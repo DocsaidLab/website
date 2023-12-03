@@ -8,7 +8,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
+  title: 'Docsaid',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
@@ -34,7 +34,6 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
-
   presets: [
     [
       'classic',
@@ -67,10 +66,10 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: '',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: 'Docsaid Logo',
+          src: 'img/docsaid_logo.png',
         },
         items: [
           {
@@ -81,7 +80,12 @@ const config = {
           },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            to: '/blog/privacy-policy',
+            label: '隱私條款',
+            position: 'right',
+          },
+          {
+            href: 'https://github.com/DocsaidLab/blog',
             label: 'GitHub',
             position: 'right',
           },
@@ -125,12 +129,12 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/DocsaidLab/blog',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Docsaid, Inc. Built with Docsaid.`,
       },
       prism: {
         theme: prismThemes.github,
