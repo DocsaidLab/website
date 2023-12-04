@@ -5,7 +5,7 @@ authors: TSE
 tags: [ubuntu, fail2ban]
 ---
 
-當你成功打開的外部的 SSH 通道之後，你會發現立刻出現一堆惡意連線，想嘗試登入你的主機。
+當您成功打開的外部的 SSH 通道之後，您會發現立刻出現一堆惡意連線，想嘗試登入您的主機。
 
 一個基本的做法是開啟防火牆進行阻擋，我們趕緊來設定一下：
 
@@ -20,9 +20,9 @@ tags: [ubuntu, fail2ban]
 
 **Fail2ban** 是一個防止服務器受到暴力攻擊的軟體。當有可疑的行為（例如：重複的登錄失敗）出現時，Fail2ban 會自動修改防火牆規則來封鎖攻擊者的 IP 地址。
 
-在大部分的 Linux 發行版上，你可以使用包管理工具來安裝 Fail2ban。
+在大部分的 Linux 發行版上，您可以使用包管理工具來安裝 Fail2ban。
 
-在 Ubuntu 上，你可以使用 apt 來安裝：
+在 Ubuntu 上，您可以使用 apt 來安裝：
 
 ```bash
 sudo apt install fail2ban
@@ -67,7 +67,7 @@ sudo fail2ban-client status
 
 ## 4. 新增自定義規則
 
-如果你想為特定的服務（例如： SSH 或 Apache）設定特別的規則，你可以在 `jail.local` 裡新增或修改對應的段落，例如針對 SSH 的設定：
+如果您想為特定的服務（例如： SSH 或 Apache）設定特別的規則，您可以在 `jail.local` 裡新增或修改對應的段落，例如針對 SSH 的設定：
 
 ```bash
 [sshd]
@@ -100,4 +100,4 @@ sudo fail2ban-client status sshd
 
 整個過程只是步驟繁瑣，但也不算複雜。
 
-希望這篇指南能夠幫助你順利完成相關設定。
+希望這篇指南能夠幫助您順利完成相關設定。

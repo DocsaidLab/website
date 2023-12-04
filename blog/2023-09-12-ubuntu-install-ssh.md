@@ -7,7 +7,7 @@ tags: [ubuntu, ssh]
 
 SSH（安全殼層）是一種網絡協議，允許用戶安全地訪問和管理遠程服務器。
 
-本文將逐步引導你完成安裝 OpenSSH 伺服器的過程，檢查其運行狀態，以及設定無密碼登入。
+本文將逐步引導您完成安裝 OpenSSH 伺服器的過程，檢查其運行狀態，以及設定無密碼登入。
 
 <!--truncate-->
 
@@ -31,7 +31,7 @@ sudo apt install openssh-server
 sudo systemctl status ssh
 ```
 
-如果你看到 「Active: active (running)」，那麼 SSH 伺服器已經成功啟動。
+如果您看到 「Active: active (running)」，那麼 SSH 伺服器已經成功啟動。
 
 ## 3. SSH 無密碼登入設定：
 
@@ -49,7 +49,7 @@ ssh-keygen
 
 ### 3.2 把公開金鑰複製到伺服器
 
-使用 ssh-copy-id 命令將公開金鑰複製到伺服器。替換 [username] 與 [server-ip] 為你的伺服器資料。
+使用 ssh-copy-id 命令將公開金鑰複製到伺服器。替換 [username] 與 [server-ip] 為您的伺服器資料。
 
 ```bash
 ssh-copy-id [username]@[server-ip]
@@ -67,7 +67,7 @@ ssh-copy-id john@192.168.0.100
 ssh-copy-id -p 2222 john@192.168.0.100
 ```
 
-此命令將會提示你輸入伺服器的密碼。一旦驗證成功，你的公開金鑰就會被添加到伺服器上的 `~/.ssh/authorized_keys` 檔案中。
+此命令將會提示您輸入伺服器的密碼。一旦驗證成功，您的公開金鑰就會被添加到伺服器上的 `~/.ssh/authorized_keys` 檔案中。
 
 ### 3.3 測試無密碼登入
 
@@ -77,15 +77,15 @@ ssh-copy-id -p 2222 john@192.168.0.100
 ssh [username]@[server-ip]
 ```
 
-如果一切設定正確，你將可以無需密碼登入伺服器。
+如果一切設定正確，您將可以無需密碼登入伺服器。
 
 ## 注意事項
 
-使用 SSH 金鑰認證確實可以提高安全性和方便性，但請確保不要遺失私鑰。建議定期更換或更新你的 SSH 金鑰。為了增加安全性，可以考慮禁止密碼認證方式。
+使用 SSH 金鑰認證確實可以提高安全性和方便性，但請確保不要遺失私鑰。建議定期更換或更新您的 SSH 金鑰。為了增加安全性，可以考慮禁止密碼認證方式。
 
 這可以在伺服器的 /etc/ssh/sshd_config 中設定：
 
 - `PasswordAuthentication no`。
 
-完成上述步驟後，你將能夠使用 SSH 金鑰認證從客戶端無密碼登入伺服器。
+完成上述步驟後，您將能夠使用 SSH 金鑰認證從客戶端無密碼登入伺服器。
 
