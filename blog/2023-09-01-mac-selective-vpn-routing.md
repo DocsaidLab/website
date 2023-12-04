@@ -1,6 +1,6 @@
 ---
 slug: mac-selective-vpn-routing
-title: 解決 Mac VPN routing 問題：選擇性流量路由
+title: 解決 Mac VPN routing：選擇性流量路由
 authors: TSE
 tags: [routing, vpn]
 ---

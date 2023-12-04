@@ -29,6 +29,7 @@
   --ifm-color-primary-light: var(--your-color-primary-light);
   --ifm-color-primary-lighter: var(--your-color-primary-lighter);
   --ifm-color-primary-lightest: var(--your-color-primary-lightest);
+
 }
 
 /* 深色模式時的色調調整 */
@@ -40,4 +41,9 @@
   --ifm-color-primary-light: var(--your-color-secondary-light);
   --ifm-color-primary-lighter: var(--your-color-secondary-lighter);
   --ifm-color-primary-lightest: var(--your-color-secondary-lightest);
+}
+
+
+article header h1 {
+  font-size: 2.2rem !important;
 }
