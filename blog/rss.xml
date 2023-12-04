@@ -9,6 +9,27 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
+            <title><![CDATA[登入中華電信的 RTF8207W 路由器]]></title>
+            <link>https://DocsaidLab.github.io/blog/login-rtf8207w</link>
+            <guid>https://DocsaidLab.github.io/blog/login-rtf8207w</guid>
+            <pubDate>Wed, 13 Sep 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[login-rtf8207w]]></description>
+            <content:encoded><![CDATA[<p><img loading="lazy" alt="login-rtf8207w" src="https://docsaidlab.github.io/assets/images/RTF8207W-login-a999863d0bb563cefdf2c85580ff829d.jpg" width="1184" height="688" class="img_ev3q"></p>
+<ol>
+<li>
+<p>登入路由器的管理介面。通常可以透過網頁瀏覽器輸入 <code>192.168.1.1</code> 或其他 IP 地址進行訪問，具體地址可能依你的路由器型號而異。</p>
+</li>
+<li>
+<p>使用工程帳號登入，帳號為：<code>cht</code>，密碼為<code>型號末四碼＋MAC末四碼</code>。</p>
+<p><img loading="lazy" alt="password" src="https://docsaidlab.github.io/assets/images/RTF8207W-f4afe2030b552611fd3f8c281a364a3c.jpg" width="2048" height="1170" class="img_ev3q"></p>
+</li>
+<li>
+<p>登入後，您就可以為所欲為了。</p>
+</li>
+</ol>]]></content:encoded>
+            <category>rtf8207w</category>
+        </item>
+        <item>
             <title><![CDATA[在 Ubuntu 主機上設定 SSH 伺服器]]></title>
             <link>https://DocsaidLab.github.io/blog/ubuntu-install-ssh</link>
             <guid>https://DocsaidLab.github.io/blog/ubuntu-install-ssh</guid>
@@ -38,7 +59,7 @@
 <p>如果伺服器更改了預設的 SSH 埠（如：2222），則使用 -p 參數：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id -p 2222 john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>此命令將會提示你輸入伺服器的密碼。一旦驗證成功，你的公開金鑰就會被添加到伺服器上的 <code>~/.ssh/authorized_keys</code> 檔案中。</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="33-測試無密碼登入">3.3 測試無密碼登入<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#33-%E6%B8%AC%E8%A9%A6%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5" class="hash-link" aria-label="Direct link to 3.3 測試無密碼登入" title="Direct link to 3.3 測試無密碼登入">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="33-測試無密碼登入">3.3 測試無密碼登入<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#33-%E6%B8%AC%E8%A9%A6%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5" class="hash-link" aria-label="Direct link to 3.3 測�試無密碼登入" title="Direct link to 3.3 測試無密碼登入">​</a></h3>
 <p>嘗試 SSH 至伺服器：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh [username]@[server-ip]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>如果一切設定正確，你將可以無需密碼登入伺服器。</p>
@@ -99,7 +120,7 @@
 <p>這不太對吧？</p>
 <p>所以我們要做的事情是：<strong>讓 VPN 只導入公司的網段，其他的流量都走本地端。</strong></p>
 <p>我們假定您已經將 VPN 設定好，並可以正常使用，這次只是要解決分流的問題。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="解決問題">解決問題<a href="https://docsaidlab.github.io/blog/mac-selective-vpn-routing#%E8%A7%A3%EF%BF%BD%EF%BF%BD%E6%B1%BA%E5%95%8F%E9%A1%8C" class="hash-link" aria-label="Direct link to 解決問題" title="Direct link to 解決問題">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="解決問題">解決問題<a href="https://docsaidlab.github.io/blog/mac-selective-vpn-routing#%E8%A7%A3%E6%B1%BA%E5%95%8F%E9%A1%8C" class="hash-link" aria-label="Direct link to 解決問題" title="Direct link to 解決問題">​</a></h2>
 <p>第一步，先確認公司內部的網段是什麼，例如：</p>
 <p>192.168.25.XXX</p>
 <p>接著，讓我們開啟一份文件：</p>
@@ -202,7 +223,7 @@
             <content:encoded><![CDATA[<p>我們強烈建議您定期查看這些使用條款，以確保您始終保持對其的了解，因為我們可能會在未來進行修改或更新。希望您在 DOCSAID 網站有一個愉快的瀏覽體驗，並尊重和遵守我們設定的規範。</p>
 <p>本網站由 DOCSAID 所擁有和經營。在您使用本網站之前，我們建議您詳細閱讀和了解這些使用條款，確保您完全明白您的權利和責任。這不僅有助於保護您的權益，也有助於確保本網站能夠為所有使用者提供一個安全和高效的環境。</p>
 <p>這些使用條款的目的是為了確保本網站的正常運作，並為使用者提供清晰的使用指引。這些條款也反映了我們對使用者的承諾，以及我們對確保一個良好網絡環境的決心。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="一智慧財產產權">一、智慧財產產權<a href="https://docsaidlab.github.io/blog/terms-of-service#%E4%B8%80%E6%99%BA%E6%85%A7%E8%B2%A1%E7%94%A2%E7%94%A2%EF%BF%BD%E6%AC%8A" class="hash-link" aria-label="Direct link to 一、智慧財產產權" title="Direct link to 一、智慧財產產權">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="一智慧財產產權">一、智慧財產產權<a href="https://docsaidlab.github.io/blog/terms-of-service#%E4%B8%80%E6%99%BA%E6%85%A7%E8%B2%A1%E7%94%A2%E7%94%A2%E6%AC%8A" class="hash-link" aria-label="Direct link to 一、智慧財產產權" title="Direct link to 一、智慧財產產權">​</a></h2>
 <p>本網站上包含的所有內容、圖片、文字、圖表、標誌、圖示、音頻創作、影片創作以及其他材料（以下統稱為「材料」）均受到智慧財產權法律的保護，包括但不限於著作權、商標權、專利權、設計權和商業秘密。</p>
 <ul>
 <li>版權：本網站的材料，包括但不限於文字、圖像、影片等，均受到版權法的保護。這意味著除非您獲得明確的許可，否則您不得未經授權使用、複製、修改或分發這些材料。</li>
@@ -228,7 +249,7 @@
 <p>您確保您所提供的所有內容都具有必要的權利和授權，並不侵犯第三方的智慧財產權或其他權利。您承諾您的內容不涉及非法、淫穢、誹謗、侮辱、歧視或侵害他人隱私的內容。</p>
 <p>遵守法律法規的基礎上，DOCSAID 網站有權在不事先通知的情形下刪除、移除或不公開您的任何內容。我們將依據我們的判斷確保網站內容的合法性和適當性。</p>
 <p>您明白 DOCSAID 網站不對您的內容負責，且您要為您的內容的合法性和真實性自行負責。若您的內容違反了這些使用條款或導致法律問題，您需獨立承擔相應的法律後果。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="四您的私隱">四、您的私隱<a href="https://docsaidlab.github.io/blog/terms-of-service#%E5%9B%9B%E6%82%A8%E7%9A%84%E7%A7%81%E9%9A%B1" class="hash-link" aria-label="Direct link to 四、您的私隱" title="Direct link to 四、您的私隱">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="四您的私隱">四、您的私隱<a href="https://docsaidlab.github.io/blog/terms-of-service#%E5%9B%9B%E6%82%A8%EF%BF%BD%E7%9A%84%E7%A7%81%E9%9A%B1" class="hash-link" aria-label="Direct link to 四、您的私隱" title="Direct link to 四、您的私隱">​</a></h2>
 <p>請閱讀<a href="https://docsaidlab.github.io/blog/privacy-policy">隱私政策</a>。</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="五無保證">五、無保證<a href="https://docsaidlab.github.io/blog/terms-of-service#%E4%BA%94%E7%84%A1%E4%BF%9D%E8%AD%89" class="hash-link" aria-label="Direct link to 五、無保證" title="Direct link to 五、無保證">​</a></h2>
 <p>本網站的內容按「原樣」提供，並且可能包含錯誤、不完整或過時的信息。DOCSAID 網站明確聲明，不提供與本網站或本網站所含材料有關的任何形式的陳述、保證或擔保，無論是明示的還是默示的。</p>
@@ -250,7 +271,7 @@
 <p>您同意，若因您違反這些使用條款，導致 DOCSAID 網站或其關聯方（包括但不限於其管理人員、董事、員工、代表、附屬公司或其他相關實體）遭受損失、損害、費用、訴訟、索賠或其他法律責任，您應對此全面負責並支付相關賠償。</p>
 <p>此賠償範圍包括但不僅限於：法律費用、訴訟成本、律師薪酬、專家咨詢費、解決糾紛相關的所有費用及其他因您的違約行為所產生的一切費用。您進一步同意，您將不反對或拒絕配合，並將提供所有必要的支持以協助 DOCSAID 網站及其相關方解決任何因您的違約行為而引發的訴訟、索賠或其他法律事宜。</p>
 <p>您確認並承諾，不論在哪個法律管轄區或訴訟場所，您都會全面賠償 DOCSAID 網站及其關聯方的相關損失。此外，您明確認知，此賠償承諾將不受到任何形式的限制，確保 DOCSAID 網站及其關聯方得到適當的法律補償和權益保障。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="八可�分割性">八、可分割性<a href="https://docsaidlab.github.io/blog/terms-of-service#%E5%85%AB%E5%8F%AF%E5%88%86%E5%89%B2%E6%80%A7" class="hash-link" aria-label="Direct link to 八、可分割性" title="Direct link to 八、可分割性">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="八可分割性">八、可分割性<a href="https://docsaidlab.github.io/blog/terms-of-service#%E5%85%AB%E5%8F%AF%E5%88%86%E5%89%B2%E6%80%A7" class="hash-link" aria-label="Direct link to 八、可分割性" title="Direct link to 八、可分割性">​</a></h2>
 <p>若根據相關適用法律，這些使用條款的某一條款被認定為無效、非法或不可執行，那麼該特定條款將被視作已被移除，但這並不會對其他條款產生影響或使其失效。</p>
 <p>在這種情況下，我們將致力於修訂或替換被認定無效的條款，以確保使用條款的原始意圖和目的得以維持。即便有部分條款因特定原因被認為是不適用或無效，本使用條款的餘下部分仍將保持其效力和約束性。</p>
 <p>這些使用條款的分割性確保了即使某些條款在法律上被認為是無效，它仍不會妨礙您與 DOCSAID 網站間其他條款所涵蓋的權利和義務的有效性。</p>
