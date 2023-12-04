@@ -8,12 +8,284 @@
     <subtitle>DOCSAID Blog</subtitle>
     <icon>https://DocsaidLab.github.io/img/favicon.ico</icon>
     <entry>
+        <title type="html"><![CDATA[Ubuntu, Docker and PyPi Server]]></title>
+        <id>https://DocsaidLab.github.io/blog/ubuntu-docker-pypiserver</id>
+        <link href="https://DocsaidLab.github.io/blog/ubuntu-docker-pypiserver"/>
+        <updated>2023-09-13T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[隨著 Python 社群的持續發展，許多開發者和團隊選擇建立自己的私有 Python 包索引伺服器，來儲存和管理自家的 Python 套件。這不僅提供了更好的版本控制，也確保了軟體包的安全性。]]></summary>
+        <content type="html"><![CDATA[<p>隨著 Python 社群的持續發展，許多開發者和團隊選擇建立自己的私有 Python 包索引伺服器，來儲存和管理自家的 Python 套件。這不僅提供了更好的版本控制，也確保了軟體包的安全性。</p>
+<p>在本文中，我們用 Docker 來建立一個 PyPi Server，並且在 Ubuntu 上運行。</p>
+<p>我們假設您已經在 Ubuntu 上安裝了 Docker，並且已經熟悉了 Docker 的基本操作。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-拉取-pypiserver-的-docker-映像">1. 拉取 pypiserver 的 Docker 映像<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#1-%E6%8B%89%E5%8F%96-pypiserver-%E7%9A%84-docker-%E6%98%A0%E5%83%8F" class="hash-link" aria-label="Direct link to 1. 拉取 pypiserver 的 Docker 映像" title="Direct link to 1. 拉取 pypiserver 的 Docker 映像">​</a></h2>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">docker pull pypiserver/pypiserver:latest</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-創建一個目錄來存儲-python-包">2. 創建一個目錄來存儲 Python 包<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#2-%E5%89%B5%E5%BB%BA%E4%B8%80%E5%80%8B%E7%9B%AE%E9%8C%84%E4%BE%86%E5%AD%98%E5%84%B2-python-%E5%8C%85" class="hash-link" aria-label="Direct link to 2. 創建一個目錄來存儲 Python 包" title="Direct link to 2. 創建一個目錄來存儲 Python 包">​</a></h2>
+<p>不囉唆，我們直接在家目錄下創建一個目錄來存儲 Python 包。</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">mkdir ~/packages</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-設定-htpasswd">3. 設定 htpasswd<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#3-%E8%A8%AD%E5%AE%9A-htpasswd" class="hash-link" aria-label="Direct link to 3. 設定 htpasswd" title="Direct link to 3. 設定 htpasswd">​</a></h2>
+<p>htpasswd 是一種用於存儲用戶名和密碼（經常用於基本 HTTP 身份驗證）的文件格式。</p>
+<p>pypiserver 會使用此文件來驗證試圖上傳或下載套件的用戶。這是一種簡單但有效的方式，可以增強 pypiserver 的安全性。</p>
+<p>要創建一個 <code>.htpasswd</code> 文件，您需要 <code>apache2-utils</code> 套件：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install apache2-utils</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>然後，使用以下命令創建一個新的 .htpasswd 文件：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">htpasswd -c ~/.htpasswd [username]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>它會提示您輸入 <code>username</code> 的密碼。輸入密碼後，<code>.htpasswd</code> 文件會在您的家目錄下創建。</p>
+<p>這時，您就可以使用上面提到的 <code>docker run</code> 命令來運行 <code>pypiserver</code>，並且使用您剛剛建立的 <code>.htpasswd</code> 文件進行身份驗證。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="4-將-pypiserver-掛載為背景服務">4. 將 pypiserver 掛載為背景服務<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#4-%E5%B0%87-pypiserver-%E6%8E%9B%E8%BC%89%E7%82%BA%E8%83%8C%E6%99%AF%E6%9C%8D%E5%8B%99" class="hash-link" aria-label="Direct link to 4. 將 pypiserver 掛載為背景服務" title="Direct link to 4. 將 pypiserver 掛載為背景服務">​</a></h2>
+<p>要將 Docker 容器作為背景服務運行，我們可以使用 Docker Compose 和 Systemd。</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="41-安裝-docker-compose">4.1 安裝 Docker Compose<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#41-%E5%AE%89%E8%A3%9D-docker-compose" class="hash-link" aria-label="Direct link to 4.1 安裝 Docker Compose" title="Direct link to 4.1 安裝 Docker Compose">​</a></h3>
+<p>如果您還沒有安裝 Docker Compose，首先進行安裝，請參考：</p>
+<ul>
+<li><a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener noreferrer"><strong>安裝 Docker Compose 的官方文件</strong></a></li>
+</ul>
+<p>要注意的是 Docker Compose 最近有較大規模的更新，很多使用方式跟之前不一樣，最明顯的就是原本使用 <code>docker-compose</code> 的指令，現在都改成 <code>docker compose</code> 了。</p>
+<p>我們根據官方文件，把安裝內容寫在下面：</p>
+<p>安裝最新版本的 Docker Compose：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt update</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install docker-compose-plugin</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>檢查 Docker Compose 是否正確安裝：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">docker compose version</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="42-創建文件">4.2 創建文件<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#42-%E5%89%B5%E5%BB%BA%E6%96%87%E4%BB%B6" class="hash-link" aria-label="Direct link to 4.2 創建文件" title="Direct link to 4.2 創建文件">​</a></h3>
+<p>找個地方創建 <code>docker-compose.yml</code>，並填入以下內容：</p>
+<p>您也可以參考 <code>pypiserver</code> 提供的範本：<a href="https://github.com/pypiserver/pypiserver/blob/master/docker-compose.yml" target="_blank" rel="noopener noreferrer"><strong>docker-compose.yml</strong></a></p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'3.3'</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">services</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">pypiserver</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">image</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> pypiserver/pypiserver</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">latest</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">volumes</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> /home/</span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">您的使用者名稱</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain">/auth</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">/data/auth</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> /home/</span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain">您的使用者名稱</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain">/packages</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">/data/packages</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">command</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> run </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">P /data/auth/.htpasswd </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">a update</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">download</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">list /data/packages</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">ports</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"8080:8080"</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li>請將上述的 [您的使用者名稱] 替換為您的實際使用者名稱。</li>
+<li>您可以在這裡修改外部 port 映射值，例如改成：”18080:8080″。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="43-創建-systemd-服務">4.3 創建 Systemd 服務<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#43-%E5%89%B5%E5%BB%BA-systemd-%E6%9C%8D%E5%8B%99" class="hash-link" aria-label="Direct link to 4.3 創建 Systemd 服務" title="Direct link to 4.3 創建 Systemd 服務">​</a></h3>
+<p>建立一個設定檔案：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo vim /etc/systemd/system/pypiserver.service</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>添加以下內容：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[Unit]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Description=PypiServer Docker Compose</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Requires=docker.service</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">After=docker.service</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">[Service]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">WorkingDirectory=/path/to/your/docker-compose/directory</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ExecStart=/usr/bin/docker compose up --remove-orphans</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ExecStop=/usr/bin/docker compose down</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Restart=always</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">[Install]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">WantedBy=multi-user.target</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li>請確保將 <code>/path/to/your/docker-compose/directory</code> 替換為 <code>docker-compose.yml</code> 文件的實際路徑，寫到路徑就可以，不用檔案名稱。</li>
+<li>請確保您的 Docker 路徑正確，您可以使用 <code>which docker</code> 來確認。</li>
+<li>我們基於新版的 <code>docker compose</code> 指令，而不是用 <code>docker-compose</code>。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="44-啟動-pypiserver-服務">4.4 啟動 pypiserver 服務<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#44-%E5%95%9F%E5%8B%95-pypiserver-%E6%9C%8D%E5%8B%99" class="hash-link" aria-label="Direct link to 4.4 啟動 pypiserver 服務" title="Direct link to 4.4 啟動 pypiserver 服務">​</a></h3>
+<p>告知 systemd 重新讀取新的服務設定：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl daemon-reload</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>啟動服務：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl start pypiserver.service</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl enable pypiserver.service</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>這樣一來，<code>pypiserver</code> 就會作為一個 <code>systemd</code> 服務運行，並且每次主機啟動時它都會自動啟動。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="5-查看狀態">5. 查看狀態<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#5-%E6%9F%A5%E7%9C%8B%E7%8B%80%E6%85%8B" class="hash-link" aria-label="Direct link to 5. 查看狀態" title="Direct link to 5. 查看狀態">​</a></h2>
+<p>如果您想查看服務的當前狀態，您可以使用：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl status pypiserver.service</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>這將會顯示 <code>pypiserver</code> 服務的當前狀態，包括是否正在運行，以及最近的日誌輸出。</p>
+<p><img loading="lazy" alt="pypiserver status" src="https://docsaidlab.github.io/assets/images/pypiserver-3a82a5ef370f8387611a4c2322e85a8a.jpg" width="2048" height="707" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="6-使用-pypiserver">6. 使用 pypiserver<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#6-%E4%BD%BF%E7%94%A8-pypiserver" class="hash-link" aria-label="Direct link to 6. 使用 pypiserver" title="Direct link to 6. 使用 pypiserver">​</a></h2>
+<p>現在，您可以使用 <code>pip</code> 來安裝和上傳套件了。</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="61-上傳套件">6.1 上傳套件<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#61-%E4%B8%8A%E5%82%B3%E5%A5%97%E4%BB%B6" class="hash-link" aria-label="Direct link to 6.1 上傳套件" title="Direct link to 6.1 上傳套件">​</a></h3>
+<p>首先，您需要有一個已經打包的 Python 軟體包（通常是 .whl 或 .tar.gz 格式）。假設您已有一個名為 <code>example_package-0.1-py3-none-any.whl</code> 的包。</p>
+<p>要上傳軟體包到您的 <code>pypiserver</code>，使用 <code>twine</code>：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pip install twine</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">twine upload --repository-url http://localhost:8080/ example_package-0.1-py3-none-any.whl</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li>您需要確保 localhost:8080 是您的 pypiserver 服務的地址和端口。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="62-安裝套件">6.2 安裝套件<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#62-%E5%AE%89%E8%A3%9D%E5%A5%97%E4%BB%B6" class="hash-link" aria-label="Direct link to 6.2 安裝套件" title="Direct link to 6.2 安裝套件">​</a></h3>
+<p>要安裝套件，您需要使用 <code>pip</code>，並且指定您的 <code>pypiserver</code> 服務的地址和端口：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pip install --index-url http://localhost:8080/ example_package</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="63-使用基本認證">6.3 使用基本認證<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#63-%E4%BD%BF%E7%94%A8%E5%9F%BA%E6%9C%AC%E8%AA%8D%E8%AD%89" class="hash-link" aria-label="Direct link to 6.3 使用基本認證" title="Direct link to 6.3 使用基本認證">​</a></h3>
+<p>如果您的 pypiserver 設置了基本認證（可能會為了安全原因這麼做），您在上傳或下載時需要提供認證資訊：</p>
+<ul>
+<li>
+<p>上傳套件：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">twine upload --repository-url http://localhost:8080/ --username [username] --password [password] example_package-0.1-py3-none-any.whl</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p>安裝套件：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pip install --index-url http://[username]:[password]@localhost:8080/ example_package</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="64-為長期使用設定-pipconf">6.4 為長期使用設定 pip.conf<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#64-%E7%82%BA%E9%95%B7%E6%9C%9F%E4%BD%BF%E7%94%A8%E8%A8%AD%E5%AE%9A-pipconf" class="hash-link" aria-label="Direct link to 6.4 為長期使用設定 pip.conf" title="Direct link to 6.4 為長期使用設定 pip.conf">​</a></h3>
+<p>如果您經常從此伺服器安裝套件，您可能不想每次都在 <code>pip install</code> 時指定 <code>--index-url</code>。此時，您可以在 <code>pip.conf</code> 中設定預設的包索引源。</p>
+<p>首先，找到或創建 <code>pip.conf</code> 文件，以下是按優先級順序可能存在於您機器上的文件：</p>
+<ul>
+<li>
+<p>優先級 1: 站點級別的配置文件：</p>
+<ul>
+<li><code>/home/[您的使用者名稱]/.pyenv/versions/3.8.18/envs/main/pip.conf</code></li>
+</ul>
+</li>
+<li>
+<p>優先級 2: 使用者級別的配置文件：</p>
+<ul>
+<li><code>/home/[您的使用者名稱]/.pip/pip.conf</code></li>
+<li><code>/home/[您的使用者名稱]/.config/pip/pip.conf</code></li>
+</ul>
+</li>
+<li>
+<p>優先級 3: 全局級別的配置文件：</p>
+<ul>
+<li><code>/etc/pip.conf</code></li>
+<li><code>/etc/xdg/pip/pip.conf</code></li>
+</ul>
+</li>
+</ul>
+<p>所以記得要釐清一下，當前的 python 環境會使用哪一份檔案，並找到該檔案後加入以下內容：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[global]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">index-url = http://[提供服務的主機IP位置]:8080/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">trusted-host = [提供服務的主機IP位置]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>再次，請確保替換 <code>[提供服務的主機IP位置]:8080</code> 為您 <code>pypiserver</code> 的正確地址和端口。</p>
+<p>此後，當您使用 <code>pip install [package_name]</code>，<code>pip</code> 會自動使用設定在 <code>pip.conf</code> 的伺服器地址作為套件源。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="7-結語">7. 結語<a href="https://docsaidlab.github.io/blog/ubuntu-docker-pypiserver#7-%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="Direct link to 7. 結語" title="Direct link to 7. 結語">​</a></h2>
+<p>現在，您已經成功地設立了自己的私有 PyPI 伺服器，並學會了如何上傳和下載套件。</p>
+<p>透過 <code>pypiserver</code>，您不僅能夠更有效地管理自己的 Python 套件，同時也能確保您的套件在一個受保護的環境中。希望本文能夠對您帶來實際的幫助。</p>]]></content>
+        <author>
+            <name>TSE</name>
+            <uri>https://github.com/zephyr-sh</uri>
+        </author>
+        <category label="ubuntu" term="ubuntu"/>
+        <category label="ssh" term="ssh"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[在 Ubuntu 上設定 SSH 伺服器]]></title>
+        <id>https://DocsaidLab.github.io/blog/ubuntu-install-ssh</id>
+        <link href="https://DocsaidLab.github.io/blog/ubuntu-install-ssh"/>
+        <updated>2023-09-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[SSH（安全殼層）是一種網絡協議，允許用戶安全地訪問和管理遠程服務器。]]></summary>
+        <content type="html"><![CDATA[<p>SSH（安全殼層）是一種網絡協議，允許用戶安全地訪問和管理遠程服務器。</p>
+<p>本文將逐步引導您完成安裝 OpenSSH 伺服器的過程，檢查其運行狀態，以及設定無密碼登入。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-安裝-openssh-伺服器">1. 安裝 OpenSSH 伺服器<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#1-%E5%AE%89%E8%A3%9D-openssh-%E4%BC%BA%E6%9C%8D%E5%99%A8" class="hash-link" aria-label="Direct link to 1. 安裝 OpenSSH 伺服器" title="Direct link to 1. 安裝 OpenSSH 伺服器">​</a></h2>
+<p>打開終端機。</p>
+<p>輸入以下命令來安裝 OpenSSH 伺服器：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt update</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install openssh-server</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-檢查-ssh-伺服器狀態">2. 檢查 SSH 伺服器狀態<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#2-%E6%AA%A2%E6%9F%A5-ssh-%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%8B%80%E6%85%8B" class="hash-link" aria-label="Direct link to 2. 檢查 SSH 伺服器狀態" title="Direct link to 2. 檢查 SSH 伺服器狀態">​</a></h2>
+<p>使用以下命令檢查 SSH 伺服器的狀態：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl status ssh</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>如果您看到 「Active: active (running)」，那麼 SSH 伺服器已經成功啟動。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-ssh-無密碼登入設定">3. SSH 無密碼登入設定：<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#3-ssh-%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5%E8%A8%AD%E5%AE%9A" class="hash-link" aria-label="Direct link to 3. SSH 無密碼登入設定：" title="Direct link to 3. SSH 無密碼登入設定：">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="31-在客戶端生成-ssh-金鑰對">3.1 在客戶端生成 SSH 金鑰對<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#31-%E5%9C%A8%E5%AE%A2%E6%88%B6%E7%AB%AF%E7%94%9F%E6%88%90-ssh-%E9%87%91%E9%91%B0%E5%B0%8D" class="hash-link" aria-label="Direct link to 3.1 在客戶端生成 SSH 金鑰對" title="Direct link to 3.1 在客戶端生成 SSH 金鑰對">​</a></h3>
+<p>打開終端機。</p>
+<p>輸入以下命令以生成金鑰對：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-keygen</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>按照提示操作。通常預設的設定就足夠了。在詢問密碼的部分可以直接按 Enter 以建立一個無密碼的金鑰對。</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-把公開金鑰複製到伺服器">3.2 把公開金鑰複製到伺服器<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#32-%E6%8A%8A%E5%85%AC%E9%96%8B%E9%87%91%E9%91%B0%E8%A4%87%E8%A3%BD%E5%88%B0%E4%BC%BA%E6%9C%8D%E5%99%A8" class="hash-link" aria-label="Direct link to 3.2 把公開金鑰複製到伺服器" title="Direct link to 3.2 把公開金鑰複製到伺服器">​</a></h3>
+<p>使用 ssh-copy-id 命令將公開金鑰複製到伺服器。替換 [username] 與 [server-ip] 為您的伺服器資料。</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id [username]@[server-ip]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>例如：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>如果伺服器更改了預設的 SSH 埠（如：2222），則使用 -p 參數：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id -p 2222 john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>此命令將會提示您輸入伺服器的密碼。一旦驗證成功，您的公開金鑰就會被添加到伺服器上的 <code>~/.ssh/authorized_keys</code> 檔案中。</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="33-測試無密碼登入">3.3 測試無密碼登入<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#33-%E6%B8%AC%E8%A9%A6%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5" class="hash-link" aria-label="Direct link to 3.3 測試無密碼登入" title="Direct link to 3.3 測試無密碼登入">​</a></h3>
+<p>嘗試 SSH 至伺服器：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh [username]@[server-ip]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>如果一切設定正確，您將可以無需密碼登入伺服器。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="注意事項">注意事項<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85" class="hash-link" aria-label="Direct link to 注意事項" title="Direct link to 注意事項">​</a></h2>
+<p>使用 SSH 金鑰認證確實可以提高安全性和方便性，但請確保不要遺失私鑰。建議定期更換或更新您的 SSH 金鑰。為了增加安全性，可以考慮禁止密碼認證方式。</p>
+<p>這可以在伺服器的 /etc/ssh/sshd_config 中設定：</p>
+<ul>
+<li><code>PasswordAuthentication no</code>。</li>
+</ul>
+<p>完成上述步驟後，您將能夠使用 SSH 金鑰認證從客戶端無密碼登入伺服器。</p>]]></content>
+        <author>
+            <name>TSE</name>
+            <uri>https://github.com/zephyr-sh</uri>
+        </author>
+        <category label="ubuntu" term="ubuntu"/>
+        <category label="ssh" term="ssh"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Ubuntu 背景執行 GitHub Runner]]></title>
+        <id>https://DocsaidLab.github.io/blog/ubuntu-github-runner-systemd</id>
+        <link href="https://DocsaidLab.github.io/blog/ubuntu-github-runner-systemd"/>
+        <updated>2023-09-10T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[我們在使用 Github 協作的過程中，常會使用到私有主機來進行 CI/CD 的工作。這個部分在 Github 中有提供說明文件，告訴使用者該如何進行初步的安裝，依照步驟做完就可以配置成功。]]></summary>
+        <content type="html"><![CDATA[<p>我們在使用 Github 協作的過程中，常會使用到私有主機來進行 CI/CD 的工作。這個部分在 Github 中有提供說明文件，告訴使用者該如何進行初步的安裝，依照步驟做完就可以配置成功。</p>
+<p>然而，在不久之後，因為某些原因，主機被重新啟動，而原本的 Runner 卻沒有跟上。這件事情就這樣被忘記，直到有人發現 CI/CD 沒有反應，才會被提醒應該把服務啟動，直到下個重新開機的迴圈為止。</p>
+<p>所以，我們需要自動執行！</p>
+<ul>
+<li>
+<p>說明文件示意圖</p>
+<p><img loading="lazy" alt="github_set_runner" src="https://docsaidlab.github.io/assets/images/github_set_runner-6ca68dc499f780fcc4c6e7d7461a2ffe.jpg" width="2048" height="1173" class="img_ev3q"></p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="配置流程">配置流程<a href="https://docsaidlab.github.io/blog/ubuntu-github-runner-systemd#%E9%85%8D%E7%BD%AE%E6%B5%81%EF%BF%BD%EF%BF%BD%E7%A8%8B" class="hash-link" aria-label="Direct link to 配置流程" title="Direct link to 配置流程">​</a></h2>
+<p>要在主機開機後自動執行某個任務，通常可以使用 systemd 服務 (service) 來做。</p>
+<ol>
+<li>
+<p><strong>建立一個新的 systemd 服務檔案：</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo vim /etc/systemd/system/actions-runner.service</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p><strong>貼上以下的內容到檔案中：</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[Unit]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Description=GitHub Action Runner</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">After=network.target</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">[Service]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Type=simple</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">User=您的使用者名稱</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">WorkingDirectory=/home/您的使用者名稱/actions-runner</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ExecStart=/home/您的使用者名稱/actions-runner/run.sh</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Restart=always</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">RestartSec=5</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">[Install]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">WantedBy=multi-user.target</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>＊注意：<code>User</code> 與 <code>WorkingDirectory</code> 要改成您自己的使用者名稱。</p>
+</li>
+<li>
+<p><strong>告知 systemd 重新讀取新的服務設定：</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl daemon-reload</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p><strong>啟用此服務，使其在開機時自動啟動：</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl enable actions-runner.service</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p><strong>現在您可以手動開始此服務，或是重新開機來測試它：</strong></p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl start actions-runner.service</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>使用這個方法，當您的主機開機時，actions-runner 會自動背景執行。</p>
+<p>如果您想停止服務，可以使用以下指令：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl stop actions-runner.service</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>＊注意：確保 <code>run.sh</code> 具有可執行的權限。</p>
+</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="查看狀態">查看狀態<a href="https://docsaidlab.github.io/blog/ubuntu-github-runner-systemd#%E6%9F%A5%E7%9C%8B%E7%8B%80%E6%85%8B" class="hash-link" aria-label="Direct link to 查看狀態" title="Direct link to 查看狀態">​</a></h2>
+<p>當您使用 systemd 來管理服務時，您無法直接「attach」之類的服務來看它的輸出，但您可以查看這個服務的日誌來了解它的工作狀態，要查看 actions-runner 服務的日誌，您可以使用以下命令：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo journalctl -u actions-runner.service -f</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>解釋一下：</p>
+<ul>
+<li><code>-u actions-runner.service</code>：只查看名為 actions-runner 的服務的日誌。</li>
+<li><code>-f</code>：這個參數讓 journalctl 持續追踪最新的日誌，所以您可以實時看到新的輸出。</li>
+</ul>
+<p>此外，如果您想查看服務的當前狀態，您可以使用：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl status actions-runner.service</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>這將會顯示 <code>actions-runner</code> 服務的當前狀態，包括是否正在運行，以及最近的日誌輸出：</p>
+<p><img loading="lazy" alt="action-service" src="https://docsaidlab.github.io/assets/images/action-service-6b4de0ff1dc1dc29f3edb7aeb4d16fc8.jpg" width="2048" height="831" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="重新配置">重新配置<a href="https://docsaidlab.github.io/blog/ubuntu-github-runner-systemd#%E9%87%8D%E6%96%B0%E9%85%8D%E7%BD%AE" class="hash-link" aria-label="Direct link to 重新配置" title="Direct link to 重新配��置">​</a></h2>
+<p>如果是原本的 Runner 不見了，通常會是在切換儲存庫的 Public 和 Private 的時候，或是原本 Runner 太久沒有調用，總之就是原本的 Runner 弄丟了，這時候就需要重新配置。</p>
+<p>這時候，就到 actions-runner 資料夾底下，把 .runner 檔案刪掉，再重新跑一次：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">./config.sh --url ... (改成新的 Token 配置)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>其他流程都一樣，配置完之後，把服務重新啟動就好。</p>]]></content>
+        <author>
+            <name>TSE</name>
+            <uri>https://github.com/zephyr-sh</uri>
+        </author>
+        <category label="ubuntu" term="ubuntu"/>
+        <category label="github-action" term="github-action"/>
+        <category label="runner" term="runner"/>
+        <category label="systemd" term="systemd"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[登入 RTF8207W 路由器]]></title>
+        <id>https://DocsaidLab.github.io/blog/login-rtf8207w</id>
+        <link href="https://DocsaidLab.github.io/blog/login-rtf8207w"/>
+        <updated>2023-09-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[1. 登入路由器的管理介面。通常可以透過網頁瀏覽器輸入 192.168.1.1 或其他 IP 地址進行訪問，具體地址可能依您的路由器型號而異。]]></summary>
+        <content type="html"><![CDATA[<ol>
+<li>登入路由器的管理介面。通常可以透過網頁瀏覽器輸入 <code>192.168.1.1</code> 或其他 IP 地址進行訪問，具體地址可能依您的路由器型號而異。</li>
+</ol>
+<p><img loading="lazy" alt="login-rtf8207w" src="https://docsaidlab.github.io/assets/images/RTF8207W-login-a999863d0bb563cefdf2c85580ff829d.jpg" width="1184" height="688" class="img_ev3q"></p>
+<ol start="2">
+<li>
+<p>使用工程帳號登入，帳號為：<code>cht</code>，密碼為<code>型號末四碼＋MAC末四碼</code>。</p>
+<p><img loading="lazy" alt="password" src="https://docsaidlab.github.io/assets/images/RTF8207W-f4afe2030b552611fd3f8c281a364a3c.jpg" width="2048" height="1170" class="img_ev3q"></p>
+</li>
+<li>
+<p>登入後，您就可以為所欲為了。</p>
+<p>如果不小心弄壞了設定，請自行連絡中華電信工程師。</p>
+</li>
+</ol>]]></content>
+        <author>
+            <name>TSE</name>
+            <uri>https://github.com/zephyr-sh</uri>
+        </author>
+        <category label="rtf8207w" term="rtf8207w"/>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[設定 Fail2ban 防止惡意登入]]></title>
         <id>https://DocsaidLab.github.io/blog/fail2ban-settings</id>
         <link href="https://DocsaidLab.github.io/blog/fail2ban-settings"/>
-        <updated>2023-09-13T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[當你成功打開的外部的 SSH 通道之後，你會發現立刻出現一堆惡意連線，想嘗試登入你的主機。]]></summary>
-        <content type="html"><![CDATA[<p>當你成功打開的外部的 SSH 通道之後，你會發現立刻出現一堆惡意連線，想嘗試登入你的主機。</p>
+        <updated>2023-09-03T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[當您成功打開的外部的 SSH 通道之後，您會發現立刻出現一堆惡意連線，想嘗試登入您的主機。]]></summary>
+        <content type="html"><![CDATA[<p>當您成功打開的外部的 SSH 通道之後，您會發現立刻出現一堆惡意連線，想嘗試登入您的主機。</p>
 <p>一個基本的做法是開啟防火牆進行阻擋，我們趕緊來設定一下：</p>
 <ul>
 <li>
@@ -23,8 +295,8 @@
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-fail2ban-安裝">1. Fail2ban 安裝<a href="https://docsaidlab.github.io/blog/fail2ban-settings#1-fail2ban-%E5%AE%89%E8%A3%9D" class="hash-link" aria-label="Direct link to 1. Fail2ban 安裝" title="Direct link to 1. Fail2ban 安裝">​</a></h2>
 <p><strong>Fail2ban</strong> 是一個防止服務器受到暴力攻擊的軟體。當有可疑的行為（例如：重複的登錄失敗）出現時，Fail2ban 會自動修改防火牆規則來封鎖攻擊者的 IP 地址。</p>
-<p>在大部分的 Linux 發行版上，你可以使用包管理工具來安裝 Fail2ban。</p>
-<p>在 Ubuntu 上，你可以使用 apt 來安裝：</p>
+<p>在大部分的 Linux 發行版上，您可以使用包管理工具來安裝 Fail2ban。</p>
+<p>在 Ubuntu 上，您可以使用 apt 來安裝：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install fail2ban</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-設定">2. 設定<a href="https://docsaidlab.github.io/blog/fail2ban-settings#2-%E8%A8%AD%E5%AE%9A" class="hash-link" aria-label="Direct link to 2. 設定" title="Direct link to 2. 設定">​</a></h2>
 <p>設定檔位於 <code>/etc/fail2ban/jail.conf</code>。</p>
@@ -45,7 +317,7 @@
 <p>查看 Fail2ban 的狀態：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo fail2ban-client status</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="4-新增自定義規則">4. 新增自定義規則<a href="https://docsaidlab.github.io/blog/fail2ban-settings#4-%E6%96%B0%E5%A2%9E%E8%87%AA%E5%AE%9A%E7%BE%A9%E8%A6%8F%E5%89%87" class="hash-link" aria-label="Direct link to 4. 新增自定義規則" title="Direct link to 4. 新增自定義規則">​</a></h2>
-<p>如果你想為特定的服務（例如： SSH 或 Apache）設定特別的規則，你可以在 <code>jail.local</code> 裡新增或修改對應的段落，例如針對 SSH 的設定：</p>
+<p>如果您想為特定的服務（例如： SSH 或 Apache）設定特別的規則，您可以在 <code>jail.local</code> 裡新增或修改對應的段落，例如針對 SSH 的設定：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[sshd]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">enabled = true</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">port = ssh</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">filter = sshd</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">logpath = /var/log/auth.log</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">maxretry = 3</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="5-測試">5. 測試<a href="https://docsaidlab.github.io/blog/fail2ban-settings#5-%E6%B8%AC%E8%A9%A6" class="hash-link" aria-label="Direct link to 5. 測試" title="Direct link to 5. 測試">​</a></h2>
 <p>在修改完設定後，重新啟動 Fail2ban 以應用更改：</p>
@@ -56,87 +328,13 @@
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo fail2ban-client status sshd</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="結語">結語<a href="https://docsaidlab.github.io/blog/fail2ban-settings#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="Direct link to 結語" title="Direct link to 結語">​</a></h2>
 <p>整個過程只是步驟繁瑣，但也不算複雜。</p>
-<p>希望這篇指南能夠幫助你順利完成相關設定。</p>]]></content>
+<p>希望這篇指南能夠幫助您順利完成相關設定。</p>]]></content>
         <author>
             <name>TSE</name>
             <uri>https://github.com/zephyr-sh</uri>
         </author>
         <category label="ubuntu" term="ubuntu"/>
         <category label="fail2ban" term="fail2ban"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[登入 RTF8207W 路由器]]></title>
-        <id>https://DocsaidLab.github.io/blog/login-rtf8207w</id>
-        <link href="https://DocsaidLab.github.io/blog/login-rtf8207w"/>
-        <updated>2023-09-13T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[1. 登入路由器的管理介面。通常可以透過網頁瀏覽器輸入 192.168.1.1 或其他 IP 地址進行訪問，具體地址可能依你的路由器型號而異。]]></summary>
-        <content type="html"><![CDATA[<ol>
-<li>登入路由器的管理介面。通常可以透過網頁瀏覽器輸入 <code>192.168.1.1</code> 或其他 IP 地址進行訪問，具體地址可能依你的路由器型號而異。</li>
-</ol>
-<p><img loading="lazy" alt="login-rtf8207w" src="https://docsaidlab.github.io/assets/images/RTF8207W-login-a999863d0bb563cefdf2c85580ff829d.jpg" width="1184" height="688" class="img_ev3q"></p>
-<ol start="2">
-<li>
-<p>使用工程帳號登入，帳號為：<code>cht</code>，密碼為<code>型號末四碼＋MAC末四碼</code>。</p>
-<p><img loading="lazy" alt="password" src="https://docsaidlab.github.io/assets/images/RTF8207W-f4afe2030b552611fd3f8c281a364a3c.jpg" width="2048" height="1170" class="img_ev3q"></p>
-</li>
-<li>
-<p>登入後，您就可以為所欲為了。</p>
-<p>如果不小心弄壞了設定，請自行連絡中華電信工程師。</p>
-</li>
-</ol>]]></content>
-        <author>
-            <name>TSE</name>
-            <uri>https://github.com/zephyr-sh</uri>
-        </author>
-        <category label="rtf8207w" term="rtf8207w"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[在 Ubuntu 上設定 SSH 伺服器]]></title>
-        <id>https://DocsaidLab.github.io/blog/ubuntu-install-ssh</id>
-        <link href="https://DocsaidLab.github.io/blog/ubuntu-install-ssh"/>
-        <updated>2023-09-13T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[SSH（安全殼層）是一種網絡協議，允許用戶安全地訪問和管理遠程服務器。]]></summary>
-        <content type="html"><![CDATA[<p>SSH（安全殼層）是一種網絡協議，允許用戶安全地訪問和管理遠程服務器。</p>
-<p>本文將逐步引導你完成安裝 OpenSSH 伺服器的過程，檢查其運行狀態，以及設定無密碼登入。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-安裝-openssh-伺服器">1. 安裝 OpenSSH 伺服器<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#1-%E5%AE%89%E8%A3%9D-openssh-%E4%BC%BA%E6%9C%8D%E5%99%A8" class="hash-link" aria-label="Direct link to 1. 安裝 OpenSSH 伺服器" title="Direct link to 1. 安裝 OpenSSH 伺服器">​</a></h2>
-<p>打開終端機。</p>
-<p>輸入以下命令來安裝 OpenSSH 伺服器：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt update</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install openssh-server</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-檢查-ssh-伺服器狀態">2. 檢查 SSH 伺服器狀態<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#2-%E6%AA%A2%E6%9F%A5-ssh-%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%8B%80%E6%85%8B" class="hash-link" aria-label="Direct link to 2. 檢查 SSH 伺服器狀態" title="Direct link to 2. 檢查 SSH 伺服器狀態">​</a></h2>
-<p>使用以下命令檢查 SSH 伺服器的狀態：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl status ssh</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>如果你看到 「Active: active (running)」，那麼 SSH 伺服器已經成功啟動。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-ssh-無密碼登入設定">3. SSH 無密碼登入設定：<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#3-ssh-%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5%E8%A8%AD%E5%AE%9A" class="hash-link" aria-label="Direct link to 3. SSH 無密碼登入設定：" title="Direct link to 3. SSH 無密碼登入設定：">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="31-在客戶端生成-ssh-金鑰對">3.1 在客戶端生成 SSH 金鑰對<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#31-%E5%9C%A8%E5%AE%A2%E6%88%B6%E7%AB%AF%E7%94%9F%E6%88%90-ssh-%E9%87%91%E9%91%B0%E5%B0%8D" class="hash-link" aria-label="Direct link to 3.1 在客戶端生成 SSH 金鑰對" title="Direct link to 3.1 在客戶端生成 SSH 金鑰對">​</a></h3>
-<p>打開終端機。</p>
-<p>輸入以下命令以生成金鑰對：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-keygen</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>按照提示操作。通常預設的設定就足夠了。在詢問密碼的部分可以直接按 Enter 以建立一個無密碼的金鑰對。</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-把公開金鑰複製到伺服器">3.2 把公開金鑰複製到伺服器<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#32-%E6%8A%8A%E5%85%AC%E9%96%8B%E9%87%91%E9%91%B0%E8%A4%87%E8%A3%BD%E5%88%B0%E4%BC%BA%E6%9C%8D%E5%99%A8" class="hash-link" aria-label="Direct link to 3.2 把公開金鑰複製到伺服器" title="Direct link to 3.2 把公開金鑰複製到伺服器">​</a></h3>
-<p>使用 ssh-copy-id 命令將公開金鑰複製到伺服器。替換 [username] 與 [server-ip] 為你的伺服器資料。</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id [username]@[server-ip]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>例如：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>如果伺服器更改了預設的 SSH 埠（如：2222），則使用 -p 參數：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id -p 2222 john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>此命令將會提示你輸入伺服器的密碼。一旦驗證成功，你的公開金鑰就會被添加到伺服器上的 <code>~/.ssh/authorized_keys</code> 檔案中。</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="33-測試無密碼登入">3.3 測試無密碼登入<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#33-%E6%B8%AC%E8%A9%A6%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5" class="hash-link" aria-label="Direct link to 3.3 測試無密碼登��入" title="Direct link to 3.3 測試無密碼登入">​</a></h3>
-<p>嘗試 SSH 至伺服器：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh [username]@[server-ip]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>如果一切設定正確，你將可以無需密碼登入伺服器。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="注意事項">注意事項<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85" class="hash-link" aria-label="Direct link to 注意事項" title="Direct link to 注意事項">​</a></h2>
-<p>使用 SSH 金鑰認證確實可以提高安全性和方便性，但請確保不要遺失私鑰。建議定期更換或更新你的 SSH 金鑰。為了增加安全性，可以考慮禁止密碼認證方式。</p>
-<p>這可以在伺服器的 /etc/ssh/sshd_config 中設定：</p>
-<ul>
-<li><code>PasswordAuthentication no</code>。</li>
-</ul>
-<p>完成上述步驟後，你將能夠使用 SSH 金鑰認證從客戶端無密碼登入伺服器。</p>]]></content>
-        <author>
-            <name>TSE</name>
-            <uri>https://github.com/zephyr-sh</uri>
-        </author>
-        <category label="ubuntu" term="ubuntu"/>
-        <category label="ssh" term="ssh"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[Unicode 編碼區段表]]></title>
@@ -185,11 +383,11 @@
 <li>公司 VPN 網段：192.168.25.XXX</li>
 <li>家裡的網段：192.168.1.XXX</li>
 </ul>
-<p>這時候如果打開 VPN，所有的流量都會走到公司的網段，所以您將無法連上家裡相同網域內的其他機器。不僅如此，你在家裡刷了個好笑的影片看著，殊不知公司的網管也跟著你一起笑了起來。</p>
+<p>這時候如果打開 VPN，所有的流量都會走到公司的網段，所以您將無法連上家裡相同網域內的其他機器。不僅如此，您在家裡刷了個好笑的影片看著，殊不知公司的網管也跟著您一起笑了起來。</p>
 <p>這不太對吧？</p>
 <p>所以我們要做的事情是：<strong>讓 VPN 只導入公司的網段，其他的流量都走本地端。</strong></p>
 <p>我們假定您已經將 VPN 設定好，並可以正常使用，這次只是要解決分流的問題。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="解決問題">解決問題<a href="https://docsaidlab.github.io/blog/mac-selective-vpn-routing#%EF%BF%BD%EF%BF%BD%E8%A7%A3%E6%B1%BA%E5%95%8F%E9%A1%8C" class="hash-link" aria-label="Direct link to 解決問題" title="Direct link to 解決問題">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="解決問題">解決問題<a href="https://docsaidlab.github.io/blog/mac-selective-vpn-routing#%E8%A7%A3%E6%B1%BA%E5%95%8F%E9%A1%8C" class="hash-link" aria-label="Direct link to 解決問題" title="Direct link to 解決問題">​</a></h2>
 <p>第一步，先確認公司內部的網段是什麼，例如：</p>
 <p>192.168.25.XXX</p>
 <p>接著，讓我們開啟一份文件：</p>
@@ -211,7 +409,7 @@
 <p>指定路由應通過哪個網絡接口。在這個例子中，它是 ppp0（點對點協議接口0）。</p>
 </li>
 </ol>
-<p>整個指令的功能是通過 ppp0 接口添加一個到 192.168.25.0/24 網絡的路由。當你的系統試圖訪問 192.168.25.0/24 網絡中的任何IP地址時，它將通過 ppp0 接口路由流量。</p>
+<p>整個指令的功能是通過 ppp0 接口添加一個到 192.168.25.0/24 網絡的路由。當您的系統試圖訪問 192.168.25.0/24 網絡中的任何IP地址時，它將通過 ppp0 接口路由流量。</p>
 <p>接著，存檔後退出，給予檔案權限：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo chmod 755 /etc/ppp/ip-up</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="解題完成但是還是壞了">解題完成，但是還是壞了？<a href="https://docsaidlab.github.io/blog/mac-selective-vpn-routing#%E8%A7%A3%E9%A1%8C%E5%AE%8C%E6%88%90%E4%BD%86%E6%98%AF%E9%82%84%E6%98%AF%E5%A3%9E%E4%BA%86" class="hash-link" aria-label="Direct link to 解題完成，但是還是壞了？" title="Direct link to 解題完成，但是還是壞了？">​</a></h2>
