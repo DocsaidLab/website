@@ -1,30 +1,43 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
-
-/* You can override the default Infima variables here. */
+/* 自訂的 CSS 變數，使用你提供的主色調 */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --your-color-primary: #1d428a;
+  /* 你的主色調 */
+  --your-color-secondary: #fe9308;
+  /* 你的次要色調 */
+
+  /* 調整主色調的不同深淺變化 */
+  --your-color-primary-dark: #17356d;
+  --your-color-primary-darker: #132a57;
+  --your-color-primary-darkest: #0f2144;
+  --your-color-primary-light: #3e5da9;
+  --your-color-primary-lighter: #5f79c4;
+  --your-color-primary-lightest: #8095df;
+
+  /* 調整次要色調的不同深淺變化 */
+  --your-color-secondary-dark: #e58307;
+  --your-color-secondary-darker: #cc7406;
+  --your-color-secondary-darkest: #b46505;
+  --your-color-secondary-light: #fea527;
+  --your-color-secondary-lighter: #feb547;
+  --your-color-secondary-lightest: #fec667;
+
+  /* 更新原有的顏色變數 */
+  --ifm-color-primary: var(--your-color-primary);
+  --ifm-color-primary-dark: var(--your-color-primary-dark);
+  --ifm-color-primary-darker: var(--your-color-primary-darker);
+  --ifm-color-primary-darkest: var(--your-color-primary-darkest);
+  --ifm-color-primary-light: var(--your-color-primary-light);
+  --ifm-color-primary-lighter: var(--your-color-primary-lighter);
+  --ifm-color-primary-lightest: var(--your-color-primary-lightest);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* 深色模式時的色調調整 */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: var(--your-color-secondary);
+  --ifm-color-primary-dark: var(--your-color-secondary-dark);
+  --ifm-color-primary-darker: var(--your-color-secondary-darker);
+  --ifm-color-primary-darkest: var(--your-color-secondary-darkest);
+  --ifm-color-primary-light: var(--your-color-secondary-light);
+  --ifm-color-primary-lighter: var(--your-color-secondary-lighter);
+  --ifm-color-primary-lightest: var(--your-color-secondary-lightest);
 }
