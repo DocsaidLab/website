@@ -49,7 +49,7 @@ tags: [terms-of-service]
 
 ## 四、您的私隱
 
-請閱讀[隱私政策](2023-12-01-privacy-policy.md)。
+請閱讀[隱私政策](2023-08-23-privacy-policy.md)。
 
 ## 五、無保證
 
