@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[2432],{4534:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/fail-2-ban","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
