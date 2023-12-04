@@ -457,15 +457,15 @@
         <id>https://DocsaidLab.github.io/blog/mac-selective-vpn-routing</id>
         <link href="https://DocsaidLab.github.io/blog/mac-selective-vpn-routing"/>
         <updated>2023-09-01T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[首先簡單描述一下本次遇到的情境題：]]></summary>
-        <content type="html"><![CDATA[<p>首先簡單描述一下本次遇到的情境題：</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="定義問題">定義問題<a href="https://docsaidlab.github.io/blog/mac-selective-vpn-routing#%E5%AE%9A%E7%BE%A9%E5%95%8F%E9%A1%8C" class="hash-link" aria-label="Direct link to 定義問題" title="Direct link to 定義問題">​</a></h2>
+        <summary type="html"><![CDATA[簡單描述一下本次遇到的情境題：]]></summary>
+        <content type="html"><![CDATA[<p>簡單描述一下本次遇到的情境題：</p>
 <p>居家辦公使用公司配置的 VPN，但我們仍想要使用本地端的其他的機器，舉例來說：</p>
 <ul>
 <li>公司 VPN 網段：192.168.25.XXX</li>
 <li>家裡的網段：192.168.1.XXX</li>
 </ul>
-<p>這時候如果打開 VPN，所有的流量都會走到公司的網段，所以您將無法連上家裡相同網域內的其他機器。不僅如此，您在家裡刷了個好笑的影片看著，殊不知公司的網管也跟著您一起笑了起來。</p>
+<p>這時候如果打開 VPN，所有的流量都會走到公司的網段，所以您將無法連上家裡相同網域內的其他機器。</p>
+<p>不僅如此，您在家裡刷了個好笑的影片看著，殊不知公司的網管也跟著您一起笑了起來。</p>
 <p>這不太對吧？</p>
 <p>所以我們要做的事情是：<strong>讓 VPN 只導入公司的網段，其他的流量都走本地端。</strong></p>
 <p>我們假定您已經將 VPN 設定好，並可以正常使用，這次只是要解決分流的問題。</p>
