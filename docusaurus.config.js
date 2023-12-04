@@ -80,8 +80,13 @@ const config = {
           },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
+            to: '/blog/terms-of-service',
+            label: '使用條款',
+            position: 'right',
+          },
+          {
             to: '/blog/privacy-policy',
-            label: '隱私條款',
+            label: '隱私政策',
             position: 'right',
           },
           {
