@@ -2,11 +2,59 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://DocsaidLab.github.io/blog</id>
     <title>Docsaid Blog</title>
-    <updated>2023-09-02T00:00:00.000Z</updated>
+    <updated>2023-09-13T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://DocsaidLab.github.io/blog"/>
     <subtitle>Docsaid Blog</subtitle>
     <icon>https://DocsaidLab.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[在 Ubuntu 主機上安裝和設定 SSH 伺服器]]></title>
+        <id>https://DocsaidLab.github.io/blog/ubuntu-install-ssh</id>
+        <link href="https://DocsaidLab.github.io/blog/ubuntu-install-ssh"/>
+        <updated>2023-09-13T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[SSH（安全殼層）是一種網絡協議，允許用戶安全地訪問和管理遠程服務器。]]></summary>
+        <content type="html"><![CDATA[<p>SSH（安全殼層）是一種網絡協議，允許用戶安全地訪問和管理遠程服務器。</p>
+<p>在這篇文章中，本文將逐步引導你完成安裝 OpenSSH 伺服器的過程，檢查其運行狀態，以及設定無密碼登入。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-安裝-openssh-伺服器">1. 安裝 OpenSSH 伺服器<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#1-%E5%AE%89%E8%A3%9D-openssh-%E4%BC%BA%E6%9C%8D%E5%99%A8" class="hash-link" aria-label="Direct link to 1. 安裝 OpenSSH 伺服器" title="Direct link to 1. 安裝 OpenSSH 伺服器">​</a></h2>
+<p>打開終端機。</p>
+<p>輸入以下命令來安裝 OpenSSH 伺服器：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt update</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install openssh-server</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-檢查-ssh-伺服器狀態">2. 檢查 SSH 伺服器狀態<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#2-%E6%AA%A2%E6%9F%A5-ssh-%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%8B%80%E6%85%8B" class="hash-link" aria-label="Direct link to 2. 檢查 SSH 伺服器狀態" title="Direct link to 2. 檢查 SSH 伺服器狀態">​</a></h2>
+<p>使用以下命令檢查 SSH 伺服器的狀態：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl status ssh</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>如果你看到 「Active: active (running)」，那麼 SSH 伺服器已經成功啟動。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-ssh-無密碼登入設定">3. SSH 無密碼登入設定：<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#3-ssh-%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5%E8%A8%AD%E5%AE%9A" class="hash-link" aria-label="Direct link to 3. SSH 無密碼登入設定：" title="Direct link to 3. SSH 無密碼登入設定：">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="31-在客戶端生成-ssh-金鑰對">3.1 在客戶端生成 SSH 金鑰對<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#31-%E5%9C%A8%E5%AE%A2%E6%88%B6%E7%AB%AF%E7%94%9F%E6%88%90-ssh-%E9%87%91%E9%91%B0%E5%B0%8D" class="hash-link" aria-label="Direct link to 3.1 在客戶端生成 SSH 金鑰對" title="Direct link to 3.1 在客戶端生成 SSH 金鑰對">​</a></h3>
+<p>打開終端機。</p>
+<p>輸入以下命令以生成金鑰對：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-keygen</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>按照提示操作。通常預設的設定就足夠了。在詢問密碼的部分可以直接按 Enter 以建立一個無密碼的金鑰對。</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-把公開金鑰複製到伺服器">3.2 把公開金鑰複製到伺服器<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#32-%E6%8A%8A%E5%85%AC%E9%96%8B%E9%87%91%E9%91%B0%E8%A4%87%E8%A3%BD%E5%88%B0%E4%BC%BA%E6%9C%8D%E5%99%A8" class="hash-link" aria-label="Direct link to 3.2 把公開金鑰複製到伺服器" title="Direct link to 3.2 把公開金鑰複製到伺服器">​</a></h3>
+<p>使用 ssh-copy-id 命令將公開金鑰複製到伺服器。替換 [username] 與 [server-ip] 為你的伺服器資料。</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id [username]@[server-ip]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>例如：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>如果伺服器更改了預設的 SSH 埠（如：2222），則使用 -p 參數：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id -p 2222 john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>此命令將會提示你輸入伺服器的密碼。一旦驗證成功，你的公開金鑰就會被添加到伺服器上的 <code>~/.ssh/authorized_keys</code> 檔案中。</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="33-測試無密碼登入">3.3 測試無密碼登入<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#33-%E6%B8%AC%E8%A9%A6%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5" class="hash-link" aria-label="Direct link to 3.3 測試無密碼登入" title="Direct link to 3.3 測試無密碼登入">​</a></h3>
+<p>嘗試 SSH 至伺服器：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh [username]@[server-ip]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>如果一切設定正確，你將可以無需密碼登入伺服器。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="注意事項">注意事項：<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85" class="hash-link" aria-label="Direct link to 注意事項：" title="Direct link to 注意事項：">​</a></h2>
+<p>使用 SSH 金鑰認證確實可以提高安全性和方便性，但請確保不要遺失私鑰。建議定期更換或更新你的 SSH 金鑰。為了增加安全性，可以考慮禁止密碼認證方式。</p>
+<p>這可以在伺服器的 /etc/ssh/sshd_config 中設定：</p>
+<ul>
+<li><code>PasswordAuthentication no</code>。</li>
+</ul>
+<p>完成上述步驟後，你將能夠使用 SSH 金鑰認證從客戶端無密碼登入伺服器。</p>]]></content>
+        <author>
+            <name>TSE</name>
+            <uri>https://github.com/zephyr-sh</uri>
+        </author>
+        <category label="ubuntu" term="ubuntu"/>
+        <category label="ssh" term="ssh"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Unicode 編碼區段表]]></title>
         <id>https://DocsaidLab.github.io/blog/unicode-table</id>
@@ -169,7 +217,7 @@
         <content type="html"><![CDATA[<p>我們強烈建議您定期查看這些使用條款，以確保您始終保持對其的了解，因為我們可能會在未來進行修改或更新。希望您在 DOCSAID 網站有一個愉快的瀏覽體驗，並尊重和遵守我們設定的規範。</p>
 <p>本網站由 DOCSAID 所擁有和經營。在您使用本網站之前，我們建議您詳細閱讀和了解這些使用條款，確保您完全明白您的權利和責任。這不僅有助於保護您的權益，也有助於確保本網站能夠為所有使用者提供一個安全和高效的環境。</p>
 <p>這些使用條款的目的是為了確保本網站的正常運作，並為使用者提供清晰的使用指引。這些條款也反映了我們對使用者的承諾，以及我們對確保一個良好網絡環境的決心。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="一智慧財產產權">一、智慧財產產權<a href="https://docsaidlab.github.io/blog/terms-of-service#%E4%B8%80%E6%99%BA%E6%85%A7%E8%B2%A1%E7%94%A2%E7%94%A2%E6%AC%8A" class="hash-link" aria-label="Direct link to 一、智慧財產產權" title="Direct link to 一、智慧財產產權">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="一智慧財產產權">一、智慧財產產權<a href="https://docsaidlab.github.io/blog/terms-of-service#%EF%BF%BD%EF%BF%BD%E4%B8%80%E6%99%BA%E6%85%A7%E8%B2%A1%E7%94%A2%E7%94%A2%E6%AC%8A" class="hash-link" aria-label="Direct link to 一、智慧財產產權" title="Direct link to 一、智慧財產產權">​</a></h2>
 <p>本網站上包含的所有內容、圖片、文字、圖表、標誌、圖示、音頻創作、影片創作以及其他材料（以下統稱為「材料」）均受到智慧財產權法律的保護，包括但不限於著作權、商標權、專利權、設計權和商業秘密。</p>
 <ul>
 <li>版權：本網站的材料，包括但不限於文字、圖像、影片等，均受到版權法的保護。這意味著除非您獲得明確的許可，否則您不得未經授權使用、複製、修改或分發這些材料。</li>
