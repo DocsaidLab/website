@@ -2,7 +2,7 @@
 slug: ubuntu-docker-pypiserver
 title: Ubuntu, Docker and PyPi Server
 authors: TSE
-tags: [ubuntu, ssh]
+tags: [ubuntu, docker, pypiserver]
 ---
 
 隨著 Python 社群的持續發展，許多開發者和團隊選擇建立自己的私有 Python 包索引伺服器，來儲存和管理自家的 Python 套件。這不僅提供了更好的版本控制，也確保了軟體包的安全性。
