@@ -14,7 +14,7 @@
         <updated>2023-09-13T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[SSH（安全殼層）是一種網絡協議，允許用戶安全地訪問和管理遠程服務器。]]></summary>
         <content type="html"><![CDATA[<p>SSH（安全殼層）是一種網絡協議，允許用戶安全地訪問和管理遠程服務器。</p>
-<p>在這篇文章中，本文將逐步引導你完成安裝 OpenSSH 伺服器的過程，檢查其運行狀態，以及設定無密碼登入。</p>
+<p>本文將逐步引導你完成安裝 OpenSSH 伺服器的過程，檢查其運行狀態，以及設定無密碼登入。</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-安裝-openssh-伺服器">1. 安裝 OpenSSH 伺服器<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#1-%E5%AE%89%E8%A3%9D-openssh-%E4%BC%BA%E6%9C%8D%E5%99%A8" class="hash-link" aria-label="Direct link to 1. 安裝 OpenSSH 伺服器" title="Direct link to 1. 安裝 OpenSSH 伺服器">​</a></h2>
 <p>打開終端機。</p>
 <p>輸入以下命令來安裝 OpenSSH 伺服器：</p>
@@ -41,7 +41,7 @@
 <p>嘗試 SSH 至伺服器：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh [username]@[server-ip]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>如果一切設定正確，你將可以無需密碼登入伺服器。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="注意事項">注意事項：<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85" class="hash-link" aria-label="Direct link to 注意事項：" title="Direct link to 注意事項：">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="注意事項">注意事項<a href="https://docsaidlab.github.io/blog/ubuntu-install-ssh#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85" class="hash-link" aria-label="Direct link to 注意事項" title="Direct link to 注意事項">​</a></h2>
 <p>使用 SSH 金鑰認證確實可以提高安全性和方便性，但請確保不要遺失私鑰。建議定期更換或更新你的 SSH 金鑰。為了增加安全性，可以考慮禁止密碼認證方式。</p>
 <p>這可以在伺服器的 /etc/ssh/sshd_config 中設定：</p>
 <ul>
