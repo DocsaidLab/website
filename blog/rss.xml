@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title>Docsaid Blog</title>
+        <title>DOCSAID Blog</title>
         <link>https://DocsaidLab.github.io/blog</link>
-        <description>Docsaid Blog</description>
+        <description>DOCSAID Blog</description>
         <lastBuildDate>Wed, 13 Sep 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
-            <title><![CDATA[在 Ubuntu 主機上安裝和設定 SSH 伺服器]]></title>
+            <title><![CDATA[在 Ubuntu 主機上設定 SSH 伺服器]]></title>
             <link>https://DocsaidLab.github.io/blog/ubuntu-install-ssh</link>
             <guid>https://DocsaidLab.github.io/blog/ubuntu-install-ssh</guid>
             <pubDate>Wed, 13 Sep 2023 00:00:00 GMT</pubDate>
@@ -83,7 +83,7 @@
             <category>unicode</category>
         </item>
         <item>
-            <title><![CDATA[解決 Mac VPN routing 問題：選擇性流量路由]]></title>
+            <title><![CDATA[解決 Mac VPN routing：選擇性流量路由]]></title>
             <link>https://DocsaidLab.github.io/blog/mac-selective-vpn-routing</link>
             <guid>https://DocsaidLab.github.io/blog/mac-selective-vpn-routing</guid>
             <pubDate>Fri, 01 Sep 2023 00:00:00 GMT</pubDate>
@@ -99,7 +99,7 @@
 <p>這不太對吧？</p>
 <p>所以我們要做的事情是：<strong>讓 VPN 只導入公司的網段，其他的流量都走本地端。</strong></p>
 <p>我們假定您已經將 VPN 設定好，並可以正常使用，這次只是要解決分流的問題。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="解決問題">解決問題<a href="https://docsaidlab.github.io/blog/mac-selective-vpn-routing#%E8%A7%A3%E6%B1%BA%E5%95%8F%E9%A1%8C" class="hash-link" aria-label="Direct link to 解決問題" title="Direct link to 解決問題">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="解決問題">解決問題<a href="https://docsaidlab.github.io/blog/mac-selective-vpn-routing#%E8%A7%A3%EF%BF%BD%EF%BF%BD%E6%B1%BA%E5%95%8F%E9%A1%8C" class="hash-link" aria-label="Direct link to 解決問題" title="Direct link to 解決問題">​</a></h2>
 <p>第一步，先確認公司內部的網段是什麼，例如：</p>
 <p>192.168.25.XXX</p>
 <p>接著，讓我們開啟一份文件：</p>
@@ -202,7 +202,7 @@
             <content:encoded><![CDATA[<p>我們強烈建議您定期查看這些使用條款，以確保您始終保持對其的了解，因為我們可能會在未來進行修改或更新。希望您在 DOCSAID 網站有一個愉快的瀏覽體驗，並尊重和遵守我們設定的規範。</p>
 <p>本網站由 DOCSAID 所擁有和經營。在您使用本網站之前，我們建議您詳細閱讀和了解這些使用條款，確保您完全明白您的權利和責任。這不僅有助於保護您的權益，也有助於確保本網站能夠為所有使用者提供一個安全和高效的環境。</p>
 <p>這些使用條款的目的是為了確保本網站的正常運作，並為使用者提供清晰的使用指引。這些條款也反映了我們對使用者的承諾，以及我們對確保一個良好網絡環境的決心。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="一智慧財產產權">一、智慧財產產權<a href="https://docsaidlab.github.io/blog/terms-of-service#%EF%BF%BD%EF%BF%BD%E4%B8%80%E6%99%BA%E6%85%A7%E8%B2%A1%E7%94%A2%E7%94%A2%E6%AC%8A" class="hash-link" aria-label="Direct link to 一、智慧財產產權" title="Direct link to 一、智慧財產產權">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="一智慧財產產權">一、智慧財產產權<a href="https://docsaidlab.github.io/blog/terms-of-service#%E4%B8%80%E6%99%BA%E6%85%A7%E8%B2%A1%E7%94%A2%E7%94%A2%EF%BF%BD%E6%AC%8A" class="hash-link" aria-label="Direct link to 一、智慧財產產權" title="Direct link to 一、智慧財產產權">​</a></h2>
 <p>本網站上包含的所有內容、圖片、文字、圖表、標誌、圖示、音頻創作、影片創作以及其他材料（以下統稱為「材料」）均受到智慧財產權法律的保護，包括但不限於著作權、商標權、專利權、設計權和商業秘密。</p>
 <ul>
 <li>版權：本網站的材料，包括但不限於文字、圖像、影片等，均受到版權法的保護。這意味著除非您獲得明確的許可，否則您不得未經授權使用、複製、修改或分發這些材料。</li>
@@ -250,7 +250,7 @@
 <p>您同意，若因您違反這些使用條款，導致 DOCSAID 網站或其關聯方（包括但不限於其管理人員、董事、員工、代表、附屬公司或其他相關實體）遭受損失、損害、費用、訴訟、索賠或其他法律責任，您應對此全面負責並支付相關賠償。</p>
 <p>此賠償範圍包括但不僅限於：法律費用、訴訟成本、律師薪酬、專家咨詢費、解決糾紛相關的所有費用及其他因您的違約行為所產生的一切費用。您進一步同意，您將不反對或拒絕配合，並將提供所有必要的支持以協助 DOCSAID 網站及其相關方解決任何因您的違約行為而引發的訴訟、索賠或其他法律事宜。</p>
 <p>您確認並承諾，不論在哪個法律管轄區或訴訟場所，您都會全面賠償 DOCSAID 網站及其關聯方的相關損失。此外，您明確認知，此賠償承諾將不受到任何形式的限制，確保 DOCSAID 網站及其關聯方得到適當的法律補償和權益保障。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="八可分割性">八、可分割性<a href="https://docsaidlab.github.io/blog/terms-of-service#%E5%85%AB%E5%8F%AF%E5%88%86%E5%89%B2%E6%80%A7" class="hash-link" aria-label="Direct link to 八、可分割性" title="Direct link to 八、可分割性">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="八可�分割性">八、可分割性<a href="https://docsaidlab.github.io/blog/terms-of-service#%E5%85%AB%E5%8F%AF%E5%88%86%E5%89%B2%E6%80%A7" class="hash-link" aria-label="Direct link to 八、可分割性" title="Direct link to 八、可分割性">​</a></h2>
 <p>若根據相關適用法律，這些使用條款的某一條款被認定為無效、非法或不可執行，那麼該特定條款將被視作已被移除，但這並不會對其他條款產生影響或使其失效。</p>
 <p>在這種情況下，我們將致力於修訂或替換被認定無效的條款，以確保使用條款的原始意圖和目的得以維持。即便有部分條款因特定原因被認為是不適用或無效，本使用條款的餘下部分仍將保持其效力和約束性。</p>
 <p>這些使用條款的分割性確保了即使某些條款在法律上被認為是無效，它仍不會妨礙您與 DOCSAID 網站間其他條款所涵蓋的權利和義務的有效性。</p>
