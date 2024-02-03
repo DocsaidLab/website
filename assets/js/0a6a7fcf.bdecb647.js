@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[7632],{3292:a=>{a.exports=JSON.parse('{"label":"fail2ban","permalink":"/blog/tags/fail-2-ban","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
