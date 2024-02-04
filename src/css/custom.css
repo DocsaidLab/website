@@ -1,35 +1,31 @@
 /* 自訂的 CSS 變數，使用你提供的主色調 */
 :root {
-  --your-color-primary: #1d428a;
-  /* 你的主色調 */
-  --your-color-secondary: #fe9308;
-  /* 你的次要色調 */
+  /* 主色调 */
+  --color-primary: #1d428a;
+  --color-primary-dark: #17356d;
+  --color-primary-darker: #132a57;
+  --color-primary-darkest: #0f2144;
+  --color-primary-light: #3e5da9;
+  --color-primary-lighter: #5f79c4;
+  --color-primary-lightest: #8095df;
 
-  /* 調整主色調的不同深淺變化 */
-  --your-color-primary-dark: #17356d;
-  --your-color-primary-darker: #132a57;
-  --your-color-primary-darkest: #0f2144;
-  --your-color-primary-light: #3e5da9;
-  --your-color-primary-lighter: #5f79c4;
-  --your-color-primary-lightest: #8095df;
+  /* 次要色调 */
+  --color-secondary: #fe9308;
+  --color-secondary-dark: #e58307;
+  --color-secondary-darker: #cc7406;
+  --color-secondary-darkest: #b46505;
+  --color-secondary-light: #fea527;
+  --color-secondary-lighter: #feb547;
+  --color-secondary-lightest: #fec667;
 
-  /* 調整次要色調的不同深淺變化 */
-  --your-color-secondary-dark: #e58307;
-  --your-color-secondary-darker: #cc7406;
-  --your-color-secondary-darkest: #b46505;
-  --your-color-secondary-light: #fea527;
-  --your-color-secondary-lighter: #feb547;
-  --your-color-secondary-lightest: #fec667;
-
-  /* 更新原有的顏色變數 */
-  --ifm-color-primary: var(--your-color-primary);
-  --ifm-color-primary-dark: var(--your-color-primary-dark);
-  --ifm-color-primary-darker: var(--your-color-primary-darker);
-  --ifm-color-primary-darkest: var(--your-color-primary-darkest);
-  --ifm-color-primary-light: var(--your-color-primary-light);
-  --ifm-color-primary-lighter: var(--your-color-primary-lighter);
-  --ifm-color-primary-lightest: var(--your-color-primary-lightest);
-
+  /* 更新原有的颜色变量以使用新的命名 */
+  --ifm-color-primary: var(--color-primary);
+  --ifm-color-primary-dark: var(--color-primary-dark);
+  --ifm-color-primary-darker: var(--color-primary-darker);
+  --ifm-color-primary-darkest: var(--color-primary-darkest);
+  --ifm-color-primary-light: var(--color-primary-light);
+  --ifm-color-primary-lighter: var(--color-primary-lighter);
+  --ifm-color-primary-lightest: var(--color-primary-lightest);
 }
 
 /* 深色模式時的色調調整 */
@@ -41,9 +37,4 @@
   --ifm-color-primary-light: var(--your-color-secondary-light);
   --ifm-color-primary-lighter: var(--your-color-secondary-lighter);
   --ifm-color-primary-lightest: var(--your-color-secondary-lightest);
-}
-
-
-article header h1 {
-  font-size: 2.2rem !important;
 }

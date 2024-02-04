@@ -141,7 +141,7 @@ get_system_info()
 
 - [system_info.py](https://github.com/DocsaidLab/DocsaidKit/blob/main/docsaidkit/utils/system_info.py)
 
-```python
+```python showLineNumbers
 import platform
 import socket
 import subprocess

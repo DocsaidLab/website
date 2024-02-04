@@ -13,7 +13,7 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://DocsaidLab.github.io',
+  url: 'https://docsaid.org',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -31,8 +31,8 @@ const config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'zh-hant',
+    locales: ['zh-hant'],
   },
   presets: [
     [
@@ -48,6 +48,8 @@ const config = {
         },
         blog: {
           showReadingTime: true,
+          blogTitle: 'DOCSAID',
+          blogSidebarCount: 0,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl:
@@ -67,34 +69,54 @@ const config = {
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
         title: '',
+        hideOnScroll: true,
         logo: {
           alt: 'Docsaid Logo',
           src: 'img/docsaid_logo.png',
         },
         items: [
           {
+            label: 'Tutorial',
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Tutorial',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
           {
-            to: '/blog/terms-of-service',
-            label: '使用條款',
+            label: 'Blog',
+            to: '/blog',
+            position: 'left'
+          },
+          {
+            label: '用戶指南',
+            type: 'dropdown',
             position: 'right',
+            items: [
+              {
+                to: '/blog/terms-of-service',
+                label: '使用條款',
+              },
+              {
+                to: '/blog/privacy-policy',
+                label: '隱私政策',
+              }
+            ]
           },
           {
-            to: '/blog/privacy-policy',
-            label: '隱私政策',
-            position: 'right',
-          },
-          {
-            href: 'https://github.com/DocsaidLab/blog',
             label: 'GitHub',
             position: 'right',
+            href: 'https://github.com/DocsaidLab/blog',
           },
         ],
+      },
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        }
+      },
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: false,
       },
       footer: {
         style: 'dark',
@@ -139,7 +161,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Docsaid, Inc. Built with Docsaid.`,
+        copyright: `Copyright © ${new Date().getFullYear()} DOCSAID.`,
       },
       prism: {
         theme: prismThemes.github,
