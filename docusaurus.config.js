@@ -75,12 +75,12 @@ const config = {
           src: 'img/docsaid_logo.png',
         },
         items: [
-          {
-            label: 'Tutorial',
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-          },
+          // {
+          //   label: 'Tutorial',
+          //   type: 'docSidebar',
+          //   sidebarId: 'tutorialSidebar',
+          //   position: 'left',
+          // },
           {
             label: 'Blog',
             to: '/blog',
