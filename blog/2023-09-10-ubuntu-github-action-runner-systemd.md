@@ -1,7 +1,7 @@
 ---
 slug: ubuntu-github-runner-systemd
 title: Ubuntu 背景執行 GitHub Runner
-authors: TSE
+authors: Zephyr
 tags: [ubuntu, github-action, runner, systemd]
 ---
 

@@ -1,7 +1,7 @@
 ---
 slug: ubuntu-docker-pypiserver
 title: Ubuntu, Docker and PyPi Server
-authors: TSE
+authors: Zephyr
 tags: [ubuntu, docker, pypiserver]
 ---
 

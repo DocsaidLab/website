@@ -1,7 +1,7 @@
 ---
 slug: gosu-usage
 title: gosu：容器環境下的使用者切換工具
-authors: TSE
+authors: Zephyr
 tags: [docker, gosu, sudo, container]
 ---
 

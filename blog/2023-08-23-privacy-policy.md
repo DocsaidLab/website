@@ -1,7 +1,7 @@
 ---
 slug: privacy-policy
 title: 隱私政策
-authors: TSE
+authors: Zephyr
 tags: [privacy-policy]
 ---
 

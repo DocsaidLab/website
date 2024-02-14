@@ -1,7 +1,7 @@
 ---
 slug: python-env-info-collector
 title: 記錄訓練主機的環境資訊
-authors: TSE
+authors: Zephyr
 tags: [python, training, environment, info, log]
 ---
 

@@ -1,7 +1,7 @@
 ---
 slug: terms-of-service
 title: 使用條款
-authors: TSE
+authors: Zephyr
 tags: [terms-of-service]
 ---
 

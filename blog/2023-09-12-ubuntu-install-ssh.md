@@ -1,7 +1,7 @@
 ---
 slug: ubuntu-install-ssh
 title: 在 Ubuntu 上設定 SSH 伺服器
-authors: TSE
+authors: Zephyr
 tags: [ubuntu, ssh]
 ---
 

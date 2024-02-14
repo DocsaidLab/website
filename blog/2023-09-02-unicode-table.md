@@ -1,7 +1,7 @@
 ---
 slug: unicode-table
 title: Unicode 編碼區段表
-authors: TSE
+authors: Zephyr
 tags: [unicode]
 ---
 

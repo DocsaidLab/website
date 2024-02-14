@@ -1,7 +1,7 @@
 ---
 slug: mac-selective-vpn-routing
 title: Mac VPN 與選擇性流量路由
-authors: TSE
+authors: Zephyr
 tags: [routing, vpn]
 ---
 

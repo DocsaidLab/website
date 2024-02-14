@@ -1,7 +1,7 @@
 ---
 slug: fail2ban-settings
 title: 設定 Fail2ban 防止惡意登入
-authors: TSE
+authors: Zephyr
 tags: [ubuntu, fail2ban]
 ---
 
