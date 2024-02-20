@@ -14,7 +14,7 @@
         <updated>2024-02-20T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[身為一個專業的 PyTorch 使用者，你應該早已經熟悉了如何訓練模型，如何調參，如何優化等技巧。]]></summary>
         <content type="html"><![CDATA[<p>身為一個專業的 PyTorch 使用者，你應該早已經熟悉了如何訓練模型，如何調參，如何優化等技巧。</p>
-<p>怎麼可能還會寫出 OOM（Out of Memory）的程式呢？但怎麼就是爆了？</p>
+<p>怎麼可能還會寫出 OOM（Out of Memory）的程式呢？</p>
 <hr>
 <ul>
 <li>請注意，這裡我們講的是系統的記憶體，不是 GPU 的記憶體。</li>
@@ -123,6 +123,29 @@
         <category label="imread" term="imread"/>
         <category label="HEIC" term="HEIC"/>
         <category label="TurboJPEG" term="TurboJPEG"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[日常錯誤排除紀錄]]></title>
+        <id>https://docsaid.org/blog/error-record</id>
+        <link href="https://docsaid.org/blog/error-record"/>
+        <updated>2024-02-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[我們總是會遇到一堆問題。有些問題是我們自己造成的，有些問題是別人造成的，有些問題是我們無法控制的。]]></summary>
+        <content type="html"><![CDATA[<p>我們總是會遇到一堆問題。有些問題是我們自己造成的，有些問題是別人造成的，有些問題是我們無法控制的。</p>
+<p>這裡紀錄一些簡單問題和解決方法。</p>
+<ol>
+<li>
+<p>執行 <code>npx docusaurus start</code> 時出現以下錯誤：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">file:///home/shayne/workspace/blog/node_modules/@docusaurus/core/bin/docusaurus.mjs:30</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">process.env.BABEL_ENV ??= 'development';</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    ^^^</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">SyntaxError: Unexpected token '??='</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>解決方法：<code>??=</code> 操作符需要 Node.js 15.0.0或更高版本才能支持。</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">nvm install node</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">nvm use node</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ol>]]></content>
+        <author>
+            <name>Zephyr</name>
+            <uri>https://github.com/zephyr-sh</uri>
+        </author>
+        <category label="error" term="error"/>
+        <category label="record" term="record"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[gosu：容器環境下的使用者切換工具]]></title>
