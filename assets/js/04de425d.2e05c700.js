@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[4079],{1854:l=>{l.exports=JSON.parse('{"label":"TurboJPEG","permalink":"/blog/tags/turbo-jpeg","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

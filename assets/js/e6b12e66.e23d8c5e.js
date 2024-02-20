@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[4064],{8640:l=>{l.exports=JSON.parse('{"label":"rtf8207w","permalink":"/blog/tags/rtf-8207-w","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
