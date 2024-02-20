@@ -7,7 +7,7 @@ tags: [PyTorch, OOM]
 
 身為一個專業的 PyTorch 使用者，你應該早已經熟悉了如何訓練模型，如何調參，如何優化等技巧。
 
-怎麼可能還會寫出 OOM（Out of Memory）的程式呢？但怎麼就是爆了？
+怎麼可能還會寫出 OOM（Out of Memory）的程式呢？
 
 <!--truncate-->
 
