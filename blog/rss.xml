@@ -34,7 +34,14 @@
 <p>看到 <code>self.data</code> 這個 List 了嗎？這個 List 會導致 OOM 問題。</p>
 <p>我們試著翻找了一下相關資料，發現這似乎不是 Pytorch 的問題，而是 Python 的問題。</p>
 <p>總之，不要用 List，改用 Numpy 或者 Tensor 來存儲數據，這樣就不會出現 OOM 問題了。</p>
-<p>至少在這個例子中，這樣做是有效的。</p>]]></content:encoded>
+<p>至少在這個例子中，這樣做是有效的。</p>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="我也是這樣寫為什麼什麼事情都沒有發生">我也是這樣寫，為什麼什麼事情都沒有發生？<a href="https://docsaid.org/blog/pytorch-training-out-of-memory#%E6%88%91%E4%B9%9F%E6%98%AF%E9%80%99%E6%A8%A3%E5%AF%AB%E7%82%BA%E4%BB%80%E9%BA%BC%E4%BB%80%E9%BA%BC%E4%BA%8B%E6%83%85%E9%83%BD%E6%B2%92%E6%9C%89%E7%99%BC%E7%94%9F" class="hash-link" aria-label="我也是這樣寫，為什麼什麼事情都沒有發生？的直接連結" title="我也是這樣寫，為什麼什麼事情都沒有發生？的直接連結">​</a></h2>
+<p>世界很美好，直到你遇到了一個大數據集。</p>
+<p>就我自己的測試的結果來看，當數據量小的時候，用 List 不會出現記憶體洩漏的問題。</p>
+<p>更具體來說，我使用一萬多筆數據的時候，沒問題；使用一百多萬筆數據的時候就爆了。</p>
+<p>所以，如果你的數據量不大，你可能永遠不會遇到這個問題。</p>
+<p>至於數據多寡的分界點，我也不知道，我推估這是 Python 或是 PyTorch 在交互的某個時刻才會出現的異常。</p>]]></content:encoded>
             <category>PyTorch</category>
             <category>OOM</category>
         </item>
