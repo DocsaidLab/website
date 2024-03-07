@@ -103,7 +103,7 @@ const config = {
           {
             label: 'GitHub',
             position: 'right',
-            href: 'https://github.com/DocsaidLab/blog',
+            href: 'https://github.com/DocsaidLab',
           },
         ],
       },
