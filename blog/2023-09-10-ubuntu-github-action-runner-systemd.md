@@ -1,6 +1,6 @@
 ---
 slug: ubuntu-github-runner-systemd
-title: Ubuntu 背景執行 GitHub Runner
+title: 利用 systemd 在 Ubuntu 上背景執行並自動啟動 GitHub Runner
 authors: Zephyr
 tags: [ubuntu, github-action, runner, systemd]
 ---

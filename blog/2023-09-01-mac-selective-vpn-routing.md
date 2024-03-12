@@ -1,6 +1,6 @@
 ---
 slug: mac-selective-vpn-routing
-title: Mac VPN 與選擇性流量路由
+title: Mac 上透過 VPN 進行選擇性流量路由設定：保持本地和公司網絡的最佳平衡
 authors: Zephyr
 tags: [routing, vpn]
 ---

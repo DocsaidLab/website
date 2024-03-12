@@ -1,6 +1,6 @@
 ---
 slug: ubuntu-docker-pypiserver
-title: Ubuntu, Docker and PyPi Server
+title: 搭建私有 PyPI：在 Ubuntu 上用 Docker 運行 PyPiServer 的完整指南
 authors: Zephyr
 tags: [ubuntu, docker, pypiserver]
 ---

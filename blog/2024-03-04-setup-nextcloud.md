@@ -1,6 +1,6 @@
 ---
 slug: setup-nextcloud
-title: 一起來建個私有雲吧！
+title: 打造個人私有雲：從零開始的 Nextcloud 搭建教程
 authors: Zephyr
 tags: [Nextcloud, Docker, Ubuntu]
 ---

@@ -1,6 +1,6 @@
 ---
 slug: fail2ban-settings
-title: 設定 Fail2ban 防止惡意登入
+title: Fail2ban 教學：如何在 Ubuntu 上配置以保護 SSH 服務免受暴力攻擊
 authors: Zephyr
 tags: [ubuntu, fail2ban]
 ---

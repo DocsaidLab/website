@@ -1,6 +1,6 @@
 ---
 slug: python-env-info-collector
-title: 記錄訓練主機的環境資訊
+title: 打造 Python 環境偵測工具：快速記錄與排查模型訓練環境問題
 authors: Zephyr
 tags: [python, training, environment, info, log]
 ---

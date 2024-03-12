@@ -1,6 +1,6 @@
 ---
 slug: pytorch-training-out-of-memory
-title: 啊！PyTorch 怎麼把記憶體弄爆了？
+title: PyTorch OOM：List 的陷阱與避免策略
 authors: Zephyr
 tags: [PyTorch, OOM]
 ---
