@@ -8,7 +8,7 @@
     <subtitle>DOCSAID Blog</subtitle>
     <icon>https://docsaid.org/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[我想建個私有雲，有沒有簡單一點的方法？]]></title>
+        <title type="html"><![CDATA[一起來建個私有雲吧！]]></title>
         <id>https://docsaid.org/blog/setup-nextcloud</id>
         <link href="https://docsaid.org/blog/setup-nextcloud"/>
         <updated>2024-03-04T00:00:00.000Z</updated>
@@ -16,7 +16,7 @@
         <content type="html"><![CDATA[<p>之前我都把檔案放在 Google Drive 上，下載檔案的時候會透過 wget 指令來下載。</p>
 <p>直到某一天，原本的下載指令突然就不能用了...</p>
 <p>既然如此，那我們來試試看 Nextcloud。</p>
-<p>以下我們基於 Ubuntu 22.04 來進行相關配置。在開始之前，，請你準備好一個域名，並且把這個域名指向你的伺服器。如果不知道該怎麼做，請直接 Google 搜尋『namecheap 怎麼用』。</p>
+<p>以下我們基於 Ubuntu 22.04 來進行相關配置。在開始之前，請你準備好一個域名，並且把這個域名指向你的伺服器。如果不知道該怎麼做，請直接 Google 搜尋『namecheap 怎麼用』。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="安裝-nextcloud">安裝 Nextcloud<a href="https://docsaid.org/blog/setup-nextcloud#%E5%AE%89%E8%A3%9D-nextcloud" class="hash-link" aria-label="安裝 Nextcloud的直接連結" title="安裝 Nextcloud的直接連結">​</a></h2>
 <p>第一問：為什麼要用 Nextcloud？</p>
 <ul>
