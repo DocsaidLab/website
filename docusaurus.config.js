@@ -47,8 +47,12 @@ const config = {
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
+          blogTitle: 'Docsaid blog!',
+          blogDescription: 'A Docsaid powered blog!',
+          postsPerPage: 'ALL',
           showReadingTime: true,
-          blogSidebarCount: 0,
+          blogSidebarTitle: 'All our posts',
+          blogSidebarCount: 'ALL',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl:
