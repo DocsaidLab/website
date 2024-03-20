@@ -14,7 +14,7 @@ tags: [error, record]
 1. 執行 `npx docusaurus start` 時出現以下錯誤：
 
     ```bash
-    file:///home/shayne/workspace/blog/node_modules/@docusaurus/core/bin/docusaurus.mjs:30
+    file:///home/user/workspace/blog/node_modules/@docusaurus/core/bin/docusaurus.mjs:30
     process.env.BABEL_ENV ??= 'development';
                         ^^^
 
