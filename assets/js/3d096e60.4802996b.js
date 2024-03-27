@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[7678],{4763:e=>{e.exports=JSON.parse('{"permalink":"/tags/sudo","page":1,"postsPerPage":1,"totalPages":1,"totalCount":1,"blogDescription":"A Docsaid powered blog!","blogTitle":"Docsaid blog!"}')}}]);

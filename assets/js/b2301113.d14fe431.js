@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[6740],{1769:e=>{e.exports=JSON.parse('{"permalink":"/tags/docker","page":1,"postsPerPage":3,"totalPages":1,"totalCount":3,"blogDescription":"A Docsaid powered blog!","blogTitle":"Docsaid blog!"}')}}]);
