@@ -47,6 +47,7 @@ const config = {
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
+          routeBasePath: '/',
           blogTitle: 'Docsaid blog!',
           blogDescription: 'A Docsaid powered blog!',
           postsPerPage: 'ALL',
@@ -90,7 +91,7 @@ const config = {
           },
           {
             label: 'Blog',
-            to: '/blog',
+            to: '/',
             position: 'left'
           },
           {
@@ -99,11 +100,11 @@ const config = {
             position: 'right',
             items: [
               {
-                to: '/blog/terms-of-service',
+                to: '/terms-of-service',
                 label: '使用條款',
               },
               {
-                to: '/blog/privacy-policy',
+                to: '/privacy-policy',
                 label: '隱私政策',
               }
             ]
@@ -142,7 +143,7 @@ const config = {
             items: [
               {
                 label: 'Blog',
-                to: '/blog',
+                to: '/',
               },
               {
                 label: 'GitHub',
