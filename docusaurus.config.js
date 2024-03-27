@@ -82,12 +82,12 @@ const config = {
           src: 'img/docsaid_logo.png',
         },
         items: [
-          // {
-          //   label: 'Tutorial',
-          //   type: 'docSidebar',
-          //   sidebarId: 'tutorialSidebar',
-          //   position: 'left',
-          // },
+          {
+            label: 'Documents',
+            type: 'docSidebar',
+            sidebarId: 'tutorialSidebar',
+            position: 'left',
+          },
           {
             label: 'Blog',
             to: '/blog',
@@ -138,23 +138,6 @@ const config = {
             ],
           },
           {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
-              },
-            ],
-          },
-          {
             title: 'More',
             items: [
               {
@@ -163,7 +146,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/DocsaidLab/blog',
+                href: 'https://github.com/DocsaidLab',
               },
             ],
           },
