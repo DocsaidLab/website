@@ -40,12 +40,6 @@ sidebar_position: 2
 
 滿足前提條件後，您可以選擇以下方法之一進行安裝：
 
-### 一般方法
-
-本包僅透過我們的內部 Pypi 服務提供。
-
-外部使用者應透過 git 複製並使用 setup.py 安裝。
-
 ### 透過 git clone 安裝
 
 1. 安裝 wheel 套件：
@@ -74,9 +68,9 @@ sidebar_position: 2
 
 ### 透過 docker 安裝（建議）
 
-我們一律透過 docker 進行安裝，以確保環境的一致性，沒有例外。
+我自己是一律透過 docker 進行安裝，以確保環境的一致性，沒有例外。
 
-所以我們也同樣建議您使用 docker 進行安裝。
+所以我也同樣建議您使用 docker 進行安裝，相關環境我都測試好了，你只要下指令就好。
 
 ```bash
 bash docker/build.bash
@@ -84,6 +78,13 @@ bash docker/build.bash
 
 ## 常見問題
 
-1. **依賴安裝**
+1. **為什麼沒有 Windows？**
 
-    特定的依賴套件如 `libturbojpeg`, `exiftool`, `ffmpeg`, `libheif-dev` 在不同作業系統上的安裝方法可能會有所不同。 上述指南提供了在 Ubuntu 和 MacOS 上安裝這些依賴的命令。 這些依賴對於確保 DocsaidKit 中的特定功能正常運作是必要的。
+    抱歉，我對 Windows 環境建置有 PTSD（創傷後壓力症候群），所以沒有支援。
+
+    珍愛生命，遠離 Windows。
+
+2. **Docker 怎麼裝？**
+
+    請參考 [**Docker 官方文件**](https://docs.docker.com/get-docker/) 進行安裝。
+
