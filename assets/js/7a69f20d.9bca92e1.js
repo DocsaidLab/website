@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[6052],{6333:a=>{a.exports=JSON.parse('{"label":"privacy-policy","permalink":"/tags/privacy-policy","allTagsPath":"/tags","count":1,"unlisted":false}')}}]);

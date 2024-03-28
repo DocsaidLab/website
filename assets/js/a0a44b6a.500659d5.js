@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[6146],{8744:i=>{i.exports=JSON.parse('{"title":"imporc","slug":"/category/imporc","permalink":"/docs/category/imporc","navigation":{"previous":{"title":"imresize","permalink":"/docs/docsaidkit/vision/geometric/imresize"},"next":{"title":"imread","permalink":"/docs/docsaidkit/vision/improc/imread"}}}')}}]);

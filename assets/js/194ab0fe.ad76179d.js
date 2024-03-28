@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[65],{9287:e=>{e.exports=JSON.parse('{"title":"GmailSummary","slug":"/category/gmailsummary","permalink":"/category/gmailsummary","navigation":{"previous":{"title":"test","permalink":"/docclassifier/test"},"next":{"title":"test","permalink":"/gmailsummary/test"}}}')}}]);

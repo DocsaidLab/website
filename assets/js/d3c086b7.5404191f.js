@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[3946],{4125:e=>{e.exports=JSON.parse('{"label":"HEIC","permalink":"/tags/heic","allTagsPath":"/tags","count":1,"unlisted":false}')}}]);
