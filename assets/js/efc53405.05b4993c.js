@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[442],{9629:e=>{e.exports=JSON.parse('{"title":"DocAligner","slug":"/category/docaligner","permalink":"/docs/category/docaligner","navigation":{"previous":{"title":"gaussianblur","permalink":"/docs/docsaidkit/vision/gaussianblur"},"next":{"title":"test","permalink":"/docs/docaligner/test"}}}')}}]);
