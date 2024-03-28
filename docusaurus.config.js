@@ -41,13 +41,13 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
+          routeBasePath: '/',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl:
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
-          routeBasePath: '/',
           blogTitle: 'Docsaid blog!',
           blogDescription: 'A Docsaid powered blog!',
           postsPerPage: 'ALL',
@@ -91,7 +91,7 @@ const config = {
           },
           {
             label: 'Blog',
-            to: '/',
+            to: '/blog',
             position: 'left'
           },
           {
@@ -100,11 +100,11 @@ const config = {
             position: 'right',
             items: [
               {
-                to: '/terms-of-service',
+                to: '/blog/terms-of-service',
                 label: '使用條款',
               },
               {
-                to: '/privacy-policy',
+                to: '/blog/privacy-policy',
                 label: '隱私政策',
               }
             ]
@@ -143,7 +143,7 @@ const config = {
             items: [
               {
                 label: 'Blog',
-                to: '/',
+                to: '/blog',
               },
               {
                 label: 'GitHub',
