@@ -1,12 +1,12 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 ---
 
-# meanblur
+# medianblur
 
->[meanblur(img: np.ndarray, ksize: _Ksize = 3, **kwargs) -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/functionals.py#L33)
+>[medianblur(img: np.ndarray, ksize: _Ksize = 3, **kwargs) -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/functionals.py#L78)
 
-- **說明**：對輸入影像套用均值模糊處理。
+- **說明**：對輸入影像套用中值模糊處理。
 
 - **參數**
 
@@ -23,8 +23,8 @@ sidebar_position: 1
     import docsaidkit as D
 
     img = D.imread('lena.png')
-    blur_img = D.meanblur(img, ksize=5)
+    blur_img = D.medianblur(img, ksize=5)
     ```
 
-    ![meanblur](./resource/test_meanblur.jpg)
+    ![medianblur](./resource/test_medianblur.jpg)
 
