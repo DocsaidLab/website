@@ -9,16 +9,34 @@ sidebar_position: 1
 
 我是個住在臺灣的 AI 工程師，同時也是這個組織的創辦人 Zephyr。
 
+## 這裡有什麼？
+
+現在你看到的這個頁面，是用來寫技術文件的。
+
+部落格的部分在隔壁：[**Blog**](https://docsaid.org/blog)。
+
+＊
+
+目前我在 Github 上已經完成了幾個項目，包括：
+
+1. [**DocsaidKit**](https://github.com/DocsaidLab/DocsaidKit)：裡面有一些我平常在用的一些小工具，是個工具箱的角色。
+2. [**DocAligner**](https://github.com/DocsaidLab/DocAligner)：這是一個提供文本定位功能的專案，主要用來定位文件的四個角點。
+3. [**DocClassifier**](https://github.com/DocsaidLab/DocClassifier)：這是一個用於提供文本相似度計算的專案，發想於我的朋友，他先完成了前期的程式開發和可行性驗證，接著把這個想法託付給我，讓我完成了後續細節之後。
+4. [**GmailSummary**](https://github.com/DocsaidLab/GmailSummary)：這是一個用於提供 Gmail 郵件摘要的專案，串接了 Gmail API 和 OpenAI API，完成大量郵件的摘要功能，並且每天固定時間推送更新資訊。
+
+還有一些還在規劃中，我就先不贅述。
+
 ## 工程師？
 
 早幾年前，做影像的會稱自己為「電腦視覺（CV）工程師」，做文字的會稱自己為「自然語言（NLP）工程師」，甚至也分出「機器學習（ML）工程師」和「深度學習（DL）工程師」，然後在某些小團體內存在不同職稱工程師的鄙視鏈，但不管是誰，全部會一起鄙視「AI工程師」：
 
 哼！又是個沒有 Sense 來騙頭銜的公司／職缺／求職者！
+
 事過境遷，現在我們愕然發現文字和影像和音訊等不同維度的資訊，居然已經在「基礎模型」的浪潮下完成了高維空間內的統一，成為刷榜、刷分、發論文的必備良藥！你這才發現，原來這些工程師都是一樣的，只是在不同的維度上做了一些不同的事情而已。
 
 然後，很快地這個領域就沒人這樣再分什麼工程師了，概念上就是你在每個領域都要學會基礎的知識，然後更多專精於你所擅長的分支。如此一來，我們在一時之間也很難說清楚自己是什麼工程師，回過頭來發現：
 
-對！就是你了！AI 工程師！
+對，就是你了！AI 工程師！
 
 ## 為什麼創立組織？
 
@@ -46,16 +64,6 @@ sidebar_position: 1
 
 你可以點一點左邊的目錄，看看我寫了些什麼，如果是空的，那就是我還沒寫完，請見諒。
 
-## 這裡有什麼？
-
-目前我已經完成了幾個項目，包括：
-
-1. [**DocsaidKit**](https://github.com/DocsaidLab/DocsaidKit)：裡面有一些我平常在用的一些小工具，是個工具箱的角色。
-2. [**DocAligner**](https://github.com/DocsaidLab/DocAligner)：這是一個提供文本定位功能的專案，主要用來定位文件的四個角點。
-3. [**DocClassifier**](https://github.com/DocsaidLab/DocClassifier)：這是一個用於提供文本相似度計算的專案，發想於我的朋友，他先完成了前期的程式開發和可行性驗證，接著把這個想法託付給我，讓我完成了後續細節之後。
-4. [**GmailSummary**](https://github.com/DocsaidLab/GmailSummary)：這是一個用於提供 Gmail 郵件摘要的專案，串接了 Gmail API 和 OpenAI API，完成大量郵件的摘要功能，並且每天固定時間推送更新資訊。
-
-還有一些其他項目還在規劃中，我就先不贅述。
 
 ## 最後 🍹
 

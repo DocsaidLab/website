@@ -32,9 +32,25 @@ sidebar_position: 2
     brew install jpeg-turbo exiftool ffmpeg libheif
     ```
 
-### pdf2image 安裝
+### pdf2image 依賴套件
 
-- 請參考開源專案 [**pdf2image**](https://github.com/Belval/pdf2image) 相關頁面以取得安裝指南。
+pdf2image 是一個 Python 模組，用於將 PDF 文件轉換為圖片。根據您的作業系統，請遵循以下指示進行安裝：
+
+- 或參考開源專案 [**pdf2image**](https://github.com/Belval/pdf2image) 相關頁面以取得安裝指南。
+
+- MacOS：Mac 使用者需要安裝 poppler。透過 Brew 進行安裝：
+
+    ```bash
+    brew install poppler
+    ```
+
+- Linux：大多數 Linux 發行版已預裝 `pdftoppm` 和 `pdftocairo`。
+
+    如果未安裝，請透過您的套件管理器安裝 poppler-utils。
+
+    ```bash
+    sudo apt install poppler-utils
+    ```
 
 ## 安裝套件
 
