@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[1968],{4131:o=>{o.exports=JSON.parse('{"title":"morphology","slug":"/category/morphology","permalink":"/category/morphology","navigation":{"previous":{"title":"imwrite","permalink":"/docsaidkit/vision/improc/imwrite"},"next":{"title":"test","permalink":"/docsaidkit/vision/morphology/test"}}}')}}]);
