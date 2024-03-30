@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[1804],{4298:i=>{i.exports=JSON.parse('{"title":"Drawings","slug":"/category/drawings","permalink":"/category/drawings","navigation":{"previous":{"title":"test","permalink":"/docsaidkit/vision/ipcam/test"},"next":{"title":"draw_box","permalink":"/docsaidkit/drawings/draw_box"}}}')}}]);
