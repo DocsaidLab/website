@@ -18,4 +18,8 @@ sidebar_position: 2
     class Person(DataclassCopyMixin):
         name: str
         age: int
+
+    person = Person('Alice', 20)
+    person_copy = person.__copy__()
+    person_deepcopy = person.__deepcopy__()
     ```
