@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[7702],{9983:i=>{i.exports=JSON.parse('{"title":"mixins","slug":"/category/mixins","permalink":"/category/mixins","navigation":{"previous":{"title":"pairwise_ioa","permalink":"/docsaidkit/structures/pairwise_ioa"},"next":{"title":"EnumCheckMixin","permalink":"/docsaidkit/mixins/enum_check_mixin"}}}')}}]);
