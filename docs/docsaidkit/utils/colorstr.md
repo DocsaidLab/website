@@ -10,8 +10,8 @@ sidebar_position: 20
 
 - **參數**
     - **obj** (`Any`)：要轉換為帶有顏色的字串的 Python 物件。
-    - **color** (`Union[COLORSTR, int, str]`, optional)：物件的顏色。預設為 `COLORSTR.BLUE`。
-    - **fmt** (`Union[FORMATSTR, int, str]`, optional)：物件的格式。預設為 `FORMATSTR.BOLD`。
+    - **color** (`Union[COLORSTR, int, str]`)：物件的顏色。預設為 `COLORSTR.BLUE`。
+    - **fmt** (`Union[FORMATSTR, int, str]`)：物件的格式。預設為 `FORMATSTR.BOLD`。
 
 - **傳回值**
 

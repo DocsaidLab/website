@@ -29,7 +29,7 @@ sidebar_position: 16
     - **load_yaml(path: Union[str, Path]) -> PowerDict**：從 yaml 檔案讀取字典。
 
 - **參數**
-    - **d** (`dict`, optional)：要轉換的字典。預設為 None。
+    - **d** (`dict`)：要轉換的字典。預設為 None。
 
 - **範例**
 

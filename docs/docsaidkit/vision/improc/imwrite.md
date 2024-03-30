@@ -11,9 +11,9 @@ sidebar_position: 2
 - **參數**
 
     - **img** (`np.ndarray`)：要寫入的影像，以 numpy ndarray 表示。
-    - **path** (`Union[str, Path]`, optional)：要寫入影像檔案的路徑。如果為 None，則寫入臨時檔案。預設為 None。
-    - **color_base** (`str`, optional)：影像的當前色彩空間。如果不是 `BGR`，函數將嘗試將其轉換為 `BGR`。預設為 `BGR`。
-    - **suffix** (`str`, optional)：如果 path 為 None，則臨時檔案的後綴。預設為 `.jpg`。
+    - **path** (`Union[str, Path]`)：要寫入影像檔案的路徑。如果為 None，則寫入臨時檔案。預設為 None。
+    - **color_base** (`str`)：影像的當前色彩空間。如果不是 `BGR`，函數將嘗試將其轉換為 `BGR`。預設為 `BGR`。
+    - **suffix** (`str`)：如果 path 為 None，則臨時檔案的後綴。預設為 `.jpg`。
 
 - **傳回值**
 

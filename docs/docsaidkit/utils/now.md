@@ -9,8 +9,8 @@ sidebar_position: 18
 - **說明**：取得現在時間。可以指定時間的輸出類型，或是給定格式化規則來取得時間字串，例如：`now(fmt='%Y-%m-%d')`。
 
 - **參數**
-    - **typ** (`str`, optional)：指定時間的輸出類型。支援的類型有：`{'timestamp', 'datetime', 'time'}`。預設為 `'timestamp'`。
-    - **fmt** (`str`, optional)：指定時間的格式化規則。預設為 `None`。
+    - **typ** (`str`)：指定時間的輸出類型。支援的類型有：`{'timestamp', 'datetime', 'time'}`。預設為 `'timestamp'`。
+    - **fmt** (`str`)：指定時間的格式化規則。預設為 `None`。
 
 - **範例**
 
