@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[608],{9291:e=>{e.exports=JSON.parse('{"title":"onnxengine","slug":"/category/onnxengine","permalink":"/category/onnxengine","navigation":{"previous":{"title":"test","permalink":"/docsaidkit/vision/ipcam/test"},"next":{"title":"test","permalink":"/docsaidkit/onnxengine/test"}}}')}}]);
