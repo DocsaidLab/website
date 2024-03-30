@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[1240],{4447:t=>{t.exports=JSON.parse('{"title":"Torch","slug":"/category/torch","permalink":"/category/torch","navigation":{"previous":{"title":"now","permalink":"/docsaidkit/utils/now"},"next":{"title":"test","permalink":"/docsaidkit/torch/test"}}}')}}]);
