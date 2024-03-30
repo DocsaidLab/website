@@ -35,7 +35,7 @@ sidebar_position: 21
 
 > [download_from_docsaid(file_id: str, file_name: str, target: str) -> None](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/utils/utils.py#L79)
 
-- **說明**：到我自建的私有雲下載資料。
+- **說明**：到 Docsaid 的私有雲下載資料。
 
 - **參數**
     - **file_id** (`str`)：檔案 ID。
