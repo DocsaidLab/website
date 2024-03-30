@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[608],{9291:e=>{e.exports=JSON.parse('{"title":"ONNXEngine","slug":"/category/onnxengine","permalink":"/category/onnxengine","navigation":{"previous":{"title":"draw_box","permalink":"/docsaidkit/draw/draw_box"},"next":{"title":"ONNXEngine","permalink":"/docsaidkit/onnxengine/"}}}')}}]);
