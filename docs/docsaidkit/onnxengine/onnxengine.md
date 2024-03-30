@@ -16,9 +16,11 @@ sidebar_position: 1
     - **session_option** (`Dict[str, Any]`)：這是 onnxruntime.SessionOptions 的參數，用來設定會話選項。預設為 `{}`。詳細設定方式請參考：[SessionOptions](https://onnxruntime.ai/docs/api/python/api_summary.html#onnxruntime.SessionOptions)。
     - **provider_option** (`Dict[str, Any]`)：這是 onnxruntime.provider_options 的參數。預設為 `{}`。詳細設定方式請參考：[CUDAExecutionProvider](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#configuration-options)。
 
-- **傳回值**
+- **推論**
 
-    在載入模型時，該函數會載入 ONNX 檔案內的資訊，並為輸入和輸出值給定一個字典，其中包含輸入和輸出的形狀和數據類型。因此，當您呼叫 `ONNXEngine` 實例時，您可以直接使用該字典來得到輸出結果。
+    在載入模型時，該函數會載入 ONNX 檔案內的資訊，並為輸入和輸出值給定一個字典，其中包含輸入和輸出的形狀和數據類型。
+
+    因此，當你呼叫 `ONNXEngine` 實例時，你可以直接使用該字典來得到輸出結果。
 
 - **範例**
 
@@ -29,7 +31,9 @@ sidebar_position: 1
     engine = D.ONNXEngine(model_path)
     print(engine)
 
-    # Inferencing, assuming the model has two inputs and two outputs and named 'input1', 'input2', 'output1', 'output2'.
+    # Inferencing
+    # Assuming the model has two inputs and two outputs and named:
+    #   'input1', 'input2', 'output1', 'output2'.
     input_data = {
         'input1': np.random.randn(1, 3, 224, 224).astype(np.float32),
         'input2': np.random.randn(1, 3, 224, 224).astype(np.float32),

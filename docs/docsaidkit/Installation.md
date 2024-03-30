@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Installation
 
-在開始安裝 DocsaidKit 之前，請確保您的系統符合以下要求：
+在開始安裝 DocsaidKit 之前，請確保你的系統符合以下要求：
 
 ## 前置條件
 
@@ -14,7 +14,7 @@ sidebar_position: 2
 
 ### 依賴套件
 
-根據您的作業系統，安裝所需的依賴套件。
+根據你的作業系統，安裝所需的依賴套件。
 
 - **Ubuntu**
 
@@ -34,7 +34,7 @@ sidebar_position: 2
 
 ### pdf2image 依賴套件
 
-pdf2image 是一個 Python 模組，用於將 PDF 文件轉換為圖片。根據您的作業系統，請遵循以下指示進行安裝：
+pdf2image 是一個 Python 模組，用於將 PDF 文件轉換為圖片。根據你的作業系統，請遵循以下指示進行安裝：
 
 - 或參考開源專案 [**pdf2image**](https://github.com/Belval/pdf2image) 相關頁面以取得安裝指南。
 
@@ -46,7 +46,7 @@ pdf2image 是一個 Python 模組，用於將 PDF 文件轉換為圖片。根據
 
 - Linux：大多數 Linux 發行版已預裝 `pdftoppm` 和 `pdftocairo`。
 
-    如果未安裝，請透過您的套件管理器安裝 poppler-utils。
+    如果未安裝，請透過你的套件管理器安裝 poppler-utils。
 
     ```bash
     sudo apt install poppler-utils
@@ -54,7 +54,7 @@ pdf2image 是一個 Python 模組，用於將 PDF 文件轉換為圖片。根據
 
 ## 安裝套件
 
-滿足前提條件後，您可以選擇以下方法之一進行安裝：
+滿足前提條件後，你可以選擇以下方法之一進行安裝：
 
 ### 透過 git clone 安裝
 
@@ -86,7 +86,7 @@ pdf2image 是一個 Python 模組，用於將 PDF 文件轉換為圖片。根據
 
 我自己是一律透過 docker 進行安裝，以確保環境的一致性，沒有例外。
 
-所以我也同樣建議您使用 docker 進行安裝，相關環境我都測試好了，你只要下指令就好。
+所以我也同樣建議你使用 docker 進行安裝，相關環境我都測試好了，你只要下指令就好。
 
 ```bash
 bash docker/build.bash
