@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[6745],{2691:e=>{e.exports=JSON.parse('{"title":"structures","slug":"/category/structures","permalink":"/category/structures","navigation":{"previous":{"title":"enums","permalink":"/docsaidkit/enums"},"next":{"title":"BoxMode","permalink":"/docsaidkit/structures/box_mode"}}}')}}]);
