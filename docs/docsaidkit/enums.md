@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 3
 ---
 
 # enums
@@ -18,7 +18,7 @@ sidebar_position: 5
 - [**FORMATSTR**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L60)：定義了文字格式化的字串。
 - [**IMGTYP**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L66)：定義了支援的映像檔類型。
 
-## INTER
+## docsaidkit.INTER
 
 用於影像大小調整或重採樣時選擇的內插法。
 
@@ -28,7 +28,7 @@ sidebar_position: 5
 - `AREA`：面積內插。
 - `LANCZOS4`：Lanczos內插（使用4個Lanczos視窗）。
 
-## ROTATE
+## docsaidkit.ROTATE
 
 圖像旋轉的具體角度。
 
@@ -36,7 +36,7 @@ sidebar_position: 5
 - `ROTATE_180`：旋轉180度。
 - `ROTATE_270`：逆時針旋轉90度。
 
-## BORDER
+## docsaidkit.BORDER
 
 影像邊界的擴展方式。
 
@@ -47,7 +47,7 @@ sidebar_position: 5
 - `REPLICATE`：複製最邊緣像素的邊界。
 - `WRAP`：包裝邊界。
 
-## MORPH
+## docsaidkit.MORPH
 
 形態學濾波時所使用的結構元素的形狀。
 
@@ -55,7 +55,7 @@ sidebar_position: 5
 - `RECT`：矩形。
 - `ELLIPSE`：橢圓形。
 
-## COLORSTR
+## docsaidkit.COLORSTR
 
 用於控制台輸出的顏色代碼。
 
@@ -76,7 +76,7 @@ sidebar_position: 5
 - `BRIGHT_CYAN`：亮青色。
 - `BRIGHT_WHITE`：亮白色。
 
-## FORMATSTR
+## docsaidkit.FORMATSTR
 
 文字格式化選項。
 
@@ -84,7 +84,7 @@ sidebar_position: 5
 - `ITALIC`：斜體。
 - `UNDERLINE`：底線。
 
-## IMGTYP
+## docsaidkit.IMGTYP
 
 支援的圖像檔案類型。
 
