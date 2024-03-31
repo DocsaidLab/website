@@ -2,11 +2,150 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://docsaid.org/blog</id>
     <title>DOCSAID Blog</title>
-    <updated>2024-03-04T00:00:00.000Z</updated>
+    <updated>2024-03-31T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://docsaid.org/blog"/>
     <subtitle>DOCSAID Blog</subtitle>
     <icon>https://docsaid.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[常用的 VScode 參數設定]]></title>
+        <id>https://docsaid.org/blog/vscode-settings</id>
+        <link href="https://docsaid.org/blog/vscode-settings"/>
+        <updated>2024-03-31T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[不久前，因為不明原因導致我的 VScode 設定檔消失。費了我一小時又重新設定了一次。]]></summary>
+        <content type="html"><![CDATA[<p>不久前，因為不明原因導致我的 VScode 設定檔消失。費了我一小時又重新設定了一次。</p>
+<p>剛好也讓我有機會重新檢視一下自己的設定檔，並且將一些常用的設定檔記錄下來。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="常用的-vscode-參數設定">常用的 VScode 參數設定<a href="https://docsaid.org/blog/vscode-settings#%E5%B8%B8%E7%94%A8%E7%9A%84-vscode-%E5%8F%83%E6%95%B8%E8%A8%AD%E5%AE%9A" class="hash-link" aria-label="常用的 VScode 參數設定的直接連結" title="常用的 VScode 參數設定的直接連結">​</a></h2>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.fontFamily": "Fira Code, MesloLGS NF",</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.fontLigatures": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "files.associations": {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "Dockerfile_base": "dockerfile"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    },</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "markdown.preview.fontSize": 15,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "debug.console.fontSize": 14,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "explorer.confirmDragAndDrop": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.minimap.enabled": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.minimap.maxColumn": 80,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.smoothScrolling": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.rulers": [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        80,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        120</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ],</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "workbench.colorCustomizations": {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "editorRuler.foreground": "#ff4081",</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "minimap.background": "#00000050",</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "editor.background": "#1e1e1e",</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "editor.foreground": "#d4d4d4"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    },</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "terminal.integrated.fontFamily": "Fira Code, MesloLGS NF",</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "files.trimTrailingWhitespace": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "files.trimFinalNewlines": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "diffEditor.ignoreTrimWhitespace": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "python.terminal.activateEnvironment": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "git.ignoreLegacyWarning": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "git.autofetch": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.largeFileOptimizations": false,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.mouseWheelZoom": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.codeActionsOnSave": {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "source.organizeImports": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "source.fixAll": true</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    },</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.formatOnSave": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "workbench.editorAssociations": {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "*.ipynb": "jupyter-notebook"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    },</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "debug.onTaskErrors": "abort",</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "explorer.confirmDelete": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "terminal.integrated.copyOnSelection": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "terminal.integrated.cursorBlinking": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "terminal.integrated.cursorStyle": "line",</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "remote.downloadExtensionsLocally": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "terminal.integrated.scrollback": 10000,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.cursorStyle": "line",</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.insertSpaces": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.lineNumbers": "on",</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "editor.wordWrap": "on",</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "workbench.editor.wrapTabs": false,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "files.watcherExclude": {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "**/.git/objects/**": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "**/.git/subtree-cache/**": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "**/node_modules/*/**": true</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    },</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "notebook.cellToolbarLocation": {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "default": "right",</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "jupyter-notebook": "left"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    },</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "github.copilot.editor.enableAutoCompletions": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    "github.copilot.enable": {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "*": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "plaintext": false,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "markdown": true,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        "scminput": false</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    },</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="參數說明">參數說明<a href="https://docsaid.org/blog/vscode-settings#%E5%8F%83%E6%95%B8%E8%AA%AA%E6%98%8E" class="hash-link" aria-label="參數說明的直接連結" title="參數說明的直接連結">​</a></h2>
+<ul>
+<li>
+<p><code>editor.fontFamily</code>：設定字體，這裡使用了 Fira Code 和 MesloLGS NF 字體。</p>
+</li>
+<li>
+<p><code>editor.fontLigatures</code>：設定是否啟用字體連字。</p>
+</li>
+<li>
+<p><code>files.associations</code>：設定檔案關聯，這裡將 Dockerfile_base 關聯到 dockerfile。</p>
+</li>
+<li>
+<p><code>markdown.preview.fontSize</code>：設定 markdown 預覽的字體大小。</p>
+</li>
+<li>
+<p><code>debug.console.fontSize</code>：設定 debug console 的字體大小。</p>
+</li>
+<li>
+<p><code>explorer.confirmDragAndDrop</code>：設定是否確認拖放。</p>
+</li>
+<li>
+<p><code>editor.minimap.enabled</code>：設定是否啟用縮略圖。</p>
+</li>
+<li>
+<p><code>editor.minimap.maxColumn</code>：設定縮略圖的最大列數。</p>
+</li>
+<li>
+<p><code>editor.smoothScrolling</code>：設定是否啟用平滑滾動。</p>
+</li>
+<li>
+<p><code>editor.rulers</code>：設定縮排對齊的列數。</p>
+</li>
+<li>
+<p><code>workbench.colorCustomizations</code>：設定顏色自定義。</p>
+</li>
+<li>
+<p><code>terminal.integrated.fontFamily</code>：設定終端字體。</p>
+</li>
+<li>
+<p><code>files.trimTrailingWhitespace</code>：設定是否刪除行尾空格。</p>
+</li>
+<li>
+<p><code>files.trimFinalNewlines</code>：設定是否刪除最後一行的空行。</p>
+</li>
+<li>
+<p><code>diffEditor.ignoreTrimWhitespace</code>：設定是否忽略空格。</p>
+</li>
+<li>
+<p><code>python.terminal.activateEnvironment</code>：設定是否啟用 Python 環境。</p>
+</li>
+<li>
+<p><code>git.ignoreLegacyWarning</code>：設定是否忽略 Git 警告。</p>
+</li>
+<li>
+<p><code>git.autofetch</code>：設定是否自動更新。</p>
+</li>
+<li>
+<p><code>editor.largeFileOptimizations</code>：設定是否優化大文件。</p>
+</li>
+<li>
+<p><code>editor.mouseWheelZoom</code>：設定是否滑鼠滾輪縮放。</p>
+</li>
+<li>
+<p><code>editor.codeActionsOnSave</code>：設定保存時的代碼操作。</p>
+</li>
+<li>
+<p><code>editor.formatOnSave</code>：設定保存時是否格式化。</p>
+</li>
+<li>
+<p><code>workbench.editorAssociations</code>：設定編輯器關聯。</p>
+</li>
+<li>
+<p><code>debug.onTaskErrors</code>：設定任務錯誤時的操作。</p>
+</li>
+<li>
+<p><code>explorer.confirmDelete</code>：設定是否確認刪除。</p>
+</li>
+<li>
+<p><code>terminal.integrated.copyOnSelection</code>：設定是否選中即複製。</p>
+</li>
+<li>
+<p><code>terminal.integrated.cursorBlinking</code>：設定終端光標閃爍。</p>
+</li>
+<li>
+<p><code>terminal.integrated.cursorStyle</code>：設定終端光標樣式。</p>
+</li>
+<li>
+<p><code>remote.downloadExtensionsLocally</code>：設定是否本地下載擴展。</p>
+</li>
+<li>
+<p><code>terminal.integrated.scrollback</code>：設定終端滾動緩衝區大小。</p>
+</li>
+<li>
+<p><code>editor.cursorStyle</code>：設定光標樣式。</p>
+</li>
+<li>
+<p><code>editor.insertSpaces</code>：設定是否插入空格。</p>
+</li>
+<li>
+<p><code>editor.lineNumbers</code>：設定是否顯示行號。</p>
+</li>
+<li>
+<p><code>editor.wordWrap</code>：設定是否自動換行。</p>
+</li>
+<li>
+<p><code>workbench.editor.wrapTabs</code>：設定是否換行標籤。</p>
+</li>
+<li>
+<p><code>files.watcherExclude</code>：設定文件監視排除。</p>
+</li>
+<li>
+<p><code>notebook.cellToolbarLocation</code>：設定筆記本工具欄位置。</p>
+</li>
+<li>
+<p><code>github.copilot.editor.enableAutoCompletions</code>：設定是否啟用自動完成。</p>
+</li>
+<li>
+<p><code>github.copilot.enable</code>：設定是否啟用 GitHub Copilot。</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a href="https://docsaid.org/blog/vscode-settings#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="結語的直接連結" title="結語的直接連結">​</a></h2>
+<p>以上就是我常用的 VScode 參數設定，這些設定可以讓你更好地使用 VScode 提高工作效率。</p>]]></content>
+        <author>
+            <name>Zephyr</name>
+            <uri>https://github.com/zephyr-sh</uri>
+        </author>
+        <category label="vscode" term="vscode"/>
+        <category label="settings" term="settings"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[打造個人私有雲：從零開始的 Nextcloud 搭建教程]]></title>
         <id>https://docsaid.org/blog/setup-nextcloud</id>
@@ -204,7 +343,7 @@
 <p>這將把 PDF 的每一頁轉換成一個 PIL 圖片對象，並儲存在 <code>images</code> 列表中。</p>
 <p>你也可以從二進制數據轉換 PDF：</p>
 <div class="language-python codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">images </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> convert_from_bytes</span><span class="token punctuation" style="color:#393A34">(</span><span class="token builtin">open</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'/path/to/your/pdf/file.pdf'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'rb'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">read</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="可選參數">可選參數<a href="https://docsaid.org/blog/read-pdf-to-images#%E5%8F%AF%E9%81%B8%E5%8F%83%E6%95%B8" class="hash-link" aria-label="可選參數的直接連結" title="可選參數的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="可選參數">可選參數<a href="https://docsaid.org/blog/read-pdf-to-images#%E5%8F%AF%E9%81%B8%E5%8F%83%E6%95%B8" class="hash-link" aria-label="可選參數的直接連結" title="可選參數的直接��連結">​</a></h2>
 <p><code>pdf2image</code> 提供了豐富的可選參數，允許你自定義 DPI、輸出格式、頁面範圍等。例如，使用 <code>dpi=300</code> 提高輸出圖片的清晰度，或者使用 <code>first_page</code> 和 <code>last_page</code> 指定轉換範圍。</p>
 <p>你可以參考 <code>pdf2image</code> 的<a href="https://github.com/Belval/pdf2image/tree/master" target="_blank" rel="noopener noreferrer">官方文件</a>；或是參考我們自己改寫的 <a href="https://github.com/DocsaidLab/DocsaidKit/blob/eb8ac0a56779a75dcc951c683001e6129052cc5a/docsaidkit/vision/improc.py#L275" target="_blank" rel="noopener noreferrer">pdf2imgs</a> 函數來了解更多用法。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a href="https://docsaid.org/blog/read-pdf-to-images#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="結語的直接連結" title="結語的直接連結">​</a></h2>
@@ -562,15 +701,15 @@
 <p>輸入以下命令以生成金鑰對：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-keygen</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>按照提示操作。通常預設的設定就足夠了。在詢問密碼的部分可以直接按 Enter 以建立一個無密碼的金鑰對。</p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="32-把公開金鑰複製到伺服器">3.2 把公開金鑰複製到伺服器<a href="https://docsaid.org/blog/ubuntu-install-ssh#32-%E6%8A%8A%E5%85%AC%E9%96%8B%E9%87%91%EF%BF%BD%E9%91%B0%E8%A4%87%E8%A3%BD%E5%88%B0%E4%BC%BA%E6%9C%8D%E5%99%A8" class="hash-link" aria-label="3.2 把公開金鑰複製到伺服器的直接連結" title="3.2 把公開金鑰複製到伺服器的直接連結">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="32-把公開金鑰複製到伺服器">3.2 把公開金鑰複製到伺服器<a href="https://docsaid.org/blog/ubuntu-install-ssh#32-%E6%8A%8A%E5%85%AC%E9%96%8B%E9%87%91%E9%91%B0%E8%A4%87%E8%A3%BD%E5%88%B0%E4%BC%BA%E6%9C%8D%E5%99%A8" class="hash-link" aria-label="3.2 把公開金鑰複製到伺服器的直接連結" title="3.2 把公開金鑰複製到伺服器的直接連結">​</a></h3>
 <p>使用 ssh-copy-id 命令將公開金鑰複製到伺服器。替換 [username] 與 [server-ip] 為您的伺服器資料。</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id [username]@[server-ip]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>例如：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代��碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>如果伺服器更改了預設的 SSH 埠（如：2222），則使用 -p 參數：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id -p 2222 john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>此命令將會提示您輸入伺服器的密碼。一旦驗證成功，您的公開金鑰就會被添加到伺服器上的 <code>~/.ssh/authorized_keys</code> 檔案中。</p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="33-測試無密碼登入">3.3 測試無密碼登入<a href="https://docsaid.org/blog/ubuntu-install-ssh#33-%E6%B8%AC%E8%A9%A6%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5" class="hash-link" aria-label="3.3 測試無密碼登入的直接連結" title="3.3 測試無密碼登入的直接連結">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="33-測試無密碼登入">3.3 測試無密碼登入<a href="https://docsaid.org/blog/ubuntu-install-ssh#33-%E6%B8%AC%E8%A9%A6%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5" class="hash-link" aria-label="3.3 測試無密碼登入�的直接連結" title="3.3 測試無密碼登入的直接連結">​</a></h3>
 <p>嘗試 SSH 至伺服器：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh [username]@[server-ip]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>如果一切設定正確，您將可以無需密碼登入伺服器。</p>
@@ -716,7 +855,7 @@
 <li><strong>findtime:</strong> 在這段時間內觀察到多少次失敗嘗試 (預設是 600 秒)</li>
 <li><strong>maxretry:</strong> 在 findtime 所設定的時間內允許的最大失敗嘗試次數。</li>
 </ul>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="3-啟動與監控">3. 啟動與監控<a href="https://docsaid.org/blog/fail2ban-settings#3-%E5%95%9F%E5%8B%95%E8%88%87%E7%9B%A3%E6%8E%A7" class="hash-link" aria-label="3. 啟動與監控的直��接連結" title="3. 啟動與監控的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="3-啟動與監控">3. 啟動與監控<a href="https://docsaid.org/blog/fail2ban-settings#3-%E5%95%9F%E5%8B%95%E8%88%87%E7%9B%A3%E6%8E%A7" class="hash-link" aria-label="3. 啟動與監控的直接連結" title="3. 啟動與監控的直接連結">​</a></h2>
 <p>啟動 Fail2ban：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo service fail2ban start</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>查看 Fail2ban 的狀態：</p>
@@ -903,7 +1042,7 @@
         <content type="html"><![CDATA[<p>我們強烈建議您定期查看這些使用條款，以確保您始終保持對其的了解，因為我們可能會在未來進行修改或更新。希望您在 DOCSAID 網站有一個愉快的瀏覽體驗，並尊重和遵守我們設定的規範。</p>
 <p>本網站由 DOCSAID 所擁有和經營。在您使用本網站之前，我們建議您詳細閱讀和了解這些使用條款，確保您完全明白您的權利和責任。這不僅有助於保護您的權益，也有助於確保本網站能夠為所有使用者提供一個安全和高效的環境。</p>
 <p>這些使用條款的目的是為了確保本網站的正常運作，並為使用者提供清晰的使用指引。這些條款也反映了我們對使用者的承諾，以及我們對確保一個良好網絡環境的決心。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="一智慧財產產權">一、智慧財產產權<a href="https://docsaid.org/blog/terms-of-service#%E4%B8%80%E6%99%BA%E6%85%A7%E8%B2%A1%E7%94%A2%E7%94%A2%E6%AC%8A" class="hash-link" aria-label="一、智慧財產產權的直接連結" title="一、智慧財產產權的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="一智慧財產產權">一、智慧財產產權<a href="https://docsaid.org/blog/terms-of-service#%E4%B8%80%E6%99%BA%E6%85%A7%E8%B2%A1%E7%94%A2%E7%94%A2%E6%AC%8A" class="hash-link" aria-label="一、智慧財產�產權的直接連結" title="一、智慧財產產權的直接連結">​</a></h2>
 <p>本網站上包含的所有內容、圖片、文字、圖表、標誌、圖示、音頻創作、影片創作以及其他材料（以下統稱為「材料」）均受到智慧財產權法律的保護，包括但不限於著作權、商標權、專利權、設計權和商業秘密。</p>
 <ul>
 <li>版權：本網站的材料，包括但不限於文字、圖像、影片等，均受到版權法的保護。這意味著除非您獲得明確的許可，否則您不得未經授權使用、複製、修改或分發這些材料。</li>
@@ -951,7 +1090,7 @@
 <p>您同意，若因您違反這些使用條款，導致 DOCSAID 網站或其關聯方（包括但不限於其管理人員、董事、員工、代表、附屬公司或其他相關實體）遭受損失、損害、費用、訴訟、索賠或其他法律責任，您應對此全面負責並支付相關賠償。</p>
 <p>此賠償範圍包括但不僅限於：法律費用、訴訟成本、律師薪酬、專家咨詢費、解決糾紛相關的所有費用及其他因您的違約行為所產生的一切費用。您進一步同意，您將不反對或拒絕配合，並將提供所有必要的支持以協助 DOCSAID 網站及其相關方解決任何因您的違約行為而引發的訴訟、索賠或其他法律事宜。</p>
 <p>您確認並承諾，不論在哪個法律管轄區或訴訟場所，您都會全面賠償 DOCSAID 網站及其關聯方的相關損失。此外，您明確認知，此賠償承諾將不受到任何形式的限制，確保 DOCSAID 網站及其關聯方得到適當的法律補償和權益保障。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="八可分割性">八、可分割性<a href="https://docsaid.org/blog/terms-of-service#%E5%85%AB%E5%8F%AF%E5%88%86%E5%89%B2%E6%80%A7" class="hash-link" aria-label="八、可分割性的直接連結" title="八、可分��割性的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="八可分割性">八、可分割性<a href="https://docsaid.org/blog/terms-of-service#%E5%85%AB%E5%8F%AF%E5%88%86%E5%89%B2%E6%80%A7" class="hash-link" aria-label="八、可分割性的直接連結" title="八、可分割性的直接連結">​</a></h2>
 <p>若根據相關適用法律，這些使用條款的某一條款被認定為無效、非法或不可執行，那麼該特定條款將被視作已被移除，但這並不會對其他條款產生影響或使其失效。</p>
 <p>在這種情況下，我們將致力於修訂或替換被認定無效的條款，以確保使用條款的原始意圖和目的得以維持。即便有部分條款因特定原因被認為是不適用或無效，本使用條款的餘下部分仍將保持其效力和約束性。</p>
 <p>這些使用條款的分割性確保了即使某些條款在法律上被認為是無效，它仍不會妨礙您與 DOCSAID 網站間其他條款所涵蓋的權利和義務的有效性。</p>
