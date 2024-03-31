@@ -74,13 +74,14 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/docsaid-social-card.jpg',
       navbar: {
         title: '',
         hideOnScroll: true,
         logo: {
           alt: 'Docsaid Logo',
           src: 'img/docsaid_logo.png',
+          srcDark: 'img/docsaid_logo_white.png',
         },
         items: [
           {
