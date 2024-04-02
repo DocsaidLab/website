@@ -166,4 +166,4 @@ tags: [vscode, settings]
 
 ## 結語
 
-以上就是我常用的 VScode 參數設定，這些設定可以讓你更好地使用 VScode 提高工作效率。
+以上是我常用的 VScode 參數設定。
