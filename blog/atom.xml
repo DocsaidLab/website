@@ -170,7 +170,7 @@
 <li>這個問題比較複雜，因為 Nextcloud 的安裝方式有很多種，而且每一種都有不同的優缺點。</li>
 <li>在本篇文章中，我唯一推薦的安裝方式是使用 Docker。</li>
 </ul>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="設定-nextcloud-all-in-one">設定 Nextcloud All-in-One<a href="https://docsaid.org/blog/setup-nextcloud#%E8%A8%AD%E5%AE%9A-nextcloud-all-in-one" class="hash-link" aria-label="設定 Nextcloud All-in-One的直接連結" title="設定 Nextcloud All-in-One的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="設定-nextcloud-all-in-one">設定 Nextcloud All-in-One<a href="https://docsaid.org/blog/setup-nextcloud#%E8%A8%AD%E5%AE%9A-nextcloud-all-in-one" class="hash-link" aria-label="設定 Nextcloud All-in-One的直接連結" title="設��定 Nextcloud All-in-One的直接連結">​</a></h2>
 <ul>
 <li>參考官方文件：<a href="https://github.com/nextcloud/all-in-one" target="_blank" rel="noopener noreferrer"><strong>Nextcloud All-in-One</strong></a></li>
 </ul>
@@ -256,17 +256,17 @@
 </ul>
 <hr>
 <p>輸入設定網址，你可以進入一個比後台還要後台的地方。</p>
-<p><img loading="lazy" alt="login_1" src="https://docsaid.org/assets/images/login_1-edb2b961d180558b75e337c1083a7202.jpg" width="1224" height="824" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="login_1" src="https://docsaid.org/assets/images/login_1-edb2b961d180558b75e337c1083a7202.jpg" width="1224" height="824" class="img_ev3q"></p>
 <p>到這一步，你可能會驚恐地發現：『我沒有密碼啊！』</p>
 <p>密碼會在你第一次登入的時候給你，但通常你會錯過他。這時候你可以透過以下的指令來找到密碼：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo grep password /var/lib/docker/volumes/nextcloud_aio_mastercontainer/_data/data/configuration.json</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>登入之後，你會看到一個設定畫面：</p>
-<p><img loading="lazy" alt="login_2" src="https://docsaid.org/assets/images/login_2-6e2d377746b11b87dcd476a7db06ecb2.jpg" width="1224" height="696" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="login_2" src="https://docsaid.org/assets/images/login_2-6e2d377746b11b87dcd476a7db06ecb2.jpg" width="1224" height="696" class="img_ev3q"></p>
 <p>你看到的這個畫面已經是我設定完成的結果，如果你是第一次登入，在這裡，首先你要先輸入你之前準備好的網域，接著系統會要你再次下載一些 docker image，下載完成後，它會幫你啟動。</p>
 <p>啟動之後，你就可以開始使用 Nextcloud 了。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a href="https://docsaid.org/blog/setup-nextcloud#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="結語的直接連結" title="結語的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a href="https://docsaid.org/blog/setup-nextcloud#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="結語的直接連結" title="結語的直�接連結">​</a></h2>
 <p>完成上面的步驟之後，在網址列中輸入你的網域後，你會看到一個很好看的介面，這個介面就是你的私有雲。</p>
-<p><img loading="lazy" alt="login_3" src="https://docsaid.org/assets/images/login_3-b50e0659125bbb3af48172e41836548d.jpg" width="1224" height="708" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="login_3" src="https://docsaid.org/assets/images/login_3-b50e0659125bbb3af48172e41836548d.jpg" width="1224" height="708" class="img_ev3q"></p>
 <p>這個介面有很多功能，你可以透過這個介面來管理你的檔案，也可以透過這個介面來分享檔案。除此之外，你可以在手機上下載 Nextcloud 的 App，然後你可以直接透過手機來管理你的檔案。</p>
 <p>有了 Nextcloud，你就不需要再擔心 Google Drive 的容量限制了。</p>]]></content>
         <author>
@@ -343,7 +343,7 @@
 <p>這將把 PDF 的每一頁轉換成一個 PIL 圖片對象，並儲存在 <code>images</code> 列表中。</p>
 <p>你也可以從二進制數據轉換 PDF：</p>
 <div class="language-python codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">images </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> convert_from_bytes</span><span class="token punctuation" style="color:#393A34">(</span><span class="token builtin">open</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'/path/to/your/pdf/file.pdf'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'rb'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">read</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="可選參數">可選參數<a href="https://docsaid.org/blog/read-pdf-to-images#%E5%8F%AF%E9%81%B8%E5%8F%83%E6%95%B8" class="hash-link" aria-label="可選參數的直接連結" title="可選參數的直接��連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="可選參數">可選參數<a href="https://docsaid.org/blog/read-pdf-to-images#%E5%8F%AF%E9%81%B8%E5%8F%83%E6%95%B8" class="hash-link" aria-label="可選參數的直接連結" title="可選參數的直接連結">​</a></h2>
 <p><code>pdf2image</code> 提供了豐富的可選參數，允許你自定義 DPI、輸出格式、頁面範圍等。例如，使用 <code>dpi=300</code> 提高輸出圖片的清晰度，或者使用 <code>first_page</code> 和 <code>last_page</code> 指定轉換範圍。</p>
 <p>你可以參考 <code>pdf2image</code> 的<a href="https://github.com/Belval/pdf2image/tree/master" target="_blank" rel="noopener noreferrer">官方文件</a>；或是參考我們自己改寫的 <a href="https://github.com/DocsaidLab/DocsaidKit/blob/eb8ac0a56779a75dcc951c683001e6129052cc5a/docsaidkit/vision/improc.py#L275" target="_blank" rel="noopener noreferrer">pdf2imgs</a> 函數來了解更多用法。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a href="https://docsaid.org/blog/read-pdf-to-images#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="結語的直接連結" title="結語的直接連結">​</a></h2>
@@ -526,7 +526,7 @@
 <li>IPV4 Address (External): 外部 IPV4 地址</li>
 <li>MAC Address: MAC 地址</li>
 </ul>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="注意事項與替代方案">注意事項與替代方案<a href="https://docsaid.org/blog/python-env-info-collector#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85%E8%88%87%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88" class="hash-link" aria-label="注意事項與替代方案的直接連結" title="注意事項與替代方案的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="注意事項與替代方案">注意事項與替代方案<a href="https://docsaid.org/blog/python-env-info-collector#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85%E8%88%87%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88" class="hash-link" aria-label="注意事項與替代方案的直接連��結" title="注意事項與替代方案的直接連結">​</a></h2>
 <p>由於我們是在 Ubuntu 上撰寫本函數，因此在其他作業系統上可能會有劇情之外的發展。</p>
 <p>以下幾個可能需要注意的要點：</p>
 <ul>
@@ -614,7 +614,7 @@
 <p>如果您想查看服務的當前狀態，您可以使用：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl status pypiserver.service</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>這將會顯示 <code>pypiserver</code> 服務的當前狀態，包括是否正在運行，以及最近的日誌輸出。</p>
-<p><img loading="lazy" alt="pypiserver status" src="https://docsaid.org/assets/images/pypiserver-3a82a5ef370f8387611a4c2322e85a8a.jpg" width="2048" height="707" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="pypiserver status" src="https://docsaid.org/assets/images/pypiserver-3a82a5ef370f8387611a4c2322e85a8a.jpg" width="2048" height="707" class="img_ev3q"></p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="6-使用-pypiserver">6. 使用 pypiserver<a href="https://docsaid.org/blog/ubuntu-docker-pypiserver#6-%E4%BD%BF%E7%94%A8-pypiserver" class="hash-link" aria-label="6. 使用 pypiserver的直接連結" title="6. 使用 pypiserver的直接連結">​</a></h2>
 <p>現在，您可以使用 <code>pip</code> 來安裝和上傳套件了。</p>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="61-上傳套件">6.1 上傳套件<a href="https://docsaid.org/blog/ubuntu-docker-pypiserver#61-%E4%B8%8A%E5%82%B3%E5%A5%97%E4%BB%B6" class="hash-link" aria-label="6.1 上傳套件的直接連結" title="6.1 上傳套件的直接連結">​</a></h3>
@@ -705,11 +705,11 @@
 <p>使用 ssh-copy-id 命令將公開金鑰複製到伺服器。替換 [username] 與 [server-ip] 為您的伺服器資料。</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id [username]@[server-ip]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>例如：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代��碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>如果伺服器更改了預設的 SSH 埠（如：2222），則使用 -p 參數：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh-copy-id -p 2222 john@192.168.0.100</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>此命令將會提示您輸入伺服器的密碼。一旦驗證成功，您的公開金鑰就會被添加到伺服器上的 <code>~/.ssh/authorized_keys</code> 檔案中。</p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="33-測試無密碼登入">3.3 測試無密碼登入<a href="https://docsaid.org/blog/ubuntu-install-ssh#33-%E6%B8%AC%E8%A9%A6%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5" class="hash-link" aria-label="3.3 測試無密碼登入�的直接連結" title="3.3 測試無密碼登入的直接連結">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="33-測試無密碼登入">3.3 測試無密碼登入<a href="https://docsaid.org/blog/ubuntu-install-ssh#33-%E6%B8%AC%E8%A9%A6%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5" class="hash-link" aria-label="3.3 測試無密碼登入的直接連結" title="3.3 測試無密碼登入的直接連結">​</a></h3>
 <p>嘗試 SSH 至伺服器：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ssh [username]@[server-ip]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>如果一切設定正確，您將可以無需密碼登入伺服器。</p>
@@ -739,7 +739,7 @@
 <ul>
 <li>
 <p>說明文件示意圖</p>
-<p><img loading="lazy" alt="github_set_runner" src="https://docsaid.org/assets/images/github_set_runner-6ca68dc499f780fcc4c6e7d7461a2ffe.jpg" width="2048" height="1173" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="github_set_runner" src="https://docsaid.org/assets/images/github_set_runner-6ca68dc499f780fcc4c6e7d7461a2ffe.jpg" width="2048" height="1173" class="img_ev3q"></p>
 </li>
 </ul>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="配置流程">配置流程<a href="https://docsaid.org/blog/ubuntu-github-runner-systemd#%E9%85%8D%E7%BD%AE%E6%B5%81%E7%A8%8B" class="hash-link" aria-label="配置流程的直接連結" title="配置流程的直接連結">​</a></h2>
@@ -756,7 +756,7 @@
 </li>
 <li>
 <p><strong>告知 systemd 重新讀取新的服務設定：</strong></p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl daemon-reload</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl daemon-reload</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼��簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>
 <p><strong>啟用此服務，使其在開機時自動啟動：</strong></p>
@@ -782,7 +782,7 @@
 <p>此外，如果您想查看服務的當前狀態，您可以使用：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl status actions-runner.service</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>這將會顯示 <code>actions-runner</code> 服務的當前狀態，包括是否正在運行，以及最近的日誌輸出：</p>
-<p><img loading="lazy" alt="action-service" src="https://docsaid.org/assets/images/action-service-6b4de0ff1dc1dc29f3edb7aeb4d16fc8.jpg" width="2048" height="831" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="action-service" src="https://docsaid.org/assets/images/action-service-6b4de0ff1dc1dc29f3edb7aeb4d16fc8.jpg" width="2048" height="831" class="img_ev3q"></p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="重新配置">重新配置<a href="https://docsaid.org/blog/ubuntu-github-runner-systemd#%E9%87%8D%E6%96%B0%E9%85%8D%E7%BD%AE" class="hash-link" aria-label="重新配置的直接連結" title="重新配置的直接連結">​</a></h2>
 <p>如果是原本的 Runner 不見了，通常會是在切換儲存庫的 Public 和 Private 的時候，或是原本 Runner 太久沒有調用，總之就是原本的 Runner 弄丟了，這時候就需要重新配置。</p>
 <p>這時候，就到 actions-runner 資料夾底下，把 .runner 檔案刪掉，再重新跑一次：</p>
@@ -806,11 +806,11 @@
         <content type="html"><![CDATA[<ol>
 <li>登入路由器的管理介面。通常可以透過網頁瀏覽器輸入 <code>192.168.1.1</code> 或其他 IP 地址進行訪問，具體地址可能依您的路由器型號而異。</li>
 </ol>
-<p><img loading="lazy" alt="login-rtf8207w" src="https://docsaid.org/assets/images/RTF8207W-login-a999863d0bb563cefdf2c85580ff829d.jpg" width="1184" height="688" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="login-rtf8207w" src="https://docsaid.org/assets/images/RTF8207W-login-a999863d0bb563cefdf2c85580ff829d.jpg" width="1184" height="688" class="img_ev3q"></p>
 <ol start="2">
 <li>
 <p>使用工程帳號登入，帳號為：<code>cht</code>，密碼為<code>型號末四碼＋MAC末四碼</code>。</p>
-<p><img loading="lazy" alt="password" src="https://docsaid.org/assets/images/RTF8207W-f4afe2030b552611fd3f8c281a364a3c.jpg" width="2048" height="1170" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="password" src="https://docsaid.org/assets/images/RTF8207W-f4afe2030b552611fd3f8c281a364a3c.jpg" width="2048" height="1170" class="img_ev3q"></p>
 </li>
 <li>
 <p>登入後，您就可以為所欲為了。</p>
@@ -834,7 +834,7 @@
 <ul>
 <li>
 <p>惡意攻擊示意圖</p>
-<p><img loading="lazy" alt="attack from ssh" src="https://docsaid.org/assets/images/ban_1-aab89918ab460891239cb1e4effc9589.jpg" width="616" height="764" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="attack from ssh" src="https://docsaid.org/assets/images/ban_1-aab89918ab460891239cb1e4effc9589.jpg" width="616" height="764" class="img_ev3q"></p>
 </li>
 </ul>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="1-fail2ban-安裝">1. Fail2ban 安裝<a href="https://docsaid.org/blog/fail2ban-settings#1-fail2ban-%E5%AE%89%E8%A3%9D" class="hash-link" aria-label="1. Fail2ban 安裝的直接連結" title="1. Fail2ban 安裝的直接連結">​</a></h2>
@@ -860,7 +860,7 @@
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo service fail2ban start</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>查看 Fail2ban 的狀態：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo fail2ban-client status</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="4-新增自定義規則">4. 新增自定義規則<a href="https://docsaid.org/blog/fail2ban-settings#4-%E6%96%B0%E5%A2%9E%E8%87%AA%E5%AE%9A%E7%BE%A9%E8%A6%8F%E5%89%87" class="hash-link" aria-label="4. 新增自定義規則的直接連結" title="4. 新增自定義規則的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="4-新增自定義規則">4. 新增自定義規則<a href="https://docsaid.org/blog/fail2ban-settings#4-%E6%96%B0%E5%A2%9E%E8%87%AA%E5%AE%9A%E7%BE%A9%E8%A6%8F%E5%89%87" class="hash-link" aria-label="4. �新增自定義規則的直接連結" title="4. 新增自定義規則的直接連結">​</a></h2>
 <p>如果您想為特定的服務（例如： SSH 或 Apache）設定特別的規則，您可以在 <code>jail.local</code> 裡新增或修改對應的段落，例如針對 SSH 的設定：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[sshd]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">enabled = true</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">port = ssh</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">filter = sshd</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">logpath = /var/log/auth.log</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">maxretry = 3</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="5-測試">5. 測試<a href="https://docsaid.org/blog/fail2ban-settings#5-%E6%B8%AC%E8%A9%A6" class="hash-link" aria-label="5. 測試的直接連結" title="5. 測試的直接連結">​</a></h2>
@@ -956,7 +956,7 @@
 <p>整個指令的功能是通過 ppp0 接口添加一個到 192.168.25.0/24 網絡的路由。當您的系統試圖訪問 192.168.25.0/24 網絡中的任何IP地址時，它將通過 ppp0 接口路由流量。</p>
 <p>接著，存檔後退出，給予檔案權限：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo chmod 755 /etc/ppp/ip-up</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解題完成但是還是壞了">解題完成，但是還是壞了？<a href="https://docsaid.org/blog/mac-selective-vpn-routing#%E8%A7%A3%E9%A1%8C%E5%AE%8C%E6%88%90%E4%BD%86%E6%98%AF%E9%82%84%E6%98%AF%E5%A3%9E%E4%BA%86" class="hash-link" aria-label="解題完成，但是還是壞了？的直接連結" title="解題完成，但是還是壞了？的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解題完成但是還是壞了">解題完成，但是還是壞了？<a href="https://docsaid.org/blog/mac-selective-vpn-routing#%E8%A7%A3%E9%A1%8C%E5%AE%8C%E6%88%90%E4%BD%86%E6%98%AF%E9%82%84%E6%98%AF%E5%A3%9E%E4%BA%86" class="hash-link" aria-label="解題完成，但是還是壞了？的直接連結" title="�解題完成，但是還是壞了？的直接連結">​</a></h2>
 <p>到這邊，可能有一部分的的機器還是無法上網，所以我們接著看：</p>
 <p>打開 MacOC 的系統設定，找到網路，如下圖：</p>
 <ul>
@@ -965,7 +965,7 @@
 <li>步驟３：點選「設定服務順序」</li>
 <li>步驟４：把 VPN 的順序拖到 Wi-Fi 後面</li>
 </ul>
-<p><img loading="lazy" alt="vpn-setting" src="https://docsaid.org/assets/images/vpn-setting-bd7c48703bedfb577a1954606aad8726.jpg" width="2048" height="1699" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="vpn-setting" src="https://docsaid.org/assets/images/vpn-setting-bd7c48703bedfb577a1954606aad8726.jpg" width="2048" height="1699" class="img_ev3q"></p>
 <p>存在這一步驟的原因是：很多設定完 VPN 後，會將 VPN 的服務順序拉到最上層，意味著將所有的流量優先導入 VPN 內，所以這邊我們要把 VPN 拉下來，如此一來，上面的網路設定才能生效。</p>
 <p>到這邊就完成了，之後有其他流量需要走 VPN 的話，就把位置寫到 ip-up 文件內即可。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="參考資料">參考資料<a href="https://docsaid.org/blog/mac-selective-vpn-routing#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99" class="hash-link" aria-label="參考資料的直接連結" title="參考資料的直接連結">​</a></h2>
@@ -1042,7 +1042,7 @@
         <content type="html"><![CDATA[<p>我們強烈建議您定期查看這些使用條款，以確保您始終保持對其的了解，因為我們可能會在未來進行修改或更新。希望您在 DOCSAID 網站有一個愉快的瀏覽體驗，並尊重和遵守我們設定的規範。</p>
 <p>本網站由 DOCSAID 所擁有和經營。在您使用本網站之前，我們建議您詳細閱讀和了解這些使用條款，確保您完全明白您的權利和責任。這不僅有助於保護您的權益，也有助於確保本網站能夠為所有使用者提供一個安全和高效的環境。</p>
 <p>這些使用條款的目的是為了確保本網站的正常運作，並為使用者提供清晰的使用指引。這些條款也反映了我們對使用者的承諾，以及我們對確保一個良好網絡環境的決心。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="一智慧財產產權">一、智慧財產產權<a href="https://docsaid.org/blog/terms-of-service#%E4%B8%80%E6%99%BA%E6%85%A7%E8%B2%A1%E7%94%A2%E7%94%A2%E6%AC%8A" class="hash-link" aria-label="一、智慧財產�產權的直接連結" title="一、智慧財產產權的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="一智慧財產產權">一、智慧財產產權<a href="https://docsaid.org/blog/terms-of-service#%E4%B8%80%E6%99%BA%E6%85%A7%E8%B2%A1%E7%94%A2%E7%94%A2%E6%AC%8A" class="hash-link" aria-label="一、智慧財產產權的直接連結" title="一、智慧財產產權的直接連結">​</a></h2>
 <p>本網站上包含的所有內容、圖片、文字、圖表、標誌、圖示、音頻創作、影片創作以及其他材料（以下統稱為「材料」）均受到智慧財產權法律的保護，包括但不限於著作權、商標權、專利權、設計權和商業秘密。</p>
 <ul>
 <li>版權：本網站的材料，包括但不限於文字、圖像、影片等，均受到版權法的保護。這意味著除非您獲得明確的許可，否則您不得未經授權使用、複製、修改或分發這些材料。</li>
