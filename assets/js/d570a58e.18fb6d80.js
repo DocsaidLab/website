@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[1860],{2549:e=>{e.exports=JSON.parse('{"title":"FeatureFusion","slug":"/category/featurefusion","permalink":"/papers/category/featurefusion","navigation":{"previous":{"title":"LXMERT","permalink":"/papers/multi-model/lxmert"},"next":{"title":"test","permalink":"/papers/feat-fusion/test"}}}')}}]);
