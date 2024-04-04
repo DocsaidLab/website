@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script>
 <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script><link rel="stylesheet" href="/assets/css/styles.109f9fb8.css">
-<script src="/assets/js/runtime~main.f2fd0656.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.2377f617.js" defer="defer"></script>
 <script src="/assets/js/main.c575bea6.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -49,7 +49,7 @@
 <p>在 ImageNet 的單標籤類別中，經常會忽略掉很多其他有意義的資訊，例如：物件之間的交互關係、情境背景、或是圖像所引起的感受等。而 CLIP 這篇論文，目的就是試圖打破這些限制，通過糅合來自不同來源、不同類型的資訊，如文字、圖像等，來豐富模型的理解和表述能力，使其更接近人類的感知和理解水平。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解決問題">解決問題<a href="#解決問題" class="hash-link" aria-label="解決問題的直接連結" title="解決問題的直接連結">​</a></h2>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="clip-模型架構">CLIP 模型架構<a href="#clip-模型架構" class="hash-link" aria-label="CLIP 模型架構的直接連結" title="CLIP 模型架構的直接連結">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="CLIP Architecture" src="/assets/images/arch_clip-49fbec7ed4a817d4d7bcb0b0ed69f1a4.jpg" width="1024" height="368" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="CLIP Architecture" src="/assets/images/arch_clip-ef4a34c3ec1c19ee45e598ca12ff5459.jpg" width="1726" height="622" class="img_ev3q"></p>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="預訓練過程">預訓練過程<a href="#預訓練過程" class="hash-link" aria-label="預訓練過程的直接連結" title="預訓練過程的直接連結">​</a></h3>
 <p>假設有一組圖像-文字對，其中一對可能是一張狗的圖片和文字「一隻可愛的小狗」。 在一個訓練批次中，CLIP 會接收到多個這樣的對。 圖像編碼器可能透過 ResNet 或 ViT 來處理圖像，獲取圖像特徵，而文本編碼器可能透過 Transformer 來處理文本，獲取文字特徵。</p>
 <p>然後，模型會比較這些特徵，以確保正確配對的圖像和文字（例如：狗的圖像和「一隻可愛的小狗」的文字）之間的餘弦相似度最大，而錯誤配對的圖像和文字（ 例如：狗的圖像和「一個蘋果」的文字）之間的餘弦相似度最小。</p>
@@ -152,7 +152,7 @@
 </li>
 </ol>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="3-能夠跨資料域嗎">3. 能夠跨資料域嗎？<a href="#3-能夠跨資料域嗎" class="hash-link" aria-label="3. 能夠跨資料域嗎？的直接連結" title="3. 能夠跨資料域嗎？的直接連結">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="CLIP 跨資料域表現" src="/assets/images/clip_demo-5299e2255ede357341d20726cfc0d150.jpg" width="1024" height="412" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="CLIP 跨資料域表現" src="/assets/images/clip_demo-22093a2af3b3c9b43d2dcf4dde81e7a0.jpg" width="1770" height="698" class="img_ev3q"></p>
 <p>在探索深度學習模型的性能與穩健性時，跨資料域（cross-domain）的能力成為一個重要的衡量標準。理想的情況下，一個模型應該能夠在不同的資料集和分佈上維持良好的性能。然而，如上文所述，很多基於 ImageNet 訓練的模型在面對新的或未見過的資料分佈時，性能往往會大幅下降。</p>
 <p>例如：經過對不同的自然分佈變化資料集（ImageNetV2, ImageNet Sketch, Youtube-BB 等）的評估後，發現傳統的 ImageNet 模型（如ResNet-101）在這些新資料集上的準確率遠低於在原始 ImageNet 驗證集上的準確率。這表明了這些模型的跨資料域性能存在很大的缺陷，並且容易受到資料分佈偏移的影響。</p>
 <p>零樣本 CLIP 模型在這些新的資料集上的表現明顯優於傳統的 ImageNet 模型，並且有效地縮小了 ImageNet 準確率與分佈偏移下準確率之間的差距。根據分析，零樣本分類器在適應 ImageNet 分佈後展現了顯著的效能提升，準確率從原始的水平提升了9.2%。 然而，一旦面臨分佈偏移的情境，其準確率的表現卻出現了輕微的下滑。</p>
