@@ -2,7 +2,9 @@
 sidebar_position: 4
 ---
 
-# VL-BERT：序幕下的觀影者
+# VL-BERT
+
+## 序幕下的觀影者
 
 **[VL-BERT: Pre-training of Generic Visual-Linguistic Representations (2019.08)](https://arxiv.org/abs/1908.08530)**
 

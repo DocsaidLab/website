@@ -2,7 +2,9 @@
 sidebar_position: 5
 ---
 
-# LXMERT：多來點預訓練
+# LXMERT
+
+## 多來點預訓練
 
 **[LXMERT: Learning Cross-Modality Encoder Representations from Transformers](https://arxiv.org/abs/1908.07490)**
 

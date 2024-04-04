@@ -2,7 +2,9 @@
 sidebar_position: 2
 ---
 
-# VisualBERT：序幕上的凝視
+# VisualBERT
+
+## 序幕上的凝視
 
 **[VisualBERT: A Simple and Performant Baseline for Vision and Language (2019.08)](https://arxiv.org/abs/1908.03557)**
 

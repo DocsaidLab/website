@@ -2,7 +2,9 @@
 sidebar_position: 1
 ---
 
-# CLIP：打碎次元的屏障
+# CLIP
+
+## 打碎次元的屏障
 
 **[Learning Transferable Visual Models From Natural Language Supervision (2021.02)](https://arxiv.org/abs/2103.00020)**
 
