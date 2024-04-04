@@ -4,9 +4,13 @@ sidebar_position: 4
 
 # Time2Time
 
-在 Python 中，多個不同時間套件的轉換一直都是個惱人的問題。之前我也被煩過，所以就寫了幾個轉換函數來解決這個問題。這些函數可以讓你在 `datetime`、`struct_time`、`timestamp` 和`時間字串`之間自由轉換。
+這是一個用來轉換時間格式的工具。
 
-我先畫個圖給你看看這些函數之間的關係：
+在 Python 中，多個不同時間套件的轉換一直都是個惱人的問題。
+
+為了解決這個問題，我們開發了幾個轉換函數，使得在 datetime、struct_time、timestamp 和 時間字串 之間的轉換變得自由。
+
+以下是這些函數之間關係圖：
 
 ![time2time](time2time.png)
 
@@ -333,4 +337,3 @@ graph TD
     print(ts)
     # >>> 1634025600.0
     ```
-
