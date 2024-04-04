@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[3415],{6560:e=>{e.exports=JSON.parse('{"title":"Multi-Model","slug":"/category/multi-model","permalink":"/category/multi-model","navigation":{"previous":{"title":"Intro","permalink":"/paper-reading/intro"},"next":{"title":"CLIP","permalink":"/paper-reading/multi-model/clip"}}}')}}]);
