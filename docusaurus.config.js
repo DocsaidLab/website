@@ -69,7 +69,17 @@ const config = {
       }),
     ],
   ],
-
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'papers',
+        path: 'papers',
+        routeBasePath: 'papers',
+        sidebarPath: './sidebarsPapers.js',
+      },
+    ],
+  ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -89,6 +99,13 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
+          },
+          {
+            label: 'Papers',
+            type: 'docSidebar',
+            sidebarId: 'papersSidebar',
+            position: 'left',
+            docsPluginId: 'papers'
           },
           {
             label: 'Blog',
