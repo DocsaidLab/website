@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script>
 <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script><link rel="stylesheet" href="/assets/css/styles.109f9fb8.css">
-<script src="/assets/js/runtime~main.725083e4.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.b5e4543c.js" defer="defer"></script>
 <script src="/assets/js/main.1a508b12.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -21,7 +21,7 @@
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>信息</div><div class="admonitionContent_BuS1"><p>以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。</p></div></div>
 <hr>
 <p>這次我們來看一篇有趣的論文。</p>
-<p>當我們嘗試理解如何使機器能夠更好地理解和描述圖像中的事物時，我們面臨了一個挑戰：如何使它不僅在學校的考試中表現出色，而且在真實世界中也能夠應對各種不可預見的問題？</p>
+<p>當我們嘗試理解如何使機器能夠更好地理解和描述圖像中的事物時，將面臨了一個挑戰：如何使它不僅在學校的考試中表現出色，而且在真實世界中也能夠應對各種不可預見的問題？</p>
 <p>想像一下，你正在訓練一名拳擊手。</p>
 <p>這名拳擊手在道場或健身房中的拳擊沙袋上表現出色，但當他面對真實的對手時，情況就完全不同了。真實的對手會使用各種策略和技巧來擊敗他，而不是像拳擊沙袋那樣待在原地。</p>
 <p>因此，為了使這名拳擊手在比賽中表現得更好，你需要模擬真實的對抗情境，給他一些突如其來的挑戰，讓他學會如何應對。例如：你可以製作一個「高科技的拳擊沙袋」（假設你做得出來），功能是這個「拳擊沙袋」會自動偵測拳擊手姿態動作，接著自動長出一雙手腳後，追逐毆打這位拳擊手。</p>
@@ -33,37 +33,58 @@
 <p>我們從概念和目的上來比較這兩者：</p>
 <ol>
 <li>
-<p>降噪 (Denoising)：</p>
+<p><strong>降噪 (Denoising)</strong></p>
 <ul>
-<li>目的：目的是清除圖片或數據中的雜訊，恢復原始的、未被雜訊干擾的數據。</li>
-<li>概念：當你有一張受到雜訊影響的圖片時（例如：因為低光線、壓縮等原因），降噪的過程會試圖去除這些雜訊，使圖片更接近原始、乾淨的狀態。</li>
-<li>方法：使用特定的算法或已經訓練好的模型，該模型已經學會了如何識別和去除多種類型的雜訊。</li>
+<li><strong>目的</strong>：目的是清除圖片或數據中的雜訊，恢復原始的、未被雜訊干擾的數據。</li>
+<li><strong>概念</strong>：當你有一張受到雜訊影響的圖片時（例如：因為低光線、壓縮等原因），降噪的過程會試圖去除這些雜訊，使圖片更接近原始、乾淨的狀態。</li>
+<li><strong>方法</strong>：使用特定的算法或已經訓練好的模型，該模型已經學會了如何識別和去除多種類型的雜訊。</li>
 </ul>
 </li>
 <li>
-<p>對抗性訓練 (Adversarial Training)：</p>
+<p><strong>對抗性訓練 (Adversarial Training)</strong></p>
 <ul>
-<li>目的：使模型在面對「對抗性攻擊」時仍然能夠正確地進行預測。</li>
-<li>概念：在模型訓練過程中，不只提供正常的數據，還會生成並加入「對抗性範例」。這些範例是故意製造出來的，外觀上可能非常接近正常的數據，但能引導模型做出錯誤的預測。訓練模型辨識和抵抗這些範例，以提高其泛化性。</li>
-<li>方法：通常涉及兩個步驟：一是生成對抗性範例，二是使用這些範例來訓練模型。</li>
+<li><strong>目的</strong>：使模型在面對「對抗性攻擊」時仍然能夠正確地進行預測。</li>
+<li><strong>概念</strong>：在模型訓練過程中，不只提供正常的數據，還會生成並加入「對抗性範例」。這些範例是故意製造出來的，外觀上可能非常接近正常的數據，但能引導模型做出錯誤的預測。訓練模型辨識和抵抗這些範例，以提高其泛化性。</li>
+<li><strong>方法</strong>：通常涉及兩個步驟：一是生成對抗性範例，二是使用這些範例來訓練模型。</li>
 </ul>
 </li>
 </ol>
-<p>降噪主要關心的是如何恢復原始的、乾淨的數據，而對抗性訓練的目的是增強模型的泛化性，使其能夠抵抗敵意的、試圖欺騙模型的輸入。另外降噪通常涉及到的是已知的雜訊模式，並試圖去除它。而對抗性訓練是故意創造新的、可能導致模型錯誤的「敵意」輸入。</p>
-<p>在訓練我們的模型時，我們不僅讓它看標準的、熟悉的圖像和文本，還要給它一些「假想的對手」，就是那些「被特意修改過，旨在迷惑模型」的輸入內容。這些「假想的對手」就像那些訓練中的突如其來的挑戰，迫使模型學會應對各種不同的情況。</p>
+<p>降噪主要關心的是如何恢復原始的、乾淨的數據，而對抗性訓練的目的是增強模型的泛化性，使其能夠抵抗敵意的、試圖欺騙模型的輸入。另外降噪通常涉及到的是已知的雜訊模式，並試圖 去除它。而對抗性訓練是故意創造新的、可能導致模型錯誤的「敵意」輸入。</p>
+<p>在訓練模型時，我們不僅讓它看標準的、熟悉的圖像和文本，還要給它一些「假想的對手」，就是那些「被特意修改過，旨在迷惑模型」的輸入內容。這些「假想的對手」就像那些訓練中的突如其來的挑戰，迫使模型學會應對各種不同的情況。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="定義問題">定義問題<a href="#定義問題" class="hash-link" aria-label="定義問題的直接連結" title="定義問題的直接連結">​</a></h2>
 <p>作者在這篇論文中主要專注於以下問題：</p>
-<ul>
-<li>預訓練模型的過度擬合問題：由於大規模預訓練模型的容量巨大，與下游任務中的有限標記資料不成比例，因此模型容易陷入過度擬合的情況。</li>
-<li>對抗性訓練的應用問題：儘管對抗性訓練已在其他領域（如圖像和文本）中證明其有效性，但它如何應用於視覺和語言（V+L）問題，並是否能夠提升模型的性能，仍是一個未解的問題。</li>
-<li>多模態編碼中的對抗性訓練問題：傳統的對抗性訓練方法專注於圖像像素和文本子詞標記層級，但作者提出在多模態的編碼層級上進行對抗性訓練可能更有利。</li>
-<li>對乾淨輸入的模型性能提升：既然對抗性訓練的目標是提高模型對敵對攻擊的抵抗力，那麼它是否也能夠提高模型對乾淨輸入的性能呢？</li>
-<li>對抗性訓練的效率問題：由於對抗性訓練過程非常耗時且運算成本高，如何提高大規模訓練的效率成為一個挑戰。</li>
-<li>穩健性和泛化之間的平衡：如何在增強模型的穩健性（抵抗對抗性攻擊的能力）的同時，保持或提高其在乾淨資料上的泛化性能？</li>
-<li>對抗性訓練在 V+L 任務中的普適性：考慮到 VILLA 是一個新的對抗性訓練策略，作者需要探索其在不同的 V+L 任務中的適用性和效果。</li>
-</ul>
+<ol>
+<li>
+<p>預訓練模型的過度擬合問題</p>
+<p>由於大規模預訓練模型的容量巨大，與下游任務中的有限標記資料不成比例，因此模型容易陷入過度擬合的情況。</p>
+</li>
+<li>
+<p>對抗性訓練的應用問題</p>
+<p>儘管對抗性訓練已在其他領域（如圖像和文本）中證明其有效性，但它如何應用於視覺和語言（V+L）問題，並是否能夠提升模型的性能，仍是一個未解的問題。</p>
+</li>
+<li>
+<p>多模態編碼中的對抗性訓練問題</p>
+<p>傳統的對抗性訓練方法專注於圖像像素和文本子詞標記層級，但作者提出在多模態的編碼層級上進行對抗性訓練可能更有利。</p>
+</li>
+<li>
+<p>對乾淨輸入的模型性能提升</p>
+<p>既然對抗性訓練的目標是提高模型對敵對攻擊的抵抗力，那麼它是否也能夠提高模型對乾淨輸入的性能呢？</p>
+</li>
+<li>
+<p>對抗性訓練的效率問題</p>
+<p>由於對抗性訓練過程非常耗時且運算成本高，如何提高大規模訓練的效率成為一個挑戰。</p>
+</li>
+<li>
+<p>穩健性和泛化之間的平衡</p>
+<p>如何在增強模型的穩健性（抵抗對抗性攻擊的能力）的同時，保持或提高其在乾淨資料上的泛化性能？</p>
+</li>
+<li>
+<p>對抗性訓練在 V+L 任務中的普適性</p>
+<p>考慮到 VILLA 是一個新的對抗性訓練策略，作者需要探索其在不同的 V+L 任務中的適用性和效果。</p>
+</li>
+</ol>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解決問題">解決問題<a href="#解決問題" class="hash-link" aria-label="解決問題的直接連結" title="解決問題的直接連結">​</a></h2>
-<p>這一段會比較艱澀一點，但我們還是可以一起來讀讀看。</p>
+<p>這邊會比較艱澀一點，但我們還是可以一起來讀讀看。</p>
 <p>作者分為三個部分來構建整個模型。</p>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="villa-模型設計">VILLA 模型設計<a href="#villa-模型設計" class="hash-link" aria-label="VILLA 模型設計的直接連結" title="VILLA 模型設計的直接連結">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="VILLA 模型設計" src="/assets/images/villa_1-63baf9b3eda3521b902813a6ab7f0de9.jpg" width="1224" height="332" class="img_ev3q"></p>
@@ -85,11 +106,11 @@
 <p>為了融合影像和文字的特徵，使用了多層的 Transformer 結構，這種結構在自然語言處理和其他多模態任務中非常流行。其中，[CLS] 標記在這裡有特別的意義，其編碼被用作多模態任務的聯合表示。</p>
 </li>
 </ol>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="預訓練任務">預訓練任務<a href="#預訓練任務" class="hash-link" aria-label="預訓練任務的直接連結" title="預訓練任務的直接連結">​</a></h3>
-<p>其中，MLM 和 ITM 在我們之前看的論文中有講過很多次了，我們這邊簡單帶過，並詳細講講 MRM 的策略。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="預訓練任務">預訓練任務<a href="#預訓練任務" class="hash-link" aria-label="預訓練任務的直接連結" title=" 預訓練任務的直接連結">​</a></h3>
+<p>其中，MLM 和 ITM 在之前看的論文中有講過很多次了，這邊簡單帶過，並詳細講講 MRM 的策略。</p>
 <ul>
 <li>
-<p><strong>掩碼 語言模型 (MLM)</strong></p>
+<p><strong>掩碼語言模型 (MLM)</strong></p>
 <p>在進行遮罩語言建模的過程中，模型的輸入標記中約有 15% 會被隨機選擇並遮罩。遮罩的意義是將特定標記的原始值隱藏，使模型不能直接看到它。此後，模型的工作就是嘗試恢復這些遮罩標記的真實值，它必須依賴於其他非遮罩的語言標記以及所提供的視覺標記來做出恢復的預測。</p>
 </li>
 <li>
@@ -119,7 +140,7 @@
 <li>
 <p><strong>對抗性訓練的假設</strong></p>
 <ul>
-<li>第一個假設是進行對抗性預訓練能  夠增強模型的泛化能力，這將對微調階段十分有利。泛化能力是指模型在未見過的數據上的表現。</li>
+<li>第一個假設是進行對抗性預訓練能夠增強模型的泛化能力，這將對微調階段十分有利。泛化能力是指模型在未見過的數據上的表現。</li>
 <li>第二個假設是在微調階段，當有了特定任務的訓練數據，可以再次使用對抗性訓練方法，進一步提高模型的性能。</li>
 </ul>
 </li>
@@ -128,17 +149,18 @@
 <p>預訓練和微調這兩個階段在數學上是相似的，所以它們都可以使用相同的對抗性訓練方法。</p>
 </li>
 </ol>
-<p>這一段要強調的是，這兩個階段都可以進行對抗性訓練，以提高模型的泛化能力和對抗攻擊的韌性。對抗性訓練在預訓練階段有助於增強模型的基本泛化能力，而在微調階段則可以根據特定任務進一步提高模型的性能。</p>
+<p>這裡要強調的是：兩個階段都可以進行對抗性訓練，以提高模型的泛化能力和對抗攻擊的韌性。</p>
+<p>對抗性訓練在預訓練階段有助於增強模型的基本泛化能力，而在微調階段則可以根據特定任務進一步提高模型的性能。</p>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="微擾動perturbations">微擾動（Perturbations）<a href="#微擾動perturbations" class="hash-link" aria-label="微擾動（Perturbations）的直接連結" title="微擾動（Perturbations）的直接連結">​</a></h3>
 <p>這段主要探討了如何在影像和文字的編碼空間（embedding space）中加入對抗性擾動來進行對抗性訓練。</p>
 <ol>
 <li>
 <p><strong>影像模態的擾動</strong></p>
-<p>在最先進的 V+L 模型中，模型通常將預訓練的目標偵測器得到的影像特徵作為輸入。與傳統的在像素空間添加擾動的方法不同，這裡的方法選擇直接在這些特徵的編碼空間中添加對抗性擾動。例如：考慮一張狗的圖片。我們不是直接對圖片的像素進行小的調整，而是對該圖片在模型中的特徵表示進行微小擾動。這種方法的主要優勢是它可以更精細地操作編碼，使得擾動更加嚴格。</p>
+<p>在最先進的 V+L 模型中，模型通常將預訓練的目標偵測器得到的影像特徵作為輸入。與傳統的在像素空間添加擾動的方法不同，這裡的方法選擇直接在這些特徵的編碼空間中添加對抗性擾動。例如：考慮一張狗的圖片，這裡不是直接對圖片的像素進行小的調整，而是對該圖片在模型中的特徵表示進行微小擾動。這種方法的主要優勢是它可以更精細地操作編碼，使得擾動更加嚴格。</p>
 </li>
 <li>
 <p><strong>文字模態的擾動</strong></p>
-<p>與影像像素的連續值不同，文字的標記是離散的，因此更難以操控。傳統上，製作保留原始語義的對抗性範例在文字模態中是困難的。然而，本文的方法選擇在單詞的編碼空間中加入擾動，而不是直接在單詞上。這樣可以避免直接改變原始的文本內容，但仍能影響模型的預測。</p>
+<p>  與影像像素的連續值不同，文字的標記是離散的，因此更難以操控。傳統上，製作保留原始語義的對抗性範例在文字模態中是困難的。然而，本文的方法選擇在單詞的編碼空間中加入擾動，而不是直接在單詞上。這樣可以避免直接改變原始的文本內容，但仍能影響模型的預測。</p>
 <p>例如：考慮句子 「The dog barks.」，作者不是替換或修改其中的字，而是對「dog」 這個詞的編碼表示進行微小調整，使其在模型中對應到與 「dog」 相似但略有不同的表示。</p>
 </li>
 <li>
@@ -156,7 +178,7 @@
 <ul>
 <li>
 <p><strong>訓練目標</strong></p>
-<p>在 VILLA 模型中，「對抗訓練」是一項核心技術，其目的是使模型在面對輕微的輸入擾動時仍能保持穩定的預測性能。這種訓練方式可以被理解為一種強化手段，使模型不容易受到外部噪音或微小變動的影響，從而提高其在各種情境下的泛化能力。這意味著模型不僅能夠  在訓練數據上表現出色，還能夠對新的、未見過的數據產生可靠的預測。</p>
+<p>在 VILLA 模型中，「對抗訓練」是一項核心技術，其目的是使模型在面對輕微的輸入擾動時仍能保持穩定的預測性能  。這種訓練方式可以被理解為一種強化手段，使模型不容易受到外部噪音或微小變動的影響，從而提高其在各種情境下的泛化能力。這意味著模型不僅能夠在訓練數據上表現出色，還能夠對新的、未見過的數據產生可靠的預測。</p>
 <p>為了達到這一目標，訓練過程中要考慮三個主要的損失項：</p>
 <ol>
 <li>
@@ -177,8 +199,8 @@
 <p><strong>多模態的對抗擾動</strong></p>
 <p>VILLA 模型在進行訓練時，不僅考慮原始的影像和文字編碼，還針對這些編碼加入了對抗性的擾動。這些擾動可以被理解為故意導入的微小變化，目的是測試和增強模型的泛化性，確保模型在遭遇未知的、微小的噪聲或變動時仍能正確工作。</p>
 <p>然而，這些對抗性擾動不是隨意添加的。它們有明確的「範數限制」，意思是這些擾動的強度或大小受到了一定的控制，以確保它們不會造成模型完全無法識別的重大變動。</p>
-<p>接著，模型的訓練涉及到兩個主要的優化步驟：外部的最小化和內部的最大化。外部的最小化主要是指在整體的訓練過程中，我們希望模型的預測錯誤（即損失）盡可能小，這一步可以通過常見的梯度下降方法如 SGD (Stochastic Gradient Descent) 來達成。而內部的最大化則是在尋找對抗性擾動時，希望這些擾動可以使模型的損失最大化，這樣找到的擾動就是最有可能干擾模型的。這一步的優化是通過一種稱為 PGD (Projected Gradient Descent) 的方法完成。</p>
-<p>具體來說，考慮到影像模態，每當我們進行一次迭代更新擾動時，PGD 會先計算當前擾動對損失的影響，即計算損失對擾動的梯度。接著，它會在這一梯度的方向上進行一個小步驟，以嘗試找到一個可以最大化損失的新擾動。這個過程會反覆進行，直到達到預定的迭代次數或擾動大小的限制。</p>
+<p>接著，模型的訓練涉及到兩個主要的優化步驟：外部的最小化和內部的最大化。外部的最小化主要是指在整體的訓練過程中，希望模型的預測錯誤（即損失）盡可能小，這一步可以通過常見的梯度下降方法如 SGD (Stochastic Gradient Descent) 來達成。而內部的最大化則是在尋找對抗性擾動時，希望這些擾動可以使模型的損失最大化，這樣找到的擾動就是最有可能干擾模型的。這一步的優化是通過一種稱為 PGD (Projected Gradient Descent) 的方法完成。</p>
+<p>具體來說，考慮到影像模態，每進行一次迭代更新擾動時，PGD 會先計算當前擾動對損失的影響，即計算損失對擾動的梯度。接著，它會在這一梯度的方向上進行一個小步驟，以嘗試找到一個可以最大化損失的新擾動。這個過程會反覆進行，直到達到預定的迭代次數或擾動大小的限制。</p>
 <p>想像你正在訓練一個機器學習模型，它的任務是分辨照片中的物體是「狗」還是「貓」。原始的影像編碼就是從照片中提取的特徵或資訊。</p>
 <ol>
 <li>
@@ -191,7 +213,7 @@
 </li>
 <li>
 <p><strong>優化</strong></p>
-<p>在每次訓練迭代中，模型都試圖找出這些微調是如何進行的，然後學習如何儘量忽略它們，專注於真正區分狗和貓的特徵。使用 SGD，模型會根據這些微調的影響，調整自己的參數，使得在這些被微調的圖片上的錯誤率減少。而使用 PGD，模型會在每次迭代中，嘗試找出最可能使自己出錯的那些微調，然後針對這些最壞情況進行學習和調整。</p>
+<p>在每次訓練迭代中，模型都試圖找出這些微調是如何進行的，然後學習如何儘量忽略它們，專注於真正區分狗和貓的特徵。使用 SGD，模型會根據這些微調的影響，調整自己的參數，使得在這些被微調的圖片上的錯誤率減少。而使用 PGD，模型會在每次迭代中，嘗試找出最可能使自己出錯的那些微調，  然後針對這些最壞情況進行學習和調整。</p>
 </li>
 </ol>
 </li>
@@ -208,15 +230,15 @@
 <ul>
 <li>
 <p><strong>K-step PGD 的計算成本</strong></p>
-<p>PGD (Projected Gradient Descent) 是進行對抗訓練時常用的方法。當使用 K-step PGD 時，需要通過模型進行 K 次的前向和反向傳播，這是非常耗時的。此外，只有在 K 步之後的最後一步中產生的擾動被用於模型訓練，這意味著先前的所有步驟都只是為了產生這最後一次的擾動。</p>
+<p>PGD (Projected Gradient Descent) 是進行對抗訓練時常用的方法。當使用 K-step PGD 時，需要通過模型進行 K 次的前向和反向傳播，這是非常耗時的。此外，只有在 K 步之後的最後一步中產生  的擾動被用於模型訓練，這意味著先前的所有步驟都只是為了產生這最後一次的擾動。</p>
 </li>
 <li>
 <p><strong>解決方法：FreeLB</strong></p>
-<p>為了克服  上述的計算問題並有效地執行大規模的訓練，作者採用了一種名為 FreeLB 的方法。FreeLB 的方法不只進行多次的 PGD 迭代以製作對抗性編碼，而且在每次迭代中都累積了「自由」參數的梯度 ∇θL。這意味著，不是在每次迭代後都更新模型參數，而是在多次迭代後一次性使用累積的梯度進行更新。</p>
+<p>為了克服上述的計算問題並有效地執行大規模的訓練，作者採用了一種名為 FreeLB 的方法。FreeLB 的方法不只進行多次的 PGD 迭代以製作對抗性編碼，而且在每次迭代中都累積了「自由」參數的梯度 ∇θL。這意味著，不是在每次迭代後都更新模型參數，而是在多次迭代後一次性使用累積的梯度進行更新。</p>
 <p>這種策略的優點是它可以模擬一個更大的「虛擬」小批量 (mini-batch)。換句話說，它有效地模擬了一個 K 倍大小的小批量，使得每次更新更為豐富和多樣。</p>
 </li>
 </ul>
-<p>不免俗的，我們再來舉個例子：</p>
+<p>不免俗的，再來舉個例子：</p>
 <p>想像你正在組裝一台自行車，每一步都有特定的組件需要安裝。</p>
 <ul>
 <li>
@@ -241,11 +263,7 @@
 <p>如果這兩個模型還沒有看過，可以參考以下:</p>
 <ul>
 <li>
-<p><strong>傳送門</strong></p>
-<ul>
-<li><strong><a href="/papers/multi-model/lxmert">LXMERT</a></strong></li>
-<li><strong><a href="/papers/multi-model/uniter">UNITER</a></strong></li>
-</ul>
+<p><strong>傳送門： <a href="/papers/multi-model/lxmert">LXMERT</a>、<a href="/papers/multi-model/uniter">UNITER</a></strong></p>
 </li>
 <li>
 <p><strong>主要模型配置：UNITER 和 LXMERT</strong></p>
@@ -261,7 +279,7 @@
 <li>
 <p><strong>LXMERT</strong></p>
 <ul>
-<li>LXMERT 是一種雙流模型，先透過獨立的自我注意力在每個模態上進行多層處理（文字有 9 層，圖像 有 5 層），然後融合兩個流的輸出，進一步進行 5 層的處理，其中包括交叉注意力和自注意力。</li>
+<li>LXMERT 是一種雙流模型，先透過獨立的自我注意力在每個模態上進行多層處理（文字有 9 層，圖像有 5 層），然後融合兩個流的輸出，進一步進行 5 層的處理，其中包括交叉注意力和自注意力。</li>
 </ul>
 </li>
 </ul>
@@ -269,7 +287,7 @@
 <li>
 <p><strong>設置細節</strong></p>
 <ul>
-<li>對於 UNITER 的實驗，我們選用了四個主要的大型資料集進行預訓練，分別是 COCO、Visual Genome (VG)、Conceptual Captions 以及 SBU Captions。</li>
+<li>對於 UNITER 的實驗，作者選用了四個主要的大型資料集進行預訓練，分別是 COCO、Visual Genome (VG)、Conceptual Captions 以及 SBU Captions。</li>
 <li>VILLA 也適用於 MLM 和 ITM 的預訓練任務，作者為 UNITER-base 和 UNITER-large 提供了不同的訓練步驟，確保公平比較且考慮到訓練時間。</li>
 </ul>
 </li>
@@ -298,7 +316,7 @@
 <p><strong>VILLA-large 模型效果提升</strong></p>
 <ul>
 <li>在整體性能上呈現相似的提升趨勢。</li>
-<li>在 VCR 的 Q→AR 指標：絕對提高了 +2.9 點，這項任務特別注重對圖像中隱式編碼的複雜社會動態的理解。</li>
+<li>在 VCR 的 Q→AR 指標：絕對提高了 +2.9 點，這項任務特別注重對圖像中隱式 編碼的複雜社會動態的理解。</li>
 <li>在 VQA 基準：從 74.02 提高到 74.87。</li>
 <li>通過集成策略，VILLA-large 的性能再次提升，達到 75.85。</li>
 </ul>
@@ -321,11 +339,11 @@
 <li>
 <p><strong>影像 vs. 文字模式（表 3a）</strong></p>
 <p><img decoding="async" loading="lazy" alt="影像 vs. 文字模式" src="/assets/images/villa_6-ef23c4f6a6c1600ca298110090a6dc44.jpg" width="1024" height="301" class="img_ev3q"></p>
-<p>當我們談到對抗性範例，我們是指經過專門設計的輸入，這些輸入對人類來說看起來與原始輸入沒有太大區別，但它們可以導致模型產生錯誤的預測。在這裡，透過添加對抗性擾動，我們專注於影像和文字這兩種模態。</p>
+<p>當談到對抗性範例時，指經過專門設計的輸入，這些輸入對人類來說看起來與原始輸入沒有太大區別，但它們可以導致模型產生錯誤的預測。在這裡，透過添加對抗性擾動，專注於影像和文字這兩種模態。</p>
 <ul>
 <li>實驗與結果<!-- -->
 <ul>
-<li>獨立的影像擾動：單獨對圖像特徵加擾動可以顯著提高模型的效能。這與傳統的認知可能有些相反，因為在影像領域，對抗性訓練常常會對乾淨影像的模型準確性產生負面影響。</li>
+<li>獨立的影像擾動  ：單獨對圖像特徵加擾動可以顯著提高模型的效能。這與傳統的認知可能有些相反，因為在影像領域，對抗性訓練常常會對乾淨影像的模型準確性產生負面影響。</li>
 <li>直覺與實際結果：起初，可能會認為在影像和文字的兩種模式中同時添加擾動會帶來更多的好處，因為它可以增加對抗性範例的多樣性。但事實上，僅在一種模態上加入擾動已經帶來了顯著的效能提升。</li>
 </ul>
 </li>
@@ -335,12 +353,12 @@
 <li>
 <p><strong>FreeLB vs. VILLA（表 3b）</strong></p>
 <p><img decoding="async" loading="lazy" alt="影像 vs. 文字模式" src="/assets/images/villa_6-ef23c4f6a6c1600ca298110090a6dc44.jpg" width="1024" height="301" class="img_ev3q"></p>
-<p>這一段作者比較 FreeLB 和 VILLA 在 VQA 和 VCR 這兩個具有代表性且具有挑戰性的 V+L 任務上的效果。由於額外的細粒度對抗正規化項，VILLA 在這兩個基準測試上都優於 FreeLB。</p>
+<p>作者比較 FreeLB 和 VILLA 在 VQA 和 VCR 這兩個具有代表性且具有挑戰性的 V+L 任務上的效果。由於額外的細粒度對抗正規化項，VILLA 在這兩個基準測試上都優於 FreeLB。</p>
 <hr>
 <p>不過等等，之前不就有提到 VILLA 所採用的策略是 FreeLB，為何又要拿出來比？</p>
 <p>儘管 VILLA 採用了 FreeLB 的策略來執行對抗性訓練。但這不意味著 VILLA 只是 FreeLB。VILLA 是一個更為全面的框架，其中加入了一些額外的策略或正則化手段，例如：細粒度的對抗正則化項，以優化和增強模型的效能。</p>
 <p>在「FreeLB vs. VILLA」這個部分，作者主要是想展示即使 VILLA 已經採用了 FreeLB 的策略，由於它還加入了其他的增強策略，所以它的效能應該比僅僅使用 FreeLB 的策略來得更好。換句話說，這部分旨在突顯 VILLA 在 FreeLB 基礎上所做的改進和它帶來的效能提升。</p>
-<p>比較的目的是為了證明：儘管 VILLA 使用了 FreeLB 作為其對抗性訓練的核心，但由於 其他的優化和增強，VILLA 在特定的任務上比僅使用 FreeLB 的方法更具有優勢。</p>
+<p>比較 的目的是為了證明：儘管 VILLA 使用了 FreeLB 作為其對抗性訓練的核心，但由於其他的優化和增強，VILLA 在特定的任務上比僅使用 FreeLB 的方法更具有優勢。</p>
 </li>
 <li>
 <p><strong>在 LXMERT 上的結果</strong></p>
@@ -352,7 +370,7 @@
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a href="#結論" class="hash-link" aria-label="結論的直接連結" title="結論的直接連結">​</a></h2>
 <p>在探索深度學習模型的穩健性方面，對抗性攻擊是一個熱門且重要的領域。本研究特別探討了視覺和語言模型（簡稱 V+L 模型）的對抗性穩健性。儘管這是一個新興領域，目前文獻中關於如何針對這些模型進行對抗性攻擊的策略還相對稀缺。其中，如何從多模態 Transformer 模型中反向傳播梯度到 CNN 主幹以產生影像對抗，以及如何合成與視覺情境相符的文字對抗，都是目前面臨的挑戰。</p>
 <p>VILLA 作為一個專為提升視覺與語言的表示學習而設計新型的對抗訓練框架。其中的獨特之處在於它不僅在預訓練階段，而且在微調階段都採用了對抗訓練。此外，透過在編碼空間中添加對抗性擾動，VILLA 還實現了在各種評估基準上的效能一致性提升。</p>
-<p>這邊可以看出來，作者把 VILLA 看成是一種 plug-in 的概念，這表示當你做好了一份模型之後，大可不必更換你的模型結構，只需要在最後的時刻加入 VILLA 所指導的對抗性訓練的技法，就能提升模型 1~3 個百分點。</p>
-<p>最後，作者提到了儘管 VILLA 的效果顯著，對  抗訓練的耗時性仍是一大挑戰。在未來，作者也期許將尋找更有效率的對抗訓練方法，希望能夠使大規模預訓練在日常實踐中更具可行性。</p></div><div style="margin-top:3rem"> </div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="文件選項卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/papers/multi-model/pixelbert"><div class="pagination-nav__sublabel">上一頁</div><div class="pagination-nav__label">Pixel-BERT</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/papers/category/featurefusion"><div class="pagination-nav__sublabel">下一頁</div><div class="pagination-nav__label">FeatureFusion</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#別墅裡的魅影" class="table-of-contents__link toc-highlight">別墅裡的魅影</a></li><li><a href="#定義問題" class="table-of-contents__link toc-highlight">定義問題</a></li><li><a href="#解決問題" class="table-of-contents__link toc-highlight">解決問題</a><ul><li><a href="#villa-模型設計" class="table-of-contents__link toc-highlight">VILLA 模型設計</a></li><li><a href="#預訓練任務" class="table-of-contents__link toc-highlight">預訓練任務</a></li><li><a href="#兩階段的對抗性訓練" class="table-of-contents__link toc-highlight">兩階段的對抗性訓練</a></li><li><a href="#微擾動perturbations" class="table-of-contents__link toc-highlight">微擾動（Perturbations）</a></li><li><a href="#多模態自由對抗訓練" class="table-of-contents__link toc-highlight">多模態「自由」對抗訓練</a></li><li><a href="#自由的對抗訓練策略" class="table-of-contents__link toc-highlight">自由的對抗訓練策略</a></li></ul></li><li><a href="#討論" class="table-of-contents__link toc-highlight">討論</a><ul><li><a href="#實驗配置" class="table-of-contents__link toc-highlight">實驗配置</a></li><li><a href="#villa-在-uniter-的效果及分析" class="table-of-contents__link toc-highlight">VILLA 在 UNITER 的效果及分析</a></li><li><a href="#深入分析-villa" class="table-of-contents__link toc-highlight">深入分析 VILLA</a></li></ul></li><li><a href="#結論" class="table-of-contents__link toc-highlight">結論</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 DOCSAID.</div></div></div></footer></div>
+<p>這邊可以看出來，作者把 VILLA 看成是一種 plug-in 的概念，這表示當你做好了一份模型之後，大可不必更換你的模型結構，只需要在最後的時刻加入 VILLA 所指導的對抗性訓練的技法，就 能提升模型 1~3 個百分點。</p>
+<p>最後，作者提到了儘管 VILLA 的效果顯著，對抗訓練的耗時性仍是一大挑戰。在未來，作者也期許將尋找更有效率的對抗訓練方法，希望能夠使大規模預訓練在日常實踐中更具可行性。</p></div><div style="margin-top:3rem"> </div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="文件選項卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/papers/multi-model/pixelbert"><div class="pagination-nav__sublabel">上一頁</div><div class="pagination-nav__label">Pixel-BERT</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/papers/category/featurefusion"><div class="pagination-nav__sublabel">下一頁</div><div class="pagination-nav__label">FeatureFusion</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#別墅裡的魅影" class="table-of-contents__link toc-highlight">別墅裡的魅影</a></li><li><a href="#定義問題" class="table-of-contents__link toc-highlight">定義問題</a></li><li><a href="#解決問題" class="table-of-contents__link toc-highlight">解決問題</a><ul><li><a href="#villa-模型設計" class="table-of-contents__link toc-highlight">VILLA 模型設計</a></li><li><a href="#預訓練任務" class="table-of-contents__link toc-highlight">預訓練任務</a></li><li><a href="#兩階段的對抗性訓練" class="table-of-contents__link toc-highlight">兩階段的對抗性訓練</a></li><li><a href="#微擾動perturbations" class="table-of-contents__link toc-highlight">微擾動（Perturbations）</a></li><li><a href="#多模態自由對抗訓練" class="table-of-contents__link toc-highlight">多模態「自由」對抗訓練</a></li><li><a href="#自由的對抗訓練策略" class="table-of-contents__link toc-highlight">自由的對抗訓練策略</a></li></ul></li><li><a href="#討論" class="table-of-contents__link toc-highlight">討論</a><ul><li><a href="#實驗配置" class="table-of-contents__link toc-highlight">實驗配置</a></li><li><a href="#villa-在-uniter-的效果及分析" class="table-of-contents__link toc-highlight">VILLA 在 UNITER 的效果及分析</a></li><li><a href="#深入分析-villa" class="table-of-contents__link toc-highlight">深入分析 VILLA</a></li></ul></li><li><a href="#結論" class="table-of-contents__link toc-highlight">結論</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 DOCSAID.</div></div></div></footer></div>
 </body>
 </html>
