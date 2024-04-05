@@ -6,7 +6,7 @@ sidebar_position: 6
 
 ## 團結者之歌
 
-**[UNITER: UNiversal Image-TExt Representation Learning](https://arxiv.org/abs/1909.11740)**
+**[UNITER: UNiversal Image-TExt Representation Learning (2019.09)](https://arxiv.org/abs/1909.11740)**
 
 ---
 
