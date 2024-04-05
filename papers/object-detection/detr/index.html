@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="zh-hant" dir="ltr" class="docs-wrapper plugin-docs plugin-id-papers docs-version-current docs-doc-page docs-doc-id-object-detection/detr" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.2.0">
+<title data-rh="true">DETR | DOCSAID</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docsaid.org/img/docsaid-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docsaid.org/img/docsaid-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docsaid.org/papers/object-detection/detr"><meta data-rh="true" property="og:locale" content="zh_hant"><meta data-rh="true" name="docusaurus_locale" content="zh-hant"><meta data-rh="true" name="docsearch:language" content="zh-hant"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-papers-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-papers-current"><meta data-rh="true" property="og:title" content="DETR | DOCSAID"><meta data-rh="true" name="description" content="跨領域的奠基者"><meta data-rh="true" property="og:description" content="跨領域的奠基者"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docsaid.org/papers/object-detection/detr"><link data-rh="true" rel="alternate" href="https://docsaid.org/papers/object-detection/detr" hreflang="zh-hant"><link data-rh="true" rel="alternate" href="https://docsaid.org/papers/object-detection/detr" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DOCSAID RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DOCSAID Atom Feed">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script><link rel="stylesheet" href="/assets/css/styles.109f9fb8.css">
+<script src="/assets/js/runtime~main.70c4e48e.js" defer="defer"></script>
+<script src="/assets/js/main.2de169fd.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳至主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳至主要内容</a></div><nav aria-label="主導航" class="navbar navbar--fixed-top navbarHideable_m1mJ"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/docsaid_logo.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/docsaid_logo_white.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/papers/intro">Papers</a><a class="navbar__item navbar__link" href="/blog">Blog</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">用戶指南</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/blog/terms-of-service">使用條款</a></li><li><a class="dropdown__link" href="/blog/privacy-policy">隱私政策</a></li></ul></div><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="切換淺色/暗黑模式（當前為淺色模式）" aria-label="切換淺色/暗黑模式（當前為淺色模式）" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到頂部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd sidebarWithHideableNavbar_wUlq"><a tabindex="-1" class="sidebarLogo_isFc" href="/"><img src="/img/docsaid_logo.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/docsaid_logo_white.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"><b></b></a><nav aria-label="文件側邊欄" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/papers/intro">Intro</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/multimodel">MultiModel</a><button aria-label="Expand sidebar category &#x27;MultiModel&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/featurefusion">FeatureFusion</a><button aria-label="Expand sidebar category &#x27;FeatureFusion&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/papers/category/objectdetection">ObjectDetection</a><button aria-label="Collapse sidebar category &#x27;ObjectDetection&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/papers/object-detection/detr">DETR</a></li></ul></li></ul></nav><button type="button" title="收起側邊欄" aria-label="收起側邊欄" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="頁面路徑"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="主頁面" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/papers/category/objectdetection"><span itemprop="name">ObjectDetection</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">DETR</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本頁導覽</button></div><div class="theme-doc-markdown markdown"><h1>DETR</h1>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="跨領域的奠基者">跨領域的奠基者<a href="#跨領域的奠基者" class="hash-link" aria-label="跨領域的奠基者的直接連結" title="跨領域的奠基者的直接連結">​</a></h2>
+<p><strong><a href="https://arxiv.org/abs/2005.12872" target="_blank" rel="noopener noreferrer">End-to-End Object Detection with Transformers (2020.05)</a></strong></p>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>信息</div><div class="admonitionContent_BuS1"><p>以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。</p></div></div>
+<hr>
+<p>物件偵測一直都是電腦視覺領域的核心任務。</p>
+<p>一些基於錨點的方法，如 Faster R-CNN、SSD 和 YOLOv2，使用預定義的邊界框（即錨點）來預測物件的位置。這些錨點的尺寸和長寬比是手動選定的，並且期望能覆蓋可能出現的所有物件形狀。基於錨點的方法有其固有的優勢，特別是在物件的多尺度和多形狀偵測上。這些方法對於多尺度物件和不同的長寬比都具有很好的泛化能力。</p>
+<p>然而，選擇合適的錨點大小和比例通常需要一些先驗知識和手動調整，這可能不適合所有的應用或資料集。此外，在每個位置上使用多個錨點可能會導致大量的多餘預測，尤其是對於那些沒有物件的背景區域，這需要額外的非極大值抑制（NMS）步驟來清理。</p>
+<p>在同一個時間線中，隔壁棚（NLP）的已經如火如荼的推進著最新的 Transformer 架構，並且取得很多顯著的進步成果，種種因素，讓本論文的作者決定：</p>
+<ul>
+<li><strong>那不然，我們也一起來 Transformer 一下吧！</strong></li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="定義問題">定義問題<a href="#定義問題" class="hash-link" aria-label="定義問題的直接連結" title="定義問題的直接連結">​</a></h2>
+<p>作者在文章中定義問題了一些現階段的問題：</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="anchor-base-好複雜">Anchor-base 好複雜<a href="#anchor-base-好複雜" class="hash-link" aria-label="Anchor-base 好複雜的直接連結" title="Anchor-base 好複雜的直接連結">​</a></h3>
+<p>在物件偵測 的領域中，Anchor-base 的方法是近年來相當流行的偵測技術。</p>
+<p>這類方法使用預設的錨點來預測邊界框和類別。這些錨點通常是在不同的大小和比例下，在整個圖像上均勻放置的預定義邊界框。</p>
+<p>但是，使用錨點的方式也帶來了一些挑戰：</p>
+<ol>
+<li>
+<p><strong>重複預測問題</strong></p>
+<p>由於有大量的錨點覆蓋在圖像上，一個真實物件可能會被多個錨點所識別，導致該物件被預測多次。這意味著系統可能會產生多個相似或重疊的邊界框來代表同一個物件。</p>
+</li>
+<li>
+<p><strong>後處理複雜性</strong></p>
+<p>為了解決上述的重複預測問題，需要引入一些後處理技術。非極大值抑制（NMS）是一種常用的方法，它可以移除重疊的邊界框，只保留該物件的最佳預測。這需要額外的計算和參數調整，增加了模型的複雜性。</p>
+</li>
+<li>
+<p><strong>錨點設計與匹配</strong></p>
+<p>設計錨點的大小和比例對模型的性能至關重要。不適當的錨點設計可能導致偵測不精確。此外，當有新的預測產生時，需要將這些預測與最接近的錨點匹配，這是一個額外的計算步驟。</p>
+</li>
+</ol>
+<p>覺得不好就不要用，我們不用錨點行不行？</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="anchor-free-不能打">Anchor-free 不能打<a href="#anchor-free-不能打" class="hash-link" aria-label="Anchor-free 不能打的直接連結" title="Anchor-free 不能打的直接連結">​</a></h3>
+<p>人們除了準確，還是要準確。</p>
+<p>實務上的場景中，使用者通常可以忍受慢一點（反正也就差幾秒）；系統可以複雜一點（反正是工程師在忙）。</p>
+<ul>
+<li><strong>但是模型不準確，我就要投訴你！</strong></li>
+</ul>
+<p>在物件偵測的發展中，直接預測一直是一個吸引人的概念。不同於使用錨點的策略，直接預測旨在直接從圖像像素預測物件  的邊界框和類別標籤，而無需其他的中間代理或輔助結構。</p>
+<p>儘管直接預測的概念在理論上很有吸引力，但在實際應用中，過去的嘗試往往在性能上受到限制。這意味著這些方法可能在一些常見的物件偵測基準上表現不佳，特別是與當前的領先方法相比。</p>
+<p>所以就算直接預測的方法具有其理論上的優勢，簡化的模型結構和少量的手工先驗，但其在實際應用中的性能和競爭力還有待提高。這也是為什麼研究者持續尋找改進這些策略的方法，希望能夠真正地實現端到端的物件偵測。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解決問題">解決問題<a href="#解決問題" class="hash-link" aria-label="解決問題的直接連結" title="解決問題的直接連結">​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="detr-模型設計">DETR 模型設計<a href="#detr-模型設計" class="hash-link" aria-label="DETR 模型設計的直接連結" title="DETR 模型設計的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="DETR 模型架構" src="/assets/images/detr_1-20bf18537c142000ca4626cbd3cbbe88.jpg" width="1024" height="266" class="img_ev3q"></p>
+<ol>
+<li>
+<p><strong>Backbone</strong></p>
+<p>主幹是用來從輸入圖片中提取特徵的部分。它通常使用卷積神經網路（CNN）結構。當圖片輸入這一層時，它會產生一組特徵圖。這些特徵圖捕捉了圖像的各種細節和語境信息，但是已經失去了原始圖片的解析度。</p>
+</li>
+<li>
+<p><strong>Transformer Encoder</strong></p>
+<p>Transformer Encoder 接收主幹的輸出特徵圖。為了讓 Transformer 能夠了解每一個特徵的相對位置，我們需要添加位置編碼。這是因為與 CNN 不同，Transformer 本身是不敏感於輸入的順序的。位置編碼提供了一種方式來輸入位置信息，這樣 Transformer 可以考慮到特徵之間的相對位置。</p>
+<p>假設輸  入的特徵圖是 3 x 224 x 224，輸出的特徵圖是 512 x 7 x 7，這裡的操作就是把輸出圖視為 512 個輸入 Token，每個 Token 有 7 x 7 也就是長度為 49 的特徵值。</p>
+</li>
+<li>
+<p><strong>Transformer Decoder</strong></p>
+<p>Decoder 的輸入是稱為「物件查詢」的固定向量，這些查詢表示對檢測物件的一般期望。通過解碼器的多個層，這些查詢將關注 Encoder 的輸出，試圖找出與特定物件相對應的特徵。</p>
+<p>這裡就簡單了，在 Decoder 輸入的時候，把所有要查詢的物件，作為一個 Token 來輸入。假設你有 100 個物件，那輸入的序列長度就是 100，特徵的部分就給定一組固定特定的內容，讓模型可以區分出不同物件就可以了。</p>
+<p>另外，需要注意的是這裡不是用 For-loop 去跑每個查詢物件，而是一次一起跑完所有查詢，因為不同物件之間沒有依賴關係，不需要進行迴圈迭代。</p>
+</li>
+<li>
+<p><strong>FFN</strong></p>
+<p>Decoder 的每個輸出都會進入 FFN。這個網路的目的是將解碼器的輸出轉換成具體的預測，這裡的預測內容為：[物件中心座標（x, y）、高度（H）、寬度（W）]，然後個數則是固定為 N，這裡的 N 通常會遠大於影像中實際的目標數量。如果沒有找到物件，它還可以輸出一個特殊的「無物件」類別。</p>
+<p>整體的實作架構流程圖，如下：</p>
+<p><img decoding="async" loading="lazy" alt="DETR 模型架構" src="/assets/images/detr_3-69a48ad1663edee8a24b38940ed6001f.jpg" width="908" height="1000" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>這裡我好奇論文中的 Spatial positional encoding 和一般的 Transformer 有什麼不一樣，所以特別去找了論文的實作來看，原來就是基於 row 和 col 給定一組可以學習的參數。</p><p><img decoding="async" loading="lazy" alt="DETR 模型架構" src="/assets/images/detr_4-d53787cc476c8c3404d9a3bab0d5270d.jpg" width="1024" height="782" class="img_ev3q"></p></div></div>
+</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="損失函數設計">損失函數設計<a href="#損失函數設計" class="hash-link" aria-label="損失函數設計的直接連結" title="損失函數設計的直接連結">​</a></h3>
+<ol>
+<li>
+<p>集合預測損失</p>
+<p>這是用於強制預測框和真實框之間的唯一匹配損失。</p>
+<ul>
+<li>
+<p><strong>匹配損失 (L_match)</strong></p>
+<p>DETR 推斷出一組固定大小的 N 個預測。這裡的 N 是設定為明顯大於圖片中物件的典型數量。損失在預測物件和真實物件之間產生最佳二分匹配。假設在一張圖片中有 5 個真實物件，但模型預測了 8 個物件。即使有多餘的預測，我們需要將這 5 個真實物件與這 8 個預測物件進行最佳匹配。</p>
+</li>
+<li>
+<p><strong>匈牙利演算法（Hungarian Algorithm）</strong></p>
+<p>使用匈牙利演算法找到最佳匹配，匹配成本考慮了預測的類別以及預測框和真實框之間的相似性。</p>
+<p>匈牙利演算法用於解決二部圖最大匹配或最小匹配問題，通常應用於分配問題。假設我們有n個任務和n個工人，且每個任務只能由一個工人完成。每個工人完成每個任務都有相應的成本，目標是找到一種分配方 式，使得所有工人完成所有任務的總成本最小。</p>
+<p>另外一個設定，是將「無物件」類別的對數機率項的權重降低 10 倍，這避免了過多的背景或非物件區域干擾訓練。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>邊界框損失 (Bounding Box Loss)</p>
+<p>在物件檢測中，模型須要預測物件的位置和範圍，這常常表示為一個「邊界框」。邊界框通常由四個座標（例如：左上和右下的x、y座標）或一個中心點和寬高來描述。邊界框損失是一種量測預測的邊界框與實際邊界框之間差異的方法。</p>
+<ul>
+<li>
+<p><strong>邊界框損失（L_box）</strong></p>
+<p>DETR (DEtection TRansformer) 是近年來受到關注的物件檢測方法，它與許多傳統方法不同。而一些傳統方法是基於對候選框（也稱為錨框或提案）的預測，然後再進一步調整獲得最終的預測邊界框，但 DETR 直接預測出物件的邊界框。</p>
+<p>這種方法的一個問題是：對於不同大小的物件，即使它們的預測相對位置偏差相同，使用常見的損失如 L1 loss 計算時，它們的損失值可能會有很大的差異。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>假設我們的模型預測一個很小的物件和一個很大的物件，兩者都偏離了真實位置 10 像素。對於小物件來說，這 10 像素的偏差可能意味著很大的差異（例如：它可能佔該物件總大小的50%），但對於大物件而言，這可能只是一個微小的偏差。如果只使用 L1 loss，這兩種情況的損失可能會有很大的不同。</p></div></div>
+</li>
+<li>
+<p><strong>有問題就要修正</strong></p>
+<p>為了克服上述問題，DETR 結合了 <code>L1 loss</code>與「廣義 IoU Loss」（Generalized Intersection over Union loss）。廣義 IoU 損失試圖解決物件大小對損失的影響，它考慮了預測的邊界框和實際邊界框之間的重疊情況，並嘗試最大化它們的交集。通過組合這兩種損失，模型在不同大小的物件上都有相似的損失尺度，這有助於模型更均勻地學習不同大小物件的邊界框。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="資料集">資料集<a href="#資料集" class="hash-link" aria-label="資料集的直接連結" title="資料集的直接連結">​</a></h3>
+<ul>
+<li><strong>使用的資料集</strong>：本研究使用了 COCO 2017 的檢測和全景分割資料集進行實驗。</li>
+<li><strong>資料集規模</strong>：資料集包含 118,000 張的訓練影像和 5,000 張的驗證影像。</li>
+<li><strong>資料註釋</strong>：每張影像都被註釋有邊界框和全景分割的資訊。</li>
+<li><strong>影像詳情</strong>：平均每張影像中有 7 個物件實例。在訓練集中，單一影像中最多有 63 個實例，這些實例的大小從小到大都有。</li>
+<li><strong>評估指標</strong>：使用了平均精度 (Average Precision, AP) 作為評估指標。預設情況下，AP是基於邊界框(bbox)的。為了與 Faster R-CNN 進行比較，論文報告了最後一個訓練時期的驗證 AP。</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="技術細節">技術細節<a href="#技術細節" class="hash-link" aria-label="技術細節的直接連結" title="技術細節的直接連結">​</a></h3>
+<ul>
+<li><strong>訓練優化器</strong>：使用 AdamW 來訓練 DETR 模型。</li>
+<li><strong>學習率設定</strong>：<!-- -->
+<ul>
+<li>Transformer 的初始學習率為 1e-4</li>
+<li>主幹網路的學習率為 1e-5</li>
+<li>權重衰減為 1e-4。</li>
+</ul>
+</li>
+<li><strong>權重初始化</strong>：所有的 Transformer 權重使用 Xavier init 進行初始化。主幹網路使用在ImageNet 上預訓練的 ResNet 模型，並凍結了 BatchNorm 層。</li>
+<li><strong>模型結構</strong>：研究報告了兩種不同主幹網路的結果：ResNet50 和 ResNet-101，分別被命名為 DETR 和 DETR-R101。還有一個修改版的模型，名為 DETR-DC5 和 DETR-DC5-R101，此修改主要是為了提高小物件的檢測性能，但計算成本也相對增加。</li>
+<li><strong>影像前處理</strong>：使用尺度增強調整影像大小，確保最短邊在 480 到 800 像素之間，而最長邊最多為 1333 像素。為了強化模型學習，他們在訓練期間使用隨機裁剪增強，這提高了大約 1 AP 的效能。</li>
+<li><strong>其他細節</strong>：使用了預設的 dropout 為 0.1 進行訓練。推理時，有些預測為空，為了優化AP，使用置信度來覆蓋這些空物件的預測，這增加了 2 AP。</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="討論">討論<a href="#討論" class="hash-link" aria-label="討論的直接連結" title="討論的直接連結">​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="這次行嗎">這次行嗎？<a href="#這次行嗎" class="hash-link" aria-label="這次行嗎？的直接連結" title="這次行嗎？的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="DETR 模型評價" src="/assets/images/detr_2-d433d652fadb40a1808d7383ce261218.jpg" width="1024" height="425" class="img_ev3q"></p>
+<p>小物件整個壞掉（AP 27.2 -&gt; AP 23.7），但其他部分看起來可以！</p>
+<p>我們仔細檢視 DETR 和 Faster R-CNN 的比較時，可以觀察 到以下主要點：</p>
+<ol>
+<li>
+<p><strong>訓練方式的差異</strong></p>
+<ul>
+<li>DETR 使用了 Transformer 結構，通常與 Adam 或 Adagrad 優化器一起使用。另外，為了讓模型學習到更深入的表示，它往往採用了較長的訓練計劃和 dropout。</li>
+<li>Faster R-CNN 則主要使用 SGD 進行訓練，且在資料增強方面相對較少。</li>
+</ul>
+</li>
+<li>
+<p><strong>嘗試使 Faster R-CNN 基線更強</strong></p>
+<ul>
+<li>為了使 Faster R-CNN 與 DETR 更為一致，研究者在其損失中加入了廣義 IoU，並應用了相同的隨機裁切影像增強以及長期訓練方法。</li>
+<li>這些調整使 Faster R-CNN 在 COCO 檢測任務上提高了 1-2 AP。</li>
+</ul>
+</li>
+<li>
+<p><strong>模型結果比較</strong></p>
+<ul>
+<li>對於 Faster R-CNN，作者展示了使用 3x 計劃訓練的模型結果，以及加入增強功能並使用 9x 計劃訓練的模型結果。</li>
+<li>對於 DETR，作者考慮了具有相同參數量的模型，這意味著 DETR 和 Faster R-CNN具有類似的模型複雜性。</li>
+</ul>
+</li>
+<li>
+<p><strong>性能比較</strong></p>
+<ul>
+<li>從結果可以看到，DETR 能夠在參數數量相同的情況下與 Faster R-CNN 競爭，達到了 COCO val 子集上的 42 AP。</li>
+<li>DETR 在提高其總體性能時，主要是通過提高 APL（大物體的檢測性能）達到的。然而，它在APS（小物體的檢測性能）方面仍然較為落後。</li>
+<li>DETR-DC5，儘管具有較高的總體 AP，但在小物體檢測上仍然明顯落後於 Faster R-CNN。</li>
+<li>使用 ResNet-101 作為主幹的 Faster R-CNN 和 DETR 在性能上都表現出相似的趨勢。</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="模型組件分析">模型組件分析<a href="#模型組件分析" class="hash-link" aria-label="模型組件分析的直接連結" title="模型組件分析的直接連結">​</a></h3>
+<p>作者詳細地探討了 DETR 架構中各個組件的重要性：</p>
+<ol>
+<li>
+<p><strong>編碼器層數</strong></p>
+<ul>
+<li>編碼器層數增加會對全域影像級自注意力帶來影響。</li>
+<li>無編碼器層會導致整體 AP 下降 3.9 點，對大物件的影響尤其明顯，達 6.0 點。</li>
+<li>編碼器是解開物件的重要組件，提供了全域場景推理。</li>
+<li>編碼器能夠分離實例，這對解碼器的物件提取和定位可能是有益的。</li>
+</ul>
+</li>
+<li>
+<p><strong>解碼器層數</strong></p>
+<ul>
+<li>解碼器層數增加有助於改善 AP 和 AP50。</li>
+<li>由於基於集合的損失，DETR 設計時不需要 NMS。</li>
+<li>但在第一個解碼層後運行 NMS 可以提高性能。</li>
+<li>隨著層數增加，NMS 的改進作用會減弱。</li>
+<li>解碼器的注意力是局部的，主要關注物體的四肢，如頭部或腿部。</li>
+</ul>
+</li>
+<li>
+<p><strong>FFN 的重要性</strong></p>
+<ul>
+<li>FFN 可視為 1 × 1 卷積層。</li>
+<li>完全移除 FFN 會造成性能下降 2.3 AP，表明 FFN 對於獲得良好的結果是非常重要的。</li>
+</ul>
+</li>
+<li>
+<p><strong>位置編碼的重要性</strong></p>
+<ul>
+<li>模型中有空間位置編碼和輸出位置編碼兩種。</li>
+<li>完全刪除空間位置編碼導致性能損失 7.8 AP。</li>
+<li>使用正弦編碼或學習編碼只會導致 AP 輕微下降 1.3 AP。</li>
+<li>這表明位置編碼對模型性能也有重要影響。</li>
+</ul>
+</li>
+<li>
+<p><strong>Loss 的重要性</strong></p>
+<ul>
+<li>Classification Loss 是必不可少的。</li>
+<li>GIoU Loss 佔有模型性能的大部分，沒有它會損失 0.7 AP。</li>
+<li>單獨使用 L1 Loss 會導致結果變差。</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="全景分割的應用">全景分割的應用<a href="#全景分割的應用" class="hash-link" aria-label="全景分割的應用的直接連結" title="全景分割的應用的直接連結">​</a></h3>
+<p>全景分割最近在電腦視覺界中受到了廣泛關注。在這篇論文中，這個章節不  是主力討論的重點，作者僅作為延伸應用做個簡單的說明。但我們如果從未來的角度看回去，這個章節後續應用非常重要，簡直就是一篇新的論文了，所以我們仔細看過。</p>
+<ul>
+<li>
+<p><strong>實驗設置</strong></p>
+<p>DETR 在 COCO 資料集上進行了全景分割的實驗。這個資料集除了有 80 個事物類別，還包括53 個事物類別。訓練 DETR 時，模型須預測 COCO 上事物和事物類別周圍的邊界框。其中，邊界框的預測在訓練中是必要的，因為用於訓練的匈牙利匹配算法依賴於框之間的距離計算。</p>
+</li>
+<li>
+<p><strong>新增的遮罩頭</strong></p>
+<p><img decoding="async" loading="lazy" alt="DETR 遮罩架構" src="/assets/images/detr_5-51a03b557e1ca0be4d41e9c32c207fe5.jpg" width="1024" height="321" class="img_ev3q"></p>
+<p>除了基本的 DETR 架構，還新增了一個遮罩頭，這個頭為每個預測框預測一個二進位遮罩。這個遮罩頭將每個物件的 Transformer 解碼器的輸出作為輸入，並計算這些編碼的多頭注意力分數編碼器的輸出，從而為每個物件產生注意力熱圖。為了得到最終的預測並增加分辨率，還使用了類似於 FPN 的架構。</p>
+<p>在訓練過程中，DETR 首先被訓練以預測邊界框，然後遮罩頭被訓練 25 個週期。這可以一步到位，或者先訓練 DETR 再訓練遮罩頭，實驗結果顯示這兩種方法的效果相似。為了得到最終的全景分割，模型在每個像素的遮罩分數上使用 argmax，然後將相應的類別分配給結果遮罩。這種方法確保了最終的遮罩之間沒有重疊。</p>
+</li>
+<li>
+<p><strong>結果展示</strong></p>
+<p><img decoding="async" loading="lazy" alt="DETR 遮罩結果1" src="/assets/images/detr_6-0dc5b20dbe6154ca746c614398c4b008.jpg" width="1024" height="298" class="img_ev3q"></p>
+<p>DETR 在全景分割上展示了其強大的性能。特別是它在事物類別上展現了出色的性能，這可能是因 為編碼器的全局推理能力。即使在事物類別的掩模預測中存在一定的性能差距，DETR 仍然獲得了有競爭力的 PQ 值。在 COCO 測試集上，DETR 達到了 46 PQ 的分數。</p>
+<p><img decoding="async" loading="lazy" alt="DETR 遮罩結果2" src="/assets/images/detr_7-25e486fc58029679c5dabe4728b1f18c.jpg" width="1024" height="281" class="img_ev3q"></p>
+</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a href="#結論" class="hash-link" aria-label="結論的直接連結" title="結論的直接連結">​</a></h2>
+<p>沒有任何技術是完美的。</p>
+<p>DETR 面臨的主要挑戰是小物體的檢測，在這方面，它的性能還有很大的提升空間。</p>
+<p>另外，與已經經過多年改進的 Faster R-CNN 比較，DETR 在某些情境下的結果僅僅達到相當的水平，這也意味著它可能不總是最佳的選擇。</p>
+<p>但這不影響這篇論文的地位與重要性，DETR 不只是一種新的技術，更是一種新的思維方式。它將先進的 Transformer 結構與二分匹配損失相結合，為我們帶來了一種全新的、直接的集合預測方法。</p>
+<p>DETR 的簡潔和直觀是它的一大賣點。在許多目標檢測方法中，我們都需要進行繁複的標記和特定的預設錨點選擇，而 DETR 擺脫了這些限制，使得整個過程更為簡單。其次，它的應用範疇十分廣泛。除了目標檢測，它還能夠輕鬆地擴展到全景分割，且在這方面也取得了相當可觀的結果。但最令人印象深刻的是，當處理大型物體時，它的自注意力機制能夠有效捕捉圖像中的全局資訊，使其在這方面的性能超越了其他傳統方法。</p></div><div style="margin-top:3rem"> </div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="文件選項卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/papers/category/objectdetection"><div class="pagination-nav__sublabel">上一頁</div><div class="pagination-nav__label">ObjectDetection</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#跨領域的奠基者" class="table-of-contents__link toc-highlight">跨領域的奠基者</a></li><li><a href="#定義問題" class="table-of-contents__link toc-highlight">定義問題</a><ul><li><a href="#anchor-base-好複雜" class="table-of-contents__link toc-highlight">Anchor-base 好複雜</a></li><li><a href="#anchor-free-不能打" class="table-of-contents__link toc-highlight">Anchor-free 不能打</a></li></ul></li><li><a href="#解決問題" class="table-of-contents__link toc-highlight">解決問題</a><ul><li><a href="#detr-模型設計" class="table-of-contents__link toc-highlight">DETR 模型設計</a></li><li><a href="#損失函數設計" class="table-of-contents__link toc-highlight">損失函數設計</a></li><li><a href="#資料集" class="table-of-contents__link toc-highlight">資料集</a></li><li><a href="#技術細節" class="table-of-contents__link toc-highlight">技術細節</a></li></ul></li><li><a href="#討論" class="table-of-contents__link toc-highlight">討論</a><ul><li><a href="#這次行嗎" class="table-of-contents__link toc-highlight">這次行嗎？</a></li><li><a href="#模型組件分析" class="table-of-contents__link toc-highlight">模型組件分析</a></li><li><a href="#全景分割的應用" class="table-of-contents__link toc-highlight">全景分割的應用</a></li></ul></li><li><a href="#結論" class="table-of-contents__link toc-highlight">結論</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 DOCSAID.</div></div></div></footer></div>
+</body>
+</html>
