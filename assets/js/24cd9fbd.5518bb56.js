@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[5111],{74361:e=>{e.exports=JSON.parse('{"title":"2019","slug":"/category/2019","permalink":"/papers/category/2019","navigation":{"previous":{"title":"MultiModel","permalink":"/papers/category/multimodel"},"next":{"title":"VisualBERT","permalink":"/papers/multi-model/2019/visualbert"}}}')}}]);

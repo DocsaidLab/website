@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="zh-hant" dir="ltr" class="docs-wrapper plugin-docs plugin-id-papers docs-version-current docs-doc-page docs-doc-id-multi-model/2019/uniter" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.2.0">
+<title data-rh="true">UNITER | DOCSAID</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docsaid.org/img/docsaid-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docsaid.org/img/docsaid-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docsaid.org/papers/multi-model/2019/uniter"><meta data-rh="true" property="og:locale" content="zh_hant"><meta data-rh="true" name="docusaurus_locale" content="zh-hant"><meta data-rh="true" name="docsearch:language" content="zh-hant"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-papers-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-papers-current"><meta data-rh="true" property="og:title" content="UNITER | DOCSAID"><meta data-rh="true" name="description" content="團結者之歌"><meta data-rh="true" property="og:description" content="團結者之歌"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docsaid.org/papers/multi-model/2019/uniter"><link data-rh="true" rel="alternate" href="https://docsaid.org/papers/multi-model/2019/uniter" hreflang="zh-hant"><link data-rh="true" rel="alternate" href="https://docsaid.org/papers/multi-model/2019/uniter" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DOCSAID RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DOCSAID Atom Feed">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script><link rel="stylesheet" href="/assets/css/styles.109f9fb8.css">
+<script src="/assets/js/runtime~main.5299de98.js" defer="defer"></script>
+<script src="/assets/js/main.f5b36bca.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳至主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳至主要内容</a></div><nav aria-label="主導航" class="navbar navbar--fixed-top navbarHideable_m1mJ"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/docsaid_logo.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/docsaid_logo_white.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/papers/intro">Papers</a><a class="navbar__item navbar__link" href="/blog">Blog</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">用戶指南</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/blog/terms-of-service">使用條款</a></li><li><a class="dropdown__link" href="/blog/privacy-policy">隱私政策</a></li></ul></div><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="切換淺色/暗黑模式（當前為淺色模式）" aria-label="切換淺色/暗黑模式（當前為淺色模式）" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到頂部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd sidebarWithHideableNavbar_wUlq"><a tabindex="-1" class="sidebarLogo_isFc" href="/"><img src="/img/docsaid_logo.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/docsaid_logo_white.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"><b></b></a><nav aria-label="文件側邊欄" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/papers/intro">Intro</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/papers/category/multimodel">MultiModel</a><button aria-label="Collapse sidebar category &#x27;MultiModel&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" tabindex="0" href="/papers/category/2019">2019</a><button aria-label="Collapse sidebar category &#x27;2019&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/multi-model/2019/visualbert">VisualBERT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/multi-model/2019/vilbert">ViLBERT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/multi-model/2019/vlbert">VL-BERT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/multi-model/2019/lxmert">LXMERT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/papers/multi-model/2019/uniter">UNITER</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" tabindex="0" href="/papers/category/2020">2020</a><button aria-label="Expand sidebar category &#x27;2020&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" tabindex="0" href="/papers/category/2021">2021</a><button aria-label="Expand sidebar category &#x27;2021&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/featurefusion">FeatureFusion</a><button aria-label="Expand sidebar category &#x27;FeatureFusion&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/objectdetection">ObjectDetection</a><button aria-label="Expand sidebar category &#x27;ObjectDetection&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav><button type="button" title="收起側邊欄" aria-label="收起側邊欄" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="頁面路徑"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="主頁面" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/papers/category/multimodel"><span itemprop="name">MultiModel</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/papers/category/2019"><span itemprop="name">2019</span></a><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">UNITER</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本頁導覽</button></div><div class="theme-doc-markdown markdown"><h1>UNITER</h1>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="團結者之歌">團結者之歌<a href="#團結者之歌" class="hash-link" aria-label="團結者之歌的直接連結" title="團結者之歌的直接連結">​</a></h2>
+<p><strong><a href="https://arxiv.org/abs/1909.11740" target="_blank" rel="noopener noreferrer">UNITER: UNiversal Image-TExt Representation Learning (2019.09)</a></strong></p>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>信息</div><div class="admonitionContent_BuS1"><p>以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。</p></div></div>
+<hr>
+<p>我們看過之前的論文，從一開始的「單流模型」到後來的「雙塔模型」，「雙流模型」等。</p>
+<p>總之，要不就是把跨模態資訊合在一起算，要不就是分開算。</p>
+<p>如果你分開算，之後的人們就想合在一起，然後超越你；
+如果你一起算，之後的人們就想要分開算，然後超越你。</p>
+<p>本來我們只是想輕輕鬆鬆地看點論文，卻還硬是看出了點人生的道理。</p>
+<p>我們先回到 UNITER。</p>
+<p>在視覺與語言（V+L）的研究領域中，聯合多模型編碼已被廣泛使用以解決圖像和文本之間的語義差距。然而，這些多模型編碼的方法和表示通常都是為特定的任務量身定制的。這意味著，當設計一種專門用於特定 V+L 任務的方法時，該方法可能難以適應其他相關任務。這種現象在多模態研究中十分常見，使得整體研究社群在找尋通用解決方案上遭遇了挑戰。</p>
+<p>先前的研究，如 MCB、BAN、DFAF、SCAN 和 MAttNet 等，都在其特定的領域中提出了先進的方法。但是，由於這些模型的架構多種多樣，且學到的表示具有高度的任務特定性，它們在廣泛的 V+L 任務中的應用受到了限制。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="定義問題">定義問題<a href="#定義問題" class="hash-link" aria-label="定義問題的直接連結" title="定義問題的直接連結">​</a></h2>
+<p>作者認為當前的研究雖然在特定任務上取得了成功，但在多模態的通用表示學習、有效的屏蔽策略以及優化的對齊技巧上還存在許多問題和挑戰：</p>
+<ol>
+<li>
+<p>特定任務的多模型編碼：現有的視覺和語言多模型編碼方法通常是針對特定任務設計的。這種特定性限制了模型在其他 V+L 任務中的泛化能力。</p>
+</li>
+<li>
+<p>模型架構和表示的多樣性：先前的研究如 MCB、BAN 等在特定領域中有其獨特的架構和表示方法。由於這些架構和表示的多樣性，使得它們難以適應廣泛的 V+L 任務。</p>
+</li>
+<li>
+<p>NLP 成功策略的直接應用：儘管 Transformer 和 BERT 在 NLP 領域中取得了巨大的成功，但直接將這些策略應用於 V+L 領域可能不是最佳的解決方案。需要特定的策略和預訓練任務以確保在V+L 任務中的成功。</p>
+</li>
+<li>
+<p>屏蔽策略的局限性：現有的多模態預訓練方法在屏蔽策略上存在挑戰。不同的屏蔽策略可能會影響模型學習到的表示，並進一步影響其在下游任務上的性能。</p>
+</li>
+<li>
+<p>語義對齊技巧的挑戰：確保圖像和文字之間的語義對齊是多模態研究的核心挑戰。雖然先前的研究提出了一些方法，但在細微對齊上仍然存在難點。</p>
+</li>
+</ol>
+<p>作者在這裡，引出了一個核心的疑問：</p>
+<ul>
+<li><strong>我們是否可以為所有 V+L 任務學習一個真正通用的圖像和文字表示？</strong></li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解決問題">解決問題<a href="#解決問題" class="hash-link" aria-label="解決問題的直接連結" title="解決問題的直接連結">​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="uniter-模型設計">UNITER 模型設計<a href="#uniter-模型設計" class="hash-link" aria-label="UNITER 模型設計的直接連結" title="UNITER 模型設計的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="UNITER 模型架構" src="/assets/images/arch_uniter-73c71ccee17ff17462647e07e34a49cb.jpg" width="1224" height="492" class="img_ev3q"></p>
+<p>UNITER 模型作為一個專為視覺和語言任務設計的解決方案，其主要目標是有效地彌合圖像和文本之間的語義差距。以下是對模型的主要設計元件和理念的深入探討。</p>
+<ol>
+<li>
+<p><strong>模型架構</strong></p>
+<ul>
+<li>UNITER 的基本結構由圖像編碼器、文字編碼器和多層的 Transformer 組成。這確保了模型能夠分別從圖像和文字中提取複雜的特徵，然後透過 Transformer 進行深入的交互和整合。</li>
+</ul>
+</li>
+<li>
+<p><strong>編碼策略</strong></p>
+<ul>
+<li>對於圖像，UNITER 利用 Faster R-CNN 提取視覺特徵，並透過 7 維向量對每個區域的位置特徵進行編碼。這兩個特徵透過全連接層合併，確保位置和視覺信息都被納入考慮。</li>
+<li>對於文字，UNITER 遵循了 BERT 的策略，使用 WordPieces 進行分詞，然後對每個 token 進行編碼。這確保了詞義和語境信息的有效編碼。</li>
+</ul>
+</li>
+<li>
+<p><strong>自注意力策略</strong></p>
+<ul>
+<li>UNITER 的 Transformer 利用自注意力機制進行上下文編碼的學習，允許模型在不同的模態之間建立深入的關聯。通過明確編碼標記和區域的位置，模型能夠捕獲更細緻的上下文信息。</li>
+</ul>
+</li>
+<li>
+<p><strong>預訓練任務</strong></p>
+<ul>
+<li>UNITER 的一大亮點是其多樣化的預訓練任務，包括基於圖像的掩碼語言建模、基於文字的屏蔽區域建模、圖像文字匹配和單字區域對齊。這些任務旨在從多個角度增強模型的跨模態學習能力。</li>
+</ul>
+</li>
+<li>
+<p><strong>條件屏蔽策略</strong></p>
+<ul>
+<li>不同於其他預訓練方法，UNITER 在屏蔽策略上選擇僅屏蔽一種模態，同時保持另一種不受污染。這個策略的目的是防止在學習過程中發生潛在的模態錯位，確保模型能夠更精確地對應圖像和文字。</li>
+</ul>
+</li>
+<li>
+<p><strong>字區域對齊策略</strong></p>
+<ul>
+<li>通過引入基於最佳傳輸的字區域對齊預訓練任務，UNITER 試圖明確地鼓勵單字和圖像區域之間的細緻對齊。這一策略確保了模型能夠有效地優化跨模態的語義對齊。</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="預訓練策略">預訓練策略<a href="#預訓練策略" class="hash-link" aria-label="預訓練策略的直接連結" title="預訓練策略的直接連結">​</a></h3>
+<p>UNITER 模型的預訓練策略是其成功的核心，設計為解決跨模態學習的獨特挑戰。這些策略旨在優化模型的能力，使其能夠深入地理解和整合圖像和文字之間的相互關聯。</p>
+<p>我們逐一來看看這些預訓練策略：</p>
+<ul>
+<li>
+<p><strong>掩碼語言模型 (MLM)</strong></p>
+<p>掩碼語言模型(MLM)是預訓練深度學習模型中的一種策略，專為加強模型的語言理解和跨模態學習能力而設計。具體來說，MLM 的工作原理是隨機選擇和屏蔽某些輸入文本中的單詞（通常是 15% 的單詞），並嘗試使用上下文以及任何相關的輔助資訊（如圖像）來預測被屏蔽的單詞。</p>
+<p>想像一下這樣一個情境：我們有一句話「小狗正在[MASK]裡玩耍」，並伴隨著一張顯示小狗在綠色草地上快樂玩耍的圖片。在這種情境下，模型需要利用圖像中的視覺資訊，即小狗在草地上的情境，來正確地預測那個[MASK]位置上的詞，即「草地」。</p>
+<p>這種方法不僅僅是在文字中做填空的遊戲。其背後的思路是強迫模型不僅要理解文本中的語境，還要瞭解圖像中的視覺內容和它與文本的關聯。當模型被訓練來優化這種預測任務時，它同時也學習了如何對文字和圖像進行更深入、更細緻的理解。</p>
+</li>
+<li>
+<p><strong>影像文字匹配 (ITM)</strong></p>
+<p>影像文字匹  配（ITM）是一種策略，它主要用於評估模型如何對文字描述與圖像進行匹配。這項任務不僅僅是關於找到匹配的項目，還涉及到評估文本與圖像之間的深層語義關聯。</p>
+<p>為了執行此任務，模型在輸入中使用一個特殊的標記，名為 [CLS]。這個標記的目的是促使模型產生一個代表圖像和文本融合的表示形式。這種融合表示為模型提供了一個單一的視角，從中可以判斷圖像和文本是否匹配。</p>
+<p>舉例來說，假設我們有一個描述「夕陽下的海灘」的文本，以及一張顯示海灘上夕陽的照片。當這些被輸入到模型中時，模型將通過 [CLS] 標記的幫助，生成一個融合表示。接著，這個表示會被送入一個全連接層（FC層）和 sigmoid 函數，產生一個 0 到 1 之間的分數。這個分數將告訴我們這段文字與這張圖像有多匹配。</p>
+<p>當然，在訓練過程中，除了正確匹配的圖像和文本對，還有所謂的「負對」，即不匹配的圖像和文本組合。例如：「夕陽下的海灘」的描述可能被配對到一張關於山脈的圖片。這種負對是通過從其他樣本中隨機選擇圖像或文本並與原始樣本配對來創建的。</p>
+<p>模型的目標是儘量減少其對正確配對和負對的預測錯誤。這通常是通過使用二元交叉熵損失來完成的，這是一種常見的損失函數，用於評估模型的二分類預測效果。</p>
+</li>
+<li>
+<p><strong>字區域對齊 (WRA)</strong></p>
+<p>字區域對齊（WRA）是一種先進的策略，它採用最佳傳輸方法（Optimal Transport，縮寫為OT）來優化文本（例如：單詞或語句）與圖像區域之間的關聯。這種策略的主要目的是為了確保模型可以準確地將文本描述與其對應的圖像部分相匹配。</p>
+<p>舉例來說，當給出一句描述「紅色的蘋果」以及一張包含多種顏色蘋果的圖片時，WRA 的目標是使模型能夠將「紅色的蘋果」這個描述精確地對齊到圖像中的紅色蘋果部分，而不是綠色或黃色的蘋果。</p>
+<p>為了實現這一目標，OT 提供了一種強大的數學框架，它具有以下特點：</p>
+<ul>
+<li><strong>自歸一化</strong>：這意味著所有的轉移值總和為1，這確保了資料之間的對齊是正規化的。</li>
+<li><strong>稀疏性</strong>：OT 為對齊提供了一個稀疏的解決方案，這意味著它主要考慮了最相關的匹配，使對齊更加精確和可解釋。</li>
+<li><strong>效率</strong>：儘管傳統的最佳傳輸方法可能需要複雜的計算，但有策略可以有效地解決大型問題，這對於大型模型預訓練特別有用。</li>
+</ul>
+<p>OT 的工作方式是評估兩個分佈之間的距離，並優化一個「運輸計劃」來描述如何從一個分佈轉移到另一個分佈。在本論文的情境中，這兩個分佈分別是文本和圖像。一旦獲得了這個運輸計劃，它就可以作為一個損失函數來更新模型參數，從而改善文本和圖像之間的對齊。</p>
+</li>
+<li>
+<p><strong>屏蔽區域建模 (MRM)</strong></p>
+<p>屏蔽區域建模 (MRM) 在 UNITER 模型中是一項關鍵策略，它特別針對影像區域的視覺特徵。和 MLM 一樣，這項策略以15%的機率隨機選取並屏蔽圖像區域的特徵。舉例來說，如果我們有一張多只鳥在天空中飛翔的圖片，MRM 可能會隨機選擇並屏蔽其中幾只鳥的特徵。然後，模型的主要任務是利用剩下的視覺資訊和相關的文本內容來重建或推測這些被屏蔽的鳥的特徵。這不僅強化了模型對圖像區域的理解，還增強了模型在不完整資訊下的推理能力。</p>
+<p>這項策略有三種主要的變體：</p>
+<ul>
+<li>
+<p><strong>屏蔽區域特徵回歸 (MRFR)</strong></p>
+<p>這是最直觀的策略。它的主要目的是重建被屏蔽的視覺特徵。例如：當一些鳥的特徵被屏蔽時，MRFR 會嘗試使用其他鳥的特徵以及相關的文本描  述來直接重建被屏蔽的鳥的特徵。</p>
+</li>
+<li>
+<p><strong>屏蔽區域分類 (MRC)</strong></p>
+<p>這個策略比較抽象，它嘗試預測被屏蔽的區域可能的類別或特性。例如：當一些鳥的特徵被屏蔽時，MRC 會試著預測這些被屏蔽的鳥可能是哪個品種或種類，基於它在畫面中的其他資訊和相關的文本內容。</p>
+</li>
+<li>
+<p><strong>使用 KL 散度的屏蔽區域分類 (MRC-kl)</strong></p>
+<p>這是一個進階版的 MRC，與 MRC 不同的是，它不完全依賴於硬標籤或最有可能的答案，而是考慮到多種可能的答案。它使用一個物件偵測器的原始輸出作為一種軟標籤，這些軟標籤給出了每種物件種類的可能性，而模型則嘗試匹配這些分佈。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="預訓練資料集">預訓練資料集<a href="#預訓練資料集" class="hash-link" aria-label="預訓練資料集的直接連結" title="預訓練資料集的直接連結">​</a></h3>
+<p>在這篇論文中，作者精心設計了一套預訓練資料集，主要源於四大知名的 V+L 資料集：</p>
+<ul>
+<li>COCO</li>
+<li>Visual Genome (VG)</li>
+<li>Conceptual Captions (CC)</li>
+<li>SBU Captions。</li>
+</ul>
+<p>這四者的組合是為了確保模型在預訓練階段能夠接觸到豐富而多樣的資料，進而提高其在後續任務上的效能。但這些資料集不僅僅被一視同仁地使用。考慮到不同資料集可能對預訓練有不同的影響，作者將其進行了一些分類。首先，將 COCO 的圖像字幕資料和 VG 的密集字幕資料組合在一起。這部分的資料被標註為「域內」數據，因為很多 V+L 任務的基礎資料集都是建立在它們上面的。</p>
+<p>在使用這些「域內」數據時，作者採取了一些特定策略來確保資料的公正性和獨特性。例如：考慮到 COCO 和 Flickr30K 的圖像都是從 Flickr 爬取的，存在圖像重疊的可能性，因此排除  了這些重疊的圖像。在這個過程中，作者最終獲得了560萬對圖像和文字的組合供訓練使用，以及131K 對供內部驗證使用。</p>
+<p>除了這些「域內」資料，作者還使用了兩個額外的資料集，即 Conceptual Captions 和 SBU Captions，作為「域外」資料來進行預訓練。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="討論">討論<a href="#討論" class="hash-link" aria-label="討論的直接連結" title="討論的直接連結">​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="預訓練上的任務表現">預訓練上的任務表現<a href="#預訓練上的任務表現" class="hash-link" aria-label="預訓練上的任務表現的直接連結" title="預訓練上的任務表現的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="預訓練任務表現" src="/assets/images/uniter_table1-abc49a92c61b9d42bda669a6e9ce548f.jpg" width="1024" height="545" class="img_ev3q"></p>
+<p>在深入探討作者所提出的多模態預訓練策略的效果時，他們選擇了四個代表性的 V+L 基準作為評估標準，分別是 VQA、NLVR2、Flickr30K 和 RefCOCO+。此外，他們還引入了一個全局指標 Meta-Sum，即所有基準的所有分數總和，以提供一個綜合的評估視角。</p>
+<ol>
+<li>
+<p><strong>基線設定</strong></p>
+<p>作者首先確立了兩個基線。第一個基線（L1）完全沒有涉及預訓練，而第二個基線（L2）使用了只在文字上預訓練的MLM的權重。結果表明，僅文字上的預訓練已經使 Meta-Sum 分數相比L1有了顯著的提升。</p>
+</li>
+<li>
+<p><strong>單一預訓練任務的效果</strong></p>
+<p>接著，他們探討了單一預訓練任務的效果。具體地，當模型只對ITM (L4) 或 MLM (L5) 進行預訓練時，相對於基線L1和L2，所有任務都有了明顯的性能提升。</p>
+</li>
+<li>
+<p><strong>預訓練任務組合</strong></p>
+<p>作者進一步發現，當結合不同的預訓練任務，例如：MLM 和 ITM (L6)，效果比單獨使用其中任何一種都要好。當 MLM、ITM 和 MRM 一起訓練時，模型在所有基準測試上都有穩定的效能增益。</p>
+</li>
+<li>
+<p><strong>細粒度對齊</strong></p>
+<p>加入 WRA 預訓練任務後（如L11），性能在特定任務，尤其是VQA和RefCOCO+上有了顯著提高。這強烈表明，預訓練期間學習的文字和區域間的細粒度對齊對於涉及區域級識別或推理的下游任務非常有益。</p>
+</li>
+<li>
+<p><strong>條件掩蔽策略</strong></p>
+<p>透過比較不同的掩蔽策略，作者發現條件掩蔽策略使模型能夠有效地學習更好的聯合圖像文字表示。</p>
+</li>
+<li>
+<p><strong>預訓練資料集的影響</strong></p>
+<p>最後，作者還探討了不同預訓練資料集的效果。結果顯示，即使在域外數據上預訓練，只要資料與下游任務相似，模型的性能仍然可以得到提高。而當在域內和域外資料上一起預訓練時，模型性能得到了進一步的提升。</p>
+</li>
+</ol>
+<p>作者透過這一系列的實驗深入地分析了不同預訓練設定的效果，提供了寶貴的見解，幫助我們更好地理解多模態預訓練的深層機制。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="下游任務的表現">下游任務的表現<a href="#下游任務的表現" class="hash-link" aria-label="下游任務的表現的直接連結" title="下游任務的表現的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="下游任務表現" src="/assets/images/uniter_table2-84e7b0edbdeedbd2f8ae0d8a012305e8.jpg" width="774" height="1024" class="img_ev3q"></p>
+<p>作者在多個下游任務中詳細測試了 UNITER 模型的表現，以下是該模型在各項測試中的主要發現：</p>
+<ol>
+<li>
+<p><strong>整體性能</strong></p>
+<p>UNITER 模型在所有下游任務中均取得了優越的成果，其中 UNITER-large 模型在所有基準測試中均達到了最新技術水平。該模型的表現在某些任務上甚至超越了目前的最佳技術。</p>
+</li>
+<li>
+<p><strong>與特定任務模型的比較</strong></p>
+<p>相對於一些特定的任務模型，如 MCAN、MaxEnt、B2T2 等，基於 UNITER 的模型在大多數任務中都表現出色。例如：在 VCR 任務中，UNITER 模型比當前最佳技術提高了約 2.8%。</p>
+</li>
+<li>
+<p><strong>與其他預訓練模型的比較</strong></p>
+<p>與其他多模態預訓練模型如 ViLBERT、LXMERT 等相比，UNITER 在多數任務上都有較好的表現。特別是它在 VQA 上優於其他所有僅針對影像文字對進行預訓練的模型，效果提升超過 1.5%。</p>
+</li>
+<li>
+<p><strong>雙流與單流模型</strong></p>
+<p>雖然先前的研究如 ViLBERT 和 LXMERT 觀察到雙流模型優於單流模型，但作者發現單流 UNITER 模型在預訓練設定下也能達到最新技術水平，而且模型參數更少。</p>
+</li>
+<li>
+<p><strong>兩階段預訓練方法</strong></p>
+<p>對於 VCR 這種任務，作者提出了一種兩階段預訓練方法，首先在標準資料集上進行預訓練，然後再對下游 VCR 資料集進行預訓練。這種策略證明了其在新的下游任務中的有效性。</p>
+</li>
+<li>
+<p><strong>NLVR2 的適應性</strong></p>
+<p>對於如 NLVR2 這樣的特殊任務，作者嘗試了不同的設定以確保模型的適應性。他們發現雙向注意力機制可以補充影像之間的交互作用，從而產生更好的效果。</p>
+</li>
+</ol>
+<p>這些結果再次強調了 UNITER 模型在多模態任務上的強大能力。通過結合最先進的預訓練策略，它成功地在多個下游任務中實現了卓越的性能，展示了其在視覺和語言融合領域的領先地位。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="模型學到了什麼">模型學到了什麼？<a href="#模型學到了什麼" class="hash-link" aria-label="模型學到了什麼？的直接連結" title="模型學到了什麼？的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="UNITER 模型學習行為" src="/assets/images/uniter_table3-d55627c1d734ad2e0c2f9946ec1d0af9.jpg" width="1024" height="592" class="img_ev3q"></p>
+<p>在 UNITER 模型中，作者通過注意力機制的視覺化對模型的學習行為進行了深入的分析。</p>
+<p>這種視覺化揭示了模型是如何理解和聯繫不同模態的資訊，以下是主要的觀察結果：</p>
+<ul>
+<li>
+<p><strong>垂直模式</strong></p>
+<p>這種模式當模型主要關注於特定的標記，如[CLS]或[SEP]時出現。這意味著模型正在該位置搜尋整體的上下文或摘要信息。若經常出現此模式，可能表明模型過度依賴這些特殊標記，這有可能是因為模型的過度參數化或訓練數據的不足。</p>
+</li>
+<li>
+<p><strong>對角線模式</strong></p>
+<p>當模型的注意力集中在標記或區域及其附近時，此模式會出現。這表示模型正在解析當前語境中的局部信息，這是一種預期的正常模式。</p>
+</li>
+<li>
+<p><strong>垂直+對角線模式</strong></p>
+<p>這是前兩種模式的融合，意味著模型既在解讀整體信息，同時也在注意局部語境。</p>
+</li>
+<li>
+<p><strong>Block模式</strong></p>
+<p>在此模式下，模型的注意力主要集中於其自身模態，如文字或視覺，而不是跨模態。這可能表示模型在該時刻主要在內部進行某些模態特定的推理。</p>
+</li>
+<li>
+<p><strong>異質模式</strong></p>
+<p>這種模式展示了模型的注意力分布是多樣化的，表示模型根據當前的輸入情況從不同的角度去理解信息。</p>
+</li>
+<li>
+<p><strong>Reversed Block 模式</strong></p>
+<p>在此模式中，模型的注意力是跨模態的，它正在鑑別文本與圖像之間的關聯。此模式的存在顯示模型正在將視覺和語言信息緊密地結合起來。</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a href="#結論" class="hash-link" aria-label="結論的直接連結" title="結論的直接連結">​</a></h2>
+<p>回顧這篇文章，我們可以看到，幾年前的研究者們對於視覺和語言融合的探索持續著深厚的興趣。在這篇研究中，UNITER 作為一種大規模的預訓練模型被提出，目的是要建立一個強大且通用的圖像-文字表示。透過一系列的消融研究，研究者明確地評估了他們所提出的四種預訓練任務。</p>
+<p>利用域內和域外的資料集進行訓練，UNITER 在當時展現了相對卓越的性能，特別是在多項視覺和語言的任務上。該研究所提供的洞察也指出了一些值得探索的方向，特別是在影像和句子之間的互動，以及更高效的預訓練策略。</p>
+<p>這篇文章為我們提供了一個回顧和反思的機會，讓我們更好地理解視覺和語言結合領域的歷史進程和發展。</p></div><div style="margin-top:3rem"> </div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="文件選項卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/papers/multi-model/2019/lxmert"><div class="pagination-nav__sublabel">上一頁</div><div class="pagination-nav__label">LXMERT</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/papers/category/2020"><div class="pagination-nav__sublabel">下一頁</div><div class="pagination-nav__label">2020</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#團結者之歌" class="table-of-contents__link toc-highlight">團結者之歌</a></li><li><a href="#定義問題" class="table-of-contents__link toc-highlight">定義問題</a></li><li><a href="#解決問題" class="table-of-contents__link toc-highlight">解決問題</a><ul><li><a href="#uniter-模型設計" class="table-of-contents__link toc-highlight">UNITER 模型設計</a></li><li><a href="#預訓練策略" class="table-of-contents__link toc-highlight">預訓練策略</a></li><li><a href="#預訓練資料集" class="table-of-contents__link toc-highlight">預訓練資料集</a></li></ul></li><li><a href="#討論" class="table-of-contents__link toc-highlight">討論</a><ul><li><a href="#預訓練上的任務表現" class="table-of-contents__link toc-highlight">預訓練上的任務表現</a></li><li><a href="#下游任務的表現" class="table-of-contents__link toc-highlight">下游任務的表現</a></li><li><a href="#模型學到了什麼" class="table-of-contents__link toc-highlight">模型學到了什麼？</a></li></ul></li><li><a href="#結論" class="table-of-contents__link toc-highlight">結論</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 DOCSAID.</div></div></div></footer></div>
+</body>
+</html>
