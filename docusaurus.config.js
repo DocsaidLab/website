@@ -42,6 +42,8 @@ const config = {
         docs: {
           sidebarPath: './sidebars.js',
           routeBasePath: '/',
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl:
@@ -77,6 +79,7 @@ const config = {
         path: 'papers',
         routeBasePath: 'papers',
         sidebarPath: './sidebarsPapers.js',
+        showLastUpdateAuthor: true,
       },
     ],
   ],
