@@ -293,7 +293,7 @@ sidebar_position: 8
 
 如果這兩個模型還沒有看過，可以參考以下:
 
-- **傳送門： [LXMERT](./lxmert.md)、[UNITER](./uniter.md)**
+- **傳送門： [LXMERT](../2019/lxmert)、[UNITER](../2019/uniter)**
 
 - **主要模型配置：UNITER 和 LXMERT**
 

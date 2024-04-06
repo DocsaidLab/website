@@ -18,7 +18,7 @@ sidebar_position: 12
 
 看完了上一篇的奧斯卡，後續的研究立刻就跟了上來。
 
-- 傳送門：[**Oscar**](./oscar.md)
+- 傳送門：[**Oscar**](../2020/oscar)
 
 這篇論文作者認為奧斯卡雖然不錯，但還是有缺點，即：
 
@@ -52,7 +52,7 @@ sidebar_position: 12
 
 ## 解決問題
 
-![VinVL 模型設計](./resources/oscar_1.jpg)
+![VinVL 模型設計](../2020/resources/oscar_1.jpg)
 
 在這篇論文中，作者沒有提出新的結構，就僅針對之前的 Oscar 架構進行視覺特徵的優化。
 

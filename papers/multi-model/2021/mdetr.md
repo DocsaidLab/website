@@ -24,11 +24,11 @@ sidebar_position: 15
 
 你應該還記得之前有一篇論文是用 ViT 來換，但結果沒有很好。
 
-- 傳送門：**[ViLT：你方唱罷我登場](./vilt.md)**
+- 傳送門：**[ViLT：你方唱罷我登場](./vilt)**
 
 既然抽換 ViT 感覺不是很好（畢竟 ViT 不是專職用來做物件偵測的），所以這次就用另外一個「專職」做物件偵測模型，DETR，來進行抽換吧！
 
-- 傳送門：**[DETR：跨領域的奠基者](../object-detection/detr.md)**
+- 傳送門：**[DETR：跨領域的奠基者](../../object-detection/detr)**
 
 ## 定義問題
 
