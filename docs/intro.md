@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # Intro
 
-歡迎你來到我的部落格。
+歡迎來到我的部落格。
 
 我是個住在臺灣的 AI 工程師，同時也是這個組織的創辦人 Zephyr。
 
@@ -13,7 +13,9 @@ sidebar_position: 1
 
 現在你看到的這個頁面，是用來寫技術文件的。
 
-部落格的部分在隔壁：[**Blog**](https://docsaid.org/blog)。
+論文閱讀的資料放在隔壁：[**Papers**](https://docsaid.org/papers/intro)。
+
+部落格的部分在隔壁的隔壁：[**Blog**](https://docsaid.org/blog)。
 
 ＊
 
