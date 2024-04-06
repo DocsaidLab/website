@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[2004],{14801:e=>{e.exports=JSON.parse('{"title":"ObjectDetection","slug":"/category/objectdetection","permalink":"/papers/category/objectdetection","navigation":{"previous":{"title":"NAS-FPN","permalink":"/papers/feat-fusion/nasfpn"},"next":{"title":"DETR","permalink":"/papers/object-detection/detr"}}}')}}]);
