@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[2933],{9974:i=>{i.exports=JSON.parse('{"title":"functionals","slug":"/category/functionals","permalink":"/category/functionals","navigation":{"previous":{"title":"Vision","permalink":"/category/vision"},"next":{"title":"meanblur","permalink":"/docsaidkit/vision/functionals/meanblur"}}}')}}]);
