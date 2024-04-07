@@ -4,10 +4,49 @@
         <title>DOCSAID Blog</title>
         <link>https://docsaid.org/blog</link>
         <description>DOCSAID Blog</description>
-        <lastBuildDate>Sun, 31 Mar 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 07 Apr 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-hant</language>
+        <item>
+            <title><![CDATA[Python 與 JS 的工具對應]]></title>
+            <link>https://docsaid.org/blog/npm-npx-nvm-python-analogues-zh</link>
+            <guid>https://docsaid.org/blog/npm-npx-nvm-python-analogues-zh</guid>
+            <pubDate>Sun, 07 Apr 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[你可能擅長使用 Python，你也知道 pip、python -m 之類的指令。]]></description>
+            <content:encoded><![CDATA[<p>你可能擅長使用 Python，你也知道 <code>pip</code>、<code>python -m</code> 之類的指令。</p>
+<p>你可能擅長使用 JavaScript，你也知道 <code>npm</code>、<code>npx</code>、<code>nvm</code> 之類的指令。</p>
+<p>但是換個地方就容易換個腦袋，所以我來幫你對應一下這些指令。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="npm-與-pip">npm 與 pip<a href="https://docsaid.org/blog/npm-npx-nvm-python-analogues-zh#npm-%E8%88%87-pip" class="hash-link" aria-label="npm 與 pip的直接連結" title="npm 與 pip的直接連結">​</a></h2>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p><strong>它們都是：套件管理器</strong></p></div></div>
+<p>npm（Node Package Manager）和 pip 本質上服務於相同的目的：它們分別為 Node.js 和 Python 的包管理器。包管理器對於共享、重用和管理代碼庫或模塊至關重要。</p>
+<ul>
+<li><strong>安裝包</strong>：在 npm 中，你會使用 <code>npm install &lt;package-name&gt;</code> 命令來為你的項目添加一個庫。同樣地，pip 通過 <code>pip install &lt;package-name&gt;</code> 實現相同的目標。</li>
+<li><strong>版本管理</strong>：npm 通過 <code>package.json</code> 文件追蹤包版本，確保開發團隊的每個成員使用相同版本的庫。Pip 則依賴於 <code>requirements.txt</code> 或較新工具如 pipenv 和 poetry 來實現類似的功能。</li>
+<li><strong>發布包</strong>：npm 使開發者能夠將他們的包發布到 npm 註冊處，使其可供全球 Node.js 社區使用。Pip 透過 PyPI（Python Package Index）提供此能力，允許分享 Python 包。</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="npx-與--m-標誌">npx 與 -m 標誌<a href="https://docsaid.org/blog/npm-npx-nvm-python-analogues-zh#npx-%E8%88%87--m-%E6%A8%99%E8%AA%8C" class="hash-link" aria-label="npx 與 -m 標誌的直接連結" title="npx 與 -m 標誌的直接連結">​</a></h2>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p><strong>它們都是：直接執行命令的工具</strong></p></div></div>
+<p>npx（npm package runner）和 Python 的 <code>-m</code> 標誌解決了直接在終端執行包命令的需求，無需進行全局安裝。</p>
+<ul>
+<li><strong>直接執行</strong>：npx 允許你直接從命令行執行項目本地 <code>node_modules</code> 文件夾中安裝的任何包（或者如果沒有安裝，則從 npm 註冊處獲取），Python 透過 <code>-m</code> 標誌實現類似結果，允許直接執行模塊，例如使用 <code>python -m http.server</code> 命令啟動一個簡單的 HTTP 服務器。</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="nvmpyenv-與-conda">nvm、pyenv 與 conda<a href="https://docsaid.org/blog/npm-npx-nvm-python-analogues-zh#nvmpyenv-%E8%88%87-conda" class="hash-link" aria-label="nvm、pyenv 與 conda的直接連結" title="nvm、pyenv 與 conda的直接連結">​</a></h2>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p><strong>它們都是：版本管理工具</strong></p></div></div>
+<p>沒有合適的工具，切換不同版本的 Node.js 或 Python 可能會非常麻煩。nvm（Node Version Manager）、pyenv 和 conda 為此問題提供了解決方案，允許開發者在同一台機器上安裝並切換 Node.js 或 Python 的多個版本。</p>
+<ul>
+<li><strong>版本切換</strong>：nvm 使用諸如 <code>nvm use &lt;version&gt;</code> 的命令來切換 Node.js 版本。Pyenv 和 conda 為 Python 提供了類似的功能，pyenv 通過 <code>pyenv global &lt;version&gt;</code> 或 <code>pyenv local &lt;version&gt;</code> 來進行版本切換，而 conda 則使用 <code>conda activate &lt;environment-name&gt;</code> 切換到不同的環境，每個環境可以擁有不同的 Python 版本和包。</li>
+<li><strong>多版本管理</strong>：這些工具促進了在同一台機器上管理多個版本，解決了因版本差異可能導致的衝突問題。</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a href="https://docsaid.org/blog/npm-npx-nvm-python-analogues-zh#%E7%B5%90%E8%AB%96" class="hash-link" aria-label="結論的直接連結" title="結論的直接連結">​</a></h2>
+<p>當我在學習新的語言或框架時，我總是喜歡將其與我已經熟悉的工具進行對應。這樣做有助於我更快地理解新工具的功能和用法，並且幫助我更快地上手。</p>
+<p>希望這篇文章能幫助你更好地理解 npm、npx、nvm、pip 和 pyenv 之間的對應關係，並且幫助你更好地使用這些工具。</p>]]></content:encoded>
+            <category>npm</category>
+            <category>npx</category>
+            <category>nvm</category>
+            <category>pip</category>
+            <category>pyenv</category>
+        </item>
         <item>
             <title><![CDATA[常用的 VScode 參數設定]]></title>
             <link>https://docsaid.org/blog/vscode-settings</link>
@@ -179,7 +218,7 @@
 <li>這個問題比較複雜，因為 Nextcloud 的安裝方式有很多種，而且每一種都有不同的優缺點。</li>
 <li>在本篇文章中，我唯一推薦的安裝方式是使用 Docker。</li>
 </ul>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="設定-nextcloud-all-in-one">設定 Nextcloud All-in-One<a href="https://docsaid.org/blog/setup-nextcloud#%E8%A8%AD%E5%AE%9A-nextcloud-all-in-one" class="hash-link" aria-label="設定 Nextcloud All-in-One的直接連結" title="設��定 Nextcloud All-in-One的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="設定-nextcloud-all-in-one">設定 Nextcloud All-in-One<a href="https://docsaid.org/blog/setup-nextcloud#%E8%A8%AD%E5%AE%9A-nextcloud-all-in-one" class="hash-link" aria-label="設定 Nextcloud All-in-One的直接連結" title="設定 Nextcloud All-in-One的直接連結">​</a></h2>
 <ul>
 <li>參考官方文件：<a href="https://github.com/nextcloud/all-in-one" target="_blank" rel="noopener noreferrer"><strong>Nextcloud All-in-One</strong></a></li>
 </ul>
@@ -273,7 +312,7 @@
 <p><img decoding="async" loading="lazy" alt="login_2" src="https://docsaid.org/assets/images/login_2-6e2d377746b11b87dcd476a7db06ecb2.jpg" width="1224" height="696" class="img_ev3q"></p>
 <p>你看到的這個畫面已經是我設定完成的結果，如果你是第一次登入，在這裡，首先你要先輸入你之前準備好的網域，接著系統會要你再次下載一些 docker image，下載完成後，它會幫你啟動。</p>
 <p>啟動之後，你就可以開始使用 Nextcloud 了。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a href="https://docsaid.org/blog/setup-nextcloud#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="結語的直接連結" title="結語的直�接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a href="https://docsaid.org/blog/setup-nextcloud#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="結語的直接連結" title="結語的直接連結">​</a></h2>
 <p>完成上面的步驟之後，在網址列中輸入你的網域後，你會看到一個很好看的介面，這個介面就是你的私有雲。</p>
 <p><img decoding="async" loading="lazy" alt="login_3" src="https://docsaid.org/assets/images/login_3-b50e0659125bbb3af48172e41836548d.jpg" width="1224" height="708" class="img_ev3q"></p>
 <p>這個介面有很多功能，你可以透過這個介面來管理你的檔案，也可以透過這個介面來分享檔案。除此之外，你可以在手機上下載 Nextcloud 的 App，然後你可以直接透過手機來管理你的檔案。</p>
@@ -422,7 +461,7 @@
             <content:encoded><![CDATA[<p>容器技術已經大量的應用在部署和管理上，它提供了前所未有的靈活性和可靠性。這種技術允許開發者將應用及其依賴打包在一起，確保在不同的環境中一致地運行。然而，如果你很常用，你一定躲不開幾個常見的問題。</p>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="可能問題-1tty-轉換">可能問題 1：TTY 轉換<a href="https://docsaid.org/blog/gosu-usage#%E5%8F%AF%E8%83%BD%E5%95%8F%E9%A1%8C-1tty-%E8%BD%89%E6%8F%9B" class="hash-link" aria-label="可能問題 1：TTY 轉換的直接連結" title="可能問題 1：TTY 轉換的直接連結">​</a></h3>
 <p>一個比較常見的情況是，當我們在容器中輸出了檔案，接著離開容器，發現檔案的權限都是 root，導致我們需要先進行 chown 之類的操作才能正常使用。又或是在 Docker 容器中使用 sudo 啟動一個需要與終端交互的應用程序，比如一個文本編輯器。當你通過 sudo 執行這類應用時，這些應用可能無法正確地檢測到終端（TTY），因為 sudo 在創建新會話時可能不會適當地處理終端的所有權和控制。結果，這些需要與終端交互的應用可能無法正常運行，或者在試圖使用它們時遇到輸入/輸出錯誤。</p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="可能問題-2信號轉發">可能問題 2：信號轉發<a href="https://docsaid.org/blog/gosu-usage#%E5%8F%AF%E8%83%BD%E5%95%8F%E9%A1%8C-2%E4%BF%A1%E8%99%9F%E8%BD%89%E7%99%BC" class="hash-link" aria-label="可能問題 2：信號轉發的直接連結" title="可能問題 2：信號轉發的直接連結">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="可能問題-2信號轉發">可能問題 2：信號轉發<a href="https://docsaid.org/blog/gosu-usage#%E5%8F%AF%E8%83%BD%E5%95%8F%E9%A1%8C-2%E4%BF%A1%E8%99%9F%E8%BD%89%E7%99%BC" class="hash-link" aria-label="可能問題 2：信號�轉發的直接連結" title="可能問題 2：信號轉發的直接連結">​</a></h3>
 <p>假設你有一個容器，其中運行著 Web 伺服器，例如 Apache 或 Nginx。 通常，你可能會使用命令列工具（如docker或kubectl）來管理這個容器，包括啟動和停止容器。 在容器內部，如果你使用 sudo 來啟動 Web 伺服器，那麼 sudo 就會建立一個新的進程來運行 Web 伺服器。</p>
 <p>問題出現在當你想要停止或重新啟動容器時。 容器管理系統（如Docker或Kubernetes）會向容器發送訊號（如SIGTERM），以通知容器內的程序準備停止。 然而，如果 Web 伺服器是透過 sudo 啟動的，那麼這個 SIGTERM 訊號可能只會被傳送到 sudo 進程，而不是實際運行 Web伺服器的進程。這意味著Web伺服器可能不會收到停止訊號，因此無法進行適當的清理和安全關閉。</p>
 <ul>
@@ -445,7 +484,7 @@
 <p>值得一提的是，儘管 gosu 的主要用途是在容器啟動時從 <code>root</code> 用戶切換到非特權用戶，但其開發者也強調了在特定情境下使用 gosu 可能存在的安全風險。這是因為任何允許用戶切換的工具，若被不當使用，都可能打開安全漏洞的大門。因此，開發和運維團隊需要對 gosu 的使用場景有充分的了解，並確保其僅在安全的上下文中使用。</p>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a href="https://docsaid.org/blog/gosu-usage#%E7%B5%90%E8%AB%96" class="hash-link" aria-label="結論的直接連結" title="結論的直接連結">​</a></h3>
 <p>gosu 以其簡潔、高效和安全的特點，為 Docker 容器中的用戶身份切換提供了一個理想的解決方案。它解決了長期困擾開發和運維團隊的一大痛點，並以最小的學習曲線實現了最大的使用效果。對於那些尋求在容器環境中實現靈活且安全用戶切換的團隊來說，gosu 無疑是一個值得探索的工具。</p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="參考資料">參考資料<a href="https://docsaid.org/blog/gosu-usage#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99" class="hash-link" aria-label="參考資料的直接連結" title="參考資料的直接連結">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="參考資料">參考資料<a href="https://docsaid.org/blog/gosu-usage#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99" class="hash-link" aria-label="參考資料的直接連結" title="參考資料的直��接連結">​</a></h3>
 <ul>
 <li><a href="https://github.com/tianon/gosu" target="_blank" rel="noopener noreferrer">gosu GitHub repository</a></li>
 </ul>]]></content:encoded>
@@ -511,7 +550,7 @@
 <li>IPV4 Address (External): 外部 IPV4 地址</li>
 <li>MAC Address: MAC 地址</li>
 </ul>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="注意事項與替代方案">注意事項與替代方案<a href="https://docsaid.org/blog/python-env-info-collector#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85%E8%88%87%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88" class="hash-link" aria-label="注意事項與替代方案的直接連��結" title="注意事項與替代方案的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="注意事項與替代�方案">注意事項與替代方案<a href="https://docsaid.org/blog/python-env-info-collector#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85%E8%88%87%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88" class="hash-link" aria-label="注意事項與替代方案的直接連結" title="注意事項與替代方案的直接連結">​</a></h2>
 <p>由於我們是在 Ubuntu 上撰寫本函數，因此在其他作業系統上可能會有劇情之外的發展。</p>
 <p>以下幾個可能需要注意的要點：</p>
 <ul>
@@ -545,7 +584,7 @@
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="2-創建一個目錄來存儲-python-包">2. 創建一個目錄來存儲 Python 包<a href="https://docsaid.org/blog/ubuntu-docker-pypiserver#2-%E5%89%B5%E5%BB%BA%E4%B8%80%E5%80%8B%E7%9B%AE%E9%8C%84%E4%BE%86%E5%AD%98%E5%84%B2-python-%E5%8C%85" class="hash-link" aria-label="2. 創建一個目錄來存儲 Python 包的直接連結" title="2. 創建一個目錄來存儲 Python 包的直接連結">​</a></h2>
 <p>不囉唆，我們直接在家目錄下創建一個目錄來存儲 Python 包。</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">mkdir ~/packages</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="3-設定-htpasswd">3. 設定 htpasswd<a href="https://docsaid.org/blog/ubuntu-docker-pypiserver#3-%E8%A8%AD%E5%AE%9A-htpasswd" class="hash-link" aria-label="3. 設定 htpasswd的直接連結" title="3. 設定 htpasswd的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="3-設定-htpasswd">3. 設定 htpasswd<a href="https://docsaid.org/blog/ubuntu-docker-pypiserver#3-%EF%BF%BD%E8%A8%AD%E5%AE%9A-htpasswd" class="hash-link" aria-label="3. 設定 htpasswd的直接連結" title="3. 設定 htpasswd的直接連結">​</a></h2>
 <p>htpasswd 是一種用於存儲用戶名和密碼（經常用於基本 HTTP 身份驗證）的文件格式。</p>
 <p>pypiserver 會使用此文件來驗證試圖上傳或下載套件的用戶。這是一種簡單但有效的方式，可以增強 pypiserver 的安全性。</p>
 <p>要創建一個 <code>.htpasswd</code> 文件，您需要 <code>apache2-utils</code> 套件：</p>
@@ -672,7 +711,7 @@
 <p>使用以下命令檢查 SSH 伺服器的狀態：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl status ssh</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>如果您看到 「Active: active (running)」，那麼 SSH 伺服器已經成功啟動。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="3-ssh-無密碼登入設定">3. SSH 無密碼登入設定：<a href="https://docsaid.org/blog/ubuntu-install-ssh#3-ssh-%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5%E8%A8%AD%E5%AE%9A" class="hash-link" aria-label="3. SSH 無密碼登入設定：的直接連結" title="3. SSH 無密碼登入設定：的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="3-ssh-無密碼登入設定">3. SSH 無密碼登入設定：<a href="https://docsaid.org/blog/ubuntu-install-ssh#3-ssh-%E7%84%A1%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5%E8%A8%AD%E5%AE%9A" class="hash-link" aria-label="3. SSH 無密��碼登入設定：的直接連結" title="3. SSH 無密碼登入設定：的直接連結">​</a></h2>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="31-在客戶端生成-ssh-金鑰對">3.1 在客戶端生成 SSH 金鑰對<a href="https://docsaid.org/blog/ubuntu-install-ssh#31-%E5%9C%A8%E5%AE%A2%E6%88%B6%E7%AB%AF%E7%94%9F%E6%88%90-ssh-%E9%87%91%E9%91%B0%E5%B0%8D" class="hash-link" aria-label="3.1 在客戶端生成 SSH 金鑰對的直接連結" title="3.1 在客戶端生成 SSH 金鑰對的直接連結">​</a></h3>
 <p>打開終端機。</p>
 <p>輸入以下命令以生成金鑰對：</p>
@@ -729,7 +768,7 @@
 </li>
 <li>
 <p><strong>告知 systemd 重新讀取新的服務設定：</strong></p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl daemon-reload</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼��簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl daemon-reload</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>
 <p><strong>啟用此服務，使其在開機時自動啟動：</strong></p>
@@ -825,7 +864,7 @@
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo service fail2ban start</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>查看 Fail2ban 的狀態：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo fail2ban-client status</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="4-新增自定義規則">4. 新增自定義規則<a href="https://docsaid.org/blog/fail2ban-settings#4-%E6%96%B0%E5%A2%9E%E8%87%AA%E5%AE%9A%E7%BE%A9%E8%A6%8F%E5%89%87" class="hash-link" aria-label="4. �新增自定義規則的直接連結" title="4. 新增自定義規則的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="4-新增自定義規則">4. 新增自定義規則<a href="https://docsaid.org/blog/fail2ban-settings#4-%E6%96%B0%E5%A2%9E%E8%87%AA%E5%AE%9A%E7%BE%A9%E8%A6%8F%E5%89%87" class="hash-link" aria-label="4. 新增自定義規則的直接連結" title="4. 新增自定義規則的直接連結">​</a></h2>
 <p>如果您想為特定的服務（例如： SSH 或 Apache）設定特別的規則，您可以在 <code>jail.local</code> 裡新增或修改對應的段落，例如針對 SSH 的設定：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[sshd]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">enabled = true</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">port = ssh</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">filter = sshd</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">logpath = /var/log/auth.log</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">maxretry = 3</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="5-測試">5. 測試<a href="https://docsaid.org/blog/fail2ban-settings#5-%E6%B8%AC%E8%A9%A6" class="hash-link" aria-label="5. 測試的直接連結" title="5. 測試的直接連結">​</a></h2>
@@ -913,7 +952,7 @@
 <p>整個指令的功能是通過 ppp0 接口添加一個到 192.168.25.0/24 網絡的路由。當您的系統試圖訪問 192.168.25.0/24 網絡中的任何IP地址時，它將通過 ppp0 接口路由流量。</p>
 <p>接著，存檔後退出，給予檔案權限：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo chmod 755 /etc/ppp/ip-up</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解題完成但是還是壞了">解題完成，但是還是壞了？<a href="https://docsaid.org/blog/mac-selective-vpn-routing#%E8%A7%A3%E9%A1%8C%E5%AE%8C%E6%88%90%E4%BD%86%E6%98%AF%E9%82%84%E6%98%AF%E5%A3%9E%E4%BA%86" class="hash-link" aria-label="解題完成，但是還是壞了？的直接連結" title="�解題完成，但是還是壞了？的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解題完成但是還是壞了">解題完成，但是還是壞了？<a href="https://docsaid.org/blog/mac-selective-vpn-routing#%E8%A7%A3%E9%A1%8C%E5%AE%8C%E6%88%90%E4%BD%86%E6%98%AF%E9%82%84%E6%98%AF%E5%A3%9E%E4%BA%86" class="hash-link" aria-label="解題完成，但是還是壞了？的直接連結" title="解題完成，但是還是壞了？的直接連結">​</a></h2>
 <p>到這邊，可能有一部分的的機器還是無法上網，所以我們接著看：</p>
 <p>打開 MacOC 的系統設定，找到網路，如下圖：</p>
 <ul>
