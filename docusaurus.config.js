@@ -68,6 +68,13 @@ const config = {
           trackingID: 'G-RDF83L9R4M',
           anonymizeIP: true,
         },
+        sitemap: {
+          lastmod: 'date',
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
+        },
       }),
     ],
   ],
@@ -116,21 +123,6 @@ const config = {
             position: 'left'
           },
           {
-            label: '用戶指南',
-            type: 'dropdown',
-            position: 'right',
-            items: [
-              {
-                to: '/blog/terms-of-service',
-                label: '使用條款',
-              },
-              {
-                to: '/blog/privacy-policy',
-                label: '隱私政策',
-              }
-            ]
-          },
-          {
             label: 'GitHub',
             position: 'right',
             href: 'https://github.com/DocsaidLab',
@@ -151,27 +143,29 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/',
-              },
-            ],
+            label: 'Docs',
+            to: '/',
           },
           {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/DocsaidLab',
-              },
-            ],
+            label: 'Papers',
+            to: '/papers/intro',
           },
+          {
+            label: 'Blog',
+            to: '/blog',
+          },
+          {
+            label: 'GitHub',
+            href: 'https://github.com/DocsaidLab',
+          },
+          {
+            label: '使用條款',
+            to: '/blog/terms-of-service',
+          },
+          {
+            label: '隱私政策',
+            to: '/blog/privacy-policy',
+          }
         ],
         copyright: `Copyright © ${new Date().getFullYear()} DOCSAID.`,
       },
