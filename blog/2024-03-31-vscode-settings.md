@@ -81,6 +81,10 @@ tags: [vscode, settings]
         "markdown": true,
         "scminput": false
     },
+    "workbench.colorTheme": "Monokai Pro",
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.wordWrapColumn": 120,
+    "files.autoSave": "onFocusChange"
 }
 ```
 
@@ -163,6 +167,14 @@ tags: [vscode, settings]
 - `github.copilot.editor.enableAutoCompletions`：設定是否啟用自動完成。
 
 - `github.copilot.enable`：設定是否啟用 GitHub Copilot。
+
+- `workbench.colorTheme`：設定顏色主題。
+
+- `editor.multiCursorModifier`：設定多光標修改器。
+
+- `editor.wordWrapColumn`：設定自動換行的列數。
+
+- `files.autoSave`：設定自動保存。
 
 ## 結語
 
