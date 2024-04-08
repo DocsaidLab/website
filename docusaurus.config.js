@@ -89,6 +89,16 @@ const config = {
         showLastUpdateAuthor: true,
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'playground',
+        path: 'playground',
+        routeBasePath: 'playground',
+        sidebarPath: './sidebarsPlayground.js',
+        showLastUpdateAuthor: true,
+      },
+    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -121,6 +131,13 @@ const config = {
             label: 'Blog',
             to: '/blog',
             position: 'left'
+          },
+          {
+            label: 'Playground',
+            type: 'docSidebar',
+            sidebarId: 'playgroundSidebar',
+            position: 'left',
+            docsPluginId: 'playground'
           },
           {
             label: 'GitHub',
