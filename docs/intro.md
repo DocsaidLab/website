@@ -3,7 +3,7 @@ slug: /
 sidebar_position: 1
 ---
 
-# Intro
+# 介紹
 
 歡迎來到我的部落格。
 

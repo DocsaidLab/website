@@ -82,7 +82,7 @@ pdf2image 是一個 Python 模組，用於將 PDF 文件轉換為圖片。
 4. 安裝建置的 wheel 套件：
 
     ```bash
-    pip install dist/docsaidKit-${version}-none-any.whl
+    pip install dist/docsaidkit-*-py3-none-any.whl
     ```
 
     如果需要安裝支援 PyTorch 的版本：
