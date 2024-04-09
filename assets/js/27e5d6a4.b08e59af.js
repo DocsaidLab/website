@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[9381],{99877:t=>{t.exports=JSON.parse('{"title":"DocsaidKit[Torch]","slug":"/category/docsaidkittorch","permalink":"/category/docsaidkittorch","navigation":{"previous":{"title":"download","permalink":"/docsaidkit/funcs/utils/download"},"next":{"title":"test","permalink":"/docsaidkit[torch]/test"}}}')}}]);
