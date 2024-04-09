@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[4048],{16496:e=>{e.exports=JSON.parse('{"title":"\u51fd\u5f0f\u5eab","slug":"/category/\u51fd\u5f0f\u5eab","permalink":"/category/\u51fd\u5f0f\u5eab","navigation":{"previous":{"title":"\u5b89\u88dd","permalink":"/docsaidkit/installation"},"next":{"title":"Enums","permalink":"/docsaidkit/funcs/enums"}}}')}}]);

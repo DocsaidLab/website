@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[8201],{94764:i=>{i.exports=JSON.parse('{"title":"Time","slug":"/category/time","permalink":"/category/time","navigation":{"previous":{"title":"DataClassToJsonMixin","permalink":"/docsaidkit/funcs/mixins/dataclass_to_json_mixin"},"next":{"title":"now","permalink":"/docsaidkit/funcs/time/now"}}}')}}]);

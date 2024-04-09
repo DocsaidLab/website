@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[4418],{87855:i=>{i.exports=JSON.parse('{"title":"Vision","slug":"/category/vision","permalink":"/category/vision","navigation":{"previous":{"title":"DataClassToJsonMixin","permalink":"/docsaidkit/mixins/dataclass_to_json_mixin"},"next":{"title":"functionals","permalink":"/category/functionals"}}}')}}]);

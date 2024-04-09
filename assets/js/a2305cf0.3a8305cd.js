@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[6745],{82691:e=>{e.exports=JSON.parse('{"title":"Structures","slug":"/category/structures","permalink":"/category/structures","navigation":{"previous":{"title":"SystemInfo","permalink":"/docsaidkit/funcs/system_info"},"next":{"title":"BoxMode","permalink":"/docsaidkit/funcs/structures/box_mode"}}}')}}]);
