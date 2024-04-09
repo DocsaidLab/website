@@ -1,5 +1,5 @@
 ---
-sidebar_position: 16
+sidebar_position: 5
 ---
 
 # PowerDict
@@ -41,4 +41,3 @@ sidebar_position: 16
     print(cfg.key)
     # >>> 'value'
     ```
-

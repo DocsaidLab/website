@@ -1,5 +1,5 @@
 ---
-sidebar_position: 12
+sidebar_position: 5
 ---
 
 # load_pickle
@@ -24,4 +24,3 @@ sidebar_position: 12
     print(data)
     # >>> {'key': 'value'}
     ```
-

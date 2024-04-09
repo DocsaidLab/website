@@ -2,7 +2,7 @@
 sidebar_position: 21
 ---
 
-# Download
+# download
 
 ## gen_download_cmd
 

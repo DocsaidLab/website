@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Installation
+# 安裝
 
 在開始安裝 DocsaidKit 之前，請確保你的系統符合以下要求：
 
@@ -34,7 +34,9 @@ sidebar_position: 2
 
 ### pdf2image 依賴套件
 
-pdf2image 是一個 Python 模組，用於將 PDF 文件轉換為圖片。根據你的作業系統，請遵循以下指示進行安裝：
+pdf2image 是一個 Python 模組，用於將 PDF 文件轉換為圖片。
+
+根據你的作業系統，請遵循以下指示進行安裝：
 
 - 或參考開源專案 [**pdf2image**](https://github.com/Belval/pdf2image) 相關頁面以取得安裝指南。
 
@@ -106,7 +108,9 @@ bash docker/build.bash
 docker run -v ${PWD}:/code -it docsaid_training_base_image your_scripts.py
 ```
 
-以下是 Build Script 具體內容，每個版本都會調整部分細節，以下內容是基於 DocsaidKit V0.18.0：
+以下是 Build Script 具體內容，每個版本都會調整部分細節：
+
+以下內容是基於 DocsaidKit V0.18.0。
 
 ```dockerfile title="DocsaidKit/docker/Dockerfile"
 # syntax=docker/dockerfile:experimental

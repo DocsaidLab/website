@@ -1,5 +1,5 @@
 ---
-sidebar_position: 14
+sidebar_position: 7
 ---
 
 # load_yaml
@@ -24,5 +24,3 @@ sidebar_position: 14
     print(data)
     # >>> {'key': 'value'}
     ```
-
-

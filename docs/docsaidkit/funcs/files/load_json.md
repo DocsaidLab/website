@@ -1,5 +1,5 @@
 ---
-sidebar_position: 10
+sidebar_position: 3
 ---
 
 # load_json
@@ -25,4 +25,3 @@ sidebar_position: 10
     print(data)
     # >>> {'key': 'value'}
     ```
-

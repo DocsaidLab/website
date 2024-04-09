@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# OpenCC
+# opencc
 
 ## convert_simplified_to_traditional
 

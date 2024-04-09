@@ -1,5 +1,5 @@
 ---
-sidebar_position: 13
+sidebar_position: 6
 ---
 
 # dump_pickle
@@ -20,5 +20,3 @@ sidebar_position: 13
     data = {'key': 'value'}
     D.dump_pickle(data, '/path/to/your/pickle')
     ```
-
-

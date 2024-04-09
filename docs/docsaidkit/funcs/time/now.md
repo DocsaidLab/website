@@ -1,5 +1,5 @@
 ---
-sidebar_position: 18
+sidebar_position: 1
 ---
 
 # now
@@ -37,4 +37,3 @@ sidebar_position: 18
     print(now_time)
     # >>> '2021-09-22'
     ```
-

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 15
+sidebar_position: 8
 ---
 
 # dump_yaml
@@ -21,4 +21,3 @@ sidebar_position: 15
     data = {'key': 'value'}
     D.dump_yaml(data)
     ```
-

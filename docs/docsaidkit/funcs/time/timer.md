@@ -1,5 +1,5 @@
 ---
-sidebar_position: 17
+sidebar_position: 2
 ---
 
 # Timer
@@ -44,4 +44,3 @@ sidebar_position: 17
     with D.Timer():
         time.sleep(1)
     ```
-
