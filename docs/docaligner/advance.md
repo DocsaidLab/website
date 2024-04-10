@@ -18,19 +18,6 @@ Backend 是一個列舉類型，用於指定 `DocAligner` 的運算後端。
 - **cpu**：使用 CPU 進行運算。
 - **cuda**：使用 GPU 進行運算（需要適當的硬體支援）。
 
-我們是使用 ONNXRuntime 作為模型的推論引擎，雖然 ONNXRuntime 支援了多種後端引擎（包括 CPU、CUDA、OpenCL、DirectX、TensorRT 等等），但限於平常使用的環境，我們稍微做了一點封裝，目前只提供了 CPU 和 CUDA 兩種後端引擎。此外，使用 cuda 運算除了需要適當的硬體支援外，還需要安裝相應的 CUDA 驅動程式和 CUDA 工具包。
-
-如果你的系統中沒有安裝 CUDA，或安裝的版本不正確，則無法使用 CUDA 運算後端。
-
-:::tip
-如果你有其他需求，請參考 [**ONNXRuntime 官方文件**](https://onnxruntime.ai/docs/execution-providers/index.html) 進行自定義。
-:::
-
-:::tip
-
-
-關於安裝依賴相關的問題，請參考 [**ONNXRuntime Release Notes**](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements)
-:::
 
 ```python
 from docsaidkit import Backend
@@ -41,6 +28,15 @@ model = DocAligner(backend=Backend.cuda) # 使用 CUDA 後端
 #
 model = DocAligner(backend=Backend.cpu) # 使用 CPU 後端
 ```
+
+我們是使用 ONNXRuntime 作為模型的推論引擎，雖然 ONNXRuntime 支援了多種後端引擎（包括 CPU、CUDA、OpenCL、DirectX、TensorRT 等等），但限於平常使用的環境，我們稍微做了一點封裝，目前只提供了 CPU 和 CUDA 兩種後端引擎。此外，使用 cuda 運算除了需要適當的硬體支援外，還需要安裝相應的 CUDA 驅動程式和 CUDA 工具包。
+
+如果你的系統中沒有安裝 CUDA，或安裝的版本不正確，則無法使用 CUDA 運算後端。
+
+:::tip
+1. 如果你有其他需求，請參考 [**ONNXRuntime 官方文件**](https://onnxruntime.ai/docs/execution-providers/index.html) 進行自定義。
+2. 關於安裝依賴相關的問題，請參考 [**ONNXRuntime Release Notes**](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements)
+:::
 
 ### 2. ModelType
 
@@ -116,10 +112,6 @@ model = DocAligner(model_cfg='mobilenetv2_140') # 使用 'mobilenetv2_140' 配�
 
 這些非正方形的圖像，在不經過適當處理直接進行推論時，往往會包含大量的無關區域或空白，從而對模型的推論效果產生不利影響。進行中心裁剪能夠有效減少這些無關區域，專注於圖像的中心區域，從而提高推論的準確性和效率。
 
-:::tip
-**使用時機**：『不會切到圖片』且圖片比例不是正方形時，可以使用中心裁切。
-:::
-
 使用方式如下：
 
 ```python
@@ -132,11 +124,13 @@ img = D.imread('path/to/image.jpg')
 result = model(img, do_center_crop=True) # 使用中心裁剪
 ```
 
+:::tip
+**使用時機**：『不會切到圖片』且圖片比例不是正方形時，可以使用中心裁切。
 :::warning
-中心裁減只是在計算流程中的一個步驟，不會對原始圖像進行修改。
-
-最後得到的結果會映射回原始圖像的尺寸，使用者不須擔心圖像的變形或失真問題。
+中心裁減只是在計算流程中的一個步驟，不會對原始圖像進行修改。最後得到的結果會映射回原始圖像的尺寸，使用者不須擔心圖像的變形或失真問題。
 :::
+:::
+
 
 ### Return `Document` Object
 

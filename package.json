@@ -18,13 +18,19 @@
     "@docusaurus/core": "^3.2.0",
     "@docusaurus/plugin-content-docs": "^3.2.0",
     "@docusaurus/preset-classic": "^3.2.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@giscus/react": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
+    "@mui/material": "^5.15.15",
+    "axios": "^1.6.8",
     "clsx": "^2.0.0",
     "gh-pages": "^6.1.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "rehype-katex": "^7.0.0",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.2.0",
