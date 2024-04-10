@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[8100],{45889:s=>{s.exports=JSON.parse('{"label":"gosu","permalink":"/en/blog/tags/gosu","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);
