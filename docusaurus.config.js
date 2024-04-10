@@ -1,9 +1,3 @@
-// @ts-check
-// `@type` JSDoc annotations allow editor autocompletion and type checking
-// (when paired with `@ts-check`).
-// There are various equivalent ways to declare your Docusaurus config.
-// See: https://docusaurus.io/docs/api/docusaurus-config
-
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 
@@ -14,28 +8,18 @@ const config = {
   title: 'DOCSAID',
   tagline: 'A playground for our developers',
   favicon: 'img/favicon.ico',
-
-  // Set the production url of your site here
   url: 'https://docsaid.org',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'DocsaidLab', // Usually your GitHub org/user name.
-  projectName: 'website', // Usually your repo name.
+  organizationName: 'DocsaidLab',
+  projectName: 'website',
   deploymentBranch: 'gh-pages',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'zh-hant',
-    locales: ['zh-hant'],
+    locales: ['zh-hant']
   },
   presets: [
     [
@@ -49,10 +33,6 @@ const config = {
           showLastUpdateTime: true,
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          // editUrl:
-          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           blogTitle: 'Docsaid blog!',
@@ -61,10 +41,6 @@ const config = {
           showReadingTime: true,
           blogSidebarTitle: 'All our posts',
           blogSidebarCount: 'ALL',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          // editUrl:
-          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -108,7 +84,6 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
       image: 'img/docsaid-social-card.jpg',
       navbar: {
         title: '',
