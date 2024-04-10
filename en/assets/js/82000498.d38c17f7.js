@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[7510],{53936:e=>{e.exports=JSON.parse('{"title":"FeatureFusion","slug":"/category/featurefusion","permalink":"/en/papers/category/featurefusion","navigation":{"previous":{"title":"METER","permalink":"/en/papers/multi-model/2021/meter"},"next":{"title":"FPN","permalink":"/en/papers/feat-fusion/fpn"}}}')}}]);

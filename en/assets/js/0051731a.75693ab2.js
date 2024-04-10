@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[5573],{40231:e=>{e.exports=JSON.parse('{"label":"pypiserver","permalink":"/en/blog/tags/pypiserver","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

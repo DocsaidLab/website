@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[8938],{82930:e=>{e.exports=JSON.parse('{"label":"terms-of-service","permalink":"/en/blog/tags/terms-of-service","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

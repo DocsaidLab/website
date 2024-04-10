@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[8998],{20649:e=>{e.exports=JSON.parse('{"title":"Files","slug":"/category/files","permalink":"/en/category/files","navigation":{"previous":{"title":"Document","permalink":"/en/docsaidkit/funcs/objects/document"},"next":{"title":"get_files","permalink":"/en/docsaidkit/funcs/files/get_files"}}}')}}]);
