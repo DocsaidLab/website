@@ -4,9 +4,15 @@ sidebar_position: 2
 
 # 安裝
 
-目前沒有提供 Pypi 上的安裝包，若要使用本專案，你可以直接從 Github 上 clone 本專案，然後安裝相依套件，安裝前請確認您已經安裝了 `DocsaidKit`。
+目前沒有提供 Pypi 上的安裝包，短時間內也沒有相關規劃。
+
+若要使用本專案，你必須直接從 Github 上 clone 本專案，然後安裝相依套件。
+
+:::tip
+安裝前請確認您已經安裝了 `DocsaidKit`。
 
 如果你還沒有安裝 `DocsaidKit`，請參考 [**DocsaidKit 安裝指南**](../docsaidkit/installation)。
+:::
 
 ## 安裝步驟
 
