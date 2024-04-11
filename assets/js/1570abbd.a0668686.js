@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[3915],{81873:e=>{e.exports=JSON.parse('{"title":"DocClassifier","slug":"/category/docclassifier","permalink":"/category/docclassifier","navigation":{"previous":{"title":"\u8f38\u51fa\u6a21\u578b","permalink":"/docaligner/training/export_model"},"next":{"title":"test","permalink":"/docclassifier/test"}}}')}}]);
