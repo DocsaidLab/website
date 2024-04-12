@@ -43,7 +43,7 @@ MIDV-2020 包含 10 種文件類型，其中包括 1000 個帶註釋的影片剪
 
 ## Synthetic Dataset
 
-![Docpool](./resources/sync_test_img.jpg)
+![Docpool](./resources/synth_test_img.jpg)
 
 
 考慮到資料集的不足，我們使用動態合成影像技術。
