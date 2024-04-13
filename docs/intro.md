@@ -24,7 +24,7 @@ sidebar_position: 1
 2. [**DocAligner**](https://github.com/DocsaidLab/DocAligner)：這是個提供文本定位功能的專案，主要用來定位文件的四個角點。
 3. [**DocClassifier**](https://github.com/DocsaidLab/DocClassifier)：這是個用於計算文本相似度的專案，其參考了人臉辨識系統的設計理念。
 4. [**GmailSummary**](https://github.com/DocsaidLab/GmailSummary)：這是個用於摘要大量 Gmail 郵件的專案，串接了 Gmail 和 OpenAI。
-5. [**TextGenerator**](https://github.com/DocsaidLab/TextGenerator)：這是用於生成文字圖像的專案，為了解決 OCR 模型訓練資料不足的問題。
+5. [**WordCanvas**](https://github.com/DocsaidLab/WordCanvas)：這是用於生成文字圖像的專案，為了解決 OCR 模型訓練資料不足的問題。
 
 ---
 

@@ -19,13 +19,13 @@ sidebar_position: 2
 1. **Clone 本專案：**
 
     ```bash
-    git clone https://github.com/DocsaidLab/TextGenerator.git
+    git clone https://github.com/DocsaidLab/WordCanvas.git
     ```
 
 2. **進入專案目錄：**
 
     ```bash
-    cd TextGenerator
+    cd WordCanvas
     ```
 
 3. **安裝相依套件：**
@@ -43,10 +43,10 @@ sidebar_position: 2
 4. **安裝打包文件：**
 
     ```bash
-    pip install dist/textgenerator-*-py3-none-any.whl
+    pip install dist/wordcanvas-*-py3-none-any.whl
     ```
 
-遵循這些步驟，你應該能夠順利完成 `TextGenerator` 的安裝。
+遵循這些步驟，你應該能夠順利完成 `WordCanvas` 的安裝。
 
 安裝完成後即可以使用本專案。
 
@@ -55,7 +55,7 @@ sidebar_position: 2
 你可以使用以下指令來測試安裝是否成功：
 
 ```bash
-python -c "import textgenerator; print(textgenerator.__version__)"
+python -c "import wordcanvas; print(wordcanvas.__version__)"
 # >>> 0.1.0
 ```
 
