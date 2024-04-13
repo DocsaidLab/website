@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[6038],{20815:e=>{e.exports=JSON.parse('{"title":"TextGenerator","slug":"/category/textgenerator","permalink":"/category/textgenerator","navigation":{"previous":{"title":"test","permalink":"/gmailsummary/test"},"next":{"title":"\u4ecb\u7d39","permalink":"/textgenerator/intro"}}}')}}]);
