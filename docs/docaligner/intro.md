@@ -6,6 +6,8 @@ sidebar_position: 1
 
 本專案的核心功能稱為「**文件定位（Document Localization）**」。
 
+- [**DocAligner Github**](https://github.com/DocsaidLab/DocAligner)
+
 ![title](./resources/title.jpg)
 
 ## 概述

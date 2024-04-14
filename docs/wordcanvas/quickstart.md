@@ -94,7 +94,7 @@ print(img.shape)
 
 當設定的尺寸小於文字圖像的尺寸時，會自動縮放文字圖像。
 
-也就是說，文字會擠在一起，變成長方形，例如：
+也就是說，文字會擠在一起，變成瘦瘦地長方形，例如：
 
 ```python
 text = '你好' * 10
@@ -322,12 +322,14 @@ gen.output_direction = OutputDirection.Horizontal
 
 設定完之後，直接調用，就可以得到新的文字圖像。
 
-如果你設定了 `reinit` 的參數，那你會收到錯誤：
+如果你設定了 `reinit` 相關的參數，那你會收到錯誤：
 
-```python
-gen.text_size = 128
-# >>> AttributeError: can't set attribute
-```
+-  **AttributeError: can't set attribute**
+
+    ```python
+    gen.text_size = 128
+    # >>> AttributeError: can't set attribute
+    ```
 
 :::danger
 當然，你還是可以強硬地進行參數設定，同樣身為 Python 使用者，我阻止不了你：
@@ -336,11 +338,13 @@ gen.text_size = 128
 gen._text_size = 128
 ```
 
-但是這樣會出錯呀！不要這麼堅持，重新初始化一個 `WordCanvas` 物件吧。
+但是這樣在後續出圖的時候會出錯呀！
+
+不要堅持，重新初始化一個物件吧。
 :::
 
 ## 小結
 
 還有許多功能沒有提到，但是基本功能已經介紹完畢。
 
-以上就是 `WordCanvas` 的基本使用方法，希望對你有所幫助，祝你使用愉快！
+以上就是本專案的基本使用方法，我們下一章節會介紹進階功能。

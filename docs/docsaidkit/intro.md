@@ -4,7 +4,13 @@ sidebar_position: 1
 
 # 介紹
 
-DocsaidKit 是我的日常開發工具，主要包括以下幾個部分：
+本專案的定位是影像處理和深度學習工具箱。
+
+- [**DocsaidKit Github**](https://github.com/DocsaidLab/DocsaidKit)
+
+## 概述
+
+DocsaidKit 主要包括以下幾個部分：
 
 - **Vision**：包括與電腦視覺相關的功能，如圖像和影片處理。
 
@@ -18,4 +24,4 @@ DocsaidKit 是我的日常開發工具，主要包括以下幾個部分：
 
 - **Tests**：測試文件，用於驗證各類函數的功能。
 
-接著根據不同功能和模塊，我把他們全部介紹一次。
+接著根據不同功能和模塊，後續章節會逐一介紹。

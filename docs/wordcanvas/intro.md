@@ -6,6 +6,10 @@ sidebar_position: 1
 
 本專案的核心功能為「**文字圖像生成工具**」，取名為 **WordCanvas**，即「文字畫布」的意思。
 
+- [**WordCanvas Github**](https://github.com/DocsaidLab/WordCanvas)
+
+![title](./resources/title.jpg)
+
 ## 概述
 
 在目前的光學字元辨識（OCR）領域的研究中，模型的準確度取決於資料集的品質和多樣性。
@@ -67,14 +71,11 @@ sidebar_position: 1
 
 ＊
 
-我們透過合成資料的方式，生成大量多樣性的中文文字圖像，以應對資料量不足、類別不平衡、缺乏多樣性等問題。對此我們參考了一些現有的文字合成工具，如：
+我們透過合成資料的方式，生成大量多樣性的中文文字圖像，以應對資料量不足、類別不平衡、缺乏多樣性等問題。
 
-- [**SynthText**](https://github.com/ankush-me/SynthText)
-- [**SynthText3D**](https://github.com/MhLiao/SynthText3D)
-- [**UnrealText**](https://github.com/Jyouhou/UnrealText/)
-- [**SynthTIGER**](https://github.com/clovaai/synthtiger)
-- [**text_renderer**](https://github.com/Sanster/text_renderer)
-- [**TextRecognitionDataGenerator**](https://github.com/Belval/TextRecognitionDataGenerator)
+對此我們參考了一些現有的文字合成工具，詳細資料請參考：
+
+- [**相關資源**](./tools)
 
 他們的設計方式帶給了我們很多啟發，讓我們決定從零開始創建了一個新的文字圖像生成器。
 
@@ -113,7 +114,6 @@ sidebar_position: 1
 13. **隨機對齊方式**：支援隨機選擇對齊方式。
 14. **隨機最小文字長度**：支援指定最小文字長度。
 15. **隨機最大文字長度**：支援指定最大文字長度。
-16. **自定義影像增強功能**：支援導入自定義的影像增強函數。
 
 ## 最後
 
