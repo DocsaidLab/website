@@ -67,7 +67,7 @@ sidebar_position: 7
 :::
 
 :::tip
-標籤資料我們會建議你使用 [**LabelMe**](https://github.com/labelmeai/labelme)，它是一個開源的標籤工具，可以幫助你快速標註影像，並且導出成 JSON 檔案。
+標籤資料我們會建議你使用 [**LabelMe**](https://github.com/labelmeai/labelme)，它是一個開源的標籤工具，可以幫助你快速標注影像，並且導出成 JSON 檔案。
 :::
 
 ---

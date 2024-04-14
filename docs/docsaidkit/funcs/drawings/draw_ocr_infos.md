@@ -13,12 +13,12 @@ sidebar_position: 7
     - **texts** (`List[str]`)：偵測到的文字字串列表。
     - **polygons** (`D.Polygons`)：表示偵測到的文字邊界的多邊形列表。
     - **colors** (`tuple`)：繪製顏色的 RGB 值。如果未提供，則為每個文字根據固定的邏輯生成唯一顏色。
-    - **concat_axis** (`int`)：用於串接原始影像和標註影像的軸。預設為 1 (水平)。
+    - **concat_axis** (`int`)：用於串接原始影像和標注影像的軸。預設為 1 (水平)。
     - **thicknesses** (`int`)：繪製多邊形的粗細。預設為 2。
     - **font_path** (`str`)：要使用的字型檔案的路徑。如果未提供，則使用預設字型 "NotoSansMonoCJKtc-VF.ttf"。
 
 - **傳回值**
-    - **np.ndarray**：串接了原始影像和標註影像的影像。
+    - **np.ndarray**：串接了原始影像和標注影像的影像。
 
 - **範例**
 
