@@ -167,22 +167,6 @@ img = np.concatenate(imgs, axis=0)
 ```
 ![sample22](./resources/sample22.jpg)
 
-:::warning
-特別注意到 `AlignMode.Scatter`，單字 "World!" 的尺寸比 "Hello," 大。
-
-導致這個情況的具體細節跟 pillow 內的 `ImageFont` 有關。
-
-簡單來說，我們在渲染文字時，會計算字串內的上下左右的邊界，然後將文字放在這個範圍內，如下圖：
-
-[![offset](./resources/offset.jpg "reference: 用 Python 在圖像上寫字")](https://sean22492249.medium.com/%E7%94%A8-python-%E5%9C%A8%E5%9C%96%E5%83%8F%E4%B8%8A%E5%AF%AB%E5%AD%97-d62a431ea727)
-
-當有些文字需要下方的藍色空間，例如 ","，整體的對齊就會往上偏移。除了分散對齊之外，其他對齊方式都是整體文字一起計算，所以不會有對齊錯位的問題。但在分散對齊的情況下，每個字元都是獨立計算的，因此在這個例子中，"Hello," 計算出來的邊界會比 "World!" 的邊界高，所以你會看到 "World!" 往下沉。
-
-這其實可以修復，概念上就是將所有文字的邊界計算一次，然後將所有文字的中心點對齊，但就是有點麻煩。實際上，這個專案應用場景在於 OCR 模型的訓練上，這種稍微不對齊的情況反而有助於模型的訓練。
-
-所以，這不是 BUG，是 Feature。
-:::
-
 ## 隨機文字方向
 
 使用 `random_direction` 參數啟用隨機文字方向的功能。

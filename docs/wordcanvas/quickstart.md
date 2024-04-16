@@ -178,13 +178,17 @@ img, infos = gen(text)
     ```python
     def split_text(text: str):
         """ Split text into a list of characters. """
-        pattern = r"[a-zA-Z0-9<\p{P}\u3000-\u303F\uFF00-\uFFEF]+|."
+        pattern = r"[a-zA-Z0-9\p{P}\p{S}]+|."
         matches = regex.findall(pattern, text)
-        # If the text is a single character, split it into a list
+        matches = [m for m in matches if not regex.match(r'\p{Z}', m)]
         if len(matches) == 1:
             matches = list(text)
         return matches
     ```
+
+    :::warning
+    這只是個很簡單的實現，不一定能滿足所有的需求。如果你有更完整拆分字串的解決方案，歡迎提供。
+    :::
     :::
 
 ## 調整文字方向
