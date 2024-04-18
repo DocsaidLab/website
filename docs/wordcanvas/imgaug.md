@@ -70,11 +70,14 @@ img = aug(image=img)['image']
 答對了！所以我們要修改 `albumentations` 的行為，讓它只需要一次初始化就可以一直使用。
 
 ```python
+import albumentations as A
+import cv2
 import numpy as np
 from wordcanvas import WordCanvas
 
+
 gen = WordCanvas(
-    random_background=True
+    random_background_color=True
 )
 
 aug = A.SafeRotate(
