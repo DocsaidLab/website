@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[6753],{60055:e=>{e.exports=JSON.parse('{"title":"2021","slug":"/category/2021","permalink":"/en/papers/category/2021","navigation":{"previous":{"title":"Oscar","permalink":"/en/papers/multi-model/2020/oscar"},"next":{"title":"CLIP","permalink":"/en/papers/multi-model/2021/clip"}}}')}}]);

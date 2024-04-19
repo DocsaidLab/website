@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[1409],{19259:e=>{e.exports=JSON.parse('{"title":"Utils","slug":"/category/utils","permalink":"/en/category/utils","navigation":{"previous":{"title":"dump_yaml","permalink":"/en/docsaidkit/funcs/files/dump_yaml"},"next":{"title":"opencc","permalink":"/en/docsaidkit/funcs/utils/opencc"}}}')}}]);
