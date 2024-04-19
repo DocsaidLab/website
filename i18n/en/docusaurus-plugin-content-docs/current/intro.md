@@ -11,12 +11,14 @@ I'm Zephyr, an AI engineer from Taiwan and the founder of this organization.
 
 ## What's Here
 
-::: info
-I would like to inform you that at present, only the technical documentation has been translated into English. I am committed to making all content fully accessible and plan to progressively update the remaining sections in the near future. Thank you for your patience and understanding as I work to enhance the offerings.
+:::info
+I would like to inform you that at present, only the technical documentation has been translated into English. I am committed to making all content fully accessible and plan to progressively update the remaining sections in the near future.
+
+Thank you for your patience and understanding as I work to enhance the offerings.
 :::
 
 - For paper reviews, see next door: [**Papers**](https://docsaid.org/papers/intro).
-- For the blog section, it's the door after next: [**Blog**](https://docsaid.org/blog). -->
+- For the blog section, it's the door after next: [**Blog**](https://docsaid.org/blog).
 
 ＊
 
