@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # Introduction
 
-歡迎你來到我的部落格。
+歡迎你來到我的網站。
 
 我是個臺灣的 AI 工程師，同時也是這個組織的創辦人 Zephyr。
 

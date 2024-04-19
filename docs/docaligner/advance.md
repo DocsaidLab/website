@@ -129,7 +129,7 @@ result = model(img, do_center_crop=True) # 使用中心裁剪
 :::warning
 中心裁減只是在計算流程中的一個步驟，不會對原始圖像進行修改。最後得到的結果會映射回原始圖像的尺寸，使用者不須擔心圖像的變形或失真問題。
 :::
-:::
+
 
 
 ### Return `Document` Object
@@ -174,5 +174,4 @@ flat_doc_img = D.imwarp_quadrangle(img, result)
 
 :::warning
 **注意**：函數 [**Docsaidkit.imwarp_quadrangle**](../docsaidkit/funcs/vision/geometric/imwarp_quadrangle) 沒有支援指定文件大小，因此輸出的圖片尺寸會根據多邊形的『最小旋轉外接矩形』來決定。
-:::
 :::
