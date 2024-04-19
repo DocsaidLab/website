@@ -13,10 +13,8 @@ const config = {
   organizationName: 'DocsaidLab',
   projectName: 'website',
   deploymentBranch: 'gh-pages',
-
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-
   i18n: {
     defaultLocale: 'zh-hant',
     locales: ['zh-hant', 'en']
@@ -27,7 +25,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: './sidebars.js',
+          sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
@@ -66,8 +64,11 @@ const config = {
         id: 'papers',
         path: 'papers',
         routeBasePath: 'papers',
-        sidebarPath: './sidebarsPapers.js',
+        sidebarPath: require.resolve('./sidebarsPapers.js'),
         showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
       },
     ],
     [
@@ -76,8 +77,11 @@ const config = {
         id: 'playground',
         path: 'playground',
         routeBasePath: 'playground',
-        sidebarPath: './sidebarsPlayground.js',
+        sidebarPath: require.resolve('./sidebarsPlayground.js'),
         showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
       },
     ],
   ],
