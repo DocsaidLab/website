@@ -1,0 +1,90 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.DocsaidKit": {
+    "message": "DocsaidKit",
+    "description": "The label for category DocsaidKit in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.函式庫": {
+    "message": "Library",
+    "description": "The label for category 函式庫 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Structures": {
+    "message": "Structures",
+    "description": "The label for category Structures in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Mixins": {
+    "message": "Mixins",
+    "description": "The label for category Mixins in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Time": {
+    "message": "Time",
+    "description": "The label for category Time in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Vision": {
+    "message": "Vision",
+    "description": "The label for category Vision in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.functionals": {
+    "message": "functionals",
+    "description": "The label for category functionals in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.geometric": {
+    "message": "geometric",
+    "description": "The label for category geometric in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.imporc": {
+    "message": "imporc",
+    "description": "The label for category imporc in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.morphology": {
+    "message": "morphology",
+    "description": "The label for category morphology in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.videotools": {
+    "message": "videotools",
+    "description": "The label for category videotools in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ipcam": {
+    "message": "ipcam",
+    "description": "The label for category ipcam in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Drawings": {
+    "message": "Drawings",
+    "description": "The label for category Drawings in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ONNXEngine": {
+    "message": "ONNXEngine",
+    "description": "The label for category ONNXEngine in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Objects": {
+    "message": "Objects",
+    "description": "The label for category Objects in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Files": {
+    "message": "Files",
+    "description": "The label for category Files in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Utils": {
+    "message": "Utils",
+    "description": "The label for category Utils in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.DocAligner": {
+    "message": "DocAligner",
+    "description": "The label for category DocAligner in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.DocClassifier": {
+    "message": "DocClassifier",
+    "description": "The label for category DocClassifier in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.GmailSummary": {
+    "message": "GmailSummary",
+    "description": "The label for category GmailSummary in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.WordCanvas": {
+    "message": "WordCanvas",
+    "description": "The label for category WordCanvas in sidebar tutorialSidebar"
+  }
+}

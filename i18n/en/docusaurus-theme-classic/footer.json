@@ -1,0 +1,30 @@
+{
+  "link.item.label.Docs": {
+    "message": "Docs",
+    "description": "The label of footer link with label=Docs linking to /"
+  },
+  "link.item.label.Papers": {
+    "message": "Papers",
+    "description": "The label of footer link with label=Papers linking to /papers/intro"
+  },
+  "link.item.label.Blog": {
+    "message": "Blog",
+    "description": "The label of footer link with label=Blog linking to /blog"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/DocsaidLab"
+  },
+  "link.item.label.使用條款": {
+    "message": "TermsOfUse",
+    "description": "The label of footer link with label=使用條款 linking to /blog/terms-of-service"
+  },
+  "link.item.label.隱私政策": {
+    "message": "Privacy Policy",
+    "description": "The label of footer link with label=隱私政策 linking to /blog/privacy-policy"
+  },
+  "copyright": {
+    "message": "Copyright © 2024 DOCSAID.",
+    "description": "The footer copyright"
+  }
+}

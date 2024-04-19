@@ -19,7 +19,7 @@ const config = {
 
   i18n: {
     defaultLocale: 'zh-hant',
-    locales: ['zh-hant']
+    locales: ['zh-hant', 'en']
   },
   presets: [
     [
@@ -118,6 +118,10 @@ const config = {
             sidebarId: 'playgroundSidebar',
             position: 'left',
             docsPluginId: 'playground'
+          },
+          {
+            type: 'localeDropdown',
+            position: 'right',
           },
           {
             label: 'GitHub',

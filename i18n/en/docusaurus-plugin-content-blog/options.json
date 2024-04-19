@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "Docsaid blog!",
+    "description": "The title for the blog used in SEO"
+  },
+  "description": {
+    "message": "A Docsaid powered blog!",
+    "description": "The description for the blog used in SEO"
+  },
+  "sidebar.title": {
+    "message": "All our posts",
+    "description": "The label for the left sidebar"
+  }
+}
