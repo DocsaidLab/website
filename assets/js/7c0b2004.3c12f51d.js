@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[6793],{22626:e=>{e.exports=JSON.parse('{"title":"DocAligner","slug":"/category/docaligner","permalink":"/category/docaligner","navigation":{"previous":{"title":"PIP \u53c3\u6578\u914d\u7f6e","permalink":"/docsaidkit/pipconfig"},"next":{"title":"\u4ecb\u7d39","permalink":"/docaligner/intro"}}}')}}]);
