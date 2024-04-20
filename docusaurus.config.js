@@ -35,10 +35,12 @@ const config = {
         blog: {
           blogTitle: 'Docsaid blog!',
           blogDescription: 'A Docsaid powered blog!',
-          postsPerPage: 'ALL',
           showReadingTime: true,
           blogSidebarTitle: 'All our posts',
-          blogSidebarCount: 'ALL',
+          blogSidebarCount: 10,
+          postsPerPage: 10,
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -65,19 +67,6 @@ const config = {
         path: 'papers',
         routeBasePath: 'papers',
         sidebarPath: require.resolve('./sidebarsPapers.js'),
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
-        remarkPlugins: [remarkMath],
-        rehypePlugins: [rehypeKatex],
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'playground',
-        path: 'playground',
-        routeBasePath: 'playground',
-        sidebarPath: require.resolve('./sidebarsPlayground.js'),
         showLastUpdateAuthor: true,
         showLastUpdateTime: true,
         remarkPlugins: [remarkMath],
@@ -115,13 +104,6 @@ const config = {
             label: 'Blog',
             to: '/blog',
             position: 'left'
-          },
-          {
-            label: 'Playground',
-            type: 'docSidebar',
-            sidebarId: 'playgroundSidebar',
-            position: 'left',
-            docsPluginId: 'playground'
           },
           {
             type: 'localeDropdown',
