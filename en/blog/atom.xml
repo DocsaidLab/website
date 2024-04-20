@@ -515,7 +515,7 @@
 <p>值得一提的是，儘管 gosu 的主要用途是在容器啟動時從 <code>root</code> 用戶切換到非特權用戶，但其開發者也強調了在特定情境下使用 gosu 可能存在的安全風險。這是因為任何允許用戶切換的工具，若被不當使用，都可能打開安全漏洞的大門。因此，開發和運維團隊需要對 gosu 的使用場景有充分的了解，並確保其僅在安全的上下文中使用。</p>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a href="https://docsaid.org/en/blog/gosu-usage#%E7%B5%90%E8%AB%96" class="hash-link" aria-label="Direct link to 結論" title="Direct link to 結論">​</a></h3>
 <p>gosu 以其簡潔、高效和安全的特點，為 Docker 容器中的用戶身份切換提供了一個理想的解決方案。它解決了長期困擾開發和運維團隊的一大痛點，並以最小的學習曲線實現了最大的使用效果。對於那些尋求在容器環境中實現靈活且安全用戶切換的團隊來說，gosu 無疑是一個值得探索的工具。</p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="參考資料">參考資料<a href="https://docsaid.org/en/blog/gosu-usage#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99" class="hash-link" aria-label="Direct link to 參考��資料" title="Direct link to 參考資料">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="參考資料">參考資料<a href="https://docsaid.org/en/blog/gosu-usage#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99" class="hash-link" aria-label="Direct link to 參考資料" title="Direct link to 參考資料">​</a></h3>
 <ul>
 <li><a href="https://github.com/tianon/gosu" target="_blank" rel="noopener noreferrer">gosu GitHub repository</a></li>
 </ul>]]></content>
@@ -593,7 +593,7 @@
 <li>如果您在 Windows 環境中，無法直接使用 <code>nvidia-smi</code> 來獲取 GPU 資訊，請確保已安裝 NVIDIA 驅動和相關的工具，並在命令提示符窗口中執行它。</li>
 <li>外部 IP 地址是從 <code>https://httpbin.org/ip</code> 獲取的，所以必須確保網路連線是活躍的。</li>
 </ul>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="程式碼">程式碼<a href="https://docsaid.org/en/blog/python-env-info-collector#%E7%A8%8B%E5%BC%8F%E7%A2%BC" class="hash-link" aria-label="Direct link to 程式碼" title="Direct link to 程式碼">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="程��式碼">程式碼<a href="https://docsaid.org/en/blog/python-env-info-collector#%E7%A8%8B%E5%BC%8F%E7%A2%BC" class="hash-link" aria-label="Direct link to 程式碼" title="Direct link to 程式碼">​</a></h2>
 <p>我們期待這份程式碼可以幫助您快速檢視訓練環境，您可以將此資訊輸出後與模型的訓練日誌一起保存，以確保訓練的可追溯性和可重現性。</p>
 <ul>
 <li><a href="https://github.com/DocsaidLab/DocsaidKit/blob/main/docsaidkit/utils/system_info.py" target="_blank" rel="noopener noreferrer">system_info.py</a></li>
@@ -1015,7 +1015,7 @@
 <p>整個指令的功能是通過 ppp0 接口添加一個到 192.168.25.0/24 網絡的路由。當您的系統試圖訪問 192.168.25.0/24 網絡中的任何IP地址時，它將通過 ppp0 接口路由流量。</p>
 <p>接著，存檔後退出，給予檔案權限：</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo chmod 755 /etc/ppp/ip-up</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解題完成但是還是��壞了">解題完成，但是還是壞了？<a href="https://docsaid.org/en/blog/mac-selective-vpn-routing#%E8%A7%A3%E9%A1%8C%E5%AE%8C%E6%88%90%E4%BD%86%E6%98%AF%E9%82%84%E6%98%AF%E5%A3%9E%E4%BA%86" class="hash-link" aria-label="Direct link to 解題完成，但是還是壞了？" title="Direct link to 解題完成，但是還是壞了？">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解題完成但是還是壞了">解題完成，但是還是壞了？<a href="https://docsaid.org/en/blog/mac-selective-vpn-routing#%E8%A7%A3%E9%A1%8C%E5%AE%8C%E6%88%90%E4%BD%86%E6%98%AF%E9%82%84%E6%98%AF%E5%A3%9E%E4%BA%86" class="hash-link" aria-label="Direct link to 解題完成，但是還是壞了？" title="Direct link to 解題完成，但是還是壞了？">​</a></h2>
 <p>到這邊，可能有一部分的的機器還是無法上網，所以我們接著看：</p>
 <p>打開 MacOC 的系統設定，找到網路，如下圖：</p>
 <ul>
@@ -1046,7 +1046,7 @@
         <updated>2023-08-23T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[歡迎您訪問 DOCSAID，以下簡稱本網站。我們非常重視您的隱私權，並致力於保護您的個人資訊。請在使用本網站之前詳細閱讀以下隱私權保護政策，以了解我們的資訊收集、使用和保護做法。]]></summary>
         <content type="html"><![CDATA[<p>歡迎您訪問 DOCSAID，以下簡稱本網站。我們非常重視您的隱私權，並致力於保護您的個人資訊。請在使用本網站之前詳細閱讀以下隱私權保護政策，以了解我們的資訊收集、使用和保護做法。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="一範圍適用">一、範圍適用<a href="https://docsaid.org/en/blog/privacy-policy#%E4%B8%80%E7%AF%84%E5%9C%8D%E9%81%A9%E7%94%A8" class="hash-link" aria-label="Direct link to 一、範圍適用" title="Direct link to 一、範圍適用">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="一範圍適用">一、範圍適用<a href="https://docsaid.org/en/blog/privacy-policy#%E4%B8%80%E7%AF%84%E5%9C%8D%E9%81%A9%E7%94%A8" class="hash-link" aria-label="Direct link to 一、範圍��適用" title="Direct link to 一、範圍適用">​</a></h2>
 <p>本隱私政策適用於您訪問本網站、使用我們的服務，以及參與相關互動的所有情況。請注意，本政策不涵蓋可能包含在本網站內的外部連結，也不適用於由非本網站所委託或管理的第三方網站。我們建議您在進入其他網站之前閱讀其隱私政策，以確保您理解他們如何處理您的個人資訊。</p>
 <p>我們強調，我們僅在本隱私政策所描述的情況下，蒐集、使用和保護您的個人資訊。如果您不同意本政策，請避免使用本網站提供的服務和功能。</p>
 <p>我們將定期審查和更新本隱私政策，以確保其與我們的資料處理實踐和法律法規的一致性。這些變更將在本網站上公布，因此我們建議您定期查看以獲取最新信息。</p>
@@ -1072,7 +1072,7 @@
 <p>我們的網站可能包含指向其他網站或服務的連結，這些網站可能與我們無關，並且可能擁有其自己的隱私政策。我們提供這些連結僅為您的方便，以便您可以獲取更多有關主題的相關信息。然而，請注意，當您點擊這些外部連結時，您將離開本網站，我們對您在這些連結指向的網站上的資訊使用和隱私政策概不負責。</p>
 <p>我們強烈建議您在訪問任何外部連結之前閱讀相關網站的隱私政策，以確保您理解他們如何收集、使用和分享您的個人資訊。我們無法控制這些外部網站的資訊收集實踐，因此建議您謹慎對待您在這些網站上提供的任何個人資訊。</p>
 <p>如果您通過我們的網站訪問了其他網站，我們建議您閱讀和理解該網站的隱私政策，以確保您的隱私得到適當的保護。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="五資料分享">五、資料分享<a href="https://docsaid.org/en/blog/privacy-policy#%E4%BA%94%E8%B3%87%E6%96%99%E5%88%86%E4%BA%AB" class="hash-link" aria-label="Direct link to 五、資料分享" title="Direct link to 五、資料��分享">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="五資料分享">五、資料分享<a href="https://docsaid.org/en/blog/privacy-policy#%E4%BA%94%E8%B3%87%E6%96%99%E5%88%86%E4%BA%AB" class="hash-link" aria-label="Direct link to 五、資料分享" title="Direct link to 五、資料分享">​</a></h2>
 <p>我們承諾保護您的個人資料，並尊重您的隱私權。我們不會未經您的明確許可，將您的個人資料銷售、交換或轉讓給任何非關聯的第三方。您的個人資訊僅在下列情況下可能被分享：</p>
 <p>您的許可：在某些情況下，我們可能會要求您的明確許可，才能與第三方共享您的資訊。例如：當您參加促銷活動或合作計劃時，我們可能需要分享您的相關資訊，以便完成相關事宜。
 法律要求：我們有義務遵守適用的法律法規，包括但不限於法院命令、法律程序或政府要求。在這些情況下，我們可能會分享您的資訊，以履行我們的法律義務和法律程序。
@@ -1134,7 +1134,7 @@
 <p>您理解並同意使用本網站的風險由您自行承擔。本網站上的內容僅供一般信息和參考之用，並不構成專業建議或意見。DOCSAID 網站不對本網站上的內容的準確性、完整性、可靠性或適用性作出任何保證或陳述。</p>
 <p>您應自行判斷並承擔使用本網站內容的風險，並在必要時諮詢適當的專業人士以獲得具體建議。DOCSAID 網站對因使用或依賴本網站內容而導致的任何損害、損失或費用不負任何責任。</p>
 <p>無論在任何情況下，DOCSAID 網站都不對您使用本網站造成的任何直接、間接、附帶、特殊、懲罰性或衍生的損害承擔責任，即使已事先被告知可能發生此類損害。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="六責任範圍">六、責任範圍<a href="https://docsaid.org/en/blog/terms-of-service#%E5%85%AD%E8%B2%AC%E4%BB%BB%E7%AF%84%E5%9C%8D" class="hash-link" aria-label="Direct link to 六、責任範圍" title="Direct link to 六、責任範圍">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="六責��任範圍">六、責任範圍<a href="https://docsaid.org/en/blog/terms-of-service#%E5%85%AD%E8%B2%AC%E4%BB%BB%E7%AF%84%E5%9C%8D" class="hash-link" aria-label="Direct link to 六、責任範圍" title="Direct link to 六、責任範圍">​</a></h2>
 <p>不論在何種情況下，DOCSAID 網站的高級管理層、董事、員工、代理人、附屬單位或其他關聯實體（以下簡稱「相關方」）都不會對您因使用或無法使用本網站，包括但不限於瀏覽、訪問、下載或依賴本網站內容所引起的任何形式的損害、損失或費用負責。</p>
 <p>無論是基於合同理論、侵權行為（包括疏忽）、嚴格責任或其他情形，相關方不會對您因以下情況所產生的直接、間接、特定、附帶或連帶的損害承擔任何責任：</p>
 <ul>
