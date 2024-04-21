@@ -18,7 +18,6 @@ Backend 是一個列舉類型，用於指定 `DocClassifier` 的運算後端。
 - **cpu**：使用 CPU 進行運算。
 - **cuda**：使用 GPU 進行運算（需要適當的硬體支援）。
 
-
 ```python
 from docsaidkit import Backend
 

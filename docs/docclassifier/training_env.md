@@ -100,7 +100,7 @@ docker run \
    - `--shm-size=64g`：設置共享內存的大小，這在大規模數據處理時很有用。
    - `--ipc=host --net=host`：這些設置允許容器使用主機的 IPC 命名空間和網絡堆棧，有助於性能提升。
    - `--cpuset-cpus="0-31"`：指定容器使用哪些 CPU 核心。
-   - `-v $PWD/DocClassifier:/code/DocClassifier` 等：這些是掛載參數，將主機的目錄映射到容器內部的目錄，以便於訓練數據和腳本的訪問。ㄋ
+   - `-v $PWD/DocClassifier:/code/DocClassifier` 等：這些是掛載參數，將主機的目錄映射到容器內部的目錄，以便於訓練數據和腳本的訪問。
    - `--cfg_name $1`：這是傳遞給 `trainer.py` 的參數，指定了配置文件的名稱。
 
 3. **數據集路徑**
@@ -168,7 +168,7 @@ onnx:
   name: WarpFeatureLearning
   input_shape:
     img:
-      shape: [1, 3, 96, 96]
+      shape: [1, 3, 128, 128]
       dtype: float32
   input_names: ['img']
   output_names:

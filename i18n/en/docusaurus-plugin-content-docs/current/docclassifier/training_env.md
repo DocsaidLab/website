@@ -168,7 +168,7 @@ onnx:
   name: WarpFeatureLearning
   input_shape:
     img:
-      shape: [1, 3, 96, 96]
+      shape: [1, 3, 128, 128]
       dtype: float32
   input_names: ['img']
   output_names:

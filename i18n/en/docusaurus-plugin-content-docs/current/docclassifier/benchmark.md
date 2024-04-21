@@ -4,15 +4,13 @@ sidebar_position: 6
 
 # Evaluation
 
+The test dataset was provided by the client who proposed this project.
+
 This dataset comprises approximately 25,000 "de-identified" images after "text localization cropping," containing seven different categories, with extremely uneven quantities. The data contains a large amount of cropping deformation caused by various lighting changes, blurriness, reflections, and corner positioning errors.
 
 We only cleaned the "misclassified category labels" of this dataset and then used all the data to evaluate the model's performance.
 
-:::info
-The test dataset was provided by the client who proposed this project.
-
 Due to privacy concerns, we only provide evaluation results based on this dataset.
-:::
 
 ## Evaluation Protocols
 
