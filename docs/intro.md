@@ -26,15 +26,7 @@ sidebar_position: 1
 4. [**GmailSummary**](https://github.com/DocsaidLab/GmailSummary)：這是個用於摘要大量 Gmail 郵件的專案，串接了 Gmail 和 OpenAI。
 5. [**WordCanvas**](https://github.com/DocsaidLab/WordCanvas)：這是用於生成文字圖像的專案，為了解決 OCR 模型訓練資料不足的問題。
 
----
-
-當然不只有這樣，但大部分都還在規劃中，我就先不贅述了。
-
-:::info
-**DocClassifier** 這個專案的來源比較特別，它發想於一個人臉辨識系統的專家，同時也是我朋友：[**Jack, L.**](https://github.com/Jack-Lin-NTU)。他知道我有個網站，所以他先完成了前期的程式開發和可行性驗證，接著把這個想法託付給我，讓我繼續完成細節並發佈在這裡。
-
-在此特別感謝他的貢獻。
-:::
+當然不只有這樣，但為了節省篇幅，那些還在規劃中的，我就不贅述了。
 
 ## 你是工程師？
 
