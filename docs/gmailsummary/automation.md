@@ -60,7 +60,9 @@ chmod +x /path/to/your/script/update_targets_infos.sh
 chmod +x /path/to/your/script/refresh_token.sh
 ```
 
-此外，由於 crontab 的環境特殊性，你必須確保執行的 python 環境和相關套件都是正確的。因此在程式中，我通常會使用絕對路徑來執行 python 程式，請記得要修改程式中的路徑。
+此外，由於 crontab 的環境特殊性，你必須確保執行的 python 環境和相關套件都是正確的。
+
+因此在程式中，我通常會使用絕對路徑來執行 python 程式，請記得要修改程式中的路徑。
 
 ```bash
 # `update_targets_infos.sh` and `refresh_token.sh`
@@ -68,13 +70,13 @@ chmod +x /path/to/your/script/refresh_token.sh
 # ...以上省略
 
 # 執行 Python 程式，要把這邊改成你自己的 python 路徑
-$HOME/.pyenv/versions/3.8.18/envs/main/bin/python main.py --project_name $project_name --time_length 1 2>&1
+$HOME/your/python main.py --project_name $project_name --time_length 1 2>&1
 
 # ...以下省略
 ```
 
 :::tip
-由於 crontab 環境特殊性，它不會讀取你的 `.bashrc` 或 `.bash_profile` 等文件，所以你需要在程式中指定所有的環境變數。
+crontab 不會讀取你的 `.bashrc` 或 `.bash_profile` 等文件，所以你需要在程式中指定所有的環境變數。
 
 這也是為什麼我們會在 `crontab` 的執行程式中設置 `OPENAI_API_KEY` 環境變數的原因。
 :::
