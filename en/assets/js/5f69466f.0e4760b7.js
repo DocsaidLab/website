@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[9719],{50313:e=>{e.exports=JSON.parse('{"title":"WordCanvas","slug":"/category/wordcanvas","permalink":"/en/category/wordcanvas","navigation":{"previous":{"title":"test","permalink":"/en/gmailsummary/test"},"next":{"title":"Introduction","permalink":"/en/wordcanvas/intro"}}}')}}]);
