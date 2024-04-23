@@ -8,7 +8,9 @@ sidebar_position: 9
 
 ## 使用 `crontab`
 
-為了讓這個過程完全自動化，我利用了 Linux 的 `crontab` 功能來設置定時任務。這樣可以確保每天固定時間自動執行程式，抓取新郵件，生成摘要，並更新 GitHub 存儲庫。
+為了讓這個過程完全自動化，我們利用了 Linux 的 `crontab` 功能來設置定時任務。
+
+這樣可以確保每天固定時間自動執行程式，抓取新郵件，生成摘要，並更新 GitHub 存儲庫。
 
 具體的 `crontab` 設定如下：
 
@@ -62,7 +64,7 @@ chmod +x /path/to/your/script/refresh_token.sh
 
 此外，由於 crontab 的環境特殊性，你必須確保執行的 python 環境和相關套件都是正確的。
 
-因此在程式中，我通常會使用絕對路徑來執行 python 程式，請記得要修改程式中的路徑。
+因此在程式中，我們通常會使用絕對路徑來執行 python 程式，請記得要修改程式中的路徑。
 
 ```bash
 # `update_targets_infos.sh` and `refresh_token.sh`

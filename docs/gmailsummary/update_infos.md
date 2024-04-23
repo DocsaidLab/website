@@ -4,11 +4,11 @@ sidebar_position: 8
 
 # 串接所有功能
 
-我們已經完成了所有功能的開發，現在我們需要把這些功能串接起來，讓整個系統在後續的運作中能夠自動化執行。
+經過前面的說明，我們已經完成了所有功能的開發，現在需要把這些功能串接起來，讓整個系統在後續的運作中能夠自動化執行。
 
 ## 完整流程
 
-最後，我把所有的步驟串接在一起，寫成了一個程式 [**update_targets_infos.py**](https://github.com/DocsaidLab/GmailSummary/blob/main/update_targets_infos.sh)。
+我們撰寫一支 bash 程式 [**update_targets_infos.sh**](https://github.com/DocsaidLab/GmailSummary/blob/main/update_targets_infos.sh)，將所有的步驟串接在一起。
 
 其中包括了函數調用還有自動推送到 GitHub 的功能。
 
@@ -20,7 +20,7 @@ sidebar_position: 8
 - **BentoML**
 - **docusaurus**
 
-過程中我們也加入了一些 Log 機制，以便於後續的追蹤。
+過程中也加入了一些 Log 機制，以便於後續的追蹤。
 
 ```bash
 #!/bin/bash
@@ -37,7 +37,7 @@ news_dir="$targ_dir/docs/gmailsummary/news/$current_date"
 mkdir -p "$log_dir" "$news_dir"
 
 # 指定項目名稱列表
-project_names=("albumentations") # "onnxruntime" "pytorch-lightning" "BentoML" "docusaurus"
+project_names=("albumentations" "onnxruntime" "pytorch-lightning" "BentoML" "docusaurus")
 
 for project_name in "${project_names[@]}"; do
     log_file="$log_dir/$project_name-log-$current_date.txt"
@@ -51,7 +51,6 @@ for project_name in "${project_names[@]}"; do
         $pyenv_path main.py --project_name $project_name --time_length 1
         mv "$origin_dir/$file_name" "$project_path"
         git -C "$targ_dir" add "$project_path/$file_name"
-        git -C "$targ_dir" commit -m "[C] Update $project_name report for $current_date"
         echo "Script finished for $project_name at $(date)"
     } >> "$log_file" 2>&1
 
@@ -63,13 +62,14 @@ done
 
 # 推送 Git 變更
 {
+    git -C "$targ_dir" commit -m "[C] Update project report for $current_date"
     git -C "$targ_dir" push
 } >> "$log_file" 2>&1
 ```
 
 ## 實作建議
 
-在實施這一個自動化方案時，我們有些建議：
+在這個專案中，為了串接 API 而使整個專案充斥著憑證和密鑰，因此我們有些建議：
 
 首先，不管怎樣，拜託不要：**硬編碼你的憑證和密鑰**。
 
