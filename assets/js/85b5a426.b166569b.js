@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[4418],{87855:i=>{i.exports=JSON.parse('{"title":"Vision","slug":"/category/vision","permalink":"/category/vision","navigation":{"previous":{"title":"Time2Time","permalink":"/docsaidkit/funcs/time/time2time"},"next":{"title":"functionals","permalink":"/category/functionals"}}}')}}]);
