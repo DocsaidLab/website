@@ -13,6 +13,7 @@ sidebar_position: 10
 ### 4 月
 
 - TextRecognizer：延續 WordCanvas 的開發，繼續推進文字辨識的專案。
+- GmailSummary：修改功能：推送每日新聞至網站的技術文件頁面。
 
 ---
 

@@ -4,29 +4,29 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Open Source Projects',
+    Svg: require('@site/static/img/docsaid_draw_1.svg').default,
     description: (
       <>
-        Our blogging platform is crafted to ensure an intuitive experience, making it simple for you to create and publish your content without any hassle.
+        Explore our open-source projects and contribute to advancements in AI technology with our developer.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Technical Documentation',
+    Svg: require('@site/static/img/docsaid_draw_2.svg').default,
     description: (
       <>
-        Personalize your blog with customizable themes and widgets to reflect your style and engage your audience more effectively.
+        Access our in-depth guides and documentation designed to help developers effectively utilize our AI tools.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Research Analysis',
+    Svg: require('@site/static/img/docsaid_draw_3.svg').default,
     description: (
       <>
-        Leverage built-in SEO tools and analytics to increase your visibility online and gain insights into your audience's behavior.
+        Stay updated with the latest in AI through our concise, clear analyses of key research findings and trends.
       </>
     ),
   },

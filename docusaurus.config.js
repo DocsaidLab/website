@@ -26,7 +26,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          routeBasePath: '/',
+          routeBasePath: '/docs',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           remarkPlugins: [remarkMath],
@@ -122,6 +122,12 @@ const config = {
           autoCollapseCategories: true,
         }
       },
+      papers: {
+        sidebar: {
+          hideable: false,
+          autoCollapseCategories: false,
+        }
+      },
       colorMode: {
         defaultMode: 'light',
         disableSwitch: false,
@@ -131,7 +137,7 @@ const config = {
         links: [
           {
             label: 'Docs',
-            to: '/',
+            to: '/docs',
           },
           {
             label: 'Papers',

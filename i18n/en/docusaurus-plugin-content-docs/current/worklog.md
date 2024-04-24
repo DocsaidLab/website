@@ -13,6 +13,7 @@ This page is solely used to document our work content.
 ### April
 
 - TextRecognizer: Continuing the development of WordCanvas, advancing the text recognition project further.
+- GmailSummary: Update pushing daily news to the technical documents page of the website.
 
 ---
 
