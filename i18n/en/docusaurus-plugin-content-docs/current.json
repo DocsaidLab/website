@@ -86,5 +86,17 @@
   "sidebar.tutorialSidebar.category.WordCanvas": {
     "message": "WordCanvas",
     "description": "The label for category WordCanvas in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.每日新聞": {
+    "message": "Daily News",
+    "description": "The label for category 每日新聞 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.2024-04-23": {
+    "message": "2024-04-23",
+    "description": "The label for category 2024-04-23 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.2024-04-24": {
+    "message": "2024-04-24",
+    "description": "The label for category 2024-04-24 in sidebar tutorialSidebar"
   }
 }
