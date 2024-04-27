@@ -1,40 +1,72 @@
-/* 自訂的 CSS 變數，使用你提供的主色調 */
+/* 主題顏色和基本配置 */
 :root {
-  /* 主色调 */
-  --color-primary: #1d428a;
-  --color-primary-dark: #17356d;
-  --color-primary-darker: #132a57;
-  --color-primary-darkest: #0f2144;
-  --color-primary-light: #3e5da9;
-  --color-primary-lighter: #5f79c4;
-  --color-primary-lightest: #8095df;
+  --color-primary: #1d428a; /* 深藍色 */
+  --color-primary-dark: #0a2342;
+  --color-primary-light: #2a5ab3;
 
-  /* 次要色调 */
-  --color-secondary: #fe9308;
-  --color-secondary-dark: #e58307;
-  --color-secondary-darker: #cc7406;
-  --color-secondary-darkest: #b46505;
+  --color-secondary: #fe930f; /* 亮橙色 */
   --color-secondary-light: #fea527;
-  --color-secondary-lighter: #feb547;
-  --color-secondary-lightest: #fec667;
+  --color-secondary-dark: #cc7406;
 
-  /* 更新原有的颜色变量以使用新的命名 */
-  --ifm-color-primary: var(--color-primary);
-  --ifm-color-primary-dark: var(--color-primary-dark);
-  --ifm-color-primary-darker: var(--color-primary-darker);
-  --ifm-color-primary-darkest: var(--color-primary-darkest);
-  --ifm-color-primary-light: var(--color-primary-light);
-  --ifm-color-primary-lighter: var(--color-primary-lighter);
-  --ifm-color-primary-lightest: var(--color-primary-lightest);
+  --background-color: #ffffff;
+  --text-color: #404040;
+
+  /* 深色模式 */
+  --dark-background-color: #121212;
+  --dark-text-color: #e4e4e4;
 }
 
-/* 深色模式時的色調調整 */
 [data-theme='dark'] {
-  --ifm-color-primary: var(--your-color-secondary);
-  --ifm-color-primary-dark: var(--your-color-secondary-dark);
-  --ifm-color-primary-darker: var(--your-color-secondary-darker);
-  --ifm-color-primary-darkest: var(--your-color-secondary-darkest);
-  --ifm-color-primary-light: var(--your-color-secondary-light);
-  --ifm-color-primary-lighter: var(--your-color-secondary-lighter);
-  --ifm-color-primary-lightest: var(--your-color-secondary-lightest);
+  --background-color: var(--dark-background-color);
+  --text-color: var(--dark-text-color);
+
+  --color-primary: #fe930f;
+  --color-secondary: #cc7406;
+}
+
+/* 常用的間距和圓角設定 */
+:root {
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+
+  --border-radius: 4px;
+}
+
+/* 首頁樣式 */
+.hero {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: var(--spacing-lg) 0;
+}
+
+.heroBanner {
+  background-image: linear-gradient(120deg, var(--color-primary-dark), var(--color-primary-light));
+}
+
+.features {
+  background-color: #f5f5f5;
+  padding: var(--spacing-md);
+}
+
+.features-item {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.cta-button {
+  background-color: var(--color-secondary);
+  color: #ffffff;
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: var(--color-secondary-light);
+}
+
+.news-section {
+  background-color: var(--background-color);
+  padding: var(--spacing-md);
 }
