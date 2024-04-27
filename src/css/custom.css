@@ -1,72 +1,99 @@
 /* 主題顏色和基本配置 */
 :root {
-  --color-primary: #1d428a; /* 深藍色 */
-  --color-primary-dark: #0a2342;
-  --color-primary-light: #2a5ab3;
+  --color-primary: #1d428a;  /* 基本深藍 */
+  --color-primary-dark: #1a3b7c;
+  --color-primary-darker: #193875;
+  --color-primary-darkest: #142e61;
+  --color-primary-light: #204998;
+  --color-primary-lighter: #214c9f;
+  --color-primary-lightest: #2656b3;
 
-  --color-secondary: #fe930f; /* 亮橙色 */
-  --color-secondary-light: #fea527;
-  --color-secondary-dark: #cc7406;
+  --color-secondary: #fe930f;  /* 亮橙色 */
+  --color-secondary-light: #fea537;
+  --color-secondary-lightest: #feb75f;
 
-  --background-color: #ffffff;
-  --text-color: #404040;
-
-  /* 深色模式 */
-  --dark-background-color: #121212;
-  --dark-text-color: #e4e4e4;
+  --background-color: #ffffff;  /* 亮模式背景色 */
+  --text-color: #404040;        /* 亮模式文字色 */
 }
 
+/* 深色模式配置 */
 [data-theme='dark'] {
-  --background-color: var(--dark-background-color);
-  --text-color: var(--dark-text-color);
+  --color-primary: #fe930f;  /* 亮橙色為深色模式的主題色 */
+  --color-primary-dark: #f18601;
+  --color-primary-darker: #e47e01;
+  --color-primary-darkest: #bc6801;
+  --color-primary-light: #fe9f2a;
+  --color-primary-lighter: #fea537;
+  --color-primary-lightest: #feb75f;
 
-  --color-primary: #fe930f;
-  --color-secondary: #cc7406;
+  --background-color: #000000;  /* 深色模式背景色 */
+  --text-color: #e4e4e4;        /* 深色模式文字色 */
 }
 
-/* 常用的間距和圓角設定 */
-:root {
-  --spacing-sm: 1rem;
-  --spacing-md: 2rem;
-  --spacing-lg: 4rem;
-
-  --border-radius: 4px;
-}
-
-/* 首頁樣式 */
-.hero {
-  background-color: var(--color-primary);
-  color: #ffffff;
-  padding: var(--spacing-lg) 0;
-}
-
-.heroBanner {
-  background-image: linear-gradient(120deg, var(--color-primary-dark), var(--color-primary-light));
-}
-
-.features {
-  background-color: #f5f5f5;
-  padding: var(--spacing-md);
-}
-
-.features-item {
-  color: var(--color-primary);
-  margin-bottom: var(--spacing-sm);
-}
-
-.cta-button {
-  background-color: var(--color-secondary);
-  color: #ffffff;
-  padding: 0.8rem 1.6rem;
-  border-radius: var(--border-radius);
-  transition: background-color 0.3s;
-}
-
-.cta-button:hover {
-  background-color: var(--color-secondary-light);
-}
-
-.news-section {
+/* 全局樣式 */
+body {
   background-color: var(--background-color);
-  padding: var(--spacing-md);
+  color: var(--text-color);
+  font-family: Arial, sans-serif; /* 添加字型設定 */
+}
+
+/* 首頁特定樣式 */
+.hero {
+  background-color: var(--color-primary); /* 亮模式背景色為深藍色 */
+  color: #ffffff;
+}
+
+/* 首頁標題和按鈕樣式 */
+.hero h1, .hero h2, .hero h3 {
+  color: #ffffff; /* 繼承.hero的顏色設定 */
+}
+
+
+/* 其他全局樣式 */
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+h1, h2, h3 {
+  color: var(--color-primary-darker); /* 全局標題顏色設定 */
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+[data-theme='dark'] a {
+  color: #ffffff;
+}
+
+a:hover {
+  color: var(--color-primary-light);
+}
+
+[data-theme='dark'] a:hover {
+  color: var(--color-primary-lightest);
+}
+
+/* 深色模式下導航欄特定樣式 */
+[data-theme='dark'] .navbar {
+  color: #ffffff; /* 在深色模式下設定為白色 */
+}
+
+/* 如果導航欄內有超連結，也應該設定它們的顏色 */
+.navbar a {
+  color: inherit; /* 繼承導航欄的顏色，確保一致性 */
+  text-decoration: none; /* 去除超連結的下劃線 */
+}
+
+.navbar a:hover {
+  text-decoration: underline; /* 鼠標懸停時添加下劃線 */
+}
+
+[data-theme='dark'] .navbar a {
+  color: inherit; /* 在深色模式下繼承導航欄的白色 */
 }
