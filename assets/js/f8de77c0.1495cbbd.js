@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[6487],{88581:o=>{o.exports=JSON.parse('{"permalink":"/blog/tags/python","page":1,"postsPerPage":8,"totalPages":1,"totalCount":3,"blogDescription":"A Docsaid powered blog!","blogTitle":"Docsaid blog!"}')}}]);
