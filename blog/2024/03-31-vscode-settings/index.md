@@ -3,88 +3,87 @@ slug: vscode-settings
 title: 常用的 VScode 參數設定
 authors: Zephyr
 tags: [vscode, settings]
+image: ./img/title.webp
+description: 記錄常用的 VScode 參數設定，以便日後使用。
 ---
+
+![title](./img/title.webp)
 
 不久前，因為不明原因導致我的 VScode 設定檔消失。費了我一小時又重新設定了一次。
 
 剛好也讓我有機會重新檢視一下自己的設定檔，並且將一些常用的設定檔記錄下來。
 
-<!--truncate-->
-
 ## 設定檔
 
 ```json
 {
-    "editor.fontFamily": "Fira Code, MesloLGS NF",
-    "editor.fontLigatures": true,
-    "files.associations": {
-        "Dockerfile_base": "dockerfile"
-    },
-    "markdown.preview.fontSize": 15,
-    "debug.console.fontSize": 14,
-    "explorer.confirmDragAndDrop": true,
-    "editor.minimap.enabled": true,
-    "editor.minimap.maxColumn": 80,
-    "editor.smoothScrolling": true,
-    "editor.rulers": [
-        80,
-        120
-    ],
-    "workbench.colorCustomizations": {
-        "editorRuler.foreground": "#ff4081",
-        "minimap.background": "#00000050",
-        "editor.background": "#1e1e1e",
-        "editor.foreground": "#d4d4d4"
-    },
-    "terminal.integrated.fontFamily": "Fira Code, MesloLGS NF",
-    "files.trimTrailingWhitespace": true,
-    "files.trimFinalNewlines": true,
-    "diffEditor.ignoreTrimWhitespace": true,
-    "python.terminal.activateEnvironment": true,
-    "git.ignoreLegacyWarning": true,
-    "git.autofetch": true,
-    "editor.largeFileOptimizations": false,
-    "editor.mouseWheelZoom": true,
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": true,
-        "source.fixAll": true
-    },
-    "editor.formatOnSave": true,
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
-    },
-    "debug.onTaskErrors": "abort",
-    "explorer.confirmDelete": true,
-    "terminal.integrated.copyOnSelection": true,
-    "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.cursorStyle": "line",
-    "remote.downloadExtensionsLocally": true,
-    "terminal.integrated.scrollback": 10000,
-    "editor.cursorStyle": "line",
-    "editor.insertSpaces": true,
-    "editor.lineNumbers": "on",
-    "editor.wordWrap": "on",
-    "workbench.editor.wrapTabs": false,
-    "files.watcherExclude": {
-        "**/.git/objects/**": true,
-        "**/.git/subtree-cache/**": true,
-        "**/node_modules/*/**": true
-    },
-    "notebook.cellToolbarLocation": {
-        "default": "right",
-        "jupyter-notebook": "left"
-    },
-    "github.copilot.editor.enableAutoCompletions": true,
-    "github.copilot.enable": {
-        "*": true,
-        "plaintext": false,
-        "markdown": true,
-        "scminput": false
-    },
-    "workbench.colorTheme": "Monokai Pro",
-    "editor.multiCursorModifier": "ctrlCmd",
-    "editor.wordWrapColumn": 120,
-    "files.autoSave": "onFocusChange"
+  "editor.fontFamily": "Fira Code, MesloLGS NF",
+  "editor.fontLigatures": true,
+  "files.associations": {
+    "Dockerfile_base": "dockerfile"
+  },
+  "markdown.preview.fontSize": 15,
+  "debug.console.fontSize": 14,
+  "explorer.confirmDragAndDrop": true,
+  "editor.minimap.enabled": true,
+  "editor.minimap.maxColumn": 80,
+  "editor.smoothScrolling": true,
+  "editor.rulers": [80, 120],
+  "workbench.colorCustomizations": {
+    "editorRuler.foreground": "#ff4081",
+    "minimap.background": "#00000050",
+    "editor.background": "#1e1e1e",
+    "editor.foreground": "#d4d4d4"
+  },
+  "terminal.integrated.fontFamily": "Fira Code, MesloLGS NF",
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "diffEditor.ignoreTrimWhitespace": true,
+  "python.terminal.activateEnvironment": true,
+  "git.ignoreLegacyWarning": true,
+  "git.autofetch": true,
+  "editor.largeFileOptimizations": false,
+  "editor.mouseWheelZoom": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.fixAll": true
+  },
+  "editor.formatOnSave": true,
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "debug.onTaskErrors": "abort",
+  "explorer.confirmDelete": true,
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+  "remote.downloadExtensionsLocally": true,
+  "terminal.integrated.scrollback": 10000,
+  "editor.cursorStyle": "line",
+  "editor.insertSpaces": true,
+  "editor.lineNumbers": "on",
+  "editor.wordWrap": "on",
+  "workbench.editor.wrapTabs": false,
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true
+  },
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
+  "workbench.colorTheme": "Monokai Pro",
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.wordWrapColumn": 120,
+  "files.autoSave": "onFocusChange"
 }
 ```
 

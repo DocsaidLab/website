@@ -73,10 +73,6 @@ a:hover {
   color: #ffffff;
 }
 
-article header h2 {
-  font-size: 2rem !important;
-}
-
 .markdown h2{font-size : 1.75rem;}
 .markdown h3{
   font-size: 1.5rem;
@@ -84,4 +80,95 @@ article header h2 {
   padding: 5px 0 5px 7px;
 }
 
+/* 隱藏博客頁側邊欄 */
+.blog-post-page aside {
+  display: none;
+}
+
+/* 移除博客列表和標籤頁的超連結懸停裝飾 */
+.blog-list-page a:hover,
+.blog-tags-post-list-page a:hover {
+  text-decoration: none;
+}
+
+/* 統一文章標題和段落的顏色 */
+.blog-list-page article header,
+.blog-list-page article p,
+.blog-tags-post-list-page header,
+.blog-tags-post-list-page article p {
+  color: var(--font-color-base);
+}
+
+/* 設定文章標題的字體大小 */
+.blog-list-page article header a,
+.blog-tags-post-list-page article header a,
+.blog-list-page header a,
+.blog-tags-post-list-page header a {
+  font-size: 1.5rem;
+}
+
+/* 設定H2標籤的行高 */
+.blog-list-page header h2,
+.blog-tags-post-list-page header h2 {
+  line-height: 1.5rem;
+}
+
+/* 文章懸停時標題顏色變更 */
+.blog-list-page article:hover header a,
+.blog-tags-post-list-page article:hover header a {
+  color: var(--color-primary);
+}
+
+/* 移除底部間隔 */
+.blog-list-page article footer,
+.blog-tags-post-list-page article footer {
+  margin-top: 0;
+}
+
+/* 響應式設計: 雙欄顯示 */
+@media (min-width: 651px) {
+  .blog-list-page main,
+  .blog-tags-post-list-page main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 25px;
+  }
+}
+
+
+.avatar {
+  padding: 0px; /* 內距 */
+  margin: 0px; /* 外距 */
+  align-items: center;   /* 垂直居中 */
+}
+
+/* 調整姓名文字大小 */
+.avatar__name span {
+  font-size: 1rem; /* 設定文字大小 */
+}
+
+/* 調整職稱文字大小 */
+.avatar__subtitle {
+  font-size: 0.7rem; /* 設定文字大小 */
+}
+
+.avatar__photo {
+  width: 40px; /* 設定圖片寬度 */
+  height: 40px; /* 設定圖片高度 */
+  border-radius: 50%; /* 讓圖片顯示為圓形 */
+}
+
+/* 確保分頁導航在Grid容器中正確對齊 */
+.pagination-nav {
+  grid-column: 1 / -1; /* 如果分頁導航應該橫跨所有列 */
+  display: flex;
+  justify-content: space-between; /* 確保按鈕在兩邊 */
+  align-items: center;
+}
+
+/* 增強響應式設計 */
+@media (max-width: 768px) {
+  .pagination-nav {
+    flex-direction: column;
+  }
 }
