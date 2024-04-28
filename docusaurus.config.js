@@ -38,9 +38,9 @@ const config = {
           blogTitle: 'Docsaid blog!',
           blogDescription: 'A Docsaid powered blog!',
           showReadingTime: true,
-          blogSidebarTitle: 'All our posts',
-          blogSidebarCount: 6,
-          postsPerPage: 6,
+          blogSidebarTitle: 'Newest Posts',
+          blogSidebarCount: 12,
+          postsPerPage: 8,
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
         },
@@ -155,11 +155,11 @@ const config = {
           },
           {
             label: '使用條款',
-            to: '/blog/terms-of-service',
+            href: 'https://docsaid.org/blog/terms-of-service',
           },
           {
             label: '隱私政策',
-            to: '/blog/privacy-policy',
+            href: 'https://docsaid.org/blog/privacy-policy',
           }
         ],
         copyright: `Copyright © ${new Date().getFullYear()} DOCSAID.`,

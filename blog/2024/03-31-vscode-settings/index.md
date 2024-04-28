@@ -3,11 +3,16 @@ slug: vscode-settings
 title: 常用的 VScode 參數設定
 authors: Zephyr
 tags: [vscode, settings]
-image: ./img/title.webp
+image: /img/2024/0331.webp
 description: 記錄常用的 VScode 參數設定，以便日後使用。
 ---
 
-![title](./img/title.webp)
+<figure>
+![title](/img/2024/0331.webp)
+<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
+</figure>
+
+---
 
 不久前，因為不明原因導致我的 VScode 設定檔消失。費了我一小時又重新設定了一次。
 

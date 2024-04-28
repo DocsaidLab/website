@@ -2,12 +2,17 @@
 slug: npm-npx-nvm-python-analogues-zh
 title: Python 與 JS 的基本指令對應
 authors: Zephyr
-image: ./img/title.webp
+image: /img/2024/0407.webp
 tags: [npm, npx, nvm, pip, pyenv]
 description: 把 Python 與 JS 的基本指令進行類似的對應。
 ---
 
-![Python 與 JS 的基本指令對應](./img/title.webp)
+<figure>
+![title](/img/2024/0407.webp)
+<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
+</figure>
+
+---
 
 我比較常使用的語言是 Python，其中常見的指令像是 `pip` 和 `python -m`，但最近開始學習 JavaScript 時，發現了類似功能的指令，像是 `npm`、`npx` 和 `nvm` 等。
 
