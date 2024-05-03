@@ -165,10 +165,3 @@ a:hover {
   justify-content: space-between; /* 確保按鈕在兩邊 */
   align-items: center;
 }
-
-/* 增強響應式設計 */
-@media (max-width: 768px) {
-  .pagination-nav {
-    flex-direction: column;
-  }
-}
