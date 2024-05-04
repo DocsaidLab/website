@@ -11,12 +11,6 @@ I'm Zephyr, an AI engineer from Taiwan and the founder of this organization.
 
 ## What's Here
 
-:::info
-I would like to inform you that at present, only the technical documentation has been translated into English. I am committed to making all content fully accessible and plan to progressively update the remaining sections in the near future.
-
-Thank you for your patience and understanding as I work to enhance the offerings.
-:::
-
 - For paper reviews, see next door: [**Papers**](https://docsaid.org/papers/intro).
 - For the blog section, it's the door after next: [**Blog**](https://docsaid.org/blog).
 
@@ -102,7 +96,7 @@ I've always had a habit of blogging. I used **Dot Blog** for about two years bef
 
 Then I tried **Wordpress.org** for about half a year before
 
- giving up on it too.
+giving up on it too.
 
 - **Engineers should write documentation in Markdown! Isn't Elementor laggy?**
 
@@ -141,57 +135,58 @@ You might get stuck at this step, like most people do, but don't worry.
 
 - **Scenario One: You know my project's functions fit your needs, but you don't know how to adjust:**
 
-    In this case, you can send me an email with your requirements and provide the "dataset you want to solve." I can help you fine-tune the model, so you can achieve better model performance.
+  In this case, you can send me an email with your requirements and provide the "dataset you want to solve." I can help you fine-tune the model, so you can achieve better model performance.
 
-    There's no charge, but I can't be pressed for time, and I can't guarantee it will be done. (This is important!)
+  There's no charge, but I can't be pressed for time, and I can't guarantee it will be done. (This is important!)
 
-    Although I'm working on open-source projects, I'm not just twiddling my thumbs. When the time comes, the model will naturally update, and just by sending an email, you might get a better model. At the very least, it could be considered a win-win, right?
+  Although I'm working on open-source projects, I'm not just twiddling my thumbs. When the time comes, the model will naturally update, and just by sending an email, you might get a better model. At the very least, it could be considered a win-win, right?
 
 - **Scenario Two: You want to develop a specific function:**
 
-    Then write to me to discuss it. If I find it interesting, I'll be happy to help you develop it, but I hope you can prepare a substantial dataset first, because even if I'm interested, I might not have the time to obtain enough data or some special data might require specific channels to acquire.
+  Then write to me to discuss it. If I find it interesting, I'll be happy to help you develop it, but I hope you can prepare a substantial dataset first, because even if I'm interested, I might not have the time to obtain enough data or some special data might require specific channels to acquire.
 
-    This scenario, like the one above, does not involve charges, but I can't be pressed for time, and I can't guarantee execution.
+  This scenario, like the one above, does not involve charges, but I can't be pressed for time, and I can't guarantee execution.
 
-    :::tip
-    If the specific function is for those public model competitions? The answer is no. Those competitions often have copyrights and related restrictions. If complained, the organizers might trouble me.
-    :::
+  :::tip
+  If the specific function is for those public model competitions? The answer is no. Those competitions often have copyrights and related restrictions. If complained, the organizers might trouble me.
+  :::
 
 - **Scenario Three: You are pursuing rapid development of a specific function:**
 
-    When time becomes your primary consideration, we can turn to a commissioned development cooperation mode. Based on your requirements, I will offer a reasonable quote. The calculation is straightforward: based on the time I need to invest, plus some necessary development costs, that's it.
+  When time becomes your primary consideration, we can turn to a commissioned development cooperation mode. Based on your requirements, I will offer a reasonable quote. The calculation is straightforward: based on the time I need to invest, plus some necessary development costs, that's it.
 
-    Take the [**DocAligner**](https://github.com/DocsaidLab/DocAligner) project as an example, from scratch, based on my own development speed, including literature review, initial exploration, model design testing, etc., normally requires a six-month development cycle. If this were a commissioned development case, the quote would be around thirty thousand dollars. This price covers the entire process from data collection, model training, to system deployment, just as you see it. If a complex, large-scale project involving multiple models communicating and coordinating is needed, we can first discuss specific needs and scheduling, then provide a quote.
+  Take the [**DocAligner**](https://github.com/DocsaidLab/DocAligner) project as an example, from scratch, based on my own development speed, including literature review, initial exploration, model design testing, etc., normally requires a six-month development cycle. If this were a commissioned development case, the quote would be around thirty thousand dollars. This price covers the entire process from data collection, model training, to system deployment, just as you see it. If a complex, large-scale project involving multiple models communicating and coordinating is needed, we can first discuss specific needs and scheduling, then provide a quote.
 
-    Additionally, you might overlook the "necessary costs" mentioned above, referring to training machines. If it's a small project, like those I've open-sourced, then my own training machines are sufficient to complete the tasks, and there are no cloud machine rental fees. But for a previous facial recognition project, due to the large size of the model, only renting cloud machines was an option. With the dataset and machines in place, it took two months to complete a model. In such scenarios, development costs come to about nine thousand dollars, but cloud training machine rental costs amount to twenty thousand dollars (a money pit), and this cost must be considered.
+  Additionally, you might overlook the "necessary costs" mentioned above, referring to training machines. If it's a small project, like those I've open-sourced, then my own training machines are sufficient to complete the tasks, and there are no cloud machine rental fees. But for a previous facial recognition project, due to the large size of the model, only renting cloud machines was an option. With the dataset and machines in place, it took two months to complete a model. In such scenarios, development costs come to about nine thousand dollars, but cloud training machine rental costs amount to twenty thousand dollars (a money pit), and this cost must be considered.
 
-    Also, I won't accept proposals like: "I want the OOO function of XXX's LLM," although I am equally skilled at building generative models, but only on a small scale. Most things related to LLMs are likely to involve expenditures in the hundreds of millions of dollars. Currently, I remain a user as far as training is concerned. Sorry for the disturbance.
+  Also, I won't accept proposals like: "I want the OOO function of XXX's LLM," although I am equally skilled at building generative models, but only on a small scale. Most things related to LLMs are likely to involve expenditures in the hundreds of millions of dollars. Currently, I remain a user as far as training is concerned. Sorry for the disturbance.
 
-    Furthermore, the purpose of my commissioned development is to rapidly meet your needs. If I succeed, it's a win-win outcome, and we can happily settle accounts. If the goals are not met, then consider it a lack of skill on my part, and I won't charge you any development fees, but if cloud machines are rented, those costs still apply. Although I can absorb the development costs myself, the expenses for cloud machines are too high for me to bear alone.
+  Furthermore, the purpose of my commissioned development is to rapidly meet your needs. If I succeed, it's a win-win outcome, and we can happily settle accounts. If the goals are not met, then consider it a lack of skill on my part, and I won't charge you any development fees, but if cloud machines are rented, those costs still apply. Although I can absorb the development costs myself, the expenses for cloud machines are too high for me to bear alone.
 
-    :::tip
-    The ownership issues of commissioned development must be discussed upfront. Generally, I retain ownership of the project, but you are free to use it. If you want to buy out the project, I will provide a separate quote.
+  :::tip
+  The ownership issues of commissioned development must be discussed upfront. Generally, I retain ownership of the project, but you are free to use it. If you want to buy out the project, I will provide a separate quote.
 
-    I do not recommend proposals to buy out projects, as this does not align with the philosophy of continuous improvement. With technological advancements, today's solutions might soon be superseded by updated methods. If you buy out a project, as time passes, you might find this investment has lost its original value.
-    :::
-    :::tip
-    You might not understand the issue of project ownership.
+  I do not recommend proposals to buy out projects, as this does not align with the philosophy of continuous improvement. With technological advancements, today's solutions might soon be superseded by updated methods. If you buy out a project, as time passes, you might find this investment has lost its original value.
+  :::
+  :::tip
+  You might not understand the issue of project ownership.
 
-    But think about it carefully; maybe you just want to "drink milk," not really "raise a cow."
+  But think about it carefully; maybe you just want to "drink milk," not really "raise a cow."
 
-    - How tiring is it to raise a cow? (Needing to maintain engineers for the project)
-    - It takes up space and is hard to care for. (Setting up training machines, renting cloud machines is expensive, buying main machines tends to break down)
-    - It's sensitive to cold and heat. (Model tuning drives you to doubt life)
-    - And it dies on a whim. (Fails to meet expected results)
-    - Truly a loss. (Spent money to buy out the project)
+  - How tiring is it to raise a cow? (Needing to maintain engineers for the project)
+  - It takes up space and is hard to care for. (Setting up training machines, renting cloud machines is expensive, buying main machines tends to break down)
+  - It's sensitive to cold and heat. (Model tuning drives you to doubt life)
+  - And it dies on a whim. (Fails to meet expected results)
+  - Truly a loss. (Spent money to buy out the project)
 
-    Moreover, the most valuable part of most projects is the dataset, followed by the thought process of the solution. Without open-sourcing the private dataset, having a piece of code is mostly just for viewing. If, after careful consideration, you still insist on buying out the project, I won't stop you; come on then.
-    :::
+  Moreover, the most valuable part of most projects is the dataset, followed by the thought process of the solution. Without open-sourcing the private dataset, having a piece of code is mostly just for viewing. If, after careful consideration, you still insist on buying out the project, I won't stop you; come on then.
+  :::
 
-    :::info
-    - **In all forms of development projects, we absolutely do not open-source the data you provide unless permitted by you.**
-    - **Normally, data is only used for updating models.**
-    - **To submit datasets: docsaidlab@gmail.com**
+  :::info
+
+  - **In all forms of development projects, we absolutely do not open-source the data you provide unless permitted by you.**
+  - **Normally, data is only used for updating models.**
+  - **To submit datasets: docsaidlab@gmail.com**
     :::
 
 ## Conclusion 🍹

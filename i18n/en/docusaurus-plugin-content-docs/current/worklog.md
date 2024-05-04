@@ -12,25 +12,14 @@ This page is solely used to document our work content.
 
 ### April
 
-- TextRecognizer: Continuing the development of WordCanvas, advancing the text recognition project further.
-- GmailSummary: Update pushing daily news to the technical documents page of the website.
-
----
-
-Is this Technical Documentation Month?
-
-- Completed the technical documentation for GmailSummary.
-- Completed the technical documentation for DocClassifier.
-- Completed the technical documentation for WordCanvas.
-- Completed the technical documentation for DocAligner.
-- Completed the technical documentation for DocsaidKit.
-
----
-
-- Explored Docusaurus' i18n functionality and started synchronizing English documentation.
-- Explored Docusaurus' technical documentation feature, initiating the writing of technical documentation and migrating content from GitHub here.
-- WordCanvas: Development completed, transitioned to an open-source project. 🎉 🎉 🎉
-- Renamed the `blog` GitHub repository to `website` to better reflect the actual situation.
+- Enhanced proficiency in CSS styling to refine the appearance of the blog.
+- Continued development of TextRecognizer, building upon WordCanvas progress to advance the text recognition project.
+- Updated functionality of GmailSummary: implemented daily news push to the technical documentation page of the website.
+- Completed technical documentation for all ongoing projects.
+- Explored Docusaurus's i18n feature, concurrently drafting English documentation.
+- Initiated technical documentation using Docusaurus, migrating content from GitHub accordingly.
+- WordCanvas development accomplished, transitioned to an open-source project. 🎉 🎉 🎉
+- Renamed the `blog` GitHub repository to `website` to better reflect its purpose and content.
 
 ### March
 

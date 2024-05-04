@@ -1,7 +1,7 @@
 {
   "link.item.label.Docs": {
     "message": "Docs",
-    "description": "The label of footer link with label=Docs linking to /"
+    "description": "The label of footer link with label=Docs linking to /docs"
   },
   "link.item.label.Papers": {
     "message": "Papers",
@@ -17,11 +17,11 @@
   },
   "link.item.label.使用條款": {
     "message": "TermsOfUse",
-    "description": "The label of footer link with label=使用條款 linking to /blog/terms-of-service"
+    "description": "The label of footer link with label=使用條款 linking to https://docsaid.org/blog/terms-of-service"
   },
   "link.item.label.隱私政策": {
     "message": "Privacy Policy",
-    "description": "The label of footer link with label=隱私政策 linking to /blog/privacy-policy"
+    "description": "The label of footer link with label=隱私政策 linking to https://docsaid.org/blog/privacy-policy"
   },
   "copyright": {
     "message": "Copyright © 2024 DOCSAID.",
