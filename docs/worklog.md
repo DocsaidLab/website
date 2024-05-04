@@ -4,7 +4,11 @@ sidebar_position: 10
 
 # Worklog
 
+---
+
+:::info
 本頁面僅用來記錄我們的工作內容。
+:::
 
 ---
 
@@ -12,21 +16,10 @@ sidebar_position: 10
 
 ### 4 月
 
+- 學習配置 CSS 樣式，調整部落格的外觀。
 - TextRecognizer：延續 WordCanvas 的開發，繼續推進文字辨識的專案。
 - GmailSummary：修改功能：推送每日新聞至網站的技術文件頁面。
-
----
-
-這是技術文件月？
-
-- 完成 GmailSummary 的技術文件。
-- 完成 DocClassifier 的技術文件。
-- 完成 WordCanvas 的技術文件。
-- 完成 DocAligner 的技術文件。
-- 完成 DocsaidKit 的技術文件。
-
----
-
+- 完成目前所有專案的技術文件。
 - 探索 Docusaurus 的 i18n 功能，並同步撰寫英文文件。
 - 探索 Docusaurus 的技術文件功能，開始著手撰寫技術文件，並且從 github 搬移內容至此。
 - WordCanvas：開發完成，轉成開源專案。🎉 🎉 🎉
@@ -36,7 +29,9 @@ sidebar_position: 10
 
 某天發現 Google Drive 的檔案下載功能壞了，原本能透過 `gen_download_cmd` 取得的資料變成「一團錯誤的 html」。👻 👻 👻
 
-經過考慮，後來決定用 [**NextCloud**](https://github.com/nextcloud) 開源架構建立私有雲，專門用於存放資料，並更新過去發布的下載連結。
+經過考慮...
+
+後來決定用 [**NextCloud**](https://github.com/nextcloud) 開源架構建立私有雲，專門用於存放資料，並更新過去發布的下載連結。
 
 - GmailSummary：開發完成，轉成開源專案。🎉 🎉 🎉
 - DocClassifier：發現疊加多個標準化層對模型效果有顯著提升。（意外發現的...）
