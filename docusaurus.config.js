@@ -6,7 +6,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'DOCSAID',
-  tagline: 'A playground for our developers',
+  tagline: 'A playground for our developers.',
   favicon: 'img/favicon.ico',
   url: 'https://docsaid.org',
   baseUrl: '/',
@@ -35,8 +35,8 @@ const config = {
           showLastUpdateTime: true,
         },
         blog: {
-          blogTitle: 'Docsaid blog!',
-          blogDescription: 'A Docsaid powered blog!',
+          blogTitle: 'Blog',
+          blogDescription: 'Docsaid Blog.',
           showReadingTime: true,
           blogSidebarTitle: 'All our Posts',
           blogSidebarCount: 'ALL',
