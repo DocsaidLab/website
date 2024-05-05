@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([[2535],{4983:a=>{a.exports=JSON.parse('{"tag":{"label":"usage","permalink":"/blog/tags/usage","allTagsPath":"/blog/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/usage","page":1,"postsPerPage":8,"totalPages":1,"totalCount":1,"blogDescription":"Docsaid Blog.","blogTitle":"Blog"}}')}}]);
