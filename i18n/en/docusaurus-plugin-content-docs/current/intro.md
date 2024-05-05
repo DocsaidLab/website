@@ -159,8 +159,6 @@ You might get stuck at this step, like most people do, but don't worry.
 
   Additionally, you might overlook the "necessary costs" mentioned above, referring to training machines. If it's a small project, like those I've open-sourced, then my own training machines are sufficient to complete the tasks, and there are no cloud machine rental fees. But for a previous facial recognition project, due to the large size of the model, only renting cloud machines was an option. With the dataset and machines in place, it took two months to complete a model. In such scenarios, development costs come to about nine thousand dollars, but cloud training machine rental costs amount to twenty thousand dollars (a money pit), and this cost must be considered.
 
-  Also, I won't accept proposals like: "I want the OOO function of XXX's LLM," although I am equally skilled at building generative models, but only on a small scale. Most things related to LLMs are likely to involve expenditures in the hundreds of millions of dollars. Currently, I remain a user as far as training is concerned. Sorry for the disturbance.
-
   Furthermore, the purpose of my commissioned development is to rapidly meet your needs. If I succeed, it's a win-win outcome, and we can happily settle accounts. If the goals are not met, then consider it a lack of skill on my part, and I won't charge you any development fees, but if cloud machines are rented, those costs still apply. Although I can absorb the development costs myself, the expenses for cloud machines are too high for me to bear alone.
 
   :::tip
