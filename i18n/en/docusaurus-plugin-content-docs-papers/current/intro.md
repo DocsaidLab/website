@@ -8,28 +8,28 @@ sidebar_position: 1
 
 Reading papers is part of my daily routine.
 
-Since the advent of ChatGPT, reading papers has become easier, but it doesn't mean we can skip thinking altogether.
+Since the advent of ChatGPT, going through papers has become much easier, but that doesn't mean we can overlook the responsibility of critical thinking.
 
-Here, I've compiled some records of papers I've read along with ChatGPT.
+Here, I document my insights into analyzing papers with ChatGPT.
 
-At the same time, please understand that I'm just a regular engineer, not an all-knowing scholar.
+However, please understand that I'm just an ordinary engineer, not an all-knowing scholar.
 
-There might be some misunderstandings in my comprehension of these papers. If you have any doubts about the content here, **please refer to the original papers**. Feel free to provide feedback as well, so I can better understand these papers.
+Therefore, my interpretation of papers may be biased or flawed. If you have any doubts about the content, **please refer to the original paper**.
 
-:::tip
-You might think we just feed papers to ChatGPT and it churns out articles on its own.
+Your feedback is also welcome to help me gain a deeper understanding of these studies.
 
-It's not that convenient!
+:::info
+You might think I just throw the paper at ChatGPT, and it magically writes the article for me.
 
-The truth is: when you throw the whole article at ChatGPT with confusion, you'll likely end up with more confusion.
+It's not that simple!
+
+The reality is: when you blindly feed the entire paper to ChatGPT, it often deepens your confusion.
 
 ＊
 
-I have to read the papers myself and write the articles on my own.
+The most efficient way is: read the paper yourself first, draft your article, and then when encountering difficulties or parts that are hard to understand, turn to ChatGPT for assistance.
 
-When encountering difficulties in writing or understanding, then I turn to ChatGPT for assistance.
-
-Believe me, this is the most efficient method.
+Trust me, this is the wisest strategy.
 :::
 
 ## Also
