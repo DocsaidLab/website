@@ -16,7 +16,9 @@ description: 記錄 Ubuntu 22.04 上搭建 Nextcloud 的過程。
 
 之前我都把檔案放在 Google Drive 上，下載檔案的時候會透過 wget 指令來下載。
 
-直到某一天，原本的下載指令突然就不能用了...既然如此，那我們來試試看 Nextcloud。
+直到某一天，原本的下載指令突然就不能用了...
+
+既然如此，那我們來試試看 Nextcloud。
 
 以下我們基於 Ubuntu 22.04 來進行相關配置。
 
@@ -45,7 +47,11 @@ description: 記錄 Ubuntu 22.04 上搭建 Nextcloud 的過程。
 
 - 參考官方文件：[**Nextcloud All-in-One**](https://github.com/nextcloud/all-in-one)
 
-首先確保你已經安裝了 Docker 和 Docker Compose。如果還沒有完成，請 Google 搜尋 『Docker & Docker Compose 安裝方法』。
+首先確保你已經安裝了 Docker 和 Docker Compose。
+
+:::tip
+如果還沒有完成，請 Google 搜尋 『Docker & Docker Compose 安裝方法』。
+:::
 
 接著，建立一個 NextCloud 資料夾，然後寫一個 Docker Compose 的設定檔 `docker-compose.yml`：
 

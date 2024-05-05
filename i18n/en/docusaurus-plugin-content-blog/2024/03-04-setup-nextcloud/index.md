@@ -14,7 +14,11 @@ description: Setting up Nextcloud on Ubuntu 22.04.
 
 ---
 
-Previously, I used to store files on Google Drive and would download them using the wget command. However, one day, the download command suddenly stopped working. So, I decided to give Nextcloud a try.
+Previously, I used to store files on Google Drive and would download them using the wget command.
+
+However, one day, the download command suddenly stopped working.
+
+So, I decided to give Nextcloud a try.
 
 Below, we'll go through the setup process based on Ubuntu 22.04.
 
@@ -43,7 +47,11 @@ If you're unsure how to do this, simply Google search "how to use namecheap".
 
 - Reference the official documentation: [**Nextcloud All-in-One**](https://github.com/nextcloud/all-in-one)
 
-First, ensure you've installed Docker and Docker Compose. If not, Google search "Docker & Docker Compose installation methods".
+First, ensure you've installed Docker and Docker Compose.
+
+:::tip
+If not, Google search "Docker & Docker Compose installation".
+:::
 
 Next, create a NextCloud folder and write a Docker Compose configuration file `docker-compose.yml`:
 
