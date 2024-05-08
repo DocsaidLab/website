@@ -27,12 +27,8 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/docs',
-          showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
-          showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
         },
         blog: {
           blogTitle: 'Blog',
@@ -69,8 +65,6 @@ const config = {
         path: 'papers',
         routeBasePath: 'papers',
         sidebarPath: require.resolve('./sidebarsPapers.js'),
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
         remarkPlugins: [remarkMath],
         rehypePlugins: [rehypeKatex],
       },
