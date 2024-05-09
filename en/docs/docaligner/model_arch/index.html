@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script>
 <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script><link rel="stylesheet" href="/en/assets/css/styles.e01011e7.css">
-<script src="/en/assets/js/runtime~main.9cae8e59.js" defer="defer"></script>
+<script src="/en/assets/js/runtime~main.67f3c3fa.js" defer="defer"></script>
 <script src="/en/assets/js/main.34d36aa9.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -70,6 +70,7 @@
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="2-bifpn">2. BiFPN<a href="#2-bifpn" class="hash-link" aria-label="Direct link to 2. BiFPN" title="Direct link to 2. BiFPN">​</a></h3>
 <p>To better integrate multi-scale features, we introduce BiFPN (Bidirectional Feature Pyramid Network), which enhances feature representation through bidirectional flow of contextual information. We anticipate BiFPN to produce a series of scale-rich and semantically strong feature maps, highly effective in capturing objects at different scales and positively impacting final prediction accuracy.</p>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="3-heatmap-regression">3. Heatmap Regression<a href="#3-heatmap-regression" class="hash-link" aria-label="Direct link to 3. Heatmap Regression" title="Direct link to 3. Heatmap Regression">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="awing_loss.jpg" src="/en/assets/images/awing_loss-f4531a7f843e26f0085e9962144a905d.jpg" width="1224" height="912" class="img_ev3q"></p>
 <p>To address the aforementioned amplification error, we need a certain &quot;fuzziness&quot; in the predicted results. Meaning, we shouldn&#x27;t let the model precisely pinpoint where the document corners are but rather make the model say, &quot;<strong>The document corners are approximately in this area</strong>&quot;.</p>
 <p>For this, we adopted a method commonly used in face keypoint detection or human pose estimation: <strong>heatmap regression</strong>.</p>
 <p>Heatmap regression generates a heatmap representation of objects, reflecting the likelihood of objects appearing at different positions. By analyzing these heatmaps, the model can accurately predict the position and pose of objects. In our context, heatmaps are used to find document corners.</p>
