@@ -1,16 +1,12 @@
 /* 主題顏色和基本配置 */
 :root {
-  --color-primary: #1d428a;  /* 基本深藍 */
-  --color-primary-dark: #1a3b7c;
-  --color-primary-darker: #193875;
-  --color-primary-darkest: #142e61;
-  --color-primary-light: #204998;
-  --color-primary-lighter: #214c9f;
-  --color-primary-lightest: #2656b3;
-
-  --color-secondary: #fe930f;  /* 亮橙色 */
-  --color-secondary-light: #fea537;
-  --color-secondary-lightest: #feb75f;
+  --ifm-color-primary: #1d428a;
+  --ifm-color-primary-dark: #1a3b7c;
+  --ifm-color-primary-darker: #193875;
+  --ifm-color-primary-darkest: #142e61;
+  --ifm-color-primary-light: #204998;
+  --ifm-color-primary-lighter: #214c9f;
+  --ifm-color-primary-lightest: #2656b3;
 
   --background-color: #ffffff;  /* 亮模式背景色 */
   --text-color: #404040;        /* 亮模式文字色 */
@@ -21,13 +17,13 @@
 
 /* 深色模式配置 */
 [data-theme='dark'] {
-  --color-primary: #fe930f;  /* 亮橙色為深色模式的主題色 */
-  --color-primary-dark: #f18601;
-  --color-primary-darker: #e47e01;
-  --color-primary-darkest: #bc6801;
-  --color-primary-light: #fe9f2a;
-  --color-primary-lighter: #fea537;
-  --color-primary-lightest: #feb75f;
+  --ifm-color-primary: #fe930f;
+  --ifm-color-primary-dark: #f18601;
+  --ifm-color-primary-darker: #e47e01;
+  --ifm-color-primary-darkest: #bc6801;
+  --ifm-color-primary-light: #fe9f2a;
+  --ifm-color-primary-lighter: #fea537;
+  --ifm-color-primary-lightest: #feb75f;
 
   --background-color: #000000;  /* 深色模式背景色 */
   --text-color: #e4e4e4;        /* 深色模式文字色 */
@@ -40,16 +36,16 @@ body {
 }
 
 h1, h2, h3 {
-  color: var(--color-primary); /* 全局標題顏色設定 */
+  color: var(--ifm-color-primary); /* 全局標題顏色設定 */
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--ifm-color-primary);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--color-primary-light);
+  color: var(--ifm-color-primary-light);
 }
 
 .navbar a {
@@ -58,13 +54,13 @@ a:hover {
 }
 
 .navbar a:hover {
-  color: var(--color-primary);
+  color: var(--ifm-color-primary);
   text-decoration: underline;
 }
 
 /* 首頁特定樣式 */
 .hero {
-  background-color: var(--color-primary);
+  background-color: var(--ifm-color-primary);
   color: #ffffff;
 }
 
@@ -76,7 +72,7 @@ a:hover {
 .markdown h2{font-size : 1.75rem;}
 .markdown h3{
   font-size: 1.5rem;
-  border-left: 5px solid var(--color-primary-lightest);
+  border-left: 5px solid var(--ifm-color-primary-lightest);
   padding: 5px 0 5px 7px;
 }
 
@@ -116,7 +112,7 @@ a:hover {
 /* 文章懸停時標題顏色變更 */
 .blog-list-page article:hover header a,
 .blog-tags-post-list-page article:hover header a {
-  color: var(--color-primary);
+  color: var(--ifm-color-primary);
 }
 
 /* 移除底部間隔 */
