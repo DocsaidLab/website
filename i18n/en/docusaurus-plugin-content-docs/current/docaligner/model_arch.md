@@ -116,6 +116,8 @@ To better integrate multi-scale features, we introduce BiFPN (Bidirectional Feat
 
 ### 3. Heatmap Regression
 
+![awing_loss.jpg](./resources/awing_loss.jpg)
+
 To address the aforementioned amplification error, we need a certain "fuzziness" in the predicted results. Meaning, we shouldn't let the model precisely pinpoint where the document corners are but rather make the model say, "**The document corners are approximately in this area**".
 
 For this, we adopted a method commonly used in face keypoint detection or human pose estimation: **heatmap regression**.

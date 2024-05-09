@@ -23,5 +23,3 @@ Here, we will discuss some insights and experiences we gained during the trainin
 - Although the "Heatmap Regression Model" demonstrates stability, it requires supervision on high-resolution feature maps, resulting in significantly higher computational costs compared to the "Point Regression Model".
 
 - However, we cannot overlook the advantages of the "Point Regression Model", including its ability to predict corners beyond the document boundary, lower computational requirements, and a faster and simpler post-processing pipeline. Therefore, we will continue to explore and optimize the "Point Regression Model" to improve its performance.
-
-Please let me know if you need further clarification or additional information!
