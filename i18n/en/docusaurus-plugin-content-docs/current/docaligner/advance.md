@@ -15,6 +15,7 @@ Here are the advanced options available during the initialization phase:
 Backend is an enumeration type used to specify the computational backend for `DocAligner`.
 
 It includes the following options:
+
 - **cpu**: Use the CPU for computation.
 - **cuda**: Use the GPU for computation (requires appropriate hardware support).
 
@@ -33,15 +34,17 @@ We use ONNXRuntime as the inference engine for the model. Although ONNXRuntime s
 If CUDA is not installed in your system, or if the installed version is incorrect, the CUDA computation backend cannot be used.
 
 :::tip
+
 1. If you have other requirements, please refer to the [**ONNXRuntime Official Documentation**](https://onnxruntime.ai/docs/execution-providers/index.html) for customization.
 2. For issues related to dependency installation, please refer to the [**ONNXRuntime Release Notes**](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements)
-:::
+   :::
 
 ### 2. ModelType
 
 ModelType is an enumeration type used to specify the type of model used by `DocAligner`.
 
 It includes the following options:
+
 - **heatmap**: Use the heatmap model.
 - **point**: Use the point regression model.
 
@@ -104,6 +107,7 @@ Among them, `do_center_crop` is a key parameter that determines whether to perfo
 This setting is particularly important because in real-world applications, the images we encounter are often not in standard square sizes.
 
 In reality, image dimensions and proportions vary greatly, such as:
+
 - Photos taken by mobile phones commonly adopt a 9:16 aspect ratio;
 - Scanned documents often appear in A4 paper ratios;
 - Screenshots are mostly in a 16:9 aspect ratio;
@@ -128,7 +132,6 @@ result = model(img, do_center_crop=True) # Using center cropping
 :::warning
 Center cropping is just one step in the computation process and does not modify the original image. The final results will be mapped back to the original image size, so users need not worry about image distortion or loss of quality.
 :::
-
 
 ### Return `Document` Object
 
