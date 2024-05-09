@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 8
 ---
 
 # 資料集說明
@@ -19,7 +19,6 @@ Smartdoc 2015 - Challenge 1 資料集最初是為 Smartdoc 2015 競賽創建的�
 ## MIDV-500/2019
 
 ![MIDV-500](./resources/midv500_test_img.jpg)
-
 
 MIDV-500 由 50 個不同身分證明文件類型的 500 個影片片段組成，包括 17 個身分證、14 個護照、13 個駕照和 6 個不同國家的其他身分證明文件，並具有真實性，可以對各種文件分析問題進行廣泛的研究。MIDV-2019 資料集包含扭曲和低光影像。
 
@@ -44,7 +43,6 @@ MIDV-2020 包含 10 種文件類型，其中包括 1000 個帶註釋的影片剪
 ## Synthetic Dataset
 
 ![Docpool](./resources/synth_test_img.jpg)
-
 
 考慮到資料集的不足，我們使用動態合成影像技術。
 
