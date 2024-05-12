@@ -28,12 +28,6 @@ I have completed several projects on Github, including:
 
 Of course, there's more, but most are still in the planning stages, so I won't go into details now.
 
-:::info
-**DocClassifier** has a special origin. It was conceived by a facial recognition system expert, also my friend, [**Jack, L.**](https://github.com/Jack-Lin-NTU). Knowing that I have a website, he completed the initial development and feasibility testing, then entrusted the idea to me to finalize the details and release it here.
-
-Special thanks to him for his contribution.
-:::
-
 ## Are You an Engineer?
 
 Yes.
