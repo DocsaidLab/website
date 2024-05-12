@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-hant" dir="ltr" class="docs-wrapper plugin-docs plugin-id-papers docs-version-current docs-doc-page docs-doc-id-language-model/bert/index" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.3.2">
+<title data-rh="true">BERT | DOCSAID</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docsaid.org/img/docsaid-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docsaid.org/img/docsaid-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docsaid.org/papers/language-model/bert/"><meta data-rh="true" property="og:locale" content="zh_hant"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-hant"><meta data-rh="true" name="docsearch:language" content="zh-hant"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-papers-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-papers-current"><meta data-rh="true" property="og:title" content="BERT | DOCSAID"><meta data-rh="true" name="description" content="十二層編碼器"><meta data-rh="true" property="og:description" content="十二層編碼器"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docsaid.org/papers/language-model/bert/"><link data-rh="true" rel="alternate" href="https://docsaid.org/papers/language-model/bert/" hreflang="zh-hant"><link data-rh="true" rel="alternate" href="https://docsaid.org/en/papers/language-model/bert/" hreflang="en"><link data-rh="true" rel="alternate" href="https://docsaid.org/papers/language-model/bert/" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DOCSAID RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DOCSAID Atom Feed">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script><link rel="stylesheet" href="/assets/css/styles.8d9f1582.css">
+<script src="/assets/js/runtime~main.6d2bc64e.js" defer="defer"></script>
+<script src="/assets/js/main.1b9ce2e5.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳至主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳至主要内容</a></div><nav aria-label="主導航" class="navbar navbar--fixed-top navbarHideable_m1mJ"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/docsaid_logo.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/docsaid_logo_white.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/docs/">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/papers/intro">Papers</a><a class="navbar__item navbar__link" href="/blog">Blog</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" class="iconLanguage_nlXk"><path fill="currentColor" d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>繁體中文</a><ul class="dropdown__menu"><li><a href="/papers/language-model/bert/" target="_self" rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang="zh-hant">繁體中文</a></li><li><a href="/en/papers/language-model/bert/" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="en">English</a></li></ul></div><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="切換淺色/暗黑模式（當前為淺色模式）" aria-label="切換淺色/暗黑模式（當前為淺色模式）" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到頂部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd sidebarWithHideableNavbar_wUlq"><a tabindex="-1" class="sidebarLogo_isFc" href="/"><img src="/img/docsaid_logo.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/docsaid_logo_white.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"><b></b></a><nav aria-label="文件側邊欄" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/papers/intro">Introduction</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/multimodel">MultiModel</a><button aria-label="Expand sidebar category &#x27;MultiModel&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/featurefusion">FeatureFusion</a><button aria-label="Expand sidebar category &#x27;FeatureFusion&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/objectdetection">ObjectDetection</a><button aria-label="Expand sidebar category &#x27;ObjectDetection&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/papers/category/languagemodel">LanguageModel</a><button aria-label="Collapse sidebar category &#x27;LanguageModel&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/language-model/transformer/">Transformer</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/language-model/gpt_1/">GPT-1</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/papers/language-model/bert/">BERT</a></li></ul></li></ul></nav><button type="button" title="收起側邊欄" aria-label="收起側邊欄" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="頁面路徑"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="主頁面" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/papers/category/languagemodel"><span itemprop="name">LanguageModel</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">BERT</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本頁導覽</button></div><div class="theme-doc-markdown markdown"><h1>BERT</h1>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="十二層編碼器">十二層編碼器<a href="#十二層編碼器" class="hash-link" aria-label="十二層編碼器的直接連結" title="十二層編碼器的直接連結">​</a></h2>
+<p><a href="https://arxiv.org/pdf/1810.04805.pdf" target="_blank" rel="noopener noreferrer"><strong>BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (2018.10)</strong></a></p>
+<hr>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>信息</div><div class="admonitionContent_BuS1"><p>以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。</p></div></div>
+<hr>
+<p>在 Transformer 提出後，許多研究者開始探討如何更好地利用這個架構。</p>
+<p>先前的 GPT-1 選擇了<strong>全編碼器（decoder-only）</strong> 的架構，而 BERT 恰好相反，選擇了<strong>全編碼器（encoder-only）</strong>。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>在 BERT 模型前半年，有個模型叫做 ELMo。然後從 BERT 取名為 BERT 之後，研究者開始流行起將模型取名芝麻街角色的風潮。我們還記得一開始的論文都還會認真地用標題來找縮寫，後來則是完全放飛自我，想取什麼名字就取什麼名字...</p></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="定義問題">定義問題<a href="#定義問題" class="hash-link" aria-label="定義問題的直接連結" title="定義問題的直接連結">​</a></h2>
+<p>將預先訓練的語言模型應用於下游任務，通常有兩種策略：</p>
+<ul>
+<li>
+<p><strong>1. 基於特徵的方法</strong></p>
+<p>這類方法，例如 ELMo（Peters 等人，2018a），使用特定於任務的架構，其中包括預訓練的表示作為附加特徵。</p>
+</li>
+<li>
+<p><strong>2. 微調方法</strong></p>
+<p>這類方法，例如生成式預訓練變壓器（OpenAI GPT）（Radford 等人，2018），引入了最少的特定任務的參數，並透過簡單地微調所有預訓練參數來訓練下游任務。</p>
+</li>
+</ul>
+<hr>
+<p>這兩種方法在預訓練期間共享相同的目標函數，它們使用單一語言模型來學習通用語言表示。</p>
+<p>其中，作者認為「單向性」的問題特別嚴重。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="單向性">單向性<a href="#單向性" class="hash-link" aria-label="單向性的直接連結" title="單向性的直接連結">​</a></h3>
+<p>在我們上一篇提到的 OpenAI GPT 中，使用的是從左到右的架構，其中每個 Token 只能專注於 Transformer 的自注意力層中的先前 Token。</p>
+<p>這種限制對於句子級任務來說並不是最優的，並且當將基於微調的方法應用於標記級任務（例如問答）時可能非常有害，因為在這些任務中，從兩個方向合併上下文可以大幅提高性能。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解決問題">解決問題<a href="#解決問題" class="hash-link" aria-label="解決問題的直接連結" title="解決問題的直接連結">​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="模型架構">模型架構<a href="#模型架構" class="hash-link" aria-label="模型架構的直接連結" title="模型架構的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="模型架構" src="/assets/images/img1-41bfb99df10461370d0216ae59469093.jpg" width="1224" height="396" class="img_ev3q"></p>
+<p>這是作者提出的模型架構，總共有 12 層編碼器。</p>
+<p>相關的配置如下：</p>
+<ul>
+<li>
+<p><strong>BERT-Base</strong></p>
+<ul>
+<li>共 12 層編碼器，每層編碼器都是 Transformer 的基本結構。</li>
+<li>每層編碼器有 768 維特徵和 12 個注意力頭。</li>
+<li>總參數量為 110M。</li>
+</ul>
+</li>
+<li>
+<p><strong>BERT-Large</strong></p>
+<ul>
+<li>共 24 層編碼器，每層編碼器都是 Transformer 的基本結構。</li>
+<li>每層編碼器有 1024 維特徵和 16 個注意力頭。</li>
+<li>總參數量為 340M。</li>
+</ul>
+</li>
+</ul>
+<p>對於輸入資料，BERT 採用了一些策略：</p>
+<ol>
+<li>
+<p><strong>輸入序列的靈活定義</strong>：在 BERT 的上下文中，「句子」並不局限於實際的語言學上的句子，而可以是任何連續文本的範圍。「序列」則指的是 BERT 處理的輸入 Token 序列，可能包含單一句子或兩個句子。</p>
+</li>
+<li>
+<p><strong>WordPiece 嵌入</strong>：使用一個包含 30,000 個標記的 WordPiece 詞彙來進行嵌入（<a href="https://arxiv.org/abs/1609.08144" target="_blank" rel="noopener noreferrer"><strong>Wu et al., 2016</strong></a>），這有助於有效地處理未知詞或罕見詞。</p>
+</li>
+<li>
+<p><strong>特殊標記的使用</strong>：</p>
+<ul>
+<li><strong>[CLS] Token</strong>：每個序列的第一個標記。這個標記的最終隱藏狀態會被用作進行分 類任務的序列表示。</li>
+<li><strong>[SEP] Token</strong>：用來分隔句子對。這有助於 BERT 識別和處理來自不同句子的資訊。</li>
+</ul>
+</li>
+<li>
+<p><strong>句子分隔的特徵標記</strong>：除了[SEP]標記外，BERT 還在每個 Token 上添加學習的參數，用以指示該 Token 屬於句子 A 還是句子 B。</p>
+</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="預訓練策略">預訓練策略<a href="#預訓練策略" class="hash-link" aria-label="預訓練策略的直接連結" title="預訓練策略的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="BERT Pre-training" src="/assets/images/img2-1567224d4a4076c2fca6a71489194baf.jpg" width="1224" height="488" class="img_ev3q"></p>
+<p>如上圖，左側是 BERT 的預訓練策略，右側是微調策略。</p>
+<p>BERT 的預訓練策略非常經典，影響了後來許多模型的設計。</p>
+<ul>
+<li>
+<p><strong>Masked Language Model（MLM）</strong></p>
+<p>BERT 採用掩碼語言模型（又稱完形填空任務）來訓練深度雙向表示。在此任務中，模型隨機遮蓋輸入序列中的一定比例的 Token，目標是預測這些被遮蓋的 Token。</p>
+<ul>
+<li>
+<p><strong>隨機遮蓋策略</strong>：在 BERT 中，每個輸入序列中約 15% 的 WordPiece Token 會被隨機選中並遮蓋。遮蓋選中的 Token 時，80% 的情況下會用 [MASK] token 替換，10% 的情況下替換為隨機 Token，另外 10%的情況下保持不變。</p>
+</li>
+<li>
+<p><strong>預測被遮蓋的 Token</strong>：對於每個被遮蓋的 Token，BERT 使用對應的最終隱藏向量，通過一個輸出 softmax 層來預測原始 Token。這個過程類似於傳統語言模型的操作。</p>
+</li>
+<li>
+<p><strong>微調階段的潛在不匹配問題</strong>：由於在預訓練期間使用了 [MASK] Token，而這些 Token 在實際下游任務的微調階段並不會出現，這在理論上造成了預訓練和微調之間的不匹配。BERT 通過不總是使用  實際的 [MASK] Token 來替換選中的 Token，而是採用上述的隨機策略來緩解這一問題。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Next Sentence Prediction（NSP）</strong></p>
+<p>為了讓模型更好地理解和捕捉句子之間的關係，BERT 引入了下一句預測這個預訓練任務。</p>
+<p>在預訓練過程中，當選擇句子 A 和 B 組成輸入對時，有 50% 的機會 B 是 A 的實際後續句子（標記為 IsNext），另外 50% 的機會 B 是從語料庫中隨機選擇的非連續句子（標記為 NotNext）。這種設計使模型能學習識別兩個句子是否在邏輯上相關或順序上相繼。</p>
+<p>通過 NSP 任務，BERT 能夠在預訓練階段就學習到如何理解和處理不同句子之間的關係。</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="微調策略">微調策略<a href="#微調策略" class="hash-link" aria-label="微調策略的直接連結" title="微調策略的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="BERT Fine-tuning" src="/assets/images/img2-1567224d4a4076c2fca6a71489194baf.jpg" width="1224" height="488" class="img_ev3q"></p>
+<p>在微調階段，BERT 通過添加一個額外的分類層來進行下游任務的微調。</p>
+<ul>
+<li>
+<p><strong>問答任務（SQuAD）：</strong></p>
+<p>在問答任務中，BERT 會將問題和包含答案的段落作為單一序列處理，利用不同的嵌入來標識問題部分和段落部分。微調過程中，BERT 引入了特定的起始和結束向量來預測答案在段落中的位置。</p>
+</li>
+<li>
+<p><strong>自然語言推理（NLI）：</strong></p>
+<p>在 NLI 任務中，BERT 接受兩個句子作為輸入，並通過將兩個句子的表示進行連接，然後通過一個分類層來預測兩個句子之間的關係。</p>
+</li>
+</ul>
+<p>這種微調方法相對成本較低，且能在短時間內（例如，在 Cloud TPU 上 1 小時或 GPU 上數小時內）完成。這種效率和通用性使得 BERT 特別適合於快速部署和實現各種自然語言處理任務的高性能解決方案。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="討論">討論<a href="#討論" class="hash-link" aria-label="討論的直接連結" title="討論的直接連結">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="BERT Results" src="/assets/images/img3-3d722e11e4894c16e56c1da28cc4c70d.jpg" width="1224" height="280" class="img_ev3q"></p>
+<p>在 GLUE 任務上，BERT 的表現顯著超過了 OpenAI GPT 模型，特別是在 MNLI 任務上，BERT-LARGE 版本達到了 80.5 分，顯著高於 GPT 的 72.8 分。研究還顯示，對於資料量較少的任務，BERT-LARGE 相比於 BERT-BASE 有更出色的表現，表明模型大小對於提高表現具有重要影響。</p>
+<p>不僅如此，BERT 總共在 11 個自然語言處理任務中取得了新的最佳結果，這表明了 BERT 在多個任務上的通用性和有效性。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="消融實驗">消融實驗<a href="#消融實驗" class="hash-link" aria-label="消融實驗的直接連結" title="消融實驗的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="BERT Ablation" src="/assets/images/img4-b6a0c39f58bb03bff44d2f62db5f9039.jpg" width="968" height="414" class="img_ev3q"></p>
+<p>作者也進行了一系列消融實驗，以探討 BERT 的不同組成部分對性能的影響。</p>
+<ol>
+<li>
+<p><strong>無 NSP</strong></p>
+<ul>
+<li>使用了 Masked LM (MLM) 進行訓練的雙向模型，但沒有執行下一句話預測 (NSP) 任務。結果表明，缺少 NSP 會顯著損害 QNLI、MNLI 和 SQuAD 1.1 的效能。</li>
+</ul>
+</li>
+<li>
+<p><strong>LTR &amp; 無 NSP</strong></p>
+<ul>
+<li>僅使用從左到右 (LTR) 語言模型進行訓練，未使用 MLM 或 NSP。</li>
+<li>在所有任務上，這個模型的表現均不如 MLM 模型，特別是在 MRPC 和 SQuAD 任務上的下降幅度更大。</li>
+<li>在 SQuAD 任務上，LTR 模型的 token 預測效能顯著較差，這是因為其 token 層級隱藏狀態缺乏右側上下文的支持。</li>
+</ul>
+</li>
+<li>
+<p><strong>BiLSTM 的添加</strong></p>
+<ul>
+<li>為了嘗試改善 LTR 系統，添加了一個隨機初始化的 BiLSTM。雖然 BiLSTM 在 SQuAD 的表現有所提升，但仍遠不如雙向模型。</li>
+<li>BiLSTM 對 GLUE 任務的效能有損害。</li>
+</ul>
+</li>
+<li>
+<p><strong>比較 ELMo 的策略</strong></p>
+<ul>
+<li>訓練獨立的 LTR 和 RTL 模型並將它們的輸出串聯起來，這一策略類似於 ELMo 所採用的方法。雖然這種方法能夠利用左右上下文，但成本是單一雙向模型的兩倍。</li>
+</ul>
+</li>
+</ol>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a href="#結論" class="hash-link" aria-label="結論的直接連結" title="結論的直接連結">​</a></h2>
+<p>BERT 的知名度，來自於它的高性能。</p>
+<p>在那個年代，這種屠榜的行為是非常少見的，因此 BERT 的出現引起了極大的關注。從 BERT 提出之後，學術圈內再也沒有 LSTM 立足的地方，天底下只剩下 Transformer。</p>
+<p>BERT 的成功證明了「預訓練-微調的模式」在多樣化的自然語言理解任務中具有潛力，為後續更大規模、更強性能的模型奠定了基礎。</p></div><div style="margin-top:3rem"> </div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="文件選項卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/papers/language-model/gpt_1/"><div class="pagination-nav__sublabel">上一頁</div><div class="pagination-nav__label">GPT-1</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#十二層編碼器" class="table-of-contents__link toc-highlight">十二層編碼器</a></li><li><a href="#定義問題" class="table-of-contents__link toc-highlight">定義問題</a><ul><li><a href="#單向性" class="table-of-contents__link toc-highlight">單向性</a></li></ul></li><li><a href="#解決問題" class="table-of-contents__link toc-highlight">解決問題</a><ul><li><a href="#模型架構" class="table-of-contents__link toc-highlight">模型架構</a></li><li><a href="#預訓練策略" class="table-of-contents__link toc-highlight">預訓練策略</a></li><li><a href="#微調策略" class="table-of-contents__link toc-highlight">微調策略</a></li></ul></li><li><a href="#討論" class="table-of-contents__link toc-highlight">討論</a><ul><li><a href="#消融實驗" class="table-of-contents__link toc-highlight">消融實驗</a></li></ul></li><li><a href="#結論" class="table-of-contents__link toc-highlight">結論</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a class="footer__link-item" href="/docs">Docs</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/papers/intro">Papers</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/blog">Blog</a><span class="footer__link-separator">·</span><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a href="https://docsaid.org/blog/terms-of-service" target="_blank" rel="noopener noreferrer" class="footer__link-item">使用條款<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a href="https://docsaid.org/blog/privacy-policy" target="_blank" rel="noopener noreferrer" class="footer__link-item">隱私政策<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 DOCSAID.</div></div></div></footer></div>
+</body>
+</html>
