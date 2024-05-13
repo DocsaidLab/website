@@ -54,8 +54,4 @@ Text Renderer integrates imgaug to support image augmentation, rendering multipl
 
 TextRecognitionDataGenerator (TRDG) is an open-source project developed by Belval, specifically for generating text image samples for training optical character recognition (OCR) software. This project supports multilingual text generation, including non-Latin scripts, and can generate images through different fonts, backgrounds, and text effects such as tilting, twisting, and blurring. TRDG is known for its modularity and ease of expansion, making it an essential tool for OCR model developers and researchers.
 
-TRDG can be used via a command-line interface (CLI) and also offers a Python module interface, allowing it to be directly integrated into training pipelines. Users can generate images with random text or specify specific text content through simple commands. Additionally, TRDG supports generating vertical text and character-level masks, increasing the flexibility and applicability of
-
- generated text images.
-
-This concludes the overview of related resources that can be utilized alongside `WordCanvas` for comprehensive image and text synthesis solutions.
+TRDG can be used via a command-line interface (CLI) and also offers a Python module interface, allowing it to be directly integrated into training pipelines. Users can generate images with random text or specify specific text content through simple commands. Additionally, TRDG supports generating vertical text and character-level masks, increasing the flexibility and applicability of generated text images.
