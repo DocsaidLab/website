@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script>
 <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script><link rel="stylesheet" href="/en/assets/css/styles.8d9f1582.css">
-<script src="/en/assets/js/runtime~main.1825becf.js" defer="defer"></script>
+<script src="/en/assets/js/runtime~main.01a07e7b.js" defer="defer"></script>
 <script src="/en/assets/js/main.32738683.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -28,11 +28,11 @@
 <ul>
 <li>
 <p><strong>1. 基於特徵的方法</strong></p>
-<p>這類方法，例如 ELMo（Peters 等人，2018a），使用特定於任務的架構，其中包括預訓練的表示作為附加特徵。</p>
+<p>這類方法，例如 ELMo（<a href="https://arxiv.org/abs/1802.05365" target="_blank" rel="noopener noreferrer">Peters 等人，2018a</a>），使用特定於任務的架構，其中包括預訓練的表示作為附加特徵。</p>
 </li>
 <li>
 <p><strong>2. 微調方法</strong></p>
-<p>這類方法，例如生成式預訓練變壓器（OpenAI GPT）（Radford 等人，2018），引入了最少的特定任務的參數，並透過簡單地微調所有預訓練參數來訓練下游任務。</p>
+<p>這類方法，例如生成式預訓練的 OpenAI GPT，引入了最少的特定任務的參數，並透過簡單地微調所有預訓練參數來訓練下游任務。</p>
 </li>
 </ul>
 <hr>
@@ -40,7 +40,7 @@
 <p>其中，作者認為「單向性」的問題特別嚴重。</p>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="單向性">單向性<a href="#單向性" class="hash-link" aria-label="Direct link to 單向性" title="Direct link to 單向性">​</a></h3>
 <p>在我們上一篇提到的 OpenAI GPT 中，使用的是從左到右的架構，其中每個 Token 只能專注於 Transformer 的自注意力層中的先前 Token。</p>
-<p>這種限制對於句子級任務來說並不是最優的，並且當將基於微調的方法應用於標記級任務（例如問答）時可能非常有害，因為在這些任務中，從兩個方向合併  上下文可以大幅提高性能。</p>
+<p>這種限制對於句子級任務來說並不是最優的，並且當將基於微調的方法應用於標記級任務（例如問答）時可能非常有害  ，因為在這些任務中，從兩個方向合併上下文可以大幅提高性能。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解決問題">解決問題<a href="#解決問題" class="hash-link" aria-label="Direct link to 解決問題" title="Direct link to 解決問題">​</a></h2>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="模型架構">模型架構<a href="#模型架構" class="hash-link" aria-label="Direct link to 模型架構" title="Direct link to 模型架構">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="模型架構" src="/en/assets/images/img1-41bfb99df10461370d0216ae59469093.jpg" width="1224" height="396" class="img_ev3q"></p>
@@ -93,13 +93,13 @@
 <p>BERT 採用掩碼語言模型（又稱完形填空任務）來訓練深度雙向表示。在此任務中，模型隨機遮蓋輸入序列中的一定比例的 Token，目標是預測這些被遮蓋的 Token。</p>
 <ul>
 <li>
-<p><strong>隨機遮蓋策略</strong>：在 BERT 中，每個輸入序列中約 15% 的 WordPiece Token 會被隨機選中並遮蓋。遮蓋選中的 Token 時，80% 的情況下會用 [MASK] token 替換，10% 的情況下替換為隨機 Token，另外 10%的情況下保持不變。</p>
+<p><strong>隨機遮蓋策略</strong>：在 BERT 中，每個輸入序列中約 15% 的 WordPiece Token 會被隨機選中並遮蓋。遮蓋選中的 Token 時，80% 的情況下會用 [MASK] Token 替換，10% 的情況下替換為隨機 Token，另外 10%的情況下保持不變。</p>
 </li>
 <li>
 <p><strong>預測被遮蓋的 Token</strong>：對於每個被遮蓋的 Token，BERT 使用對應的最終隱藏向量，通過一個輸出 softmax 層來預測原始 Token。這個過程類似於傳統語言模型的操作。</p>
 </li>
 <li>
-<p><strong>微調階段的潛在不匹配問題</strong>：由於在預訓練期間使用了 [MASK] Token，而這些 Token 在實際下游任務的微調階段並不會出現，這在理論上造成了預訓練和微調之 間的不匹配。BERT 通過不總是使用實際的 [MASK] Token 來替換選中的 Token，而是採用上述的隨機策略來緩解這一問題。</p>
+<p><strong>微調階段的潛在不匹配問題</strong>：由於在預訓練期間使用了 [MASK] Token，而這些 Token 在實際下游任務的微調階段並不會出 現，這在理論上造成了預訓練和微調之間的不匹配。BERT 通過不總是使用實際的 [MASK] Token 來替換選中的 Token，而是採用上述的隨機策略來緩解這一問題。</p>
 </li>
 </ul>
 </li>
@@ -123,7 +123,7 @@
 <p>在 NLI 任務中，BERT 接受兩個句子作為輸入，並通過將兩個句子的表示進行連接，然後通過一個分類層來預測兩個句子之間的關係。</p>
 </li>
 </ul>
-<p>這種微調方法相對成本較低，且能在短時間內（例如，在 Cloud TPU 上 1 小時或 GPU 上數小時內）完成。這種效 率和通用性使得 BERT 特別適合於快速部署和實現各種自然語言處理任務的高性能解決方案。</p>
+<p>這種微調方法相對成本較低，且能在短時間內（例如，在 Cloud TPU 上 1 小時或 GPU 上數小時內）完成。這種效率和通用性使得 BERT 特別適合於快速部署和實現各種自然語言處理任務的高性能解決方案。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="討論">討論<a href="#討論" class="hash-link" aria-label="Direct link to 討論" title="Direct link to 討論">​</a></h2>
 <p><img decoding="async" loading="lazy" alt="BERT Results" src="/en/assets/images/img3-3d722e11e4894c16e56c1da28cc4c70d.jpg" width="1224" height="280" class="img_ev3q"></p>
 <p>在 GLUE 任務上，BERT 的表現顯著超過了 OpenAI GPT 模型，特別是在 MNLI 任務上，BERT-LARGE 版本達到了 80.5 分，顯著高於 GPT 的 72.8 分。研究還顯示，對於資料量較少的任務，BERT-LARGE 相比於 BERT-BASE 有更出色的表現，表明模型大小對於提高表現具有重要影響。</p>
@@ -142,8 +142,8 @@
 <p><strong>LTR &amp; 無 NSP</strong></p>
 <ul>
 <li>僅使用從左到右 (LTR) 語言模型進行訓練，未使用 MLM 或 NSP。</li>
-<li>在所有任務上，這個模型的表現均不如 MLM 模型，特別是在 MRPC 和 SQuAD 任務上的下降幅度更大。</li>
-<li>在 SQuAD 任務上，LTR  模型的 token 預測效能顯著較差，這是因為其 token 層級隱藏狀態缺乏右側上下文的支持。</li>
+<li>在所有任務上，這個模型的表現均不如 MLM 模型，特別是在 MRPC 和 SQuAD 任務上的下降  幅度更大。</li>
+<li>在 SQuAD 任務上，LTR 模型的 Token 預測效能顯著較差，這是因為其 Token 層級隱藏狀態缺乏右側上下文的支持。</li>
 </ul>
 </li>
 <li>
