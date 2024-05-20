@@ -9,7 +9,7 @@ sidebar_position: 2
 若要使用本專案，你必須直接從 Github 上 clone 本專案，然後安裝相依套件。
 
 :::tip
-安裝前請確認您已經安裝了 `DocsaidKit`。
+安裝前請確認你已經安裝了 `DocsaidKit`。
 
 如果你還沒有安裝 `DocsaidKit`，請參考 [**DocsaidKit 安裝指南**](../docsaidkit/installation)。
 :::
@@ -18,33 +18,33 @@ sidebar_position: 2
 
 1. **Clone 本專案：**
 
-    ```bash
-    git clone https://github.com/DocsaidLab/WordCanvas.git
-    ```
+   ```bash
+   git clone https://github.com/DocsaidLab/WordCanvas.git
+   ```
 
 2. **進入專案目錄：**
 
-    ```bash
-    cd WordCanvas
-    ```
+   ```bash
+   cd WordCanvas
+   ```
 
 3. **安裝相依套件：**
 
-    ```bash
-    pip install wheel
-    ```
+   ```bash
+   pip install wheel
+   ```
 
-3. **建立打包文件：**
+4. **建立打包文件：**
 
-    ```bash
-    python setup.py bdist_wheel
-    ```
+   ```bash
+   python setup.py bdist_wheel
+   ```
 
-4. **安裝打包文件：**
+5. **安裝打包文件：**
 
-    ```bash
-    pip install dist/wordcanvas-*-py3-none-any.whl
-    ```
+   ```bash
+   pip install dist/wordcanvas-*-py3-none-any.whl
+   ```
 
 遵循這些步驟，你應該能夠順利完成 `WordCanvas` 的安裝。
 
@@ -56,7 +56,7 @@ sidebar_position: 2
 
 ```bash
 python -c "import wordcanvas; print(wordcanvas.__version__)"
-# >>> 0.1.0
+# >>> 0.4.2
 ```
 
-如果你看到類似 `0.1.0` 的版本號，則表示安裝成功。
+如果你看到類似 `0.4.2` 的版本號，則表示安裝成功。

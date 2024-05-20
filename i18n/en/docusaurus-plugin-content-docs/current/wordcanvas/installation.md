@@ -16,33 +16,33 @@ If you have not installed `DocsaidKit`, please refer to the [**DocsaidKit Instal
 
 1. **Clone the project:**
 
-    ```bash
-    git clone https://github.com/DocsaidLab/WordCanvas.git
-    ```
+   ```bash
+   git clone https://github.com/DocsaidLab/WordCanvas.git
+   ```
 
 2. **Enter the project directory:**
 
-    ```bash
-    cd WordCanvas
-    ```
+   ```bash
+   cd WordCanvas
+   ```
 
 3. **Install dependencies:**
 
-    ```bash
-    pip install wheel
-    ```
+   ```bash
+   pip install wheel
+   ```
 
 4. **Build the package:**
 
-    ```bash
-    python setup.py bdist_wheel
-    ```
+   ```bash
+   python setup.py bdist_wheel
+   ```
 
 5. **Install the package:**
 
-    ```bash
-    pip install dist/wordcanvas-*-py3-none-any.whl
-    ```
+   ```bash
+   pip install dist/wordcanvas-*-py3-none-any.whl
+   ```
 
 Following these steps, you should be able to successfully install `WordCanvas`.
 
@@ -54,7 +54,7 @@ You can test whether the installation was successful with the following command:
 
 ```bash
 python -c "import wordcanvas; print(wordcanvas.__version__)"
-# >>> 0.1.0
+# >>> 0.4.2
 ```
 
-If you see a version number similar to `0.1.0`, it indicates the installation was successful.
+If you see a version number similar to `0.4.2`, it indicates the installation was successful.

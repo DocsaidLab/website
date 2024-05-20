@@ -165,6 +165,7 @@ for _ in range(8):
 # 結合所有圖片一起輸出
 img = np.concatenate(imgs, axis=0)
 ```
+
 ![sample22](./resources/sample22.jpg)
 
 ## 隨機文字方向
@@ -235,6 +236,125 @@ img = np.concatenate(imgs, axis=0)
 
 我們希望可以透過這個設計，來讓你快速地確認相關設定。
 
+## 字型權重
+
+:::tip
+本功能在 0.2.0 版新增。
+:::
+
+由於每個字型所支援的文字數量不一致，因此在訓練模型時，我們可能會遇到字型權重不均的問題。
+
+簡單解釋一下，就是隨機選擇字型時的機率是一樣的，但某些文字只有少數的字型才能支援，因此你會發現有些文字幾乎不會被訓練到。
+
+為了緩解這個問題，我們引入了 `use_random_font_weight` 參數。
+
+```python
+import numpy as np
+from wordcanvas import WordCanvas
+
+gen = WordCanvas(
+    random_font=True,
+    use_random_font_weight=True,
+    output_size=(64, 512),
+)
+```
+
+當你啟用這個參數時，`WordCanvas` 會根據字型支援的文字數量來調整字型的選擇機率，當字型支援的文字愈少，那被選中的機率就會愈低，以達到均勻分配的效果。
+
+但是還是有不足的地方，我們認為應該是統計所有文字出現的頻率後，再給定選擇權重會比較好，我們預期之後把這個功能發佈在 0.5.0 版。
+
+## 阻擋名單
+
+:::tip
+本功能在 0.4.0 版新增。
+:::
+
+我們在使用字型時，發現有些字型表裡不一。
+
+舉例來說，從字型檔案中可以讀取到該字型所支援的文字列表，但是在實際使用時，卻發現有些文字卻無法正確渲染。
+
+對此我們感到很生氣，所以特別開發了一個阻擋名單的功能，讓你可以將這些字型排除在外。
+
+請使用參數 `block_font_list` 來設定阻擋名單：
+
+```python
+import numpy as np
+from wordcanvas import WordCanvas
+
+gen = WordCanvas(
+    random_font=True,
+    use_random_font_weight=True,
+    block_font_list=['阻擋名單字型']
+)
+```
+
+我們已經預先建立了一個阻擋名單預設值 `DEFAULT_FONT_BLOCK_LIST`，只要讓我們有找到一個明明不支援，但又出現在字型表裡的字型，我們就會把它列入阻擋名單：
+
+```python
+DEFAULT_FONT_BLOCK_LIST = [
+    "AbyssinicaSIL",
+    "AdobeBlank",
+    "Akatab",
+    "Alkalami",
+    "Andika",
+    "AnnapurnaSIL",
+    "AoboshiOne",
+    "AppleGothic",
+    "BM-HANNA",
+    "CharisSIL",
+    "DaiBannaSIL",
+    "FlowCircular",
+    "GentiumBookPlus",
+    "Harmattan",
+    "GentiumPlus",
+    "IMFeFCsc28P",
+    "JejuGothic"
+    "JejuMyeongjo",
+    "KayPhoDu",
+    "KouzanMouhitu",
+    "KumarOne",
+    "LastResort",
+    "LakkiReddy",
+    "Lateef",
+    "LisuBosa",
+    "Lohit-Devanagari",
+    "Mingzat",
+    "Namdhinggo",
+    "Narnoor",
+    "NotoColorEmojiCompatTest",
+    "NotoColorEmoji",
+    "NotoSansDevanagariUI",
+    "NotoSansHK[wght]",
+    "NotoSansJP[wght]",
+    "NotoSansKR[wght]",
+    "NotoSansSC[wght]",
+    "NotoSansTC[wght]",
+    "NotoSerifHK[wght]",
+    "NotoSerifJP[wght]",
+    "NotoSerifKR[wght]",
+    "NotoSerifSC[wght]",
+    "NotoSerifTC[wght]",
+    "NotoSansOldHungarian",
+    "NuosuSIL",
+    "Padauk",
+    "PadyakkeExpandedOne",
+    "Ponnala",
+    "RedHatDisplay",
+    "RedHatMono",
+    "RedHatText",
+    "Ranga",
+    "RaviPrakash",
+    "RubikPixels",
+    "Ruwudu",
+    "ScheherazadeNew",
+    "SoukouMincho",
+    "Walkway",
+    "851tegaki_zatsu_normal_0883",
+]
+```
+
 ## 小結
 
-在開發工具的過程中，我們的目標是創建一個能夠靈活地生成各種文字圖像的工具，特別是為了機器學習模型的訓練。隨機性的引入旨在模擬現實世界中的各種情況，這對於提高模型的適應性和泛化能力有極大的幫助。
+在開發工具的過程中，我們的目標是創建一個能夠靈活地生成各種文字圖像的工具，特別是為了機器學習模型的訓練。
+
+隨機性的引入旨在模擬現實世界中的各種情況，這對於提高模型的適應性和泛化能力有極大的幫助，希望你會喜歡這些功能。

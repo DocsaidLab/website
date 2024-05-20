@@ -165,6 +165,7 @@ for _ in range(8):
 # Combine all images for output
 img = np.concatenate(imgs, axis=0)
 ```
+
 ![sample22](./resources/sample22.jpg)
 
 ## Random Text Direction
@@ -235,8 +236,123 @@ When randomness-related parameters are enabled, parameters set to True will be m
 
 We hope this design allows you to quickly verify related settings.
 
-## Conclusion
+## Font Weights
 
-During the development of this tool, our goal was to create a versatile tool capable of generating a variety of text images, particularly for training machine learning models. Introducing randomness aims to simulate various real-world scenarios, which is crucial for enhancing the adaptability and generalization ability of models.
+:::tip
+This feature was introduced in version 0.2.0.
+:::
 
-This concludes the advanced usage section of this project, and we hope you find these features helpful for your applications.
+Since different fonts support varying numbers of characters, we may encounter issues with uneven font weights during model training.
+
+To put it simply, the probability of randomly selecting each font is equal. However, some characters are only supported by a few fonts, meaning certain characters might rarely be trained on.
+
+To mitigate this issue, we introduced the `use_random_font_weight` parameter.
+
+```python
+import numpy as np
+from wordcanvas import WordCanvas
+
+gen = WordCanvas(
+    random_font=True,
+    use_random_font_weight=True,
+    output_size=(64, 512),
+)
+```
+
+When you enable this parameter, `WordCanvas` adjusts the font selection probability based on the number of characters each font supports. Fonts that support fewer characters will be less likely to be chosen, resulting in a more balanced distribution.
+
+However, there's still room for improvement. We believe that by first calculating the frequency of all characters, and then assigning selection weights, we could achieve better results. We plan to release this feature in version 0.5.0.
+
+## Blocklist
+
+:::tip
+This feature was introduced in version 0.4.0.
+:::
+
+We found that some fonts claim to support certain characters but fail to render them correctly.
+
+For instance, a font file might list a set of supported characters, but in practice, some of those characters do not display properly.
+
+This was quite frustrating, so we developed a blocklist feature that allows you to exclude such fonts by using the `block_font_list` parameter:
+
+```python
+import numpy as np
+from wordcanvas import WordCanvas
+
+gen = WordCanvas(
+    random_font=True,
+    use_random_font_weight=True,
+    block_font_list=['Blocked Font Name']
+)
+```
+
+We have also created a default blocklist, `DEFAULT_FONT_BLOCK_LIST`. Whenever we find a font that falsely claims to support certain characters, we add it to this list:
+
+```python
+DEFAULT_FONT_BLOCK_LIST = [
+    "AbyssinicaSIL",
+    "AdobeBlank",
+    "Akatab",
+    "Alkalami",
+    "Andika",
+    "AnnapurnaSIL",
+    "AoboshiOne",
+    "AppleGothic",
+    "BM-HANNA",
+    "CharisSIL",
+    "DaiBannaSIL",
+    "FlowCircular",
+    "GentiumBookPlus",
+    "Harmattan",
+    "GentiumPlus",
+    "IMFeFCsc28P",
+    "JejuGothic"
+    "JejuMyeongjo",
+    "KayPhoDu",
+    "KouzanMouhitu",
+    "KumarOne",
+    "LastResort",
+    "LakkiReddy",
+    "Lateef",
+    "LisuBosa",
+    "Lohit-Devanagari",
+    "Mingzat",
+    "Namdhinggo",
+    "Narnoor",
+    "NotoColorEmojiCompatTest",
+    "NotoColorEmoji",
+    "NotoSansDevanagariUI",
+    "NotoSansHK[wght]",
+    "NotoSansJP[wght]",
+    "NotoSansKR[wght]",
+    "NotoSansSC[wght]",
+    "NotoSansTC[wght]",
+    "NotoSerifHK[wght]",
+    "NotoSerifJP[wght]",
+    "NotoSerifKR[wght]",
+    "NotoSerifSC[wght]",
+    "NotoSerifTC[wght]",
+    "NotoSansOldHungarian",
+    "NuosuSIL",
+    "Padauk",
+    "PadyakkeExpandedOne",
+    "Ponnala",
+    "RedHatDisplay",
+    "RedHatMono",
+    "RedHatText",
+    "Ranga",
+    "RaviPrakash",
+    "RubikPixels",
+    "Ruwudu",
+    "ScheherazadeNew",
+    "SoukouMincho",
+    "Walkway",
+    "851tegaki_zatsu_normal_0883",
+]
+```
+
+## Summary
+
+Our goal in developing this tool is to create a flexible solution for generating various text images, particularly for training machine learning models.
+
+Introducing randomness is intended to simulate real-world scenarios, which greatly enhances the adaptability and generalization capabilities of models. We hope you find these features useful.
