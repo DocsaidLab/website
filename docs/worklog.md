@@ -14,6 +14,11 @@ sidebar_position: 10
 
 ## 2024
 
+### 5 月
+
+- 探索 Docusaurus 的 searcher 功能，測試並加入 Algolia 的搜尋服務。
+- 開發 Text Recognizer 模型，調測模型參數，並進行模型訓練。
+
 ### 4 月
 
 - 學習配置 CSS 樣式，調整部落格的外觀。

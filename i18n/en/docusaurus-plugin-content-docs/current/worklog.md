@@ -10,6 +10,11 @@ This page is solely used to document our work content.
 
 ## 2024
 
+### May
+
+- Explore the searcher functionality of Docusaurus, test it, and integrate Algolia's search service.
+- Develop a Text Recognizer model, tune the model parameters, and conduct model training.
+
 ### April
 
 - Enhanced proficiency in CSS styling to refine the appearance of the blog.
