@@ -13,7 +13,7 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="DOCSAID" href="/en/opensearch.xml"><link rel="stylesheet" href="/en/assets/css/styles.3d275683.css">
-<script src="/en/assets/js/runtime~main.728c4534.js" defer="defer"></script>
+<script src="/en/assets/js/runtime~main.ff178fba.js" defer="defer"></script>
 <script src="/en/assets/js/main.4d50460f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -56,7 +56,7 @@
 <li><strong>壓縮特徵：</strong> 透過特徵壓縮，提高特徵的表達能力。</li>
 </ul>
 <p>另外，為了確保每個 Adapter 模組能夠順利運作，作者還為每個 Adapter 模組內部加入了一個「跳躍連接」，這樣一來，如果 Adapter 模組初始化的參數接近於零，它們就會像恆等函數一樣不會影響原來的輸出，保證了穩定性。</p>
-<p>在模型訓練時，我們只需要絢練「 Adapter 模組」的參數，其他參數都直接凍結，不需要進行更新。</p>
+<p>在模型訓練時，我們只需要針對「 Adapter 模組」的參數進行訓練，其他參數都直接凍結即可，不需要進行更新。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="討論">討論<a href="#討論" class="hash-link" aria-label="Direct link to 討論" title="Direct link to 討論">​</a></h2>
 <p>所以有用嗎？</p>
 <p>當然，不然論文就不發了...</p>
@@ -108,7 +108,7 @@
 <li>
 <p><strong>移除層影響</strong>：</p>
 <ul>
-<li>移  除單層的 Adapter 對整體效能影響不大，最大減少只有 2%。</li>
+<li>移除單層的 Adapter 對整體效能影響不大，最大減少只有 2%。</li>
 <li>但如果移除所有 Adapter，效能會大幅下降，在 MNLI 上降到 37%，在 CoLA 上降到 69%。</li>
 </ul>
 </li>

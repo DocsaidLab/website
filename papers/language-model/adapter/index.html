@@ -13,7 +13,7 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="DOCSAID" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.3d275683.css">
-<script src="/assets/js/runtime~main.8423a735.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.3b1882e8.js" defer="defer"></script>
 <script src="/assets/js/main.c58b3125.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -56,7 +56,7 @@
 <li><strong>壓縮特徵：</strong> 透過特徵壓縮，提高特徵的表達能力。</li>
 </ul>
 <p>另外，為了確保每個 Adapter 模組能夠順利運作，作者還為每個 Adapter 模組內部加入了一個「跳躍連接」，這樣一來，如果 Adapter 模組初始化的參數接近於零，它們就會像恆等函數一樣不會影響原來的輸出，保證了穩定性。</p>
-<p>在模型訓練時，我們只需要絢練「 Adapter 模組」的參數，其他參數都直接凍結，不需要進行更新。</p>
+<p>在模型訓練時，我們只需要針對「 Adapter 模組」的參數進行訓練，其他參數都直接凍結即可，不需要進行更新。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="討論">討論<a href="#討論" class="hash-link" aria-label="討論的直接連結" title="討論的直接連結">​</a></h2>
 <p>所以有用嗎？</p>
 <p>當然，不然論文就不發了...</p>
@@ -66,7 +66,7 @@
 <p>結果顯示：這種 Adapter 模組的設計確實能夠在不增加太多參數的情況下，提高模型的表現。</p>
 <p>上面表格中有分兩種實驗設計：</p>
 <ul>
-<li><strong>第一組實驗 (8-256)</strong>：這個設計是針對不同任務設計不同的 Adapter 模組，其特徵維度  （瓶頸中的單元數量）在 「8, 64, 256」 三選一。</li>
+<li><strong>第一組實驗 (8-256)</strong>：這個設計是針對不同任務設計不同的 Adapter 模組  ，其特徵維度（瓶頸中的單元數量）在 「8, 64, 256」 三選一。</li>
 <li><strong>第二組實驗 (64)</strong>：這個的設計是針對所有任務使用相同的 Adapter 模組，其特徵維度都是 64。</li>
 </ul>
 <p>最後，由於訓練不穩定，作者使用不同的隨機種子重新運行 5 次，並在驗證集上選擇最佳模型。</p>
@@ -108,7 +108,7 @@
 <li>
 <p><strong>移除層影響</strong>：</p>
 <ul>
-<li>移除單層的 Adapter 對整體效能影響不  大，最大減少只有 2%。</li>
+<li>移除單層的 Adapter 對整  體效能影響不大，最大減少只有 2%。</li>
 <li>但如果移除所有 Adapter，效能會大幅下降，在 MNLI 上降到 37%，在 CoLA 上降到 69%。</li>
 </ul>
 </li>
