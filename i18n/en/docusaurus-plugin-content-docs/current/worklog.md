@@ -14,12 +14,14 @@ This page is solely used to document our work content.
 
 - Explore the searcher feature of Docusaurus, test, and integrate Algolia's search service.
   - Thanks to [**WeiWei**](https://github.com/WeiYun0912) for writing the article:
-    - [**[docusaurus] Implementing Search Functionality in Docusaurus Using Algolia**](https://wei-docusaurus-vercel.vercel.app/docs/Docusaurus/Algolia)
+    - [**[docusaurus] 在 Docusaurus 中使用 Algolia 實作搜尋功能**](https://wei-docusaurus-vercel.vercel.app/docs/Docusaurus/Algolia)
 - Develop a Text Recognizer model, tune the model parameters, and conduct model training.
 
 ### April
 
 - Enhanced proficiency in CSS styling to refine the appearance of the blog.
+  - Thanks to [**朝八晚八**](https://from8to8.com/) for writing the article:
+    - [**部落格首頁**](https://from8to8.com/docs/Website/blog/blog_homepage/)
 - Continued development of TextRecognizer, building upon WordCanvas progress to advance the text recognition project.
 - Updated functionality of GmailSummary: implemented daily news push to the technical documentation page of the website.
 - Completed technical documentation for all ongoing projects.
@@ -44,6 +46,9 @@ After consideration, decided to set up a private cloud using [**NextCloud**](htt
 
 - TextDetector: Gathered public data.
 - DocClassifier: Introduced CLIP, performed knowledge distillation on the model, resulting in significant improvements!
+- Explored Docusaurus's commenting feature and integrated the giscus comment service.
+  - Thanks to [**不務正業的架構師**](https://ouch1978.github.io/) for writing the article:
+    - [**在文件庫和部落格的文章下方加上 giscus 留言區**](https://ouch1978.github.io/docs/docusaurus/customization/add-giscus-to-docusaurus)
 
 ### January
 
@@ -79,4 +84,5 @@ After consideration, decided to set up a private cloud using [**NextCloud**](htt
 - DocAligner: Initial planning.
 - DocsaidKit: Organized commonly used tools, started development.
 - Explored the functionality of [**Wordpress**](https://wordpress.org/), attempted self-hosting and blogging.
+  - Thanks to [**諾特斯網站**](https://notesstartup.com/) for your selfless sharing, I have benefited a lot.
 - Created a GitHub account for DOCSAID and began planning some projects.

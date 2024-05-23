@@ -16,7 +16,7 @@ sidebar_position: 10
 
 ### 5 月
 
-- 探索 Docusaurus 的 searcher 功能，測試並加入 Algolia 的搜尋服務。
+- 探索 Docusaurus 的 Search 功能，測試並加入 Algolia 的搜尋服務。
   - 感謝 [**WeiWei**](https://github.com/WeiYun0912) 所撰寫的文章：
     - [**[docusaurus] 在 Docusaurus 中使用 Algolia 實作搜尋功能**](https://wei-docusaurus-vercel.vercel.app/docs/Docusaurus/Algolia)
 - 開發 Text Recognizer 模型，調測模型參數，並進行模型訓練。
@@ -24,6 +24,8 @@ sidebar_position: 10
 ### 4 月
 
 - 學習配置 CSS 樣式，調整部落格的外觀。
+  - 感謝 [**朝八晚八**](https://from8to8.com/) 所撰寫的文章：
+    - [**部落格首頁**](https://from8to8.com/docs/Website/blog/blog_homepage/)
 - TextRecognizer：延續 WordCanvas 的開發，繼續推進文字辨識的專案。
 - GmailSummary：修改功能：推送每日新聞至網站的技術文件頁面。
 - 完成目前所有專案的技術文件。
@@ -50,6 +52,9 @@ sidebar_position: 10
 
 - TextDetector：收集公開資料。
 - DocClassifier：把 CLIP 帶進來，對模型進行知識蒸餾，效果甚好！
+- 探索 Docusaurus 的留言功能，並加入 giscus 留言服務。
+  - 感謝 [**不務正業的架構師**](https://ouch1978.github.io/) 所撰寫的文章：
+    - [**在文件庫和部落格的文章下方加上 giscus 留言區**](https://ouch1978.github.io/docs/docusaurus/customization/add-giscus-to-docusaurus)
 
 ### 1 月
 
@@ -85,4 +90,5 @@ sidebar_position: 10
 - DocAligner：前期規劃。
 - DocsaidKit：整理常用的工具，開始進行開發。
 - 探索 [**Wordpress**](https://wordpress.org/) 的功能，嘗試自行架站並撰寫部落格。
+  - 感謝[**諾特斯網站**](https://notesstartup.com/)的無私分享，獲益良多。
 - 建立 DOCSAID 的 GitHub 帳號，並且開始規劃一些專案。
