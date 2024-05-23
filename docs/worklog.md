@@ -17,6 +17,8 @@ sidebar_position: 10
 ### 5 月
 
 - 探索 Docusaurus 的 searcher 功能，測試並加入 Algolia 的搜尋服務。
+  - 感謝 [**WeiWei**](https://github.com/WeiYun0912) 所撰寫的文章：
+    - [**[docusaurus] 在 Docusaurus 中使用 Algolia 實作搜尋功能**](https://wei-docusaurus-vercel.vercel.app/docs/Docusaurus/Algolia)
 - 開發 Text Recognizer 模型，調測模型參數，並進行模型訓練。
 
 ### 4 月

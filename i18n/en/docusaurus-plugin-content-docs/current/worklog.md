@@ -12,7 +12,9 @@ This page is solely used to document our work content.
 
 ### May
 
-- Explore the searcher functionality of Docusaurus, test it, and integrate Algolia's search service.
+- Explore the searcher feature of Docusaurus, test, and integrate Algolia's search service.
+  - Thanks to [**WeiWei**](https://github.com/WeiYun0912) for writing the article:
+    - [**[docusaurus] Implementing Search Functionality in Docusaurus Using Algolia**](https://wei-docusaurus-vercel.vercel.app/docs/Docusaurus/Algolia)
 - Develop a Text Recognizer model, tune the model parameters, and conduct model training.
 
 ### April
