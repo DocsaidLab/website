@@ -13,7 +13,7 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="DOCSAID" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.3d275683.css">
-<script src="/assets/js/runtime~main.f5e9b7c7.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.30916279.js" defer="defer"></script>
 <script src="/assets/js/main.c10e1113.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -32,7 +32,36 @@
 </ul>
 <p>這個問題，就是本論文想解決的核心挑戰。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解決問題">解決問題<a href="#解決問題" class="hash-link" aria-label="解決問題的直接連結" title="解決問題的直接連結">​</a></h2>
-<p>為了回答這個問題，OpenAI 進行了一系列的實驗，最後定調了模型的縮放律。</p>
+<p>本文中，使用了以下超參數來參數化 Transformer 架構：</p>
+<ul>
+<li><strong>中間前饋層的維度</strong></li>
+<li><strong>注意力輸出的維度</strong></li>
+<li><strong>每層的注意力頭數</strong></li>
+<li><strong>層數</strong>：Transformer 的層數</li>
+<li><strong>Token 數量</strong>：上下文長度，通常設定為 1024</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="訓練過程">訓練過程<a href="#訓練過程" class="hash-link" aria-label="訓練過程的直接連結" title="訓練過程的直接連結">​</a></h3>
+<p>除非特別註明，否則使用 Adam 優化器進行訓練，每次訓練進行 2.5 * 10^5 步，批次大小為 512 個序列，每個序列包含 1024 個標記。由於記憶體限制，超過 10 億參數的模型使用 Adafactor 進行訓練。</p>
+<p>作者試驗了各種學習率和學習率調度方法，發現收斂時的結果基本不受學習率調度的影響。除非特別說明，所有訓練均使用 3000 步的線性增溫後逐步衰減至零的學習率調度。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="數據集">數據集<a href="#數據集" class="hash-link" aria-label="數據集的直接連結" title="數據集的直接連結">​</a></h3>
+<p>模型訓練在「<strong>擴展版的 WebText 數據集</strong>」上。</p>
+<ul>
+<li>原始 WebText 數據集來自於 Reddit 的外部鏈接，這些鏈接在 2017 年 12 月前獲得至少 3 個其他讀者認同。</li>
+<li>WebText2 中，加入了 2018 年 1 月至 10 月期間的 Reddit 外部鏈接，這些鏈接也需要至少 3 個其他讀者認同。</li>
+<li>使用 Newspaper3k Python 庫提取鏈接文本，最終數據集包含 2030 萬個文檔，總計 96GB 文本和 1.62 * 10^10 詞。</li>
+<li>應用了可逆的字節對編碼（byte-pair encoding）來進行標記化，最終得到 2.29 * 10^10 個標記，並保留了 6.6 * 10^8 個標記作為測試集。</li>
+<li>在 Books Corpus、Common Crawl、英語維基百科和其他公共可用的網絡書籍樣本上進行測試。</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="變化因素">變化因素<a href="#變化因素" class="hash-link" aria-label="變化因素的直接連結" title="變化因素的直接連結">​</a></h3>
+<p>為了全面研究語言模型的縮放特性，本論文在以下方面進行了廣泛的模型訓練：</p>
+<ul>
+<li><strong>模型大小</strong>：從 768 到 15 億非嵌入參數的模型</li>
+<li><strong>數據集大小</strong>：從 2200 萬到 230 億標記的數據集</li>
+<li><strong>模型形狀</strong>：包括深度、寬度、注意力頭數和前饋層維度</li>
+<li><strong>上下文長度</strong>：大多數訓練使用 1024 長度的上下文，但我們也試驗了更短的上下文</li>
+<li><strong>批次大小</strong>：大多數訓練使用 2^19 的批次大小，但我們也變化批次大小來測量關鍵批次大小</li>
+</ul>
+<p>上述的實驗設計旨在系統地研  究模型在不同條件下的性能表現，並得出相關的縮放規律。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="討論">討論<a href="#討論" class="hash-link" aria-label="討論的直接連結" title="討論的直接連結">​</a></h2>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="規模大於一切">規模大於一切<a href="#規模大於一切" class="hash-link" aria-label="規模大於一切的直接連結" title="規模大於一切的直接連結">​</a></h3>
 <p>模型的性能很大程度上取決於規模，而較弱地取決於模型形狀，模型性能很大程度上取決於規模，它由三個因素組成：</p>
@@ -56,20 +85,20 @@
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="測試表現與下游表現">測試表現與下游表現<a href="#測試表現與下游表現" class="hash-link" aria-label="測試表現與下游表現的直接連結" title="測試表現與下游表現的直接連結">​</a></h3>
 <p>實驗指出：當我們在分佈與訓練不同的文本上評估模型時，結果與訓練驗證集上的結果密切相關，損失的偏移量大致恆定。</p>
 <p>換句話說，轉移到不同的分佈會產生恆定的懲罰，但在其他方面會根據測試集的表現大致提高。</p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="樣本效率">樣本效率<a href="#樣本效率" class="hash-link" aria-label="樣本效率的直接連結" title="樣本效率的直接連結">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="樣本效率">樣本效率<a href="#樣本效率" class="hash-link" aria-label="樣本效率 的直接連結" title="樣本效率的直接連結">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="img2" src="/assets/images/img2-62b3001dd1209df06fd9a28bdd9c3c27.jpg" width="2809" height="2030" class="img_ev3q"></p>
 <p>大型模型比小型模型的樣本效率更高，可以透過更少的最佳化步驟(上圖，第一張圖表)和使用更少的數據點(上圖，第二張圖表)達到相同的效能水準。</p>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="收斂是一件低效的事情">收斂是一件低效的事情<a href="#收斂是一件低效的事情" class="hash-link" aria-label="收斂是一件低效的事情的直接連結" title="收斂是一件低效的事情的直接連結">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="img3" src="/assets/images/img3-4b5347886e8f82ed827e5e8a79a0126e.jpg" width="1224" height="560" class="img_ev3q"></p>
-<p>如上圖顯示，增加模型尺寸是一個更有效的方  法，而不是訓練小模型直到完全收斂。</p>
+<p>如上圖顯示，增加模型尺寸是一個更有效的方法，而不是訓練小模型直到完全收斂。</p>
 <p>簡單來說，如果我們有固定的計算資源，最好訓練非常大的模型並在它們完全收斂之前停止，這樣可以在固定的計算預算內獲得最佳性能。相比之下，訓練小模型直到它們完全收斂反而效率更低。</p>
 <p>此外，隨著計算資源的增加，所需的訓練數據量增加得很慢，因此我們不需要大量增加數據來匹配增加的計算資源。</p>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="最佳批量大小">最佳批量大小<a href="#最佳批量大小" class="hash-link" aria-label="最佳批量大小的直接連結" title="最佳批量大小的直接連結">​</a></h3>
 <p>訓練語言模型的最佳批次大小並不是一個固定的數值，而是與損失函數有關，可以通過測量梯度噪聲尺度來確定。</p>
-<p>在本論文中，定義的最大模型為 15 億（1.5B），在訓練效果最好的時候，最佳的批次大小大約是 100 萬到 200 萬個 Tokens。這樣的批次大小有助於在訓練過程中達到最佳性能和效果。</p>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>這邊提到的 100 萬到 200 萬指的是 Tokens 數量，而不是 Batch size 的數量。如果模型的上下文長度是 1024 的話，那麼對應的 Batch size 大約是 1000  到 2000，就能達到最佳效果。</p></div></div>
+<p>在本論文中，定義的最大模型為 15 億（1.5B），在訓練效果最好的時候，最佳的批次大小大約是 100 萬到 200 萬個 Tokens。這樣的批次大小有助於在訓 練過程中達到最佳性能和效果。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>這邊提到的 100 萬到 200 萬指的是 Tokens 數量，而不是 Batch size 的數量。如果模型的上下文長度是 1024 的話，那麼對應的 Batch size 大約是 1000 到 2000，就能達到最佳效果。</p></div></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a href="#結論" class="hash-link" aria-label="結論的直接連結" title="結論的直接連結">​</a></h2>
 <p>這篇論文中做了大量的實驗，並對語言模型的訓練方式提出了總結。</p>
-<p>這些結論在我們眼裡看到的都是白花花的鈔票，我們心懷感激地接受這些實驗結果。</p></div><div style="margin-top:3rem"> </div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="文件選項卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/papers/language-model/gpt_2/"><div class="pagination-nav__sublabel">上一頁</div><div class="pagination-nav__label">GPT-2</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#模型的縮放律" class="table-of-contents__link toc-highlight">模型的縮放律</a></li><li><a href="#定義問題" class="table-of-contents__link toc-highlight">定義問題</a></li><li><a href="#解決問題" class="table-of-contents__link toc-highlight">解決問題</a></li><li><a href="#討論" class="table-of-contents__link toc-highlight">討論</a><ul><li><a href="#規模大於一切" class="table-of-contents__link toc-highlight">規模大於一切</a></li><li><a href="#冪定律" class="table-of-contents__link toc-highlight">冪定律</a></li><li><a href="#過擬合的普遍性" class="table-of-contents__link toc-highlight">過擬合的普遍性</a></li><li><a href="#測試表現與下游表現" class="table-of-contents__link toc-highlight">測試表現與下游表現</a></li><li><a href="#樣本效率" class="table-of-contents__link toc-highlight">樣本效率</a></li><li><a href="#收斂是一件低效的事情" class="table-of-contents__link toc-highlight">收斂是一件低效的事情</a></li><li><a href="#最佳批量大小" class="table-of-contents__link toc-highlight">最佳批量大小</a></li></ul></li><li><a href="#結論" class="table-of-contents__link toc-highlight">結論</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a class="footer__link-item" href="/docs">Docs</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/papers/intro">Papers</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/blog">Blog</a><span class="footer__link-separator">·</span><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a href="https://docsaid.org/blog/terms-of-service" target="_blank" rel="noopener noreferrer" class="footer__link-item">使用條款<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a href="https://docsaid.org/blog/privacy-policy" target="_blank" rel="noopener noreferrer" class="footer__link-item">隱私政策<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 DOCSAID.</div></div></div></footer></div>
+<p>這些結論在我們眼裡看到的都是白花花的鈔票，我們心懷感激地接受這些實驗結果。</p></div><div style="margin-top:3rem"> </div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="文件選項卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/papers/language-model/gpt_2/"><div class="pagination-nav__sublabel">上一頁</div><div class="pagination-nav__label">GPT-2</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#模型的縮放律" class="table-of-contents__link toc-highlight">模型的縮放律</a></li><li><a href="#定義 問題" class="table-of-contents__link toc-highlight">定義問題</a></li><li><a href="#解決問題" class="table-of-contents__link toc-highlight">解決問題</a><ul><li><a href="#訓練過程" class="table-of-contents__link toc-highlight">訓練過程</a></li><li><a href="#數據集" class="table-of-contents__link toc-highlight">數據集</a></li><li><a href="#變化因素" class="table-of-contents__link toc-highlight">變化因素</a></li></ul></li><li><a href="#討論" class="table-of-contents__link toc-highlight">討論</a><ul><li><a href="#規模大於一切" class="table-of-contents__link toc-highlight">規模大於一切</a></li><li><a href="#冪定律" class="table-of-contents__link toc-highlight">冪定律</a></li><li><a href="#過擬合的普遍性" class="table-of-contents__link toc-highlight">過擬合的普遍性</a></li><li><a href="#測試表現與下游表現" class="table-of-contents__link toc-highlight">測試表現與下游表現</a></li><li><a href="#樣本效率" class="table-of-contents__link toc-highlight">樣本效率</a></li><li><a href="#收斂是一件低效的事情" class="table-of-contents__link toc-highlight">收斂是一件低效的事情</a></li><li><a href="#最佳批量大小" class="table-of-contents__link toc-highlight">最佳批量大小</a></li></ul></li><li><a href="#結論" class="table-of-contents__link toc-highlight">結論</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a class="footer__link-item" href="/docs">Docs</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/papers/intro">Papers</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/blog">Blog</a><span class="footer__link-separator">·</span><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a href="https://docsaid.org/blog/terms-of-service" target="_blank" rel="noopener noreferrer" class="footer__link-item">使用條款<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a href="https://docsaid.org/blog/privacy-policy" target="_blank" rel="noopener noreferrer" class="footer__link-item">隱私政策<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 DOCSAID.</div></div></div></footer></div>
 </body>
 </html>
