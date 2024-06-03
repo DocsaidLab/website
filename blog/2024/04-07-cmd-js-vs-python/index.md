@@ -53,10 +53,20 @@ npx（npm package runner）和 Python 的 `-m` 標誌解決了直接在終端執
 **它們都是：版本管理工具**
 :::
 
-沒有合適的工具，切換不同版本的 Node.js 或 Python 可能會非常麻煩。nvm（Node Version Manager）、pyenv 和 conda 為此問題提供了解決方案，允許開發者在同一台機器上安裝並切換 Node.js 或 Python 的多個版本。
+切換不同版本的 Node.js 或 Python 可能會非常麻煩。
+
+nvm（Node Version Manager）、pyenv 和 conda 為此問題提供了解決方案，允許開發者在同一台機器上安裝並切換 Node.js 或 Python 的多個版本。
 
 - **版本切換**：nvm 使用諸如 `nvm use <version>` 的命令來切換 Node.js 版本。Pyenv 和 conda 為 Python 提供了類似的功能，pyenv 通過 `pyenv global <version>` 或 `pyenv local <version>` 來進行版本切換，而 conda 則使用 `conda activate <environment-name>` 切換到不同的環境，每個環境可以擁有不同的 Python 版本和包。
 - **多版本管理**：這些工具促進了在同一台機器上管理多個版本，解決了因版本差異可能導致的衝突問題。
+
+## 題外話：還有 yarn 呢？
+
+npm 於 2009 年誕生，是 Node.js 生態系統中首個主要的包管理器。npm 的出現解決了 JavaScript 開發者管理依賴包的需求，迅速成為行業標準。然而，隨著使用者數量的增長，npm 暴露出了一些性能問題，如安裝速度慢和依賴版本不穩定。
+
+Yarn 於 2016 年由 Facebook 開發，目的是在解決 npm 的性能瓶頸。Yarn 引入了並行下載、離線快取等技術，大幅提升了依賴安裝速度和穩定性。此外，Yarn 還增加了 yarn.lock 文件，確保依賴包版本的一致性。這些改進使得 Yarn 迅速獲得了開發者的青睞。
+
+隨著 Yarn 的成功，npm 也加快了自身的改進步伐。從 npm v5 開始，npm 引入了 package-lock.json，提升了安裝速度並增強了依賴管理的穩定性。至今，npm 和 Yarn 已經成為 JavaScript 開發者的兩大主要選擇，並且都在不斷進步，互相借鑒對方的優點。
 
 ## 結論
 
