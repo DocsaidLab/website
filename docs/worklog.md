@@ -14,8 +14,15 @@ sidebar_position: 10
 
 ## 2024
 
+### 6 月
+
+- 這個月要進行每半年一次的論文馬拉松，本月暫定目標 ~100（想累死誰？）~ 30 篇。
+
 ### 5 月
 
+- 完成 Text Recognizer 模型。
+  - 最後評測的效果不錯，但我們認為這仍然是一個「假裝自己不是過擬合的過擬合模型」。(？？？)
+  - 它距離我們心目中的好架構還有一段距離，因此暫時先不公開。
 - 探索 Docusaurus 的 Search 功能，測試並加入 Algolia 的搜尋服務。
   - 感謝 [**WeiWei**](https://github.com/WeiYun0912) 所撰寫的文章：
     - [**[docusaurus] 在 Docusaurus 中使用 Algolia 實作搜尋功能**](https://wei-docusaurus-vercel.vercel.app/docs/Docusaurus/Algolia)
