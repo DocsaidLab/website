@@ -7670,9 +7670,9 @@ regjsparser@^0.9.1:
   dependencies:
     jsesc "~0.5.0"
 
-rehype-katex@^7.0.0:
+rehype-katex@7:
   version "7.0.0"
-  resolved "https://registry.npmjs.org/rehype-katex/-/rehype-katex-7.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/rehype-katex/-/rehype-katex-7.0.0.tgz#f5e9e2825981175a7b0a4d58ed9816c33576dfed"
   integrity sha512-h8FPkGE00r2XKU+/acgqwWUlyzve1IiOKwsEkg4pDL3k48PiE0Pt+/uLtVHDVkN1yA4iurZN6UES8ivHVEQV6Q==
   dependencies:
     "@types/hast" "^3.0.0"
@@ -7740,9 +7740,9 @@ remark-gfm@^4.0.0:
     remark-stringify "^11.0.0"
     unified "^11.0.0"
 
-remark-math@^6.0.0:
+remark-math@6:
   version "6.0.0"
-  resolved "https://registry.npmjs.org/remark-math/-/remark-math-6.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/remark-math/-/remark-math-6.0.0.tgz#0acdf74675f1c195fea6efffa78582f7ed7fc0d7"
   integrity sha512-MMqgnP74Igy+S3WwnhQ7kqGlEerTETXMvJhrUzDikVZ2/uogJCb+WHUg97hK9/jcfc0dkD73s3LN8zU49cTEtA==
   dependencies:
     "@types/mdast" "^4.0.0"
