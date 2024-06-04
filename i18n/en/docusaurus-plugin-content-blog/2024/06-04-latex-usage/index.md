@@ -22,7 +22,6 @@ Every time you need it, it's always a hassle to find, so we decided to write a L
 |                          | Italic                           |                 `\textit{AB}`                  |                 $\textit{AB}$                 |
 |                          | Underline                        |                `\underline{AB}`                |               $\underline{AB}$                |
 |                          | Overline                         |                `\overline{AB}`                 |                $\overline{AB}$                |
-|                          | Bold Math                        |                 `\mathbf{AB}`                  |                 $\mathbf{AB}$                 |
 |                          | Typewriter Font                  |                 `\texttt{AB}`                  |                 $\texttt{AB}$                 |
 | **Math Structures**      | Fraction                         |                 `\frac{A}{B}`                  |                 $\frac{A}{B}$                 |
 |                          | Fraction (displayed)             |                 `\dfrac{a}{b}`                 |                $\dfrac{a}{b}$                 |
