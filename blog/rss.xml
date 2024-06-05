@@ -4,10 +4,182 @@
         <title>DOCSAID Blog</title>
         <link>https://docsaid.org/blog</link>
         <description>DOCSAID Blog</description>
-        <lastBuildDate>Tue, 04 Jun 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 05 Jun 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-hant</language>
+        <item>
+            <title><![CDATA[簡單配置 Win11 系統的 Python 環境]]></title>
+            <link>https://docsaid.org/blog/windows-python-settings</link>
+            <guid>https://docsaid.org/blog/windows-python-settings</guid>
+            <pubDate>Wed, 05 Jun 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Setting up Python on Windows.]]></description>
+            <content:encoded><![CDATA[<figure><p><img decoding="async" loading="lazy" alt="title" src="https://docsaid.org/assets/images/0605-3516b0c322035747ec94f6e619003b9f.webp" width="1024" height="1024" class="img_ev3q">
+</p><figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption><p></p></figure>
+<hr>
+<p>前陣子接了一個專案，必須基於 Windows 的系統進行開發。</p>
+<p>可真是久違了！距離上次使用 Windows 已經有好幾年了。</p>
+<p>＊</p>
+<p>我們先嘗試了幾個方法，最後決定使用 PowerShell 來配置 Python 環境。</p>
+<p>本來想要使用 WSL 來配置，但這會把環境變成 Linux 環境...（？）</p>
+<p>那我們手邊就有 Linux 環境了，還要在 Windows 上配置幹嘛？</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="作業環境">作業環境<a class="hash-link" aria-label="作業環境的直接連結" title="作業環境的直接連結" href="https://docsaid.org/blog/windows-python-settings#%E4%BD%9C%E6%A5%AD%E7%92%B0%E5%A2%83">​</a></h2>
+<p>我們使用 Mac 所提供的虛擬環境工具：<a href="https://www.parallels.com/products/desktop/" target="_blank" rel="noopener noreferrer"><strong>Parallels Desktop</strong></a>。</p>
+<p>透過 Parallels Desktop，我們可以在 Mac 上順利地運行 Windows 系統，現在預設安裝的是 Windows 11。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>Apple M1 晶片是 ARM 架構，在剛推出時遇到許多相容性的問題，但過了幾年已經好很多了。</p></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="安裝-chocolatey">安裝 Chocolatey<a class="hash-link" aria-label="安裝 Chocolatey的直接連結" title="安裝 Chocolatey的直接連結" href="https://docsaid.org/blog/windows-python-settings#%E5%AE%89%E8%A3%9D-chocolatey">​</a></h2>
+<p>首先，我們需要啟動 PowerShell。</p>
+<p><img decoding="async" loading="lazy" alt="PowerShell" src="https://docsaid.org/assets/images/img1-72c7bd3a6fc465711d8d71512ee740b1.jpg" width="2511" height="2497" class="img_ev3q"></p>
+<p>Chocolatey 是一個基於 Windows 的包管理系統，它利用 NuGet 和 PowerShell 技術來自動化軟件的安裝、升級和管理過程。它類似於 Linux 上的 <code>apt-get</code> 或 <code>yum</code>，讓 Windows 用戶可以以一種簡單、一致的方式來管理軟件。</p>
+<p>安裝 Chocolatey 相對簡單，只需要在以管理員身份運行的 PowerShell 中執行以下命令：</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>安裝完成後，輸入以下命令驗證 Chocolatey 是否安裝成功：</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">choco -v</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>如果看到 Chocolatey 的版本號，則表示安裝成功。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>上面這段指令的內容是這樣：</p><ol>
+<li>
+<p><strong>Set-ExecutionPolicy Bypass -Scope Process -Force</strong>:</p>
+<ul>
+<li>這段命令是設定 PowerShell 執行政策。</li>
+<li><code>Set-ExecutionPolicy</code> 用於更改執行政策，以允許或禁止執行 PowerShell 腳本。</li>
+<li><code>Bypass</code> 表示繞過所有執行政策，不進行任何限制。</li>
+<li><code>-Scope Process</code> 表示僅在當前 PowerShell 會話中應用此變更，不影響整個系統。</li>
+<li><code>-Force</code> 用於強制執行此操作而不提示確認。</li>
+</ul>
+</li>
+<li>
+<p><strong>[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072</strong>:</p>
+<ul>
+<li>這段命令是設定網路安全協議。</li>
+<li><code>[System.Net.ServicePointManager]::SecurityProtocol</code> 用於獲取或設置協議類型。</li>
+<li><code>-bor 3072</code> 表示將 TLS 1.2 (3072) 協議添加到現有的協議中。<code>-bor</code> 是位運算符，表示按位或操作，允許同時啟用多個協議。</li>
+</ul>
+</li>
+<li>
+<p><strong>iex ((New-Object System.Net.WebClient).DownloadString('<a href="https://community.chocolatey.org/install.ps1" target="_blank" rel="noopener noreferrer">https://community.chocolatey.org/install.ps1</a>'))</strong>:</p>
+<ul>
+<li>這段命令是下載並執行 Chocolatey 的安裝腳本。</li>
+<li><code>iex</code> 是 <code>Invoke-Expression</code> 的縮寫，用於執行傳遞給它的字串內容。</li>
+<li><code>New-Object System.Net.WebClient</code> 用於創建一個新的 WebClient 對象，這個對象可以用來下載資料。</li>
+<li><code>.DownloadString('https://community.chocolatey.org/install.ps1')</code> 用於從指定的 URL 下載腳本內容。</li>
+<li>整體上，<code>iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))</code> 命令會下載並立即執行位於 '<a href="https://community.chocolatey.org/install.ps1" target="_blank" rel="noopener noreferrer">https://community.chocolatey.org/install.ps1</a>' 的 PowerShell 腳本，該腳本負責安裝 Chocolatey。</li>
+</ul>
+</li>
+</ol><p>簡單來說，這段指令的作用是：暫時設置 PowerShell 執行政策以允許腳本執行，配置網路安全協議以支持 TLS 1.2，然後下載並執行 Chocolatey 的安裝腳本。</p></div></div>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>信息</div><div class="admonitionContent_BuS1"><p><strong>Chocolatey 常用指令：</strong></p><ul>
+<li><strong>安裝</strong>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">choco install &lt;packageName&gt;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li><strong>升級</strong>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">choco upgrade &lt;packageName&gt;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li><strong>列出已安裝的套件</strong>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">choco list --localonly</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li><strong>卸載</strong>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">choco uninstall &lt;packageName&gt;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="安裝-git">安裝 git<a class="hash-link" aria-label="安裝 git的直接連結" title="安裝 git的直接連結" href="https://docsaid.org/blog/windows-python-settings#%E5%AE%89%E8%A3%9D-git">​</a></h2>
+<p>安裝完成後，繼續以管理員身份運行 PowerShell，並執行以下命令安裝 Git：</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">choco install git -y</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>安裝完成後，輸入以下命令驗證 Git 是否安裝成功：</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">git --version</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># &gt;&gt;&gt; git version 2.45.2.windows.1</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="安裝-python">安裝 Python<a class="hash-link" aria-label="安裝 Python的直接連結" title="安裝 Python的直接連結" href="https://docsaid.org/blog/windows-python-settings#%E5%AE%89%E8%A3%9D-python">​</a></h2>
+<p>我們使用 pyenv 來管理 Python 版本。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>雖然市面上有很多選擇，例如 Anaconda、Miniconda、WinPython 等，但我們還是選擇了 pyenv。</p><p>因為我們常在 Linux 上開發，看到 pyenv 就覺得親切。</p></div></div>
+<p>在 Windows 上安裝和使用 <code>pyenv</code> 通常不是直接進行的，因為 <code>pyenv</code> 是為 Unix-like 環境設計的。然而，可以使用 <code>pyenv-win</code> 這個項目，它是 <code>pyenv</code> 的一個 Windows 端口。</p>
+<p>請跟著以下步驟：</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="步驟-1安裝-pyenv-win">步驟 1：安裝 <code>pyenv-win</code><a class="hash-link" aria-label="步驟-1安裝-pyenv-win的直接連結" title="步驟-1安裝-pyenv-win的直接連結" href="https://docsaid.org/blog/windows-python-settings#%E6%AD%A5%E9%A9%9F-1%E5%AE%89%E8%A3%9D-pyenv-win">​</a></h3>
+<ul>
+<li>
+<p>下載 <code>pyenv-win</code> 專案：</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">git clone https://github.com/pyenv-win/pyenv-win.git $HOME\.pyenv</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p>設置環境變量：</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$env:PYENV = "$HOME\.pyenv"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$env:PATH = "$env:PYENV\pyenv-win\bin;$env:PYENV\pyenv-win\shims;$env:PATH"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">[Environment]::SetEnvironmentVariable('PYENV', $env:PYENV, [EnvironmentVariableTarget]::User)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">[Environment]::SetEnvironmentVariable('PATH', $env:PATH, [EnvironmentVariableTarget]::User)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="步驟-2驗證安裝">步驟 2：驗證安裝<a class="hash-link" aria-label="步驟 2：驗證安裝的直接連結" title="步驟 2：驗證安裝的直接連結" href="https://docsaid.org/blog/windows-python-settings#%E6%AD%A5%E9%A9%9F-2%E9%A9%97%E8%AD%89%E5%AE%89%E8%A3%9D">​</a></h3>
+<ol>
+<li>
+<p><strong>重啟 PowerShell</strong>：</p>
+<ul>
+<li>關閉並重新打開 PowerShell 窗口，以應用環境變量更改。</li>
+</ul>
+</li>
+<li>
+<p><strong>檢查 <code>pyenv</code> 安裝</strong>：</p>
+<ul>
+<li>
+<p>輸入以下命令檢查 <code>pyenv</code> 版本：</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pyenv --version</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="步驟-3使用-pyenv-安裝-python-版本">步驟 3：使用 <code>pyenv</code> 安裝 Python 版本<a class="hash-link" aria-label="步驟-3使用-pyenv-安裝-python-版本的直接連結" title="步驟-3使用-pyenv-安裝-python-版本的直接連結" href="https://docsaid.org/blog/windows-python-settings#%E6%AD%A5%E9%A9%9F-3%E4%BD%BF%E7%94%A8-pyenv-%E5%AE%89%E8%A3%9D-python-%E7%89%88%E6%9C%AC">​</a></h3>
+<ol>
+<li>
+<p><strong>查看可用的 Python 版本</strong>：</p>
+<ul>
+<li>
+<p>使用以下命令列出所有可用的 Python 版本：</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pyenv install --list</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>安裝指定的 Python 版本</strong>：</p>
+<ul>
+<li>
+<p>例如，安裝 Python 3.10.11：</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pyenv install 3.10.11</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>設定全域 Python 版本</strong>：</p>
+<ul>
+<li>
+<p>這個步驟不是必要的，但是如果你想要在所有的 shell 中使用相同的 Python 版本，可以設置安裝的 Python 版本為全局默認版本：</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pyenv global 3.10.11</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>驗證 Python 安裝</strong>：</p>
+<ul>
+<li>
+<p>輸入以下命令驗證 Python 是否安裝成功：</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">python --version</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+</ol>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="安裝-vs-code">安裝 VS Code<a class="hash-link" aria-label="安裝 VS Code的直接連結" title="安裝 VS Code的直接連結" href="https://docsaid.org/blog/windows-python-settings#%E5%AE%89%E8%A3%9D-vs-code">​</a></h2>
+<p>最後，我們安裝 Visual Studio Code 作為開發工具。</p>
+<p>這邊我們就到 <a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener noreferrer"><strong>VS Code 官網</strong></a> 下載安裝程式，然後安裝即可。</p>
+<p><img decoding="async" loading="lazy" alt="VS Code" src="https://docsaid.org/assets/images/img2-252427a36a6921cb6173893c00a691e4.jpg" width="2809" height="1668" class="img_ev3q"></p>
+<p>安裝完成之後，我們希望能夠在 PowerShell 中直接使用 <code>code</code> 命令來打開 VS Code。</p>
+<p>所以現在需要把 VS Code 的安裝路徑加入到環境變量中，複製以下路徑：</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">C:\Users\your_user_name\AppData\Local\Programs\Microsoft VS Code\bin</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>記得將 <code>your_user_name</code> 替換為你的使用者名稱。</p></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="題外話">題外話<a class="hash-link" aria-label="題外話的直接連結" title="題外話的直接連結" href="https://docsaid.org/blog/windows-python-settings#%E9%A1%8C%E5%A4%96%E8%A9%B1">​</a></h2>
+<p>其實我們覺得 PowerShell 的展示畫面實在難以直視。</p>
+<p>這個部分我們建議使用 <a href="https://ohmyposh.dev/" target="_blank" rel="noopener noreferrer"><strong>oh-my-posh</strong></a> 來美化 PowerShell 的外觀。</p>
+<p>但這個部分不是本文的重點，有興趣的讀者請查看：</p>
+<ul>
+<li><a href="https://learn.microsoft.com/zh-tw/windows/terminal/tutorials/custom-prompt-setup" target="_blank" rel="noopener noreferrer"><strong>教學課程 - 使用 Oh My Posh 設定 PowerShell 或 WSL 的自訂提示</strong></a></li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a class="hash-link" aria-label="結語的直接連結" title="結語的直接連結" href="https://docsaid.org/blog/windows-python-settings#%E7%B5%90%E8%AA%9E">​</a></h2>
+<p>透過 PowerShell，我們可以快速地配置 Python 環境，並安裝開發工具。</p>
+<p>當然，以上僅涵蓋了最基本的配置，留此文章作為參考。</p>]]></content:encoded>
+            <category>win11</category>
+            <category>python</category>
+            <category>powershell</category>
+        </item>
         <item>
             <title><![CDATA[LaTeX 語法快速查詢表]]></title>
             <link>https://docsaid.org/blog/latex-usage</link>
@@ -570,6 +742,31 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
 <p><strong>解決方法：</strong></p>
 <p><code>??=</code> 操作符需要 Node.js 15.0.0 或更高版本才能支持。</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">nvm install node</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">nvm use node</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="2-choco-命令無法辨識">2. choco 命令無法辨識<a class="hash-link" aria-label="2. choco 命令無法辨識的直接連結" title="2. choco 命令無法辨識的直接連結" href="https://docsaid.org/blog/error-record#2-choco-%E5%91%BD%E4%BB%A4%E7%84%A1%E6%B3%95%E8%BE%A8%E8%AD%98">​</a></h2>
+<ul>
+<li>
+<p><strong>錯誤訊息：</strong></p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">PS C:\Windows\System32&gt; choco install git -y</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&gt;&gt;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">choco : 無法辨識 'choco' 詞彙是否為 Cmdlet、函數、指令檔或可執行程式的名稱。請檢查名稱拼字是否正確，如果包含路徑的話，請確認路徑是否正確，然後再試一次。</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">位於 線路:1 字元:1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">+ choco install git -y</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">+ ~~~~~</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + CategoryInfo          : ObjectNotFound: (choco:String) [], CommandNotFoundException</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + FullyQualifiedErrorId : CommandNotFoundException</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p><strong>解決方法：</strong></p>
+<p>這表示沒有成功安裝 Chocolatey，失敗的原因通常是沒有以「系統管理員」身份執行 PowerShell。</p>
+<p>請以「系統管理員」身份執行 PowerShell，然後再次執行 Chocolatey 安裝指令。</p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="3-chocolatey-安裝失敗">3. Chocolatey 安裝失敗<a class="hash-link" aria-label="3. Chocolatey 安裝失敗的直接連結" title="3. Chocolatey 安裝失敗的直接連結" href="https://docsaid.org/blog/error-record#3-chocolatey-%E5%AE%89%E8%A3%9D%E5%A4%B1%E6%95%97">​</a></h2>
+<ul>
+<li>
+<p><strong>錯誤訊息：</strong></p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">警告: An existing Chocolatey installation was detected. Installation will not continue. This script will not overwrite existing installations.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">If there is no Chocolatey installation at 'C:\ProgramData\chocolatey', delete the folder and attempt the installation again.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Please use choco upgrade chocolatey to handle upgrades of Chocolatey itself.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">If the existing installation is not functional or a prior installation did not complete, follow these steps:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Backup the files at the path listed above so you can restore your previous installation if needed.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Remove the existing installation manually.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Rerun this installation script.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Reinstall any packages previously installed, if needed (refer to the lib folder in the backup).</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Once installation is completed, the backup folder is no longer needed and can be deleted.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p><strong>解決方法：</strong></p>
+<p>這表示 Chocolatey 已經安裝過了，請先刪除舊的安裝，然後再重新安裝。</p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Remove-Item "C:\ProgramData\chocolatey" -Recurse -Force</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製代碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 </ul>]]></content:encoded>
             <category>error</category>
@@ -1212,61 +1409,6 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <category>routing</category>
             <category>vpn</category>
             <category>macos</category>
-        </item>
-        <item>
-            <title><![CDATA[隱私政策]]></title>
-            <link>https://docsaid.org/blog/privacy-policy</link>
-            <guid>https://docsaid.org/blog/privacy-policy</guid>
-            <pubDate>Wed, 23 Aug 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[隱私政策]]></description>
-            <content:encoded><![CDATA[<p>歡迎您訪問 DOCSAID，以下簡稱本網站。我們非常重視您的隱私權，並致力於保護您的個人資訊。請在使用本網站之前詳細閱讀以下隱私權保護政策，以了解我們的資訊收集、使用和保護做法。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="一範圍適用">一、範圍適用<a class="hash-link" aria-label="一、範圍適用的直接連結" title="一、範圍適用的直接連結" href="https://docsaid.org/blog/privacy-policy#%E4%B8%80%E7%AF%84%E5%9C%8D%E9%81%A9%E7%94%A8">​</a></h2>
-<p>本隱私政策適用於您訪問本網站、使用我們的服務，以及參與相關互動的所有情況。請注意，本政策不涵蓋可能包含在本網站內的外部連結，也不適用於由非本網站所委託或管理的第三方網站。我們建議您在進入其他網站之前閱讀其隱私政策，以確保您理解他們如何處理您的個人資訊。</p>
-<p>我們強調，我們僅在本隱私政策所描述的情況下，蒐集、使用和保護您的個人資訊。如果您不同意本政策，請避免使用本網站提供的服務和功能。</p>
-<p>我們將定期審查和更新本隱私政策，以確保其與我們的資料處理實踐和法律法規的一致性。這些變更將在本網站上公布，因此我們建議您定期查看以獲取最新信息。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="二資料的蒐集與使用">二、資料的蒐集與使用<a class="hash-link" aria-label="二、資料的蒐集與使用的直接連結" title="二、資料的蒐集與使用的直接連結" href="https://docsaid.org/blog/privacy-policy#%E4%BA%8C%E8%B3%87%E6%96%99%E7%9A%84%E8%92%90%E9%9B%86%E8%88%87%E4%BD%BF%E7%94%A8">​</a></h2>
-<p>當您使用本網站時，我們可能會要求您提供特定的個人資訊，以便向您提供更好的服務體驗。</p>
-<p>以下是可能蒐集的一些資訊類型：</p>
-<ul>
-<li>姓名、電子郵件地址、聯絡資訊：當您使用我們的互動功能，例如：註冊帳戶、填寫問卷或使用信箱時，我們可能會收集這些資訊，以便與您溝通並提供相關的支援和服務。</li>
-<li>IP 地址、瀏覽器類型、使用時間：我們可能會自動收集您的 IP 地址、瀏覽器類型、訪問時間等訪問日誌資訊。這些資訊將有助於我們改進網站性能、提高服務品質以及確保網站的安全性。</li>
-<li>我們也可能對問卷調查等數據進行統計和分析，但我們將確保這些統計結果是匿名的，並不會涉及特定個人身分。</li>
-</ul>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="三資訊安全">三、資訊安全<a class="hash-link" aria-label="三、資訊安全的直接連結" title="三、資訊安全的直接連結" href="https://docsaid.org/blog/privacy-policy#%E4%B8%89%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8">​</a></h2>
-<p>我們深知保護您的個人資料免於未經授權的訪問、使用或洩露的重要性。因此，我們採用了多種技術和程序來確保您的資訊安全。以下是我們所採取的安全措施：</p>
-<ul>
-<li>數據加密：我們使用加密技術來保護在傳輸過程中的敏感資訊。這意味著在資訊從您的設備傳送到我們的伺服器，以及從伺服器返回到您的設備時，資訊都會被加密，降低了未經授權訪問的風險。</li>
-<li>存取控制：我們實施嚴格的存取控制，僅授予有權限的員工和服務提供商訪問您的個人資訊。這些人員需要進行嚴格的身分驗證，並且僅在執行特定任務時才能訪問相關資訊。</li>
-<li>密碼保護：您的帳戶信息和相關數據可能會受到密碼的保護。我們強烈建議您選擇強大且獨特的密碼，定期更換密碼，並不將密碼透露給他人。</li>
-<li>安全審查：我們定期進行安全審查，以確保我們的系統和流程足夠堅固，能夠應對不斷變化的威脅和風險。</li>
-</ul>
-<p>儘管我們已經採取了各種措施來保護您的資訊，但請理解互聯網並非絕對安全的環境。您應該保持警惕，不在未經驗證的情況下透露您的個人資訊。</p>
-<p>如果您認為自己的帳戶安全受到威脅，或發現任何安全漏洞，請立即通知我們，以便我們能夠採取適當的措施保護您的資訊。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="四外部連結">四、外部連結<a class="hash-link" aria-label="四、外部連結的直接連結" title="四、外部連結的直接連結" href="https://docsaid.org/blog/privacy-policy#%E5%9B%9B%E5%A4%96%E9%83%A8%E9%80%A3%E7%B5%90">​</a></h2>
-<p>我們的網站可能包含指向其他網站或服務的連結，這些網站可能與我們無關，並且可能擁有其自己的隱私政策。</p>
-<p>我們提供這些連結僅為您的方便，以便您可以獲取更多有關主題的相關信息。</p>
-<p>然而，請注意，當您點擊這些外部連結時，您將離開本網站，我們對您在這些連結指向的網站上的資訊使用和隱私政策概不負責。</p>
-<p>我們強烈建議您在訪問任何外部連結之前閱讀相關網站的隱私政策，以確保您理解他們如何收集、使用和分享您的個人資訊。</p>
-<p>我們無法控制這些外部網站的資訊收集實踐，因此建議您謹慎對待您在這些網站上提供的任何個人資訊。</p>
-<p>如果您通過我們的網站訪問了其他網站，我們建議您閱讀和理解該網站的隱私政策，以確保您的隱私得到適當的保護。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="五資料分享">五、資料分享<a class="hash-link" aria-label="五、資料分享的直接連結" title="五、資料分享的直接連結" href="https://docsaid.org/blog/privacy-policy#%E4%BA%94%E8%B3%87%E6%96%99%E5%88%86%E4%BA%AB">​</a></h2>
-<p>我們承諾保護您的個人資料，並尊重您的隱私權。我們不會未經您的明確許可，將您的個人資料銷售、交換或轉讓給任何非關聯的第三方。</p>
-<p>您的個人資訊僅在下列情況下可能被分享：</p>
-<ul>
-<li>您的許可：在某些情況下，我們可能會要求您的明確許可，才能與第三方共享您的資訊。例如：當您參加促銷活動或合作計劃時，我們可能需要分享您的相關資訊，以便完成相關事宜。</li>
-<li>法律要求：我們有義務遵守適用的法律法規，包括但不限於法院命令、法律程序或政府要求。在這些情況下，我們可能會分享您的資訊，以履行我們的法律義務和法律程序。</li>
-<li>公共安全目的：我們可能會分享您的個人資訊，以保護公共安全和防止欺詐、安全事故或違法行為。這可能包括將資訊與執法機構、政府機構或其他相關組織分享。</li>
-</ul>
-<p>無論在何種情況下，我們都會盡一切合理努力確保您的個人資訊得到適當的保護。我們不會輕率地分享您的資訊，並將遵循適用的法律法規和最佳實踐來處理資料分享事宜。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="六cookie-技術">六、Cookie 技術<a class="hash-link" aria-label="六、Cookie 技術的直接連結" title="六、Cookie 技術的直接連結" href="https://docsaid.org/blog/privacy-policy#%E5%85%ADcookie-%E6%8A%80%E8%A1%93">​</a></h2>
-<p>為了提供更好的用戶體驗，我們可能會在您的設備上使用 Cookie 和類似技術。Cookie 是小型文本文件，它們被存儲在您的設備上的瀏覽器中，用於記錄有關您的訪問和互動的信息。這些信息可能包括訪問時間、訪問的頁面、設備信息等。</p>
-<p>我們使用 Cookie 的主要目的是：</p>
-<ul>
-<li>提供個人化的用戶體驗：Cookie 允許我們記住您的偏好和選擇，從而在您再次訪問時提供更加個人化的內容和功能。</li>
-<li>分析和改進：我們使用 Cookie 來分析網站的使用情況，以了解流量模式、使用習慣和頁面互動，這有助於我們改進網站的性能和功能。</li>
-</ul>
-<p>您可以根據自己的偏好管理瀏覽器中的 Cookie 設置。大多數瀏覽器允許您控制、管理或刪除 Cookie。然而，請注意，禁用或限制 Cookie 可能會影響某些網站的功能和使用體驗。如果您選擇禁用或限制 Cookie，可能無法充分體驗本網站提供的所有功能。</p>]]></content:encoded>
-            <category>privacy-policy</category>
         </item>
     </channel>
 </rss>
