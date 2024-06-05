@@ -135,23 +135,23 @@ Installing and using `pyenv` on Windows is not usually straightforward because `
 
 Follow these steps:
 
-### Step 1: Install `pyenv-win`
+### Step 1: Installing `pyenv-win`
 
-- Download the `pyenv-win` project:
+- [**Reference: pyenv-win/docs/installation.md**](https://github.com/pyenv-win/pyenv-win/blob/master/docs/installation.md)
 
-  ```powershell
-  git clone https://github.com/pyenv-win/pyenv-win.git $HOME\.pyenv
-  ```
+Download the `pyenv-win` project:
 
-- Set the environment variables:
+```powershell
+Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
+```
 
-  ```powershell
-  $env:PYENV = "$HOME\.pyenv"
-  $env:PATH = "$env:PYENV\pyenv-win\bin;$env:PYENV\pyenv-win\shims;$env:PATH"
+If you encounter any `UnauthorizedAccess` errors as shown below, please launch Windows PowerShell with the "Run as Administrator" option and execute:
 
-  [Environment]::SetEnvironmentVariable('PYENV', $env:PYENV, [EnvironmentVariableTarget]::User)
-  [Environment]::SetEnvironmentVariable('PATH', $env:PATH, [EnvironmentVariableTarget]::User)
-  ```
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+```
+
+After completion, rerun the installation command above.
 
 ### Step 2: Verify Installation
 

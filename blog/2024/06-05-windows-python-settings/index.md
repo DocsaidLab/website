@@ -137,21 +137,21 @@ git --version
 
 ### 步驟 1：安裝 `pyenv-win`
 
-- 下載 `pyenv-win` 專案：
+- [**參考資料： pyenv-win/docs/installation.md**](https://github.com/pyenv-win/pyenv-win/blob/master/docs/installation.md)
 
-  ```powershell
-  git clone https://github.com/pyenv-win/pyenv-win.git $HOME\.pyenv
-  ```
+下載 `pyenv-win` 專案：
 
-- 設置環境變量：
+```powershell
+Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
+```
 
-  ```powershell
-  $env:PYENV = "$HOME\.pyenv"
-  $env:PATH = "$env:PYENV\pyenv-win\bin;$env:PYENV\pyenv-win\shims;$env:PATH"
+如果你收到如下所示的任何 `UnauthorizedAccess` 錯誤，請使用「以管理員身分執行」選項啟動 Windows PowerShell 並執行：
 
-  [Environment]::SetEnvironmentVariable('PYENV', $env:PYENV, [EnvironmentVariableTarget]::User)
-  [Environment]::SetEnvironmentVariable('PATH', $env:PATH, [EnvironmentVariableTarget]::User)
-  ```
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+```
+
+完成後，再重新執行上述安裝命令。
 
 ### 步驟 2：驗證安裝
 
