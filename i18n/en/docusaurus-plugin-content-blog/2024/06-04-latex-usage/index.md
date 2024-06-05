@@ -2,7 +2,7 @@
 slug: latex-usage
 title: LaTeX Syntax Quick Reference
 authors: Zephyr
-image: /img/2024/0604.webp
+image: /en/img/2024/0604.webp
 tags: [LaTeX, Math]
 description: Quick reference guide for LaTeX syntax
 ---
