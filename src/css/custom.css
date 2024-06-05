@@ -127,10 +127,25 @@ a:hover {
   .blog-tags-post-list-page main {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0 25px;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .blog-list-page main > *:not(.pagination-nav),
+  .blog-tags-post-list-page main > *:not(.pagination-nav) {
+    border: 1px solid #ccc;
+    padding: 10px;
+    line-height: normal;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .blog-list-page main > article.margin-bottom--xl,
+  .blog-tags-post-list-page main > article.margin-bottom--xl {
+    margin-bottom: 1rem !important;
   }
 }
-
 
 .avatar {
   padding: 0px; /* 內距 */
@@ -157,4 +172,10 @@ a:hover {
 /* 確保分頁導航在Grid容器中正確對齊 */
 .pagination-nav {
   grid-column: 1 / -1; /* 如果分頁導航應該橫跨所有列 */
+}
+
+.container {
+  max-width: 90%;
+  padding: 0 15px;
+  margin: 0 auto;
 }
