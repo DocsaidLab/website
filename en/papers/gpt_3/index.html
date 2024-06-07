@@ -15,7 +15,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="DOCSAID" href="/en/opensearch.xml">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css" integrity="sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM" crossorigin="anonymous"><link rel="stylesheet" href="/en/assets/css/styles.c6ca026b.css">
-<script src="/en/assets/js/runtime~main.541cef0c.js" defer="defer"></script>
+<script src="/en/assets/js/runtime~main.a8976f28.js" defer="defer"></script>
 <script src="/en/assets/js/main.144c1ced.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -26,11 +26,71 @@
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。</p></div></div>
 <hr>
 <p>第二代的 GPT 疊了四十八層 Transformer 解碼器。</p>
-<p>OpenAI 覺得這樣不夠，於是他們疊了九十六層 Transformer 解碼器，這就是 GPT-3。</p>
+<p>OpenAI 覺得這樣不夠，於是他們繼續往上疊了九十六層 Transformer 解碼器，參數量達到史無前例的 175 B，名為 GPT-3。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="定義問題">定義問題<a class="hash-link" aria-label="Direct link to 定義問題" title="Direct link to 定義問題" href="/en/papers/gpt_3/#定義問題">​</a></h2>
+<p>最近的工作已經證明，透過對大量文字進行預訓練，然後對特定任務進行微調，在許多 NLP 任務和基準測試中取得了巨大的成果。在我們的理想中的 NLP 技術應能像人類一樣，在接收少量指示或示例的情況下，快速適應和處理多種語言任務，但現階段的研究中還是有幾個問題，顯然和理想上還有很大的差距：</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="多樣化的語言任務需求">多樣化的語言任務需求<a class="hash-link" aria-label="Direct link to 多樣化的語言任務需求" title="Direct link to 多樣化的語言任務需求" href="/en/papers/gpt_3/#多樣化的語言任務需求">​</a></h3>
+<p>當前的語言模型面臨著適應廣泛且多樣化的語言任務的需求，從語法糾正到抽象概念生成等。每個新任務通常需要大量特定的標記數據集，這限制了模型的普遍適用性。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="依賴大規模監督數據集">依賴大規模監督數據集<a class="hash-link" aria-label="Direct link to 依賴大規模監督數據集" title="Direct link to 依賴大規模監督數據集" href="/en/papers/gpt_3/#依賴大規模監督數據集">​</a></h3>
+<p>收集和標記大型數據集對於許多語言任務來說既昂貴又耗時。每個新任務都需要重複這一數據收集過程，這增加了開發成本並延長了部署時間。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="模型的過度專業化和泛化問題">模型的過度專業化和泛化問題<a class="hash-link" aria-label="Direct link to 模型的過度專業化和泛化問題" title="Direct link to 模型的過度專業化和泛化問題" href="/en/papers/gpt_3/#模型的過度專業化和泛化問題">​</a></h3>
+<p>當前模型在特定任務上進行微調可能導致過度專業化，使得模型在訓練分佈之外的數據上泛化能力差。訓練中的虛假相關性可能會誤導模型，影響其長期和廣泛的應用。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="人類的學習效率與模型的對比">人類的學習效率與模型的對比<a class="hash-link" aria-label="Direct link to 人類的學習效率與模型的對比" title="Direct link to 人類的學習效率與模型的對比" href="/en/papers/gpt_3/#人類的學習效率與模型的對比">​</a></h3>
+<p>相對於人類通過少量示例或直接指令就能快速適應新任務的能力，當前模型對大量標記數據的依賴顯得效率低下。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解決問題">解決問題<a class="hash-link" aria-label="Direct link to 解決問題" title="Direct link to 解決問題" href="/en/papers/gpt_3/#解決問題">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="tuning" src="/en/assets/images/img2-5ebe8a874ae278f7a9930a9174ee42e9.jpg" width="1204" height="1080" class="img_ev3q"></p>
+<p>在 GPT-3 中，基本預訓練方法，包括模型、資料和訓練，都與 GPT-2 中描述的過程類似，相對簡單地擴大了模型大小、資料集大小和多樣性以及訓練長度。對情境學習的使用也與 GPT-2 類似，但在這 項工作中，作者們系統地探索了情境中學習的不同設定，主要的分別為：</p>
+<ol>
+<li>
+<p><strong>Fine-tuning</strong></p>
+<ul>
+<li>這是最常見的方法，涉及透過對特定於所需任務的監督資料集進行訓練來更新預訓練模型的權重。通常使用數千到數十萬個標籤的範例。微調的主要優點是在許多基準測試中表現出色。主要缺點是每個任務都需要一個新的大型資料集，分佈外泛化能力差的可能性，以及利用訓練資料的虛假特徵的可能性，這可能會導致與人類表現進行不公平的比較。在這項工作中，作者們沒有對 GPT-3 進行微調，因為他們的重點是與任務無關的性能，但 GPT-3 原則上可以進行微調，這是未來工作的一個有希望的方向。</li>
+</ul>
+</li>
+<li>
+<p><strong>Few-shot</strong></p>
+<ul>
+<li>Few-shot 是作者們在這項工作中使用的術語，指的是這樣的設定：在推理時為模型提供一些任務演示作為條件，但不允許權重更新。對於典型的資料集，範例具有上下文和所需的完成（例如英語句子和法語翻譯），透過給出 K 個上下文和完成的範例，然後提供一個最終範例，可以進行少樣本工作上下文，模型有望提供完成。作者們通常將 K 設定在 10 到 100 的範圍內，因為這是模型上下文視窗中可以容納的範例數量。Few-shot 的主要優點是大幅減少了對特定任務資料的需求，並降低了從大而窄的微調資料集中學習過於狹窄的分佈的潛力。主要缺點是，迄今為止，這種方法的結果比最先進的微調模型要差得多。此外，仍需要少量任務特定資料。</li>
+</ul>
+</li>
+<li>
+<p><strong>One-shot</strong></p>
+<ul>
+<li>One-shot 與 Few-shot 相同，只是只允許進行一次演示，此外還需要對任務進行自然語言描述。這種方法提供了最接近某些任務與人類溝通的方式。例如，當要求人類在人類工作者服務（例如 Mechanical Turk）上產生資料集時，通常會給出一個任務演示。相較之下，如果不給予範例，有時很難傳達任務的內容或格式。</li>
+</ul>
+</li>
+<li>
+<p><strong>Zero-shot</strong></p>
+<ul>
+<li>與 One-shot 相同，只是不允許進行演示，並且僅向模型提供描述任務的自然語言指令。這種方法提供了最大的便利性、穩健性的潛力，並避免了虛假相關性，但也是最具挑戰性的設定。在某些情況下，如果沒有先前的範例，人類甚至可能很難理解任務的格式，因此這種設定在某些情況下「相當困難」。</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="模型架構">模型架構<a class="hash-link" aria-label="Direct link to 模型架構" title="Direct link to 模型架構" href="/en/papers/gpt_3/#模型架構">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="model_arch" src="/en/assets/images/img1-1f3e4c8320bb9c2d8cc890ce0a0975ec.jpg" width="1224" height="336" class="img_ev3q"></p>
+<p>在本文中，作者使用與 GPT-2 相同的模型和架構，包括修改後的初始化、預歸一化和可逆標記化。</p>
+<p>不同之處在於作者們在變壓器中使用了稀疏變壓器，讀者可以參考以下論文以獲取更多資訊：</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/1904.10509" target="_blank" rel="noopener noreferrer"><strong>Generating Long Sequences with Sparse Transformers</strong></a></li>
+</ul>
+<p>為了研究機器學習效能對模型大小的依賴性，作者們訓練了 8 種不同大小的模型，範圍從 1.25 億個參數到 1750 億個參數三個數量級，最後一個是他們稱為 GPT-3 的模型。</p>
+<p>從上表中可以看到，所有模型都使用 2048 個 Token 的上下文視窗。作者們沿著深度和寬度維度跨 GPU 劃分模型，以最大程度地減少節點之間的資料傳輸。每個模型的精確架構參數是根據運算效率和跨 GPU 模型佈局的負載平衡來選擇的。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="資料集設定">資料集設定<a class="hash-link" aria-label="Direct link to 資料集設定" title="Direct link to 資料集設定" href="/en/papers/gpt_3/#資料集設定">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="data" src="/en/assets/images/img3-5443003f09defaed11a7863fe50f1974.jpg" width="1224" height="320" class="img_ev3q"></p>
+<p>在本文中，作者使用包含近兆字的 Common Crawl 資料集來預先訓練模型。</p>
+<p>另外，作者也發現未經篩選或僅輕度篩選的 Common Crawl 版本的資料品質通常不如精心準備的資料集。</p>
+<p>為了提升資料集的平均質量，他們採取了以下三個步驟：</p>
+<ol>
+<li><strong>資料篩選和品質控制</strong>：篩選 Common Crawl 的數據，選擇與一系列高品質參考語料庫相似度較高的數據。</li>
+<li><strong>去重處理</strong>：在文件層級進行模糊重複資料刪除，既在資料集內部進行，也跨資料集進行，以防止資料冗餘，並保持驗證集的完整性。</li>
+<li><strong>增強資料多樣性</strong>：在訓練組合中加入了已知的高品質參考語料庫，以增強 Common Crawl 資料並提高其多樣性。</li>
+</ol>
+<p>透過這種方法，作者收集了從 2016 年至 2019 年間的 41 個 Common Crawl 每月資料片段，這些資料包含了過濾前的 45TB 壓縮明文和過濾後的 570GB，大約等同於 4000 億個位元組編碼的 Token。</p>
+<p>此外，在訓練期間並非按資料大小進行採樣，而是更頻繁地採樣我們認為品質較高的資料集，例如 Common Crawl 和 Books2 資料集在訓練期間的採樣次數不足一次，而其他數據集則採樣 2 至 3 次。這種做法本質上是為了用少量的過度擬合換取更高品質的訓練資料。</p>
+<p>預訓練大規模網路資料的語言模型存在一個主要的方法論問題，尤其是對於那些能夠記憶大量內容的大型模型：在預訓練期間無意中看到測試或開發  集，可能會污染下游任務的效果。為了減少這種污染，作者搜尋並嘗試消除所有 Benchmark 和 Training 資料的任何重疊。</p>
+<p>不幸的是，過濾中的錯誤導致作者們忽略了一些重疊，而由於訓練成本，模型不能重新訓練，只能在後面試著挽救這個錯誤。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>訓練的機會是有限的，因為沒錢了。</p></div></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="討論">討論<a class="hash-link" aria-label="Direct link to 討論" title="Direct link to 討論" href="/en/papers/gpt_3/#討論">​</a></h2>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a class="hash-link" aria-label="Direct link to 結論" title="Direct link to 結論" href="/en/papers/gpt_3/#結論">​</a></h2>
-<p>這個模型的規模之大，以至於 OpenAI 在發布時擔心它可能被濫用，因此他們決定不公開釋出完整的模型。</p></div><div style="margin-top:3rem"> </div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/papers/detr/"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">[20.05] DETR</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/papers/ernie-vil/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">[20.06] ERNIE-ViL</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#九十六層解碼器">九十六層解碼器</a></li><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#定義問題">定義問題</a></li><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#解決問題">解決問題</a></li><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#討論">討論</a></li><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#結論">結論</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a class="footer__link-item" href="/en/docs">Docs</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/en/papers/intro">Papers</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/en/blog">Blog</a><span class="footer__link-separator">·</span><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a href="https://docsaid.org/blog/terms-of-service" target="_blank" rel="noopener noreferrer" class="footer__link-item">TermsOfUse<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a href="https://docsaid.org/blog/privacy-policy" target="_blank" rel="noopener noreferrer" class="footer__link-item">Privacy Policy<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 DOCSAID.</div></div></div></footer></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a class="hash-link" aria-label="Direct link to 結論" title="Direct link to 結論" href="/en/papers/gpt_3/#結論">​</a></h2></div><div style="margin-top:3rem"> </div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/papers/detr/"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">[20.05] DETR</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/papers/ernie-vil/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">[20.06] ERNIE-ViL</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#九十六層解碼器">九十六層解碼器</a></li><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#定義問題">定義問題</a><ul><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#多樣化的語言任務需求">多樣化的語言任務需求</a></li><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#依賴大規模監督數據集">依賴大規模監督數據集</a></li><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#模型的過度專業化和泛化問題">模型的過度專業化和泛化問題</a></li><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#人類的學習效率與模型的對比">人類的學習效率與模型的對比</a></li></ul></li><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#解決問題">解決問題</a><ul><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#模型架構">模型架構</a></li><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#資料集設定">資料集設定</a></li></ul></li><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#討論">討論</a></li><li><a class="table-of-contents__link toc-highlight" href="/en/papers/gpt_3/#結論">結論</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a class="footer__link-item" href="/en/docs">Docs</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/en/papers/intro">Papers</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/en/blog">Blog</a><span class="footer__link-separator">·</span><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a href="https://docsaid.org/blog/terms-of-service" target="_blank" rel="noopener noreferrer" class="footer__link-item">TermsOfUse<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a href="https://docsaid.org/blog/privacy-policy" target="_blank" rel="noopener noreferrer" class="footer__link-item">Privacy Policy<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 DOCSAID.</div></div></div></footer></div>
 </body>
 </html>
