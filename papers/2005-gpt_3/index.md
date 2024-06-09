@@ -81,9 +81,11 @@ OpenAI 覺得這樣不夠，於是他們繼續往上疊了九十六層 Transform
 
 在本文中，作者使用與 GPT-2 相同的模型和架構，包括修改後的初始化、預歸一化和可逆標記化。
 
-不同之處在於作者們在 Transformer 中使用了稀疏注意力的 Transformer，讀者可以參考以下論文以獲取更多資訊：
+不同之處在於：作者在 Transformer 中使用了稀疏注意力的 Transformer，關於該技術的詳細內容，讀者可以參考我們的另外一篇文章以獲取更多資訊：
 
-- [**Generating Long Sequences with Sparse Transformers**](https://arxiv.org/pdf/1904.10509)
+- [**\[19.04\] Sparse Transformer**](../1904-sparse-transformer/index.md)
+
+  ![sparse_transformer](../1904-sparse-transformer/img/img6.jpg)
 
 為了研究機器學習效能對模型大小的依賴性，作者們訓練了 8 種不同大小的模型，範圍從 1.25 億個參數到 1750 億個參數三個數量級，最後一個是他們稱為 GPT-3 的模型。
 
