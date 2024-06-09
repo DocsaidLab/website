@@ -15,7 +15,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="DOCSAID" href="/en/opensearch.xml">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css" integrity="sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM" crossorigin="anonymous"><link rel="stylesheet" href="/en/assets/css/styles.c6ca026b.css">
-<script src="/en/assets/js/runtime~main.746dbd9e.js" defer="defer"></script>
+<script src="/en/assets/js/runtime~main.86305478.js" defer="defer"></script>
 <script src="/en/assets/js/main.505c487c.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -91,13 +91,16 @@
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="模型架構">模型架構<a class="hash-link" aria-label="Direct link to 模型架構" title="Direct link to 模型架構" href="/en/papers/gpt_3/#模型架構">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="model_arch" src="/en/assets/images/img1-1f3e4c8320bb9c2d8cc890ce0a0975ec.jpg" width="1224" height="336" class="img_ev3q"></p>
 <p>在本文中，作者使用與 GPT-2 相同的模型和架構，包括修改後的初始化、預歸一化和可逆標記化。</p>
-<p>不同之處在於作者們在 Transformer 中使用了稀疏注意力的 Transformer，讀者可以參考以下論文以獲取更多資訊：</p>
+<p>不同之處在於：作者在 Transformer 中使用了稀疏注意力的 Transformer，關於該技術的詳細內容，讀者可以參考我們的另外一篇文章以獲取更多資訊：</p>
 <ul>
-<li><a href="https://arxiv.org/pdf/1904.10509" target="_blank" rel="noopener noreferrer"><strong>Generating Long Sequences with Sparse Transformers</strong></a></li>
+<li>
+<p><a href="/en/papers/sparse-transformer/"><strong>[19.04] Sparse Transformer</strong></a></p>
+<p><img decoding="async" loading="lazy" alt="sparse_transformer" src="/en/assets/images/img6-dba9e1d15b2107a0f8f0fb46d6cb84b8.jpg" width="1392" height="694" class="img_ev3q"></p>
+</li>
 </ul>
 <p>為了研究機器學習效能對模型大小的依賴性，作者們訓練了 8 種不同大小的模型，範圍從 1.25 億個參數到 1750 億個參數三個數量級，最後一個是他們稱為 GPT-3 的模型。</p>
 <p>從上表中可以看到，所有模型都使用 2048 個 Token 的上下文視窗。作者們沿著深度和寬度維度跨 GPU 劃分模型，以最大程度地減少節點之間的資料傳輸。每個模型的精確架構參數是根據運算效率和跨 GPU 模型佈局的負載平衡來選擇的。</p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="資料集設定">資料集設定<a class="hash-link" aria-label="Direct link to 資料集設定" title="Direct link to 資料集設定" href="/en/papers/gpt_3/#資料集設定">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="資料集設定">資料  集設定<a class="hash-link" aria-label="Direct link to 資料集設定" title="Direct link to 資料集設定" href="/en/papers/gpt_3/#資料集設定">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="data" src="/en/assets/images/img3-5443003f09defaed11a7863fe50f1974.jpg" width="1224" height="320" class="img_ev3q"></p>
 <p>在本文中，作者使用包含近兆字的 Common Crawl 資料集來預先訓練模型。</p>
 <p>另外，作者也發現未經篩選或僅輕度篩選的 Common Crawl 版本的資料品質通常不如精心準備的資料集。</p>
@@ -116,7 +119,7 @@
 <p><img decoding="async" loading="lazy" alt="lambada" src="/en/assets/images/img4-558b8d19491337799dc4f90f438fb167.jpg" width="1224" height="772" class="img_ev3q"></p>
 <p>LAMBADA 資料集要求模型預測一個句子的最後一個單字，需要閱讀整段上下文。這個基準測試特別挑戰模型對遠端依賴關係的建模能力。</p>
 <ul>
-<li>最近研究指出，在 LAMBADA 基準測試中，語言模型的持續擴展已經帶來收益遞減。過去的研究顯示，兩個先進結果間模型大小加倍僅提升了 1.5% 的準確率，並提出結論認為通過擴展硬體和數據規模來提升性能並不是可行之路。</li>
+<li>最近研究指出，在 LAMBADA 基準測試中，語言模型的持續擴展已經帶來收益遞減。過去的研究顯示，兩個先進結果間模型大小加倍僅提升了 1.5% 的準確率，並提出結論認為通過擴展硬體和數據規模來提升性能並不是可行之路 。</li>
 <li>而 OpenAI 則表示：那是你的規模不夠。在 Zero-shot 的設定中，GPT-3 在 LAMBADA 上達到了 76% 的準確率，比之前最佳技術水平「提高了 8%」。（上圖的藍線）</li>
 <li>在 Few-shot 設定中，GPT-3 達到了 86.4% 的準確率，比之前最佳技術水平「提高了超過 18%」。（上圖的橘線）</li>
 </ul>
@@ -125,7 +128,7 @@
 <p><img decoding="async" loading="lazy" alt="qa" src="/en/assets/images/img5-e2e8027e4df1a147951d6e5b723e49d0.jpg" width="1224" height="732" class="img_ev3q"></p>
 <p>這項任務用來衡量 GPT-3 回答廣泛事實知識問題的能力，通常這些問題透過資訊檢索系統查找相關文本並生成答案。此任務被稱為「open-book」設定，即系統可以搜尋並利用相關文字回答問題。另一種設定是「閉卷」（closed-book），系統直接回答問題，不依賴外部資訊。</p>
 <p>本研究測試 GPT-3 在相同 closed-book 設定中的表現，在 Zero-shot 的設定中達到 64.3%，在 One-shot 的設定中達到 68.0%，在 Few-shot 的設定中達到 71.2%。相比微調後的 T5-11B，GPT-3 在 Zero-shot 的設定中提高了 14.2%，比帶有 Q&amp;A 定制跨度預測的版本提高了 3.8%，而且用 One-shot 設定就達到 SoTA 水平。</p>
-<p>在所有測試資料集上，作者發現效能隨模型大小的變化非常平滑，這可能反映了模型容量直接轉化為模型參數吸收的更多「知識」的想法。</p>
+<p>在所有測試資料集上，作者發  現效能隨模型大小的變化非常平滑，這可能反映了模型容量直接轉化為模型參數吸收的更多「知識」的想法。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a class="hash-link" aria-label="Direct link to 結論" title="Direct link to 結論" href="/en/papers/gpt_3/#結論">​</a></h2>
 <p>該論文是一份共有 75 頁的 PDF 檔案，裡面提供的圖表遠不止上面提到的這些，但所有的圖表都表明了一個共同的趨勢：大語言模型的性能需要經過 Few-shot 設定才能發揮出來。這種趨勢在各種任務和基準測試中都是如此。這也在後續衍生出一連串的「提示工程（Prompt Engineering）」研究，這些研究主要是為了找到最佳的提示方式，以便模型能夠在 Few-shot 設定下發揮最佳性能。</p>
 <p>儘管 GPT-3 在文本生成和自然語言處理任務上相較於前代模型有顯著進步，它仍然存在諸如語義重複、失去連貫性及邏輯錯誤等問題。在處理常識物理問題和上下文學習行為上，GPT-3 顯示出特定的弱點，這反映了模型在某些特定語言任務上的局限性。</p>
