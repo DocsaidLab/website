@@ -48,12 +48,12 @@ sidebar_position: 1
 
 1. **使用 Zapier 或 IFTTT 等服務**
 
-    - [**Zapier**](https://zapier.com/)：這是個專注於增強工作效率的自動化平台，它支持連接超過 3,000 種不同的網絡應用程序，包括 Gmail、Slack、Mailchimp 等。這個平台允許用戶通過創建自動化工作流程，來實現各種應用之間的自動交互。
-    - [**IFTTT**](https://ifttt.com/)：IFTTT 是一個免費的網絡服務，它允許用戶創建「如果這樣，那麼那樣」的自動化任務，這些任務稱為「Applets」。每個 Applet 都是由一個觸發器和一個動作組成的。當觸發器條件被滿足時，Applet 將自動執行動作。
+   - [**Zapier**](https://zapier.com/)：這是個專注於增強工作效率的自動化平台，它支持連接超過 3,000 種不同的網絡應用程序，包括 Gmail、Slack、Mailchimp 等。這個平台允許用戶通過創建自動化工作流程，來實現各種應用之間的自動交互。
+   - [**IFTTT**](https://ifttt.com/)：IFTTT 是一個免費的網絡服務，它允許用戶創建「如果這樣，那麼那樣」的自動化任務，這些任務稱為「Applets」。每個 Applet 都是由一個觸發器和一個動作組成的。當觸發器條件被滿足時，Applet 將自動執行動作。
 
 2. **使用 GmailAPI**
 
-    - [**GmailAPI**](https://developers.google.com/gmail/api)：可以讓我們使用程式來讀取郵件、寫入郵件、搜尋郵件等操作。
+   - [**GmailAPI**](https://developers.google.com/gmail/api)：可以讓我們使用程式來讀取郵件、寫入郵件、搜尋郵件等操作。
 
 :::tip
 既然我們都要寫程式了，那就不必再考慮第一種方案了，就用 GmailAPI 上吧。
@@ -74,6 +74,6 @@ sidebar_position: 1
 3. **郵件內容摘要**：使用 ChatGPT。
 4. **輸出＆排程**：使用 Markdown 來輸出，使用 crontab 來排程。
 
-以上就是本專案的核心功能，我們把成果展示在 **每日新聞** 頁面。
+以上就是本專案的核心功能，我們把成果展示在 **輸出示範** 頁面。
 
 接下來，我們將逐一介紹這些部分的功能實現方式。

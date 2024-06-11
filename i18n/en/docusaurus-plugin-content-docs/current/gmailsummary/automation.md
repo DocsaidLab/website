@@ -50,16 +50,12 @@ OPENAI_API_KEY="your_openai_api_key"
 
 # Automatically execute the update script every morning at 6
 0 6 * * * /path/to/your/script/update_targets_infos.sh
-
-# Update GmailAPI Token every hour
-*/50 * * * * /path/to/your/script/refresh_token.sh
 ```
 
 Before setting up scheduled tasks, don't forget to grant execution permissions to the script files:
 
 ```bash
 chmod +x /path/to/your/script/update_targets_infos.sh
-chmod +x /path/to/your/script/refresh_token.sh
 ```
 
 Additionally, due to the specific environment of `crontab`, you must ensure that the Python environment and related packages being executed are correct.
@@ -67,7 +63,7 @@ Additionally, due to the specific environment of `crontab`, you must ensure that
 Therefore, in the program, we typically use absolute paths to execute Python scripts. Remember to modify the paths in the program.
 
 ```bash
-# `update_targets_infos.sh` and `refresh_token.sh`
+# `update_targets_infos.sh`
 
 # ...omitting above
 

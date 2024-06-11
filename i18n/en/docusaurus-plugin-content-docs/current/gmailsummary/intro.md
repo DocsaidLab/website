@@ -48,12 +48,12 @@ Let's briefly consider some feasible solutions:
 
 1. **Using Services like Zapier or IFTTT**
 
-    - [**Zapier**](https://zapier.com/): This is an automation platform focused on enhancing productivity, supporting connections to over 3,000 different web applications, including Gmail, Slack, Mailchimp, etc. This platform allows users to create automated workflows to achieve automatic interaction between various applications.
-    - [**IFTTT**](https://ifttt.com/): IFTTT is a free web service that allows users to create "if this, then that" automated tasks, known as "Applets." Each Applet consists of a trigger and an action. When the trigger condition is met, the Applet will automatically execute the action.
+   - [**Zapier**](https://zapier.com/): This is an automation platform focused on enhancing productivity, supporting connections to over 3,000 different web applications, including Gmail, Slack, Mailchimp, etc. This platform allows users to create automated workflows to achieve automatic interaction between various applications.
+   - [**IFTTT**](https://ifttt.com/): IFTTT is a free web service that allows users to create "if this, then that" automated tasks, known as "Applets." Each Applet consists of a trigger and an action. When the trigger condition is met, the Applet will automatically execute the action.
 
 2. **Using Gmail API**
 
-    - [**Gmail API**](https://developers.google.com/gmail/api): This allows us to perform operations like reading emails, writing emails, searching emails, etc., programmatically.
+   - [**Gmail API**](https://developers.google.com/gmail/api): This allows us to perform operations like reading emails, writing emails, searching emails, etc., programmatically.
 
 :::tip
 Since we're already going to write code, let's not consider the first solution and go with Gmail API.
@@ -74,6 +74,6 @@ We break down the entire process into several parts:
 3. **Email Content Summarization**: Using ChatGPT.
 4. **Output & Scheduling**: Outputting in Markdown format and scheduling using crontab.
 
-The above is the core functionality of this project, and we showcase the results on the **Daily News** page.
+The above is the core functionality of this project, and we showcase the results on the **Demo** page.
 
 Next, we'll introduce the implementation of these parts one by one.

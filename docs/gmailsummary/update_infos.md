@@ -39,7 +39,7 @@ mkdir -p "$log_dir" "$project_path"
 cd $origin_dir
 
 # 指定項目名稱列表
-project_names=("albumentations" "onnxruntime" "pytorch-lightning" "BentoML" "docusaurus")
+project_names=("albumentations" "onnxruntime" "pytorch-lightning" "docusaurus")
 
 for project_name in "${project_names[@]}"; do
     log_file="$log_dir/$project_name-log-$current_date.txt"

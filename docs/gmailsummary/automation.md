@@ -50,16 +50,12 @@ OPENAI_API_KEY="your_openai_api_key"
 
 # 每天早上 6 點自動執行更新程式
 0 6 * * * /path/to/your/script/update_targets_infos.sh
-
-# 每小時更新 GmailAPI Token
-*/50 * * * * /path/to/your/script/refresh_token.sh
 ```
 
 在設置定時任務之前，不要忘記給程式文件賦予執行權限：
 
 ```bash
 chmod +x /path/to/your/script/update_targets_infos.sh
-chmod +x /path/to/your/script/refresh_token.sh
 ```
 
 此外，由於 crontab 的環境特殊性，你必須確保執行的 python 環境和相關套件都是正確的。
@@ -67,7 +63,7 @@ chmod +x /path/to/your/script/refresh_token.sh
 因此在程式中，我們通常會使用絕對路徑來執行 python 程式，請記得要修改程式中的路徑。
 
 ```bash
-# `update_targets_infos.sh` and `refresh_token.sh`
+# `update_targets_infos.sh`
 
 # ...以上省略
 
