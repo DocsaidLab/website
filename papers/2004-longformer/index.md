@@ -24,11 +24,15 @@ Transformer 的自注意力機制的計算複雜度為 $O(n^2)$。
 
 為了解決原始的 Transformer 計算複雜度的問題，研究者不停地尋找優化的方法。
 
-一部分的方法是採用 [**Transformer-XL**](../1901-transformer-xl/index.md) 的設計理念，用滑動視窗搭配額外記憶區塊的方式來處理長文檔。
+一部分的方法是採用 **Transformer-XL** 的設計理念，用滑動視窗搭配額外記憶區塊的方式來處理長文檔。
+
+- [**Transformer-XL: 更長的上下文**](../1901-transformer-xl/index.md)
 
 但滑動視窗的這種設計，對於雙向的注意力機制上有著天生的設計缺陷。
 
-另外一種流派則是採用稀疏注意力機制，例如：比這篇論文還要早一年提出的 [**Sparse Transformer**](../1904-sparse-transformer/index.md)。
+另外一種流派則是採用稀疏注意力機制，例如：比這篇論文還要早一年提出的 **Sparse Transformer**。
+
+- [**Sparse Transformer: 稀疏注意力機制**](../1904-sparse-transformer/index.md)
 
 而過去關於稀疏注意力機制的研究，卻沒有提到基於預訓練模型的微調以及對於更多下游任務的泛化性。
 
