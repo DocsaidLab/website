@@ -7,16 +7,22 @@ sidebar_position: 1
 :::danger
 本專案為開發中半成品，僅供學習用途。
 
+在開發階段，說明文件和程式碼會持續變動，並且不一定會同步更新。
+
 目前會持續更新開發內容，在本訊息消失前，請勿使用本專案進行實際交易。
 
-再次警告：在本訊息消失前，請勿使用本專案進行實際交易。
+＊
+
+重複一次最重要的一句話：
+
+**在本訊息消失前，請勿使用本專案進行實際交易。**
 :::
 
 本專案主要為串接證券商 API 並進行自動交易。
 
 - [**AutoTraderX Github**](https://github.com/DocsaidLab/AutoTraderX)
 
-![title](./resources/title.webp)
+![title](./img/title.webp)
 
 ## 概述
 
@@ -52,7 +58,7 @@ sidebar_position: 1
 
 串接 [**元富證券的 Python API**](https://mlapi.masterlink.com.tw/web_api/service/home)，並透過該 API 進行自動交易。
 
-![masterlink](./resources/masterlink.jpg)
+![masterlink](./img/masterlink.jpg)
 
 ### 第二階段目標
 

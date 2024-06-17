@@ -1,4 +1,8 @@
-# 報價系統
+---
+sidebar_position: 3
+---
+
+# 報價系統分析
 
 ## SolPYAPI
 
@@ -15,6 +19,7 @@ pip install .\MasterLink_PythonAPI\SolPYAPI\PY_TradeD-0.1.15-py3-none-any.whl
 ## 官方技術文件
 
 - [**元富證券-報價 API**](https://mlapi.masterlink.com.tw/web_api/service/document/python-quote)
+- [**官方程式範例：Sample_D.py**](https://github.com/DocsaidLab/AutoTraderX/blob/main/MasterLink_PythonAPI/SolPYAPI/Sample_D.py)
 
 ## 核心模組
 
