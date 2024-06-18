@@ -36,6 +36,10 @@ mkdir ~/packages
 
 ## 3. 設定 htpasswd
 
+:::tip
+如果你不想設定密碼，可以跳過這一步。
+:::
+
 htpasswd 是一種用於存儲用戶名和密碼（經常用於基本 HTTP 身份驗證）的文件格式。
 
 pypiserver 會使用此文件來驗證試圖上傳或下載套件的用戶。這是一種簡單但有效的方式，可以增強 pypiserver 的安全性。
@@ -104,6 +108,12 @@ services:
 
 - 請將上述的 [你的使用者名稱] 替換為你的實際使用者名稱。
 - 你可以在這裡修改外部 port 映射值，例如改成：”18080:8080″。
+
+如果你不想設定密碼，修改 `command` 中的指令為：
+
+```yaml
+command: run -a . -P . /data/packages --server wsgiref
+```
 
 ### 4.3 創建 Systemd 服務
 
