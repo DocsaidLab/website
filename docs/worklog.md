@@ -16,7 +16,7 @@ sidebar_position: 10
 
 ### 6 月
 
-- AutoTraderX：開發到一半，先轉成開源專案。
+- AutoTraderX：開發到一半，考慮到需要與外部協作，先轉成開源專案。
 - 儲值給 OpenAI 的錢花完了，所以關閉 GmailSummary 每日新聞推送功能。
 - 這個月要進行每半年一次的論文馬拉松，本月暫定目標 ~100（想累死誰？）~ 30 篇。
   - 目前進度：20%
@@ -36,6 +36,7 @@ sidebar_position: 10
   - 感謝 [**WeiWei**](https://github.com/WeiYun0912) 所撰寫的文章：
     - [**[docusaurus] 在 Docusaurus 中使用 Algolia 實作搜尋功能**](https://wei-docusaurus-vercel.vercel.app/docs/Docusaurus/Algolia)
 - 開發 Text Recognizer 模型，調測模型參數，並進行模型訓練。
+- AutoTraderX： 開始進行開發。
 
 ### 4 月
 

@@ -216,6 +216,10 @@ class Order:
 
 ### ReportOrder
 
+:::warning
+我們不推薦任何股票，所有關於證券戶內的股票資訊都會以馬賽克處理。
+:::
+
 這是呼叫 API 的時候實際上會拿到的訂單回報資料。
 
 ```python title="MasterTradePy\64bit\MasterTradePy\model.py"
