@@ -600,8 +600,7 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
 <li>
 <p><strong>Nextcloud Talk 的連接埠開放</strong>：</p>
 <ul>
-<li>為了確保 Nextcloud Talk 功能（如視訊通話和訊息）能夠正常運作，特別提到了需要在防火牆或路由器中為 Talk 容器開放 3478/TCP 和 3478/UDP 連接埠。</li>
-<li>這些連接埠對於處理 NAT 穿越至關重要，NAT 穿越是一種技術，允許網絡內外的裝置直接連接，這對於實時通信應用（如視訊通話）是必需的。</li>
+<li>為了確保 Nextcloud Talk 功能（如視訊通話和訊息）能夠正常運作，需要在防火牆或路由器中為 Talk 容器開放 3478/TCP 和 3478/UDP 連接埠。</li>
 </ul>
 </li>
 </ol>
