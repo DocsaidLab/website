@@ -144,8 +144,7 @@ sudo systemctl start nextcloud
    - 如果你的防火牆或路由器已開放或轉發了 80 和 8443 端口，並且你已經將一個域名指向你的伺服器，那麼你可以通過訪問`https://your-domain-that-points-to-this-server.tld:8443`來自動獲取一個由受信任 CA 發行的有效證書，以增加安全性和便利性。這裡的`your-domain-that-points-to-this-server.tld`應該替換為你指向伺服器的實際域名。
 
 4. **Nextcloud Talk 的連接埠開放**：
-   - 為了確保 Nextcloud Talk 功能（如視訊通話和訊息）能夠正常運作，特別提到了需要在防火牆或路由器中為 Talk 容器開放 3478/TCP 和 3478/UDP 連接埠。
-   - 這些連接埠對於處理 NAT 穿越至關重要，NAT 穿越是一種技術，允許網絡內外的裝置直接連接，這對於實時通信應用（如視訊通話）是必需的。
+   - 為了確保 Nextcloud Talk 功能（如視訊通話和訊息）能夠正常運作，需要在防火牆或路由器中為 Talk 容器開放 3478/TCP 和 3478/UDP 連接埠。
 
 - **常見問題：**
 
