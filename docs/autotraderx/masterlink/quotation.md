@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # 報價系統
@@ -17,7 +17,8 @@ sidebar_position: 5
 接著從 `autotraderx` 中 import `QuotationSystem` 類別：
 
 ```python
-from autotraderx import QuotationSystem, load_yaml
+from autotraderx import load_yaml
+from autotraderx.masterlink import QuotationSystem
 
 # Load account infos
 cfg = load_yaml(DIR / "account.yaml")

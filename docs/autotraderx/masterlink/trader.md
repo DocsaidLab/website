@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # 下單系統
@@ -19,7 +19,8 @@ sidebar_position: 6
 參數檔案中，必須有帳號密碼和帳號號碼，這樣才能順利登入元富證券的帳號。
 
 ```python
-from autotraderx import Trader, load_yaml
+from autotraderx import load_yaml
+from autotraderx.masterlink import Trader
 
 # Load account infos
 cfg = load_yaml(DIR / "account.yaml")
