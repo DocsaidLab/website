@@ -18,11 +18,12 @@ I'm Zephyr, an AI engineer from Taiwan and the founder of this organization.
 
 I have completed several projects on Github, including:
 
-1. [**DocsaidKit**](https://github.com/DocsaidLab/DocsaidKit): This is a toolbox of small utilities I use regularly.
-2. [**DocAligner**](https://github.com/DocsaidLab/DocAligner): This project provides text localization functionality, mainly used to pinpoint the four corners of a document.
-3. [**DocClassifier**](https://github.com/DocsaidLab/DocClassifier): This project is used for calculating text similarity, inspired by facial recognition systems.
-4. [**GmailSummary**](https://github.com/DocsaidLab/GmailSummary): This project summarizes large volumes of Gmail messages, integrating Gmail with OpenAI.
-5. [**WordCanvas**](https://github.com/DocsaidLab/WordCanvas): This project generates text images to solve the problem of insufficient training data for OCR models.
+1. [**AutoTraderX**](https://github.com/DocsaidLab/AutoTraderX)：This project is used for automatic trading, mainly for Taiwan stock trading.
+2. [**DocsaidKit**](https://github.com/DocsaidLab/DocsaidKit): This is a toolbox of small utilities I use regularly.
+3. [**DocAligner**](https://github.com/DocsaidLab/DocAligner): This project provides text localization functionality, mainly used to pinpoint the four corners of a document.
+4. [**DocClassifier**](https://github.com/DocsaidLab/DocClassifier): This project is used for calculating text similarity, inspired by facial recognition systems.
+5. [**GmailSummary**](https://github.com/DocsaidLab/GmailSummary): This project summarizes large volumes of Gmail messages, integrating Gmail with OpenAI.
+6. [**WordCanvas**](https://github.com/DocsaidLab/WordCanvas): This project generates text images to solve the problem of insufficient training data for OCR models.
 
 ---
 

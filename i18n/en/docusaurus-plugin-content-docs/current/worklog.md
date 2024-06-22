@@ -10,6 +10,13 @@ This page is solely used to document our work content.
 
 ## 2024
 
+### June
+
+- AutoTraderX: Completed the integration of the MasterLink's Python API and transitioned to an open-source project. 🎉 🎉 🎉
+- The funds deposited with OpenAI have been exhausted, and the daily news push feature of GmailSummary has been disabled.
+- This month, we will conduct a biannual paper marathon, with a tentative goal of ~100 (who wants to be exhausted?) ~ 30 articles.
+  - Completion: 20 %
+
 ### May
 
 - Explore the searcher feature of Docusaurus, test, and integrate Algolia's search service.

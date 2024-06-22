@@ -16,16 +16,10 @@ sidebar_position: 10
 
 ### 6 月
 
-- AutoTraderX：開發到一半，考慮到需要與外部協作，先轉成開源專案。
-- 儲值給 OpenAI 的錢花完了，所以關閉 GmailSummary 每日新聞推送功能。
+- AutoTraderX：完成元富證券 API 串接，轉成開源專案。🎉 🎉 🎉
+- 儲值給 OpenAI 的錢花完了，關閉 GmailSummary 每日新聞推送功能。
 - 這個月要進行每半年一次的論文馬拉松，本月暫定目標 ~100（想累死誰？）~ 30 篇。
-  - 目前進度：20%
-    - 6 / 4: Transformer-XL
-    - 6 / 8: GPT-3
-    - 6 / 9: Sparse Transformer
-    - 6 / 12: Longformer
-    - 6 / 14: BigBird
-    - 6 / 15: AutoPormpt
+  - 完成度：20 %
 
 ### 5 月
 

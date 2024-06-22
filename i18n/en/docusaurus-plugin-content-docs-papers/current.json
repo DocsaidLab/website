@@ -2,29 +2,5 @@
   "version.label": {
     "message": "Next",
     "description": "The label for version current"
-  },
-  "sidebar.papersSidebar.category.MultiModel": {
-    "message": "MultiModel",
-    "description": "The label for category MultiModel in sidebar papersSidebar"
-  },
-  "sidebar.papersSidebar.category.2019": {
-    "message": "2019",
-    "description": "The label for category 2019 in sidebar papersSidebar"
-  },
-  "sidebar.papersSidebar.category.2020": {
-    "message": "2020",
-    "description": "The label for category 2020 in sidebar papersSidebar"
-  },
-  "sidebar.papersSidebar.category.2021": {
-    "message": "2021",
-    "description": "The label for category 2021 in sidebar papersSidebar"
-  },
-  "sidebar.papersSidebar.category.FeatureFusion": {
-    "message": "FeatureFusion",
-    "description": "The label for category FeatureFusion in sidebar papersSidebar"
-  },
-  "sidebar.papersSidebar.category.ObjectDetection": {
-    "message": "ObjectDetection",
-    "description": "The label for category ObjectDetection in sidebar papersSidebar"
   }
 }

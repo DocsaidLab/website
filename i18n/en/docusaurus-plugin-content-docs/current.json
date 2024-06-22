@@ -3,12 +3,20 @@
     "message": "Next",
     "description": "The label for version current"
   },
+  "sidebar.tutorialSidebar.category.AutoTraderX": {
+    "message": "AutoTraderX",
+    "description": "The label for category AutoTraderX in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.元富證券": {
+    "message": "MasterLink",
+    "description": "The label for category 元富證券 in sidebar tutorialSidebar"
+  },
   "sidebar.tutorialSidebar.category.DocsaidKit": {
     "message": "DocsaidKit",
     "description": "The label for category DocsaidKit in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.函式庫": {
-    "message": "Library",
+    "message": "Libraries",
     "description": "The label for category 函式庫 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Structures": {
@@ -83,64 +91,44 @@
     "message": "GmailSummary",
     "description": "The label for category GmailSummary in sidebar tutorialSidebar"
   },
+  "sidebar.tutorialSidebar.category.輸出示範": {
+    "message": "Example",
+    "description": "The label for category 輸出示範 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.2024-06-01": {
+    "message": "2024-06-01",
+    "description": "The label for category 2024-06-01 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.2024-06-02": {
+    "message": "2024-06-02",
+    "description": "The label for category 2024-06-02 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.2024-06-03": {
+    "message": "2024-06-03",
+    "description": "The label for category 2024-06-03 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.2024-06-04": {
+    "message": "2024-06-04",
+    "description": "The label for category 2024-06-04 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.2024-06-05": {
+    "message": "2024-06-05",
+    "description": "The label for category 2024-06-05 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.2024-06-06": {
+    "message": "2024-06-06",
+    "description": "The label for category 2024-06-06 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.2024-06-07": {
+    "message": "2024-06-07",
+    "description": "The label for category 2024-06-07 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.2024-06-08": {
+    "message": "2024-06-08",
+    "description": "The label for category 2024-06-08 in sidebar tutorialSidebar"
+  },
   "sidebar.tutorialSidebar.category.WordCanvas": {
     "message": "WordCanvas",
     "description": "The label for category WordCanvas in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.每日新聞": {
-    "message": "Daily News",
-    "description": "The label for category 每日新聞 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-04-23": {
-    "message": "2024-04-23",
-    "description": "The label for category 2024-04-23 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-04-24": {
-    "message": "2024-04-24",
-    "description": "The label for category 2024-04-24 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-04": {
-    "message": "2024-04",
-    "description": "The label for category 2024-04 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-04-25": {
-    "message": "2024-04-25",
-    "description": "The label for category 2024-04-25 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-04-26": {
-    "message": "2024-04-26",
-    "description": "The label for category 2024-04-26 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-04-27": {
-    "message": "2024-04-27",
-    "description": "The label for category 2024-04-27 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-04-28": {
-    "message": "2024-04-28",
-    "description": "The label for category 2024-04-28 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-04-29": {
-    "message": "2024-04-29",
-    "description": "The label for category 2024-04-29 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-04-30": {
-    "message": "2024-04-30",
-    "description": "The label for category 2024-04-30 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-05-01": {
-    "message": "2024-05-01",
-    "description": "The label for category 2024-05-01 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-05-02": {
-    "message": "2024-05-02",
-    "description": "The label for category 2024-05-02 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-05-03": {
-    "message": "2024-05-03",
-    "description": "The label for category 2024-05-03 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.2024-05-04": {
-    "message": "2024-05-04",
-    "description": "The label for category 2024-05-04 in sidebar tutorialSidebar"
   }
 }

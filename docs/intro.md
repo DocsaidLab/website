@@ -20,11 +20,12 @@ sidebar_position: 1
 
 目前我在 Github 上已經完成了幾個專案，包括：
 
-1. [**DocsaidKit**](https://github.com/DocsaidLab/DocsaidKit)：這裡有一些我平常在用的一些小工具，是個工具箱的角色。
-2. [**DocAligner**](https://github.com/DocsaidLab/DocAligner)：這是個提供文本定位功能的專案，主要用來定位文件的四個角點。
-3. [**DocClassifier**](https://github.com/DocsaidLab/DocClassifier)：這是個用於計算文本相似度的專案，其參考了人臉辨識系統的設計理念。
-4. [**GmailSummary**](https://github.com/DocsaidLab/GmailSummary)：這是個用於摘要大量 Gmail 郵件的專案，串接了 Gmail 和 OpenAI。
-5. [**WordCanvas**](https://github.com/DocsaidLab/WordCanvas)：這是用於生成文字圖像的專案，為了解決 OCR 模型訓練資料不足的問題。
+1. [**AutoTraderX**](https://github.com/DocsaidLab/AutoTraderX)：這是個用於自動交易的專案，主要用於台灣股票的交易。
+2. [**DocsaidKit**](https://github.com/DocsaidLab/DocsaidKit)：這裡有一些我平常在用的一些小工具，是個工具箱的角色。
+3. [**DocAligner**](https://github.com/DocsaidLab/DocAligner)：這是個提供文本定位功能的專案，主要用來定位文件的四個角點。
+4. [**DocClassifier**](https://github.com/DocsaidLab/DocClassifier)：這是個用於計算文本相似度的專案，其參考了人臉辨識系統的設計理念。
+5. [**GmailSummary**](https://github.com/DocsaidLab/GmailSummary)：這是個用於摘要大量 Gmail 郵件的專案，串接了 Gmail 和 OpenAI。
+6. [**WordCanvas**](https://github.com/DocsaidLab/WordCanvas)：這是用於生成文字圖像的專案，為了解決 OCR 模型訓練資料不足的問題。
 
 當然不只有這樣，但為了節省篇幅，那些還在開發中的，我就不贅述了。
 
