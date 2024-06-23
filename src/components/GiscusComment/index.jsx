@@ -8,7 +8,7 @@ export default function GiscusComment() {
     return (
         <div style={{ marginTop: '3rem' }}> {/* 增加邊距 */}
             <Giscus
-                repo="DocsaidLab/blog"
+                repo="DocsaidLab/website"
                 repoId="R_kgDOK0_How"
                 category="Announcements"
                 categoryId="DIC_kwDOK0_Ho84CeZ07"
