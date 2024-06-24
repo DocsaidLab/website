@@ -15,7 +15,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="DOCSAID" href="/opensearch.xml">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css" integrity="sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM" crossorigin="anonymous"><link rel="stylesheet" href="/assets/css/styles.c6ca026b.css">
-<script src="/assets/js/runtime~main.da6ddedc.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.c85b2e0d.js" defer="defer"></script>
 <script src="/assets/js/main.46e9ced1.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -77,9 +77,7 @@
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="實驗-2dcnn-對同卵雙胞胎的辨識">實驗 2：DCNN 對同卵雙胞胎的辨識<a class="hash-link" aria-label="實驗 2：DCNN 對同卵雙胞胎的辨識的直接連結" title="實驗 2：DCNN 對同卵雙胞胎的辨識的直接連結" href="/papers/tivc/#實驗-2dcnn-對同卵雙胞胎的辨識">​</a></h3>
 <p>在演算法測試中，我們使用了基於 ResNet-101 架構的深度卷積神經網路（DCNN）。該網路在 Universe 資料集上進行訓練，這是一個從網絡上抓取的野外資料集，包含 5,714,444 張圖像，涉及 58,020 個唯一身份。這些訓練數據集中的圖像屬性變化很大，包括姿勢、光照、解析度和年齡。用於訓練網路的 Universe 資料集的族群組成尚不清楚。</p>
 <p>該網路包含 101 層，使用跳躍連接來保持訓練過程中誤差信號的幅度。為了確保 L2 范數在學習過程中保持不變，應用了 Crystal loss，alpha 參數設置為 50。</p>
-<p>此外，作為網路訓練的預處理步驟，臉部圖像被裁剪以包含內部臉部，並對齊到 128 × 128 的大小後再輸入網路。</p>
-<p>這一程序對所有圖像姿勢都以相同方式應用。當完全訓練的網路完成後，倒數第二個全連接層的輸出用於生成每張圖像的身份描述符。</p>
-<p>最終的網路是一個高性能的臉部辨識系統，能夠在視角、光照和表  情的顯著變化中保持準確性。</p>
+<p>此外，作為網路訓練的預處理步驟，臉部圖像被裁剪以包含內部臉部，並對齊到 128 × 128 的大小後再輸入網路。該流程對所有圖像姿勢都以相同方式應用。當完全訓練的網路完成後，倒數第二個全連接層的輸出用於生成每張圖像的身份表示特徵。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="討論">討論<a class="hash-link" aria-label="討論的直接連結" title="討論的直接連結" href="/papers/tivc/#討論">​</a></h2>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="實驗結果">實驗結果<a class="hash-link" aria-label="實驗結果的直接連結" title="實驗結果的直接連結" href="/papers/tivc/#實驗結果">​</a></h3>
 <p><img decoding="async" loading="lazy" alt="實驗結果" src="/assets/images/img2-d0e8b0f3f66cb64f37013c8ee8b42ebb.jpg" width="1224" height="588" class="img_ev3q"></p>
@@ -114,12 +112,12 @@
 <li>一般冒名頂替條件，正面對 45 度側面：0.933</li>
 <li>雙胞胎冒名頂替條件，正面對 45 度側面：0.691</li>
 <li>一般冒名頂替條件，正面對 90 度側面：0.869</li>
-<li>雙胞胎冒名頂替 條件，正面對 90 度側面：0.652</li>
+<li>雙胞胎冒名頂替條件，正面對 90 度側面：0.652</li>
 </ul>
 </li>
 <li>
 <p><strong>DCNN 實驗結果</strong></p>
-<p>在收集人類數據實驗中觀看的每對圖像對，DCNN 都生成了相似度評分。通過計算分配給相同身份圖像對和不同身份圖像對的相似度評分的 AUC 來測量 DCNN 的辨識準確度。正確的反應來自顯示相同身份的圖像對，而誤報來自顯示不同身份的圖像對。DCNN 的性能顯示在圖 2 中，以紅色圓圈表示，覆蓋在人類個體表現數據上。</p>
+<p>在收集人類數據實驗中觀看  的每對圖像對，DCNN 都生成了相似度評分。通過計算分配給相同身份圖像對和不同身份圖像對的相似度評分的 AUC 來測量 DCNN 的辨識準確度。正確的反應來自顯示相同身份的圖像對，而誤報來自顯示不同身份的圖像對。DCNN 的性能顯示在圖 2 中，以紅色圓圈表示，覆蓋在人類個體表現數據上。</p>
 <ul>
 <li>對於一般冒名頂替條件，DCNN 獲得了完美的身份匹配性能（AUC = 1.0）。</li>
 <li>對於雙胞胎冒名頂替條件，DCNN 的身份匹配性能仍然很高（AUC = 0.96）。</li>
@@ -131,7 +129,7 @@
 <p>深度卷積神經網路相較於早期的臉部識別演算法，在不同視角和光照條件下仍能保持高準確度，顯示出顯著的進步。</p>
 <p>本論文實驗結果表明，DCNN 在所有測試條件下的準確度均超過了大多數人類參與者，特別是在挑戰性高的雙胞胎辨識任務中，這與美國國家標準與技術研究所（NIST）的研究結果形成對比，強調了在不同問題背景下考量 DCNN 性能的重要性。人類參與者的表現顯示出廣泛的個體差異，而 DCNN 始終保持在高水平且無個體差異。未來研究應考慮包括外部特徵在內的更多識別信息，並進一步探討 DCNN 生成的面部表示的性質，以提升人類和機器在雙胞胎識別任務中的聯合作用，這對於如法醫應用等困難的圖像匹配任務尤為重要。</p>
 <p>＊</p>
-<p>看完這篇論文  ，我們認為只有一個比較重要的結論：</p>
+<p>看完這篇論文，我們認為只有一個比較重要的結論：</p>
 <ul>
 <li><strong>電腦視覺系統和人類的表現是一致的，因此探討人類專家是如何辨識雙胞胎的機制，可以幫助我們改進電腦視覺系統。</strong></li>
 </ul>
