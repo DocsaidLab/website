@@ -12,7 +12,7 @@
 
 ---
 
-在 FPN 被提出來之後，特徵融合一直是熱烈討論的問題，我這裡根據時間序羅列幾篇：
+在 FPN 被提出來之後，特徵融合一直是熱烈討論的問題，我們這裡根據時間序羅列幾篇：
 
 - 2017.01 -> [DSSD : Deconvolutional single shot detector](https://arxiv.org/abs/1701.06659)
 - 2017.07 -> [RON: reverse connection with objectness prior networks for object detection](https://arxiv.org/abs/1707.01691)
@@ -24,7 +24,7 @@
 - 2018.08 -> [Deep feature pyramid reconfiguration for object detection](https://arxiv.org/abs/1808.07993)
 - 2018.10 -> [Parallel feature pyramid network for object detection](https://link.springer.com/chapter/10.1007/978-3-030-01228-1_15#chapter-info)
 
-其中人們比較常聽到的是 PANet，除此之外，上述的幾篇論文也都有數百到上千的引用量，我仍然會推薦你有時間可以閱讀一下。
+其中人們比較常聽到的是 PANet，除此之外，上述的幾篇論文也都有數百到上千的引用量，有時間我們也可以閱讀一下。
 
 那麼，該選個好呢？
 
