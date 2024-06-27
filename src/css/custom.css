@@ -179,3 +179,7 @@ a:hover {
   padding: 0 15px;
   margin: 0 auto;
 }
+
+.token-line.theme-code-block-highlighted-line {
+  background-color: #feb75f;
+}
