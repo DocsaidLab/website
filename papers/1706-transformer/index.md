@@ -420,7 +420,7 @@ print(output.shape)
 
 這個 Feed-Forward 網路就是一個典型的全連接網路，這裡我們使用了兩層全連接層，中間加了一個 ReLU 激活函數。
 
-你會看到中間有一個 Expand-Dim 操作，通常這個膨脹係數為 4，這個操作是借鑑了 MobileNet 的 Inverted Residual Bottleneck Block，可以有效地增加模型的非線性能力。
+此外，模組中間有一個 Expand-Dim 操作，通常這個膨脹係數為 4，這個操作和之後 MobileNet-V2 所提出的 Inverted Residual Bottleneck Block 是類似的概念，主要目的都是透過膨脹維度再壓縮的方式，來提高模型的非線性表達能力。
 
 ### Layer Normalization
 
