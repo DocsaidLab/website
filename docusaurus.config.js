@@ -29,6 +29,8 @@ const config = {
           routeBasePath: '/docs',
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
         },
         blog: {
           blogTitle: 'Blog',
@@ -67,6 +69,8 @@ const config = {
         sidebarPath: require.resolve('./sidebarsPapers.js'),
         remarkPlugins: [remarkMath],
         rehypePlugins: [rehypeKatex],
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
       },
     ],
   ],
@@ -163,23 +167,12 @@ const config = {
         darkTheme: prismThemes.vsDark,
       },
       algolia: {
-        // The application ID provided by Algolia
         appId: 'S9NC0RYCHF',
-
-        // Public API key: it is safe to commit it
-        apiKey: '842757a059db8a232231828803688f96',
-
+        apiKey: '842757a059db8a232231828803688f96', // Public API key: it is safe to commit it
         indexName: 'docusaurus-algolia',
-
-        // Optional: see doc section below
         contextualSearch: true,
-
-        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
         externalUrlRegex: 'external\\.com|domain\\.com',
-
-        // Optional: path for search page that enabled by default (`false` to disable it)
         searchPagePath: 'search',
-
       },
     }),
   stylesheets: [
