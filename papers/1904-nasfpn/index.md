@@ -2,7 +2,7 @@
 
 ## 有錢就是任性
 
-**[NAS-FPN: Learning Scalable Feature Pyramid Architecture for Object Detection](https://arxiv.org/abs/1904.07392)**
+[**NAS-FPN: Learning Scalable Feature Pyramid Architecture for Object Detection**](https://arxiv.org/abs/1904.07392)
 
 ---
 
@@ -14,15 +14,15 @@
 
 在 FPN 被提出來之後，特徵融合一直是熱烈討論的問題，我們這裡根據時間序羅列幾篇：
 
-- 2017.01 -> [DSSD : Deconvolutional single shot detector](https://arxiv.org/abs/1701.06659)
-- 2017.07 -> [RON: reverse connection with objectness prior networks for object detection](https://arxiv.org/abs/1707.01691)
-- 2017.07 -> [Deep layer aggregation](https://arxiv.org/abs/1707.06484)
-- 2017.09 -> [StairNet: top-down semantic aggregation for accurate one shot detection](https://arxiv.org/abs/1709.05788)
-- 2017.11 -> [Single-shot refinement neural network for object detection](https://arxiv.org/abs/1711.06897)
-- 2018.03 -> [Path Aggregation Network for Instance Segmentation](https://arxiv.org/abs/1803.01534) (< PANet 在這裡 )
-- 2018.08 -> [Scale-transferrable object detection](https://ieeexplore.ieee.org/document/8578160)
-- 2018.08 -> [Deep feature pyramid reconfiguration for object detection](https://arxiv.org/abs/1808.07993)
-- 2018.10 -> [Parallel feature pyramid network for object detection](https://link.springer.com/chapter/10.1007/978-3-030-01228-1_15#chapter-info)
+- **2017.01** -> [DSSD : Deconvolutional single shot detector](https://arxiv.org/abs/1701.06659)
+- **2017.07** -> [RON: reverse connection with objectness prior networks for object detection](https://arxiv.org/abs/1707.01691)
+- **2017.07** -> [Deep layer aggregation](https://arxiv.org/abs/1707.06484)
+- **2017.09** -> [StairNet: top-down semantic aggregation for accurate one shot detection](https://arxiv.org/abs/1709.05788)
+- **2017.11** -> [Single-shot refinement neural network for object detection](https://arxiv.org/abs/1711.06897)
+- **2018.03** -> [Path Aggregation Network for Instance Segmentation](https://arxiv.org/abs/1803.01534) (< PANet 在這裡 )
+- **2018.08** -> [Scale-transferrable object detection](https://ieeexplore.ieee.org/document/8578160)
+- **2018.08** -> [Deep feature pyramid reconfiguration for object detection](https://arxiv.org/abs/1808.07993)
+- **2018.10** -> [Parallel feature pyramid network for object detection](https://link.springer.com/chapter/10.1007/978-3-030-01228-1_15#chapter-info)
 
 其中人們比較常聽到的是 PANet，除此之外，上述的幾篇論文也都有數百到上千的引用量，有時間我們也可以閱讀一下。
 
@@ -151,11 +151,18 @@ RetinaNet 這篇論文的主題其實是 FocalLoss，裡面的 RetinaNet 架構�
 
 ## 結論
 
-在過去的研究中，特徵融合架構多是通過人工設計和實驗得來，這種做法的可靠性和規模一直是大家質疑的焦點。確實，實驗性的研究雖然能夠提供某些見解，但其價值往往局限於實驗的規模和設計。
+在過去的研究中，特徵融合架構多是通過人工設計和實驗得來，這種做法的可靠性和規模一直是大家質疑的焦點。
+
+確實，實驗性的研究雖然能夠提供某些見解，但其價值往往局限於實驗的規模和設計。
 
 或許我們可以接受某結論的「理論根基」可能不夠，並接受經由「實驗」所得到的結論。
+
 但這些文獻要怎麼說服別人說「實驗」的量級是足夠的呢？
 
-然而，NAS-FPN 藉由一個精密的搜尋架構和前所未有的計算規模（可能沒有其他公司有錢，而且願意花錢做這種計算），對這個問題提出了一個全新的角度。這不僅確認了 PANet 的設計理念的正確性，而且還揭示了其連接方式可能存在的低效問題。
+＊
 
-我認為這就是這篇論文的價值所在。這種經由 NAS 搜索得到的結合方式，不僅增加了前人研究的可信度，也為未來的研究提供了新的方向。
+在此，NAS-FPN 藉由一個精密的搜尋架構和前所未有的計算規模（可能沒有其他公司有錢，而且願意花錢做這種計算），對這個問題提出了一個全新的角度。
+
+這不僅確認了 PANet 的設計理念的正確性，而且還揭示了其連接方式可能存在的低效問題。
+
+這種經由 NAS 搜索得到的結合方式，不僅增加了前人研究的可信度，也為未來的研究提供了新的方向。
