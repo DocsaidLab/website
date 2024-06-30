@@ -12,7 +12,7 @@ export default function GiscusComment() {
                 repoId="R_kgDOK0_How"
                 category="Announcements"
                 categoryId="DIC_kwDOK0_Ho84CeZ07"
-                mapping="pathname"
+                mapping="url"
                 strict="0"
                 reactionsEnabled="1"
                 emitMetadata="0"
