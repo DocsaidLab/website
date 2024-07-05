@@ -4,61 +4,83 @@ sidebar_position: 1
 
 # Introduction
 
-## Daily Routine
+## Daily Life
 
-Reading papers is part of my daily work.
+Reading papers is a truly enjoyable experience!
 
-Since the advent of ChatGPT, reading papers has become easier, but this doesn't mean we can relinquish our responsibility to think critically.
+If you are a seasoned engineer, you probably understand this sentiment.
 
-Here, I document my experiences analyzing papers with ChatGPT.
+In our day-to-day project development, we often focus on practical issues like performance, stability, and maintainability. As a result, the technologies and tools we use are relatively fixed, with little room for variation.
 
-Please understand that I'm just an ordinary engineer, not an all-knowing scholar.
+Moreover, the demands of extensive work and client communications leave us with little time to stay updated on new technologies.
 
-Therefore, my interpretations of the papers might have biases or errors. If you have any doubts about the content, **please refer to the original papers**.
+Before we know it, several years have passed.
 
-Your feedback is also welcome to help me gain a deeper understanding of these studies.
-
-:::info
-We thought we could just give a paper to ChatGPT, and it would automatically write an article.
-
-- Life isn’t that straightforward, is it?
-
-In the end, we found that we still need to read the papers ourselves and write the first draft.
-
-Then, when encountering difficult parts, we hand them over to ChatGPT for help. This turns out to be the fastest strategy.
-:::
-
-## Papers
-
-If you're looking for papers, we suggest you paste the paper title into the search bar at the top right corner. This will help you find the desired paper more quickly.
-
-Our writing follows a fixed format:
-
-- The title consists of the [publication month and year] + [author's name or the paper's commonly known name in the industry]
-- The content starts with a casual introduction
-- Then defines the problem the paper aims to solve
-- Followed by an introduction to the proposed solution
-- And finally, a discussion and conclusion
-
-So, this is not exactly a translation of the paper, but more like a guided reading.
-
-If you find **errors or broken links** during your reading, please leave a comment to inform us, and we'll fix them as soon as possible.
-
-## One More Thing
-
-We also want to say: there are so many papers!
-
-On one hand, there’s the overwhelming feeling of never being able to read them all, and on the other, the excitement of discovering new technologies—it's truly a mix of emotions.
-
-Moreover, writing a guided reading for a paper is very time-consuming and labor-intensive. The time spent writing one article could be used to read five papers.
-
-Therefore, the writing of these articles often depends on our availability.
+We find ourselves lagging behind in terms of technology, with no time to learn new skills because the next requirement is already upon us.
 
 ＊
 
-If you have any papers you want to read or discuss with me, feel free to let us know, and we'll take a look when we have time.
+Why do we often say that the career lifespan of an engineer is short?
 
-When we have time, that is.
+Because technological iterations typically occur in cycles of three to five years. If we miss two cycles, we are likely to find ourselves on the path to obsolescence.
+
+So, why not take some time to read a few papers with us?
+
+＊
+
+Back to the beginning.
+
+Having the time to read papers in our daily work is a very enjoyable thing.
+
+Unlike researchers who are often overwhelmed by the progress of their papers, we can simply enjoy the insights shared by the authors, understand the challenges they faced, and appreciate the latest academic advancements.
+
+The truths of this universe are hidden within the small observations in each paper. These observations may be incorrect, biased, or wishful thinking on the part of the researchers, but they may also point directly to the core truths. These are all part of the journey of exploring the truth.
+
+We believe that the best way to approach reading papers is with a relaxed attitude and a reverent longing for knowledge.
+
+We think, we record, and we persistently move forward.
+
+We always believe that knowledge is power.
+
+## The Era of Large Language Models
+
+Since the advent of ChatGPT, reading papers has become easier, but this does not mean we can abdicate our responsibility to think.
+
+Here, we document our insights from reading papers with ChatGPT. Our understanding of the papers may be biased or incorrect, so if there is any discrepancy with the original paper, **please refer to the original paper first**.
+
+We also welcome your feedback to help us gain a deeper understanding of these studies.
+
+## Finding Papers
+
+If you are looking for a specific paper, we recommend pasting the paper's title into the search bar at the top right corner for quicker results.
+
+Our writing format is as follows:
+
+- The title includes: [Publication Date] + [Author's Name or Common Industry Name for the Paper]
+- The content starts with a brief discussion
+- Then defines the problem the paper aims to solve
+- Followed by an introduction of the solution
+- Concludes with discussion and summary
+
+So, this is not a translation of the paper but more of a guided reading.
+
+Additionally, for the English-speaking audience, although the original papers are already in English, we have decided to ask ChatGPT-4o to help provide English versions of our summaries for the sake of completeness.
+
+If you find any:
+
+- **Broken or incorrect links**
+- **Translation errors**
+- **Misunderstandings**
+
+Please leave a comment to let us know, and we will prioritize fixing them.
+
+## And Finally
+
+Writing a guided reading of a paper is very time-consuming; the time it takes to write one article could be used to read five papers.
+
+Therefore, the frequency of writing articles depends on the circumstances.
+
+If you have any papers you want to read or discuss, feel free to let us know, and we will take a look if time permits.
 
 ＊
 
