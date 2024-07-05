@@ -6,81 +6,83 @@ sidebar_position: 1
 
 ## Daily Life
 
-Reading papers is a truly enjoyable experience!
+Reading papers is a truly enjoyable activity!
 
-If you are a seasoned engineer, you probably understand this sentiment.
+If you've been an engineer for many years, you probably understand this sentiment.
 
-In our day-to-day project development, we often focus on practical issues like performance, stability, and maintainability. As a result, the technologies and tools we use are relatively fixed, with little room for variation.
+＊
 
-Moreover, the demands of extensive work and client communications leave us with little time to stay updated on new technologies.
+In our usual development projects, we tend to focus on practical issues like performance, stability, and maintainability. Therefore, the technologies and tools we use are relatively fixed and don't change much. Furthermore, a significant amount of our time and mental energy is consumed by communicating with clients, leaving us exhausted and with little energy to keep up with new technologies.
 
 Before we know it, several years have passed.
 
-We find ourselves lagging behind in terms of technology, with no time to learn new skills because the next requirement is already upon us.
+Our knowledge quietly becomes outdated, but we have no time to learn because the next requirement is already here.
 
 ＊
 
-Why do we often say that the career lifespan of an engineer is short?
+Why do we often say that an engineer's career lifespan is short?
 
-Because technological iterations typically occur in cycles of three to five years. If we miss two cycles, we are likely to find ourselves on the path to obsolescence.
-
-So, why not take some time to read a few papers with us?
+Because the iteration cycle of knowledge is about three to five years. Once we've missed two cycles, we're likely to be on the path to retirement.
 
 ＊
 
-Back to the beginning.
+Let's circle back to the beginning.
 
-Having the time to read papers in our daily work is a very enjoyable thing.
+In our daily work, finding time to read papers is a truly enjoyable experience.
 
-Unlike researchers who are often overwhelmed by the progress of their papers, we can simply enjoy the insights shared by the authors, understand the challenges they faced, and appreciate the latest academic advancements.
+Unlike researchers who are constantly stressed about their paper deadlines, we can simply gain insights into the challenges and efforts of researchers through their papers, as well as the latest academic advancements.
 
-The truths of this universe are hidden within the small observations in each paper. These observations may be incorrect, biased, or wishful thinking on the part of the researchers, but they may also point directly to the core truths. These are all part of the journey of exploring the truth.
+The truths of this universe lie in the minute observations within each paper. These observations might be incorrect, biased, or merely wishful thinking by the researchers, but they could also hit the core of the matter. These are all essential steps in the pursuit of truth.
 
-We believe that the best way to approach reading papers is with a relaxed attitude and a reverent longing for knowledge.
+We believe that the attitude towards reading papers should be relaxed, with a reverence for knowledge.
 
 We think, we record, and we persistently move forward.
 
-We always believe that knowledge is power.
+We always believe: knowledge is power.
 
 ## The Era of Large Language Models
 
-Since the advent of ChatGPT, reading papers has become easier, but this does not mean we can abdicate our responsibility to think.
+Since the advent of ChatGPT, reading papers has become much easier, but this doesn't mean we can relinquish the responsibility of thinking.
 
-Here, we document our insights from reading papers with ChatGPT. Our understanding of the papers may be biased or incorrect, so if there is any discrepancy with the original paper, **please refer to the original paper first**.
+Here, we document our insights from reading papers together with ChatGPT.
 
-We also welcome your feedback to help us gain a deeper understanding of these studies.
+Our understanding of the papers might be biased or incorrect.
+
+If there is any discrepancy with the original papers, **please refer to the original paper first**.
 
 ## Finding Papers
 
-If you are looking for a specific paper, we recommend pasting the paper's title into the search bar at the top right corner for quicker results.
+If you want to find a paper, we suggest pasting the title into the search bar at the top right corner for quicker results.
 
 Our writing format is as follows:
 
-- The title includes: [Publication Date] + [Author's Name or Common Industry Name for the Paper]
+- The title includes: [Publication Date] + [Author's Name or Common Reference Name]
 - The content starts with a brief discussion
 - Then defines the problem the paper aims to solve
-- Followed by an introduction of the solution
-- Concludes with discussion and summary
+- Introduces the solution method
+- Ends with discussion and conclusion
 
-So, this is not a translation of the paper but more of a guided reading.
+Thus, this is not a direct translation of the paper but more of a guided reading.
 
-Additionally, for the English-speaking audience, although the original papers are already in English, we have decided to ask ChatGPT-4o to help provide English versions of our summaries for the sake of completeness.
+Additionally, for English content, since papers are originally in English, providing translations might seem unnecessary. However, for the sake of completeness of this website, we decided to let `ChatGPT 4.0` handle it.
 
-If you find any:
+If during the reading process you find:
 
 - **Broken or incorrect links**
 - **Translation errors**
 - **Misunderstandings**
 
-Please leave a comment to let us know, and we will prioritize fixing them.
+Please feel free to leave a comment and let us know, and we will prioritize fixing them.
 
-## And Finally
+## One More Thing
 
-Writing a guided reading of a paper is very time-consuming; the time it takes to write one article could be used to read five papers.
+Writing paper guides is very time-consuming and labor-intensive. Writing one guide can take as much time as reading five papers.
 
-Therefore, the frequency of writing articles depends on the circumstances.
+So, the content largely depends on serendipity.
 
-If you have any papers you want to read or discuss, feel free to let us know, and we will take a look if time permits.
+If you come across some interesting articles, feel free to share them with us. If we have time, we'll take a look.
+
+If we have time.
 
 ＊
 
