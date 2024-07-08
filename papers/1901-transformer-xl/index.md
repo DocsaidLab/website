@@ -90,36 +90,29 @@
 
 ### 相對位置編碼
 
-在標準 Transformer 中，查詢向量 $q_i$ 和鍵向量 $k_j$ 之間的注意力分數可以分解為四項：
+在本篇論文中，對自注意力機制中的 $QK^T$ 展開：
 
-![pos_enc](./img/img4.jpg)
+- $Q_i=(x_i+pos_i)W_Q$
+- $K_j=(x_j+pos_j)W_K$
+- $Q_iK_j^T=(x_i+pos_i)W_QW_K^T(x_j+pos_j)^T$
 
-這四項分別表示：
+最後，得到了下式：
 
-- $E_{x_i}^T W_q^T W_k E_{x_j}$：基於內容的注意力。
-- $E_{x_i}^T W_q^T W_k U_j$：與 Key 向量的絕對位置編碼相關的注意力。
-- $U_i^T W_q^T W_k E_{x_j}$：與 Query 向量的絕對位置編碼相關的注意力。
-- $U_i^T W_q^T W_k U_j$：與 Query 和 Key 向量的絕對位置編碼相關的注意力。
+- $Q_iK_j^T=x_iW_QW_K^Tx_j^T+x_iW_QW_K^Tpos_j^T+pos_iW_QW_K^Tx_j^T+pos_iW_QW_K^Tpos_j^T$
 
-這種方法存在的問題是，當我們重用隱藏狀態時，不同段落中的位置編碼會相互混淆。
+接著，將 $pos_j$ 替換成相對位置向量 $R_{i-j}$；將 $pos_i$ 替換成可學習的向量 $u$, $v$，得到：
 
-為了解決這個問題，作者提出了相對位置編碼的方法，重新參數化上述四項：
+- $Q_iK_j^T=x_iW_QW_K^Tx_j^T+x_iW_QW_K^T{\color{red}{R_{i-j}^T}}+{\color{green}{u}}W_QW_K^Tx_j^T+{\color{green}{v}}W_QW_K^T{\color{red}{R_{i-j}^T}}$
 
-![pos_enc_rel](./img/img5.jpg)
+然後 $uW_Q$ 和 $vW_Q$ 都是可學習的參數，可以合併成一個，得到：
 
-這裡的每一項都有其直觀的含義：
+- $Q_iK_j^T=x_iW_QW_K^Tx_j^T+x_iW_QW_K^T{\color{red}{R_{i-j}^T}}+{\color{green}{u}}W_K^Tx_j^T+{\color{green}{v}}W_K^T{\color{red}{R_{i-j}^T}}$
 
-- $E_{x_i}^T W_q^T W_k E_{x_j}$：基於內容的注意力。
-- $E_{x_i}^T W_q^T W_k R_{i-j}$：與內容相關的相對位置偏差。
-- $u^T W_k E_{x_j}$：控制全局內容偏差的可訓練參數 $u$。
-- $v^T W_k R_{i-j}$：控制全局位置偏差的可訓練參數 $v$。
+考慮到 ${\color{red}{R_{i-j}^T}}$ 的編碼空間和原本 $pos_j$ 的編碼空間不同，因此把 $W_K^T$ 換成 $W_{K, R}^T$，得到：
 
-具體的改進如下：
+- $Q_iK_j^T=x_iW_QW_K^Tx_j^T+x_iW_QW_{K, R}^T{\color{red}{R_{i-j}^T}}+{\color{green}{u}}W_K^Tx_j^T+{\color{green}{v}}W_{K, R}^T{\color{red}{R_{i-j}^T}}$
 
-- **替換絕對位置編碼**：將用於計算項目 (b) 和 (d) 中的關鍵向量的絕對位置編碼 $U_j$ 替換為其相對對應項 $R_{i-j}$。這反映了只有相對距離才決定要去哪裡參加的先驗知識。 $R$ 是一個正弦編碼矩陣，不含可學習參數。
-- **引入可訓練參數**：引入可訓練參數 $u$ 和 $v$ 來取代項目 (c) 和 (d) 中的查詢向量 $U_i$ 的絕對位置編碼。這表明無論查詢位置如何，對不同單字的注意偏差應該保持相同。
-
-綜合上述改進，作者得到了 Transformer-XL 架構。
+最後，在這篇論文中，沒有在 QKV 的 V 矩陣中添加位置編碼，之後的研究也都只在 QK 矩陣（也就是注意力矩陣）中添加位置編碼。
 
 ## 討論
 
