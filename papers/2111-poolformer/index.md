@@ -173,8 +173,10 @@ PoolFormer 的實驗結果十分驚人，它在 ImageNet 上的表現超越了�
 
 將 Transformer 中的注意力機制抽象化為 Token-Mixer。這種抽象化的創新在於，它不僅僅限於特定的 Token-Mixer，從而提供了一種靈活且強大的框架。
 
-透過將池化這種極為簡單的操作作為 Token-Mixer，作者成功地展示了 PoolFormer 模型在各種視覺任務中的競爭力，從而強有力地支持了「**MetaFormer 其實就是你視覺所需要的**」這一主張。
+透過將池化這種極為簡單的操作作為 Token-Mixer，作者成功地展示了 PoolFormer 模型在各種視覺任務中的競爭力，從而強有力地支持了「**MetaFormer Is Actually What You Need for Vision**」這一主張。
 
 未來的研究方向之一是檢驗 MetaFormer 架構的廣泛適用性和穩健性。
 
-作者建議探索 PoolFormer 在自然語言處理（NLP）任務中的應用，以驗證 MetaFormer 在 NLP 領域的有效性。如果能夠證明這一點，MetaFormer 作為通用架構的地位將更加堅固。
+作者建議探索 PoolFormer 在自然語言處理（NLP）任務中的應用，以驗證 MetaFormer 在 NLP 領域的有效性。
+
+如果能夠證明這一點，MetaFormer 作為通用架構的地位將更加堅固。

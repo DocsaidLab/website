@@ -16,7 +16,7 @@ A while ago, it seemed like SENet was on the verge of introducing MobileNet-V3!
 
 Unfortunately, it was only briefly mentioned towards the end of the paper.
 
-- [**SENet-Lightweight Model Performance Showcase**](../1709-senet/index.md#lightweight-model-performance-showcase)
+- [**SENet-Lightweight Model Performance Showcase**](../1709-senet/index.md#results-on-lightweight-models)
 
 The Google team was clearly eager to further develop MobileNet, and so began their exploration into MobileNet-V3.
 
