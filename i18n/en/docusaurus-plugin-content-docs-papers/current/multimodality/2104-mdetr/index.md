@@ -24,7 +24,7 @@ You might remember a previous paper that attempted to replace the detection arch
 
 Since replacing with ViT wasn’t very successful (because ViT isn’t specialized for object detection), this time the authors used another "specialist" object detection model, DETR, for the replacement.
 
-- Portal: **[DETR: The Pioneer Across Fields](../2005-detr/index.md)**
+- Portal: **[DETR: The Pioneer Across Fields](../../object-detection/2005-detr/index.md)**
 
 ## Problem Definition
 

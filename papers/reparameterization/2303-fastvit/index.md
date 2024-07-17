@@ -32,13 +32,13 @@
 
 首先我們會分層幾個層級，對應視覺任務的多尺度的解析度需求，這個概念來自於 PVT 和 Swin Transformer：
 
-- [**[21.02] PVT: 空間縮減注意力機制**](../2102-pvt/index.md)
+- [**[21.02] PVT: 空間縮減注意力機制**](../../backbone/2102-pvt/index.md)
 - [**[21.03] Swin Transformer**](https://arxiv.org/abs/2103.14030)
 
 接著我們會設計一個 Token Mixer 區塊搭配一個 FFN 區塊，組成一個基本模組，這個概念來自於 MetaFormer：
 
-- [**[21.11] PoolFormer: 你需要的是框架**](../2111-poolformer/index.md)
-- [**[22.10] CaFormer: MetaFormer 使用說明書**](../2210-caformer/index.md)
+- [**[21.11] PoolFormer: 你需要的是框架**](../../backbone/2111-poolformer/index.md)
+- [**[22.10] CaFormer: MetaFormer 使用說明書**](../../backbone/2210-caformer/index.md)
 
 本篇論文的作者在提出 MobileOne 之後，把目光轉向了這個際設架構。
 
