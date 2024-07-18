@@ -1,6 +1,6 @@
 # [23.03] FastViT
 
-## 重參數化的 ViT 試驗
+## 重新參數化的 ViT 試驗
 
 [**FastViT: A Fast Hybrid Vision Transformer using Structural Reparameterization**](https://arxiv.org/abs/2303.14189)
 
@@ -17,7 +17,7 @@
 上次是對 MobileNet 架構動手，這次輪到 ViT 了。
 
 :::tip
-**模型重參數化（Reparameterization）**：
+**模型重新參數化（Reparameterization）**：
 
 拆分訓練和推論架構，將原本的模型參數轉換為新的參數，以數學等價的方式將訓練架構轉換為推論架構，從而提升模型速度和性能。
 
@@ -44,7 +44,7 @@
 
 - [**[22.06] MobileOne: 一毫秒攻防**](../2206-mobileone/index.md)
 
-有沒有機會也把這個 Vision Transformer 系列的模型也重參數化呢？
+有沒有機會也把這個 Vision Transformer 系列的模型也重新參數化呢？
 
 ## 解決問題
 
@@ -64,24 +64,24 @@ FastViT 架構包含四個不同的階段，每個階段在不同的尺度上運
 
   $$Y = \text{DWConv}(\text{BN}(X)) + X$$
 
-  這樣的設計主要好處是在推論時可以重參數化為單一深度卷積層：
+  這樣的設計主要好處是在推論時可以重新參數化為單一深度卷積層：
 
   $$Y = \text{DWConv}(X)$$
 
-  這種重參數化顯著降低了記憶體存取成本和計算複雜度，相比於 PoolFormer 中的 PoolMixer，RepMixer 有更好的推論性能。
+  這種重新參數化顯著降低了記憶體存取成本和計算複雜度，相比於 PoolFormer 中的 PoolMixer，RepMixer 有更好的推論性能。
 
   ![RepMixer](./img/img3.jpg)
 
 - **位置編碼**
 
-  FastViT 採用條件位置編碼（參考文獻如下列），這些編碼根據輸入 token 的局部鄰域動態生成。這些編碼通過深度卷積運算產生，並添加到 patch 嵌入中。由於該過程中缺乏非線性操作，這個區塊可以有效地進行重參數化。
+  FastViT 採用條件位置編碼（參考文獻如下列），這些編碼根據輸入 token 的局部鄰域動態生成。這些編碼通過深度卷積運算產生，並添加到 patch 嵌入中。由於該過程中缺乏非線性操作，這個區塊可以有效地進行重新參數化。
 
   - [**[21.02] Conditional positional encodings for vision transformers**](https://arxiv.org/abs/2102.10882)
   - [**[21.04] Twins: Revisiting the design of spatial attention in vision transformers**](https://arxiv.org/abs/2104.13840)
 
 - **深度可分離卷積**
 
-  延續 MobileOne 的設計理念，，FastViT 將密集$k \times k$ 卷積替換為深度可分離卷積，即$k \times k$ 深度卷積和$1 \times 1$ 點卷積，並搭配重參數化的訓練策略。
+  延續 MobileOne 的設計理念，，FastViT 將密集$k \times k$ 卷積替換為深度可分離卷積，即$k \times k$ 深度卷積和$1 \times 1$ 點卷積，並搭配重新參數化的訓練策略。
 
   這種方法在不顯著增加訓練時間的情況下提升了模型容量。例如，FastViT-SA12 和 FastViT-SA36 的訓練時間僅分別增加了 6.7% 和 4.4%。
 
@@ -182,5 +182,5 @@ FastViT 通過結構重新參數化和其他改進措施，實現了高效能和
 - CAFormer-S18, MACs 4.1G；FastViT-SA24, MACs 3.8G。
 - CAFormer-S18 的 Top-1 精度為 83.6%，而 FastViT-SA24 的 Top-1 精度為 82.6%。
 
-不過在 CAFormer 中沒有重參數化，因此可以預期速度會慢得多。此外，CAFormer 最小的模型還是很大，不適合部署在行動設備上。FastViT 在這方面佔有優勢，其最小模型的尺寸大約 3.6M 的參數量。
+不過在 CAFormer 中沒有重新參數化，因此可以預期速度會慢得多。此外，CAFormer 最小的模型還是很大，不適合部署在行動設備上。FastViT 在這方面佔有優勢，其最小模型的尺寸大約 3.6M 的參數量。
 :::
