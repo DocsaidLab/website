@@ -110,7 +110,7 @@ After completion, run the command wrapped in Docker each time:
 #!/bin/bash
 docker run \
     --gpus all \
-    -v ${PWD}:/code
+    -v ${PWD}:/code \
     -it --rm your_image_name your_scripts.py
 ```
 

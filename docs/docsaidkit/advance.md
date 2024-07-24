@@ -110,7 +110,7 @@ docker build -f your_Dockerfile -t your_image_name .
 #!/bin/bash
 docker run \
     --gpus all \
-    -v ${PWD}:/code
+    -v ${PWD}:/code \
     -it --rm your_image_name your_scripts.py
 ```
 
