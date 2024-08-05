@@ -165,7 +165,7 @@ $$
 
 - [**[23.01] BNET: Batch normalization with enhanced linear transformation**](https://ieeexplore.ieee.org/document/10012548)
 
-具體來說，給定輸入特徵 $x \in \mathbb{R}^{H \times W \times C}$，其中 $H$、$W$ 和 $C$ 分別是其高度、寬度和通道數，激活函數表示為：
+給定輸入特徵 $x \in \mathbb{R}^{H \times W \times C}$，其中 $H$、$W$ 和 $C$ 分別是其高度、寬度和通道數，激活函數表示為：
 
 $$
 A_s(x_{h,w,c}) = \sum_{i,j \in \{-n, n\}} a_{i,j,c} A(x_{i+h,j+w,c} + b_c)

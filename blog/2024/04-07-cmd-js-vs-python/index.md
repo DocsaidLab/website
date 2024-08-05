@@ -24,7 +24,7 @@ description: 把 Python 與 JS 的基本指令進行類似的對應。
 **它們都是：套件管理器**
 :::
 
-npm（Node Package Manager）和 pip 本質上服務於相同的目的：它們分別為 Node.js 和 Python 的包管理器。包管理器對於共享、重用和管理代碼庫或模塊至關重要。
+npm（Node Package Manager）和 pip 本質上服務於相同的目的：它們分別為 Node.js 和 Python 的包管理器。
 
 - **安裝包**：在 npm 中，我們使用 `npm install <package-name>` 命令來為項目添加一個庫。同樣地，pip 通過 `pip install <package-name>` 實現相同的目標。
 - **版本管理**：npm 通過 `package.json` 文件追蹤包版本，確保開發團隊的每個成員使用相同版本的庫。Pip 則依賴於 `requirements.txt` 或較新工具如 pipenv 和 poetry 來實現類似的功能。

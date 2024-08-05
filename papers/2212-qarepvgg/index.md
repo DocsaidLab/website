@@ -87,7 +87,7 @@ $$
 
 這裡作者使用與 RepVGG 相同的命名約定，以便更好地理解。
 
-具體來說，這裡用 $W^{(k)} \in \mathbb{R}^{C_2 \times C_1 \times k \times k}$ 表示 $k \times k$ 卷積的核，其中 $C_1$ 和 $C_2$ 分別是輸入和輸出通道的數量。對於 RepVGG 來說，$k \in \{1, 3\}$，至於 $k \times k$ 卷積後的 BN 層，我們用 $\mu^{(k)} \in \mathbb{R}^{C_2}$, $\sigma^{(k)} \in \mathbb{R}^{C_2}$, $\gamma^{(k)} \in \mathbb{R}^{C_2}$, $\beta^{(k)} \in \mathbb{R}^{C_2}$ 作為均值、標準差、縮放因子和偏差。對於 Identity 分支中的 BN，使用 $\mu^{(0)}$, $\sigma^{(0)}$, $\gamma^{(0)}$, $\beta^{(0)}$。
+這裡用 $W^{(k)} \in \mathbb{R}^{C_2 \times C_1 \times k \times k}$ 表示 $k \times k$ 卷積的核，其中 $C_1$ 和 $C_2$ 分別是輸入和輸出通道的數量。對於 RepVGG 來說，$k \in \{1, 3\}$，至於 $k \times k$ 卷積後的 BN 層，我們用 $\mu^{(k)} \in \mathbb{R}^{C_2}$, $\sigma^{(k)} \in \mathbb{R}^{C_2}$, $\gamma^{(k)} \in \mathbb{R}^{C_2}$, $\beta^{(k)} \in \mathbb{R}^{C_2}$ 作為均值、標準差、縮放因子和偏差。對於 Identity 分支中的 BN，使用 $\mu^{(0)}$, $\sigma^{(0)}$, $\gamma^{(0)}$, $\beta^{(0)}$。
 
 設 $M^{(1)} \in \mathbb{R}^{N \times C_1 \times H_1 \times W_1}$, $M^{(2)} \in \mathbb{R}^{N \times C_2 \times H_2 \times W_2}$ 分別表示輸入和輸出，$\ast$ 表示卷積運算。
 

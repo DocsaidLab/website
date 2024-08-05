@@ -42,7 +42,7 @@ BERT 提出後，定調的 NLP 的學習範式：
 
 作者在現有的 Transformer 架構中加入了一些小但高效的 Adapter 模組，這些 Adapter 的目的是在不增加太多額外參數的情況下，提高模型的表現。
 
-這裡請搭配上圖看一下，具體來說，作者在 Transformer 的每一層後面加上了兩個 Adapter 模組。
+這裡請搭配上圖看一下，作者在 Transformer 的每一層後面加上了兩個 Adapter 模組。
 
 - **第一個加在 Self-Attention 之後，LayerNorm 之前。**
 - **第二個加在 Feed-Forward 之後，LayerNorm 之前。**
