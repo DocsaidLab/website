@@ -1,5 +1,5 @@
 ---
-slug: read-pdf-to-images
+slug: convert-pdf-to-images
 title: 使用 Python 把 PDF 轉圖片
 authors: Zephyr
 tags: [Python, PDF, pdf2image, PIL]

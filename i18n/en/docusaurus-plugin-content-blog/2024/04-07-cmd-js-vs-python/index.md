@@ -1,5 +1,5 @@
 ---
-slug: python-js-basic-command-equivalents-en
+slug: python-js-basic-command-equivalents
 title: Equivalent Basic Commands between Python and JS
 authors: Zephyr
 image: /en/img/2024/0407.webp

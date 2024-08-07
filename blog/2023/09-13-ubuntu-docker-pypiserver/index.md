@@ -1,5 +1,5 @@
 ---
-slug: ubuntu-docker-pypiserver
+slug: setting-up-pypiserver-on-ubuntu-with-docker
 title: 搭建 PyPiServer 記錄
 authors: Zephyr
 tags: [docker, pypiserver]

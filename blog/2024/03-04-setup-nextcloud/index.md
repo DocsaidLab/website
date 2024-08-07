@@ -1,5 +1,5 @@
 ---
-slug: setup-nextcloud
+slug: setting-up-nextcloud
 title: 搭建 Nextcloud 記錄
 authors: Zephyr
 tags: [Nextcloud, Docker, Ubuntu]
