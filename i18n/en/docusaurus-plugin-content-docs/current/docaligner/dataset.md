@@ -34,7 +34,7 @@ MIDV-2020 features 10 types of documents, including 1000 annotated video clips, 
 
 ![CORD](./resources/cordv0_test_img.jpg)
 
-This dataset comprises thousands of Indonesian receipts, which include image text annotations for OCR and multi-layer semantic tags for parsing. The provided dataset can be used to address various OCR and parsing tasks.
+This dataset comprises thousands of Indonesian receipts, which include text annotations for OCR and multi-layer semantic tags for parsing. The provided dataset can be used to address various OCR and parsing tasks.
 
 - **URL**: [**CORD**](https://github.com/clovaai/cord)
 
@@ -42,4 +42,4 @@ This dataset comprises thousands of Indonesian receipts, which include image tex
 
 ![Docpool](./resources/synth_test_img.jpg)
 
-Considering the limitations of available datasets, we use dynamic image synthesis techniques. In essence, we first collected a dataset of various texts, including images of various documents and certificates found online. We then used an Indoor dataset as a background, onto which we superimposed the text data. Moreover, for the MIDV-500/MIDV-2019/CORD datasets, which all have corresponding polygon data, we also synthesized various images onto these datasets in the spirit of maximizing resource use and increasing dataset diversity.
+Considering the limitations of available datasets, we use dynamic image synthesis techniques. In essence, we first collected a dataset including images of various documents and certificates found online. We then used an Indoor dataset as a background, onto which we superimposed the documents data. Moreover, for the MIDV-500/MIDV-2019/CORD datasets, which all have corresponding polygon groundtruth, we also synthesized various documents onto these datasets in the spirit of maximizing resource use and increasing dataset diversity.

@@ -25,7 +25,7 @@ Outside the field of deep learning, "Localization" typically refers to the local
 :::
 
 :::tip
-**Flattening**: Correcting the text or images within a document to display them on a flat surface.
+**Flattening**: Correcting the images within a document to display them on a flat surface.
 :::
 
 ## Definition
