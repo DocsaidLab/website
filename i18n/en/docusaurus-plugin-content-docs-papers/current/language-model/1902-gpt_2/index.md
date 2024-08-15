@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 The first generation of GPT stacked twelve layers of Transformer decoders. OpenAI felt this wasn't enough, so they stacked forty-eight layers of Transformer decoders, resulting in GPT-2.
 
 ## Defining the Problem

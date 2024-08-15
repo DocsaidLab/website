@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content was compiled by ChatGPT-4, edited and supplemented with manual corrections and explanations.
-:::
-
----
-
 After reading several papers, you might be familiar with some of the prediction methods for various downstream tasks. Let's look at two examples:
 
 ![Demo](./img/vlt5_1.jpg)

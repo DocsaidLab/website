@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 OpenAI has been pushing the boundaries with the Transformer decoder architecture.
 
 ## Problem Definition

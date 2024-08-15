@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and has been manually reviewed, edited, and supplemented.
-:::
-
----
-
 This is not a paper but a technical report.
 
 The NIST conducted research on distinguishing twins within the scope of the FRVT (Face Recognition Vendor Test).

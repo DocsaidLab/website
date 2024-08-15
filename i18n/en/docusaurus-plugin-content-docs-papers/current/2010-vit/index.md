@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been manually checked, edited, and supplemented.
-:::
-
----
-
 In 2017, the introduction of the Transformer model caused a massive wave in the field of natural language processing (NLP), quickly becoming a dominant force.
 
 Three years later, this wave has finally reached the realm of computer vision.

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。
-:::
-
----
-
 在 FPN 被提出來之後，特徵融合一直是熱烈討論的問題，我們這裡根據時間序羅列幾篇：
 
 - **2017.01** -> [DSSD : Deconvolutional single shot detector](https://arxiv.org/abs/1701.06659)

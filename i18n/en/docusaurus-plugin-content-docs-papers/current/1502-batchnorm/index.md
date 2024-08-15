@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4, with manual proofreading and supplementary explanations.
-:::
-
----
-
 Deep learning has made significant progress in various fields such as vision and speech. Stochastic Gradient Descent (SGD) and its variants like Momentum and Adagrad have proven to be highly effective methods for training deep neural networks. These optimization algorithms adjust the network parameters to minimize loss by processing small batches of data during training.
 
 In the SGD process, instead of updating parameters with each individual training example, we use mini-batches. This approach has two main benefits: first, the gradient of the loss over a mini-batch is a good estimate of the gradient over the entire training set, and as the batch size increases, this estimate improves; second, modern computing platforms support parallel computation, making it more efficient to process a whole batch of data at once rather than multiple individual data points.

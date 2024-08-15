@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and has been manually reviewed, edited, and supplemented.
-:::
-
----
-
 Identifying twins has always been a challenge in computer vision research.
 
 This paper aims to compare the accuracy of human and Deep Convolutional Neural Networks (DCNN) in the identification of monozygotic twins, especially under varying viewpoints. Specifically, researchers aim to understand the differences in how these two systems distinguish highly similar faces and evaluate their reliability in real-world applications.

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 As CNNs have become deeper, gradient information from input images often vanishes, making training difficult.
 
 Various studies began exploring how to improve the flow of information through deep networks, one of the most significant being ResNet.

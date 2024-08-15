@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been manually checked, edited, and supplemented.
-:::
-
----
-
 As language models grow larger and more complex, training or fine-tuning them becomes beyond the reach of most people. Consequently, prompt engineering, a new research direction, has emerged: how to design effective prompts that enable large language models to answer specific questions.
 
 But writing prompts is a hassle!

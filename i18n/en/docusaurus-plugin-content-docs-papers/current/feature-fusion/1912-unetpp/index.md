@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 The authors of this paper use U-Net as a starting point to explore design issues in the original U-Net architecture.
 
 To quote the authors:

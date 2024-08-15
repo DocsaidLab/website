@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and has been manually reviewed, edited, and supplemented.
-:::
-
----
-
 In the race for lightweight models, several main directions have emerged:
 
 - **Optimizing parameter count** to reduce model size.

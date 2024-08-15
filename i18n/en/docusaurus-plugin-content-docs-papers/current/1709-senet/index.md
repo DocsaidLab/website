@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 In an era where everyone is striving to top the ImageNet leaderboard, various network architectures emerge endlessly. The SENet architecture was proposed to enhance the global inter-channel relationships within a network, thereby improving its performance.
 
 ## Defining the Problem

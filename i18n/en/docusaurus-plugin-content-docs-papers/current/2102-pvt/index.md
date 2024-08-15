@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content was compiled by ChatGPT-4, edited and supplemented with manual corrections and explanations.
-:::
-
----
-
 ViT has achieved remarkable results in image classification, officially marking the entry of the Transformer architecture into the realm of computer vision.
 
 ## Defining the Problem

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been manually checked, edited, and supplemented.
-:::
-
----
-
 Before this, the classic R-CNN methods dominated the object detection field. Although slow, they were highly accurate. Subsequent research aimed to address the speed issue with methods like SSD and YOLO.
 
 However, while these new methods were faster, they lacked accuracy.

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4, with additional manual review and editing.
-:::
-
----
-
 In recent years, CNN architectures have faced challenges from ViT, causing their dominance to waver.
 
 Some argue that ViT's strength lies in its multi-head attention mechanism, which offers greater flexibility, reduced inductive bias, and robustness to distortions.

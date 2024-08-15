@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been manually edited and supplemented.
-:::
-
----
-
 The introduction of the Transformer architecture into the vision domain has sparked a significant wave of research. In previous studies, most researchers focused on improving the performance of the Token-Mixer or optimizing the Patchify process. However, an important issue was often overlooked: **the framework**.
 
 ## Problem Definition

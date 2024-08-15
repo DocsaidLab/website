@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and has been manually reviewed, edited, and supplemented.
-:::
-
----
-
 Five years have passed since the release of MobileNetV3.
 
 During this time, the academic community has made significant progress with new network architectures and the application of multi-head attention mechanisms.

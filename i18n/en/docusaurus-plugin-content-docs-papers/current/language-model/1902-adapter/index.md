@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 After BERT was introduced, it set the standard for the learning paradigm in NLP:
 
 - **We must first train a "large" model with "massive" data, and then fine-tune it.**

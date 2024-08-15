@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been manually checked, edited, and supplemented.
-:::
-
----
-
 Earlier, we reviewed ViT.
 
 - [**ViT: Pioneering a New World**](../2010-vit/index.md)

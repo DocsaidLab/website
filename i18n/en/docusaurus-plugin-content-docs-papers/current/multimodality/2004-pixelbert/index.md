@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 In the past, when discussing the integration of vision and language models, most researchers followed a conventional standard procedure:
 
 1. Use object detection models like Faster R-CNN to extract region features from images.

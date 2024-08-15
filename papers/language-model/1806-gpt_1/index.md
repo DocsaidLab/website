@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。
-:::
-
----
-
 原始的 Transformer 架構由兩個部分組成：一個編碼器（encoder）和一個解碼器（decoder）。
 
 而 OpenAI 則是基於這個架構，選了不一樣的技術路線：**全解碼器（decoder-only）**。

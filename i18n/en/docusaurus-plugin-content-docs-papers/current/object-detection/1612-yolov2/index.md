@@ -6,11 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4, with manual verification, editing, and additional explanations.
-:::
-
----
 
 ## Problem Definition
 

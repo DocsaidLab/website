@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 Common methods to enhance the performance of convolutional neural networks (CNNs) include:
 
 1. **Deeper Networks**: Increasing network depth, such as with ResNet.

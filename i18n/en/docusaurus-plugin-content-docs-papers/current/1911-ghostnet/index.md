@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content was compiled by ChatGPT-4 and has been manually proofread, edited, and supplemented.
-:::
-
----
-
 After the introduction of MobileNet, many researchers continued to work on improving the performance of lightweight networks.
 
 This paper specifically addresses the problem of "feature map redundancy."

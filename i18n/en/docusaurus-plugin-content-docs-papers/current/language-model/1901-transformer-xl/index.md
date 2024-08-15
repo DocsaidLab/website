@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 [**BERT**](../1810-bert/index.md) uses a fixed sequence length during training and prediction. But ideally, how should we input text for training?
 
 - **The best way would be to input the entire text at once, regardless of its length!**

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 The study of neural networks began long before AlexNet made its mark.
 
 AlexNet represents a significant milestone, achieving remarkable results in the 2012 ImageNet Challenge.

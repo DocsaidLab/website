@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 Imagine a scenario.
 
 Given a typical convolutional network model's operation flow: first, an input image, possibly of size 3 x 224 x 224, is passed through successive layers of downsampling, ultimately producing a high-dimensional semantic feature map, potentially 256 x 7 x 7. Conventionally, the final output of such a model is 1/32 the original size, meaning that for an input image of 224 x 224, the final feature map is 7 x 7.

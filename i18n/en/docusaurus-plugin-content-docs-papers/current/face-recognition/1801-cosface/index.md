@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been manually proofread and supplemented.
-:::
-
----
-
 The task of face recognition has interested researchers even before the advent of deep learning. As it is one of the few areas with numerous real-life applications, it has remained a popular topic over the past few decades.
 
 ## Defining the Problem

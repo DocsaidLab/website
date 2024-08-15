@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4, and has been manually proofread, edited, and supplemented.
-:::
-
----
-
 After Transformers were introduced into the field of computer vision, many studies began exploring ways to make the exchange of information between patches more efficient.
 
 Thus, a new term emerged: "Token-Mixer."

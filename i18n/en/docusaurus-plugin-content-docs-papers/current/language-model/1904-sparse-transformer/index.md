@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 The computational complexity of the self-attention mechanism in a Transformer is $O(n^2)$.
 
 When any algorithm exhibits such computational complexity, it indicates significant room for optimization. OpenAI has made substantial efforts in foundational research, one of which is presented in this paper: Sparse Transformer.

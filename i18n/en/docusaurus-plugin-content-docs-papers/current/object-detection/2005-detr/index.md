@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 Object detection has always been a core task in computer vision.
 
 Anchor-based methods like Faster R-CNN, SSD, and YOLOv2 use predefined bounding boxes (anchors) to predict the locations of objects. These anchors are manually selected for their size and aspect ratios, aiming to cover all possible object shapes. Anchor-based methods have inherent advantages, especially in detecting objects of various scales and shapes, as they generalize well to objects with different scales and aspect ratios.

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and has been manually reviewed, edited, and supplemented.
-:::
-
----
-
 This is a comprehensive paper.
 
 So, you can expect to see experiments and... more experiments.

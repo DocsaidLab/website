@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 You might have heard various stories about BERT and its successors, and you could probably point out a few differences. For instance:
 
 ERNIE models integrate rich prior knowledge, such as entity knowledge graphs, during pre-training, resulting in better semantic understanding. Additionally, ERNIE employs phrase-level masking. Besides the common Masked Language Model (MLM) task, ERNIE incorporates other pre-training tasks to enhance the model's representation capabilities.

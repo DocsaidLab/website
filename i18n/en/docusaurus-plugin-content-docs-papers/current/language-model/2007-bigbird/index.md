@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4, edited, and supplemented with additional information.
-:::
-
----
-
 The computational complexity of the Transformer's self-attention mechanism is $O(n^2)$.
 
 When any algorithm has such a high computational complexity, it indicates significant optimization potential.

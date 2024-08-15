@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content was compiled by ChatGPT-4, edited and supplemented with manual corrections and explanations.
-:::
-
----
-
 In our daily lives, information is everywhere, appearing in various forms such as text, images, sound, or video. You might have described a painting with words or used pictures to make a story more vivid.
 
 This time, we discuss Multi-Model Machine Learning (MMML).

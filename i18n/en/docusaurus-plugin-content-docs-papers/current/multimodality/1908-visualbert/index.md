@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 Around 2015, many multimodal models based on LSTM architecture were being explored, as mentioned by the authors: "Multimodal model research is nothing new!" With the advent of the Transformer architecture and its attention mechanism in 2017, significant advancements were made in natural language processing. Notably, BERT successfully pre-trained a general language encoder capable of predicting masked words in a text.
 
 By 2019, the application of attention mechanisms in the multimodal domain had also advanced significantly, refocusing research on combining language and vision to extract deeper semantic details from images, including objects, attributes, parts, spatial relationships, actions, and intentions.

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and has been manually reviewed, edited, and supplemented.
-:::
-
----
-
 Looking back at the 2010s, deep learning made significant strides, profoundly impacting multiple fields.
 
 At the heart of this progress was the revival of neural networks, particularly Convolutional Neural Networks (ConvNet).

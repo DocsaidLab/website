@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 We've seen previous papers evolve from "single-stream models" to "dual-tower models" and "dual-stream models."
 
 Essentially, you can either combine multimodal information in a single computation or process them separately.

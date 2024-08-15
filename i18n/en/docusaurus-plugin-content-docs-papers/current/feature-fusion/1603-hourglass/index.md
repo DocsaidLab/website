@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 If you are a developer who frequently explores various papers, the Hourglass architecture may not be entirely unfamiliar to you. Let's quickly introduce this architecture:
 
 The Hourglass architecture is designed specifically for human pose estimation tasks. By comprehensively processing and integrating features at all scales, it aims to optimally capture various spatial relationships related to the human body. The research team demonstrated that by repeatedly applying bottom-up and top-down processing and incorporating intermediate supervision, the network's performance could be significantly enhanced. Therefore, they named this new architecture the "Stacked Hourglass" network. This network, based on successive pooling and upsampling steps, is used to generate the final prediction.

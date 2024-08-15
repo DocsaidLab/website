@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content was compiled by ChatGPT-4, edited and supplemented with manual corrections and explanations.
-:::
-
----
-
 After examining Oscar, further research promptly followed.
 
 - Portal: [**Oscar**](../2004-oscar/index.md)

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and has been manually reviewed, edited, and supplemented.
-:::
-
----
-
 To excel in VQA (Visual Question Answering), using an object detector is almost inevitable.
 
 Those pioneers who attempted to do without object detectors, like ViLT and MDETR, have already faced significant challenges.

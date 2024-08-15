@@ -44,9 +44,7 @@ We always believe: knowledge is power.
 
 Since the advent of ChatGPT, reading papers has become much easier, but this doesn't mean we can relinquish the responsibility of thinking.
 
-Here, we document our insights from reading papers together with ChatGPT.
-
-Our understanding of the papers might be biased or incorrect.
+Here, we document our insights from reading papers and our understanding of the papers might be biased or incorrect.
 
 If there is any discrepancy with the original papers, **please refer to the original paper first**.
 
@@ -64,7 +62,7 @@ Our writing format is as follows:
 
 Thus, this is not a direct translation of the paper but more of a guided reading.
 
-Additionally, for English content, since papers are originally in English, providing translations might seem unnecessary. However, for the sake of completeness of this website, we decided to let `ChatGPT 4.0` handle it.
+Additionally, for English content, since papers are originally in English, providing translations might seem unnecessary. However, for the sake of completeness of this website, we decided to let `ChatGPT 4o` handle it.
 
 If during the reading process you find:
 

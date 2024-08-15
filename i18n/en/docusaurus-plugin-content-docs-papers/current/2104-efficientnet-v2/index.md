@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4, and has been manually proofread, edited, and supplemented.
-:::
-
----
-
 After proposing the first generation of EfficientNet, the authors felt there was still room for improvement.
 
 Thus, they introduced EfficientNetV2, a smaller and faster model while maintaining high efficiency.

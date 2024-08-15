@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。
-:::
-
----
-
 比起 RoFormer 這個名字，其實 RoPE 應該更廣為人知。
 
 RoPE 是 RoFormer 的核心概念，全名為「Rotary Position Embedding」，是一種新型的位置編碼方法。

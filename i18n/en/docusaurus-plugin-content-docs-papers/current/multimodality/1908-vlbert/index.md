@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 Previously, we discussed VisualBERT, which follows a One-Tower Encoder architecture but only supervises the text part during training, leaving the image part unsupervised. We also mentioned ViLBERT, a Two-Tower Encoder architecture, where text and images each have their own encoder and exchange information via a cross-attention mechanism, though it is quite complex.
 
 - **Wait, what's One-Tower, Two-Tower?**

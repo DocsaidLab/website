@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4, and has been manually proofread, edited, and supplemented.
-:::
-
----
-
 **Is it true that fewer parameters in a model result in faster speeds?**
 
 You might know the answer is: "Not necessarily!"

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been edited and supplemented with manual proofreading.
-:::
-
----
-
 The main comparisons in this paper are made between ViT and DeiT.
 
 The primary objective is to improve the classification performance of the ViT architecture on ImageNet.

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 A while ago, it seemed like SENet was on the verge of introducing MobileNet-V3!
 
 Unfortunately, it was only briefly mentioned towards the end of the paper.

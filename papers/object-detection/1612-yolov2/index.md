@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。
-:::
-
----
-
 ## 定義問題
 
 ![yolo v2 problem](./img/img9.jpg)

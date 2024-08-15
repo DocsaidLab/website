@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 After the introduction of FPN, feature fusion has been a hot topic of discussion. Here, we list some papers chronologically:
 
 - **2017.01** -> [DSSD: Deconvolutional single shot detector](https://arxiv.org/abs/1701.06659)

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content was compiled by ChatGPT-4, edited and supplemented with manual corrections and explanations.
-:::
-
----
-
 You might recall that the Transformer was introduced in 2017. Vision Transformer (ViT), specifically designed for images, appeared at the end of 2020, more than three years later.
 
 This time, we don't have to wait that long. In less than six months, ViT was adapted to replace the visual architecture in VLP (Vision-Language Pretraining) models.

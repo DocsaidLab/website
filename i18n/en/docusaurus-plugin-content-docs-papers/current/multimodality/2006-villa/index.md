@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 This time, we delve into an intriguing paper.
 
 When trying to understand how to make machines better at understanding and describing objects in images, we face a challenge: how to ensure that the machine performs well not just in controlled settings but also in real-world scenarios with unpredictable problems?

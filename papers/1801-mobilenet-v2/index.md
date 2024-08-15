@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。
-:::
-
----
-
 MobileNet 是一個輕量級的深度學習網絡，旨在在移動設備上實現高效的圖像辨識。
 
 在第一代 MobileNet 中，作者提出了深度可分離卷積（Depthwise Separable Convolution）的概念，以減少參數量和計算量。

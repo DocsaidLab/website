@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 After the introduction of the classic FPN, the question of "how to achieve more efficient feature fusion" became an area of research. Let's explore another equally classic architecture — PANet.
 
 ## Defining the Problem

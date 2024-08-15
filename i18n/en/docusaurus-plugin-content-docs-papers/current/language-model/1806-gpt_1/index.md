@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 The original Transformer architecture consists of two parts: an encoder and a decoder. However, OpenAI took a different approach and chose to use a decoder-only architecture.
 
 ## Defining the Problem

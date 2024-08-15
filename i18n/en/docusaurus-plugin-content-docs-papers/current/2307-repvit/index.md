@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been summarized and edited by ChatGPT-4, with additional input and verification.
-:::
-
----
-
 Research on reparameterization is thriving and gradually spreading to different model architectures.
 
 The goal of this paper is to reparameterize MobileNet-V3, but unlike previous works, this study approaches it from the perspective of Vision Transformers (ViTs).

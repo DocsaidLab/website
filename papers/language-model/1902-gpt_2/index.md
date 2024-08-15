@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。
-:::
-
----
-
 第一代的 GPT 疊了十二層 Transformer 解碼器。
 
 OpenAI 覺得這樣不夠，於是他們疊了四十八層 Transformer 解碼器，這就是 GPT-2。

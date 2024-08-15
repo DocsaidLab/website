@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4, and has been manually verified and supplemented.
-:::
-
----
-
 In an era dominated by deep convolutional networks, it’s surprising to see a minimalist approach like VanillaNet emerge.
 
 ## Problem Definition

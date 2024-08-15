@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been manually verified, edited, and supplemented.
-:::
-
----
-
 The concept of reparameterization gained attention around 2021 after the introduction of RepVGG.
 
 Researchers have been exploring ways to find suitable reparameterization methods in model architecture to enhance performance.

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 In the field of Vision-Language (V+L) research, the issue of ambiguity has always been a significant hurdle, particularly when multiple objects overlap in image regions. Extracting precise visual region features becomes particularly challenging. For example, when an image contains both a cat and a dog intertwined, their overlapping region features might become ambiguous, posing a challenge for semantic alignment. How to find a clear and meaningful representation in this intertwined region and accurately align it with language is the problem that Oscar seeks to address.
 
 The operation mechanism of Oscar can be simply explained: suppose there is an image containing an apple and a banana, with some overlap between the two. In a conventional scenario, directly extracting features from this overlapping visual region would yield a “mixed” information, making subsequent semantic alignment difficult.

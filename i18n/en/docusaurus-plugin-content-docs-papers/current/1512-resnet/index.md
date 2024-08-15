@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4, edited and supplemented with human verification.
-:::
-
----
-
 After the introduction of BatchNorm, the issues of gradient vanishing and exploding seemed to have been resolved.
 
 So why are models still difficult to train well?

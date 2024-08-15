@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 After the introduction of the Transformer architecture, many researchers began exploring ways to better utilize it. GPT-1, discussed previously, opted for a decoder-only architecture. In contrast, BERT chose an encoder-only approach.
 
 :::tip

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been manually proofread, edited, and supplemented.
-:::
-
----
-
 Remember the Inception model we discussed earlier?
 
 - [**Going Deeper with Convolutions**](https://arxiv.org/abs/1409.4842)

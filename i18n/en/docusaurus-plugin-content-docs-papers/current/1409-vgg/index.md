@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been manually proofread and supplemented.
-:::
-
----
-
 In the early stages of neural networks, the exploration of depth was stagnant for a long time.
 
 The primary reason was the vanishing gradient problem. As the network depth increased, the gradient information could not effectively propagate to the earlier layers, making training difficult.

@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 MobileNet is a lightweight deep learning network designed to achieve efficient image recognition on mobile devices. In the first generation of MobileNet, the authors introduced the concept of depthwise separable convolutions to reduce the number of parameters and computations.
 
 In this paper, the authors continue this approach and attempt to find new methods to improve performance.

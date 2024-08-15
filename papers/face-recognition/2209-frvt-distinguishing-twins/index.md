@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。
-:::
-
----
-
 這不是一篇論文，而是一篇技術報告。
 
 主要是 NIST 在 FRVT（Face Recognition Vendor Test）中，針對區分雙胞胎的問題進行了研究。

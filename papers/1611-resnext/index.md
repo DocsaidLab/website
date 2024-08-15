@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-以下內容由 ChatGPT-4 彙整，並經過人工校對編輯與補充說明。
-:::
-
----
-
 還記得稍早提出的 Inception 模型嗎？
 
 - [**Going Deeper with Convolutions**](https://arxiv.org/abs/1409.4842)

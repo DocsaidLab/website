@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been manually checked, edited, and supplemented.
-:::
-
----
-
 It's been a while since we had a literature class. Do you remember what "intertwined" means?
 
 It might feel a bit off-topic, but let's review it.

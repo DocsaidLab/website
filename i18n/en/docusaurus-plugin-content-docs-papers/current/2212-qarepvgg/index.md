@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been manually reviewed, edited, and supplemented.
-:::
-
----
-
 RepVGG leverages an over-parameterized network with multiple branches during the training phase, and merges these branches into a single one during inference, a process termed "re-parameterization."
 
 - [**RepVGG: Making VGG Great Again**](../2101-repvgg/index.md)

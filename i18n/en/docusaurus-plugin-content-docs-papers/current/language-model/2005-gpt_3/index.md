@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 The second generation of GPT stacked forty-eight layers of Transformer decoders. OpenAI felt this wasn't enough, so they stacked ninety-six layers of Transformer decoders, reaching an unprecedented 175 billion parameters, naming it GPT-3.
 
 ## Problem Definition

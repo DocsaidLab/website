@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 The competition for lightweight networks has just begun.
 
 ShuffleNet joined the fray during this period.

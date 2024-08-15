@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is summarized by ChatGPT-4 and has been manually reviewed and supplemented for clarity.
-:::
-
----
-
 In object detection systems, the process is typically divided into two main steps: region proposal and classification.
 
 1. **Region Proposal**:

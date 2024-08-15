@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 Depthwise separable convolution is a convolutional neural network structure that decomposes standard convolution into two separate layers: depthwise convolution and pointwise convolution.
 
 This structure reduces the number of model parameters and computation, making the model more lightweight, which is particularly useful for resource-constrained scenarios like mobile devices.

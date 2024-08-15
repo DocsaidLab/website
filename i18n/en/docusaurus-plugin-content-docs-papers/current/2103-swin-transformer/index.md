@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and has been manually proofread, edited, and supplemented.
-:::
-
----
-
 At the same time, the PVT was proposed, which also incorporated the hierarchical structure of convolutional networks into the Transformer.
 
 - [**[21.02] PVT: Spatial Reduction Attention Mechanism**](../2102-pvt/index.md)

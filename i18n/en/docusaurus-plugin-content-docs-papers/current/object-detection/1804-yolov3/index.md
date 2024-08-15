@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4, and has been manually reviewed, edited, and supplemented.
-:::
-
----
-
 The third generation of YOLO is not a formal research paper; as stated by the author, it is more of a technical report.
 
 ## Problem Definition

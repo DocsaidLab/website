@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 In recent years, we have witnessed numerous efforts to merge vision and language. This field attracts relentless exploration because it involves two primary human perception modes: vision and language, which are often inseparable in daily life.
 
 Reflecting on this journey, models like ViLBERT, VL-BERT, and VisualBERT have been milestones, each attempting to integrate these powerful information sources: images and text. However, like all pioneering research, they each had their limitations and characteristics.

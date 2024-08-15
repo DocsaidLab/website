@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4, and has been manually verified and supplemented.
-:::
-
----
-
 After the recent introduction of MobileOne, Apple continues to explore more possibilities with model reparameterization. Previously, they tackled the MobileNet architecture; now, it's Vision Transformer's turn.
 
 :::tip

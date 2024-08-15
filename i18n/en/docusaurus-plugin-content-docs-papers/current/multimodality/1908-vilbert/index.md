@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4 and manually proofread, edited, and supplemented.
-:::
-
----
-
 This article introduces ViLBERT, which emerged around the same time as VisualBERT. 2019 was a particularly eventful year in the academic world, and we are far from the end of this journey.
 
 We all know that it is no easy task to make machines truly "understand" an image and describe it in words. In the past, most research methods separated image understanding from language processing. However, when attempting to combine these two domains, the results often fell short. It's like a machine can recognize that an image shows a Shiba Inu but struggles to identify the breed when asked, "What breed of dog is this?"

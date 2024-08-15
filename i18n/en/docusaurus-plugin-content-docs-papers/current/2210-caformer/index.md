@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content has been compiled by ChatGPT-4, and has been manually proofread and supplemented.
-:::
-
----
-
 After publishing the first MetaFormer paper, the authors released another paper to demonstrate its performance.
 
 - [**PoolFormer: You Need a Meta!**](../2111-poolformer/index.md)

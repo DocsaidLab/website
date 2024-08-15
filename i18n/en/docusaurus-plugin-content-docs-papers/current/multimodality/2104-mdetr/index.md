@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is summarized by ChatGPT-4 and has been manually checked, edited, and supplemented with additional explanations.
-:::
-
----
-
 In recent years, object detection has been at the forefront of computer vision, serving as the core of many advanced multi-modal understanding systems. However, traditional methods treat detection systems as black boxes, conducting fixed concept image detection, which clearly has inherent limitations.
 
 A significant issue is the inability to effectively utilize multi-modal context for collaborative training, limiting downstream models to accessing only detected objects. Moreover, these detection systems are often frozen, meaning they lack further refinement and adaptability. Most importantly, the vocabulary of these detection systems is severely limited, making them blind to novel concept combinations expressed in free-form text.

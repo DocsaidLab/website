@@ -6,12 +6,6 @@
 
 ---
 
-:::info
-The following content is compiled by ChatGPT-4 and has been manually edited and supplemented.
-:::
-
----
-
 Compared to the name RoFormer, RoPE (Rotary Position Embedding) is more widely known. RoPE is the core concept of RoFormer, introducing a new method of positional encoding.
 
 ## Problem Definition
