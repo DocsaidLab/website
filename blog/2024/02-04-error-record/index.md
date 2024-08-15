@@ -91,3 +91,21 @@ description: 紀錄一些簡單問題和解法。
   ```shell
   Remove-Item "C:\ProgramData\chocolatey" -Recurse -Force
   ```
+
+## 4. 遠端機器埠口轉發
+
+- **描述：**
+
+  在遠端機器上啟動了一個服務，例如 TensorBoard，但是無法直接訪問，因此必須通過本地機器進行轉發。
+
+- **解決方法：**
+
+  假設服務運行在遠端機器的 6006 端口，本地機器想要訪問的端口也是 6006。
+
+  我們在使用 SSH 登入時，可以通過 `-L` 參數 進行端口轉發：
+
+  ```bash
+  ssh -L 6006:localhost:6006 user@remote_ip_address
+  ```
+
+  這樣本地機器就可以通過 `http://localhost:6006` 訪問遠端機器的 TensorBoard 服務了。
