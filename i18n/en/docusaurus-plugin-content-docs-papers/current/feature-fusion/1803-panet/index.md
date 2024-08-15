@@ -12,7 +12,7 @@ After the introduction of the classic FPN, the question of "how to achieve more 
 
 In the PANet paper, the primary comparison is with the FPN architecture. If you're not familiar with FPN, you can refer to:
 
-- **Portal: [FPN](../1612-fpn/index.md)**
+- [**[16.12] FPN: The Pyramid Structure**](../1612-fpn/index.md)
 
 Recall a key conclusion from FPN: "Bottom-up, top-down, then add."
 
