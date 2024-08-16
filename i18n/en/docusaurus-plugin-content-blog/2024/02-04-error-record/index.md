@@ -1,14 +1,10 @@
-Sure, here is the translated article in English:
-
 ---
-
 slug: error-record
 title: Daily Error Troubleshooting Log
 authors: Zephyr
 tags: [error, record]
-image: /img/2024/0204.webp
+image: /en/img/2024/0204.webp
 description: A log of simple issues and their solutions.
-
 ---
 
 <figure>
