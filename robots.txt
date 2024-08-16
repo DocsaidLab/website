@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /build/
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /private/
+Disallow: /drafts/
+Disallow: /search
+Allow: /
+Sitemap: https://docsaid.org/sitemap.xml
+Sitemap: https://docsaid.org/en/sitemap.xml
