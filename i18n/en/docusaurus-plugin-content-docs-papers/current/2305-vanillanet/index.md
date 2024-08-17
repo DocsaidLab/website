@@ -6,31 +6,25 @@
 
 ---
 
-In an era dominated by deep convolutional networks, it’s surprising to see a minimalist approach like VanillaNet emerge.
+Even after a decade of deep convolutional networks dominating the field, it's refreshing to see such a minimalist approach like VanillaNet emerge.
 
 ## Problem Definition
 
-The field of computer vision has seen tremendous progress over the past few years.
+In recent years, the field of computer vision has advanced rapidly. From the early days of AlexNet to the latest CNN and Transformer hybrid architectures, there's been a relentless push towards more complex models.
 
-From the early days of AlexNet to the latest hybrid architectures of CNNs and Transformers, the advancements have been rapid.
+To climb the ImageNet leaderboard, researchers have continuously increased model complexity, leading to a corresponding rise in computational costs and resource demands. Moreover, deploying these complex architectures has become increasingly challenging. For instance, ResNet consumes a significant amount of additional memory during operation, while the shifted window mechanism in Swin Transformer requires complex engineering solutions, including rewriting CUDA code.
 
-In the race to top the ImageNet leaderboard, researchers have continuously increased model complexity, leading to a significant rise in computational costs and resource demands.
+### Why Have Non-Residual Convolutional Architectures Fallen Out of Favor?
 
-Additionally, complex architectures pose deployment challenges. For instance, ResNet consumes a large amount of extra memory during operations, while Swin Transformers require intricate engineering implementations like re-writing CUDA code for shifted windows.
+Take AlexNet and VGG, for example.
 
-### Why Are Residual-Free Convolutional Architectures Overlooked?
+The reason is well understood: the issues of gradient vanishing and network degradation in deep network structures. The introduction of the residual structure by ResNet effectively addressed these problems, making non-residual architectures less competitive in terms of accuracy—a fact that cannot be ignored.
 
-Think AlexNet and VGG.
+As a result, simple network designs seemed to have hit a dead end, receiving little attention.
 
-The gradient vanishing problem in deep networks was effectively addressed by ResNet’s introduction of residual connections.
+However, with the continuous development of AI chips, modern GPUs can easily handle parallel computations, and the bottleneck in neural network inference speed is no longer FLOPs or parameter count. Instead, the complexity and depth of modern models have become the obstacles to speed.
 
-On the other hand, non-residual networks inherently lagged in accuracy, an unavoidable reality.
-
-Simple network designs seemed to hit a dead end, drawing little attention.
-
-With the continuous development of AI chips, the inference speed bottleneck for neural networks is no longer FLOPs or parameter counts, as modern GPUs can easily handle parallel computations with immense processing power.
-
-Ironically, the last bottleneck, unnoticed at the outset, turned out to be model complexity and depth.
+This realization brought about the insight that the ultimate bottleneck was destined from the start.
 
 ## Solution
 
@@ -38,124 +32,124 @@ Ironically, the last bottleneck, unnoticed at the outset, turned out to be model
 
 ![model arch](./img/img1.jpg)
 
-The authors of this paper propose a straightforward neural network architecture called VanillaNet, as illustrated above.
+The authors of this paper propose a simple neural network architecture called VanillaNet, as shown in the figure above.
 
-This architecture feels like a throwback to a decade ago:
+Looking at this architecture feels like a blast from the past:
 
 - AlexNet! What are you doing here?
 
 ---
 
-Unlike current deep networks, each down-sampling stage here consists of just a single layer.
+Unlike modern deep networks, each downsampling stage here consists of only **one layer**.
 
-In the Stem stage, a $4 \times 4 \times 3 \times C$ convolution layer with a stride of 4 maps the image to a $C$-dimensional feature space.
+In the Stem stage, the authors use a $4 \times 4 \times 3 \times C$ convolutional layer with a stride of 4 to map the image into a $C$-dimensional feature space.
 
-In stages 1 to 3, a MaxPool layer with a stride of 2 reduces the feature map size and doubles the channel count.
+In stages 1 to 3, a MaxPool layer with a stride of 2 is used to reduce the feature map size while doubling the number of channels.
 
-The final layer is a fully connected layer for output classification. Each convolution layer is $1 \times 1$ to minimize parameter counts. Each convolution layer is followed by an activation function, with BatchNorm applied to stabilize the training process.
+The final layer is a fully connected layer that outputs the classification result. Each convolutional layer is $1 \times 1$, minimizing the number of parameters. An activation function follows each convolutional layer, and BatchNorm is applied to stabilize the training process.
 
-There are no residual connections, attention mechanisms, or shifted windows—just basic convolutions and pooling.
+There are no residual connections, attention mechanisms, or shifted windows here—just basic convolution and pooling.
 
-### This Can’t Work, Right?
+### Does This Really Work?
 
-Such a simple architecture seems unlikely to perform well.
+How could such a straightforward architecture possibly perform well?
 
-The authors point out that this design lacks a critical element: non-linearity.
+The authors point out that this design lacks a crucial element: **non-linearity**.
 
-It’s well-known that the power of neural networks lies in their non-linearity, key to fitting complex functions.
+We know that the strength of neural networks lies in their non-linearity, which is key to fitting complex functions. How can we enhance the non-linear capacity of this network? We'll explore this later, but first, let's look at another issue: **depth**.
 
-### Deep Training Strategy
+### Depth Training Strategy
 
-In convolutional neural networks, the combination of convolution layers and activation functions is crucial for capturing data non-linearities.
+In convolutional neural networks, the combination of convolutional layers and activation functions is crucial for capturing the non-linear features of data.
 
-In the initial training phase, the authors use two convolution layers with activation functions to ensure strong non-linearity, enabling better feature learning from the data. As training progresses, the non-linearity of the activation functions is gradually reduced, eventually transforming them into an identity mapping.
+During the initial training stages, the authors use two convolutional layers with activation functions. This design aims to provide the network with strong non-linear capabilities at the start, enabling it to learn data features more effectively. As training progresses, the non-linearity of the activation functions is gradually reduced, eventually transforming them into an identity mapping.
 
-The change in activation function can be described by the following formula:
+The entire transformation of the activation function can be described by the following formula:
 
 $$
 A'(x) = (1 - \lambda)A(x) + \lambda x,
 $$
 
-where $\lambda$ is a hyperparameter varying with the number of training iterations. At the start of training, $\lambda = 0$, meaning $A'(x) = A(x)$, indicating full-strength activation. As training progresses, $\lambda$ increases until it reaches 1, turning the activation function into an identity mapping.
+where $\lambda$ is a hyperparameter that changes with training iterations. At the start of training, $\lambda = 0$, meaning $A'(x) = A(x)$, with the activation function at full strength. As training progresses, $\lambda$ gradually increases until, by the end of training, $\lambda = 1$, meaning $A'(x) = x$, and the activation function becomes an identity mapping.
 
-At the end of training, with activation functions transformed into identity mappings, the two convolution layers can be merged into one, reducing inference time and enhancing model efficiency. The merging process is akin to reparameterization:
+At the end of training, since the activation function has become an identity mapping, the two convolutional layers can be merged into a single layer, reducing inference time and improving model efficiency. The merging process is akin to reparameterization, familiar from models like RepVGG:
 
 - **BatchNorm Merging**:
 
-  First, merge each BatchNorm layer with its preceding convolution layer.
+  First, each BatchNorm layer is merged with the preceding convolutional layer.
 
-  Let the weights and bias matrices of the convolution layer be $W \in \mathbb{R}^{C_{out} \times C_{in} \times k \times k}$ and $B \in \mathbb{R}^{C_{out}}$, and the parameters (scale, shift, mean, and variance) of the BatchNorm layer be $\gamma, \beta, \mu, \sigma \in \mathbb{R}^{C_{out}}$.
+  Let the weight and bias matrices of the convolutional layer be $W \in \mathbb{R}^{C_{out} \times C_{in} \times k \times k}$ and $B \in \mathbb{R}^{C_{out}}$, and the parameters of batch normalization (scaling, shifting, mean, and variance) be $\gamma, \beta, \mu, \sigma \in \mathbb{R}^{C_{out}}$.
 
-  The merged weights and bias matrices are:
+  The merged weight and bias matrices are:
 
   $$
   W'_i = \frac{\gamma_i}{\sigma_i} W_i, \quad B'_i = \frac{(B_i - \mu_i) \gamma_i}{\sigma_i} + \beta_i,
   $$
 
-  where $i$ denotes the $i$-th output channel.
+  where the subscript $i$ represents the value of the $i$th output channel.
 
-- **Merging Two $1 \times 1$ Convolution Layers**:
+- **Merging Two $1 \times 1$ Convolutional Layers**:
 
-  After merging the BatchNorm layer, proceed to merge the two $1 \times 1$ convolution layers.
+  After merging the batch normalization layers, we proceed to merge the two $1 \times 1$ convolutional layers.
 
-  Given input $x \in \mathbb{R}^{C_{in} \times H \times W}$ and output $y \in \mathbb{R}^{C_{out} \times H' \times W'}$, convolution can be expressed as:
+  Let $x \in \mathbb{R}^{C_{in} \times H \times W}$ and $y \in \mathbb{R}^{C_{out} \times H' \times W'}$ be the input and output features, respectively. The convolution can be expressed as:
 
   $$
   y = W * x = W \cdot \text{im2col}(x) = W \cdot X,
   $$
 
-  where $*$ denotes the convolution operation, $\cdot$ denotes matrix multiplication, and $X$ is generated by the im2col operation, reshaping the input to match the shape of the convolution kernel. For $1 \times 1$ convolution, the im2col operation becomes a simple reshaping operation. Thus, the weight matrices $W_1$ and $W_2$ of the two convolution layers can be merged into one matrix:
+  where $*$ denotes the convolution operation, $\cdot$ denotes matrix multiplication, and $X$ is generated by the im2col operation, transforming the input into a matrix corresponding to the convolution kernel shape. For a $1 \times 1$ convolution, the im2col operation simplifies to a reshaping operation, so the weight matrices $W_1$ and $W_2$ of the two convolutional layers can be merged into one matrix:
 
   $$
-  y = W1 * (W2 * x) = W1 \cdot W2 \cdot \text{im2col}(x) = (W1 \cdot W2) * X,
+  y = W_1 * (W_2 * x) = W_1 \cdot W_2 \cdot \text{im2col}(x) = (W_1 \cdot W_2) * X,
   $$
 
-  Therefore, two $1 \times 1$ convolution layers can be merged without increasing inference time.
+  Thus, the two $1 \times 1$ convolutional layers can be merged without increasing inference speed.
 
-This deep training strategy offers several advantages:
+This depth training strategy offers several advantages:
 
-1. **Enhanced Model Non-linearity**: Using strong non-linear activation functions at the start helps the model capture complex patterns in the data, improving performance.
-2. **Gradual Transition to Simplified Model**: As training progresses, activation functions gradually turn into identity mappings, simplifying the final model structure and boosting inference speed.
-3. **Convenient Layer Merging**: At the end of training, two convolution layers can be easily merged into one, reducing computational costs and improving efficiency.
+1. **Enhanced Non-linearity**: Using strong non-linear activation functions in the early training stages helps the model capture complex patterns in the data, improving performance.
+2. **Gradual Transition to a Simplified Model**: As training progresses, the activation functions gradually become identity mappings, simplifying the final model structure and improving inference speed.
+3. **Easy Layer Merging**: At the end of training, the two convolutional layers can be easily merged into one, reducing computational costs and improving efficiency.
 
 :::tip
-The reparameterization process is conceptually similar to RepVGG.
+The reparameterization process is similar to the concept seen in RepVGG.
 
 - [**RepVGG: Making VGG Great Again**](../2101-repvgg/index.md)
   :::
 
 ### Series-Informed Activation Functions
 
-Existing research shows that the limited capability of simple and shallow networks primarily stems from their "insufficient non-linearity," a topic less explored compared to deep and complex networks.
+According to existing research, the limited capabilities of simple and shallow networks are primarily due to insufficient non-linearity, which contrasts with deep and complex networks. This area remains underexplored.
 
 In fact, there are two ways to enhance the non-linearity of neural networks:
 
 1. **Stacking Non-linear Activation Layers**
 2. **Increasing the Non-linearity of Each Activation Layer**
 
-Current network trends favor the former, which can lead to high latency when parallel computing capacity is ample.
+Current trends in network design favor the former approach, but this leads to high latency when parallel computing capacity is abundant.
 
 ---
 
-A straightforward idea to enhance activation layer non-linearity is stacking. The "serial" stacking of activation functions is the core idea of deep networks.
+A direct way to enhance the non-linearity of an activation layer is to stack it. The "serial" stacking of activation functions is the core idea of deep networks.
 
-In contrast, the authors choose "parallel" stacking of activation functions.
+In contrast, the authors of this paper chose to "parallelize" the stacking of activation functions.
 
-Given a single activation function $A(x)$ in a neural network, which can be a common ReLU or Tanh function, the parallel stacking of activation functions can be expressed as:
+Let a single activation function in a neural network be $A(x)$, which could be a common function like ReLU or Tanh.
+
+Parallel stacking of activation functions can be expressed as:
 
 $$
 A_s(x) = \sum_{i=1}^{n} a_i A(x + b_i)
 $$
 
-where $n$ is the number of stacked activation functions, and $a_i$ and $b_i$ are the scaling and shifting factors for each activation function. This parallel stacking significantly enhances the non-linearity of the activation function, and the above equation can be mathematically viewed as a series, essentially a summation of multiple quantities.
+where $n$ represents the number of stacked activation functions, and $a_i$ and $b_i$ are the scaling and bias for each activation function. Parallel stacking significantly enhances the non-linearity of the activation function, and the above equation can be seen as a series, essentially a sum of several operations.
 
----
-
-To further enhance the series' approximation capability, the authors allow "series-based functions to learn global information by varying their input neighborhood," similar to the BNET concept.
+To further enhance the series' approximation ability, the authors ensure that "**the series-based functions can learn global information by varying their input neighborhoods**," which aligns with the concept of BNET.
 
 - [**[23.01] BNET: Batch normalization with enhanced linear transformation**](https://ieeexplore.ieee.org/document/10012548)
 
-Specifically, given the input feature $x \in \mathbb{R}^{H \times W \times C}$, where $H$, $W$, and $C$ are the height, width, and channel count, respectively, the activation function is expressed as:
+Given an input feature $x \in \mathbb{R}^{H \times W \times C}$, where $H$, $W$, and $C$ are the height, width, and channels, respectively, the activation function is expressed as:
 
 $$
 A_s(x_{h,w,c}) = \sum_{i,j \in \{-n, n\}} a_{i,j,c} A(x_{i+h,j+w,c} + b_c)
@@ -163,9 +157,18 @@ $$
 
 where $h \in \{1, 2, ..., H\}$, $w \in \{1, 2, ..., W\}$, and $c \in \{1, 2, ..., C\}$.
 
-It can be seen that when $n = 0$, the series-based activation function $A_s(x)$ degenerates into the regular activation function $A(x)$, indicating that this method can be viewed as a universal extension of existing activation functions. In the paper, the authors use ReLU as the base activation function for constructing the series due to its high inference efficiency on GPUs.
+It can be seen that when $n = 0$, the series-based activation function $A_s(x)$ reduces to the ordinary activation function $A(x)$, meaning this method can be considered a general extension of existing activation functions. In the paper, the authors use ReLU as the base activation function to construct the series, due to its high inference efficiency on GPUs.
 
-To clearly understand this concept, let’s look at the implementation that uses convolution operations to realize parallel stacking of activation functions:
+:::tip
+Let's pause here for a moment. If you're reading the paper, you might find this explanation a bit abstract.
+
+Simply put, in common network designs, assume we have a $3 \times 3$ convolutional layer followed by a ReLU. At this point, the receptive field of ReLU is $3 \times 3$. Next, there's another $3 \times 3$ convolutional layer followed by another ReLU, giving it a receptive field of $5 \times 5$, and so on as it "serially" goes deeper.
+
+So, what does "parallel" stacking of activation functions mean?
+
+It means we directly "increase" the size of the convolution kernel to enlarge the receptive field. Stacking one layer is equivalent to using a $3 \times 3$ convolution; stacking two layers is equivalent to a $5 \times 5$ convolution; stacking three layers is equivalent to a $7 \times 7$ convolution, and so on.
+
+We can look at the implementation to understand this concept better:
 
 ```python
 # Ref: VanillaNet
@@ -199,66 +202,72 @@ class activation(nn.ReLU):
                 self.weight, padding=self.act_num, groups=self.dim))
 ```
 
+If you look directly at `def forward(self, x):`, it first applies a ReLU activation function to the input, followed by a convolution operation using `nn.functional.conv2d`. The convolution kernel for this operation is `self.weight`, and its size is `act_num*2 + 1`, meaning it has stacked `act_num` layers of activation functions.
+
+Finally, all these operations are performed channel-wise, as indicated by the `groups=self.dim` parameter. This parameter in PyTorch's `groups` specifies independent convolution operations for each channel.
+
+:::
+
 ## Discussion
 
-Earlier, it was mentioned that the limited capability of shallow networks is primarily due to their "insufficient non-linearity." Now, with the addition of parallel stacked activation functions, can this design improve the model’s performance?
+Earlier, we mentioned that the limited capabilities of shallow networks are mainly due to "insufficient non-linearity." With the introduction of parallel stacking of activation functions, can this design improve the model's performance?
 
-### Ablation Study - Activation Functions
+### Ablation Study - Activation Function
 
 ![ablation](./img/img4.jpg)
 
 The table above shows the performance of VanillaNet with different values of $n$.
 
-The original network structure could only achieve 60.53% accuracy on the ImageNet dataset, which is not practical for real-world applications.
+The original network structure only achieves 60.53% accuracy on the ImageNet dataset, which is insufficient for practical applications.
 
-When $n = 1$, the accuracy jumps to 74.53%, marking a significant improvement. With $n = 3$, the accuracy and inference speed reach an optimal balance.
+When $n = 1$, the accuracy jumps to 74.53%, marking a significant improvement. When $n = 3$, the accuracy and inference speed reach an optimal balance.
 
-### Ablation Study - Deep Training Strategy
+### Ablation Study - Depth Training Strategy
 
 ![ablation_2](./img/img5.jpg)
 
-Given the very shallow structure of VanillaNet, the authors proposed increasing non-linearity during training to enhance its performance.
+Given the extremely shallow structure of VanillaNet, the authors propose increasing non-linearity during training to enhance performance.
 
-The table above analyzes the effectiveness of the proposed deep training technique, showing that the original VanillaNet achieves 75.23% top-1 accuracy, serving as a baseline. With the deep training technique, VanillaNet reaches 76.36% accuracy. These results demonstrate the usefulness of the proposed deep training technique for shallow networks.
+The table above analyzes the effectiveness of the proposed depth training technique. The results show that the original VanillaNet achieved a top-1 accuracy of 75.23%, which serves as the baseline. By using the depth training technique, the proposed VanillaNet reached 76.36% accuracy. These results indicate that the depth training technique is beneficial for shallow networks.
 
-Additionally, the authors applied deep training and series-informed activation functions to other networks to showcase the generalizability of these techniques.
+Additionally, the authors further applied the depth training and series-informed activation functions to other networks to demonstrate the generalization ability of these two techniques.
 
-The table reports results on the ImageNet dataset for two classic deep networks: AlexNet and ResNet-50. The original AlexNet achieves only 57.52% accuracy (with a 12-layer structure).
+The table reports results on the ImageNet dataset for two classic deep neural networks: AlexNet and ResNet-50. The original AlexNet could only achieve 57.52% accuracy (12-layer structure).
 
-By applying the proposed deep training and series-informed activation functions, AlexNet’s performance improves significantly by about 6%, indicating the techniques’ effectiveness for shallow networks.
+By applying the proposed depth training and series-informed activation functions, AlexNet's performance improved by about 6%, demonstrating that these techniques are highly effective for shallow networks.
 
-For the relatively complex ResNet-50, the performance improvement is minor, suggesting that deep and complex networks already have sufficient non-linearity, rendering additional techniques unnecessary.
+For the relatively complex ResNet-50, the performance improvement was smaller. This result suggests that deep and complex networks already possess sufficient non-linearity, making additional techniques unnecessary.
 
 ### Ablation Study - Residual Connections
 
 ![ablation_3](./img/img6.jpg)
 
-Finally, how do residual connections, popular in general network structures, perform here?
+Finally, how effective are the residual connections popular in general network structures?
 
-Experiments show that residual connections do not improve performance in shallow network structures and can even decrease accuracy.
+The authors demonstrated through experiments that using residual connections in shallow network structures does not improve performance and can actually decrease accuracy.
 
-A straightforward explanation is that shallow networks’ bottleneck is not identity mapping but "weak non-linearity." Thus, shortcuts do not enhance non-linearity since residual connections skip activation functions to reduce depth, leading to performance degradation.
+A straightforward explanation is that the bottleneck in shallow networks is not identity mapping but rather "weak non-linearity." Therefore, shortcuts do not help improve non-linearity, as residual connections skip activation functions to reduce depth, leading to decreased performance.
 
 ### Performance on ImageNet
 
 ![imagenet_1](./img/img2.jpg)
 
-To demonstrate the effectiveness of the proposed method, the authors conducted experiments on the ImageNet dataset.
+To demonstrate the effectiveness of the proposed methods, the authors conducted experiments on the ImageNet dataset.
 
-This dataset consists of 224 × 224-pixel RGB color images, with 1.28 million training images and 50,000 validation images covering 1,000 categories. They employed strong regularization, as each layer in the proposed VanillaNet has numerous parameters to capture useful information from images with limited non-linearity.
+This dataset consists of RGB color images with a resolution of 224 × 224 pixels, comprising 1.28 million training images and 50,000 validation images across 1,000 categories. They employed strong regularization because VanillaNet has a large number of parameters in each layer, allowing it to capture useful information from images with limited non-linearity.
 
-Latency tests were conducted on Nvidia A100 GPUs, and the authors proposed various VanillaNet architectures with different depths. To verify these architectures' performance, they tested with a batch size of 1, indicating that AI chips have enough computing power to handle each network.
+The latency tests were conducted on an Nvidia A100 GPU, and the authors proposed VanillaNet architectures with different numbers of layers. To validate the performance of these architectures, they tested with a batch size of 1, meaning the AI chip had enough computational power to handle each network.
 
-In this setup, they found that inference speed has little to do with the number of FLOPs and parameters. For instance, while MobileNetV3-Large has very low FLOPs (0.22B), its GPU latency is 7.83ms, even higher than VanillaNet-13 with 11.9B FLOPs.
+In this scenario, the study found that inference speed had little correlation with the number of FLOPs and parameters. For example, although MobileNetV3-Large has very low FLOPs (0.22B), its GPU latency is 7.83ms, even higher than that of VanillaNet-13, which has 11.9B FLOPs.
 
-The research shows that inference speed is highly related to network complexity and depth in this setup. For example, the inference speed difference between ShuffleNetV2x1.5 and ShuffleNetV2x2 is minimal (7.23ms vs. 7.84ms), despite their significant differences in parameter count and FLOPs (0.3B vs. 0.6B) because their difference is mainly in channel count.
+The study shows that under these settings, inference speed is highly related to the complexity and number of layers in the network. For instance, the inference speed difference between ShuffleNetV2x1.5 and ShuffleNetV2x2 is minimal (7.23ms and 7.84ms), despite a significant difference in their parameter count and FLOPs (0.3B vs. 0.6B). This is because the difference lies only in the number of channels.
 
-The study also reveals that simple architectures, including ResNet, VGGNet, and VanillaNet, achieve the highest inference speed without additional branches and complex blocks like squeeze-and-excitation blocks or dense connections.
+The study also found that simple architectures, including ResNet, VGGNet, and VanillaNet, achieve the fastest inference speeds without needing additional branches or complex blocks (such as squeeze-and-excitation blocks or dense connections).
 
 ![imagenet_2](./img/img3.jpg)
 
 ## Conclusion
 
-VanillaNet, with its superior efficiency and accuracy, surpasses contemporary networks, highlighting the potential of minimalistic approaches in deep learning.
+VanillaNet outperforms contemporary networks in efficiency and accuracy, highlighting the potential of minimalist approaches in deep learning.
 
-This groundbreaking research paves the way for new directions in neural network design, challenging established norms of foundational models and setting new trajectories for fine and efficient model architectures.
+This research challengs established norms of foundational models and setting a new trajectory for refined and efficient model architectures.
