@@ -14,23 +14,7 @@ If you've been an engineer for many years, you probably understand this sentimen
 
 In our usual development projects, we tend to focus on practical issues like performance, stability, and maintainability. Therefore, the technologies and tools we use are relatively fixed and don't change much. Furthermore, a significant amount of our time and mental energy is consumed by communicating with clients, leaving us exhausted and with little energy to keep up with new technologies.
 
-Before we know it, several years have passed.
-
-Our knowledge quietly becomes outdated, but we have no time to learn because the next requirement is already here.
-
-＊
-
-Why do we often say that an engineer's career lifespan is short?
-
-Because the iteration cycle of knowledge is about three to five years. Once we've missed two cycles, we're likely to be on the path to retirement.
-
-＊
-
-Let's circle back to the beginning.
-
-In our daily work, finding time to read papers is a truly enjoyable experience.
-
-Unlike researchers who are constantly stressed about their paper deadlines, we can simply gain insights into the challenges and efforts of researchers through their papers, as well as the latest academic advancements.
+Being able to take some time out of our daily work to read a paper is a rare and leisurely pleasure. We don't have to be like those researchers who are stressed out every day about the progress of their papers. Just by reading the papers, we can understand the difficulties and efforts of the researchers, as well as the latest academic developments.
 
 The truths of this universe lie in the minute observations within each paper. These observations might be incorrect, biased, or merely wishful thinking by the researchers, but they could also hit the core of the matter. These are all essential steps in the pursuit of truth.
 
