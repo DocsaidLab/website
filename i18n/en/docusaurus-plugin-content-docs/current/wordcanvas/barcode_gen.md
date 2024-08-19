@@ -113,3 +113,9 @@ gen = Code128Generator()
 ```
 
 ![code128 example 1](./resources/code128_example_1.jpg)
+
+## Conclusion
+
+With this feature, we can train a model to locate and decode barcodes in the future.
+
+Although this feature may sound useless, it's still a good exercise for practicing.

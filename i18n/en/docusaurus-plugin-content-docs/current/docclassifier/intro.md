@@ -98,19 +98,19 @@ Although not every classification problem is suitable for elevating to the level
 
 - **Obstacle 1: Class Definition**
 
-    Our goal is to learn a better distance function that can help us distinguish similar categories more effectively. So, we no longer need to define categories. The objects we want to classify will ultimately become a registration data.
+  Our goal is to learn a better distance function that can help us distinguish similar categories more effectively. So, we no longer need to define categories. The objects we want to classify will ultimately become a registration data.
 
 - **Obstacle 2: Class Data Imbalance**
 
-    We no longer need to collect a large amount of data because our model no longer relies on a large number of samples. We only need one sample, which is our registration data. The rest can be trained using other training data.
+  We no longer need to collect a large amount of data because our model no longer relies on a large number of samples. We only need one sample, which is our registration data. The rest can be trained using other training data.
 
 - **Obstacle 3: Class Expansion**
 
-    Expanding classes only requires registering new data, without the need to retrain the model. This design can significantly reduce the training cost.
+  Expanding classes only requires registering new data, without the need to retrain the model. This design can significantly reduce the training cost.
 
 - **Obstacle 4: Class Sub-labels**
 
-    This problem can be well addressed within the framework of metric learning. We can treat sub-labels as new registration data, which will not affect the original model. The distance between sub-labels and main labels in the feature space may be very close, but not exactly the same, thus effectively distinguishing between these two categories.
+  This problem can be well addressed within the framework of metric learning. We can treat sub-labels as new registration data, which will not affect the original model. The distance between sub-labels and main labels in the feature space may be very close, but not exactly the same, thus effectively distinguishing between these two categories.
 
 ---
 
@@ -132,4 +132,4 @@ During our development process, we often exclaimed, "Can we really do this?" As 
 
 Compared to our previously released "conventional" projects, this project is full of fun.
 
-Therefore, we decided to make the architecture and experimental results of this project public. This will also be our "only" project where we publicly release trained models. We hope this project can bring you some inspiration. If you can find new application scenarios from the design principles of this project, you're welcome to share them with us.
+Therefore, we decided to make the architecture and experimental results of this project public. We hope this project can bring you some inspiration. If you can find new application scenarios from the design principles of this project, you're welcome to share them with us.

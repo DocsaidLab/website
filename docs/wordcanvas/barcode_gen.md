@@ -113,3 +113,9 @@ gen = Code128Generator()
 ```
 
 ![code128 example 1](./resources/code128_example_1.jpg)
+
+## 總結
+
+有了這個功能，我們之後就可以用來訓練一個條碼定位和解析的模型了。
+
+雖然這種功能聽起來很沒用，但是用來練練手感還是挺不錯的。
