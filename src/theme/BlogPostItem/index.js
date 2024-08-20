@@ -1,4 +1,4 @@
-import { useBlogPost } from '@docusaurus/theme-common/internal';
+import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
 import BackToTopButton from '@theme/BackToTopButton';
 import BlogPostItemContainer from '@theme/BlogPostItem/Container';
 import BlogPostItemContent from '@theme/BlogPostItem/Content';
