@@ -16,6 +16,8 @@ description: Running automatically with Ubuntu Systemd.
 
 In our collaborative work using GitHub, we often utilize private hosts for CI/CD tasks. While GitHub provides documentation on how to install runners, following those steps might lead to instances where the host is rebooted, but the runner fails to start again.
 
+<!-- truncate -->
+
 This issue often slips through the cracks until someone notices the CI/CD isn't responding, prompting the reminder to manually start the service.
 
 **This cycle of forgetfulness is disruptive!**

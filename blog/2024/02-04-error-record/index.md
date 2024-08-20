@@ -20,6 +20,8 @@ description: 紀錄一些簡單問題和解法。
 本文章會持續更新。
 :::
 
+<!-- truncate -->
+
 ## 1. 執行 `npx docusaurus start` 時出現以下錯誤
 
 - **錯誤訊息：**

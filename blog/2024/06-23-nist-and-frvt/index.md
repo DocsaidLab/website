@@ -22,6 +22,8 @@ description: An brief introduction to NIST and FRVT.
 
 作為一個非盈利機構，NIST 的使命是通過制定標準、進行科學研究和技術開發，推動美國在科學與技術領域的創新與競爭力，從而促進經濟安全並提升國民生活品質。
 
+<!-- truncate -->
+
 ## NIST 的核心任務與價值
 
 NIST 的核心任務主要包括：

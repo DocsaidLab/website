@@ -16,6 +16,8 @@ description: Quick reference guide for LaTeX syntax
 
 Every time you need it, it's always a hassle to find, so we decided to write a LaTeX syntax quick reference table.
 
+<!-- truncate -->
+
 | **Category**             | **Description**                  |                   **Syntax**                   |                  **Output**                   |
 | ------------------------ | -------------------------------- | :--------------------------------------------: | :-------------------------------------------: |
 | **Text Styles**          | Bold                             |                 `\textbf{AB}`                  |                 $\textbf{AB}$                 |

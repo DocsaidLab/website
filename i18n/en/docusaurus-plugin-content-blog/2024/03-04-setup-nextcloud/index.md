@@ -20,6 +20,8 @@ However, one day, the download command suddenly stopped working.
 
 So, I decided to give Nextcloud a try.
 
+<!-- truncate -->
+
 Below, we'll go through the setup process based on Ubuntu 22.04.
 
 :::tip

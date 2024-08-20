@@ -16,6 +16,8 @@ description: Configuring VPN routing on Mac.
 
 When working from home using a company-configured VPN, it's common to still need access to other local machines. For instance:
 
+<!-- truncate -->
+
 - Company VPN subnet: 192.168.25.XXX
 - Home subnet: 192.168.1.XXX
 

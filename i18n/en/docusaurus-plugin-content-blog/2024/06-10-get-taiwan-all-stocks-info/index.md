@@ -18,6 +18,8 @@ The stock codes in the Taiwanese market change periodically, making manual track
 
 It's time to automate!
 
+<!-- truncate -->
+
 ## Setup Environment
 
 Let's tackle the challenge by writing a program. First, install the necessary packages:

@@ -18,6 +18,8 @@ Not long ago, my VSCode settings disappeared for some unknown reason. It took me
 
 However, it gave me the opportunity to review my settings and document some commonly used configurations.
 
+<!-- truncate -->
+
 ## Configuration Settings
 
 ```json

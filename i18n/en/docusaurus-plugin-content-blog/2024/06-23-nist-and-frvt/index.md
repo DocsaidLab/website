@@ -20,6 +20,8 @@ description: A brief introduction to NIST and FRVT.
 
 The National Institute of Standards and Technology (NIST) was founded in 1901 and is part of the United States Department of Commerce.
 
+<!-- truncate -->
+
 As a non-profit organization, NIST's mission is to advance U.S. innovation and competitiveness in science and technology through the development of standards, scientific research, and technology development, thereby promoting economic security and enhancing the quality of life.
 
 ## Core Missions and Values of NIST

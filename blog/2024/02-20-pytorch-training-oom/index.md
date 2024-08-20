@@ -18,7 +18,7 @@ description: 發現與解決 PyTorch OOM 問題。
 
 怎麼可能還會寫出 OOM（Out of Memory）的程式呢？
 
----
+<!-- truncate -->
 
 - 請注意，這裡我們講的是系統的記憶體，不是 GPU 的記憶體。
 - 當然，GPU 的記憶體也是一個常見的問題，但這裡我們不談這個。

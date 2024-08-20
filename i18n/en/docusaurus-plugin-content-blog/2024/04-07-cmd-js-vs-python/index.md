@@ -16,6 +16,8 @@ description: Mapping basic cmds between Py and JS.
 
 Python has been my go-to language, with commonly used commands like `pip` and `python -m`. However, delving into JavaScript recently, I've encountered analogous functionalities through commands like `npm`, `npx`, and `nvm`.
 
+<!-- truncate -->
+
 I'm interested in aligning these commands, hoping it might ease the transition into new skills.
 
 ## npm vs. pip

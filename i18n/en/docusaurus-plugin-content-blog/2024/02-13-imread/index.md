@@ -16,6 +16,8 @@ description: Optimizing imread for reading HEIC images!
 
 When you want to read an image, you might use the `imread` function from OpenCV. This function is very convenient as it can read various image formats and directly load the image into a `numpy.ndarray` variable. However, this function is not always universal, and you may encounter some issues.
 
+<!-- truncate -->
+
 ## Basic Usage
 
 The basic usage of the `imread` function is straightforward; you just need to pass the path to the image:

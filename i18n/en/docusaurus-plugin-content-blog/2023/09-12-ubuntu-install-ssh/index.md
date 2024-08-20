@@ -16,6 +16,8 @@ description: Tutorial on configuring ssh server.
 
 SSH (Secure Shell) is a network protocol that allows users to securely access and manage remote servers.
 
+<!-- truncate -->
+
 This guide will walk you through setting up passwordless login.
 
 ## 1. Install OpenSSH Server

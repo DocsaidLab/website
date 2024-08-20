@@ -18,7 +18,7 @@ description: Setting up Python on Windows.
 
 可真是久違了！距離上次使用 Windows 已經有好幾年了。
 
-＊
+<!-- truncate -->
 
 我們先嘗試了幾個方法，最後決定使用 PowerShell 來配置 Python 環境。
 

@@ -16,6 +16,8 @@ description: RTF8207W account and password.
 
 Today, we're going to talk about logging into Chunghwa Telecom's little turtle, the RTF8207W modem.
 
+<!-- truncate -->
+
 First off, the actual device doesn't look anything like the cover image; that's just a figment of GPT's imagination.
 
 But I digress, let's get back to it:

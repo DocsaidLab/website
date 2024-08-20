@@ -16,6 +16,8 @@ description: A tool worth learning how to use.
 
 Docker technology has been extensively employed in deployment and management, allowing developers to package applications and their dependencies together to ensure consistent operation across different environments.
 
+<!-- truncate -->
+
 ## Common Issues
 
 However, with frequent use, you can't escape encountering a few common problems.

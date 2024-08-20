@@ -16,6 +16,8 @@ description: Using open-source library pdf2image.
 
 In daily office tasks or academic endeavors, whether it's for conveniently sharing information or integrating document content into presentations, there's often a need to convert PDF files into image formats.
 
+<!-- truncate -->
+
 Here, we recommend a handy Python module: [pdf2image](https://github.com/Belval/pdf2image/tree/master), which can convert PDF files into PIL images.
 
 This tutorial will guide you on how to install and use this package.

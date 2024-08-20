@@ -20,6 +20,8 @@ description: 記錄 Ubuntu 上搭建 PyPiServer 的過程。
 
 我們假設你已經在 Ubuntu 上安裝了 Docker，並且已經熟悉了 Docker 的基本操作。
 
+<!-- truncate -->
+
 ## 1. 拉取 pypiserver 的 Docker 映像
 
 ```bash

@@ -16,6 +16,8 @@ description: Setting up PyPiServer on Ubuntu using Docker.
 
 As the Python community continues to evolve, many developers and teams opt to establish their own private Python package index servers to store and manage their Python packages. This not only provides better version control but also ensures the security of software packages.
 
+<!-- truncate -->
+
 In this article, we'll use Docker to set up a PyPi Server and run it on Ubuntu.
 
 We assume you've already installed Docker on Ubuntu and are familiar with basic Docker operations.

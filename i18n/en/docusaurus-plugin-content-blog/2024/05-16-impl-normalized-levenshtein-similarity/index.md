@@ -16,6 +16,8 @@ description: Average Normalized Levenshtein Similarity
 
 Average Normalized Levenshtein Similarity, abbreviated as ANLS, is a metric used to compute the similarity between two strings.
 
+<!-- truncate -->
+
 In natural language processing (NLP), it's often necessary to compare the similarity of two strings.
 
 Levenshtein Similarity is a common measure that assesses the "edit distance" between two strings, which is the minimum number of single-character edits (insertions, deletions, or substitutions) required to change one string into the other. However, Levenshtein Similarity itself isn't intuitive as it depends on the lengths of the strings.

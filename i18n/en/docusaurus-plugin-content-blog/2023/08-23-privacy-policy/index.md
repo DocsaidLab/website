@@ -9,6 +9,8 @@ description: Privacy Policy
 
 Welcome to DOCSAID, hereinafter referred to as the Website. We value your privacy and are committed to protecting your personal information. Please read the following Privacy Policy carefully before using this website to understand our information collection, use, and protection practices.
 
+<!-- truncate -->
+
 ## 1. Scope of Application
 
 This Privacy Policy applies to all instances where you visit the Website, use our services, and engage in related interactions. Please note that this policy does not cover external links that may be included within this Website, nor does it apply to third-party websites not commissioned or managed by us. We recommend reading the privacy policies of other websites before accessing them to ensure you understand how they handle your personal information.

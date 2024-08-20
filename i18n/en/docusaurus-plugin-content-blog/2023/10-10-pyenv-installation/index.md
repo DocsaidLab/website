@@ -18,6 +18,8 @@ In earlier years, Conda was predominantly used for managing Python environments.
 
 This article aims to document the installation and usage of pyenv.
 
+<!-- truncate -->
+
 ## Prerequisites
 
 Before installing `pyenv`, ensure that `Git` is installed on your system.

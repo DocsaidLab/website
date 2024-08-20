@@ -20,6 +20,8 @@ description: 使用開源套件 pdf2image 來解決問題。
 
 這篇教學將引導你如何安裝並使用這個套件。
 
+<!-- truncate -->
+
 ## 安裝依賴
 
 `pdf2image` 依賴於 `pdftoppm` 和 `pdftocairo`，不同作業系統的安裝方式略有不同：

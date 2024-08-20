@@ -16,6 +16,8 @@ description: Unicode Table for easy reference.
 
 Unicode is an international character encoding standard maintained by the non-profit organization Unicode Consortium. The standard aims to unify most of the world's writing systems to facilitate information exchange across platforms and languages. Unicode is an implementation of the ISO/IEC 10646 standard and has become a global universal character set.
 
+<!-- truncate -->
+
 In the Unicode standard, each character corresponds to a unique numerical code called a "code point." Code points are a crucial concept in Unicode, used to determine the position of each distinct character.
 
 The Unicode code point range extends from U+0000 to U+10FFFF, meaning it can accommodate 1,114,112 different characters. These ranges are divided into various subsets based on different functionalities and purposes, such as:

@@ -16,6 +16,8 @@ description: Setting up Python on Windows.
 
 It's been a while since I worked on a project that required development on a Windows system.
 
+<!-- truncate -->
+
 It feels like ages! It's been several years since I last used Windows.
 
 ＊

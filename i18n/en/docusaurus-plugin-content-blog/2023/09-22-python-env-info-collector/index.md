@@ -16,6 +16,8 @@ description: A custom logging tool.
 
 When a model's training goes awry, we always want to know the reasons behind it. At such times, it's essential to inspect the environment information of the training host, such as Python version, PyTorch version, CUDA version, GPU information, CPU information, RAM information, disk information, IP address, and more.
 
+<!-- truncate -->
+
 In this article, we share a custom Python tool we've crafted to swiftly review this information. While it's not exhaustive, it should suffice for basic troubleshooting needs.
 
 Typically, we record environment information in the training host's logs at the start of training.

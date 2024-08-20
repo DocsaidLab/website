@@ -18,6 +18,8 @@ description: 把 Python 與 JS 的基本指令進行類似的對應。
 
 我想試著對應這些指令，或許能更容易地轉換新技能。
 
+<!-- truncate -->
+
 ## npm 與 pip
 
 :::tip

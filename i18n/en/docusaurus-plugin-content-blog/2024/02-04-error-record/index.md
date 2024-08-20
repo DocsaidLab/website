@@ -16,6 +16,8 @@ description: A log of simple issues and their solutions.
 
 We often encounter various issues. Some of these problems are self-inflicted, some are caused by others, and some are beyond our control. Here, I document some simple problems and their solutions.
 
+<!-- truncate -->
+
 :::tip
 This article will be continuously updated.
 :::

@@ -18,6 +18,8 @@ description: Get Taiwan all stocks info from TWSE by Python.
 
 所以我們需要自動化！
 
+<!-- truncate -->
+
 ## 安裝環境
 
 遇到困難就自己寫個程式吧，首先安裝必要的套件：

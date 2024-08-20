@@ -18,6 +18,8 @@ Average Normalized Levenshtein Similarity，簡稱 ANLS，是一種用於計算�
 
 在自然語言處理（NLP）中，我們經常需要比較兩個字符串的相似性。
 
+<!-- truncate -->
+
 Levenshtein Similarity 是一種常見的度量方法，它衡量了兩個字符串之間的「**編輯距離**」，即通過多少次插入、刪除或替換操作可以將一個字符串轉換為另一個字符串。然而，Levenshtein Similarity 本身並不直觀，因為它取決於字符串的長度。
 
 為了解決這個問題，我們可以將 Levenshtein Similarity 標準化為 [0, 1] 區間，這樣我們就可以更容易地理解和比較不同字符串之間的相似性，稱為 Normalized Levenshtein Similarity（NLS）。

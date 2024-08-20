@@ -20,6 +20,8 @@ description: 記錄 Ubuntu 22.04 上搭建 Nextcloud 的過程。
 
 既然如此，那我們來試試看 Nextcloud。
 
+<!-- truncate -->
+
 以下我們基於 Ubuntu 22.04 來進行相關配置。
 
 :::tip

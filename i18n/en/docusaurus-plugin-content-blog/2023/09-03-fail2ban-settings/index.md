@@ -16,6 +16,8 @@ description: Keeping the malicious out.
 
 As soon as you successfully open an external SSH channel, you'll notice a barrage of malicious connections attempting to log into your host.
 
+<!-- truncate -->
+
 A fundamental approach is to activate firewall blocking. Let's set it up quickly:
 
 - Malicious Attack Illustration
