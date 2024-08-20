@@ -10,10 +10,20 @@ This page is solely used to document our work content.
 
 ## 2024
 
+### August
+
+- Updated **@docusaurus/core@3.5.2** and found that it is not backward compatible...
+  - Spent some time updating the erroneous code blocks.
+- Determined to troubleshoot OpenCV dependency issues, discovered that we are not the only victims:
+  - [**修复 OpenCV 依赖错误的小工具：OpenCV Fixer**](https://soulteary.com/2024/01/07/fix-opencv-dependency-errors-opencv-fixer.html)
+  - Open-source project: [**soulteary/opencv-fixer**](https://github.com/soulteary/opencv-fixer/tree/main)
+  - Thanks to [**蘇洋博客**](https://soulteary.com/) for sharing, saving us a lot of time.
+
 ### July
 
-- Continuing the paper marathon from last month, we continue to write paper introductions, writing about 50 articles in total... (feeling tired)
+- Continued the paper marathon from last month, writing about 50 articles in total...
   - Completion: 153 %
+  - Emm...Feeling very tired
 - MRZScanner: Started development.
 
 ### June

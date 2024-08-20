@@ -14,10 +14,20 @@ sidebar_position: 10
 
 ## 2024
 
+### 8 月
+
+- 更新 **@docusaurus/core@3.5.2**，發現居然沒有向下相容......
+  - 只好花點時間去更新錯誤程式區塊。
+- 下定決心來排查 OpenCV 的依賴問題，發現我們不是唯一的受害者：
+  - [**修复 OpenCV 依赖错误的小工具：OpenCV Fixer**](https://soulteary.com/2024/01/07/fix-opencv-dependency-errors-opencv-fixer.html)
+  - 開源專案：[**soulteary/opencv-fixer**](https://github.com/soulteary/opencv-fixer/tree/main)
+  - 謝謝[**蘇洋博客**](https://soulteary.com/)的分享，讓我們省下了不少時間。
+
 ### 7 月
 
-- 延續上個月的論文馬拉松，我們持續撰寫論文導讀，前前後後大概寫了 50 篇了吧...(覺得累)
+- 延續上個月的論文馬拉松，我們持續撰寫論文導讀，前前後後大概寫了 50 篇了吧...
   - 完成度：153 %
+  - 覺得好累
 - MRZScanner：開始進行開發。
 
 ### 6 月
