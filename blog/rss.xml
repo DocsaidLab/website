@@ -1004,6 +1004,199 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <category>container</category>
         </item>
         <item>
+            <title><![CDATA[買電腦紀錄]]></title>
+            <link>https://docsaid.org/blog/buy-a-new-computer</link>
+            <guid>https://docsaid.org/blog/buy-a-new-computer</guid>
+            <pubDate>Thu, 12 Oct 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[記錄組裝電腦的過程。]]></description>
+            <content:encoded><![CDATA[<figure><p><img decoding="async" loading="lazy" alt="title" src="https://docsaid.org/assets/images/1012-0f738b6dff0b18404e41f6e2d9c58969.webp" width="1024" height="1024" class="img_ev3q">
+</p><figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption><p></p></figure>
+<hr>
+<p>突然想買一台電腦。</p>
+<p>不為別的，就是想用 RTX 4090 來 Train 模型。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="免責聲明">免責聲明<a href="https://docsaid.org/blog/buy-a-new-computer#%E5%85%8D%E8%B2%AC%E8%81%B2%E6%98%8E" class="hash-link" aria-label="免責聲明的直接連結" title="免責聲明的直接連結">​</a></h2>
+<p>我們自己忙碌一番，動手組一台訓練用的主機，再順手留個紀錄。如果你根據本紀錄自行組裝主機，並因此產生任何問題或造成任何形式的損失，我們概不負責。</p>
+<p>此外，本文章僅為個人紀錄之用，並無任何推薦或廣告意圖。文中提及的所有產品或品牌均為記錄所需，不代表任何商業合作或推薦立場。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="採購明細">採購明細<a href="https://docsaid.org/blog/buy-a-new-computer#%E6%8E%A1%E8%B3%BC%E6%98%8E%E7%B4%B0" class="hash-link" aria-label="採購明細的直接連結" title="採購明細的直接連結">​</a></h2>
+<p>以下表格紀錄了我們的採購清單：</p>
+<table><thead><tr><th>品名</th><th>品項</th><th>數量</th><th>總價 (NTD)</th></tr></thead><tbody><tr><td>CPU</td><td>Intel i9-13900K 【24 核/32 緒】3.0GHz-5.8GHz 36MB LGA1700 125W</td><td>1</td><td>$ 19,500</td></tr><tr><td>主機板</td><td>技嘉 Z790 AORUS ELITE (ATX/Realtek 2.5Gb) 16+1+2 相電源</td><td>1</td><td>$ 7,990</td></tr><tr><td>顯示卡</td><td>技嘉 RTX 4090 AERO OC 24G 白色風之力 散熱 金屬背板</td><td>1</td><td>$ 60,990</td></tr><tr><td>記憶體</td><td>金士頓 64 GB (雙通道 32GBx2) DDR5 6000 CL36 FURY Beast 白色</td><td>2</td><td>$ 12,258</td></tr><tr><td>硬碟</td><td>美光 Crucial P5 Plus 2TB (Gen4 M.2 PCIe 4.0) NVMe SSD (讀 6600M / 寫 5500M)</td><td>2</td><td>$ 7,800</td></tr><tr><td>水冷系統</td><td>NZXT Kraken 360 RGB 白色</td><td>1</td><td>$ 7,990</td></tr><tr><td>機殼</td><td>華碩 TUF Gaming GT502 白色 ATX</td><td>1</td><td>$ 5,490</td></tr><tr><td>機殼風扇</td><td>華碩 TUF Gaming TF120 ARGB 白色 三風扇組 (機殼贈品)</td><td>1</td><td>-</td></tr><tr><td>機殼風扇</td><td>華碩 TUF Gaming TF120 ARGB 白色 三風扇組 (加購)</td><td>1</td><td>$ 1,690</td></tr><tr><td>機殼風扇</td><td>華碩 TUF Gaming TF120 ARGB 白色 單風扇 (加購)</td><td>4</td><td>$ 2,196</td></tr><tr><td>電源供應器</td><td>全漢 HYDRO PTM PRO 1200W ATX3.0 白金 全模</td><td>1</td><td>$ 5,790</td></tr><tr><td>連接線</td><td>銀欣 1 分 4 A.RGB 連接線（SST-CPL03）</td><td>2</td><td>$ 250</td></tr></tbody></table>
+<ul>
+<li><strong>總價（含稅）</strong>：新台幣 131,944 元，折合美金約 4,100 元</li>
+<li><strong>日期</strong>：2023 年 9 月</li>
+</ul>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p>我們去看了同等規格的預組電腦，價格大概是 180,000 元左右。</p></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="rtx-4090">RTX 4090<a href="https://docsaid.org/blog/buy-a-new-computer#rtx-4090" class="hash-link" aria-label="RTX 4090的直接連結" title="RTX 4090的直接連結">​</a></h2>
+<p>一切都從這裡開始。</p>
+<p>我們先到原價屋看看，發現 4090 大概有幾個廠商：華碩、技嘉和微星。</p>
+<p>接著去找個測試影片：</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=uyMnMPLYk2w" target="_blank" rel="noopener noreferrer"><strong>MSI RTX 4090 Suprim X vs. RTX 4090 Gaming X Trio, Thermals, Power &amp; Overclocking</strong></a></li>
+</ul>
+<p>看起來微星特別熱，另外兩個廠商的溫度差不多。</p>
+<p>再去找個相關文章：</p>
+<ul>
+<li><a href="https://forum.gamer.com.tw/C.php?bsn=60030&amp;snA=615853" target="_blank" rel="noopener noreferrer"><strong>【情報】6 張 4090 散熱比較</strong></a></li>
+</ul>
+<p>整體看起來，技嘉的整體表現最好，那麼我們就從技嘉的產品中選擇最好看的白色風之力版本：</p>
+<p>詳細參數：</p>
+<ul>
+<li>
+<p>品項：GIGABYTE RTX 4090 AERO OC 24G 白色風之力 散熱 金屬背板</p>
+</li>
+<li>
+<p>價格：原價屋 $ 60,900 NTD</p>
+</li>
+<li>
+<p>長度：34.2 cm</p>
+<p><img decoding="async" loading="lazy" alt="gigabyte" src="https://docsaid.org/assets/images/img2-7c184ad017c863953df6e34de6eae49c.jpg" width="1226" height="488" class="img_ev3q"></p>
+</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="主機板">主機板<a href="https://docsaid.org/blog/buy-a-new-computer#%E4%B8%BB%E6%A9%9F%E6%9D%BF" class="hash-link" aria-label="主機板的直接連結" title="主機板的直接連結">​</a></h2>
+<p>決定了顯卡，接著就是主機板了。</p>
+<p>這裡出現了「腳位」的問題，不同的主機板對應了不同的 CPU，這裡我們繼續查一下資料：</p>
+<ul>
+<li>Intel 12 代，搭配 600 系列主機板，用 1700 腳位。</li>
+<li>Intel 13 代，搭配 700 系列主機板，用 1700 腳位。</li>
+<li>Intel 14 代，搭配 700 系列主機板，用 1700 腳位。</li>
+</ul>
+<p>看起來 1700 腳位是一個比較長期的選擇，那麼我們就選擇了 700 系列主機板：</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="1700-腳位">1700 腳位<a href="https://docsaid.org/blog/buy-a-new-computer#1700-%E8%85%B3%E4%BD%8D" class="hash-link" aria-label="1700 腳位的直接連結" title="1700 腳位的直接連結">​</a></h3>
+<p>根據<a href="https://zh.wikipedia.org/zh-tw/LGA_1700" target="_blank" rel="noopener noreferrer"><strong>維基百科對於 LGA 1700</strong></a> 的描述：</p>
+<p>LGA 1700，是英特爾用於 2021 年推出 Alder Lake 微架構（第 12 代 Intel Core）和 Raptor Lake 微架構(第 13 代、第 14 代 Intel Core）的桌上型微處理器插槽。此插槽取代 LGA 1200，且支援 DDR5 記憶體。由於接觸點大幅增加，之前對應 LGA 1200、LGA 1151(封裝大小 37.5 mm x 37.5 mm)的處理器散熱器均與 LGA 1700 不相容(封裝大小 45.0 mm x 37.5 mm)。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="晶片組規格">晶片組規格<a href="https://docsaid.org/blog/buy-a-new-computer#%E6%99%B6%E7%89%87%E7%B5%84%E8%A6%8F%E6%A0%BC" class="hash-link" aria-label="晶片組規格的直接連結" title="晶片組規格的直接連結">​</a></h3>
+<p>實際上在採購時，還會看到 B660、H670、Z690 等主機板，這裡我們繼續查一下資料：</p>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>點選展開</summary><div><div class="collapsibleContent_i85q"><table><thead><tr><th><strong>特性</strong></th><th><strong>H610</strong></th><th><strong>B660</strong></th><th><strong>H670</strong></th><th><strong>Z690</strong></th><th><strong>W680</strong></th><th><strong>Z790</strong></th></tr></thead><tbody><tr><td><strong>CPU 超頻</strong></td><td>否</td><td>否 (支援記憶體超頻)</td><td>否 (支援記憶體超頻)</td><td>是</td><td>是</td><td>是</td></tr><tr><td><strong>匯流排界面</strong></td><td>DMI 4.0 x4</td><td>DMI 4.0 x8</td><td>DMI 4.0 x8</td><td>DMI 4.0 x8</td><td>DMI 4.0 x8</td><td>DMI 4.0 x8</td></tr><tr><td><strong>支援的 CPU</strong></td><td>Alder Lake, Raptor Lake, Raptor Lake Refresh</td><td>Alder Lake, Raptor Lake, Raptor Lake Refresh</td><td>Alder Lake, Raptor Lake, Raptor Lake Refresh</td><td>Alder Lake, Raptor Lake, Raptor Lake Refresh</td><td>Alder Lake, Raptor Lake, Raptor Lake Refresh</td><td>Alder Lake, Raptor Lake, Raptor Lake Refresh</td></tr><tr><td><strong>支援的內存</strong></td><td>最高支持 64GB, DDR4 3200 / DDR5 4800</td><td>最高支持 128GB, DDR4 3200 / DDR5 4800</td><td>最高支持 128GB, DDR4 3200 / DDR5 4800</td><td>最高支持 128GB, DDR4 3200 / DDR5 4800</td><td>最高支持 128GB, DDR4 3200 / DDR5 4800</td><td>最高支持 128GB, DDR4 3200 / DDR5 4800</td></tr><tr><td><strong>最大 DIMM 插槽</strong></td><td>2</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td></tr><tr><td><strong>最大 USB 2.0 埠</strong></td><td>10</td><td>12</td><td>14</td><td>14</td><td>14</td><td>14</td></tr><tr><td><strong>USB 3.2 Gen 1 (5 Gbit/s)</strong></td><td>最多 4 個</td><td>最多 6 個</td><td>最多 8 個</td><td>最多 10 個</td><td>最多 10 個</td><td>最多 10 個</td></tr><tr><td><strong>USB 3.2 Gen 2 (10 Gbit/s)</strong></td><td>最多 1 個</td><td>最多 2 個</td><td>最多 4 個</td><td>最多 4 個</td><td>最多 4 個</td><td>最多 10 個</td></tr><tr><td><strong>USB 3.2 Gen 2x2 (20 Gbit/s)</strong></td><td>否</td><td>最多 2 個</td><td>最多 4 個</td><td>最多 4 個</td><td>最多 4 個</td><td>最多 5 個</td></tr><tr><td><strong>最大 SATA 3.0 埠</strong></td><td>4</td><td>4</td><td>8</td><td>8</td><td>8</td><td>8</td></tr><tr><td><strong>處理器 PCI Express 5.0 設置</strong></td><td>1x16</td><td>1x16+1x4</td><td>1x16+1x4 或 2x8+1x4</td><td>1x16+1x4 或 2x8+1x4</td><td>1x16+1x4 或 2x8+1x4</td><td>1x16 或 2x8</td></tr><tr><td><strong>PCH PCI Express 4.0 設置</strong></td><td>否</td><td>6</td><td>12</td><td>16</td><td>16</td><td>16</td></tr><tr><td><strong>PCH PCI Express 3.0 設置</strong></td><td>8</td><td>12</td><td>12</td><td>12</td><td>12</td><td>12</td></tr><tr><td><strong>內建支持顯示 (數字埠/管道)</strong></td><td>3</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td></tr><tr><td><strong>內建無線網 (802.11ax / Wi-Fi 6E)</strong></td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr><tr><td><strong>SATA RAID 0/1/5/10 支持</strong></td><td>否</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr><tr><td><strong>Intel Optane Memory 支持</strong></td><td>否</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr><tr><td><strong>Intel Smart Sound 技術</strong></td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr><tr><td><strong>Intel Active Management, Trusted Execution 與 vPro 技術</strong></td><td>否</td><td>否</td><td>否</td><td>否</td><td>是</td><td>否</td></tr><tr><td><strong>晶片組 TDP</strong></td><td>6W</td><td>6W</td><td>6W</td><td>6W</td><td>6W</td><td>6W</td></tr><tr><td><strong>發布日期</strong></td><td>Q1 2022</td><td>Q1 2022</td><td>Q1 2022</td><td>Q4 2021</td><td>Q2 2022</td><td>Q4 2022</td></tr></tbody></table></div></div></details>
+<p>哎呀！這裡的資訊太多了，總之就挑好的買，就選 Z790 吧！</p>
+<p>詳細參數：</p>
+<ul>
+<li>
+<p>品項：GIGABYTE Z790 AORUS ELITE (ATX/Realtek 2.5Gb) 16+1+2 相電源</p>
+</li>
+<li>
+<p>價格：原價屋 $ 7,990 NTD</p>
+<p><img decoding="async" loading="lazy" alt="gigabyte" src="https://docsaid.org/assets/images/img3-f54e5f5967437c2fc69bc3777b230e28.jpg" width="1224" height="576" class="img_ev3q"></p>
+</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="cpu">CPU<a href="https://docsaid.org/blog/buy-a-new-computer#cpu" class="hash-link" aria-label="CPU的直接連結" title="CPU的直接連結">​</a></h2>
+<p>聽說 Intel 13 代和 14 代充滿了奇怪的問題。</p>
+<p>但是我們也不超頻，應該問題不大，不如先買個 Intel 13 代吧！</p>
+<p>詳細參數：</p>
+<ul>
+<li>品項：Intel i9-13900K 【24 核/32 緒】3.0GHz-5.8GHz 36MB 1700 腳位 125W</li>
+<li>價格：原價屋 $ 19,500 NTD</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>我們運行的是 Ubuntu 系統，在後續使用中確實有當機的問題。</p><p>但是在某次系統更新後，這個問題就消失了，所以我們不確定是否該把責任推給 CPU 瑕疵？</p></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="記憶體">記憶體<a href="https://docsaid.org/blog/buy-a-new-computer#%E8%A8%98%E6%86%B6%E9%AB%94" class="hash-link" aria-label="記憶體的直接連結" title="記憶體的直接連結">​</a></h2>
+<p>我們認知的意義體三大廠應該是：美光、金士頓和威剛。這個部分我們也不是專業玩家，總之就從這三間挑就對了。</p>
+<p>重點是容量，既然要 Train 模型，插滿 128GB 是很基本的操作，對吧！</p>
+<p>詳細參數：</p>
+<ul>
+<li>
+<p>品項：金士頓 64 GB (雙通道 32GBx2) DDR5 6000 CL36 FURY Beast 白色</p>
+</li>
+<li>
+<p>價格：原價屋 $ 6,129 NTD / 1 組</p>
+</li>
+<li>
+<p>數量：2 組</p>
+<p><img decoding="async" loading="lazy" alt="kingston" src="https://docsaid.org/assets/images/img4-b70ccb5c68efa8e5c1d9ced85b722e62.jpg" width="1224" height="564" class="img_ev3q"></p>
+</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="硬碟">硬碟<a href="https://docsaid.org/blog/buy-a-new-computer#%E7%A1%AC%E7%A2%9F" class="hash-link" aria-label="硬碟的直接連結" title="硬碟的直接連結">​</a></h2>
+<p>這一個部分我們在 PTT 上有找到硬碟大神的指南：</p>
+<ul>
+<li><a href="https://www.ptt.cc/bbs/PC_Shopping/M.1675587557.A.3D3.html" target="_blank" rel="noopener noreferrer"><strong>SSD(固態硬碟)選購指南</strong></a></li>
+</ul>
+<p>裡面還有很多延伸閱讀，和各種廠商的比較彙整等，總之這裡的專業知識太多了。</p>
+<p>就在我們頭昏腦脹之際，似乎瞥見一個結論是選美光，那就這麼辦吧！（<del>太隨便了吧？</del>）</p>
+<p>既然要 Train 模型，就配個 4 TB 的硬碟，資料集才放得下。</p>
+<p>詳細參數：</p>
+<ul>
+<li>
+<p>品項：美光 Crucial P5 Plus 2TB PCIe 4.0 NVMe SSD (讀 6600M / 寫 5500M) TCL 顆粒</p>
+</li>
+<li>
+<p>價格：原價屋 $ 3,900 NTD / 1 顆</p>
+</li>
+<li>
+<p>數量：2 顆</p>
+<p><img decoding="async" loading="lazy" alt="micron" src="https://docsaid.org/assets/images/img5-7bfcd070be0438f8a289b50910b6ea18.jpg" width="1226" height="514" class="img_ev3q"></p>
+</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="水冷系統">水冷系統<a href="https://docsaid.org/blog/buy-a-new-computer#%E6%B0%B4%E5%86%B7%E7%B3%BB%E7%B5%B1" class="hash-link" aria-label="水冷系統的直接連結" title="水冷系統的直接連結">​</a></h2>
+<p>這裡大概有華碩、微星、海盜船和 NZXT 等品牌。雖然選擇看起來很多，但在網上搜實在找不到什麼比較有參考性的評比資料，於是我們挑選的重點變成是保固時間。</p>
+<p>大多數的保固時間是 3 年，但 NZXT 的保固時間是 6+1 年，這個部分我們就選擇了 NZXT。</p>
+<p>詳細參數：</p>
+<ul>
+<li>
+<p>品項：NZXT Kraken 360 RGB 白色</p>
+</li>
+<li>
+<p>價格：原價屋 $ 7,990 NTD</p>
+</li>
+<li>
+<p>厚度：5.6 cm</p>
+<p><img decoding="async" loading="lazy" alt="nzxt" src="https://docsaid.org/assets/images/img6-f9a3ce94fe721656f4952b59a390ee79.jpg" width="1224" height="568" class="img_ev3q"></p>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>如果你是這方面的專業人士，或許可以提供我們更專業的建議，我們在組裝下一台主機時會優先考慮。</p></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="機殼和風扇">機殼和風扇<a href="https://docsaid.org/blog/buy-a-new-computer#%E6%A9%9F%E6%AE%BC%E5%92%8C%E9%A2%A8%E6%89%87" class="hash-link" aria-label="機殼和風扇的直接連結" title="機殼和風扇的直接連結">​</a></h2>
+<p>這裡就是選一個可以塞下所有東西的機殼，然後再買一些風扇裝進去。</p>
+<p>詳細參數：</p>
+<ul>
+<li>
+<p>品項：</p>
+<ul>
+<li>華碩 TUF Gaming GT502 白色 ATX</li>
+<li>TUF Gaming TF120 ARGB 白 三風扇組 (機殼贈品) x1</li>
+<li>TUF Gaming TF120 ARGB 白 三風扇組 (加購) x2</li>
+<li>TUF Gaming TF120 ARGB 白 單風扇 (加購) x4</li>
+</ul>
+</li>
+<li>
+<p>價格：</p>
+<ul>
+<li>
+<p>機殼加贈品，原價屋 $ 5,490 NTD</p>
+</li>
+<li>
+<p>三風扇組加購，原價屋 $ 1,690 NTD / 1 組</p>
+</li>
+<li>
+<p>單風扇加購，原價屋 $ 549 NTD / 1 組</p>
+<p><img decoding="async" loading="lazy" alt="asus case" src="https://docsaid.org/assets/images/img7-d6b934be3078c2b0c855211a33ace3db.jpg" width="1224" height="728" class="img_ev3q"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="電源供應器">電源供應器<a href="https://docsaid.org/blog/buy-a-new-computer#%E9%9B%BB%E6%BA%90%E4%BE%9B%E6%87%89%E5%99%A8" class="hash-link" aria-label="電源供應器的直接連結" title="電源供應器的直接連結">​</a></h2>
+<p>這個部分就是到網上搜一下，看看年度推薦的電源供應器品牌。</p>
+<p>其實有在榜單上的品牌都可以選，我們認為這個部分沒有太大的差異，所以根據保固時間和價格，選擇了全漢。</p>
+<p>詳細參數：</p>
+<ul>
+<li>
+<p>品項：全漢 HYDRO PTM PRO 1200W ATX3.0 白金 全模</p>
+</li>
+<li>
+<p>價格：原價屋 $ 5,790 NTD</p>
+<p><img decoding="async" loading="lazy" alt="fsp" src="https://docsaid.org/assets/images/img8-397163213149d3e2c1956fec53f77ce5.jpg" width="1224" height="740" class="img_ev3q"></p>
+</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="竣工">竣工<a href="https://docsaid.org/blog/buy-a-new-computer#%E7%AB%A3%E5%B7%A5" class="hash-link" aria-label="竣工的直接連結" title="竣工的直接連結">​</a></h2>
+<p>買了一堆東西，其實我們也沒把握裝得好，所以最後這一步驟就委託給原價屋的技師了。</p>
+<p>我們攝影技術不行，你可以參考下面這個影片，最後的成品差不多就長這樣：</p>
+<ul>
+<li>
+<p><a href="https://www.youtube.com/watch?v=puMYF4wpzTQ" target="_blank" rel="noopener noreferrer"><strong>ASUS TUF GT502 CUSTOM SETUP | Black &amp; White PC BUILD | i9-13900k | ASUS TUF RTX 4070TI | ProArt Z790</strong></a></p>
+<p><img decoding="async" loading="lazy" alt="final" src="https://docsaid.org/assets/images/img9-e7fab2e41d051511bf87ff6625e82c93.jpg" width="1226" height="690" class="img_ev3q"></p>
+</li>
+</ul>
+<hr>
+<p>這次的組裝過程就到這裡，我們要去開心愉快地 Train 模型了！</p>]]></content:encoded>
+            <category>rtx4090</category>
+            <category>13900k</category>
+        </item>
+        <item>
             <title><![CDATA[使用 pyenv 管理 Python 版本]]></title>
             <link>https://docsaid.org/blog/pyenv-installation</link>
             <guid>https://docsaid.org/blog/pyenv-installation</guid>
@@ -1421,29 +1614,6 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <category>github-action</category>
             <category>runner</category>
             <category>systemd</category>
-        </item>
-        <item>
-            <title><![CDATA[登入 RTF8207W 路由器]]></title>
-            <link>https://docsaid.org/blog/login-rtf8207w</link>
-            <guid>https://docsaid.org/blog/login-rtf8207w</guid>
-            <pubDate>Mon, 04 Sep 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[偷偷登入 RTF8207W 路由器。]]></description>
-            <content:encoded><![CDATA[<figure><p><img decoding="async" loading="lazy" alt="title" src="https://docsaid.org/assets/images/0904-d2a591661a07973b692c6589e9193644.webp" width="1024" height="1024" class="img_ev3q">
-</p><figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption><p></p></figure>
-<hr>
-<p>這次我們想要登入中華電信的小烏龜，也就是 RTF8207W 數據機。</p>
-<p>首先這個機器絕對不是長得像封面圖片這樣，這只是 GPT 的幻想而已。</p>
-<p>言歸正傳，我們繼續：</p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="1-登入管理介面">1. 登入管理介面。<a href="https://docsaid.org/blog/login-rtf8207w#1-%E7%99%BB%E5%85%A5%E7%AE%A1%E7%90%86%E4%BB%8B%E9%9D%A2" class="hash-link" aria-label="1. 登入管理介面。的直接連結" title="1. 登入管理介面。的直接連結">​</a></h3>
-<p>通常可以透過網頁瀏覽器輸入 <code>192.168.1.1</code> 或其他 IP 地址進行訪問，具體地址可能依你的路由器型號而異。</p>
-<p><img decoding="async" loading="lazy" alt="login-rtf8207w" src="https://docsaid.org/assets/images/RTF8207W-login-a999863d0bb563cefdf2c85580ff829d.jpg" width="1184" height="688" class="img_ev3q"></p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="2-工程帳號">2. 工程帳號<a href="https://docsaid.org/blog/login-rtf8207w#2-%E5%B7%A5%E7%A8%8B%E5%B8%B3%E8%99%9F" class="hash-link" aria-label="2. 工程帳號的直接連結" title="2. 工程帳號的直接連結">​</a></h3>
-<p>一般來說，帳號為：<code>cht</code>，密碼為<code>型號末四碼＋MAC末四碼</code>。</p>
-<p><img decoding="async" loading="lazy" alt="password" src="https://docsaid.org/assets/images/RTF8207W-f4afe2030b552611fd3f8c281a364a3c.jpg" width="2048" height="1170" class="img_ev3q"></p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="3-登入">3. 登入<a href="https://docsaid.org/blog/login-rtf8207w#3-%E7%99%BB%E5%85%A5" class="hash-link" aria-label="3. 登入的直接連結" title="3. 登入的直接連結">​</a></h3>
-<p>然後你就可以為所欲為了。</p>
-<div class="theme-admonition theme-admonition-danger admonition_xJq3 alert alert--danger"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg></span>危險</div><div class="admonitionContent_BuS1"><p>如果不小心弄壞了設定，導致網路崩潰無法連線，請自行連絡<strong>中華電信工程師</strong>。</p><p>本文章僅供參考，不負任何責任。</p></div></div>]]></content:encoded>
-            <category>rtf8207w</category>
         </item>
     </channel>
 </rss>
