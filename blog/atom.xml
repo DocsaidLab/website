@@ -1087,7 +1087,7 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
 <ul>
 <li><a href="https://www.youtube.com/watch?v=uyMnMPLYk2w" target="_blank" rel="noopener noreferrer"><strong>MSI RTX 4090 Suprim X vs. RTX 4090 Gaming X Trio, Thermals, Power &amp; Overclocking</strong></a></li>
 </ul>
-<p>看起來微星特別熱，另外兩個廠商的溫度差不多。</p>
+<p>看起來微星的工作溫度特別高，反觀另外兩個廠商的溫度差不多。</p>
 <p>再去找個相關文章：</p>
 <ul>
 <li><a href="https://forum.gamer.com.tw/C.php?bsn=60030&amp;snA=615853" target="_blank" rel="noopener noreferrer"><strong>【情報】6 張 4090 散熱比較</strong></a></li>
@@ -1106,6 +1106,7 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
 <p><img decoding="async" loading="lazy" alt="gigabyte" src="https://docsaid.org/assets/images/img2-7c184ad017c863953df6e34de6eae49c.jpg" width="1226" height="488" class="img_ev3q"></p>
 </li>
 </ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>這一代的 GPU 還牽扯到 ATX 的規格，這裡我們放到電源供應器的部分再說。</p></div></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="主機板">主機板<a href="https://docsaid.org/blog/buy-a-new-computer#%E4%B8%BB%E6%A9%9F%E6%9D%BF" class="hash-link" aria-label="主機板的直接連結" title="主機板的直接連結">​</a></h2>
 <p>決定了顯卡，接著就是主機板了。</p>
 <p>這裡出現了「腳位」的問題，不同的主機板對應了不同的 CPU，這裡我們繼續查一下資料：</p>
@@ -1164,11 +1165,18 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
 </ul>
 <p>裡面還有很多延伸閱讀，和各種廠商的比較彙整等，總之這裡的專業知識太多了。</p>
 <p>就在我們頭昏腦脹之際，似乎瞥見一個結論是選美光，那就這麼辦吧！（<del>太隨便了吧？</del>）</p>
+<hr>
+<p>我們查詢資料後，得到不要選 QLC 的結論，似乎是因為 QLC 的寫入速度慢和壽命短。另一方面，PCIe 5 的 SSD 似乎有災情（連結如下），所以我們選擇了 TLC 技術和 PCIe 4.0 的 SSD。</p>
+<ul>
+<li><a href="https://www.neowin.net/news/crucial-corsair-pcie-50-ssds-running-hot-throttling-and-shutting-down-without-heatsink/?fbclid=IwAR0aM7igqoPCImgSMKCtPTNLRw5nOeGJPxLN3HYN89CsTSFEEtl2YsDqbCU" target="_blank" rel="noopener noreferrer"><strong>Crucial, Corsair PCIe 5.0 SSDs running hot, throttling, and shutting down without heatsink</strong></a></li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>不過技術迭代很快，說不定過一陣子，這些問題都不是問題了！所以這裡還是要看最新的資訊。</p></div></div>
+<hr>
 <p>既然要 Train 模型，就配個 4 TB 的硬碟，資料集才放得下。</p>
 <p>詳細參數：</p>
 <ul>
 <li>
-<p>品項：美光 Crucial P5 Plus 2TB PCIe 4.0 NVMe SSD (讀 6600M / 寫 5500M) TCL 顆粒</p>
+<p>品項：美光 Crucial P5 Plus 2TB PCIe 4.0 NVMe SSD (讀 6600M / 寫 5500M) TLC</p>
 </li>
 <li>
 <p>價格：原價屋 $ 3,900 NTD / 1 顆</p>
@@ -1237,9 +1245,17 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
 <p><img decoding="async" loading="lazy" alt="fsp" src="https://docsaid.org/assets/images/img8-397163213149d3e2c1956fec53f77ce5.jpg" width="1224" height="740" class="img_ev3q"></p>
 </li>
 </ul>
+<hr>
+<p>延續 GPU 的話題，這裡得在補充一下 ATX 3.0 的相關知識：</p>
+<ul>
+<li>
+<p><a href="https://zh.wikipedia.org/zh-tw/ATX%E8%A6%8F%E6%A0%BC" target="_blank" rel="noopener noreferrer"><strong>ATX 3.0 規格</strong></a></p>
+<p>ATX 3.0 規格於 2022 年 2 月發布。它包括新的 16-Pin 12VHPWR 供電介面，可為顯示卡提供高達 600 W 的功率。這些組件包含用於與電源供應器協商電源功能的數據線，因此它們不會消耗比電源供應器能夠提供的功率為多。該規範還對處理尖峰有更嚴格的要求。</p>
+</li>
+</ul>
+<p>為了因應 4090 的功率需求，在選擇電源供應器時，我們就要注意 ATX 3.0 的相容性。在 4090 發布後的一段時間內，出現很多燒機的案例，大多數的原因都是因為電源供應器功率不足，系統無法難以穩定運行。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="竣工">竣工<a href="https://docsaid.org/blog/buy-a-new-computer#%E7%AB%A3%E5%B7%A5" class="hash-link" aria-label="竣工的直接連結" title="竣工的直接連結">​</a></h2>
-<p>買了一堆東西，其實我們也沒把握裝得好，所以最後這一步驟就委託給原價屋的技師了。</p>
-<p>我們攝影技術不行，你可以參考下面這個影片，最後的成品差不多就長這樣：</p>
+<p>買了一堆東西，其實我們也沒把握裝得好，所以最後這一步驟就委託給原價屋的技師了。我們攝影技術不行，你可以參考下面這個影片，最後的成品差不多就長這樣，差別在於我們的顯卡和四條記憶體也都是白色的。</p>
 <ul>
 <li>
 <p><a href="https://www.youtube.com/watch?v=puMYF4wpzTQ" target="_blank" rel="noopener noreferrer"><strong>ASUS TUF GT502 CUSTOM SETUP | Black &amp; White PC BUILD | i9-13900k | ASUS TUF RTX 4070TI | ProArt Z790</strong></a></p>
@@ -1247,7 +1263,7 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
 </li>
 </ul>
 <hr>
-<p>這次的組裝過程就到這裡，我們要去開心愉快地 Train 模型了！</p>]]></content>
+<p>這次的組裝過程就到這裡，我們要去開心愉快地 Train 模型了～</p>]]></content>
         <author>
             <name>Zephyr</name>
             <uri>https://github.com/zephyr-sh</uri>
