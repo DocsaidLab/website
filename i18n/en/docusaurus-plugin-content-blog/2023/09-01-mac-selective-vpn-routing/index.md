@@ -2,7 +2,7 @@
 slug: mac-selective-vpn-routing
 title: Setting Up Selective Traffic Routing for VPN on Mac
 authors: Zephyr
-tags: [routing, vpn, macos]
+tags: [routing-vpn, macos]
 image: /en/img/2023/0901.webp
 description: Configuring VPN routing on Mac.
 ---

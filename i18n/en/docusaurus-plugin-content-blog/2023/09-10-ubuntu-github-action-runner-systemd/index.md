@@ -2,7 +2,7 @@
 slug: ubuntu-github-runner-systemd
 title: Automating GitHub Runner with Systemd
 authors: Zephyr
-tags: [ubuntu, github-action, runner, systemd]
+tags: [github-action, runner]
 image: /en/img/2023/0910.webp
 description: Running automatically with Ubuntu Systemd.
 ---

@@ -3,7 +3,7 @@ slug: python-js-basic-command-equivalents
 title: Equivalent Basic Commands between Python and JS
 authors: Zephyr
 image: /en/img/2024/0407.webp
-tags: [npm, npx, nvm, pip, pyenv]
+tags: [npm, pip]
 description: Mapping basic cmds between Py and JS.
 ---
 

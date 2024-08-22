@@ -2,7 +2,7 @@
 slug: gosu-usage
 title: "User Switching Tool in Containers: gosu"
 authors: Zephyr
-tags: [docker, gosu, sudo, container]
+tags: [docker, gosu]
 image: /en/img/2024/0203.webp
 description: A tool worth learning how to use.
 ---

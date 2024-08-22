@@ -3,7 +3,7 @@ slug: impl-normalized-levenshtein-similarity
 title: Implementing ANLS
 authors: Zephyr
 image: /en/img/2024/0516.webp
-tags: [python, pytorch, metric, anls]
+tags: [pytorch, anls]
 description: Average Normalized Levenshtein Similarity
 ---
 

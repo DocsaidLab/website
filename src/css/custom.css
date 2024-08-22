@@ -11,7 +11,7 @@
   --background-color: #ffffff;  /* 亮模式背景色 */
   --text-color: #404040;        /* 亮模式文字色 */
 
-  --ifm-font-size-base: 17px;
+  --ifm-font-size-base: 16px;
   --ifm-line-height-base: 1.8;
 }
 
@@ -100,13 +100,13 @@ a:hover {
 .blog-tags-post-list-page article header a,
 .blog-list-page header a,
 .blog-tags-post-list-page header a {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 /* 設定H2標籤的行高 */
 .blog-list-page header h2,
 .blog-tags-post-list-page header h2 {
-  line-height: 1.5rem;
+  line-height: 0.9rem;
 }
 
 /* 文章懸停時標題顏色變更 */
@@ -126,7 +126,7 @@ a:hover {
   .blog-list-page main,
   .blog-tags-post-list-page main {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin: 0;
     padding: 0;

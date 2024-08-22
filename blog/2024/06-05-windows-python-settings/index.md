@@ -3,7 +3,7 @@ slug: windows-python-settings
 title: 簡單配置 Win11 系統的 Python 環境
 authors: Zephyr
 image: /img/2024/0605.webp
-tags: [win11, python, powershell]
+tags: [win11, python]
 description: Setting up Python on Windows.
 ---
 

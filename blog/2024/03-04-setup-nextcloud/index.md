@@ -2,7 +2,7 @@
 slug: setting-up-nextcloud
 title: 搭建 Nextcloud 記錄
 authors: Zephyr
-tags: [Nextcloud, Docker, Ubuntu]
+tags: [Nextcloud, Docker]
 image: /img/2024/0304.webp
 description: 記錄 Ubuntu 22.04 上搭建 Nextcloud 的過程。
 ---

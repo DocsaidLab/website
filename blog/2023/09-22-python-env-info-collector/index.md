@@ -2,7 +2,7 @@
 slug: python-env-info-collector
 title: 記錄與排查模型訓練環境問題
 authors: Zephyr
-tags: [python, training, env, info, log]
+tags: [python, training-log]
 image: /img/2023/0922.webp
 description: 自己手刻的紀錄工具，分享給大家使用。
 ---

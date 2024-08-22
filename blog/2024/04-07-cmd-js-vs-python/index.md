@@ -3,7 +3,7 @@ slug: python-js-basic-command-equivalents
 title: Python 與 JS 的基本指令對應
 authors: Zephyr
 image: /img/2024/0407.webp
-tags: [npm, npx, nvm, pip, pyenv]
+tags: [npm, pip]
 description: 把 Python 與 JS 的基本指令進行類似的對應。
 ---
 

@@ -2,7 +2,7 @@
 slug: gosu-usage
 title: 容器下的使用者切換工具：gosu
 authors: Zephyr
-tags: [docker, gosu, sudo, container]
+tags: [docker, gosu]
 image: /img/2024/0203.webp
 description: 這麼好用的工具，肯定要學習一下。
 ---

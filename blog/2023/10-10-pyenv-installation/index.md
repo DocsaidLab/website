@@ -2,7 +2,7 @@
 slug: pyenv-installation
 title: 使用 pyenv 管理 Python 版本
 authors: Zephyr
-tags: [python, pyenv, virtualenv, usage]
+tags: [pyenv, virtualenv]
 image: /img/2023/1010.webp
 description: 記錄安裝 pyenv 的安裝與使用方式。
 ---

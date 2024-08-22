@@ -2,7 +2,7 @@
 slug: mac-selective-vpn-routing
 title: 為 VPN 設定選擇性流量路由
 authors: Zephyr
-tags: [routing, vpn, macos]
+tags: [vpn-routing, macos]
 image: /img/2023/0901.webp
 description: 在 Mac 上設定 VPN 路由。
 ---

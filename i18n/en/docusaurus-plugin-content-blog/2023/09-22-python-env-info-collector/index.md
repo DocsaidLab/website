@@ -2,7 +2,7 @@
 slug: python-env-info-collector
 title: Recording Model Training Environment Issues
 authors: Zephyr
-tags: [python, training, environment, info, log]
+tags: [python, training-log]
 image: /en/img/2023/0922.webp
 description: A custom logging tool.
 ---
