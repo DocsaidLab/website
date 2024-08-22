@@ -111,3 +111,31 @@ This article will be continuously updated.
   ```
 
   This way, you can access the TensorBoard service on the remote machine via `http://localhost:6006` on your local machine.
+
+## 5. Inconsistent Web Rendering Behavior in Development and Deployment Environments
+
+- **Description:**
+
+  You've set the layout style of the blog in `custom.css`:
+
+  ```css
+  .container {
+    max-width: 90%;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+  ```
+
+  In the deployment phase, this style seems to be overridden by other higher-priority styles, but in the development phase, this style is normal.
+
+- **Solution:**
+
+  Be more specific in selecting the target:
+
+  ```css
+  body .container {
+    max-width: 90%;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+  ```

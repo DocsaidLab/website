@@ -111,3 +111,31 @@ description: 紀錄一些簡單問題和解法。
   ```
 
   這樣本地機器就可以通過 `http://localhost:6006` 訪問遠端機器的 TensorBoard 服務了。
+
+## 5. 開發和部署環境網頁渲染行為不一致
+
+- **描述：**
+
+  在 `custom.css` 中設置了部落格的版面樣式：
+
+  ```css
+  .container {
+    max-width: 90%;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+  ```
+
+  在部署階段，這個樣式似乎被其他更高優先級的樣式覆蓋了，但是在開發階段，這個樣式是正常的。
+
+- **解決方法：**
+
+  更具體地選擇目標：
+
+  ```css
+  body .container {
+    max-width: 90%;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+  ```
