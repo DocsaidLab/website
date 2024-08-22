@@ -35,6 +35,12 @@ body {
   color: var(--text-color);
 }
 
+body .container {
+  max-width: 90%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
 h1, h2, h3 {
   color: var(--ifm-color-primary); /* 全局標題顏色設定 */
 }
@@ -172,12 +178,6 @@ a:hover {
 /* 確保分頁導航在Grid容器中正確對齊 */
 .pagination-nav {
   grid-column: 1 / -1; /* 如果分頁導航應該橫跨所有列 */
-}
-
-.container {
-  max-width: 90%;
-  padding: 0 15px;
-  margin: 0 auto;
 }
 
 .token-line.theme-code-block-highlighted-line {
