@@ -182,9 +182,7 @@ M1001 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlis
             <name>Zephyr</name>
             <uri>https://github.com/zephyr-sh</uri>
         </author>
-        <category label="requests" term="requests"/>
         <category label="beautifulsoup4" term="beautifulsoup4"/>
-        <category label="python" term="python"/>
         <category label="TWSE" term="TWSE"/>
     </entry>
     <entry>
@@ -361,7 +359,6 @@ M1001 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlis
         </author>
         <category label="win11" term="win11"/>
         <category label="python" term="python"/>
-        <category label="powershell" term="powershell"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[LaTeX Syntax Quick Reference]]></title>
@@ -455,9 +452,7 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <name>Zephyr</name>
             <uri>https://github.com/zephyr-sh</uri>
         </author>
-        <category label="python" term="python"/>
         <category label="pytorch" term="pytorch"/>
-        <category label="metric" term="metric"/>
         <category label="anls" term="anls"/>
     </entry>
     <entry>
@@ -504,10 +499,7 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <uri>https://github.com/zephyr-sh</uri>
         </author>
         <category label="npm" term="npm"/>
-        <category label="npx" term="npx"/>
-        <category label="nvm" term="nvm"/>
         <category label="pip" term="pip"/>
-        <category label="pyenv" term="pyenv"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[Common VSCode Configuration Settings]]></title>
@@ -690,7 +682,6 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
         </author>
         <category label="Nextcloud" term="Nextcloud"/>
         <category label="Docker" term="Docker"/>
-        <category label="Ubuntu" term="Ubuntu"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[The Pitfall of Lists in PyTorch]]></title>
@@ -774,9 +765,7 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <uri>https://github.com/zephyr-sh</uri>
         </author>
         <category label="Python" term="Python"/>
-        <category label="PDF" term="PDF"/>
         <category label="pdf2image" term="pdf2image"/>
-        <category label="PIL" term="PIL"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[Reading HEIC Images in Python]]></title>
@@ -818,8 +807,6 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <name>Zephyr</name>
             <uri>https://github.com/zephyr-sh</uri>
         </author>
-        <category label="Python" term="Python"/>
-        <category label="imread" term="imread"/>
         <category label="HEIC" term="HEIC"/>
         <category label="TurboJPEG" term="TurboJPEG"/>
     </entry>
@@ -934,8 +921,6 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
         </author>
         <category label="docker" term="docker"/>
         <category label="gosu" term="gosu"/>
-        <category label="sudo" term="sudo"/>
-        <category label="container" term="container"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[Building a New Computer]]></title>
@@ -1237,10 +1222,8 @@ Remove or comment out the relevant <code>pyenv</code> configuration lines, then 
             <name>Zephyr</name>
             <uri>https://github.com/zephyr-sh</uri>
         </author>
-        <category label="python" term="python"/>
         <category label="pyenv" term="pyenv"/>
         <category label="virtualenv" term="virtualenv"/>
-        <category label="usage" term="usage"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[Recording Model Training Environment Issues]]></title>
@@ -1321,10 +1304,7 @@ Remove or comment out the relevant <code>pyenv</code> configuration lines, then 
             <uri>https://github.com/zephyr-sh</uri>
         </author>
         <category label="python" term="python"/>
-        <category label="training" term="training"/>
-        <category label="environment" term="environment"/>
-        <category label="info" term="info"/>
-        <category label="log" term="log"/>
+        <category label="training-log" term="training-log"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[Setting Up PyPiServer on Ubuntu]]></title>
@@ -1575,9 +1555,7 @@ Remove or comment out the relevant <code>pyenv</code> configuration lines, then 
             <name>Zephyr</name>
             <uri>https://github.com/zephyr-sh</uri>
         </author>
-        <category label="ubuntu" term="ubuntu"/>
         <category label="github-action" term="github-action"/>
         <category label="runner" term="runner"/>
-        <category label="systemd" term="systemd"/>
     </entry>
 </feed>

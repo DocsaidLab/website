@@ -189,9 +189,7 @@ M1001 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlis
             <name>Zephyr</name>
             <uri>https://github.com/zephyr-sh</uri>
         </author>
-        <category label="requests" term="requests"/>
         <category label="beautifulsoup4" term="beautifulsoup4"/>
-        <category label="python" term="python"/>
         <category label="TWSE" term="TWSE"/>
     </entry>
     <entry>
@@ -365,7 +363,6 @@ M1001 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlis
         </author>
         <category label="win11" term="win11"/>
         <category label="python" term="python"/>
-        <category label="powershell" term="powershell"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[LaTeX 語法快速查詢表]]></title>
@@ -459,9 +456,7 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <name>Zephyr</name>
             <uri>https://github.com/zephyr-sh</uri>
         </author>
-        <category label="python" term="python"/>
         <category label="pytorch" term="pytorch"/>
-        <category label="metric" term="metric"/>
         <category label="anls" term="anls"/>
     </entry>
     <entry>
@@ -513,10 +508,7 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <uri>https://github.com/zephyr-sh</uri>
         </author>
         <category label="npm" term="npm"/>
-        <category label="npx" term="npx"/>
-        <category label="nvm" term="nvm"/>
         <category label="pip" term="pip"/>
-        <category label="pyenv" term="pyenv"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[常用的 VScode 參數設定]]></title>
@@ -805,7 +797,6 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
         </author>
         <category label="Nextcloud" term="Nextcloud"/>
         <category label="Docker" term="Docker"/>
-        <category label="Ubuntu" term="Ubuntu"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[PyTorch 的 List 陷阱]]></title>
@@ -889,9 +880,7 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <uri>https://github.com/zephyr-sh</uri>
         </author>
         <category label="Python" term="Python"/>
-        <category label="PDF" term="PDF"/>
         <category label="pdf2image" term="pdf2image"/>
-        <category label="PIL" term="PIL"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[用 Python 讀取 HEIC 圖檔]]></title>
@@ -935,8 +924,6 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <name>Zephyr</name>
             <uri>https://github.com/zephyr-sh</uri>
         </author>
-        <category label="Python" term="Python"/>
-        <category label="imread" term="imread"/>
         <category label="HEIC" term="HEIC"/>
         <category label="TurboJPEG" term="TurboJPEG"/>
     </entry>
@@ -1055,8 +1042,6 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
         </author>
         <category label="docker" term="docker"/>
         <category label="gosu" term="gosu"/>
-        <category label="sudo" term="sudo"/>
-        <category label="container" term="container"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[買電腦紀錄]]></title>
@@ -1358,10 +1343,8 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <name>Zephyr</name>
             <uri>https://github.com/zephyr-sh</uri>
         </author>
-        <category label="python" term="python"/>
         <category label="pyenv" term="pyenv"/>
         <category label="virtualenv" term="virtualenv"/>
-        <category label="usage" term="usage"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[記錄與排查模型訓練環境問題]]></title>
@@ -1442,10 +1425,7 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <uri>https://github.com/zephyr-sh</uri>
         </author>
         <category label="python" term="python"/>
-        <category label="training" term="training"/>
-        <category label="env" term="env"/>
-        <category label="info" term="info"/>
-        <category label="log" term="log"/>
+        <category label="training-log" term="training-log"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[搭建 PyPiServer 記錄]]></title>
@@ -1705,9 +1685,7 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
             <name>Zephyr</name>
             <uri>https://github.com/zephyr-sh</uri>
         </author>
-        <category label="ubuntu" term="ubuntu"/>
         <category label="github-action" term="github-action"/>
         <category label="runner" term="runner"/>
-        <category label="systemd" term="systemd"/>
     </entry>
 </feed>
