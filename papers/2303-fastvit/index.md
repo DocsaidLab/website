@@ -27,7 +27,7 @@
 首先我們會分層幾個層級，對應視覺任務的多尺度的解析度需求，這個概念來自於 PVT 和 Swin Transformer：
 
 - [**[21.02] PVT: 空間縮減注意力機制**](../2102-pvt/index.md)
-- [**[21.03] Swin Transformer**](https://arxiv.org/abs/2103.14030)
+- [**[21.03] Swin Transformer: 舞會開始**](../2103-swin-transformer/index.md)
 
 接著我們會設計一個 Token Mixer 區塊搭配一個 FFN 區塊，組成一個基本模組，這個概念來自於 MetaFormer：
 
@@ -51,6 +51,8 @@ FastViT 架構包含四個不同的階段，每個階段在不同的尺度上運
 - **RepMixer**
 
   RepMixer 基於 ConvMixer 引入的卷積混合概念，其混合塊定義如下：
+
+  - [**[22.01] ConvMixer**](https://arxiv.org/abs/2201.09792)
 
   $$Y = \text{BN}(\sigma(\text{DWConv}(X))) + X$$
 

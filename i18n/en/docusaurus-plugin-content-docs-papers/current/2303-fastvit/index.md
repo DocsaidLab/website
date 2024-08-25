@@ -25,7 +25,7 @@ Several design directions have been established over the past few years for Tran
 First, we structure multiple layers corresponding to the multi-scale resolution needs of vision tasks. This concept comes from PVT and Swin Transformer:
 
 - [**[21.02] PVT: Spatial Reduction Attention Mechanism**](../2102-pvt/index.md)
-- [**[21.03] Swin Transformer**](https://arxiv.org/abs/2103.14030)
+- [**[21.03] Swin Transformer: The Dance Begins**](../2103-swin-transformer/index.md)
 
 Next, we design a Token Mixer block paired with an FFN block to form a basic module, a concept derived from MetaFormer:
 
@@ -49,6 +49,8 @@ The FastViT architecture comprises four distinct stages, operating at different 
 - **RepMixer**
 
   RepMixer is based on the convolutional mixing concept introduced by ConvMixer, with its mixing block defined as follows:
+
+  - [**[22.01] ConvMixer**](https://arxiv.org/abs/2201.09792)
 
   $$Y = \text{BN}(\sigma(\text{DWConv}(X))) + X$$
 
