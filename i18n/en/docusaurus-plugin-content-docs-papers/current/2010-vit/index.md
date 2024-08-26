@@ -221,15 +221,32 @@ After adjustments, both prediction methods achieved good results.
 In our experience, the Transformer architecture is very sensitive to learning rates, and this holds true for ViT.
 :::
 
+### Self-Supervised Training
+
+The authors attempted to use the MLM training method: destroying 50% of the image tokens, with methods including replacing embeddings with a learnable \[MASK\] (80%), randomly replacing with other tokens (10%), or keeping the original (10%).
+
+Next, they trained on the JFT dataset, running the model for 1 million steps (equivalent to 14 epochs), with a batch size of 4096. During training, they used the Adam optimizer, set the base learning rate to $2 \times 10^{-4}$, warmed up for the first 10,000 steps, and adopted a cosine learning rate decay strategy.
+
+In this process, the authors tried different prediction targets, including:
+
+1. Predicting the average of 3-bit colors
+2. Predicting a 4×4 downsized token
+3. Predicting a 16×16 full token
+
+Experiments found that all these methods achieved good results (L2 slightly inferior).
+
+Finally, the authors chose the best-performing first method because it performed best in few-shot learning. Additionally, they also tried a 15% masking rate but found that this setting performed slightly worse.
+
+However, regardless of the method, the results were worse than supervised learning (4% lower accuracy).
+
 ### Other Considerations
 
 Besides the main content, here are some training tips and considerations:
 
 1. Using a weight decay of 0.1 for training was found beneficial for downstream tasks.
-2. The authors imitated MLM training methods but found them ineffective, requiring further research.
-3. When the input image resolution changes, corresponding changes in the input sequence length (due to fixed patch size) necessitate linear interpolation of learned position encodings.
-4. Adam was found to work better than SGD, likely because Adam better handles learning rate issues (AdamW is now commonly used).
-5. Using 1-D learnable position encodings, 2-D learnable position encodings, or relative position encodings showed little difference, but one must be chosen; otherwise, performance significantly drops.
+2. When the input image resolution changes, corresponding changes in the input sequence length (due to fixed patch size) necessitate linear interpolation of learned position encodings.
+3. Adam was found to work better than SGD, likely because Adam better handles learning rate issues (AdamW is now commonly used).
+4. Using 1-D learnable position encodings, 2-D learnable position encodings, or relative position encodings showed little difference, but one must be chosen; otherwise, performance significantly drops.
 
 ## Conclusion
 
