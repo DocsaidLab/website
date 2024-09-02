@@ -139,3 +139,39 @@ description: 紀錄一些簡單問題和解法。
     margin: 0 auto;
   }
   ```
+
+## 6. Turbojpg 讀取影像出現警告
+
+- **描述**
+
+  讀取影像時出現以下警告訊息：
+
+  ```shell
+  turbojpeg.py:940: UserWarning: Corrupt JPEG data: 18 extraneous bytes before marker 0xc4
+  turbojpeg.py:940: UserWarning: Corrupt JPEG data: bad Huffman code
+  turbojpeg.py:940: UserWarning: Corrupt JPEG data: premature end of data segment
+  ```
+
+- **解決方法**
+
+  看了很煩，應該要過濾剔除這些資料：
+
+  ```python
+  import cv2
+  import warnings
+
+  data = ['test1.jpg', 'test2.jpg', 'test3.jpg']
+
+  for d in data:
+    with warnings.catch_warnings(record=True) as w:
+      warnings.simplefilter("always", UserWarning)
+
+      # 讀取影像，看看是否有警告
+      cv2.imread(d)
+
+      # 有的話就刪除
+      if w:
+        data.remove(d)
+
+  # 最後可以透過 json 或其他方式紀錄清洗後的資料
+  ```

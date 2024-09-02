@@ -139,3 +139,39 @@ This article will be continuously updated.
     margin: 0 auto;
   }
   ```
+
+## 6. Turbojpeg Warning When Reading Images
+
+- **Description**
+
+  When reading images, the following warning messages appear:
+
+  ```shell
+  turbojpeg.py:940: UserWarning: Corrupt JPEG data: 18 extraneous bytes before marker 0xc4
+  turbojpeg.py:940: UserWarning: Corrupt JPEG data: bad Huffman code
+  turbojpeg.py:940: UserWarning: Corrupt JPEG data: premature end of data segment
+  ```
+
+- **Solution**
+
+  To avoid these annoying warnings, you should filter out the problematic images:
+
+  ```python
+  import cv2
+  import warnings
+
+  data = ['test1.jpg', 'test2.jpg', 'test3.jpg']
+
+  for d in data:
+    with warnings.catch_warnings(record=True) as w:
+      warnings.simplefilter("always", UserWarning)
+
+      # Read the image and see if there are any warnings
+      cv2.imread(d)
+
+      # Remove the data if warnings are present
+      if w:
+        data.remove(d)
+
+  # Saving the filtered data
+  ```
