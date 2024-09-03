@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-hant" dir="ltr" class="docs-wrapper plugin-docs plugin-id-papers docs-version-current docs-doc-page docs-doc-id-transformers/multimodality/meter/index" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.5.2">
+<title data-rh="true">[21.11] METER | DOCSAID</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docsaid.org/img/docsaid-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docsaid.org/img/docsaid-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docsaid.org/papers/transformers/multimodality/meter/"><meta data-rh="true" property="og:locale" content="zh_hant"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-hant"><meta data-rh="true" name="docsearch:language" content="zh-hant"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-papers-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-papers-current"><meta data-rh="true" property="og:title" content="[21.11] METER | DOCSAID"><meta data-rh="true" name="description" content="繽紛的儀表板"><meta data-rh="true" property="og:description" content="繽紛的儀表板"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docsaid.org/papers/transformers/multimodality/meter/"><link data-rh="true" rel="alternate" href="https://docsaid.org/papers/transformers/multimodality/meter/" hreflang="zh-hant"><link data-rh="true" rel="alternate" href="https://docsaid.org/en/papers/transformers/multimodality/meter/" hreflang="en"><link data-rh="true" rel="alternate" href="https://docsaid.org/papers/transformers/multimodality/meter/" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://S9NC0RYCHF-dsn.algolia.net" crossorigin="anonymous"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DOCSAID RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DOCSAID Atom Feed">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script>
+
+
+<link rel="search" type="application/opensearchdescription+xml" title="DOCSAID" href="/opensearch.xml">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css" integrity="sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM" crossorigin="anonymous"><link rel="stylesheet" href="/assets/css/styles.3057f3b6.css">
+<script src="/assets/js/runtime~main.2feb62c1.js" defer="defer"></script>
+<script src="/assets/js/main.02db3e96.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳至主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳至主要内容</a></div><nav aria-label="主導航" class="navbar navbar--fixed-top navbarHideable_m1mJ"><div class="navbar__inner"><div class="navbar__items"><button aria-label="切換導覽列" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/docsaid_logo.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/docsaid_logo_white.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/docs/">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/papers/intro">Papers</a><a class="navbar__item navbar__link" href="/blog">Blog</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" class="iconLanguage_nlXk"><path fill="currentColor" d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>繁體中文</a><ul class="dropdown__menu"><li><a href="/papers/transformers/multimodality/meter/" target="_self" rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang="zh-hant">繁體中文</a></li><li><a href="/en/papers/transformers/multimodality/meter/" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="en">English</a></li></ul></div><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="切換淺色/深色模式（當前為淺色模式）" aria-label="切換淺色/深色模式（當前為淺色模式）" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><button type="button" class="DocSearch DocSearch-Button" aria-label="搜尋"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">搜尋</span></span><span class="DocSearch-Button-Keys"></span></button></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到頂部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd sidebarWithHideableNavbar_wUlq"><a tabindex="-1" class="sidebarLogo_isFc" href="/"><img src="/img/docsaid_logo.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/docsaid_logo_white.png" alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"><b></b></a><nav aria-label="文件側邊欄" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/papers/intro">Introduction</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/cnns">CNNs</a><button aria-label="展開側邊欄分類 &#x27;CNNs&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/face-recognition">Face Recognition</a><button aria-label="展開側邊欄分類 &#x27;Face Recognition&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/feature-fusion">Feature Fusion</a><button aria-label="展開側邊欄分類 &#x27;Feature Fusion&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/normalization">Normalization</a><button aria-label="展開側邊欄分類 &#x27;Normalization&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/object-detection">Object Detection</a><button aria-label="展開側邊欄分類 &#x27;Object Detection&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/papers/category/reparameterization">Reparameterization</a><button aria-label="展開側邊欄分類 &#x27;Reparameterization&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/papers/category/transformers">Transformers</a><button aria-label="收起側邊欄分類 &#x27;Transformers&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" tabindex="0" href="/papers/category/language">Language</a><button aria-label="展開側邊欄分類 &#x27;Language&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" tabindex="0" href="/papers/category/multimodality">Multimodality</a><button aria-label="收起側邊欄分類 &#x27;Multimodality&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/lxmert/">[19.08] LXMERT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/vilbert/">[19.08] ViLBERT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/visualbert/">[19.08] VisualBERT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/vlbert/">[19.08] VL-BERT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/uniter/">[19.09] UNITER</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/oscar/">[20.04] Oscar</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/pixelbert/">[20.04] Pixel-BERT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/ernie-vil/">[20.06] ERNIE-ViL</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/villa/">[20.06] VILLA</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/unimo/">[20.12] UNIMO</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/vinvl/">[21.01] VinVL</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/vilt/">[21.02] ViLT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/vlt5/">[21.02] VL-T5</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/clip/">[21.03] CLIP</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/mdetr/">[21.04] MDETR</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/albef/">[21.07] ALBEF</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/papers/transformers/multimodality/simvlm/">[21.08] SimVLM</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/papers/transformers/multimodality/meter/">[21.11] METER</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" tabindex="0" href="/papers/category/vision">Vision</a><button aria-label="展開側邊欄分類 &#x27;Vision&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></li></ul></nav><button type="button" title="收起側邊欄" aria-label="收起側邊欄" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="頁面路徑"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="主頁面" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/papers/category/transformers"><span itemprop="name">Transformers</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/papers/category/multimodality"><span itemprop="name">Multimodality</span></a><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">[21.11] METER</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本頁導覽</button></div><div class="theme-doc-markdown markdown"><header><h1>[21.11] METER</h1></header>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="繽紛的儀表板">繽紛的儀表板<a href="#繽紛的儀表板" class="hash-link" aria-label="繽紛的儀表板的直接連結" title="繽紛的儀表板的直接連結">​</a></h2>
+<p><a href="https://arxiv.org/abs/2111.02387" target="_blank" rel="noopener noreferrer"><strong>An Empirical Study of Training End-to-End Vision-and-Language Transformers</strong></a></p>
+<hr>
+<p>這是一篇彙整式論文。</p>
+<p>所以你可以預期在這裡會看到實驗，還有……更多的實驗。</p>
+<p>當前主流的 VLP 架構主要有三個組件：</p>
+<ul>
+<li>其一：視覺編碼器，也就是我們常講的 ViT。</li>
+<li>其二：文字編碼器，最常見的是 BERT。</li>
+<li>最後：共編碼器，這裡就是把視覺和文字整理起來的地方。</li>
+</ul>
+<p>作者首先整理了過去研究中使用架構的總表，把這三個組件一一拆解，然後娓娓道來。</p>
+<p><img decoding="async" loading="lazy" alt="All model summary" src="/assets/images/meter_6-69bf836a9e204eb8d7341fa117cb60bd.png" width="1024" height="431" class="img_ev3q"></p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="定義問題">定義問題<a href="#定義問題" class="hash-link" aria-label="定義問題的直接連結" title="定義問題的直接連結">​</a></h2>
+<p>說到底，就是視覺組件的問題：</p>
+<ol>
+<li>
+<p><strong>效率問題</strong></p>
+<p>在視覺和語言預訓練（VLP）中，大多數現有的模型依賴於預先訓練的目標檢測器（例如 Faster RCNN）來從影像中提取區域特徵。然而，這些目標檢測器在 VLP 過程中通常保持凍結狀態，限制了 VLP 模型的容量。此外，提取區域特徵的過程非常耗時，這可能會影響模型的效率和實用性。</p>
+</li>
+<li>
+<p><strong>探索太少</strong></p>
+<p>雖然 Transformer 在自然語言處理和電腦視覺中顯示出有希望的性能，但完全基於 Transformer 的 VLP 模型，特別是使用視覺 Transformer（ViT）作為影像編碼器的模型，仍然未得到充分的探索。雖然有一些基於 ViT 的 VLP 模型，但它們在下游任務如視覺問答等方面的性能仍然落後於最先進的性能。</p>
+</li>
+<li>
+<p><strong>優化器不一致</strong></p>
+<p>有些研究嘗試將卷積神經網路和文字的網格特徵直接輸入到 Transformer 中，但遇到了優化器不一致的問題，通常在 CNN 和 Transformer 中使用不同的優化器。最近的研究顯示，與 ViT 相比，CNN 在精度和計算成本（FLOPs）上的表現稍差。</p>
+</li>
+</ol>
+<p>看到作者提到「優化器不一致」的部分，讓我立刻意識到：這不就是在說 SimVLM 嗎？</p>
+<ul>
+<li><strong>傳送門：<a href="/papers/transformers/multimodality/simvlm/">SimVLM：簡單一點</a></strong></li>
+</ul>
+<p>畢竟人家也是 SoTA 架構，肯定是要給予足夠的尊重，但這不妨礙研究者們對其吹毛求疵，品頭論足一番，這畢竟是人類進步的原動力。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解決問題">解決問題<a href="#解決問題" class="hash-link" aria-label="解決問題的直接連結" title="解決問題的直接連結">​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="meter-模型設計">METER 模型設計<a href="#meter-模型設計" class="hash-link" aria-label="METER 模型設計的直接連結" title="METER 模  型設計的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="METER" src="/assets/images/meter_1-48dcc286bb35cb21b54d97a72b256a62.png" width="1468" height="606" class="img_ev3q"></p>
+<p>作者有系統地研究如何訓練高效能的視覺和語言轉換器，並從多個維度剖析模型設計：視覺編碼器、文字編碼器、多模態融合模組、架構設計（僅編碼器與編碼器-解碼器）和預訓練目標。</p>
+<ol>
+<li>
+<p><strong>Vision Encoder 挑選</strong></p>
+<p>本文主要探討了視覺變換器（ViTs）在視覺編碼器中的應用，特別是在處理 patch feature 方面。在 ViT 的機制中，影像首先被分割成多個 patch，然後這些 patch 被輸入到 Transformer 模型中進行處理。</p>
+<p>近期 ViT 已經成為一個熱門的研究主題，並且已經被應用在視覺和語言預訓練（VLP）領域中。然而，當與基於區域特徵的先進模型（例如：VinVL）相比時，所有這些基於 ViT 的模型的性能都顯得較差。</p>
+<p>另外，目前缺乏對不同預訓練 ViT 的系統性研究，以確定哪些 ViT 最適合 VLP 應用。為了解決這個問題，作者比較了多種不同的 ViT 模型，包括下列：</p>
+<ul>
+<li><strong>ViT (2020.10)：</strong>
+<ul>
+<li><a href="https://arxiv.org/abs/2010.11929" target="_blank" rel="noopener noreferrer">An Image is Worth 16×16 Words: Transformers for Image Recognition at Scale</a></li>
+</ul>
+</li>
+<li><strong>DeiT (2020.12)：</strong>
+<ul>
+<li><a href="https://arxiv.org/abs/2012.12877" target="_blank" rel="noopener noreferrer">Training data-efficient image transformers &amp; distillation through attention</a></li>
+</ul>
+</li>
+<li><strong>CLIP-ViT (2021.02)：</strong>
+<ul>
+<li><a href="https://arxiv.org/abs/2103.00020" target="_blank" rel="noopener noreferrer">Learning Transferable Visual Models From Natural Language Supervision</a></li>
+</ul>
+</li>
+<li><strong>Swin Transformer (2021.03)：</strong>
+<ul>
+<li><a href="https://arxiv.org/abs/2103.14030" target="_blank" rel="noopener noreferrer">Hierarchical Vision Transformer using Shifted Windows</a></li>
+</ul>
+</li>
+<li><strong>CaiT (2021.03)：</strong>
+<ul>
+<li><a href="https://arxiv.org/abs/2103.17239" target="_blank" rel="noopener noreferrer">Going deeper with Image Transformers</a></li>
+</ul>
+</li>
+<li><strong>VOLO (2021.06)：</strong>
+<ul>
+<li><a href="https://arxiv.org/abs/2106.13112" target="_blank" rel="noopener noreferrer">Vision Outlooker for Visual Recognition</a></li>
+</ul>
+</li>
+<li><strong>BEiT (2021.06)：</strong>
+<ul>
+<li><a href="https://arxiv.org/abs/2106.08254v2" target="_blank" rel="noopener noreferrer">BERT Pre-Training of Image Transformers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Text Encoder 挑選</strong></p>
+<p>在 BERT 和 RoBERTa 之後，VLP 模型首先將輸入句子分割成子詞序列。此步驟是在進行文本和視覺信息融合之前的文本處理階段。在分割子詞序列後，會在句子的開頭和末尾插入兩個特殊標記以產生輸入文本序列。這些特殊標記有助於定義句子的界限。</p>
+<p>作者的目標是在將特徵發送到融合模組之前首先使用文字編碼器。他們探索了使用不同的語言模型，如 BERT、RoBERTa、ELECTRA、ALBERT 和 DeBERTa 進行文本編碼。除了使用不同的語言模型外，作者還嘗試使用一個簡單的字嵌入查找層，該層由 BERT 嵌入層初始化。</p>
+<p>我們同樣把作者所選用的架構放上來：</p>
+<ul>
+<li><strong>BERT (2018.10)</strong>：<!-- -->
+<ul>
+<li><a href="https://arxiv.org/abs/1810.04805" target="_blank" rel="noopener noreferrer">Pre-training of Deep Bidirectional Transformers for Language Understanding</a></li>
+</ul>
+</li>
+<li><strong>RoBERTa (2019.07)</strong>：<!-- -->
+<ul>
+<li><a href="https://arxiv.org/abs/1907.11692" target="_blank" rel="noopener noreferrer">A Robustly Optimized BERT Pretraining Approach</a></li>
+</ul>
+</li>
+<li><strong>ALBERT (2019.09)</strong>：<!-- -->
+<ul>
+<li><a href="https://arxiv.org/abs/1909.11942" target="_blank" rel="noopener noreferrer">A Lite BERT for Self-supervised Learning of Language Representations</a></li>
+</ul>
+</li>
+<li><strong>ELECTRA (2020.03)</strong>：<!-- -->
+<ul>
+<li><a href="https://arxiv.org/abs/2003.10555" target="_blank" rel="noopener noreferrer">Pre-training Text Encoders as Discriminators Rather Than Generators</a></li>
+</ul>
+</li>
+<li><strong>DeBERTa (2020.06)</strong>：<!-- -->
+<ul>
+<li><a href="https://arxiv.org/abs/2006.03654" target="_blank" rel="noopener noreferrer">Decoding-enhanced BERT with Disentangled Attention</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Multimodal 架構</strong></p>
+<p><img decoding="async" loading="lazy" alt="METER model arch" src="/assets/images/meter_2-e997ec9f64398ae1aa5ad653eea8dfeb.png" width="1024" height="426" class="img_ev3q"></p>
+<p>由於端對端的 VLP 模型變得越來越流行，作者在新環境中重新評估了這兩種融合模組的影響。這可能是為了了解在新的模型架構或設置中哪種融合策略更有效。</p>
+<ul>
+<li>
+<p><strong>合併注意力模組</strong></p>
+<p>在此模組中，文字和視覺特徵被簡單地連接在一起，然後一起輸入到單一的 Transformer 模組中。這種方法允許在同一個 Transformer 模組中同時處理文本和視覺信息。</p>
+</li>
+<li>
+<p><strong>共同注意力模組</strong></p>
+<p>共同注意力模組將文字和視覺特徵獨立地輸入到不同的 Transformer 模組中。這個模組使用交叉注意力技術來實現跨模式的互動，即在視覺和文本特徵之間實現互動。</p>
+<p>對於基於區域的 VLP 模型，這兩種融合模組可以達到相似的表現。這表明，不同的融合策略可能對結果的影響不大。而合併注意力模組在參數效率上更高，因為它使用相同的參數集來處理兩種模式的特徵。這可能使得合併注意力模組在計算資源有限的情況下更為吸引人。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="encoder-only-vs-encoder-decoder">Encoder-Only vs. Encoder-Decoder<a href="#encoder-only-vs-encoder-decoder" class="hash-link" aria-label="Encoder-Only vs. Encoder-Decoder的直接連結" title="Encoder-Only vs. Encoder-Decoder的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="METER encoder-decoder" src="/assets/images/meter_3-22af86f4d0d10f0ef7aa65d807bd1418.png" width="1024" height="399" class="img_ev3q"></p>
+<p>作者比較了兩種不同的模型架構：僅「編碼器」架構和「編碼器-解碼器」架構，並探討了它們在視覺語言預訓練（VLP）模型中的應用：</p>
+<ul>
+<li>
+<p><strong>僅編碼器架構</strong></p>
+<p>在這種架構中，跨模態表示（例如視覺和文本特徵的結合）直接輸入到輸出層以產生最終輸出。VisualBERT 是採用僅編碼器架構的 VLP 模型的一個例子。</p>
+</li>
+<li>
+<p><strong>編碼器-解碼器架構</strong></p>
+<p>最近有一些模型，如：VL-T5 和 SimVLM，提倡使用編碼器-解碼器架構。在這種架構中，跨模態表示首先輸入到解碼器，然後再輸入到輸出層。解碼器在此過程中同時關注編碼器的表示和先前產生的標記，以自回歸的方式產生輸出。</p>
+<p>作者通過上圖的例子（執行 MLM 建模任務）展示了這兩種架構之間的差異。具體來看，編碼器-解碼器模型在執行像視覺問答（VQA）這樣的分類任務時，將文字輸入到編碼器，將分類標記輸入到解碼器，然後解碼器相應地產生輸出結果。</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="預訓練策略">預訓練策略<a href="#預訓練策略" class="hash-link" aria-label="預訓練策略的直接連結" title="預訓練策略的直接連結">​</a></h3>
+<p>作者挑出了在視覺語言預訓練（VLP）模型中的三種主要預訓練任務，包括：掩蔽語言建模（MLM）、圖像文字匹配（ITM）和掩蔽影像建模（MIM）：</p>
+<ol>
+<li>
+<p><strong>掩蔽語言建模（MLM）</strong></p>
+<p>初始於純語言預訓練，後於 VLP 中延伸應用，目的是在給定圖像標題對時，隨機屏蔽一些輸入標記，並訓練模型以重建這些屏蔽的標記。</p>
+</li>
+<li>
+<p><strong>圖像-文字匹配（ITM）</strong></p>
+<p>模型需要識別哪些圖像和標題相互匹配，通常作為二元分類問題。模型學習全域跨模態表示，並利用分類器預測是否匹配。</p>
+</li>
+<li>
+<p><strong>掩蔽影像建模（MIM）</strong></p>
+<p>這是一種在視覺預訓練模型中應用的技術，其靈感主要來自於掩蔽語言建模（MLM）。在 MIM 中，模型的目的是在某些視覺特徵被屏蔽或隱藏的情況下，嘗試重建或預測這些被屏蔽的視覺特徵。作者提出了一些改善方法，例如：Masked Patch Classification with In-batch Negatives 和 Masked Patch Classification with Discrete Code。</p>
+</li>
+</ol>
+<p>這裡沒有提到剛剛獲得成功 PrefixLM，我認為主要的原因可能是：是在本篇論文中，作者認為 PrefixLM 並不是主流的方法，而且 SimVLM 的成功主要原因可能是他們的資料集規模龐大，因此沒有特別拿出 PrefixLM 進行討論。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p><strong>掩蔽影像建模（MIM）</strong></p><p>掩蔽影像建模（Masked Image Modeling, MIM）是一種 在視覺預訓練模型中應用的技術，其靈感主要來自於掩蔽語言建模（MLM）。在 MIM 中，模型的目的是在某些視覺特徵被屏蔽或隱藏的情況下，嘗試重建或預測這些被屏蔽的視覺特徵。</p><p>例如：LXMERT 和 UNITER 等模型在某些輸入區域被屏蔽的情況下，訓練模型來回歸原始區域特徵。這通常是通過最小化均方誤差損失來實現的。儘管 MIM 在某些模型中顯示出潛力，但最近的一些先進模型（例如 ALBEF 和 VinVL）在 VLP 期間並未應用 MIM，表明可能對 MIM 在 VLP 模型中的真正效用存在疑慮。</p><p>既然有疑慮，於是作者提出了一些改善：</p><ol>
+<li>
+<p><strong>Masked Patch Classification with In-batch Negatives</strong></p>
+<p>這個方法是受到了 MLM 的啟發，它用一種特殊的方式來重建被遮蔽的圖像部分（或稱為 Patch）。 在訓練過程中，模型的任務是從所有可能的 Patch 中找出被遮蔽的原始 Patch。為了做到這一點，它創建了一個臨時的「詞彙表」，由當前批次中的所有 Patch 組成。 這樣模型就能嘗試從這個臨時「詞彙表」中找到被遮擋 Patch 的最佳匹配。</p>
+</li>
+<li>
+<p><strong>Masked Patch Classification with Discrete Code</strong></p>
+<p>這個方法的靈感來自於 BEiT，它的目的是透過訓練模型來重新創建被遮蓋掉的圖像部分（Patch）。首先，它用一個叫做 VQ-VAE 的模型，將圖像轉換成一組特定的標籤，這些標籤是離散的，這意味著它們是明確且分開的。 然後模型的任務是嘗試預測這些被遮蓋掉的圖像部分原來對應的標籤，而不是直接預測被遮蓋掉的圖像部分本身。</p>
+</li>
+</ol></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="資料集">資料集<a href="#資料集" class="hash-link" aria-label="資料集的直接連結" title="資料集的直接連結">​</a></h3>
+<p>模型在四個常用資料集上預先訓練，包括 COCO、Conceptual Captions、SBU Captions 和 Visual Genome，依循著先前的研究，組合訓練資料共包含約 4M 張圖片。&#x27;</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="技術細節">技術細節<a href="#技術細節" class="hash-link" aria-label="技術細節的直接連結" title="技術細節的直接連結">​</a></h3>
+<ul>
+<li>除非另有說明，隱藏層大小設定為 768， Head 設定為 12。</li>
+<li>視覺分支和語言分支之間沒有解碼器，也沒有參數共享。</li>
+<li>除特殊情況外，模型僅使用 MLM 和 ITM 進行預訓練。</li>
+<li>使用 AdamW 預先訓練模型 100,000 步，底層和頂層的學習率分別設定為 1e-5 和 5e-5。</li>
+<li>預熱比率為 10%，學習率在總訓練步數的 10% 後線性衰減到 0。</li>
+<li>根據所採用的視覺轉換器，使用 center-crop 將每個影像的大小調整為 224×224 或 384×384。</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="討論">討論<a href="#討論" class="hash-link" aria-label="討論的直接連結" title="討論的直接連結">​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="模組分開評估">模組分開評估<a href="#模組分開評估" class="hash-link" aria-label="模組分開評估的直接連結" title="模組分開評估的直接連結">​</a></h3>
+<p>因為預訓練過程非常耗時，為了提高效率，研究首先透過比較不同的文字和視覺編碼器而不進行視覺語言預訓練（VLP）來進行：</p>
+<ul>
+<li>使用特定的預訓練視覺和文字編碼器來初始化模型的底層，而頂層則進行隨機初始化。</li>
+<li>預設選擇的編碼器為 CLIP-ViT-224/32 和 RoBERTa，其中 ViT-N/M 中的 N 和 M 分別代表影像解析度和區塊大小。</li>
+</ul>
+<ol>
+<li>
+<p><strong>Text Encoder 評比</strong></p>
+<p><img decoding="async" loading="lazy" alt="meter_4" src="/assets/images/meter_4-aef51740f3998d1d833802a093b8d2a9.png" width="1024" height="387" class="img_ev3q"></p>
+<p>不 同文字編碼器的模型表現並沒有顯著差異。 RoBERTa 似乎在此設定中實現了最強勁的性能。 此外，從 Emb-only 結果可以看出，有必要有一個預先訓練的編碼器，否則下游任務表現將會下降。</p>
+</li>
+<li>
+<p><strong>Vision Encoder 評比</strong></p>
+<p><img decoding="async" loading="lazy" alt="meter_5" src="/assets/images/meter_5-8993adf1775cbd10e476c1f2fca64cea.png" width="1024" height="393" class="img_ev3q"></p>
+<p>CLIP-ViT-224/16 和 Swin Transformer 在此設定下均可達到不錯的效能。 值得注意的是，Swin Transformer 在沒有任何 VLP 的測試開發集上可以達到 72.38 的 VQA 分數，這在預訓練後已經可以與一些 VLP 模型相媲美。</p>
+</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="vl-綜合評估">V+L 綜合評估<a href="#vl-綜合評估" class="hash-link" aria-label="V+L 綜合評估的直接連結" title="V+L 綜合評估的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="meter_7" src="/assets/images/meter_7-73aaf0343b909b4884999b5953a75f42.png" width="1024" height="337" class="img_ev3q"></p>
+<p>兩者搭配，成為 VLP 架構之後，BERT 和 RoBERTa 之間的差異似乎縮小了，但在底部有一個預先訓練的文本編碼器仍然很重要（Embed-only 與 RoBERTa）。 對於視覺編碼器，CLIP-ViT-224/16 和 Swin Transformer 都可以達到相當不錯的性能。 特別是，CLIP-ViT-224/16 在 test-dev/test-std 集合上分別可以達到 77.19/77.20 的 VQA 分數，優於先前最先進的基於區域的 VinVL 模型。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p><strong>來自論文作者的友情提示</strong></p><p>作者有提供一個有趣的技巧，用來提升模型表現。</p><p><img decoding="async" loading="lazy" alt="meter_8" src="/assets/images/meter_8-89b2acec6abe77b02e1d8787fb1f75c2.png" width="966" height="320" class="img_ev3q"></p><p>相較於使用預訓練模型初始化的參數，對於隨機初始化的參數使用更大的學習率是更好的。如果對模型的所有部分使用相同的學習率，會使得模型效能下降。這可能是因為預訓練的參數已經包含了一些視覺和語言方面的知識，而過於積極的微調可能會損失這些有價值的資訊。</p></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="融合技巧和-decoder-的貢獻探討">融合技巧和 Decoder 的貢獻探討<a href="#融合技巧和-decoder-的貢獻探討" class="hash-link" aria-label="融合技巧和 Decoder 的貢獻探討的直接連結" title="融合技巧和 Decoder 的貢獻探討的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="meter_9" src="/assets/images/meter_9-1bb641394e63d9fe12c6c625dac23f7d.png" width="1024" height="249" class="img_ev3q"></p>
+<p>作者設計了合併注意力模型和共同注意力模型並比較了它們的表現。</p>
+<p>實驗結果表示：共同注意力模型的表現優於合併注意力模型，這暗示著保持兩種模式具有不同參數集是重要的。</p>
+<p>不過，這個結果與先前基於區域的 VLP 模型的研究結果有所矛盾，作者認為這可能是因為：</p>
+<ol>
+<li>基於區域的 VLP 模型的研究結果不一定能直接應用於基於 ViT 的 VLP 模型。</li>
+<li>大部分的基於區域的 VLP 模型只使用預  先訓練的視覺編碼器，而不包含預先訓練的文字編碼器，這使得像共同注意模型這樣的對稱架構在這些情況下可能不太適用。</li>
+</ol>
+<p>另一方面，在實驗 Encoder 對比 Encoder-Decoder 架構的部分，實驗根據文獻採用了 T5 風格的語言建模目標，屏蔽了 15% 的輸入文字標記，使用哨兵標記替換了連續的文字範圍，並訓練解碼器來重建被屏蔽的標記。對於圖像文字匹配任務，向解碼器提供了特殊的類別標記以生成二進位輸出。</p>
+<p>結果顯示，僅編碼器模型在兩個判別任務上的表現優於編碼器-解碼器模型，這與文獻的發現一致。但值得注意的是，編碼器-解碼器架構更為靈活，能夠執行如影像字幕等任務，這對僅應用編碼器的模型來說可能較為困難。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>我們看到這裡有個問題，為什麼 SimVLM 比起 T5 有著更優秀的性能，為什麼在評比 Decoder 的時候，不採用 SimVLM 的風格？而是要選用 T5 的風格？</p><p>作者沒有解釋，但推測可能的原因是作者認為 SimVLM 使用大規模資料集的關係，所以它在這邊沒有相同的比較基礎，所以就選了 T5 來作為參考。</p></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="擴大資料集規模">擴大資料集規模<a href="#擴大資料集規模" class="hash-link" aria-label="擴大資料集規模的直接連結" title="擴大資料集規模的直接連結">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="meter_10" src="/assets/images/meter_10-5e32604002bbf7b73d39805116f5a0ae.png" width="990" height="192" class="img_ev3q"></p>
+<p>作者通過使用更多的圖像和更大的視覺主幹來進行模型的預訓練，來驗證這個框架的可擴展性。具體的預訓練資料包括 COCO、CC、CC12M、SBU 和 VG 這五個資料集，它們總共提供了大約 1400 萬張圖像和 2000 萬張圖像標題對，為模型的預訓練提供了豐富的資料。</p>
+<p>在視覺主幹的選擇上，採用了 CoSwin-Huge 作為視覺主幹，它有能力處理大量的視覺資料。
+文字主幹方面，選擇了 RoBERTa-base 來進行文字的處理，這個選擇保證了文字資訊能夠被有效地編碼。
+通過擴展後的設定，模型在 VQAv2 上表現出最先進的性能，超越了之前使用了 18 億張圖像訓練的 SimVLM，這個結果證明了 METER 框架具有很好的可擴展性，可以通過增加資料和調整模型結構來達到更好的效果。</p>
+<h1>結論</h1>
+<p>整體的實驗設計的某些方面似乎顯得稍微不足，並且缺乏足夠的控制變數以確保結果的可靠性。例如：在一開始提出了眾多的文本主幹（6 個）和圖像主幹（9 個）時，雖然這些架構的提出背後都有其優化的重點，但在作者組合兩個主幹成為 V+L 的模型 時，卻統一採用了相同的邏輯，而沒有針對不同的架構進行最優調整。 這種「一刀切」的方法可能未能充分發揮每種架構的獨特優勢，同時也可能掩蓋了某些潛在問題的發現。</p>
+<ol>
+<li>
+<p>RoBERTa 有別於 BERT 採用了新的動態 MASK 機制，但在本論文中卻都一致地使用 MLM 策略？Vision Encoder 的部分也同樣沒有看到什麼細緻的操作，就只是拿個效果比較好的架構，然後把它湊成 V+L 的模型？</p>
+</li>
+<li>
+<p>SimVLM 所採用的 PrefixLM 如果用在作者所提出來的架構上，效果會如何呢？當不同的文字和圖像主幹結合時，是否該搭配不同的參數設定和優化技巧，以確保各種架構的最佳表現？以及嘗試了多種多模態融合策略，以驗證模型的泛化能力和穩定性？</p>
+</li>
+</ol>
+<p>儘管有上述這些較為可惜的地方，我非常認同該研究在多模態學習領域所做的努力和貢獻。透過探索不同的文字和圖像主幹組合，為讀者提供了一個全新的視角來理解多模態學習的可能性和挑戰。而且，透過大量的實驗和比較，也為未來的研究提供了寶貴的參考和啟示。</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">最後<!-- -->由 <b>zephyr-sh</b> <!-- -->於 <b><time datetime="2024-09-03T01:48:11.000Z" itemprop="dateModified">2024年9月3日</time></b> <!-- -->更新</span></div></div></footer><div style="margin-top:3rem"> </div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="文件選項卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/papers/transformers/multimodality/simvlm/"><div class="pagination-nav__sublabel">上一頁</div><div class="pagination-nav__label">[21.08] SimVLM</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/papers/category/vision"><div class="pagination-nav__sublabel">下一頁</div><div class="pagination-nav__label">Vision</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#繽紛的儀表板" class="table-of-contents__link toc-highlight">繽紛的儀表板</a></li><li><a href="#定義問題" class="table-of-contents__link toc-highlight">定義問題</a></li><li><a href="#解決問題" class="table-of-contents__link toc-highlight">解決問題</a><ul><li><a href="#meter-模型設計" class="table-of-contents__link toc-highlight">METER 模型設計</a></li><li><a href="#encoder-only-vs-encoder-decoder" class="table-of-contents__link toc-highlight">Encoder-Only vs. Encoder-Decoder</a></li><li><a href="#預訓練策略" class="table-of-contents__link toc-highlight">預訓練策略</a></li><li><a href="#資料集" class="table-of-contents__link toc-highlight">資料集</a></li><li><a href="#技術細節" class="table-of-contents__link toc-highlight">技術細節</a></li></ul></li><li><a href="#討論" class="table-of-contents__link toc-highlight">討論</a><ul><li><a href="#模組分開評估" class="table-of-contents__link toc-highlight">模組分開評估</a></li><li><a href="#vl-綜合評估" class="table-of-contents__link toc-highlight">V+L 綜合評估</a></li><li><a href="#融合技巧和-decoder-的貢獻探討" class="table-of-contents__link toc-highlight">融合技巧和 Decoder 的貢獻探討</a></li><li><a href="#擴大資料集規模" class="table-of-contents__link toc-highlight">擴大資料集規模</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a class="footer__link-item" href="/docs">Docs</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/papers/intro">Papers</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/blog">Blog</a><span class="footer__link-separator">·</span><a href="https://github.com/DocsaidLab" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a href="https://docsaid.org/blog/terms-of-service" target="_blank" rel="noopener noreferrer" class="footer__link-item">使用條款<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a href="https://docsaid.org/blog/privacy-policy" target="_blank" rel="noopener noreferrer" class="footer__link-item">隱私政策<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 DOCSAID.</div></div></div></footer></div>
+</body>
+</html>
