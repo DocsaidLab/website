@@ -18,16 +18,16 @@ sidebar_position: 1
 
 ＊
 
-目前我在 Github 上已經完成了幾個專案，包括：
+目前我在 Github 上公開了幾個已經完成的專案，包括：
 
-1. [**AutoTraderX**](./autotraderx/intro.md)：這是我練習串接臺灣證券交易券商的系統，所留下的紀錄。
+1. [**AutoTraderX**](./autotraderx/intro.md)：這是我練習串接臺灣證券交易券商的系統而留下的紀錄。
 2. [**DocsaidKit**](./docsaidkit/intro.md)：這是我自己寫的工具箱。
-3. [**DocAligner**](./docaligner/intro.md)：這是深度學習專案，用來定位文件的四個角點。
-4. [**DocClassifier**](./docclassifier/intro.md)：這是深度學習專案，用來比對文件相似度。
-5. [**GmailSummary**](./gmailsummary/intro.md)：這是我練習串接 Gmail 和 OpenAI，所留下的紀錄。
+3. [**DocAligner**](./docaligner/intro.md)：【深度學習】功能是定位文件的四個角點。
+4. [**DocClassifier**](./docclassifier/intro.md)：【深度學習】功能是比對文件相似度。
+5. [**GmailSummary**](./gmailsummary/intro.md)：這是我練習串接 Gmail 和 OpenAI 而留下的紀錄。
 6. [**WordCanvas**](./wordcanvas/intro.md)：這是我自己寫的合成文字圖像的工具，用來製作訓練資料。
 
-大部分的專案沒有公開，有些還在開發中。有更多的是已經開發完成但效果普通，既然普通就是還需要優化，等我滿意了再公開。
+還有一些其他的專案沒有公開，有些還在開發中。有更多的是已經開發完成但效果普通，既然普通就是還需要優化，等我滿意了再來考慮公開的事項。
 
 ## 你是工程師？
 
