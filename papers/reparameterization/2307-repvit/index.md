@@ -58,7 +58,7 @@
 :::tip
 沒看過 DeiT 的讀者可以參考：
 
-- [**[20.12] DeiT: 來人，把 ViT 拿去蒸了！**](../../transformers/vision/2012-deit/index.md)
+- [**[20.12] DeiT: 蒸餾後更香醇**](../../transformers/vision/2012-deit/index.md)
   :::
 
 ### 重新參數化結構

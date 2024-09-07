@@ -1,6 +1,6 @@
 # [20.12] DeiT
 
-## 來人，把 ViT 拿去蒸了！
+## 蒸餾後更香醇
 
 [**Training data-efficient image transformers & distillation through attention**](https://arxiv.org/abs/2012.12877)
 
