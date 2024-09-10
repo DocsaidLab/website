@@ -120,7 +120,7 @@ LXMERT 也誕生在這一系列探索的高峰時期，但它所做的不僅僅�
 1. **VQA (Visual Question Answering)**
 
    - 先前的最先進結果是由 Kim 等人於 2018 年提出的 [**BAN+Counter**](https://arxiv.org/abs/1805.07932)，它在 VQA 上比其他近期的方法（如 MFH、Pythia、DFAF 和 Cycle-Consistency）表現更好。
-   - 然而，LXMERT 在整體準確性上提高了 2.1%，並在 「Binary」 和 「Other」 的問題子類別上取得了 2.4% 的改進。值得注意的是，即使 LXMERT 並未像 BAN+Counter 那樣明確地使用計數模組，它在計數相關問題（如「Number」）上的結果仍然相同或更好。
+   - 然而，LXMERT 在整體準確性上提高了 2.1%，並在 「Binary」 和 「Other」 的問題子類別上取得了 2.4% 的改進。即使 LXMERT 並未像 BAN+Counter 那樣明確地使用計數模組，它在計數相關問題（如「Number」）上的結果仍然相同或更好。
 
 2. **GQA**
 

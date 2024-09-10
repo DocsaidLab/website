@@ -76,7 +76,7 @@ Mobile-Former 在大多數組別中，以更低的計算成本（FLOP）超越�
 
 所有變體均使用 224×224 的影像解析度，且未使用教師網路進行蒸餾訓練。Mobile-Former 在計算成本僅為其他 Transformer 變體的 30% 時，仍然取得更高的準確率。這是因為 Mobile-Former 使用較少的 token 來建模全局互動，並有效利用 MobileNet 來提取局部特徵。
 
-值得注意的是，Mobile-Former（訓練 450 個 epoch 且未進行蒸餾）甚至優於使用教師網路蒸餾且訓練 1000 個 epoch 的 LeViT（準確率 77.9% vs. 76.6%，FLOP 為 294M vs. 305M）。
+Mobile-Former（訓練 450 個 epoch 且未進行蒸餾）甚至優於使用教師網路蒸餾且訓練 1000 個 epoch 的 LeViT（準確率 77.9% vs. 76.6%，FLOP 為 294M vs. 305M）。
 
 ---
 

@@ -180,7 +180,7 @@ PVT 使用 SRA 機制（Spatial Reduction Attention）來減少注意力機制�
 - **Swin-T (81.3%)** 比 **DeiT-S (79.8%)** 提升了 1.5%。
 - **Swin-B (83.3%/84.5%)** 比 **DeiT-B (81.8%/83.1%)** 分別提升了 1.5% 和 1.4%。
 
-與最先進的 ConvNet 架構（如 RegNet 和 EfficientNet）相比，Swin Transformer 在速度與精度權衡方面也略勝一籌。值得注意的是，雖然 RegNet 和 EfficientNet 是通過徹底的架構搜尋獲得的，但所提出的 Swin Transformer 是根據標準 Transformer 改編的，並且具有進一步改進的強大潛力。
+與最先進的 ConvNet 架構（如 RegNet 和 EfficientNet）相比，Swin Transformer 在速度與精度權衡方面也略勝一籌。雖然 RegNet 和 EfficientNet 是通過徹底的架構搜尋獲得的，但所提出的 Swin Transformer 是根據標準 Transformer 改編的，並且具有進一步改進的強大潛力。
 
 ### 物件偵測-設定
 
