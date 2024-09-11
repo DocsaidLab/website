@@ -3,7 +3,7 @@ slug: /
 sidebar_position: 1
 ---
 
-# Introduction
+# Open Source Project
 
 Welcome to my website!
 

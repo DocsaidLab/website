@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# 介紹
+# 論文筆記
 
 ## 日常
 

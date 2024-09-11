@@ -1,4 +1,8 @@
-# Worklog
+---
+sidebar_position: 2
+---
+
+# 工作日誌
 
 ---
 
