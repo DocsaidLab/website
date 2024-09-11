@@ -109,7 +109,7 @@ The task involves predicting whether a prompt feature pair matches a particular 
 
 To create positive and negative feature pairs, the authors introduced a **Prompt Feature Bank** inspired by **ALBEF** to store prompt features, from which positive and negative pairs are sampled for training. Hard Negative Mining is used to boost training efficiency.
 
-- [**[21.07] ALBEF: Pursuing the Pure Path**](../../transformers/multimodality/2107-albef/index.md)
+- [**[21.07] ALBEF: Pursuing the Pure Path**](../../multimodality/2107-albef/index.md)
 
 After generating positive and negative pairs, they are passed through a fully connected layer, producing a logit, which is optimized using Cross Entropy Loss:
 

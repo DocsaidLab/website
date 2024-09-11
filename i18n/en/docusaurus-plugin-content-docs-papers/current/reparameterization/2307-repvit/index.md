@@ -20,8 +20,8 @@ Research on lightweight vision models is primarily divided into two camps:
 :::tip
 For those unfamiliar with MetaFormer, you might find these references useful:
 
-- [**[21.11] PoolFormer: You Need a Meta!**](../../transformers/vision/2111-poolformer/index.md)
-- [**[22.10] CAFormer: MetaFormer User Manual**](../../transformers/vision/2210-caformer/index.md)
+- [**[21.11] PoolFormer: You Need a Meta!**](../../vision-transformers/2111-poolformer/index.md)
+- [**[22.10] CAFormer: MetaFormer User Manual**](../../vision-transformers/2210-caformer/index.md)
   :::
 
 ---
@@ -56,7 +56,7 @@ All models are trained using these standardized methods.
 :::tip
 For those unfamiliar with DeiT, you might find this reference helpful:
 
-- [**[20.12] DeiT: Distillation ViT**](../../transformers/vision/2012-deit/index.md)
+- [**[20.12] DeiT: Distillation ViT**](../../vision-transformers/2012-deit/index.md)
   :::
 
 ### Reparameterizing the Structure

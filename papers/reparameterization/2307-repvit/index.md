@@ -22,8 +22,8 @@
 :::tip
 沒看過 MetaFormer 的讀者可以參考：
 
-- [**[21.11] PoolFormer: 你需要的是框架！**](../../transformers/vision/2111-poolformer/index.md)
-- [**[22.10] CAFormer: MetaFormer 使用說明書**](../../transformers/vision/2210-caformer/index.md)
+- [**[21.11] PoolFormer: 你需要的是框架！**](../../vision-transformers/2111-poolformer/index.md)
+- [**[22.10] CAFormer: MetaFormer 使用說明書**](../../vision-transformers/2210-caformer/index.md)
   :::
 
 ---
@@ -58,7 +58,7 @@
 :::tip
 沒看過 DeiT 的讀者可以參考：
 
-- [**[20.12] DeiT: 蒸餾後更香醇**](../../transformers/vision/2012-deit/index.md)
+- [**[20.12] DeiT: 蒸餾後更香醇**](../../vision-transformers/2012-deit/index.md)
   :::
 
 ### 重新參數化結構

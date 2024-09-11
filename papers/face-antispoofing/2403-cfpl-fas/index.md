@@ -119,7 +119,7 @@ $$
 
 作者在這裡引入 ALBEF 的設計理念，透過一個 Bank 來儲存一定數量的 Prompt 特徵，這樣就可以在訓練過程中，隨機抽樣出正負樣本對，並且搭配「Hard Negative Mining」的方式，來提高訓練的效率。
 
-- [**[21.07] ALBEF: 追尋純粹的路**](../../transformers/multimodality/2107-albef/index.md)
+- [**[21.07] ALBEF: 追尋純粹的路**](../../multimodality/2107-albef/index.md)
 
 組合正負樣本對之後，透過一個全連接層，得到一個 logit，再透過 Cross Entropy Loss 來進行優化，整個流程的數學式如下：
 

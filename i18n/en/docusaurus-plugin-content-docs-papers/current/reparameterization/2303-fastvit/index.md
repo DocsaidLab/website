@@ -24,13 +24,13 @@ Several design directions have been established over the past few years for Tran
 
 First, we structure multiple layers corresponding to the multi-scale resolution needs of vision tasks. This concept comes from PVT and Swin Transformer:
 
-- [**[21.02] PVT: Spatial Reduction Attention Mechanism**](../../transformers/vision/2102-pvt/index.md)
-- [**[21.03] Swin Transformer: The Dance Begins**](../../transformers/vision/2103-swin-transformer/index.md)
+- [**[21.02] PVT: Spatial Reduction Attention Mechanism**](../../vision-transformers/2102-pvt/index.md)
+- [**[21.03] Swin Transformer: The Dance Begins**](../../vision-transformers/2103-swin-transformer/index.md)
 
 Next, we design a Token Mixer block paired with an FFN block to form a basic module, a concept derived from MetaFormer:
 
-- [**[21.11] PoolFormer: You Need a Meta!**](../../transformers/vision/2111-poolformer/index.md)
-- [**[22.10] CaFormer: MetaFormer User Manual**](../../transformers/vision/2210-caformer/index.md)
+- [**[21.11] PoolFormer: You Need a Meta!**](../../vision-transformers/2111-poolformer/index.md)
+- [**[22.10] CaFormer: MetaFormer User Manual**](../../vision-transformers/2210-caformer/index.md)
 
 After proposing MobileOne, the authors turned their attention to this structural architecture.
 

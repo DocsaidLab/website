@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Introduction
+# 介紹
 
 ## 日常
 
