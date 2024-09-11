@@ -156,7 +156,7 @@ useEffect(() => {
 
 - [**Freepik**](https://www.freepik.com/icons/error)
 
-然後下載下來，放在 `static/img` 目錄下，然後在 `index.js` 中引入。
+把它下載下來，放在 `static/img` 目錄下，然後在 `index.js` 中引入。
 
 ```jsx
 <img
