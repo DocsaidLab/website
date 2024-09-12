@@ -14,7 +14,7 @@ description: LaTeX syntax quick reference
 
 ---
 
-每次要用的時候都是一陣好找，所以我們決定寫一份 LaTeX 語法快速查詢表格。
+每次需要使用 LaTeX 時，往往會忘記部分語法，因此這份快速查詢表將常用的 LaTeX 語法整理在一起，方便隨時查閱。
 
 <!-- truncate -->
 
@@ -56,19 +56,24 @@ description: LaTeX syntax quick reference
 |                | 邏輯非             |                     `\neg`                     |                    $\neg$                     |
 |                | 不等於             |                     `\neq`                     |                    $\neq$                     |
 |                | 約等於             |                   `\approx`                    |                   $\approx$                   |
-| **特殊符號**   | 希臘字母 α         |                    `\alpha`                    |                   $\alpha$                    |
-|                | 希臘字母 β         |                    `\beta`                     |                    $\beta$                    |
-|                | 希臘字母 γ         |                    `\gamma`                    |                   $\gamma$                    |
-|                | 角                 |                    `\angle`                    |                   $\angle$                    |
-|                | 三角形             |                  `\triangle`                   |                  $\triangle$                  |
-|                | 正方形             |                   `\square`                    |                   $\square$                   |
-|                | 實部               |                     `\Re`                      |                     $\Re$                     |
-|                | 虛部               |                     `\Im`                      |                     $\Im$                     |
-|                | 虛數單位 i         |                    `\imath`                    |                   $\imath$                    |
-|                | 虛數單位 j         |                    `\jmath`                    |                   $\jmath$                    |
-|                | 希臘字母 ε         |                   `\epsilon`                   |                  $\epsilon$                   |
-|                | 希臘字母 φ         |                     `\phi`                     |                    $\phi$                     |
-|                | 變形希臘字母 φ     |                   `\varphi`                    |                   $\varphi$                   |
+| **希臘字母**   | 小寫 α             |                    `\alpha`                    |                   $\alpha$                    |
+|                | 大寫 Α             |                    `\Alpha`                    |                   $\Alpha$                    |
+|                | 小寫 β             |                    `\beta`                     |                    $\beta$                    |
+|                | 大寫 Β             |                    `\Beta`                     |                    $\Beta$                    |
+|                | 小寫 γ             |                    `\gamma`                    |                   $\gamma$                    |
+|                | 大寫 Γ             |                    `\Gamma`                    |                   $\Gamma$                    |
+|                | 小寫 δ             |                    `\delta`                    |                   $\delta$                    |
+|                | 大寫 Δ             |                    `\Delta`                    |                   $\Delta$                    |
+|                | 小寫 ε             |                   `\epsilon`                   |                  $\epsilon$                   |
+|                | 大寫 Ε             |                   `\Epsilon`                   |                  $\Epsilon$                   |
+|                | 變形小寫 φ         |                   `\varphi`                    |                   $\varphi$                   |
+|                | 大寫 Φ             |                     `\Phi`                     |                    $\Phi$                     |
+|                | 小寫 χ             |                     `\chi`                     |                    $\chi$                     |
+|                | 大寫 Χ             |                     `\Chi`                     |                    $\Chi$                     |
+|                | 小寫 μ             |                     `\mu`                      |                     $\mu$                     |
+|                | 大寫 Μ             |                     `\Mu`                      |                     $\Mu$                     |
+|                | 小寫 ω             |                    `\omega`                    |                   $\omega$                    |
+|                | 大寫 Ω             |                    `\Omega`                    |                   $\Omega$                    |
 | **矩陣和向量** | 矩陣（括號）       | `\begin{pmatrix} a & b \\ c & d \end{pmatrix}` | $\begin{pmatrix} a & b\\ c & d \end{pmatrix}$ |
 |                | 矩陣（無括號）     |  `\begin{matrix} x & y \\ z & w \end{matrix}`  | $\begin{matrix} x & y \\ z & w \end{matrix}$  |
 |                | 向量               |                   `\vec{v}`                    |                   $\vec{v}$                   |
@@ -91,16 +96,11 @@ description: LaTeX syntax quick reference
 |                | 空集合（好看）     |                 `\varnothing`                  |                 $\varnothing$                 |
 |                | 屬於               |                     `\in`                      |                     $\in$                     |
 |                | 不屬於             |                   `\not\in`                    |                   $\not\in$                   |
-|                | 希臘字母 χ         |                     `\chi`                     |                    $\chi$                     |
 |                | 逆時針圓箭頭       |               `\circlearrowleft`               |              $\circlearrowleft$               |
 |                | 順時針圓箭頭       |              `\circlearrowright`               |              $\circlearrowright$              |
-|                | 逆時針曲線箭頭     |               `\curvearrowleft`                |               $\curvearrowleft$               |
-|                | 順時針曲線箭頭     |               `\curvearrowright`               |              $\curvearrowright$               |
 |                | 普朗克常數         |                    `\hbar`                     |                    $\hbar$                    |
 |                | 自然對數           |                     `\ln`                      |                     $\ln$                     |
 |                | 常數 $\pi$         |                     `\pi`                      |                     $\pi$                     |
-|                | 集合符號 $\cup$    |                     `\cup`                     |                    $\cup$                     |
-|                | 集合符號 $\cap$    |                     `\cap`                     |                    $\cap$                     |
 | **格式**       | 函數顏色           |         `f(x) = a{\color{red}{x}} + b`         |        $f(x) = a{\color{red}{x}} + b$         |
 |                | 顏色框             |        `\colorbox{#eeeeee}{Color Box}`         |        $\colorbox{#eeeeee}{Color Box}$        |
 |                | 書法字體           |            `{\cal ABCDE12345abced}`            |           ${\cal ABCDE12345abced}$            |
