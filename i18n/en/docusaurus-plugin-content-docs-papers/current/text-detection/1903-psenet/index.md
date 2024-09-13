@@ -113,14 +113,23 @@ W_{x,y} =
 \end{cases}
 $$
 
-### Training Data
+### Training Datasets
 
-PSENet was trained and evaluated on several datasets:
+- **CTW1500**
 
-- **CTW1500**: Contains challenging long curved text instances with polygon annotations.
-- **Total-Text**: Includes horizontal, multi-oriented, and curved text instances.
-- **ICDAR 2015**: A standard dataset for text detection, annotated with quadrilateral bounding boxes.
-- **ICDAR 2017 MLT**: A large multilingual dataset with images from nine languages.
+  CTW1500 is a challenging dataset designed for detecting long, curved text. Created by Yuliang et al., it contains 1,000 training images and 500 test images. Unlike traditional text datasets like ICDAR 2015 and ICDAR 2017 MLT, CTW1500 annotates text instances using 14-point polygons, allowing it to describe arbitrarily shaped curved text.
+
+- **Total-Text**
+
+  Total-Text is a newly released curved text detection dataset that includes horizontal, multi-oriented, and curved text instances. The dataset contains 1,255 training images and 300 test images.
+
+- **ICDAR 2015**
+
+  ICDAR 2015 is a widely-used dataset in text detection, consisting of 1,500 images, with 1,000 for training and 500 for testing. Text regions are annotated as quadrilaterals with four vertices.
+
+- **ICDAR 2017 MLT**
+
+  IC17-MLT is a large-scale multi-lingual text dataset that includes 7,200 training images, 1,800 validation images, and 9,000 test images. It contains full scene images across nine languages, making it a comprehensive dataset for multi-lingual text detection.
 
 ### Training Strategy
 
