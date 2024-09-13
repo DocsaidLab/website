@@ -2,110 +2,127 @@
 sidebar_position: 2
 ---
 
-# Worklog
+# Work Log
 
-This page is solely used to document our work content.
+---
+
+:::info
+This page is solely for recording our work activities.
+:::
 
 ---
 
 ## 2024
 
+### September
+
+- **MRZScanner**: Deployment testing and rework.
+- **TextDetector**: Continued development, following progress made in March.
+- Came across a beautifully designed website and had to note it down:
+  - [**Hello Algorithm**](https://www.hello-algo.com/)
+
 ### August
 
-- Updated **@docusaurus/core@3.5.2** and found that it is not backward compatible...
-  - Spent some time updating the erroneous code blocks.
-- Determined to troubleshoot OpenCV dependency issues, discovered that we are not the only victims:
+- Updated **@docusaurus/core@3.5.2** and found out it's not backward compatible...
+  - Spent time updating the problematic code sections.
+- Investigated OpenCV dependency issues and discovered we weren’t alone:
   - [**修复 OpenCV 依赖错误的小工具：OpenCV Fixer**](https://soulteary.com/2024/01/07/fix-opencv-dependency-errors-opencv-fixer.html)
   - Open-source project: [**soulteary/opencv-fixer**](https://github.com/soulteary/opencv-fixer/tree/main)
-  - Thanks to [**蘇洋博客**](https://soulteary.com/) for sharing, saving us a lot of time.
+  - Thanks to [**蘇洋博客**](https://soulteary.com/) for sharing and saving us a lot of time.
+- Wrote paper reviews, with approximately 90 papers reviewed so far.
 
 ### July
 
-- Continued the paper marathon from last month, writing about 50 articles in total...
-  - Completion: 153 %
-  - Emm...Feeling very tired
-- MRZScanner: Started development.
+- Wrote paper reviews, with around 80 papers in total so far.
+- **MRZScanner**: Began development.
 
 ### June
 
-- AutoTraderX: Completed the integration of the MasterLink's Python API and transitioned to an open-source project. 🎉 🎉 🎉
-- The funds deposited with OpenAI have been exhausted, and the daily news push feature of GmailSummary has been disabled.
-- This month, we will conduct a biannual paper marathon, with a tentative goal of ~100 (who wants to be exhausted?) ~ 30 articles.
-  - Completion: 50 %
+- **AutoTraderX**: Completed the API integration for Yuanta Securities and made it open-source. 🎉 🎉 🎉
+- Ran out of funds for OpenAI services, so we suspended the daily news push from GmailSummary.
+- Continued writing paper reviews, totaling 50 papers by this point.
 
 ### May
 
-- Explore the searcher feature of Docusaurus, test, and integrate Algolia's search service.
-  - Thanks to [**WeiWei**](https://github.com/WeiYun0912) for writing the article:
+- Finished developing the **Text Recognizer** model.
+  - Final evaluation results were promising, but we think it’s still an "overfitted model pretending not to be overfitted." (???)
+  - Since it doesn’t meet our ideal standards yet, we’ve decided not to release it for now.
+- Explored **Docusaurus**' Search feature, tested and integrated Algolia search service.
+  - Thanks to [**WeiWei**](https://github.com/WeiYun0912) for the tutorial:
     - [**[docusaurus] 在 Docusaurus 中使用 Algolia 實作搜尋功能**](https://wei-docusaurus-vercel.vercel.app/docs/Docusaurus/Algolia)
-- Develop a Text Recognizer model, tune the model parameters, and conduct model training.
+- Continued working on the **Text Recognizer** model, adjusting parameters and training.
+- **AutoTraderX**: Development started.
 
 ### April
 
-- Enhanced proficiency in CSS styling to refine the appearance of the blog.
-  - Thanks to [**朝八晚八**](https://from8to8.com/) for writing the article:
+- Learned how to configure CSS styles to tweak the blog’s appearance.
+  - Thanks to [**朝八晚八**](https://from8to8.com/) for the helpful article:
     - [**部落格首頁**](https://from8to8.com/docs/Website/blog/blog_homepage/)
-- Continued development of TextRecognizer, building upon WordCanvas progress to advance the text recognition project.
-- Updated functionality of GmailSummary: implemented daily news push to the technical documentation page of the website.
+- **TextRecognizer**: Continued development from **WordCanvas** and made further progress on the text recognition project.
+- **GmailSummary**: Modified functionality to push daily news to the tech documentation page.
 - Completed technical documentation for all ongoing projects.
-- Explored Docusaurus's i18n feature, concurrently drafting English documentation.
-- Initiated technical documentation using Docusaurus, migrating content from GitHub accordingly.
-- WordCanvas development accomplished, transitioned to an open-source project. 🎉 🎉 🎉
-- Renamed the `blog` GitHub repository to `website` to better reflect its purpose and content.
+- Explored **Docusaurus**’ i18n functionality and started writing English documentation.
+- Investigated **Docusaurus**’ documentation features and began migrating content from GitHub to the platform.
+- **WordCanvas**: Project completed and made open-source. 🎉 🎉 🎉
+- Renamed the `blog` GitHub project to `website` for accuracy.
 
 ### March
 
-Discovered one day that Google Drive's file download functionality broke, with data that could previously be retrieved through `gen_download_cmd` now turning into "a mess of HTML errors." 👻 👻 👻
+One day, we found that the Google Drive download feature broke—what was once accessible through `gen_download_cmd` became a garbled mess of HTML. 👻 👻 👻
 
-After consideration, decided to set up a private cloud using [**NextCloud**](https://github.com/nextcloud) open-source architecture dedicated to storing data and updated previously published download links.
+After considering several options...
 
-- GmailSummary: Development completed, transitioned to an open-source project. 🎉 🎉 🎉
-- DocClassifier: Found that adding multiple standardization layers significantly improves model performance. (An unexpected discovery...)
-- TextRecognizer: Initial project planning.
-- WordCanvas: Started development.
-- TextDetector: Encountered numerous difficulties, temporarily shelved.
+We decided to use [**NextCloud**](https://github.com/nextcloud) to set up a private cloud for storing data and updated our previous download links accordingly.
+
+- **GmailSummary**: Completed development and made it open-source. 🎉 🎉 🎉
+- **DocClassifier**: Discovered that stacking multiple normalization layers significantly improved model performance (a surprising discovery...).
+- **TextRecognizer**: Early-stage project planning.
+- **WordCanvas**: Development started.
+- **TextDetector**: Ran into several issues and decided to put it on hold for now.
 
 ### February
 
-- TextDetector: Gathered public data.
-- DocClassifier: Introduced CLIP, performed knowledge distillation on the model, resulting in significant improvements!
-- Explored Docusaurus's commenting feature and integrated the giscus comment service.
-  - Thanks to [**不務正業的架構師**](https://ouch1978.github.io/) for writing the article:
+- **TextDetector**: Collected public datasets.
+- **DocClassifier**: Introduced **CLIP** into the model and applied knowledge distillation with excellent results!
+- Explored **Docusaurus**’ commenting functionality and integrated **giscus** for comments.
+  - Thanks to [**不務正業的架構師**](https://ouch1978.github.io/) for the insightful guide:
     - [**在文件庫和部落格的文章下方加上 giscus 留言區**](https://ouch1978.github.io/docs/docusaurus/customization/add-giscus-to-docusaurus)
 
 ### January
 
-- TextDetector: Initial project planning.
-- DocClassifier: Development completed, transitioned to an open-source project. 🎉 🎉 🎉
+- **TextDetector**: Early-stage project planning.
+- **DocClassifier**: Project completed and made open-source. 🎉 🎉 🎉
 
 ## 2023
 
 ### December
 
-- DocClassifier: Started development.
-- DocAligner: Development completed, transitioned to an open-source project. 🎉 🎉 🎉
-- blog: Discovered an interesting Meta open-source project [**docusaurus**](https://github.com/facebook/docusaurus). It provides a simple way to build a static website and allows content to be written in Markdown. So I decided to use it to write a blog.
-- Abandoned and deleted the website built by WordPress, transferred content to the `blog` repository on GitHub.
+- **DocClassifier**: Development started.
+- **DocAligner**: Completed development and made it open-source. 🎉 🎉 🎉
+- **Blog**: Discovered Meta’s interesting open-source project [**Docusaurus**](https://github.com/facebook/docusaurus). It provides a simple way to build a static website using Markdown for content creation, so I decided to use it to write a blog.
+- Abandoned and deleted the WordPress-built website, migrating all content to the GitHub `blog` project.
 
 ### November
 
-- DocClassifier: Initial project planning.
-- DocsaidKit: Development completed, transitioned to an open-source project. 🎉 🎉 🎉
+- **DocClassifier**: Early-stage project planning.
+- **DocsaidKit**: Completed development and made it open-source. 🎉 🎉 🎉
+- Wrote paper reviews, totaling 20 papers.
 
 ### October
 
-- WordCanvas: Initial project planning.
-- DocGenerator: Phase two development completed, separated text synthesis module to WordCanvas project.
+- **WordCanvas**: Early-stage project planning.
+- **DocGenerator**: Completed phase two of development, splitting the text synthesis module into the **WordCanvas** project.
 
 ### September
 
-- DocAligner: Started development.
-- DocGenerator: Phase one development completed.
+- **DocAligner**: Development started.
+- **DocGenerator**: Phase one of development completed.
+- Wrote paper reviews, totaling 5 papers.
 
 ### August
 
-- DocAligner: Initial planning.
-- DocsaidKit: Organized commonly used tools, started development.
-- Explored the functionality of [**Wordpress**](https://wordpress.org/), attempted self-hosting and blogging.
-  - Thanks to [**諾特斯網站**](https://notesstartup.com/) for your selfless sharing, I have benefited a lot.
-- Created a GitHub account for DOCSAID and began planning some projects.
+- **DocAligner**: Early-stage project planning.
+- **DocsaidKit**: Organized commonly used tools and started development.
+- Explored [**WordPress**](https://wordpress.org/) functionality, experimented with building a personal blog.
+  - Thanks to [**諾特斯網站**](https://notesstartup.com/) for the generous knowledge sharing.
+- Created a **DOCSAID** GitHub account and started planning various projects.

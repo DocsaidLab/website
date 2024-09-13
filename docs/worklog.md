@@ -14,6 +14,13 @@ sidebar_position: 2
 
 ## 2024
 
+### 9 月
+
+- MRZScanner：部署測試，回爐重造。
+- TextDetector：延續 3 月進度，繼續開發。
+- 路過一個網站，覺得好美好厲害，趕緊把它記在小本本上。
+  - [**Hello 演算法**](https://www.hello-algo.com/)
+
 ### 8 月
 
 - 更新 **@docusaurus/core@3.5.2**，發現居然沒有向下相容......
@@ -22,20 +29,18 @@ sidebar_position: 2
   - [**修复 OpenCV 依赖错误的小工具：OpenCV Fixer**](https://soulteary.com/2024/01/07/fix-opencv-dependency-errors-opencv-fixer.html)
   - 開源專案：[**soulteary/opencv-fixer**](https://github.com/soulteary/opencv-fixer/tree/main)
   - 謝謝[**蘇洋博客**](https://soulteary.com/)的分享，讓我們省下了不少時間。
+- 撰寫論文導讀，目前累計約 90 篇。
 
 ### 7 月
 
-- 延續上個月的論文馬拉松，我們持續撰寫論文導讀，前前後後大概寫了 50 篇了吧...
-  - 完成度：153 %
-  - 覺得好累
+- 撰寫論文導讀，累計約 80 篇。
 - MRZScanner：開始進行開發。
 
 ### 6 月
 
 - AutoTraderX：完成元富證券 API 串接，轉成開源專案。🎉 🎉 🎉
 - 儲值給 OpenAI 的錢花完了，關閉 GmailSummary 每日新聞推送功能。
-- 這個月要進行每半年一次的論文馬拉松，本月暫定目標 ~100（想累死誰？）~ 30 篇。
-  - 完成度：50 %
+- 撰寫論文導讀，累計約 50 篇。
 
 ### 5 月
 
@@ -101,6 +106,7 @@ sidebar_position: 2
 
 - DocClassifier：前期專案規劃。
 - DocsaidKit：開發完成，轉成開源專案。🎉 🎉 🎉
+- 撰寫論文導讀，累計約 20 篇。
 
 ### 10 月
 
@@ -111,6 +117,7 @@ sidebar_position: 2
 
 - DocAligner：開始進行開發。
 - DocGenerator：第一階段開發完成。
+- 撰寫論文導讀，累計約 5 篇。
 
 ### 8 月
 
