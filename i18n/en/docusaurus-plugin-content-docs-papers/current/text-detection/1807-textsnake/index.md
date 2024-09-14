@@ -44,12 +44,12 @@ The radius $r$ is half the width of the text, and $\theta$ is the tangential dir
 
 The model design begins with standard procedures.
 
-First, a Backbone network is chosen, such as VGG16 or ResNet, which is combined with feature fusion techniques. Here, the authors adopt an FPN (Feature Pyramid Network) approach, merging feature maps at different scales.
+First, a Backbone network is chosen, such as VGG16 or ResNet, which is combined with feature fusion techniques. Here, the authors adopt an U-Net approach, merging feature maps at different scales.
 
 In essence, this model follows an FCN (Fully Convolutional Network) approach—performing end-to-end pixel prediction without any linear layers, directly outputting pixel-level predictions.
 
 :::tip
-The model doesn't follow FPN exactly, but the general approach of merging features from different scales is preserved.
+The model doesn't follow U-Net exactly, but the general approach of merging features from different scales is preserved.
 :::
 
 ---
@@ -58,7 +58,7 @@ The model doesn't follow FPN exactly, but the general approach of merging featur
 
 Next, let's talk about the design of the prediction head.
 
-The model uses the highest-resolution feature map from the FPN to predict several geometric attributes of text:
+The model uses the highest-resolution feature map from the U-Net to predict several geometric attributes of text:
 
 1. **TCL (Text Center Line)**: The text centerline, which distinguishes text areas, with 2 channels.
 2. **TR (Text Region)**: The text region, which defines the extent of the text, with 2 channels.

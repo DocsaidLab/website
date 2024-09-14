@@ -6,7 +6,9 @@
 
 ---
 
-With the rise of Fully Convolutional Networks (FCNs), dense prediction methods have helped solve the problem of large variations in text sizes. Soon after, the concept of multi-scale feature fusion also came into focus. The Feature Pyramid Network (FPN) introduced a way to combine features from different layers, significantly improving the accuracy of object detection.
+With the rise of Fully Convolutional Networks (FCN), dense prediction methods have helped solve the problem of large variations in text sizes.
+
+Soon after, the concept of multi-scale feature fusion also came into focus. The U-Net introduced a way to combine features from different layers, significantly improving the accuracy of object detection.
 
 Naturally, these advancements were applied to text detection, too.
 
@@ -28,9 +30,9 @@ Since the size of text regions varies greatly, detecting large text areas requir
 
 In the above diagram, the yellow block on the far left is the Backbone network, which can be replaced with any architecture. In this paper, the authors used VGG16 as the Backbone.
 
-The green block represents the Feature Pyramid Network (FPN). The authors utilized FPN to handle multi-scale feature fusion, but they didn’t go into detail about FPN in this paper. If you're interested, you can refer to:
+The green block represents the U-Net. The authors utilized U-Net to handle multi-scale feature fusion, but they didn’t go into detail about U-Net in this paper. If you're interested, you can refer to:
 
-- [**[16.12] FPN: The Pyramid Structure**](../../feature-fusion/1612-fpn/index.md)
+- [**[15.05] U-Net: The Dawn of Integration**](../../feature-fusion/1505-unet/index.md)
 
 Finally, there's the detection head, where the authors predict using the "highest resolution" feature map output by the FPN. The detection head is divided into three parts:
 
