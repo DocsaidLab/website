@@ -1,4 +1,4 @@
-# [19.11] DB
+# [19.11] DBNet
 
 ## Differentiable Binarization Function
 
