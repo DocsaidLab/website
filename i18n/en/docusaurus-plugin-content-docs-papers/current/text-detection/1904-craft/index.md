@@ -30,6 +30,10 @@ The model architecture follows a conventional **Backbone + Neck** structure.
 
 As shown above, we have labeled the diagram: the Backbone, marked in red, uses **VGG16**. The Neck, marked in blue, adopts a **U-Net** structure, where feature maps are fused via concatenation rather than addition.
 
+:::tip
+In the up-sampling stage, if addition is used, it is an FPN-like structure; if concatenation is used, it is a U-Net-like structure.
+:::
+
 One unusual aspect of this model is that the Backbone extends to **Stage 6**. This is likely to increase the model's receptive field, but in our experience, text detection, being focused on small objects, typically relies on shallow feature maps for prediction. Stage 6 may be necessary to accommodate particularly large text instances within the dataset.
 
 Lastly, the prediction head uses the highest resolution output feature map to predict two types of score maps: **Region Scores** and **Affinity Scores**.
