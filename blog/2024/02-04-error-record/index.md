@@ -175,3 +175,24 @@ description: 紀錄一些簡單問題和解法。
 
   # 最後可以透過 json 或其他方式紀錄清洗後的資料
   ```
+
+## 7. `Docusaurus` 部署後 `showLastUpdateTime: true` 無效
+
+- **描述**
+
+  在 `docusaurus.config.js` 中設置了 `showLastUpdateTime: true` 和 `showLastUpdateAuthor: true,`，但是部署後發現沒有效果，渲染頁面中全部都是一樣的時間和作者？
+
+- **解決方法**
+
+  因為在部署時，checkout 分支的時候設定錯誤，導致 `git` 無法正確獲取最後更新時間和作者。
+
+  這樣改：
+
+  ```yaml
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+  ```
+
+  只要設定 `fetch-depth: 0`，問題就解決了。

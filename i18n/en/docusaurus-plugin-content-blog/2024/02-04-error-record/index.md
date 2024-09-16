@@ -175,3 +175,24 @@ This article will be continuously updated.
 
   # Saving the filtered data
   ```
+
+## 7. `Docusaurus` Deployment: `showLastUpdateTime: true` Not Working
+
+- **Description**
+
+  In `docusaurus.config.js`, you set `showLastUpdateTime: true` and `showLastUpdateAuthor: true,` but after deployment, you find that it has no effect. The rendered page displays the same time and author?
+
+- **Solution**
+
+  The problem is caused by an incorrect setting when checking out the branch during deployment, which prevents `git` from correctly obtaining the last update time and author.
+
+  Change it like this:
+
+  ```yaml
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+  ```
+
+  Setting `fetch-depth: 0` will solve the problem.
