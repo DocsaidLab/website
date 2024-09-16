@@ -4,7 +4,9 @@ Disallow: /src/
 Disallow: /node_modules/
 Disallow: /private/
 Disallow: /drafts/
-Disallow: /search
-Allow: /
+Disallow: /search/
+Disallow: /blog/page/
+Disallow: /blog/tags/
+Disallow: /category/
 Sitemap: https://docsaid.org/sitemap.xml
 Sitemap: https://docsaid.org/en/sitemap.xml
