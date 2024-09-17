@@ -36,9 +36,13 @@ First, the authors discard the common backbone + neck architecture.
 
 They introduce a new backbone structure named `TextNet`, which we’ll discuss in detail later. Although the neck is discarded, feature fusion is still required. Here, the authors directly use multi-scale feature maps from the backbone, concatenating them at the end.
 
-The prediction head takes these multi-scale feature maps as input and outputs a "text kernel map" with a single channel.
+### Minimalist Kernel Representation
 
-Once the text kernel map is generated, connected component labeling is applied. This concept is derived from the following paper:
+For the prediction head, the input feature maps are the multi-scale feature maps mentioned earlier, and the output is a "text kernel map" with a single channel.
+
+Minimalist Kernel Representation (MKR) is a text kernel representation proposed by the authors. In previous studies, text kernels were obtained through contraction formulas, but here, the authors use the "Erode" operation to obtain text kernels.
+
+After obtaining the text kernel map, connected component labeling is applied. This concept is derived from the following paper:
 
 - [**[19.08] Optimized Block-Based Algorithms to Label Connected Components on GPUs**](https://www.researchgate.net/publication/335183975_Optimized_Block-Based_Algorithms_to_Label_Connected_Components_on_GPUs)
 

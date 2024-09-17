@@ -40,9 +40,13 @@
 
 雖然捨棄了 Neck，但還是得進行特徵融合。這裡作者直接使用 Backbone 所輸出的多尺度特徵圖，在最後進行拼接（concatenate）。
 
+### 極簡文字表示法
+
 預測頭的部分，輸入特徵圖就是剛才提到的多尺度特徵圖，輸出是一個文字核心圖，僅由一個通道組成。
 
-得到文字核心圖之後，接著是「連通區域標記」，這個概念來自於以下這篇論文：
+極簡文字表示法，Minimalist Kernel Representation（MKR），是作者提出的一種文字核心表示法。
+
+過去的研究是透過收縮公式來得到文字核心，而這裡作者使用「侵蝕」操作來得到文字核心。得到文字核心圖之後，接著是「連通區域標記」，這個概念來自於以下這篇論文：
 
 - [**[19.08] Optimized Block-Based Algorithms to Label Connected Components on GPUs**](https://www.researchgate.net/publication/335183975_Optimized_Block-Based_Algorithms_to_Label_Connected_Components_on_GPUs)
 
