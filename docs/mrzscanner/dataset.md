@@ -28,9 +28,21 @@ sidebar_position: 8
 
    同樣的，下載之後找個位置放，然後啟動資料生成器的時候，把路徑指向這個資料夾。
 
-:::tip
-**注意：** 記得把這兩個資料夾放在一起，因為我們只有開放一個指定路徑的參數。
-:::
+   :::tip
+   **注意：** 記得把這兩個資料夾放在一起，因為我們只有開放一個指定路徑的參數。
+   :::
+
+---
+
+3. 安裝模組：[**WordCanvas Github**](https://github.com/DocsaidLab/WordCanvas)
+
+   合成資料集依賴我們另外一個模組 `WordCanvas`，請先完成相關套件的安裝。
+
+   - [**WordCanvas Docs**](../wordcanvas/intro.md)
+
+    <figure style={{width: "80%"}}>
+   ![wordcanvas](../wordcanvas/resources/title.jpg)
+    </figure>
 
 ---
 

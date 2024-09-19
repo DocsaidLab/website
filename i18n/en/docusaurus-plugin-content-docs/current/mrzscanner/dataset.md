@@ -28,9 +28,23 @@ Before you can start using it, there are a few things you’ll need to handle on
 
    Similarly, after downloading, place it somewhere accessible and point the path to this folder when running the data generator.
 
-:::tip
-**Note**: Make sure both datasets are in the same directory, as we only provide a single path parameter for specifying the location.
-:::
+   :::tip
+   **Note**: Make sure both datasets are in the same directory, as we only provide a single path parameter for specifying the location.
+   :::
+
+---
+
+3. Install the module: [**WordCanvas Github**](https://github.com/DocsaidLab/WordCanvas)
+
+   The synthetic dataset relies on our other module, `WordCanvas`. Please install the relevant packages first.
+
+   - [**WordCanvas Docs**](../wordcanvas/intro.md)
+
+   ![wordcanvas](../wordcanvas/resources/title.jpg)
+
+   <figure style={{width: "80%"}}>
+   ![wordcanvas](../wordcanvas/resources/title.jpg)
+    </figure>
 
 ---
 
