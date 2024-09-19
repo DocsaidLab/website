@@ -16,13 +16,15 @@ sidebar_position: 2
 
 ### 9 月
 
-- MRZScanner：部署測試，回爐重造。
+- MRZScanner：開發完成，轉成開源專案。🎉 🎉 🎉
 - TextDetector：延續 3 月進度，繼續開發。
 - 路過一個網站，覺得好美好厲害，趕緊把它記在小本本上。
   - [**Hello 演算法**](https://www.hello-algo.com/)
+- 撰寫論文導讀，目前累計約 100 篇。
 
 ### 8 月
 
+- MRZScanner：部署測試，回爐重造。
 - 更新 **@docusaurus/core@3.5.2**，發現居然沒有向下相容......
   - 只好花點時間去更新錯誤程式區塊。
 - 下定決心來排查 OpenCV 的依賴問題，發現我們不是唯一的受害者：

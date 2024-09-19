@@ -22,12 +22,13 @@ I’ve completed several projects on GitHub, including:
 
 1. [**AutoTraderX**](./autotraderx/intro.md): This is a record of my experience integrating systems with Taiwanese stock brokers.
 2. [**DocsaidKit**](./docsaidkit/intro.md): My personal toolbox.
-3. [**DocAligner**](./docaligner/intro.md): A deep learning project designed to locate the four corners of a document.
-4. [**DocClassifier**](./docclassifier/intro.md): A deep learning project focused on document similarity matching.
-5. [**GmailSummary**](./gmailsummary/intro.md): A project where I experimented with integrating Gmail and OpenAI.
-6. [**WordCanvas**](./wordcanvas/intro.md): A tool I developed to synthesize text images, primarily for creating training data.
+3. [**GmailSummary**](./gmailsummary/intro.md): A project where I experimented with integrating Gmail and OpenAI.
+4. [**WordCanvas**](./wordcanvas/intro.md): A tool I developed to synthesize text images, primarily for creating training data.
+5. [**【Deep Learning Project】DocAligner**](./docaligner/intro.md): A project designed to locate the four corners of a document.
+6. [**【Deep Learning Project】DocClassifier**](./docclassifier/intro.md): A project focused on document similarity matching.
+7. [**【Deep Learning Project】MRZScanner**](./mrzscanner/intro.md): A project designed to recognize the MRZ area on a document.
 
-Most of my projects are private, some are still under development, and others are complete but need further optimization. Once I’m satisfied with the results, I’ll make them public.
+Most of my projects are private, some are still under development, and others are complete but need further optimization.
 
 ## Are You an Engineer?
 

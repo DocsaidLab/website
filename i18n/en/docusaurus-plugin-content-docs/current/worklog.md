@@ -16,13 +16,15 @@ This page is solely for recording our work activities.
 
 ### September
 
-- **MRZScanner**: Deployment testing and rework.
+- **MRZScanner**: Project completed and made open-source. 🎉 🎉 🎉
 - **TextDetector**: Continued development, following progress made in March.
 - Came across a beautifully designed website and had to note it down:
   - [**Hello Algorithm**](https://www.hello-algo.com/)
+- Wrote paper reviews, totaling approximately 100 papers.
 
 ### August
 
+- **MRZScanner**: Deployment testing and rework.
 - Updated **@docusaurus/core@3.5.2** and found out it's not backward compatible...
   - Spent time updating the problematic code sections.
 - Investigated OpenCV dependency issues and discovered we weren’t alone:

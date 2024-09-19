@@ -22,12 +22,13 @@ sidebar_position: 1
 
 1. [**AutoTraderX**](./autotraderx/intro.md)：這是我練習串接臺灣證券交易券商的系統而留下的紀錄。
 2. [**DocsaidKit**](./docsaidkit/intro.md)：這是我自己寫的工具箱。
-3. [**DocAligner**](./docaligner/intro.md)：【深度學習】功能是定位文件的四個角點。
-4. [**DocClassifier**](./docclassifier/intro.md)：【深度學習】功能是比對文件相似度。
-5. [**GmailSummary**](./gmailsummary/intro.md)：這是我練習串接 Gmail 和 OpenAI 而留下的紀錄。
-6. [**WordCanvas**](./wordcanvas/intro.md)：這是我自己寫的合成文字圖像的工具，用來製作訓練資料。
+3. [**GmailSummary**](./gmailsummary/intro.md)：這是我練習串接 Gmail 和 OpenAI 而留下的紀錄。
+4. [**WordCanvas**](./wordcanvas/intro.md)：這是我自己寫的合成文字圖像的工具，用來製作訓練資料。
+5. [**【深度學習專案】DocAligner**](./docaligner/intro.md)：功能是定位文件的四個角點。
+6. [**【深度學習專案】DocClassifier**](./docclassifier/intro.md)：功能是比對文件相似度。
+7. [**【深度學習專案】MRZScanner**](./mrzscanner/intro.md)：功能是辨識文件上的 MRZ 區域。
 
-還有一些其他的專案沒有公開，有些還在開發中。有更多的是已經開發完成但效果普通，既然普通就是還需要優化，等我滿意了再來考慮公開的事項。
+還有一些其他的專案沒有公開，有些還在開發中。有更多的是已經開發完成但效果普通，還沒到適合公開的時候。
 
 ## 你是工程師？
 
