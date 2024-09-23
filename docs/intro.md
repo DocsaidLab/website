@@ -20,13 +20,13 @@ sidebar_position: 1
 
 目前我在 Github 上公開了幾個已經完成的專案，包括：
 
-1. [**AutoTraderX**](./autotraderx)：這是我練習串接臺灣證券交易券商的系統而留下的紀錄。
-2. [**DocsaidKit**](./docsaidkit)：這是我自己寫的工具箱。
-3. [**GmailSummary**](./gmailsummary)：這是我練習串接 Gmail 和 OpenAI 而留下的紀錄。
-4. [**WordCanvas**](./wordcanvas)：這是我自己寫的合成文字圖像的工具，用來製作訓練資料。
-5. [**【深度學習專案】DocAligner**](./docaligner)：功能是定位文件的四個角點。
-6. [**【深度學習專案】DocClassifier**](./docclassifier)：功能是比對文件相似度。
-7. [**【深度學習專案】MRZScanner**](./mrzscanner)：功能是辨識文件上的 MRZ 區域。
+1. [**AutoTraderX**](./autotraderx/index.md)：這是我練習串接臺灣證券交易券商的系統而留下的紀錄。
+2. [**DocsaidKit**](./docsaidkit/index.md)：這是我自己寫的工具箱。
+3. [**GmailSummary**](./gmailsummary/index.md)：這是我練習串接 Gmail 和 OpenAI 而留下的紀錄。
+4. [**WordCanvas**](./wordcanvas/index.md)：這是我自己寫的合成文字圖像的工具，用來製作訓練資料。
+5. [**【深度學習專案】DocAligner**](./docaligner/index.md)：功能是定位文件的四個角點。
+6. [**【深度學習專案】DocClassifier**](./docclassifier/index.md)：功能是比對文件相似度。
+7. [**【深度學習專案】MRZScanner**](./mrzscanner/index.md)：功能是辨識文件上的 MRZ 區域。
 
 還有一些其他的專案沒有公開，有些還在開發中。有更多的是已經開發完成但效果普通，還沒到適合公開的時候。
 
