@@ -75,9 +75,9 @@ a:hover {
   color: #ffffff;
 }
 
-.markdown h2{font-size : 1.75rem;}
+.markdown h2{font-size : 1.6rem;}
 .markdown h3{
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   border-left: 5px solid var(--ifm-color-primary-lightest);
   padding: 5px 0 5px 7px;
 }

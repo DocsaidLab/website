@@ -4,18 +4,6 @@ sidebar_position: 1
 
 # Introduction
 
-The core functionality of this project is "**Email Summary**".
-
-- [**GmailSummary Github**](https://github.com/DocsaidLab/GmailSummary)
-
-![title](./resources/title.jpg)
-
-:::info
-This project isn't a ready-to-use Python tool; instead, it's an example of API integration. If you happen to have similar needs, you can refer to the instructions in this project for corresponding modifications and further development.
-:::
-
-## Overview
-
 In daily life, we often start receiving activity update emails from GitHub repositories because we've clicked the "Watch" option on those repositories. These updates include but are not limited to discussions on new features, issue reports, pull requests (PR), and bug reports.
 
 For example, if you follow some GitHub projects and opt for "All activity":

@@ -4,14 +4,6 @@ sidebar_position: 1
 
 # 介紹
 
-本專案的核心功能為「MRZ 文字辨識」。
-
-- [**MRZScanner Github**](https://github.com/DocsaidLab/MRZScanner)
-
-![title](./resources/title.webp)
-
-## 概述
-
 MRZ（Machine Readable Zone，機器可讀區）指護照、簽證、身分證等旅行證件上的一段特定區域，該區域內的資訊可以被機器快速讀取。 MRZ 依照國際民航組織（ICAO）第 9303 號文件的規定進行設計和生成，用於加快邊境檢查和提高資訊處理的準確性。
 
 - [**第 9303 號文件**](./reference.md#icao-9303)

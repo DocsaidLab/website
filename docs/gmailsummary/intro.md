@@ -4,18 +4,6 @@ sidebar_position: 1
 
 # 介紹
 
-本專案的核心功能為「**郵件摘要（Email Summary**」。
-
-- [**GmailSummary Github**](https://github.com/DocsaidLab/GmailSummary)
-
-![title](./resources/title.jpg)
-
-:::info
-本專案不是開箱即用的 python 工具，而是一個串接 API 的範例。若你剛好有類似的需求，可以參考本專案的說明進行對應的修改和後續開發。
-:::
-
-## 概述
-
 在日常生活中，我們經常會因為點擊了 GitHub 上的某個專案的 Watch 選項而開始收到該專案的活動更新郵件。這些更新包括但不限於新功能的討論、issue 回報、pull request (PR) 以及 bug 報告等。
 
 舉個例子，如果你關注了一些 Github 項目，然後採用「所有活動」的方式：

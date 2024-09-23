@@ -4,14 +4,6 @@ sidebar_position: 1
 
 # Introduction
 
-The core functionality of this project is **MRZ Text Recognition**.
-
-- [**MRZScanner Github**](https://github.com/DocsaidLab/MRZScanner)
-
-![title](./resources/title.webp)
-
-## Overview
-
 MRZ (Machine Readable Zone) refers to a specific area on travel documents such as passports, visas, and ID cards. The information in this area can be quickly read by machines. MRZ is designed and generated according to the International Civil Aviation Organization’s (ICAO) Document 9303, intended to speed up border checks and improve the accuracy of data processing.
 
 - [**Document 9303**](./reference.md#icao-9303)

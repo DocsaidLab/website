@@ -4,12 +4,6 @@ sidebar_position: 1
 
 # 介紹
 
-本專案的定位是影像處理和深度學習工具箱。
-
-- [**DocsaidKit Github**](https://github.com/DocsaidLab/DocsaidKit)
-
-## 概述
-
 DocsaidKit 主要包括以下幾個部分：
 
 - **Vision**：包括與電腦視覺相關的功能，如圖像和影片處理。

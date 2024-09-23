@@ -4,28 +4,6 @@ sidebar_position: 1
 
 # Introduction
 
-The core functionality of this project is called "**Document Classification**".
-
-- [**DocClassifier Github**](https://github.com/DocsaidLab/DocClassifier)
-
-![title](./resources/title.jpg)
-
-:::info
-This project has a unique origin. It was conceived by an expert in facial recognition systems, who happens to be my friend: [**Jack, L.**](https://github.com/Jack-Lin-NTU). He knew about my website, so he completed the initial programming and feasibility verification. Then, he entrusted me with this idea to further develop and publish it here. Special thanks to him for his contribution.
-:::
-
-:::tip
-Upon seeing this title, you might smirk and think, "Isn't it just a classification model?"
-
-Yes, and no.
-
-This time, we aim to create an atypical classification model. While its application scope may be limited, its intrinsic interest is quite high.
-
-It might not be what you imagine. Please continue reading.
-:::
-
-## Overview
-
 In past project experiences, the classification model can be considered one of the most common machine learning tasks.
 
 There's nothing particularly difficult about classification models. First, we build a backbone, then map the final output to multiple specific categories, and finally evaluate the model's performance using several metrics such as accuracy, recall, F1-Score, and so on.

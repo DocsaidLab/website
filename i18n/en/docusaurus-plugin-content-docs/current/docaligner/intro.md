@@ -4,14 +4,6 @@ sidebar_position: 1
 
 # Introduction
 
-The core functionality of this project is called "**Document Localization**."
-
-- [**DocAligner Github**](https://github.com/DocsaidLab/DocAligner)
-
-![title](./resources/title.jpg)
-
-## Overview
-
 This task is essentially a "precursor" to OCR tasks.
 
 In recent years, various general-purpose OCR models have become highly sophisticated. They can find all the text in unconstrained environments and provide recognition results without any pre-processing.

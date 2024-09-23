@@ -4,14 +4,6 @@ sidebar_position: 1
 
 # Introduction
 
-The core functionality of this project is the "**Text-to-Image Generation Tool**", named **WordCanvas**.
-
-- [**WordCanvas Github**](https://github.com/DocsaidLab/WordCanvas)
-
-![title](./resources/title.jpg)
-
-## Overview
-
 In the current field of Optical Character Recognition (OCR), the accuracy of models is contingent upon the quality and diversity of datasets.
 
 Here, we list several challenges faced by current research:

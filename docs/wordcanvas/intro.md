@@ -4,14 +4,6 @@ sidebar_position: 1
 
 # 介紹
 
-本專案的核心功能為「**文字圖像生成工具**」，取名為 **WordCanvas**，即「文字畫布」的意思。
-
-- [**WordCanvas Github**](https://github.com/DocsaidLab/WordCanvas)
-
-![title](./resources/title.jpg)
-
-## 概述
-
 在目前的光學字元辨識（OCR）領域的研究中，模型的準確度取決於資料集的品質和多樣性。
 
 在此，我們列舉幾個現行研究面臨的問題：

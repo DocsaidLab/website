@@ -4,21 +4,11 @@ sidebar_position: 1
 
 # 介紹
 
-本專案的核心功能稱為「**文件定位（Document Localization）**」。
-
-- [**DocAligner Github**](https://github.com/DocsaidLab/DocAligner)
-
-![title](./resources/title.jpg)
-
-## 概述
-
 這個任務其實算是 OCR 任務的「前導」。
 
 到了近幾年，各種通用型的 OCR 模型已經相當成熟，甚至不需要任何前處理，就能在無受限的場景中找到所有文字並提供其辨識結果。
 
 但，就是有點昂貴。
-
----
 
 這個昂貴所指的目標，可以從各方面來切入：
 

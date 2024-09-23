@@ -4,18 +4,6 @@ sidebar_position: 1
 
 # 介紹
 
-:::warning
-由於本專案涉及金融市場交易，請務必詳細閱讀並遵守：[**免責聲明**](./disclaimer.md)。
-:::
-
-本專案主要為串接證券商 API 並進行自動交易。
-
-- [**AutoTraderX Github**](https://github.com/DocsaidLab/AutoTraderX)
-
-![title](./img/title.webp)
-
-## 概述
-
 前陣子和朋友聊天，聊到希望能夠透過證券商的 API 進行自動交易。
 
 剛好我們也想要把深度學習模型應用到實際的金融交易中，於是就開始了這個專案。
