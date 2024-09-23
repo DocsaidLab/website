@@ -13,7 +13,7 @@
             <link>https://docsaid.org/blog/file-crawler-python-implementation</link>
             <guid>https://docsaid.org/blog/file-crawler-python-implementation</guid>
             <pubDate>Mon, 23 Sep 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[透過 Python 實作一個簡單的網頁檔案下載器。]]></description>
+            <description><![CDATA[一個簡單的網頁檔案下載程式。]]></description>
             <content:encoded><![CDATA[<figure><p><img decoding="async" loading="lazy" alt="title" src="https://docsaid.org/assets/images/0923-f0f893ffdaddcbc2c95fb74b47244394.webp" width="1024" height="1024" class="img_ev3q">
 </p><figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption><p></p></figure>
 <hr>
