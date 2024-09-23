@@ -119,7 +119,7 @@ This primarily serves to perform preliminary filtering of the output results. Er
 
 The check digit is a crucial part of the MRZ used to ensure data accuracy. It verifies the correctness of numbers to prevent data entry errors.
 
-- The detailed operational process is described in [**References#Check Digit**](./reference.md#Check-Digit).
+- The detailed operational process is described in [**References#Check Digit**](./reference#check-digit).
 
 ---
 

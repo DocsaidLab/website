@@ -39,7 +39,7 @@ For example, if you have an image with an MRZ section, the corresponding label d
 
 ---
 
-We recommend uploading the dataset to your Google Drive and sharing the link with us via [**email**](#Contact-Us). Upon receiving your dataset, we will conduct testing and integration as soon as possible. If the dataset does not meet our requirements, we will notify you promptly.
+We recommend uploading the dataset to your Google Drive and sharing the link with us via [**email**](#contact-us). Upon receiving your dataset, we will conduct testing and integration as soon as possible. If the dataset does not meet our requirements, we will notify you promptly.
 
 ## Frequently Asked Questions
 
