@@ -4,7 +4,7 @@ title: 下載網頁檔案的 Python 實作
 authors: Zephyr
 image: /img/2024/0923.webp
 tags: [Python, File Crawler]
-description: 透過 Python 實作一個簡單的網頁檔案下載器。
+description: 一個簡單的網頁檔案下載程式。
 ---
 
 <figure>
