@@ -230,7 +230,7 @@ That’s it! Here we only have the image and the label, no other information.
 :::tip
 This is why our final training model only uses text supervision without auxiliary branches:
 
-**Most fine-tuning datasets only contain text and lack additional information.**
+Most fine-tuning datasets only contain text and lack additional information.
 :::
 
 ---
@@ -288,6 +288,16 @@ ds = MRZFinetuneDataset(
 For fine-tuning, we used the AdamW optimizer with a weight decay of 1e-1 and a learning rate of 1e-6.
 
 We stopped training when validation performance plateaued.
+
+---
+
+Weight Decay’s setting here may seem a bit strange, going against the mainstream method, but we can explain:
+
+1. During the training phase, the synthetic data’s patterns are complex, making recognition difficult. Combined with a relatively small model, we can’t set the Weight Decay too high, as the diversified data itself has a regularizing effect.
+
+2. During the fine-tuning phase, the data patterns are limited to a few images, so we need stronger regularization to avoid overfitting.
+
+We have verified both of these points through experiments.
 
 ## Conclusion
 
