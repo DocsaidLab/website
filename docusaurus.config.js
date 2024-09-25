@@ -114,6 +114,11 @@ const config = {
             position: 'right',
             href: 'https://github.com/DocsaidLab',
           },
+          {
+            label: 'Sponsor',
+            position: 'right',
+            href: 'https://buymeacoffee.com/zephyr_docsaid',
+          }
         ],
       },
       docs: {

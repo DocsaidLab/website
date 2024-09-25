@@ -148,16 +148,24 @@ If you find yourself stuck at this step, don’t worry—you’re not alone. Mos
   - **Dataset submission: docsaidlab@gmail.com**
     :::
 
-## In Conclusion 🍹
+## Finally 🍹
 
-I’m just a self-taught AI engineer, casually working on open-source projects and documenting my learning journey.
+I have invested a lot of time and effort in these open-source projects. On the one hand, I want to improve my technical skills, and on the other hand, I hope to make some contributions to the community.
 
-I know I can’t solve every problem.
+I believe that every small contribution is a part of our collective effort to create a better world.
 
-But I believe that every small contribution is a part of our collective effort to create a better life.
+If you find my open-source projects helpful or appreciate my efforts, you can support me through “Buy Me A Coffee.” This will help me continue to maintain and develop these projects. In addition, feel free to leave a few words or give a star to the project. These are all great encouragements to me.
 
-If my projects have helped you in any way, feel free to leave a comment or give a star—it’s the greatest encouragement I can receive.
+Every bit of support, no matter how small, motivates me to continue improving existing projects and developing more interesting new tools.
 
 ＊
 
 2024 Zephyr
+
+<div align="center">
+<br />
+<figure style={{ width: "60%"}}>
+[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/zephyr_docsaid)
+</figure>
+<br />
+</div>
