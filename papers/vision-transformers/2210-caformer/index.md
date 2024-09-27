@@ -158,7 +158,7 @@ IdentityFormer 的效能較差是可以理解的，因為直接映射並不進�
 
    - **ConvFormer 明顯優於強大的 CNN 模型 ConvNeXt。**
 
-     - 參考資料：[**ConvNeXt**](../2201-convnext/index.md)
+     - 參考資料：[**ConvNeXt**](../../classic-cnns/2201-convnext/index.md)
      - ConvFormer-B36（100M 參數，22.6G MAC）在 224\*224 解析度下比 ConvNeXt-B（198M 參數，34.4G MAC）高出 0.5% 的 top-1 精度，且只需 51% 的參數和 66% 的 MAC。
 
    - **ConvFormer 的表現優於多種基於注意力的強模型或混合模型。**

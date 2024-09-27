@@ -152,7 +152,7 @@ The lower performance of IdentityFormer is understandable, as direct mapping wit
 
    - **ConvFormer outperforms the powerful CNN model ConvNeXt.**
 
-     - Reference: [**ConvNeXt**](../2201-convnext/index.md)
+     - Reference: [**ConvNeXt**](../../classic-cnns//2201-convnext/index.md)
      - ConvFormer-B36 (100M parameters, 22.6G MACs) achieves 0.5% higher top-1 accuracy at 224\*224 resolution than ConvNeXt-B (198M parameters, 34.4G MACs), with only 51% of the parameters and 66% of the MACs.
 
    - **ConvFormer outperforms several strong attention-based or hybrid models.**
