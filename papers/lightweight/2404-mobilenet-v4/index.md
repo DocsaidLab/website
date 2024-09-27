@@ -40,7 +40,7 @@
 
 除了注意力機制，還有一些網路架構綜述，例如：
 
-- [**[22.01] A ConvNet for the 2020s**](https://arxiv.org/abs/2201.03545)
+- [**[22.01] ConvNeXt: 讓卷積再次偉大**](../../classic-cnns/2201-convnext/index.md)
 
 這也是可以拿來參考的對象。
 
@@ -79,7 +79,7 @@
 
 這個架構來自於：
 
-- [**[19.11] Fast Transformer Decoding: One Write-Head is All You Need**](https://arxiv.org/abs/1911.02150)
+- [**[19.11] MQA: 共享 Key-Value**](../../transformers/1911-mqa/index.md)
 
 如果你還記得注意力機制的基本結構，你會知道它由三個部分組成：Query、Key 和 Value。
 
@@ -99,7 +99,7 @@
 
 於是作者另外參考了另外一篇論文：
 
-- [**[21.02] Pyramid Vision Transformer: A Versatile Backbone for Dense Prediction without Convolutions**](https://arxiv.org/abs/2102.12122)
+- [**[21.02] PVT: 空間縮減注意力機制**](../../vision-transformers/2102-pvt/index.md)
 
 這篇論文中提出空間縮減注意力模組（Spatial-Reduction Attention）簡稱 SRA。
 

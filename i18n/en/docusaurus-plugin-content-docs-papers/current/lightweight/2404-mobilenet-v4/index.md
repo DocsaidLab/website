@@ -42,7 +42,7 @@ Key papers include:
 
 Beyond attention mechanisms, there are other architectural overviews worth considering:
 
-- [**[22.01] A ConvNet for the 2020s**](https://arxiv.org/abs/2201.03545)
+- [**[22.01] ConvNeXt: Making Convolutions Great Again**](../../classic-cnns/2201-convnext/index.md)
 
 These serve as valuable references.
 
@@ -81,7 +81,7 @@ After designing the convolutional network architecture, the authors introduced a
 
 This structure originates from:
 
-- [**[19.11] Fast Transformer Decoding: One Write-Head is All You Need**](https://arxiv.org/abs/1911.02150)
+- [**[19.11] MQA: Sharing Key-Value**](../../transformers/1911-mqa/index.md)
 
 If you recall the basic structure of attention mechanisms, they consist of Query, Key, and Value.
 
@@ -101,7 +101,7 @@ Unlike text-based attention mechanisms, this one is applied to images.
 
 Thus, the authors also referenced another paper:
 
-- [**[21.02] Pyramid Vision Transformer: A Versatile Backbone for Dense Prediction without Convolutions**](https://arxiv.org/abs/2102.12122)
+- [**[21.02] PVT: Spatial-Reduction Attention**](../../vision-transformers/2102-pvt/index.md)
 
 This paper introduced the Spatial-Reduction Attention (SRA) module, which reduces the spatial dimensions of feature maps before applying attention, thus reducing computation.
 
