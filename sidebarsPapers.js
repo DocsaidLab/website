@@ -13,9 +13,12 @@ function generateSidebar() {
 
   sidebarItems.push('intro');
 
+  let all_count = 0;
+
   categories.forEach((category) => {
     const categoryPath = path.join(baseDir, category);
     const count = countItemsInDirectory(categoryPath);
+    all_count += count;
 
     // Read the '_category_.json' to get the original label and link
     const categoryJsonPath = path.join(categoryPath, '_category_.json');
@@ -42,6 +45,12 @@ function generateSidebar() {
 
     sidebarItems.push(sidebarItem);
   });
+
+  sidebarItems.push({
+    type: 'link',
+    label: `All Notes: ${all_count} entries`,
+    href: '/papers/intro'
+  })
 
   return {
     papersSidebar: sidebarItems,
