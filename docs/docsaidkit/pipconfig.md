@@ -15,7 +15,7 @@ python -m pip config [<file-option>] [--editor <editor-path>] edit
 
 其中，`<file-option>` 可以是以下選項：
 
-- `--global`：指定操作系統全局配置文件。
+- `--global`：指定作業系統全局配置文件。
 - `--user`：指定操作用戶級別配置文件。
 - `--site`：指定操作當前虛擬環境內的配置文件。
 
@@ -32,13 +32,13 @@ python -m pip config --global --editor vim edit
 配置文件的優先級順序非常重要。以下是可能存在於你的機器上的配置文件列表，按優先級排序：
 
 1. **站點級文件**：
-    - `/home/user/.pyenv/versions/3.x.x/envs/envs_name/pip.conf`
+   - `/home/user/.pyenv/versions/3.x.x/envs/envs_name/pip.conf`
 2. **用戶級文件**：
-    - `/home/user/.config/pip/pip.conf`
-    - `/home/user/.pip/pip.conf`
+   - `/home/user/.config/pip/pip.conf`
+   - `/home/user/.pip/pip.conf`
 3. **全局級文件**：
-    - `/etc/pip.conf`
-    - `/etc/xdg/pip/pip.conf`
+   - `/etc/pip.conf`
+   - `/etc/xdg/pip/pip.conf`
 
 在 python 環境中，pip 會按照上述順序來尋找並應用配置文件。確認你正在修改的是正確的配置文件，可以幫助避免產生難以追蹤的錯誤。
 

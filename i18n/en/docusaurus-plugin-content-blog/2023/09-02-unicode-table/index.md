@@ -322,7 +322,7 @@ If you require further details, we recommend consulting the original table: [**U
 | &nbsp;1&nbsp;SMP | 1D2E0 &#8211; 1D2FF   | 瑪雅數字                         | Mayan Numerals                                   |
 | &nbsp;1&nbsp;SMP | 1D300 &#8211; 1D35F   | 太玄經符號                       | Tai Xuan Jing Symbols                            |
 | &nbsp;1&nbsp;SMP | 1D360 &#8211; 1D37F   | 算籌                             | Counting Rod Numerals                            |
-| &nbsp;1&nbsp;SMP | 1D400 &#8211; 1D7FF   | 字母和數字符號                   | Mathematical Alphanumeric Symbols                |
+| &nbsp;1&nbsp;SMP | 1D400 &#8211; 1D7FF   | 字母和數字元號                   | Mathematical Alphanumeric Symbols                |
 | &nbsp;1&nbsp;SMP | 1D800 &#8211; 1DAAF   | 薩頓書寫符號                     | Sutton SignWriting                               |
 | &nbsp;1&nbsp;SMP | 1DF00 &#8211; 1DFFF   | 拉丁字母擴展-G                   | Latin Extended-G                                 |
 | &nbsp;1&nbsp;SMP | 1E000 &#8211; 1E02F   | 格拉哥里字母補充                 | Glagolitic Supplement                            |
@@ -336,7 +336,7 @@ If you require further details, we recommend consulting the original table: [**U
 | &nbsp;1&nbsp;SMP | 1E900 &#8211; 1E95F   | 阿德拉姆字母                     | Adlam                                            |
 | &nbsp;1&nbsp;SMP | 1EC70 &#8211; 1ECBF   | 印度西亞格數字                   | Indic Siyaq Numbers                              |
 | &nbsp;1&nbsp;SMP | 1ED00 &#8211; 1ED4F   | 奧斯曼西亞格數字                 | Ottoman Siyaq Numbers                            |
-| &nbsp;1&nbsp;SMP | 1EE00 &#8211; 1EEFF   | 阿拉伯字母數字符號               | Arabic Mathematical Alphabetic Symbols           |
+| &nbsp;1&nbsp;SMP | 1EE00 &#8211; 1EEFF   | 阿拉伯字母數字元號               | Arabic Mathematical Alphabetic Symbols           |
 | &nbsp;1&nbsp;SMP | 1F000 &#8211; 1F02F   | 麻將牌                           | Mahjong Tiles                                    |
 | &nbsp;1&nbsp;SMP | 1F030 &#8211; 1F09F   | 多米諾骨牌                       | Domino Tiles                                     |
 | &nbsp;1&nbsp;SMP | 1F0A0 &#8211; 1F0FF   | 撲克牌                           | Playing Cards                                    |

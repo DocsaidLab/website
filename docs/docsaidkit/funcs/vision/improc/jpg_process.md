@@ -4,13 +4,13 @@ sidebar_position: 4
 
 # JPG Process
 
->[get_orientation_code(stream: Union[str, Path, bytes]) -> Union[ROTATE, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L34C5-L34C25)
+> [get_orientation_code(stream: Union[str, Path, bytes]) -> Union[ROTATE, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L34C5-L34C25)
 
->[jpgencode(img: np.ndarray, quality: int = 90) -> Union[bytes, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L50)
+> [jpgencode(img: np.ndarray, quality: int = 90) -> Union[bytes, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L50)
 
->[jpgdecode(byte_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L60)
+> [jpgdecode(byte\_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L60)
 
->[jpgread(img_file: Union[str, Path]) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L72)
+> [jpgread(img_file: Union[str, Path]) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L72)
 
 這一系列函數提供了對 JPG 圖像的編碼、解碼和讀取支持，以及從 EXIF 數據自動調整圖像方向的功能。
 
@@ -30,7 +30,7 @@ sidebar_position: 4
 
 ### jpgdecode
 
-- **byte_** (`bytes`)：要解碼的 JPG 格式的字節串。
+- **byte\_** (`bytes`)：要解碼的 JPG 格式的字節串。
 
 ### jpgread
 
@@ -66,10 +66,10 @@ img_array = D.jpgread('path/to/image.jpg')
 
 - **特點**
 
-    - **高效率**：利用了 libjpeg-turbo 庫的高性能特性，相較於傳統的 JPEG 處理方法，TurboJPEG 可以大幅提高圖像處理的速度。
-    - **易用性**：提供了簡潔明了的 API，使得開發者可以輕鬆地在應用程序中實現高效的 JPEG 圖像處理。
-    - **靈活性**：支持多種圖像質量和壓縮等級的設置，滿足不同場景下對圖像質量和文件大小的需求。
-    - **跨平台**：支持 Windows、macOS 和 Linux 等多個操作系統，方便在不同開發環境中使用。
+  - **高效率**：利用了 libjpeg-turbo 庫的高性能特性，相較於傳統的 JPEG 處理方法，TurboJPEG 可以大幅提高圖像處理的速度。
+  - **易用性**：提供了簡潔明了的 API，使得開發者可以輕鬆地在應用程序中實現高效的 JPEG 圖像處理。
+  - **靈活性**：支持多種圖像質量和壓縮等級的設置，滿足不同場景下對圖像質量和文件大小的需求。
+  - **跨平台**：支持 Windows、macOS 和 Linux 等多個作業系統，方便在不同開發環境中使用。
 
 安裝完成後，可以通過以下方式在 Python 中使用 TurboJPEG 進行編解碼的功能：
 

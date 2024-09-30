@@ -88,9 +88,9 @@ volumes:
 - `--init`：選項確保永遠不會建立殭屍行程。
 - `--name nextcloud-aio-mastercontainer`：設定容器的名稱，這個名稱不允許更改，因為更改後可能會導致 mastercontainer 更新失敗。
 - `--restart always`：設定容器的重啟策略為始終隨 Docker 守護程序一起啟動。
-- `--publish 80:80`：將容器的 80 端口發佈到宿主機的 80 端口，用於獲取 AIO 接口的有效證書，如果不需要可以移除。
-- `--publish 8080:8080`：將容器的 8080 端口發佈到宿主機的 8080 端口，此端口用於 AIO 接口，預設使用自簽名證書。 如果 8080 端口已被佔用，可以更改宿主機的端口，如：`--publish 8081:8080`。
-- `--publish 8443:8443`：將容器的 8443 端口發佈到宿主機的 8443 端口，如果公開到網路，可以通過此端口訪問 AIO 接口並獲取有效證書，如果不需要可以移除。
+- `--publish 80:80`：將容器的 80 端口發佈到宿主機的 80 端口，用於獲取 AIO 介面的有效證書，如果不需要可以移除。
+- `--publish 8080:8080`：將容器的 8080 端口發佈到宿主機的 8080 端口，此端口用於 AIO 介面，預設使用自簽名證書。 如果 8080 端口已被佔用，可以更改宿主機的端口，如：`--publish 8081:8080`。
+- `--publish 8443:8443`：將容器的 8443 端口發佈到宿主機的 8443 端口，如果公開到網路，可以通過此端口訪問 AIO 介面並獲取有效證書，如果不需要可以移除。
 - `--volume nextcloud_aio_mastercontainer:/mnt/docker-aio-config`：設定 mastercontainer 建立的檔案將儲存在名為 nextcloud_aio_mastercontainer 的 docker 磁碟區中，此設定不允許變更。
 - `--volume /var/run/docker.sock:/var/run/docker.sock:ro`：將 docker 套接字掛載到容器內，用於啟動所有其他容器和其他功能。 在 Windows/macOS 和 docker 無根模式下需要調整。
 - `nextcloud/all-in-one:latest`：指定使用的 Docker 容器映像。
@@ -135,7 +135,7 @@ sudo systemctl start nextcloud
 1. **訪問 Nextcloud AIO 介面**：
 
    - 在初始啟動後，你可以通過訪問 `https://ip.address.of.this.server:8080` 來開啟 Nextcloud AIO 介面，其中 `ip.address.of.this.server` 應該被替換為部署 Nextcloud 服務的伺服器的 IP 地址。
-   - 重要的是使用 IP 地址而非域名來訪問這個連接埠（8080），因為 HTTP Strict Transport Security（HSTS）可能會阻止使用域名訪問。HSTS 是一種 Web 安全政策機制，它要求網絡瀏覽器僅通過安全的 HTTPS 連接與網站建立連接。
+   - 重要的是使用 IP 地址而非域名來訪問這個連接埠（8080），因為 HTTP Strict Transport Security（HSTS）可能會阻止使用域名訪問。HSTS 是一種 Web 安全政策機制，它要求網路瀏覽器僅通過安全的 HTTPS 連接與網站建立連接。
 
 2. **自簽名證書的使用**：
 

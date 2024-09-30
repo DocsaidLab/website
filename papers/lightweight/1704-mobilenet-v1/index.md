@@ -6,7 +6,7 @@
 
 ---
 
-深度可分離卷積是一種卷積神經網絡的結構，它將標準卷積分解為兩個獨立的層：深度卷積和逐點卷積。
+深度可分離卷積是一種卷積神經網路的結構，它將標準卷積分解為兩個獨立的層：深度卷積和逐點卷積。
 
 這種結構可以減少模型的參數數量和計算量，從而使得模型更加輕量化，這對於移動設備等資源受限的場景非常有用。
 
@@ -14,7 +14,7 @@
 
 - [**Rigid-motion scattering for image classification**](https://arxiv.org/abs/1403.1687)
 
-MobileNets 的作者也提到，他們的主要貢獻在於將「深度可分離卷積」這個結構，系統性的應用到了卷積神經網絡中，並且在 ImageNet 上取得了不錯的效果。
+MobileNets 的作者也提到，他們的主要貢獻在於將「深度可分離卷積」這個結構，系統性的應用到了卷積神經網路中，並且在 ImageNet 上取得了不錯的效果。
 
 也就是現在赫赫有名的： **MobileNet-V1**。
 
@@ -70,7 +70,7 @@ class DepthwiseSeparableConv(nn.Module):
         return out
 ```
 
-在這篇論文的實作中，有提到每個卷積層後面都接了 Batch Normalization 和 ReLU 激活函數，如下圖：
+在這篇論文的實作中，有提到每個卷積層後面都接了 Batch Normalization 和 ReLU 啟動函數，如下圖：
 
 ![Depthwise Separable Convolution with BN and ReLU](./img/img2.jpg)
 

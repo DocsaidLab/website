@@ -14,15 +14,15 @@ description: Average Normalized Levenshtein Similarity
 
 ---
 
-Average Normalized Levenshtein Similarity，簡稱 ANLS，是一種用於計算兩個字符串之間相似性的指標。
+Average Normalized Levenshtein Similarity，簡稱 ANLS，是一種用於計算兩個字串之間相似性的指標。
 
-在自然語言處理（NLP）中，我們經常需要比較兩個字符串的相似性。
+在自然語言處理（NLP）中，我們經常需要比較兩個字串的相似性。
 
 <!-- truncate -->
 
-Levenshtein Similarity 是一種常見的度量方法，它衡量了兩個字符串之間的「**編輯距離**」，即通過多少次插入、刪除或替換操作可以將一個字符串轉換為另一個字符串。然而，Levenshtein Similarity 本身並不直觀，因為它取決於字符串的長度。
+Levenshtein Similarity 是一種常見的度量方法，它衡量了兩個字串之間的「**編輯距離**」，即通過多少次插入、刪除或替換操作可以將一個字串轉換為另一個字串。然而，Levenshtein Similarity 本身並不直觀，因為它取決於字串的長度。
 
-為了解決這個問題，我們可以將 Levenshtein Similarity 標準化為 [0, 1] 區間，這樣我們就可以更容易地理解和比較不同字符串之間的相似性，稱為 Normalized Levenshtein Similarity（NLS）。
+為了解決這個問題，我們可以將 Levenshtein Similarity 標準化為 [0, 1] 區間，這樣我們就可以更容易地理解和比較不同字串之間的相似性，稱為 Normalized Levenshtein Similarity（NLS）。
 
 由於 NLS 指的是一組字串之間的相似性，我們可以將其進一步擴展為 ANLS，即 Average Normalized Levenshtein Similarity，它計算了多組字串之間的平均相似性，藉此來橫量模型的性能。
 
@@ -44,7 +44,7 @@ from torchmetrics.text import EditDistance
 from torchmetrics.utilities.data import dim_zero_cat
 ```
 
-由於 `EditDistance` 已經可以計算 Levenshtein 距離，我們可以直接使用它來計算兩個字符串之間的編輯距離。然而，`EditDistance` 並沒有提供標準化的功能，所以我們需要自己實現這一部分。
+由於 `EditDistance` 已經可以計算 Levenshtein 距離，我們可以直接使用它來計算兩個字串之間的編輯距離。然而，`EditDistance` 並沒有提供標準化的功能，所以我們需要自己實現這一部分。
 
 ## 實作標準化功能
 
@@ -70,8 +70,8 @@ class NormalizedLevenshteinSimilarity(Metric):
 
 這裡有幾個要點：
 
-1. 確保輸入的 `preds` 和 `target` 是字符串列表，否則函數就會計算到「字元」的部分。
-2. 計算每個字符串的最大長度，這樣才能進行標準化。
+1. 確保輸入的 `preds` 和 `target` 是字串列表，否則函數就會計算到「字元」的部分。
+2. 計算每個字串的最大長度，這樣才能進行標準化。
 
 ```python
 def update(self, preds: Union[str, Sequence[str]], target: Union[str, Sequence[str]]) -> None:

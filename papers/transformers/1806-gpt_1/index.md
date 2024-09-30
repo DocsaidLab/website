@@ -58,7 +58,7 @@
 - 序列長度為 512。
 - Dropout 機率為 0.1。
 - 採用 L2 正則化。
-- 採用 Gelu 激活函數。
+- 採用 Gelu 啟動函數。
 - 位置編碼採用可學習式的位置嵌入。
 - 使用 [**spaCy tokenizer**](https://spacy.io/api/tokenizer**) 進行分詞。
 

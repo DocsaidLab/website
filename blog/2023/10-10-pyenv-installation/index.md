@@ -111,7 +111,7 @@ pyenv virtualenv 3.10.14 your-env-name
 
 ### 使用
 
-激活虛擬環境，請運行：
+啟動虛擬環境，請運行：
 
 ```bash
 pyenv activate your-env-name
@@ -133,9 +133,9 @@ pyenv virtualenv-delete your-env-name
 pyenv update
 ```
 
-## 卸載 `pyenv`
+## 移除 `pyenv`
 
-如果你決定不再使用 `pyenv`，可以按照以下步驟卸載：
+如果你決定不再使用 `pyenv`，可以按照以下步驟移除：
 
 1. **移除 `pyenv` 安裝目錄**：
 

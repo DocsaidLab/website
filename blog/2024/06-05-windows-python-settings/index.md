@@ -42,7 +42,7 @@ Apple M1 晶片是 ARM 架構，在剛推出時遇到許多相容性的問題，
 
 ![PowerShell](./img/img1.jpg)
 
-Chocolatey 是一個基於 Windows 的包管理系統，它利用 NuGet 和 PowerShell 技術來自動化軟件的安裝、升級和管理過程。它類似於 Linux 上的 `apt-get` 或 `yum`，讓 Windows 用戶可以以一種簡單、一致的方式來管理軟件。
+Chocolatey 是一個基於 Windows 的包管理系統，它利用 NuGet 和 PowerShell 技術來自動化軟體的安裝、升級和管理過程。它類似於 Linux 上的 `apt-get` 或 `yum`，讓 Windows 用戶可以以一種簡單、一致的方式來管理軟體。
 
 安裝 Chocolatey 相對簡單，只需要在以管理員身份運行的 PowerShell 中執行以下命令：
 
@@ -100,7 +100,7 @@ choco -v
   ```powershell
   choco list --localonly
   ```
-- **卸載**
+- **移除**
   ```powershell
   choco uninstall <packageName>
   ```
@@ -157,7 +157,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
 1. **重啟 PowerShell**：
 
-   - 關閉並重新打開 PowerShell 窗口，以應用環境變量更改。
+   - 關閉並重新打開 PowerShell 視窗，以應用環境變量更改。
 
 2. **檢查 `pyenv` 安裝**：
 

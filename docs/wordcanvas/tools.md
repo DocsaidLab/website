@@ -12,10 +12,9 @@ sidebar_position: 6
 
 - [**SynthText**](https://github.com/ankush-me/SynthText)
 
-SynthText 是一個開源專案，由 Ankush Gupta、Andrea Vedaldi 和 Andrew Zisserman 於 2016 年的 CVPR（計算機視覺和模式識別會議）上發表。該專案旨在生成合成文本圖像，以便用於自然圖像中的文本定位研究。這些合成圖像主要用於訓練機器學習模型，特別是在光學字符辨識和文本檢測領域。
+SynthText 是一個開源專案，由 Ankush Gupta、Andrea Vedaldi 和 Andrew Zisserman 於 2016 年的 CVPR（計算機視覺和模式識別會議）上發表。該專案旨在生成合成文本圖像，以便用於自然圖像中的文本定位研究。這些合成圖像主要用於訓練機器學習模型，特別是在光學字元辨識和文本檢測領域。
 
 SynthText 利用自然場景圖像作為背景，並在其中合成看似自然的文本。這一過程需要背景圖像的深度和分割信息。專案的主要依賴包括 pygame、opencv、PIL、numpy、matplotlib、h5py 和 scipy。
-
 
 ## SynthText3D
 
@@ -37,7 +36,7 @@ UnrealText 利用 Unreal Engine，這是一款強大的遊戲開發工具，來�
 
 - [**SynthTIGER**](https://github.com/clovaai/synthtiger)
 
-SynthTIGER (Synthetic Text Image Generator) 是由 NAVER Corp. 開發的一個開源專案，旨在生成合成文本圖像以支援光學字符識別（OCR）模型的訓練。該工具特別設計來改善文本識別模型的表現，並於 2021 年國際文件分析和識別會議（ICDAR）上發表。
+SynthTIGER (Synthetic Text Image Generator) 是由 NAVER Corp. 開發的一個開源專案，旨在生成合成文本圖像以支援光學字元識別（OCR）模型的訓練。該工具特別設計來改善文本識別模型的表現，並於 2021 年國際文件分析和識別會議（ICDAR）上發表。
 
 SynthTIGER 支援多語言和多樣化的文本樣式生成，能夠產生豐富和多變的訓練數據。包括字體定制、顏色映射定制和模板定制，使用者可以根據具體需求調整生成過程。同時也提供了分割成多個小文件的大型數據集，方便下載和使用。
 
@@ -53,6 +52,6 @@ Text Renderer 整合了 imgaug 來支援影像增強，支援在影像上渲染�
 
 - [**TextRecognitionDataGenerator**](https://github.com/Belval/TextRecognitionDataGenerator)
 
-TextRecognitionDataGenerator (TRDG) 是由 Belval 開發的一個開源項目，專門用於產生用於訓練光學字元辨識（OCR）軟體的文字影像樣本。 此計畫支援包括非拉丁文本在內的多語言文字生成，能夠透過不同的字體、背景和文字效果（如傾斜、扭曲、模糊等）來生成圖像。 TRDG 以其模組化和易於擴展的特性，成為了OCR模型開發者和研究人員的重要工具。
+TextRecognitionDataGenerator (TRDG) 是由 Belval 開發的一個開源項目，專門用於產生用於訓練光學字元辨識（OCR）軟體的文字影像樣本。 此計畫支援包括非拉丁文本在內的多語言文字生成，能夠透過不同的字體、背景和文字效果（如傾斜、扭曲、模糊等）來生成圖像。 TRDG 以其模組化和易於擴展的特性，成為了 OCR 模型開發者和研究人員的重要工具。
 
-TRDG 可以透過命令列介面（CLI）使用，也提供了 Python 模組接口，使其能夠直接整合到訓練管道中。使用者可以透過簡單的命令產生包含隨機文字的圖像，或指定特定的文字內容。此外，TRDG 支援產生垂直文字和字元級掩碼，增加了生成文字影像的靈活性和適用性。
+TRDG 可以透過命令列介面（CLI）使用，也提供了 Python 模組介面，使其能夠直接整合到訓練管道中。使用者可以透過簡單的命令產生包含隨機文字的圖像，或指定特定的文字內容。此外，TRDG 支援產生垂直文字和字元級掩碼，增加了生成文字影像的靈活性和適用性。

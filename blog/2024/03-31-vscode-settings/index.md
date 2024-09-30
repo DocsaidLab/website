@@ -148,15 +148,15 @@ description: 記錄常用的 VScode 參數設定，以便日後使用。
 
 - `terminal.integrated.copyOnSelection`：設定是否選中即複製。
 
-- `terminal.integrated.cursorBlinking`：設定終端光標閃爍。
+- `terminal.integrated.cursorBlinking`：設定終端游標閃爍。
 
-- `terminal.integrated.cursorStyle`：設定終端光標樣式。
+- `terminal.integrated.cursorStyle`：設定終端游標樣式。
 
 - `remote.downloadExtensionsLocally`：設定是否本地下載擴展。
 
 - `terminal.integrated.scrollback`：設定終端滾動緩衝區大小。
 
-- `editor.cursorStyle`：設定光標樣式。
+- `editor.cursorStyle`：設定游標樣式。
 
 - `editor.insertSpaces`：設定是否插入空格。
 
@@ -176,7 +176,7 @@ description: 記錄常用的 VScode 參數設定，以便日後使用。
 
 - `workbench.colorTheme`：設定顏色主題。
 
-- `editor.multiCursorModifier`：設定多光標修改器。
+- `editor.multiCursorModifier`：設定多游標修改器。
 
 - `editor.wordWrapColumn`：設定自動換行的列數。
 

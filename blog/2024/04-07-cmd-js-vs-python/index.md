@@ -40,7 +40,7 @@ npm（Node Package Manager）和 pip 本質上服務於相同的目的：它們�
 
 npx（npm package runner）和 Python 的 `-m` 標誌解決了直接在終端執行包命令的需求，無需進行全局安裝。
 
-- **直接執行**：npx 允許你直接從命令行執行項目本地 `node_modules` 文件夾中安裝的任何包（或者如果沒有安裝，則從 npm 註冊處獲取），Python 透過 `-m` 標誌實現類似結果，允許直接執行模塊，例如使用 `python -m http.server` 命令啟動一個簡單的 HTTP 服務器。
+- **直接執行**：npx 允許你直接從命令行執行項目本地 `node_modules` 文件夾中安裝的任何包（或者如果沒有安裝，則從 npm 註冊處獲取），Python 透過 `-m` 標誌實現類似結果，允許直接執行模塊，例如使用 `python -m http.server` 命令啟動一個簡單的 HTTP 伺服器。
 
 :::note
 **npm run 與 npx run**

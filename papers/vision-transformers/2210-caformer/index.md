@@ -42,11 +42,11 @@
 
 ### StarReLU
 
-在本文中，作者介紹了一種名為 StarReLU 的新型激活函數。
+在本文中，作者介紹了一種名為 StarReLU 的新型啟動函數。
 
-此函數是從 Transformer 模型中常用的激活函數 ReLU 和 GELU 演變而來。
+此函數是從 Transformer 模型中常用的啟動函數 ReLU 和 GELU 演變而來。
 
-首先，傳統的 Transformer 模型中使用了 ReLU 作為激活函數，其數學表達式為：
+首先，傳統的 Transformer 模型中使用了 ReLU 作為啟動函數，其數學表達式為：
 
 $$
 \mathrm {ReLU}(x) = \mathrm {max}(0, x)
@@ -54,7 +54,7 @@ $$
 
 其中 $x$ 代表輸入的神經元單元，計算成本為每個單元 1 FLOP。
 
-隨後，GPT 模型採用了 GELU 激活函數，並被許多後續的 Transformer 模型（如 BERT、GPT-3 和 ViT）廣泛採用，GELU 的近似表示為：
+隨後，GPT 模型採用了 GELU 啟動函數，並被許多後續的 Transformer 模型（如 BERT、GPT-3 和 ViT）廣泛採用，GELU 的近似表示為：
 
 $$
 \mathrm {GELU}(x) = x\Phi (x) \approx 0.5 \times x(1 + \mathrm {tanh}(\sqrt {2 / \pi }(x + 0.044715 \times x^{3})))
@@ -98,7 +98,7 @@ $$
 \approx 0.8944 \cdot \left (\mathrm {ReLU}(x)\right )^2 - 0.4472
 $$
 
-StarReLU 這種激活函數在計算中使用了較多的乘法，因此得名。
+StarReLU 這種啟動函數在計算中使用了較多的乘法，因此得名。
 
 為了使其能適應不同的模型和初始化狀況，縮放因子$s$和偏移量$b$被設置為可學習的參數。
 
@@ -176,7 +176,7 @@ ConvFormer-B36 的參數比 ConvNeXt-L 優越 0.2%，同時參數減少 49%，MA
 
 ![ablation](./img/img4.jpg)
 
-1. **激活函數的影響**
+1. **啟動函數的影響**
 
    - **使用 StarReLU 替換 ReLU**
      - ConvFormer-S18：效能從 83.0% 降至 82.1%。
@@ -185,7 +185,7 @@ ConvFormer-B36 的參數比 ConvNeXt-L 優越 0.2%，同時參數減少 49%，MA
      - 效能令人滿意，但不及 GELU。
    - **使用 StarReLU 替換 GELU**
      - ConvFormer-S18 和 CAFormer-S18 準確率分別提高 0.3% 和 0.2%。
-     - 減少 71% 的激活 FLOP。
+     - 減少 71% 的啟動 FLOP。
 
 2. **StarReLU 變體的應用**
 
@@ -215,8 +215,8 @@ ConvFormer-B36 的參數比 ConvNeXt-L 優越 0.2%，同時參數減少 49%，MA
 
    使用深度可分離卷積作為 Token Mixer 的 ConvFormer，表現優於強大的 CNN 模型 ConvNeXt。CAFormer 透過在底部階段使用深度可分離卷積，在頂部階段使用自注意力機制，在 ImageNet-1K 上創下新紀錄，224 × 224 解析度下，普通監督訓練的 top-1 準確率達到 85.5%。
 
-4. **新激活函數 StarReLU**
+4. **新啟動函數 StarReLU**
 
-   與常用的 GELU 相比，StarReLU 減少了 71% 的激活 FLOPs，且性能更佳。StarReLU 是 Squared ReLU 的變體，專注於減輕分佈偏移問題，預期在 MetaFormer 類模型和其他神經網絡中有很大的應用潛力。
+   與常用的 GELU 相比，StarReLU 減少了 71% 的啟動 FLOPs，且性能更佳。StarReLU 是 Squared ReLU 的變體，專注於減輕分佈偏移問題，預期在 MetaFormer 類模型和其他神經網路中有很大的應用潛力。
 
 MetaFormer 展現了實現最先進性能的巨大潛力，隨著先進的 Token Mixer 或訓練策略的引入，預期類似 MetaFormer 的模型性能將持續創下新紀錄。

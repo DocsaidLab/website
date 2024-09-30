@@ -56,7 +56,7 @@ FastViT 架構包含四個不同的階段，每個階段在不同的尺度上運
 
   $$Y = \text{BN}(\sigma(\text{DWConv}(X))) + X$$
 
-  其中$\sigma$ 代表非線性激活函數，BN 表示批次正規化（Batch Normalization），DWConv 為深度卷積層。FastViT 通過重新排列操作並移除非線性函數進行簡化：
+  其中$\sigma$ 代表非線性啟動函數，BN 表示批次正規化（Batch Normalization），DWConv 為深度卷積層。FastViT 通過重新排列操作並移除非線性函數進行簡化：
 
   $$Y = \text{DWConv}(\text{BN}(X)) + X$$
 

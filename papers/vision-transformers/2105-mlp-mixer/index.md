@@ -105,7 +105,7 @@ Token-Mixer 是後來論文歸納出來的名詞，並非本篇論文提出的�
 
 在 ImageNet-21k 上預訓練並進行額外正則化時，MLP-Mixer 在 ImageNet 上達到 84.15% 的 top-1 準確率，表現強勁但略遜於其他模型。沒有正則化時，Mixer 容易過度擬合，這與 ViT 的觀察結果一致。
 
-當在 ImageNet 上從隨機初始化訓練 MLP-Mixer 時，Mixer-B/16 在分辨率 224 下取得 76.4% 的分數，與普通 ResNet50 類似，但低於其他最先進的 CNN/混合模型，例如 84.7% 的 BotNet 和 86.5% 的 NFNet。
+當在 ImageNet 上從隨機初始化訓練 MLP-Mixer 時，Mixer-B/16 在解析度 224 下取得 76.4% 的分數，與普通 ResNet50 類似，但低於其他最先進的 CNN/混合模型，例如 84.7% 的 BotNet 和 86.5% 的 NFNet。
 
 當上游資料集大小增加時，MLP-Mixer 的效能顯著提高。
 

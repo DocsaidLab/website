@@ -21,64 +21,65 @@ pip install -U google-api-python-client google-auth-httplib2 google-auth-oauthli
 ## 配置範例
 
 1. 在你的工作目錄中，建立一個名為 `quickstart.py`.
-    - 可以直接參考 Google 提供的原始碼：[**source code**](https://github.com/googleworkspace/python-samples/blob/main/gmail/quickstart/quickstart.py)
+
+   - 可以直接參考 Google 提供的原始碼：[**source code**](https://github.com/googleworkspace/python-samples/blob/main/gmail/quickstart/quickstart.py)
 
 2. 將以下程式碼包含在 `quickstart.py`:
 
-    ```python title="quickstart.py"
-    import os.path
+   ```python title="quickstart.py"
+   import os.path
 
-    from google.auth.transport.requests import Request
-    from google.oauth2.credentials import Credentials
-    from google_auth_oauthlib.flow import InstalledAppFlow
-    from googleapiclient.discovery import build
-    from googleapiclient.errors import HttpError
+   from google.auth.transport.requests import Request
+   from google.oauth2.credentials import Credentials
+   from google_auth_oauthlib.flow import InstalledAppFlow
+   from googleapiclient.discovery import build
+   from googleapiclient.errors import HttpError
 
-    # If modifying these scopes, delete the file token.json.
-    SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
+   # If modifying these scopes, delete the file token.json.
+   SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
 
-    def main():
-    """Shows basic usage of the Gmail API. Lists the user's Gmail labels."""
-    creds = None
-    # The file token.json stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
-    if os.path.exists("token.json"):
-        creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-    # If there are no (valid) credentials available, let the user log in.
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                "credentials.json", SCOPES
-            )
-            creds = flow.run_local_server(port=0)
-        # Save the credentials for the next run
-        with open("token.json", "w") as token:
-            token.write(creds.to_json())
+   def main():
+   """Shows basic usage of the Gmail API. Lists the user's Gmail labels."""
+   creds = None
+   # The file token.json stores the user's access and refresh tokens, and is
+   # created automatically when the authorization flow completes for the first
+   # time.
+   if os.path.exists("token.json"):
+       creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+   # If there are no (valid) credentials available, let the user log in.
+   if not creds or not creds.valid:
+       if creds and creds.expired and creds.refresh_token:
+           creds.refresh(Request())
+       else:
+           flow = InstalledAppFlow.from_client_secrets_file(
+               "credentials.json", SCOPES
+           )
+           creds = flow.run_local_server(port=0)
+       # Save the credentials for the next run
+       with open("token.json", "w") as token:
+           token.write(creds.to_json())
 
-    try:
-        # Call the Gmail API
-        service = build("gmail", "v1", credentials=creds)
-        results = service.users().labels().list(userId="me").execute()
-        labels = results.get("labels", [])
+   try:
+       # Call the Gmail API
+       service = build("gmail", "v1", credentials=creds)
+       results = service.users().labels().list(userId="me").execute()
+       labels = results.get("labels", [])
 
-        if not labels:
-            print("No labels found.")
-            return
-        print("Labels:")
-        for label in labels:
-            print(label["name"])
+       if not labels:
+           print("No labels found.")
+           return
+       print("Labels:")
+       for label in labels:
+           print(label["name"])
 
-    except HttpError as error:
-        # TODO(developer) - Handle errors from gmail API.
-        print(f"An error occurred: {error}")
+   except HttpError as error:
+       # TODO(developer) - Handle errors from gmail API.
+       print(f"An error occurred: {error}")
 
-    if __name__ == "__main__":
-        main()
-    ```
+   if __name__ == "__main__":
+       main()
+   ```
 
 ## 執行範例
 
@@ -118,7 +119,7 @@ UNREAD
 
 接下來，我們將開始使用 GmailAPI 來解析郵件內容。
 
-我們實作了三個部分，分別是：創建客戶端、取得郵件和郵件解析。
+我們實作了三個部分，分別是：創建用戶端、取得郵件和郵件解析。
 
 先引入需要的套件：
 
@@ -132,9 +133,9 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 ```
 
-### 創建客戶端
+### 創建用戶端
 
-在建立 GmailAPI 的客戶端時，會載入 `token.json` 存儲了用戶的訪問令牌和刷新令牌，並在訪問令牌到期時自動刷新。
+在建立 GmailAPI 的用戶端時，會載入 `token.json` 存儲了用戶的訪問令牌和刷新令牌，並在訪問令牌到期時自動刷新。
 
 ```python
 def build_service():
@@ -148,7 +149,7 @@ def build_service():
 
 ### 取得郵件
 
-接下來，我們先定義一個函數，用來從客戶端取得郵件內容：
+接下來，我們先定義一個函數，用來從用戶端取得郵件內容：
 
 ```python
 def get_messages(

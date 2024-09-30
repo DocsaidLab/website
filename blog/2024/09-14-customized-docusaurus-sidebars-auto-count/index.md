@@ -137,7 +137,7 @@ const fs = require("fs"); // 引入 Node.js 的檔案系統模組，用來操作
 const path = require("path"); // 引入 Node.js 的路徑模組，用來處理路徑
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
-// 這是一個 Docusaurus 側邊欄配置的類型定義，方便 IDE 提供智能提示
+// 這是一個 Docusaurus 側邊欄配置的類型定義，方便 IDE 提供提示
 function generateSidebar() {
   // 設定基本路徑，這裡指向 'papers' 目錄，可以根據實際情況修改
   const baseDir = path.join(__dirname, "papers");

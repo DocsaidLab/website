@@ -36,8 +36,8 @@ sidebar_position: 1
 
 1. **使用 Zapier 或 IFTTT 等服務**
 
-   - [**Zapier**](https://zapier.com/)：這是個專注於增強工作效率的自動化平台，它支持連接超過 3,000 種不同的網絡應用程序，包括 Gmail、Slack、Mailchimp 等。這個平台允許用戶通過創建自動化工作流程，來實現各種應用之間的自動交互。
-   - [**IFTTT**](https://ifttt.com/)：IFTTT 是一個免費的網絡服務，它允許用戶創建「如果這樣，那麼那樣」的自動化任務，這些任務稱為「Applets」。每個 Applet 都是由一個觸發器和一個動作組成的。當觸發器條件被滿足時，Applet 將自動執行動作。
+   - [**Zapier**](https://zapier.com/)：這是個專注於增強工作效率的自動化平台，它支持連接超過 3,000 種不同的網路應用程序，包括 Gmail、Slack、Mailchimp 等。這個平台允許用戶通過創建自動化工作流程，來實現各種應用之間的自動交互。
+   - [**IFTTT**](https://ifttt.com/)：IFTTT 是一個免費的網路服務，它允許用戶創建「如果這樣，那麼那樣」的自動化任務，這些任務稱為「Applets」。每個 Applet 都是由一個觸發器和一個動作組成的。當觸發器條件被滿足時，Applet 將自動執行動作。
 
 2. **使用 GmailAPI**
 

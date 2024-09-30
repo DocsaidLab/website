@@ -35,11 +35,11 @@ Solace 是一家提供高效能消息傳遞中介軟體和相關服務的公司�
 
 1. **Messaging Service**
 
-   - **MessagingService**: 這是消息服務的主要接口，用於配置和建立與 Solace 消息代理的連接。
-   - **ReconnectionListener**: 這些接口用於處理連接中斷和重連的事件。
-   - **ReconnectionAttemptListener**: 這些接口用於處理連接中斷和重連的事件。
-   - **ServiceInterruptionListener**: 這些接口用於處理連接中斷和重連的事件。
-   - **RetryStrategy**: 這個接口用於定義消息重傳的策略。
+   - **MessagingService**: 這是消息服務的主要介面，用於配置和建立與 Solace 消息代理的連接。
+   - **ReconnectionListener**: 這些介面用於處理連接中斷和重連的事件。
+   - **ReconnectionAttemptListener**: 這些介面用於處理連接中斷和重連的事件。
+   - **ServiceInterruptionListener**: 這些介面用於處理連接中斷和重連的事件。
+   - **RetryStrategy**: 這個介面用於定義消息重傳的策略。
    - **ServiceEvent**: 處理有關服務生命週期的事件。
 
 2. **Topic Subscription**
@@ -60,8 +60,8 @@ Solace 是一家提供高效能消息傳遞中介軟體和相關服務的公司�
 
    - **Topic**: 表示消息主題，可以是動態的或固定的。
    - **CachedMessageSubscriptionRequest**: 處理對緩存消息的訂閱請求。
-   - **CacheRequestOutcomeListener**: 處理緩存請求結果的接口和類別。
-   - **CacheRequestOutcome**: 處理緩存請求結果的接口和類別。
+   - **CacheRequestOutcomeListener**: 處理緩存請求結果的介面和類別。
+   - **CacheRequestOutcome**: 處理緩存請求結果的介面和類別。
 
 5. **Life Cycle and Utility**
    - **TerminationNotificationListener**: 這些用於處理組件終止的通知和事件。
@@ -132,7 +132,7 @@ Solace 是一家提供高效能消息傳遞中介軟體和相關服務的公司�
 
 ### SorApi
 
-該類別是一個封裝了與證券訂單路由系統（SORS）溝通的接口。
+該類別是一個封裝了與證券訂單路由系統（SORS）溝通的介面。
 
 這個類別提供了一系列的功能，允許用戶連接、發送請求、接收和處理回報等，也就是說，這個是連接券商下單系統的本體 API。
 

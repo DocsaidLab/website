@@ -118,7 +118,7 @@ get_system_info()
 }
 ```
 
-- OS Version: 操作系統版本
+- OS Version: 作業系統版本
 - CPU Model: CPU 型號
 - Physical CPU Cores: 物理 CPU 核心數
 - Logical CPU Cores (incl. hyper-threading): 邏輯 CPU 核心數 (包括超執行緒)
@@ -138,8 +138,8 @@ get_system_info()
 
 以下幾個可能需要注意的要點：
 
-- 因操作系統的限制，某些函數可能無法在所有平台上運行。例如：`get_cpu_info` 在 Windows 上不會顯示完整的 CPU 型號。在這種情況下，你可以考慮使用其他工具或手動獲取此資訊。
-- 如果你在 Windows 環境中，無法直接使用 `nvidia-smi` 來獲取 GPU 資訊，請確保已安裝 NVIDIA 驅動和相關的工具，並在命令提示符窗口中執行它。
+- 因作業系統的限制，某些函數可能無法在所有平台上運行。例如：`get_cpu_info` 在 Windows 上不會顯示完整的 CPU 型號。在這種情況下，你可以考慮使用其他工具或手動獲取此資訊。
+- 如果你在 Windows 環境中，無法直接使用 `nvidia-smi` 來獲取 GPU 資訊，請確保已安裝 NVIDIA 驅動和相關的工具，並在命令提示符視窗中執行它。
 - 外部 IP 地址是從 `https://httpbin.org/ip` 獲取的，所以必須確保網路連線是活躍的。
 
 ## 程式碼

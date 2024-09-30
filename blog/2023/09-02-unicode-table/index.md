@@ -14,7 +14,7 @@ description: Unicode 編碼區段表，方便查詢。
 
 ---
 
-Unicode 是一個由非營利組織 Unicode 聯盟所維護的國際性字符編碼標準。
+Unicode 是一個由非營利組織 Unicode 聯盟所維護的國際性字元編碼標準。
 
 該標準旨在統一世界上大部分的文字系統，從而實現跨平臺和多語言環境下的信息交流。
 
@@ -22,17 +22,17 @@ Unicode 是 ISO/IEC 10646 標準的實現，也成為全球性的通用字元集
 
 <!-- truncate -->
 
-在 Unicode 標準中，每個字符都對應到一個唯一的數字代碼，這個代碼被稱為「區段」（Code Point）。區段是 Unicode 標準中一個重要的概念，用於確定每個獨特字符的位置。
+在 Unicode 標準中，每個字元都對應到一個唯一的數字代碼，這個代碼被稱為「區段」（Code Point）。區段是 Unicode 標準中一個重要的概念，用於確定每個獨特字元的位置。
 
-Unicode 的區段範圍從 U+0000 到 U+10FFFF，這意味著它可以容納 1,114,112 個不同的字符。這些區段按照不同的功能和用途被劃分成多個子集，例如：
+Unicode 的區段範圍從 U+0000 到 U+10FFFF，這意味著它可以容納 1,114,112 個不同的字元。這些區段按照不同的功能和用途被劃分成多個子集，例如：
 
 - 基本多文種平面（Basic Multilingual Plane, BMP）：U+0000 到 U+FFFF
 
-  包括了拉丁字母、希臘字母、漢字等常用字符。
+  包括了拉丁字母、希臘字母、漢字等常用字元。
 
 - 補充平面（Supplementary Planes）：U+010000 到 U+10FFFF
 
-  包括了更多的象形文字、補充字符等。
+  包括了更多的象形文字、補充字元等。
 
 有鑒於我們每次需要查找 Unicode 編碼時，總是得花費半小時去把 wiki 的資料表翻出來，所以還是把一些基本的資訊儲存起來吧。
 
@@ -326,7 +326,7 @@ Unicode 的區段範圍從 U+0000 到 U+10FFFF，這意味著它可以容納 1,1
 | &nbsp;1&nbsp;SMP | 1D2E0 &#8211; 1D2FF   | 瑪雅數字                         | Mayan Numerals                                   |
 | &nbsp;1&nbsp;SMP | 1D300 &#8211; 1D35F   | 太玄經符號                       | Tai Xuan Jing Symbols                            |
 | &nbsp;1&nbsp;SMP | 1D360 &#8211; 1D37F   | 算籌                             | Counting Rod Numerals                            |
-| &nbsp;1&nbsp;SMP | 1D400 &#8211; 1D7FF   | 字母和數字符號                   | Mathematical Alphanumeric Symbols                |
+| &nbsp;1&nbsp;SMP | 1D400 &#8211; 1D7FF   | 字母和數字元號                   | Mathematical Alphanumeric Symbols                |
 | &nbsp;1&nbsp;SMP | 1D800 &#8211; 1DAAF   | 薩頓書寫符號                     | Sutton SignWriting                               |
 | &nbsp;1&nbsp;SMP | 1DF00 &#8211; 1DFFF   | 拉丁字母擴展-G                   | Latin Extended-G                                 |
 | &nbsp;1&nbsp;SMP | 1E000 &#8211; 1E02F   | 格拉哥里字母補充                 | Glagolitic Supplement                            |
@@ -340,7 +340,7 @@ Unicode 的區段範圍從 U+0000 到 U+10FFFF，這意味著它可以容納 1,1
 | &nbsp;1&nbsp;SMP | 1E900 &#8211; 1E95F   | 阿德拉姆字母                     | Adlam                                            |
 | &nbsp;1&nbsp;SMP | 1EC70 &#8211; 1ECBF   | 印度西亞格數字                   | Indic Siyaq Numbers                              |
 | &nbsp;1&nbsp;SMP | 1ED00 &#8211; 1ED4F   | 奧斯曼西亞格數字                 | Ottoman Siyaq Numbers                            |
-| &nbsp;1&nbsp;SMP | 1EE00 &#8211; 1EEFF   | 阿拉伯字母數字符號               | Arabic Mathematical Alphabetic Symbols           |
+| &nbsp;1&nbsp;SMP | 1EE00 &#8211; 1EEFF   | 阿拉伯字母數字元號               | Arabic Mathematical Alphabetic Symbols           |
 | &nbsp;1&nbsp;SMP | 1F000 &#8211; 1F02F   | 麻將牌                           | Mahjong Tiles                                    |
 | &nbsp;1&nbsp;SMP | 1F030 &#8211; 1F09F   | 多米諾骨牌                       | Domino Tiles                                     |
 | &nbsp;1&nbsp;SMP | 1F0A0 &#8211; 1F0FF   | 撲克牌                           | Playing Cards                                    |

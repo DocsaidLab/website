@@ -111,7 +111,7 @@ VGG 已經得到了堆疊小核就能達到同樣效果的「感受野」，因�
 這個部分在上圖中沒有畫出來，但對性能提升很重要。這些區塊的設計使得網路能夠在不同階段保持高效的特徵提取和處理能力。
 :::
 
-此外，為了增強非線性和跨通道的資訊通信，RepLKNet 引入了 ConvFFN 區塊。這些區塊由捷徑、Batch Normalization（BN）、兩個 1×1 卷積層和 GELU 激活函數組成，類似於 Transformer 和 MLP 中的前饋網路（FFN）。
+此外，為了增強非線性和跨通道的資訊通信，RepLKNet 引入了 ConvFFN 區塊。這些區塊由捷徑、Batch Normalization（BN）、兩個 1×1 卷積層和 GELU 啟動函數組成，類似於 Transformer 和 MLP 中的前饋網路（FFN）。
 
 相比於經典 FFN 使用 Layer Normalization 的做法，BN 可以更有效地融合到卷積操作中，提升推理效率。這一設計靈感來自於 Transformer 和 MLP 網路，並在卷積神經網路中得到成功應用。
 
@@ -184,7 +184,7 @@ VGG 已經得到了堆疊小核就能達到同樣效果的「感受野」，因�
 從上圖中可以看出 RepLKNet-31B 的形狀偏差比 Swin Transformer 和小核心 CNN 高得多。作者認為形狀偏差與有效感受野密切相關，而不是與自注意力，同時這也解釋了：
 
 1. ViT 的高形狀偏差，因為採用全局注意力
-2. Swin Transformer 的低形狀偏差，因為採用局部窗口內的注意力
+2. Swin Transformer 的低形狀偏差，因為採用局部視窗內的注意力
 
 ### 限制
 

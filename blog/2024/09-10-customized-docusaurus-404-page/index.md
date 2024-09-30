@@ -19,7 +19,7 @@ import Translate from '@docusaurus/Translate';
 
 ---
 
-Docusaurus 是一個由 Meta 開發的靜態網站生成器，用於構建開源文檔網站。它提供了一個簡單的方式來創建和維護網站，並且支持自定義主題和插件。
+Docusaurus 是一個由 Meta 開發的靜態網站生成器，用於構建開源文件網站。它提供了一個簡單的方式來創建和維護網站，並且支持自定義主題和插件。
 
 <!-- truncate -->
 
@@ -182,7 +182,7 @@ useEffect(() => {
 `}</style>
 ```
 
-這是一個圖片元素，用來顯示一個錯誤圖標：
+這是一個圖片元素，用來顯示一個錯誤圖示：
 
 - `src="/img/error-icon.png"`：圖片來源，這裡是本地 /img/error-icon.png。
 - `alt="Error icon"`：替代文字，當圖片無法顯示時，這段文字會被呈現。

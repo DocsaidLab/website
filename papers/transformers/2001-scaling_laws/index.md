@@ -40,9 +40,9 @@ OpenAI 在 Transformer 解碼器上走得愈來愈遠了。
 
 - 原始 WebText 數據集來自於 Reddit 的外部鏈接，這些鏈接在 2017 年 12 月前獲得至少 3 個其他讀者認同。
 - WebText2 中，加入了 2018 年 1 月至 10 月期間的 Reddit 外部鏈接，這些鏈接也需要至少 3 個其他讀者認同。
-- 使用 Newspaper3k Python 庫提取鏈接文本，最終數據集包含 2030 萬個文檔，總計 96GB 文本和 $1.62\times10^{10}$ 詞。
+- 使用 Newspaper3k Python 庫提取鏈接文本，最終數據集包含 2030 萬個文件，總計 96GB 文本和 $1.62\times10^{10}$ 詞。
 - 應用了可逆的字節對編碼（byte-pair encoding）來進行標記化，最終得到 $2.29\times10^{10}$ 個標記，並保留了 $6.6\times10^{8}$ 個標記作為測試集。
-- 在 Books Corpus、Common Crawl、英語維基百科和其他公共可用的網絡書籍樣本上進行測試。
+- 在 Books Corpus、Common Crawl、英語維基百科和其他公共可用的網路書籍樣本上進行測試。
 
 ### 變化因素
 

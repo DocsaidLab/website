@@ -12,7 +12,7 @@ DocsaidKit 主要包括以下幾個部分：
 
 - **ONNXEngine**：提供 ONNX 推理的功能，支持 ONNX 格式模型。
 
-- **Torch**：與 PyTorch 相關，包含神經網絡架構、優化器等。
+- **Torch**：與 PyTorch 相關，包含神經網路架構、優化器等。
 
 - **Utils**：不知道該怎麼歸類的，就放在這裡。
 
