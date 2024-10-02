@@ -102,7 +102,7 @@ volumes:
 完成了上述的設定之後，再來是設定系統服務。
 
 ```bash
-sudo vim /etc/systemd/system/nexcloud.service
+sudo vim /etc/systemd/system/nextcloud.service
 ```
 
 貼上以下的內容：

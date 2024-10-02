@@ -97,7 +97,7 @@ For more detailed configurations, refer to the official documentation: [compose.
 ## Configuring System Services
 
 ```bash
-sudo vim /etc/systemd/system/nexcloud.service
+sudo vim /etc/systemd/system/nextcloud.service
 ```
 
 Paste the following content:
