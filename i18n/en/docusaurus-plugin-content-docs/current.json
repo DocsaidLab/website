@@ -130,5 +130,9 @@
   "sidebar.tutorialSidebar.category.WordCanvas": {
     "message": "WordCanvas",
     "description": "The label for category WordCanvas in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.MRZScanner": {
+    "message": "MRZScanner",
+    "description": "The label for category MRZScanner in sidebar tutorialSidebar"
   }
 }

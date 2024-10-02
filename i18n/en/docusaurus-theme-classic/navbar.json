@@ -18,5 +18,13 @@
   "item.label.GitHub": {
     "message": "GitHub",
     "description": "Navbar item with label GitHub"
+  },
+  "item.label.Playground": {
+    "message": "Playground",
+    "description": "Navbar item with label Playground"
+  },
+  "item.label.Sponsor": {
+    "message": "Sponsor",
+    "description": "Navbar item with label Sponsor"
   }
 }
