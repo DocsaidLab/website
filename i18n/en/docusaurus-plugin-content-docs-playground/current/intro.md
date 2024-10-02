@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Playground
 
 Now that the models are built, it's time to showcase their capabilities!
@@ -12,7 +16,9 @@ Considering the high cost of cloud hosting, all models are currently deployed on
 
 ## A Small Request 🙏
 
-Feel free to use these demos at any time! However, I kindly ask that you don't "overwork" them. I would really appreciate your cooperation.
+Feel free to use these demos at any time!
+
+However, I kindly ask that you don't "overwork" them. I would really appreciate your cooperation.
 
 Here are some actions that are not allowed:
 
@@ -25,6 +31,10 @@ Let's all be respectful with resources so that this playground can stay open and
 
 ## In Conclusion
 
-The demo currently on display is just the beginning. My goal is to bring more interesting and practical models online. Whether it's image processing, language models, or other machine learning applications, they will gradually become available for you to try out.
+The demos currently showcased are just the beginning.
 
-If you have any ideas for models or features you'd like to see, feel free to let me know! I'll consider adding them to this playground.
+Whether it's image processing, language models, or other machine learning applications, I'll continue to add more to this playground when time permits.
+
+＊
+
+2024 Zephyr
