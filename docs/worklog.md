@@ -14,6 +14,10 @@ sidebar_position: 2
 
 ## 2024
 
+### 10 月
+
+- 完成模型 Demo 的功能，並且將其部署至網站上：[**Playground**](https://docsaid.org/playground/intro)
+
 ### 9 月
 
 - MRZScanner：開發完成，轉成開源專案。🎉 🎉 🎉

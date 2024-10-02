@@ -14,6 +14,10 @@ This page is solely for recording our work activities.
 
 ## 2024
 
+### October
+
+- Completed the model demo functionality and deployed it on the website: [**Playground**](https://docsaid.org/playground/intro)
+
 ### September
 
 - **MRZScanner**: Project completed and made open-source. 🎉 🎉 🎉

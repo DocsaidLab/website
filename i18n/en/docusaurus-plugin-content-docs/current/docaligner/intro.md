@@ -98,6 +98,16 @@ Although we use different colors for different corner points in the visualized r
 In other words: **No matter how the text is oriented, the model will always define the top-left corner as the starting point and the bottom-left corner as the endpoint.**
 :::
 
+## Playground
+
+We have placed this model on this webpage, so you can try it out in the playground.
+
+- [**DocAligner-Demo**](https://docsaid.org/en/playground/docaligner-demo)
+
+:::tip
+Don't use images that are too large (exceeding 4000 pixels in length and width), as this may cause the browser to crash.
+:::
+
 ## Conclusion
 
 Initially, we aimed to develop a zero-shot model capable of running smoothly on mobile devices. The goal was to create a model that could generalize to all types of documents worldwide, without needing any annotations or fine-tuning, and be ready for immediate use.
