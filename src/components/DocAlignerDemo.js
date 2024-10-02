@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../css/DocAlignerDemo.css';
 
 const DocAlignerDemo = ({
@@ -17,6 +17,7 @@ const DocAlignerDemo = ({
   fileSizeLabel,
   fileTypeLabel,
   imageSizeLabel,
+  externalImage,
 }) => {
   const fileInputRef = useRef(null);
   const originalCanvasRef = useRef(null);
@@ -28,6 +29,47 @@ const DocAlignerDemo = ({
   const [imageInfo, setImageInfo] = useState(null);
   const [inferenceTime, setInferenceTime] = useState(0);
   const [timestamp, setTimestamp] = useState(0);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  useEffect(() => {
+    if (externalImage) {
+      handleExternalImageChange(externalImage);
+    }
+  }, [externalImage]);
+
+  const handleExternalImageChange = (imageSource) => {
+    const canvas = originalCanvasRef.current;
+    clearAll();
+
+    setError(null);
+    setWarning(null);
+    setPredictionData(null);
+    setImageInfo(null);
+
+    const img = new Image();
+    img.crossOrigin = "Anonymous"; // 避免 CORS 問題
+    img.onload = function () {
+      const ctx = canvas.getContext('2d');
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      if (img.width > 4000 || img.height > 4000) {
+        setWarning(warningMessage.imageTooLarge);
+      }
+
+      ctx.drawImage(img, 0, 0);
+
+      adjustCanvasSize(canvas, img.width, img.height);
+      setImageInfo({ width: img.width, height: img.height });
+
+      // 將畫布轉換為 Blob，然後創建一個 File 對象
+      canvas.toBlob(function (blob) {
+        const file = new File([blob], "example.jpg", { type: "image/jpeg" });
+        setSelectedFile(file);
+      }, "image/jpeg");
+    };
+    img.src = imageSource;
+  };
 
   const validateFileType = (file) => {
     const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
@@ -94,17 +136,20 @@ const DocAlignerDemo = ({
   };
 
   const uploadImage = () => {
-    const fileInput = fileInputRef.current;
     const originalCanvas = originalCanvasRef.current;
     const processedCanvas = processedCanvasRef.current;
 
-    if (!fileInput.files || fileInput.files.length === 0) {
+    let file = null;
+
+    if (selectedFile) {
+      file = selectedFile;
+    } else if (fileInputRef.current.files && fileInputRef.current.files.length > 0) {
+      file = fileInputRef.current.files[0];
+    } else {
       setError(errorMessage.chooseFile);
       clearAll();
       return;
     }
-
-    const file = fileInput.files[0];
 
     if (!validateFileType(file)) {
       setError(errorMessage.invalidFileType);
@@ -154,7 +199,7 @@ const DocAlignerDemo = ({
       })
       .catch(error => {
         console.error('Error:', error);
-        setError(errorMessage.uploadError);
+        setError(`${errorMessage.uploadError}: ${error.message || error}`);
       })
       .finally(() => {
         setIsLoading(false);
@@ -258,6 +303,8 @@ const DocAlignerDemo = ({
     downloadAnchorNode.remove();
   };
 
+  const currentFile = selectedFile || (fileInputRef.current && fileInputRef.current.files[0]);
+
   return (
     <div className="doc-aligner-demo">
 
@@ -274,13 +321,13 @@ const DocAlignerDemo = ({
 
       <br />
 
-      {imageInfo && (
+      {imageInfo && currentFile && (
         <div id="imageInfo">
           <h3>{imageInfoTitle}</h3>
           <ul>
-            <li>{fileNameLabel}: {fileInputRef.current.files[0].name}</li>
-            <li>{fileSizeLabel}: {Math.round(fileInputRef.current.files[0].size / 1024)} KB</li>
-            <li>{fileTypeLabel}: {fileInputRef.current.files[0].type}</li>
+            <li>{fileNameLabel}: {currentFile.name}</li>
+            <li>{fileSizeLabel}: {Math.round(currentFile.size / 1024)} KB</li>
+            <li>{fileTypeLabel}: {currentFile.type}</li>
             <li>{imageSizeLabel}: {imageInfo.width} x {imageInfo.height} pixel</li>
           </ul>
         </div>
@@ -310,7 +357,7 @@ const DocAlignerDemo = ({
           <h3>{inferenceInfoTitle}</h3>
           <ul>
             <li>{inferenceTimeLabel}: {inferenceTime.toFixed(2)} sec </li>
-             <li>{timestampLabel}: {timestamp}</li>
+            <li>{timestampLabel}: {timestamp}</li>
           </ul>
         </div>
       )}

@@ -27,9 +27,11 @@
     "axios": "^1.6.8",
     "clsx": "^2.0.0",
     "gh-pages": "^6.1.0",
+    "i18next": "^23.15.1",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-i18next": "^15.0.2",
     "rehype-katex": "7",
     "remark-math": "6"
   },

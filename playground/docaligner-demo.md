@@ -1,8 +1,12 @@
 # DocAligner Demo
 
-import DocAlignerDemo from '@site/src/components/DocAlignerDemo';
+你可以從檔案系統中選幾張帶有文件的圖片來測試這個功能。
 
-<DocAlignerDemo
+如果一時半刻間找不到圖片，我們也可以先跟 MIDV-2020 借幾張來用：
+
+import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemoWrapper';
+
+<DocAlignerDemoWrapper
 chooseFileLabel="選擇檔案"
 uploadButtonLabel="上傳並預測"
 downloadButtonLabel="下載預測結果"
@@ -26,5 +30,9 @@ fileNameLabel="檔案名稱"
 fileSizeLabel="檔案大小"
 fileTypeLabel="檔案類型"
 imageSizeLabel="圖像尺寸"
-
+defaultImages={[
+{ src: '/img/docalign-demo/000025.jpg', description: '文字干擾' },
+{ src: '/img/docalign-demo/000139.jpg', description: '強烈反光' },
+{ src: '/img/docalign-demo/000175.jpg', description: '高度歪斜' }
+]}
 />
