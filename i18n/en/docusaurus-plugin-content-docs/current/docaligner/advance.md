@@ -77,11 +77,7 @@ from docaligner import DocAligner
 
 print(DocAligner().list_models())
 # >>> [
-#     'lcnet050',
-#     'lcnet050_fpn',
 #     'lcnet100',
-#     'lcnet100_fpn',
-#     'mobilenetv2_140',
 #     'fastvit_t8',
 #     'fastvit_sa24',       <-- Default
 #     ...
@@ -91,7 +87,7 @@ print(DocAligner().list_models())
 You can specify the model configuration using the `model_cfg` parameter.
 
 ```python
-model = DocAligner(model_cfg='mobilenetv2_140') # Using 'mobilenetv2_140' configuration
+model = DocAligner(model_cfg='fastvit_t8') # Using 'fastvit_t8' configuration
 ```
 
 ## Inference

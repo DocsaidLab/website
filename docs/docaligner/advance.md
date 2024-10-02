@@ -15,9 +15,9 @@ sidebar_position: 4
 Backend 是一個列舉類型，用於指定 `DocAligner` 的運算後端。
 
 它包含以下選項：
+
 - **cpu**：使用 CPU 進行運算。
 - **cuda**：使用 GPU 進行運算（需要適當的硬體支援）。
-
 
 ```python
 from docsaidkit import Backend
@@ -34,15 +34,17 @@ model = DocAligner(backend=Backend.cpu) # 使用 CPU 後端
 如果你的系統中沒有安裝 CUDA，或安裝的版本不正確，則無法使用 CUDA 運算後端。
 
 :::tip
+
 1. 如果你有其他需求，請參考 [**ONNXRuntime 官方文件**](https://onnxruntime.ai/docs/execution-providers/index.html) 進行自定義。
 2. 關於安裝依賴相關的問題，請參考 [**ONNXRuntime Release Notes**](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements)
-:::
+   :::
 
 ### 2. ModelType
 
 ModelType 是一個列舉類型，用於指定 `DocAligner` 使用的模型類型。
 
 它包含以下選項：
+
 - **heatmap**：使用熱圖模型。
 - **point**：使用點回歸模型。
 
@@ -75,11 +77,7 @@ from docaligner import DocAligner
 
 print(DocAligner().list_models())
 # >>> [
-#     'lcnet050',
-#     'lcnet050_fpn',
 #     'lcnet100',
-#     'lcnet100_fpn',
-#     'mobilenetv2_140',
 #     'fastvit_t8',
 #     'fastvit_sa24',       <-- Default
 #     ...
@@ -89,7 +87,7 @@ print(DocAligner().list_models())
 你可以透過 `model_cfg` 參數來指定模型的配置。
 
 ```python
-model = DocAligner(model_cfg='mobilenetv2_140') # 使用 'mobilenetv2_140' 配置
+model = DocAligner(model_cfg='fastvit_t8') # 使用 'fastvit_t8' 配置
 ```
 
 ## Inference
@@ -105,6 +103,7 @@ model = DocAligner(model_cfg='mobilenetv2_140') # 使用 'mobilenetv2_140' 配�
 這項設定尤其重要，因為在實際應用中，我們遇到的圖像往往並非標準的正方形尺寸。
 
 實際上，圖像的尺寸和比例多種多樣，例如：
+
 - 手機拍攝的照片普遍採用 9:16 的寬高比；
 - 掃描的文件常見於 A4 的紙張比例；
 - 網頁截圖大多是 16:9 的寬高比；
@@ -129,8 +128,6 @@ result = model(img, do_center_crop=True) # 使用中心裁剪
 :::warning
 中心裁減只是在計算流程中的一個步驟，不會對原始圖像進行修改。最後得到的結果會映射回原始圖像的尺寸，使用者不須擔心圖像的變形或失真問題。
 :::
-
-
 
 ### Return `Document` Object
 
