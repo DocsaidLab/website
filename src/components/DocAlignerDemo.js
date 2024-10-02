@@ -17,7 +17,6 @@ const DocAlignerDemo = ({
   fileSizeLabel,
   fileTypeLabel,
   imageSizeLabel,
-  noPolygonWarning
 }) => {
   const fileInputRef = useRef(null);
   const originalCanvasRef = useRef(null);
@@ -67,6 +66,11 @@ const DocAlignerDemo = ({
         const ctx = canvas.getContext('2d');
         canvas.width = img.width;
         canvas.height = img.height;
+
+        if (img.width > 2000 || img.height > 2000) {
+          setWarning(warningMessage.imageTooLarge);
+        }
+
         ctx.drawImage(img, 0, 0);
 
         adjustCanvasSize(canvas, img.width, img.height);

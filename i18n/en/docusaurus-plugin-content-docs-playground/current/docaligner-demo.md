@@ -14,7 +14,8 @@ errorMessage={{
     uploadError: "An error occurred, please try again later."
   }}
 warningMessage={{
-    noPolygon: "No polygon detected, please ensure the image is valid."
+    noPolygon: "No polygon detected, maybe model does not recognize this doc type.",
+    imageTooLarge: "Image is too large and may cause browser crash."
   }}
 imageInfoTitle="Image Information"
 inferenceInfoTitle="Model Inference Information"

@@ -14,7 +14,8 @@ errorMessage={{
     uploadError: "發生錯誤，請稍後再試。"
   }}
 warningMessage={{
-    noPolygon: "為檢測到多邊形，請確認圖片是否符合要求。"
+    noPolygon: "沒有檢測到多邊形，模型不認識這種文件類型。",
+    imageTooLarge: "圖片太大，可能會導致瀏覽器故障。"
   }}
 imageInfoTitle="圖像資訊"
 inferenceInfoTitle="模型推論資訊"
@@ -25,4 +26,5 @@ fileNameLabel="檔案名稱"
 fileSizeLabel="檔案大小"
 fileTypeLabel="檔案類型"
 imageSizeLabel="圖像尺寸"
+
 />
