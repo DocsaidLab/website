@@ -73,6 +73,19 @@ const config = {
         showLastUpdateTime: true,
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'playground',
+        path: 'playground',
+        routeBasePath: 'playground',
+        sidebarPath: require.resolve('./sidebarsPlayground.js'),
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+      },
+    ]
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -104,6 +117,13 @@ const config = {
             label: 'Blog',
             to: '/blog',
             position: 'left'
+          },
+          {
+            label: 'Playground',
+            type: 'docSidebar',
+            sidebarId: 'playgroundSidebar',
+            position: 'left',
+            docsPluginId: 'playground'
           },
           {
             type: 'localeDropdown',

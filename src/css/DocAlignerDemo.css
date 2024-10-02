@@ -1,0 +1,85 @@
+/* CSS 作用范围限制在 .doc-aligner-demo 类下 */
+.doc-aligner-demo {
+  font-family: var(--ifm-font-family-base, sans-serif);
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  color: var(--text-color);
+}
+
+.doc-aligner-demo button {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 10px 25px;
+  margin: 10px 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.doc-aligner-demo input[type="file"] {
+  display: none;
+}
+
+.doc-aligner-demo .custom-file-upload {
+  background-color: var(--ifm-color-primary-light);
+  color: white;
+  padding: 10px 25px;
+  margin: 10px 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.doc-aligner-demo .custom-file-upload:hover {
+  background-color: var(--ifm-color-primary-lightest);
+  transform: translateY(-3px);
+}
+
+.doc-aligner-demo .images-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.doc-aligner-demo .images-container canvas {
+  max-width: 45%;
+  height: auto;
+  margin: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.doc-aligner-demo #uploadButton {
+  background-color: var(--ifm-color-primary-lighter);
+}
+
+.doc-aligner-demo #downloadButton {
+  background-color: var(--ifm-color-primary-lighter);
+}
+
+
+.doc-aligner-demo #loadingIndicator {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: var(--primary-color-dark);
+}
+
+.doc-aligner-demo #errorMessage {
+  margin-top: 20px;
+  color: red;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .doc-aligner-demo .images-container canvas {
+    max-width: 100%;
+  }
+}
