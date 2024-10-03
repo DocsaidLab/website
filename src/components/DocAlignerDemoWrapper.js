@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import DocAlignerDemo from './DocAlignerDemo';
 
+
 const DocAlignerDemoWrapper = ({
+  titleStage1,
+  titleStage2,
   chooseFileLabel,
   uploadButtonLabel,
   downloadButtonLabel,
+  clearButtonLabel,
   processingMessage,
   errorMessage,
   warningMessage,
@@ -28,7 +32,7 @@ const DocAlignerDemoWrapper = ({
 
   return (
     <div>
-      <h2>測試圖片</h2>
+      <h2>{titleStage1}</h2>
       <div className="image-grid">
         {defaultImages.map((image, index) => (
           <div key={index}>
@@ -42,14 +46,13 @@ const DocAlignerDemoWrapper = ({
         ))}
       </div>
 
-      <p>直接點擊上方圖片，可以代入下方模型展示中。</p>
-
       {/* 傳遞 externalImage */}
-      <h2>模型展示</h2>
+      <h2>{titleStage2}</h2>
       <DocAlignerDemo
         chooseFileLabel={chooseFileLabel}
         uploadButtonLabel={uploadButtonLabel}
         downloadButtonLabel={downloadButtonLabel}
+        clearButtonLabel={clearButtonLabel}
         processingMessage={processingMessage}
         errorMessage={errorMessage}
         warningMessage={warningMessage}

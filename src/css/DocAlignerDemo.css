@@ -65,6 +65,9 @@
   background-color: var(--ifm-color-primary-lighter);
 }
 
+.doc-aligner-demo #clearButton {
+  background-color: var(--ifm-color-primary-lighter);
+}
 
 .doc-aligner-demo #loadingIndicator {
   margin-top: 20px;

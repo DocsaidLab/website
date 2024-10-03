@@ -5,6 +5,7 @@ const DocAlignerDemo = ({
   chooseFileLabel,
   uploadButtonLabel,
   downloadButtonLabel,
+  clearButtonLabel,
   processingMessage,
   errorMessage,
   warningMessage,
@@ -27,6 +28,8 @@ const DocAlignerDemo = ({
   const [error, setError] = useState(null);
   const [warning, setWarning] = useState(null);
   const [imageInfo, setImageInfo] = useState(null);
+  const [originalImageInfo, setOriginalImageInfo] = useState(null);
+  const [scale, setScale] = useState(1);
   const [inferenceTime, setInferenceTime] = useState(0);
   const [timestamp, setTimestamp] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -47,22 +50,34 @@ const DocAlignerDemo = ({
     setImageInfo(null);
 
     const img = new Image();
-    img.crossOrigin = "Anonymous"; // 避免 CORS 問題
+    img.crossOrigin = "Anonymous"; // Avoid CORS issues
     img.onload = function () {
-      const ctx = canvas.getContext('2d');
-      canvas.width = img.width;
-      canvas.height = img.height;
+      const originalWidth = img.width;
+      const originalHeight = img.height;
+      let scale = 1;
+      if (img.width > 1000 || img.height > 1000) {
+        scale = 1000 / Math.max(img.width, img.height);
+      }
+      setScale(scale);
+
+      const scaledWidth = img.width * scale;
+      const scaledHeight = img.height * scale;
+
+      canvas.width = scaledWidth;
+      canvas.height = scaledHeight;
 
       if (img.width > 4000 || img.height > 4000) {
         setWarning(warningMessage.imageTooLarge);
       }
 
-      ctx.drawImage(img, 0, 0);
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, scaledWidth, scaledHeight);
 
-      adjustCanvasSize(canvas, img.width, img.height);
-      setImageInfo({ width: img.width, height: img.height });
+      adjustCanvasSize(canvas, scaledWidth, scaledHeight);
+      setImageInfo({ width: scaledWidth, height: scaledHeight });
+      setOriginalImageInfo({ width: originalWidth, height: originalHeight });
 
-      // 將畫布轉換為 Blob，然後創建一個 File 對象
+      // Convert canvas to Blob and create a File object
       canvas.toBlob(function (blob) {
         const file = new File([blob], "example.jpg", { type: "image/jpeg" });
         setSelectedFile(file);
@@ -105,18 +120,36 @@ const DocAlignerDemo = ({
     reader.onload = function(event) {
       const img = new Image();
       img.onload = function() {
-        const ctx = canvas.getContext('2d');
-        canvas.width = img.width;
-        canvas.height = img.height;
+        const originalWidth = img.width;
+        const originalHeight = img.height;
+        let scale = 1;
+        if (img.width > 1000 || img.height > 1000) {
+          scale = 1000 / Math.max(img.width, img.height);
+        }
+        setScale(scale);
 
-        if (img.width > 2000 || img.height > 2000) {
+        const scaledWidth = img.width * scale;
+        const scaledHeight = img.height * scale;
+
+        canvas.width = scaledWidth;
+        canvas.height = scaledHeight;
+
+        if (img.width > 4000 || img.height > 4000) {
           setWarning(warningMessage.imageTooLarge);
         }
 
-        ctx.drawImage(img, 0, 0);
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, scaledWidth, scaledHeight);
 
-        adjustCanvasSize(canvas, img.width, img.height);
-        setImageInfo({ width: img.width, height: img.height });
+        adjustCanvasSize(canvas, scaledWidth, scaledHeight);
+        setImageInfo({ width: scaledWidth, height: scaledHeight });
+        setOriginalImageInfo({ width: originalWidth, height: originalHeight });
+
+        // Convert canvas to Blob and create a File object
+        canvas.toBlob(function(blob) {
+          const scaledFile = new File([blob], file.name, { type: file.type });
+          setSelectedFile(scaledFile);
+        }, file.type);
       };
       img.src = event.target.result;
     };
@@ -128,7 +161,10 @@ const DocAlignerDemo = ({
     setPredictionData(null);
     setWarning(null);
     setImageInfo(null);
+    setOriginalImageInfo(null);
+    setSelectedFile(null);
     setInferenceTime(0);
+    setScale(1);
     const originalCtx = originalCanvasRef.current.getContext('2d');
     const processedCtx = processedCanvasRef.current.getContext('2d');
     originalCtx.clearRect(0, 0, originalCanvasRef.current.width, originalCanvasRef.current.height);
@@ -143,8 +179,6 @@ const DocAlignerDemo = ({
 
     if (selectedFile) {
       file = selectedFile;
-    } else if (fileInputRef.current.files && fileInputRef.current.files.length > 0) {
-      file = fileInputRef.current.files[0];
     } else {
       setError(errorMessage.chooseFile);
       clearAll();
@@ -165,7 +199,6 @@ const DocAlignerDemo = ({
     const formData = new FormData();
     formData.append('file', file);
 
-    // 发送预测请求
     fetch('https://api.docsaid.org/docaligner-predict', {
       method: 'POST',
       body: formData
@@ -187,7 +220,15 @@ const DocAlignerDemo = ({
         setInferenceTime(data.inference_time);
         setTimestamp(data.timestamp);
 
-        setPredictionData(data);
+        // Adjust polygon coordinates back to original image dimensions
+        const adjustedPolygon = data.polygon.map(point => [
+          point[0] / scale,
+          point[1] / scale,
+        ]);
+
+        // Update prediction data with adjusted polygon
+        setPredictionData({ ...data, polygon: adjustedPolygon });
+
         const ctx = processedCanvas.getContext('2d');
         ctx.clearRect(0, 0, processedCanvas.width, processedCanvas.height);
         processedCanvas.width = originalCanvas.width;
@@ -195,7 +236,7 @@ const DocAlignerDemo = ({
         ctx.drawImage(originalCanvas, 0, 0);
 
         adjustCanvasSize(processedCanvas, originalCanvas.width, originalCanvas.height);
-        drawPolygon(ctx, data.polygon);
+        drawPolygon(ctx, data.polygon); // Draw using scaled coordinates
       })
       .catch(error => {
         console.error('Error:', error);
@@ -206,17 +247,17 @@ const DocAlignerDemo = ({
       });
   };
 
-  const adjustCanvasSize = (canvas, originalWidth, originalHeight) => {
+  const adjustCanvasSize = (canvas, width, height) => {
     const containerWidth = document.querySelector('.images-container').clientWidth;
     const maxWidth = containerWidth / 2 - 20;
 
-    if (originalWidth > maxWidth) {
-      const aspectRatio = originalHeight / originalWidth;
+    if (width > maxWidth) {
+      const aspectRatio = height / width;
       canvas.style.width = `${maxWidth}px`;
       canvas.style.height = `${maxWidth * aspectRatio}px`;
     } else {
-      canvas.style.width = `${originalWidth}px`;
-      canvas.style.height = `${originalHeight}px`;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
     }
   };
 
@@ -321,14 +362,14 @@ const DocAlignerDemo = ({
 
       <br />
 
-      {imageInfo && currentFile && (
+      {imageInfo && currentFile && originalImageInfo && (
         <div id="imageInfo">
           <h3>{imageInfoTitle}</h3>
           <ul>
             <li>{fileNameLabel}: {currentFile.name}</li>
             <li>{fileSizeLabel}: {Math.round(currentFile.size / 1024)} KB</li>
             <li>{fileTypeLabel}: {currentFile.type}</li>
-            <li>{imageSizeLabel}: {imageInfo.width} x {imageInfo.height} pixel</li>
+            <li>{imageSizeLabel}: {originalImageInfo.width} x {originalImageInfo.height} pixel</li>
           </ul>
         </div>
       )}
@@ -345,6 +386,7 @@ const DocAlignerDemo = ({
             {downloadButtonLabel}
           </button>
         )}
+        <button id="clearButton" onClick={clearAll}>{clearButtonLabel}</button>
       </div>
       {isLoading && <div id="loadingIndicator">{processingMessage}</div>}
       {error && <div id="errorMessage">{error}</div>}
