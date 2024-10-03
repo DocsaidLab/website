@@ -105,7 +105,9 @@ We have placed this model on this webpage, so you can try it out in the playgrou
 - [**DocAligner-Demo**](https://docsaid.org/en/playground/docaligner-demo)
 
 :::tip
-Don't use images that are too large (exceeding 4000 pixels in length and width), as this may cause the browser to crash.
+As an AI engineer, it is quite common to deploy a webpage and connect the front and back ends to allow others to try out the model.
+
+If you find any bugs while using it, please let us know in any way, and we will address them as soon as possible.
 :::
 
 ## Conclusion

@@ -103,7 +103,9 @@ sidebar_position: 1
 - [**DocAligner-Demo**](https://docsaid.org/playground/docaligner-demo)
 
 :::tip
-不要放太大的圖片（長寬超過 4000 pixel），否則瀏覽器容易故障。
+身為 AI 工程師，為了讓其他人可以試用模型，自己動手做點網頁部署和串接前後端什麼的，也算是很常見的事情。
+
+如果你在使用中有發現 Bug，可以用任何形式通知我們，我們會盡快處理。
 :::
 
 ## 最後
