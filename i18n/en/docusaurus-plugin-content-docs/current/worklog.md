@@ -17,6 +17,7 @@ This page is solely for recording our work activities.
 ### October
 
 - Completed the model demo functionality and deployed it on the website: [**Playground**](https://docsaid.org/playground/intro)
+- Moved NextCloud from our own host to GCP and updated all download links.
 
 ### September
 

@@ -17,6 +17,7 @@ sidebar_position: 2
 ### 10 月
 
 - 完成模型 Demo 的功能，並且將其部署至網站上：[**Playground**](https://docsaid.org/playground/intro)
+- 把 NextCloud 從我們自己的主機上搬到 GCP，並更新所有下載連結。
 
 ### 9 月
 
