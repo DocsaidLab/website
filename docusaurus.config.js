@@ -6,7 +6,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'DOCSAID',
-  tagline: 'A playground for our developers.',
+  tagline: '這是我們的技術遊樂場',
   favicon: 'img/favicon.ico',
   url: 'https://docsaid.org',
   baseUrl: '/',
@@ -101,25 +101,25 @@ const config = {
         },
         items: [
           {
-            label: 'Docs',
+            label: '開源專案',
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
           },
           {
-            label: 'Papers',
+            label: '論文筆記',
             type: 'docSidebar',
             sidebarId: 'papersSidebar',
             position: 'left',
             docsPluginId: 'papers'
           },
           {
-            label: 'Blog',
+            label: '部落格',
             to: '/blog',
             position: 'left'
           },
           {
-            label: 'Playground',
+            label: '遊樂場',
             type: 'docSidebar',
             sidebarId: 'playgroundSidebar',
             position: 'left',
@@ -130,15 +130,15 @@ const config = {
             position: 'right',
           },
           {
+            label: '支持我們',
+            position: 'right',
+            href: 'https://buymeacoffee.com/zephyr_docsaid',
+          },
+          {
             label: 'GitHub',
             position: 'right',
             href: 'https://github.com/DocsaidLab',
           },
-          {
-            label: 'Sponsor',
-            position: 'right',
-            href: 'https://buymeacoffee.com/zephyr_docsaid',
-          }
         ],
       },
       docs: {
@@ -161,20 +161,20 @@ const config = {
         style: 'dark',
         links: [
           {
-            label: 'Docs',
+            label: '開源專案',
             to: '/docs',
           },
           {
-            label: 'Papers',
+            label: '論文筆記',
             to: '/papers/intro',
           },
           {
-            label: 'Blog',
+            label: '部落格',
             to: '/blog',
           },
           {
-            label: 'GitHub',
-            href: 'https://github.com/DocsaidLab',
+            label: '支持我們',
+            href: 'https://buymeacoffee.com/zephyr_docsaid',
           },
           {
             label: '使用條款',

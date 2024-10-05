@@ -26,5 +26,21 @@
   "copyright": {
     "message": "Copyright © 2024 DOCSAID.",
     "description": "The footer copyright"
+  },
+  "link.item.label.開源專案": {
+    "message": "Projects",
+    "description": "The label of footer link with label=開源專案 linking to /docs"
+  },
+  "link.item.label.論文筆記": {
+    "message": "Papers",
+    "description": "The label of footer link with label=論文筆記 linking to /papers/intro"
+  },
+  "link.item.label.部落格": {
+    "message": "Blog",
+    "description": "The label of footer link with label=部落格 linking to /blog"
+  },
+  "link.item.label.支持我們": {
+    "message": "Support Us",
+    "description": "The label of footer link with label=支持我們 linking to https://buymeacoffee.com/zephyr_docsaid"
   }
 }

@@ -4,8 +4,10 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Layout from '@theme/Layout';
 import clsx from 'clsx';
 
+import Translate from '@docusaurus/Translate';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
+
 
 function HomepageHeader() {
     const { siteConfig } = useDocusaurusContext();
@@ -15,12 +17,14 @@ function HomepageHeader() {
                 <Heading as="h1" className="hero__title">
                     {siteConfig.title}
                 </Heading>
-                <p className="hero__subtitle">{siteConfig.tagline}</p>
+                <p className="hero__subtitle">
+                <Translate id="homepage.tagline" description="Title for homepage tagline">{siteConfig.tagline}</Translate>
+                </p>
                 <div className={styles.buttons}>
                     <Link
                         className="button button--secondary button--lg"
                         to="/docs">
-                        Documents
+                        <Translate id="homepage.button1" description="Title for homepage butten1">開始探索</Translate>
                     </Link>
                 </div>
             </div>

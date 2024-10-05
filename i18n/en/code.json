@@ -444,5 +444,37 @@
   "theme.contentVisibility.draftBanner.message": {
     "message": "This page is a draft. It will only be visible in dev and be excluded from the production build.",
     "description": "The draft content banner message"
+  },
+  "homepage.feature.title1": {
+    "message": "Open Source Projects",
+    "description": "Title for the open source projects feature"
+  },
+  "homepage.feature.description1": {
+    "message": "Explore our open-source projects and join us in advancing AI technology through innovation and community collaboration.",
+    "description": "Description for the open source projects feature"
+  },
+  "homepage.feature.title2": {
+    "message": "Technical Documentation",
+    "description": "Title for the technical documentation feature"
+  },
+  "homepage.feature.description2": {
+    "message": "We provide detailed insights into our open-source projects to help developers understand our vision and enhance the development process's efficiency.",
+    "description": "Description for the technical documentation feature"
+  },
+  "homepage.feature.title3": {
+    "message": "Research Analysis",
+    "description": "Title for the paper notes feature"
+  },
+  "homepage.feature.description3": {
+    "message": "We document our thoughts and insights while reading research papers, offering a glimpse into our thinking process and key takeaways through these notes.",
+    "description": "Description for the paper notes feature"
+  },
+  "homepage.button1": {
+    "message": "Let's Go!",
+    "description": "Title for homepage butten1"
+  },
+  "homepage.tagline": {
+    "message": "A playground for our developers.",
+    "description": "Title for homepage tagline"
   }
 }
