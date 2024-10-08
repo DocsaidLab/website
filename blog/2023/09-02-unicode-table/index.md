@@ -124,7 +124,7 @@ Unicode 的區段範圍從 U+0000 到 U+10FFFF，這意味著它可以容納 1,1
 | &nbsp;0&nbsp;BMP | 2200 &#8211; 22FF     | 數學運算子                       | Mathematical Operators                           |
 | &nbsp;0&nbsp;BMP | 2300 &#8211; 23FF     | 雜項技術符號                     | Miscellaneous Technical                          |
 | &nbsp;0&nbsp;BMP | 2400 &#8211; 243F     | 控制圖形                         | Control Pictures                                 |
-| &nbsp;0&nbsp;BMP | 2440 &#8211; 245F     | 光學字元識別                     | Optical Character Recognition                    |
+| &nbsp;0&nbsp;BMP | 2440 &#8211; 245F     | 光學字元辨識                     | Optical Character Recognition                    |
 | &nbsp;0&nbsp;BMP | 2460 &#8211; 24FF     | 圍繞字母數字                     | Enclosed Alphanumerics                           |
 | &nbsp;0&nbsp;BMP | 2500 &#8211; 257F     | 制表符                           | Box Drawing                                      |
 | &nbsp;0&nbsp;BMP | 2580 &#8211; 259F     | 方塊元素                         | Block Elements                                   |

@@ -210,23 +210,28 @@ Details of the network configuration are as follows:
 
 ### Evaluation Metrics
 
-The authors evaluated the model’s performance on four popular scene text recognition benchmarks:
+The authors evaluated the model's performance using four common scene text recognition benchmark datasets:
 
-- **ICDAR 2003 (IC03)**
+1. **ICDAR 2003 (IC03)**
 
-  The test set contains 251 scene images with labeled text boundaries. After ignoring images with non-alphanumeric characters or less than three characters, the final test set consists of 860 cropped text images. Each test image has a dictionary of 50 words, with a full dictionary combining all images’ dictionaries.
+   - The test set contains 251 scene images with labeled text bounding boxes.
+   - For fair comparison with previous works, text images containing non-alphanumeric characters or less than three characters are usually ignored. After filtering, 860 cropped text images remain for testing.
+   - Each test image is accompanied by a 50-word lexicon (dictionary). Additionally, a **full lexicon** is provided, which merges the lexicons of all images for evaluation.
 
-- **ICDAR 2013 (IC13)**
+2. **ICDAR 2013 (IC13)**
 
-  The test set inherits most data from IC03, with a total of 1,015 real-world cropped text images.
+   - The test set inherits and corrects part of the IC03 data, resulting in 1,015 cropped text images with accurate annotations.
+   - Unlike IC03, IC13 does not provide a lexicon, so evaluations are done without dictionary assistance (i.e., in a no-dictionary setting).
 
-- **IIIT 5k-word (IIIT5k)**
+3. **IIIT 5K-Word (IIIT5k)**
 
-  The test set consists of 3,000 cropped text images collected from the web. Each image is assigned a dictionary containing 50 words and another dictionary with 1,000 words.
+   - The test set contains 3,000 cropped text images collected from the web, covering a wider range of fonts and languages.
+   - Each image comes with two lexicons: a small dictionary containing 50 words and a large dictionary containing 1,000 words for dictionary-assisted evaluation.
 
-- **Street View Text (SVT)**
+4. **Street View Text (SVT)**
 
-  The test set contains 249 street view scene images from Google Street View, from which 647 cropped text images were extracted. Each text image has a dictionary of 50 words.
+   - The test set comprises 249 scene images from Google Street View, cropped into 647 text images.
+   - Each text image is accompanied by a 50-word lexicon for dictionary-assisted evaluation.
 
 ## Discussion
 

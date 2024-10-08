@@ -75,7 +75,7 @@ pip install .\MasterLink_PythonAPI\SolPYAPI\PY_TradeD-0.1.15-py3-none-any.whl
     | 39  | UnderlyingType                  | str      |          | E S:個股 現貨類別(TAIFEX)                                                                                                                 |
     | 40  | MarketCloseGroup                | str      |          | 參考"商品收盤時間群組表" 商品收盤時間群組(TAIFEX)                                                                                         |
     | 41  | EndSession                      | str      |          | 一般交易時段：0 盤後交易時段：1 交易時段(TAIFEX)                                                                                          |
-    | 42  | isAfterHours                    | str      |          | 早盤 : 0 午盤: 1 早午盤識別(TAIFEX)                                                                                                       |
+    | 42  | isAfterHours                    | str      |          | 早盤 : 0 午盤: 1 早午盤辨識(TAIFEX)                                                                                                       |
 
 </details>
 

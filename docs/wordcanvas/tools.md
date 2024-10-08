@@ -12,7 +12,7 @@ sidebar_position: 6
 
 - [**SynthText**](https://github.com/ankush-me/SynthText)
 
-SynthText 是一個開源專案，由 Ankush Gupta、Andrea Vedaldi 和 Andrew Zisserman 於 2016 年的 CVPR（計算機視覺和模式識別會議）上發表。該專案旨在生成合成文本圖像，以便用於自然圖像中的文本定位研究。這些合成圖像主要用於訓練機器學習模型，特別是在光學字元辨識和文本檢測領域。
+SynthText 是一個開源專案，由 Ankush Gupta、Andrea Vedaldi 和 Andrew Zisserman 於 2016 年的 CVPR（計算機視覺和模式辨識會議）上發表。該專案旨在生成合成文本圖像，以便用於自然圖像中的文本定位研究。這些合成圖像主要用於訓練機器學習模型，特別是在光學字元辨識和文本檢測領域。
 
 SynthText 利用自然場景圖像作為背景，並在其中合成看似自然的文本。這一過程需要背景圖像的深度和分割信息。專案的主要依賴包括 pygame、opencv、PIL、numpy、matplotlib、h5py 和 scipy。
 
@@ -36,7 +36,7 @@ UnrealText 利用 Unreal Engine，這是一款強大的遊戲開發工具，來�
 
 - [**SynthTIGER**](https://github.com/clovaai/synthtiger)
 
-SynthTIGER (Synthetic Text Image Generator) 是由 NAVER Corp. 開發的一個開源專案，旨在生成合成文本圖像以支援光學字元識別（OCR）模型的訓練。該工具特別設計來改善文本識別模型的表現，並於 2021 年國際文件分析和識別會議（ICDAR）上發表。
+SynthTIGER (Synthetic Text Image Generator) 是由 NAVER Corp. 開發的一個開源專案，旨在生成合成文本圖像以支援光學字元辨識（OCR）模型的訓練。該工具特別設計來改善文本辨識模型的表現，並於 2021 年國際文件分析和辨識會議（ICDAR）上發表。
 
 SynthTIGER 支援多語言和多樣化的文本樣式生成，能夠產生豐富和多變的訓練數據。包括字體定制、顏色映射定制和模板定制，使用者可以根據具體需求調整生成過程。同時也提供了分割成多個小文件的大型數據集，方便下載和使用。
 
