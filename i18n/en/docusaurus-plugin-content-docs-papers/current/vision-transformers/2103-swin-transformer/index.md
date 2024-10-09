@@ -48,7 +48,11 @@ Downsampling is achieved through patch merging, which splits each patch into 2 x
 
 Here’s an illustrative diagram:
 
+<div align="center">
+<figure style={{ "width": "70%"}}>
 ![patch merging](./img/img8.jpg)
+</figure>
+</div>
 
 To control the channel count, a 1 x 1 convolution is used to reduce the number of channels from 4C to 2C.
 
@@ -98,15 +102,27 @@ According to the paper, the shift size is 3, meaning each window shifts three pa
 
 First, shift right by 3:
 
-![cycle shift 1](./img/img11.jpg)
+<div align="center">
+<figure style={{ "width": "50%"}}>
+![cycle shift](./img/img11.jpg)
+</figure>
+</div>
 
 Then shift down by 3 to form new windows.
 
-![cycle shift 2](./img/img12.jpg)
+<div align="center">
+<figure style={{ "width": "50%"}}>
+![cycle shift](./img/img12.jpg)
+</figure>
+</div>
 
 Combining these steps, we get the paper’s figure:
 
+<div align="center">
+<figure style={{ "width": "80%"}}>
 ![cycle shift](./img/img10.jpg)
+</figure>
+</div>
 :::
 
 This way, we reassemble complete N x N windows without incurring extra computational cost.
@@ -213,8 +229,11 @@ They compare Swin Transformer with standard ConvNets (e.g., ResNe(X)t) and previ
 
 ### Swin vs ResNe(X)t
 
-![detection](./img/img6.jpg)
-
+<div align="center">
+<figure style={{ "width": "80%"}}>
+![result](./img/img6.jpg)
+</figure>
+</div>
 Table (a) shows Swin-T and ResNet-50 results on four object detection frameworks.
 
 - Swin-T provides consistent +3.4∼4.2 box AP improvements over ResNet-50.

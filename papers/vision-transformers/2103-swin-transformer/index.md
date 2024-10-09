@@ -48,7 +48,11 @@ PVT 使用 SRA 機制（Spatial Reduction Attention）來減少注意力機制�
 
 來看個示意圖：
 
+<div align="center">
+<figure style={{ "width": "70%"}}>
 ![patch merging](./img/img8.jpg)
+</figure>
+</div>
 
 為了控制通道數量，最後作者會在使用 1 x 1 的卷積將通道數量從 4C 調整回 2C。
 
@@ -98,15 +102,27 @@ PVT 使用 SRA 機制（Spatial Reduction Attention）來減少注意力機制�
 
 我們把它拆解為先向右移動 3 格：
 
-![cycle shift 1](./img/img11.jpg)
+<div align="center">
+<figure style={{ "width": "50%"}}>
+![cycle shift](./img/img11.jpg)
+</figure>
+</div>
 
 再向下移動 3 格，這樣就可以得到新的視窗。
 
-![cycle shift 2](./img/img12.jpg)
+<div align="center">
+<figure style={{ "width": "50%"}}>
+![cycle shift](./img/img12.jpg)
+</figure>
+</div>
 
 合起來一起看，就是論文的圖了：
 
+<div align="center">
+<figure style={{ "width": "80%"}}>
 ![cycle shift](./img/img10.jpg)
+</figure>
+</div>
 :::
 
 經過了上述的移位方式，我們重新得到完整的 N x N 的視窗，這樣就不必承受多餘的計算量。
@@ -213,7 +229,11 @@ PVT 使用 SRA 機制（Spatial Reduction Attention）來減少注意力機制�
 
 ### Swin vs ResNe(X)t
 
-![detection](./img/img6.jpg)
+<div align="center">
+<figure style={{ "width": "80%"}}>
+![result](./img/img6.jpg)
+</figure>
+</div>
 
 上表 (a) 列出了 Swin-T 和 ResNet-50 在四種物件偵測框架上的結果。
 
