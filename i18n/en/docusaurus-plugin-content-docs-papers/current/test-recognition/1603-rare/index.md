@@ -150,15 +150,66 @@ This process is also differentiable, allowing the entire model to backpropagate 
 </figure>
 </div>
 
-After the image is automatically rectified, we proceed to the recognition process, which we’re more familiar with.
+After completing the automatic correction of the image, we return to the familiar recognition process.
 
-First comes the encoder, which uses a CRNN model. This involves using a backbone network to convert the input image into sequential features, which are then passed to a BiLSTM network for temporal modeling.
+First, we have the encoder, where a CRNN model is used. This model uses a backbone network to convert the input image into a sequence of features, which are then fed into a BiLSTM network for sequence modeling.
 
-Next comes the decoder. In the original CRNN model, CTC was used for text decoding. However, in this paper, the authors replace it with a simpler method: using GRU for decoding.
+Next comes the decoder. In the original CRNN model, the CTC algorithm was used for text decoding, but in this paper, the authors opted for a simpler method: using a GRU (Gated Recurrent Unit) for decoding.
 
-GRU, similar to LSTM, is a recurrent neural network with fewer parameters, which can result in faster training.
+:::tip
+GRU and LSTM are similar architectures, but GRU has fewer parameters, which leads to faster training times.
+:::
 
-The authors use the output from the BiLSTM as the input to the GRU, followed by a fully connected layer, which produces the probability distribution of characters. Since there is no CTC module, the output directly corresponds to the final character sequence.
+For the decoding part, the authors integrated an attention mechanism. At each time step $t$, the decoder calculates an attention weight vector $\alpha_t \in \mathbb{R}^L$, where $L$ is the length of the input sequence.
+
+The formula for calculating the attention weights is as follows:
+
+$$
+\alpha_t = \text{Attend}(s_{t-1}, \alpha_{t-1}, h)
+$$
+
+Where:
+
+- $s_{t-1}$ is the hidden state of the GRU unit from the previous time step.
+- $\alpha_{t-1}$ is the attention weight vector from the previous time step.
+- $h$ is the encoder’s representation of the input sequence.
+
+The Attend function calculates the current attention weight vector $\alpha_t$ based on the previous hidden state $s_{t-1}$ and the previous attention weights $\alpha_{t-1}$. Each element of this vector is non-negative, and the sum of all elements equals 1, representing the importance of each element in the input sequence for the current decoding step.
+
+Once $\alpha_t$ is computed, the model generates a vector called the glimpse vector $g_t$, which is the weighted sum of the encoded representation $h$ of the input sequence.
+
+The formula for the glimpse vector is:
+
+$$
+g_t = \sum_{i=1}^{L} \alpha_{ti} h_i
+$$
+
+Where:
+
+- $\alpha_{ti}$ is the $i$-th element of the attention weight vector $\alpha_t$.
+- $h_i$ is the encoded representation of the $i$-th element of the input sequence.
+
+The glimpse vector $g_t$ represents the weighted sum of the parts of the input sequence that the model is currently focusing on.
+
+Since $\alpha_t$ is a probability distribution (with all elements being non-negative and summing to 1), the glimpse vector $g_t$ is a weighted combination of the input sequence’s features. This allows the decoder to focus on different parts of the input sequence depending on the current decoding step.
+
+After computing the glimpse vector $g_t$, the decoder uses the GRU’s recursive formula to update the hidden state $s_t$:
+
+$$
+s_t = \text{GRU}(l_{t-1}, g_t, s_{t-1})
+$$
+
+Where:
+
+- $l_{t-1}$ is the label from the previous time step.
+- During training, this is the actual label.
+- During testing, this is the predicted label from the previous time step $\hat{l}_{t-1}$.
+- $g_t$ is the glimpse vector calculated using the attention mechanism, representing the part of the input the model is focusing on.
+- $s_{t-1}$ is the hidden state of the GRU from the previous time step.
+
+The GRU unit updates the current hidden state $s_t$ based on the previous label $l_{t-1}$, the current glimpse vector $g_t$, and the previous hidden state $s_{t-1}$, encoding the relationship between the current step’s output and the input information.
+
+At each time step, the decoder predicts the next output character based on the updated hidden state $s_t$. The output $\hat{y}_t$ is a probability distribution over all possible characters, including a special "End of Sequence" (EOS) symbol. Once the model predicts EOS, the sequence generation process is complete.
 
 ### Dictionary-Assisted Recognition
 
