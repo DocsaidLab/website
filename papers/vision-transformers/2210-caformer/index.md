@@ -2,7 +2,7 @@
 
 ## MetaFormer 使用說明書
 
-[**MetaFormer Baselines for Vision**](https://arxiv.org/abs/2210.13452v2)
+[**MetaFormer Baselines for Vision**](https://arxiv.org/abs/2210.13452)
 
 ---
 

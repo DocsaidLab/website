@@ -2,7 +2,7 @@
 
 ## 長注意力機制
 
-[**Longformer: The Long-Document Transformer**](https://arxiv.org/pdf/2004.05150)
+[**Longformer: The Long-Document Transformer**](https://arxiv.org/abs/2004.05150)
 
 ---
 

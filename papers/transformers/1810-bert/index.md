@@ -2,7 +2,7 @@
 
 ## 十二層編碼器
 
-[**BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding**](https://arxiv.org/pdf/1810.04805.pdf)
+[**BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding**](https://arxiv.org/abs/1810.04805)
 
 ---
 

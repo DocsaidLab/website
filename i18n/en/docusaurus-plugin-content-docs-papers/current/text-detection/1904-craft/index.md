@@ -2,7 +2,7 @@
 
 ## The Craft of Text
 
-[**Character Region Awareness for Text Detection**](https://arxiv.org/abs/1904.01941v1)
+[**Character Region Awareness for Text Detection**](https://arxiv.org/abs/1904.01941)
 
 ---
 

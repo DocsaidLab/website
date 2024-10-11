@@ -2,7 +2,7 @@
 
 ## Automatic Rectification
 
-[**Robust Scene Text Recognition with Automatic Rectification**](https://arxiv.org/abs/1603.03915v2)
+[**Robust Scene Text Recognition with Automatic Rectification**](https://openaccess.thecvf.com/content_cvpr_2016/papers/Shi_Robust_Scene_Text_CVPR_2016_paper.pdf)
 
 ---
 

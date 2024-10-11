@@ -2,7 +2,7 @@
 
 ## A snake of text
 
-[**TextSnake: A Flexible Representation for Detecting Text of Arbitrary Shapes**](https://arxiv.org/abs/1807.01544v2)
+[**TextSnake: A Flexible Representation for Detecting Text of Arbitrary Shapes**](https://arxiv.org/abs/1807.01544)
 
 ---
 

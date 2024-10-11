@@ -2,7 +2,7 @@
 
 ## 卷積網路 100 層
 
-[**Deep Residual Learning for Image Recognition**](https://arxiv.org/pdf/1512.03385)
+[**Deep Residual Learning for Image Recognition**](https://arxiv.org/abs/1512.03385)
 
 ---
 

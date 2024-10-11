@@ -2,7 +2,7 @@
 
 ## Give Me a Shortcut
 
-**[Path Aggregation Network for Instance Segmentation](https://arxiv.org/abs/1803.01534v4)**
+[**Path Aggregation Network for Instance Segmentation**](https://arxiv.org/abs/1803.01534)
 
 ---
 

@@ -2,7 +2,7 @@
 
 ## I Want It All!
 
-[**An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition**](https://arxiv.org/abs/1507.05717v1)
+[**An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition**](https://ieeexplore.ieee.org/document/7801919)
 
 ---
 

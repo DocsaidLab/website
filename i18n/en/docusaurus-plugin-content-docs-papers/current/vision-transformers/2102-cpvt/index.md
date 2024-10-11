@@ -2,7 +2,7 @@
 
 ## Conditional Positional Encodings
 
-[**Conditional Positional Encodings for Vision Transformers**](https://arxiv.org/abs/2102.10882v3)
+[**Conditional Positional Encodings for Vision Transformers**](https://arxiv.org/abs/2102.10882)
 
 ---
 

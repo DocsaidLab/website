@@ -2,7 +2,7 @@
 
 ## 引入新的維度
 
-[**Scene Text Recognition from Two-Dimensional Perspective**](https://arxiv.org/abs/1809.06508v2)
+[**Scene Text Recognition from Two-Dimensional Perspective**](https://cdn.aaai.org/ojs/4895/4895-13-7961-1-10-20190709.pdf)
 
 ---
 

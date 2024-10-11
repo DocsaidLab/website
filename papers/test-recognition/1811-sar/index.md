@@ -2,7 +2,7 @@
 
 ## 二維注意力圖
 
-[**Show, Attend and Read: A Simple and Strong Baseline for Irregular Text Recognition**](https://arxiv.org/abs/1811.00751v2)
+[**Show, Attend and Read: A Simple and Strong Baseline for Irregular Text Recognition**](https://arxiv.org/abs/1811.00751)
 
 ---
 

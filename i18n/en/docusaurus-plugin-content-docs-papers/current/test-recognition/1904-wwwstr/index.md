@@ -2,7 +2,7 @@
 
 ## Data and Model Analysis
 
-[**What Is Wrong With Scene Text Recognition Model Comparisons? Dataset and Model Analysis**](https://arxiv.org/abs/1904.01906v4)
+[**What Is Wrong With Scene Text Recognition Model Comparisons? Dataset and Model Analysis**](https://arxiv.org/abs/1904.01906)
 
 ---
 

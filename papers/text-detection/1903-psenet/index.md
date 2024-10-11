@@ -2,7 +2,7 @@
 
 ## 逐步擴展策略
 
-[**Shape Robust Text Detection with Progressive Scale Expansion Network**](https://arxiv.org/pdf/1903.12473v2)
+[**Shape Robust Text Detection with Progressive Scale Expansion Network**](https://arxiv.org/abs/1903.12473)
 
 ---
 
