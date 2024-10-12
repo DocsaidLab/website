@@ -101,8 +101,8 @@ const DocAlignerDemo = ({
       const originalWidth = img.width;
       const originalHeight = img.height;
       let scale = 1;
-      if (img.width > 1000 || img.height > 1000) {
-        scale = 1000 / Math.max(img.width, img.height);
+      if (img.width > 2000 || img.height > 2000) {
+        scale = 2000 / Math.max(img.width, img.height);
       }
       setScale(scale);
 
@@ -112,7 +112,7 @@ const DocAlignerDemo = ({
       canvas.width = scaledWidth;
       canvas.height = scaledHeight;
 
-      if (img.width > 4000 || img.height > 4000) {
+      if (img.width > 5000 || img.height > 5000) {
         setWarning(warningMessage.imageTooLarge);
       }
 
@@ -173,8 +173,8 @@ const DocAlignerDemo = ({
         const originalWidth = img.width;
         const originalHeight = img.height;
         let scale = 1;
-        if (img.width > 1000 || img.height > 1000) {
-          scale = 1000 / Math.max(img.width, img.height);
+        if (img.width > 2000 || img.height > 2000) {
+          scale = 2000 / Math.max(img.width, img.height);
         }
         setScale(scale);
 
@@ -184,7 +184,7 @@ const DocAlignerDemo = ({
         canvas.width = scaledWidth;
         canvas.height = scaledHeight;
 
-        if (img.width > 4000 || img.height > 4000) {
+        if (img.width > 5000 || img.height > 5000) {
           setWarning(warningMessage.imageTooLarge);
         }
 

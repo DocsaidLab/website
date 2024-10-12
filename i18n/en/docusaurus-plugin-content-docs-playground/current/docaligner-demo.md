@@ -16,6 +16,7 @@ When selecting images, please note the following:
 1. If the document's corners are outside the image, the model will not be able to find all four corners and will return an error message.
    - We have made efforts to allow the model to extrapolate to unknown areas, but it may still fail.
 2. If multiple documents are present in the image, the model may randomly select four corners from the many available.
+3. Due to the browser's webpage load capacity, we must compress the uploaded images directly, which may reduce image quality.
 
 With these reminders, we wish you a pleasant experience!
 :::
