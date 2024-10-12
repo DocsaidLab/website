@@ -21,6 +21,10 @@ const DocAlignerDemoWrapper = ({
   fileSizeLabel,
   fileTypeLabel,
   imageSizeLabel,
+  TransformedTitle,
+  TransformedWidthLabel,
+  TransformedHeightLabel,
+  TransformedButtonLabel,
   defaultImages
 }) => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -65,6 +69,10 @@ const DocAlignerDemoWrapper = ({
         fileSizeLabel={fileSizeLabel}
         fileTypeLabel={fileTypeLabel}
         imageSizeLabel={imageSizeLabel}
+        TransformedTitle={TransformedTitle}
+        TransformedWidthLabel={TransformedWidthLabel}
+        TransformedHeightLabel={TransformedHeightLabel}
+        TransformedButtonLabel={TransformedButtonLabel}
         externalImage={selectedImage}
       />
     </div>

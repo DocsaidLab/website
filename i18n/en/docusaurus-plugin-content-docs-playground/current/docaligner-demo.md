@@ -78,6 +78,10 @@ fileNameLabel="File Name"
 fileSizeLabel="File Size"
 fileTypeLabel="File Type"
 imageSizeLabel="Image Size"
+TransformedTitle="Transformed Image"
+TransformedWidthLabel="Output Width"
+TransformedHeightLabel="Output Height"
+TransformedButtonLabel="Download Transformed Image"
 defaultImages={[
 { src: '/en/img/docalign-demo/000025.jpg', description: 'Text Interference' },
 { src: '/en/img/docalign-demo/000121.jpg', description: 'Partial Occlusion' },
@@ -86,7 +90,3 @@ defaultImages={[
 { src: '/en/img/docalign-demo/000175.jpg', description: 'Highly Skewed' },
 ]}
 />
-
-```
-
-```

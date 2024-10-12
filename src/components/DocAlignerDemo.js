@@ -18,12 +18,18 @@ const DocAlignerDemo = ({
   fileSizeLabel,
   fileTypeLabel,
   imageSizeLabel,
+  TransformedTitle,
+  TransformedWidthLabel,
+  TransformedHeightLabel,
+  TransformedButtonLabel,
   externalImage,
 }) => {
   const fileInputRef = useRef(null);
   const originalCanvasRef = useRef(null);
   const processedCanvasRef = useRef(null);
+  const transformedCanvasRef = useRef(null);
   const [predictionData, setPredictionData] = useState(null);
+  const [predictionDataScale, setPredictionDataScale] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [warning, setWarning] = useState(null);
@@ -33,6 +39,9 @@ const DocAlignerDemo = ({
   const [inferenceTime, setInferenceTime] = useState(0);
   const [timestamp, setTimestamp] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [openCvLoaded, setOpenCvLoaded] = useState(false);
+  const [outputWidth, setOutputWidth] = useState(768);
+  const [outputHeight, setOutputHeight] = useState(480);
 
   useEffect(() => {
     if (externalImage) {
@@ -40,14 +49,51 @@ const DocAlignerDemo = ({
     }
   }, [externalImage]);
 
+  // Load OpenCV.js
+  useEffect(() => {
+    // Define Module with onRuntimeInitialized before loading the script
+    window.Module = {
+      onRuntimeInitialized() {
+        console.log('OpenCV.js is ready');
+        setOpenCvLoaded(true);
+      },
+    };
+
+    const script = document.createElement('script');
+    script.src = 'https://docs.opencv.org/4.x/opencv.js';
+    script.async = true;
+    script.onload = () => {
+      console.log('OpenCV.js script loaded');
+    };
+    script.onerror = () => {
+      console.error('Failed to load OpenCV.js');
+      setError('Failed to load OpenCV.js');
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  // Perform perspective transform when predictionData or output dimensions change
+  useEffect(() => {
+    if (predictionData && openCvLoaded) {
+      performPerspectiveTransform();
+    }
+  }, [predictionData, openCvLoaded, outputWidth, outputHeight]);
+
   const handleExternalImageChange = (imageSource) => {
-    const canvas = originalCanvasRef.current;
     clearAll();
 
     setError(null);
     setWarning(null);
     setPredictionData(null);
+    setPredictionDataScale(null);
     setImageInfo(null);
+
+    const canvas = originalCanvasRef.current;
+    if (!canvas) return;
 
     const img = new Image();
     img.crossOrigin = "Anonymous"; // Avoid CORS issues
@@ -93,7 +139,10 @@ const DocAlignerDemo = ({
 
   const handleFileChange = () => {
     const fileInput = fileInputRef.current;
+    if (!fileInput) return;
+
     const canvas = originalCanvasRef.current;
+    if (!canvas) return;
 
     clearAll();
 
@@ -114,12 +163,13 @@ const DocAlignerDemo = ({
     setError(null);
     setWarning(null);
     setPredictionData(null);
+    setPredictionDataScale(null);
     setImageInfo(null);
 
     const reader = new FileReader();
-    reader.onload = function(event) {
+    reader.onload = function (event) {
       const img = new Image();
-      img.onload = function() {
+      img.onload = function () {
         const originalWidth = img.width;
         const originalHeight = img.height;
         let scale = 1;
@@ -146,7 +196,7 @@ const DocAlignerDemo = ({
         setOriginalImageInfo({ width: originalWidth, height: originalHeight });
 
         // Convert canvas to Blob and create a File object
-        canvas.toBlob(function(blob) {
+        canvas.toBlob(function (blob) {
           const scaledFile = new File([blob], file.name, { type: file.type });
           setSelectedFile(scaledFile);
         }, file.type);
@@ -159,21 +209,37 @@ const DocAlignerDemo = ({
 
   const clearAll = () => {
     setPredictionData(null);
+    setPredictionDataScale(null);
     setWarning(null);
     setImageInfo(null);
     setOriginalImageInfo(null);
     setSelectedFile(null);
     setInferenceTime(0);
     setScale(1);
-    const originalCtx = originalCanvasRef.current.getContext('2d');
-    const processedCtx = processedCanvasRef.current.getContext('2d');
-    originalCtx.clearRect(0, 0, originalCanvasRef.current.width, originalCanvasRef.current.height);
-    processedCtx.clearRect(0, 0, processedCanvasRef.current.width, processedCanvasRef.current.height);
+    setOutputWidth(768);
+    setOutputHeight(480);
+
+    if (originalCanvasRef.current) {
+      const originalCtx = originalCanvasRef.current.getContext('2d');
+      originalCtx.clearRect(0, 0, originalCanvasRef.current.width, originalCanvasRef.current.height);
+    }
+
+    if (processedCanvasRef.current) {
+      const processedCtx = processedCanvasRef.current.getContext('2d');
+      processedCtx.clearRect(0, 0, processedCanvasRef.current.width, processedCanvasRef.current.height);
+    }
+
+    if (transformedCanvasRef.current) {
+      const transformedCtx = transformedCanvasRef.current.getContext('2d');
+      transformedCtx.clearRect(0, 0, transformedCanvasRef.current.width, transformedCanvasRef.current.height);
+    }
   };
 
   const uploadImage = () => {
     const originalCanvas = originalCanvasRef.current;
     const processedCanvas = processedCanvasRef.current;
+
+    if (!originalCanvas || !processedCanvas) return;
 
     let file = null;
 
@@ -195,6 +261,7 @@ const DocAlignerDemo = ({
     setError(null);
     setWarning(null);
     setPredictionData(null);
+    setPredictionDataScale(null);
 
     const formData = new FormData();
     formData.append('file', file);
@@ -219,15 +286,16 @@ const DocAlignerDemo = ({
 
         setInferenceTime(data.inference_time);
         setTimestamp(data.timestamp);
+        setPredictionData(data);
 
         // Adjust polygon coordinates back to original image dimensions
-        const adjustedPolygon = data.polygon.map(point => [
+        const adjustedPolygon = data.polygon.map((point) => [
           point[0] / scale,
           point[1] / scale,
         ]);
 
         // Update prediction data with adjusted polygon
-        setPredictionData({ ...data, polygon: adjustedPolygon });
+        setPredictionDataScale({ ...data, polygon: adjustedPolygon });
 
         const ctx = processedCanvas.getContext('2d');
         ctx.clearRect(0, 0, processedCanvas.width, processedCanvas.height);
@@ -236,7 +304,7 @@ const DocAlignerDemo = ({
         ctx.drawImage(originalCanvas, 0, 0);
 
         adjustCanvasSize(processedCanvas, originalCanvas.width, originalCanvas.height);
-        drawPolygon(ctx, data.polygon); // Draw using scaled coordinates
+        drawPolygon(ctx, data.polygon);
       })
       .catch(error => {
         console.error('Error:', error);
@@ -287,19 +355,14 @@ const DocAlignerDemo = ({
   };
 
   const sortPolygonClockwise = (polygon) => {
-    // First, sort points by y-coordinate (ascending)
     const sortedByY = polygon.slice().sort((a, b) => a[1] - b[1]);
 
-    // Top two points (smallest y)
     const topPoints = sortedByY.slice(0, 2);
 
-    // Bottom two points (largest y)
     const bottomPoints = sortedByY.slice(2);
 
-    // Sort top points by x-coordinate to get left and right
     const [topLeft, topRight] = topPoints.sort((a, b) => a[0] - b[0]);
 
-    // Sort bottom points by x-coordinate to get left and right
     const [bottomLeft, bottomRight] = bottomPoints.sort((a, b) => a[0] - b[0]);
 
     return [topLeft, topRight, bottomRight, bottomLeft];
@@ -342,6 +405,80 @@ const DocAlignerDemo = ({
     document.body.appendChild(downloadAnchorNode);
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
+  };
+
+  const downloadTransformedImage = () => {
+    const transformedCanvas = transformedCanvasRef.current;
+    if (!transformedCanvas) return;
+
+    const dataURL = transformedCanvas.toDataURL('image/jpeg');
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = 'transformed_image.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Function to perform perspective transform using OpenCV.js
+  const performPerspectiveTransform = () => {
+    if (!predictionData || !openCvLoaded || !cv || !cv.imread) return;
+
+    const originalCanvas = originalCanvasRef.current;
+    const transformedCanvas = transformedCanvasRef.current;
+
+    if (!originalCanvas || !transformedCanvas) return;
+
+    try {
+      const src = cv.imread(originalCanvas);
+
+      // Get image dimensions
+      const imgWidth = originalCanvas.width;
+      const imgHeight = originalCanvas.height;
+
+      // Adjust polygon coordinates
+      const scaledPolygon = predictionData.polygon.map(point => [
+        point[0] * (imgWidth / imageInfo.width),
+        point[1] * (imgHeight / imageInfo.height),
+      ]);
+
+      const sortedPolygon = sortPolygonClockwise(scaledPolygon);
+
+      if (sortedPolygon.length !== 4) {
+        setError('Invalid number of points in polygon.');
+        return;
+      }
+
+      // Flatten the points
+      const srcPts = cv.matFromArray(4, 1, cv.CV_32FC2, sortedPolygon.flat());
+
+      const dstPts = cv.matFromArray(4, 1, cv.CV_32FC2, [
+        0, 0,
+        outputWidth, 0,
+        outputWidth, outputHeight,
+        0, outputHeight
+      ]);
+
+      const M = cv.getPerspectiveTransform(srcPts, dstPts);
+
+      const dst = new cv.Mat();
+      const dsize = new cv.Size(outputWidth, outputHeight);
+
+      cv.warpPerspective(src, dst, M, dsize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, new cv.Scalar());
+
+      cv.imshow(transformedCanvas, dst);
+
+      adjustCanvasSize(transformedCanvas, outputWidth, outputHeight);
+
+      src.delete();
+      dst.delete();
+      srcPts.delete();
+      dstPts.delete();
+      M.delete();
+    } catch (e) {
+      console.error('Error performing perspective transform:', e);
+      setError('Error performing perspective transform: ' + e.message);
+    }
   };
 
   const currentFile = selectedFile || (fileInputRef.current && fileInputRef.current.files[0]);
@@ -392,10 +529,9 @@ const DocAlignerDemo = ({
       {error && <div id="errorMessage">{error}</div>}
       {warning && <div id="warningMessage">{warning}</div>}
 
-      <hr />
-
       {imageInfo && (
         <div id="imageInfo">
+          <hr />
           <h3>{inferenceInfoTitle}</h3>
           <ul>
             <li>{inferenceTimeLabel}: {inferenceTime.toFixed(2)} sec </li>
@@ -404,19 +540,51 @@ const DocAlignerDemo = ({
         </div>
       )}
 
-      <hr />
-
       {predictionData && !warning && (
         <div id="polygonInfo">
+          <hr />
           <h3>{polygonInfoTitle}</h3>
           <ul>
-            {predictionData.polygon.map((point, index) => (
+            {predictionDataScale.polygon.map((point, index) => (
               <li key={index}>
-                Point {index + 1}：({Math.round(point[0])}, {Math.round(point[1])})
+                Point {index + 1}: ({Math.round(point[0])}, {Math.round(point[1])})
               </li>
             ))}
           </ul>
         </div>
+      )}
+
+      {predictionData && !warning && (
+        <div className="transform-section">
+        <hr />
+        <h3>{TransformedTitle}</h3>
+        <div className="transform-inputs">
+          <label>
+            {TransformedWidthLabel}:{' '}
+            <input
+              type="number"
+              value={outputWidth}
+              onChange={(e) => {
+                const value = e.target.value === '' ? '' : Number(e.target.value);
+                setOutputWidth(value);
+              }}
+            />
+          </label>
+          <label>
+          {TransformedHeightLabel}:{' '}
+            <input
+              type="number"
+              value={outputHeight}
+              onChange={(e) => {
+                const value = e.target.value === '' ? '' : Number(e.target.value);
+                setOutputHeight(value);
+              }}
+            />
+          </label>
+        </div>
+        <canvas ref={transformedCanvasRef}></canvas>
+        <button onClick={downloadTransformedImage}>{TransformedButtonLabel}</button>
+      </div>
       )}
     </div>
   );

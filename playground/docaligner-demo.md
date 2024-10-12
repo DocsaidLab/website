@@ -78,6 +78,10 @@ fileNameLabel="檔案名稱"
 fileSizeLabel="檔案大小"
 fileTypeLabel="檔案類型"
 imageSizeLabel="圖像尺寸"
+TransformedTitle="攤平圖像"
+TransformedWidthLabel="輸出寬度："
+TransformedHeightLabel="輸出高度："
+TransformedButtonLabel="下載攤平圖像"
 defaultImages={[
 { src: '/img/docalign-demo/000025.jpg', description: '文字干擾' },
 { src: '/img/docalign-demo/000121.jpg', description: '部分遮擋' },
