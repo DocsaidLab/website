@@ -53,6 +53,10 @@ This image is quite long, and performing inference directly might cause excessiv
 Next, you can perform inference using the `model`:
 
 ```python
+from mrzscanner import MRZScanner
+
+model = MRZScanner()
+
 result, msg = model(img, do_center_crop=True)
 print(result)
 # >>> ('PCAZEQAOARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
@@ -66,7 +70,7 @@ print(msg)
 :::
 
 :::info
-We have implemented an automatic model download feature. When you use `DocAligner` for the first time, the model will be downloaded automatically.
+We have implemented an automatic model download feature. When you use `MRZScanner` for the first time, the model will be downloaded automatically.
 :::
 
 ## Using with `DocAligner`

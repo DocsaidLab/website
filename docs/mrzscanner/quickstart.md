@@ -53,6 +53,10 @@ img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 接著，我們可以使用 `model` 進行推論：
 
 ```python
+from mrzscanner import MRZScanner
+
+model = MRZScanner()
+
 result, msg = model(img, do_center_crop=True)
 print(result)
 # >>> ('PCAZEQAOARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
@@ -66,7 +70,7 @@ print(msg)
 :::
 
 :::info
-我們有設計了自動下載模型的功能，當你第一次使用 `DocAligner` 時，會自動下載模型。
+我們有設計了自動下載模型的功能，當你第一次使用 `MRZScanner` 時，會自動下載模型。
 :::
 
 ## 搭配 `DocAligner` 使用
@@ -120,7 +124,7 @@ class ErrorCodes(Enum):
 
 檢查碼 (Check Digit) 是 MRZ 中用來確保資料正確性的關鍵部分，它用來檢查數字的正確性，防止資料輸入錯誤。
 
-- 詳細操作流程我們寫在 [**參考文獻#檢查碼**](./reference#檢查碼) 中。
+- 詳細操作流程我們寫在 [**參考文獻：檢查碼**](./reference#檢查碼) 中。
 
 ---
 
