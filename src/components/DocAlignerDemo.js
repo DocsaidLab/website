@@ -42,12 +42,31 @@ const DocAlignerDemo = ({
   const [openCvLoaded, setOpenCvLoaded] = useState(false);
   const [outputWidth, setOutputWidth] = useState(768);
   const [outputHeight, setOutputHeight] = useState(480);
+  const [apiStatus, setApiStatus] = useState(null);
 
   useEffect(() => {
     if (externalImage) {
       handleExternalImageChange(externalImage);
     }
   }, [externalImage]);
+
+  useEffect(() => {
+    checkApiStatus();
+  }, []);
+
+  const checkApiStatus = async () => {
+    try {
+      const response = await fetch('https://api.docsaid.org/docaligner-predict');
+      if (response.ok) {
+        setApiStatus('online'); // API 暢通
+      } else {
+        setApiStatus('offline'); // API 故障
+      }
+    } catch (error) {
+      setApiStatus('offline'); // 請求失敗，視為 API 故障
+      console.error('Error checking API status:', error);
+    }
+  };
 
   // Load OpenCV.js
   useEffect(() => {
@@ -468,8 +487,6 @@ const DocAlignerDemo = ({
 
       cv.imshow(transformedCanvas, dst);
 
-      adjustCanvasSize(transformedCanvas, outputWidth, outputHeight);
-
       src.delete();
       dst.delete();
       srcPts.delete();
@@ -486,15 +503,24 @@ const DocAlignerDemo = ({
   return (
     <div className="doc-aligner-demo">
 
-      <div>
-        <label className="custom-file-upload">
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-          />
-          {chooseFileLabel}
-        </label>
+      <div className="file-upload-status-container">
+        <div>
+          <label className={`custom-file-upload ${apiStatus !== 'online' ? 'disabled' : ''}`}>
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              disabled={apiStatus !== 'online'}
+            />
+            {chooseFileLabel}
+          </label>
+        </div>
+
+        <div className="api-status-indicator">
+          {apiStatus === 'online' && <span className="status-online">🟢</span>}
+          {apiStatus === 'offline' && <span className="status-offline">🔴</span>}
+          {apiStatus === null && <span className="status-checking">⚪</span>}
+        </div>
       </div>
 
       <br />
@@ -517,7 +543,14 @@ const DocAlignerDemo = ({
       </div>
 
       <div align="center">
-        <button id="uploadButton" onClick={uploadImage}>{uploadButtonLabel}</button>
+        <button
+          id="uploadButton"
+          onClick={uploadImage}
+          className={apiStatus !== 'online' ? 'disabled' : ''}
+          disabled={apiStatus !== 'online'}
+        >
+          {uploadButtonLabel}
+        </button>
         {predictionData && !warning && (
           <button id="downloadButton" onClick={downloadJSON}>
             {downloadButtonLabel}

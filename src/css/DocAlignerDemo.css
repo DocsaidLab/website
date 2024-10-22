@@ -37,8 +37,23 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+/* 當按鈕被禁用時的樣式 */
+.doc-aligner-demo .custom-file-upload.disabled {
+  background-color: #d3d3d3; /* 淡灰色 */
+  color: #ffffff80; /* 半透明白色文字 */
+  cursor: not-allowed; /* 顯示禁用的游標 */
+  box-shadow: none; /* 移除陰影效果 */
+  transform: none; /* 移除按下的縮放效果 */
+  transition: background-color 0.3s ease;
+}
+
+/* 指定禁用狀態下的 input[type="file"] 樣式 */
+.doc-aligner-demo .custom-file-upload input[type="file"]:disabled {
+  pointer-events: none; /* 禁止點擊事件 */
+}
+
 .doc-aligner-demo .custom-file-upload:hover {
-  background-color: var(--ifm-color-primary-lightest);
+  background-color: var(--ifm-color-primary-lighter);
   transform: translateY(-3px);
 }
 
@@ -59,6 +74,15 @@
 
 .doc-aligner-demo #uploadButton {
   background-color: var(--ifm-color-primary-lighter);
+  color: white;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .doc-aligner-demo #downloadButton {
@@ -67,6 +91,16 @@
 
 .doc-aligner-demo #clearButton {
   background-color: var(--ifm-color-primary-lighter);
+}
+
+/* 禁用狀態的樣式 */
+.doc-aligner-demo #uploadButton.disabled {
+  background-color: #d3d3d3; /* 淡灰色 */
+  color: #ffffff80; /* 半透明白色文字 */
+  cursor: not-allowed; /* 顯示禁用的游標 */
+  box-shadow: none; /* 移除陰影效果 */
+  transform: none; /* 移除按下的縮放效果 */
+  transition: background-color 0.3s ease;
 }
 
 .doc-aligner-demo #loadingIndicator {
@@ -108,6 +142,10 @@
 
 .transform-section {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* 區塊寬度佔滿父容器 */
+  margin-top: 20px;
 }
 
 .transform-inputs {
@@ -132,7 +170,7 @@
 }
 
 .transform-section canvas {
-  max-width: 80%;
+  max-width: 90%;
   height: auto;
   border: 2px solid #ccc;
   border-radius: 5px;
@@ -153,4 +191,32 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.file-upload-status-container {
+  display: flex;
+  align-items: center;  /* 垂直居中對齊 */
+  gap: 10px; /* 控制按鈕與 API 狀態之間的間距 */
+}
+
+.api-status-indicator {
+  display: flex;
+  align-items: right;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.status-online {
+  color: green;
+  margin-left: 5px;
+}
+
+.status-offline {
+  color: red;
+  margin-left: 5px;
+}
+
+.status-checking {
+  color: gray;
+  margin-left: 5px;
 }
