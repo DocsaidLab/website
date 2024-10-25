@@ -107,7 +107,7 @@ We have placed this model on this webpage, so you can try it out in the playgrou
 :::tip
 As an AI engineer, it is quite common to deploy a webpage and connect the front and back ends to allow others to try out the model.
 
-If you find any bugs while using it, please let us know in any way, and we will address them as soon as possible.
+If you find any bugs while using it, please notify us privately to avoid malicious exploitation, and we will address them as soon as possible.
 :::
 
 ## Conclusion
