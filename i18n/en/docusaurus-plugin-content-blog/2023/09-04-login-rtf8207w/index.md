@@ -26,13 +26,21 @@ But I digress, let's get back to it:
 
 Typically, you can access it through a web browser by entering `192.168.1.1` or another IP address. The specific address might vary depending on your router model.
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![login-rtf8207w](./img/RTF8207W-login.jpg)
+</figure>
+</div>
 
 ### 2. Default Credentials
 
 Usually, the username is: `cht`, and the password is `last four digits of the model + last four digits of the MAC address`.
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![password](./img/RTF8207W.jpg)
+</figure>
+</div>
 
 ### 3. Logging In
 

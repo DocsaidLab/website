@@ -22,7 +22,11 @@ A fundamental approach is to activate firewall blocking. Let's set it up quickly
 
 - Malicious Attack Illustration
 
+  <div align="center">
+  <figure style={{"width": "40%"}}>
   ![attack from ssh](./img/ban_1.jpg)
+  </figure>
+  </div>
 
 ## 1. Installation of Fail2ban
 

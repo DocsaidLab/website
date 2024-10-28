@@ -26,13 +26,21 @@ description: 偷偷登入 RTF8207W 路由器。
 
 通常可以透過網頁瀏覽器輸入 `192.168.1.1` 或其他 IP 地址進行訪問，具體地址可能依你的路由器型號而異。
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![login-rtf8207w](./img/RTF8207W-login.jpg)
+</figure>
+</div>
 
 ### 2. 工程帳號
 
 一般來說，帳號為：`cht`，密碼為`型號末四碼＋MAC末四碼`。
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![password](./img/RTF8207W.jpg)
+</figure>
+</div>
 
 ### 3. 登入
 

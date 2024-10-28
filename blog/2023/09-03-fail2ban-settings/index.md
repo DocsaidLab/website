@@ -22,7 +22,11 @@ description: 把那些惡意都封鎖在外面。
 
 - 惡意攻擊示意圖
 
+  <div align="center">
+  <figure style={{"width": "40%"}}>
   ![attack from ssh](./img/ban_1.jpg)
+  </figure>
+  </div>
 
 ## 1. Fail2ban 安裝
 
