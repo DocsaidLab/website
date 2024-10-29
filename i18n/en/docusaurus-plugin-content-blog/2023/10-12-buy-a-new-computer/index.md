@@ -22,9 +22,11 @@ The main reason? To use an RTX 4090 for model training.
 
 ## Disclaimer
 
-We decided to take on the task of assembling a machine for training purposes and document the process along the way. If you follow this guide to build your own computer and encounter any issues or suffer any loss, we bear no responsibility.
+We were busy and decided to build a training rig, so we documented the process.
 
-Additionally, this article is purely for personal documentation and is not intended as a recommendation or advertisement. Any products or brands mentioned are solely for the purpose of record-keeping and do not imply any commercial partnership or endorsement.
+1. If you assemble a computer based on this documentation and encounter any issues or losses, we are not responsible.
+2. This article is for personal documentation purposes only and is not intended as a recommendation or advertisement.
+3. All products or brands mentioned in the article are for documentation purposes only and do not represent any commercial cooperation or endorsement.
 
 ## Purchase Details
 
@@ -276,3 +278,25 @@ After buying all these components, we weren’t entirely confident in our abilit
 ---
 
 That wraps up the assembly process. Now it’s time to enjoy training some models with our new rig!
+
+## Afterword 1
+
+:::info
+Updated in June 2024
+:::
+
+Loaded with model training, based on Taiwan's residential electricity meter billing, the monthly electricity bill is about NT$5,000.
+
+## Afterword 2
+
+:::info
+Updated in October 2024
+:::
+
+After using it for a year, I feel that buying a 4TB hard drive is too conservative:
+
+1. The WebFace42M dataset requires 0.9TB.
+2. The ImageNet 21k dataset requires 1.3TB.
+3. ...
+
+There are other large-scale datasets, and 4TB is simply not enough. Next time, I need to buy at least 16TB.
