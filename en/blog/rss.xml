@@ -1106,8 +1106,12 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
 <p>I suddenly decided to buy a new computer.</p>
 <p>The main reason? To use an RTX 4090 for model training.</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="disclaimer">Disclaimer<a href="https://docsaid.org/en/blog/buy-a-new-computer#disclaimer" class="hash-link" aria-label="Direct link to Disclaimer" title="Direct link to Disclaimer">​</a></h2>
-<p>We decided to take on the task of assembling a machine for training purposes and document the process along the way. If you follow this guide to build your own computer and encounter any issues or suffer any loss, we bear no responsibility.</p>
-<p>Additionally, this article is purely for personal documentation and is not intended as a recommendation or advertisement. Any products or brands mentioned are solely for the purpose of record-keeping and do not imply any commercial partnership or endorsement.</p>
+<p>We were busy and decided to build a training rig, so we documented the process.</p>
+<ol>
+<li>If you assemble a computer based on this documentation and encounter any issues or losses, we are not responsible.</li>
+<li>This article is for personal documentation purposes only and is not intended as a recommendation or advertisement.</li>
+<li>All products or brands mentioned in the article are for documentation purposes only and do not represent any commercial cooperation or endorsement.</li>
+</ol>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="purchase-details">Purchase Details<a href="https://docsaid.org/en/blog/buy-a-new-computer#purchase-details" class="hash-link" aria-label="Direct link to Purchase Details" title="Direct link to Purchase Details">​</a></h2>
 <p>Below is the list of items we purchased:</p>
 <table><thead><tr><th>Item</th><th>Description</th><th>Quantity</th><th>Total Price (NTD)</th></tr></thead><tbody><tr><td>CPU</td><td>Intel i9-13900K 【24 cores/32 threads】3.0GHz-5.8GHz 36MB LGA1700 125W</td><td>1</td><td>$ 19,500</td></tr><tr><td>Motherboard</td><td>Gigabyte Z790 AORUS ELITE (ATX/Realtek 2.5Gb) 16+1+2 Power Phases</td><td>1</td><td>$ 7,990</td></tr><tr><td>Graphics Card</td><td>Gigabyte RTX 4090 AERO OC 24G White Windforce Cooling Metal Backplate</td><td>1</td><td>$ 60,990</td></tr><tr><td>Memory</td><td>Kingston 64 GB (Dual Channel 32GBx2) DDR5 6000 CL36 FURY Beast White</td><td>2</td><td>$ 12,258</td></tr><tr><td>SSD</td><td>Micron Crucial P5 Plus 2TB (Gen4 M.2 PCIe 4.0) NVMe SSD (Read 6600M / Write 5500M)</td><td>2</td><td>$ 7,800</td></tr><tr><td>Liquid Cooling</td><td>NZXT Kraken 360 RGB White</td><td>1</td><td>$ 7,990</td></tr><tr><td>Case</td><td>ASUS TUF Gaming GT502 White ATX</td><td>1</td><td>$ 5,490</td></tr><tr><td>Case Fans</td><td>ASUS TUF Gaming TF120 ARGB White Triple Fan Pack (Case Gift)</td><td>1</td><td>-</td></tr><tr><td>Case Fans</td><td>ASUS TUF Gaming TF120 ARGB White Triple Fan Pack (Additional Purchase)</td><td>1</td><td>$ 1,690</td></tr><tr><td>Case Fans</td><td>ASUS TUF Gaming TF120 ARGB White Single Fan (Additional Purchase)</td><td>4</td><td>$ 2,196</td></tr><tr><td>PSU</td><td>FSP HYDRO PTM PRO 1200W ATX3.0 Platinum Fully Modular</td><td>1</td><td>$ 5,790</td></tr><tr><td>Cables</td><td>SilverStone 1 to 4 A.RGB Splitter Cable (SST-CPL03)</td><td>2</td><td>$ 250</td></tr></tbody></table>
@@ -1299,7 +1303,19 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
 </li>
 </ul>
 <hr>
-<p>That wraps up the assembly process. Now it’s time to enjoy training some models with our new rig!</p>]]></content:encoded>
+<p>That wraps up the assembly process. Now it’s time to enjoy training some models with our new rig!</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="afterword-1">Afterword 1<a href="https://docsaid.org/en/blog/buy-a-new-computer#afterword-1" class="hash-link" aria-label="Direct link to Afterword 1" title="Direct link to Afterword 1">​</a></h2>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Updated in June 2024</p></div></div>
+<p>Loaded with model training, based on Taiwan's residential electricity meter billing, the monthly electricity bill is about NT$5,000.</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="afterword-2">Afterword 2<a href="https://docsaid.org/en/blog/buy-a-new-computer#afterword-2" class="hash-link" aria-label="Direct link to Afterword 2" title="Direct link to Afterword 2">​</a></h2>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Updated in October 2024</p></div></div>
+<p>After using it for a year, I feel that buying a 4TB hard drive is too conservative:</p>
+<ol>
+<li>The WebFace42M dataset requires 0.9TB.</li>
+<li>The ImageNet 21k dataset requires 1.3TB.</li>
+<li>...</li>
+</ol>
+<p>There are other large-scale datasets, and 4TB is simply not enough. Next time, I need to buy at least 16TB.</p>]]></content:encoded>
             <category>rtx4090</category>
             <category>13900k</category>
         </item>
