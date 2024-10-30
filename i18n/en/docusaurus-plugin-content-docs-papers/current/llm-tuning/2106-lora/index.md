@@ -304,7 +304,7 @@ The authors evaluated **RoBERTa Base (125M)** and **RoBERTa Large (355M)** model
 
 RoBERTa is an optimized version of BERT, with improved training procedures to enhance performance. We’ve previously covered RoBERTa in:
 
-- [**[19.07] RoBERTa: A Guide to Training BERT**](../1907-roberta/index.md)
+- [**[19.07] RoBERTa: A Guide to Training BERT**](../../transformers/1907-roberta/index.md)
   :::
 
 To ensure a fair comparison with the Adapter baseline, the following adjustments were made:

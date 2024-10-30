@@ -288,7 +288,7 @@ LoRA 可應用於任何神經網路的權重矩陣。在 Transformer 架構中�
 
 RoBERTa 是基於 BERT 的模型，通過對 BERT 的訓練過程進行了一系列的優化，提高了模型的性能。我們之前有讀過：
 
-- [**[19.07] RoBERTa: 訓練 BERT 的說明書**](../1907-roberta/index.md)
+- [**[19.07] RoBERTa: 訓練 BERT 的說明書**](../../transformers/1907-roberta/index.md)
   :::
 
 為了與 Adapter 基準進行公平比較，做了以下兩項調整：
