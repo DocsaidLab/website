@@ -8,7 +8,7 @@
 
 When we first encountered this paper, both the model design philosophy and the illustration style gave us a sense of familiarity. Upon reviewing the authors' team, we realized it belongs to Face++, the same group behind CA-FCN!
 
-- [**[18.09] CA-FCN: A New Dimension**](../../test-recognition/1809-cafcn/index.md)
+- [**[18.09] CA-FCN: A New Dimension**](../../text-recognition/1809-cafcn/index.md)
 
 Many of their papers have been published in CVPR and have had a major impact in the field.
 
