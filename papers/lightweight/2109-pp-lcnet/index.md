@@ -46,7 +46,11 @@
 
 ### 模型架構
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![PP-LCNet arch](./img/img1.jpg)
+</figure>
+</div>
 
 作者提出了幾個策略，來解決上述問題。
 
@@ -111,9 +115,17 @@
 
 ### 實驗結果
 
+<div align="center">
+<figure style={{"width": "50%"}}>
 ![PP-LCNet results](./img/img2.jpg)
+</figure>
+</div>
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![PP-LCNet results2](./img/img3.jpg)
+</figure>
+</div>
 
 作者在 ImageNet-1k 數據集上進行了實驗，包括 128 萬張訓練影像和 1000 個類別的 5 萬張驗證影像。
 

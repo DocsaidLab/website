@@ -174,7 +174,11 @@ MQA 也將 MAC 和模型參數減少了 25% 以上。
 
 其他模型的架構請直接參閱論文。
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![MNv4-Conv-S](./img/img4.jpg)
+</figure>
+</div>
 
 ## 結論
 

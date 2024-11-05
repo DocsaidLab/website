@@ -22,7 +22,11 @@ EfficientNet 的作者在提出第一代模型後，覺得還有進一步的改�
 
 - [**[20.03] Accelerator-aware Neural Network Design using AutoML**](https://arxiv.org/abs/2003.02838)
 
+  <div align="center">
+  <figure style={{"width": "80%"}}>
   ![fused-conv](./img/img2.jpg)
+  </figure>
+  </div>
 
   - 這篇論文指出深度卷積表面上大幅降低了計算量，但是實際上無法獲得硬體加速。
 
@@ -32,7 +36,11 @@ EfficientNet 的作者在提出第一代模型後，覺得還有進一步的改�
 
 ### 模型架構
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![efficientnet-v2-arch](./img/img1.jpg)
+</figure>
+</div>
 
 深度卷積比常規卷積具有更少的參數和 FLOPs，但它們通常無法充分利用現代加速器。
 
@@ -54,7 +62,11 @@ EfficientNet 的作者在提出第一代模型後，覺得還有進一步的改�
 
 為了驗證該想法，作者於是在 ImageNet 上進行了以下實驗。
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![progressive-resizing](./img/img7.jpg)
+</figure>
+</div>
 
 從上表中可以看出當輸入尺寸為 128 時，使用較少的正則化效果更好；當輸入尺寸為 300 時，使用較多的正則化效果更好。
 
@@ -70,7 +82,11 @@ EfficientNet 的作者在提出第一代模型後，覺得還有進一步的改�
 
 ### Fused-MBConv 放在哪？
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![fused-conv-position](./img/img3.jpg)
+</figure>
+</div>
 
 根據實驗，`Fused-MBConv` 放的位置也很講究。
 
@@ -80,7 +96,11 @@ EfficientNet 的作者在提出第一代模型後，覺得還有進一步的改�
 
 ### 搜索網路結果
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![efficientnet-v2-arch](./img/img4.jpg)
+</figure>
+</div>
 
 跟第一代相比，第二代的模型主要有幾個差別：
 
@@ -90,7 +110,11 @@ EfficientNet 的作者在提出第一代模型後，覺得還有進一步的改�
 
 ### 加速訓練
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![efficientnet-v2-speedup](./img/img5.jpg)
+</figure>
+</div>
 
 作者比較了 EfficientNet-V2 和其他模型的訓練速度。
 

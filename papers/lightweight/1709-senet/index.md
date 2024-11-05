@@ -1,6 +1,6 @@
 # [17.09] SENet
 
-## 擠～～用力擠～～
+## 擠！用力擠！
 
 [**Squeeze-and-Excitation Networks**](https://arxiv.org/abs/1709.01507)
 
@@ -81,7 +81,11 @@ class SEBlock(nn.Module):
 
 接下來，看完程式碼之後，回來看一下作者畫的圖吧：
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![SENet arch 1](./img/img2.jpg)
+</figure>
+</div>
 
 如圖，在 SENet 中，步驟依序是：
 

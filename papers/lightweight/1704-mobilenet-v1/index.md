@@ -34,7 +34,11 @@ MobileNets 的作者也提到，他們的主要貢獻在於將「深度可分離
 
 ### 深度可分離卷積
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![Depthwise Separable Convolution](./img/img1.jpg)
+</figure>
+</div>
 
 傳統卷積層將輸入的特徵圖通過一個多通道的卷積核過濾並結合，生成新的特徵圖。這個過程在每個輸出通道上都會考慮所有輸入通道的信息，計算成本很高。而深度可分離卷積則將此過程分解為兩個階段，先進行深度卷積，即每個輸入通道獨立應用一個濾波器，只處理輸入資料的一個通道，然後透過逐點卷積將這些輸出通道的結果進行組合。
 
@@ -72,7 +76,11 @@ class DepthwiseSeparableConv(nn.Module):
 
 在這篇論文的實作中，有提到每個卷積層後面都接了 Batch Normalization 和 ReLU 啟動函數，如下圖：
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![Depthwise Separable Convolution with BN and ReLU](./img/img2.jpg)
+</figure>
+</div>
 
 所以實作方式可以改成這樣：
 
@@ -112,7 +120,11 @@ class DepthwiseSeparableConv(nn.Module):
 
 整體結構如下表：
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![MobileNet-V1 Architecture](./img/img3.jpg)
+</figure>
+</div>
 
 ## 訓練技巧
 
@@ -136,13 +148,21 @@ MobileNet-V1 的作者在訓練過程中使用了一些技巧來提高模型的�
 
 ### 深度可分離卷積的效能
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![Depthwise Separable Convolution Performance](./img/img4.jpg)
+</figure>
+</div>
 
 與全卷積相比，使用深度可分離卷積在 ImageNet 上僅降低了 1% 的準確度，並且大大節省了乘法和參數數量。
 
 ### 要深度還是要寬度？
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![Depth vs Width](./img/img5.jpg)
+</figure>
+</div>
 
 降低模型寬度，正確率降低 2.2%；降低模型深度，正確率降低 5.3%。
 
@@ -150,13 +170,15 @@ MobileNet-V1 的作者在訓練過程中使用了一些技巧來提高模型的�
 
 ### 和其他模型比較
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![Comparison with Other Models](./img/img6.jpg)
+</figure>
+</div>
 
 將完整的 MobileNet 與原始的 GoogleNet 和 VGG16 進行了比較。
 
-MobileNet 幾乎與 VGG16 一樣準確，同時體積小 32 倍，計算強度降低 27 倍。
-
-MobileNet 比 GoogleNet 更準確，同時體積更小，計算量減少 2.5 倍以上。
+MobileNet 幾乎與 VGG16 一樣準確，同時體積小 32 倍，計算強度降低 27 倍。而且比 GoogleNet 更準確，同時體積更小，計算量減少 2.5 倍以上。
 
 在大約相同的大小和減少 22 倍的計算量的情況下，MobileNet 也比 Squeezenet 的效果提升了約 4%。
 
@@ -166,8 +188,6 @@ MobileNet-V1 的推出，將深度可分離卷積技術正式地帶入了大眾�
 
 這篇論文不僅提供了一種在資源有限環境中部署深度學習模型的有效方案，而且其設計理念啟發了後續多種輕量級深度學習架構的開發，進一步推動了深度學習架構在行動裝置和邊緣計算中的應用。
 
----
-
-MobileNet 在後續也推出 V2、V3 和 V4 版本，進一步改進了模型的性能和效率。
-
-這一系列的研究成果在實際應用中取得了廣泛的成功，成為了輕量級深度學習模型的經典之作。
+:::tip
+MobileNet 在後續也推出 V2、V3 和 V4 版本，進一步改進了模型的性能和效率。這一系列的研究成果在實際應用中取得了廣泛的成功，成為了輕量級深度學習模型的經典之作。
+:::

@@ -12,7 +12,11 @@
 
 ## 定義問題
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![problem](./img/img1.jpg)
+</figure>
+</div>
 
 卷積網路中的特徵圖通常包含大量冗餘信息，這些冗餘信息佔用了一定量的計算資源，並且對於網路的性能有著不利的影響。
 
@@ -24,7 +28,11 @@
 
 ### 模型架構
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![model_arch](./img/img2.jpg)
+</figure>
+</div>
 
 在 GhostNet 中，作者提出了一種新的模型架構，如上圖所示。
 
@@ -43,7 +51,11 @@
 
 ### 模組配置
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![model_arch2](./img/img3.jpg)
+</figure>
+</div>
 
 - **Ghost Bottlenecks**
 
@@ -73,7 +85,11 @@
 
 最終的模型配置如下表：
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![module_config](./img/img4.jpg)
+</figure>
+</div>
 
 ## 討論
 

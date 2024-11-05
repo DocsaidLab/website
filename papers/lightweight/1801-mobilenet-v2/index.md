@@ -48,7 +48,11 @@ ReLU 的效果是對每個元素進行線性閾值處理，將所有負值設為
 
 而避免這種情況的方式，是提供足夠的維度，以便在非線性變換後仍然保留足夠的信息，如下圖所示：
 
+<div align="center">
+<figure style={{"width": "95%"}}>
 ![Linear Bottleneck](./img/img1.jpg)
+</figure>
+</div>
 
 在圖中，最左邊的是輸入，對於投影到不同的維度上，且經過 ReLU 運算後，右邊的分佈就會有所不同。
 
@@ -58,7 +62,11 @@ ReLU 的效果是對每個元素進行線性閾值處理，將所有負值設為
 
 先看一下什麼叫做殘差網路，這裡引入 ResNet 論文內提供的圖片：
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![ResNet](./img/img2.jpg)
+</figure>
+</div>
 
 一般的殘差網路，首先經過一個 1x1 卷積層降維，然後是 3x3 卷積層彙整資訊，最後再經過一個 1x1 卷積層升維，最後再加上原始輸入。
 
@@ -107,7 +115,11 @@ ReLU 的效果是對每個元素進行線性閾值處理，將所有負值設為
 
 ### 模型架構
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![Model Architecture](./img/img4.jpg)
+</figure>
+</div>
 
 最後就是整個模型的架構，從上圖可以看到，相比於 MobileNetV1，在 MobileNetV2 中則是進一步融合殘差模組。
 
@@ -150,7 +162,11 @@ class InvertResidual(nn.Module):
 
 先參考一下論文的配置：
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![Model Config](./img/img5.jpg)
+</figure>
+</div>
 
 輸入圖片大小為 224x224，輸出類別數為 1000......
 
@@ -229,7 +245,11 @@ class MobileNetV2(nn.Module):
 
 ### 圖像分類效能
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![ImageNet Performance](./img/img6.jpg)
+</figure>
+</div>
 
 從上表可以看到，MobileNetV2 在 ImageNet 上的表現比 MobileNetV1 有所提升。
 

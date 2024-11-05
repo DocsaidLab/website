@@ -29,11 +29,19 @@ Google 團隊顯然也想繼續推進 MobileNet 的發展，於是他們開始�
 
 ### MobileNet-V2 模組
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![MobileNet-V2 模組](./img/img2.jpg)
+</figure>
+</div>
 
 ### MobileNet-V3 模組
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![MobileNet-V3 模組](./img/img1.jpg)
+</figure>
+</div>
 
 對比上下兩張架構圖，你能看出來 MobileNet-V3 的改進嗎？
 
@@ -41,7 +49,7 @@ Google 團隊顯然也想繼續推進 MobileNet 的發展，於是他們開始�
 
 在約一年前提出的論文 `MnasNet` 中，已經在 `MobileNet-V2` 的基礎上加入了 `Squeeze-and-Excitation` 模組。
 
-- [**\[18.07\] MnasNet: Platform-Aware Neural Architecture Search for Mobile**](https://arxiv.org/abs/1807.11626)
+- [**[18.07] MnasNet: Platform-Aware Neural Architecture Search for Mobile**](https://arxiv.org/abs/1807.11626)
 
 在 `MobileNet-V3` 中，這個模組‘進一步地改進，移除速度「極慢」的 `Sigmoid` 函數，改成 `Hard-Sigmoid` 函數。
 
@@ -57,9 +65,13 @@ Google 團隊顯然也想繼續推進 MobileNet 的發展，於是他們開始�
 
 接著在網路架構上應用 `NetAdapt` 演算法和其他最佳化。
 
-- [**\[18.04\] Netadapt: Platform-aware neural network adaptation for mobile applications**](https://arxiv.org/abs/1804.03230)
+- [**[18.04] Netadapt: Platform-aware neural network adaptation for mobile applications**](https://arxiv.org/abs/1804.03230)
 
-  ![NetAdapt 演算法](./img/img3.jpg)
+  <div align="center">
+   <figure style={{"width": "70%"}}>
+   ![NetAdapt 演算法](./img/img3.jpg)
+   </figure>
+   </div>
 
 :::tip
 這個部分不是本文的重點，我們只要知道這個部分是用來調整網路架構的就好。
@@ -132,25 +144,41 @@ Google 團隊顯然也想繼續推進 MobileNet 的發展，於是他們開始�
 - **RE**：表示是否使用了 `ReLU` 啟動函數。
 - **NBM**：表示沒有使用 `Batch Normalization`。
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![MobileNet-V3 large](./img/img6.jpg)
+</figure>
+</div>
 
 ### 網路架構（小）
 
 針對小型模型，作者們也展示了搜索的結果。
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![MobileNet-V3 small](./img/img7.jpg)
+</figure>
+</div>
 
 ## 討論
 
 ### ImageNet 實驗結果
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![ImageNet 實驗結果](./img/img9.jpg)
+</figure>
+</div>
 
 從上圖可以看出，MobileNetV3 優於目前最先進的模型，例如 MnasNet、ProxylessNas 和 MobileNetV2。
 
 ### 移動裝置評估
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![MobileNet-V3 實驗結果](./img/img8.jpg)
+</figure>
+</div>
 
 作者在上表中報告了不同 Pixel 手機上的浮點效能。
 
@@ -158,7 +186,11 @@ Google 團隊顯然也想繼續推進 MobileNet 的發展，於是他們開始�
 
 ### 優化紀錄
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![MobileNet-V3 優化紀錄](./img/img10.jpg)
+</figure>
+</div>
 
 上圖展示了作者們在本論文中的優化紀錄。
 
