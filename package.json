@@ -27,6 +27,7 @@
     "@mdx-js/react": "^3.0.0",
     "@mui/material": "^5.15.15",
     "@types/react": "^16",
+    "acorn": "^8",
     "axios": "^1.6.8",
     "clsx": "^2.0.0",
     "gh-pages": "^6.1.0",
@@ -59,5 +60,11 @@
   },
   "engines": {
     "node": ">=18.0"
+  },
+  "resolutions": {
+    "rimraf": "^4",
+    "glob": "^9",
+    "memfs": "^4",
+    "inflight": "github:isaacs/inflight"
   }
 }
