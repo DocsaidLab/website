@@ -17,10 +17,10 @@
   "dependencies": {
     "@algolia/client-search": "^4.9.1",
     "@docsearch/react": "^3.6.0",
-    "@docusaurus/core": "^3.5.2",
+    "@docusaurus/core": "^3.6.0",
     "@docusaurus/faster": "^3.6.0",
-    "@docusaurus/plugin-content-docs": "^3.5.2",
-    "@docusaurus/preset-classic": "^3.5.2",
+    "@docusaurus/plugin-content-docs": "^3.6.0",
+    "@docusaurus/preset-classic": "^3.6.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@giscus/react": "^3.0.0",
@@ -43,8 +43,8 @@
     "typescript": "^5.6.3"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.5.2",
-    "@docusaurus/types": "^3.5.2"
+    "@docusaurus/module-type-aliases": "^3.6.0",
+    "@docusaurus/types": "^3.6.0"
   },
   "browserslist": {
     "production": [
