@@ -7,13 +7,6 @@ tags: [LaTeX, Math]
 description: LaTeX syntax quick reference
 ---
 
-<figure>
-![title](/img/2024/0604.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
 每次需要使用 LaTeX 時，往往會忘記部分語法，因此這份快速查詢表將常用的 LaTeX 語法整理在一起，方便隨時查閱。
 
 <!-- truncate -->
