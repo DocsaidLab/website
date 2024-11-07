@@ -7,13 +7,6 @@ tags: [Docusaurus, Sidebar]
 description: 幫 Sidebar 加點新功能。
 ---
 
-<figure>
-![title](/img/2024/0914.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
 Docusaurus 預設提供了功能非常豐富的 Sidebar，但不合用。
 
 這次讓我們動手改一改。
