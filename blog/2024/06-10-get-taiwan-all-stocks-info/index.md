@@ -7,13 +7,6 @@ tags: [beautifulsoup4, TWSE]
 description: Get Taiwan all stocks info from TWSE by Python.
 ---
 
-<figure>
-![title](/img/2024/0610.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
 臺灣股市每隔一段時間就會更迭一次股票代號，每次都用人工查找，總不是辦法。
 
 所以我們需要自動化！
@@ -38,7 +31,11 @@ pip install requests beautifulsoup4 json
 
 - [**臺灣證券交易所/證券編碼公告**](https://www.twse.com.tw/zh/products/code/announcement.html)
 
+  <div align="center">
+  <figure style={{"width": "80%"}}>
   ![TWSE](./img/img1.jpg)
+  </figure>
+  </div>
 
 我們先把這三個網頁記下來：
 
@@ -52,7 +49,11 @@ urls = [
 
 ## 解析網頁
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![stock_table](./img/img2.jpg)
+</figure>
+</div>
 
 網頁點進去之後，查詢一下主要表格對應的 HTML 標籤是：`class=h4`。
 
@@ -171,5 +172,3 @@ target = df[df["產業別"] == "水泥工業"]
 ## 結語
 
 我們之後只需要不定期的執行這個程式，就可以取得最新的股票資訊。
-
-如果你有任何問題或建議，歡迎在下方留言！
