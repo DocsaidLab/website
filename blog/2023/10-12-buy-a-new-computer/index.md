@@ -7,13 +7,6 @@ image: /img/2023/1012.webp
 description: 記錄組裝電腦的過程。
 ---
 
-<figure>
-![title](/img/2023/1012.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
 突然想買一台電腦。
 
 不為別的，就是想用 RTX 4090 來 Train 模型。
