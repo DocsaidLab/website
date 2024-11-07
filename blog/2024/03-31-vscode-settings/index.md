@@ -7,16 +7,9 @@ image: /img/2024/0331.webp
 description: 記錄常用的 VScode 參數設定，以便日後使用。
 ---
 
-<figure>
-![title](/img/2024/0331.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
+不久前，因為不明原因導致 VScode 設定檔消失，又重新設定了一次費了我們不少時間。
 
----
-
-不久前，因為不明原因導致我的 VScode 設定檔消失。費了我一小時又重新設定了一次。
-
-剛好也讓我有機會重新檢視一下自己的設定檔，並且將一些常用的設定檔記錄下來。
+剛好也有個機會重新檢視一下我們自己的設定檔，並且將一些常用的設定檔記錄下來。
 
 <!-- truncate -->
 
@@ -181,7 +174,3 @@ description: 記錄常用的 VScode 參數設定，以便日後使用。
 - `editor.wordWrapColumn`：設定自動換行的列數。
 
 - `files.autoSave`：設定自動保存。
-
-## 結語
-
-以上是我常用的 VScode 參數設定。
