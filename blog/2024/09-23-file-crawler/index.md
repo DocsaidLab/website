@@ -7,13 +7,6 @@ tags: [Python, File Crawler]
 description: 一個簡單的網頁檔案下載程式。
 ---
 
-<figure>
-![title](/img/2024/0923.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
 我們看上了一個網頁，裡面有上百份 pdf 檔案連結。
 
 身為工程師的我們，如果是自己逐篇點開下載，顯然不太對？
