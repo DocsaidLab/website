@@ -7,13 +7,6 @@ tags: [PyTorch, LayerNorm]
 description: 閒來無事，動手算算。恩，怎麼不對啊？
 ---
 
-<figure>
-![title](/img/2024/0820.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
 今天突然想算一下 LayerNorm 的數值。
 
 <!-- truncate -->
