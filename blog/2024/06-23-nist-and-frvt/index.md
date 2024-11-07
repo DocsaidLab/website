@@ -7,18 +7,9 @@ tags: [NIST, FRVT]
 description: An brief introduction to NIST and FRVT.
 ---
 
-<figure>
-![title](/img/2024/0623.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
-## 簡介
+美國國家標準技術研究院（National Institute of Standards and Technology，簡稱 NIST）成立於 1901 年，隸屬於美國商務部。
 
 - [**NIST 官方網站**](https://www.nist.gov/)
-
-美國國家標準技術研究院（National Institute of Standards and Technology，簡稱 NIST）成立於 1901 年，隸屬於美國商務部。
 
 作為一個非盈利機構，NIST 的使命是通過制定標準、進行科學研究和技術開發，推動美國在科學與技術領域的創新與競爭力，從而促進經濟安全並提升國民生活品質。
 
