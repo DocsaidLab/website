@@ -7,20 +7,9 @@ image: /img/2023/0904.webp
 description: 偷偷登入 RTF8207W 路由器。
 ---
 
-<figure>
-![title](/img/2023/0904.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
 這次我們想要登入中華電信的小烏龜，也就是 RTF8207W 數據機。
 
-首先這個機器絕對不是長得像封面圖片這樣，這只是 GPT 的幻想而已。
-
 <!-- truncate -->
-
-言歸正傳，我們繼續：
 
 ### 1. 登入管理介面。
 
