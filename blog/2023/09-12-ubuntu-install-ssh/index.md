@@ -7,20 +7,13 @@ image: /img/2023/0912.webp
 description: 伺服器的設定與無密碼登入教學。
 ---
 
-<figure>
-![title](/img/2023/0912.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
-SSH（安全殼層）是一種網路協議，允許用戶安全地訪問和管理遠程伺服器。
+SSH 是一種網路協議，允許用戶安全地訪問和管理遠程伺服器。
 
 我們這次要來設定無密碼登入。
 
 <!-- truncate -->
 
-## 1. 安裝 OpenSSH 伺服器
+## 安裝 OpenSSH 伺服器
 
 打開終端機。
 
@@ -31,7 +24,7 @@ sudo apt update
 sudo apt install openssh-server
 ```
 
-## 2. 檢查 SSH 伺服器狀態
+## 檢查 SSH 伺服器狀態
 
 使用以下命令檢查 SSH 伺服器的狀態：
 
@@ -41,9 +34,9 @@ sudo systemctl status ssh
 
 如果你看到 「Active: active (running)」，那麼 SSH 伺服器已經成功啟動。
 
-## 3. SSH 無密碼登入設定：
+## SSH 無密碼登入設定：
 
-### 3.1 在用戶端生成 SSH 金鑰對
+### 在用戶端生成 SSH 金鑰對
 
 打開終端機。
 
@@ -55,7 +48,7 @@ ssh-keygen
 
 按照提示操作。通常預設的設定就足夠了。在詢問密碼的部分可以直接按 Enter 以建立一個無密碼的金鑰對。
 
-### 3.2 把公開金鑰複製到伺服器
+### 把公開金鑰複製到伺服器
 
 使用 ssh-copy-id 命令將公開金鑰複製到伺服器。替換 [username] 與 [server-ip] 為你的伺服器資料。
 
@@ -79,7 +72,7 @@ ssh-copy-id -p 2222 john@192.168.0.100
 
 一旦驗證成功，你的公開金鑰就會被添加到伺服器上的 `~/.ssh/authorized_keys` 檔案中。
 
-### 3.3 測試無密碼登入
+### 測試無密碼登入
 
 嘗試 SSH 至伺服器：
 
@@ -87,16 +80,18 @@ ssh-copy-id -p 2222 john@192.168.0.100
 ssh [username]@[server-ip]
 ```
 
-如果一切設定正確，你將可以無需密碼登入伺服器。
+如果一切設定正確，你就可以無需密碼登入伺服器。
 
-## 注意事項
+## 禁用密碼
 
-使用 SSH 金鑰認證確實可以提高安全性和方便性，但請確保不要遺失私鑰。
-
-建議定期更換或更新你的 SSH 金鑰。為了增加安全性，可以考慮禁止密碼認證方式。
+有了 SSH 金鑰之後，為了增加安全性，可以考慮禁止密碼認證方式。
 
 這可以在伺服器的 `/etc/ssh/sshd_config` 中設定：
 
-- `PasswordAuthentication no`。
+```bash
+sudo vim /etc/ssh/sshd_config
+```
 
-完成上述步驟後，你將能夠使用 SSH 金鑰認證從用戶端無密碼登入伺服器。
+找到檔案中的 `PasswordAuthentication` 選項，並將其設置為 `no`。
+
+完成上述步驟後，恭喜你可以開心愉快地使用 SSH 了！
