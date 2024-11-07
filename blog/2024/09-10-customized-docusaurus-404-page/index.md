@@ -7,19 +7,9 @@ tags: [Docusaurus, 404NotFound]
 description: 預設的 404 頁面必須改一改！
 ---
 
-import Layout from '@theme/Layout';
-import clsx from 'clsx';
-import Heading from '@theme/Heading';
-import Translate from '@docusaurus/Translate';
+Docusaurus 是一個由 Meta 開發的靜態網站生成器，用於構建開源文件網站。
 
-<figure>
-![title](/img/2024/0910.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
-Docusaurus 是一個由 Meta 開發的靜態網站生成器，用於構建開源文件網站。它提供了一個簡單的方式來創建和維護網站，並且支持自定義主題和插件。
+它提供了一個簡單的方式來創建和維護網站，並且支持自定義主題和插件。
 
 <!-- truncate -->
 
