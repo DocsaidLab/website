@@ -1,15 +1,6 @@
----
-slug: terms-of-service
-title: Terms of Service
-authors: Zephyr
-tags: [terms-of-service]
-image: /en/img/2023/08231.webp
-description: Terms of Service
----
+# Terms of Service
 
 We strongly recommend that you regularly review these Terms of Service to ensure that you always maintain an understanding of them, as we may make modifications or updates in the future. We hope you have a pleasant browsing experience on the DOCSAID website and respect and comply with the standards we have set.
-
-<!-- truncate -->
 
 This website is owned and operated by DOCSAID. Before using this website, we suggest that you carefully read and understand these Terms of Service to ensure that you fully understand your rights and responsibilities. This not only helps protect your interests but also helps ensure that this website can provide a safe and efficient environment for all users.
 

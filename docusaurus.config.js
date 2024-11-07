@@ -173,17 +173,17 @@ const config = {
             to: '/blog',
           },
           {
-            label: '支持我們',
-            href: 'https://buymeacoffee.com/zephyr_docsaid',
-          },
-          {
             label: '使用條款',
-            href: 'https://docsaid.org/blog/terms-of-service',
+            href: '/terms-of-service',
           },
           {
             label: '隱私政策',
-            href: 'https://docsaid.org/blog/privacy-policy',
-          }
+            href: '/privacy-policy',
+          },
+          {
+            label: '支持我們',
+            href: 'https://buymeacoffee.com/zephyr_docsaid',
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} DOCSAID.`,
       },

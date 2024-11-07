@@ -1,15 +1,6 @@
----
-slug: privacy-policy
-title: Privacy Policy
-authors: Zephyr
-tags: [privacy-policy]
-image: /en/img/2023/08232.webp
-description: Privacy Policy
----
+# Privacy Policy
 
 Welcome to DOCSAID, hereinafter referred to as the Website. We value your privacy and are committed to protecting your personal information. Please read the following Privacy Policy carefully before using this website to understand our information collection, use, and protection practices.
-
-<!-- truncate -->
 
 ## 1. Scope of Application
 
