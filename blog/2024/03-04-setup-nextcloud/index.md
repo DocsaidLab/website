@@ -7,14 +7,7 @@ image: /img/2024/0304.webp
 description: 記錄 Ubuntu 22.04 上搭建 Nextcloud 的過程。
 ---
 
-<figure>
-![title](/img/2024/0304.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
-之前我都把檔案放在 Google Drive 上，下載檔案的時候會透過 wget 指令來下載。
+之前我們都把檔案放在 Google Drive 上，下載檔案的時候會透過 wget 指令來下載。
 
 直到某一天，原本的下載指令突然就不能用了...
 
@@ -27,7 +20,7 @@ description: 記錄 Ubuntu 22.04 上搭建 Nextcloud 的過程。
 :::tip
 在開始之前，請你準備好一個域名，並且把這個域名指向你的伺服器。
 
-如果不知道該怎麼做，請直接 Google 搜尋『namecheap 怎麼用』。
+如果不知道該怎麼做，請直接 Google 搜尋：**namecheap 怎麼用**。
 :::
 
 ## 安裝 Nextcloud
@@ -107,7 +100,7 @@ sudo vim /etc/systemd/system/nextcloud.service
 
 貼上以下的內容：
 
-```bash
+```bash {7}
 [Unit]
 Description=NextCloud Docker Compose
 Requires=docker.service
@@ -122,6 +115,8 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
+
+記得要把 `[YourName]` 替換成你的使用者名稱。
 
 ## 啟動 Nextcloud
 
@@ -143,7 +138,8 @@ sudo systemctl start nextcloud
 
 3. **獲取有效證書的自動化方式**：
 
-   - 如果你的防火牆或路由器已開放或轉發了 80 和 8443 端口，並且你已經將一個域名指向你的伺服器，那麼你可以通過訪問`https://your-domain-that-points-to-this-server.tld:8443`來自動獲取一個由受信任 CA 發行的有效證書，以增加安全性和便利性。這裡的`your-domain-that-points-to-this-server.tld`應該替換為你指向伺服器的實際域名。
+   - 如果你的防火牆或路由器已開放或轉發了 80 和 8443 端口，並且你已經將一個域名指向你的伺服器，那麼你可以通過訪問 `https://your-domain-that-points-to-this-server.tld:8443` 來自動獲取一個由受信任 CA 發行的有效證書，以增加安全性和便利性。
+   - 這裡的 `your-domain-that-points-to-this-server.tld` 應該替換為你指向伺服器的實際域名。
 
 4. **Nextcloud Talk 的連接埠開放**：
    - 為了確保 Nextcloud Talk 功能（如視訊通話和訊息）能夠正常運作，需要在防火牆或路由器中為 Talk 容器開放 3478/TCP 和 3478/UDP 連接埠。
@@ -152,7 +148,7 @@ sudo systemctl start nextcloud
 
   - **家用網路是動態 IP，怎麼指向域名？**
 
-    - 我有試過一些 No-IP 的方法，後來覺得直接去中華電信申請固定 IP 最快最方便。
+    - 我們有試過一些 No-IP 的方法，後來覺得直接去中華電信申請固定 IP 最快最方便。
 
   - **我不想用 Docker，有沒有其他方法？**
 
@@ -167,11 +163,19 @@ sudo systemctl start nextcloud
 
 輸入設定網址，你可以進入一個比後台還要後台的地方。
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![login_1](./img/login_1.jpg)
+</figure>
+</div>
 
-到這一步，你可能會驚恐地發現：『我沒有密碼啊！』
+到這一步，你可能會驚恐地發現：
 
-密碼會在你第一次登入的時候給你，但通常你會錯過他。這時候你可以透過以下的指令來找到密碼：
+- **我沒有密碼啊！**
+
+密碼會在你第一次登入的時候給你，但通常你會錯過他。
+
+這時候你可以透過以下的指令來找到密碼：
 
 ```bash
 sudo grep password /var/lib/docker/volumes/nextcloud_aio_mastercontainer/_data/data/configuration.json
@@ -179,9 +183,15 @@ sudo grep password /var/lib/docker/volumes/nextcloud_aio_mastercontainer/_data/d
 
 登入之後，你會看到一個設定畫面：
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![login_2](./img/login_2.jpg)
+</figure>
+</div>
 
-你看到的這個畫面已經是我設定完成的結果，如果你是第一次登入，在這裡，首先你要先輸入你之前準備好的網域，接著系統會要你再次下載一些 docker image，下載完成後，它會幫你啟動。
+你看到的這個畫面已經是我們設定完成的結果。
+
+如果你是第一次登入，在這裡，首先你要先輸入你之前準備好的網域，接著系統會要你再次下載一些 docker image，下載完成後，它會幫你重新啟動。
 
 啟動之後，你就可以開始使用 Nextcloud 了。
 
@@ -189,8 +199,14 @@ sudo grep password /var/lib/docker/volumes/nextcloud_aio_mastercontainer/_data/d
 
 完成上面的步驟之後，在網址列中輸入你的網域後，你會看到一個很好看的介面，這個介面就是你的私有雲。
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![login_3](./img/login_3.jpg)
+</figure>
+</div>
 
-這個介面有很多功能，你可以透過這個介面來管理你的檔案，也可以透過這個介面來分享檔案。除此之外，你可以在手機上下載 Nextcloud 的 App，然後你可以直接透過手機來管理你的檔案。
+這個介面有很多功能，你可以透過這個介面來管理你的檔案，也可以透過這個介面來分享檔案。
+
+除此之外，你可以在手機上下載 Nextcloud 的 App，然後你可以直接透過手機來管理你的檔案。
 
 有了 Nextcloud，你就不需要再擔心 Google Drive 的容量限制了。
