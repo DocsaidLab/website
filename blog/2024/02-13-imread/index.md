@@ -7,18 +7,9 @@ image: /img/2024/0213.webp
 description: 來優化一下 OpenCV imread 吧！
 ---
 
-<figure>
-![title](/img/2024/0213.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
 當你想要讀取一張影像時，你可能會使用 OpenCV 的 `imread` 函數。
 
-這個函數非常方便，它可以讀取多種格式的影像，並且可以直接將影像讀取到 `numpy.ndarray` 類型的變數中。
-
-然而，這個函數並不是萬能的，有時候你可能會遇到一些問題。
+可惜這個函數並不是萬能的，有時候可能會遇到一些問題。
 
 <!-- truncate -->
 
@@ -185,5 +176,3 @@ def imread(
 ```
 
 詳細程式碼可以參考：[imread.py](https://github.com/DocsaidLab/DocsaidKit/blob/eb8ac0a56779a75dcc951c683001e6129052cc5a/docsaidkit/vision/improc.py#L197)
-
-以上就是關於 OpenCV 的 `imread` 函數的一些限制和解決方法，希望對你有所幫助。
