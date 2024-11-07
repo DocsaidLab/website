@@ -9,6 +9,8 @@ description: Tutorial on configuring ssh server.
 
 SSH is a network protocol that allows users to securely access and manage remote servers. This time, we will set up passwordless login.
 
+<!-- truncate -->
+
 ## Installing the OpenSSH Server
 
 Open the terminal.

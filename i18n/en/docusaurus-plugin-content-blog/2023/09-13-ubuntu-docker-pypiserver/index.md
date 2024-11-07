@@ -11,6 +11,8 @@ Today, we’ll document the process of setting up a PyPi Server using Docker on 
 
 We assume you have Docker installed on Ubuntu and are familiar with basic Docker operations.
 
+<!-- truncate -->
+
 ## Pull the Image
 
 ```bash
