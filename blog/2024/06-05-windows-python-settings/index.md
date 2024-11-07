@@ -7,14 +7,7 @@ tags: [win11, python]
 description: Setting up Python on Windows.
 ---
 
-<figure>
-![title](/img/2024/0605.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
-前陣子接了一個專案，必須基於 Windows 的系統進行開發。
+前陣子我們收到一個必須基於 Windows 的系統進行開發的任務。
 
 可真是久違了！距離上次使用 Windows 已經有好幾年了。
 
@@ -40,7 +33,11 @@ Apple M1 晶片是 ARM 架構，在剛推出時遇到許多相容性的問題，
 
 首先，我們需要啟動 PowerShell。
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![PowerShell](./img/img1.jpg)
+</figure>
+</div>
 
 Chocolatey 是一個基於 Windows 的包管理系統，它利用 NuGet 和 PowerShell 技術來自動化軟體的安裝、升級和管理過程。它類似於 Linux 上的 `apt-get` 或 `yum`，讓 Windows 用戶可以以一種簡單、一致的方式來管理軟體。
 
@@ -207,7 +204,11 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
 這邊我們就到 [**VS Code 官網**](https://code.visualstudio.com/Download) 下載安裝程式，然後安裝即可。
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![VS Code](./img/img2.jpg)
+</figure>
+</div>
 
 安裝完成之後，我們希望能夠在 PowerShell 中直接使用 `code` 命令來打開 VS Code。
 
