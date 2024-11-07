@@ -7,28 +7,25 @@ tags: [pytorch, anls]
 description: Average Normalized Levenshtein Similarity
 ---
 
-<figure>
-![title](/img/2024/0516.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
 Average Normalized Levenshtein Similarity，簡稱 ANLS，是一種用於計算兩個字串之間相似性的指標。
-
-在自然語言處理（NLP）中，我們經常需要比較兩個字串的相似性。
 
 <!-- truncate -->
 
-Levenshtein Similarity 是一種常見的度量方法，它衡量了兩個字串之間的「**編輯距離**」，即通過多少次插入、刪除或替換操作可以將一個字串轉換為另一個字串。然而，Levenshtein Similarity 本身並不直觀，因為它取決於字串的長度。
+Levenshtein Similarity，以下我們簡稱為 LS。
 
-為了解決這個問題，我們可以將 Levenshtein Similarity 標準化為 [0, 1] 區間，這樣我們就可以更容易地理解和比較不同字串之間的相似性，稱為 Normalized Levenshtein Similarity（NLS）。
+在自然語言處理（NLP）中，我們經常需要比較兩個字串的相似性。LS 是一種常見的度量方法，它衡量了兩個字串之間的「**編輯距離**」，即通過多少次插入、刪除或替換操作可以將一個字串轉換為另一個字串。
 
-由於 NLS 指的是一組字串之間的相似性，我們可以將其進一步擴展為 ANLS，即 Average Normalized Levenshtein Similarity，它計算了多組字串之間的平均相似性，藉此來橫量模型的性能。
+只是 LS 本身並不直觀，因為它取決於字串的長度。為了解決這個問題，我們可以將 LS 標準化為 [0, 1] 區間，這樣我們就可以更容易地理解和比較不同字串之間的相似性，稱為 Normalized Levenshtein Similarity（NLS）。
 
-然後...
+由於 NLS 指的是一組字串之間的相似性，我們可以將其進一步擴展為 ANLS，它計算了多組字串之間的平均相似性，藉此來橫量模型的性能。
 
-我總是找不到喜歡的實作，最後決定自己寫一個。
+然後......
+
+我們總是找不到喜歡的實作，最後決定自己寫一個。
+
+## 參考資料
+
+- [**torchmetrics.text.EditDistance**](https://lightning.ai/docs/torchmetrics/stable/text/edit.html)
 
 ## 導入必要的庫
 
@@ -293,6 +290,8 @@ if __name__ == "__main__":
     print(anls(preds, target))
 ```
 
-## 參考資料
+## 最後
 
-- [**torchmetrics.text.EditDistance**](https://lightning.ai/docs/torchmetrics/stable/text/edit.html)
+我們可以保證這個實作是正確的嗎？
+
+答案是不行，如果你發現了任何問顫，請告訴我們，非常感謝！
