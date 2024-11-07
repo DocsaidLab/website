@@ -7,30 +7,24 @@ image: /en/img/2023/0903.webp
 description: Keeping the malicious out.
 ---
 
-<figure>
-![title](/img/2023/0903.webp)
-<figcaption>Cover Image: Automatically generated after reading this article by GPT-4</figcaption>
-</figure>
-
----
-
 As soon as you successfully open an external SSH channel, you'll notice a barrage of malicious connections attempting to log into your host.
 
 <!-- truncate -->
 
-A fundamental approach is to activate firewall blocking. Let's set it up quickly:
+<div align="center">
+<figure style={{"width": "40%"}}>
+![attack from ssh](./img/ban_1.jpg)
+</figure>
+<figcaption>Malicious Attack Illustration</figcaption>
+</div>
 
-- Malicious Attack Illustration
+---
 
-  <div align="center">
-  <figure style={{"width": "40%"}}>
-  ![attack from ssh](./img/ban_1.jpg)
-  </figure>
-  </div>
+Common practice is to use Fail2ban to protect our host. It's software designed to protect servers from brute force attacks.
+
+It automatically adjusts firewall rules to block attackers' IP addresses when suspicious behavior, such as repeated login failures, occurs.
 
 ## 1. Installation of Fail2ban
-
-**Fail2ban** is software designed to protect servers from brute force attacks. It automatically adjusts firewall rules to block attackers' IP addresses when suspicious behavior, such as repeated login failures, occurs.
 
 On most Linux distributions, you can install Fail2ban using package management tools.
 
@@ -53,7 +47,7 @@ sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 Edit `jail.local`:
 
 ```bash
-sudo nano /etc/fail2ban/jail.local
+sudo vim /etc/fail2ban/jail.local
 ```
 
 **Important configuration parameters:**

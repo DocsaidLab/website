@@ -7,34 +7,28 @@ image: /img/2023/0903.webp
 description: 把那些惡意都封鎖在外面。
 ---
 
-<figure>
-![title](/img/2023/0903.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
 當你成功打開的外部的 SSH 通道之後，你會發現立刻出現一堆惡意連線，想嘗試登入你的主機。
 
 <!-- truncate -->
 
-一個基本的做法是開啟防火牆進行阻擋，我們趕緊來設定一下：
+<div align="center">
+<figure style={{"width": "40%"}}>
+![attack from ssh](./img/ban_1.jpg)
+</figure>
+<figcaption>惡意攻擊示意圖</figcaption>
+</div>
 
-- 惡意攻擊示意圖
+---
 
-  <div align="center">
-  <figure style={{"width": "40%"}}>
-  ![attack from ssh](./img/ban_1.jpg)
-  </figure>
-  </div>
+常見的做法是用 Fail2ban 來保護我們的主機，這是一個防止伺服器受到暴力攻擊的軟體。
+
+當系統偵測到可疑的行為（例如：重複的登錄失敗）出現時，Fail2ban 會自動修改防火牆規則來封鎖攻擊者的 IP 地址。
 
 ## 1. Fail2ban 安裝
 
-**Fail2ban** 是一個防止伺服器受到暴力攻擊的軟體。當有可疑的行為（例如：重複的登錄失敗）出現時，Fail2ban 會自動修改防火牆規則來封鎖攻擊者的 IP 地址。
-
 在大部分的 Linux 發行版上，你可以使用包管理工具來安裝 Fail2ban。
 
-在 Ubuntu 上，你可以使用 apt 來安裝：
+我們自己的主機是 Ubuntu，所以我們使用 apt 來安裝：
 
 ```bash
 sudo apt install fail2ban
@@ -44,7 +38,7 @@ sudo apt install fail2ban
 
 設定檔位於 `/etc/fail2ban/jail.conf`。
 
-建議不直接修改此文件，而是複製一份到 `jail.local` 並修改它：
+建議不要直接修改此文件，而是複製一份到 `jail.local` 並修改它：
 
 ```bash
 sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
@@ -53,10 +47,10 @@ sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 編輯 `jail.local`：
 
 ```bash
-sudo nano /etc/fail2ban/jail.local
+sudo vim /etc/fail2ban/jail.local
 ```
 
-**重要的設定參數：**
+這一份檔案內有幾個重要的設定參數，對應的功能如下：
 
 - **ignoreip:** 忽略的 IP 地址或網段，例如： 127.0.0.1/8
 - **bantime:** 封鎖時間，以秒為單位 (預設是 600 秒)
@@ -79,7 +73,7 @@ sudo fail2ban-client status
 
 ## 4. 新增自定義規則
 
-如果你想為特定的服務（例如： SSH 或 Apache）設定特別的規則，你可以在 `jail.local` 裡新增或修改對應的段落，例如針對 SSH 的設定：
+如果你想為特定的服務設定特別的規則，你可以在 `jail.local` 裡新增或修改對應的段落，例如針對 SSH 的設定：
 
 ```bash
 [sshd]
@@ -112,4 +106,4 @@ sudo fail2ban-client status sshd
 
 整個過程只是步驟繁瑣，但也不算複雜。
 
-希望這篇指南能夠幫助你順利完成相關設定。
+希望這篇文章能夠幫助你順利完成相關設定。
