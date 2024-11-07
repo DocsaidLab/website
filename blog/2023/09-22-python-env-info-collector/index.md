@@ -7,16 +7,9 @@ image: /img/2023/0922.webp
 description: 自己手刻的紀錄工具，分享給大家使用。
 ---
 
-<figure>
-![title](/img/2023/0922.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
 當模型 train 壞了，我們總是會想知道是什麼原因導致的，這時候我們需要檢查訓練主機的環境資訊，例如：Python 版本、PyTorch 版本、CUDA 版本、GPU 資訊、CPU 資訊、RAM 資訊、磁碟資訊、IP 地址等等。
 
-我們在本文中分享一個自己手刻的 Python 小工具，可以快速查看這些資訊，雖然說不是包山包海，但基本的問題排查應該足夠用了。
+我們分享一個自己手刻的 Python 小工具，可以快速查看這些資訊，雖然說不是包山包海，但基本的問題排查應該足夠用。
 
 一般來說，我們會在訓練啟動的環節，將環境資訊紀錄到訓練主機的日誌裡面。
 
@@ -30,11 +23,15 @@ description: 自己手刻的紀錄工具，分享給大家使用。
 pip install psutil requests
 ```
 
-接著你可以在本文的最後取得完整的程式碼，並且將它放在你的專案裡面。
+:::tip
+完整的程式碼在 Github 上，並且我們同步放在本篇文章的最後面。
+
+- [**system_info.py**](https://github.com/DocsaidLab/DocsaidKit/blob/main/docsaidkit/utils/system_info.py)
+  :::
 
 ## 使用 `get_package_versions`
 
-我們假設你有安裝 docsaidkit，並且已經在專案裡面，則可以透過以下指令測試：
+我們假設你有安裝 `docsaidkit`，並且已經在專案裡面，則可以透過以下指令測試：
 
 ```python
 from docsaidkit import get_package_versions
@@ -143,10 +140,6 @@ get_system_info()
 - 外部 IP 地址是從 `https://httpbin.org/ip` 獲取的，所以必須確保網路連線是活躍的。
 
 ## 程式碼
-
-我們期待這份程式碼可以幫助你快速檢視訓練環境，你可以將此資訊輸出後與模型的訓練日誌一起保存，以確保訓練的可追溯性和可重現性。
-
-- [system_info.py](https://github.com/DocsaidLab/DocsaidKit/blob/main/docsaidkit/utils/system_info.py)
 
 ```python showLineNumbers
 import platform

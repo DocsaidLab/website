@@ -7,13 +7,6 @@ image: /en/img/2023/0922.webp
 description: A custom logging tool.
 ---
 
-<figure>
-![title](/img/2023/0922.webp)
-<figcaption>Cover Image: Generated automatically by GPT-4 after reading this article.</figcaption>
-</figure>
-
----
-
 When a model's training goes awry, we always want to know the reasons behind it. At such times, it's essential to inspect the environment information of the training host, such as Python version, PyTorch version, CUDA version, GPU information, CPU information, RAM information, disk information, IP address, and more.
 
 <!-- truncate -->
@@ -30,7 +23,11 @@ Let's start by installing the necessary packages:
 pip install psutil requests
 ```
 
-Next, you can retrieve the complete code at the end of this article and integrate it into your project.
+:::tip
+The complete code is available on GitHub, and we've also included it at the end of this article.
+
+- [**system_info.py**](https://github.com/DocsaidLab/DocsaidKit/blob/main/docsaidkit/utils/system_info.py)
+  :::
 
 ## `get_package_versions`
 
@@ -143,10 +140,6 @@ Here are a few points to note:
 - External IP address is fetched from `https://httpbin.org/ip`, so ensure an active internet connection.
 
 ## Code
-
-We hope this code helps you quickly inspect your training environment. You can output this information and save it along with your model's training logs to ensure traceability and reproducibility.
-
-- [system_info.py](https://github.com/DocsaidLab/DocsaidKit/blob/main/docsaidkit/utils/system_info.py)
 
 ```python showLineNumbers
 import platform
