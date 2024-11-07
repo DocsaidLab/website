@@ -7,13 +7,6 @@ image: /img/2023/1010.webp
 description: 記錄安裝 pyenv 的安裝與使用方式。
 ---
 
-<figure>
-![title](/img/2023/1010.webp)
-<figcaption>封面圖片：由 GPT-4 閱讀本文之後自動生成</figcaption>
-</figure>
-
----
-
 早些年使用 Python 的時候大多使用 Conda 來管理。現在則是常用 pyenv 。
 
 我們就在這篇文章中來記錄安裝 pyenv 的安裝與使用方式。
@@ -81,6 +74,7 @@ description: 記錄安裝 pyenv 的安裝與使用方式。
   ```
 
 - **在特定目錄使用特定版本**：
+
   ```bash
   pyenv local 3.8.5
   ```
@@ -144,7 +138,9 @@ pyenv update
    ```
 
 2. **清理你的 `.bashrc`**：
+
    移除或註釋掉相關的 `pyenv` 配置行，然後重啟你的 shell：
+
    ```bash
    exec $SHELL
    ```
