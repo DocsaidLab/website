@@ -28,10 +28,12 @@ MRZ localization can be approached in two ways:
 
 1. **Locating MRZ corner points:**
 
-   <figure>
+   <div align="center">
+   <figure style={{"width": "50%"}}>
    ![Locating MRZ corner points](./resources/img2.jpg)
    <figcaption>Image source: [**MIDV-2020 Synthetic Dataset**](http://l3i-share.univ-lr.fr/MIDV2020/midv2020.html)</figcaption>
    </figure>
+   </div>
 
    This is similar to previous document localization projects we've worked on, except here we’re localizing the MRZ area instead of the whole document.
 
@@ -43,10 +45,12 @@ MRZ localization can be approached in two ways:
 
 2. **Segmenting the MRZ area:**
 
-    <figure>
+    <div align="center">
+    <figure style={{"width": "50%"}}>
     ![Segmenting the MRZ area](./resources/img3.jpg)
     <figcaption>Image source: [**MIDV-2020 Synthetic Dataset**](http://l3i-share.univ-lr.fr/MIDV2020/midv2020.html)</figcaption>
     </figure>
+    </div>
 
    This approach is much more stable, as we can directly predict the MRZ region using a segmentation model. The text within the MRZ area physically exists in the image, so the model doesn’t have to "imagine" anything extra. This allows us to segment the MRZ region directly without worrying about corner points.
 
@@ -84,9 +88,11 @@ At this stage, there are a couple of design options:
 
    For example, if you use a Transformer Encoder structure, the model design could look like this:
 
-    <figure>
+    <div align="center">
+    <figure style={{"width": "50%"}}>
     ![Transformer Encoder](./resources/img6.jpg)
     </figure>
+    </div>
 
    Due to the self-attention mechanism, there could be multiple tokens pointing to the same character. Using a typical decoding method could confuse the model—why should it decode one character's image into another character?
 

@@ -28,10 +28,12 @@ MRZ 區域的定位大概可以分成兩個方向:
 
 1. **定位 MRZ 區域角點：**
 
-   <figure>
+   <div align="center">
+   <figure style={{"width": "50%"}}>
    ![定位 MRZ 區域角點](./resources/img2.jpg)
    <figcaption>圖片來源：[**MIDV-2020 合成資料集**](http://l3i-share.univ-lr.fr/MIDV2020/midv2020.html)</figcaption>
    </figure>
+   </div>
 
    這和之前我們做過的文件定位的專案類似，只是這裡把文件換成 MRZ 區域。
 
@@ -43,10 +45,12 @@ MRZ 區域的定位大概可以分成兩個方向:
 
 2. **分割 MRZ 區域：**
 
-    <figure>
+    <div align="center">
+    <figure style={{"width": "50%"}}>
     ![分割 MRZ 區域](./resources/img3.jpg)
     <figcaption>圖片來源：[**MIDV-2020 合成資料集**](http://l3i-share.univ-lr.fr/MIDV2020/midv2020.html)</figcaption>
     </figure>
+    </div>
 
    這個方法就比較穩定了，因為我們可以直接用分割模型去預測 MRZ 區域的範圍。MRZ 區域上的文字也是真實存在於圖面上，不需要模型做「多餘」的臆測。這樣一來，我們就可以直接將 MRZ 區域分割出來，不需要再去擔心角點的問題。
 
@@ -84,9 +88,11 @@ MRZ 區域的定位大概可以分成兩個方向:
 
    舉例來說，如果你只要使用 Transformer Encoder 的架構，那模型設計可以是這樣：
 
-    <figure>
+    <div align="center">
+    <figure style={{"width": "50%"}}>
     ![Transformer Encoder](./resources/img6.jpg)
     </figure>
+    </div>
 
    由於自注意力機制的關係，因此可能會有多個 Token 同時指向同一個文字的情況，這時候如果使用一般的解碼方式，可能會讓模型感到困惑：明明就是這個文字的影像，為什麼要解碼成另外一個文字？
 
