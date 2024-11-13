@@ -129,7 +129,11 @@ Consider a mini-batch $B$ of size $m$. Since normalization is applied independen
 
 Let $\hat{x}_1, \ldots, \hat{x}_m$ be the normalized values, and $y_1, \ldots, y_m$ the linear transformations of them. We call this transformation the BatchNorm transform $BN_{\gamma, \beta}$, described as follows. In the algorithm, $\epsilon$ is a constant added to the mini-batch variance for numerical stability.
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![bn algo](./img/img1.jpg)
+</figure>
+</div>
 
 In the representation $y = BN_{\gamma, \beta}(x)$, the parameters $\gamma$ and $\beta$ are learned, but note that the BN transform does not independently process activations in each training example. Instead, $BN_{\gamma, \beta}(x)$ depends on both the training sample and the other samples in the mini-batch. The scaled and shifted values $y$ are propagated to other network layers.
 
@@ -183,7 +187,11 @@ When training with BatchNorm, a training sample is observed together with other 
 
 ### MNIST Experiment
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![mnist](./img/img2.jpg)
+</figure>
+</div>
 
 To verify the impact of internal covariate shift on training and BatchNorm's ability to counteract it, the authors tested on the MNIST dataset for digit classification.
 
@@ -195,7 +203,11 @@ The above figure shows the proportion of correct predictions on holdout test dat
 
 ### ImageNet Experiment
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![imagenet](./img/img3.jpg)
+</figure>
+</div>
 
 The authors then applied BatchNorm to a new variant of the Inception network and trained it on the ImageNet classification task.
 
@@ -221,7 +233,11 @@ The authors evaluated the following networks, all trained on LSVRC2012 training 
 
 The above figure shows network validation accuracy as training progresses. Inception reached 72.2% accuracy after 31 million training steps. The table below shows the number of training steps each network took to reach the same 72.2% accuracy, the highest validation accuracy each network achieved, and the steps required to reach it.
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![imagenet table](./img/img4.jpg)
+</figure>
+</div>
 
 Using only BatchNorm (BN-Baseline), the same accuracy as Inception was achieved in less than half the training steps. BN-x5 required 14 times fewer steps to reach 72.2% accuracy than Inception. Interestingly, further increasing the learning rate (BN-x30) initially slowed down training but allowed for higher final accuracy. After 6 million steps, it reached 74.8%, five times fewer steps than Inception to reach 72.2%.
 

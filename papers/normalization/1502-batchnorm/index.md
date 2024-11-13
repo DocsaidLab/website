@@ -56,21 +56,11 @@ $$
 
 這不僅依賴於給定的訓練樣本 $x$，還依賴於所有樣本 $\chi$。
 
-對於反向傳播，我們需要計算
+對於反向傳播，我們需要計算 $$\frac{\partial \text{Norm}(x, \chi)}{\partial x}$$ 和 $$\frac{\partial \text{Norm}(x, \chi)}{\partial \chi}$$，如果忽略後者會導致上述的爆炸。
 
-$$
-\frac{\partial \text{Norm}(x, \chi)}{\partial x}
-$$
+在此框架下，因為需要計算協方差矩陣 $\text{Cov}[x] = E_{x \in X}[xx^T] - E[x]E[x]^T$ 及其逆平方根，以生成白化啟動 $\text{Cov}[x]^{-1/2}(x - E[x])$，以及這些變換的導數以進行反向傳播。
 
-和
-
-$$
-\frac{\partial \text{Norm}(x, \chi)}{\partial \chi}
-$$
-
-忽略後者會導致上述的爆炸。
-
-在此框架下，因為需要計算協方差矩陣 $\text{Cov}[x] = E_{x \in X}[xx^T] - E[x]E[x]^T$ 及其逆平方根，以生成白化啟動 $\text{Cov}[x]^{-1/2}(x - E[x])$，以及這些變換的導數以進行反向傳播。整個白化層輸入非常昂貴。這促使作者尋求一種替代方法，以可微的方式執行輸入正規化，且不需要在每次參數更新後分析整個訓練集。
+整個白化層輸入非常昂貴，這促使作者尋求一種替代方法，以可微的方式執行輸入正規化，且不需要在每次參數更新後分析整個訓練集。
 
 :::tip
 **白化 vs 標準化**
@@ -131,7 +121,11 @@ $$
 
 設正規化後的值為 $\hat{x}_1, \ldots, \hat{x}_m$，它們的線性變換為 $y_1, \ldots, y_m$。我們將該變換稱為 BatchNorm 變換 $BN_{\gamma, \beta}$，其過程如下。在算法中， $\epsilon$ 是一個為數值穩定性而添加到小批量方差中的常數。
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![bn algo](./img/img1.jpg)
+</figure>
+</div>
 
 在 $y = BN_{\gamma, \beta}(x)$ 的表示中，參數 $\gamma$ 和 $\beta$ 是需要學習的，但需要注意的是，BN 變換並不是獨立處理每個訓練樣本中的啟動值。相反，$BN_{\gamma, \beta}(x)$ 既依賴於訓練樣本，也依賴於小批量中的其他樣本。縮放和平移後的值 $y$ 傳遞到其他網路層。
 
@@ -185,7 +179,11 @@ $$
 
 ### 在 MNIST 實驗
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![mnist](./img/img2.jpg)
+</figure>
+</div>
 
 為了驗證內部共變量轉移對訓練的影響以及 BatchNorm 抵禦它的能力，作者在 MNIST 數據集上預測數字類別的問題。
 
@@ -197,7 +195,11 @@ $$
 
 ### 在 ImageNet 實驗
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![imagenet](./img/img3.jpg)
+</figure>
+</div>
 
 作者接著將 BatchNorm 應用到一個新的 Inception 網路變體，並在 ImageNet 分類任務上進行了訓練。
 
@@ -223,7 +225,11 @@ $$
 
 在上圖中展示了隨訓練步數變化的網路驗證準確率。Inception 在 3100 萬訓練步後達到 72.2%的準確率。下表顯示了每個網路達到相同 72.2%準確率所需的訓練步數，以及網路達到的最高驗證準確率和達到它所需的步數。
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![imagenet table](./img/img4.jpg)
+</figure>
+</div>
 
 僅使用 BatchNorm（BN-Baseline），在不到一半的訓練步數內達到了 Inception 的準確率。BN-x5 比 Inception 需要少 14 倍的步數來達到 72.2%的準確率。有趣的是，進一步提高學習率（BN-x30）使模型初期訓練速度稍慢，但允許它達到更高的最終準確率。在 600 萬步後達到 74.8%，即比 Inception 達到 72.2%所需的步數少 5 倍。
 
