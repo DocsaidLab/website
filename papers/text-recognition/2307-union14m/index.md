@@ -117,7 +117,7 @@ MAERec 的核心基於 ViT，其優勢在於能輕鬆應用於遮罩影像建模
 ### 預訓練與微調
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![model pretrained](./img/img9.jpg)
 </figure>
 </div>

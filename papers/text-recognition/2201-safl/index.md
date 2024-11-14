@@ -27,7 +27,7 @@
 ### 模型架構
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![SAFL](./img/img1.jpg)
 </figure>
 </div>
@@ -49,7 +49,7 @@
 ### Focal Loss
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![data distribution](./img/img2.jpg)
 </figure>
 </div>

@@ -40,7 +40,7 @@
 ### 模型架構
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![model architecture](./img/img1.jpg)
 </figure>
 </div>
@@ -82,7 +82,7 @@ ViT 的所有輸出都會作為解碼器的輸入，即 $\mathbf{z} = Enc(\mathb
 ### 解碼器設計
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![model architecture](./img/img7.jpg)
 </figure>
 </div>
@@ -96,7 +96,7 @@ ViT 的所有輸出都會作為解碼器的輸入，即 $\mathbf{z} = Enc(\mathb
 ### 回顧一下
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![model architecture](./img/img8.jpg)
 </figure>
 </div>
@@ -126,7 +126,7 @@ $$
 在 Transformer 中實現 PLM 並不需要實際改變文本標籤 $y$ 的順序，而是通過調整注意力遮罩來實現，如下表所示：
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![permutation language modeling](./img/img2.jpg)
 </figure>
 </div>
@@ -146,7 +146,7 @@ PLM 訓練搭配適當的參數設定，使得 PARSeq 支援多種解碼方式�
 作者在此主要探討兩種對比解碼方式：自回歸（AR）解碼與非自回歸（NAR）解碼，以及一種稱為**迭代精煉**（iterative refinement）的技術。
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![decoding methods](./img/img3.jpg)
 </figure>
 </div>
@@ -224,7 +224,7 @@ $$
 ### 與現有方法的比較
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![comparison with existing methods](./img/img5.jpg)
 </figure>
 </div>

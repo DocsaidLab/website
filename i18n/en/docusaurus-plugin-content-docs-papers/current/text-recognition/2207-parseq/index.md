@@ -38,7 +38,7 @@ If the summary above makes sense, you’ve basically understood this paper.
 ### Model Architecture
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![model architecture](./img/img1.jpg)
 </figure>
 </div>
@@ -76,7 +76,7 @@ You can refer to our article here: [**[20.10] ViT: Pioneering a New World**](../
 ### Decoder Design
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![model architecture](./img/img7.jpg)
 </figure>
 </div>
@@ -90,7 +90,7 @@ So, how do we integrate a language model into this structure?
 ### Review
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![model architecture](./img/img8.jpg)
 </figure>
 </div>
@@ -120,7 +120,7 @@ $$
 Implementing PLM in Transformers does not require physically rearranging the label sequence $ y $. Instead, it’s achieved by adjusting the attention mask, as shown in the table below:
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![permutation language modeling](./img/img2.jpg)
 </figure>
 </div>
@@ -140,7 +140,7 @@ PLM training, combined with proper parameterization, enables PARSeq to support m
 The authors focus primarily on two contrasting decoding methods: **Autoregressive (AR)** and **Non-autoregressive (NAR)** decoding, as well as a technique called **Iterative Refinement**.
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![decoding methods](./img/img3.jpg)
 </figure>
 </div>
@@ -210,7 +210,7 @@ Due to the exponential increase in computational demand, training on all possibl
 ### Comparison with Existing Methods
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![comparison with existing methods](./img/img5.jpg)
 </figure>
 </div>

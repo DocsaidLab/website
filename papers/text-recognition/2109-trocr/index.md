@@ -25,7 +25,7 @@
 ### 模型架構
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![model arch](./img/img1.jpg)
 </figure>
 </div>
@@ -146,7 +146,7 @@ TrOCR 模型在此任務上超越了現有 SOTA 模型，且無需任何複雜�
 ### IAM 性能比較
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![iam](./img/img5.jpg)
 </figure>
 </div>
@@ -158,7 +158,7 @@ TrOCR 模型在此任務上超越了現有 SOTA 模型，且無需任何複雜�
 ### STR 性能比較
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![str](./img/img6.jpg)
 </figure>
 </div>

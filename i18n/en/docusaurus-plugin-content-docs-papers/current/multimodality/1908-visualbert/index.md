@@ -68,7 +68,7 @@ The training is divided into three main phases:
 ### Performance on VQA
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![VQA](./img/img1.jpg)
 </figure>
 </div>

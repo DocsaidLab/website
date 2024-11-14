@@ -68,7 +68,7 @@ VisualBERT 的訓練目標是學會處理語言與視覺兩種輸入，因此使
 ### VQA 上的表現
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![VQA](./img/img1.jpg)
 </figure>
 </div>

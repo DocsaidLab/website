@@ -21,7 +21,7 @@ The authors aim to depart from traditional learning approaches, designing a meth
 ### Model Architecture
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![ViLBERT Model Architecture](./img/img1.jpg)
 </figure>
 </div>

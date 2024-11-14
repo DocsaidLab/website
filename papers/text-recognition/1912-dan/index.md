@@ -245,7 +245,7 @@ $$
 ### 對齊錯誤分析
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![error analysis](./img/img12.jpg)
 </figure>
 </div>

@@ -232,7 +232,7 @@ As the depth $L$ decreases, DAN’s performance **drops significantly**, indicat
 ### Alignment Error Analysis
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![error analysis](./img/img12.jpg)
 </figure>
 </div>

@@ -44,7 +44,7 @@ Previous studies mostly used VGG networks.
 ### Encoder
 
 <div align="center">
-<figure style={{ "width": "90%"}}>
+<figure style={{ "width": "85%"}}>
 ![encoder](./img/img2.jpg)
 </figure>
 </div>
@@ -58,7 +58,7 @@ The LSTM consists of two layers, each with 512 hidden units, and from the diagra
 ### Decoder
 
 <div align="center">
-<figure style={{ "width": "90%"}}>
+<figure style={{ "width": "85%"}}>
 ![decoder](./img/img3.jpg)
 </figure>
 </div>

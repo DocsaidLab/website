@@ -109,7 +109,7 @@ To ensure fair comparisons, the **number of character classes** is standardized 
 ### Pretraining and Fine-Tuning
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![model pretrained](./img/img9.jpg)
 </figure>
 </div>

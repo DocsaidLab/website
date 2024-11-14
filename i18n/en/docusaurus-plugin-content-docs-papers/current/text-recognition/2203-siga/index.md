@@ -295,7 +295,7 @@ SIGAT’s performance on the SVT, IC13-857, SP, and CT benchmarks improved by 1.
 ### Visualization Analysis
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![visualization](./img/img10.jpg)
 </figure>
 </div>

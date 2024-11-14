@@ -21,7 +21,7 @@
 ### 模型架構
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![ViLBERT 模型架構](./img/img1.jpg)
 </figure>
 </div>

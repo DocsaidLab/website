@@ -295,7 +295,7 @@ SIGAT 在 SVT、IC13-857、SP 和 CT 基準數據集上的表現分別提升了 
 ### 可視化分析
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![visualization](./img/img10.jpg)
 </figure>
 </div>

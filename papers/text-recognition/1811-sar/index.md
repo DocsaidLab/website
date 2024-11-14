@@ -45,7 +45,7 @@
 ### 編碼器
 
 <div align="center">
-<figure style={{ "width": "90%"}}>
+<figure style={{ "width": "85%"}}>
 ![encoder](./img/img2.jpg)
 </figure>
 </div>
@@ -59,7 +59,7 @@
 ### 解碼器
 
 <div align="center">
-<figure style={{ "width": "90%"}}>
+<figure style={{ "width": "85%"}}>
 ![decoder](./img/img3.jpg)
 </figure>
 </div>

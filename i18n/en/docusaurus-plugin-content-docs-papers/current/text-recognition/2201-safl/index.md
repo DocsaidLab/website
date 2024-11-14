@@ -25,7 +25,7 @@ Thus, the authors proposed SAFL, an STR model that incorporates Focal Loss as th
 ### Model Architecture
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![SAFL](./img/img1.jpg)
 </figure>
 </div>
@@ -45,7 +45,7 @@ Finally, the authors replaced CrossEntropy Loss with Focal Loss.
 ### Why Focal Loss?
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![data distribution](./img/img2.jpg)
 </figure>
 </div>

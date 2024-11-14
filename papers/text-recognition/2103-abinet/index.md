@@ -191,7 +191,7 @@ $$
 ### 與其他方法的比較
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![Comparison](./img/img5.jpg)
 </figure>
 </div>

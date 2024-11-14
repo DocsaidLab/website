@@ -49,7 +49,7 @@ ReLU 的效果是對每個元素進行線性閾值處理，將所有負值設為
 而避免這種情況的方式，是提供足夠的維度，以便在非線性變換後仍然保留足夠的信息，如下圖所示：
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![Linear Bottleneck](./img/img1.jpg)
 </figure>
 </div>

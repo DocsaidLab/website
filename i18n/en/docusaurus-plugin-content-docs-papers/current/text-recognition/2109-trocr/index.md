@@ -25,7 +25,7 @@ While some studies suggest that models trained from scratch perform better, and 
 ### Model Architecture
 
 <div align="center">
-<figure style={{"width": "90%"}}>
+<figure style={{"width": "85%"}}>
 ![model arch](./img/img1.jpg)
 </figure>
 </div>
@@ -146,7 +146,7 @@ The results indicate that TrOCR outperforms existing SOTA models on this task wi
 ### Performance on the IAM Dataset
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![iam](./img/img5.jpg)
 </figure>
 </div>
@@ -158,7 +158,7 @@ According to the results, models with CTC decoders perform well on this task, wi
 ### Performance on STR
 
 <div align="center">
-<figure style={{"width": "95%"}}>
+<figure style={{"width": "85%"}}>
 ![str](./img/img6.jpg)
 </figure>
 </div>
