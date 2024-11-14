@@ -40,11 +40,15 @@
 3. **ConvFormer**: 全部使用 Conv Token Mixer，這也是個「全卷積」的架構。
 4. **CAFormer**: 前兩層使用 Conv Token Mixer；後兩層使用 Self-Attention Token Mixer。
 
+:::tip
+以上四個部分請搭配上圖使用，這樣會更容易理解。
+:::
+
 ### StarReLU
 
-在本文中，作者介紹了一種名為 StarReLU 的新型啟動函數。
+完成基礎架構之後，作者另外提出了一個新的啟動函數 StarReLU。
 
-此函數是從 Transformer 模型中常用的啟動函數 ReLU 和 GELU 演變而來。
+此函數是從大家耳熟能詳的啟動函數 ReLU 和 GELU 演變而來。
 
 首先，傳統的 Transformer 模型中使用了 ReLU 作為啟動函數，其數學表達式為：
 
@@ -108,15 +112,17 @@ $$
 \mathrm {StarReLU}(x) = s \cdot (\mathrm {ReLU}(x))^{2} + b
 $$
 
-其中 $s$ 和 $b$ 是縮放和偏移的標量，對所有通道共享。
-
-這種形式的 StarReLU 計算成本僅為 4 FLOPs，比 GELU 的 14 FLOPs 要低得多，同時性能更好。
+其中 $s$ 和 $b$ 是縮放和偏移的標量，對所有通道共享。這種形式的 StarReLU 計算成本僅為 4 FLOPs，比 GELU 的 14 FLOPs 要低得多，同時性能更好。
 
 ## 討論
 
 ### 使用基本的 Token Mixer
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![base-token-mixer](./img/img2.jpg)
+</figure>
+</div>
 
 :::tip
 在上表中的 PoolFormerV2 和 V1 比起來沒有差異。但為了和其他架構一起比較，作者應用了有別於 V1 的訓練技巧和方式，因此特別加了 V2 作為區別。
@@ -147,7 +153,11 @@ IdentityFormer 的效能較差是可以理解的，因為直接映射並不進�
 
 ### 使用常見的 Token Mixer
 
+<div align="center">
+<figure style={{"width": "85%"}}>
 ![common-token-mixer](./img/img3.jpg)
+</figure>
+</div>
 
 1. **ConvFormer 與 CAFormer 架構**
 
@@ -174,7 +184,11 @@ ConvFormer-B36 的參數比 ConvNeXt-L 優越 0.2%，同時參數減少 49%，MA
 
 ### 消融實驗
 
+<div align="center">
+<figure style={{"width": "85%"}}>
 ![ablation](./img/img4.jpg)
+</figure>
+</div>
 
 1. **啟動函數的影響**
 

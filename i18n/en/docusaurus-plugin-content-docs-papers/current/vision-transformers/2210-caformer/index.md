@@ -110,7 +110,11 @@ StarReLU's computational cost is 4 FLOPs, significantly lower than GELU's 14 FLO
 
 ### Using Basic Token Mixers
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![base-token-mixer](./img/img2.jpg)
+</figure>
+</div>
 
 :::tip
 PoolFormerV2 shows no difference from V1 in the table above. However, to compare with other architectures, the authors applied different training techniques and methods, distinguishing V2 from V1.
@@ -141,7 +145,11 @@ The lower performance of IdentityFormer is understandable, as direct mapping wit
 
 ### Using Common Token Mixers
 
+<div align="center">
+<figure style={{"width": "85%"}}>
 ![common-token-mixer](./img/img3.jpg)
+</figure>
+</div>
 
 1. **ConvFormer and CAFormer Architectures**
 
@@ -168,7 +176,11 @@ ConvFormer-B36 shows better performance than ConvNeXt-L by 0.2%, with 49% fewer 
 
 ### Ablation Experiments
 
+<div align="center">
+<figure style={{"width": "85%"}}>
 ![ablation](./img/img4.jpg)
+</figure>
+</div>
 
 1. **Impact of Activation Functions**
 
