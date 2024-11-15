@@ -16,7 +16,7 @@ BERT 的成功帶給後續研究者大量的啟發。
 
 BERT 的預訓練過程主要包括兩個目標：遮蔽語言模型（Masked Language Modeling, MLM）和下一句預測（Next Sentence Prediction, NSP）。
 
-BERT 會先在大規模未標注的文本上進行預訓練，之後再使用標注的資料進行微調。
+BERT 會先在大規模未標註的文本上進行預訓練，之後再使用標註的資料進行微調。
 
 BERT 採用了 Transformer 架構，並在此基礎上進行改進。模型由 L 層 Transformer 組成，每層包含 A 個自注意力頭（self-attention heads），並具有 H 維的隱藏層。
 
