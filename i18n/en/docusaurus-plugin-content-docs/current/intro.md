@@ -148,6 +148,12 @@ If you find yourself stuck at this step, don’t worry—you’re not alone. Mos
   - **Dataset submission: docsaidlab@gmail.com**
     :::
 
+## Also,
+
+Stop telling me my website design is crude! I know, okay? 😅
+
+My main job is building models—reading papers, writing code, tuning parameters—but web design isn’t part of it. Especially when it comes to aesthetics, my skills are probably on a kindergarten level. If I ever get the chance, and I fail to master this field, I’ll just hire a professional to help me improve it later.
+
 ## Finally 🍹
 
 I have invested a lot of time and effort in these open-source projects. On the one hand, I want to improve my technical skills, and on the other hand, I hope to make some contributions to the community.
