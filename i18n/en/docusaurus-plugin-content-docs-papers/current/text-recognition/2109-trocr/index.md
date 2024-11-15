@@ -1,6 +1,6 @@
 # [21.09] TrOCR
 
-## Pre-training is Key
+## Pretraining is Justice
 
 [**TrOCR: Transformer-based Optical Character Recognition with Pre-trained Models**](https://arxiv.org/abs/2109.10282)
 
