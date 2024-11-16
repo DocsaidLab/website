@@ -170,7 +170,7 @@ Every bit of support, no matter how small, motivates me to continue improving ex
 
 <div align="center">
 <br />
-<figure style={{ width: "60%"}}>
+<figure style={{ width: "50%"}}>
 [![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/zephyr_docsaid)
 </figure>
 <br />

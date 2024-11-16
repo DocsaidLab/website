@@ -14,6 +14,14 @@ This page is solely for recording our work activities.
 
 ## 2024
 
+### November
+
+- Updated **@docusaurus/core@3.6.1** and found out it's not backward compatible...
+  - Spent time updating the problematic code sections.
+- Wrote paper reviews, totaling 135 papers.
+- **DocumentAI**: Continued development.
+- **TextRecognizer**: Continued development from October.
+
 ### October
 
 - Completed the model demo functionality and deployed it on the website: [**Playground**](https://docsaid.org/playground/intro)
@@ -25,7 +33,7 @@ This page is solely for recording our work activities.
 - **TextDetector**: Continued development, following progress made in March.
 - Came across a beautifully designed website and had to note it down:
   - [**Hello Algorithm**](https://www.hello-algo.com/)
-- Wrote paper reviews, totaling approximately 100 papers.
+- Wrote paper reviews, totaling 100 papers.
 
 ### August
 
@@ -36,7 +44,7 @@ This page is solely for recording our work activities.
   - [**修复 OpenCV 依赖错误的小工具：OpenCV Fixer**](https://soulteary.com/2024/01/07/fix-opencv-dependency-errors-opencv-fixer.html)
   - Open-source project: [**soulteary/opencv-fixer**](https://github.com/soulteary/opencv-fixer/tree/main)
   - Thanks to [**蘇洋博客**](https://soulteary.com/) for sharing and saving us a lot of time.
-- Wrote paper reviews, with approximately 90 papers reviewed so far.
+- Wrote paper reviews, with 90 papers reviewed so far.
 
 ### July
 
@@ -63,15 +71,13 @@ This page is solely for recording our work activities.
 ### April
 
 - Learned how to configure CSS styles to tweak the blog’s appearance.
-  - Thanks to [**朝八晚八**](https://from8to8.com/) for the helpful article:
-    - [**部落格首頁**](https://from8to8.com/docs/Website/blog/blog_homepage/)
+  - Thanks to [**朝八晚八**](https://from8to8.com/) for the helpful article:[**部落格首頁**](https://from8to8.com/docs/Website/blog/blog_homepage/)
 - **TextRecognizer**: Continued development from **WordCanvas** and made further progress on the text recognition project.
 - **GmailSummary**: Modified functionality to push daily news to the tech documentation page.
 - Completed technical documentation for all ongoing projects.
 - Explored **Docusaurus**’ i18n functionality and started writing English documentation.
 - Investigated **Docusaurus**’ documentation features and began migrating content from GitHub to the platform.
 - **WordCanvas**: Project completed and made open-source. 🎉 🎉 🎉
-- Renamed the `blog` GitHub project to `website` for accuracy.
 
 ### March
 
@@ -106,8 +112,8 @@ We decided to use [**NextCloud**](https://github.com/nextcloud) to set up a priv
 
 - **DocClassifier**: Development started.
 - **DocAligner**: Completed development and made it open-source. 🎉 🎉 🎉
-- **Blog**: Discovered Meta’s interesting open-source project [**Docusaurus**](https://github.com/facebook/docusaurus). It provides a simple way to build a static website using Markdown for content creation, so I decided to use it to write a blog.
-- Abandoned and deleted the WordPress-built website, migrating all content to the GitHub `blog` project.
+- **Website**: Discovered Meta’s interesting open-source project [**Docusaurus**](https://github.com/facebook/docusaurus). It provides a simple way to build a static website using Markdown for content creation, so I decided to use it to write a blog.
+- Abandoned and deleted the WordPress-built website, migrating all content to the GitHub `website` project.
 
 ### November
 
