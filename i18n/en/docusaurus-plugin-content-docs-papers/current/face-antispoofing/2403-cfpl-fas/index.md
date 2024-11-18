@@ -32,9 +32,13 @@ With this background in mind, let's dive into **Prompt Learning** as it applies 
 
 Prompt learning gained popularity because training an LLM from scratch is expensive and impractical for most people. Instead, prompts are fed to pre-trained LLMs to generate useful features, which are then used to guide the training of our own models.
 
-Though this idea isn’t new, it gained traction after CLIP, followed by further research like **BLIP**, which applied this concept to unified vision-language tasks.
+This is not a very new concept, and it has been widely known since CLIP. Subsequent research, such as BLIP-2, introduced the concept of Q-Former, aiming to transfer knowledge from large models using a small number of tokens to achieve cross-domain generalization.
 
-- [**[22.01] BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation**](https://arxiv.org/abs/2201.12086)
+:::tip
+If you haven't read about BLIP-2 yet, you can check out our previous article:
+
+- [**[23.01] BLIP-2: Q-Former debuts**](../../multimodality/2301-blip2/index.md)
+  :::
 
 Returning to this paper, the authors aimed to apply **Prompt Learning** in the **FAS** domain. However, the limited number of classes and the fact that pre-trained models aren’t specifically designed for FAS meant that even using prompt learning wouldn’t necessarily yield meaningful features, let alone help with generalization.
 

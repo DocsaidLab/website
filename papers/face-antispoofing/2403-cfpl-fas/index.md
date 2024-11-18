@@ -32,9 +32,13 @@ FAS 的本質是人臉辨識系統的防禦措施，目的是為了防止假冒�
 
 因為一般人根本 Train 不動 LLM，後來衍生出使用 Prompt 的方式輸入給 LLM 得到文字特徵，然後再透過這些文字特徵來進行引導我們自己的模型訓練。
 
-這雖然不是一個很新的概念，大概從 CLIP 之後比較廣為人知，後續研究 BLIP 則是把這個概念應用在圖像和語言的訓練上。
+這雖然不是一個很新的概念，大概從 CLIP 之後比較廣為人知，後續研究 BLIP-2 則是提出了 Q-Former 的概念，目標是透過一小部分的 token 來遷移大模型的知識，以達到跨領域泛化的效果。
 
-- [**[22.01] BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation**](https://arxiv.org/abs/2201.12086)
+:::tip
+如果你還沒看過 BLIP-2，可以參考我們之前的文章：
+
+- [**[23.01] BLIP-2: Q-Former 初登場**](../../multimodality/2301-blip2/index.md)
+  :::
 
 回到這篇論文。
 
