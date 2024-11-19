@@ -33,7 +33,7 @@ The figure above illustrates the Flamingo model architecture. The blue component
 :::tip
 At first glance, this architecture resembles the Adapter model we previously encountered.
 
-- [**[19.02] Adapter: Saving 96% of Parameters**](../../llm-tuning/1902-adapter/index.md)
+- [**[19.02] Adapter: Saving 96% of Parameters**](../../model-tuning/1902-adapter/index.md)
   :::
 
 Now, let’s follow the data flow to understand how the Flamingo model operates.

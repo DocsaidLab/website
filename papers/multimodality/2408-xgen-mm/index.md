@@ -19,7 +19,7 @@
 :::tip
 如果還沒看過 BLIP-2 的話，可以參考：
 
-- [**[23.01] BLIP-2: Q-Former 初登場**](../2301-blip2/index.md)
+- [**[23.01] BLIP-2: Q-Former 初登場**](../../model-tuning/2301-blip2/index.md)
   :::
 
 作者認為 Q-Former 架構和多樣化的訓練目標（ITM、ITC、ITG 損失）增加了大規模訓練的難度，並且 BLIP-2 僅支持單圖像輸入，無法處理最自然的多模態數據形式，例如語言和文字交錯輸入的數據格式。
@@ -169,7 +169,7 @@
    :::tip
    如果你對 LoRA 感興趣，可以參考我們之前讀過的文章：
 
-   - [**[21.06] LoRA: 萬分之一的 LLM**](../../llm-tuning/2106-lora/index.md)
+   - [**[21.06] LoRA: 萬分之一的 LLM**](../../model-tuning/2106-lora/index.md)
      :::
 
 2. **安全性微調（Safety Fine-tuning）**

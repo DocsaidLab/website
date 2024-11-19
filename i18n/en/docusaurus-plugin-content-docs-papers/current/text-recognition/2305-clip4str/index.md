@@ -236,8 +236,8 @@ When training resources are limited, LST serves as a viable alternative.
 :::tip
 For further reading on LLM tuning, we’ve reviewed a few papers previously, which readers might find useful:
 
-- [**[19.02] Adapter: Saving 96% of Parameters**](../../llm-tuning/1902-adapter/index.md)
-- [**[21.01] Prefix-Tuning: Is it the Same or Different?**](../../llm-tuning/2101-prefix-tuning/index.md)
+- [**[19.02] Adapter: Saving 96% of Parameters**](../../model-tuning/1902-adapter/index.md)
+- [**[21.01] Prefix-Tuning: Is it the Same or Different?**](../../model-tuning/2101-prefix-tuning/index.md)
   :::
 
 ## Conclusion

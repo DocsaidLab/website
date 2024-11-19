@@ -37,7 +37,7 @@ This is not a very new concept, and it has been widely known since CLIP. Subsequ
 :::tip
 If you haven't read about BLIP-2 yet, you can check out our previous article:
 
-- [**[23.01] BLIP-2: Q-Former debuts**](../../multimodality/2301-blip2/index.md)
+- [**[23.01] BLIP-2: Q-Former debuts**](../../model-tuning/2301-blip2/index.md)
   :::
 
 Returning to this paper, the authors aimed to apply **Prompt Learning** in the **FAS** domain. However, the limited number of classes and the fact that pre-trained models aren’t specifically designed for FAS meant that even using prompt learning wouldn’t necessarily yield meaningful features, let alone help with generalization.

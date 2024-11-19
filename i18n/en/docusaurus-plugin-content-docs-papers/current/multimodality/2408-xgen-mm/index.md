@@ -19,7 +19,7 @@ Let’s build on the discussion of BLIP-2.
 :::tip
 If you haven’t read about BLIP-2, you can refer to:
 
-- [**[23.01] BLIP-2: The Debut of Q-Former**](../2301-blip2/index.md)
+- [**[23.01] BLIP-2: The Debut of Q-Former**](../../model-tuning/2301-blip2/index.md)
   :::
 
 The authors argue that the Q-Former architecture and the diverse training objectives (ITM, ITC, ITG losses) increased the complexity of large-scale training. Additionally, BLIP-2 only supports single-image input, making it incapable of handling the most natural forms of multimodal data, such as interleaved language and text input formats.
@@ -171,7 +171,7 @@ Post-training is divided into two parts:
    :::tip
    If you're interested in LoRA, you can refer to our earlier article:
 
-   - [**[21.06] LoRA: A Fraction of an LLM**](../../llm-tuning/2106-lora/index.md)
+   - [**[21.06] LoRA: A Fraction of an LLM**](../../model-tuning/2106-lora/index.md)
      :::
 
 2. **Safety Fine-Tuning**

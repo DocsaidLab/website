@@ -33,7 +33,7 @@
 :::tip
 這個架構給人的第一印象很像是之前我們在讀過的 Adapter 模型。
 
-- [**[19.02] Adapter: 參數節省九成六**](../../llm-tuning/1902-adapter/index.md)
+- [**[19.02] Adapter: 參數節省九成六**](../../model-tuning/1902-adapter/index.md)
   :::
 
 接著，我們跟著資料流的方向，來看看 Flamingo 模型的運作方式。

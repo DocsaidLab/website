@@ -121,7 +121,7 @@
 :::tip
 我們之前讀過「Soft Prompts」的概念，感興趣的讀者，可以參考我們之前的文章：
 
-- [**[21.04] Soft Prompts: 小弦切切如私語**](../../llm-tuning/2104-soft-prompts/index.md)
+- [**[21.04] Soft Prompts: 小弦切切如私語**](../2104-soft-prompts/index.md)
   :::
 
 ### 預訓練數據集

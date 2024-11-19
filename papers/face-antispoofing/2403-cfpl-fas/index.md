@@ -37,7 +37,7 @@ FAS 的本質是人臉辨識系統的防禦措施，目的是為了防止假冒�
 :::tip
 如果你還沒看過 BLIP-2，可以參考我們之前的文章：
 
-- [**[23.01] BLIP-2: Q-Former 初登場**](../../multimodality/2301-blip2/index.md)
+- [**[23.01] BLIP-2: Q-Former 初登場**](../../model-tuning/2301-blip2/index.md)
   :::
 
 回到這篇論文。

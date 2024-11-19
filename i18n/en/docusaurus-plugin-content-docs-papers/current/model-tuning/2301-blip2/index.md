@@ -119,7 +119,7 @@ Since Q-Former has been pre-trained to extract visual features relevant to langu
 :::tip
 For readers interested in the concept of "Soft Prompts," you can refer to our earlier article:
 
-- [**[21.04] Soft Prompts: Subtle Whispers of Guidance**](../../llm-tuning/2104-soft-prompts/index.md)
+- [**[21.04] Soft Prompts: Subtle Whispers of Guidance**](../2104-soft-prompts/index.md)
   :::
 
 ### Pre-Training Setup
