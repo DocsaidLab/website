@@ -1,30 +1,75 @@
 # [21.04] Soft Prompts
 
-## Strings Whispering Like Secrets
+## A soft reminder
 
 [**The Power of Scale for Parameter-Efficient Prompt Tuning**](https://arxiv.org/abs/2104.08691)
 
 ---
 
-We just recently explored **Prefix-Tuning**, and now it's time to look at another new method: **Prompt Tuning**.
+We just finished reviewing **Prefix-Tuning** not long ago, and now let's take a look at another new method: **Prompt Tuning**.
 
-If you haven’t read about Prefix-Tuning yet, you may want to check out our previous article:
+:::tip
+If you haven't read about Prefix-Tuning yet, consider checking out the paper we reviewed earlier:
 
 - [**[21.01] Prefix-Tuning: Is it the Same or Different?**](../2101-prefix-tuning/index.md)
+  :::
 
 ## Problem Definition
 
-In the design of Prefix-Tuning, a sequence of tokens called a **prefix** is added at the beginning of the model’s input to guide it in generating the desired output. This prefix needs to interact with every layer of the model to ensure that the guidance influences the model at all levels.
-
-But can we simplify this process? What if we only provide guidance at the input layer? Would that be sufficient?
+The authors begin the paper by revisiting the framework of T5 to help readers understand the challenges currently faced in fine-tuning models.
 
 :::tip
-The concept of "guidance" here differs from the more commonly known **Prompt Engineering**. In Prompt Engineering, we use natural language prompts to steer the model's output. This approach does not modify the input features, adjust parameters, or change the model architecture.
+If you're unfamiliar with T5, you can refer to the following paper:
 
-**Prompt Tuning**, however, involves adding a special **trainable token** at the input layer. During training, the model learns how to utilize this token to discover the optimal way to guide itself.
+- [**[19.10] Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer**](https://arxiv.org/abs/1910.10683)
+  :::
+
+T5 treats all tasks as text generation problems. Whether it is translation, summarization, or classification, tasks can be represented as generating output text from input text.
+
+Traditional classification models use the probability $\text{Pr}(y|X)$ to map an input $X$ to an output class $y$. However, in the T5 framework, the focus is on a **conditional generation** problem, where the objective is to compute:
+
+$$
+\text{Pr}_\theta(Y | X)
+$$
+
+where:
+
+- $Y$ is **text** representing a class, such as "positive" or "negative," rather than categorical labels like 0, 1, or 2.
+- $\theta$ are the parameters of the Transformer model.
+
+This approach enables the model to generate richer textual outputs rather than just a single class label.
+
+**Prompting** involves adding a piece of text before the input $X$ to guide the model in generating the correct output $Y$. Prompts provide the model with task context or instructions, helping it understand how to handle the input.
+
+For example, in a sentiment analysis task, a prompt might look like this:
+
+```
+"Please determine the sentiment of the following sentence:"
+```
+
+The user’s input sentence is appended to the prompt, forming the final input for the model:
+
+```
+"Please determine the sentiment of the following sentence: I love this movie!"
+```
+
+However, this traditional prompting approach comes with several challenges: it requires high manual effort, is unstable in performance, and is non-differentiable. The non-differentiability issue means that the prompt's parameters cannot be updated using backpropagation, preventing the model from automatically learning the optimal prompts.
+
+---
+
+To address this issue, previous research—**Prefix-Tuning**—proposed adding a special sequence of tokens called a **Prefix** to the model's input. This prefix influences the model at every layer, ensuring it is guided throughout the entire generation process.
+
+But can we simplify this further? What if we only guide the model at the input layer?
+
+Enter the paper: **Prompt Tuning**.
+
+:::tip
+The "guidance" discussed here differs from what we often hear as "Prompt Engineering." Prompt Engineering involves using natural language prompts to guide the model without modifying its input features, parameters, or architecture.
+
+In contrast, **Prompt Tuning** involves adding a trainable token at the model's input layer. This token can be updated during training, allowing the model to learn the most effective guiding strategy on its own.
 :::
 
-## Problem Solution
+## Solving the Problem
 
 ### Prompt Tuning
 
@@ -34,135 +79,114 @@ The concept of "guidance" here differs from the more commonly known **Prompt Eng
 </figure>
 </div>
 
-To better understand the concept of **Prompt Tuning**, the authors build on the **text-to-text** framework introduced by T5 (Raffel et al., 2020). T5 treats all tasks as text generation problems—whether it’s translation, summarization, or classification, each task is represented as generating text output from text input.
-
-Traditional classification models rely on the probability function $Pr(y | X)$, mapping an input $X$ to an output class $y$. This means that the model predicts which class the input belongs to.
-
-However, the T5 framework focuses on **conditional generation** tasks, where the objective is to compute:
-
-$$
-Pr_\theta(Y | X)
-$$
-
-where:
-
-- $Y$ is the **text sequence** representing a class (e.g., "positive" or "negative").
-- $\theta$ represents the parameters of the Transformer model.
-
-The advantage of this approach is that it enables the model to generate richer text outputs, instead of merely assigning a class label.
-
-A **prompt** is a piece of text added to the beginning of the input $X$ to guide the model toward generating the correct output $Y$. It provides context or instructions to help the model understand how to handle the input.
-
-For instance, in a sentiment analysis task, a prompt might be:
-
-```
-"Please determine the sentiment of the following sentence:"
-```
-
-This prompt is concatenated with the user’s input sentence to form the final input to the model.
-
-In models like GPT-3, the prompt $P = \{p_1, p_2, ..., p_n\}$ is part of the model's embedding table, represented by frozen parameters $\theta$. However, crafting prompts manually is labor-intensive, inconsistent, and non-differentiable.
-
-To address these challenges, the authors propose **Prompt Tuning**.
-
-Prompt Tuning introduces **trainable prompt embeddings** $\theta_P$ that are not limited to the original embedding table. These parameters can be automatically learned from training data.
+The authors proposed the **Prompt Tuning** method, introducing trainable prompt embedding parameters $\theta_P$. These parameters are no longer constrained by the model's word embedding table and can be automatically learned from the training data.
 
 The new conditional generation formula becomes:
 
 $$
-Pr_{\theta; \theta_P}(Y | [P; X])
+\text{Pr}_{\theta; \theta_P}(Y | [P; X])
 $$
 
 where:
 
-- $[P; X]$ denotes the concatenation of the prompt $P$ and the input $X$.
-- $\theta$ refers to the frozen model parameters.
-- $\theta_P$ represents the trainable prompt parameters.
+- $[P; X]$ represents the concatenation of the prompt $P$ and the input $X$.
+- $\theta$ are the frozen model parameters.
+- $\theta_P$ are the trainable prompt parameters.
 
-During training, only the prompt parameters $\theta_P$ are updated using backpropagation, while the main model parameters $\theta$ remain unchanged.
+During training, only the prompt parameters $\theta_P$ are updated using the backpropagation algorithm, while the main model parameters $\theta$ remain unchanged.
 
-### Implementation Steps
+The implementation can generally be divided into the following steps:
 
-1. **Input Embedding**: Embed the $n$ tokens of the input into a matrix $X_e \in \mathbb{R}^{n \times e}$, where $e$ is the embedding dimension.
-2. **Prompt Embedding**: The prompt embeddings form a matrix $P_e \in \mathbb{R}^{p \times e}$, where $p$ is the prompt length.
-3. **Concatenation**: The prompt and input embeddings are concatenated as:
+1. **Input Embedding**: Embed the $n$ input tokens into a matrix $X_e \in \mathbb{R}^{n \times e}$, where $e$ is the embedding dimension.
+2. **Prompt Embedding**: Embed the prompt tokens into a matrix $P_e \in \mathbb{R}^{p \times e}$, where $p$ is the length of the prompt.
+3. **Concatenation**: Concatenate the prompt embeddings and input embeddings into:
    $$
    [P_e; X_e] \in \mathbb{R}^{(p + n) \times e}
    $$
-4. **Model Computation**: The concatenated embeddings are fed into the encoder-decoder model for processing.
+4. **Model Processing**: Input the concatenated embeddings into the encoder-decoder architecture for computation.
+
+For example, suppose we want the model to determine the sentiment of the sentence "I love this movie!" In traditional methods, the model input would look like this:
+
+```
+"Please determine the sentiment of the following sentence: I love this movie!"
+```
+
+In contrast, using the Prompt Tuning method, the model input becomes:
+
+```
+[Token1] [Token2] [Token3] [Token4] [Token5] I love this movie!
+```
+
+Here, each of the tokens (`[Token1]`, `[Token2]`, etc.) is trainable, and the model must learn how to best use these prompts.
 
 :::tip
-Let’s consider an example where the task is to determine the sentiment of the sentence: "I love this movie!"
+**Isn't this AutoPrompt?**
 
-**Traditional Approach**:
+If you're familiar with AutoPrompt, you might be asking this question. If not, you can refer to our previous article:
 
-- **Manual Prompt**: "Please determine the sentiment of the following sentence:"
-- **Model Input**: "Please determine the sentiment of the following sentence: I love this movie!"
+- [**[20.10] AutoPrompt: Model Language**](../2010-autoprompt/index.md)
 
-**Prompt Tuning Approach**:
+---
 
-1. **Initialize the Prompt**:
+The key difference lies in how prompts are generated:
+In **AutoPrompt**, the model selects the most suitable prompts from an existing vocabulary, and the results remain within the vocabulary. In **Prompt Tuning**, the prompt input directly operates in the feature space, without being restricted to the vocabulary.
 
-   - Set the prompt length to $p=5$, meaning five trainable prompt vectors.
-   - These vectors can be initialized randomly or selected from the embedding table.
-
-2. **Model Input**: The prompt vectors are concatenated with the input sentence's embeddings to form the model’s input.
-
-3. **Training Process**:
-
-   - Use a large amount of labeled sentiment analysis data.
-   - Update only the prompt parameters $\theta_P$ through backpropagation.
-   - The model learns to generate the correct sentiment label when it sees the learned prompt.
-
-4. **Model Output**: For the input "I love this movie!", the model might generate "positive".
-
+As a result, with Prompt Tuning, you can only infer which words the prompt resembles by calculating cosine similarity, rather than directly observing the prompt content.
 :::
 
 ## Discussion
 
 ![ablation](./img/img2.jpg)
 
-The authors conducted a series of ablation studies to investigate several key questions about **Prompt Tuning**:
+The authors conducted a series of ablation studies to explore key questions surrounding **Prompt Tuning**:
 
-### How Long Should the Prompt Be?
+### How long should the prompt be?
 
-As shown in Figure (a), the authors tested different prompt lengths $\{1, 5, 20, 100, 150\}$ across various model sizes (Small, Base, Large, XL, XXL).
+As shown in Figure (a), the authors experimented with different prompt lengths (\{1, 5, 20, 100, 150\}) across various model scales (Small, Base, Large, XL, XXL).
 
-The results indicate that for most models, using more than one token significantly improves performance. However, for the **T5-XXL model**, even a single-token prompt achieves decent results, suggesting that larger models require less prompting to perform well.
+The results indicate:
 
-Performance gains plateau after **20 tokens**, with only minor improvements beyond that length.
+- For most models, increasing the prompt length beyond a single token leads to significant performance improvements.
+- For the **T5-XXL model**, even a single-token prompt achieves reasonable performance, suggesting that larger models are less reliant on extensive prompt signals.
+- Beyond 20 tokens, performance gains taper off, providing only marginal improvements.
 
-### How Does the Initialization Strategy Affect Performance?
+### What is the impact of prompt initialization strategies?
 
 In Figure (b), the authors compared three initialization strategies:
 
-1. **Random Initialization**: Tokens are sampled uniformly from the range $[-0.5, 0.5]$.
-2. **Vocabulary Embedding Initialization**: Tokens are initialized from embeddings of the **5,000 most frequent words** in T5’s vocabulary.
-3. **Label Embedding Initialization**: For classification tasks, labels are converted into embeddings. If a label consists of multiple tokens, the embeddings are averaged. If the prompt length exceeds the number of labels, the remaining tokens are filled using embeddings from the vocabulary.
+1. **Random Initialization**: Prompt embeddings are initialized with values uniformly sampled from $[-0.5, 0.5]$.
+2. **Vocabulary Embedding Initialization**: Embeddings are initialized using T5's **5,000 most frequent vocabulary words**.
+3. **Class Label Initialization**: Downstream task labels are converted into embeddings. If a label consists of multiple tokens, the embeddings are averaged. For prompts longer than the number of classes, remaining tokens are filled with vocabulary embeddings.
 
-The results show that **label embedding initialization** yields the best performance across all model sizes, especially for **smaller models**, where the choice of initialization has a significant impact. On the other hand, **T5-XXL** is less sensitive to the initialization strategy, maintaining stable performance across different methods.
+The findings show:
 
-### How Does the Pre-training Objective Affect Performance?
+- **Class Label Initialization** consistently performs the best across all model scales, with particularly pronounced differences for smaller models.
+- For the **T5-XXL model**, performance is relatively insensitive to the initialization strategy, with stable results regardless of the method used.
 
-Figure (c) explores the impact of different pre-training objectives on Prompt Tuning:
+### How does the pretraining objective affect Prompt Tuning?
 
-1. **Span Corruption**: Uses the standard T5 span corruption objective during pre-training.
-2. **Span Corruption + Sentinel**: Adds sentinel tokens in the target output during fine-tuning to simulate the span corruption format used in pre-training.
-3. **LM Adaptation**: Fine-tunes the T5 model for an additional 100,000 steps using a **language modeling (LM) objective** instead of span corruption.
+In Figure (c), the authors examined the impact of different pretraining objectives on Prompt Tuning:
 
-The results show that models pre-trained with **span corruption** are not well-suited for Prompt Tuning with frozen parameters. This is because the model is accustomed to both reading and producing outputs with sentinel tokens. Even using the **Span Corruption + Sentinel** strategy to simulate the original pre-training format yields limited improvements.
+1. **Span Corruption**: T5's default span corruption objective during pretraining.
+2. **Span Corruption + Sentinel**: Adds sentinel tokens in the target output of downstream tasks to mimic the format used in pretraining.
+3. **LM Adaptation**: Continues T5 pretraining with an additional **language modeling (LM) objective** for 100,000 steps.
 
-In contrast, **LM Adaptation** significantly boosts performance across all model sizes, suggesting that switching to a pure language modeling objective makes the model more compatible with Prompt Tuning.
+The results show:
 
-### How Does the Duration of LM Adaptation Affect Performance?
+- Models pretrained with **Span Corruption** are poorly suited for frozen-model Prompt Tuning because they expect input and output texts to include sentinel tokens. Even simulating the pretraining format with **Span Corruption + Sentinel** provides limited benefits.
+- **LM Adaptation** significantly improves performance across all model scales, highlighting its effectiveness in aligning the model's pretraining objective with downstream Prompt Tuning tasks.
 
-Figure (d) analyzes the effect of the LM adaptation duration on Prompt Tuning performance.
+### The Impact of LM Adaptation Duration
 
-The results show that extending the adaptation beyond **100,000 steps** provides diminishing returns, with the optimal results appearing around that mark. Transitioning from span corruption to an LM objective is not a straightforward process—it requires substantial training resources (equivalent to **10% of the original T5 pre-training steps**).
+As shown in Figure (d), the authors investigated the effect of LM adaptation duration on Prompt Tuning.
 
-Despite the challenges, **T5-XXL** demonstrates high resilience across various non-optimal configurations. In contrast, smaller models sometimes outperform larger ones (Base, Large, and XL) under the span corruption setting. This inconsistency is not due to random noise, as the pattern was observed across **three repeated experiments** with low variance.
+The results indicate that extending the number of LM adaptation steps provides additional gains, peaking at around 100,000 steps. Converting Span Corruption pretraining to an LM objective is not a straightforward process and requires significant training resources (approximately 10% of the original T5 pretraining steps).
 
-Compared to models pre-trained with span corruption, **LM-adapted models** exhibit much greater stability across all sizes, significantly reducing the risk of erratic performance. This highlights the importance of using LM adaptation for robust performance in Prompt Tuning.
+T5-XXL performs well under various suboptimal configurations, demonstrating its robustness. However, under Span Corruption pretraining, performance is unstable, with smaller models sometimes outperforming Base, Large, and XL models. These issues are not caused by random noise, as consistent low variance was observed across three repeated experiments.
+
+Compared to models trained with Span Corruption, LM-adapted models exhibit stable performance across all scales, significantly reducing the risk of performance instability.
+
+---
 
 ### Comparison with Other Methods
 
@@ -172,88 +196,81 @@ Compared to models pre-trained with span corruption, **LM-adapted models** exhib
 </figure>
 </div>
 
-- **Prefix Tuning**
+The figure compares Prompt Tuning with several related methods. Below are brief descriptions of each method and their corresponding references:
+
+---
+
+- **Prefix Tuning**:
 
   - [**[21.01] Prefix-Tuning: Optimizing Continuous Prompts for Generation**](https://arxiv.org/abs/2101.00190)
 
-  Prefix Tuning involves adding **trainable prefixes** to every layer of the Transformer model, essentially acting as fixed activations for each layer. This method is suitable for models like **GPT-2** and **BART**, while Prompt Tuning is designed for **T5**.
+    Prefix Tuning prepends learnable prefixes to every layer of the Transformer, effectively providing fixed activations for each layer. It is designed for GPT-2 and BART, while Prompt Tuning focuses on T5. For BART, Prefix Tuning requires prefixes for both the encoder and decoder, whereas Prompt Tuning only modifies the encoder.
 
-  In BART, Prefix Tuning requires adding prefixes to both the **encoder and decoder**, whereas Prompt Tuning only involves adding a prompt to the **encoder**.
-
-  Prompt Tuning requires fewer parameters since it only introduces a single prompt token at the input layer, rather than prefixes across all layers. Moreover, Prompt Tuning enables the Transformer to update its task representation dynamically based on the input, whereas Prefix Tuning requires re-parameterization to stabilize the training process.
+    Prompt Tuning simplifies the process by adding a single prompt token at the input layer, reducing parameter requirements. Additionally, Prompt Tuning allows the Transformer to update intermediate task representations based on input examples, unlike Prefix Tuning, which relies on reparameterization for training stability.
 
 ---
 
-- **WARP (Word-level Adversarial ReProgramming)**
+- **WARP**:
 
   - [**[21.01] WARP: Word-level Adversarial ReProgramming**](https://arxiv.org/abs/2101.00121)
 
-  WARP adds prompt parameters to the input layer and uses the **[MASK] token** along with a learnable output layer to map masked segments to class predictions. However, WARP is limited to generating a **single output**, making it more suitable for **classification tasks** only.
+    WARP introduces prompt parameters at the input layer, utilizing [MASK] tokens and a learnable output layer to map masked portions to class predictions. However, this method only supports single-output tasks, limiting it to classification problems.
 
-  In contrast, Prompt Tuning does not require any specialized input design or task-specific output layers, making it more versatile for a broader range of tasks. Additionally, Prompt Tuning achieves performance closer to full model fine-tuning without complex input transformations.
+    Prompt Tuning does not require specialized input design or task-specific output layers, making it applicable to a broader range of tasks with performance closer to full model fine-tuning.
 
 ---
 
-- **P-Tuning**
+- **P-tuning**:
 
   - [**[21.03] GPT Understands, Too**](https://arxiv.org/abs/2103.10385)
 
-  P-Tuning introduces **learnable continuous prompts** embedded between the input tokens and relies on human-designed patterns for arrangement. To achieve high performance on tasks like **SuperGLUE**, P-Tuning requires a combination of **prompt tuning and model fine-tuning**, meaning both the prompt and model parameters need to be updated.
+    P-tuning embeds learnable continuous prompts within the input and arranges them based on human-designed patterns. To achieve strong SuperGLUE performance, P-tuning must combine prompt and model fine-tuning, requiring updates to both the prompt and main model parameters.
 
-  In contrast, **Prompt Tuning** only updates the prompt parameters while keeping the **language model frozen**, avoiding the overhead of full model fine-tuning and reducing computational cost.
+    Prompt Tuning updates only the prompt parameters, keeping the main language model frozen and avoiding the cost of full model fine-tuning.
 
 ---
 
-- **Soft Words**
+- **Soft Words**:
 
   - [**[21.04] Learning How to Ask: Querying LMs with Mixtures of Soft Prompts**](https://arxiv.org/abs/2104.06599)
 
-  Soft Words rely on **manually designed prompt templates** and introduce learnable parameters \(\Delta_i\) at every layer of the Transformer model. As the model depth increases, the number of parameters grows, leading to larger memory requirements.
+    Soft Words learns prompts based on handcrafted templates and introduces trainable $\Delta_i$ parameters for each layer, increasing parameter requirements with model depth.
 
-  In contrast, Prompt Tuning maintains efficiency by **not introducing additional parameters for each layer**, keeping the parameter scale smaller and more manageable.
+    Prompt Tuning does not require additional parameters per layer, making it more parameter-efficient.
 
 ---
 
-- **Adapters**
+- **Adapters**:
 
   - [**[19.02] Parameter-Efficient Transfer Learning for NLP**](https://arxiv.org/abs/1902.00751)
 
-  Adapters are small **bottleneck layers** inserted between the frozen layers of the main model. This method reduces the number of task-specific parameters. For example, fine-tuning the **Adapter layers** in BERT-Large only increases the parameter count by **2–4%** while maintaining near full fine-tuning performance.
+    Adapters insert small bottleneck layers between frozen model layers to reduce task-specific parameters. For BERT-Large, tuning adapter layers adds only 2–4% more parameters while achieving performance close to full model fine-tuning.
 
-  While **Adapters** modify the model’s behavior by rewriting the activations in intermediate layers, **Prompt Tuning** adjusts the **input representation** without changing the internal computations, preserving the internal structure of the frozen model.
+    While Adapters modify model behavior by rewriting intermediate activations, Prompt Tuning adjusts input representations, leaving internal computations unchanged.
 
-### What Does Prompt Tuning Actually Encode?
+### What Exactly Do Prompts Capture?
 
-Prompt Tuning guides a language model to generate the desired output by **adjusting prompt vectors in continuous embedding space**. However, since these prompts operate in the **continuous space** rather than the discrete word space, it is challenging to interpret how they influence the model's behavior. To better understand how Prompt Tuning works, the authors employed the following methods to analyze the effect of these prompts.
+As previously discussed, since Prompt Tuning operates in continuous space rather than a discrete vocabulary space, it is difficult to directly understand how prompts influence model behavior.
 
-The authors calculated the **cosine similarity** between each prompt token and every token in the model’s vocabulary to identify the **nearest-neighbor tokens**. This helps reveal the semantic meaning encoded in each prompt token.
+The authors addressed this by calculating the **cosine similarity** between each prompt token and the tokens in the model's vocabulary, identifying the most similar words. This reveals the "nearest-neighbor words" for each prompt token, shedding light on the semantic meanings captured by the prompts.
 
-**Key Findings:**
+The experimental results showed that the top five nearest-neighbor words for each prompt token often form "semantically cohesive groups." In contrast, when random vectors are used instead of trained prompt tokens, no such semantic grouping is observed.
 
-1. **Semantically Coherent Clusters**:
-   The nearest-neighbor words for each prompt token tend to form **clusters of semantically related words**, indicating that Prompt Tuning effectively learns meaningful representations similar to those of related words in the vocabulary.
+This indicates that Prompt Tuning is not random but effectively captures the semantic structures inherent in the language model. Additionally, in long prompt sequences, the authors observed that multiple prompt tokens might share the same nearest-neighbor words.
 
-2. **Comparison with Random Vectors**:
-   When **random vectors** were used in place of trained prompt tokens, they failed to form coherent semantic clusters. This confirms that the effect of Prompt Tuning is not random—it captures and encodes the underlying **semantic structure** of the language model.
+However, this raises two potential issues:
 
-For longer prompt sequences, the authors observed that **multiple prompt tokens often shared the same nearest-neighbor words**, which raises two potential concerns:
+1. **Redundant Capacity**: There may be overlapping or redundant information in the prompts, offering no further performance gains.
+2. **Lack of Sequential Structure**: The prompt tokens’ representations fail to precisely reflect positional information within the sequence, making it harder for the model to locate and interpret key information.
 
-1. **Redundant Capacity**:
-   Some of the information within the prompt tokens may be **repetitive or unnecessary**, limiting further performance improvements.
-
-2. **Lack of Sequential Structure**:
-   The learned prompt representations do not effectively capture **positional information** within the sequence, making it difficult for the model to accurately locate and interpret key information.
-
-An interesting observation is that many of the nearest-neighbor words for the prompt tokens often included **class labels** from the downstream tasks. This suggests that the **expected output labels are implicitly stored** within the prompt tokens, helping the model generate correct outputs.
-
-Although the learned prompt sequences are difficult to interpret in natural language, they form **semantically meaningful representations** and enable effective internal adjustments within the model. These findings demonstrate that Prompt Tuning not only guides the model toward specific outputs but also has the potential to **dynamically adjust the context** within the model.
+Another important observation is that the nearest-neighbor words of prompt tokens frequently include the **class labels** of the downstream task. This suggests that Prompt Tuning can store expected output categories within the model as reference points for generating outputs.
 
 ## Conclusion
 
-Prompt Tuning achieves **performance comparable to traditional fine-tuning** in various experiments, and the performance gap narrows further as the model size increases.
+Prompt Tuning demonstrates performance comparable to traditional model fine-tuning across various experiments, and this performance gap diminishes as model scale increases. In zero-shot transfer tasks, Prompt Tuning shows better generalization capabilities, indicating that freezing the language model’s general understanding parameters while restricting learning to lightweight prompt vectors effectively mitigates overfitting to specific domains.
 
-In **zero-shot transfer tasks**, Prompt Tuning exhibits superior generalization, suggesting that **freezing the core language model parameters** while limiting learning to lightweight prompt vectors can help avoid **overfitting to specific domains**.
+The authors suggest that future research could focus on separating "task-specific parameters" from "general language modeling parameters." This would better control model behavior and enhance interpretability.
 
-Beyond its performance advantages, Prompt Tuning also offers benefits in terms of **storage and serving costs**. By keeping the pre-trained model frozen, it supports **multi-task processing** more efficiently and promotes the seamless integration of different prompts.
-
-Looking ahead, a promising research direction could involve **separating task-specific parameters from general language modeling parameters**. This could lead to new ways of efficiently guiding models without the need for full fine-tuning.
+:::tip
+Several subsequent studies have continued to explore directions related to Prompt Tuning. We can review some of these papers in the future.
+:::
