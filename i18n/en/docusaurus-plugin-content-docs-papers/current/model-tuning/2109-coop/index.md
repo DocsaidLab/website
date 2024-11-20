@@ -11,7 +11,7 @@ Earlier, we discussed the **Soft Prompts** paper. Now, let’s take a look at it
 :::tip
 If you haven’t read it yet, you can refer to our previous article:
 
-- [**[21.04] Soft Prompts: Whispering Secrets Like Tiny Strings**](../2104-soft-prompts/index.md)
+- [**[21.04] Soft Prompts: A soft reminder**](../2104-soft-prompts/index.md)
   :::
 
 This plugin-based method for model tuning is primarily aimed at LLMs or VLMs.
@@ -21,7 +21,7 @@ In this paper, the authors target VLMs, specifically focusing on the well-known 
 :::tip
 Haven’t heard of CLIP? Check out this article first:
 
-- [**[21.03] CLIP: Breaking Dimensional Barriers**](../../multimodality/2103-clip/index.md)
+- [**[21.03] CLIP: Breaking the Dimensional Barrier**](../../multimodality/2103-clip/index.md)
   :::
 
 CLIP was introduced in March 2021. Just a month later, the concept of Soft Prompts emerged.
