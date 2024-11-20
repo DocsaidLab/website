@@ -110,3 +110,45 @@ info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this comm
 畢竟我們的網站也就這麼一丁點大，編譯速度並不是我們的瓶頸，但是這個特性卻要讓我們修改很多檔案。
 
 還是改天再來看看吧！
+
+## 2024-11-20 更新
+
+收到官方推送更新的消息了，這次版本更新到 v3.6.2，修復了上面文章提到的問題。
+
+在這個版本中，我們可以順利使用`experimental_faster` 這個設定：
+
+```js title="docusaurus.config.js"
+const config = {
+  future: {
+    experimental_faster: true,
+  },
+};
+```
+
+經過測試，目前沒有再出現 `Segmentation fault` 的問題。
+
+但是...
+
+啟動後，如果在開發環境下修改檔案，會出現以下錯誤：
+
+```shell
+Panic occurred at runtime. Please file an issue on GitHub with the backtrace below: https://github.com/web-infra-dev/rspack/issues
+Message:  Chunk(ChunkUkey(Ukey(606), PhantomData<rspack_core::chunk::Chunk>)) not found in ChunkByUkey
+Location: crates/rspack_core/src/lib.rs:328
+
+Run with COLORBT_SHOW_HIDDEN=1 environment variable to disable frame filtering.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ BACKTRACE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 1: start_thread
+    at ./nptl/pthread_create.c:447
+ 2: clone3
+    at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78
+Aborted (core dumped)
+error Command failed with exit code 134.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+```
+
+看起來是 rspack 的問題，我們立刻找到了相關的 issue：
+
+- [**web-infra-dev/rspack: [Bug]:using docusaurus edit mdx or md file, process crash. #8480**](https://github.com/web-infra-dev/rspack/issues/8480)
+
+看來我們不孤單啊！還是再等等吧。
