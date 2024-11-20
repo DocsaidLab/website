@@ -6,7 +6,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   future: {
-    experimental_faster: false,
+    experimental_faster: true,
   },
   title: 'DOCSAID',
   tagline: '這是我們的技術遊樂場',
