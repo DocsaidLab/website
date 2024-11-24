@@ -152,3 +152,9 @@ It seems to be an issue with Rspack. We quickly found a related issue on GitHub:
 - [**web-infra-dev/rspack: [Bug]: using docusaurus edit mdx or md file, process crash. #8480**](https://github.com/web-infra-dev/rspack/issues/8480)
 
 It looks like we're not alone in this! We'll have to wait for a further fix.
+
+## 2024-11-24 Update
+
+Continuing from the previous issue, this time we updated to v3.6.3.
+
+The Rspack issue has been fixed, and we can now happily use it as normal!

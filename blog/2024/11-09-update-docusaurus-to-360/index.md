@@ -152,3 +152,9 @@ info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this comm
 - [**web-infra-dev/rspack: [Bug]:using docusaurus edit mdx or md file, process crash. #8480**](https://github.com/web-infra-dev/rspack/issues/8480)
 
 看來我們不孤單啊！還是再等等吧。
+
+## 2024-11-24 更新
+
+延續上次的問題，這次把版本更新到 v3.6.3。
+
+rspack 的問題已經修復了，我們可以開心愉快地正常使用了！
