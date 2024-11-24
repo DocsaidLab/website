@@ -62,7 +62,10 @@
 <ul>
 <li><a href="https://github.com/web-infra-dev/rspack/issues/8480" target="_blank" rel="noopener noreferrer"><strong>web-infra-dev/rspack: [Bug]<!-- -->:using<!-- --> docusaurus edit mdx or md file, process crash. #8480</strong></a></li>
 </ul>
-<p>看來我們不孤單啊！還是再等等吧。</p>]]></content:encoded>
+<p>看來我們不孤單啊！還是再等等吧。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="2024-11-24-更新">2024-11-24 更新<a href="https://docsaid.org/blog/update-docusaurus-to-3-6-0#2024-11-24-%E6%9B%B4%E6%96%B0" class="hash-link" aria-label="2024-11-24 更新的直接連結" title="2024-11-24 更新的直接連結">​</a></h2>
+<p>延續上次的問題，這次把版本更新到 v3.6.3。</p>
+<p>rspack 的問題已經修復了，我們可以開心愉快地正常使用了！</p>]]></content:encoded>
             <category>Docusaurus</category>
             <category>Update</category>
         </item>

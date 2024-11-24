@@ -62,7 +62,10 @@
 <ul>
 <li><a href="https://github.com/web-infra-dev/rspack/issues/8480" target="_blank" rel="noopener noreferrer"><strong>web-infra-dev/rspack: [Bug]: using docusaurus edit mdx or md file, process crash. #8480</strong></a></li>
 </ul>
-<p>It looks like we're not alone in this! We'll have to wait for a further fix.</p>]]></content:encoded>
+<p>It looks like we're not alone in this! We'll have to wait for a further fix.</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="2024-11-24-update">2024-11-24 Update<a href="https://docsaid.org/en/blog/update-docusaurus-to-3-6-0#2024-11-24-update" class="hash-link" aria-label="Direct link to 2024-11-24 Update" title="Direct link to 2024-11-24 Update">​</a></h2>
+<p>Continuing from the previous issue, this time we updated to v3.6.3.</p>
+<p>The Rspack issue has been fixed, and we can now happily use it as normal!</p>]]></content:encoded>
             <category>Docusaurus</category>
             <category>Update</category>
         </item>
