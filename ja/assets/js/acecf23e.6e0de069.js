@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkblog=self.webpackChunkblog||[]).push([["27627"],{47548:function(o){o.exports=JSON.parse('{"blogBasePath":"/ja/blog","blogTitle":"Blog","authorsListPath":"/ja/blog/authors"}')}}]);
