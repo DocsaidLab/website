@@ -139,3 +139,15 @@ We decided to use [**NextCloud**](https://github.com/nextcloud) to set up a priv
 - Explored [**WordPress**](https://wordpress.org/) functionality, experimented with building a personal blog.
   - Thanks to [**諾特斯網站**](https://notesstartup.com/) for the generous knowledge sharing.
 - Created a **DOCSAID** GitHub account and started planning various projects.
+
+### Before This
+
+We drifted between various jobs, day after day, year after year. Listening to different bosses tell the same dreams, chewing on those tasteless promises.
+
+Countless projects rushed to completion through sleepless nights, intertwining passionate ideals, only to sway between the capital market’s affection and indifference.
+
+When the love fades, it all falls apart.
+
+Before our youth completely slips away, we still want to leave something behind.
+
+Anything will do—just to mark that we were here.

@@ -106,7 +106,9 @@ Now, you can see that the output results are more accurate—the MRZ region of t
 
 ## Error Messages
 
-To help users understand the reasons behind any errors, we return an error message field covering the following content:
+To help users understand the reasons behind errors, we designed the `ErrorCodes` class.
+
+When the model inference fails, an error message is generated, covering the following scenarios:
 
 ```python
 class ErrorCodes(Enum):
@@ -117,20 +119,26 @@ class ErrorCodes(Enum):
     POSTPROCESS_FAILED_TD2_TD3_LENGTH = 'Postprocess failed, length of lines not 36 or 44 when `doc_type` is TD2 or TD3.'
 ```
 
-This primarily serves to perform preliminary filtering of the output results. Errors that are immediately noticeable, such as incorrect string lengths or an incorrect number of lines, can be detected here.
+This filters out basic errors, such as incorrect input formats, incorrect line counts, etc.
 
-## Check Digit
+## Check Digits
 
-The check digit is a crucial part of the MRZ used to ensure data accuracy. It verifies the correctness of numbers to prevent data entry errors.
+Check Digits are a key part of MRZ used to ensure data accuracy. They validate numerical correctness to prevent input errors.
 
-- The detailed operational process is described in [**References#Check Digit**](./reference#check-digit).
+- Detailed steps are documented in [**Reference: Check Digits**](./reference#check-digits).
 
 ---
 
-What we want to emphasize here is: **We do not provide a check digit calculation function.**
+Here’s what we want to emphasize:
 
-Apart from the standard methods, MRZs from different regions may redefine how the check digit is calculated. Providing a specific check digit calculation method might limit user flexibility.
+- **We do not provide a function to calculate Check Digits!**
 
-Additionally, our goal is to train a model focused on MRZ recognition, where each output format is automatically determined by the model. If you want to apply a check digit, you must know the target format in advance. Otherwise, you'd have to calculate the check digit for every possible format, which is not our objective.
+This is because the calculation method for MRZ Check Digits is not standardized. Besides the official calculation methods, different regions can define their own Check Digit algorithms for MRZ, so providing a predefined method might limit user flexibility.
 
-There are many other open-source projects that offer check digit calculation functions. For instance, [**Arg0s1080/mrz**](https://github.com/Arg0s1080/mrz) provides methods for calculating check digits. We recommend users to use such projects directly.
+:::info
+Fun fact:
+
+The Check Digits on the back of Taiwan's Resident Certificate (ARC) differ from global standards. Without collaboration with the government, it is impossible to determine their calculation method.
+:::
+
+Our goal is to train a model that focuses on MRZ recognition. Each output format is automatically determined by the model. Many other open-source projects provide Check Digit calculation features. For example, the [**Arg0s1080/mrz**](https://github.com/Arg0s1080/mrz) project includes a Check Digit calculation function, and we recommend users utilize that project directly.

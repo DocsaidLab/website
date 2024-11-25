@@ -56,15 +56,21 @@ If during the reading process you find:
 
 Please feel free to leave a comment and let us know, and we will prioritize fixing them.
 
-## One More Thing
+## And
 
-Writing paper guides is very time-consuming and labor-intensive. Writing one guide can take as much time as reading five papers.
+Writing literature reviews is incredibly time-consuming and labor-intensive—writing one can take as much time as reading five papers.
 
-So, the content largely depends on serendipity.
+At the same time, it’s also a continuous effort. Writing a few pieces whenever the thought arises and sustaining it over a long period inevitably leads to changes in writing style.
 
-If you come across some interesting articles, feel free to share them with us. If we have time, we'll take a look.
+Earlier articles tend to be more detailed and exhaustive, mainly due to inexperience and uncertainty about the paper's key points. As a result, they often end up resembling translations...😓
 
-If we have time.
+Over time, with more practice, it becomes easier to pinpoint the main ideas of a paper. This allows less important parts to be skipped, making the writing appear more concise.
+
+Ultimately, the quality of the content often depends on chance—not every article can be written perfectly.
+
+If you come across any interesting papers, feel free to share them with us. If time permits, we’ll take a look.
+
+If time permits, that is.
 
 ＊
 
