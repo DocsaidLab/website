@@ -1,10 +1,10 @@
 {
   "title": {
-    "message": "Docsaid blog!",
+    "message": "Blog",
     "description": "The title for the blog used in SEO"
   },
   "description": {
-    "message": "A Docsaid powered blog!",
+    "message": "Docsaid Blog.",
     "description": "The description for the blog used in SEO"
   },
   "sidebar.title": {
