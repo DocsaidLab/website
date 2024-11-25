@@ -141,8 +141,9 @@ The MRZ region can vary with the user’s capture angle, meaning that before det
 ![backbone](./resources/img8.jpg)
 
 Recently, Google released a new paper: **MobileNet-V4**, which is optimized for mobile devices. This is great news for us, and we’ll use it as our Backbone, using the pretrained weights from `timm`, with an input image size of 512 x 512 in RGB.
+https://docsaid.org/papers/lightweight/mobilenet-v4/
 
-- [**[24.04] MobileNet-V4: The Legacy After Five Years**](https://docsaid.org/papers/cnns/lightweight/mobilenet-v4/)
+- [**[24.04] MobileNet-V4: The Legacy After Five Years**](https://docsaid.org/en/papers/lightweight/mobilenet-v4/)
 - [**huggingface/pytorch-image-models**](https://github.com/huggingface/pytorch-image-models)
 
 :::tip

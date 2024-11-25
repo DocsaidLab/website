@@ -88,6 +88,28 @@ Feel free to click around the menu on the left. I’ve already completed some se
 
 If you find empty content, it means I’m still working on it, so please be patient.
 
+## Multilingual Support
+
+Another important aspect is multilingual support.
+
+I primarily write in Chinese and then translate the content into other languages.
+
+However, my capabilities are limited, and I cannot handle all the translation work by myself. Therefore, I rely on various `GPTs` available on the market to assist me in completing this task.
+
+The standard workflow is as follows: I take paragraphs from each article and directly pass them to `GPTs` for translation. After obtaining the translated results, I perform manual proofreading to eliminate any visible errors.
+
+If you come across any of the following issues while reading:
+
+- **Broken or incorrect links**
+- **Translation errors**
+- **Misinterpretations**
+
+Feel free to leave a comment below, and I will prioritize fixing them.
+
+:::tip
+If the entire article hasn't been translated yet, it means it's still under construction. Please check back later.
+:::
+
 ## How to Fine-Tune Models
 
 This might be the topic you’re most interested in.

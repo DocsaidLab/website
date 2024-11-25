@@ -246,7 +246,7 @@
 
 如果這兩個模型還沒有看過，可以參考以下:
 
-- **傳送門： [LXMERT](../1908-lxmert/index.md)、[UNITER](../1909-uniter/index.md)**
+- **[LXMERT](../1908-lxmert/index.md)、[UNITER](../1909-uniter/index.md)**
 - **主要模型配置：UNITER 和 LXMERT**
 
   - **UNITER**

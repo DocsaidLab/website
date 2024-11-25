@@ -15,7 +15,7 @@ This is an intriguing issue because the high similarity between twins can pose s
 In fact, "distinguishing twins" is an exceedingly challenging task for facial recognition systems.
 
 :::tip
-For more information about NIST, you can refer to [**NIST & FRVT**](https://docsaid.org/blog/nist-and-frvt/).
+For more information about NIST, you can refer to [**NIST & FRVT**](https://docsaid.org/en/blog/nist-and-frvt/).
 :::
 
 ## Introduction

@@ -146,7 +146,7 @@ MRZ 的區域會隨著使用者拍攝角度的不同而有所變化，這就意�
 
 這次我們就用它來做為我們的 Backbone，使用 timm 的預訓練權重，輸入影像尺寸設定為 512 x 512 的 RGB 影像。
 
-- [**[24.04] MobileNet-V4: 時隔五年的傳承**](https://docsaid.org/papers/cnns/lightweight/mobilenet-v4/)
+- [**[24.04] MobileNet-V4: 時隔五年的傳承**](https://docsaid.org/papers/lightweight/mobilenet-v4/)
 - [**huggingface/pytorch-image-models**](https://github.com/huggingface/pytorch-image-models)
 
 :::tip

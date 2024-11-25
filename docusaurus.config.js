@@ -20,7 +20,7 @@ const config = {
   onBrokenMarkdownLinks: 'warn',
   i18n: {
     defaultLocale: 'zh-hant',
-    locales: ['zh-hant', 'en']
+    locales: ['zh-hant', 'en', 'ja']
   },
   presets: [
     [
@@ -182,6 +182,10 @@ const config = {
           {
             label: '隱私政策',
             href: '/privacy-policy',
+          },
+          {
+            label: '工作日誌',
+            href: '/worklog',
           },
           {
             label: '支持我們',

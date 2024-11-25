@@ -46,16 +46,6 @@ Our writing format is as follows:
 
 Thus, this is not a direct translation of the paper but more of a guided reading.
 
-Additionally, for English content, since papers are originally in English, providing translations might seem unnecessary. However, for the sake of completeness of this website, we decided to let `ChatGPT 4o` handle it.
-
-If during the reading process you find:
-
-- **Broken or incorrect links**
-- **Translation errors**
-- **Misunderstandings**
-
-Please feel free to leave a comment and let us know, and we will prioritize fixing them.
-
 ## And
 
 Writing literature reviews is incredibly time-consuming and labor-intensive—writing one can take as much time as reading five papers.

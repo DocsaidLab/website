@@ -1,0 +1,30 @@
+{
+  "logo.alt": {
+    "message": "Docsaid Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.開源專案": {
+    "message": "オープンソースプロジェクト",
+    "description": "Navbar item with label 開源專案"
+  },
+  "item.label.論文筆記": {
+    "message": "論文ノート",
+    "description": "Navbar item with label 論文筆記"
+  },
+  "item.label.部落格": {
+    "message": "ブログ",
+    "description": "Navbar item with label 部落格"
+  },
+  "item.label.遊樂場": {
+    "message": "遊び場",
+    "description": "Navbar item with label 遊樂場"
+  },
+  "item.label.支持我們": {
+    "message": "サポートする",
+    "description": "Navbar item with label 支持我們"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

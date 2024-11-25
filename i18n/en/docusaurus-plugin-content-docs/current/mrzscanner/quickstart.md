@@ -125,7 +125,7 @@ This filters out basic errors, such as incorrect input formats, incorrect line c
 
 Check Digits are a key part of MRZ used to ensure data accuracy. They validate numerical correctness to prevent input errors.
 
-- Detailed steps are documented in [**Reference: Check Digits**](./reference#check-digits).
+- Detailed steps are documented in [**Reference: Check Digits**](./reference#check-digit).
 
 ---
 

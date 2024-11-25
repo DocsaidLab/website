@@ -40,7 +40,7 @@ Below is the list of items we purchased:
 | PSU            | FSP HYDRO PTM PRO 1200W ATX3.0 Platinum Fully Modular                              | 1        | $ 5,790           |
 | Cables         | SilverStone 1 to 4 A.RGB Splitter Cable (SST-CPL03)                                | 2        | $ 250             |
 
-- **Total Price (including tax)**: NT$131,944, approximately $4,100 USD
+- **Total Price (including tax)**: NTD 131,944, approximately 4,100 USD
 - **Date**: September 2023
 
 :::info
