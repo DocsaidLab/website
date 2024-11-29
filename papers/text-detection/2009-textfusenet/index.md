@@ -8,7 +8,7 @@
 
 這篇論文我們只有找到發表時間是 2020 年，月份不明。
 
-因此我們去翻閱了他們的 gituhb 專案，看到他們上傳時間是 2020 年 9 月。
+因此我們去翻閱了他們的 github 專案，看到他們上傳時間是 2020 年 9 月。
 
 - [**ying09/TextFuseNet**](https://github.com/ying09/TextFuseNet)
 

@@ -86,8 +86,8 @@ fileSizeLabel="ファイルサイズ"
 fileTypeLabel="ファイルタイプ"
 imageSizeLabel="画像サイズ"
 TransformedTitle="平坦化画像"
-TransformedWidthLabel="出力幅："
-TransformedHeightLabel="出力高さ："
+TransformedWidthLabel="出力幅"
+TransformedHeightLabel="出力高さ"
 TransformedButtonLabel="平坦化画像をダウンロード"
 defaultImages={[
 { src: "/ja/img/docalign-demo/000025.jpg", description: "文字干渉" },
