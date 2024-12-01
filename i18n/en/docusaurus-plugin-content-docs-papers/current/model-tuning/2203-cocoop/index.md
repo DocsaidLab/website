@@ -1,6 +1,6 @@
 # [22.03] CoCoOp
 
-## Look at the image first
+## Read the image first
 
 [**Conditional Prompt Learning for Vision-Language Models**](https://arxiv.org/abs/2203.05557)
 
