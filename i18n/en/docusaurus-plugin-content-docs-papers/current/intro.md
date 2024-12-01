@@ -2,6 +2,8 @@
 sidebar_position: 1
 ---
 
+import { Timeline } from 'antd';
+
 # Research Paper Notes
 
 ## Daily Life
@@ -23,6 +25,20 @@ We believe that the attitude towards reading papers should be relaxed, with a re
 We think, we record, and we persistently move forward.
 
 We always believe: knowledge is power.
+
+## Recent Updates
+
+<!-- RECENT_UPDATES_START -->
+
+This block of code is automatically generated, please do not modify it manually.
+
+<!-- RECENT_UPDATES_END -->
+
+:::info
+This block will automatically read the paper notes written in the last 30 days from our commit history.
+
+Therefore, it's normal to see different content every day, and it also reminds us to write more notes.
+:::
 
 ## The Era of Large Language Models
 

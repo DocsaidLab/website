@@ -183,3 +183,23 @@ a:hover {
 .token-line.theme-code-block-highlighted-line {
   background-color: #feb75f;
 }
+
+
+/* 調整 Timeline 的節點樣式 */
+.ant-timeline-item-head {
+  background-color: #6fba1c !important;
+}
+
+/* 調整鏈接的樣式 */
+.ant-timeline-item-content a {
+  color: #333;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+/* 懸停效果 */
+.ant-timeline-item-content a:hover {
+  color: #fe930f;
+}
