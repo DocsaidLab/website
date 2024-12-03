@@ -8,15 +8,15 @@ import { Timeline } from 'antd';
 
 ## 最近の更新
 
+<!-- RECENT_UPDATES_START -->
+
+<!-- RECENT_UPDATES_END -->
+
 :::info
 このブロックは、私たちのコミット履歴から直近 30 日間の論文ノートを読み込みます。
 
 そのため、毎日異なるコンテンツが表示されることが正常であり、私たち自身にもっとノートを書くよう促す助けになります。
 :::
-
-<!-- RECENT_UPDATES_START -->
-
-<!-- RECENT_UPDATES_END -->
 
 ## 日常
 

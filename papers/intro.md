@@ -8,15 +8,15 @@ import { Timeline } from 'antd';
 
 ## 近期更新
 
+<!-- RECENT_UPDATES_START -->
+
+<!-- RECENT_UPDATES_END -->
+
 :::info
 這個區塊會自動從我們的提交紀錄中讀取最近 30 天內撰寫的論文筆記。
 
 因此，每天看到不一樣的內容是正常的，也順便督促我們自己要多寫點筆記。
 :::
-
-<!-- RECENT_UPDATES_START -->
-
-<!-- RECENT_UPDATES_END -->
 
 ## 日常
 

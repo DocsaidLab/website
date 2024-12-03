@@ -8,15 +8,15 @@ import { Timeline } from 'antd';
 
 ## Recent Updates
 
+<!-- RECENT_UPDATES_START -->
+
+<!-- RECENT_UPDATES_END -->
+
 :::info
 This block will automatically read the paper notes written in the last 30 days from our commit history.
 
 Therefore, it's normal to see different content every day, and it also reminds us to write more notes.
 :::
-
-<!-- RECENT_UPDATES_START -->
-
-<!-- RECENT_UPDATES_END -->
 
 ## Daily Life
 
