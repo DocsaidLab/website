@@ -138,9 +138,9 @@ const config = {
             href: 'https://buymeacoffee.com/zephyr_docsaid',
           },
           {
-            label: 'GitHub',
+            label: '關於我們',
+            href: '/aboutus',
             position: 'right',
-            href: 'https://github.com/DocsaidLab',
           },
         ],
       },

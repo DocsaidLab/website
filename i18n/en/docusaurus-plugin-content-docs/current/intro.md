@@ -5,190 +5,168 @@ sidebar_position: 1
 
 # Open Source Project
 
-Welcome to my website!
+The page you're currently viewing is used for writing technical documentation.
 
-I’m Zephyr, an AI engineer based in Taiwan.
+- If you're interested in reading related paper shares, please visit: [**Papers**](https://docsaid.org/en/papers/intro).
+- For more technical insights and discussions, please check out: [**Blog**](https://docsaid.org/en/blog).
 
-## What's Here
+## 📂 List of Public Projects
 
-The page you’re currently viewing is designed for technical documentation.
+Currently, I have made several completed projects public on GitHub, including:
 
-- For resources on paper readings, head over to [**Papers**](https://docsaid.org/papers/intro).
-- My blog can be found at [**Blog**](https://docsaid.org/blog).
+### Tools and Integrations
 
-＊
+- [**AutoTraderX**](./autotraderx/index.md):
 
-I’ve completed several projects on GitHub, including:
+  This is a record I left while practicing integrating Taiwan's securities brokerage systems. So far, I've explored the "Yuanta Securities" API. If you're asking me about development insights? It's probably best described as "survivor's remorse." 😓
 
-1. [**AutoTraderX**](./autotraderx/index.md): This is a record of my experience integrating systems with Taiwanese stock brokers.
-2. [**DocsaidKit**](./docsaidkit/index.md): My personal toolbox.
-3. [**GmailSummary**](./gmailsummary/index.md): A project where I experimented with integrating Gmail and OpenAI.
-4. [**WordCanvas**](./wordcanvas/index.md): A tool I developed to synthesize text images, primarily for creating training data.
-5. [**【Deep Learning Project】DocAligner**](./docaligner/index.md): A project designed to locate the four corners of a document.
-6. [**【Deep Learning Project】DocClassifier**](./docclassifier/index.md): A project focused on document similarity matching.
-7. [**【Deep Learning Project】MRZScanner**](./mrzscanner/index.md): A project designed to recognize the MRZ area on a document.
+  I plan to explore "Fubon Securities" next, but haven't scheduled the time yet. If you're interested, feel free to join in!
 
-Most of my projects are private, some are still under development, and others are complete but need further optimization.
+  ***
 
-## Are You an Engineer?
+- [**DocsaidKit**](./docsaidkit/index.md):
 
-Yes.
+  This is a toolbox I created, mainly defining some common structures used in computer vision, such as `Boxes` and `Polygons`.
 
-I enjoy solving real-world problems using scientific knowledge, and I find great joy in doing so.
+  Additionally, there are some image processing (opencv), model architecture (pytorch), and inference tools (onnxruntime) along with environment configuration content, which are tools I commonly use in my work.
 
-＊
+  ***
 
-A few years back, those working with images might have called themselves “Computer Vision Engineers,” those working with text might have been “Natural Language Processing Engineers,” and there were also “Machine Learning Engineers” and “Deep Learning Engineers.” Within certain circles, these titles even created a hierarchy.
+- [**GmailSummary**](./gmailsummary/index.md):
 
-But regardless of the specialty, everyone looked down on the title “AI Engineer”:
+  This is a record I left while practicing integrating Gmail and OpenAI. The content may become outdated after future updates to Google and OpenAI's APIs.
 
-- "Oh, another company/job seeker trying to claim a flashy title without real skills!"
+  This project worked for a few months, but I have already exhausted the funds for OpenAI, so it is no longer functional.
 
-However, times have changed. We’ve witnessed the unification of text, images, audio, and other types of data into a high-dimensional space under the wave of “Foundation Models,” which have become essential for breakthroughs and research publications.
+  ***
 
-People have since realized that these engineers are essentially doing the same work, just in different dimensions.
+- [**WordCanvas**](./wordcanvas/index.md):
 
-Soon, the distinctions between these titles faded, as cross-disciplinary research became necessary. Researchers now need to understand multiple fields to advance their work. This shift has made it difficult to clearly define what we do.
+  This project was originally created to abstract out some basic features for generating synthetic training data, and it integrates them into a tool that mainly renders font files into images.
 
-And so, we’ve come full circle:
+### Deep Learning Projects
 
-- Yes, that’s it! AI Engineer!
+- [**DocAligner**](./docaligner/index.md):
 
-## So What Is This Place?
+  This is a document alignment project, which locates the four corner points of a document.
 
-Not long ago, I stumbled upon Meta’s [**Docusaurus**](https://docusaurus.io/) while browsing, and I was impressed with its capabilities.
+  Though the function is simple, it can be applied in many scenarios. Currently, it only locates the four corner points, but I plan to add more features if I have time.
 
-I thought, why not use it to build a blog? So I combined Docusaurus with GitHub Pages for automatic deployment, and now you’re looking at the result.
+  ***
 
-:::info
-Surprise! This means if GitHub ever goes down, so will this site.
+- [**DocClassifier**](./docclassifier/index.md):
 
-So, let’s take good care of GitHub and hope it never breaks. (What a conclusion!)
-:::
+  This is a document classification project, which classifies documents into different categories.
 
----
+  This project offers a training module. I follow the same building logic for each of my model projects. If you're interested in other models, you can refer to this project to set up your own training environment.
 
-I believe the hardest part of “creating a website” is naming it.
+  ***
 
-Analyzing text is my daily job—whether it’s OCR, image fraud detection, topic classification, keyword extraction, or similar tasks. From my perspective, text isn’t limited to just words; it could be an image, a video, a song, a dataset, or even human behavior. As long as it has analytical value, or we’re willing to analyze it, anything can be considered text (chaotic neutral?).
+- [**MRZScanner**](./mrzscanner/index.md):
 
-So, in the end, I wanted the name of this site to be related to this field, and I chose **DOCSAID**.
+  This function recognizes the MRZ (Machine Readable Zone) area on documents.
 
-This name is a blend of two words: “DOC” and “SAID,” roughly meaning:
+  I initially aimed to develop an end-to-end model, but the results were not as expected. However, I still made some small progress, so I turned it into an open-source project, hoping to help those who need it.
 
-- **The moment a text is created, it has already conveyed its message.**
+## 🚧 In Development and Unreleased Projects
 
-So, what exactly did these texts say? That’s what we need to analyze!
+In addition to the above public projects, there are some projects in development or in internal testing.
 
-Interestingly, after picking this name, I realized it also contains the letters AI—an unexpected delight.
+If you're particularly interested in any topic or idea, feel free to contact me.
 
-＊
+## 🌍 Multilingual Support
 
-Feel free to click around the menu on the left. I’ve already completed some sections.
+I write the content primarily in Chinese, and then translate it into other languages.
 
-If you find empty content, it means I’m still working on it, so please be patient.
+However, my ability is limited, and I can't handle all the translation work by myself, so I rely on various `GPTs` available on the market to help with the task.
 
-## Multilingual Support
+The standard process is: I extract paragraphs from each article and submit them to `GPTs` for translation. After receiving the translation, I manually proofread it to fix any obvious errors.
 
-Another important aspect is multilingual support.
-
-I primarily write in Chinese and then translate the content into other languages.
-
-However, my capabilities are limited, and I cannot handle all the translation work by myself. Therefore, I rely on various `GPTs` available on the market to assist me in completing this task.
-
-The standard workflow is as follows: I take paragraphs from each article and directly pass them to `GPTs` for translation. After obtaining the translated results, I perform manual proofreading to eliminate any visible errors.
-
-If you come across any of the following issues while reading:
+If you come across:
 
 - **Broken or incorrect links**
-- **Translation errors**
-- **Misinterpretations**
+- **Incorrect translations**
+- **Misunderstandings**
 
 Feel free to leave a comment below, and I will prioritize fixing them.
 
 :::tip
-If the entire article hasn't been translated yet, it means it's still under construction. Please check back later.
+If a full article hasn't been translated, that means it's still under construction, so please check back later.
 :::
 
-## How to Fine-Tune Models
+## 🔄 Adjusting Models
 
-This might be the topic you’re most interested in.
+This might be the topic you're most interested in.
 
-Based on the topics I’ve defined and the models I’ve provided, I believe they can solve most application scenarios.
+Based on the topics I define and the models I provide, I believe they will solve most application scenarios.
 
-However, I understand that some scenarios might require better model performance, which means you’ll need to collect your own dataset and fine-tune the model.
+However, I also know that some scenarios may require better model performance, which means you might need to collect your own dataset and fine-tune the model.
 
-If you find yourself stuck at this step, don’t worry—you’re not alone. Most people struggle here.
+You might get stuck at this step, as most people do, but don’t worry.
 
-- **Scenario 1: You know my project meets your needs, but you don't know how to fine-tune it**
+### Scenario One
 
-  In this case, you can email me with your requirements and provide your dataset. I can help you fine-tune the model, giving you better results.
+You know that the project functions I provide meet your needs, but you're not sure how to adjust them.
 
-  I don’t charge for this, but there’s no deadline, and I can’t guarantee I’ll do it (this is important!).
+In this case, you can send me an email with your needs and the dataset you want to solve. I can help with model fine-tuning so you can achieve better results.
 
-  Although I work on open-source projects, I’m not doing this full-time. If the timing is right, I’ll update the model, and you might get a better result just by sending an email. It’s a win-win, right?
+No charges, but no timeline guarantees either. I can't promise it will be executed. (This is important!)
 
-- **Scenario 2: You want to develop a specific feature**
+Although I work on open-source projects, I’m not just idling around. When the opportunity arises, the model will naturally be updated. You just need to send an email, and "maybe" get a better model. It could be a win-win!
 
-  Email me, and we can discuss it. If I find it interesting, I’d be happy to help develop it, but I’d like you to prepare a dataset of a certain scale first. Even if I’m interested, I might not have the time or access to the necessary data, especially if it requires specific channels.
+### Scenario Two
 
-  As with the first scenario, I won’t charge, but there’s no deadline, and I can’t guarantee it’ll happen.
+You want to develop a specific function but aren’t in a hurry.
 
-  :::tip
-  If the feature you want is for a public competition? The answer is no. Competitions often have copyright and other restrictions, and I don’t want to get into trouble with the organizers.
+In that case, let’s discuss it via email. If I find it interesting, I’d be happy to help you develop it. However, I’d like you to prepare a sufficient dataset, because even if I’m interested, I may not have the time to gather enough data, or some specific data might require special channels to obtain.
+
+This scenario is the same as the previous one — no charges, but no timeline guarantees either. I can’t promise execution.
+
+:::tip
+If the specific function is for public model competitions, the answer is no. These competitions often have copyrights and related restrictions, and if complaints arise, the organizers will come after me.
+:::
+
+### Scenario Three
+
+You need a specific feature developed quickly.
+
+When time is your primary concern, we can turn to a commissioned development collaboration. Based on your needs, I will propose a reasonable price according to my development time.
+
+Generally speaking, I will retain ownership of the project, but you are free to use it. I do not recommend buying out a project, as it doesn’t align with the continuous progress concept. With technological advancements, today’s solution might soon be replaced by a newer method. If you buy out a project, over time, you may find that the investment no longer holds its original value.
+
+:::tip
+You may not fully understand the issue of project ownership.
+
+Think about it: perhaps you just want to "drink the milk," not actually "raise the cow."
+
+- How tiring is raising a cow? (You need to maintain the project with engineers)
+- It takes up space and is hard to take care of. (Building training machines, renting cloud machines is expensive, buying hardware is prone to failure)
+- It’s sensitive to temperature. (Tuning models until you question your life)
+- It could suddenly break down. (Not achieving the expected results)
+- It’s quite a loss. (Spending money to buy out a project)
   :::
 
-- **Scenario 3: You need to quickly develop a specific feature**
+Moreover, the most valuable part of most projects is the dataset, followed by the thought process behind the solution. Without releasing private datasets, the most you can do with the code is for viewing purposes.
 
-  When time is of the essence, we can shift to a commissioned development approach. Based on your requirements, I’ll provide a reasonable quote.
+If, after careful consideration, you still insist on buying out the project, I won’t stop you. Go ahead.
 
-  Additionally, the ownership of the commissioned project must be discussed upfront. Generally, I retain ownership, and you can freely use it. I don’t recommend buying out the project, as it goes against the principle of continuous improvement. With technological advances, today’s solution may soon be replaced by a newer method. If you buy out a project, you might find that your investment loses value over time.
+:::info
 
-  :::tip
+- **We absolutely will not open-source any data you provide in any development project, unless you allow it.**
+- **Under normal procedures, data will only be used for model updates.**
+- **Dataset submissions: docsaidlab@gmail.com**
+  :::
 
-  You might not fully understand the issue of project ownership.
+## 🍹 Final Thoughts
 
-  Think about it carefully—you might just want to “drink the milk” without having to “own the cow.”
+I’ve invested a great deal of effort into developing and maintaining these projects. This is both a learning process and a way to give back to the open-source community. If you recognize my efforts, feel free to support me through the following ways:
 
-  - Owning a cow is a lot of work. (You’d need engineers to maintain the project)
-  - It takes up space and is hard to care for. (You’d need to set up training machines, and cloud servers are expensive, while physical servers can break down)
-  - It’s sensitive to the environment. (Hyperparameter tuning can drive you crazy)
-  - And it could just die unexpectedly. (Results might not meet expectations)
-  - It’s a real hassle. (Spending money to buy out a project)
-    :::
-
-  Also, the most valuable part of most projects is the dataset, followed by the thought process behind the solution.
-
-  Without open-sourcing a private dataset, having access to the code is mostly just for viewing purposes.
-
-  If, after careful consideration, you still insist on buying out a project, I won’t stop you. Let’s do it.
-
-  :::info
-
-  - **In all forms of development projects, we will never open-source the data you provide unless you give explicit permission.**
-  - **Under normal circumstances, the data will only be used for model updates.**
-  - **Dataset submission: docsaidlab@gmail.com**
-    :::
-
-## Also,
-
-Stop telling me my website design is crude! I know, okay? 😅
-
-My main job is building models—reading papers, writing code, tuning parameters—but web design isn’t part of it. Especially when it comes to aesthetics, my skills are probably on a kindergarten level. If I ever get the chance, and I fail to master this field, I’ll just hire a professional to help me improve it later.
-
-## Finally 🍹
-
-I have invested a lot of time and effort in these open-source projects. On the one hand, I want to improve my technical skills, and on the other hand, I hope to make some contributions to the community.
-
-I believe that every small contribution is a part of our collective effort to create a better world.
-
-If you find my open-source projects helpful or appreciate my efforts, you can support me through “Buy Me A Coffee.” This will help me continue to maintain and develop these projects. In addition, feel free to leave a few words or give a star to the project. These are all great encouragements to me.
-
-Every bit of support, no matter how small, motivates me to continue improving existing projects and developing more interesting new tools.
+- [**Buy Me A Coffee**](https://buymeacoffee.com/zephyr_docsaid) - Your support will help me maintain projects and develop new tools!
+- Give a star ⭐️ on GitHub for the project or leave some suggestions and encouragement!
 
 ＊
 
-2024 Zephyr
+2024 © Zephyr
 
 <div align="center">
 <br />

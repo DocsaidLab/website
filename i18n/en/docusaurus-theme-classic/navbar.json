@@ -46,5 +46,9 @@
   "item.label.支持我們": {
     "message": "Support Us",
     "description": "Navbar item with label 支持我們"
+  },
+  "item.label.關於我們": {
+    "message": "About Us",
+    "description": "Navbar item with label 關於我們"
   }
 }
