@@ -10,25 +10,24 @@ Unlike previous sequential models, the Transformer model introduced a new era of
 
 This model no longer relies on recursive calculations of sequences but instead uses attention mechanisms for sequence modeling, making the training and inference processes more efficient.
 
-## Defining the Problem
+## Problem Definition
 
-In past sequence modeling tasks, RNN and LSTM models were mainstream.
+In previous sequence modeling tasks, RNN and LSTM models were the mainstream.
 
-However, these models faced several issues during training and inference:
+However, these models have some issues during training and inference:
 
-### 1. Limitations of Recursive Calculations
-
-RNN and LSTM models need to calculate each element of the sequence step-by-step during training, leading to serialized computations that hinder efficient parallel processing.
-
-### 2. Long-Distance Dependency Problem
-
-Due to the recursive nature of RNN and LSTM models, they struggle to capture dependencies between distant positions in a sequence when processing long sequences.
+- **Limitations of Recursive Computation**: RNN and LSTM models require step-by-step computation of each element in the sequence during training, which makes it difficult for the models to perform efficient parallel computation.
+- **Long-Distance Dependency Problem**: Due to the recursive computation method of RNN and LSTM models, they struggle to capture dependencies between distant positions in long sequences.
 
 ## Solving the Problem
 
 ### Model Design
 
+<div align="center">
+<figure style={{"width": "50%"}}>
 ![Transformer Model Architecture](./img/img1.jpg)
+</figure>
+</div>
 
 This is the Transformer model architecture diagram provided in the original paper.
 
@@ -106,15 +105,25 @@ print(embedded_input.shape)
 
 ### Positional Encoding
 
-In traditional RNN and LSTM models, the model captures sequence dependencies through the position of elements in the sequence.
+In the original RNN and LSTM models, the model can capture dependencies in the sequence through the position of elements in the sequence. Therefore, we do not need to explicitly design positional encodings, as the model implicitly includes positional information during each iteration of the For-Loop.
 
-Therefore, we do not need special positional encoding, as the model implicitly includes positional information in each iteration of the For-Loop.
+However, in the Transformer architecture, there is no such implicit positional information; all we have are linear transformation layers. In these layers, each element is independent, without any relational information, and the internal representation lacks any correlation. Therefore, we need an additional positional encoding to help the model capture the positional information in the sequence.
 
-However, the Transformer architecture lacks such implicit positional information; it only consists of linear transformation layers. In linear transformation layers, each element is independent with no intrinsic relationships. Hence, we need additional positional encoding to help the model capture positional dependencies in the sequence.
+In the paper, the authors propose a simple method for positional encoding using sine and cosine functions. For a given sequence position $pos$ and encoding dimension $i$, the positional encoding is calculated as:
 
-In this paper, the authors propose a simple positional encoding method using sine and cosine functions:
+$$
+PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{\frac{2i}{d_{model}}}}\right)
+$$
 
-![Positional Encoding Formula](./img/img2.jpg)
+$$
+PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{\frac{2i}{d_{model}}}}\right)
+$$
+
+Where:
+
+- $pos$ is the position of the element in the sequence (starting from 0).
+- $i$ is the index in the feature dimension (starting from 0).
+- $d_{model}$ is the dimension of the positional encoding (usually the same as the feature dimension of the model input).
 
 Let's implement a positional encoding function based on the above formula:
 
@@ -226,7 +235,9 @@ The QKV process involves three different projections of the input, followed by t
 
 The second step of the self-attention mechanism is to calculate the attention scores.
 
-![Self-Attention Mechanism](./img/img4.jpg)
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
+$$
 
 In this step, we perform a dot product between the Query tensor and the Key tensor.
 
@@ -282,7 +293,11 @@ The authors also thought of this, so they proposed the **multi-head attention me
 
 In the multi-head attention mechanism, we prepare multiple sets of QKV matrices and perform self-attention calculations for each set.
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![Multi-Head Attention Mechanism](./img/img5.jpg)
+</figure>
+</div>
 
 Although the concept is to have multiple heads, in practice, we do not prepare multiple sets of QKV matrices. Instead, we split the original QKV matrices into multiple sub-matrices and perform self-attention calculations on each sub-matrix, like this:
 
@@ -446,7 +461,11 @@ Sequence data relies more on its characteristics than those of batch data. There
 
 ### Why Use Self-Attention?
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![Attention](./img/img6.jpg)
+</figure>
+</div>
 
 In short, it's fast.
 
@@ -454,33 +473,39 @@ In short, it's fast.
 
 The authors summarized the computational complexity of RNN, CNN, and Self-Attention, as shown in the figure above.
 
-1. **Self-Attention Layer (Unrestricted):**
+The author summarizes the computational complexity of RNN, CNN, and Self-Attention as shown in the diagram above.
 
-   - **Per Layer Complexity: O(n^2·d)**: In the self-attention mechanism, each input token (sequence length n) needs to attend to every other token, forming an (n \* n) attention matrix. Each matrix element requires calculations based on the embedding dimension (d), resulting in a total complexity of O(n^2·d).
-   - **Sequential Operations: O(1)**: The full attention matrix can be computed in parallel, allowing all comparisons to occur simultaneously.
-   - **Maximum Path Length: O(1)**: Since each token can directly attend to any other token, the maximum path length is just one step.
+1. **Self-Attention Layer (Unrestricted)**:
 
-2. **RNN:**
+   - **Per-layer complexity:** $\mathcal{O}(n^2 \cdot d)$: In the self-attention mechanism, each input token (with sequence length $n$) must compute attention with all other tokens, forming a complete $n \times n$ attention matrix. Each matrix element requires computation based on a $d$-dimensional embedding, so the total complexity of the attention matrix is $\mathcal{O}(n^2 \cdot d)$.
+   - **Sequential computation:** $\mathcal{O}(1)$: The entire attention matrix can be computed in parallel, and all comparisons can happen simultaneously.
+   - **Maximum path length:** $\mathcal{O}(1)$: Since each token can directly connect to any other token via the attention mechanism, the maximum path length is just one step.
 
-   - **Per Layer Complexity: O(n·d^2)**: RNN layers process each token sequentially. Each token's calculation combines the current token embedding (d-dimension) and the hidden state (also d-dimension), resulting in an operation cost of O(d^2). Since n tokens are processed, the total complexity is O(n·d^2).
-   - **Sequential Operations: O(n)**: Due to RNN's sequential nature, each token must wait for the previous token's calculation to complete before processing the next.
-   - **Maximum Path Length: O(n)**: In RNNs, the path length between two tokens requires traversing through all intermediate tokens between them.
+2. **RNN**:
 
-3. **CNN:**
+   - **Per-layer complexity:** $\mathcal{O}(n \cdot d^2)$: The recurrent layer processes each token sequentially. The computation for each token involves combining the current token embedding (with $d$ dimensions) and the hidden state (also $d$-dimensional), resulting in an operational cost of $\mathcal{O}(d^2)$. Since $n$ tokens are processed, the overall complexity is $\mathcal{O}(n \cdot d^2)$.
+   - **Sequential computation:** $\mathcal{O}(n)$: Due to the sequential nature of RNNs, each token must wait for the computation of the previous token before processing the next.
+   - **Maximum path length:** $\mathcal{O}(n)$: In an RNN, the path length between two tokens depends on the number of intermediate tokens between them.
 
-   - **Per Layer Complexity: O(k·n·d^2)**: In convolutional layers, a kernel of width k slides over the sequence to compute local features. Each n tokens need computations in the d-dimensional embeddings, and each convolution operation costs O(d^2). Thus, the total complexity is O(k·n·d^2).
-   - **Sequential Operations: O(1)**: Each convolution filter can be applied to the entire sequence simultaneously.
-   - **Maximum Path Length: O(log_k(n))**: By stacking convolutional layers with dilation, the network can connect distant tokens logarithmically to k.
+3. **CNN**:
 
-4. **Restricted Self-Attention Layer:**
+   - **Per-layer complexity:** $\mathcal{O}(k \cdot n \cdot d^2)$: In the convolutional layer, a convolutional kernel of width $k$ slides over the entire sequence to compute local features. Each of the $n$ tokens requires computation on a $d$-dimensional embedding, and the cost of each convolution operation is proportional to $d^2$. Therefore, the total complexity is $\mathcal{O}(k \cdot n \cdot d^2)$.
+   - **Sequential computation:** $\mathcal{O}(1)$: Each convolution filter can be applied to the entire sequence simultaneously.
+   - **Maximum path length:** $\mathcal{O}(\log_k(n))$: Through stacking dilated convolution layers, the network can connect tokens that are farther apart in a logarithmic manner, with respect to $k$.
 
-   - **Per Layer Complexity: O(r·n·d)**: Here, each token can only attend to a neighborhood of size r. The attention matrix becomes (n·r), but each element still requires calculations based on the embedding dimension (d), resulting in a total complexity of O(r·n·d).
-   - **Sequential Operations: O(1)**: Similar to unrestricted self-attention, all comparisons can be performed simultaneously.
-   - **Maximum Path Length: O(n/r)**: Since each token can only attend to a smaller neighborhood, the path length between two distant tokens increases to O(n/r).
+4. **Restricted Self-Attention Layer**:
+
+   - **Per-layer complexity:** $\mathcal{O}(r \cdot n \cdot d)$: In this case, each token can only attend to a neighborhood of size $r$. The attention matrix becomes $n \times r$, but each matrix element still requires computation based on a $d$-dimensional embedding, so the overall complexity is $\mathcal{O}(r \cdot n \cdot d)$.
+   - **Sequential computation:** $\mathcal{O}(1)$: Similar to the unrestricted self-attention layer, all comparisons can be performed simultaneously.
+   - **Maximum path length:** $\mathcal{O}(\frac{n}{r})$: Since each token can only attend to a small neighborhood, the path length between two distant tokens increases to $\mathcal{O}(\frac{n}{r})$.
 
 ### Experimental Results: Machine Translation
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![Machine Translation Results](./img/img7.jpg)
+</figure>
+</div>
 
 In the WMT 2014 English-German translation task, the Transformer (big) improved the BLEU score by over 2.0 points compared to the previous best models (including ensemble models), setting a new record of 28.4 BLEU. This model trained for 3.5 days using 8 P100 GPUs. Even the base model surpassed all previously published models and ensemble models at a significantly lower training cost.
 
@@ -488,8 +513,16 @@ In the WMT 2014 English-French translation task, the Transformer (big) achieved 
 
 ## Conclusion
 
-The Transformer is a groundbreaking architecture that not only addresses some of the issues of RNN and LSTM models but also improves training and inference efficiency.
+The Transformer is a groundbreaking architecture that not only solves several problems of RNN and LSTM models but also improves the efficiency of model training and inference.
 
-When first introduced, the Transformer architecture did not make a significant impact.
+When it was first introduced, it didn’t make much of a splash.
 
-While the Transformer was widely and continuously discussed in academic circles for several years, from natural language processing to computer vision, it might have only attracted the attention of engineers and researchers in the industry.
+Although Transformer was continuously and passionately discussed within the academic community for several years, it was widely known from natural language processing to computer vision fields. On the other hand, in the industrial sector, it was mostly engineers and researchers who took an interest in the topic.
+
+---
+
+However, when OpenAI's ChatGPT was released, everything changed.
+
+Yes.
+
+Everything changed.
