@@ -1,6 +1,6 @@
 ---
 slug: fourier-transform
-title: フーリエ変換について
+title: フーリエ変換の概要
 authors: Zephyr
 image: /ja/img/2024/1202.webp
 tags: [fourier-transform, signal-processing]

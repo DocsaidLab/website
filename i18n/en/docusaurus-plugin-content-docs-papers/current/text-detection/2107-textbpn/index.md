@@ -10,6 +10,12 @@ This paper introduces several concepts to address the problem of text detection,
 
 Let's dive directly into the details.
 
+:::tip
+If you're unfamiliar with Graph Convolutional Networks, you can refer to our previous article:
+
+- [**A Brief Introduction to Graph Convolutional Networks**](https://docsaid.org/en/blog/graph-convolutional-networks)
+  :::
+
 ## Problem Definition
 
 We have reviewed several text detection methods, and most of them deal with overlapping text regions by first identifying the "text core" and then expanding outwards to find the text boundaries. These approaches are often slow, or as the paper describes: "complex and inefficient."
