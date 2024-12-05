@@ -80,6 +80,8 @@ As an AI engineer, my expertise is in model building and parameter tuning. As fo
 
 If you have any questions or are interested in my work, feel free to reach out to me anytime!
 
+This is my work email: **docsaidlab@gmail.com**. You can also leave a comment on any article on this website, and I will see it.
+
 Your suggestions and support are my motivation to keep improving.
 
 ---
