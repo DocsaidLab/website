@@ -18,9 +18,11 @@ Currently, I have made several completed projects public on GitHub, including:
 
 - [**AutoTraderX**](./autotraderx/index.md):
 
-  This is a record I left while practicing integrating Taiwan's securities brokerage systems. So far, I've explored the "Yuanta Securities" API. If you're asking me about development insights? It's probably best described as "survivor's remorse." 😓
+  This is a record I left while practicing integrating the systems of Taiwan's securities brokers. I have only explored the API of "MasterLink" so far, and I plan to explore "Fubon Securities" next, but I haven't scheduled the time yet.
 
-  I plan to explore "Fubon Securities" next, but haven't scheduled the time yet. If you're interested, feel free to join in!
+  :::tip
+  If you ask me about my development experience? It's probably a bit of a nightmare. 😓
+  :::
 
   ***
 
@@ -90,8 +92,12 @@ If you come across:
 
 Feel free to leave a comment below, and I will prioritize fixing them.
 
-:::tip
-If a full article hasn't been translated, that means it's still under construction, so please check back later.
+:::info
+Another way is to raise an issue on the GitHub discussion board:
+
+- [**Help Us Improve Translation Accuracy**](https://github.com/orgs/DocsaidLab/discussions/12)
+
+Alternatively, you can raise an issue on the GitHub discussion board.
 :::
 
 ## 🔄 Adjusting Models
