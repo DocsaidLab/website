@@ -3,142 +3,135 @@ const fs = require('fs-extra');
 const path = require('path');
 
 const git = simpleGit();
+
+// 可根據需求調整
 const RECENT_DAYS = 30;
 
+// 這裡是目標檔案，程式不再直接修改這些檔案
+// 而是在同目錄下產生 `recent_updates.mdx` 檔案
 const TARGET_FILES = [
   path.join(__dirname, '..', '..', 'papers', 'intro.md'),
   path.join(__dirname, '..', '..', 'i18n', 'en', 'docusaurus-plugin-content-docs-papers', 'current', 'intro.md'),
   path.join(__dirname, '..', '..', 'i18n', 'ja', 'docusaurus-plugin-content-docs-papers', 'current', 'intro.md'),
 ];
 
+async function getAddedArticles(sinceOption) {
+  const log = await git.log({'--since': sinceOption});
+  if (log.total === 0) {
+    console.log('No commits found in the given date range.');
+    return [];
+  }
+  console.log(`Found ${log.total} commits.`);
+
+  const addedArticles = [];
+  for (const commit of log.all) {
+    if (/\[A\] Add article/i.test(commit.message)) {
+      const diff = await git.show(['--name-status', commit.hash]);
+      const lines = diff.split('\n');
+      for (const line of lines) {
+        if (line.startsWith('A\t')) {
+          const filePath = line.substring(2);
+          if (filePath.endsWith('.md') || filePath.endsWith('.mdx')) {
+            const articleFullPath = path.resolve(__dirname, '..', '..', filePath);
+            addedArticles.push({ filePath, fullPath: articleFullPath, date: commit.date });
+          }
+        }
+      }
+    }
+  }
+
+  console.log('Total added articles found:', addedArticles.length);
+  return addedArticles;
+}
+
+async function extractTitleInfo(article) {
+  if (!(await fs.pathExists(article.fullPath))) {
+    console.log(`File does not exist: ${article.fullPath}`);
+    return null;
+  }
+
+  const content = await fs.readFile(article.fullPath, 'utf-8');
+  const lines = content.split('\n');
+
+  let mainTitle = '';
+  let subTitle = '';
+
+  for (const line of lines) {
+    if (line.startsWith('# ')) {
+      mainTitle = line.replace('# ', '').trim();
+    } else if (line.startsWith('## ')) {
+      subTitle = line.replace('## ', '').trim();
+    }
+
+    if (mainTitle && subTitle) break;
+  }
+
+  // 若未找到主標題則以檔名替代
+  if (!mainTitle) {
+    mainTitle = path.basename(article.filePath, path.extname(article.filePath));
+  }
+
+  const combinedTitle = subTitle ? `${mainTitle}: ${subTitle}` : mainTitle;
+  return combinedTitle;
+}
+
+/**
+ * 將文章清單產生的 <Timeline> 內容寫入不被 Git 追蹤的檔案中 (recent_updates.md)
+ */
+async function writeRecentUpdates(targetDir, articles) {
+  if (articles.length === 0) {
+    console.log('No articles to write for', targetDir);
+    return;
+  }
+
+  // 組合要插入的 markdown 片段
+  let markdownContent = 'import { Timeline } from "antd";\n\n<Timeline mode="alternate">\n';
+  for (const article of articles) {
+    markdownContent += `  <Timeline.Item label="${article.date}">\n`;
+    markdownContent += `    [${article.combinedTitle}](${article.link})\n`;
+    markdownContent += `  </Timeline.Item>\n`;
+  }
+  markdownContent += '</Timeline>';
+
+  const outputFile = path.join(targetDir, 'recent_updates.mdx');
+  await fs.writeFile(outputFile, markdownContent, 'utf-8');
+  console.log(`✅ Generated recent updates at: ${outputFile}\nPlease make sure this file is in .gitignore to avoid tracking.`);
+}
 
 (async () => {
   try {
     const sinceOption = `${RECENT_DAYS} days ago`;
     console.log('Since option:', sinceOption);
-    const log = await git.log({
-      '--since': sinceOption,
-    });
 
-    if (log.total === 0) {
-      console.log('No commits found in the given date range.');
+    // 取得最近 N 天 commits 中的已新增文章清單
+    const addedArticles = await getAddedArticles(sinceOption);
+    if (addedArticles.length === 0) {
+      console.log('No added articles found, no updates needed.');
       return;
-    } else {
-      console.log(`Found ${log.total} commits.`);
     }
 
-    const addedArticles = [];
-    for (const commit of log.all) {
-      if (/\[A\] Add article/i.test(commit.message)) {
-        const diff = await git.show(['--name-status', commit.hash]);
-        const lines = diff.split('\n');
-        for (const line of lines) {
-          if (line.startsWith('A\t')) {
-            const filePath = line.substring(2);
-            const articleFullPath = path.resolve(__dirname, '..', '..', filePath);
-            if (filePath.endsWith('.md') || filePath.endsWith('.mdx')) {
-              addedArticles.push({
-                filePath,
-                fullPath: articleFullPath,
-                date: commit.date,
-              });
-            }
-          }
-        }
-      }
-    }
-
-    console.log('Total added articles found:', addedArticles.length);
+    // 對每個 TARGET_FILE 產生獨立的 recent_updates.md
     for (const TARGET_FILE of TARGET_FILES) {
-      console.log('\nProcessing TARGET_FILE:', TARGET_FILE);
-
       const targetDir = path.dirname(TARGET_FILE);
-      const baseArticleDir = path.resolve(targetDir);
-      console.log('Base article directory:', baseArticleDir);
 
-      const articles = [];
+      const filteredArticles = [];
       for (const article of addedArticles) {
-        const articleFullPath = article.fullPath;
+        if (!article.fullPath.startsWith(targetDir)) continue;
 
-        if (!articleFullPath.startsWith(baseArticleDir)) {
-          // console.log(`Skipping file not in target directory: ${articleFullPath}`);
-          continue;
-        }
+        const combinedTitle = await extractTitleInfo(article);
+        if (!combinedTitle) continue;
 
-        if (await fs.pathExists(articleFullPath)) {
-          const content = await fs.readFile(articleFullPath, 'utf-8');
-          const lines = content.split('\n');
-          let mainTitle = '';
-          let subTitle = '';
-
-          for (const line of lines) {
-            if (line.startsWith('# ')) {
-              mainTitle = line.replace('# ', '').trim();
-            } else if (line.startsWith('## ')) {
-              subTitle = line.replace('## ', '').trim();
-            }
-
-            if (mainTitle && subTitle) {
-              break;
-            }
-          }
-
-          if (!mainTitle) {
-            mainTitle = path.basename(article.filePath, path.extname(article.filePath));
-          }
-
-          const combinedTitle = subTitle ? `${mainTitle}: ${subTitle}` : mainTitle;
-          const relativeLink = './' + path.relative(targetDir, articleFullPath).replace(/\\/g, '/');
-
-          const date = article.date.split('T')[0]; // 使用 commit.date
-          articles.push({ combinedTitle, link: relativeLink, date });
-        } else {
-          console.log(`File does not exist: ${articleFullPath}`);
-        }
+        const relativeLink = './' + path.relative(targetDir, article.fullPath).replace(/\\/g, '/');
+        const date = article.date.split('T')[0];
+        filteredArticles.push({ combinedTitle, link: relativeLink, date });
       }
 
-      console.log('Articles to be updated for this TARGET_FILE:', articles.length);
-      articles.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      if (articles.length === 0) {
-        console.log('No articles to update for this TARGET_FILE.');
-        continue;
-      }
-
-      let markdownContent = '<Timeline mode="alternate">\n';
-
-      articles.forEach((article) => {
-        markdownContent += `  <Timeline.Item label="${article.date}">\n`;
-        markdownContent += `    [${article.combinedTitle}](${article.link})\n`;
-        markdownContent += `  </Timeline.Item>\n`;
-      });
-
-      markdownContent += '</Timeline>';
-
-      let targetFileContent = await fs.readFile(TARGET_FILE, 'utf-8');
-
-      const SECTION_MARKER_START = '<!-- RECENT_UPDATES_START -->';
-      const SECTION_MARKER_END = '<!-- RECENT_UPDATES_END -->';
-
-      const newContent = `${SECTION_MARKER_START}\n\n${markdownContent}\n\n${SECTION_MARKER_END}`;
-
-      const regex = new RegExp(
-        `${SECTION_MARKER_START}[\\s\\S]*?${SECTION_MARKER_END}`,
-        'g'
-      );
-      const match = targetFileContent.match(regex);
-      // console.log('Regex match:', match);
-
-      if (match) {
-        targetFileContent = targetFileContent.replace(regex, newContent);
-        await fs.writeFile(TARGET_FILE, targetFileContent, 'utf-8');
-        console.log(`✅ File ${TARGET_FILE} has been updated.`);
-      } else {
-        console.error(`❌ Failed to find the marker in the target file: ${TARGET_FILE}`);
-      }
+      filteredArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+      await writeRecentUpdates(targetDir, filteredArticles);
     }
 
-    console.log('\nAll TARGET_FILES have been processed.');
+    console.log('\nAll TARGET_FILES have been processed. The recent updates are now stored in their respective `recent_updates.mdx` files.');
+    console.log('Remember to add `recent_updates.mdx` to your `.gitignore` file so it won\'t be tracked by git.');
   } catch (error) {
     console.error('❌ Error：', error);
   }

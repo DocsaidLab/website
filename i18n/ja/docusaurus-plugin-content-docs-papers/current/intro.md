@@ -2,15 +2,13 @@
 sidebar_position: 1
 ---
 
-import { Timeline } from 'antd';
+import RecentUpdates from './recent_updates.mdx';
 
 # 論文ノート
 
 ## 最近の更新
 
-<!-- RECENT_UPDATES_START -->
-
-<!-- RECENT_UPDATES_END -->
+<RecentUpdates />
 
 :::info
 このブロックは、私たちのコミット履歴から直近 30 日間の論文ノートを読み込みます。

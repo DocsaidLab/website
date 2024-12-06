@@ -2,15 +2,13 @@
 sidebar_position: 1
 ---
 
-import { Timeline } from 'antd';
+import RecentUpdates from './recent_updates.mdx';
 
 # Research Paper Notes
 
 ## Recent Updates
 
-<!-- RECENT_UPDATES_START -->
-
-<!-- RECENT_UPDATES_END -->
+<RecentUpdates />
 
 :::info
 This block will automatically read the paper notes written in the last 30 days from our commit history.

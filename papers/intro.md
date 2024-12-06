@@ -2,15 +2,13 @@
 sidebar_position: 1
 ---
 
-import { Timeline } from 'antd';
+import RecentUpdates from './recent_updates.mdx';
 
 # 論文筆記
 
 ## 近期更新
 
-<!-- RECENT_UPDATES_START -->
-
-<!-- RECENT_UPDATES_END -->
+<RecentUpdates />
 
 :::info
 這個區塊會自動從我們的提交紀錄中讀取最近 30 天內撰寫的論文筆記。
