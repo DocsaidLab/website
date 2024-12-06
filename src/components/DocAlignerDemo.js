@@ -1,5 +1,21 @@
+import { ClearOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons';
+import {
+  Alert,
+  Button,
+  Card,
+  Col,
+  Divider,
+  InputNumber,
+  Row,
+  Space,
+  Spin,
+  Typography,
+  Upload
+} from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import '../css/DocAlignerDemo.css';
+
+const { Title, Text } = Typography;
 
 const DocAlignerDemo = ({
   chooseFileLabel,
@@ -70,14 +86,12 @@ const DocAlignerDemo = ({
 
   // Load OpenCV.js
   useEffect(() => {
-    // Define Module with onRuntimeInitialized before loading the script
     window.Module = {
       onRuntimeInitialized() {
         console.log('OpenCV.js is ready');
         setOpenCvLoaded(true);
       },
     };
-
     const script = document.createElement('script');
     script.src = 'https://docs.opencv.org/4.x/opencv.js';
     script.async = true;
@@ -95,7 +109,6 @@ const DocAlignerDemo = ({
     };
   }, []);
 
-  // Perform perspective transform when predictionData or output dimensions change
   useEffect(() => {
     if (predictionData && openCvLoaded) {
       performPerspectiveTransform();
@@ -104,7 +117,6 @@ const DocAlignerDemo = ({
 
   const handleExternalImageChange = (imageSource) => {
     clearAll();
-
     setError(null);
     setWarning(null);
     setPredictionData(null);
@@ -115,7 +127,7 @@ const DocAlignerDemo = ({
     if (!canvas) return;
 
     const img = new Image();
-    img.crossOrigin = "Anonymous"; // Avoid CORS issues
+    img.crossOrigin = "Anonymous";
     img.onload = function () {
       const originalWidth = img.width;
       const originalHeight = img.height;
@@ -156,39 +168,24 @@ const DocAlignerDemo = ({
     return validTypes.includes(file.type);
   };
 
-  const handleFileChange = () => {
-    const fileInput = fileInputRef.current;
-    if (!fileInput) return;
-
-    const canvas = originalCanvasRef.current;
-    if (!canvas) return;
-
-    clearAll();
-
-    if (!fileInput.files || fileInput.files.length === 0) {
+  const handleFileChange = (file) => {
+    if (!file) {
       setError(errorMessage.chooseFile);
       clearAll();
-      return;
+      return false;
     }
-
-    const file = fileInput.files[0];
-
     if (!validateFileType(file)) {
       setError(errorMessage.invalidFileType);
       clearAll();
-      return;
+      return false;
     }
-
-    setError(null);
-    setWarning(null);
-    setPredictionData(null);
-    setPredictionDataScale(null);
-    setImageInfo(null);
 
     const reader = new FileReader();
     reader.onload = function (event) {
       const img = new Image();
       img.onload = function () {
+        const canvas = originalCanvasRef.current;
+        if (!canvas) return;
         const originalWidth = img.width;
         const originalHeight = img.height;
         let scale = 1;
@@ -224,6 +221,7 @@ const DocAlignerDemo = ({
     };
 
     reader.readAsDataURL(file);
+    return false; // 禁止 Upload 自動上傳行為
   };
 
   const clearAll = () => {
@@ -259,12 +257,9 @@ const DocAlignerDemo = ({
     const processedCanvas = processedCanvasRef.current;
 
     if (!originalCanvas || !processedCanvas) return;
+    let file = selectedFile;
 
-    let file = null;
-
-    if (selectedFile) {
-      file = selectedFile;
-    } else {
+    if (!file) {
       setError(errorMessage.chooseFile);
       clearAll();
       return;
@@ -289,63 +284,50 @@ const DocAlignerDemo = ({
       method: 'POST',
       body: formData
     })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(errorMessage.networkError);
-        }
-        return response.json();
-      })
-      .then(data => {
-
-        if (!data.polygon || data.polygon.length === 0) {
-          setWarning(warningMessage.noPolygon);
-          setIsLoading(false);
-          return;
-        }
-
-        setInferenceTime(data.inference_time);
-        setTimestamp(data.timestamp);
-        setPredictionData(data);
-
-        // Adjust polygon coordinates back to original image dimensions
-        const adjustedPolygon = data.polygon.map((point) => [
-          point[0] / scale,
-          point[1] / scale,
-        ]);
-
-        // Update prediction data with adjusted polygon
-        setPredictionDataScale({ ...data, polygon: adjustedPolygon });
-
-        const ctx = processedCanvas.getContext('2d');
-        ctx.clearRect(0, 0, processedCanvas.width, processedCanvas.height);
-        processedCanvas.width = originalCanvas.width;
-        processedCanvas.height = originalCanvas.height;
-        ctx.drawImage(originalCanvas, 0, 0);
-
-        adjustCanvasSize(processedCanvas, originalCanvas.width, originalCanvas.height);
-        drawPolygon(ctx, data.polygon);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        setError(`${errorMessage.uploadError}: ${error.message || error}`);
-      })
-      .finally(() => {
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(errorMessage.networkError);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (!data.polygon || data.polygon.length === 0) {
+        setWarning(warningMessage.noPolygon);
         setIsLoading(false);
-      });
+        return;
+      }
+
+      setInferenceTime(data.inference_time);
+      setTimestamp(data.timestamp);
+      setPredictionData(data);
+
+      const adjustedPolygon = data.polygon.map((point) => [
+        point[0] / scale,
+        point[1] / scale,
+      ]);
+      setPredictionDataScale({ ...data, polygon: adjustedPolygon });
+
+      const ctx = processedCanvas.getContext('2d');
+      ctx.clearRect(0, 0, processedCanvas.width, processedCanvas.height);
+      processedCanvas.width = originalCanvas.width;
+      processedCanvas.height = originalCanvas.height;
+      ctx.drawImage(originalCanvas, 0, 0);
+
+      adjustCanvasSize(processedCanvas, originalCanvas.width, originalCanvas.height);
+      drawPolygon(ctx, data.polygon);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      setError(`${errorMessage.uploadError}: ${error.message || error}`);
+    })
+    .finally(() => {
+      setIsLoading(false);
+    });
   };
 
   const adjustCanvasSize = (canvas, width, height) => {
-    const containerWidth = document.querySelector('.images-container').clientWidth;
-    const maxWidth = containerWidth / 2 - 20;
-
-    if (width > maxWidth) {
-      const aspectRatio = height / width;
-      canvas.style.width = `${maxWidth}px`;
-      canvas.style.height = `${maxWidth * aspectRatio}px`;
-    } else {
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-    }
+    // 使用一般方式控制 canvas 大小即可，不一定需要動態調整
+    // 此處略過以保留簡單性
   };
 
   const drawPolygon = (ctx, polygon) => {
@@ -355,7 +337,6 @@ const DocAlignerDemo = ({
       [255, 0, 0],
       [255, 255, 0],
     ];
-
     const sortedPolygon = sortPolygonClockwise(polygon);
     const numPoints = sortedPolygon.length;
 
@@ -375,22 +356,16 @@ const DocAlignerDemo = ({
 
   const sortPolygonClockwise = (polygon) => {
     const sortedByY = polygon.slice().sort((a, b) => a[1] - b[1]);
-
     const topPoints = sortedByY.slice(0, 2);
-
     const bottomPoints = sortedByY.slice(2);
-
     const [topLeft, topRight] = topPoints.sort((a, b) => a[0] - b[0]);
-
     const [bottomLeft, bottomRight] = bottomPoints.sort((a, b) => a[0] - b[0]);
-
     return [topLeft, topRight, bottomRight, bottomLeft];
   };
 
   const drawArrow = (ctx, fromX, fromY, toX, toY, thickness, color) => {
     const headlen = thickness * 5;
     const angle = Math.atan2(toY - fromY, toX - fromX);
-
     ctx.beginPath();
     ctx.moveTo(fromX, fromY);
     ctx.lineTo(toX, toY);
@@ -439,7 +414,6 @@ const DocAlignerDemo = ({
     document.body.removeChild(link);
   };
 
-  // Function to perform perspective transform using OpenCV.js
   const performPerspectiveTransform = () => {
     if (!predictionData || !openCvLoaded || !cv || !cv.imread) return;
 
@@ -450,12 +424,8 @@ const DocAlignerDemo = ({
 
     try {
       const src = cv.imread(originalCanvas);
-
-      // Get image dimensions
       const imgWidth = originalCanvas.width;
       const imgHeight = originalCanvas.height;
-
-      // Adjust polygon coordinates
       const scaledPolygon = predictionData.polygon.map(point => [
         point[0] * (imgWidth / imageInfo.width),
         point[1] * (imgHeight / imageInfo.height),
@@ -468,9 +438,7 @@ const DocAlignerDemo = ({
         return;
       }
 
-      // Flatten the points
       const srcPts = cv.matFromArray(4, 1, cv.CV_32FC2, sortedPolygon.flat());
-
       const dstPts = cv.matFromArray(4, 1, cv.CV_32FC2, [
         0, 0,
         outputWidth, 0,
@@ -479,12 +447,10 @@ const DocAlignerDemo = ({
       ]);
 
       const M = cv.getPerspectiveTransform(srcPts, dstPts);
-
       const dst = new cv.Mat();
       const dsize = new cv.Size(outputWidth, outputHeight);
 
       cv.warpPerspective(src, dst, M, dsize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, new cv.Scalar());
-
       cv.imshow(transformedCanvas, dst);
 
       src.delete();
@@ -498,127 +464,137 @@ const DocAlignerDemo = ({
     }
   };
 
-  const currentFile = selectedFile || (fileInputRef.current && fileInputRef.current.files[0]);
+  const currentFile = selectedFile;
 
   return (
-    <div className="doc-aligner-demo">
+    <div style={{ padding: '20px' }}>
+      <Space direction="vertical" style={{ width: '100%' }}>
 
-      <div className="file-upload-status-container">
-        <div>
-          <label className={`custom-file-upload ${apiStatus !== 'online' ? 'disabled' : ''}`}>
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
+        <Row justify="space-between" align="middle">
+          <Col>
+            <Upload
+              beforeUpload={handleFileChange}
+              showUploadList={false}
               disabled={apiStatus !== 'online'}
-            />
-            {chooseFileLabel}
-          </label>
-        </div>
+            >
+              <Button
+                icon={<UploadOutlined />}
+                disabled={apiStatus !== 'online'}
+              >
+                {chooseFileLabel}
+              </Button>
+            </Upload>
+          </Col>
+          <Col>
+            {apiStatus === 'online' && <Text type="success">🟢</Text>}
+            {apiStatus === 'offline' && <Text type="danger">🔴</Text>}
+            {apiStatus === null && <Text type="secondary">⚪</Text>}
+          </Col>
+        </Row>
 
-        <div className="api-status-indicator">
-          {apiStatus === 'online' && <span className="status-online">🟢</span>}
-          {apiStatus === 'offline' && <span className="status-offline">🔴</span>}
-          {apiStatus === null && <span className="status-checking">⚪</span>}
-        </div>
-      </div>
-
-      <br />
-
-      {imageInfo && currentFile && originalImageInfo && (
-        <div id="imageInfo">
-          <h3>{imageInfoTitle}</h3>
-          <ul>
-            <li>{fileNameLabel}: {currentFile.name}</li>
-            <li>{fileSizeLabel}: {Math.round(currentFile.size / 1024)} KB</li>
-            <li>{fileTypeLabel}: {currentFile.type}</li>
-            <li>{imageSizeLabel}: {originalImageInfo.width} x {originalImageInfo.height} pixel</li>
-          </ul>
-        </div>
-      )}
-
-      <div className="images-container">
-        <canvas ref={originalCanvasRef}></canvas>
-        <canvas ref={processedCanvasRef}></canvas>
-      </div>
-
-      <div align="center">
-        <button
-          id="uploadButton"
-          onClick={uploadImage}
-          className={apiStatus !== 'online' ? 'disabled' : ''}
-          disabled={apiStatus !== 'online'}
-        >
-          {uploadButtonLabel}
-        </button>
-        {predictionData && !warning && (
-          <button id="downloadButton" onClick={downloadJSON}>
-            {downloadButtonLabel}
-          </button>
+        {imageInfo && currentFile && originalImageInfo && (
+          <Card title={imageInfoTitle}>
+            <ul>
+              <li>{fileNameLabel}: {currentFile.name}</li>
+              <li>{fileSizeLabel}: {Math.round(currentFile.size / 1024)} KB</li>
+              <li>{fileTypeLabel}: {currentFile.type}</li>
+              <li>{imageSizeLabel}: {originalImageInfo.width} x {originalImageInfo.height} pixel</li>
+            </ul>
+          </Card>
         )}
-        <button id="clearButton" onClick={clearAll}>{clearButtonLabel}</button>
-      </div>
-      {isLoading && <div id="loadingIndicator">{processingMessage}</div>}
-      {error && <div id="errorMessage">{error}</div>}
-      {warning && <div id="warningMessage">{warning}</div>}
 
-      {imageInfo && (
-        <div id="imageInfo">
-          <hr />
-          <h3>{inferenceInfoTitle}</h3>
-          <ul>
-            <li>{inferenceTimeLabel}: {inferenceTime.toFixed(2)} sec </li>
-            <li>{timestampLabel}: {timestamp}</li>
-          </ul>
-        </div>
-      )}
+        <Row gutter={16}>
+          <Col span={12}>
+            <canvas ref={originalCanvasRef} style={{ width: '100%', border: '1px solid #ccc' }}></canvas>
+          </Col>
+          <Col span={12}>
+            <canvas ref={processedCanvasRef} style={{ width: '100%', border: '1px solid #ccc' }}></canvas>
+          </Col>
+        </Row>
 
-      {predictionData && !warning && (
-        <div id="polygonInfo">
-          <hr />
-          <h3>{polygonInfoTitle}</h3>
-          <ul>
-            {predictionDataScale.polygon.map((point, index) => (
-              <li key={index}>
-                Point {index + 1}: ({Math.round(point[0])}, {Math.round(point[1])})
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+        <Row justify="center" gutter={16}>
+          <Col>
+            <Button
+              type="primary"
+              onClick={uploadImage}
+              disabled={apiStatus !== 'online'}
+            >
+              {uploadButtonLabel}
+            </Button>
+          </Col>
+          <Col>
+            {predictionData && !warning && (
+              <Button icon={<DownloadOutlined />} onClick={downloadJSON}>
+                {downloadButtonLabel}
+              </Button>
+            )}
+          </Col>
+          <Col>
+            <Button icon={<ClearOutlined />} onClick={clearAll}>
+              {clearButtonLabel}
+            </Button>
+          </Col>
+        </Row>
 
-      {predictionData && !warning && (
-        <div className="transform-section">
-        <hr />
-        <h3>{TransformedTitle}</h3>
-        <div className="transform-inputs">
-          <label>
-            {TransformedWidthLabel}:{' '}
-            <input
-              type="number"
-              value={outputWidth}
-              onChange={(e) => {
-                const value = e.target.value === '' ? '' : Number(e.target.value);
-                setOutputWidth(value);
-              }}
-            />
-          </label>
-          <label>
-          {TransformedHeightLabel}:{' '}
-            <input
-              type="number"
-              value={outputHeight}
-              onChange={(e) => {
-                const value = e.target.value === '' ? '' : Number(e.target.value);
-                setOutputHeight(value);
-              }}
-            />
-          </label>
-        </div>
-        <canvas ref={transformedCanvasRef}></canvas>
-        <button onClick={downloadTransformedImage}>{TransformedButtonLabel}</button>
-      </div>
-      )}
+        {isLoading && (
+          <Spin tip={processingMessage} />
+        )}
+
+        {error && (
+          <Alert message={error} type="error" showIcon />
+        )}
+
+        {warning && (
+          <Alert message={warning} type="warning" showIcon />
+        )}
+
+        {imageInfo && (
+          <>
+            <Divider />
+            <Title level={3}>{inferenceInfoTitle}</Title>
+            <ul>
+              <li>{inferenceTimeLabel}: {inferenceTime.toFixed(2)} sec </li>
+              <li>{timestampLabel}: {timestamp}</li>
+            </ul>
+          </>
+        )}
+
+        {predictionData && !warning && (
+          <>
+            <Divider />
+            <Title level={3}>{polygonInfoTitle}</Title>
+            <ul>
+              {predictionDataScale.polygon.map((point, index) => (
+                <li key={index}>
+                  Point {index + 1}: ({Math.round(point[0])}, {Math.round(point[1])})
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {predictionData && !warning && (
+          <>
+            <Divider />
+            <Title level={3}>{TransformedTitle}</Title>
+            <Space>
+              <Text>{TransformedWidthLabel}:</Text>
+              <InputNumber value={outputWidth} onChange={(val)=>setOutputWidth(val)} />
+              <Text>{TransformedHeightLabel}:</Text>
+              <InputNumber value={outputHeight} onChange={(val)=>setOutputHeight(val)} />
+            </Space>
+            <div style={{ marginTop: '20px', textAlign: 'center' }}>
+              <canvas ref={transformedCanvasRef} style={{ border: '1px solid #ccc', maxWidth: '100%' }}></canvas>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <Button icon={<DownloadOutlined />} onClick={downloadTransformedImage}>
+                {TransformedButtonLabel}
+              </Button>
+            </div>
+          </>
+        )}
+
+      </Space>
     </div>
   );
 };
