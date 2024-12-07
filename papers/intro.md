@@ -76,4 +76,4 @@ import RecentUpdates from './recent_updates.mdx';
 
 ＊
 
-2024 Zephyr
+2024 © Zephyr

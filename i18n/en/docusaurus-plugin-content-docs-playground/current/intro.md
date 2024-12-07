@@ -37,4 +37,4 @@ Whether it's image processing, language models, or other machine learning applic
 
 ＊
 
-2024 Zephyr
+2024 © Zephyr

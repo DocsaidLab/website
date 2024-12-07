@@ -76,4 +76,4 @@ If time permits, that is.
 
 ＊
 
-2024 Zephyr
+2024 © Zephyr

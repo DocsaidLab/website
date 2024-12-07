@@ -133,6 +133,11 @@ const config = {
             position: 'right',
           },
           {
+            label: 'GitHub',
+            position: 'right',
+            href: 'https://github.com/DocsaidLab',
+          },
+          {
             label: '支持我們',
             position: 'right',
             href: 'https://buymeacoffee.com/zephyr_docsaid',
@@ -142,6 +147,7 @@ const config = {
             href: '/aboutus',
             position: 'right',
           },
+
         ],
       },
       docs: {
