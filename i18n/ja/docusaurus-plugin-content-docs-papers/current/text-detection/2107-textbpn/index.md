@@ -36,7 +36,11 @@
 
 ### Backbone + Neck
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![textbpn backbone](./img/img3.jpg)
+</figure>
+</div>
 
 基本的な特徴マップの抽出は基本的な操作です。ここでの Backbone は ResNet-50 を使用し、Neck 部分では Concat 方式で特徴を融合しています。これは U-Net 風のアーキテクチャです。
 
@@ -44,9 +48,11 @@
 
 ### 境界提案生成
 
-<figure align="center">
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![textbpn boundary proposal](./img/img14.jpg)
 </figure>
+</div>
 
 境界提案生成（Boundary Proposal Generation）は、複数の膨張畳み込みから構成され、2 層の$3 \times 3$畳み込み層（異なる膨張率）と 1 層の$1 \times 1$畳み込み層を含みます。
 
@@ -85,7 +91,11 @@
    L = \max(D_{gt}(p)), p \in T
    $$
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![textbpn boundary proposal](./img/img5.jpg)
+</figure>
+</div>
 
 距離場マップ$D$に基づいて、固定された閾値$th_d$を使用して候補境界提案を生成できますが、これらの提案には誤検出が含まれる可能性があります。そのため、分類マップを使用して各候補境界提案の平均信頼度を計算し、閾値$th_s$を使用して信頼度の低い提案を除去します。
 
@@ -119,9 +129,11 @@ $$
 
 ここでは GCN と RNN を導入して境界変形を行います。下の図のように：
 
-<figure align="center">
+<div align="center">
+<figure style={{"width": "50%"}}>
 ![Adaptive Boundary Deformation](./img/img15.jpg)
 </figure>
+</div>
 
 エンコーダは GCN と RNN を組み合わせており、境界のトポロジーとシーケンスコンテキストを最大限に活用します。式は次の通りです：
 
@@ -189,7 +201,11 @@ GCN 内の各制御点はその 4 つの隣接点と接続され、このよう�
 
 1. **自適応変形モデルの有効性：**
 
+   <div align="center">
+   <figure style={{"width": "90%"}}>
    ![ablation deformation](./img/img6.jpg)
+   </figure>
+   </div>
 
    4 つの異なるエンコーダを比較しました：全結合ネットワーク（FC）と Conv1x1、RNN、循環畳み込み（Circular Convolution）、グラフ畳み込みネットワーク（GCN）。
 
@@ -197,7 +213,11 @@ GCN 内の各制御点はその 4 つの隣接点と接続され、このよう�
 
 2. **制御点の数（N）の影響：**
 
-   ![ablation contral point](./img/img16.jpg)
+   <div align="center">
+    <figure style={{"width": "70%"}}>
+    ![ablation contral point](./img/img16.jpg)
+    </figure>
+    </div>
 
    著者は、検出性能に対する異なる制御点の数の影響を調べました。制御点の数は 12 から 32 の範囲で、間隔は 4 に設定されました。
 
@@ -205,27 +225,39 @@ GCN 内の各制御点はその 4 つの隣接点と接続され、このよう�
 
 3. **反復回数の影響：**
 
+   <div align="center">
+   <figure style={{"width": "90%"}}>
    ![ablation iteration](./img/img7.jpg)
+   </figure>
+   </div>
 
    著者は、異なる推論反復回数のモデル性能を比較しました。上の表によると、反復回数の増加に伴い検出性能は向上しましたが、推論速度は低下しました。反復回数が 2 回から 3 回に増加すると、検出性能の向上は顕著ではなくなりました。速度と性能のバランスを考慮し、実験では反復回数を 3 回に設定しました。
 
 4. **先験情報の影響：**
 
+   <div align="center">
+   <figure style={{"width": "90%"}}>
    ![ablation prior](./img/img9.jpg)
+   </figure>
+   </div>
 
    著者は、Total-Text データセットで消融実験を実施し、異なる先験情報（分類マップ、距離場、方向場）の重要性を検証しました。上の表によると、分類マップのみを使用した場合、検出性能は良好ではありません。距離場と方向場を加えると、性能が著しく向上し、F-measure はそれぞれ 5.45%と 1.55%向上しました。
 
 ### 曲線テキスト実験結果
 
-<figure>
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![total-text](./img/img10.jpg)
-<figcaption>Total-Text 実験結果</figcaption>
+<figcaption>Total-Text 實驗結果</figcaption>
 </figure>
+</div>
 
-<figure>
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![ctw1500](./img/img12.jpg)
-<figcaption>CTW1500 実験結果</figcaption>
+<figcaption>Total-Text 實驗結果</figcaption>
 </figure>
+</div>
 
 ---
 
@@ -241,7 +273,11 @@ TextBPN は精度（87.81%）と F-measure（85.0%）の両方で優れたパフ
 
 ### MSRA-TD500 実験結果
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![msra-td500](./img/img13.jpg)
+</figure>
+</div>
 
 MSRA-TD500 でテストする際、分類閾値$th_s$は 0.925 に設定しました。
 
@@ -249,7 +285,11 @@ TextBPN は任意の方向およびサイズの長いテキスト行を成功裏
 
 ### 可視化結果
 
+<div align="center">
+<figure style={{"width": "90%"}}>
 ![textbpn vis](./img/img11.jpg)
+</figure>
+</div>
 
 ## 結論
 

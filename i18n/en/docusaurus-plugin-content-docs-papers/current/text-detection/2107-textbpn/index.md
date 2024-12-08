@@ -32,15 +32,21 @@ The architecture may seem complex at first glance, so let’s break it down into
 
 ### Backbone + Neck
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![textbpn backbone](./img/img3.jpg)
+</figure>
+</div>
 
 The feature extraction uses a ResNet-50 backbone, and the feature fusion in the neck is done using a U-Net-like architecture through concatenation. The final output from the neck consists of feature maps with 32 channels, retaining the same size as the input image.
 
 ### Boundary Proposal Generation
 
-<figure align="center">
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![textbpn boundary proposal](./img/img14.jpg)
 </figure>
+</div>
 
 The boundary proposal generation consists of multiple dilated convolutions, including two 3x3 convolution layers (with different dilation rates) and one 1x1 convolution layer. These layers use shared features extracted from the backbone to generate three outputs: classification map, distance field map, and direction field map.
 
@@ -74,7 +80,11 @@ The boundary proposal generation consists of multiple dilated convolutions, incl
    L = \max(D_{gt}(p)), p \in T
    $$
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![textbpn boundary proposal](./img/img5.jpg)
+</figure>
+</div>
 
 Based on the distance field map $D$, candidate boundary proposals are generated using a fixed threshold $th_d$, but these proposals may include false positives. Therefore, the average confidence of each candidate proposal is computed from the classification map, and proposals with low confidence (below threshold $th_s$) are discarded.
 
@@ -100,9 +110,11 @@ $$
 
 Once control point predictions are obtained, boundary refinement takes place. This is done using GCN and RNN, as illustrated below:
 
-<figure align="center">
+<div align="center">
+<figure style={{"width": "50%"}}>
 ![Adaptive Boundary Deformation](./img/img15.jpg)
 </figure>
+</div>
 
 The encoder combines GCN and RNN to fully utilize both topological and sequential contexts of the boundary. The formula is:
 
@@ -148,7 +160,11 @@ To verify the effectiveness of the adaptive deformation model, the authors condu
 
 1. **Effectiveness of Adaptive Deformation Model:**
 
+    <div align="center">
+   <figure style={{"width": "90%"}}>
    ![ablation deformation](./img/img6.jpg)
+   </figure>
+   </div>
 
    Four encoder variations were compared: Fully Connected Network (FC) + Conv1x1, RNN, Circular Convolution, and GCN.
 
@@ -156,33 +172,49 @@ To verify the effectiveness of the adaptive deformation model, the authors condu
 
 2. **Impact of Control Point Number (N):**
 
-   ![ablation contral point](./img/img16.jpg)
+   <div align="center">
+    <figure style={{"width": "70%"}}>
+    ![ablation contral point](./img/img16.jpg)
+    </figure>
+    </div>
 
    Different numbers of control points (ranging from 12 to 32) were tested. The F-measure decreased when the number of control points was too large or too small. At 20 control points, the model achieved the best performance on both datasets, so this number was fixed for experiments.
 
 3. **Impact of Iteration Count:**
 
+   <div align="center">
+   <figure style={{"width": "90%"}}>
    ![ablation iteration](./img/img7.jpg)
+   </figure>
+   </div>
 
    Performance improved with more iterations but plateaued after three iterations. Considering the balance between speed and performance, three iterations were chosen.
 
 4. **Impact of Prior Information:**
 
+   <div align="center">
+   <figure style={{"width": "90%"}}>
    ![ablation prior](./img/img9.jpg)
+   </figure>
+   </div>
 
 The importance of different prior information (e.g., classification map, distance field, direction field) was evaluated. Adding distance and direction fields significantly boosted performance, with F-measure improvements of 5.45% and 1.55%, respectively.
 
 ### Results on Curved Text
 
-<figure>
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![total-text](./img/img10.jpg)
-<figcaption>Total-Text Results</figcaption>
+<figcaption>Total-Text 實驗結果</figcaption>
 </figure>
+</div>
 
-<figure>
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![ctw1500](./img/img12.jpg)
-<figcaption>CTW1500 Results</figcaption>
+<figcaption>Total-Text 實驗結果</figcaption>
 </figure>
+</div>
 
 ---
 
@@ -194,13 +226,21 @@ On CTW-1500, with $th_s = 0.8$, TextBPN achieved an accuracy of 87.81% and an F-
 
 ### Results on MSRA-TD500
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![msra-td500](./img/img13.jpg)
+</figure>
+</div>
 
 On MSRA-TD500, with $th_s = 0.925$, TextBPN achieved an F-measure of 85.57%, outperforming other techniques such as DB and DRRG.
 
 ### Visualization Results
 
+<div align="center">
+<figure style={{"width": "90%"}}>
 ![textbpn vis](./img/img11.jpg)
+</figure>
+</div>
 
 ## Conclusion
 

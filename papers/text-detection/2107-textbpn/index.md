@@ -36,7 +36,11 @@
 
 ### Backbone + Neck
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![textbpn backbone](./img/img3.jpg)
+</figure>
+</div>
 
 基礎特徵圖的提取是基本的操作，這裡的 Backbone 使用的是 ResNet-50，Neck 的部分使用 Concat 的方式進行特徵融合，算是 U-Net-like 的架構。
 
@@ -44,9 +48,11 @@
 
 ### 邊界提議生成
 
-<figure align="center">
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![textbpn boundary proposal](./img/img14.jpg)
 </figure>
+</div>
 
 邊界提議生成（Boundary Proposal Generation），由多層膨脹卷積構成，包含兩層 $3 \times 3$ 的卷積層（不同的膨脹率）和一層 $1 \times 1$ 的卷積層。
 
@@ -85,7 +91,11 @@
    L = \max(D_{gt}(p)), p \in T
    $$
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![textbpn boundary proposal](./img/img5.jpg)
+</figure>
+</div>
 
 根據距離場圖 $D$，可以通過固定的閾值 $th_d$ 來生成候選邊界提議，但這些提議可能包含誤檢。因此，會根據分類圖計算每個候選邊界提議的平均置信度，並使用閾值 $th_s$ 去除一些置信度低的提議。
 
@@ -120,7 +130,7 @@ $$
 這裡引入 GCN 和 RNN 來進行邊界變形，如下圖所示：
 
 <div align="center">
-<figure style={{"width": "70%"}}>
+<figure style={{"width": "50%"}}>
 ![Adaptive Boundary Deformation](./img/img15.jpg)
 </figure>
 </div>
@@ -189,7 +199,11 @@ GCN 中的每個控制點與其四個鄰居相連，透過此種方式處理控�
 
 1. **自適應變形模型的有效性：**
 
+    <div align="center">
+   <figure style={{"width": "90%"}}>
    ![ablation deformation](./img/img6.jpg)
+   </figure>
+   </div>
 
    使用四種不同的編碼器進行比較：全連接網路（FC）與 Conv1x1、RNN、循環卷積（Circular Convolution）、圖卷積網路（GCN）。
 
@@ -197,7 +211,11 @@ GCN 中的每個控制點與其四個鄰居相連，透過此種方式處理控�
 
 2. **控制點數量（N）的影響：**
 
-   ![ablation contral point](./img/img16.jpg)
+    <div align="center">
+    <figure style={{"width": "70%"}}>
+    ![ablation contral point](./img/img16.jpg)
+    </figure>
+    </div>
 
    作者研究了不同控制點數量對檢測性能的影響，控制點數量設定為 12 到 32，間隔為 4。
 
@@ -205,27 +223,39 @@ GCN 中的每個控制點與其四個鄰居相連，透過此種方式處理控�
 
 3. **迭代次數的影響：**
 
+   <div align="center">
+   <figure style={{"width": "90%"}}>
    ![ablation iteration](./img/img7.jpg)
+   </figure>
+   </div>
 
    作者比較了不同推理迭代次數的模型性能。根據上表，隨著迭代次數的增加，檢測性能逐漸提升，但推理速度逐漸降低。當迭代次數從 2 增加到 3 時，檢測性能的提升不再明顯。綜合速度與性能的平衡，實驗中迭代次數設置為 3 次。
 
 4. **先驗信息的影響：**
 
+   <div align="center">
+   <figure style={{"width": "90%"}}>
    ![ablation prior](./img/img9.jpg)
+   </figure>
+   </div>
 
    作者在 Total-Text 數據集上進行消融實驗，驗證不同先驗信息（如分類圖、距離場和方向場）的重要性。根據上表，僅使用分類圖時，檢測性能不理想。當加入距離場和方向場後，性能顯著提升，F-measure 分別提高了 5.45%和 1.55%。
 
 ### 曲線文字實驗結果
 
-<figure>
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![total-text](./img/img10.jpg)
 <figcaption>Total-Text 實驗結果</figcaption>
 </figure>
+</div>
 
-<figure>
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![ctw1500](./img/img12.jpg)
-<figcaption>CTW1500 實驗結果</figcaption>
+<figcaption>Total-Text 實驗結果</figcaption>
 </figure>
+</div>
 
 ---
 
@@ -241,7 +271,11 @@ TextBPN 在精度（87.81%）與 F-measure（85.0%）上均取得了優異表現
 
 ### MSRA-TD500 實驗結果
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![msra-td500](./img/img13.jpg)
+</figure>
+</div>
 
 在 MSRA-TD500 上測試時，分類閾值 $th_s$ 設定為 0.925。
 
@@ -249,7 +283,11 @@ TextBPN 能成功檢測任意方向與大小的長文字行，並且在 F-measur
 
 ### 可視化結果
 
+<div align="center">
+<figure style={{"width": "90%"}}>
 ![textbpn vis](./img/img11.jpg)
+</figure>
+</div>
 
 ## 結論
 
