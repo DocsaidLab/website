@@ -1,6 +1,6 @@
 # [21.07] TextBPN
 
-## 來點圖卷積吧！
+## 再訪圖卷積
 
 [**Adaptive Boundary Proposal Network for Arbitrary Shape Text Detection**](https://arxiv.org/abs/2107.12664)
 

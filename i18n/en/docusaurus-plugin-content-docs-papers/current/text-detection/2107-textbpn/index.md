@@ -1,6 +1,6 @@
 # [21.07] TextBPN
 
-## Try Some GCN!
+## Revisiting GCN
 
 [**Adaptive Boundary Proposal Network for Arbitrary Shape Text Detection**](https://arxiv.org/abs/2107.12664)
 

@@ -1,6 +1,6 @@
 # [21.07] TextBPN
 
-## 画像畳み込みを始めましょう！
+## グラフ畳み込みの再考
 
 [**Adaptive Boundary Proposal Network for Arbitrary Shape Text Detection**](https://arxiv.org/abs/2107.12664)
 
