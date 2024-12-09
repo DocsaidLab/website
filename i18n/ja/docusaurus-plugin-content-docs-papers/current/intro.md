@@ -2,13 +2,36 @@
 sidebar_position: 1
 ---
 
-import RecentUpdates from './recent_updates.mdx';
+import { Timeline } from "antd";
+import Link from '@docusaurus/Link';
+import recentUpdates from './recent_updates_data.json';
 
 # 論文ノート
 
 ## 最近の更新
 
-<RecentUpdates />
+<Timeline mode="alternate">
+  {recentUpdates.map((item, idx) => {
+    const convertMdLinkToRoute = (mdLink) => {
+      return mdLink
+        .replace(/^.\//, '/papers/')  // 將 "./" 換成 "/papers/"
+        .replace(/\.md$/, '')         // 移除 .md 副檔名
+        .replace(/\/index$/, '')      // 移除 /index
+        // 將最後一段若是 YYYY-xxxx 格式，移除 YYYY-
+        // 例如: /papers/transformers/2101-switch-transformer -> /papers/transformers/switch-transformer
+        .replace(/\/(\d{4}-)/, '/');
+    };
+
+    const finalRoute = convertMdLinkToRoute(item.link);
+
+    return (
+      <Timeline.Item key={idx} label={item.date}>
+        <Link to={finalRoute}>{item.combinedTitle}</Link>
+      </Timeline.Item>
+    );
+
+})}
+</Timeline>
 
 :::info
 このブロックは、私たちのコミット履歴から直近 30 日間の論文ノートを読み込みます。

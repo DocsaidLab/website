@@ -7,8 +7,6 @@ const git = simpleGit();
 // 可根據需求調整
 const RECENT_DAYS = 30;
 
-// 這裡是目標檔案，程式不再直接修改這些檔案
-// 而是在同目錄下產生 `recent_updates.mdx` 檔案
 const TARGET_FILES = [
   path.join(__dirname, '..', '..', 'papers', 'intro.md'),
   path.join(__dirname, '..', '..', 'i18n', 'en', 'docusaurus-plugin-content-docs-papers', 'current', 'intro.md'),
@@ -25,6 +23,7 @@ async function getAddedArticles(sinceOption) {
 
   const addedArticles = [];
   for (const commit of log.all) {
+    // 僅針對訊息中包含 "[A] Add article" 的 commit
     if (/\[A\] Add article/i.test(commit.message)) {
       const diff = await git.show(['--name-status', commit.hash]);
       const lines = diff.split('\n');
@@ -75,27 +74,21 @@ async function extractTitleInfo(article) {
   return combinedTitle;
 }
 
-/**
- * 將文章清單產生的 <Timeline> 內容寫入不被 Git 追蹤的檔案中 (recent_updates.md)
- */
-async function writeRecentUpdates(targetDir, articles) {
+async function writeRecentUpdatesData(targetDir, articles) {
   if (articles.length === 0) {
     console.log('No articles to write for', targetDir);
     return;
   }
 
-  // 組合要插入的 markdown 片段
-  let markdownContent = 'import { Timeline } from "antd";\n\n<Timeline mode="alternate">\n';
-  for (const article of articles) {
-    markdownContent += `  <Timeline.Item label="${article.date}">\n`;
-    markdownContent += `    [${article.combinedTitle}](${article.link})\n`;
-    markdownContent += `  </Timeline.Item>\n`;
-  }
-  markdownContent += '</Timeline>';
+  const data = articles.map(a => ({
+    date: a.date,
+    link: a.link,
+    combinedTitle: a.combinedTitle,
+  }));
 
-  const outputFile = path.join(targetDir, 'recent_updates.mdx');
-  await fs.writeFile(outputFile, markdownContent, 'utf-8');
-  console.log(`✅ Generated recent updates at: ${outputFile}\nPlease make sure this file is in .gitignore to avoid tracking.`);
+  const outputFile = path.join(targetDir, 'recent_updates_data.json');
+  await fs.writeJson(outputFile, data, { spaces: 2 });
+  console.log(`✅ Generated recent updates data at: ${outputFile}\nPlease make sure this file is in .gitignore if you don't want it tracked.`);
 }
 
 (async () => {
@@ -110,7 +103,7 @@ async function writeRecentUpdates(targetDir, articles) {
       return;
     }
 
-    // 對每個 TARGET_FILE 產生獨立的 recent_updates.md
+    // 對每個 TARGET_FILE 產生獨立的 recent_updates_data.json
     for (const TARGET_FILE of TARGET_FILES) {
       const targetDir = path.dirname(TARGET_FILE);
 
@@ -127,11 +120,10 @@ async function writeRecentUpdates(targetDir, articles) {
       }
 
       filteredArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
-      await writeRecentUpdates(targetDir, filteredArticles);
+      await writeRecentUpdatesData(targetDir, filteredArticles);
     }
 
-    console.log('\nAll TARGET_FILES have been processed. The recent updates are now stored in their respective `recent_updates.mdx` files.');
-    console.log('Remember to add `recent_updates.mdx` to your `.gitignore` file so it won\'t be tracked by git.');
+    console.log('\nAll TARGET_FILES have been processed. The recent updates are now stored in their respective `recent_updates_data.json` files.');
   } catch (error) {
     console.error('❌ Error：', error);
   }
