@@ -8,31 +8,21 @@
   --ifm-color-primary-lighter: #214c9f;
   --ifm-color-primary-lightest: #2656b3;
 
-  --background-color: #ffffff;  /* 亮模式背景色 */
-  --text-color: #404040;        /* 亮模式文字色 */
+  --background-color: #ffffff;   /* 背景色 */
+  --text-color: #404040;         /* 文字色 */
 
   --ifm-font-size-base: 16px;
   --ifm-line-height-base: 1.8;
-}
-
-/* 深色模式配置 */
-[data-theme='dark'] {
-  --ifm-color-primary: #fe930f;
-  --ifm-color-primary-dark: #f18601;
-  --ifm-color-primary-darker: #e47e01;
-  --ifm-color-primary-darkest: #bc6801;
-  --ifm-color-primary-light: #fe9f2a;
-  --ifm-color-primary-lighter: #fea537;
-  --ifm-color-primary-lightest: #feb75f;
-
-  --background-color: #000000;  /* 深色模式背景色 */
-  --text-color: #e4e4e4;        /* 深色模式文字色 */
 }
 
 /* 全局樣式 */
 body {
   background-color: var(--background-color);
   color: var(--text-color);
+  font-size: var(--ifm-font-size-base);
+  line-height: var(--ifm-line-height-base);
+  margin: 0;
+  padding: 0;
 }
 
 body .container {
@@ -42,14 +32,14 @@ body .container {
 }
 
 h1, h2, h3 {
-  color: var(--ifm-color-primary); /* 全局標題顏色設定 */
+  color: var(--ifm-color-primary);
 }
 
 a {
   color: var(--ifm-color-primary);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
-
 a:hover {
   color: var(--ifm-color-primary-light);
 }
@@ -58,7 +48,6 @@ a:hover {
   color: inherit;
   text-decoration: none;
 }
-
 .navbar a:hover {
   color: var(--ifm-color-primary);
   text-decoration: underline;
@@ -68,15 +57,18 @@ a:hover {
 .hero {
   background-color: var(--ifm-color-primary);
   color: #ffffff;
+  padding: 4rem 1rem;
+  text-align: center;
 }
 
-/* 首頁標題和按鈕樣式 */
 .hero h1, .hero h2, .hero h3 {
   color: #ffffff;
 }
 
-.markdown h2{font-size : 1.6rem;}
-.markdown h3{
+.markdown h2 {
+  font-size: 1.6rem;
+}
+.markdown h3 {
   font-size: 1.4rem;
   border-left: 5px solid var(--ifm-color-primary-lightest);
   padding: 5px 0 5px 7px;
@@ -87,18 +79,18 @@ a:hover {
   display: none;
 }
 
-/* 移除博客列表和標籤頁的超連結懸停裝飾 */
+/* 移除博客列表和標籤頁的超連結懸停下的下劃線 */
 .blog-list-page a:hover,
 .blog-tags-post-list-page a:hover {
   text-decoration: none;
 }
 
-/* 統一文章標題和段落的顏色 */
+/* 統一文章標題和段落的顏色，在 blog 列表中 */
 .blog-list-page article header,
 .blog-list-page article p,
 .blog-tags-post-list-page header,
 .blog-tags-post-list-page article p {
-  color: var(--font-color-base);
+  color: var(--text-color);
 }
 
 /* 設定文章標題的字體大小 */
@@ -109,10 +101,10 @@ a:hover {
   font-size: 1.2rem;
 }
 
-/* 設定H2標籤的行高 */
+/* 設定H2標籤的行高 (針對 blog 列表標題) */
 .blog-list-page header h2,
 .blog-tags-post-list-page header h2 {
-  line-height: 0.9rem;
+  line-height: 1.2;
 }
 
 /* 文章懸停時標題顏色變更 */
@@ -127,7 +119,7 @@ a:hover {
   margin-top: 0;
 }
 
-/* 響應式設計: 雙欄顯示 */
+/* 響應式三欄顯示 (若需要雙欄可調整) */
 @media (min-width: 651px) {
   .blog-list-page main,
   .blog-tags-post-list-page main {
@@ -153,44 +145,43 @@ a:hover {
   }
 }
 
+/* Avatar樣式 */
 .avatar {
-  padding: 0px; /* 內距 */
-  margin: 0px; /* 外距 */
-  align-items: center;   /* 垂直居中 */
+  padding: 0;
+  margin: 0;
+  align-items: center;
 }
 
-/* 調整姓名文字大小 */
+/* 調整姓名和職稱文字大小 */
 .avatar__name span {
-  font-size: 1rem; /* 設定文字大小 */
+  font-size: 1rem;
 }
-
-/* 調整職稱文字大小 */
 .avatar__subtitle {
-  font-size: 0.7rem; /* 設定文字大小 */
+  font-size: 0.7rem;
 }
 
 .avatar__photo {
-  width: 40px; /* 設定圖片寬度 */
-  height: 40px; /* 設定圖片高度 */
-  border-radius: 50%; /* 讓圖片顯示為圓形 */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
-/* 確保分頁導航在Grid容器中正確對齊 */
+/* 分頁導航 */
 .pagination-nav {
-  grid-column: 1 / -1; /* 如果分頁導航應該橫跨所有列 */
+  grid-column: 1 / -1;
 }
 
+/* Code-block highlight line */
 .token-line.theme-code-block-highlighted-line {
   background-color: #feb75f;
 }
 
-
-/* 調整 Timeline 的節點樣式 */
+/* Timeline 節點樣式 */
 .ant-timeline-item-head {
   background-color: #6fba1c !important;
 }
 
-/* 調整鏈接的樣式 */
+/* Timeline 內容中鏈接 */
 .ant-timeline-item-content a {
   color: #333;
   font-size: 1.2em;
@@ -198,8 +189,6 @@ a:hover {
   text-decoration: none;
   transition: color 0.3s ease;
 }
-
-/* 懸停效果 */
 .ant-timeline-item-content a:hover {
   color: #fe930f;
 }

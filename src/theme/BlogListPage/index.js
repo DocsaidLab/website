@@ -15,14 +15,16 @@ function BlogListPageContent(props) {
           const {title, description, image, tags} = frontMatter;
           const {permalink, readingTime, authors} = metadata;
 
-          // 確保 authors 為陣列
           const authorsArray = Array.isArray(authors) ? authors : (authors ? [authors] : []);
 
           return (
             <div className={styles.blogCard} key={permalink}>
               {image && (
                 <div className={styles.blogCardImageWrapper}>
-                  <img className={styles.blogCardImage} src={image} alt={title} />
+                  {/* 將 img 包在 Link 中，使整個圖片可點擊 */}
+                  <Link to={permalink}>
+                    <img className={styles.blogCardImage} src={image} alt={title} />
+                  </Link>
                 </div>
               )}
               <div className={styles.blogCardContent}>
@@ -31,7 +33,6 @@ function BlogListPageContent(props) {
                 </h2>
                 {description && <p className={styles.blogCardDescription}>{description}</p>}
 
-                {/* 若有 tags，顯示 tags 區塊 */}
                 {tags && tags.length > 0 && (
                   <div className={styles.blogCardTags}>
                     {tags.map((tag) => (

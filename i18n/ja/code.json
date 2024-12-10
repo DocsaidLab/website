@@ -472,5 +472,13 @@
   "homepage.tagline": {
     "message": "ここは私たちのテクノロジーの遊び場です",
     "description": "Title for homepage tagline"
+  },
+  "homepage.recentUpdatesTitle": {
+    "message": "最近の論文更新",
+    "description": "Title for homepage recent updates"
+  },
+  "homepage.latestBlogPostsTitle": {
+    "message": "最新のブログ記事",
+    "description": "Title for homepage latest blog posts"
   }
 }

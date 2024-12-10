@@ -1,3 +1,4 @@
+import Link from '@docusaurus/Link';
 import {
   BlogPostProvider,
   useBlogPost,
@@ -13,20 +14,86 @@ import ContentVisibility from '@theme/ContentVisibility';
 import TOC from '@theme/TOC';
 import clsx from 'clsx';
 import React from 'react';
-
+import styles from './index.module.css';
 
 function BlogPostPageContent({sidebar, children}) {
-  const {metadata, toc} = useBlogPost();
-  const {nextItem, prevItem, frontMatter} = metadata;
+  const {metadata, toc, frontMatter = {}} = useBlogPost();
+  const {nextItem, prevItem} = metadata;
+
+  // 解構frontMatter時提供預設值以防止undefined
   const {
-    hide_table_of_contents: hideTableOfContents,
-    toc_min_heading_level: tocMinHeadingLevel,
-    toc_max_heading_level: tocMaxHeadingLevel,
-    no_comments
+    hide_table_of_contents: hideTableOfContents = false,
+    toc_min_heading_level: tocMinHeadingLevel = 2,
+    toc_max_heading_level: tocMaxHeadingLevel = 3,
+    no_comments = false,
+    image
   } = frontMatter;
+
+  const {title, description, authors, date, readingTime, tags} = metadata;
+  const authorsArray = Array.isArray(authors) ? authors : (authors ? [authors] : []);
+
+  // Hero 區塊
+  const hero = image && (
+    <div className={styles.postHero} style={{ backgroundImage: `url(${image})` }}>
+      <div className={styles.postHeroOverlay}>
+        <h1 className={styles.postTitle}>{title}</h1>
+        <div className={styles.postMeta}>
+          {authorsArray.length > 0 && (
+            <div className={styles.postAuthors}>
+              {authorsArray.map((author, idx) => {
+                const authorName = author.name;
+                const authorURL = author.url;
+                return (
+                  <div className={styles.postAuthor} key={idx}>
+                    {author.imageURL && (
+                      <img className={styles.postAuthorImg} src={author.imageURL} alt={authorName}/>
+                    )}
+                    {authorURL ? (
+                      <a href={authorURL} target="_blank" rel="noopener noreferrer" className={styles.postAuthorLink}>
+                        <span className={styles.postAuthorName}>{authorName}</span>
+                      </a>
+                    ) : (
+                      <span className={styles.postAuthorName}>{authorName}</span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          <div className={styles.postMetaInfo}>
+            <div className={styles.postMetaRow}>
+              {date && (
+                <span className={styles.postDate}>
+                  {new Date(date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric'})}
+                </span>
+              )}
+              {readingTime && (
+                <span className={styles.postReadingTime}>
+                  {Math.ceil(readingTime)} min read
+                </span>
+              )}
+            </div>
+
+            {tags && tags.length > 0 && (
+              <div className={styles.postTags}>
+                {tags.map((tag) => (
+                  <Link to={tag.permalink} key={tag.label} className={styles.postTag}>
+                    {tag.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <BlogLayout
       sidebar={sidebar}
+      hero={hero} // 將 hero 傳入 BlogLayout
       toc={
         !hideTableOfContents && toc.length > 0 ? (
           <TOC
@@ -38,11 +105,11 @@ function BlogPostPageContent({sidebar, children}) {
       }>
       <ContentVisibility metadata={metadata} />
 
-      <BlogPostItem>{children}</BlogPostItem>
+      <article className="markdown" style={{maxWidth: '800px', margin: '2rem auto'}}>
+        <BlogPostItem>{children}</BlogPostItem>
+      </article>
 
-      {!no_comments && (
-        <GiscusComment />
-      )}
+      {!no_comments && <GiscusComment />}
 
       {(nextItem || prevItem) && (
         <BlogPostPaginator nextItem={nextItem} prevItem={prevItem} />
@@ -50,8 +117,9 @@ function BlogPostPageContent({sidebar, children}) {
     </BlogLayout>
   );
 }
+
 export default function BlogPostPage(props) {
-  const BlogPostContent = props.content;
+  const {content: BlogPostContent} = props;
   return (
     <BlogPostProvider content={props.content} isBlogPostPage>
       <HtmlClassNameProvider

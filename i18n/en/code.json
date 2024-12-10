@@ -476,5 +476,13 @@
   "homepage.tagline": {
     "message": "A playground for our developers.",
     "description": "Title for homepage tagline"
+  },
+  "homepage.recentUpdatesTitle": {
+    "message": "Recent Paper Updates",
+    "description": "Title for homepage recent updates"
+  },
+  "homepage.latestBlogPostsTitle": {
+    "message": "Recent Blog Posts",
+    "description": "Title for homepage latest blog posts"
   }
 }

@@ -41,7 +41,7 @@ const config = {
           showReadingTime: true,
           blogSidebarTitle: 'All our Posts',
           blogSidebarCount: 'ALL',
-          postsPerPage: 9,
+          postsPerPage: 12,
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
         },

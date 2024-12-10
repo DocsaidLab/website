@@ -3,11 +3,20 @@
  * and scoped locally.
  */
 
+/* Hero Banner: 恢復較接近原始設計的風格 */
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background-color: var(--ifm-color-primary);
+  color: #ffffff;
+}
+
+.heroBanner h1,
+.heroBanner h2,
+.heroBanner h3 {
+  color: #ffffff;
 }
 
 @media screen and (max-width: 996px) {
@@ -16,8 +25,111 @@
   }
 }
 
-.buttons {
+/* Buttons */
+.buttons .button {
+  border-radius: 1.5rem;
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  transition: background 0.3s ease;
+}
+
+.buttons .button.button--secondary {
+  background: #fff;
+  color: var(--ifm-color-primary) !important;
+  border: none;
+}
+
+.buttons .button.button--secondary:hover {
+  background: var(--ifm-color-primary-light);
+  color: #ffffff !important;
+}
+
+/* Two-Column Layout */
+.twoColumnLayout {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 3rem auto;
+  max-width: 1200px;
+  transition: all 0.3s ease;
+}
+
+.leftColumn,
+.rightColumn {
+  flex: 1 1 45%;
+  min-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .twoColumnLayout {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+/* Timeline Section */
+.timelineSection {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease;
+  max-height: 600px;       /* 限制卡片高度 */
+  overflow-y: auto;        /* 超出範圍時顯示捲軸 */
+}
+
+.timelineSection:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.timelineTitle {
+  text-align: left;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  color: var(--ifm-color-primary-darkest);
+}
+
+.timelineItemContent {
+  padding: 0.5rem 0;
+  display: inline-block;
+}
+
+.timelineItemContent a {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--ifm-color-primary-darker);
+  transition: color 0.2s ease;
+}
+
+.timelineItemContent a:hover {
+  color: var(--ifm-color-primary-light);
+}
+
+/* Demo Section */
+.demoSection {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease;
+  max-height: 600px;       /* 限制卡片高度 */
+  overflow-y: auto;        /* 超出範圍時顯示捲軸 */
+}
+
+.demoSection:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.demoSection h2 {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  color: var(--ifm-color-primary-darkest);
+}
+
+.demoDescription p {
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  line-height: 1.6;
 }

@@ -7,29 +7,25 @@ import BlogPostItemHeader from '@theme/BlogPostItem/Header';
 import clsx from 'clsx';
 import React from 'react';
 
-
 // apply a bottom margin in list view
 function useContainerClassName() {
   const {isBlogPostPage} = useBlogPost();
   return !isBlogPostPage ? 'margin-bottom--xl' : undefined;
 }
-export default function BlogPostItem({
-  children,
-  className}
-) {
 
+export default function BlogPostItem({ children, className }) {
   const containerClassName = useContainerClassName();
-  const {metadata,frontMatter,isBlogPostPage} = useBlogPost();
+  const {metadata, frontMatter, isBlogPostPage} = useBlogPost();
 
   return (
     <BlogPostItemContainer className={clsx(containerClassName, className)}>
       {isBlogPostPage ? (
+        // 在文章內頁只顯示文章內容，不顯示標題、作者、日期等資訊
         <div>
-          <BlogPostItemHeader />
           <BlogPostItemContent>{children}</BlogPostItemContent>
-          <BlogPostItemFooter />
         </div>
       ) : (
+        // 列表模式下的行為保持不變，或可依需求精簡
         <div>
           <a href={metadata.permalink}>
             {frontMatter.image && (
