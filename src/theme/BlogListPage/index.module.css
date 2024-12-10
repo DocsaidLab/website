@@ -1,0 +1,122 @@
+.blogCardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+  gap: 20px;
+  margin: 2rem 0;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.blogCard {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s ease;
+}
+
+.blogCard:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.blogCardImageWrapper {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.blogCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.blogCardContent {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.blogCardTitle {
+  margin: 0 0 0.5em;
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #1d428a;
+}
+
+.blogCardTitle a {
+  color: #1d428a;
+  text-decoration: none;
+}
+
+.blogCardTitle a:hover {
+  text-decoration: underline;
+}
+
+.blogCardDescription {
+  margin: 0 0 0.5em;
+  color: rgba(0,0,0,0.7);
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* Tags 區塊 */
+.blogCardTags {
+  margin-bottom: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.blogCardTag {
+  font-size: 0.85rem;
+  background: #f0f0f0;
+  color: #333;
+  border-radius: 4px;
+  padding: 2px 6px;
+  text-transform: lowercase;
+}
+
+/* 作者與閱讀時間區塊 */
+.blogCardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+  margin-top: auto;
+}
+
+.blogCardAuthors {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.blogCardAuthor {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.blogCardAuthorImg {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.blogCardAuthorName {
+  font-size: 0.9rem;
+  color: rgba(0,0,0,0.8);
+}
+
+.blogCardReadingTime {
+  font-size: 0.9rem;
+  color: rgba(0,0,0,0.6);
+}

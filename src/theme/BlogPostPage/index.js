@@ -1,30 +1,21 @@
-import type { BlogSidebar } from '@docusaurus/plugin-content-blog';
 import {
   BlogPostProvider,
   useBlogPost,
 } from '@docusaurus/plugin-content-blog/client';
 import { HtmlClassNameProvider, ThemeClassNames } from '@docusaurus/theme-common';
+import GiscusComment from '@site/src/components/GiscusComment';
 import BlogLayout from '@theme/BlogLayout';
 import BlogPostItem from '@theme/BlogPostItem';
-import type { Props } from '@theme/BlogPostPage';
 import BlogPostPageMetadata from '@theme/BlogPostPage/Metadata';
 import BlogPostPageStructuredData from '@theme/BlogPostPage/StructuredData';
 import BlogPostPaginator from '@theme/BlogPostPaginator';
 import ContentVisibility from '@theme/ContentVisibility';
 import TOC from '@theme/TOC';
 import clsx from 'clsx';
-import React, { type ReactNode } from 'react';
-
-import GiscusComment from '@site/src/components/GiscusComment';
+import React from 'react';
 
 
-function BlogPostPageContent({
-  sidebar,
-  children,
-}: {
-  sidebar: BlogSidebar;
-  children: ReactNode;
-}): JSX.Element {
+function BlogPostPageContent({sidebar, children}) {
   const {metadata, toc} = useBlogPost();
   const {nextItem, prevItem, frontMatter} = metadata;
   const {
@@ -59,8 +50,7 @@ function BlogPostPageContent({
     </BlogLayout>
   );
 }
-
-export default function BlogPostPage(props: Props): JSX.Element {
+export default function BlogPostPage(props) {
   const BlogPostContent = props.content;
   return (
     <BlogPostProvider content={props.content} isBlogPostPage>
