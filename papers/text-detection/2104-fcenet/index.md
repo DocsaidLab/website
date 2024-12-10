@@ -1,4 +1,7 @@
-# [21.04] FCENet
+---
+title: "[21.04] FCENet"
+authors: Zephyr
+---
 
 ## 傅立葉的指引
 

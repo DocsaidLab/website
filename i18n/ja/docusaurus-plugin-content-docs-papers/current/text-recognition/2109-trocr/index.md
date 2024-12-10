@@ -1,4 +1,7 @@
-# [21.09] TrOCR
+---
+title: "[21.09] TrOCR"
+authors: Zephyr
+---
 
 ## 事前訓練が正義
 

@@ -1,4 +1,7 @@
-# [22.03] CoCoOp
+---
+title: "[22.03] CoCoOp"
+authors: Zephyr
+---
 
 ## 先に画像を見てから話す
 

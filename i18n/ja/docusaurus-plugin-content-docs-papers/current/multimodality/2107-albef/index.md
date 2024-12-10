@@ -1,4 +1,7 @@
-# [21.07] ALBEF
+---
+title: "[21.07] ALBEF"
+authors: Zephyr
+---
 
 ## 純粋な道を追い求める
 

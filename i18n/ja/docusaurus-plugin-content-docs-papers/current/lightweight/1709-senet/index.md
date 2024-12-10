@@ -1,4 +1,7 @@
-# [17.09] SENet
+---
+title: "[17.09] SENet"
+authors: Zephyr
+---
 
 ## 強く絞ってください
 

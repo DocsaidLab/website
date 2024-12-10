@@ -1,4 +1,7 @@
-# [19.12] UNet++
+---
+title: "[19.12] UNet++"
+authors: Zephyr
+---
 
 ## 微妙なウェブスピナー
 

@@ -1,4 +1,7 @@
-# [20.06] ERNIE-ViL
+---
+title: "[20.06] ERNIE-ViL"
+authors: Zephyr
+---
 
 ## The Double-Edged Sword of Knowledge
 

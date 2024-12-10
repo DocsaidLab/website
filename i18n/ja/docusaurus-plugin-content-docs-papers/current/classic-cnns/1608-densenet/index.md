@@ -1,4 +1,7 @@
-# [16.08] DenseNet
+---
+title: "[16.08] DenseNet"
+authors: Zephyr
+---
 
 ## すべて繋げる
 

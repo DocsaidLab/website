@@ -1,4 +1,7 @@
-# [17.06] Transformer
+---
+title: "[17.06] Transformer"
+authors: Zephyr
+---
 
 ## 新世界の起点
 

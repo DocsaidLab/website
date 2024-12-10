@@ -1,4 +1,7 @@
-# [19.07] RoBERTa
+---
+title: "[19.07] RoBERTa"
+authors: Zephyr
+---
 
 ## BERT のトレーニングの説明書
 

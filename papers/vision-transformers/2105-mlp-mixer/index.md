@@ -1,4 +1,7 @@
-# [21.05] MLP-Mixer
+---
+title: "[21.05] MLP-Mixer"
+authors: Zephyr
+---
 
 ## 少虧就是賺
 

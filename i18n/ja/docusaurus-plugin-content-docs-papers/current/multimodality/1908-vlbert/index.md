@@ -1,4 +1,7 @@
-# [19.08] VL-BERT
+---
+title: "[19.08] VL-BERT"
+authors: Zephyr
+---
 
 ## 幕間の視聴者
 

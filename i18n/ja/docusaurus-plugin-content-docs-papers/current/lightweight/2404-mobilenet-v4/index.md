@@ -1,4 +1,7 @@
-# [24.04] MobileNet-V4
+---
+title: "[24.04] MobileNet-V4"
+authors: Zephyr
+---
 
 ## 五年後の継承
 

@@ -1,4 +1,7 @@
-# [22.07] PARSeq
+---
+title: "[22.07] PARSeq"
+authors: Zephyr
+---
 
 ## 文字的序順不影閱響讀
 

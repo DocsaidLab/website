@@ -1,4 +1,7 @@
-# [19.11] DBNet
+---
+title: "[19.11] DBNet"
+authors: Zephyr
+---
 
 ## Differentiable Binarization Function
 

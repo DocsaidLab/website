@@ -1,4 +1,7 @@
-# [21.09] PP-LCNet
+---
+title: "[21.09] PP-LCNet"
+authors: Zephyr
+---
 
 ## 速度の限界を探る
 

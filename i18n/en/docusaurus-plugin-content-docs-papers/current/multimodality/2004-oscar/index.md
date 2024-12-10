@@ -1,4 +1,7 @@
-# [20.04] Oscar
+---
+title: "[20.04] Oscar"
+authors: Zephyr
+---
 
 ## The Anchors of Oscar
 

@@ -1,4 +1,7 @@
-# [20.09] TextFuseNet
+---
+title: "[20.09] TextFuseNet"
+authors: Zephyr
+---
 
 ## 華麗融合三重奏
 

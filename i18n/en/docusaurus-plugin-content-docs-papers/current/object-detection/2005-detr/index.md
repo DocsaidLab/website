@@ -1,4 +1,7 @@
-# [20.05] DETR
+---
+title: "[20.05] DETR"
+authors: Zephyr
+---
 
 ## A Foundation Across Domains
 

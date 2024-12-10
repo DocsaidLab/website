@@ -1,4 +1,7 @@
-# [21.01] Fast DETR
+---
+title: "[21.01] Fast DETR"
+authors: Zephyr
+---
 
 ## 摻點高斯吧！
 

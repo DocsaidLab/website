@@ -1,4 +1,7 @@
-# [21.07] YATR
+---
+title: "[21.07] YATR"
+authors: Zephyr
+---
 
 ## Fake Can't Replace the Real
 

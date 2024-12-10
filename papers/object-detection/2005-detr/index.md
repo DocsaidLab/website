@@ -1,4 +1,7 @@
-# [20.05] DETR
+---
+title: "[20.05] DETR"
+authors: Zephyr
+---
 
 ## 跨領域的奠基者
 

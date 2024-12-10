@@ -1,4 +1,7 @@
-# [18.01] MobileNet-V2
+---
+title: "[18.01] MobileNet-V2"
+authors: Zephyr
+---
 
 ## Refining the Bottleneck
 

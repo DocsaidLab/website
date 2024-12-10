@@ -1,4 +1,7 @@
-# [16.12] YOLO-V2
+---
+title: "[16.12] YOLO-V2"
+authors: Zephyr
+---
 
 ## 大量カテゴリの拡張
 

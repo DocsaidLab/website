@@ -1,4 +1,7 @@
-# [21.07] TextBPN
+---
+title: "[21.07] TextBPN"
+authors: Zephyr
+---
 
 ## グラフ畳み込みの再考
 

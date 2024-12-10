@@ -1,4 +1,7 @@
-# [23.01] BLIP-2
+---
+title: "[23.01] BLIP-2"
+authors: Zephyr
+---
 
 ## Q-Former debuts
 

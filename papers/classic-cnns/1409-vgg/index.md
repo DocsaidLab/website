@@ -1,4 +1,7 @@
-# [14.09] VGG
+---
+title: "[14.09] VGG"
+authors: Zephyr
+---
 
 ## 很深，還要更深
 

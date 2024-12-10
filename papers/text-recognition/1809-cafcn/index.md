@@ -1,4 +1,7 @@
-# [18.09] CA-FCN
+---
+title: "[18.09] CA-FCN"
+authors: Zephyr
+---
 
 ## 引入新的維度
 

@@ -1,4 +1,7 @@
-# [20.01] Scaling Laws
+---
+title: "[20.01] Scaling Laws"
+authors: Zephyr
+---
 
 ## Scaling Laws for Neural Language Models
 

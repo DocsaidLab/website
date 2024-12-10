@@ -1,4 +1,7 @@
-# [18.01] CosFace
+---
+title: "[18.01] CosFace"
+authors: Zephyr
+---
 
 ## 大餘弦損失
 

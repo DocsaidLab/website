@@ -1,4 +1,7 @@
-# [22.01] ConvNeXt
+---
+title: "[22.01] ConvNeXt"
+authors: Zephyr
+---
 
 ## Making Convolutions Great Again
 

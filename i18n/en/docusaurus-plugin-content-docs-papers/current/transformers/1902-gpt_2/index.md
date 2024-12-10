@@ -1,4 +1,7 @@
-# [19.02] GPT-2
+---
+title: "[19.02] GPT-2"
+authors: Zephyr
+---
 
 ## Forty-Eight Layers of Decoders
 

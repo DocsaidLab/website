@@ -1,4 +1,7 @@
-# [17.07] ShuffleNet
+---
+title: "[17.07] ShuffleNet"
+authors: Zephyr
+---
 
 ## 通道洗牌網路
 

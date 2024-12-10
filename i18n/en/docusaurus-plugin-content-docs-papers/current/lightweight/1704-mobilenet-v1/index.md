@@ -1,4 +1,7 @@
-# [17.04] MobileNet-V1
+---
+title: "[17.04] MobileNet-V1"
+authors: Zephyr
+---
 
 ## Pioneers of Depthwise Separable Convolutions
 

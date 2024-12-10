@@ -1,4 +1,7 @@
-# [23.08] DTrOCR
+---
+title: "[23.08] DTrOCR"
+authors: Zephyr
+---
 
 ## Decoder-Only Approach
 

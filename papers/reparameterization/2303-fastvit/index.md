@@ -1,4 +1,7 @@
-# [23.03] FastViT
+---
+title: "[23.03] FastViT"
+authors: Zephyr
+---
 
 ## 重新參數化的 ViT 試驗
 

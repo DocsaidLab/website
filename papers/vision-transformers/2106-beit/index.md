@@ -1,4 +1,7 @@
-# [21.06] BEiT
+---
+title: "[21.06] BEiT"
+authors: Zephyr
+---
 
 ## 離散編碼預訓練
 

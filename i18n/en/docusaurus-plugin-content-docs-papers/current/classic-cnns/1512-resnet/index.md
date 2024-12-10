@@ -1,4 +1,7 @@
-# [15.12] ResNet
+---
+title: "[15.12] ResNet"
+authors: Zephyr
+---
 
 ## Convolutional with 100 Layers
 

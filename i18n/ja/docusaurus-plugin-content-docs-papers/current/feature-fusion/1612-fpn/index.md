@@ -1,4 +1,7 @@
-# [16.12] FPN
+---
+title: "[16.12] FPN"
+authors: Zephyr
+---
 
 ## ピラミッド構造
 

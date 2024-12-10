@@ -1,4 +1,7 @@
-# [21.09] CoOp
+---
+title: "[21.09] CoOp"
+authors: Zephyr
+---
 
 ## 搖曳的呢喃
 

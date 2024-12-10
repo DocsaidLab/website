@@ -1,4 +1,7 @@
-# [15.05] U-Net
+---
+title: "[15.05] U-Net"
+authors: Zephyr
+---
 
 ## 融合の序章
 

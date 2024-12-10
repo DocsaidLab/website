@@ -1,21 +1,21 @@
 .docAuthor {
   display: flex;
-  align-items: center; /* 改為center，使圖像與文字垂直置中對齊 */
-  margin-bottom: 2rem; /* 縮小距離讓整體更緊湊 */
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
 .docAuthorImg {
-  width: 60px; /* 稍微縮小頭像尺寸 */
+  width: 60px;
   height: 60px;
   border-radius: 50%;
-  margin-right: 0.75rem; /* 減少右側間距，讓文字更貼近圖像 */
+  margin-right: 0.75rem;
   object-fit: cover;
 }
 
 .docAuthorName {
-  font-weight: 600; /* 稍提升字重使重點更突出 */
-  font-size: 1rem; /* 稍微縮小字體，減少空間感 */
-  margin-bottom: 0.25rem; /* 保留一點下邊距即可 */
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
   color: #111;
 }
 
@@ -31,14 +31,14 @@
 .docAuthorTitle {
   font-size: 0.85rem;
   color: #555;
-  margin-bottom: 0.25rem; /* 縮小下邊距 */
-  line-height: 1.2; /* 縮小行高讓空間更緊密 */
+  margin-bottom: 0.25rem;
+  line-height: 1.2;
 }
 
 .docAuthorDesc {
   font-size: 0.85rem;
   color: #333;
-  margin-bottom: 0.4rem; /* 稍微縮小 */
+  margin-bottom: 0.4rem;
   line-height: 1.4;
 }
 
@@ -46,7 +46,7 @@
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  align-items: center; /* 確保社群圖示群組也垂直置中 */
+  align-items: center;
 }
 
 .docAuthorSocialLink {
@@ -54,14 +54,9 @@
   align-items: center;
   text-decoration: none;
   color: inherit;
-  line-height: 1; /* 確保圖示不會受行高影響 */
+  line-height: 1;
 }
 
 .docAuthorSocialLink:hover {
   color: var(--ifm-color-primary);
 }
-
-/* 若發現圖示仍有對齊問題，可嘗試以下設定 */
-/*.docAuthorSocialLink svg {
-  display: block;
-}*/

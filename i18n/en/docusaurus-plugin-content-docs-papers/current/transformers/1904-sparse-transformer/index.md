@@ -1,4 +1,7 @@
-# [19.04] Sparse Transformer
+---
+title: "[19.04] Sparse Transformer"
+authors: Zephyr
+---
 
 ## Sparse Attention Mechanism
 

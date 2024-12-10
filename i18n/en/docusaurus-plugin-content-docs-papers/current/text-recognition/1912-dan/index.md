@@ -1,4 +1,7 @@
-# [19.12] DAN
+---
+title: "[19.12] DAN"
+authors: Zephyr
+---
 
 ## They Cannot Be Together
 

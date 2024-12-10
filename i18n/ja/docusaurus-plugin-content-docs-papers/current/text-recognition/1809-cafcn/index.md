@@ -1,4 +1,7 @@
-# [18.09] CA-FCN
+---
+title: "[18.09] CA-FCN"
+authors: Zephyr
+---
 
 ## 新しい次元の導入
 

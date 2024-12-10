@@ -1,4 +1,7 @@
-# [18.06] GPT-1
+---
+title: "[18.06] GPT-1"
+authors: Zephyr
+---
 
 ## Twelve-Layer Decoder
 

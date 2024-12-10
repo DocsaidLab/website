@@ -1,4 +1,7 @@
-# [22.01] SAFL
+---
+title: "[22.01] SAFL"
+authors: Zephyr
+---
 
 ## 來點 Focal Loss 吧！
 

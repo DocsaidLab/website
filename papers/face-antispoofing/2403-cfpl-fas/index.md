@@ -1,4 +1,7 @@
-# [24.03] CFPL-FAS
+---
+title: "[24.03] CFPL-FAS"
+authors: Zephyr
+---
 
 ## 無類別提示學習
 

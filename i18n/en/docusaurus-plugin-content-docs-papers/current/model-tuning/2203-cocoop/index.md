@@ -1,4 +1,7 @@
-# [22.03] CoCoOp
+---
+title: "[22.03] CoCoOp"
+authors: Zephyr
+---
 
 ## Read the image first
 

@@ -1,4 +1,7 @@
-# [21.10] MobileViT
+---
+title: "[21.10] MobileViT"
+authors: Zephyr
+---
 
 ## 設計変更による畳み込みカーネルの変更
 

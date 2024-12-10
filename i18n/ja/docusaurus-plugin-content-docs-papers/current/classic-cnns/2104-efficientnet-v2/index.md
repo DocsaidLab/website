@@ -1,4 +1,7 @@
-# [21.04] EfficientNet-V2
+---
+title: "[21.04] EfficientNet-V2"
+authors: Zephyr
+---
 
 ## 深層畳み込みの這い進み
 

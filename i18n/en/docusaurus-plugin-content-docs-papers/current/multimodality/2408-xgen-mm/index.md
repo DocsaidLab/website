@@ -1,4 +1,7 @@
-# [24.08] xGen-MM
+---
+title: "[24.08] xGen-MM"
+authors: Zephyr
+---
 
 ## Also Known As BLIP-3
 

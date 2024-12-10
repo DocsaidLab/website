@@ -1,4 +1,7 @@
-# [22.01] ConvNeXt
+---
+title: "[22.01] ConvNeXt"
+authors: Zephyr
+---
 
 ## 卷積を再び偉大に
 

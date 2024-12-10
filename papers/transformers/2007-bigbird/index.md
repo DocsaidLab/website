@@ -1,4 +1,7 @@
-# [20.07] BigBird
+---
+title: "[20.07] BigBird"
+authors: Zephyr
+---
 
 ## 大鳥注意力機制
 

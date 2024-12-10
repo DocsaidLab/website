@@ -1,4 +1,7 @@
-# [12.09] AlexNet
+---
+title: "[12.09] AlexNet"
+authors: Zephyr
+---
 
 ## The Rise of Convolutional Networks
 

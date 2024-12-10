@@ -1,4 +1,7 @@
-# [19.08] PAN
+---
+title: "[19.08] PAN"
+authors: Zephyr
+---
 
 ## 像素聚合策略
 

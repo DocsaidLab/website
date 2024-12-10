@@ -1,4 +1,7 @@
-# [20.03] DRRG
+---
+title: "[20.03] DRRG"
+authors: Zephyr
+---
 
 ## グラフ畳み込みの初探
 

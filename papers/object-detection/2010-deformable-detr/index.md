@@ -1,4 +1,7 @@
-# [20.10] Deformable DETR
+---
+title: "[20.10] Deformable DETR"
+authors: Zephyr
+---
 
 ## 可變形的注意力機制
 

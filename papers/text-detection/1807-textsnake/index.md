@@ -1,4 +1,7 @@
-# [18.07] TextSnake
+---
+title: "[18.07] TextSnake"
+authors: Zephyr
+---
 
 ## 文字蛇
 

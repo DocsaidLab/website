@@ -1,4 +1,7 @@
-# [20.08] HiPPO
+---
+title: "[20.08] HiPPO"
+authors: Zephyr
+---
 
 ## Hippo's Memory
 

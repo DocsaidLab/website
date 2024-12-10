@@ -1,4 +1,7 @@
-# [21.08] Mobile-Former
+---
+title: "[21.08] Mobile-Former"
+authors: Zephyr
+---
 
 ## 雙向連通橋
 

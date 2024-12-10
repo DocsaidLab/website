@@ -1,4 +1,7 @@
-# [23.03] FastViT
+---
+title: "[23.03] FastViT"
+authors: Zephyr
+---
 
 ## 再パラメータ化された ViT の実験
 

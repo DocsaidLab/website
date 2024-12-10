@@ -1,4 +1,7 @@
-# [14.11] FCN
+---
+title: "[14.11] FCN"
+authors: Zephyr
+---
 
 ## 全卷積網路
 

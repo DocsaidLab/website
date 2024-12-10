@@ -1,4 +1,7 @@
-# [21.08] SimVLM
+---
+title: "[21.08] SimVLM"
+authors: Zephyr
+---
 
 ## Simplifying Things
 

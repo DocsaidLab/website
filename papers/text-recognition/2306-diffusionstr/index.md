@@ -1,4 +1,7 @@
-# [23.06] DiffusionSTR
+---
+title: "[23.06] DiffusionSTR"
+authors: Zephyr
+---
 
 ## 噪聲中的文字訊號
 

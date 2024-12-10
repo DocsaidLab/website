@@ -1,4 +1,7 @@
-# [19.06] XLNet
+---
+title: "[19.06] XLNet"
+authors: Zephyr
+---
 
 ## 双流注意機構
 

@@ -1,4 +1,7 @@
-# [20.08] HiPPO
+---
+title: "[20.08] HiPPO"
+authors: Zephyr
+---
 
 ## 河馬的記憶
 

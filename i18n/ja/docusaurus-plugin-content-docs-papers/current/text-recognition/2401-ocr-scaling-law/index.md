@@ -1,4 +1,7 @@
-# [24.01] OCR Scaling Law
+---
+title: "[24.01] OCR Scaling Law"
+authors: Zephyr
+---
 
 ## OCR のモデルスケーリング法則
 

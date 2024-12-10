@@ -1,4 +1,7 @@
-# [14.11] FCN
+---
+title: "[14.11] FCN"
+authors: Zephyr
+---
 
 ## Fully Convolutional Networks
 

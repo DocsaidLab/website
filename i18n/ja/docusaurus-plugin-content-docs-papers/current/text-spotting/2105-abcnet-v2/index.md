@@ -1,4 +1,7 @@
-# [21.05] ABCNet v2
+---
+title: "[21.05] ABCNet v2"
+authors: Zephyr
+---
 
 ## 一ビットの攻防
 

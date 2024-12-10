@@ -1,4 +1,7 @@
-# [20.04] Pixel-BERT
+---
+title: "[20.04] Pixel-BERT"
+authors: Zephyr
+---
 
 ## 像素之語
 

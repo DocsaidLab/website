@@ -1,4 +1,7 @@
-# [19.04] WWWSTR
+---
+title: "[19.04] WWWSTR"
+authors: Zephyr
+---
 
 ## データセットとモデルの分析
 

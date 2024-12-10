@@ -1,4 +1,7 @@
-# [19.11] EfficientDet
+---
+title: "[19.11] EfficientDet"
+authors: Zephyr
+---
 
 ## BiFPN こそが本体
 

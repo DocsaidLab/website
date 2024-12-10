@@ -1,4 +1,7 @@
-# [18.10] BERT
+---
+title: "[18.10] BERT"
+authors: Zephyr
+---
 
 ## 十二層編碼器
 

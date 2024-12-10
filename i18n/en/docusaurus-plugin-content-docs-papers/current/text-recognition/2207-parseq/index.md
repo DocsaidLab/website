@@ -1,4 +1,7 @@
-# [22.07] PARSeq
+---
+title: "[22.07] PARSeq"
+authors: Zephyr
+---
 
 ## Wrod oerdr dseon't mteartr for redaing
 

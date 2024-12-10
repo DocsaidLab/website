@@ -1,4 +1,7 @@
-# [18.01] ArcFace
+---
+title: "[18.01] ArcFace"
+authors: Zephyr
+---
 
 ## Additive Angular Margin Loss
 

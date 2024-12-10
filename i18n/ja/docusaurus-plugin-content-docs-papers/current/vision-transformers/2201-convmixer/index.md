@@ -1,4 +1,7 @@
-# [22.01] ConvMixer
+---
+title: "[22.01] ConvMixer"
+authors: Zephyr
+---
 
 ## コンボリューションミキサー
 

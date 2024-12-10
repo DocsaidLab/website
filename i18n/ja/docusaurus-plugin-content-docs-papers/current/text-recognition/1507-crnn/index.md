@@ -1,4 +1,7 @@
-# [15.07] CRNN
+---
+title: "[15.07] CRNN"
+authors: Zephyr
+---
 
 ## 私は全部欲しい！
 

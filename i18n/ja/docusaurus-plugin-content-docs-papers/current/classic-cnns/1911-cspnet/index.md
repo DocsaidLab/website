@@ -1,4 +1,7 @@
-# [19.11] CSPNet
+---
+title: "[19.11] CSPNet"
+authors: Zephyr
+---
 
 ## 半半半プラグイン
 

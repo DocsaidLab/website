@@ -1,4 +1,7 @@
-# [22.06] MobileOne
+---
+title: "[22.06] MobileOne"
+authors: Zephyr
+---
 
 ## One Millisecond Optimization
 

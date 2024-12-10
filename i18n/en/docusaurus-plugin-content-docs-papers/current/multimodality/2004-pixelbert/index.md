@@ -1,4 +1,7 @@
-# [20.04] Pixel-BERT
+---
+title: "[20.04] Pixel-BERT"
+authors: Zephyr
+---
 
 ## The Language of Pixels
 

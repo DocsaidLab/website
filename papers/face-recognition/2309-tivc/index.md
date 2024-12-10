@@ -1,4 +1,7 @@
-# [23.09] TIVC-DCNNSH
+---
+title: "[23.09] TIVC-DCNNSH"
+authors: Zephyr
+---
 
 ## 雙胞胎辨識的觀點
 

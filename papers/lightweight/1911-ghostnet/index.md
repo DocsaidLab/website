@@ -1,4 +1,7 @@
-# [19.11] GhostNet
+---
+title: "[19.11] GhostNet"
+authors: Zephyr
+---
 
 ## 特徵圖中的幽靈
 

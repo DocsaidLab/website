@@ -1,4 +1,7 @@
-# [21.05] MLP-Mixer
+---
+title: "[21.05] MLP-Mixer"
+authors: Zephyr
+---
 
 ## Less Loss is Gain
 

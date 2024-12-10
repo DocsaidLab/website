@@ -1,4 +1,7 @@
-# [15.02] BatchNorm
+---
+title: "[15.02] BatchNorm"
+authors: Zephyr
+---
 
 ## 批次標準化
 

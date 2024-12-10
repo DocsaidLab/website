@@ -1,4 +1,7 @@
-# [19.01] Transformer-XL
+---
+title: "[19.01] Transformer-XL"
+authors: Zephyr
+---
 
 ## より長い文脈
 

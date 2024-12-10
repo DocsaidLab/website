@@ -1,4 +1,7 @@
-# [18.06] GPT-1
+---
+title: "[18.06] GPT-1"
+authors: Zephyr
+---
 
 ## 十二層解碼器
 

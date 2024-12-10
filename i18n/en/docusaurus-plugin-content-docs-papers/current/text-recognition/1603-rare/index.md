@@ -1,4 +1,7 @@
-# [16.03] RARE
+---
+title: "[16.03] RARE"
+authors: Zephyr
+---
 
 ## Automatic Rectification
 

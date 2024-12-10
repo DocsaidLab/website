@@ -1,4 +1,7 @@
-# [16.12] YOLO-V2
+---
+title: "[16.12] YOLO-V2"
+authors: Zephyr
+---
 
 ## Expanding a Large Number of Categories
 

@@ -1,4 +1,7 @@
-# [20.09] TextFuseNet
+---
+title: "[20.09] TextFuseNet"
+authors: Zephyr
+---
 
 ## A Beautiful Fusion of Three Feature Types
 

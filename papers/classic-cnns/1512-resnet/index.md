@@ -1,4 +1,7 @@
-# [15.12] ResNet
+---
+title: "[15.12] ResNet"
+authors: Zephyr
+---
 
 ## 卷積網路 100 層
 

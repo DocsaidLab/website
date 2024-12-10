@@ -1,4 +1,7 @@
-# [23.05] CLIP4STR
+---
+title: "[23.05] CLIP4STR"
+authors: Zephyr
+---
 
 ## The Blessing of Multimodality
 

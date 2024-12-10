@@ -1,4 +1,7 @@
-# [15.12] SSD
+---
+title: "[15.12] SSD"
+authors: Zephyr
+---
 
 ## Save Time, Save Pooling
 

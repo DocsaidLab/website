@@ -1,4 +1,7 @@
-# [17.04] EAST
+---
+title: "[17.04] EAST"
+authors: Zephyr
+---
 
 ## 日出東方
 

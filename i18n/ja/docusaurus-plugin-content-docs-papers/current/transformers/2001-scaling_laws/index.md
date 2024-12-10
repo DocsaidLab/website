@@ -1,4 +1,7 @@
-# [20.01] Scaling Laws
+---
+title: "[20.01] Scaling Laws"
+authors: Zephyr
+---
 
 ## モデルのスケーリング法則
 

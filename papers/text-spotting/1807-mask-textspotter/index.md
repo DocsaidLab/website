@@ -1,4 +1,7 @@
-# [18.07] Mask TextSpotter
+---
+title: "[18.07] Mask TextSpotter"
+authors: Zephyr
+---
 
 ## 定位即辨識
 

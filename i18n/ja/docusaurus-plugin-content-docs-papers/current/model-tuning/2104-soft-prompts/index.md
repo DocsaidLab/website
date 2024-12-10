@@ -1,4 +1,7 @@
-# [21.04] Soft Prompts
+---
+title: "[21.04] Soft Prompts"
+authors: Zephyr
+---
 
 ## 優しいリマインダー
 

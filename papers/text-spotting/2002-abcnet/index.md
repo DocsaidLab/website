@@ -1,4 +1,7 @@
-# [20.02] ABCNet
+---
+title: "[20.02] ABCNet"
+authors: Zephyr
+---
 
 ## 貝茲曲線的問候
 

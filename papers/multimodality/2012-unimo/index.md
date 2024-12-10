@@ -1,4 +1,7 @@
-# [20.12] UNIMO
+---
+title: "[20.12] UNIMO"
+authors: Zephyr
+---
 
 ## 錯綜的線索
 

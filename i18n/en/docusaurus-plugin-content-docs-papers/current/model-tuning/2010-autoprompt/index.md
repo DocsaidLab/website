@@ -1,4 +1,7 @@
-# [20.10] AutoPrompt
+---
+title: "[20.10] AutoPrompt"
+authors: Zephyr
+---
 
 ## Model Language
 

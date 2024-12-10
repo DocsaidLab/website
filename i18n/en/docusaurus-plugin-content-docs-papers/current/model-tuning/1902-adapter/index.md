@@ -1,4 +1,7 @@
-# [19.02] Adapter
+---
+title: "[19.02] Adapter"
+authors: Zephyr
+---
 
 ## Saving 96% of Parameters
 

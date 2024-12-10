@@ -1,4 +1,7 @@
-# [22.02] DBNet++
+---
+title: "[22.02] DBNet++"
+authors: Zephyr
+---
 
 ## 画像特徴の自動融合
 

@@ -53,7 +53,6 @@ export default function DocItemAuthors() {
     return null;
   }
 
-  // 確保 authors 是陣列
   if (typeof authors === 'string') {
     authors = [authors];
   }

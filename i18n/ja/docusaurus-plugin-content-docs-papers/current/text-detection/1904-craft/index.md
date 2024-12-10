@@ -1,4 +1,7 @@
-# [19.04] CRAFT
+---
+title: "[19.04] CRAFT"
+authors: Zephyr
+---
 
 ## ワードクラフト
 

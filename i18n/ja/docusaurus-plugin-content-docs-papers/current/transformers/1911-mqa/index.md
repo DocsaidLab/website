@@ -1,4 +1,7 @@
-# [19.11] MQA
+---
+title: "[19.11] MQA"
+authors: Zephyr
+---
 
 ## 共有キーと値
 

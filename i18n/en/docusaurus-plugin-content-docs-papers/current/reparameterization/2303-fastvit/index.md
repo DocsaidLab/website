@@ -1,4 +1,7 @@
-# [23.03] FastViT
+---
+title: "[23.03] FastViT"
+authors: Zephyr
+---
 
 ## Reparameterized ViT Experiments
 

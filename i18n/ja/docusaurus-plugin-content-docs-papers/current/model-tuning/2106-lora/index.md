@@ -1,4 +1,7 @@
-# [21.06] LoRA
+---
+title: "[21.06] LoRA"
+authors: Zephyr
+---
 
 ## 万分之一の LLM
 

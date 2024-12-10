@@ -1,4 +1,7 @@
-# [24.03] CFPL-FAS
+---
+title: "[24.03] CFPL-FAS"
+authors: Zephyr
+---
 
 ## Class-Free Prompt Learning
 

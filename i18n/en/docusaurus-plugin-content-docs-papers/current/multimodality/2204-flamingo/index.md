@@ -1,4 +1,7 @@
-# [22.04] Flamingo
+---
+title: "[22.04] Flamingo"
+authors: Zephyr
+---
 
 ## Richly Illustrated
 

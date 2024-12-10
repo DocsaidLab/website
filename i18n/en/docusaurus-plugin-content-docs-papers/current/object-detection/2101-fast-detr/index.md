@@ -1,4 +1,7 @@
-# [21.01] Fast DETR
+---
+title: "[21.01] Fast DETR"
+authors: Zephyr
+---
 
 ## Add Some Gaussian!
 

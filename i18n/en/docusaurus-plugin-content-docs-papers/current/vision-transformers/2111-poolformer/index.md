@@ -1,4 +1,7 @@
-# [21.11] PoolFormer
+---
+title: "[21.11] PoolFormer"
+authors: Zephyr
+---
 
 ## You Need a Meta!
 

@@ -1,4 +1,7 @@
-# [20.04] Oscar
+---
+title: "[20.04] Oscar"
+authors: Zephyr
+---
 
 ## 奧斯卡的錨點
 

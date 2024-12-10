@@ -1,4 +1,7 @@
-# [19.08] LXMERT
+---
+title: "[19.08] LXMERT"
+authors: Zephyr
+---
 
 ## 多來點預訓練
 

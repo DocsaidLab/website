@@ -1,4 +1,7 @@
-# [14.09] GoogLeNet
+---
+title: "[14.09] GoogLeNet"
+authors: Zephyr
+---
 
 ## またの名を Inception-V1
 

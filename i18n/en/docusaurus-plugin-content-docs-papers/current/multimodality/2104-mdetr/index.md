@@ -1,4 +1,7 @@
-# [21.04] MDETR
+---
+title: "[21.04] MDETR"
+authors: Zephyr
+---
 
 ## The Art of Continuity
 

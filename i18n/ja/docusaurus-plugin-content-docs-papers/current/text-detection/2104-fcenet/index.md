@@ -1,4 +1,7 @@
-# [21.04] FCENet
+---
+title: "[21.04] FCENet"
+authors: Zephyr
+---
 
 ## フーリエの導き
 

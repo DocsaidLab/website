@@ -1,4 +1,7 @@
-# [19.11] DBNet
+---
+title: "[19.11] DBNet"
+authors: Zephyr
+---
 
 ## 微分可能な二値化関数
 

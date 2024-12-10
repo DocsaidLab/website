@@ -1,4 +1,7 @@
-# [15.12] SSD
+---
+title: "[15.12] SSD"
+authors: Zephyr
+---
 
 ## 省時省力省池化
 

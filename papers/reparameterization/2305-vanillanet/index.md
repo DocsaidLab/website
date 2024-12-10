@@ -1,4 +1,7 @@
-# [23.05] VanillaNet
+---
+title: "[23.05] VanillaNet"
+authors: Zephyr
+---
 
 ## 香草極簡風
 

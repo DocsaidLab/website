@@ -1,4 +1,7 @@
-# [22.03] RepLKNet
+---
+title: "[22.03] RepLKNet"
+authors: Zephyr
+---
 
 ## 巨大なカーネル
 

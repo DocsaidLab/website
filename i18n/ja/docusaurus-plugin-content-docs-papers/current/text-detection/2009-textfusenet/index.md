@@ -1,4 +1,7 @@
-# [20.09] TextFuseNet
+---
+title: "[20.09] TextFuseNet"
+authors: Zephyr
+---
 
 ## 複数画像特徴の融合
 

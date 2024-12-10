@@ -1,4 +1,7 @@
-# [15.07] CRNN
+---
+title: "[15.07] CRNN"
+authors: Zephyr
+---
 
 ## I Want It All!
 

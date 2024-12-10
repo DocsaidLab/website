@@ -1,4 +1,7 @@
-# [21.10] MobileViT
+---
+title: "[21.10] MobileViT"
+authors: Zephyr
+---
 
 ## Changing the Design of Convolution Kernels
 

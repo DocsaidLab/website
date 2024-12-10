@@ -1,4 +1,7 @@
-# [21.03] ABINet
+---
+title: "[21.03] ABINet"
+authors: Zephyr
+---
 
 ## Thinking more!
 

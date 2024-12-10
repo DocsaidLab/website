@@ -1,4 +1,7 @@
-# [20.06] VILLA
+---
+title: "[20.06] VILLA"
+authors: Zephyr
+---
 
 ## 別荘の中の魅影
 

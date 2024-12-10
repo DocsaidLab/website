@@ -1,4 +1,7 @@
-# [21.11] PoolFormer
+---
+title: "[21.11] PoolFormer"
+authors: Zephyr
+---
 
 ## あなたが必要なのはフレームワーク！
 

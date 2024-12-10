@@ -1,4 +1,7 @@
-# [22.01] BLIP
+---
+title: "[22.01] BLIP"
+authors: Zephyr
+---
 
 ## Synthetic Text Technology
 

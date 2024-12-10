@@ -1,4 +1,7 @@
-# [22.07] PARSeq
+---
+title: "[22.07] PARSeq"
+authors: Zephyr
+---
 
 ## 文字の順序は読み取りに影響しない
 

@@ -1,4 +1,7 @@
-# [21.01] VinVL
+---
+title: "[21.01] VinVL"
+authors: Zephyr
+---
 
 ## Revisiting Oscar
 

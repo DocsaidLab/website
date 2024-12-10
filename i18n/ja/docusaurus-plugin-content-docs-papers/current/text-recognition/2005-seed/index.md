@@ -1,4 +1,7 @@
-# [20.05] SEED
+---
+title: "[20.05] SEED"
+authors: Zephyr
+---
 
 ## 言語の種
 

@@ -1,4 +1,7 @@
-# [21.05] ViTSTR
+---
+title: "[21.05] ViTSTR"
+authors: Zephyr
+---
 
 ## エンコーダだけで十分
 

@@ -1,4 +1,7 @@
-# [19.08] VL-BERT
+---
+title: "[19.08] VL-BERT"
+authors: Zephyr
+---
 
 ## Watching from the Sidelines
 

@@ -1,4 +1,7 @@
-# [19.03] PSENet
+---
+title: "[19.03] PSENet"
+authors: Zephyr
+---
 
 ## 逐步拡張戦略
 

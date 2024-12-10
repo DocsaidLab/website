@@ -1,4 +1,7 @@
-# [22.10] CAFormer
+---
+title: "[22.10] CAFormer"
+authors: Zephyr
+---
 
 ## MetaFormer User Manual
 

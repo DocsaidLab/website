@@ -1,4 +1,7 @@
-# [20.03] DRRG
+---
+title: "[20.03] DRRG"
+authors: Zephyr
+---
 
 ## 初探圖卷積
 

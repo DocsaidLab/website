@@ -1,4 +1,7 @@
-# [22.12] QARepVGG
+---
+title: "[22.12] QARepVGG"
+authors: Zephyr
+---
 
 ## RepVGG を再び偉大に
 

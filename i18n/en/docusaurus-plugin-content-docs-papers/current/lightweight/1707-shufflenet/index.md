@@ -1,4 +1,7 @@
-# [17.07] ShuffleNet
+---
+title: "[17.07] ShuffleNet"
+authors: Zephyr
+---
 
 ## Channel Shuffling Network
 

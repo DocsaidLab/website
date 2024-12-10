@@ -1,4 +1,7 @@
-# [22.12] FLIP
+---
+title: "[22.12] FLIP"
+authors: Zephyr
+---
 
 ## CLIP 貳之型
 

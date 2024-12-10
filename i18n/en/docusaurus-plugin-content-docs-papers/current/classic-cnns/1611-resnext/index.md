@@ -1,4 +1,7 @@
-# [16.11] ResNeXt
+---
+title: "[16.11] ResNeXt"
+authors: Zephyr
+---
 
 ## Exploring the Next Dimension
 

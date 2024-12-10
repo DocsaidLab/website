@@ -1,4 +1,7 @@
-# [23.07] RepViT
+---
+title: "[23.07] RepViT"
+authors: Zephyr
+---
 
 ## Revisiting Mobile CNN from the ViT Perspective
 

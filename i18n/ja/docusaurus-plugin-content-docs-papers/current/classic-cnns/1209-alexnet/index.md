@@ -1,4 +1,7 @@
-# [12.09] AlexNet
+---
+title: "[12.09] AlexNet"
+authors: Zephyr
+---
 
 ## 畳み込みネットワークの台頭
 

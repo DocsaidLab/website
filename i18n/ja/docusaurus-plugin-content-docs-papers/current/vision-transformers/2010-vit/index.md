@@ -1,4 +1,7 @@
-# [20.10] ViT
+---
+title: "[20.10] ViT"
+authors: Zephyr
+---
 
 ## 新世界の開拓者
 

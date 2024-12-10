@@ -1,4 +1,7 @@
-# [19.05] EfficientNet
+---
+title: "[19.05] EfficientNet"
+authors: Zephyr
+---
 
 ## 聯合縮放架構
 

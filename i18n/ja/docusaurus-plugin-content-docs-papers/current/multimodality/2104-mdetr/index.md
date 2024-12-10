@@ -1,4 +1,7 @@
-# [21.04] MDETR
+---
+title: "[21.04] MDETR"
+authors: Zephyr
+---
 
 ## 継続の芸術
 

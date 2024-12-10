@@ -1,4 +1,7 @@
-# [18.01] MobileNet-V2
+---
+title: "[18.01] MobileNet-V2"
+authors: Zephyr
+---
 
 ## 瓶頸內的淬煉
 

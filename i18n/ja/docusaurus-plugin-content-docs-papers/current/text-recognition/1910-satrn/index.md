@@ -1,4 +1,7 @@
-# [19.10] SATRN
+---
+title: "[19.10] SATRN"
+authors: Zephyr
+---
 
 ## Transformer 戦場へ到達
 

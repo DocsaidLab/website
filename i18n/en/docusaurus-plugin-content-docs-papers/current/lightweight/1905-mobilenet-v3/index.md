@@ -1,4 +1,7 @@
-# [19.05] MobileNet-V3
+---
+title: "[19.05] MobileNet-V3"
+authors: Zephyr
+---
 
 ## Custom Architecture Search
 

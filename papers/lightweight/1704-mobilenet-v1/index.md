@@ -1,4 +1,7 @@
-# [17.04] MobileNet-V1
+---
+title: "[17.04] MobileNet-V1"
+authors: Zephyr
+---
 
 ## 深度可分離卷積的發揚者
 

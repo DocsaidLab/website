@@ -1,4 +1,7 @@
-# [23.09] TIVC-DCNNSH
+---
+title: "[23.09] TIVC-DCNNSH"
+authors: Zephyr
+---
 
 ## 双子識別の視点
 

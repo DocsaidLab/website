@@ -1,4 +1,7 @@
-# [21.03] CLIP
+---
+title: "[21.03] CLIP"
+authors: Zephyr
+---
 
 ## Breaking the Dimensional Barrier
 

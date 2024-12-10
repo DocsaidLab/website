@@ -1,4 +1,7 @@
-# [17.07] NASNet
+---
+title: "[17.07] NASNet"
+authors: Zephyr
+---
 
 ## ネットワークアーキテクチャの探索
 

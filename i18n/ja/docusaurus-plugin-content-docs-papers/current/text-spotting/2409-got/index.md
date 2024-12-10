@@ -1,4 +1,7 @@
-# [24.09] GOT
+---
+title: "[24.09] GOT"
+authors: Zephyr
+---
 
 ## OCR モデルを統一する
 

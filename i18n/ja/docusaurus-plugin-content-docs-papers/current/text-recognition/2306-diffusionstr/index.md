@@ -1,4 +1,7 @@
-# [23.06] DiffusionSTR
+---
+title: "[23.06] DiffusionSTR"
+authors: Zephyr
+---
 
 ## ノイズの中の文字信号
 

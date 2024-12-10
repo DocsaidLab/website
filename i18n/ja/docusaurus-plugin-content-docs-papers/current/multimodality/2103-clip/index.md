@@ -1,4 +1,7 @@
-# [21.03] CLIP
+---
+title: "[21.03] CLIP"
+authors: Zephyr
+---
 
 ## 次元の壁を打破する
 

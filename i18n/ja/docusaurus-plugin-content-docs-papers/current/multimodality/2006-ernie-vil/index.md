@@ -1,4 +1,7 @@
-# [20.06] ERNIE-ViL
+---
+title: "[20.06] ERNIE-ViL"
+authors: Zephyr
+---
 
 ## 知識的双刃劍
 

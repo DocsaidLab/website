@@ -1,4 +1,7 @@
-# [21.11] MAE
+---
+title: "[21.11] MAE"
+authors: Zephyr
+---
 
 ## 四分之一の線索
 

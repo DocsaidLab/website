@@ -1,4 +1,7 @@
-# [17.08] RetinaNet
+---
+title: "[17.08] RetinaNet"
+authors: Zephyr
+---
 
 ## Focal Loss が重要
 

@@ -1,4 +1,7 @@
-# [19.09] ALBERT
+---
+title: "[19.09] ALBERT"
+authors: Zephyr
+---
 
 ## アインシュタイン
 
