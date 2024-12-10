@@ -54,7 +54,7 @@ MIDV-2020 是個開源資料集，裡面有許多文件圖片，可以用來測�
 如果你有需要，可以從這裡下載：[**MIDV-2020 Download**](http://l3i-share.univ-lr.fr/MIDV2020/midv2020.html)
 :::
 
-import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemoWrapper';
+import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo/DocAlignerDemoWrapper';
 
 <DocAlignerDemoWrapper
 titleStage1="測試圖片"

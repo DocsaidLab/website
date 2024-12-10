@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DocAlignerDemo from './DocAlignerDemo';
+import styles from './DocAlignerDemo.module.css';
 
 
 const DocAlignerDemoWrapper = ({
@@ -37,7 +38,7 @@ const DocAlignerDemoWrapper = ({
   return (
     <div>
       <h2>{titleStage1}</h2>
-      <div className="image-grid">
+      <div className={styles.imageGrid}>
         {defaultImages.map((image, index) => (
           <div key={index}>
             <img

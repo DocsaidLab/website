@@ -13,7 +13,8 @@ import {
   Upload
 } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
-import '../css/DocAlignerDemo.css';
+import styles from './DocAlignerDemo.module.css';
+
 
 const { Title, Text } = Typography;
 
@@ -74,17 +75,16 @@ const DocAlignerDemo = ({
     try {
       const response = await fetch('https://api.docsaid.org/docaligner-predict');
       if (response.ok) {
-        setApiStatus('online'); // API 暢通
+        setApiStatus('online');
       } else {
-        setApiStatus('offline'); // API 故障
+        setApiStatus('offline');
       }
     } catch (error) {
-      setApiStatus('offline'); // 請求失敗，視為 API 故障
+      setApiStatus('offline');
       console.error('Error checking API status:', error);
     }
   };
 
-  // Load OpenCV.js
   useEffect(() => {
     window.Module = {
       onRuntimeInitialized() {
@@ -150,11 +150,9 @@ const DocAlignerDemo = ({
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, scaledWidth, scaledHeight);
 
-      adjustCanvasSize(canvas, scaledWidth, scaledHeight);
       setImageInfo({ width: scaledWidth, height: scaledHeight });
       setOriginalImageInfo({ width: originalWidth, height: originalHeight });
 
-      // Convert canvas to Blob and create a File object
       canvas.toBlob(function (blob) {
         const file = new File([blob], "example.jpg", { type: "image/jpeg" });
         setSelectedFile(file);
@@ -207,11 +205,9 @@ const DocAlignerDemo = ({
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, scaledWidth, scaledHeight);
 
-        adjustCanvasSize(canvas, scaledWidth, scaledHeight);
         setImageInfo({ width: scaledWidth, height: scaledHeight });
         setOriginalImageInfo({ width: originalWidth, height: originalHeight });
 
-        // Convert canvas to Blob and create a File object
         canvas.toBlob(function (blob) {
           const scaledFile = new File([blob], file.name, { type: file.type });
           setSelectedFile(scaledFile);
@@ -221,7 +217,7 @@ const DocAlignerDemo = ({
     };
 
     reader.readAsDataURL(file);
-    return false; // 禁止 Upload 自動上傳行為
+    return false;
   };
 
   const clearAll = () => {
@@ -312,8 +308,6 @@ const DocAlignerDemo = ({
       processedCanvas.width = originalCanvas.width;
       processedCanvas.height = originalCanvas.height;
       ctx.drawImage(originalCanvas, 0, 0);
-
-      adjustCanvasSize(processedCanvas, originalCanvas.width, originalCanvas.height);
       drawPolygon(ctx, data.polygon);
     })
     .catch(error => {
@@ -323,11 +317,6 @@ const DocAlignerDemo = ({
     .finally(() => {
       setIsLoading(false);
     });
-  };
-
-  const adjustCanvasSize = (canvas, width, height) => {
-    // 使用一般方式控制 canvas 大小即可，不一定需要動態調整
-    // 此處略過以保留簡單性
   };
 
   const drawPolygon = (ctx, polygon) => {
@@ -467,7 +456,7 @@ const DocAlignerDemo = ({
   const currentFile = selectedFile;
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div className={styles.demoWrapper}>
       <Space direction="vertical" style={{ width: '100%' }}>
 
         <Row justify="space-between" align="middle">
@@ -493,8 +482,8 @@ const DocAlignerDemo = ({
         </Row>
 
         {imageInfo && currentFile && originalImageInfo && (
-          <Card title={imageInfoTitle}>
-            <ul>
+          <Card className={styles.demoCard} title={imageInfoTitle}>
+            <ul className={styles.infoList}>
               <li>{fileNameLabel}: {currentFile.name}</li>
               <li>{fileSizeLabel}: {Math.round(currentFile.size / 1024)} KB</li>
               <li>{fileTypeLabel}: {currentFile.type}</li>
@@ -505,10 +494,10 @@ const DocAlignerDemo = ({
 
         <Row gutter={16}>
           <Col span={12}>
-            <canvas ref={originalCanvasRef} style={{ width: '100%', border: '1px solid #ccc' }}></canvas>
+            <canvas ref={originalCanvasRef} className={styles.demoCanvas}></canvas>
           </Col>
           <Col span={12}>
-            <canvas ref={processedCanvasRef} style={{ width: '100%', border: '1px solid #ccc' }}></canvas>
+            <canvas ref={processedCanvasRef} className={styles.demoCanvas}></canvas>
           </Col>
         </Row>
 
@@ -552,7 +541,7 @@ const DocAlignerDemo = ({
           <>
             <Divider />
             <Title level={3}>{inferenceInfoTitle}</Title>
-            <ul>
+            <ul className={styles.infoList}>
               <li>{inferenceTimeLabel}: {inferenceTime.toFixed(2)} sec </li>
               <li>{timestampLabel}: {timestamp}</li>
             </ul>
@@ -563,7 +552,7 @@ const DocAlignerDemo = ({
           <>
             <Divider />
             <Title level={3}>{polygonInfoTitle}</Title>
-            <ul>
+            <ul className={styles.infoList}>
               {predictionDataScale.polygon.map((point, index) => (
                 <li key={index}>
                   Point {index + 1}: ({Math.round(point[0])}, {Math.round(point[1])})
@@ -583,8 +572,8 @@ const DocAlignerDemo = ({
               <Text>{TransformedHeightLabel}:</Text>
               <InputNumber value={outputHeight} onChange={(val)=>setOutputHeight(val)} />
             </Space>
-            <div style={{ marginTop: '20px', textAlign: 'center' }}>
-              <canvas ref={transformedCanvasRef} style={{ border: '1px solid #ccc', maxWidth: '100%' }}></canvas>
+            <div className={styles.canvasWrapper}>
+              <canvas ref={transformedCanvasRef} className={styles.demoCanvas}></canvas>
             </div>
             <div style={{ textAlign: 'center' }}>
               <Button icon={<DownloadOutlined />} onClick={downloadTransformedImage}>

@@ -1,0 +1,63 @@
+.imageGrid {
+  display: flex;
+  gap: 20px;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.imageGrid div {
+  text-align: center;
+}
+
+.imageGrid img {
+  cursor: pointer;
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.imageGrid img:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+}
+
+.demoWrapper {
+  padding: 20px;
+}
+
+.demoCard {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  border: 1px solid #eaeaea;
+  margin-bottom: 1rem;
+}
+
+.demoCard:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.infoList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.infoList li {
+  margin-bottom: 0.3rem;
+  color: var(--text-color);
+}
+
+.demoCanvas {
+  width: 100% !important;
+  border: 1px solid #ccc;
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.canvasWrapper {
+  margin-top: 20px;
+  text-align: center;
+}

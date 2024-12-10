@@ -54,7 +54,7 @@ MIDV-2020 はオープンソースのデータセットで、たくさんの文�
 必要に応じて、こちらからダウンロードできます：[**MIDV-2020 Download**](http://l3i-share.univ-lr.fr/MIDV2020/midv2020.html)
 :::
 
-import DocAlignerDemoWrapper from "@site/src/components/DocAlignerDemoWrapper";
+import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo/DocAlignerDemoWrapper';
 
 <DocAlignerDemoWrapper
 titleStage1="テスト画像"

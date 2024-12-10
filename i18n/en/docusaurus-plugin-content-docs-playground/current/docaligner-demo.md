@@ -54,7 +54,7 @@ MIDV-2020 is an open-source dataset containing many document images, perfect for
 If needed, you can download it here: [**MIDV-2020 Download**](http://l3i-share.univ-lr.fr/MIDV2020/midv2020.html)
 :::
 
-import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemoWrapper';
+import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo/DocAlignerDemoWrapper';
 
 <DocAlignerDemoWrapper
 titleStage1="Test Images"
