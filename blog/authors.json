@@ -1,0 +1,20 @@
+{
+  "Zephyr": {
+    "name": "Zephyr",
+    "title": "Dosaid maintainer, Full-Stack AI Engineer",
+    "url": "https://github.com/zephyr-sh",
+    "image_url": "https://github.com/zephyr-sh.png",
+    "socials": {
+      "github": "zephyr-sh"
+    }
+  },
+  "Jack": {
+    "name": "Jack",
+    "title": "Senior AI Engineer",
+    "url": "https://github.com/kunkunlin1221",
+    "image_url": "https://github.com/kunkunlin1221.png",
+    "socials": {
+      "github": "kunkunlin1221"
+    }
+  }
+}

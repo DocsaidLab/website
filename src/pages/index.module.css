@@ -75,7 +75,7 @@
   border: 1px solid #eaeaea;
   box-shadow: 0 4px 14px rgba(0,0,0,0.05);
   transition: box-shadow 0.3s ease;
-  max-height: 600px;       /* 限制卡片高度 */
+  max-height: 700px;       /* 限制卡片高度 */
   overflow-y: auto;        /* 超出範圍時顯示捲軸 */
 }
 
@@ -114,7 +114,7 @@
   border: 1px solid #eaeaea;
   box-shadow: 0 4px 14px rgba(0,0,0,0.05);
   transition: box-shadow 0.3s ease;
-  max-height: 600px;       /* 限制卡片高度 */
+  max-height: 700px;       /* 限制卡片高度 */
   overflow-y: auto;        /* 超出範圍時顯示捲軸 */
 }
 

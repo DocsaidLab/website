@@ -55,14 +55,20 @@ async function extractTitleInfo(article) {
   let mainTitle = '';
   let subTitle = '';
 
+  // 解析 YAML 頭部的 title
+  let inYamlBlock = false;
   for (const line of lines) {
-    if (line.startsWith('# ')) {
-      mainTitle = line.replace('# ', '').trim();
-    } else if (line.startsWith('## ')) {
-      subTitle = line.replace('## ', '').trim();
+    if (line.trim() === '---') {
+      inYamlBlock = !inYamlBlock;
+      continue;
     }
-
-    if (mainTitle && subTitle) break;
+    if (inYamlBlock && line.startsWith('title:')) {
+      mainTitle = line.replace('title:', '').trim().replace(/^["']|["']$/g, ''); // 去掉引號
+    }
+    if (!inYamlBlock && line.startsWith('## ')) {
+      subTitle = line.replace('## ', '').trim();
+      break;
+    }
   }
 
   // 若未找到主標題則以檔名替代

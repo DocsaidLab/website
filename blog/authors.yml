@@ -1,5 +1,7 @@
 Zephyr:
   name: Zephyr
-  title: Engineer
+  title: Dosaid maintainer, Full-Stack AI Engineer
   url: https://github.com/zephyr-sh
   image_url: https://github.com/zephyr-sh.png
+  socials:
+    github: "zephyr-sh"
