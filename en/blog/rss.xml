@@ -166,7 +166,7 @@
 </ul>
 <p>This adjacency matrix is "symmetric", so this graph is an "undirected graph".</p>
 <p>If we visualize it, it would look like this:</p>
-<div style="display:flex;justify-content:center;align-items:center;width:100%;height:100%;margin:20px auto"><svg style="width:60%;height:auto;border:1px solid #333"></svg></div>
+<div style="display:flex;justify-content:center;align-items:center;width:100%;max-width:600px;margin:20px auto"><svg style="width:100%;height:auto;border:1px solid #333"></svg></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="expanded-adjacency-matrix">Expanded Adjacency Matrix<a href="https://docsaid.org/en/blog/graph-convolutional-networks#expanded-adjacency-matrix" class="hash-link" aria-label="Direct link to Expanded Adjacency Matrix" title="Direct link to Expanded Adjacency Matrix">​</a></h2>
 <p>In practical applications, the adjacency matrix can be further expanded to represent additional information, such as:</p>
 <ol>
@@ -209,7 +209,7 @@
 <li>The third row <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mn>22</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[22, 1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mopen">[</span><span class="mord">22</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span> represents Carol, who is 22 years old and has exercise habits.</li>
 </ul>
 <p>We use the size of the circles to represent the nodes' ages, and the color to indicate whether they have exercise habits:</p>
-<div style="display:flex;justify-content:center;align-items:center;width:100%;height:100%;margin:20px auto"><svg style="width:60%;height:auto;border:1px solid #333"></svg></div>
+<div style="display:flex;justify-content:center;align-items:center;width:100%;max-width:600px;margin:20px auto"><svg style="width:100%;height:auto;border:1px solid #333"></svg></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="mathematics-of-gcn">Mathematics of GCN<a href="https://docsaid.org/en/blog/graph-convolutional-networks#mathematics-of-gcn" class="hash-link" aria-label="Direct link to Mathematics of GCN" title="Direct link to Mathematics of GCN">​</a></h2>
 <p>After understanding the adjacency matrix and feature matrix, we can dive into the mathematical principles of Graph Convolutional Networks (GCN).</p>
 <p>The core idea of GCN is to perform information propagation and aggregation on graph structures through the "convolution operation," in order to learn the representation (i.e., embedding vectors) of the nodes.</p>

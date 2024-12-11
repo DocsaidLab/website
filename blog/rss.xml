@@ -167,7 +167,7 @@
 </ul>
 <p>這個鄰接矩陣是「對稱的」，因此這個圖是一個「無向圖」。</p>
 <p>轉成圖像的話，會長這樣：</p>
-<div style="display:flex;justify-content:center;align-items:center;width:100%;height:100%;margin:20px auto"><svg style="width:60%;height:auto;border:1px solid #333"></svg></div>
+<div style="display:flex;justify-content:center;align-items:center;width:100%;max-width:600px;margin:20px auto"><svg style="width:100%;height:auto;border:1px solid #333"></svg></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="擴展鄰接矩陣">擴展鄰接矩陣<a href="https://docsaid.org/blog/graph-convolutional-networks#%E6%93%B4%E5%B1%95%E9%84%B0%E6%8E%A5%E7%9F%A9%E9%99%A3" class="hash-link" aria-label="擴展鄰接矩陣的直接連結" title="擴展鄰接矩陣的直接連結">​</a></h2>
 <p>在實際應用中，鄰接矩陣還可以進一步擴展來表示更多信息，例如：</p>
 <ol>
@@ -210,7 +210,7 @@
 <li>第三行 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mn>22</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[22, 1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mopen">[</span><span class="mord">22</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span> 表示 Carol 年齡為 22 歲，有運動習慣。</li>
 </ul>
 <p>我們用圓的大小來表示節點的年齡，用顏色來表示是否有運動習慣：</p>
-<div style="display:flex;justify-content:center;align-items:center;width:100%;height:100%;margin:20px auto"><svg style="width:60%;height:auto;border:1px solid #333"></svg></div>
+<div style="display:flex;justify-content:center;align-items:center;width:100%;max-width:600px;margin:20px auto"><svg style="width:100%;height:auto;border:1px solid #333"></svg></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="gcn-的數學">GCN 的數學<a href="https://docsaid.org/blog/graph-convolutional-networks#gcn-%E7%9A%84%E6%95%B8%E5%AD%B8" class="hash-link" aria-label="GCN 的數學的直接連結" title="GCN 的數學的直接連結">​</a></h2>
 <p>在了解了鄰接矩陣和特徵矩陣之後，我們可以深入探討圖卷積網路（GCN）的數學原理。</p>
 <p>GCN 的核心思想是通過「卷積操作」在圖結構上進行資訊的傳遞和聚合，從而學習節點的表示（即嵌入向量）。</p>
