@@ -83,19 +83,21 @@ Thus, this is not a direct translation of the paper but more of a guided reading
 
 ## And
 
-Writing literature reviews is incredibly time-consuming and labor-intensive—writing one can take as much time as reading five papers.
+Writing notes is very time-consuming and labor-intensive. The time it takes to write one note is enough for me to read five papers.
 
-At the same time, it’s also a continuous effort. Writing a few pieces whenever the thought arises and sustaining it over a long period inevitably leads to changes in writing style.
+At the same time, it's a continuous task, usually taking two days to write one. As the duration increases, my writing style changes. For example, earlier articles tend to be more detailed, but that's actually because of inexperience—I wasn't sure what the main points of the paper were, so writing it turned into a translation. (I apologize for that... 😓)
 
-Earlier articles tend to be more detailed and exhaustive, mainly due to inexperience and uncertainty about the paper's key points. As a result, they often end up resembling translations...😓
+As I continued writing, I started to recognize the main points of the papers, which allowed me to skip some sections and focus solely on the core contributions. This led to a more concise presentation of the article.
 
-Over time, with more practice, it becomes easier to pinpoint the main ideas of a paper. This allows less important parts to be skipped, making the writing appear more concise.
+In the end, the quality of the content still depends on luck, and not every article will be written perfectly. If you're willing, you can also publish your notes here or revise existing notes. Just send us a pull request, and we'll be very happy to receive it.
 
-Ultimately, the quality of the content often depends on chance—not every article can be written perfectly.
+:::info
+Don't worry about the multilingual part; we can handle it. Just write your notes in your preferred language.
+:::
 
-If you come across any interesting papers, feel free to share them with us. If time permits, we’ll take a look.
+If you come across any interesting articles, feel free to share them with us, and when we have time, we'll take a look.
 
-If time permits, that is.
+If we have time.
 
 ＊
 
