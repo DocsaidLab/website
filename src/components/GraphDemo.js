@@ -1,4 +1,4 @@
-import "antd/dist/reset.css"; // 確保引入 Ant Design 的樣式
+import "antd/dist/reset.css";
 import * as d3 from "d3";
 import React, { useEffect, useRef } from "react";
 
@@ -6,7 +6,6 @@ const GraphDemo = () => {
   const svgRef = useRef(null);
 
   useEffect(() => {
-    // 定義圖表數據
     const data = {
       nodes: [
         { id: "Alice", label: "Alice" },
@@ -19,30 +18,26 @@ const GraphDemo = () => {
       ],
     };
 
-    const width = 600; // 圖表寬度
-    const height = 400; // 圖表高度
+    const width = 600;  // 基礎繪圖寬度
+    const height = 400; // 基礎繪圖高度
 
     // 清除之前的 SVG 內容（避免重複渲染）
     d3.select(svgRef.current).selectAll("*").remove();
 
-    // 創建 SVG
-    const svg = d3
-      .select(svgRef.current)
-      .attr("width", width)
-      .attr("height", height)
+    // 設定 viewBox 以達成自適應尺寸
+    const svg = d3.select(svgRef.current)
+      .attr("viewBox", `0 0 ${width} ${height}`)
+      .attr("preserveAspectRatio", "xMidYMid meet")
       .call(
-        d3
-          .zoom()
+        d3.zoom()
           .scaleExtent([0.5, 2])
           .on("zoom", (event) => {
             g.attr("transform", event.transform);
           })
-      )
-      .append("g");
+      );
 
     const g = svg.append("g");
 
-    // 定義力導向圖
     const simulation = d3
       .forceSimulation(data.nodes)
       .force(
@@ -53,17 +48,15 @@ const GraphDemo = () => {
       .force("center", d3.forceCenter(width / 2, height / 2))
       .force("collision", d3.forceCollide().radius(50));
 
-    // 繪製連結
     const link = g
       .selectAll(".link")
       .data(data.links)
       .enter()
       .append("line")
       .attr("class", "link")
-      .attr("stroke", "#87CEEB") // 天藍色邊
+      .attr("stroke", "#87CEEB")
       .attr("stroke-width", 3);
 
-    // 繪製節點
     const node = g
       .selectAll(".node")
       .data(data.nodes)
@@ -89,23 +82,20 @@ const GraphDemo = () => {
           })
       );
 
-    // 繪製節點圓形，統一配色
     node
       .append("circle")
       .attr("r", 20)
-      .attr("fill", "#FF6347") // 番茄紅色
+      .attr("fill", "#FF6347")
       .attr("stroke-width", 3);
 
-    // 添加節點標籤
     node
       .append("text")
       .attr("dy", 5)
       .attr("text-anchor", "middle")
       .text((d) => d.label)
       .attr("font-size", 12)
-      .attr("fill", "#FFFFFF"); // 白色字體
+      .attr("fill", "#FFFFFF");
 
-    // 更新節點和連結的位置
     simulation.on("tick", () => {
       link
         .attr("x1", (d) => d.source.x)
@@ -116,7 +106,6 @@ const GraphDemo = () => {
       node.attr("transform", (d) => `translate(${d.x},${d.y})`);
     });
 
-    // 清理函數
     return () => {
       simulation.stop();
     };
@@ -129,14 +118,14 @@ const GraphDemo = () => {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        height: "100%",
+        maxWidth: "600px",    // 最大寬度控制，可依需求調整
         margin: "20px auto",
       }}
     >
       <svg
         ref={svgRef}
         style={{
-          width: "60%",
+          width: "100%",       // 設定為100%以讓SVG自適應容器
           height: "auto",
           border: "1px solid #333",
         }}
