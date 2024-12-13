@@ -59,7 +59,7 @@ authors: Zephyr
 このような混合と再構成を通じて、モデルはさまざまなスケールの特徴の利点を効率的に取り込むことができ、小さくて曲がった低品質な文字に対してより認識可能な特徴を生成します。具体的な操作は以下の図の通りです：
 
 <div align="center">
-<figure style={{"width": "40%"}}>
+<figure style={{"width": "60%"}}>
 ![detail of channel shuffle network](./img/img3.jpg)
 </figure>
 </div>
@@ -89,7 +89,7 @@ FSNet では、2 つのシャッフル層（Shuffle layer）が設計されて�
 ### Central Transformer Block
 
 <div align="center">
-<figure style={{"width": "70%"}}>
+<figure style={{"width": "80%"}}>
 ![central transformer block](./img/img11.jpg)
 </figure>
 </div>
@@ -172,7 +172,7 @@ FSNet では、2 つのシャッフル層（Shuffle layer）が設計されて�
 ### 消融実験
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![ablation study](./img/img7.jpg)
 </figure>
 </div>
@@ -184,7 +184,7 @@ FSNet では、2 つのシャッフル層（Shuffle layer）が設計されて�
 ### 他の方法との比較
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![comparison](./img/img8.jpg)
 </figure>
 </div>
@@ -192,7 +192,7 @@ FSNet では、2 つのシャッフル層（Shuffle layer）が設計されて�
 上記の表は、MSRA-TD500 データセットにおける多方向テキスト検出の比較結果です。MixNet は F1 スコアで 89.4%を達成し、他の方法よりも 2.1%の改善を示しました。この結果は、多言語および多方向テキスト検出のシナリオにおける優れた性能を証明しています。
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![comparison](./img/img9.jpg)
 </figure>
 </div>

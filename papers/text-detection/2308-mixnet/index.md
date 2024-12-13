@@ -59,7 +59,7 @@ authors: Zephyr
 透過此種混合與重組，模型能更有效率地汲取各尺度特徵的優勢，產生對小型、彎曲以及低品質文字更具辨識度的特徵，詳細操作如下圖：
 
 <div align="center">
-<figure style={{"width": "40%"}}>
+<figure style={{"width": "60%"}}>
 ![detail of channel shuffle network](./img/img3.jpg)
 </figure>
 </div>
@@ -89,7 +89,7 @@ authors: Zephyr
 ### Central Transformer Block
 
 <div align="center">
-<figure style={{"width": "70%"}}>
+<figure style={{"width": "80%"}}>
 ![central transformer block](./img/img11.jpg)
 </figure>
 </div>
@@ -172,7 +172,7 @@ authors: Zephyr
 ### 消融實驗
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![ablation study](./img/img7.jpg)
 </figure>
 </div>
@@ -184,7 +184,7 @@ authors: Zephyr
 ### 與其他方法的比較
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![comparison](./img/img8.jpg)
 </figure>
 </div>
@@ -192,7 +192,7 @@ authors: Zephyr
 上表是針對多方向文字檢測，MSRA-TD500 數據集的比較結果，可以看到 MixNet 在 F1-score 上取得了 89.4% 的表現，比其他方法提升了 2.1%。證實了該方法在多語言、多方向文字檢測情境下的優異表現。
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![comparison](./img/img9.jpg)
 </figure>
 </div>

@@ -59,7 +59,7 @@ The method is to split the feature channels of each resolution, remix them, upsa
 Through this mixing and reshuffling, the model can more efficiently leverage the advantages of features at different scales, producing more recognizable features for small, curved, and low-quality text. The detailed operation is shown in the figure below:
 
 <div align="center">
-<figure style={{"width": "40%"}}>
+<figure style={{"width": "60%"}}>
 ![detail of channel shuffle network](./img/img3.jpg)
 </figure>
 </div>
@@ -89,7 +89,7 @@ If you remember, in ShuffleNet, after performing "group convolution," the channe
 ### Central Transformer Block
 
 <div align="center">
-<figure style={{"width": "70%"}}>
+<figure style={{"width": "80%"}}>
 ![central transformer block](./img/img11.jpg)
 </figure>
 </div>
@@ -172,7 +172,7 @@ If you're interested in the other network architectures mentioned above, you can
 ### Ablation Study
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![ablation study](./img/img7.jpg)
 </figure>
 </div>
@@ -184,7 +184,7 @@ The results show that FSNet achieves a 2.1% improvement in F1-score. Furthermore
 ### Comparison with Other Methods
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![comparison](./img/img8.jpg)
 </figure>
 </div>
@@ -192,7 +192,7 @@ The results show that FSNet achieves a 2.1% improvement in F1-score. Furthermore
 The table above shows the comparison results for multi-directional text detection on the MSRA-TD500 dataset. It can be seen that MixNet achieves an F1-score of 89.4%, which is 2.1% higher than other methods, confirming its superior performance in multi-language and multi-directional text detection scenarios.
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![comparison](./img/img9.jpg)
 </figure>
 </div>
