@@ -73,7 +73,7 @@ If you want to find a paper, we suggest pasting the title into the search bar at
 
 Our writing format is as follows:
 
-- The title includes: [Publication Date] + [Author's Name or Common Reference Name]
+- The title includes: [**Publication Date**] + [**Author's Name or Common Reference Name**]
 - The content starts with a brief discussion
 - Then defines the problem the paper aims to solve
 - Introduces the solution method
@@ -97,7 +97,7 @@ Don't worry about the multilingual part; we can handle it. Just write your notes
 
 If you come across any interesting articles, feel free to share them with us, and when we have time, we'll take a look.
 
-If we have time.
+Thank you for reading and supporting. we hope **DOCSAID** can bring you help and inspiration!
 
 ＊
 

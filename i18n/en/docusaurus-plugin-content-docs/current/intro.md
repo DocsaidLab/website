@@ -156,28 +156,18 @@ Moreover, the most valuable part of most projects is the dataset, followed by th
 
 If, after careful consideration, you still insist on buying out the project, I won’t stop you. Go ahead.
 
-:::info
+## ✉️ Contact Information
 
-- **We absolutely will not open-source any data you provide in any development project, unless you allow it.**
-- **Under normal procedures, data will only be used for model updates.**
-- **Dataset submissions: docsaidlab@gmail.com**
-  :::
+If you have any questions or are interested in my work, feel free to reach out to me anytime!
 
-## 🍹 Final Thoughts
+This is the email I use for job applications: **docsaidlab@gmail.com**. You can send an email, or simply find an article on this website and leave a comment below. I will see it.
 
-I’ve invested a great deal of effort into developing and maintaining these projects. This is both a learning process and a way to give back to the open-source community. If you recognize my efforts, feel free to support me through the following ways:
+## 🍹 Final Note
 
-- [**Buy Me A Coffee**](https://buymeacoffee.com/zephyr_docsaid) - Your support will help me maintain projects and develop new tools!
-- Give a star ⭐️ on GitHub for the project or leave some suggestions and encouragement!
+Unless given your permission, we will never open-source the data you provide in any form of development projects. The data will only be used to update the model.
+
+Thank you for reading and supporting. we hope **DOCSAID** can bring you help and inspiration!
 
 ＊
 
 2024 © Zephyr
-
-<div align="center">
-<br />
-<figure style={{ width: "50%"}}>
-[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/zephyr_docsaid)
-</figure>
-<br />
-</div>

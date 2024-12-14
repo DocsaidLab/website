@@ -157,28 +157,18 @@ sidebar_position: 1
 
 如果你在仔細思考過後，還是堅持要買斷專案，那我也不會攔著你，來吧。
 
-:::info
+## ✉️ 聯繫方式
 
-- **在所有形式的開發專案中，我們絕對不會開源你提供的資料，除非獲得你的允許。**
-- **正常流程下，資料只會用於更新模型。**
-- **資料集提交：docsaidlab@gmail.com**
-  :::
+如果你有任何問題，或對我的工作感興趣，歡迎隨時聯繫我！
+
+這是我申請的工作信箱：**docsaidlab@gmail.com**，你可以寄信過來，或是直接在本網站上找一篇文章，在底下留言，我都會看到。
 
 ## 🍹 最後
 
-我投入了大量精力開發與維護這些專案，這既是技術學習的過程，也是對開源社區的回饋。如果你認可我的努力，歡迎通過以下方式支持我：
+除非獲得你的允許，否則在所有形式的開發專案中，我們絕對不會開源你提供的資料。資料只會用於更新模型。
 
-- [**Buy Me A Coffee**](https://buymeacoffee.com/zephyr_docsaid) - 你的支持將幫助我維護專案並開發更多新工具！
-- 在 GitHub 上為專案點個星星 ⭐️，或留下幾句建議與鼓勵！
+感謝你的閱讀與支持，希望 **DOCSAID** 能為你帶來幫助與啟發！
 
 ＊
 
 2024 © Zephyr
-
-<div align="center">
-<br />
-<figure style={{ width: "50%"}}>
-[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/zephyr_docsaid)
-</figure>
-<br />
-</div>

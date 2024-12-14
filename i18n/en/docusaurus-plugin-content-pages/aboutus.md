@@ -1,91 +1,91 @@
-# About Us
+## About Us
 
-Welcome to **DOCSAID**!
+Welcome to my website.
 
 I am Zephyr, an AI engineer living in Taiwan.
 
----
+## 👨‍💻 Are you an engineer?
 
-## 👨‍💻 My Story
+Yes.
 
-Yes, I am an engineer.
-
-I am passionate about solving real-world problems using scientific knowledge and derive endless joy from it.
-
-In the past, the field of engineering was categorized in great detail:
-
-- Those working on images were called "Computer Vision Engineers"
-- Those working on text were called "Natural Language Engineers"
-- There were also "Machine Learning Engineers," "Deep Learning Engineers," and even a certain hierarchy of job titles.
-
-However, everyone seemed to share a common disdain for "AI Engineers":
-
-> Hmph, another one without any sense, trying to ride the wave of hype with their company/position/job seeker!
-
-But with the rise of "foundation models," multidimensional information such as text, images, and audio has been unified in high-dimensional space, and people were amazed to find:
-
-> It turns out that these engineers are actually doing the same thing, just with different dimensions.
-
-Today, cross-field collaboration has become the norm, technical barriers are no longer clear, and the boundaries of job titles have blurred. We’ve ultimately returned to the original starting point:
-
-> **AI Engineer**!
+I enjoy using scientific knowledge to solve practical problems and find joy in doing so.
 
 ---
 
-## 💡 About DOCSAID
+A few years ago, people working in image processing would call themselves "Computer Vision Engineers," those working with text would be "Natural Language Engineers," and there were even distinctions between "Machine Learning Engineers" and "Deep Learning Engineers." Within certain small communities, there was a hierarchy based on these different job titles.
 
-This is the birthplace of **DOCSAID**, a platform for technical documentation and sharing.
+But no matter who they were, they all shared a disdain for "AI Engineers":
 
-I recently stumbled upon [**Docusaurus**](https://docusaurus.io/), a static site generator open-sourced by Meta, which is feature-rich and perfect for building blogs and technical documentation. So, I used it in combination with GitHub Pages to automatically deploy this website. What you see now was made possible by that.
+> Hmph! Another person without any sense trying to trick their way into a title at some company/job opening!
 
-:::info
-Yes, the stability of this website depends entirely on the proper functioning of GitHub.
+Time passed, and now we are amazed to find that text, images, audio, and other forms of information have been unified in high-dimensional space under the wave of "foundation models," becoming essential tools for ranking, scoring, and publishing papers!
 
-So, let’s take good care of GitHub and keep it running smoothly! 😉
-:::
+It turns out that these engineers are all doing the same thing, just in different dimensions.
 
----
+Soon, no one in this field bothers to differentiate between the various engineering titles anymore, as academic research has become interdisciplinary. Researchers now need to know a little bit about every field, or their work simply cannot progress. So, it has become difficult to say exactly what we are.
+
+Looking back, we realize:
+
+> Yes, it's you! AI Engineer!
+
+## 💡 So, what is this?
+
+A while ago, while browsing, I accidentally discovered Meta's open-source [**Docusaurus**](https://docusaurus.io/) and found that it was quite feature-rich.
+
+I thought, why not use it to write a blog? So I combined Docusaurus with GitHub Pages for automatic deployment, and here is the website you're currently viewing. That means if something goes wrong with GitHub, this site will be affected too.
+
+> Therefore, let’s take good care of GitHub and make sure it doesn't break. (~What conclusion is this?~)
+
+Anyway, as I keep tweaking things, this website is almost reaching the limit for GitHub Pages, so it will have to be moved elsewhere soon... (Sigh, life is tough 😮‍💨)
 
 ## 🚀 The Origin of the Website Name
 
-For me, naming is a huge challenge.
+I think the most difficult part of "creating a website" is choosing a name.
 
-My daily work revolves around "text analysis," whether it's image text recognition, fraud detection, topic classification, or keyword extraction, all of which are related to text. To me, the definition of text is quite broad:
+Analyzing text is my daily work, whether it's image text recognition, image fraud detection, topic classification, keyword extraction, or anything like that. In my view, text is not just words—it can be an image, a video, a song, a dataset, or even a person's behavior. As long as there's analytical value, or we are willing to analyze it, I believe everything can be considered text (chaotic and evil?).
 
-- It can be a piece of writing, an image, a video, a song, or even a person's behavior.
+So in the end, I wanted to give this website a name related to the field, and I called it **DOCSAID**.
 
-As long as there is value in analysis, it is worth exploring.
+The name is made up of two words: "DOC" and "SAID." The general meaning is:
 
-Thus, the website was named **DOCSAID**. The name comes from two words: "DOC" and "SAID," meaning:
+> **When text is created, it has already expressed what it intends to say.**
 
-> The moment text is created, it has already told all its stories.
+So, what exactly did these texts say? All we need to do is analyze them!
 
-Our task is to analyze and interpret what the text "says."
+Interestingly, after choosing this name, I realized it even contains the letters "AI" hidden within it—an unexpected bonus.
 
-Interestingly, after completing the name, I was delighted to discover that "AI" is hidden within "DOCSAID"!
+## 💻 About Website Design
 
-A delightful surprise.
+Stop saying my website design is too simple! I know! 😅
 
----
-
-## 💻 About the Website Design
-
-If you think my website design is a bit simple, it’s because — well, I know! 😅
-
-As an AI engineer, my expertise is in model building and parameter tuning. As for web design… I’d say my skills are probably still at a kindergarten level. In the future, if I get the chance, I’ll try to improve in this area, or perhaps leave it to a professional designer to optimize.
-
----
+My main job is working with models, reading papers, writing code, and tuning parameters—not web design. Especially when it comes to aesthetics, my skills are probably at a kindergarten level. If I don't manage to learn this professional skill, I'll just ask an expert to help me redesign it later.
 
 ## ✉️ Contact Information
 
 If you have any questions or are interested in my work, feel free to reach out to me anytime!
 
-This is my work email: **docsaidlab@gmail.com**. You can also leave a comment on any article on this website, and I will see it.
+This is my job application email: **docsaidlab@gmail.com**. You can send me an email or simply find an article on this site and leave a comment below. I will see it.
 
-Your suggestions and support are my motivation to keep improving.
+## 🍹 Final Note
 
----
+I have invested a lot of energy into developing these projects and writing learning notes. This process is not only about technical learning but also about giving back to the open-source community.
+
+If this website has helped you, or if you appreciate my efforts, feel free to support me in the following ways:
+
+- [**Buy Me A Coffee**](https://buymeacoffee.com/zephyr_docsaid) to help me maintain the project and develop more new tools.
+- Or give a star ⭐️ to the project on GitHub.
+- Or leave suggestions or encouragement under the articles you like!
 
 Thank you for reading and supporting. I hope **DOCSAID** can bring you help and inspiration!
 
+＊
+
 2024 © Zephyr
+
+<div align="center">
+<br />
+<figure style={{ width: "50%"}}>
+[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/zephyr_docsaid)
+</figure>
+<br />
+</div>
