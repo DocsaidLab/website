@@ -10,6 +10,11 @@ This page is solely for recording our work activities.
 
 ## 2024
 
+### December
+
+- Added an "Author" field to the paper notes and beautified the homepage, paper notes, and blog styles.
+- Start building the web backend management system, database system and member registration system.
+
 ### November
 
 - Added i18n: [**日本語**](https://docsaid.org/ja/)
