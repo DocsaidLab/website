@@ -96,8 +96,7 @@ const demoContent = {
   },
   'en': {
     title: 'DocAligner Demo',
-    description: `You can select a few images with documents from your file system to test this feature.
-...（貼上英文版的介紹文字）`,
+    description: `You can test this feature by selecting a few images with files from the file system. \nYou can also use the test pictures we provide:`,
     docAlignerProps: {
       titleStage1: "Test Images",
       titleStage2: "Demo",
@@ -140,8 +139,7 @@ const demoContent = {
   },
   'ja': {
     title: 'DocAligner デモ',
-    description: `ファイルシステムからいくつかの文書画像を選んで、この機能をテストしてみてください。
-...（貼上日文版的介紹文字）`,
+    description: `ファイル システムからファイルを含む写真をいくつか選択することで、この機能をテストできます。 \n弊社が提供するテスト画像を使用することもできます：`,
     docAlignerProps: {
       titleStage1: "テスト画像",
       titleStage2: "モデル展示",
