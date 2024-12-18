@@ -1,7 +1,7 @@
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { Card } from 'antd';
 import React from 'react';
-import Chart from 'react-apexcharts';
 
 const I18N = {
   'zh-hant': {
@@ -41,87 +41,91 @@ export default function MACDChartView({ macd, ohlcData }) {
   if (!hasValidMACD) return <p>{t.noMACDData}</p>;
 
   const categories = ohlcData.map(d => d.x);
-
   const minLen = Math.min(categories.length, macd.DIF.length, macd.DEA.length, macd.MACD.length);
   const DIFData = macd.DIF.slice(0, minLen).map(v => v ?? null);
   const DEAData = macd.DEA.slice(0, minLen).map(v => v ?? null);
   const MACDData = macd.MACD.slice(0, minLen).map(v => v ?? 0);
   const alignedCategories = categories.slice(0, minLen);
 
-  const options = {
-    chart: { height: 300, toolbar: { show: false } },
-    theme: {
-      mode: 'light',
-      palette: 'palette2'
-    },
-    xaxis: {
-      type: 'datetime',
-      categories: alignedCategories,
-      labels: {
-        rotate: -45,
-        datetimeUTC: false,
-        format: 'yyyy-MM-dd',
-      },
-      tickAmount: Math.min(10, alignedCategories.length),
-    },
-    yaxis: {
-      labels: {
-        formatter: (val) => (val != null ? val.toFixed(2) : '')
-      }
-    },
-    plotOptions: {
-      bar: {
-        columnWidth: '40%',
-        colors: {
-          ranges: [
-            { from: -1000, to: 0, color: '#00B746' },
-            { from: 0, to: 1000, color: '#EF403C' }
-          ]
-        }
-      }
-    },
-    annotations: {
-      yaxis: [
-        {
-          y: 0,
-          strokeDashArray: 4,
-          borderColor: '#999',
-          label: {
-            text: t.zeroAxis,
-            style: {
-              color: '#333',
-              background: '#eaeaea'
-            },
-            position: 'left'
-          }
-        }
-      ]
-    },
-    grid: {
-      padding: { left: 10, right: 10, top: 20, bottom: 20 }
-    },
-    stroke: {
-      curve: 'smooth',
-      width: 2
-    },
-    colors: ['#1f77b4', '#d62728', '#7f8fa6'],
-    legend: {
-      position: 'top'
-    }
-  };
-
-  const series = [
-    { name: t.dif, type: 'line', data: DIFData },
-    { name: t.dea, type: 'line', data: DEAData },
-    { name: t.macd, type: 'column', data: MACDData }
-  ];
-
-  const hasData = series.some(s => s.data.some(val => val !== null && val !== undefined));
+  const hasData = [DIFData, DEAData, MACDData].some(arr => arr.some(val => val !== null && val !== undefined));
   if (!hasData) return <p>{t.noMACDChart}</p>;
 
   return (
     <Card style={{ marginTop: 20 }} title={t.title}>
-      <Chart options={options} series={series} height={300} type="line" />
+      <BrowserOnly>
+        {() => {
+          const Chart = require('react-apexcharts').default;
+          const options = {
+            chart: { height: 300, toolbar: { show: false } },
+            theme: {
+              mode: 'light',
+              palette: 'palette2'
+            },
+            xaxis: {
+              type: 'datetime',
+              categories: alignedCategories,
+              labels: {
+                rotate: -45,
+                datetimeUTC: false,
+                format: 'yyyy-MM-dd',
+              },
+              tickAmount: Math.min(10, alignedCategories.length),
+            },
+            yaxis: {
+              labels: {
+                formatter: (val) => (val != null ? val.toFixed(2) : '')
+              }
+            },
+            plotOptions: {
+              bar: {
+                columnWidth: '40%',
+                colors: {
+                  ranges: [
+                    { from: -1000, to: 0, color: '#00B746' },
+                    { from: 0, to: 1000, color: '#EF403C' }
+                  ]
+                }
+              }
+            },
+            annotations: {
+              yaxis: [
+                {
+                  y: 0,
+                  strokeDashArray: 4,
+                  borderColor: '#999',
+                  label: {
+                    text: t.zeroAxis,
+                    style: {
+                      color: '#333',
+                      background: '#eaeaea'
+                    },
+                    position: 'left'
+                  }
+                }
+              ]
+            },
+            grid: {
+              padding: { left: 10, right: 10, top: 20, bottom: 20 }
+            },
+            stroke: {
+              curve: 'smooth',
+              width: 2
+            },
+            colors: ['#1f77b4', '#d62728', '#7f8fa6'],
+            legend: {
+              position: 'top'
+            }
+          };
+
+          const series = [
+            { name: t.dif, type: 'line', data: DIFData },
+            { name: t.dea, type: 'line', data: DEAData },
+            { name: t.macd, type: 'column', data: MACDData }
+          ];
+
+          return <Chart options={options} series={series} height={300} type="line" />;
+        }}
+      </BrowserOnly>
     </Card>
   );
 }

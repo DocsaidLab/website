@@ -1,7 +1,7 @@
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { Card } from 'antd';
 import React from 'react';
-import Chart from 'react-apexcharts';
 
 const I18N = {
   'zh-hant': {
@@ -106,7 +106,12 @@ export default function RSIChartView({ rsi, ohlcData }) {
 
   return (
     <Card style={{ marginTop: 20 }} title={t.title}>
-      <Chart options={options} series={series} height={300} type="line" />
+      <BrowserOnly>
+        {() => {
+          const Chart = require('react-apexcharts').default;
+          return <Chart options={options} series={series} height={300} type="line" />;
+        }}
+      </BrowserOnly>
     </Card>
   );
 }

@@ -1,6 +1,6 @@
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import React from 'react';
-import Chart from 'react-apexcharts';
 import { formatPrice } from './analysis/utils/dataHelpers';
 
 const I18N = {
@@ -152,7 +152,13 @@ export default function MainChartView({ ohlcData, bollinger, advancedAnalysis, n
 
   return (
     <div style={{ marginTop: 20 }}>
-      <Chart options={candleOptions} series={series} height={450} />
+      {/* 使用 BrowserOnly 包裹圖表 */}
+      <BrowserOnly>
+        {() => {
+          const Chart = require('react-apexcharts').default;
+          return <Chart options={candleOptions} series={series} height={450} />;
+        }}
+      </BrowserOnly>
     </div>
   );
 }
