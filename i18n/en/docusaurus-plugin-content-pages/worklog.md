@@ -12,8 +12,11 @@ This page is solely for recording our work activities.
 
 ### December
 
-- Added an "Author" field to the paper notes and beautified the homepage, paper notes, and blog styles.
-- Start building the web backend management system, database system and member registration system.
+- Invited two new authors to join, each working on different project developments.
+- Completed the **StockAnalysis Demo** feature and deployed it to the website: [**Playground**](https://docsaid.org/playground/stock-demo)
+- Added an "Author Field" to the paper notes and also beautified the homepage, paper notes, and blog styles.
+- Started building the website's backend management system, database system, and member registration system.
+- Wrote paper notes, with a current total of 150 entries.
 
 ### November
 
@@ -26,7 +29,7 @@ This page is solely for recording our work activities.
 
 ### October
 
-- Completed the model demo functionality and deployed it on the website: [**Playground**](https://docsaid.org/playground/intro)
+- Completed the model demo functionality and deployed it on the website: [**Playground**](https://docsaid.org/playground/docaligner-demo)
 - Moved NextCloud from our own host to GCP and updated all download links.
 
 ### September

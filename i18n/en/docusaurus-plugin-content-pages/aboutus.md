@@ -1,4 +1,4 @@
-## About Us
+# About Us
 
 Welcome to my website.
 

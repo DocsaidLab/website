@@ -190,6 +190,10 @@ const config = {
             href: '/privacy-policy',
           },
           {
+            label: '成為作者',
+            href: '/become-an-author',
+          },
+          {
             label: '工作日誌',
             href: '/worklog',
           },

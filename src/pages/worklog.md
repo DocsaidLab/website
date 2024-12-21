@@ -12,8 +12,11 @@
 
 ### 12 月
 
+- 邀請到新的兩位作者加入，分別進行不同的專案開發。
+- 完成 **StockAnalysis Demo** 的功能，並且將其部署至網站上：[**遊樂場**](https://docsaid.org/playground/stock-demo)
 - 新增「作者欄位」至論文筆記，順便美化首頁、論文筆記與部落格樣式。
 - 開始建構網頁後台管理系統，資料庫系統及會員註冊系統。
+- 撰寫論文筆記，目前累計 150 篇。
 
 ### 11 月
 
@@ -27,7 +30,7 @@
 ### 10 月
 
 - **TextRecognizer**：延續 5 月進度，繼續開發。
-- 完成模型 Demo 的功能，並且將其部署至網站上：[**遊樂場**](https://docsaid.org/playground/intro)
+- 完成模型 Demo 的功能，並且將其部署至網站上：[**遊樂場**](https://docsaid.org/playground/docaligner-demo)
 - 把 NextCloud 從我們自己的主機上搬到 GCP，並更新所有下載連結。
 
 ### 9 月
