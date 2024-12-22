@@ -1,10 +1,6 @@
----
-sidebar_position: 1
----
-
 # IpcamCapture
 
-> [IpcamCapture(url: int, str, color_base: str) -> None](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/ipcam/camera.py#L11)
+> [IpcamCapture(url: int, str, color_base: str) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/ipcam/camera.py#L11)
 
 - **說明**：從 IP 攝影機中捕獲影像。
 
@@ -24,9 +20,9 @@ sidebar_position: 1
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  cam = D.IpcamCapture(url='http://your_ip:your_port/video')
+  cam = cb.IpcamCapture(url='http://your_ip:your_port/video')
   for frame in cam:
-      D.imshow(frame)
+      D.imwrite(frame, 'frame.jpg')
   ```

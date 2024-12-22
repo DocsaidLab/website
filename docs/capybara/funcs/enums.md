@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Enums
 
 在 OpenCV 裡的列舉類別實在太多了，為了方便使用，我們將一些常用的列舉類別整理到 docsaidkit 中。這些列舉類別提供了一種清晰和方便的方式來引用常用的參數和類型，有助於提高程式碼的可讀性和可維護性。
@@ -10,15 +6,15 @@ sidebar_position: 3
 
 ## 列舉類別概述
 
-- [**INTER**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L12)：定義了不同的影像內插法。
-- [**ROTATE**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L20)：定義了影像的旋轉角度。
-- [**BORDER**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L26)：定義了邊界處理的方式。
-- [**MORPH**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L35)：定義了形態學操作的核形狀。
-- [**COLORSTR**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L41)：定義了終端顯示的顏色字串。
-- [**FORMATSTR**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L60)：定義了文字格式化的字串。
-- [**IMGTYP**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L66)：定義了支援的映像檔類型。
+- [**INTER**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L12)：定義了不同的影像內插法。
+- [**ROTATE**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L20)：定義了影像的旋轉角度。
+- [**BORDER**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L26)：定義了邊界處理的方式。
+- [**MORPH**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L35)：定義了形態學操作的核形狀。
+- [**COLORSTR**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L41)：定義了終端顯示的顏色字串。
+- [**FORMATSTR**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L60)：定義了文字格式化的字串。
+- [**IMGTYP**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L66)：定義了支援的映像檔類型。
 
-## docsaidkit.INTER
+## capybara.INTER
 
 用於影像大小調整或重採樣時選擇的內插法。
 
@@ -26,17 +22,17 @@ sidebar_position: 3
 - `BILINEAR`：雙線性內插。
 - `CUBIC`：三次內插。
 - `AREA`：面積內插。
-- `LANCZOS4`：Lanczos內插（使用4個Lanczos視窗）。
+- `LANCZOS4`：Lanczos 內插（使用 4 個 Lanczos 視窗）。
 
-## docsaidkit.ROTATE
+## capybara.ROTATE
 
 圖像旋轉的具體角度。
 
-- `ROTATE_90`：順時針旋轉90度。
-- `ROTATE_180`：旋轉180度。
-- `ROTATE_270`：逆時針旋轉90度。
+- `ROTATE_90`：順時針旋轉 90 度。
+- `ROTATE_180`：旋轉 180 度。
+- `ROTATE_270`：逆時針旋轉 90 度。
 
-## docsaidkit.BORDER
+## capybara.BORDER
 
 影像邊界的擴展方式。
 
@@ -47,7 +43,7 @@ sidebar_position: 3
 - `REPLICATE`：複製最邊緣像素的邊界。
 - `WRAP`：包裝邊界。
 
-## docsaidkit.MORPH
+## capybara.MORPH
 
 形態學濾波時所使用的結構元素的形狀。
 
@@ -55,7 +51,7 @@ sidebar_position: 3
 - `RECT`：矩形。
 - `ELLIPSE`：橢圓形。
 
-## docsaidkit.COLORSTR
+## capybara.COLORSTR
 
 用於控制台輸出的顏色代碼。
 
@@ -76,7 +72,7 @@ sidebar_position: 3
 - `BRIGHT_CYAN`：亮青色。
 - `BRIGHT_WHITE`：亮白色。
 
-## docsaidkit.FORMATSTR
+## capybara.FORMATSTR
 
 文字格式化選項。
 
@@ -84,7 +80,7 @@ sidebar_position: 3
 - `ITALIC`：斜體。
 - `UNDERLINE`：底線。
 
-## docsaidkit.IMGTYP
+## capybara.IMGTYP
 
 支援的圖像檔案類型。
 

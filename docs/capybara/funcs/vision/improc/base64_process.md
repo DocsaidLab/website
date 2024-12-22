@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # Base64 Process
 
 `pybase64` 是一個 Python 函式庫，提供了 Base64 編碼和解碼的功能。 它支援多種編碼格式，包括標準 Base64、Base64 URL 和 Base64 URL 檔案名稱安全編碼。 `pybase64` 是基於 `base64` 模組的增強版本，提供了更多的功能和選項。
@@ -14,7 +10,7 @@ sidebar_position: 6
 
 ## img_to_b64
 
-> [img_to_b64(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG) -> Union[bytes, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L116)
+> [img_to_b64(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG) -> Union[bytes, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L116)
 
 - **說明**：將 NumPy 圖像數組轉換為 Base64 字節串。
 
@@ -30,15 +26,15 @@ sidebar_position: 6
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  img = D.imread('lena.png')
-  b64 = D.img_to_b64(img, IMGTYP=D.IMGTYP.PNG)
+  img = cb.imread('lena.png')
+  b64 = cb.img_to_b64(img, IMGTYP=cb.IMGTYP.PNG)
   ```
 
 ## npy_to_b64
 
-> [npy_to_b64(x: np.ndarray, dtype='float32') -> bytes](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L126)
+> [npy_to_b64(x: np.ndarray, dtype='float32') -> bytes](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L126)
 
 - **說明**：將 NumPy 數組轉換為 Base64 字節串。
 
@@ -54,16 +50,16 @@ sidebar_position: 6
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
   import numpy as np
 
   x = np.random.rand(100, 100, 3)
-  b64 = D.npy_to_b64(x)
+  b64 = cb.npy_to_b64(x)
   ```
 
 ## npy_to_b64str
 
-> [npy_to_b64str(x: np.ndarray, dtype='float32', string_encode: str = 'utf-8') -> str](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L130)
+> [npy_to_b64str(x: np.ndarray, dtype='float32', string_encode: str = 'utf-8') -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L130)
 
 - **說明**：將 NumPy 數組轉換為 Base64 字串。
 
@@ -80,17 +76,17 @@ sidebar_position: 6
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
   import numpy as np
 
   x = np.random.rand(100, 100, 3)
 
-  b64str = D.npy_to_b64str(x)
+  b64str = cb.npy_to_b64str(x)
   ```
 
 ## img_to_b64str
 
-> [img_to_b64str(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG, string_encode: str = 'utf-8') -> Union[str, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L134)
+> [img_to_b64str(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG, string_encode: str = 'utf-8') -> Union[str, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L134)
 
 - **說明**：將 NumPy 圖像數組轉換為 Base64 字串。
 
@@ -107,15 +103,15 @@ sidebar_position: 6
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  img = D.imread('lena.png')
-  b64str = D.img_to_b64str(img, IMGTYP=D.IMGTYP.PNG)
+  img = cb.imread('lena.png')
+  b64str = cb.img_to_b64str(img, IMGTYP=cb.IMGTYP.PNG)
   ```
 
 ## b64_to_img
 
-> [b64_to_img(b64: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L143)
+> [b64_to_img(b64: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L143)
 
 - **說明**：將 Base64 字節串轉換為 NumPy 圖像數組。
 
@@ -130,15 +126,15 @@ sidebar_position: 6
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  b64 = D.img_to_b64(D.imread('lena.png'))
-  img = D.b64_to_img(b64)
+  b64 = cb.img_to_b64(cb.imread('lena.png'))
+  img = cb.b64_to_img(b64)
   ```
 
 ## b64str_to_img
 
-> [b64str_to_img(b64str: Union[str, None], string_encode: str = 'utf-8') -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L151)
+> [b64str_to_img(b64str: Union[str, None], string_encode: str = 'utf-8') -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L151)
 
 - **說明**：將 Base64 字串轉換為 NumPy 圖像數組。
 
@@ -154,16 +150,16 @@ sidebar_position: 6
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  b64 = D.img_to_b64(D.imread('lena.png'))
+  b64 = cb.img_to_b64(cb.imread('lena.png'))
   b64str = b64.decode('utf-8')
-  img = D.b64str_to_img(b64str)
+  img = cb.b64str_to_img(b64str)
   ```
 
 ## b64_to_npy
 
-> [b64_to_npy(x: bytes, dtype='float32') -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L166)
+> [b64_to_npy(x: bytes, dtype='float32') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L166)
 
 - **說明**：將 Base64 字節串轉換為 NumPy 數組。
 
@@ -179,15 +175,15 @@ sidebar_position: 6
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  b64 = D.npy_to_b64(np.random.rand(100, 100, 3))
-  x = D.b64_to_npy(b64)
+  b64 = cb.npy_to_b64(np.random.rand(100, 100, 3))
+  x = cb.b64_to_npy(b64)
   ```
 
 ## b64str_to_npy
 
-> [b64str_to_npy(x: bytes, dtype='float32', string_encode: str = 'utf-8') -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L170)
+> [b64str_to_npy(x: bytes, dtype='float32', string_encode: str = 'utf-8') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L170)
 
 - **說明**：將 Base64 字串轉換為 NumPy 數組。
 
@@ -204,8 +200,8 @@ sidebar_position: 6
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  b64 = D.npy_to_b64(np.random.rand(100, 100, 3))
-  x = D.b64str_to_npy(b64.decode('utf-8'))
+  b64 = cb.npy_to_b64(np.random.rand(100, 100, 3))
+  x = cb.b64str_to_npy(b64.decode('utf-8'))
   ```

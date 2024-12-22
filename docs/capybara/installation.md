@@ -8,29 +8,15 @@ sidebar_position: 2
 
 ## 前置條件
 
-### Python 版本
+安裝前，請先確保系統已安裝 Python 3.10 或以上版本。
 
-- 確保系統已安裝 Python 3.10 或以上版本。
+我們基於 Ubuntu 作業系統進行開發，因此以下指南可能不適用於 Windows 和 MacOS 用戶。
 
-### 依賴套件
+接著，開啟終端，執行以下命令安裝依賴：
 
-根據你的作業系統，安裝所需的依賴套件。
-
-- **Ubuntu**
-
-  開啟終端，執行以下命令安裝依賴：
-
-  ```bash
-  sudo apt install libturbojpeg exiftool ffmpeg libheif-dev
-  ```
-
-- **MacOS**
-
-  使用 brew 安裝相依性：
-
-  ```bash
-  brew install jpeg-turbo exiftool ffmpeg libheif
-  ```
+```bash
+sudo apt install libturbojpeg exiftool ffmpeg libheif-dev
+```
 
 ### pdf2image 依賴套件
 
@@ -40,19 +26,13 @@ pdf2image 是一個 Python 模組，用於將 PDF 文件轉換為圖片。
 
 - 或參考開源專案 [**pdf2image**](https://github.com/Belval/pdf2image) 相關頁面以取得安裝指南。
 
-- MacOS：Mac 使用者需要安裝 poppler。透過 Brew 進行安裝：
+大多數 Linux 發行版已預裝 `pdftoppm` 和 `pdftocairo`。
 
-  ```bash
-  brew install poppler
-  ```
+如果未安裝，請透過你的套件管理器安裝 poppler-utils。
 
-- Linux：大多數 Linux 發行版已預裝 `pdftoppm` 和 `pdftocairo`。
-
-  如果未安裝，請透過你的套件管理器安裝 poppler-utils。
-
-  ```bash
-  sudo apt install poppler-utils
-  ```
+```bash
+sudo apt install poppler-utils
+```
 
 ## 安裝套件
 

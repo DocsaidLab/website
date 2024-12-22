@@ -4,6 +4,8 @@ sidebar_position: 4
 
 # PIP 參數配置
 
+本章節帶你更深入了解 pip 的配置機制，協助你在多重 Python 環境下避免套件衝突與權限問題。
+
 ## 使用方式
 
 在 Linux/macOS 系統上，你可以使用以下指令來管理本地和全局配置：
@@ -27,6 +29,10 @@ python -m pip config [<file-option>] [--editor <editor-path>] edit
 python -m pip config --global --editor vim edit
 ```
 
+:::tip
+若你使用的是 Windows 系統，則配置檔可能位於 `%APPDATA%\pip\pip.ini`，或使用 `%HOMEPATH%\.pip\pip.ini` 等路徑。可參考官方文件或使用 `pip config list` 進一步確認實際位置。
+:::
+
 ## 優先級
 
 配置文件的優先級順序非常重要。以下是可能存在於你的機器上的配置文件列表，按優先級排序：
@@ -40,7 +46,9 @@ python -m pip config --global --editor vim edit
    - `/etc/pip.conf`
    - `/etc/xdg/pip/pip.conf`
 
-在 python 環境中，pip 會按照上述順序來尋找並應用配置文件。確認你正在修改的是正確的配置文件，可以幫助避免產生難以追蹤的錯誤。
+在 python 環境中，pip 會按照上述順序來尋找並應用配置文件。
+
+確認你正在修改的是正確的配置文件，可以幫助避免產生難以追蹤的錯誤。
 
 ## 配置文件範例
 
@@ -63,4 +71,8 @@ extra-index-url = https://pypi.anaconda.org/simple
 
 :::warning
 請注意，當使用多個源時，所有的源都應該是可信的，因為安裝過程中將會從這些源中選擇最適合的版本。未經信任的源可能會帶來安全風險。
+:::
+
+:::tip
+若你有私有套件伺服器，或需要指定帳號密碼進行驗證，也可以將帳密放在你的 `pip.conf` 中以利自動化，但務必確保檔案權限安全。
 :::

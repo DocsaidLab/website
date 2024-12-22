@@ -1,16 +1,12 @@
----
-sidebar_position: 4
----
-
 # JPG Process
 
-> [get_orientation_code(stream: Union[str, Path, bytes]) -> Union[ROTATE, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L34C5-L34C25)
+> [get_orientation_code(stream: Union[str, Path, bytes]) -> Union[ROTATE, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L34)
 
-> [jpgencode(img: np.ndarray, quality: int = 90) -> Union[bytes, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L50)
+> [jpgencode(img: np.ndarray, quality: int = 90) -> Union[bytes, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L50)
 
-> [jpgdecode(byte\_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L60)
+> [jpgdecode(byte\_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L60)
 
-> [jpgread(img_file: Union[str, Path]) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L72)
+> [jpgread(img_file: Union[str, Path]) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L72)
 
 這一系列函數提供了對 JPG 圖像的編碼、解碼和讀取支持，以及從 EXIF 數據自動調整圖像方向的功能。
 
@@ -42,22 +38,22 @@ sidebar_position: 4
 
 ```python
 import numpy as np
-import docsaidkit as D
+import capybara as cb
 
 img_array = np.random.rand(100, 100, 3) * 255
-encoded_bytes = D.jpgencode(img_array, quality=95)
+encoded_bytes = cb.jpgencode(img_array, quality=95)
 ```
 
 ### jpgdecode
 
 ```python
-decoded_img = D.jpgdecode(encoded_bytes)
+decoded_img = cb.jpgdecode(encoded_bytes)
 ```
 
 ### jpgread
 
 ```python
-img_array = D.jpgread('path/to/image.jpg')
+img_array = cb.jpgread('path/to/image.jpg')
 ```
 
 ## 附加說明：TurboJPEG
