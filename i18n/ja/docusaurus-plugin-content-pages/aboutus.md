@@ -72,7 +72,7 @@
 
 もしこのサイトがあなたの役に立ったり、私の努力を評価していただけたなら、以下の方法でサポートしていただけると嬉しいです：
 
-- [**Buy Me A Coffee**](https://buymeacoffee.com/zephyr_docsaid)で、私のプロジェクトをサポートして新しいツールの開発を助けてください。
+- [**Buy Me A Coffee**](https://buymeacoffee.com/docsaid)，メッセージを残してどの著者にコーヒーをおごるか指定することもできますし、指定しない場合はクラウドホスティングの費用に使います。いずれにせよ、あなたのサポートには大変感謝しています！
 - GitHub でプロジェクトにスター ⭐️ を付けてください。
 - 好きな記事の下にコメントや励ましのメッセージを残してください！
 
@@ -85,7 +85,7 @@
 <div align="center">
 <br />
 <figure style={{ width: "50%"}}>
-[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/zephyr_docsaid)
+[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/docsaid)
 </figure>
 <br />
 </div>

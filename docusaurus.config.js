@@ -140,7 +140,7 @@ const config = {
           {
             label: '支持我們',
             position: 'right',
-            href: 'https://buymeacoffee.com/zephyr_docsaid',
+            href: 'https://buymeacoffee.com/docsaid',
           },
           {
             label: '關於我們',
@@ -199,7 +199,7 @@ const config = {
           },
           {
             label: '支持我們',
-            href: 'https://buymeacoffee.com/zephyr_docsaid',
+            href: 'https://buymeacoffee.com/docsaid',
           },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} DOCSAID.`,

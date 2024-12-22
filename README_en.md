@@ -25,12 +25,12 @@ Please follow the steps below to check and configure your environment to ensure 
 
 1. **Check Node.js Version**
 
-   - We recommend using Node.js v16 or above.
+   - We recommend using Node.js v22 or above.
    - If you haven't installed `nvm`, please refer to the [official nvm documentation](https://github.com/nvm-sh/nvm#installing-and-updating) for installation.
    - After installation, run the following commands to check and set the Node.js version:
      ```bash
-     nvm install 16
-     nvm use 16
+     nvm install 22
+     nvm use 22
      ```
 
 2. **Install Yarn**
@@ -282,25 +282,44 @@ import HelloWorld from "./HelloWorld";
 Other content
 ```
 
+## Multilingual Support
+
+After writing the article, you suddenly realize that our website supports multiple languages, but you don't know any other languages!
+
+Don't worry, generally speaking, someone named Zephyr will help you with this, but you can do it yourself:
+
+1. Place your written article in the corresponding `i18n` folder, for example:
+
+   - Articles for `docs` go into the `i18n/en/docusaurus-plugin-content-docs/current` folder,
+   - Articles for `blog` go into the `i18n/en/docusaurus-plugin-content-blog/current` folder,
+   - Articles for `papers` go into the `i18n/en/docusaurus-plugin-content-papers/current` folder.
+
+   ***
+
+   For Japanese, place the content in the `i18n/ja` folder, and for other languages, follow the same pattern.
+
+2. Then, translate the content of the article in the `i18n` folder to the corresponding language. It is recommended to use GPTs for translation, then remove any unnecessary phrases and obvious mistakes.
+3. Finally, submit a PR to the `main` branch and wait for the review.
+
 ## Finally
 
-We want to remind you that although many AI tools can help generate articles, a truly engaging article always carries the author's unique style and emotional expression, which is something AI cannot fully replicate or replace.
+We must remind ourselves that, while many AI tools can now assist in generating articles, a truly captivating piece of writing must carry the author's unique personal style and emotional expression, which is something AI cannot fully replicate or replace.
 
-AI operates based on statistical models and generates content using maximum likelihood estimation. This means AI tends to produce more generic and common syntax and sentence structures, which often leads to bland and similar content. Therefore, over-relying on AI may cause creators to lose their individuality and soul, making their articles lack depth and impact.
+The core operation of AI models is based on statistical models, generating content through maximum likelihood estimation. This means that the model tends to produce **mainstream, common syntax and sentence structures**, leading to content that often feels bland and similar in style. Therefore, excessive reliance on the model’s output can cause creators to lose their originality and soul, making the article lack depth and impact.
 
-If you find that you cannot create without AI assistance or feel mentally blocked, this is a warning: it indicates that you need to solidify your writing skills and master the basic techniques of creation. Otherwise, you will merely be a mouthpiece for AI models rather than a true author.
+If you find yourself unable to create without AI assistance, or your mind goes completely blank, consider it a warning: you need to first strengthen your own writing skills and master basic creative techniques. Otherwise, you might end up becoming just a mouthpiece for the model.
 
-In our experience, AI is excellent for tedious and repetitive tasks, such as table data analysis and data aggregation, because these tasks are highly standardized, requiring high accuracy and efficiency but relatively low creativity and flexibility:
+In our experience, AI models are very suitable for tedious, repetitive tasks, such as spreadsheet data analysis and data aggregation, because these tasks typically have high standardization, requiring precision and efficiency but relatively low demands for creativity and flexibility:
 
-> After all, table data will not become more interesting or change its experimental results just because you are creative.
+> After all, spreadsheet data won’t become more interesting or change its experimental results just because you are creative.
 
-For example, in "Paper Notes," AI can only assist in the "## Discussion" section or help us deal with difficult mathematical theories, but it cannot replace our understanding and thinking of the paper. As for "Project Documentation" and "Blogs," which entirely depend on the creator's style and thinking, AI’s help is relatively limited.
+Take "paper notes" as an example, where AI can assist us with difficult mathematical theories or help summarize experimental results and conclusions in the "## Discussion" section. However, it cannot replace our understanding and critical thinking of the paper, nor can it replace in-depth analysis. Similarly, for "project documentation," AI can quickly generate large amounts of technical documentation for the tedious details of function inputs and outputs, but for the design philosophy of the model, we still rely on our own expertise. As for "blogs," which completely depend on the creator’s style and thinking, AI’s help is even more limited.
 
-Therefore, we should clearly define the scope of AI usage and adjust our creative strategies accordingly to ensure the quality and uniqueness of the articles. Use AI's power wisely, but more importantly, retain your own creativity and desire for expression.
+Therefore, we should clearly define the scope of AI’s use and adjust our creative strategies accordingly to ensure the quality and uniqueness of our work. AI is a tool that can help us expand our perspectives and improve efficiency, not a tool to limit our thinking or style.
 
-AI should be a tool that helps expand our vision and improve efficiency, not limit our thinking or style. In the writing process, remember that truly moving words come from the heart of a person, not cold algorithms. Let AI be your capable assistant, but you, as the creator, are the true master of the work.
+Remember, the truly moving words in writing come from the heart.
 
-AI will only replace those who refuse to think. I think, therefore I am.
+AI will only replace those who are unwilling to think. I think, therefore I am.
 
 ＊
 

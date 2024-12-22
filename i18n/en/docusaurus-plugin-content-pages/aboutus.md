@@ -72,7 +72,7 @@ I have invested a lot of energy into developing these projects and writing learn
 
 If this website has helped you, or if you appreciate my efforts, feel free to support me in the following ways:
 
-- [**Buy Me A Coffee**](https://buymeacoffee.com/zephyr_docsaid) to help me maintain the project and develop more new tools.
+- [**Buy Me A Coffee**](https://buymeacoffee.com/docsaid), where you can leave a message specifying which author you'd like to treat to coffee, or you can leave it unspecified, and I'll use it to pay for cloud hosting costs. Either way, I will be very grateful for your support!
 - Or give a star ⭐️ to the project on GitHub.
 - Or leave suggestions or encouragement under the articles you like!
 
@@ -85,7 +85,7 @@ Thank you for reading and supporting. I hope **DOCSAID** can bring you help and 
 <div align="center">
 <br />
 <figure style={{ width: "50%"}}>
-[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/zephyr_docsaid)
+[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/docsaid)
 </figure>
 <br />
 </div>

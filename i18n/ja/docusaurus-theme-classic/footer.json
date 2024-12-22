@@ -25,7 +25,7 @@
   },
   "link.item.label.支持我們": {
     "message": "サポートする",
-    "description": "The label of footer link with label=支持我們 linking to https://buymeacoffee.com/zephyr_docsaid"
+    "description": "The label of footer link with label=支持我們 linking to https://buymeacoffee.com/docsaid"
   },
   "copyright": {
     "message": "Copyright © 2024 DOCSAID.",
