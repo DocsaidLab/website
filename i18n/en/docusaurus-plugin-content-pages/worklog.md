@@ -12,7 +12,7 @@ This page is solely for recording our work activities.
 
 ### December
 
-- Invited two new authors to join, each working on different project developments.
+- Invited four authors to share their daily development experiences.
 - Completed the **StockAnalysis Demo** feature and deployed it to the website: [**Playground**](https://docsaid.org/playground/stock-demo)
 - Added an "Author Field" to the paper notes and also beautified the homepage, paper notes, and blog styles.
 - Started building the website's backend management system, database system, and member registration system.
