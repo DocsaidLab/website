@@ -1,4 +1,6 @@
-# Dear Sir/Madam
+# Become an Author
+
+## Dear Sir/Madam
 
 Thank you for joining our group of authors. Below are some commonly used tools and guidelines that will help you get started more quickly.
 
