@@ -1,38 +1,32 @@
----
-sidebar_position: 6
----
-
 # draw_mask
 
-> [draw_mask(img: np.ndarray, mask: np.ndarray, colormap: int = cv2.COLORMAP_JET, weight: Tuple[float, float] = (0.5, 0.5), gamma: float = 0, min_max_normalize: bool = False) -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/visualization/draw.py#L366)
+> [draw_mask(img: np.ndarray, mask: np.ndarray, colormap: int = cv2.COLORMAP_JET, weight: Tuple[float, float] = (0.5, 0.5), gamma: float = 0, min_max_normalize: bool = False) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/visualization/draw.py#L507)
 
-- **Description**
+- **Description**: Draws a mask on an image.
 
-    Draw a mask on an image.
+- **Parameters**:
 
-- **Parameters**
+  - **img** (`np.ndarray`): The image to draw on.
+  - **mask** (`np.ndarray`): The mask to draw.
+  - **colormap** (`int`): The colormap to apply to the mask. Defaults to `cv2.COLORMAP_JET`.
+  - **weight** (`Tuple[float, float]`): The weights for the image and the mask. Defaults to (0.5, 0.5).
+  - **gamma** (`float`): The gamma value for the mask. Defaults to 0.
+  - **min_max_normalize** (`bool`): Whether to normalize the mask to the range [0, 1]. Defaults to False.
 
-    - **img** (`np.ndarray`): The image to draw on.
-    - **mask** (`np.ndarray`): The mask to draw.
-    - **colormap** (`int`): The colormap used for the mask. Defaults to `cv2.COLORMAP_JET`.
-    - **weight** (`Tuple[float, float]`): The weights of the image and the mask. Defaults to (0.5, 0.5).
-    - **gamma** (`float`): The gamma value of the mask. Defaults to 0.
-    - **min_max_normalize** (`bool`): Whether to normalize the mask to the range [0, 1]. Defaults to False.
+- **Return Value**:
 
-- **Returns**
+  - **np.ndarray**: The image with the mask drawn on it.
 
-    - **np.ndarray**: The image with the drawn mask.
+- **Example**:
 
-- **Example**
+  ```python
+  import capybara as cb
+  import numpy as np
 
-    ```python
-    import docsaidkit as D
-    import numpy as np
+  img = cb.imread('lena.png')
+  polygon = cb.Polygon([(20, 20), (100, 20), (80, 80), (20, 40)])
+  mask = cb.draw_polygon(np.zeros_like(img), polygon, fillup=True, color=255)
+  mask_img = cb.draw_mask(img, mask, colormap=cv2.COLORMAP_JET, weight=(0.5, 0.5), gamma=0, min_max_normalize=False)
+  ```
 
-    img = D.imread('lena.png')
-    polygon = D.Polygon([(20, 20), (100, 20), (80, 80), (20, 40)])
-    mask = D.draw_polygon(np.zeros_like(img), polygon, fillup=True, color=255)
-    mask_img = D.draw_mask(img, mask, colormap=cv2.COLORMAP_JET, weight=(0.5, 0.5), gamma=0, min_max_normalize=False)
-    ```
-
-    ![draw_mask](./resource/test_draw_mask.jpg)
+  ![draw_mask](./resource/test_draw_mask.jpg)

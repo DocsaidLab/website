@@ -4,59 +4,39 @@ sidebar_position: 2
 
 # 基本インストール
 
-Capybara のインストールを始める前に、以下のシステム要件を満たしていることを確認してください：
+Capybara のインストールを開始する前に、システムが以下の要件を満たしていることを確認してください。
 
 ## 前提条件
 
-### Python バージョン
+インストール前に、システムに Python 3.10 以上がインストールされていることを確認してください。
 
-- Python 3.10 以上がインストールされていることを確認してください。
+開発は Ubuntu オペレーティングシステムを基に行っていますので、以下のガイドラインは Windows および MacOS ユーザーには適用されない場合があります。
 
-### 依存パッケージ
+次に、ターミナルを開き、以下のコマンドを実行して依存関係をインストールします：
 
-使用しているオペレーティングシステムに応じて、必要な依存パッケージをインストールします。
-
-- **Ubuntu**
-
-  ターミナルを開き、以下のコマンドで依存パッケージをインストールします：
-
-  ```bash
-  sudo apt install libturbojpeg exiftool ffmpeg libheif-dev
-  ```
-
-- **MacOS**
-
-  Brew を使って依存パッケージをインストールします：
-
-  ```bash
-  brew install jpeg-turbo exiftool ffmpeg libheif
-  ```
+```bash
+sudo apt install libturbojpeg exiftool ffmpeg libheif-dev
+```
 
 ### pdf2image 依存パッケージ
 
 pdf2image は PDF ファイルを画像に変換するための Python モジュールです。
 
-使用しているオペレーティングシステムに応じて、以下の手順でインストールします：
+使用しているオペレーティングシステムに応じて、以下の指示に従ってインストールしてください：
 
-- または、オープンソースプロジェクト [**pdf2image**](https://github.com/Belval/pdf2image) の関連ページを参照してインストールガイドを確認してください。
+- また、オープンソースプロジェクト [**pdf2image**](https://github.com/Belval/pdf2image) のページを参照して、インストールガイドを取得できます。
 
-- MacOS：Mac のユーザーは poppler をインストールする必要があります。Brew を使用してインストールできます：
+多くの Linux ディストリビューションには `pdftoppm` と `pdftocairo` が事前にインストールされています。
 
-  ```bash
-  brew install poppler
-  ```
+もしインストールされていない場合は、パッケージマネージャーを使って poppler-utils をインストールしてください。
 
-- Linux：ほとんどの Linux ディストリビューションには `pdftoppm` と `pdftocairo` がプリインストールされています。
-
-  インストールされていない場合は、パッケージマネージャーを使用して poppler-utils をインストールします：
-
-  ```bash
-  sudo apt install poppler-utils
-  ```
+```bash
+sudo apt install poppler-utils
+```
 
 ## パッケージのインストール
 
-前提条件が整ったら、次に git clone を使用してインストールします：
+前提条件を満たしたら、git clone を使ってインストールできます：
 
 1. このパッケージをダウンロード：
 
@@ -83,26 +63,20 @@ pdf2image は PDF ファイルを画像に変換するための Python モジュ
    pip install dist/capybara-*-py3-none-any.whl
    ```
 
-   PyTorch 対応のバージョンをインストールする場合は、次のコマンドを使用します：
-
-   ```bash
-   pip install "dist/capybara-${version}-none-any.whl[torch]"
-   ```
-
 ## よくある質問
 
-1. **なぜ Windows には対応していないのですか？**
+1. **Windows はサポートされていますか？**
 
-   安全のため、Windows は避けるべきです。
+   命を大切にしましょう、Windows は避けてください。
 
-2. **Windows を使いたいです。余計なことを言わないでください！**
+2. **どうしても Windows を使いたいんです、余計なこと言わないでください！**
 
-   わかりました。Windows ユーザーには、Docker をインストールし、上記の方法で Docker を使用してプログラムを実行することをお勧めします。
+   わかりました、その場合 Docker をインストールし、上記の方法で Docker 経由でプログラムを実行することをお勧めします。
 
-   次の章：[**進階インストール**](./advance.md)を参照してください。
+   次の記事を参照してください：[**進階インストール**](./advance.md)。
 
-3. **Docker のインストール方法は？**
+3. **Docker はどうやってインストールしますか？**
 
    難しくはありませんが、手順が少し多いです。
 
-   [**Docker 公式ドキュメント**](https://docs.docker.com/get-docker/) を参照してインストールを行ってください。
+   インストール方法については [**Docker の公式ドキュメント**](https://docs.docker.com/get-docker/) を参照してください。

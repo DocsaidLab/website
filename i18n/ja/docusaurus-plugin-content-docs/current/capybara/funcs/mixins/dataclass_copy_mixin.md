@@ -1,18 +1,14 @@
----
-sidebar_position: 2
----
-
 # DataClassCopyMixin
 
-> [DataClassCopyMixin](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/mixins.py#L77)
+> [DataClassCopyMixin](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/mixins.py#L77)
 
-- **説明**：DataClass オブジェクトのコピー方法を提供します。これを使用すると、DataClass オブジェクトをコピーできます。
+- **説明**：DataClass オブジェクトのコピー方法を提供し、DataClass オブジェクトをコピーする際に使用できます。
 
 - **例**
 
   ```python
   from dataclasses import dataclass
-  from docsaidkit import DataclassCopyMixin
+  from capybara import DataclassCopyMixin
 
   @dataclass
   class Person(DataclassCopyMixin):

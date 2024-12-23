@@ -1,25 +1,19 @@
----
-sidebar_position: 6
----
-
 # dump_pickle
 
-> [dump_pickle(obj, path: Union[str, Path]) -> None](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/files_utils.py#L173)
+> [dump_pickle(obj, path: Union[str, Path]) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L173)
 
-- **Description**
+- **Description**: Writes an object to a pickle file.
 
-    Write an object to a pickle file.
+- **Parameters**:
 
-- **Parameters**
+  - **obj** (`Any`): The object to write.
+  - **path** (`Union[str, Path]`): The path for the pickle file.
 
-    - **obj** (`Any`): The object to write.
-    - **path** (`Union[str, Path]`): The path to the pickle file.
+- **Example**:
 
-- **Example**
+  ```python
+  import capybara as cb
 
-    ```python
-    import docsaidkit as D
-
-    data = {'key': 'value'}
-    D.dump_pickle(data, '/path/to/your/pickle')
-    ```
+  data = {'key': 'value'}
+  cb.dump_pickle(data, '/path/to/your/pickle')
+  ```

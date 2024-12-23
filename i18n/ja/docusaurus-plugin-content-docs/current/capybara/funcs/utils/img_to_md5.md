@@ -1,28 +1,24 @@
----
-sidebar_position: 8
----
-
 # img_to_md5
 
-> [img_to_md5(img: np.ndarray) -> str](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/files_utils.py#L42)
+> [img_to_md5(img: np.ndarray) -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L42)
 
-- **説明**：指定された画像から MD5 ハッシュを生成します。`gen_md5`と同じ理由で存在しており、異なる点はこの関数が画像データを入力として使用することです。
+- **説明**：指定された画像に基づいて md5 を生成します。`gen_md5` と同じ理由で存在しますが、こちらは画像入力に特化した関数です。
 
-- **パラメータ**
+- **引数**
 
-  - **img** (`np.ndarray`)：画像。
+  - **img** (`np.ndarray`)：画像データ。
 
 - **戻り値**
 
-  - **str**：MD5 ハッシュ。
+  - **str**：md5 値。
 
 - **例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  img = D.imread('lena.png')
-  md5 = D.img_to_md5(img)
+  img = cb.imread('lena.png')
+  md5 = cb.img_to_md5(img)
   print(md5)
   # >>> 'd41d8cd98f00b204e9800998ecf8427e'
   ```

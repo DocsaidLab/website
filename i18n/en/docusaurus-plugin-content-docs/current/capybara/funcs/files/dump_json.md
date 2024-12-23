@@ -1,26 +1,20 @@
----
-sidebar_position: 4
----
-
 # dump_json
 
-> [dump_json(obj: Any, path: Union[str, Path] = None, **kwargs) -> None](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/files_utils.py#L65)
+> [dump_json(obj: Any, path: Union[str, Path] = None, \*\*kwargs) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L65)
 
-- **Description**
+- **Description**: Writes an object to a JSON file. It uses `ujson` for faster writing compared to the standard `json` module.
 
-    Write an object to JSON. Here, `ujson` is used for writing because it is much faster than `json`.
+- **Parameters**:
 
-- **Parameters**
+  - **obj** (`Any`): The object to write.
+  - **path** (`Union[str, Path]`): The path for the JSON file. Defaults to None, which writes to `tmp.json` in the current directory.
+  - **kwargs**: Additional parameters for `ujson.dump`.
 
-    - **obj** (`Any`): The object to write.
-    - **path** (`Union[str, Path]`): The path to the JSON file. Defaults to None, indicating writing to `tmp.json` in the current directory.
-    - `**kwargs`: Additional parameters for `ujson.dump`.
+- **Example**:
 
-- **Example**
+  ```python
+  import capybara as cb
 
-    ```python
-    import docsaidkit as D
-
-    data = {'key': 'value'}
-    D.dump_json(data)
-    ```
+  data = {'key': 'value'}
+  cb.dump_json(data)
+  ```

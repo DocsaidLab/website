@@ -4,66 +4,66 @@ sidebar_position: 7
 
 # pairwise_iou
 
->[paiwise_iou(boxes1: Boxes, boxes2: Boxes) -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/structures/functionals.py#L41)
+> [pairwise_iou(boxes1: Boxes, boxes2: Boxes) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/functionals.py#L42)
 
-- **Description**
+- **Description**:
 
-    `pairwise_iou` is a function used to compute the Intersection over Union (IoU) between two lists of bounding boxes. This function computes IoU for all N x M pairs of bounding boxes. The input bounding boxes must be of type `Boxes`.
+  `pairwise_iou` is a function used to calculate the Intersection over Union (IoU) between two lists of bounding boxes. This function computes the IoU for all N x M pairs of bounding boxes. The input bounding boxes must be of type `Boxes`.
 
 - **Parameters**
 
-    - **boxes1** (`Boxes`): The first list of bounding boxes, containing N bounding boxes.
-    - **boxes2** (`Boxes`): The second list of bounding boxes, containing M bounding boxes.
+  - **boxes1** (`Boxes`): The first list of bounding boxes, containing N bounding boxes.
+  - **boxes2** (`Boxes`): The second list of bounding boxes, containing M bounding boxes.
 
 - **Example**
 
-    ```python
-    import docsaidkit as D
+  ```python
+  import capybara as cb
 
-    boxes1 = D.Boxes([[10, 20, 50, 80], [20, 30, 60, 90]])
-    boxes2 = D.Boxes([[20, 30, 60, 90], [30, 40, 70, 100]])
-    iou = D.pairwise_iou(boxes1, boxes2)
-    print(iou)
-    # >>> [[0.45454547 0.2]
-    #      [1.0 0.45454547]]
-    ```
+  boxes1 = cb.Boxes([[10, 20, 50, 80], [20, 30, 60, 90]])
+  boxes2 = cb.Boxes([[20, 30, 60, 90], [30, 40, 70, 100]])
+  iou = cb.pairwise_iou(boxes1, boxes2)
+  print(iou)
+  # >>> [[0.45454547 0.2]
+  #      [1.0 0.45454547]]
+  ```
 
-## Additional information
+## Additional Information
 
 ### Introduction to IoU
 
-IoU (Intersection over Union) is a crucial metric in computer vision for evaluating the performance of object detection algorithms, particularly in tasks such as object detection and segmentation. It measures the overlap between predicted bounding boxes and ground truth bounding boxes.
+IoU (Intersection over Union) is an important metric in computer vision for evaluating the performance of object detection algorithms, especially in tasks like object detection and segmentation. It measures the overlap between the predicted bounding box and the ground truth bounding box.
 
 ### Definition
 
-The IoU calculation formula computes the ratio of the area of intersection to the area of union between the predicted bounding box and the ground truth bounding box. IoU values range from 0 to 1, where higher values indicate greater overlap and hence more accurate predictions.
+The IoU formula is the intersection area of the predicted and ground truth bounding boxes divided by their union area. The IoU value ranges from 0 to 1, with higher values indicating better overlap and more accurate predictions.
 
-### Computation Steps
+### Calculation Steps
 
-1. **Determine Bounding Box Coordinates**: Firstly, it's necessary to establish the positions of the predicted and ground truth bounding boxes in the image. Typically, bounding boxes are represented using four coordinates: (x0, y0, x1, y1), where (x0, y0) denotes the coordinates of the top-left corner, and (x1, y1) denotes the coordinates of the bottom-right corner.
+1. **Determine Bounding Box Coordinates**: First, determine the positions of the predicted and ground truth bounding boxes in the image. These are typically represented by four coordinates: (x0, y0, x1, y1), where (x0, y0) is the top-left corner and (x1, y1) is the bottom-right corner.
 
-2. **Compute Intersection Area**: Calculate the area of overlap between the two bounding boxes. If the two bounding boxes do not overlap at all, the intersection area is 0.
+2. **Calculate Intersection Area**: Compute the area of the overlap between the predicted and ground truth bounding boxes. If the two bounding boxes do not overlap, the intersection area will be 0.
 
-3. **Compute Union Area**: The union area is equal to the sum of the areas of the two bounding boxes minus the intersection area.
+3. **Calculate Union Area**: The union area is the total area covered by both bounding boxes, which is the sum of their individual areas minus the intersection area.
 
-4. **Compute IoU**: Divide the intersection area by the union area to obtain the IoU value.
+4. **Calculate IoU**: Divide the intersection area by the union area to obtain the IoU value.
 
 ### Applications
 
-- **Object Detection**: In object detection tasks, IoU is used to assess whether the detection box accurately covers the object. A threshold (e.g., 0.5) is often set, and detections with IoU above this threshold are considered successful.
+- **Object Detection**: In object detection tasks, IoU is used to evaluate how accurately the predicted bounding box overlaps with the ground truth. A threshold (e.g., 0.5) is often set, and if the IoU is greater than this threshold, the detection is considered successful.
 
-- **Model Evaluation**: IoU is commonly used to evaluate and compare the performance of different object detection models, with higher IoU values indicating better detection accuracy.
+- **Model Evaluation**: IoU is commonly used to evaluate and compare the performance of different object detection models. A higher IoU value indicates better detection accuracy.
 
-- **Non-Maximum Suppression (NMS)**: In post-processing of object detection, IoU is utilized for non-maximum suppression to eliminate overlapping detection boxes and retain the best detection results.
+- **Non-Maximum Suppression (NMS)**: In post-processing of object detection, IoU is used in non-maximum suppression to remove overlapping detection boxes and retain the best results.
 
 ### Advantages and Limitations
 
 - **Advantages**
 
-    - **Intuitive**: IoU provides an intuitive way to quantify the similarity between predicted bounding boxes and ground truth bounding boxes.
-    - **Standardized**: Being a scalar value ranging from 0 to 1, IoU facilitates comparison and evaluation.
+  - **Intuitive**: IoU provides an intuitive way to quantify the similarity between the predicted and ground truth bounding boxes.
+  - **Standardized**: As a scalar value in the range [0, 1], IoU is easy to compare and evaluate.
 
 - **Limitations**
 
-    - **Insensitivity**: IoU may not be sensitive enough to small deviations between predicted and ground truth bounding boxes, particularly when the overlap is high.
-    - **Threshold Selection**: The choice of IoU threshold may influence the final evaluation results, with different thresholds leading to different evaluation criteria.
+  - **Insensitivity**: When the predicted and ground truth bounding boxes have small deviations (i.e., they almost overlap), IoU may not be sensitive enough to detect minor differences.
+  - **Threshold Selection**: The choice of IoU threshold can influence the evaluation results. Different thresholds may lead to different evaluation standards.

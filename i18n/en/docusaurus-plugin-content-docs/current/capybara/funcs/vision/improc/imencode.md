@@ -1,25 +1,23 @@
----
-sidebar_position: 7
----
-
 # imencode
 
-> [imencode(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG) -> Union[bytes, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L100)
+> [imencode(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG) -> Union[bytes, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L100)
 
-- **Description**: Encode a NumPy image array into a byte string in the specified format.
+- **Description**: Encodes a NumPy image array into a byte string in a specified format.
 
-- **Parameters**
-    - **img** (`np.ndarray`): The image array to encode.
-    - **IMGTYP** (`Union[str, int, IMGTYP]`): The type of the image. Supported types are `IMGTYP.JPEG` and `IMGTYP.PNG`. Default is `IMGTYP.JPEG`.
+- **Parameters**:
 
-- **Returns**
-    - **bytes**: The encoded image byte string.
+  - **img** (`np.ndarray`): The image array to encode.
+  - **IMGTYP** (`Union[str, int, IMGTYP]`): The image type. Supported types are `IMGTYP.JPEG` and `IMGTYP.PNG`. Default is `IMGTYP.JPEG`.
 
-- **Example**
+- **Return value**:
 
-    ```python
-    import docsaidkit as D
+  - **bytes**: The encoded image byte string.
 
-    img = D.imread('lena.png')
-    encoded_bytes = D.imencode(img, IMGTYP=D.IMGTYP.PNG)
-    ```
+- **Example**:
+
+  ```python
+  import capybara as cb
+
+  img = cb.imread('lena.png')
+  encoded_bytes = cb.imencode(img, IMGTYP=cb.IMGTYP.PNG)
+  ```

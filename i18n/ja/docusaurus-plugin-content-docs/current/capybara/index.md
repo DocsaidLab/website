@@ -1,12 +1,12 @@
 # Capybara
 
 :::info
-新しい開発者を招待し、DocsaidKit の再構築を開始しました。その一部をこのプロジェクトに分割します。全体的な内容は大きく変わりませんが、今後、他のパッケージの依存関係を順次 Capybara に移行していきます。移行が完了するまで、DocsaidKit のメンテナンスを続けますが、Capybara が完成次第、DocsaidKit は廃止されます。
+新たな開発者を迎え、DocsaidKit の再構築に取り組み、いくつかの部分をこのプロジェクトに分割しました。基本的な内容は変わりませんが、今後、他のパッケージの依存関係も Capybara に移行していきます。移行が完了するまでは DocsaidKit のメンテナンスを続け、Capybara が完成した後、DocsaidKit は廃止される予定です。
 :::
 
-このプロジェクトは画像処理および深層学習のツールキットであり、開発プロセスの中で役立つツールを集めたものです。
+このプロジェクトの目的は、画像処理、ファイル操作、日常的なユーティリティを提供することです。開発過程で作成されたツールボックスです。
 
-- [**Capybara GitHub**](https://github.com/DocsaidLab/Capybara)
+- [**Capybara Github**](https://github.com/DocsaidLab/Capybara)
 
 ---
 

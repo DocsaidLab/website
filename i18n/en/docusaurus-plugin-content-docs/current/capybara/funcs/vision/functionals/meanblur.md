@@ -1,29 +1,25 @@
----
-sidebar_position: 1
----
-
 # meanblur
 
->[meanblur(img: np.ndarray, ksize: _Ksize = 3, **kwargs) -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/functionals.py#L33)
+> [meanblur(img: np.ndarray, ksize: \_Ksize = 3, \*\*kwargs) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L33)
 
-- **Description**: Apply mean blur processing to the input image.
+- **Description**: Applies mean blur to the input image.
 
-- **Parameters**:
+- **Parameters**
 
-    - **img** (`np.ndarray`): Input image to be blurred.
-    - **ksize** (`Union[int, Tuple[int, int]]`): Size of the kernel used for blurring. If an integer value is provided, a square kernel of the specified size is used. If a tuple `(k_height, k_width)` is provided, a rectangular kernel of the specified size is used. Default is 3.
+  - **img** (`np.ndarray`): The input image to be blurred.
+  - **ksize** (`Union[int, Tuple[int, int]]`): The size of the kernel used for blurring. If an integer is provided, a square kernel of the specified size is used. If a tuple `(k_height, k_width)` is provided, a rectangular kernel of the specified size is used. Default is 3.
 
-- **Returns**:
+- **Returns**
 
-    - **np.ndarray**: Blurred image.
+  - **np.ndarray**: The blurred image.
 
-- **Example**:
+- **Example**
 
-    ```python
-    import docsaidkit as D
+  ```python
+  import capybara as cb
 
-    img = D.imread('lena.png')
-    blur_img = D.meanblur(img, ksize=5)
-    ```
+  img = cb.imread('lena.png')
+  blur_img = cb.meanblur(img, ksize=5)
+  ```
 
-    ![meanblur](./resource/test_meanblur.jpg)
+  ![meanblur](./resource/test_meanblur.jpg)

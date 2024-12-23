@@ -1,28 +1,24 @@
----
-sidebar_position: 21
----
-
 # download
 
 ## gen_download_cmd
 
-> [gen_download_cmd(file_id: str, target: str) -> str](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/utils/utils.py#L68)
+> [gen_download_cmd(file_id: str, target: str) -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/utils.py#L68)
 
 - **説明**：Google Drive のファイルをダウンロードするためのコマンドを生成します。
 
-- **パラメータ**
+- **引数**
 
-  - **file_id** (`str`)：ファイル ID。
+  - **file_id** (`str`)：ファイルの ID。
   - **target** (`str`)：ダウンロード先のファイルパス。
 
 - **例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
   file_id = '1c1b9b1b0cdcwfjowief'
   target = 'example.txt'
-  cmd = D.gen_download_cmd(file_id, target)
+  cmd = cb.gen_download_cmd(file_id, target)
   print(cmd)
   # >>> wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget
   # >>> --quiet
@@ -34,23 +30,23 @@ sidebar_position: 21
 
 ## download_from_docsaid
 
-> [download_from_docsaid(file_id: str, file_name: str, target: str) -> None](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/utils/utils.py#L79)
+> [download_from_docsaid(file_id: str, file_name: str, target: str) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/utils.py#L79)
 
 - **説明**：Docsaid のプライベートクラウドからデータをダウンロードします。
 
-- **パラメータ**
+- **引数**
 
-  - **file_id** (`str`)：ファイル ID。
+  - **file_id** (`str`)：ファイルの ID。
   - **file_name** (`str`)：ファイル名。
   - **target** (`str`)：ダウンロード先のファイルパス。
 
 - **例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
   file_id = 'c1b9b1b0cdcwfjowief'
   file_name = 'example.txt'
   target = 'example.txt'
-  D.download_from_docsaid(file_id, file_name, target)
+  cb.download_from_docsaid(file_id, file_name, target)
   ```

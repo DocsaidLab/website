@@ -1,211 +1,207 @@
----
-sidebar_position: 6
----
-
 # Base64 Process
 
-`pybase64`は、Base64 エンコードおよびデコード機能を提供する Python ライブラリです。標準の Base64、Base64 URL、および Base64 URL ファイル名安全エンコードなど、さまざまなエンコード形式をサポートしています。`pybase64`は、`base64`モジュールをベースにした強化バージョンで、より多くの機能とオプションを提供します。
+`pybase64` is a Python library that provides Base64 encoding and decoding functionality. It supports various encoding formats, including standard Base64, Base64 URL, and Base64 URL-safe filenames. `pybase64` is an enhanced version of the `base64` module, offering more features and options.
 
-画像処理では、画像データを Base64 エンコードされた文字列に変換して、インターネットでの転送などで使用することがよくあります。`pybase64`は、さまざまなエンコード形式をサポートし、簡単なインターフェースで Base64 エンコードおよびデコードを迅速に行うことができます。
+In image processing, we often need to convert image data into Base64 encoded strings for use in web transmission. `pybase64` provides a convenient interface to quickly perform Base64 encoding and decoding operations, supporting multiple encoding formats to meet various needs.
 
-- **よくある質問：文字列とバイト文字列？**
+- **Common Issue: String vs. Byte String?**
 
-  Python では、文字列（string）は Unicode 文字のシーケンスであり、バイト文字列（bytes）は「バイト」のシーケンスです。Base64 エンコードでは、通常、エンコードおよびデコード操作に「バイト」文字列を使用します。Base64 エンコードは「バイト」データに対して行われます。
+  In Python, a string is a sequence of Unicode characters, while a byte string is a sequence of "bytes". In Base64 encoding, we typically work with "byte" strings because Base64 encoding operates on byte data.
 
 ## img_to_b64
 
-> [img_to_b64(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG) -> Union[bytes, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L116)
+> [img_to_b64(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG) -> Union[bytes, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L116)
 
-- **説明**：NumPy 画像配列を Base64 バイト文字列に変換します。
+- **説明**：NumPy 画像配列を Base64 バイト列に変換します。
 
-- 引数
+- **パラメータ**
 
   - **img** (`np.ndarray`)：変換する画像配列。
-  - **IMGTYP** (`Union[str, int, IMGTYP]`)：画像タイプ。サポートされているタイプは `IMGTYP.JPEG` と `IMGTYP.PNG` です。デフォルトは `IMGTYP.JPEG`。
+  - **IMGTYP** (`Union[str, int, IMGTYP]`)：画像タイプ。サポートされているタイプは`IMGTYP.JPEG`と`IMGTYP.PNG`です。デフォルトは`IMGTYP.JPEG`。
 
-- **返り値**
+- **戻り値**
 
-  - **bytes**：変換された Base64 バイト文字列。
+  - **bytes**：変換後の Base64 バイト列。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  img = D.imread('lena.png')
-  b64 = D.img_to_b64(img, IMGTYP=D.IMGTYP.PNG)
+  img = cb.imread('lena.png')
+  b64 = cb.img_to_b64(img, IMGTYP=cb.IMGTYP.PNG)
   ```
 
 ## npy_to_b64
 
-> [npy_to_b64(x: np.ndarray, dtype='float32') -> bytes](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L126)
+> [npy_to_b64(x: np.ndarray, dtype='float32') -> bytes](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L126)
 
-- **説明**：NumPy 配列を Base64 バイト文字列に変換します。
+- **説明**：NumPy 配列を Base64 バイト列に変換します。
 
-- 引数
+- **パラメータ**
 
   - **x** (`np.ndarray`)：変換する NumPy 配列。
-  - **dtype** (`str`)：データ型。デフォルトは `'float32'`。
+  - **dtype** (`str`)：データ型。デフォルトは`'float32'`。
 
-- **返り値**
+- **戻り値**
 
-  - **bytes**：変換された Base64 バイト文字列。
+  - **bytes**：変換後の Base64 バイト列。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
   import numpy as np
 
   x = np.random.rand(100, 100, 3)
-  b64 = D.npy_to_b64(x)
+  b64 = cb.npy_to_b64(x)
   ```
 
 ## npy_to_b64str
 
-> [npy_to_b64str(x: np.ndarray, dtype='float32', string_encode: str = 'utf-8') -> str](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L130)
+> [npy_to_b64str(x: np.ndarray, dtype='float32', string_encode: str = 'utf-8') -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L130)
 
 - **説明**：NumPy 配列を Base64 文字列に変換します。
 
-- 引数
+- **パラメータ**
 
   - **x** (`np.ndarray`)：変換する NumPy 配列。
-  - **dtype** (`str`)：データ型。デフォルトは `'float32'`。
-  - **string_encode** (`str`)：文字列エンコード。デフォルトは `'utf-8'`。
+  - **dtype** (`str`)：データ型。デフォルトは`'float32'`。
+  - **string_encode** (`str`)：文字列エンコード。デフォルトは`'utf-8'`。
 
-- **返り値**
+- **戻り値**
 
-  - **str**：変換された Base64 文字列。
+  - **str**：変換後の Base64 文字列。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
   import numpy as np
 
   x = np.random.rand(100, 100, 3)
 
-  b64str = D.npy_to_b64str(x)
+  b64str = cb.npy_to_b64str(x)
   ```
 
 ## img_to_b64str
 
-> [img_to_b64str(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG, string_encode: str = 'utf-8') -> Union[str, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L134)
+> [img_to_b64str(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG, string_encode: str = 'utf-8') -> Union[str, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L134)
 
 - **説明**：NumPy 画像配列を Base64 文字列に変換します。
 
-- 引数
+- **パラメータ**
 
   - **img** (`np.ndarray`)：変換する画像配列。
-  - **IMGTYP** (`Union[str, int, IMGTYP]`)：画像タイプ。サポートされているタイプは `IMGTYP.JPEG` と `IMGTYP.PNG` です。デフォルトは `IMGTYP.JPEG`。
-  - **string_encode** (`str`)：文字列エンコード。デフォルトは `'utf-8'`。
+  - **IMGTYP** (`Union[str, int, IMGTYP]`)：画像タイプ。サポートされているタイプは`IMGTYP.JPEG`と`IMGTYP.PNG`です。デフォルトは`IMGTYP.JPEG`。
+  - **string_encode** (`str`)：文字列エンコード。デフォルトは`'utf-8'`。
 
-- **返り値**
+- **戻り値**
 
-  - **str**：変換された Base64 文字列。
+  - **str**：変換後の Base64 文字列。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  img = D.imread('lena.png')
-  b64str = D.img_to_b64str(img, IMGTYP=D.IMGTYP.PNG)
+  img = cb.imread('lena.png')
+  b64str = cb.img_to_b64str(img, IMGTYP=cb.IMGTYP.PNG)
   ```
 
 ## b64_to_img
 
-> [b64_to_img(b64: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L143)
+> [b64_to_img(b64: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L143)
 
-- **説明**：Base64 バイト文字列を NumPy 画像配列に変換します。
+- **説明**：Base64 バイト列を NumPy 画像配列に変換します。
 
-- 引数
+- **パラメータ**
 
-  - **b64** (`bytes`)：変換する Base64 バイト文字列。
+  - **b64** (`bytes`)：変換する Base64 バイト列。
 
-- **返り値**
+- **戻り値**
 
-  - **np.ndarray**：変換された NumPy 画像配列。
+  - **np.ndarray**：変換後の NumPy 画像配列。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  b64 = D.img_to_b64(D.imread('lena.png'))
-  img = D.b64_to_img(b64)
+  b64 = cb.img_to_b64(cb.imread('lena.png'))
+  img = cb.b64_to_img(b64)
   ```
 
 ## b64str_to_img
 
-> [b64str_to_img(b64str: Union[str, None], string_encode: str = 'utf-8') -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L151)
+> [b64str_to_img(b64str: Union[str, None], string_encode: str = 'utf-8') -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L151)
 
 - **説明**：Base64 文字列を NumPy 画像配列に変換します。
 
-- 引数
+- **パラメータ**
 
   - **b64str** (`Union[str, None]`)：変換する Base64 文字列。
-  - **string_encode** (`str`)：文字列エンコード。デフォルトは `'utf-8'`。
+  - **string_encode** (`str`)：文字列エンコード。デフォルトは`'utf-8'`。
 
-- **返り値**
+- **戻り値**
 
-  - **np.ndarray**：変換された NumPy 画像配列。
+  - **np.ndarray**：変換後の NumPy 画像配列。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  b64 = D.img_to_b64(D.imread('lena.png'))
+  b64 = cb.img_to_b64(cb.imread('lena.png'))
   b64str = b64.decode('utf-8')
-  img = D.b64str_to_img(b64str)
+  img = cb.b64str_to_img(b64str)
   ```
 
 ## b64_to_npy
 
-> [b64_to_npy(x: bytes, dtype='float32') -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L166)
+> [b64_to_npy(x: bytes, dtype='float32') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L166)
 
-- **説明**：Base64 バイト文字列を NumPy 配列に変換します。
+- **説明**：Base64 バイト列を NumPy 配列に変換します。
 
-- 引数
+- **パラメータ**
 
-  - **x** (`bytes`)：変換する Base64 バイト文字列。
-  - **dtype** (`str`)：データ型。デフォルトは `'float32'`。
+  - **x** (`bytes`)：変換する Base64 バイト列。
+  - **dtype** (`str`)：データ型。デフォルトは`'float32'`。
 
-- **返り値**
+- **戻り値**
 
-  - **np.ndarray**：変換された NumPy 配列。
+  - **np.ndarray**：変換後の NumPy 配列。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  b64 = D.npy_to_b64(np.random.rand(100, 100, 3))
-  x = D.b64_to_npy(b64)
+  b64 = cb.npy_to_b64(np.random.rand(100, 100, 3))
+  x = cb.b64_to_npy(b64)
   ```
 
 ## b64str_to_npy
 
-> [b64str_to_npy(x: bytes, dtype='float32', string_encode: str = 'utf-8') -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L170)
+> [b64str_to_npy(x: bytes, dtype='float32', string_encode: str = 'utf-8') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L170)
 
 - **説明**：Base64 文字列を NumPy 配列に変換します。
 
-- 引数
+- **パラメータ**
 
   - **x** (`bytes`)：変換する Base64 文字列。
-  - **dtype** (`str`)：データ型。デフォルトは `'float32'`。
-  - **string_encode** (`str`)：文字列エンコード。デフォルトは `'utf-8'`。
+  - **dtype** (`str`)：データ型。デフォルトは`'float32'`。
+  - **string_encode** (`str`)：文字列エンコード。デフォルトは`'utf-8'`。
 
-- **返り値**
+- **戻り値**
 
-  - **np.ndarray**：変換された NumPy 配列。
+  - **np.ndarray**：変換後の NumPy 配列。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  b64 = D.npy_to_b64(np.random.rand(100, 100, 3))
-  x = D.b64str_to_npy(b64.decode('utf-8'))
+  b64 = cb.npy_to_b64(np.random.rand(100, 100, 3))
+  x = cb.b64str_to_npy(b64.decode('utf-8'))
   ```

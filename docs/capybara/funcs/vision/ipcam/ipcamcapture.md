@@ -24,5 +24,5 @@
 
   cam = cb.IpcamCapture(url='http://your_ip:your_port/video')
   for frame in cam:
-      D.imwrite(frame, 'frame.jpg')
+      cb.imwrite(frame, 'frame.jpg')
   ```

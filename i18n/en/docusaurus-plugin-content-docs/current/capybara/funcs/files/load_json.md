@@ -1,29 +1,25 @@
----
-sidebar_position: 3
----
-
 # load_json
 
-> [load_json(path: Union[Path, str], **kwargs) -> dict](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/files_utils.py#L50)
+> [load_json(path: Union[Path, str], \*\*kwargs) -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L50)
 
-- **Description**
+- **Description**: Reads a JSON file. It uses `ujson` for faster reading compared to the standard `json` module.
 
-    Read a JSON file. Here, `ujson` is used for reading because it is much faster than `json`.
+- **Parameters**:
 
-- **Parameters**
-    - **path** (`Union[Path, str]`): The path to the JSON file.
-    - `**kwargs`: Additional parameters for `ujson.load`.
+  - **path** (`Union[Path, str]`): The path to the JSON file.
+  - **kwargs**: Additional parameters for `ujson.load`.
 
-- **Returns**
-    - **dict**: The content of the JSON file.
+- **Return Value**:
 
-- **Example**
+  - **dict**: The content of the JSON file.
 
-    ```python
-    import docsaidkit as D
+- **Example**:
 
-    path = '/path/to/your/json'
-    data = D.load_json(path)
-    print(data)
-    # >>> {'key': 'value'}
-    ```
+  ```python
+  import capybara as cb
+
+  path = '/path/to/your/json'
+  data = cb.load_json(path)
+  print(data)
+  # >>> {'key': 'value'}
+  ```

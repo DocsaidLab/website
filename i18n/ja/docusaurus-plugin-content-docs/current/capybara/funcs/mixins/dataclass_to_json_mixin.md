@@ -1,27 +1,23 @@
----
-sidebar_position: 3
----
-
 # DataClassToJsonMixin
 
-> [DataClassToJsonMixin](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/mixins.py#L90)
+> [DataClassToJsonMixin](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/mixins.py#L90)
 
-- **説明**：DataClass オブジェクトの JSON シリアライズ方法を提供します。これを使用すると、DataClass オブジェクトを JSON 形式に変換できます。
+- **説明**：DataClass オブジェクトの JSON シリアライズ方法を提供し、DataClass オブジェクトを JSON 形式に変換する際に使用できます。
 
-- **dict_to_jsonable** のサポートする形式：
+- **dict_to_jsonable** のサポート形式：
 
-  - **Box**、**Boxes**：`List[float]`形式に変換。
-  - **Polygon**、**Polygons**：`List[List[float]]`形式に変換。
-  - **np.ndarray**、**np.generic**：`List`形式に変換。
-  - **list**、**tuple**：再帰的に`List`形式に変換。
-  - **Enum**：`str`形式に変換。
-  - **Mapping**：再帰的に`Dict`形式に変換。
+  - **Box**、**Boxes**：`List[float]` 形式に変換。
+  - **Polygon**、**Polygons**：`List[List[float]]` 形式に変換。
+  - **np.ndarray**、**np.generic**：`List` 形式に変換。
+  - **list**、**tuple**：再帰的に `List` 形式に変換。
+  - **Enum**：`str` 形式に変換。
+  - **Mapping**：再帰的に `Dict` 形式に変換。
 
 - **例**
 
   ```python
   from dataclasses import dataclass
-  from docsaidkit import DataclassToJsonMixin
+  from capybara import DataclassToJsonMixin
 
   @dataclass
   class Person(DataclassToJsonMixin):

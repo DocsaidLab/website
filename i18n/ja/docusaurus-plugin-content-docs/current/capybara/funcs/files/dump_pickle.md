@@ -1,23 +1,19 @@
----
-sidebar_position: 6
----
-
 # dump_pickle
 
-> [dump_pickle(obj, path: Union[str, Path]) -> None](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/files_utils.py#L173)
+> [dump_pickle(obj, path: Union[str, Path]) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L173)
 
-- **説明**：オブジェクトを pickle ファイルに書き出します。
+- **説明**：オブジェクトを pickle ファイルに書き込みます。
 
-- **パラメータ**
+- **引数**
 
-  - **obj** (`Any`)：書き出すオブジェクト。
+  - **obj** (`Any`)：書き込む対象のオブジェクト。
   - **path** (`Union[str, Path]`)：pickle ファイルのパス。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
   data = {'key': 'value'}
-  D.dump_pickle(data, '/path/to/your/pickle')
+  cb.dump_pickle(data, '/path/to/your/pickle')
   ```

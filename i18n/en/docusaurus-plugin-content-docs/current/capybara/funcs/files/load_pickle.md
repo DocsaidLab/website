@@ -1,28 +1,24 @@
----
-sidebar_position: 5
----
-
 # load_pickle
 
-> [load_pickle(path: Union[str, Path]) -> dict](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/files_utils.py#L159)
+> [load_pickle(path: Union[str, Path]) -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L159)
 
-- **Description**
+- **Description**: Reads a pickle file.
 
-    Read a pickle file.
+- **Parameters**:
 
-- **Parameters**
-    - **path** (`Union[str, Path]`): The path to the pickle file.
+  - **path** (`Union[str, Path]`): The path to the pickle file.
 
-- **Returns**
-    - **dict**: The content of the pickle file.
+- **Return Value**:
 
-- **Example**
+  - **dict**: The content of the pickle file.
 
-    ```python
-    import docsaidkit as D
+- **Example**:
 
-    path = '/path/to/your/pickle'
-    data = D.load_pickle(path)
-    print(data)
-    # >>> {'key': 'value'}
-    ```
+  ```python
+  import capybara as cb
+
+  path = '/path/to/your/pickle'
+  data = cb.load_pickle(path)
+  print(data)
+  # >>> {'key': 'value'}
+  ```

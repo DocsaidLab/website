@@ -1,38 +1,34 @@
----
-sidebar_position: 3
----
-
 # imrotate
 
->[imrotate(img: np.ndarray, angle: float, scale: float = 1, interpolation: Union[str, int, INTER] = INTER.BILINEAR, bordertype: Union[str, int, BORDER] = BORDER.CONSTANT, bordervalue: Union[int, Tuple[int, int, int]] = None, expand: bool = True, center: Tuple[int, int] = None) -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/geometric.py#L80C1-L153C1)
+> [imrotate(img: np.ndarray, angle: float, scale: float = 1, interpolation: Union[str, int, INTER] = INTER.BILINEAR, bordertype: Union[str, int, BORDER] = BORDER.CONSTANT, bordervalue: Union[int, Tuple[int, int, int]] = None, expand: bool = True, center: Tuple[int, int] = None) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/geometric.py#L80)
 
-- **Description**: Rotate the input image.
+- **Description**: Rotates the input image.
 
-- **Parameters**:
+- **Parameters**
 
-    - **img** (`np.ndarray`): Input image to be rotated.
-    - **angle** (`float`): Rotation angle in degrees, counterclockwise.
-    - **scale** (`float`): Scale factor. Default is 1.
-    - **interpolation** (`Union[str, int, INTER]`): Interpolation method. Available options are: INTER.NEAREST, INTER.LINEAR, INTER.CUBIC, INTER.LANCZOS4. Default is INTER.LINEAR.
-    - **border_type** (`Union[str, int, BORDER]`): Border type. Available options are: BORDER.CONSTANT, BORDER.REPLICATE, BORDER.REFLECT, BORDER.REFLECT_101. Default is BORDER.CONSTANT.
-    - **border_value** (`Union[int, Tuple[int, int, int]]`): Value used for padding borders. Only valid when border_type is BORDER.CONSTANT. Default is None.
-    - **expand** (`bool`): Whether to expand the output image to accommodate the entire rotated image. If True, the output image is expanded to be large enough to accommodate the entire rotated image. If False or omitted, the output image is the same size as the input image. Note that the expand flag assumes rotation around the center and no translation. Default is False.
-    - **center** (`Tuple[int, int]`): Rotation center. Default is the center of the image.
+  - **img** (`np.ndarray`): The input image to be rotated.
+  - **angle** (`float`): The rotation angle in degrees, counterclockwise.
+  - **scale** (`float`): The scaling factor. Default is 1.
+  - **interpolation** (`Union[str, int, INTER]`): The interpolation method. Available options include: INTER.NEAREST, INTER.LINEAR, INTER.CUBIC, INTER.LANCZOS4. Default is INTER.LINEAR.
+  - **bordertype** (`Union[str, int, BORDER]`): The border type. Available options include: BORDER.CONSTANT, BORDER.REPLICATE, BORDER.REFLECT, BORDER.REFLECT_101. Default is BORDER.CONSTANT.
+  - **bordervalue** (`Union[int, Tuple[int, int, int]]`): The value used to fill the border. Only used when bordertype is BORDER.CONSTANT. Default is None.
+  - **expand** (`bool`): Whether to expand the output image to fit the entire rotated image. If True, the output image will be expanded to accommodate the full rotated image. If False or omitted, the output image will be the same size as the input image. Note that the expand flag assumes rotation around the center with no translation. Default is False.
+  - **center** (`Tuple[int, int]`): The center of rotation. Default is the center of the image.
 
-- **Returns**:
+- **Returns**
 
-    - **np.ndarray**: Rotated image.
+  - **np.ndarray**: The rotated image.
 
-- **Example**:
+- **Example**
 
-    ```python
-    import docsaidkit as D
+  ```python
+  import capybara as cb
 
-    img = D.imread('lena.png')
-    rotate_img = D.imrotate(img, 45, bordertype=D.BORDER.CONSTANT, expand=True)
+  img = cb.imread('lena.png')
+  rotate_img = cb.imrotate(img, 45, bordertype=cb.BORDER.CONSTANT, expand=True)
 
-    # Resize the rotated image to the original size for visualization
-    rotate_img = D.imresize(rotate_img, [img.shape[0], img.shape[1]])
-    ```
+  # Resize the rotated image to the original size for visualization
+  rotate_img = cb.imresize(rotate_img, [img.shape[0], img.shape[1]])
+  ```
 
-    ![imrotate](./resource/test_imrotate.jpg)
+  ![imrotate](./resource/test_imrotate.jpg)

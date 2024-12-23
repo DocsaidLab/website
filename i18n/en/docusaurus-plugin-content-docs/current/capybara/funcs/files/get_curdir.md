@@ -1,25 +1,19 @@
----
-sidebar_position: 2
----
-
 # get_curdir
 
->[get_curdir() -> str](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/custom_path.py#L8)
+> [get_curdir() -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/custom_path.py#L8)
 
-- **Description**
+- **Description**: Retrieves the current working directory path. The working directory here refers to the directory of the Python file that calls this function. This is typically used as a reference for relative paths.
 
-    Get the path of the current working directory. Here, the working directory refers to the directory where the Python file calling this function is located. Typically, this is used as a reference for relative paths.
+- **Return Value**:
 
-- **Returns**
+  - **str**: The path of the current working directory.
 
-    - **str**: The path of the current working directory.
+- **Example**:
 
-- **Example**
+  ```python
+  import capybara as cb
 
-    ```python
-    import docsaidkit as D
-
-    DIR = D.get_curdir()
-    print(DIR)
-    # >>> '/path/to/your/current/directory'
-    ```
+  DIR = cb.get_curdir()
+  print(DIR)
+  # >>> '/path/to/your/current/directory'
+  ```

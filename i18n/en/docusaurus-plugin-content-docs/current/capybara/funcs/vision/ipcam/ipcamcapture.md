@@ -1,29 +1,28 @@
----
-sidebar_position: 1
----
-
 # IpcamCapture
 
->[IpcamCapture(url: int, str, color_base: str) -> None](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/ipcam/camera.py#L11)
+> [IpcamCapture(url: int, str, color_base: str) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/ipcam/camera.py#L11)
 
-- **Description**: Capture images from an IP camera.
+- **Description**: Captures images from an IP camera.
 
-- **Parameters**:
-    - **url** (`int`, `str`): Identifier of the video source. It can be the device index of a locally connected camera or a string containing the network address of the IP camera. For local cameras, 0 is usually the default camera. Default is 0.
-    - **color_base** (`str`): Color space of the output frames. It can be 'BGR' or 'RGB'. Note that the input frames in OpenCV are always in BGR format. If color_base is set to 'RGB', each frame will be converted from BGR to RGB before returning. Default is 'BGR'.
+- **Parameters**
 
-- **Attributes**:
-    - **color_base** (`str`): Color space of the output frames.
+  - **url** (`int`, `str`): The identifier for the video source. It can be the device index for a locally connected camera or a string containing the network address of an IP camera. For local cameras, 0 is typically the default camera. Default is 0.
+  - **color_base** (`str`): The color space for the output frame. It can be 'BGR' or 'RGB'. Note that OpenCV input frames are always in BGR format. If `color_base` is set to 'RGB', each frame will be converted from BGR to RGB before returning. Default is 'BGR'.
 
-- **Methods**:
-    - **get_frame() -> np.ndarray**: Retrieve the currently captured frame.
+- **Attributes**
 
-- **Example**:
+  - **color_base** (`str`): The color space of the output frame.
 
-    ```python
-    import docsaidkit as D
+- **Methods**
 
-    cam = D.IpcamCapture(url='http://your_ip:your_port/video')
-    for frame in cam:
-        D.imshow(frame)
-    ```
+  - **get_frame() -> np.ndarray**: Retrieves the current captured frame.
+
+- **Example**
+
+  ```python
+  import capybara as cb
+
+  cam = cb.IpcamCapture(url='http://your_ip:your_port/video')
+  for frame in cam:
+      cb.imwrite(frame, 'frame.jpg')
+  ```

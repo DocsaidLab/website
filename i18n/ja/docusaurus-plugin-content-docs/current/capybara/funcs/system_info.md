@@ -1,27 +1,23 @@
----
-sidebar_position: 5
----
-
 # SystemInfo
 
-このツールはシステム情報を取得するためのものです。CPU、メモリ、ディスク、ネットワークなど、システムのさまざまな情報を取得できます。
+これはシステム情報を取得するためのツールです。CPU、メモリ、ディスク、ネットワークなどのシステム情報を取得するのに役立ちます。
 
 ## get_package_versions
 
-> [get_package_versions() -> dict](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/utils/system_info.py#L14)
+> [get_package_versions() -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/system_info.py#L14)
 
-- **説明**：よく使われる深層学習やデータ分析関連のライブラリのバージョン情報を取得します。PyTorch、PyTorch Lightning、TensorFlow、Keras、NumPy、Pandas、Scikit-learn、OpenCV などのライブラリのバージョン情報を含みます。
+- **説明**：PyTorch、PyTorch Lightning、TensorFlow、Keras、NumPy、Pandas、Scikit-learn、OpenCV などの一般的な深層学習およびデータ分析ライブラリのバージョン情報を取得します。
 
 - **返り値**
 
-  - **dict**：インストールされているライブラリのバージョン情報を含む辞書。
+  - **dict**：インストールされているパッケージのバージョン情報を含む辞書。
 
 - **例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  versions_info = D.get_package_versions()
+  versions_info = cb.get_package_versions()
   print(versions_info)
   # versions_info = {
   #     'PyTorch Version': '1.9.0',
@@ -37,20 +33,20 @@ sidebar_position: 5
 
 ## get_gpu_cuda_versions
 
-> [get_gpu_cuda_versions() -> dict](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/utils/system_info.py#L84)
+> [get_gpu_cuda_versions() -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/system_info.py#L84)
 
-- **説明**：GPU と CUDA のバージョン情報を取得します。PyTorch、TensorFlow、CuPy などのライブラリを使用して CUDA のバージョンを取得し、`nvidia-smi`コマンドを使用して Nvidia ドライバのバージョンを取得します。
+- **説明**：GPU と CUDA のバージョン情報を取得します。PyTorch、TensorFlow、CuPy などのライブラリを使用して CUDA バージョンを取得し、`nvidia-smi` コマンドで Nvidia ドライバーのバージョンを取得します。
 
 - **返り値**
 
-  - **dict**：CUDA および GPU ドライバのバージョン情報を含む辞書。
+  - **dict**：CUDA と GPU ドライバーのバージョン情報を含む辞書。
 
 - **例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  gpu_cuda_info = D.get_gpu_cuda_versions()
+  gpu_cuda_info = cb.get_gpu_cuda_versions()
   print(gpu_cuda_info)
   # gpu_cuda_info = {
   #     'CUDA Version': '11.1',
@@ -60,29 +56,29 @@ sidebar_position: 5
 
 ## get_cpu_info
 
-> [get_cpu_info() -> str](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/utils/system_info.py#L134)
+> [get_cpu_info() -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/system_info.py#L134)
 
-- **説明**：異なるプラットフォームで CPU のモデル名を取得します。
+- **説明**：プラットフォームに応じて CPU のモデル名を取得します。
 
 - **返り値**
 
-  - **str**：CPU モデル名、見つからない場合は "N/A" を返します。
+  - **str**：CPU のモデル名。見つからない場合は "N/A" を返します。
 
 - **例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  cpu_info = D.get_cpu_info()
+  cpu_info = cb.get_cpu_info()
   print(cpu_info)
   # cpu_info = 'Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz'
   ```
 
 ## get_system_info
 
-> [get_system_info() -> dict](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/utils/system_info.py#L163)
+> [get_system_info() -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/system_info.py#L155)
 
-- **説明**：システムの情報を取得します。OS のバージョン、CPU 情報、メモリ、ディスク使用量などを含みます。
+- **説明**：システム情報を取得します。これには、OS バージョン、CPU 情報、メモリ、ディスク使用量などが含まれます。
 
 - **返り値**
 
@@ -91,9 +87,9 @@ sidebar_position: 5
 - **例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  system_info = D.get_system_info()
+  system_info = cb.get_system_info()
   print(system_info)
   # system_info = {
   #     'OS Version': 'Linux-5.4.0-80-generic-x86_64-with-glibc2.29',

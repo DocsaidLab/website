@@ -1,24 +1,20 @@
----
-sidebar_position: 4
----
-
 # dump_json
 
-> [dump_json(obj: Any, path: Union[str, Path] = None, \*\*kwargs) -> None](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/files_utils.py#L65)
+> [dump_json(obj: Any, path: Union[str, Path] = None, \*\*kwargs) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L65)
 
-- **説明**：オブジェクトを json として書き出します。ここでは `ujson` を使用して書き出します。理由は、`ujson` が `json` よりも高速だからです。
+- **説明**：オブジェクトを json 形式で書き込みます。ここでは `ujson` を使って書き込んでおり、その理由は `ujson` の方が `json` よりもかなり速いためです。
 
-- **パラメータ**
+- **引数**
 
-  - **obj** (`Any`)：書き出すオブジェクト。
-  - **path** (`Union[str, Path]`)：json ファイルのパス。デフォルトは None、現在のディレクトリに `tmp.json` として書き出します。
-  - `**kwargs`：`ujson.dump` のその他のパラメータ。
+  - **obj** (`Any`)：書き込む対象のオブジェクト。
+  - **path** (`Union[str, Path]`)：json ファイルのパス。デフォルトは None で、現在のディレクトリに `tmp.json` という名前で書き込まれます。
+  - `**kwargs`：`ujson.dump` のその他の引数。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
   data = {'key': 'value'}
-  D.dump_json(data)
+  cb.dump_json(data)
   ```

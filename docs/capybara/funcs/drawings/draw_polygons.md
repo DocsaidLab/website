@@ -27,7 +27,7 @@
       cb.Polygon([(20, 20), (100, 20), (80, 80), (20, 40)]),
       cb.Polygon([(100, 100), (20, 100), (40, 40), (100, 80)])
   ]
-  polygons_img = cbD.draw_polygons(img, polygons, color=[(0, 255, 0), (255, 0, 0)], thickness=2)
+  polygons_img = cb.draw_polygons(img, polygons, color=[(0, 255, 0), (255, 0, 0)], thickness=2)
   ```
 
   ![draw_polygons](./resource/test_draw_polygons.jpg)

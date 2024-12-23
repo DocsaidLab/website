@@ -1,50 +1,45 @@
----
-sidebar_position: 2
----
-
 # Timer
 
-> [Timer(precision: int = 5, desc: str = None, verbose: bool = False)](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/time.py#L76C1-L157C71)
+> [Timer(precision: int = 5, desc: str = None, verbose: bool = False)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L76)
 
-- **Description**: This is a timer that can be used to measure the execution time of a program. The timer has three usage modes:
+- **Description**: This is a timer used to measure the execution time of a program. There are three ways to use this timer: 1. Using `tic` and `toc` methods; 2. Using a decorator; 3. Using a `with` statement. By the way, when designing this, I was torn between naming it `start/stop` or `tic/toc`, and ultimately chose `tic/toc` because it feels more fitting for a timer.
 
-    1. using the `tic` and `toc` methods;
-    2. using decorators;
-    3. using the `with` statement.
+- **Parameters**
 
-- **Parameters**:
-    - **precision** (`int`): The precision of decimal points. Default is 5.
-    - **desc** (`str`): Description text. Default is None.
-    - **verbose** (`bool`): Whether to display the timing results. Default is False.
+  - **precision** (`int`): The precision of the decimal point. Default is 5.
+  - **desc** (`str`): A description text. Default is None.
+  - **verbose** (`bool`): Whether to display the timing results. Default is False.
 
-- **Methods**:
-    - **tic()**: Start the timer.
-    - **toc(verbose=False)**: Stop the timer and return the elapsed time.
-    - **clear_record()**: Clear the records.
+- **Methods**
 
-- **Attributes**:
-    - **mean** (`float`): Mean time.
-    - **max** (`float`): Maximum time.
-    - **min** (`float`): Minimum time.
-    - **std** (`float`): Standard deviation.
+  - **tic()**: Start the timer.
+  - **toc(verbose=False)**: End the timer and return the elapsed time.
+  - **clear_record()**: Clear the recorded data.
 
-- **Example**:
+- **Attributes**
 
-    ```python
-    import docsaidkit as D
+  - **mean** (`float`): The average time.
+  - **max** (`float`): The maximum time.
+  - **min** (`float`): The minimum time.
+  - **std** (`float`): The standard deviation.
 
-    # Using 'tic' and 'toc' method
-    t = D.Timer()
-    t.tic()
-    time.sleep(1)
-    t.toc()
+- **Example**
 
-    # Using decorator
-    @D.Timer()
-    def testing_function():
-        time.sleep(1)
+  ```python
+  import capybara as cb
 
-    # Using 'with' statement
-    with D.Timer():
-        time.sleep(1)
-    ```
+  # Using 'tic' and 'toc' method
+  t = cb.Timer()
+  t.tic()
+  time.sleep(1)
+  t.toc()
+
+  # Using decorator
+  @cb.Timer()
+  def testing_function():
+      time.sleep(1)
+
+  # Using 'with' statement
+  with cb.Timer():
+      time.sleep(1)
+  ```

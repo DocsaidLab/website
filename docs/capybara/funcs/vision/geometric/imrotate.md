@@ -25,7 +25,7 @@
   import capybara as cb
 
   img = cb.imread('lena.png')
-  rotate_img = cb.imrotate(img, 45, bordertype=D.BORDER.CONSTANT, expand=True)
+  rotate_img = cb.imrotate(img, 45, bordertype=cb.BORDER.CONSTANT, expand=True)
 
   # Resize the rotated image to the original size for visualization
   rotate_img = cb.imresize(rotate_img, [img.shape[0], img.shape[1]])

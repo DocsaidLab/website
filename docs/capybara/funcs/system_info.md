@@ -15,9 +15,9 @@
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  versions_info = D.get_package_versions()
+  versions_info = cb.get_package_versions()
   print(versions_info)
   # versions_info = {
   #     'PyTorch Version': '1.9.0',
@@ -44,9 +44,9 @@
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  gpu_cuda_info = D.get_gpu_cuda_versions()
+  gpu_cuda_info = cb.get_gpu_cuda_versions()
   print(gpu_cuda_info)
   # gpu_cuda_info = {
   #     'CUDA Version': '11.1',
@@ -67,9 +67,9 @@
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  cpu_info = D.get_cpu_info()
+  cpu_info = cb.get_cpu_info()
   print(cpu_info)
   # cpu_info = 'Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz'
   ```
@@ -87,9 +87,9 @@
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  system_info = D.get_system_info()
+  system_info = cb.get_system_info()
   print(system_info)
   # system_info = {
   #     'OS Version': 'Linux-5.4.0-80-generic-x86_64-with-glibc2.29',

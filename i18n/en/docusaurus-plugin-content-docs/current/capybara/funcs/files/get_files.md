@@ -1,34 +1,29 @@
----
-sidebar_position: 1
----
-
 # get_files
 
->[get_files(folder: Union[str, Path], suffix: Union[str, List[str], Tuple[str]] = None, recursive: bool = True, return_pathlib: bool = True, sort_path: bool = True, ignore_letter_case: bool = True) -> List[Path]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/files_utils.py#L88)
+> [get_files(folder: Union[str, Path], suffix: Union[str, List[str], Tuple[str]] = None, recursive: bool = True, return_pathlib: bool = True, sort_path: bool = True, ignore_letter_case: bool = True) -> List[Path]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L88)
 
-- **Description**
+- **Description**: Retrieves all files in the specified folder. Note that the `suffix` is case-insensitive, but be sure to include the `.` as part of the suffix. Many times, files are not found due to this issue.
 
-    Get all files in the specified folder. Note that the `suffix` here is case-insensitive, but you must remember to include the `.`. Many times, not finding files is due to this issue.
+- **Parameters**:
 
-- **Parameters**
-    - **folder** (`folder: Union[str, Path]`): The specified folder.
-    - **suffix** (`suffix: Union[str, List[str], Tuple[str]]`): The suffix(es) of the files to retrieve. For example: ['.jpg', '.png']. Defaults to None, indicating retrieving all files in the folder.
-    - **recursive** (`bool`): Whether to include files in subfolders. Defaults to True.
-    - **return_pathlib** (`bool`): Whether to return Path objects. Defaults to True.
-    - **sort_path** (`bool`): Whether to return a list of paths sorted in natural order. Defaults to True.
-    - **ignore_letter_case** (`bool`): Whether to include suffixes with different cases. Defaults to True.
+  - **folder** (`Union[str, Path]`): The folder to search for files in.
+  - **suffix** (`Union[str, List[str], Tuple[str]]`): The file extensions to retrieve. For example: `['.jpg', '.png']`. Defaults to None, meaning all files in the folder are retrieved.
+  - **recursive** (`bool`): Whether to include files in subfolders. Defaults to True.
+  - **return_pathlib** (`bool`): Whether to return Path objects. Defaults to True.
+  - **sort_path** (`bool`): Whether to return the list of paths sorted naturally. Defaults to True.
+  - **ignore_letter_case** (`bool`): Whether to match file extensions case-insensitively. Defaults to True.
 
-- **Returns**
+- **Return Value**:
 
-    - **List[Path]**: A list of file paths.
+  - **List[Path]**: A list of file paths.
 
-- **Example**
+- **Example**:
 
-    ```python
-    import docsaidkit as D
+  ```python
+  import capybara as cb
 
-    folder = '/path/to/your/folder'
-    files = D.get_files(folder, suffix=['.jpg', '.png'])
-    print(files)
-    # >>> ['/path/to/your/folder/1.jpg', '/path/to/your/folder/2.png']
-    ```
+  folder = '/path/to/your/folder'
+  files = cb.get_files(folder, suffix=['.jpg', '.png'])
+  print(files)
+  # >>> ['/path/to/your/folder/1.jpg', '/path/to/your/folder/2.png']
+  ```

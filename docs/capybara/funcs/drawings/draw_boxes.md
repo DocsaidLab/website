@@ -18,11 +18,11 @@
 - **範例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  img = D.imread('lena.png')
-  boxes = [D.Box([20, 20, 100, 100]), D.Box([150, 150, 200, 200])]
-  boxes_img = D.draw_boxes(img, boxes, color=[(0, 255, 0), (255, 0, 0)], thickness=2)
+  img = cb.imread('lena.png')
+  boxes = [cb.Box([20, 20, 100, 100]), cb.Box([150, 150, 200, 200])]
+  boxes_img = cb.draw_boxes(img, boxes, color=[(0, 255, 0), (255, 0, 0)], thickness=2)
   ```
 
   ![draw_boxes](./resource/test_draw_boxes.jpg)

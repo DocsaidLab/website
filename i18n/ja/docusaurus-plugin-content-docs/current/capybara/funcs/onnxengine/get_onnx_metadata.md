@@ -1,10 +1,6 @@
----
-sidebar_position: 2
----
-
 # get_onnx_metadata
 
-> [get_onnx_metadata(onnx_path: Union[str, Path]) -> dict](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/onnxengine/metadata.py#L10)
+> [get_onnx_metadata(onnx_path: Union[str, Path]) -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/onnxengine/metadata.py#L10)
 
 - **説明**：ONNX モデルからカスタムメタデータを取得します。
 
@@ -12,17 +8,17 @@ sidebar_position: 2
 
   - **onnx_path** (`Union[str, Path]`)：ONNX モデルのパス。
 
-- **戻り値**
+- **返り値**
 
   - **dict**：カスタムメタデータ。
 
 - **例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
   onnx_path = 'model.onnx'
-  metadata = D.get_onnx_metadata(onnx_path)
+  metadata = cb.get_onnx_metadata(onnx_path)
   print(metadata)
   # >>> metadata = {
   #     'key1': 'value1',

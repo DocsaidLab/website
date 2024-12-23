@@ -1,27 +1,23 @@
----
-sidebar_position: 7
----
-
 # imencode
 
-> [imencode(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG) -> Union[bytes, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L100)
+> [imencode(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG) -> Union[bytes, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L100)
 
-- **説明**：NumPy 画像配列を指定された形式のバイト文字列にエンコードします。
+- **説明**：NumPy 画像配列を指定された形式のバイト列にエンコードします。
 
-- 引数
+- **パラメータ**
 
   - **img** (`np.ndarray`)：エンコードする画像配列。
-  - **IMGTYP** (`Union[str, int, IMGTYP]`)：画像タイプ。サポートされているタイプは `IMGTYP.JPEG` と `IMGTYP.PNG` です。デフォルトは `IMGTYP.JPEG`。
+  - **IMGTYP** (`Union[str, int, IMGTYP]`)：画像タイプ。サポートされているタイプは`IMGTYP.JPEG`と`IMGTYP.PNG`です。デフォルトは`IMGTYP.JPEG`。
 
-- **返り値**
+- **戻り値**
 
-  - **bytes**：エンコード後の画像バイト文字列。
+  - **bytes**：エンコードされた画像のバイト列。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  img = D.imread('lena.png')
-  encoded_bytes = D.imencode(img, IMGTYP=D.IMGTYP.PNG)
+  img = cb.imread('lena.png')
+  encoded_bytes = cb.imencode(img, IMGTYP=cb.IMGTYP.PNG)
   ```

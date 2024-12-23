@@ -1,24 +1,20 @@
----
-sidebar_position: 5
----
-
 # copy_path
 
-> [copy_path(path_src: Union[str, Path], path_dst: Union[str, Path]) -> None](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/custom_path.py#L34)
+> [copy_path(path_src: Union[str, Path], path_dst: Union[str, Path]) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/custom_path.py#L34)
 
 - **説明**：ファイルやディレクトリをコピーします。
 
-- **パラメータ**
+- **引数**
 
-  - **path_src** (`path_src: Union[str, Path]`)：コピー元のファイルまたはディレクトリ。
-  - **path_dst** (`path_dst: Union[str, Path]`)：コピー先のファイルまたはディレクトリ。
+  - **path_src** (`path_src: Union[str, Path]`)：コピーする元のファイルやディレクトリ。
+  - **path_dst** (`path_dst: Union[str, Path]`)：コピー先のファイルやディレクトリ。
 
 - **例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
   path_src = '/path/to/your/source'
   path_dst = '/path/to/your/destination'
-  D.copy_path(path_src, path_dst)
+  cb.copy_path(path_src, path_dst)
   ```

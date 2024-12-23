@@ -1,16 +1,12 @@
----
-sidebar_position: 6
----
-
 # Tqdm
 
-> [Tqdm(iterable=None, desc=None, smoothing=0, \*\*kwargs)](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/custom_tqdm.py#L8)
+> [Tqdm(iterable=None, desc=None, smoothing=0, \*\*kwargs)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/custom_tqdm.py#L8)
 
-- **説明**：`tqdm`を継承したカスタム進捗バーで、イテレータの繰り返しの進行状況を表示します。このカスタマイズでは、`total`パラメータに変更を加えています。ユーザーが`total`を指定しない場合、自動的に`iterable`の長さを計算して`total`に設定します。これにより、ユーザーが`total`を指定しなくても正しく進捗バーが表示されるようになります。
+- **説明**：これは `tqdm` を継承したカスタム進捗バーで、イテレータの繰り返し処理中に進捗バーを表示するために使用されます。この進捗バーは、元々の `tqdm` に対して `total` パラメータを自動で計算し、`iterable` の長さを `total` に設定する変更を加えています。これにより、ユーザーが `total` を指定しなくても進捗バーが正しく表示されるようになります。
 
-- **パラメータ**
+- **引数**
 
-  - **iterable** (`Iterable`)：イテレートするオブジェクト。
+  - **iterable** (`Iterable`)：反復可能なオブジェクト。
   - **desc** (`str`)：進捗バーの説明。
   - **smoothing** (`int`)：平滑化パラメータ。
   - **kwargs** (`Any`)：その他のパラメータ。
@@ -18,8 +14,8 @@ sidebar_position: 6
 - **例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  for i in D.Tqdm(range(100), desc='Processing'):
+  for i in cb.Tqdm(range(100), desc='Processing'):
       pass
   ```

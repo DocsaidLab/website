@@ -22,7 +22,7 @@
   import capybara as cb
 
   img = cb.imread('lena.png')
-  rotate_img = cb.imrotate90(img, D.ROTATE.ROTATE_270)
+  rotate_img = cb.imrotate90(img, cb.ROTATE.ROTATE_270)
   ```
 
   ![imrotate90](./resource/test_imrotate90.jpg)

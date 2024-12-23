@@ -1,38 +1,32 @@
----
-sidebar_position: 1
----
-
 # EnumCheckMixin
 
-> [EnumCheckMixin](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/mixins.py#L57)
+> [EnumCheckMixin](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/mixins.py#L57)
 
-- **Description**
+- **Description**: Provides the `obj_to_enum` method for Enum objects, allowing for the conversion of various types into the corresponding enum values.
 
-    Provides an `obj_to_enum` method for Enum objects, allowing for the retrieval of different types of enum values.
+The design concept of this method is to prevent users from using incorrect enum values by enforcing type constraints while also avoiding frustration when a matching enum value cannot be found.
 
-    The design philosophy behind this method is to prevent users from using incorrect enum values in the program by enforcing enum type constraints. However, it also aims to prevent users from feeling frustrated if they cannot find the corresponding enum value.
+Thus, the `obj_to_enum` method is available to convert different types of enum values into the correct enum type.
 
-    Therefore, this function also provides an `obj_to_enum` method, which can be used to convert different types of enum values to the enum type.
-
-    Users can query enum values using strings, enum values, or integers.
+Users can query enum values using strings, enum values, or integers.
 
 - **Example**
 
-    ```python
-    from enum import IntEnum
-    from docsaidkit import EnumCheckMixin
+  ```python
+  from enum import IntEnum
+  from capybara import EnumCheckMixin
 
-    class Color(EnumCheckMixin, IntEnum):
-        RED = 1
-        GREEN = 2
-        BLUE = 3
+  class Color(EnumCheckMixin, IntEnum):
+      RED = 1
+      GREEN = 2
+      BLUE = 3
 
-    color = Color.obj_to_enum('GREEN')
-    print(color)  # Color.GREEN
+  color = Color.obj_to_enum('GREEN')
+  print(color)  # Color.GREEN
 
-    color = Color.obj_to_enum(Color.RED)
-    print(color)  # Color.RED
+  color = Color.obj_to_enum(Color.RED)
+  print(color)  # Color.RED
 
-    color = Color.obj_to_enum(3)
-    print(color)  # Color.BLUE
-    ```
+  color = Color.obj_to_enum(3)
+  print(color)  # Color.BLUE
+  ```

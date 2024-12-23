@@ -1,24 +1,21 @@
----
-sidebar_position: 6
----
-
 # Tqdm
 
->[Tqdm(iterable=None, desc=None, smoothing=0, **kwargs)](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/custom_tqdm.py#L8)
+> [Tqdm(iterable=None, desc=None, smoothing=0, \*\*kwargs)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/custom_tqdm.py#L8)
 
-- **Description**: This is a custom progress bar inherited from `tqdm`, used to display progress during iteration over an iterable. The modification we made to the original `tqdm` is in the `total` parameter. When the user does not specify `total`, we automatically calculate the length of the `iterable` and set it as `total`. This design allows users to correctly display the progress bar without needing to specify `total`.
+- **Description**: This is a custom progress bar derived from `tqdm` to display a progress bar during the iteration process of an iterable. The modification made to the original `tqdm` is with the `total` parameter. When the user does not specify `total`, the length of the `iterable` is automatically calculated and set as `total`. This design ensures that the progress bar is correctly displayed without requiring the user to manually set `total`.
 
-- **Parameters**:
-    - **iterable** (`Iterable`): The object to iterate over.
-    - **desc** (`str`): Description of the progress bar.
-    - **smoothing** (`int`): Smoothing parameter.
-    - **kwargs** (`Any`): Other parameters.
+- **Parameters**
 
-- **Example**:
+  - **iterable** (`Iterable`): The object to iterate over.
+  - **desc** (`str`): A description for the progress bar.
+  - **smoothing** (`int`): The smoothing parameter.
+  - **kwargs** (`Any`): Other parameters.
 
-    ```python
-    import docsaidkit as D
+- **Example**
 
-    for i in D.Tqdm(range(100), desc='Processing'):
-        pass
-    ```
+  ```python
+  import capybara as cb
+
+  for i in cb.Tqdm(range(100), desc='Processing'):
+      pass
+  ```

@@ -1,30 +1,26 @@
----
-sidebar_position: 5
----
-
 # imwarp_quadrangles
 
->[imwarp_quadrangles(img: np.ndarray, polygons: Union[Polygons, np.ndarray]) -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/geometric.py#L206)
+> [imwarp_quadrangles(img: np.ndarray, polygons: Union[Polygons, np.ndarray]) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/geometric.py#L206)
 
-- **Description**: Apply perspective transformation to the input image using the 4 points defined by the given "multiple" polygons. The function automatically sorts the four points in the order: the first point is the top-left corner, the second point is the top-right corner, the third point is the bottom-right corner, and the fourth point is the bottom-left corner. The target size of the image transformation is determined by the width and height of the minimum bounding rectangle of the polygons.
+- **Description**: Applies perspective transformations to the input image based on multiple quadrilaterals, each defined by four points. The function automatically sorts the points in the following order: the first point is the top-left, the second is the top-right, the third is the bottom-right, and the fourth is the bottom-left. The target size of the transformed image is determined by the width and height of the minimum rotated bounding box of each polygon.
 
-- **Parameters**:
+- **Parameters**
 
-    - **img** (`np.ndarray`): Input image to be transformed.
-    - **polygons** (`Union[Polygons, np.ndarray]`): Polygon objects containing the four points defining the transformation for "multiple" polygons.
+  - **img** (`np.ndarray`): The input image to be transformed.
+  - **polygons** (`Union[Polygons, np.ndarray]`): A collection of polygons, each containing four points that define the transformation.
 
-- **Returns**:
+- **Returns**
 
-    - **List[np.ndarray]**: List of transformed images.
+  - **List[np.ndarray]**: A list of transformed images.
 
-- **Example**:
+- **Example**
 
-    ```python
-    import docsaidkit as D
+  ```python
+  import capybara as cb
 
-    img = D.imread('./resource/test_warp.jpg')
-    polygons = D.Polygons([[[602, 404], [1832, 530], [1588, 985], [356, 860]]])
-    warp_imgs = D.imwarp_quadrangles(img, polygons)
-    ```
+  img = cb.imread('./resource/test_warp.jpg')
+  polygons = cb.Polygons([[[602, 404], [1832, 530], [1588, 985], [356, 860]]])
+  warp_imgs = cb.imwarp_quadrangles(img, polygons)
+  ```
 
-    Please refer to the picture [**imwarp_quadrangle**](./imwarp_quadrangle.md)。
+  For visual reference, please refer to [**imwarp_quadrangle**](./imwarp_quadrangle.md).

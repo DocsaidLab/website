@@ -1,26 +1,24 @@
----
-sidebar_position: 8
----
-
 # img_to_md5
 
-> [img_to_md5(img: np.ndarray) -> str](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/utils/files_utils.py#L42)
+> [img_to_md5(img: np.ndarray) -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L42)
 
-- **Description**: Generates an MD5 hash based on the given image. This function serves the same purpose as `gen_md5`, but is specifically designed for image inputs.
+- **Description**: Generates an MD5 hash based on the given image. The reason for this function's existence is the same as `gen_md5`, but it specifically handles image inputs.
 
-- **Parameters**:
-    - **img** (`np.ndarray`): The image.
+- **Parameters**
 
-- **Returns**:
-    - **str**: The MD5 hash.
+  - **img** (`np.ndarray`): The image.
 
-- **Example**:
+- **Returns**
 
-    ```python
-    import docsaidkit as D
+  - **str**: The MD5 hash.
 
-    img = D.imread('lena.png')
-    md5 = D.img_to_md5(img)
-    print(md5)
-    # >>> 'd41d8cd98f00b204e9800998ecf8427e'
-    ```
+- **Example**
+
+  ```python
+  import capybara as cb
+
+  img = cb.imread('lena.png')
+  md5 = cb.img_to_md5(img)
+  print(md5)
+  # >>> 'd41d8cd98f00b204e9800998ecf8427e'
+  ```

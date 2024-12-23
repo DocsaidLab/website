@@ -1,63 +1,59 @@
----
-sidebar_position: 3
----
-
 # Enums
 
-In OpenCV, the enumeration classes are numerous. To facilitate their use, we have organized some commonly used enumeration classes into DocsaidKit. These enumerations provide a clear and convenient way to reference common parameters and types, enhancing code readability and maintainability.
+There are too many enumeration classes in OpenCV. To make it easier to use, we have organized some common enumeration classes into `capybara`. These enumeration classes provide a clear and convenient way to reference commonly used parameters and types, which helps improve the readability and maintainability of the code.
 
-Most enumeration values are directly referenced from OpenCV's enums to ensure consistency. If you need other enum values, you can directly refer to OpenCV's enums.
+Most of the enumeration values directly reference OpenCV’s enumeration values, ensuring consistency. If you need to use other enumeration values, you can directly reference OpenCV’s enumeration values.
 
 ## Overview of Enumeration Classes
 
-- [**INTER**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L12): Defines different types of image interpolation methods.
-- [**ROTATE**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L20): Defines image rotation angles.
-- [**BORDER**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L26): Defines the modes of border handling.
-- [**MORPH**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L35): Defines the shapes of the kernel for morphological operations.
-- [**COLORSTR**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L41): Defines color strings for terminal display.
-- [**FORMATSTR**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L60): Defines formatting strings.
-- [**IMGTYP**](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/enums.py#L66): Defines supported image file types.
+- [**INTER**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L12): Defines different image interpolation methods.
+- [**ROTATE**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L20): Defines the rotation angles of an image.
+- [**BORDER**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L26): Defines border handling methods.
+- [**MORPH**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L35): Defines the kernel shapes for morphological operations.
+- [**COLORSTR**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L41): Defines color strings for terminal display.
+- [**FORMATSTR**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L60): Defines formatting strings for text.
+- [**IMGTYP**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L66): Defines supported image file types.
 
-## docsaidkit.INTER
+## capybara.INTER
 
-Used for image resizing or resampling to choose the interpolation method.
+Interpolation methods used for image resizing or resampling.
 
 - `NEAREST`: Nearest neighbor interpolation.
 - `BILINEAR`: Bilinear interpolation.
 - `CUBIC`: Cubic interpolation.
-- `AREA`: Area interpolation.
+- `AREA`: Area-based interpolation.
 - `LANCZOS4`: Lanczos interpolation (using 4 Lanczos windows).
 
-## docsaidkit.ROTATE
+## capybara.ROTATE
 
 Specific angles for image rotation.
 
-- `ROTATE_90`: Rotate the image 90 degrees clockwise.
-- `ROTATE_180`: Rotate the image 180 degrees.
-- `ROTATE_270`: Rotate the image 90 degrees counterclockwise.
+- `ROTATE_90`: Rotate 90 degrees clockwise.
+- `ROTATE_180`: Rotate 180 degrees.
+- `ROTATE_270`: Rotate 90 degrees counterclockwise.
 
-## docsaidkit.BORDER
+## capybara.BORDER
 
-Ways to expand the image borders.
+Methods for extending image borders.
 
-- `DEFAULT`: Default border handling method.
+- `DEFAULT`: Default border handling.
 - `CONSTANT`: Constant border, filled with a specific color.
 - `REFLECT`: Reflective border.
 - `REFLECT_101`: Another type of reflective border.
-- `REPLICATE`: Replicate the edge pixels of the border.
-- `WRAP`: Wrap around border.
+- `REPLICATE`: Replicate the edge pixels.
+- `WRAP`: Wrap-around border.
 
-## docsaidkit.MORPH
+## capybara.MORPH
 
-Shapes of the structural element used in morphological filtering.
+Shapes of the structural elements used in morphological filtering.
 
 - `CROSS`: Cross-shaped.
 - `RECT`: Rectangular.
 - `ELLIPSE`: Elliptical.
 
-## docsaidkit.COLORSTR
+## capybara.COLORSTR
 
-Color codes used for console output.
+Color codes for console output.
 
 - `BLACK`: Black.
 - `RED`: Red.
@@ -76,15 +72,15 @@ Color codes used for console output.
 - `BRIGHT_CYAN`: Bright cyan.
 - `BRIGHT_WHITE`: Bright white.
 
-## docsaidkit.FORMATSTR
+## capybara.FORMATSTR
 
-Options for text formatting.
+Text formatting options.
 
 - `BOLD`: Bold.
 - `ITALIC`: Italic.
-- `UNDERLINE`: Underlined.
+- `UNDERLINE`: Underline.
 
-## docsaidkit.IMGTYP
+## capybara.IMGTYP
 
 Supported image file types.
 

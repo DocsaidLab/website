@@ -1,32 +1,30 @@
----
-sidebar_position: 19
----
-
 # make_batch
 
->[make_batch(data: Union[Iterable, Generator], batch_size: int) -> Generator[List, None, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/utils/utils.py#L13)
+> [make_batch(data: Union[Iterable, Generator], batch_size: int) -> Generator[List, None, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/utils.py#L13)
 
-- **Description**: This function is used to convert data into batched data.
+- **Description**: This function is used to convert data into batches.
 
-- **Parameters**:
-    - **data** (`Union[Iterable, Generator]`): The data generator.
-    - **batch_size** (`int`): The size of batches.
+- **Parameters**
 
-- **Returns**:
-    - **Generator[List, None, None]**: A generator for batched data.
+  - **data** (`Union[Iterable, Generator]`): The data generator.
+  - **batch_size** (`int`): The size of each batch.
 
-- **Example**:
+- **Returns**
 
-    ```python
-    import docsaidkit as D
+  - **Generator[List, None, None]**: A generator that yields batched data.
 
-    data = range(10)
-    batch_size = 3
-    batched_data = D.make_batch(data, batch_size)
-    for batch in batched_data:
-        print(batch)
-    # >>> [0, 1, 2]
-    # >>> [3, 4, 5]
-    # >>> [6, 7, 8]
-    # >>> [9]
-    ```
+- **Example**
+
+  ```python
+  import capybara as cb
+
+  data = range(10)
+  batch_size = 3
+  batched_data = cb.make_batch(data, batch_size)
+  for batch in batched_data:
+      print(batch)
+  # >>> [0, 1, 2]
+  # >>> [3, 4, 5]
+  # >>> [6, 7, 8]
+  # >>> [9]
+  ```

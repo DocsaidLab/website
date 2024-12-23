@@ -1,25 +1,21 @@
----
-sidebar_position: 9
----
-
 # npyread
 
-> [npyread(path: Union[str, Path]) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L174)
+> [npyread(path: Union[str, Path]) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L174)
 
 - **説明**：NumPy の`.npy`ファイルから画像配列を読み込みます。
 
-- 引数
+- **パラメータ**
 
   - **path** (`Union[str, Path]`)：`.npy`ファイルのパス。
 
-- **返り値**
+- **戻り値**
 
   - **np.ndarray**：読み込んだ画像配列。読み込みに失敗した場合は`None`を返します。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  img = D.npyread('lena.npy')
+  img = cb.npyread('lena.npy')
   ```

@@ -1,36 +1,30 @@
----
-sidebar_position: 3
----
-
 # DataClassToJsonMixin
 
-> [DataClassToJsonMixin](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/mixins.py#L90)
+> [DataClassToJsonMixin](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/mixins.py#L90)
 
+- **Description**: Provides JSON serialization methods for DataClass objects, enabling conversion of DataClass instances to JSON format.
 
-- **Description**
+- **dict_to_jsonable** format support:
 
-    Provides a JSON serialization method for DataClass objects, enabling the conversion of DataClass objects into JSON format.
-
-- **Supported Formats for dict_to_jsonable**
-    - **Box**, **Boxes**: Converted to `List[float]` format.
-    - **Polygon**, **Polygons**: Converted to `List[List[float]]` format.
-    - **np.ndarray**, **np.generic**: Converted to `List` format.
-    - **list**, **tuple**: Recursively converted to `List` format.
-    - **Enum**: Converted to `str` format.
-    - **Mapping**: Recursively converted to `Dict` format.
+  - **Box**, **Boxes**: Converts to `List[float]` format.
+  - **Polygon**, **Polygons**: Converts to `List[List[float]]` format.
+  - **np.ndarray**, **np.generic**: Converts to `List` format.
+  - **list**, **tuple**: Recursively converts to `List` format.
+  - **Enum**: Converts to `str` format.
+  - **Mapping**: Recursively converts to `Dict` format.
 
 - **Example**
 
-    ```python
-    from dataclasses import dataclass
-    from docsaidkit import DataclassToJsonMixin
+  ```python
+  from dataclasses import dataclass
+  from capybara import DataclassToJsonMixin
 
-    @dataclass
-    class Person(DataclassToJsonMixin):
-        name: str
-        age: int
+  @dataclass
+  class Person(DataclassToJsonMixin):
+      name: str
+      age: int
 
-    person = Person('Alice', 20)
-    print(person.be_jsonable())
-    # >>> OrderedDict([('name', 'Alice'), ('age', 20)])
-    ```
+  person = Person('Alice', 20)
+  print(person.be_jsonable())
+  # >>> OrderedDict([('name', 'Alice'), ('age', 20)])
+  ```

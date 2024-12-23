@@ -4,53 +4,53 @@ sidebar_position: 4
 
 # Polygon
 
-> [Polygon(array: \_Polygon, normalized: bool = False)](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/structures/polygons.py#L64)
+> [Polygon(array: \_Polygon, normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/polygons.py#L64)
 
 - **説明**：
 
-  `Polygon` は多角形を表すクラスです。このクラスは、多角形の座標を操作するためのさまざまなメソッドを提供します。これには、座標の正規化、反正規化、裁切り、移動、スケーリング、凸包への変換、最小外接矩形への変換、境界ボックスへの変換などが含まれます。
+  `Polygon` は、多角形を表すクラスです。このクラスは、多角形の座標を操作するための多くのメソッドを提供します。例えば、座標の正規化、非正規化、多角形のクリッピング、移動、スケーリング、凸多角形への変換、最小外接矩形への変換、境界ボックスへの変換などです。
 
 - **パラメータ**
 
   - **array** (`_Polygon`)：多角形の座標。
-  - **normalized** (`bool`)：座標が正規化されているかどうかを示すフラグ。デフォルトは `False`。
+  - **normalized** (`bool`)：多角形の座標が正規化されているかどうかを示すフラグ。デフォルトは `False`。
 
 - **属性**
 
-  - **normalized**：多角形が正規化されているかどうか。
-  - **moments**：多角形のモーメント。
-  - **area**：多角形の面積。
-  - **arclength**：多角形の周長。
-  - **centroid**：多角形の重心。
-  - **boundingbox**：多角形の境界ボックス。
-  - **min_circle**：多角形の最小外接円。
-  - **min_box**：多角形の最小外接矩形。
-  - **orientation**：多角形の向き。
-  - **min_box_wh**：最小外接矩形の幅と高さ。
-  - **extent**：多角形の占有率。
-  - **solidity**：多角形の実質的な面積。
+  - **normalized**：多角形の正規化状態を取得。
+  - **moments**：多角形のモーメントを取得。
+  - **area**：多角形の面積を取得。
+  - **arclength**：多角形の周囲長を取得。
+  - **centroid**：多角形の質量中心を取得。
+  - **boundingbox**：多角形の境界ボックスを取得。
+  - **min_circle**：多角形の最小外接円を取得。
+  - **min_box**：多角形の最小外接矩形を取得。
+  - **orientation**：多角形の向きを取得。
+  - **min_box_wh**：多角形の最小外接矩形の幅と高さを取得。
+  - **extent**：多角形の占有率を取得。
+  - **solidity**：多角形の充実度（solidity）を取得。
 
 - **メソッド**
 
-  - **copy**()：多角形オブジェクトをコピーします。
-  - **numpy**()：多角形を numpy 配列に変換します。
-  - **normalize**(`w: float, h: float`)：多角形の座標を正規化します。
-  - **denormalize**(`w: float, h: float`)：多角形の座標を反正規化します。
-  - **clip**(`xmin: int, ymin: int, xmax: int, ymax: int`)：多角形を裁切ります。
-  - **shift**(`shift_x: float, shift_y: float`)：多角形を移動させます。
-  - **scale**(`distance: int, join_style: JOIN_STYLE = JOIN_STYLE.mitre`)：多角形をスケールします。
-  - **to_convexhull**()：多角形を凸包に変換します。
-  - **to_min_boxpoints**()：多角形を最小外接矩形の座標に変換します。
-  - **to_box**(`box_mode: str = 'xyxy'`)：多角形を境界ボックスに変換します。
-  - **to_list**(`flatten: bool = False`)：多角形をリストに変換します。
-  - **is_empty**(`threshold: int = 3`)：多角形が空であるかどうかを判断します。
+  - **copy**()：多角形オブジェクトをコピー。
+  - **numpy**()：多角形オブジェクトを numpy 配列に変換。
+  - **normalize**(`w: float, h: float`)：多角形の座標を正規化。
+  - **denormalize**(`w: float, h: float`)：多角形の座標を非正規化。
+  - **clip**(`xmin: int, ymin: int, xmax: int, ymax: int`)：多角形をクリッピング。
+  - **shift**(`shift_x: float, shift_y: float`)：多角形を移動。
+  - **scale**(`distance: int, join_style: JOIN_STYLE = JOIN_STYLE.mitre`)：多角形をスケーリング。
+  - **to_convexhull**()：多角形を凸多角形に変換。
+  - **to_min_boxpoints**()：多角形を最小外接矩形の座標に変換。
+  - **to_box**(`box_mode: str = 'xyxy'`)：多角形を境界ボックスに変換。
+  - **to_list**(`flatten: bool = False`)：多角形をリストに変換。
+  - **is_empty**(`threshold: int = 3`)：多角形が空かどうかを判定。
 
 - **例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  polygon = D.Polygon([[10., 20.], [50, 20.], [50, 80.], [10., 80.]])
+  polygon = cb.Polygon([[10., 20.], [50, 20.], [50, 80.], [10., 80.]])
   print(polygon)
   # >>> Polygon([[10. 20.], [50. 20.], [50. 80.], [10. 80.]])
 

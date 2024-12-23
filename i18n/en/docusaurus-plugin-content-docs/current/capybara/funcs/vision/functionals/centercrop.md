@@ -1,29 +1,27 @@
----
-sidebar_position: 8
----
-
 # centercrop
 
->[centercrop(img: np.ndarray) -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/functionals.py#L374)
+> [centercrop(img: np.ndarray) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L374)
 
-- **Description**: Performs center cropping on the input image.
+- **Description**: Performs a center crop on the input image.
 
-- **Parameters**:
-    - **img** (`np.ndarray`): The input image to be center cropped.
+- **Parameters**
 
-- **Returns**:
-    - **np.ndarray**: The cropped image.
+  - **img** (`np.ndarray`): The input image to be center-cropped.
 
-- **Example**:
+- **Returns**
 
-    ```python
-    import docsaidkit as D
+  - **np.ndarray**: The cropped image.
 
-    img = D.imread('lena.png')
-    img = D.imresize(img, [128, 256])
-    crop_img = D.centercrop(img)
-    ```
+- **Example**
 
-    The green box indicates the center cropped area.
+  ```python
+  import capybara as cb
 
-    ![centercrop](./resource/test_centercrop.jpg)
+  img = cb.imread('lena.png')
+  img = cb.imresize(img, [128, 256])
+  crop_img = cb.centercrop(img)
+  ```
+
+  The green box represents the area of the center crop.
+
+  ![centercrop](./resource/test_centercrop.jpg)

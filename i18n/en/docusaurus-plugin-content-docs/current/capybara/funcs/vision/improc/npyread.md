@@ -1,23 +1,21 @@
----
-sidebar_position: 9
----
-
 # npyread
 
-> [npyread(path: Union[str, Path]) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L174)
+> [npyread(path: Union[str, Path]) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L174)
 
-- **Description**: Read an image array from a NumPy `.npy` file.
+- **Description**: Reads an image array from a NumPy `.npy` file.
 
-- **Parameters**
-    - **path** (`Union[str, Path]`): The path to the `.npy` file.
+- **Parameters**:
 
-- **Returns**
-    - **np.ndarray**: The read image array. Returns `None` if reading fails.
+  - **path** (`Union[str, Path]`): The path to the `.npy` file.
 
-- **Example**
+- **Return value**:
 
-    ```python
-    import docsaidkit as D
+  - **np.ndarray**: The image array read from the file. Returns `None` if reading fails.
 
-    img = D.npyread('lena.npy')
-    ```
+- **Example**:
+
+  ```python
+  import capybara as cb
+
+  img = cb.npyread('lena.npy')
+  ```

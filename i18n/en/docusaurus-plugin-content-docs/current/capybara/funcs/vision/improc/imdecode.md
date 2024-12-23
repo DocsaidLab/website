@@ -1,25 +1,23 @@
----
-sidebar_position: 8
----
-
 # imdecode
 
-> [imdecode(byte_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L107)
+> [imdecode(byte\_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L107)
 
-- **Description**: Decode an image byte string to a NumPy image array.
+- **Description**: Decodes an image byte string into a NumPy image array.
 
-- **Parameters**
-    - **byte_** (`bytes`): The image byte string to decode.
+- **Parameters**:
 
-- **Returns**
-    - **np.ndarray**: The decoded image array.
+  - **byte\_** (`bytes`): The image byte string to decode.
 
-- **Example**
+- **Return value**:
 
-    ```python
-    import docsaidkit as D
+  - **np.ndarray**: The decoded image array.
 
-    img = D.imread('lena.png')
-    encoded_bytes = D.imencode(img, IMGTYP=D.IMGTYP.PNG)
-    decoded_img = D.imdecode(encoded_bytes)
-    ```
+- **Example**:
+
+  ```python
+  import capybara as cb
+
+  img = cb.imread('lena.png')
+  encoded_bytes = cb.imencode(img, IMGTYP=cb.IMGTYP.PNG)
+  decoded_img = cb.imdecode(encoded_bytes)
+  ```

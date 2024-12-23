@@ -7,7 +7,7 @@
 - **參數**
 
   - **img** (`np.ndarray`)：要裁剪的輸入影像。
-  - **boxes** (`Union[Boxes, np.ndarray]`)：裁剪框。輸入可以為 DocsaidKit 自定義的 Boxes 物件，其定義為 List[Box]，也可以是具有相同格式的 NumPy 陣列。
+  - **boxes** (`Union[Boxes, np.ndarray]`)：裁剪框。輸入可以為 Capybara 自定義的 Boxes 物件，其定義為 List[Box]，也可以是具有相同格式的 NumPy 陣列。
   - **use_pad** (`bool`)：是否使用填充來處理超出邊界的區域。如果設置為 True，則外部區域將使用零填充。預設為 False。
 
 - **傳回值**

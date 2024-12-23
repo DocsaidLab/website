@@ -1,33 +1,28 @@
----
-sidebar_position: 2
----
-
 # imrotate90
 
->[imrotate90(img: np.ndarray, rotate_code: ROTATE) -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/geometric.py#L66C1-L77C47)
+> [imrotate90(img: np.ndarray, rotate_code: ROTATE) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/geometric.py#L66)
 
+- **Description**: Rotates the input image by 90 degrees.
 
-- **Description**: Rotate the input image by 90 degrees.
+- **Parameters**
 
-- **Parameters**:
+  - **img** (`np.ndarray`): The input image to be rotated.
+  - **rotate_code** (`RotateCode`): The rotation code. Available options include:
+    - ROTATE.ROTATE_90: Rotate by 90 degrees.
+    - ROTATE.ROTATE_180: Rotate by 180 degrees.
+    - ROTATE.ROTATE_270: Rotate counterclockwise by 90 degrees.
 
-    - **img** (`np.ndarray`): Input image to be rotated.
-    - **rotate_code** (`RotateCode`): Rotation code. Available options are:
-        - ROTATE.ROTATE_90: 90 degrees.
-        - ROTATE.ROTATE_180: 180 degrees.
-        - ROTATE.ROTATE_270: 90 degrees counterclockwise.
+- **Returns**
 
-- **Returns**:
+  - **np.ndarray**: The rotated image.
 
-    - **np.ndarray**: Rotated image.
+- **Example**
 
-- **Example**:
+  ```python
+  import capybara as cb
 
-    ```python
-    import docsaidkit as D
+  img = cb.imread('lena.png')
+  rotate_img = cb.imrotate90(img, cb.ROTATE.ROTATE_270)
+  ```
 
-    img = D.imread('lena.png')
-    rotate_img = D.imrotate90(img, D.ROTATE.ROTATE_270)
-    ```
-
-    ![imrotate90](./resource/test_imrotate90.jpg)
+  ![imrotate90](./resource/test_imrotate90.jpg)

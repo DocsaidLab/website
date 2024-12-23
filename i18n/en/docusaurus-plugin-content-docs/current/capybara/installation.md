@@ -4,61 +4,41 @@ sidebar_position: 2
 
 # Installation
 
-Before you begin installing Capybara, ensure your system meets the following requirements:
+Before installing Capybara, make sure your system meets the following requirements:
 
 ## Prerequisites
 
-### Python Version
+Ensure that Python 3.10 or higher is installed on your system before proceeding with the installation.
 
-- Ensure that Python 3.10 or above is installed on your system.
+We developed this based on the Ubuntu operating system, so the following instructions may not apply to Windows and MacOS users.
 
-### Dependency Packages
+Next, open your terminal and run the following command to install dependencies:
 
-Install the required dependency packages according to your operating system.
-
-- **Ubuntu**
-
-  Open the terminal and run the following command to install the dependencies:
-
-  ```bash
-  sudo apt install libturbojpeg exiftool ffmpeg libheif-dev
-  ```
-
-- **MacOS**
-
-  Use brew to install the dependencies:
-
-  ```bash
-  brew install jpeg-turbo exiftool ffmpeg libheif
-  ```
+```bash
+sudo apt install libturbojpeg exiftool ffmpeg libheif-dev
+```
 
 ### pdf2image Dependencies
 
-pdf2image is a Python module for converting PDF documents into images.
+pdf2image is a Python module used to convert PDF files into images.
 
-Follow the instructions below to install the necessary dependencies based on your operating system:
+Follow the instructions below to install it based on your operating system:
 
-- For detailed installation instructions, refer to the open-source project [**pdf2image**](https://github.com/Belval/pdf2image).
+- Alternatively, refer to the open-source project [**pdf2image**](https://github.com/Belval/pdf2image) for installation guides.
 
-- MacOS: Mac users need to install poppler. Install it via Brew:
+Most Linux distributions come pre-installed with `pdftoppm` and `pdftocairo`.
 
-  ```bash
-  brew install poppler
-  ```
+If not installed, use your package manager to install poppler-utils:
 
-- Linux: Most Linux distributions come with `pdftoppm` and `pdftocairo` pre-installed.
+```bash
+sudo apt install poppler-utils
+```
 
-  If not installed, use your package manager to install poppler-utils.
+## Installing the Package
 
-  ```bash
-  sudo apt install poppler-utils
-  ```
+Once the prerequisites are met, you can install the package via git clone:
 
-## Package Installation
-
-Once the prerequisites are met, you can proceed with the installation via git clone:
-
-1. Download the package:
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/DocsaidLab/Capybara.git
@@ -83,26 +63,20 @@ Once the prerequisites are met, you can proceed with the installation via git cl
    pip install dist/capybara-*-py3-none-any.whl
    ```
 
-   If you need to install the version supporting PyTorch:
-
-   ```bash
-   pip install "dist/capybara-${version}-none-any.whl[torch]"
-   ```
-
 ## Frequently Asked Questions
 
-1. **Why is Windows not supported?**
+1. **Why is there no Windows version?**
 
-   To avoid potential issues, we recommend avoiding Windows.
+   For the love of life, stay away from Windows.
 
-2. **I insist on using Windows, what should I do?**
+2. **I just want to use Windows, and I prefer you not to meddle!**
 
-   In that case, we recommend installing Docker and using the above method to run your program within a Docker container.
+   Fine, we suggest installing Docker and then using the methods above to run your program via Docker.
 
    Please refer to the next section: [**Advanced Installation**](./advance.md).
 
 3. **How do I install Docker?**
 
-   It's not difficult, but it involves several steps.
+   It's not difficult, but there are a few steps.
 
-   Refer to the [**Docker official documentation**](https://docs.docker.com/get-docker/) for installation instructions.
+   Please refer to the [**Docker Official Documentation**](https://docs.docker.com/get-docker/) for installation instructions.

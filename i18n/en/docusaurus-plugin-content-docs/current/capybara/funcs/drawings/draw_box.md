@@ -1,34 +1,28 @@
----
-sidebar_position: 1
----
-
 # draw_box
 
->[draw_box(img: np.ndarray, box: Union[Box, np.ndarray], color: _Color = (0, 255, 0), thickness: _Thickness = 2) -> np.ndarray](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/visualization/draw.py#L31)
+> [draw_box(img: np.ndarray, box: Union[Box, np.ndarray], color: \_Color = (0, 255, 0), thickness: \_Thickness = 2) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/visualization/draw.py#L36)
 
-- **Description**
+- **Description**: Draws a bounding box on an image.
 
-    Draw Bounding Box on an image.
+- **Parameters**:
 
-- **Parameters**
+  - **img** (`np.ndarray`): The image to draw on, as a NumPy array.
+  - **box** (`Union[Box, np.ndarray]`): The bounding box to draw, either as a `Box` object or a NumPy array in the format [x1, y1, x2, y2].
+  - **color** (`_Color`): The color of the bounding box. Defaults to (0, 255, 0) (green).
+  - **thickness** (`_Thickness`): The thickness of the box border. Defaults to 2.
 
-    - **img** (`np.ndarray`): The image to draw on, as a NumPy array.
-    - **box** (`Union[Box, np.ndarray]`): The Bounding Box to draw, can be a Box object or a NumPy array in the form [x1, y1, x2, y2].
-    - **color** (`_Color`): The color of the box to draw. Defaults to (0, 255, 0).
-    - **thickness** (`_Thickness`): The thickness of the box outline to draw. Defaults to 2.
+- **Return Value**:
 
-- **Returns**
+  - **np.ndarray**: The image with the bounding box drawn.
 
-    - **np.ndarray**: The image with the drawn box.
+- **Example**:
 
-- **Example**
+  ```python
+  import capybara as cb
 
-    ```python
-    import docsaidkit as D
+  img = cb.imread('lena.png')
+  box = cb.Box([20, 20, 100, 100])
+  box_img = cb.draw_box(img, box, color=(0, 255, 0), thickness=2)
+  ```
 
-    img = D.imread('lena.png')
-    box = D.Box([20, 20, 100, 100])
-    box_img = D.draw_box(img, box, color=(0, 255, 0), thickness=2)
-    ```
-
-    ![draw_box](./resource/test_draw_box.jpg)
+  ![draw_box](./resource/test_draw_box.jpg)

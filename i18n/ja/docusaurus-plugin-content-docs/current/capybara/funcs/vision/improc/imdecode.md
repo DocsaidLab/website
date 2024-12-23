@@ -1,27 +1,23 @@
----
-sidebar_position: 8
----
-
 # imdecode
 
-> [imdecode(byte\_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/71170598902b6f8e89a969f1ce27ed4fd05b2ff2/docsaidkit/vision/improc.py#L107)
+> [imdecode(byte\_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L107)
 
-- **説明**：画像のバイト文字列を解凍して NumPy 画像配列に変換します。
+- **説明**：画像のバイト列を NumPy 画像配列にデコードします。
 
-- 引数
+- **パラメータ**
 
-  - **byte\_** (`bytes`)：解凍する画像のバイト文字列。
+  - **byte\_** (`bytes`)：デコードする画像のバイト列。
 
-- **返り値**
+- **戻り値**
 
-  - **np.ndarray**：解凍後の画像配列。
+  - **np.ndarray**：デコードされた画像配列。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  img = D.imread('lena.png')
-  encoded_bytes = D.imencode(img, IMGTYP=D.IMGTYP.PNG)
-  decoded_img = D.imdecode(encoded_bytes)
+  img = cb.imread('lena.png')
+  encoded_bytes = cb.imencode(img, IMGTYP=cb.IMGTYP.PNG)
+  decoded_img = cb.imdecode(encoded_bytes)
   ```

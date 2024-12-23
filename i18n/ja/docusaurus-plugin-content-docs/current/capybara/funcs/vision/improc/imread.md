@@ -1,32 +1,28 @@
----
-sidebar_position: 1
----
-
 # imread
 
-> [imread(path: Union[str, Path], color_base: str = 'BGR', verbose: bool = False) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/DocsaidKit/blob/012540eebaebb2718987dd3ec0f7dcf40f403caa/docsaidkit/vision/improc.py#L197C1-L242C15)
+> [imread(path: Union[str, Path], color_base: str = 'BGR', verbose: bool = False) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L197)
 
-- **説明**：画像を読み込み、画像形式に応じて異なる読み込み方法を使用します。サポートされる形式は以下の通りです：
+- **説明**：画像を読み込み、異なる画像形式に基づいて異なる読み込み方法を使用します。サポートされている形式は以下の通りです：
 
   - `.heic`：`read_heic_to_numpy`を使用して読み込み、`BGR`形式に変換します。
   - `.jpg`：`jpgread`を使用して読み込み、`BGR`形式に変換します。
   - その他の形式：`cv2.imread`を使用して読み込み、`BGR`形式に変換します。
-  - `jpgread`で`None`が返された場合、`cv2.imread`を使用して読み込みます。
+  - `jpgread`で`None`が返される場合は、`cv2.imread`を使用して読み込みます。
 
-- 引数
+- **パラメータ**
 
   - **path** (`Union[str, Path]`)：読み込む画像のパス。
-  - **color_base** (`str`)：画像の色空間。`BGR`でない場合、`imcvtcolor`関数を使って変換します。デフォルトは`BGR`です。
-  - **verbose** (`bool`)：`True`に設定すると、画像が`None`の場合に警告を表示します。デフォルトは`False`です。
+  - **color_base** (`str`)：画像の色空間。`BGR`でない場合、`imcvtcolor`関数を使用して変換します。デフォルトは`BGR`。
+  - **verbose** (`bool`)：True に設定すると、読み込んだ画像が None の場合に警告を出します。デフォルトは False。
 
-- **返り値**
+- **戻り値**
 
-  - **np.ndarray**：成功した場合、画像の NumPy ndarray を返します。失敗した場合は`None`を返します。
+  - **np.ndarray**：成功時に画像の NumPy ndarray を返し、失敗時には`None`を返します。
 
-- **例**
+- **使用例**
 
   ```python
-  import docsaidkit as D
+  import capybara as cb
 
-  img = D.imread('lena.png')
+  img = cb.imread('lena.png')
   ```
