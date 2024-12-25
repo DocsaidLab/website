@@ -27,6 +27,10 @@
     "message": "サポートする",
     "description": "The label of footer link with label=支持我們 linking to https://buymeacoffee.com/docsaid"
   },
+  "link.item.label.成為作者": {
+    "message": "著者になる",
+    "description": "The label of footer link with label=成為作者"
+  },
   "copyright": {
     "message": "Copyright © 2024 DOCSAID.",
     "description": "The footer copyright"

@@ -248,6 +248,16 @@ Docusaurus 讓我們能直接使用 Markdown 撰寫網頁內容，並透過 Reac
 
 9. 完成後，發 PR 到 `main` 分支，等待審核。
 
+   :::tip
+   特別注意，新增論文的 commit message 請遵守以下格式：
+
+   ```txt
+   [A] Add article `Paper Title`
+   ```
+
+   由於我們有撰寫固定的解析文件，用來鎖定論文標題，因此請務必遵守此格式。其他的 commit message 也請不要用到這 Add article 這個關鍵字。
+   :::
+
 ## 在文章內寫程式
 
 我們採用的是基於 React 的 MDX 語法，所以你可以在文章內直接寫 React 程式碼。

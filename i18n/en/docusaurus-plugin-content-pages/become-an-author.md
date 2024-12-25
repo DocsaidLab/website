@@ -248,6 +248,16 @@ If you also want to take notes, here are the guidelines for writing paper notes:
 
 9. Once completed, submit a PR to the `main` branch and wait for review.
 
+   :::tip
+   Please pay special attention. The commit message for adding a new paper must follow the format below:
+
+   ```txt
+   [A] Add article `Paper Title`
+   ```
+
+   Since we have a fixed parsing file to lock the paper title, please make sure to follow this format. For other commit messages, do not use the "Add article" keyword.
+   :::
+
 ## Writing Code in Articles
 
 We use the MDX syntax based on React, so you can write React code directly within articles.
