@@ -228,7 +228,7 @@ PVT 使用 SRA 機制（Spatial Reduction Attention）來減少注意力機制�
 - soft-NMS
 - 使用 ImageNet-22K 預訓練模型進行初始化
 
-作者將 Swin Transformer 與標準 ConvNet（如 ResNe(X)t）和先前的 Transformer 網路（如 DeiT）進行比較，透過僅更改主幹網路而其他設定不變來進行公平比較。由於 Swin Transformer 和 ResNe(X)t 具有分層特徵圖，能夠直接應用於上述所有框架，但 DeiT 只產生單一解析度的特徵圖，因此作者使用反捲積層來建構 DeiT 的分層特徵圖。
+作者將 Swin Transformer 與標準 ConvNet（如 ResNe(X)t）和先前的 Transformer 網路（如 DeiT）進行比較，透過僅更改主幹網路而其他設定不變來進行公平比較。由於 Swin Transformer 和 ResNe(X)t 具有分層特徵圖，能夠直接應用於上述所有框架，但 DeiT 只產生單一解析度的特徵圖，因此作者使用反卷積層來建構 DeiT 的分層特徵圖。
 
 ### Swin vs ResNe(X)t
 
