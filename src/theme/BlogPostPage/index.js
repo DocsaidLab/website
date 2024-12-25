@@ -38,34 +38,60 @@ function BlogPostPageContent({sidebar, children}) {
       <div className={styles.postHeroOverlay}>
         <h1 className={styles.postTitle}>{title}</h1>
         <div className={styles.postMeta}>
-          {authorsArray.length > 0 && (
-            <div className={styles.postAuthors}>
-              {authorsArray.map((author, idx) => {
-                const authorName = author.name;
-                const authorURL = author.url;
-                return (
-                  <div className={styles.postAuthor} key={idx}>
-                    {author.imageURL && (
-                      <img className={styles.postAuthorImg} src={author.imageURL} alt={authorName}/>
-                    )}
-                    {authorURL ? (
-                      <a href={authorURL} target="_blank" rel="noopener noreferrer" className={styles.postAuthorLink}>
-                        <span className={styles.postAuthorName}>{authorName}</span>
+        {authorsArray.length > 0 && (
+          <div className={styles.postAuthors}>
+            {authorsArray.map((author, idx) => {
+              return (
+                <div className={styles.postAuthor} key={idx}>
+                  {author.imageURL && (
+                    <img
+                      className={styles.postAuthorImg}
+                      src={author.imageURL}
+                      alt={author.name}
+                    />
+                  )}
+
+                  {/* 新增: 包作者資訊的容器 */}
+                  <div className={styles.postAuthorText}>
+                    {author.url ? (
+                      <a
+                        href={author.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.postAuthorLink}
+                      >
+                        <span className={styles.postAuthorName}>{author.name}</span>
                       </a>
                     ) : (
-                      <span className={styles.postAuthorName}>{authorName}</span>
+                      <span className={styles.postAuthorName}>{author.name}</span>
                     )}
+
+                    {author.title && (
+                      <span className={styles.postAuthorTitle}>{author.title}</span>
+                    )}
+
+                    {author.description && (
+                      <p className={styles.postAuthorDesc}>{author.description}</p>
+                    )}
+
                   </div>
-                );
-              })}
-            </div>
-          )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+
 
           <div className={styles.postMetaInfo}>
             <div className={styles.postMetaRow}>
               {date && (
                 <span className={styles.postDate}>
-                  {new Date(date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric'})}
+                  {new Date(date).toLocaleDateString(undefined, {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
                 </span>
               )}
               {readingTime && (
@@ -93,7 +119,7 @@ function BlogPostPageContent({sidebar, children}) {
   return (
     <BlogLayout
       sidebar={sidebar}
-      hero={hero} // 將 hero 傳入 BlogLayout
+      hero={hero}
       toc={
         !hideTableOfContents && toc.length > 0 ? (
           <TOC
@@ -102,10 +128,14 @@ function BlogPostPageContent({sidebar, children}) {
             maxHeadingLevel={tocMaxHeadingLevel}
           />
         ) : undefined
-      }>
+      }
+    >
       <ContentVisibility metadata={metadata} />
 
-      <article className="markdown" style={{maxWidth: '800px', margin: '2rem auto'}}>
+      <article
+        className="markdown"
+        style={{maxWidth: '800px', margin: '2rem auto'}}
+      >
         <BlogPostItem>{children}</BlogPostItem>
       </article>
 
@@ -126,7 +156,8 @@ export default function BlogPostPage(props) {
         className={clsx(
           ThemeClassNames.wrapper.blogPages,
           ThemeClassNames.page.blogPostPage,
-        )}>
+        )}
+      >
         <BlogPostPageMetadata />
         <BlogPostPageStructuredData />
         <BlogPostPageContent sidebar={props.sidebar}>
