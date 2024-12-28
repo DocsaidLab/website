@@ -1,8 +1,8 @@
 {
-  "name": "blog",
+  "name": "docsaid_website",
   "version": "0.0.0",
-  "private": true,
-  "homepage": "https://DocsaidLab.github.io/blog",
+  "private": false,
+  "homepage": "https://docsaid.org/",
   "scripts": {
     "generate-updates": "node src/components/generateRecentUpdates.js",
     "build": "npm run generate-updates && docusaurus build",
