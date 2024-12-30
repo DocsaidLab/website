@@ -4,173 +4,203 @@ sidebar_position: 3
 
 # クイックスタート
 
-私たちは、前処理と後処理のロジックを含む簡単なモデル推論インターフェースを提供しています。
+簡単なモデル推論インターフェースを提供しており、前処理と後処理のロジックも含まれています。
 
 まず、必要な依存関係をインポートし、`DocAligner` クラスを作成する必要があります。
 
 ## モデル推論
 
-以下は、`DocAligner` を使用してモデル推論を行う方法を示す簡単な例です：
-
-```python
-from docaligner import DocAligner
-
-model = DocAligner()
-```
-
-モデルを起動した後、次に推論を行う画像を準備します：
-
-:::tip
-`DocAligner` が提供するテスト画像を使用できます：
-
-ダウンロードリンク：[**run_test_card.jpg**](https://github.com/DocsaidLab/DocAligner/blob/main/docs/run_test_card.jpg)
+:::info
+モデルの自動ダウンロード機能を設計しています。プログラムがモデルが不足していることを確認すると、サーバーに接続して自動的にダウンロードします。
 :::
 
-```python
-import docsaidkit as D
-
-img = D.imread('path/to/run_test_card.jpg')
-```
-
-または、URL を通じて直接画像を読み込むこともできます：
+以下は簡単な例です：
 
 ```python
 import cv2
 from skimage import io
+from docaligner import DocAligner
 
+# モデルを構築
+model = DocAligner()
+
+# 画像を読み込む
 img = io.imread('https://github.com/DocsaidLab/DocAligner/blob/main/docs/run_test_card.jpg?raw=true')
 img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+# 推論を実行
+polygon = model(img)
+
+# 出力された四隅の座標
+# print(polygon)
+#    [[ 48.151894 223.47687 ]
+#    [387.1344   198.09961 ]
+#    [423.0362   345.51334 ]
+#    [ 40.148613 361.38782 ]]
 ```
 
+:::tip
+上記の例で使用した画像のダウンロードリンクは、[**run_test_card.jpg**](https://github.com/DocsaidLab/DocAligner/blob/main/docs/run_test_card.jpg) を参照してください。
+
+<div align="center">
+<figure style={{"width": "50%"}}>
 ![test_card](./resources/run_test_card.jpg)
-
-次に、`model` を使って推論を行います：
-
-```python
-result = model(img)
-```
-
-得られた推論結果は、私たちがラップした [**Document**](../docsaidkit/funcs/objects/document) クラス型で、文書のポリゴンや OCR の文字情報などが含まれています。このモジュールでは OCR に関連する機能は使用しないので、`image` と `doc_polygon` の属性のみを使用します。推論結果を取得した後、さまざまな後処理操作を行うことができます。
+</figure>
+</div>
+:::
 
 :::tip
-`DocAligner` は `__call__` でラップされているので、インスタンスを直接呼び出して推論を行うことができます。
+`DocAligner` は `__call__` でラップされているため、インスタンスを直接呼び出して推論を行うことができます。
+
+最新バージョンでは、モデルは numpy.ndarray 形式で結果を返すため、ユーザーにより柔軟で後続のアプリケーションがしやすい形になっています。
 :::
 
-:::info
-最初に `DocAligner` を使用する際、モデルは自動的にダウンロードされます。
-:::
+## 結果の出力
 
-## 出力結果
+### 多角形を描画
 
-### 1. ポリゴンを描画
-
-文書のポリゴンが描画された画像を保存します。
-
-```python
-# draw
-result.draw_doc(
-    folder='path/to/save/folder',
-    name='output_image.jpg'
-)
-```
-
-または、パスを指定せずに直接出力：
-
-```python
-# デフォルトの出力パスは現在のディレクトリ
-# デフォルトの出力ファイル名は現在時刻を使用し、f"output_{D.now()}.jpg" になります。
-result.draw_doc()
-```
-
-![output_image](./resources/flat_result.jpg)
-
-### 2. NumPy 画像を取得
-
-他のニーズがある場合、`gen_doc_info_image` メソッドを使用して、自分で処理を行うことができます。
-
-```python
-img = result.gen_doc_info_image()
-```
-
-### 3. フラット化された画像を抽出
-
-もし文書の元のサイズが分かっていれば、`gen_doc_flat_img` メソッドを使って、文書画像をそのポリゴンの境界に基づいて矩形画像に変換できます。
-
-```python
-H, W = 1080, 1920
-flat_img = result.gen_doc_flat_img(image_size=(H, W))
-```
-
-もし画像のクラスが不明な場合、`image_size` パラメータを指定することなく、最小矩形画像が自動的に計算され、最小矩形の長さと幅は `H` と `W` に設定されます。
-
-```python
-flat_img = result.gen_doc_flat_img()
-```
-
-:::tip
-画像内で文書が大きく傾いている場合、計算された最小矩形が扁平になることがあり、その場合フラット化すると一定の歪みが生じます。このような場合には、`image_size` パラメータを使って手動で設定することをお勧めします。
-:::
-
-## なぜモデルが文書を検出できないのか？
-
-これはすぐに答えるのが難しい質問で、ひとつひとつ解説していく必要があります。
-
-以下は、MIDV-2020 の画像を例に説明します。読者はこの画像をダウンロードしてテストできます：
-
-![example](./resources/midv2020_example.jpg)
-
-### 画像内の文書サイズ
-
-最初に考慮すべきは、画像内の文書のサイズです。文書が大きすぎたり、小さすぎたりすると、モデルが検出できない可能性があります。
-
-トレーニングデータを調査した結果、文書のスケールはおおよそ 1/2 ~ 1/8 の間であることがわかりました。以下の図を参照してください：
-
-![scale](./resources/scale_corner.jpg)
-
-つまり、画像内で文書のサイズが上記の 1/8 のスケールの「単一のグリッド」サイズよりも小さい場合、その文書はモデルによって無視される可能性があります。モデルはそれを背景として判断するかもしれません。
-
-私たちは、文書検出が後続のタスクのために行われることを考慮し、実際のアプリケーションシーンでは小さすぎる文書が意味を持たないかもしれないと考え、この特性をトレーニングデータに反映させました。
-
-### 文書の角点が欠けている
-
-文書が大きすぎる場合、通常はモデルに影響を与えませんが、この場合、文書の角点が画像の端に切り取られたり、画像からはみ出すことがあります。
-
-このモデルの主な機能は角点検出であるため、文書の角点が欠けていると、モデルは不安定な推定結果を出します。もし角点が文書の端に欠けている場合、モデルは無効な文書と判定し、ポリゴン結果を出力しないことがあります。以下の図を参照してください：
-
-![missing corner](./resources/missing_corner.jpg)
-
-### 画像内の文書がぼやけている
-
-もう一つの検出失敗の原因は、文書がぼやけていることです。ぼやけた文書は、モデルが文書の境界を見つけられなくなり、検出に失敗する原因となります。以下の図を参照してください：
-
-![blurry](./resources/blur_corner.jpg)
-
-### モデルが認識しない文書
-
-私たちがトレーニングしたモデルの規模は限られており、約 5MB から 20MB の範囲です。モデルには一定の一般化能力がありますが、トレーニングデータに含まれていない特殊な文書には対応できない場合があります。
-
-例えば、以下の図の青い計算機は「特殊な文書」であると仮定しましょう：
-
-![unknown](./resources/unknown_corner.jpg)
-
-この画像をモデルに入力すると、空のポリゴンが返されます。なぜなら、モデルは「計算機」という文書を認識しないからです。この解決方法は、この「特殊な文書」に対して手動で訓練し、アノテーションを追加してモデルを微調整することです。
-
-## モデルの可視化
-
-この機能はラッピングしていませんが、実際には中間処理の一部であり、その後に他の画像処理ステップが行われます。
-
-それでも、可視化を見たい場合には、以下のようにコードを書いて出力を見ることができます。例えば、ヒートマップモデルを使用してモデルの出力を可視化する方法は以下の通りです：
+ファイルの多角形を含む画像を描画して保存します。
 
 ```python
 import cv2
-import docsaidkit as D
 import numpy as np
+
+def draw_polygon_image(
+    img: np.ndarray,
+    polygon: np.ndarray,
+    thickness: int = 3
+) -> np.ndarray:
+
+    colors = [(0, 255, 255), (255, 255, 0), (0, 255, 0), (0, 0, 255)]
+    export_img = img.copy()
+    _polys = polygon.astype(int)
+    _polys_roll = np.roll(_polys, 1, axis=0)
+    for p1, p2, color in zip(_polys, _polys_roll, colors):
+        export_img = cv2.circle(
+            export_img, p2, radius=thickness*2,
+            color=color, thickness=-1, lineType=cv2.LINE_AA
+        )
+        export_img = cv2.arrowedLine(
+            export_img, p2, p1, color=color,
+            thickness=thickness, line_type=cv2.LINE_AA
+        )
+    return export_img
+
+# 描画
+export_img = draw_polygon_image(img, polygon)
+```
+
+<div align="center">
+<figure style={{"width": "50%"}}>
+![output_image](./resources/flat_result.jpg)
+</figure>
+</div>
+
+### 平坦化された画像の抽出
+
+ファイルの元のサイズが分かっている場合は、`Capybara.imwarp_quadrangle` メソッドを呼び出し、ファイル多角形の画像を矩形画像に変換できます。
+
+- 参照元コード：[**Capybara.imwarp_quadrangle**](https://github.com/DocsaidLab/Capybara/blob/40dbe8a58c959023ed87c7d48c1c378de5bcf038/capybara/vision/geometric.py#L155)
+
+```python
+from capybara import imwarp_quadrangle
+
+H, W = 480, 800
+flat_img = imwarp_quadrangle(img, polygon, dst_size=(W, H))
+```
+
+実行結果は以下の通りです：
+
+<div align="center">
+<figure style={{"width": "50%"}}>
+![output_image](./resources/flat_result_2.jpg)
+</figure>
+</div>
+
+もし画像の種類が不明な場合、`dst_size` パラメータを指定しなくても、自動的に最小矩形画像を計算して、最小矩形の幅と高さを `W` と `H` に設定します。
+
+```python
+flat_img = imwarp_quadrangle(img, polygon)
+```
+
+:::tip
+画像内でファイルが大きく傾いている場合、最小矩形が非常に扁平な形状になることがあります。この場合、平坦化すると一定の歪みが生じる可能性があります。
+
+そのため、このような場合は `dst_size` パラメータを使用して手動で設定することをお勧めします。
+:::
+
+## なぜモデルがファイルを検出できないのか？
+
+これはすぐに答えられる問題ではなく、個別に解決する必要があります。
+
+以下では、MIDV-2020 の画像を例として説明します。読者はこの画像をダウンロードしてテストできます：
+
+<div align="center">
+<figure style={{"width": "30%"}}>
+![example](./resources/midv2020_example.jpg)
+</figure>
+</div>
+
+### 画像内のファイルサイズ
+
+最初に考慮すべきは、画像内のファイルのサイズです。ファイルが大きすぎたり小さすぎたりすると、モデルが検出できない可能性があります。
+
+訓練データを調査した結果、ファイルのスケールは約 1/2 ～ 1/8 の範囲に収まっています。下記の図を参考にしてください：
+
+![scale](./resources/scale_corner.jpg)
+
+つまり、ファイルのサイズが画像内で上記の 1/8 より小さい「単一のグリッド」サイズの場合、そのファイルはモデルによって無視される可能性があります。モデルはそれを背景と見なす可能性があります。
+
+実際のアプリケーションシーンで小さすぎるファイルを検出しても意味がないため、訓練データを設計する際にこの特性を保持しています。
+
+### ファイルの角点が欠けている
+
+ファイルが大きすぎると通常はモデルに影響を与えませんが、この場合、ファイルの角点が画像の端に切り取られたり、画像を越えてしまったりすることがあります。
+
+このモデルの主な機能は角点の検出であるため、ファイルの角点が欠けていると、モデルは不安定な推定結果を出力します。角点がファイルの端に欠けている場合、モデルは無効なファイルとして判断し、Polygon 結果を出力しない場合があります。以下の図を参照してください：
+
+![missing corner](./resources/missing_corner.jpg)
+
+### 画像内のファイルがぼやけている
+
+もう一つの検出失敗の原因は、ファイルがぼやけていることです。ぼやけたファイルは、モデルがファイルの境界を見つけられなくなり、検出が失敗する原因となります。以下の図を参照してください：
+
+<div align="center">
+<figure style={{"width": "80%"}}>
+![blurry](./resources/blur_corner.jpg)
+</figure>
+</div>
+
+### モデルが認識しないファイル
+
+私たちが訓練したモデルは規模が限られており、約 5MB ～ 20MB の範囲です。モデルは一定の汎化能力を持っていますが、訓練データセットに含まれていない特殊なファイルを検出することはできません。
+
+例えば、以下の図の青い計算機は「特殊なファイル」と仮定します：
+
+<div align="center">
+<figure style={{"width": "60%"}}>
+![unknown](./resources/unknown_corner.jpg)
+</figure>
+</div>
+
+この画像をモデルに送ると、空の Polygon が返されます。モデルは「計算機」というファイルを認識できないためです。この問題を解決するには、この「特殊なファイル」を手動で訓練データに追加し、モデルを微調整する必要があります。
+
+## モデルの可視化
+
+この機能はラッピングしていませんが、実際には中間処理であり、その後に他の画像後処理が行われます。
+
+もし本当に見たい場合は、次のコードを使って表示できます。熱画像モデルを使用していると仮定します：
+
+```python
+import cv2
+import numpy as np
+from capybara import imresize, imread
 from docaligner import DocAligner
 from docaligner.heatmap_reg.infer import preprocess
 
 model = DocAligner()
 
-img = D.imread('midv2020_example.jpg')
+img = imread('midv2020_example.jpg')
 
 img_infos = preprocess(
     img=img,
@@ -179,18 +209,22 @@ img_infos = preprocess(
 
 heatmap = model.detector.model(**img_infos['input'])['heatmap'][0].sum(0)
 heatmap = np.uint8(heatmap * 255)
-heatmap = D.imresize(heatmap, size=img.shape[:2])
+heatmap = imresize(heatmap, size=img.shape[:2])
 heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
 output = cv2.addWeighted(img, 0.5, heatmap, 0.5, 0)
 D.imwrite(output)
 ```
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![heatmap](./resources/heatmap_corner.jpg)
+</figure>
+</div>
 
-上記のコードを使うことで、モデルの出力を視覚化できます。これはヒートマップで、色が濃いほどその領域が文書の角点である可能性が高いことを示しています。検出に失敗した場合、問題の可能性がある場所をこの図で見つけることができます。
+上記のコードを使用すると、モデルの出力を視覚化できます。これは熱画像で、色が濃いほどその領域がファイルの角点である可能性が高いことを示します。検出に失敗した場合、この画像で問題の可能性を特定できる場合があります。
 
 ## お問い合わせ
 
-もし上記の答えが見つからなかった場合、問題があると思われる画像を電子メールで送っていただければ、時間があるときに確認いたします。
+上記が答えでない場合は、問題があると思われる画像を電子メールで送信してください。時間があるときに確認させていただきます。
 
-以下のメールアドレスでご連絡ください：**docsaidlab@gmail.com**
+メールでお問い合わせください：**docsaidlab@gmail.com**

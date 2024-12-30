@@ -20,7 +20,7 @@ Backend 是一個列舉類型，用於指定 `DocAligner` 的運算後端。
 - **cuda**：使用 GPU 進行運算（需要適當的硬體支援）。
 
 ```python
-from docsaidkit import Backend
+from capybara import Backend
 
 model = DocAligner(backend=Backend.cuda) # 使用 CUDA 後端
 #
@@ -114,61 +114,19 @@ model = DocAligner(model_cfg='fastvit_t8') # 使用 'fastvit_t8' 配置
 使用方式如下：
 
 ```python
-import docsaidkit as D
+from capybara import imread
 from docaligner import DocAligner
 
 model = DocAligner()
 
-img = D.imread('path/to/image.jpg')
+img = imread('path/to/image.jpg')
 result = model(img, do_center_crop=True) # 使用中心裁剪
 ```
 
 :::tip
 **使用時機**：『不會切到圖片』且圖片比例不是正方形時，可以使用中心裁切。
-:::warning
-中心裁減只是在計算流程中的一個步驟，不會對原始圖像進行修改。最後得到的結果會映射回原始圖像的尺寸，使用者不須擔心圖像的變形或失真問題。
 :::
 
-### Return `Document` Object
-
-使用 `return_document_obj` 參數可以指定是否返回 [**Document**](../docsaidkit/funcs/objects/document) 物件。
-
-在很多時候，你可能只需要文件的多邊形資訊，而不需要其他的屬性。
-
-這時，你可以設定 `return_document_obj=False`，這樣就只會返回多邊形資訊。
-
-```python
-result = model(img)
-print(type(result))
-# >>> <class 'docsaidkit.funcs.objects.document.Document'>
-
-# 或是
-
-result = model(img, return_document_obj=False) # 只返回多邊形資訊
-print(type(result))
-# >>> <class 'numpy.ndarray'>
-
-print(result)
-# >>> array([[ 48.151894, 223.47687 ],
-#            [387.1344  , 198.09961 ],
-#            [423.0362  , 345.51334 ],
-#            [ 40.148613, 361.38782 ]], dtype=float32)
-```
-
-:::tip
-當你取得 `numpy.ndarray` 時，你可以調用 [**Docsaidkit.imwarp_quadrangle**](../docsaidkit/funcs/vision/geometric/imwarp_quadrangle) 函數來進行進一步的後處理，參考範例：
-
-```python
-import docsaidkit as D
-
-result = model(img, return_document_obj=False)
-flat_doc_img = D.imwarp_quadrangle(img, result)
-```
-
-輸出結果如下：
-
-![flat_doc_img](./resources/flat_result_1.jpg)
-
 :::warning
-**注意**：函數 [**Docsaidkit.imwarp_quadrangle**](../docsaidkit/funcs/vision/geometric/imwarp_quadrangle) 沒有支援指定文件大小，因此輸出的圖片尺寸會根據多邊形的『最小旋轉外接矩形』來決定。
+中心裁減只是在計算流程中的一個步驟，不會對原始圖像進行修改。最後得到的結果會映射回原始圖像的尺寸，使用者不須擔心圖像的變形或失真問題。
 :::

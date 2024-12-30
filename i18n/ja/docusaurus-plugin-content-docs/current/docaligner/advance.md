@@ -20,7 +20,7 @@ Backend は列挙型で、`DocAligner` の計算バックエンドを指定す�
 - **cuda**：GPU を使用して計算を行います（適切なハードウェアサポートが必要です）。
 
 ```python
-from docsaidkit import Backend
+from capybara import Backend
 
 model = DocAligner(backend=Backend.cuda) # CUDA バックエンドを使用
 #
@@ -114,61 +114,19 @@ model = DocAligner(model_cfg='fastvit_t8') # 'fastvit_t8' 設定を使用
 使用方法は以下の通りです：
 
 ```python
-import docsaidkit as D
+from capybara import imread
 from docaligner import DocAligner
 
 model = DocAligner()
 
-img = D.imread('path/to/image.jpg')
+img = imread('path/to/image.jpg')
 result = model(img, do_center_crop=True) # センタークロップを使用
 ```
 
 :::tip
 **使用時期**：『画像が切り取られない』且つ画像のアスペクト比が正方形でない場合に、センタークロップを使用できます。
-:::warning
-センタークロップは計算処理の一部であり、元の画像を変更することはありません。最終的な結果は元の画像のサイズにマッピングされるため、画像の変形や歪みを心配する必要はありません。
 :::
 
-### `Document` オブジェクトを返す
-
-`return_document_obj` パラメータを使用して、[**Document**](../docsaidkit/funcs/objects/document) オブジェクトを返すかどうかを指定できます。
-
-多くの場面で、ドキュメントのポリゴン情報だけが必要であり、他の属性は必要ない場合があります。
-
-この場合、`return_document_obj=False` と設定すると、ポリゴン情報のみが返されます。
-
-```python
-result = model(img)
-print(type(result))
-# >>> <class 'docsaidkit.funcs.objects.document.Document'>
-
-# または
-
-result = model(img, return_document_obj=False) # ポリゴン情報のみを返す
-print(type(result))
-# >>> <class 'numpy.ndarray'>
-
-print(result)
-# >>> array([[ 48.151894, 223.47687 ],
-#            [387.1344  , 198.09961 ],
-#            [423.0362  , 345.51334 ],
-#            [ 40.148613, 361.38782 ]], dtype=float32)
-```
-
-:::tip
-`numpy.ndarray` を取得した場合、[**Docsaidkit.imwarp_quadrangle**](../docsaidkit/funcs/vision/geometric/imwarp_quadrangle) 関数を呼び出して、さらなる後処理を行うことができます。参考のため、以下のように使用できます：
-
-```python
-import docsaidkit as D
-
-result = model(img, return_document_obj=False)
-flat_doc_img = D.imwarp_quadrangle(img, result)
-```
-
-出力結果は以下の通りです：
-
-![flat_doc_img](./resources/flat_result_1.jpg)
-
 :::warning
-**注意**：関数 [**Docsaidkit.imwarp_quadrangle**](../docsaidkit/funcs/vision/geometric/imwarp_quadrangle) はファイルサイズの指定をサポートしていないため、出力される画像サイズはポリゴンの「最小回転外接矩形」に基づいて決定されます。
+センタークロップは計算処理の一部であり、元の画像を変更することはありません。最終的な結果は元の画像のサイズにマッピングされるため、画像の変形や歪みを心配する必要はありません。
 :::

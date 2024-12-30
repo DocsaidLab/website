@@ -4,59 +4,73 @@ sidebar_position: 2
 
 # Installation
 
-Currently, there is no package available on PyPI, and there are no plans to offer one in the near future.
+We provide installation via PyPI or by cloning the project from GitHub.
 
-To use this project, you must clone it directly from Github and then install the required dependencies.
+## Install via PyPI
+
+1. Install `docaligner_docsaid`:
+
+   ```bash
+   pip install docaligner_docsaid
+   ```
+
+2. Verify the installation:
+
+   ```bash
+   python -c "import docaligner; print(docaligner.__version__)"
+   ```
+
+3. If you see the version number, the installation is successful.
+
+## Install via GitHub
 
 :::tip
-Before installation, please ensure you have installed `DocsaidKit`.
+If you want to install via GitHub, make sure you have installed `Capybara`.
 
-If you have not installed `DocsaidKit`, please refer to the [**DocsaidKit Installation Guide**](../docsaidkit/installation).
+If not, refer to the [**Capybara Installation Guide**](../capybara/installation.md).
 :::
-
-## Installation Steps
 
 1. **Clone the project:**
 
-    ```bash
-    git clone https://github.com/DocsaidLab/DocAligner.git
-    ```
+   ```bash
+   git clone https://github.com/DocsaidLab/DocAligner.git
+   ```
 
-2. **Enter the project directory:**
+2. **Navigate to the project directory:**
 
-    ```bash
-    cd DocAligner
-    ```
+   ```bash
+   cd DocAligner
+   ```
 
 3. **Install dependencies:**
 
-    ```bash
-    pip install setuptools wheel
-    ```
+   ```bash
+   pip install setuptools wheel
+   ```
 
-4. **Build the package:**
+4. **Create the package:**
 
-    ```bash
-    python setup.py bdist_wheel
-    ```
+   ```bash
+   python setup.py bdist_wheel
+   ```
 
 5. **Install the package:**
 
-    ```bash
-    pip install dist/docaligner-*-py3-none-any.whl
-    ```
+   ```bash
+   pip install dist/docaligner_docsaid-*-py3-none-any.whl
+   ```
 
-Following these steps, you should be able to successfully install `DocAligner`.
+By following these steps, you should be able to successfully install `DocAligner`.
 
-Once installed, you are ready to use the project.
+Once installed, you can begin using the project.
 
-## Test the Installation
+## Test Installation
 
-You can test whether the installation was successful with the following command:
+You can test the installation by running the following command:
 
 ```bash
 python -c "import docaligner; print(docaligner.__version__)"
-# >>> 0.6.0
+# >>> 1.0.0
 ```
 
-If you see a version number similar to `0.6.0`, it indicates the installation was successful.
+If you see a version number like `1.0.0`, the installation was successful.

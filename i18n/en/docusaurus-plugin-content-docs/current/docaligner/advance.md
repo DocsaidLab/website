@@ -20,7 +20,7 @@ It includes the following options:
 - **cuda**: Use the GPU for computation (requires appropriate hardware support).
 
 ```python
-from docsaidkit import Backend
+from capybara import Backend
 
 model = DocAligner(backend=Backend.cuda) # Using CUDA backend
 #
@@ -114,61 +114,19 @@ These non-square images, when used directly for inference without proper process
 Usage is as follows:
 
 ```python
-import docsaidkit as D
+from capybara import imread
 from docaligner import DocAligner
 
 model = DocAligner()
 
-img = D.imread('path/to/image.jpg')
+img = imread('path/to/image.jpg')
 result = model(img, do_center_crop=True) # Using center cropping
 ```
 
 :::tip
 **When to use**: Use center cropping when "not cutting the image" and when the image ratio is not square.
-:::warning
-Center cropping is just one step in the computation process and does not modify the original image. The final results will be mapped back to the original image size, so users need not worry about image distortion or loss of quality.
 :::
 
-### Return `Document` Object
-
-Using the `return_document_obj` parameter, you can specify whether to return a [**Document**](../docsaidkit/funcs/objects/document) object.
-
-Often, you might only need the polygon information of the document and not the other attributes.
-
-In such cases, you can set `return_document_obj=False`, which will only return the polygon information.
-
-```python
-result = model(img)
-print(type(result))
-# >>> <class 'docsaidkit.funcs.objects.document.Document'>
-
-# Or
-
-result = model(img, return_document_obj=False) # Only return polygon information
-print(type(result))
-# >>> <class 'numpy.ndarray'>
-
-print(result)
-# >>> array([[ 48.151894, 223.47687 ],
-#            [387.1344  , 198.09961 ],
-#            [423.0362  , 345.51334 ],
-#            [ 40.148613, 361.38782 ]], dtype=float32)
-```
-
-:::tip
-When you obtain a `numpy.ndarray`, you can call the [**Docsaidkit.imwarp_quadrangle**](../docsaidkit/funcs/vision/geometric/imwarp_quadrangle) function for further post-processing, see the example:
-
-```python
-import docsaidkit as D
-
-result = model(img, return_document_obj=False)
-flat_doc_img = D.imwarp_quadrangle(img, result)
-```
-
-Output results as follows:
-
-![flat_doc_img](./resources/flat_result_1.jpg)
-
 :::warning
-**Note**: The function [**Docsaidkit.imwarp_quadrangle**](../docsaidkit/funcs/vision/geometric/imwarp_quadrangle) does not support specifying document size, so the output image size will be determined by the "minimum rotated bounding rectangle" of the polygon.
+Center cropping is just one step in the computation process and does not modify the original image. The final results will be mapped back to the original image size, so users need not worry about image distortion or loss of quality.
 :::

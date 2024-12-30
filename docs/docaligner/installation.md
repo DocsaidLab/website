@@ -4,47 +4,61 @@ sidebar_position: 2
 
 # 安裝
 
-目前沒有提供 Pypi 上的安裝包，短時間內也沒有相關規劃。
+我們有提供 PyPI 上的安裝，或是從 Github 上 clone 本專案的方式來安裝。
 
-若要使用本專案，你必須直接從 Github 上 clone 本專案，然後安裝相依套件。
+## 透過 PyPI 安裝
+
+1. 安裝 `docaligner_docsaid`：
+
+   ```bash
+   pip install docaligner_docsaid
+   ```
+
+2. 驗證安裝：
+
+   ```bash
+   python -c "import docaligner; print(docaligner.__version__)"
+   ```
+
+3. 如果你看到版本號，則表示安裝成功。
+
+## 透過 GitHub 安裝
 
 :::tip
-安裝前請確認您已經安裝了 `DocsaidKit`。
+若要透過 GitHub 安裝，請確保你已經安裝了 `Capybara`。
 
-如果你還沒有安裝 `DocsaidKit`，請參考 [**DocsaidKit 安裝指南**](../docsaidkit/installation)。
+如果沒有，請參考 [**Capybara 安裝指南**](../capybara/installation.md)。
 :::
-
-## 安裝步驟
 
 1. **Clone 本專案：**
 
-    ```bash
-    git clone https://github.com/DocsaidLab/DocAligner.git
-    ```
+   ```bash
+   git clone https://github.com/DocsaidLab/DocAligner.git
+   ```
 
 2. **進入專案目錄：**
 
-    ```bash
-    cd DocAligner
-    ```
+   ```bash
+   cd DocAligner
+   ```
 
 3. **安裝相依套件：**
 
-    ```bash
-    pip install setuptools wheel
-    ```
+   ```bash
+   pip install setuptools wheel
+   ```
 
-3. **建立打包文件：**
+4. **建立打包文件：**
 
-    ```bash
-    python setup.py bdist_wheel
-    ```
+   ```bash
+   python setup.py bdist_wheel
+   ```
 
-4. **安裝打包文件：**
+5. **安裝打包文件：**
 
-    ```bash
-    pip install dist/docaligner-*-py3-none-any.whl
-    ```
+   ```bash
+   pip install dist/docaligner_docsaid-*-py3-none-any.whl
+   ```
 
 遵循這些步驟，你應該能夠順利完成 `DocAligner` 的安裝。
 
@@ -56,7 +70,7 @@ sidebar_position: 2
 
 ```bash
 python -c "import docaligner; print(docaligner.__version__)"
-# >>> 0.5.0
+# >>> 1.0.0
 ```
 
-如果你看到類似 `0.5.0` 的版本號，則表示安裝成功。
+如果你看到類似 `1.0.0` 的版本號，則表示安裝成功。

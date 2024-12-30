@@ -10,105 +10,123 @@ sidebar_position: 3
 
 ## 模型推論
 
-以下是一個簡單的範例，展示如何使用 `DocAligner` 進行模型推論：
-
-```python
-from docaligner import DocAligner
-
-model = DocAligner()
-```
-
-啟動模型之後，接著要準備一張圖片進行推論：
-
-:::tip
-你可以使用 `DocAligner` 提供的測試圖片：
-
-下載連結：[**run_test_card.jpg**](https://github.com/DocsaidLab/DocAligner/blob/main/docs/run_test_card.jpg)
+:::info
+我們有設計了自動下載模型的功能，當程式檢查你缺少模型時，會自動連接到我們的伺服器進行下載。
 :::
 
-```python
-import docsaidkit as D
-
-img = D.imread('path/to/run_test_card.jpg')
-```
-
-或是你可以直接透過 URL 進行讀取：
+以下是一個簡單的範例：
 
 ```python
 import cv2
 from skimage import io
+from docaligner import DocAligner
 
+# build model
+model = DocAligner()
+
+# read image
 img = io.imread('https://github.com/DocsaidLab/DocAligner/blob/main/docs/run_test_card.jpg?raw=true')
 img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+# inference
+polygon = model(img)
+
+# 輸出為文件的四個角點坐標
+# print(polygon)
+#    [[ 48.151894 223.47687 ]
+#    [387.1344   198.09961 ]
+#    [423.0362   345.51334 ]
+#    [ 40.148613 361.38782 ]]
 ```
 
+:::tip
+在上面範例中，圖片下載連結請參考：[**run_test_card.jpg**](https://github.com/DocsaidLab/DocAligner/blob/main/docs/run_test_card.jpg)
+
+<div align="center">
+<figure style={{"width": "50%"}}>
 ![test_card](./resources/run_test_card.jpg)
-
-接著，我們可以使用 `model` 進行推論：
-
-```python
-result = model(img)
-```
-
-你得到的推論結果是經過我們包裝的 [**Document**](../docsaidkit/funcs/objects/document) 類型，它包含了文件的多邊形、OCR 文字資訊等等。在這個模組中，我們不會用到 OCR 相關的功能，因此我們只會使用 `image` 和 `doc_polygon` 屬性。獲取到推論結果後，你可以進行多種後處理操作。
+</figure>
+</div>
+:::
 
 :::tip
 `DocAligner` 已經用 `__call__` 進行了封裝，因此你可以直接呼叫實例進行推論。
-:::
 
-:::info
-我們有設計了自動下載模型的功能，當你第一次使用 `DocAligner` 時，會自動下載模型。
+在最新的版本中，模型會直接回傳 numpy.ndarray 格式的結果，我們認為這樣可以提供使用者更多彈性，以及更方便地進行後續的應用。
 :::
 
 ## 輸出結果
 
-### 1. 繪製多邊形
+### 繪製多邊形
 
 繪製並保存帶有文件多邊形的圖像。
 
 ```python
+import cv2
+import numpy as np
+
+def draw_polygon_image(
+    img: np.ndarray,
+    polygon: np.ndarray,
+    thickness: int = 3
+) -> np.ndarray:
+
+    colors = [(0, 255, 255), (255, 255, 0), (0, 255, 0), (0, 0, 255)]
+    export_img = img.copy()
+    _polys = polygon.astype(int)
+    _polys_roll = np.roll(_polys, 1, axis=0)
+    for p1, p2, color in zip(_polys, _polys_roll, colors):
+        export_img = cv2.circle(
+            export_img, p2, radius=thickness*2,
+            color=color, thickness=-1, lineType=cv2.LINE_AA
+        )
+        export_img = cv2.arrowedLine(
+            export_img, p2, p1, color=color,
+            thickness=thickness, line_type=cv2.LINE_AA
+        )
+    return export_img
+
 # draw
-result.draw_doc(
-    folder='path/to/save/folder',
-    name='output_image.jpg'
-)
+export_img = draw_polygon_image(img, polygon)
 ```
 
-或是不指定路徑，直接輸出：
-
-```python
-# 預設的輸出路徑為當前目錄
-# 預設的輸出檔名會調用當前時刻，為 f"output_{D.now()}.jpg"。
-result.draw_doc()
-```
-
+<div align="center">
+<figure style={{"width": "50%"}}>
 ![output_image](./resources/flat_result.jpg)
+</figure>
+</div>
 
-### 2. 取得 NumPy 圖像
+### 提取攤平後的圖像
 
-如果你有其他需求，可以使用 `gen_doc_info_image` 方法，之後再自行處理。
+如果你知道文件的原始大小，那可以調用 `Capybara.imwarp_quadrangle` 方法，將文件多邊形的圖像轉換為矩形圖像。
+
+- 參考原始碼：[**Capybara.imwarp_quadrangle**](https://github.com/DocsaidLab/Capybara/blob/40dbe8a58c959023ed87c7d48c1c378de5bcf038/capybara/vision/geometric.py#L155)
 
 ```python
-img = result.gen_doc_info_image()
+from capybara import imwarp_quadrangle
+
+H, W = 480, 800
+flat_img = imwarp_quadrangle(img, polygon, dst_size=(W, H))
 ```
 
-### 3. 提取攤平後的圖像
+執行結果如下圖：
 
-如果你知道文件的原始大小，即可以使用 `gen_doc_flat_img` 方法，將文件圖像根據其多邊形邊界轉換為矩形圖像。
+<div align="center">
+<figure style={{"width": "50%"}}>
+![output_image](./resources/flat_result_2.jpg)
+</figure>
+</div>
+
+如果是一個未知的影像類別，也可以不用給定 `dst_size` 參數，此時將會根據文件多邊形的邊界自動計算出『**最小的矩形**』圖像，並將最小矩形的寬高設為 `W` 和 `H`。
 
 ```python
-H, W = 1080, 1920
-flat_img = result.gen_doc_flat_img(image_size=(H, W))
-```
-
-如果是一個未知的影像類別，也可以不用給定 `image_size` 參數，此時將會根據文件多邊形的邊界自動計算出『**最小的矩形**』圖像，並將最小矩形的長寬設為 `H` 和 `W`。
-
-```python
-flat_img = result.gen_doc_flat_img()
+flat_img = imwarp_quadrangle(img, polygon)
 ```
 
 :::tip
-當你的文件在圖像中呈現大幅度傾斜時，可能會算出較扁平的最小矩形，此時進行攤平會有一定的形變。因此，建議在這種情況下，使用 `image_size` 參數進行手動設定。
+當你的文件在圖像中呈現大幅度傾斜時，可能會算出較扁平的最小矩形，此時進行攤平會有一定的形變。
+
+因此，建議在這種情況下，使用 `dst_size` 參數進行手動設定。
 :::
 
 ## 為何模型偵測不到文件？
@@ -117,7 +135,11 @@ flat_img = result.gen_doc_flat_img()
 
 以下我們用 MIDV-2020 的一張圖像作為範例說明，讀者可以自行下載這張圖像進行測試：
 
+<div align="center">
+<figure style={{"width": "30%"}}>
 ![example](./resources/midv2020_example.jpg)
+</figure>
+</div>
 
 ### 圖像中的文件尺寸
 
@@ -143,7 +165,11 @@ flat_img = result.gen_doc_flat_img()
 
 另外一個造成偵測失敗的原因是文件模糊，模糊的文件可能會讓模型無法找到文件的邊界，進而導致偵測失敗，如下圖：
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![blurry](./resources/blur_corner.jpg)
+</figure>
+</div>
 
 ### 模型不認識的文件
 
@@ -151,7 +177,11 @@ flat_img = result.gen_doc_flat_img()
 
 例如：我們假設下圖中的藍色計算機是一種「特殊的文件」：
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![unknown](./resources/unknown_corner.jpg)
+</figure>
+</div>
 
 這張圖送給模型，就會得到一個空的 Polygon，因為模型不認識「計算機」這種文件，這個解決方式只有對這個「特殊的文件」進行訓練手動標註，然後加入訓練資料微調模型。
 
@@ -163,14 +193,14 @@ flat_img = result.gen_doc_flat_img()
 
 ```python
 import cv2
-import docsaidkit as D
 import numpy as np
+from capybara import imresize, imread
 from docaligner import DocAligner
 from docaligner.heatmap_reg.infer import preprocess
 
 model = DocAligner()
 
-img = D.imread('midv2020_example.jpg')
+img = imread('midv2020_example.jpg')
 
 img_infos = preprocess(
     img=img,
@@ -179,13 +209,17 @@ img_infos = preprocess(
 
 heatmap = model.detector.model(**img_infos['input'])['heatmap'][0].sum(0)
 heatmap = np.uint8(heatmap * 255)
-heatmap = D.imresize(heatmap, size=img.shape[:2])
+heatmap = imresize(heatmap, size=img.shape[:2])
 heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
 output = cv2.addWeighted(img, 0.5, heatmap, 0.5, 0)
 D.imwrite(output)
 ```
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![heatmap](./resources/heatmap_corner.jpg)
+</figure>
+</div>
 
 透過上面的程式碼，你可以看到模型的輸出，這是一個熱圖，顏色越深代表該區域越可能是文件的角點。在偵測失敗的情況下，你有一定的機會可以在這張圖中找到可能的問題。
 
