@@ -270,4 +270,6 @@ From the current research trends, the codebook is not only useful for image toke
 
 Overall, this paper improves BEiT’s pretraining process with VQ-KD, successfully advancing MIM to a higher level of semantic understanding. The patch aggregation mechanism proposed by the authors allows the model to aggregate global information, narrowing the gap between pretraining objectives and downstream applications.
 
-The next step is to venture into the multimodality domain — stay tuned for BEiT v3.
+The next step is to bring the concept of "discrete encoding" into the multimodal domain. See BEiT-3.
+
+- [**[22.08] BEiT-3: Great Minds Think Alike**](../../multimodality/2208-beit-v3/index.md)
