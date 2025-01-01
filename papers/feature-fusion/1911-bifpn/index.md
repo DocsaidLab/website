@@ -52,13 +52,21 @@ FPN 這一項開創性的工作自從發布以來，已經廣泛應用到各種�
 
    我們從 PANet 開始改，這裡新增跨尺度連接，然後每個連接要進行「加權」相加，所以每個節點新增一組權重參數。
 
+   <div align="center">
+   <figure style={{"width": "30%"}}>
    ![bifpn cross](./img/img3_1.jpg)
+   </figure>
+   </div>
 
 2. **移除低貢獻節點：**
 
    看一下上面的圖，你會發現最深層有個節點只有一組連接，這顯然是低效的，不如就刪了；最淺層的節點由於沒有要再接收更上層的特徵，所以兩個節點功能重複了，也可以刪掉。
 
+   <div align="center">
+   <figure style={{"width": "30%"}}>
    ![bifpn remove](./img/img3_2.jpg)
+   </figure>
+   </div>
 
 做完上面兩個步驟，我們就得到了 BiFPN 的結構。
 
@@ -70,7 +78,11 @@ FPN 這一項開創性的工作自從發布以來，已經廣泛應用到各種�
 
 ### 模型縮放
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![bifpn scale](./img/img4.jpg)
+</figure>
+</div>
 
 除了新的架構之外，作者也延續 EfficientNet 的思路，提出了一個模型縮放的概念。
 
@@ -94,7 +106,11 @@ FPN 這一項開創性的工作自從發布以來，已經廣泛應用到各種�
 
 ### 在 COCO 上的表現
 
+<div align="center">
+<figure style={{"width": "90%"}}>
 ![bifpn coco](./img/img5.jpg)
+</figure>
+</div>
 
 作者基於 COCO 2017 檢測資料集進行實驗，使用了 118,000 張訓練影像。
 
@@ -114,8 +130,4 @@ FPN 這一項開創性的工作自從發布以來，已經廣泛應用到各種�
 
 相比於傳統的 FPN 架構，BiFPN 通過選擇性加權和輕量化設計，在不顯著增加計算成本的情況下，實現了更好的多尺度特徵融合效果。
 
-:::tip
 簡單好用，是我們實作模型的好夥伴，在這裡也推薦給你試試。
-
-- [**docsaidkit/torch/neck/bifpn**](https://github.com/DocsaidLab/DocsaidKit/blob/main/docsaidkit/torch/neck/bifpn.py)
-  :::

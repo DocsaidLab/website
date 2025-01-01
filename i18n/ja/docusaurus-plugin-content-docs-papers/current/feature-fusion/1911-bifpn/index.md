@@ -52,13 +52,21 @@ FPN という革新的な作業は、発表されて以来、さまざまな物�
 
    PANet から改善が始まり、ここではクロススケール接続が追加され、各接続に対して「加重」加算が行われます。したがって、各ノードには新しい重みパラメータが追加されます。
 
+   <div align="center">
+   <figure style={{"width": "30%"}}>
    ![bifpn cross](./img/img3_1.jpg)
+   </figure>
+   </div>
 
 2. **低貢献ノードの削除：**
 
    上の図を見てください。最深部に 1 つの接続しかないノードがあり、これは明らかに非効率的です。削除してしまったほうが良いでしょう。また、最浅層のノードはそれ以上上層の特徴を受け取る必要がないため、2 つのノードは機能が重複しており、これも削除できます。
 
+   <div align="center">
+   <figure style={{"width": "30%"}}>
    ![bifpn remove](./img/img3_2.jpg)
+   </figure>
+   </div>
 
 これら 2 つのステップを完了すると、BiFPN の構造が得られます。
 
@@ -70,7 +78,11 @@ FPN という革新的な作業は、発表されて以来、さまざまな物�
 
 ### モデルスケーリング
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![bifpn scale](./img/img4.jpg)
+</figure>
+</div>
 
 新しいアーキテクチャに加えて、著者は EfficientNet のアイデアを踏襲し、モデルスケーリングの概念を提案しました。
 
@@ -94,7 +106,11 @@ FPN という革新的な作業は、発表されて以来、さまざまな物�
 
 ### COCO でのパフォーマンス
 
+<div align="center">
+<figure style={{"width": "90%"}}>
 ![bifpn coco](./img/img5.jpg)
+</figure>
+</div>
 
 著者は COCO 2017 検出データセットを基に実験を行い、118,000 枚の訓練画像を使用しました。
 
@@ -114,8 +130,4 @@ FPN という革新的な作業は、発表されて以来、さまざまな物�
 
 従来の FPN アーキテクチャと比較して、BiFPN は選択的加重と軽量化設計により、計算コストを大幅に増加させることなく、より良い多尺度特徴融合効果を実現しました。
 
-:::tip
 シンプルで使いやすい、実装モデルの良きパートナーとして、ここで試してみることをお勧めします。
-
-- [**docsaidkit/torch/neck/bifpn**](https://github.com/DocsaidLab/DocsaidKit/blob/main/docsaidkit/torch/neck/bifpn.py)
-  :::

@@ -48,13 +48,21 @@ This design starts with PANet and makes a few improvements, which we’ll illust
 
    Starting from PANet, cross-scale connections are added, with each connection involving a “weighted” addition. Therefore, each node introduces a set of weight parameters.
 
+   <div align="center">
+   <figure style={{"width": "30%"}}>
    ![bifpn cross](./img/img3_1.jpg)
+   </figure>
+   </div>
 
 2. **Removing low-contribution nodes:**
 
    Looking at the above diagram, you’ll notice that the deepest node only has one connection, which is inefficient. It’s better to remove it. Similarly, the shallowest nodes don’t need to receive features from higher levels, so the two nodes are redundant and can also be removed.
 
+   <div align="center">
+   <figure style={{"width": "30%"}}>
    ![bifpn remove](./img/img3_2.jpg)
+   </figure>
+   </div>
 
 After these two steps, we arrive at the BiFPN structure.
 
@@ -66,7 +74,11 @@ This concept was not demonstrated in the original PANet, which only had one upsa
 
 ### Model Scaling
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![bifpn scale](./img/img4.jpg)
+</figure>
+</div>
 
 Beyond the new architecture, the authors extended the concept of model scaling from EfficientNet, introducing a scaling concept for the FPN as well.
 
@@ -90,7 +102,11 @@ In the above figure, the authors show experimental results for the second and th
 
 ### Performance on COCO
 
+<div align="center">
+<figure style={{"width": "90%"}}>
 ![bifpn coco](./img/img5.jpg)
+</figure>
+</div>
 
 The authors conducted experiments on the COCO 2017 detection dataset, using 118,000 training images.
 
@@ -110,8 +126,4 @@ In high-precision settings, EfficientDet-D7x achieved 55.1 AP on the COCO test-d
 
 Compared to traditional FPN architectures, BiFPN achieves better multi-scale feature fusion by leveraging selective weighting and lightweight design, all without significantly increasing computational costs.
 
-:::tip
 Simple and effective, BiFPN is a great companion for implementing models. We highly recommend giving it a try.
-
-- [**docsaidkit/torch/neck/bifpn**](https://github.com/DocsaidLab/DocsaidKit/blob/main/docsaidkit/torch/neck/bifpn.py)
-  :::
