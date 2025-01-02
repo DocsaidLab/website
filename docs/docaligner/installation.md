@@ -8,10 +8,10 @@ sidebar_position: 2
 
 ## 透過 PyPI 安裝
 
-1. 安裝 `docaligner_docsaid`：
+1. 安裝 `docaligner-docsaid`：
 
    ```bash
-   pip install docaligner_docsaid
+   pip install docaligner-docsaid
    ```
 
 2. 驗證安裝：
@@ -62,15 +62,11 @@ sidebar_position: 2
 
 遵循這些步驟，你應該能夠順利完成 `DocAligner` 的安裝。
 
-安裝完成後即可以使用本專案。
-
-## 測試安裝
-
-你可以使用以下指令來測試安裝是否成功：
+安裝完成後，可以使用以下指令來測試安裝是否成功：
 
 ```bash
 python -c "import docaligner; print(docaligner.__version__)"
-# >>> 1.0.0
+# >>> 1.1.0
 ```
 
-如果你看到類似 `1.0.0` 的版本號，則表示安裝成功。
+如果你看到類似 `1.1.0` 的版本號，則表示安裝成功。

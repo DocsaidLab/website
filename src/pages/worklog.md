@@ -8,12 +8,19 @@
 
 ---
 
+## 2025
+
+### 1 月
+
+- 關閉 GCP，更換模型檔案位置，並更新所有下載連結。
+  - 更新 Capybara, DocAligner, MRZScanner 模型檔案。
+
 ## 2024
 
 ### 12 月
 
 - 邀請到四位作者加入，分享開發日常。
-- 完成 **StockAnalysis Demo** 的功能，並且將其部署至網站上：[**遊樂場**](https://docsaid.org/playground/stock-demo)
+- 完成 **StockAnalysis Demo** 的功能：[**stock-demo**](https://docsaid.org/playground/stock-demo)
 - 新增「作者欄位」至論文筆記，順便美化首頁、論文筆記與部落格樣式。
 - 開始建構網頁後台管理系統，資料庫系統及會員註冊系統。
 - 撰寫論文筆記，目前累計 150 篇。
@@ -30,7 +37,7 @@
 ### 10 月
 
 - **TextRecognizer**：延續 5 月進度，繼續開發。
-- 完成模型 Demo 的功能，並且將其部署至網站上：[**遊樂場**](https://docsaid.org/playground/docaligner-demo)
+- 完成模型 Demo 的功能：[**docaligner-demo**](https://docsaid.org/playground/docaligner-demo)
 - 把 NextCloud 從我們自己的主機上搬到 GCP，並更新所有下載連結。
 
 ### 9 月

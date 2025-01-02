@@ -4,53 +4,54 @@ sidebar_position: 3
 
 # クイックスタート
 
-私たちは、前後処理のロジックを含むシンプルなモデル推論インターフェースを提供しています。
+私たちは、前処理と後処理のロジックを含むシンプルなモデル推論インターフェースを提供しています。
 
-まず、必要な依存関係をインポートし、`MRZScanner`クラスを作成する必要があります。
+まず、必要な依存関係をインポートし、`MRZScanner` クラスを作成する必要があります。
 
 ## モデル推論
 
-以下は、`MRZScanner`を使ってモデル推論を行う簡単な例です：
+:::info
+自動的にモデルをダウンロードする機能を設計しています。プログラムがモデルが不足していることを検出すると、サーバーに接続して自動的にダウンロードが行われます。
+:::
+
+以下は簡単な例です：
 
 ```python
+import cv2
+from skimage import io
 from mrzscanner import MRZScanner
 
+# モデルの構築
 model = MRZScanner()
+
+# 画像を読み込む
+img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
+img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+# 推論
+result_mrz, error_msg = model(img)
+
+# MRZブロックの2行の文字とエラーメッセージを出力
+print(result_mrz)
+# >>> ('PCAZEQAQARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
+#     'C946302620AZE6707297F23031072W12IMJ<<<<<<<40')
+print(error_msg)
+# >>> <ErrorCodes.NO_ERROR: 'No error.'>
 ```
 
-モデルを起動したら、次に推論に使用する画像を準備します：
-
 :::tip
-`MRZScanner`が提供するテスト画像を使用できます：
-
-ダウンロードリンク：[**midv2020_test_mrz.jpg**](https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg)
+上記の例で使用された画像のダウンロードリンクはこちらです：[**midv2020_test_mrz.jpg**](https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg)
 
 <div align="center" >
-<figure style={{width: "50%"}}>
+<figure style={{width: "30%"}}>
 ![test_mrz](./resources/test_mrz.jpg)
 </figure>
 </div>
 :::
 
-```python
-import docsaidkit as D
+## `do_center_crop` パラメーターを使用する
 
-img = D.imread('path/to/run_test_card.jpg')
-```
-
-または、URL から直接読み込むこともできます：
-
-```python
-import cv2
-from skimage import io
-
-img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
-img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-```
-
-この画像は長すぎるため、直接推論すると過度な文字の歪みが発生する可能性があります。そのため、モデルを呼び出す際に`do_center_crop`パラメータを有効にします。
-
-次に、`model`を使って推論を実行します：
+この画像はモバイルデバイスで撮影されたもので、形が細長いため、直接モデルに渡すと文字が歪んでしまいます。そのため、モデルを呼び出す際に `do_center_crop` パラメーターを同時に有効にする方法は次の通りです：
 
 ```python
 from mrzscanner import MRZScanner
@@ -66,50 +67,48 @@ print(msg)
 ```
 
 :::tip
-`MRZScanner`は`__call__`でラップされているため、インスタンスを直接呼び出して推論できます。
+`MRZScanner` は `__call__` でラップされているため、インスタンスを直接呼び出して推論を行うことができます。
 :::
 
-:::info
-初めて`MRZScanner`を使用する際には、自動でモデルをダウンロードする機能も実装しています。
-:::
+## `DocAligner` と併用する
 
-## `DocAligner`との併用
+上記の出力結果をよく見ると、`do_center_crop` を行ったにもかかわらず、いくつかの誤字が見受けられます。
 
-上記の出力結果を見て、`do_center_crop`を使用しても、いくつかの誤字があることに気づきます。
+これは、全体画像スキャンを使用したため、モデルが画像内の文字を誤認識する可能性があるためです。
 
-これは、全画像をスキャンしたため、画像内の文字に誤認識が生じる可能性があるためです。
-
-精度を向上させるために、`DocAligner`を追加して MRZ 区画を整列させます：
+精度を向上させるために、`DocAligner` を追加して MRZ ブロックを整列させる手順は次の通りです：
 
 ```python
 import cv2
 from docaligner import DocAligner # DocAlignerをインポート
 from mrzscanner import MRZScanner
+from capybara import imwarp_quadrangle
 from skimage import io
 
 model = MRZScanner()
 
 doc_aligner = DocAligner()
 
-img = io.imread(
-    'https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
+img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
 img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 
-flat_img = doc_aligner(img).doc_flat_img # MRZ区画を整列
+polygon = doc_aligner(img)
+flat_img = imwarp_quadrangle(img, polygon, dst_size=(800, 480))
+
 print(model(flat_img))
 # >>> ('PCAZEQAQARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
 #      'C946302620AZE6707297F23031072W12IMJ<<<<<<<40')
 ```
 
-`DocAligner`を使用した後は、もう`do_center_crop`パラメータを使う必要はありません。
+`DocAligner` を使用した後は、`do_center_crop` パラメーターを使用する必要はありません。
 
-これで、より正確な結果が得られ、この画像の MRZ 区画が正しく認識されたことがわかります。
+これで、出力結果がより正確になり、画像の MRZ ブロックが正しく識別されました。
 
 ## エラーメッセージ
 
-ユーザーがエラーの原因を理解できるように、`ErrorCodes`クラスを設計しました。
+ユーザーがエラーの原因を理解できるように、`ErrorCodes` クラスを設計しました。
 
-モデル推論でエラーが発生した場合、以下の範囲でエラーメッセージが表示されます：
+モデルの推論でエラーが発生した場合、エラーメッセージが表示され、その内容は次のようになります：
 
 ```python
 class ErrorCodes(Enum):
@@ -120,26 +119,26 @@ class ErrorCodes(Enum):
     POSTPROCESS_FAILED_TD2_TD3_LENGTH = 'Postprocess failed, length of lines not 36 or 44 when `doc_type` is TD2 or TD3.'
 ```
 
-ここでは、基本的なエラー（例：不正な入力形式や行数が正しくないなど）をフィルタリングします。
+ここでは、入力フォーマットが不正、行数が不正など、基本的なエラーをフィルタリングします。
 
-## チェックデジット
+## チェックディジット
 
-チェックデジットは、MRZ 内でデータの正確性を確保するための重要な部分です。これは、数字の正確性を検証し、データ入力エラーを防ぐために使用されます。
+チェックディジット（Check Digit）は、MRZ においてデータの正確性を確認するための重要な部分であり、数字の正確性を検証して、データ入力ミスを防止します。
 
-- 詳細な操作手順は、[**参考文献：チェックデジット**](./reference#チェックデジット)に記載しています。
+- 詳しい操作手順については、[**参考文献：チェックディジット**](./reference#チェックディジット)をご覧ください。
 
 ---
 
-このセクションで言いたいのは：
+このセクションでは、次のことを説明します：
 
-- **チェックデジット計算機能は提供していません！**
+- **チェックディジット計算機能は提供していません！**
 
-MRZ のチェックデジット計算方法は唯一ではなく、正規の計算方法に加えて、異なる地域の MRZ では独自のチェックデジット計算方法を再定義することができます。そのため、チェックデジット計算方法を指定すると、ユーザーの柔軟性を制限する可能性があります。
+MRZ のチェックディジット計算方法は一意ではなく、正規の計算方法に加えて、異なる地域の MRZ では独自に計算方法を定義することがあります。そのため、特定のチェックディジット計算方法を提供すると、ユーザーの柔軟性が制限される可能性があります。
 
 :::info
-冷知識を一つ：
+ちなみに、冷知識を一つ：
 
-台湾の外国人居留証の MRZ のチェックデジットは、世界の標準とは異なります。政府と協力して開発しない限り、このチェックデジットの計算方法は分かりません。
+台湾の外国人居留証の MRZ チェックディジットは世界標準と異なり、政府と協力して開発しない限り、その計算方法は分かりません。
 :::
 
-私たちの目標は、MRZ 認識に特化したモデルを訓練することです。モデルは自動的に形式を判定し、チェックデジットの計算機能は他の多くのオープンソースプロジェクトで提供されています。例えば、[**Arg0s1080/mrz**](https://github.com/Arg0s1080/mrz)ではチェックデジット計算方法が提供されているので、ユーザーはこのプロジェクトを直接利用することをお勧めします。
+私たちの目標は、MRZ 認識に特化したモデルを訓練することです。モデルの出力は自動的に形式を判定します。チェックディジット計算機能は多くの他のオープンソースプロジェクトで提供されており、例えば以前引用した [**Arg0s1080/mrz**](https://github.com/Arg0s1080/mrz) などでチェックディジット計算方法が提供されています。ユーザーはこのプロジェクトを直接使用することをお勧めします。

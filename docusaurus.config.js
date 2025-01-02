@@ -93,14 +93,6 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      announcementBar: {
-        id: 'support_us',
-        content:
-          '檔案伺服器維護中，暫停下載模型功能。',
-        backgroundColor: '#fafbfc',
-        textColor: '#091E42',
-        isCloseable: true,
-      },
       image: 'img/docsaid-social-card.jpg',
       navbar: {
         title: '',

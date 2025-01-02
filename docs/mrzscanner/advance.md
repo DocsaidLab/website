@@ -20,7 +20,7 @@ Backend 是一個列舉類型，用於指定 `MRZScanner` 的運算後端。
 - **cuda**：使用 GPU 進行運算（需要適當的硬體支援）。
 
 ```python
-from docsaidkit import Backend
+from capybara import Backend
 
 model = MRZScanner(backend=Backend.cuda) # 使用 CUDA 後端
 #
@@ -96,12 +96,12 @@ model = MRZScanner(model_cfg='20240919') # 使用 '20240919' 配置
 使用方式如下：
 
 ```python
-import docsaidkit as D
+import capybara as cb
 from mrzscanner import MRZScanner
 
 model = MRZScanner()
 
-img = D.imread('path/to/image.jpg')
+img = cb.imread('path/to/image.jpg')
 result = model(img, do_center_crop=True) # 使用中心裁剪
 ```
 

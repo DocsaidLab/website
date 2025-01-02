@@ -15,11 +15,12 @@ sidebar_position: 4
 Backend 是一個列舉類型，用於指定 `DocClassifier` 的運算後端。
 
 它包含以下選項：
+
 - **cpu**：使用 CPU 進行運算。
 - **cuda**：使用 GPU 進行運算（需要適當的硬體支援）。
 
 ```python
-from docsaidkit import Backend
+from capybara import Backend
 
 model = DocClassifier(backend=Backend.cuda) # 使用 CUDA 後端
 #
@@ -33,9 +34,10 @@ model = DocClassifier(backend=Backend.cpu) # 使用 CPU 後端
 如果你的系統中沒有安裝 CUDA，或安裝的版本不正確，則無法使用 CUDA 運算後端。
 
 :::tip
+
 1. 如果你有其他需求，請參考 [**ONNXRuntime 官方文件**](https://onnxruntime.ai/docs/execution-providers/index.html) 進行自定義。
 2. 關於安裝依賴相關的問題，請參考 [**ONNXRuntime Release Notes**](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements)
-:::
+   :::
 
 ### 2. ModelType
 
@@ -80,10 +82,10 @@ model = DocClassifier(model_cfg='20240326') # 使用 '20240326' 配置
 
 ```python
 from docclassifier import DocClassifier
-import docsaidkit as D
+import capybara as cb
 
 model = DocClassifier()
-img = D.imread('path/to/image.jpg')
+img = cb.imread('path/to/image.jpg')
 
 # 提取特徵： 返回 256 維特徵向量
 features = model.extract_feature(img)

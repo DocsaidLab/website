@@ -15,11 +15,12 @@ Here are the advanced setting options during initialization:
 Backend is an enumeration type used to specify the computation backend of `DocClassifier`.
 
 It includes the following options:
+
 - **cpu**: Perform computation using CPU.
 - **cuda**: Perform computation using GPU (requires appropriate hardware support).
 
 ```python
-from docsaidkit import Backend
+from capybara import Backend
 
 model = DocClassifier(backend=Backend.cuda) # Use CUDA backend
 #
@@ -33,9 +34,10 @@ We use ONNXRuntime as the inference engine for the model. Although ONNXRuntime s
 If CUDA is not installed on your system or if the version is incorrect, the CUDA backend cannot be used.
 
 :::tip
+
 1. If you have other requirements, please refer to the [**ONNXRuntime official documentation**](https://onnxruntime.ai/docs/execution-providers/index.html) for customization.
 2. For issues related to installing dependencies, please refer to the [**ONNXRuntime Release Notes**](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements).
-:::
+   :::
 
 ### 2. ModelType
 
@@ -80,10 +82,10 @@ You may be more interested in the features of the document rather than its class
 
 ```python
 from docclassifier import DocClassifier
-import docsaidkit as D
+import capybara as cb
 
 model = DocClassifier()
-img = D.imread('path/to/image.jpg')
+img = cb.imread('path/to/image.jpg')
 
 # Extract features: Returns a 256-dimensional feature vector
 features = model.extract_feature(img)

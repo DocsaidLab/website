@@ -10,47 +10,48 @@ sidebar_position: 3
 
 ## 模型推論
 
-以下是一個簡單的範例，展示如何使用 `MRZScanner` 進行模型推論：
+:::info
+我們有設計了自動下載模型的功能，當程式檢查你缺少模型時，會自動連接到我們的伺服器進行下載。
+:::
+
+以下是一個簡單的範例：
 
 ```python
+import cv2
+from skimage import io
 from mrzscanner import MRZScanner
 
+# build model
 model = MRZScanner()
+
+# read image
+img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
+img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+# inference
+result_mrz, error_msg = model(img)
+
+# 輸出為 MRZ 區塊的兩行文字及錯誤訊息提示
+print(result_mrz)
+# >>> ('PCAZEQAQARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
+#     'C946302620AZE6707297F23031072W12IMJ<<<<<<<40')
+print(error_msg)
+# >>> <ErrorCodes.NO_ERROR: 'No error.'>
 ```
 
-啟動模型之後，接著要準備一張圖片進行推論：
-
 :::tip
-你可以使用 `MRZScanner` 提供的測試圖片：
-
-下載連結：[**midv2020_test_mrz.jpg**](https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg)
+在上面範例中，圖片下載連結請參考：[**midv2020_test_mrz.jpg**](https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg)
 
 <div align="center" >
-<figure style={{width: "50%"}}>
+<figure style={{width: "30%"}}>
 ![test_mrz](./resources/test_mrz.jpg)
 </figure>
 </div>
 :::
 
-```python
-import docsaidkit as D
+## 使用 `do_center_crop` 參數
 
-img = D.imread('path/to/run_test_card.jpg')
-```
-
-或是你可以直接透過 URL 進行讀取：
-
-```python
-import cv2
-from skimage import io
-
-img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
-img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-```
-
-這張影像太長了，如果直接推論的話，會造成過多的文字形變，因此我們調用模型的時候，同時開啟 `do_center_crop` 參數：
-
-接著，我們可以使用 `model` 進行推論：
+這張影像應該是與行動裝置拍攝的，形狀偏狹長，如果直接給模型推論的話，會造成過多的文字形變，因此我們調用模型的時候，同時開啟 `do_center_crop` 參數，方式如下：
 
 ```python
 from mrzscanner import MRZScanner
@@ -69,10 +70,6 @@ print(msg)
 `MRZScanner` 已經用 `__call__` 進行了封裝，因此你可以直接呼叫實例進行推論。
 :::
 
-:::info
-我們有設計了自動下載模型的功能，當你第一次使用 `MRZScanner` 時，會自動下載模型。
-:::
-
 ## 搭配 `DocAligner` 使用
 
 仔細看看上面的輸出結果，發現儘管做了 `do_center_crop` ，但有幾個錯字。
@@ -85,17 +82,19 @@ print(msg)
 import cv2
 from docaligner import DocAligner # 導入 DocAligner
 from mrzscanner import MRZScanner
+from capybara import imwarp_quadrangle
 from skimage import io
 
 model = MRZScanner()
 
 doc_aligner = DocAligner()
 
-img = io.imread(
-    'https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
+img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
 img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 
-flat_img = doc_aligner(img).doc_flat_img # 對齊 MRZ 區塊
+polygon = doc_aligner(img)
+flat_img = imwarp_quadrangle(img, polygon, dst_size=(800, 480))
+
 print(model(flat_img))
 # >>> ('PCAZEQAQARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
 #      'C946302620AZE6707297F23031072W12IMJ<<<<<<<40')

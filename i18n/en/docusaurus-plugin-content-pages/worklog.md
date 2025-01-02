@@ -8,12 +8,19 @@ This page is solely for recording our work activities.
 
 ---
 
+## 2025
+
+### January
+
+- Shut down GCP, change the model file storage location, and update all download links.
+  - Update the model files for Capybara, DocAligner, and MRZScanner.
+
 ## 2024
 
 ### December
 
 - Invited four authors to share their daily development experiences.
-- Completed the **StockAnalysis Demo** feature and deployed it to the website: [**Playground**](https://docsaid.org/playground/stock-demo)
+- Completed the **StockAnalysis Demo** feature: [**stock-demo**](https://docsaid.org/playground/stock-demo)
 - Added an "Author Field" to the paper notes and also beautified the homepage, paper notes, and blog styles.
 - Started building the website's backend management system, database system, and member registration system.
 - Wrote paper notes, with a current total of 150 entries.
@@ -29,7 +36,7 @@ This page is solely for recording our work activities.
 
 ### October
 
-- Completed the model demo functionality and deployed it on the website: [**Playground**](https://docsaid.org/playground/docaligner-demo)
+- Completed the model demo functionality: [**docaligner-demo**](https://docsaid.org/playground/docaligner-demo)
 - Moved NextCloud from our own host to GCP and updated all download links.
 
 ### September

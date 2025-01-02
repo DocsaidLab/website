@@ -4,59 +4,69 @@ sidebar_position: 2
 
 # 安裝
 
-目前沒有提供 Pypi 上的安裝包，短時間內也沒有相關規劃。
+我們有提供 PyPI 上的安裝，或是從 Github 上 clone 本專案的方式來安裝。
 
-若要使用本專案，你必須直接從 Github 上 clone 本專案，然後安裝相依套件。
+## 透過 PyPI 安裝
+
+1. 安裝 `docclassifier-docsaid`：
+
+   ```bash
+   pip install docclassifier-docsaid
+   ```
+
+2. 驗證安裝：
+
+   ```bash
+   python -c "import docclassifier; print(docclassifier.__version__)"
+   ```
+
+3. 如果你看到版本號，則表示安裝成功。
+
+## 透過 GitHub 安裝
 
 :::tip
-安裝前請確認您已經安裝了 `DocsaidKit`。
+若要透過 GitHub 安裝，請確保你已經安裝了 `Capybara`。
 
-如果你還沒有安裝 `DocsaidKit`，請參考 [**DocsaidKit 安裝指南**](../docsaidkit/installation)。
+如果沒有，請參考 [**Capybara 安裝指南**](../capybara/installation.md)。
 :::
-
-## 安裝步驟
 
 1. **Clone 本專案：**
 
-    ```bash
-    git clone https://github.com/DocsaidLab/DocClassifier.git
-    ```
+   ```bash
+   git clone https://github.com/DocsaidLab/DocClassifier.git
+   ```
 
 2. **進入專案目錄：**
 
-    ```bash
-    cd DocClassifier
-    ```
+   ```bash
+   cd DocClassifier
+   ```
 
 3. **安裝相依套件：**
 
-    ```bash
-    pip install setuptools wheel
-    ```
+   ```bash
+   pip install setuptools wheel
+   ```
 
-3. **建立打包文件：**
+4. **建立打包文件：**
 
-    ```bash
-    python setup.py bdist_wheel
-    ```
+   ```bash
+   python setup.py bdist_wheel
+   ```
 
-4. **安裝打包文件：**
+5. **安裝打包文件：**
 
-    ```bash
-    pip install dist/docclassifier-*-py3-none-any.whl
-    ```
+   ```bash
+   pip install dist/docclassifier_docsaid-*-py3-none-any.whl
+   ```
 
 遵循這些步驟，你應該能夠順利完成 `DocClassifier` 的安裝。
 
-安裝完成後即可以使用本專案。
-
-## 測試安裝
-
-你可以使用以下指令來測試安裝是否成功：
+安裝完成後，可以使用以下指令來測試安裝是否成功：
 
 ```bash
 python -c "import docclassifier; print(docclassifier.__version__)"
-# >>> 0.8.0
+# >>> 0.10.0
 ```
 
-如果你看到類似 `0.8.0` 的版本號，則表示安裝成功。
+如果你看到類似 `0.10.0` 的版本號，則表示安裝成功。

@@ -8,30 +8,37 @@
 
 ---
 
+## 2025
+
+### 1 月
+
+- GCP を終了し、モデルファイルの保存場所を変更し、すべてのダウンロードリンクを更新。
+  - Capybara、DocAligner、MRZScanner のモデルファイルを更新。
+
 ## 2024
 
 ### 12 月
 
-- 4 人の作成者を招待して、開発ルーチンに参加して共有します。
-- **StockAnalysis Demo**の機能を完成させ、ウェブサイトにデプロイしました：[**遊楽場**](https://docsaid.org/playground/stock-demo)
-- 論文ノートに「著者欄」を追加し、ホームページ、論文ノート、ブログのスタイルを美化。
+- 4 人の著者を招待し、開発の日常を共有。
+- **StockAnalysis Demo**の機能を完成：[**stock-demo**](https://docsaid.org/playground/stock-demo)
+- 論文ノートに「著者欄」を追加し、ホームページ、論文ノート、ブログのデザインを整備。
 - ウェブサイトのバックエンド管理システム、データベースシステム、会員登録システムの構築を開始。
-- 論文ノートを執筆中、現在累計 150 本。
+- 論文ノートを執筆、現在累計 150 篇。
 
 ### 11 月
 
-- 新たに多言語対応：[**日本語**](https://docsaid.org/ja/)
-- **@docusaurus/core@3.6.1** を更新したら、また壊れた！
-  - エラー部分を修正するために少し時間を割きました。
-- 論文ノートを執筆中、現在累計 135 本。
-- **DocumentAI**：開発を継続中。
-- **TextRecognizer**：10 月の進捗を引き継ぎ、開発を続行中。
+- 多言語対応を追加：[**日本語**](https://docsaid.org/ja/)
+- **@docusaurus/core@3.6.1**を更新、また壊れた！
+  - エラープログラムブロックを更新するために時間をかけることに。
+- 論文ノートを執筆、現在累計 135 篇。
+- **DocumentAI**：開発を並行して進行。
+- **TextRecognizer**：10 月の進捗を引き続き開発。
 
 ### 10 月
 
-- **TextRecognizer**：5 月の進捗を引き継ぎ、開発を続行中。
-- モデル Demo の機能を完成させ、ウェブサイトにデプロイ：[**遊び場**](https://docsaid.org/playground/docaligner-demo)
-- NextCloud を自分のサーバーから GCP に移行し、すべてのダウンロードリンクを更新。
+- **TextRecognizer**：5 月の進捗を引き続き開発。
+- モデル Demo の機能を完成：[**docaligner-demo**](https://docsaid.org/playground/docaligner-demo)
+- NextCloud を自社サーバーから GCP に移転し、すべてのダウンロードリンクを更新。
 
 ### 9 月
 

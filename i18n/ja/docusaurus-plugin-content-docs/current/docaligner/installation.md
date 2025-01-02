@@ -8,10 +8,10 @@ PyPI 上でのインストールまたは GitHub から本プロジェクトを�
 
 ## PyPI を使用したインストール
 
-1. `docaligner_docsaid` をインストール：
+1. `docaligner-docsaid` をインストール：
 
    ```bash
-   pip install docaligner_docsaid
+   pip install docaligner-docsaid
    ```
 
 2. インストールを確認：
@@ -62,15 +62,11 @@ GitHub からインストールするには、`Capybara` がインストール�
 
 これらの手順に従うことで、`DocAligner` のインストールが成功するはずです。
 
-インストール後は本プロジェクトを使用できます。
-
-## インストールのテスト
-
 インストールが成功したかどうかを次のコマンドで確認できます：
 
 ```bash
 python -c "import docaligner; print(docaligner.__version__)"
-# >>> 1.0.0
+# >>> 1.1.0
 ```
 
-`1.0.0` のようなバージョン番号が表示されれば、インストールは成功です。
+`1.1.0` のようなバージョン番号が表示されれば、インストールは成功です。

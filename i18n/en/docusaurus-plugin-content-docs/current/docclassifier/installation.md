@@ -4,57 +4,69 @@ sidebar_position: 2
 
 # Installation
 
-Currently, there is no installation package available on PyPI, and there are no plans for one in the near future.
+We provide installation via PyPI or by cloning the project from GitHub.
 
-To use this project, you must clone the repository directly from GitHub and then install the required dependencies.
+## Installation via PyPI
+
+1. Install `docclassifier-docsaid`:
+
+   ```bash
+   pip install docclassifier-docsaid
+   ```
+
+2. Verify the installation:
+
+   ```bash
+   python -c "import docclassifier; print(docclassifier.__version__)"
+   ```
+
+3. If you see the version number, the installation is successful.
+
+## Installation via GitHub
 
 :::tip
-Before installing, please ensure that you have installed `DocsaidKit`.
+To install via GitHub, make sure you have `Capybara` installed.
 
-If you haven't installed `DocsaidKit` yet, please refer to the [**DocsaidKit Installation Guide**](../docsaidkit/installation).
+If not, please refer to the [**Capybara Installation Guide**](../capybara/installation.md).
 :::
 
-## Installation Steps
+1. **Clone the project:**
 
-1. **Clone the repository:**
-
-    ```bash
-    git clone https://github.com/DocsaidLab/DocClassifier.git
-    ```
+   ```bash
+   git clone https://github.com/DocsaidLab/DocClassifier.git
+   ```
 
 2. **Navigate to the project directory:**
 
-    ```bash
-    cd DocClassifier
-    ```
+   ```bash
+   cd DocClassifier
+   ```
 
-3. **Install the required dependencies:**
+3. **Install the dependencies:**
 
-    ```bash
-    pip install setuptools wheel
-    ```
+   ```bash
+   pip install setuptools wheel
+   ```
 
-4. **Create the distribution package:**
+4. **Build the package:**
 
-    ```bash
-    python setup.py bdist_wheel
-    ```
+   ```bash
+   python setup.py bdist_wheel
+   ```
 
-5. **Install the distribution package:**
+5. **Install the package:**
 
-    ```bash
-    pip install dist/docclassifier-*-py3-none-any.whl
-    ```
+   ```bash
+   pip install dist/docclassifier_docsaid-*-py3-none-any.whl
+   ```
 
 By following these steps, you should be able to successfully install `DocClassifier`.
 
-## Testing the Installation
-
-You can test if the installation was successful by using the following command:
+After installation, you can use the following command to test if the installation was successful:
 
 ```bash
 python -c "import docclassifier; print(docclassifier.__version__)"
-# >>> 0.8.0
+# >>> 0.10.0
 ```
 
-If you see a version number similar to `0.8.0`, it means the installation was successful.
+If you see a version number like `0.10.0`, the installation was successful.

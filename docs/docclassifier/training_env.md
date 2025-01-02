@@ -4,6 +4,12 @@ sidebar_position: 8
 
 # 模型訓練指南
 
+:::warning
+我們已經在進行 `DocsaidKit` 的轉移，這個頁面的內容進行翻修，把相關訓練模組轉移到 `Chameleon` 專案中。
+
+完成後我們會重新改寫本頁面，請不用擔心。
+:::
+
 請你確保已經從 `DocsaidKit` 內建置了基礎映像 `docsaid_training_base_image`。
 
 如果你還沒有這樣做，請先參考 `DocsaidKit` 的說明文件。

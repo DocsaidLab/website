@@ -20,7 +20,7 @@ Backend は列挙型で、`DocClassifier` の計算バックエンドを指定�
 - **cuda**：GPU を使用して計算を行います（適切なハードウェアサポートが必要です）。
 
 ```python
-from docsaidkit import Backend
+from capybara import Backend
 
 model = DocClassifier(backend=Backend.cuda) # CUDA バックエンドを使用
 #
@@ -82,10 +82,10 @@ model = DocClassifier(model_cfg='20240326') # '20240326' 設定を使用
 
 ```python
 from docclassifier import DocClassifier
-import docsaidkit as D
+import capybara as cb
 
 model = DocClassifier()
-img = D.imread('path/to/image.jpg')
+img = cb.imread('path/to/image.jpg')
 
 # 特徴を抽出： 256 次元の特徴ベクトルを返す
 features = model.extract_feature(img)

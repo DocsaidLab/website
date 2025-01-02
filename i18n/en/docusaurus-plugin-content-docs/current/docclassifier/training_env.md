@@ -4,6 +4,12 @@ sidebar_position: 8
 
 # Training
 
+:::warning
+We are currently transitioning `DocsaidKit`, with the content of this page being overhauled and related training modules being moved to the `Chameleon` project.
+
+Once the transition is complete, we will rewrite this page. Please don't worry.
+:::
+
 Please ensure that you've built the foundational image `docsaid_training_base_image` from `DocsaidKit`.
 
 If you haven't done so yet, please refer to the documentation of `DocsaidKit`.
@@ -29,32 +35,38 @@ bash docker/build.bash
 Below is our default [Dockerfile](https://github.com/DocsaidLab/DocClassifier/blob/main/docker/Dockerfile) designed specifically for model training. We provide a brief explanation of this file, which you can modify according to your needs:
 
 1. **Base Image**
-    - `FROM docsaid_training_base_image:latest`
-    - This line specifies the base image for the container, which is the latest version of `docsaid_training_base_image`. The base image serves as the starting point for building your Docker container, containing pre-configured operating systems and basic tools, which you can find in the `DocsaidKit` project.
+
+   - `FROM docsaid_training_base_image:latest`
+   - This line specifies the base image for the container, which is the latest version of `docsaid_training_base_image`. The base image serves as the starting point for building your Docker container, containing pre-configured operating systems and basic tools, which you can find in the `DocsaidKit` project.
 
 2. **Working Directory Setup**
-    - `WORKDIR /code`
-    - Here, the working directory inside the container is set to `/code`. The working directory is a directory in the Docker container where your application and all commands will operate.
+
+   - `WORKDIR /code`
+   - Here, the working directory inside the container is set to `/code`. The working directory is a directory in the Docker container where your application and all commands will operate.
 
 3. **Environment Variables**
-    - `ENV ENTRYPOINT_SCRIPT=/entrypoint.sh`
-    - This line defines an environment variable `ENTRYPOINT_SCRIPT` with a value set to `/entrypoint.sh`. Environment variables are used to store common configurations accessible anywhere within the container.
+
+   - `ENV ENTRYPOINT_SCRIPT=/entrypoint.sh`
+   - This line defines an environment variable `ENTRYPOINT_SCRIPT` with a value set to `/entrypoint.sh`. Environment variables are used to store common configurations accessible anywhere within the container.
 
 4. **Installing gosu**
-    - The `RUN` command installs `gosu`. `gosu` is a lightweight tool that allows running commands as a specific user, similar to `sudo`, but more suitable for Docker containers.
-    - `apt-get update && apt-get install -y gosu && rm -rf /var/lib/apt/lists/*` This command first updates the package lists, then installs `gosu`, and finally cleans up unnecessary files to reduce the image size.
+
+   - The `RUN` command installs `gosu`. `gosu` is a lightweight tool that allows running commands as a specific user, similar to `sudo`, but more suitable for Docker containers.
+   - `apt-get update && apt-get install -y gosu && rm -rf /var/lib/apt/lists/*` This command first updates the package lists, then installs `gosu`, and finally cleans up unnecessary files to reduce the image size.
 
 5. **Creating the Entry Point Script**
-    - A series of `RUN` commands create the entry point script `/entrypoint.sh`.
-    - This script first checks if the environment variables `USER_ID` and `GROUP_ID` are set. If set, the script creates a new user and user group and executes commands as that user.
-    - This is useful for handling file permission issues both inside and outside the container, especially when the container needs to access files on the host machine.
+
+   - A series of `RUN` commands create the entry point script `/entrypoint.sh`.
+   - This script first checks if the environment variables `USER_ID` and `GROUP_ID` are set. If set, the script creates a new user and user group and executes commands as that user.
+   - This is useful for handling file permission issues both inside and outside the container, especially when the container needs to access files on the host machine.
 
 6. **Granting Permissions**
-    - `RUN chmod +x "$ENTRYPOINT_SCRIPT"` This command makes the entry point script executable.
+
+   - `RUN chmod +x "$ENTRYPOINT_SCRIPT"` This command makes the entry point script executable.
 
 7. **Setting the Container's Entry Point and Default Command**
-    - `ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]` and `CMD ["bash"]`
-    - These commands specify the default command to run when the container starts. When the container starts, it will execute the `/entrypoint.sh` script.
+   - `ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]` and `CMD ["bash"]`
+   - These commands specify the default command to run when the container starts. When the container starts, it will execute the `/entrypoint.sh` script.
 
 ## Running Training
 
@@ -89,10 +101,12 @@ docker run \
 Here's an explanation of the above file. Feel free to modify it as needed:
 
 1. **Creating the Training Script**
+
    - `cat > trainer.py <<EOF ... EOF`
    - This command creates a Python script `trainer.py`. The script imports necessary modules and functions and calls the `main_docalign_train` function in the main part of the script. Google's Python Fire library is used to parse command-line arguments, making command-line interface generation easier.
 
 2. **Running the Docker Container**
+
    - `docker run ... doc_classifier_train python trainer.py --cfg_name $1`
    - This command starts a Docker container and runs the `trainer.py` script inside it.
    - `-e USER_ID=$(id -u) -e GROUP_ID=$(id -g)`: These parameters pass the current user's user ID and group ID to the container to create a user with corresponding permissions inside the container.
@@ -170,14 +184,14 @@ onnx:
     img:
       shape: [1, 3, 128, 128]
       dtype: float32
-  input_names: ['img']
+  input_names: ["img"]
   output_names:
     - feats
   dynamic_axes:
     img:
-      '0': batch_size
+      "0": batch_size
     output:
-      '0': batch_size
+      "0": batch_size
   options:
     opset_version: 16
     verbose: False

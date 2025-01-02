@@ -4,6 +4,12 @@ sidebar_position: 8
 
 # モデル訓練ガイド
 
+:::warning
+現在、私たちは `DocsaidKit` の移行作業を進めており、このページの内容を改訂し、関連するトレーニングモジュールを `Chameleon` プロジェクトに移行しています。
+
+完了後、このページは再度書き直されますので、ご安心ください。
+:::
+
 まず初めに、`DocsaidKit` から基本の Docker イメージ `docsaid_training_base_image` を構築していることを確認してください。
 
 まだこの手順を行っていない場合は、`DocsaidKit` のドキュメントを参照してください。

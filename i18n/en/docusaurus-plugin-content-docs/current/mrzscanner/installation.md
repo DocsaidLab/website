@@ -4,19 +4,33 @@ sidebar_position: 2
 
 # Installation
 
-Currently, there is no installation package available on PyPI, and there are no immediate plans to release one.
+We provide installation through PyPI or by cloning the project from GitHub.
 
-To use this project, you must clone it directly from GitHub and install the required dependencies.
+## Install via PyPI
+
+1. Install `mrzscanner-docsaid`:
+
+   ```bash
+   pip install mrzscanner-docsaid
+   ```
+
+2. Verify the installation:
+
+   ```bash
+   python -c "import mrzscanner; print(mrzscanner.__version__)"
+   ```
+
+3. If you see the version number, the installation is successful.
+
+## Install via GitHub
 
 :::tip
-Before installing, make sure you have already installed `DocsaidKit`.
+To install via GitHub, make sure you have `Capybara` installed.
 
-If you haven't installed `DocsaidKit` yet, please refer to the [**DocsaidKit Installation Guide**](../docsaidkit/installation).
+If not, refer to the [**Capybara Installation Guide**](../capybara/installation.md).
 :::
 
-## Installation Steps
-
-1. **Clone the repository:**
+1. **Clone the project:**
 
    ```bash
    git clone https://github.com/DocsaidLab/MRZScanner.git
@@ -28,35 +42,31 @@ If you haven't installed `DocsaidKit` yet, please refer to the [**DocsaidKit Ins
    cd MRZScanner
    ```
 
-3. **Install required dependencies:**
+3. **Install dependencies:**
 
    ```bash
    pip install wheel
    ```
 
-4. **Build the package:**
+4. **Create the package:**
 
    ```bash
    python setup.py bdist_wheel
    ```
 
-5. **Install the built package:**
+5. **Install the package:**
 
    ```bash
-   pip install dist/mrzscanner-*-py3-none-any.whl
+   pip install dist/mrzscanner_docsaid-*-py3-none-any.whl
    ```
 
-By following these steps, you should successfully complete the installation of `MRZScanner`.
+By following these steps, you should be able to successfully install `MRZScanner`.
 
-Once the installation is finished, you can start using the project.
-
-## Verify Installation
-
-You can test if the installation was successful by running the following command:
+Once installed, you can test the installation with the following command:
 
 ```bash
 python -c "import mrzscanner; print(mrzscanner.__version__)"
-# >>> 0.1.0
+# >>> 0.3.2
 ```
 
-If you see a version number like `0.1.0`, the installation was successful.
+If you see a version number like `0.3.2`, the installation was successful.

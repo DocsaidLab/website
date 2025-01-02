@@ -5,7 +5,9 @@ sidebar_position: 6
 # Evaluation
 
 :::warning
-The test dataset for this project is provided by a private institution. For privacy protection, we only provide the evaluation results of this dataset.
+The test dataset for this project is provided by a private institution.
+
+For privacy protection, we only provide the evaluation results of this dataset.
 :::
 
 This dataset contains approximately 25,000 images that have been "textually located and cropped" and "de-identified". It includes seven different categories, with extremely unbalanced quantities. The data contains a large number of cropped shape variations caused by different light and shadow changes, blurring, reflections, and corner positioning errors.

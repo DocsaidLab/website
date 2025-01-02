@@ -4,23 +4,23 @@ sidebar_position: 4
 
 # 高度な設定
 
-`MRZScanner` モデルを呼び出す際、パラメータを渡すことで高度な設定を行うことができます。
+`MRZScanner` モデルを使用する際、パラメータを渡すことで高度な設定を行うことができます。
 
 ## 初期化
 
-以下は、初期化段階での高度な設定オプションです：
+以下は初期化時に利用可能な高度な設定オプションです：
 
 ### 1. Backend
 
-Backend は、`MRZScanner` の計算バックエンドを指定するための列挙型です。
+Backend は列挙型で、`MRZScanner` の計算バックエンドを指定します。
 
-以下のオプションがあります：
+利用可能なオプション：
 
-- **cpu**：CPU を使用して計算します。
-- **cuda**：GPU を使用して計算します（適切なハードウェアサポートが必要です）。
+- **cpu**：CPU を使用して計算。
+- **cuda**：GPU を使用して計算（適切なハードウェアサポートが必要）。
 
 ```python
-from docsaidkit import Backend
+from capybara import Backend
 
 model = MRZScanner(backend=Backend.cuda) # CUDA バックエンドを使用
 #
@@ -29,25 +29,25 @@ model = MRZScanner(backend=Backend.cuda) # CUDA バックエンドを使用
 model = MRZScanner(backend=Backend.cpu) # CPU バックエンドを使用
 ```
 
-私たちは ONNXRuntime をモデル推論エンジンとして使用しており、ONNXRuntime は複数のバックエンジン（CPU、CUDA、OpenCL、DirectX、TensorRT など）をサポートしていますが、一般的に使用される環境を考慮して、若干のラッピングを行い、現在は CPU と CUDA の 2 つのバックエンジンのみ提供しています。さらに、CUDA を使用する場合、適切なハードウェアサポートが必要であり、CUDA ドライバとツールキットをインストールする必要があります。
+ONNXRuntime を推論エンジンとして使用しています。ONNXRuntime は CPU、CUDA、OpenCL、DirectX、TensorRT など複数のバックエンドエンジンをサポートしていますが、一般的な使用環境を考慮して、現在は CPU と CUDA のみをサポートしています。CUDA 計算を使用するには適切なハードウェアサポートに加え、対応する CUDA ドライバーおよび CUDA ツールキットが必要です。
 
-システムに CUDA がインストールされていない場合、またはバージョンが正しくない場合は、CUDA バックエンドを使用できません。
+CUDA がインストールされていない場合、またはバージョンが適切でない場合は、CUDA 計算バックエンドを使用できません。
 
 :::tip
 
-1. その他の要件がある場合は、[**ONNXRuntime の公式ドキュメント**](https://onnxruntime.ai/docs/execution-providers/index.html) を参照してカスタマイズしてください。
-2. 依存関係のインストールについては、[**ONNXRuntime リリースノート**](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements) を参照してください。
+1. 他のバックエンドが必要な場合は、[**ONNXRuntime 公式ドキュメント**](https://onnxruntime.ai/docs/execution-providers/index.html)を参照してカスタマイズしてください。
+2. 依存関係のインストールに関する問題については、[**ONNXRuntime Release Notes**](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements)をご確認ください。
    :::
 
 ### 2. ModelType
 
-ModelType は、`MRZScanner` が使用するモデルの種類を指定するための列挙型です。
+ModelType は列挙型で、`MRZScanner` が使用するモデルの種類を指定します。
 
-以下のオプションがあります：
+利用可能なオプション：
 
-- **spotting**：エンドツーエンドのモデルアーキテクチャを使用します。
+- **spotting**：エンドツーエンドモデルアーキテクチャを使用。
 
-`model_type` パラメータを使用して、使用するモデルを指定できます。
+`model_type` パラメータでモデルの種類を指定できます。
 
 ```python
 from mrzscanner import MRZScanner
@@ -57,7 +57,7 @@ model = MRZScanner(model_type=MRZScanner.spotting)
 
 ### 3. ModelCfg
 
-`list_models` を使用して、使用可能なすべてのモデルを表示できます。
+`list_models` を使用して利用可能なすべてのモデルを確認できます。
 
 ```python
 from mrzscanner import MRZScanner
@@ -66,7 +66,7 @@ print(MRZScanner().list_models())
 # >>> ['20240919']
 ```
 
-`model_cfg` パラメータを使用して、モデルの設定を指定できます。
+`model_cfg` パラメータを使用してモデル設定を指定できます。
 
 ```python
 model = MRZScanner(model_cfg='20240919') # '20240919' 設定を使用
@@ -74,48 +74,48 @@ model = MRZScanner(model_cfg='20240919') # '20240919' 設定を使用
 
 ## 推論
 
-以下は、推論段階での高度な設定オプションです：
+以下は推論時に利用可能な高度な設定オプションです：
 
-### 中心裁剪
+### 中央クロップ
 
-推論段階では、適切な高度なオプションを設定することで、モデルのパフォーマンスと結果に大きな影響を与えることができます。
+推論段階で適切な高度設定を行うことで、モデルのパフォーマンスや精度に大きな影響を与えることができます。
 
-その中で、`do_center_crop` は推論時に中央裁剪を行うかどうかを決定する重要なパラメータです。
+`do_center_crop` は中心クロップを行うかどうかを決定する重要なパラメータです。
 
-この設定は特に重要です。なぜなら、実際のアプリケーションでは、処理する画像が標準的な正方形のサイズでないことが多いためです。
+特に実用的なシナリオでは、画像が標準的な正方形サイズでない場合が多いため、この設定が重要です。
 
-実際、画像のサイズとアスペクト比はさまざまで、例えば：
+例えば：
 
-- スマホで撮影した写真は通常 9:16 のアスペクト比；
-- スキャンした書類は A4 のアスペクト比；
-- ウェブサイトのスクリーンショットは通常 16:9 のアスペクト比；
-- ウェブカメラで撮影した画像は通常 4:3 のアスペクト比。
+- スマートフォンで撮影した写真は通常 9:16 のアスペクト比。
+- スキャンした書類は A4 用紙の比率。
+- ウェブページのスクリーンショットは 16:9 のアスペクト比。
+- ウェブカメラで撮影した画像は一般的に 4:3 の比率。
 
-これらの非正方形の画像は、適切に処理せずに直接推論を行うと、無関係な領域や空白が大量に含まれ、推論結果に悪影響を与えることが多いです。中央裁剪を行うことで、これらの無関係な領域を減少させ、画像の中心領域に集中することができ、推論の精度と効率を向上させます。
+これらの非正方形画像は、適切な処理を行わずに推論を実行すると、多くの不要な領域や空白が含まれ、モデルの推論性能に悪影響を及ぼします。中心クロップを行うことで、これらの不要な領域を削減し、画像の中心領域に焦点を当てることで、推論の精度と効率を向上させることができます。
 
 使用方法は以下の通りです：
 
 ```python
-import docsaidkit as D
+import capybara as cb
 from mrzscanner import MRZScanner
 
 model = MRZScanner()
 
-img = D.imread('path/to/image.jpg')
-result = model(img, do_center_crop=True) # 中心裁剪を使用
+img = cb.imread('path/to/image.jpg')
+result = model(img, do_center_crop=True) # 中心クロップを使用
 ```
 
 :::tip
-**使用時の注意**：「MRZ 領域が切り取られない」かつ画像比率が正方形でない場合に、中央裁剪を使用することをお勧めします。
+**使用するべき場合**：MRZ エリアを切り取る心配がない場合や、画像のアスペクト比が正方形でない場合に中心クロップを使用できます。
 :::
 
 ### 後処理
 
-中央裁剪に加えて、モデルの精度をさらに向上させるために後処理オプションも提供しています。デフォルトでは、後処理パラメータは `do_postprocess=True` です。
+中心クロップ以外にも、モデルの精度をさらに向上させる後処理オプションを提供しています。後処理用のパラメータ `do_postprocess=True` がデフォルトで有効になっています。
 
-MRZ 区画にはいくつかの規則があり、例えば国コードは大文字アルファベットのみ、性別は `M` または `F` のみであるなど、これらを規範として MRZ 区画を調整できます。
+これは、MRZ エリアにはいくつかの規則（例：国コードは大文字のアルファベットのみ、性別は `M` または `F` のみなど）があるためです。
 
-そのため、規範に従った修正を行うために人工的に補正を行っています。以下のコードスニペットのように、数値が表示されないフィールドに誤って判定された数値を正しい文字に置き換えることができます：
+このような規則を使用して MRZ エリアを修正することができます。以下のコード例のように、数字が出現しないはずのフィールドで誤認識された数字を正しい文字に置き換える後処理が可能です：
 
 ```python
 import re
@@ -137,9 +137,9 @@ if doc_type == 3:  # TD1
     country = replace_digits(results[0][2:5])
 ```
 
-この後処理の文字置換は私たちの場合、精度向上には寄与しませんでしたが、特定の状況では誤った認識結果を修正できることがあります。
+この後処理による精度向上は限られた状況で発生するものの、誤認識結果を修正する際に有効です。
 
-推論時に `do_postprocess` を `False` に設定することで、元の認識結果をそのまま得ることができます。
+推論時に `do_postprocess` を `False` に設定することで、後処理を行わない生の認識結果を取得できます。
 
 ```python
 result, msg = model(img, do_postprocess=False)

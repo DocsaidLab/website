@@ -8,10 +8,10 @@ We provide installation via PyPI or by cloning the project from GitHub.
 
 ## Install via PyPI
 
-1. Install `docaligner_docsaid`:
+1. Install `docaligner-docsaid`:
 
    ```bash
-   pip install docaligner_docsaid
+   pip install docaligner-docsaid
    ```
 
 2. Verify the installation:
@@ -62,15 +62,11 @@ If not, refer to the [**Capybara Installation Guide**](../capybara/installation.
 
 By following these steps, you should be able to successfully install `DocAligner`.
 
-Once installed, you can begin using the project.
-
-## Test Installation
-
-You can test the installation by running the following command:
+Once installed, You can test the installation by running the following command:
 
 ```bash
 python -c "import docaligner; print(docaligner.__version__)"
 # >>> 1.0.0
 ```
 
-If you see a version number like `1.0.0`, the installation was successful.
+If you see a version number like `1.1.0`, the installation was successful.
