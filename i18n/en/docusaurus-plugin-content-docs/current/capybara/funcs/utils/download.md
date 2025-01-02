@@ -1,52 +1,39 @@
 # download
 
-## gen_download_cmd
+## download_from_google
 
-> [gen_download_cmd(file_id: str, target: str) -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/utils.py#L68)
+> [download_from_google(file_id: str, file_name: str, target: str = ".") -> None](https://github.com/DocsaidLab/Capybara/blob/c83d96363a3de3686a98dd7b558a168f08b9bc97/capybara/utils/utils.py#L70)
 
-- **Description**: Generates the command to download a file from Google Drive.
+- **Description**: Download files from Google Drive and handle confirmation issues for large files.
 
 - **Parameters**
 
-  - **file_id** (`str`): The file ID.
-  - **target** (`str`): The target path to save the downloaded file.
+  - **file_id** (`str`): The ID of the file to be downloaded from Google Drive.
+  - **file_name** (`str`): The name to save the file as after downloading.
+  - **target** (`str`, optional): The target directory to save the file. The default is the current directory `"."`.
+
+- **Exceptions**
+
+  - **Exception**: An exception is raised if the download fails or the file cannot be created.
+
+- **Notes**
+
+  - This function handles both small and large files. For large files, it automatically handles Google's confirmation checks, bypassing warnings about virus scans or file size limits.
+  - Ensure the target directory exists; if not, it will be created automatically.
 
 - **Example**
 
   ```python
-  import capybara as cb
+  # Example 1: Download a file to the current directory
+  download_from_google(
+      file_id="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      file_name="example_file.txt"
+  )
 
-  file_id = '1c1b9b1b0cdcwfjowief'
-  target = 'example.txt'
-  cmd = cb.gen_download_cmd(file_id, target)
-  print(cmd)
-  # >>> wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget
-  # >>> --quiet
-  # >>> --save-cookies /tmp/cookies.txt
-  # >>> --keep-session-cookies
-  # >>> --no-check-certificate 'https://docs.google.com/uc?export=download&id=1c1b9b1b0cdcwfjowief'
-  # >>> -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1c1b9b1b0cdcwfjowief" -O example.txt && rm -rf /tmp/cookies.txt
-  ```
-
-## download_from_docsaid
-
-> [download_from_docsaid(file_id: str, file_name: str, target: str) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/utils.py#L79)
-
-- **Description**: Downloads data from Docsaid's private cloud.
-
-- **Parameters**
-
-  - **file_id** (`str`): The file ID.
-  - **file_name** (`str`): The file name.
-  - **target** (`str`): The target path to save the downloaded file.
-
-- **Example**
-
-  ```python
-  import capybara as cb
-
-  file_id = 'c1b9b1b0cdcwfjowief'
-  file_name = 'example.txt'
-  target = 'example.txt'
-  cb.download_from_docsaid(file_id, file_name, target)
+  # Example 2: Download a file to a specified directory
+  download_from_google(
+      file_id="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      file_name="example_file.txt",
+      target="./downloads"
+  )
   ```

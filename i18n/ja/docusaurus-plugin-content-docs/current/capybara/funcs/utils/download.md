@@ -1,52 +1,39 @@
 # download
 
-## gen_download_cmd
+## download_from_google
 
-> [gen_download_cmd(file_id: str, target: str) -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/utils.py#L68)
+> [download_from_google(file_id: str, file_name: str, target: str = ".") -> None](https://github.com/DocsaidLab/Capybara/blob/c83d96363a3de3686a98dd7b558a168f08b9bc97/capybara/utils/utils.py#L70)
 
-- **説明**：Google Drive のファイルをダウンロードするためのコマンドを生成します。
+- **説明**：Google ドライブからファイルをダウンロードし、大きなファイルの確認問題を処理します。
 
-- **引数**
+- **パラメーター**
 
-  - **file_id** (`str`)：ファイルの ID。
-  - **target** (`str`)：ダウンロード先のファイルパス。
+  - **file_id** (`str`)：Google ドライブからダウンロードするファイルの ID。
+  - **file_name** (`str`)：ダウンロード後に保存するファイル名。
+  - **target** (`str`, オプション)：ファイルを保存するターゲットディレクトリ。デフォルトは現在のディレクトリ `"."`。
 
-- **例**
+- **例外**
 
-  ```python
-  import capybara as cb
+  - **Exception**：ダウンロードに失敗した場合やファイルが作成できない場合、例外が発生します。
 
-  file_id = '1c1b9b1b0cdcwfjowief'
-  target = 'example.txt'
-  cmd = cb.gen_download_cmd(file_id, target)
-  print(cmd)
-  # >>> wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget
-  # >>> --quiet
-  # >>> --save-cookies /tmp/cookies.txt
-  # >>> --keep-session-cookies
-  # >>> --no-check-certificate 'https://docs.google.com/uc?export=download&id=1c1b9b1b0cdcwfjowief'
-  # >>> -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1c1b9b1b0cdcwfjowief" -O example.txt && rm -rf /tmp/cookies.txt
-  ```
+- **注意事項**
 
-## download_from_docsaid
-
-> [download_from_docsaid(file_id: str, file_name: str, target: str) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/utils.py#L79)
-
-- **説明**：Docsaid のプライベートクラウドからデータをダウンロードします。
-
-- **引数**
-
-  - **file_id** (`str`)：ファイルの ID。
-  - **file_name** (`str`)：ファイル名。
-  - **target** (`str`)：ダウンロード先のファイルパス。
+  - この関数は、小さなファイルと大きなファイルの両方を処理します。大きなファイルの場合、Google の確認手続きを自動的に処理し、ウイルススキャンやファイルサイズ制限の警告を回避します。
+  - ターゲットディレクトリが存在することを確認してください。存在しない場合は自動的に作成されます。
 
 - **例**
 
   ```python
-  import capybara as cb
+  # 例 1：現在のディレクトリにファイルをダウンロード
+  download_from_google(
+      file_id="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      file_name="example_file.txt"
+  )
 
-  file_id = 'c1b9b1b0cdcwfjowief'
-  file_name = 'example.txt'
-  target = 'example.txt'
-  cb.download_from_docsaid(file_id, file_name, target)
+  # 例 2：指定したディレクトリにファイルをダウンロード
+  download_from_google(
+      file_id="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      file_name="example_file.txt",
+      target="./downloads"
+  )
   ```
