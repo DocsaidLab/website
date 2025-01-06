@@ -29,17 +29,16 @@
 
 ```python title='python demo code'
 from docaligner import DocAligner
-import docsaidkit as D
+from capybara import pad
 
 model = DocAligner(model_cfg='fastvit_sa24')
 
 # 画像内で未知のコーナーを見つけるためのパディング
-input_img = D.pad(input_img, 100)
+input_img = pad(input_img, 100)
 
 polygon = model(
-    img=input_img,
-    do_center_crop=False,
-    return_document_obj=False
+  img=input_img,
+  do_center_crop=False
 )
 
 # パディングを削除
