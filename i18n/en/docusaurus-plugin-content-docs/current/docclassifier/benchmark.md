@@ -5,43 +5,41 @@ sidebar_position: 6
 # Evaluation
 
 :::warning
-The test dataset for this project is provided by a private institution.
-
-For privacy protection, we only provide the evaluation results of this dataset.
+The test dataset for this project is a private dataset. We only provide the evaluation results for this dataset.
 :::
 
-This dataset contains approximately 25,000 images that have been "textually located and cropped" and "de-identified". It includes seven different categories, with extremely unbalanced quantities. The data contains a large number of cropped shape variations caused by different light and shadow changes, blurring, reflections, and corner positioning errors.
+This dataset contains over 20,000 document images that have been "cropped" for localization, covering seven different categories with highly imbalanced quantities. The data includes a large number of images affected by various lighting changes, blurriness, glare, and cropping distortions caused by corner alignment errors.
 
-We only cleaned the "incorrect category labels" of this dataset and then used all the data to evaluate the model's performance.
+We only cleaned the "incorrect category labels" in this dataset and then used all the data to evaluate the model's performance.
 
-## Evaluation Protocols
+## Evaluation Protocol
 
 ### AUROC
 
-AUROC (Area Under the Receiver Operating Characteristic Curve) is a statistical metric used to evaluate the performance of classification models, especially in binary classification problems. The AUROC value ranges from 0 to 1, where a higher AUROC value indicates a better ability of the model to discriminate between two classes.
+AUROC (Area Under the Receiver Operating Characteristic Curve) is a statistical metric used to assess the performance of classification models, especially for binary classification problems. The AUROC value ranges from 0 to 1, with a higher AUROC indicating better capability of the model to distinguish between the two classes.
 
 - **ROC Curve**
 
-  - **Definition**: The ROC curve is a graphical evaluation tool that shows the performance of a classification model at all possible classification thresholds. It achieves this by plotting the values of True Positive Rate (TPR) and False Positive Rate (FPR) at different thresholds.
-  - **True Positive Rate (TPR)**: Also known as sensitivity, calculated as TPR = TP / (TP + FN), where TP is the number of true positives, and FN is the number of false negatives.
-  - **False Positive Rate (FPR)**: Calculated as FPR = FP / (FP + TN), where FP is the number of false positives, and TN is the number of true negatives.
+  - **Definition**: The ROC curve is a graphical tool that shows the performance of a classification model at all possible classification thresholds. It is created by plotting the True Positive Rate (TPR) and False Positive Rate (FPR) at different thresholds.
+  - **True Positive Rate (TPR)**: Also known as sensitivity, calculated as TPR = TP / (TP + FN), where TP is the number of true positives and FN is the number of false negatives.
+  - **False Positive Rate (FPR)**: Calculated as FPR = FP / (FP + TN), where FP is the number of false positives and TN is the number of true negatives.
 
-- **Calculation of AUROC**
+- **Calculating AUROC**
 
-  - AUROC is the area under the ROC curve. It provides a metric to summarize the performance of the model across all classification thresholds.
-  - **Interpretation**:
-    - **AUROC = 1**: Perfect classifier, able to completely distinguish between the two classes.
-    - **0.5 < AUROC < 1**: The model has some ability to discriminate, with higher AUROC values indicating better performance.
+  - AUROC is the area under the ROC curve. It provides a single metric to summarize the model's performance across all classification thresholds.
+  - **Analysis**:
+    - **AUROC = 1**: A perfect classifier, able to completely distinguish between the two classes.
+    - **0.5 < AUROC < 1**: The model has some ability to distinguish between the classes, with values closer to 1 indicating better performance.
     - **AUROC = 0.5**: No discrimination ability, equivalent to random guessing.
-    - **AUROC < 0.5**: Worse than random guessing, but if the model predicts the reverse, it may have better performance.
+    - **AUROC < 0.5**: Worse than random guessing, but if the model's predictions are reversed, it may perform better.
 
 ### TPR@FPR Threshold Table
 
-The TPR@FPR threshold table is a key evaluation tool widely used in the field of face recognition, mainly used to measure the model's performance at different threshold settings. This table is derived from the ROC curve and provides an intuitive and accurate method for evaluating model performance.
+The TPR@FPR threshold table is a widely used key evaluation tool in the field of face recognition. Its primary purpose is to measure the model's performance at different threshold settings. This table is derived from the ROC curve and provides an intuitive and precise method for evaluating model performance.
 
-For example, if the goal is to achieve a performance of at least 0.9 TPR (True Positive Rate) at an FPR (False Positive Rate) of 0.01, we can determine the corresponding threshold through the TPR-FPR threshold table. This threshold then guides the inference process of the model.
+For example, if the goal is to achieve at least a TPR (True Positive Rate) of 0.9 when the FPR (False Positive Rate) is 0.01, we can use the TPR-FPR threshold table to determine the corresponding threshold and use it to interpret the inference results.
 
-In the implementation of this project, we also adopted a similar evaluation method. We chose the performance of TPR at FPR of 0.0001 as the standard, which helps us better understand the performance of the model under specific conditions.
+In the implementation of this project, we also use this evaluation method. We chose the performance at FPR = 0.0001 for TPR as the standard, as this criterion helps us better understand the model's performance under specific conditions.
 
 ### Zero-shot Testing
 

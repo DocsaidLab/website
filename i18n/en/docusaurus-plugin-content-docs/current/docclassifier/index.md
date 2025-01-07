@@ -1,6 +1,6 @@
 # DocClassifier
 
-The core functionality of this project is called "**Document Classification**".
+The core functionality of this project is called **Document Classification**.
 
 - [**DocClassifier Github**](https://github.com/DocsaidLab/DocClassifier)
 
@@ -10,18 +10,18 @@ The core functionality of this project is called "**Document Classification**".
 
 ---
 
-Upon seeing this title, you might smirk and think, "Isn't it just a classification model?"
+Upon seeing this title, you might be confused: isn't this just a classification model? It sounds pretty ordinary!
 
-- Yes, and no.
+> Well, yes and no.
 
-This time, we aim to create an atypical classification model. While its application scope may be limited, its intrinsic interest is quite high.
+This time, we aim to build a non-typical classification model. It may have limited application, but the fun in creating it is immense.
 
-It might not be what you imagine, but if you have time, you might as well continue reading.
+In this project, we do not use the traditional cross-entropy loss function for the final classification results. Instead, we employ a similarity learning approach for classification. The overall effect is quite good, and if you have the time, feel free to keep reading.
 
 :::info
-This project was conceived and proposed by [**kunkunlin1221**](https://github.com/kunkunlin1221), who completed the initial program development and feasibility verification.Since he didn't have time to write the web page, he entrusted this idea to me to continue the details and publish it here.
+This project was conceived and initiated by [**kunkunlin1221**](https://github.com/kunkunlin1221), who completed the early stages of program development and feasibility verification. Since he didn't have time to write the website, he entrusted me with continuing the work, refining the details, and publishing it here.
 
-I would like to express my special thanks to him for his contribution.
+A special thanks to him for his contribution.
 
 2024 © Zephyr
 :::
