@@ -208,7 +208,7 @@ RUN python -c "import capybara; import chameleon"
 :::tip
 因為 OpenCV 常有版本故障的問題，這裡使用 `opencv-fixer` 來自動修復。
 
-此外，在 `capbybara` 模組中，會預先下載繪圖用的字型檔案，所以預先下載到容器內。
+此外，在 `capbybara` 模組中，有自動下載字型檔案的功能，在這裡先呼叫一次模組，可以將字型檔案預先下載到容器內，避免後續使用時出現問題。
 :::
 
 ---

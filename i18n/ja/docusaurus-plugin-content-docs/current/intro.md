@@ -26,11 +26,29 @@ sidebar_position: 1
 
   ***
 
-- [**DocsaidKit**](./docsaidkit/index.md)：
+- [**Capybara**](./capybara/index.md)：
 
-  これは私が作成したツールキットで、主にコンピュータビジョン分野でよく使用される構造体（例えば、`Boxes`、`Polygons`）を定義しています。
+  ここでは、コンピュータビジョンの分野でよく使用される構造、例えば `Boxes`、`Polygons`、`Keypoints` などが定義されています。
 
-  さらに、画像処理（opencv）、モデル構造（pytorch）、推論ツール（onnxruntime）や環境設定に関する内容も含まれています。これらはすべて私が仕事でよく使っているツールです。
+  さらに、画像処理（opencv）、モデルアーキテクチャ（pytorch）、推論ツール（onnxruntime）、および環境設定に関する内容も含まれており、これらは私たちが仕事でよく使用するツールです。
+
+  ***
+
+- [**DocsaidKit（近日廃止予定）**](./docsaidkit/index.md)：
+
+  一定期間の使用後、このツールキットを分割することに決めました。PyTorch に関連するトレーニングツールを削除し、モデル推論と画像処理に関連する機能のみを残しました。
+
+  最終的にこのプロジェクトは三つに分割されました：
+
+  - [**Capybara**](https://github.com/DocsaidLab/Capybara)：モデル推論と画像処理に関連する機能。
+  - [**Chameleon**](https://github.com/DocsaidLab/Chameleon)：純粋な PyTorch トレーニングツール。
+  - [**Otter**](https://github.com/DocsaidLab/Otter)：PyTorch-Lightning ベースのトレーニングツール。
+
+  :::tip
+  これらのパッケージ名について質問があるかもしれませんが、何かおかしな名前だと思っていませんか？🤔🤔🤔
+
+  そんなことはありません！今では大手機関が発表する論文もみんなこんな風に奇妙な名前をつけています。私たちはその偉大な方々に敬意を表しています！
+  :::
 
   ***
 

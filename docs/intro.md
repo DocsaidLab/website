@@ -26,11 +26,29 @@ sidebar_position: 1
 
   ***
 
-- [**DocsaidKit**](./docsaidkit/index.md)：
+- [**Capybara**](./capybara/index.md)：
 
-  這是我自己寫的工具箱，裡面定義了一些在電腦視覺領域中常用的結構，例如 `Boxes`、`Polygons`。
+  這裡面定義了一些在電腦視覺領域中常用的結構，例如 `Boxes`、`Polygons` 和 `Keypoints` 等。
 
-  除此之外，還有一些影像處理（opencv）、模型架構（pytorch）和推論工具（onnxruntime）和環境配置的內容都放在這裡，這些都是我在工作中常用到的工具。
+  除此之外，還有一些影像處理（opencv）、模型架構（pytorch）和推論工具（onnxruntime）和環境配置的內容都放在這裡，這些都是我們在工作中常用到的工具。
+
+  ***
+
+- [**DocsaidKit（即將棄用）**](./docsaidkit/index.md)：
+
+  經過一段時間的使用後，我們決定對這個工具箱進行拆分，把 PyTorch 相關的訓練工具移除，僅保留模型推論和影像處理相關的功能。
+
+  最終這個專案拆成三份：
+
+  - [**Capybara**](https://github.com/DocsaidLab/Capybara)：模型推論和影像處理相關的功能。
+  - [**Chameleon**](https://github.com/DocsaidLab/Chameleon)：純粹的 PyTorch 訓練工具。
+  - [**Otter**](https://github.com/DocsaidLab/Otter)：基於 PyTorch-Lightning 的訓練工具。
+
+  :::tip
+  你可能會問說這些套件命名是發生什麼事？是不是喝茫了？🤔🤔🤔
+
+  沒這回事！你看現在各大機構發表的論文都是這樣天外飛來一個奇怪的名字，我們這是在向大師致敬！
+  :::
 
   ***
 

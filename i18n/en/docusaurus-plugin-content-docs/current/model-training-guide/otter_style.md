@@ -208,7 +208,7 @@ These two lines execute simple Python commands to test the installation:
 :::tip
 Since OpenCV often has version-related issues, we use `opencv-fixer` to automatically fix these.
 
-Also, the `capybara` module pre-downloads font files for drawing purposes, so these are downloaded into the container beforehand.
+In addition, the `capbybara` module has the function of automatically downloading font files. By calling the module here, the font files can be downloaded to the container in advance to avoid problems during subsequent use.
 :::
 
 ---

@@ -26,11 +26,29 @@ Currently, I have made several completed projects public on GitHub, including:
 
   ***
 
-- [**DocsaidKit**](./docsaidkit/index.md):
+- [**Capybara**](./capybara/index.md):
 
-  This is a toolbox I created, mainly defining some common structures used in computer vision, such as `Boxes` and `Polygons`.
+  This defines some commonly used structures in the field of computer vision, such as `Boxes`, `Polygons` and `Keypoints`.
 
-  Additionally, there are some image processing (opencv), model architecture (pytorch), and inference tools (onnxruntime) along with environment configuration content, which are tools I commonly use in my work.
+  Additionally, it includes some image processing (opencv), model architectures (pytorch), inference tools (onnxruntime), and environment configurations. These are tools we frequently use in our work.
+
+  ***
+
+- [**DocsaidKit (soon to be deprecated)**](./docsaidkit/index.md):
+
+  After some time of use, we decided to split this toolkit by removing the PyTorch-related training tools and only keeping the model inference and image processing functions.
+
+  The project was eventually split into three parts:
+
+  - [**Capybara**](https://github.com/DocsaidLab/Capybara): Functions related to model inference and image processing.
+  - [**Chameleon**](https://github.com/DocsaidLab/Chameleon): Pure PyTorch training tools.
+  - [**Otter**](https://github.com/DocsaidLab/Otter): Training tools based on PyTorch-Lightning.
+
+  :::tip
+  You might ask, what's up with the names of these packages? Did you drink too much? 🤔🤔🤔
+
+  Not at all! As you can see, many papers from major institutions nowadays feature strange names. We are just paying tribute to the masters!
+  :::
 
   ***
 
