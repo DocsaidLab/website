@@ -140,3 +140,39 @@
   line-height: 1.8;
   font-size: 1rem;
 }
+
+/* 移動裝置上的標題樣式 */
+@media (max-width: 768px) {
+  .postTitle {
+      font-size: 1.6rem; /* 縮小字體大小 */
+      margin-bottom: 0.3em; /* 縮小底部間距 */
+      text-shadow: 0 1px 2px rgba(0,0,0,0.4); /* 降低陰影強度 */
+      line-height: 1.2; /* 縮短行高 */
+      text-align: center; /* 保持居中對齊 */
+  }
+
+  .postAuthorImg {
+      width: 30px; /* 縮小頭像大小 */
+      height: 30px; /* 縮小頭像大小 */
+  }
+
+  .postAuthorName {
+      font-size: 0.9rem; /* 縮小作者名稱字體 */
+      margin-bottom: 0.1rem; /* 縮小底部間距 */
+  }
+
+  .postAuthorTitle {
+      font-size: 0.6rem; /* 縮小作者職稱字體 */
+      margin-bottom: 0.1rem; /* 縮小底部間距 */
+  }
+
+  .postTag {
+      font-size: 0.7rem; /* 縮小標籤字體 */
+      padding: 2px 4px; /* 縮小標籤內邊距 */
+  }
+
+  .postMetaInfo {
+      font-size: 0.8rem; /* 縮小文章資訊字體 */
+  }
+
+}
