@@ -6,7 +6,7 @@ import { Timeline } from "antd";
 import Link from '@docusaurus/Link';
 import recentUpdates from './recent_updates_data.json';
 
-# Research Paper Notes
+# Paper Notes
 
 ## Recent Updates
 
@@ -14,11 +14,11 @@ import recentUpdates from './recent_updates_data.json';
   {recentUpdates.map((item, idx) => {
     const convertMdLinkToRoute = (mdLink) => {
       return mdLink
-        .replace(/^.\//, '/papers/')  // 將 "./" 換成 "/papers/"
-        .replace(/\.md$/, '')         // 移除 .md 副檔名
-        .replace(/\/index$/, '')      // 移除 /index
-        // 將最後一段若是 YYYY-xxxx 格式，移除 YYYY-
-        // 例如: /papers/transformers/2101-switch-transformer -> /papers/transformers/switch-transformer
+        .replace(/^.\//, '/papers/')  // Replace "./" with "/papers/"
+        .replace(/\.md$/, '')         // Remove .md extension
+        .replace(/\/index$/, '')      // Remove /index
+        // Remove the year prefix if in YYYY-xxxx format
+        // For example: /papers/transformers/2101-switch-transformer -> /papers/transformers/switch-transformer
         .replace(/\/(\d{4}-)/, '/');
     };
 
@@ -34,71 +34,71 @@ import recentUpdates from './recent_updates_data.json';
 </Timeline>
 
 :::info
-This block will automatically read the paper notes written in the last 30 days from our commit history.
+This section automatically reads the most recent 30 days' worth of paper notes from our commit history.
 
-Therefore, it's normal to see different content every day, and it also reminds us to write more notes.
+Therefore, it's normal to see different content each day, which also encourages us to write more notes ourselves.
 :::
 
-## Daily Life
+## Daily Routine
 
-Reading papers is a truly enjoyable activity!
+Reading papers is a very enjoyable activity!
 
-If you've been an engineer for many years, you probably understand this sentiment.
+If you are an experienced engineer, you probably understand what I mean.
 
 ＊
 
-In our usual development projects, we tend to focus on practical issues like performance, stability, and maintainability. Therefore, the technologies and tools we use are relatively fixed and don't change much. Furthermore, a significant amount of our time and mental energy is consumed by communicating with clients, leaving us exhausted and with little energy to keep up with new technologies.
+In our regular development projects, we focus on real-world issues like performance, stability, and maintainability. As a result, the technologies and tools we use are relatively fixed and don't change much. Moreover, the workload and client communication often drain our energy, leaving us with little time to focus on new technologies.
 
-Being able to take some time out of our daily work to read a paper is a rare and leisurely pleasure. We don't have to be like those researchers who are stressed out every day about the progress of their papers. Just by reading the papers, we can understand the difficulties and efforts of the researchers, as well as the latest academic developments.
+Finding time to read papers during our daily work is a rare and leisurely entertainment. We don’t have to be as stressed as researchers who have to worry about their paper deadlines. Through the papers, we can understand the difficulties and efforts faced by the researchers, as well as the latest academic advancements.
 
-The truths of this universe lie in the minute observations within each paper. These observations might be incorrect, biased, or merely wishful thinking by the researchers, but they could also hit the core of the matter. These are all essential steps in the pursuit of truth.
+The truth of the universe lies in the small observations within each paper. These observations may be incorrect, biased, or based on the researcher’s wishes, but they may also strike at the core. These are all essential steps in the exploration of truth.
 
-We believe that the attitude towards reading papers should be relaxed, with a reverence for knowledge.
+We believe that the attitude towards reading papers should be relaxed, and the yearning for knowledge should be sincere.
 
 We think, we record, and we persistently move forward.
 
-We always believe: knowledge is power.
+We firmly believe: knowledge is power.
 
 ## The Era of Large Language Models
 
-Since the advent of ChatGPT, reading papers has become much easier, but this doesn't mean we can relinquish the responsibility of thinking.
+Since the emergence of ChatGPT, reading papers has become much easier, but this doesn't mean we can stop thinking critically.
 
-Here, we document our insights from reading papers and our understanding of the papers might be biased or incorrect.
+Here, we record some insights from reading papers, and the understanding of the papers may contain biases or errors.
 
-If there is any discrepancy with the original papers, **please refer to the original paper first**.
+If there is any discrepancy with the paper, **please refer to the original paper first**.
 
 ## Finding Papers
 
-If you want to find a paper, we suggest pasting the title into the search bar at the top right corner for quicker results.
+If you're looking for a paper, we suggest pasting the title into the search bar at the top right corner for quicker results.
 
-Our writing format is as follows:
+Our standard writing format is:
 
-- The title includes: [**Publication Date**] + [**Author's Name or Common Reference Name**]
-- The content starts with a brief discussion
-- Then defines the problem the paper aims to solve
-- Introduces the solution method
-- Ends with discussion and conclusion
+- Title: [**Publication Date**] + [**Author's Name or Common Industry Name for the Paper**]
+- The content mainly starts with a few introductory remarks
+- Then, we define the problem the paper aims to solve
+- Next, we introduce the proposed solution
+- Finally, we discuss and conclude
 
-Thus, this is not a direct translation of the paper but more of a guided reading.
+So this is not a translation of the paper, but more like paper notes.
 
-## And
+## Additionally
 
-Writing notes is very time-consuming and labor-intensive. The time it takes to write one note is enough for me to read five papers.
+Writing notes is not an easy task; it can take as long as reading five papers to write one note. Therefore, we don't have many paper notes due to time constraints, but we will continue to update them.
 
-At the same time, it's a continuous task, usually taking two days to write one. As the duration increases, my writing style changes. For example, earlier articles tend to be more detailed, but that's actually because of inexperience—I wasn't sure what the main points of the paper were, so writing it turned into a translation. (I apologize for that... 😓)
+You might ask why not just have GPT write all the notes?
 
-As I continued writing, I started to recognize the main points of the papers, which allowed me to skip some sections and focus solely on the core contributions. This led to a more concise presentation of the article.
+Of course, that’s possible! But notes that aren't thought through by the brain have no value.
 
-In the end, the quality of the content still depends on luck, and not every article will be written perfectly. If you're willing, you can also publish your notes here or revise existing notes. Just send us a pull request, and we'll be very happy to receive it.
+Additionally, this is a continuous task, and the writing style usually changes over time. Typically, the first ten papers will be more formal, while later ones will reflect a more personalized style.
+
+In conclusion, the quality of the articles depends on the circumstances, and not every paper can be written perfectly. If you're willing, you can also contribute your own notes or rewrite existing notes by submitting a Pull Request; we welcome that very much.
 
 :::info
-Don't worry about the multilingual part; we can handle it. Just write your notes in your preferred language.
+For multilingual support, we can handle it for you. Feel free to write your notes in any language you prefer.
 :::
 
-If you come across any interesting articles, feel free to share them with us, and when we have time, we'll take a look.
+## Finally
 
-Thank you for reading and supporting. we hope **DOCSAID** can bring you help and inspiration!
+If you would like us to write about specific papers, please leave a comment below, and we will check them out when we have time.
 
-＊
-
-2024 © Zephyr
+Thank you for your reading and support, and we hope this site can bring you help and inspiration!
