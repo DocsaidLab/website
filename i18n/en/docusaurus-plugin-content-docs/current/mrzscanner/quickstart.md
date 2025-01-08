@@ -125,7 +125,7 @@ This will filter basic errors, such as invalid input format or incorrect line co
 
 Check digits in MRZ are crucial for ensuring data accuracy, used to validate numerical values and prevent data entry errors.
 
-- For a detailed process, we have written about it in the [**Reference: Check Digit**](./reference#檢查碼).
+- For a detailed process, we have written about it in the [**Reference: Check Digit**](./reference#check-digit).
 
 ---
 
