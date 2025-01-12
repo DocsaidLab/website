@@ -4,10 +4,6 @@ sidebar_position: 7
 
 # 條碼生成
 
-:::tip
-本功能在 0.5.0 版新增。
-:::
-
 這個功能其實是我們日常實作的小功能，單獨開一個專案也不太合適，因此我們將其放在這裡。
 
 我們實作了 Code 39 和 Code 128 兩種格式的條碼生成器。
@@ -23,7 +19,6 @@ Code39（也稱為 Alpha39、Code 3 of 9、Code3/9、Type 39、USS Code39 或 US
 使用方式如下：
 
 ```python
-import docsaidkit as D
 from wordcanvas import Code39Generator
 
 gen = Code39Generator(
@@ -32,7 +27,6 @@ gen = Code39Generator(
 )
 
 img = gen('123456789', w=400, h=128)
-D.imwrite(img)
 ```
 
 - `width_rate` 用來設定窄與寬的比例，預設為 2，建議比例介於 1:2 和 1:3 之間。
@@ -53,7 +47,6 @@ Code 128 條碼可以編碼全部 128 個 ASCII 字元，包含數字、大小�
 使用方式如下：
 
 ```python
-import docsaidkit as D
 from wordcanvas import Code128Generator, CodeType
 
 # 直接使用預設值即可
@@ -63,7 +56,6 @@ gen = Code128Generator(
 )
 
 barcode_img = gen("ABCD1234", w=400, h=128)
-D.imwrite(barcode_img)
 ```
 
 ![code128 example](./resources/code128_example.jpg)
@@ -76,7 +68,6 @@ D.imwrite(barcode_img)
 
 ```python
 import numpy as np
-import docsaidkit as D
 from wordcanvas import Code39Generator
 
 gen = Code39Generator()

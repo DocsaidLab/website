@@ -4,7 +4,9 @@ sidebar_position: 4
 
 # 進階用法
 
-除了基本的使用方法外，`WordCanvas` 還提供了一些進階的設定，讓你可以更靈活地控制輸出的文字圖像。在這裡我們引入隨機性的設定，這些特性主要被用來訓練模型。
+除了基本的使用方法外，我們還提供了一些進階的設定，讓你可以更靈活地控制輸出的文字圖像。在這裡我們引入隨機性的設定，這些特性主要被用來訓練模型。
+
+若想要使用隨機性的功能，請使用 `RandomWordCanvas` 類別。
 
 ## 隨機字型
 
@@ -14,18 +16,18 @@ sidebar_position: 4
 
 ```python
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 
-gen = WordCanvas(
+gen = RandomWordCanvas(
     random_font=True,
     output_size=(64, 512),
-    font_bank="path/to/your/font/bank"
+    # font_bank="path/to/your/font/bank"
 )
 
 imgs = []
 for _ in range(8):
     text = 'Hello, World!'
-    img, infos = gen(text)
+    img = gen(text)
     imgs.append(img)
 
 # 結合所有圖片一起輸出
@@ -42,9 +44,9 @@ img = np.concatenate(imgs, axis=0)
 
 ```python
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 
-gen = WordCanvas(
+gen = RandomWordCanvas(
     random_text=True,
     output_size=(64, 512),
 )
@@ -52,7 +54,7 @@ gen = WordCanvas(
 imgs = []
 for _ in range(8):
     text = 'Hello!World!' # 這個輸入會被忽略
-    img, infos = gen(text)
+    img = gen(text)
     imgs.append(img)
 
 # 結合所有圖片一起輸出
@@ -72,10 +74,10 @@ img = np.concatenate(imgs, axis=0)
 
 ```python
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 
 # 固定生成 5 個字元的文字
-gen = WordCanvas(
+gen = RandomWordCanvas(
     random_text=True,
     min_random_text_length=5,
     max_random_text_length=5,
@@ -84,7 +86,7 @@ gen = WordCanvas(
 
 imgs = []
 for _ in range(8):
-    img, infos = gen()
+    img = gen()
     imgs.append(img)
 
 # 結合所有圖片一起輸出
@@ -99,9 +101,9 @@ img = np.concatenate(imgs, axis=0)
 
 ```python
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 
-gen = WordCanvas(
+gen = RandomWordCanvas(
     random_background_color=True,
     output_size=(64, 512),
 )
@@ -109,7 +111,7 @@ gen = WordCanvas(
 imgs = []
 for _ in range(8):
     text = 'Hello, World!'
-    img, infos = gen(text)
+    img = gen(text)
     imgs.append(img)
 
 # 結合所有圖片一起輸出
@@ -124,9 +126,9 @@ img = np.concatenate(imgs, axis=0)
 
 ```python
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 
-gen = WordCanvas(
+gen = RandomWordCanvas(
     random_text_color=True,
     output_size=(64, 512),
 )
@@ -134,7 +136,7 @@ gen = WordCanvas(
 imgs = []
 for _ in range(8):
     text = 'Hello, World!'
-    img, infos = gen(text)
+    img = gen(text)
     imgs.append(img)
 
 # 結合所有圖片一起輸出
@@ -149,9 +151,9 @@ img = np.concatenate(imgs, axis=0)
 
 ```python
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 
-gen = WordCanvas(
+gen = RandomWordCanvas(
     random_align_mode=True,
     output_size=(64, 512),
 )
@@ -159,7 +161,7 @@ gen = WordCanvas(
 imgs = []
 for _ in range(8):
     text = 'Hello, World!'
-    img, infos = gen(text)
+    img = gen(text)
     imgs.append(img)
 
 # 結合所有圖片一起輸出
@@ -176,9 +178,9 @@ img = np.concatenate(imgs, axis=0)
 
 ```python
 import numpy as np
-from wordcanvas import WordCanvas, OutputDirection
+from wordcanvas import RandomWordCanvas, OutputDirection
 
-gen = WordCanvas(
+gen = RandomWordCanvas(
     random_direction=True,
     output_direction=OutputDirection.Horizontal,
     output_size=(64, 512),
@@ -187,7 +189,7 @@ gen = WordCanvas(
 imgs = []
 for _ in range(8):
     text = '午安，或是晚安。'
-    img, infos = gen(text)
+    img = gen(text)
     imgs.append(img)
 
 # 結合所有圖片一起輸出
@@ -196,100 +198,129 @@ img = np.concatenate(imgs, axis=0)
 
 ![sample23](./resources/sample23.jpg)
 
-## 全隨機
+## 隨機文字外框
 
-如果你想要所有的設定都是隨機的，可以使用 `enable_all_random` 參數。
+使用 `random_stroke_width` 參數啟用隨機文字外框的功能。同時可以搭配 `min_random_stroke_width` 和 `max_random_stroke_width` 來指定外框的寬度範圍。
 
-啟用這個參數，開啟群魔亂舞模式。
+外框顏色可以透過 `stroke_fill` 進行指定，或是使用 `random_stroke_fill` 啟用隨機外框顏色。
 
 ```python
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 
-gen = WordCanvas(
-    enable_all_random=True,
+gen = RandomWordCanvas(
+    random_stroke_width=True,  # 啟用隨機外框寬度
+    random_stroke_fill=True,   # 啟用隨機外框顏色
+    min_random_stroke_width=1, # 最小外框寬度
+    max_random_stroke_width=5, # 最大外框寬度
     output_size=(64, 512),
 )
 
 imgs = []
-for _ in range(20):
-    img, infos = gen()
+for _ in range(8):
+    text = 'Hello, World!'
+    img = gen(text)
     imgs.append(img)
 
 # 結合所有圖片一起輸出
 img = np.concatenate(imgs, axis=0)
 ```
 
-![sample24](./resources/sample24.jpg)
+![sample32](./resources/sample32.jpg)
 
 :::warning
-這個參數不會調整 `reinit` 系列的參數，例如 `random_font`、`random_text` 等，這些參數都需要自行設定。
+使用 `random_stroke_width` 會收到警告：
+
+```python
+Using `random_stroke_width` may cause an OSError: array allocation size too large error with certain text.
+This is a known issue with the `Pillow` library (see https://github.com/python-pillow/Pillow/issues/7287) and cannot be resolved directly.
+```
+
+因為我們在測試中發現，在 `Pillow` 內使用 `stroke_width` 會不定期出現 `OSError` 的錯誤。這是 `Pillow` 的一個已知問題，我們把相關的 issue 連結放在了警告中，你可以點擊查看。
 :::
 
-## 儀表板
+## 隨機多行文字間距
 
-我們再次回到儀表板。
-
-![dashboard](./resources/dashboard.jpg)
-
-在隨機性的相關參數啟用時，True 的參數會被標示為綠色，False 的參數會被標示為紅色。
-
-我們希望可以透過這個設計，來讓你快速地確認相關設定。
-
-## 字型權重
-
-:::tip
-本功能在 0.2.0 版新增。
-:::
-
-由於每個字型所支援的文字數量不一致，因此在訓練模型時，我們可能會遇到字型權重不均的問題。
-
-簡單解釋一下，就是隨機選擇字型時的機率是一樣的，但某些文字只有少數的字型才能支援，因此你會發現有些文字幾乎不會被訓練到。
-
-為了緩解這個問題，我們引入了 `use_random_font_weight` 參數。
+使用 `random_spacing` 參數啟用隨機多行文字間距的功能。可以搭配 `min_random_spacing` 和 `max_random_spacing` 來指定間距的範圍。
 
 ```python
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas, AlignMode
 
-gen = WordCanvas(
+gen = RandomWordCanvas(
+    random_spacing=True,
+    min_random_spacing=10,
+    max_random_spacing=100,
+    align_mode=AlignMode.Center,
+    output_size=(128, 512),
+)
+
+imgs = []
+for _ in range(2):
+    img = gen('你好！\nHello, World!')
+    imgs.append(img)
+
+# 結合所有圖片一起輸出
+img = np.concatenate(imgs, axis=1)
+```
+
+![sample33](./resources/sample33.jpg)
+
+## 字型權重
+
+由於每個字型所支援的文字數量不一致，因此在訓練模型時，我們可能會遇到字型權重不均的問題。為了緩解這個問題，可以使用 `random_font_weight` 參數。
+
+:::tip
+簡單來說，由於每個字型被選擇的機率是一樣的，但某些文字只有少數的字型才能支援，因此你會發現有些文字幾乎不會被訓練到。
+:::
+
+```python
+from wordcanvas import RandomWordCanvas
+
+gen = RandomWordCanvas(
     random_font=True,
-    use_random_font_weight=True,
+    random_font_weight=True,
     output_size=(64, 512),
 )
 ```
 
-當你啟用這個參數時，`WordCanvas` 會根據字型支援的文字數量來調整字型的選擇機率，當字型支援的文字愈少，那被選中的機率就會愈低，以達到均勻分配的效果。
-
-但是還是有不足的地方，我們認為應該是統計所有文字出現的頻率後，再給定選擇權重會比較好，我們預期之後把這個功能發佈在 0.5.0 版。
+當啟用這個參數時，`RandomWordCanvas` 會根據字型支援的文字數量來調整字型的選擇機率，當字型支援的文字愈少，那被選中的機率就會愈低，以達到均勻分配的效果。
 
 ## 阻擋名單
 
-:::tip
-本功能在 0.4.0 版新增。
-:::
-
 我們在使用字型時，發現有些字型表裡不一。
 
-舉例來說，從字型檔案中可以讀取到該字型所支援的文字列表，但是在實際使用時，卻發現有些文字卻無法正確渲染。
-
-對此我們感到很生氣，所以特別開發了一個阻擋名單的功能，讓你可以將這些字型排除在外。
+舉例來說，從字型檔案中可以讀取到該字型所支援的文字列表，但是在實際使用時，卻發現有些文字卻無法正確渲染。對此我們感到無奈，所以特別開發了一個阻擋名單的功能，讓你可以將這些字型排除在外。
 
 請使用參數 `block_font_list` 來設定阻擋名單：
 
 ```python
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import WordCanvas, RandomWordCanvas
 
 gen = WordCanvas(
-    random_font=True,
-    use_random_font_weight=True,
-    block_font_list=['阻擋名單字型']
+    block_font_list=['AABB']
+)
+
+gen_random = RandomWordCanvas(
+    block_font_list=['AABB'],
 )
 ```
 
+設定後，程式會自動過濾掉帶有你所設定的 `*AABB*.(ttf|otf)` 的字型，不會被選中。
+
+## 儀表板
+
+我們再次回到儀表板，`RandomWordCanvas` 的資訊更為豐富：
+
+![sample34](./resources/sample34.jpg)
+
+在隨機性的相關參數啟用時，True 的參數會被標示為綠色，False 的參數會被標示為紅色。
+
+我們希望可以透過這個設計，來讓你快速地確認相關設定。
+
 ## 小結
 
-在開發工具的過程中，我們的目標是創建一個能夠靈活地生成各種文字圖像的工具，特別是為了機器學習模型的訓練。
+在開發工具的過程中，我們的目標是創建一個能夠靈活地生成各種文字圖像的工具，特別是為了深度學習模型的訓練。
 
 隨機性的引入旨在模擬現實世界中的各種情況，這對於提高模型的適應性和泛化能力有極大的幫助，希望你會喜歡這些功能。

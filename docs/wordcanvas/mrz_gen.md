@@ -4,10 +4,6 @@ sidebar_position: 6
 
 # MRZ 生成
 
-:::tip
-本功能在 0.5.0 版新增。
-:::
-
 完成 `WordCanvas` 的開發之後，我們可以利用這個工具來做點其他事情。
 
 在本章節中，我們開發一個生成「**機器閱讀區域（Machine Readable Zone, MRZ）**」的功能。
@@ -52,18 +48,18 @@ MRZ 的結構因不同類型的證件而有所不同，主要包括以下幾種�
 相關功能我們已經完成，請直接參考以下範例，調用 `MRZGenerator`：
 
 ```python
-import docsaidkit as D
 from wordcanvas import MRZGenerator
 
 mrz_gen = MRZGenerator(
     text_color=(0, 0, 0),
     background_color=(255, 255, 255),
-    interval=None,
-    delimiter='&',
 )
+
+output_infos = mrz_gen()
+img = output_infos['image']
 ```
 
-在這個設定中，你可以手動指定文字顏色、背景顏色，以及分隔符號。由於 MRZ 的文字是 2~3 行，分隔符號的目的是輸出時可以區分每一行的文字，預設為 `&`。
+在這個設定中，你可以手動指定文字顏色、背景顏色，以及分隔符號。由於 MRZ 的文字是 2~3 行，分隔符號統一設定為 `\n`。
 
 完成設定後，直接當成函數來呼叫即可，我們已經實作了 `__call__` 方法：
 
@@ -82,10 +78,6 @@ output_infos = mrz_gen()
 
 以下為輸出影像範例：
 
-```python
-D.imwrite(output_infos['image'])
-```
-
 ![mrz_output](./resources/mrz_output.jpg)
 
 ## 展示每個文字的座標
@@ -94,27 +86,19 @@ D.imwrite(output_infos['image'])
 
 ```python
 import cv2
-import docsaidkit as D
+from capybara import draw_points
 from wordcanvas import MRZGenerator
-
-
-def draw_points(img, points, color=(0, 255, 0), radius=5):
-    for point in points:
-        cv2.circle(img, point, radius, color, -1)
-    return img
-
 
 mrz_gen = MRZGenerator(
     text_color=(0, 0, 0),
     background_color=(255, 255, 255),
-    interval=None,
-    delimiter='&',
 )
 
 output_infos = mrz_gen()
 
-img = draw_points(results['image'], results['points'])
-D.imwrite(img)
+img = output_infos['image']
+points = output_infos['points']
+points_img = draw_points(img, points, scales=5)
 ```
 
 ![mrz_points](./resources/mrz_points.jpg)
@@ -130,22 +114,22 @@ mrz_gen = MRZGenerator(
 )
 
 output_infos = mrz_gen()
-D.imwrite(output_infos['image'])
+img = output_infos['image']
 ```
 
 ![mrz_color](./resources/mrz_color.jpg)
 
 ---
 
-使用 `interval` 參數可以調整文字之間的間距：
+使用 `spacing` 參數可以調整文字之間的間距：
 
 ```python
 mrz_gen = MRZGenerator(
-    interval=100,
+    spacing=100,
 )
 
 output_infos = mrz_gen()
-D.imwrite(output_infos['image'])
+img = output_infos['image']
 ```
 
 ![mrz_interval](./resources/mrz_interval.jpg)
@@ -159,7 +143,7 @@ D.imwrite(output_infos['image'])
 :::
 
 ```python
-mrz_gen = MRZGenerator(interval=32)
+mrz_gen = MRZGenerator(spacing=32)
 
 output_infos = mrz_gen(
     mrz_type='TD1',
@@ -170,7 +154,7 @@ output_infos = mrz_gen(
     ]
 )
 
-D.imwrite(output_infos['image'])
+img = output_infos['image']
 ```
 
 ![mrz_assign_text](./resources/mrz_assign_text.jpg)

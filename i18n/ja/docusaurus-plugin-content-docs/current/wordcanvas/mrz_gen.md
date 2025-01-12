@@ -4,123 +4,108 @@ sidebar_position: 6
 
 # MRZ 生成
 
-:::tip
-この機能はバージョン 0.5.0 で追加されました。
-:::
+`WordCanvas` の開発が完了した後、このツールを活用して他の機能を実現することができます。
 
-`WordCanvas` の開発が完了した後、このツールを使って他のこともできます。
-
-この章では、「**機械可読ゾーン（MRZ, Machine Readable Zone）**」を生成する機能を開発しました。
+本章では、「**機械可読ゾーン（Machine Readable Zone, MRZ）**」を生成する機能を開発します。
 
 ## MRZ とは？
 
-MRZ（Machine Readable Zone、機械可読ゾーン）は、パスポート、ビザ、身分証明書などの旅行書類に含まれる特定の区域で、この区域内の情報は機械によって迅速に読み取ることができます。MRZ は国際民間航空機関（ICAO）第 9303 号の規定に基づいて設計および生成され、国境での検査を迅速化し、情報処理の精度を向上させるために使用されます。
+MRZ（Machine Readable Zone, 機械可読ゾーン）は、パスポート、ビザ、身分証明書などの旅行書類に含まれる特定の領域で、この領域の情報は機械で迅速に読み取ることができます。MRZ は国際民間航空機関（ICAO）の第 9303 号文書の規定に基づき設計および生成されており、国境検査の迅速化や情報処理の正確性向上を目的としています。
 
 - [**ICAO Doc9309**](https://www.icao.int/publications/Documents/9303_p1_cons_en.pdf)
 
 MRZ の構造は書類の種類によって異なり、主に以下の種類があります：
 
-1. **TD1（身分証明書など）**
+1. **TD1（身分証など）：**
 
-   - 3 行、各行 30 文字で構成され、合計 90 文字。
-   - 含まれる情報：証明書タイプ、国コード、証明書番号、出生日、性別、有効期限、国籍、姓、名前、任意のデータ 1、任意のデータ 2。
+   - 3 行、各行 30 文字、合計 90 文字。
+   - 含まれる情報：書類種別、国コード、書類番号、生年月日、性別、有効期限、国籍、姓、名、任意データ 1、任意データ 2。
 
-2. **TD2（パスポートカードなど）**
+2. **TD2（パスポートカードなど）：**
 
-   - 2 行、各行 36 文字で構成され、合計 72 文字。
-   - 含まれる情報：証明書タイプ、国コード、姓、名前、証明書番号、国籍、出生日、性別、有効期限、任意のデータ。
+   - 2 行、各行 36 文字、合計 72 文字。
+   - 含まれる情報：書類種別、国コード、姓、名、書類番号、国籍、生年月日、性別、有効期限、任意データ。
 
-3. **TD3（パスポートなど）**
+3. **TD3（パスポートなど）：**
 
-   - 2 行、各行 44 文字で構成され、合計 88 文字。
-   - 含まれる情報：証明書タイプ、国コード、姓、名前、証明書番号、国籍、出生日、性別、有効期限、任意のデータ。
+   - 2 行、各行 44 文字、合計 88 文字。
+   - 含まれる情報：書類種別、国コード、姓、名、書類番号、国籍、生年月日、性別、有効期限、任意データ。
 
-4. **MRVA（ビザタイプ A）**
+4. **MRVA（ビザタイプ A）：**
 
-   - 2 行、各行 44 文字で構成され、合計 88 文字。
-   - 含まれる情報：証明書タイプ、国コード、姓、名前、証明書番号、国籍、出生日、性別、有効期限、任意のデータ。
+   - 2 行、各行 44 文字、合計 88 文字。
+   - 含まれる情報：書類種別、国コード、姓、名、書類番号、国籍、生年月日、性別、有効期限、任意データ。
 
-5. **MRVB（ビザタイプ B）**
-   - 2 行、各行 36 文字で構成され、合計 72 文字。
-   - 含まれる情報：証明書タイプ、国コード、姓、名前、証明書番号、国籍、出生日、性別、有効期限、任意のデータ。
+5. **MRVB（ビザタイプ B）：**
+
+   - 2 行、各行 36 文字、合計 72 文字。
+   - 含まれる情報：書類種別、国コード、姓、名、書類番号、国籍、生年月日、性別、有効期限、任意データ。
 
 ## 合成画像
 
-MRZ 検出モデルをトレーニングするには、大量のデータセットが必要ですが、これらのデータには個人情報が含まれているため、収集が困難です。この問題を解決するために、`WordCanvas` を使って MRZ 画像を合成することができます。
+MRZ 検出モデルを訓練する際、大量のデータセットが必要ですが、これらのデータには個人情報が含まれるため、収集が難しい場合があります。この問題を解決するために、`WordCanvas` を利用して MRZ 画像を合成します。
 
-関連機能はすでに実装されているので、以下の例に従って `MRZGenerator` を呼び出してください：
+関連機能はすでに完成しており、以下のサンプルコードを参照して `MRZGenerator` を使用できます：
 
 ```python
-import docsaidkit as D
 from wordcanvas import MRZGenerator
 
 mrz_gen = MRZGenerator(
     text_color=(0, 0, 0),
     background_color=(255, 255, 255),
-    interval=None,
-    delimiter='&',
 )
+
+output_infos = mrz_gen()
+img = output_infos['image']
 ```
 
-この設定では、文字色、背景色、区切り文字を手動で指定できます。MRZ の文字は 2〜3 行なので、区切り文字は各行の文字を区別するために使用され、デフォルトは `&` です。
+この設定では、文字色、背景色、区切り文字を手動で指定できます。MRZ の文字は 2 ～ 3 行で構成されており、区切り文字は一律で`\n`に設定されています。
 
-設定が完了したら、関数として呼び出すだけです。`__call__` メソッドが実装されています：
+設定後、関数として呼び出すだけで済みます。`__call__` メソッドはすでに実装済みです：
 
 ```python
 output_infos = mrz_gen()
 ```
 
-これで、合成された MRZ 画像が得られます。出力フォーマットは以下の通りです：
+これにより、合成された MRZ 画像を取得できます。データの出力形式は以下の通りです：
 
-- `typ`：MRZ タイプ。
-- `text`：MRZ 文字。
-- `points`：各文字の座標。
+- `typ`：MRZ の種類。
+- `text`：MRZ の文字。
+- `points`：MRZ 内の各文字の座標。
 - `image`：MRZ 画像。
 
-パラメータを指定しない場合、MRZ タイプ（TD1、TD2、TD3）はランダムに決定され、その後、MRZ 文字がランダムに生成され、画像が合成されます。
+出力時、パラメータを指定しない場合は、MRZ の種類（TD1、TD2、TD3）がランダムに決定されます。その後、MRZ 文字をランダムに生成し、画像を合成します。
 
-以下のように画像を出力できます：
-
-```python
-D.imwrite(output_infos['image'])
-```
+以下は出力画像の例です：
 
 ![mrz_output](./resources/mrz_output.jpg)
 
-## 各文字の座標の表示
+## 各文字の座標を表示
 
-各文字の位置に興味があるかもしれません。これにより、文字検出モデルのトレーニングに役立ちます。この機能も提供されており、`points` プロパティを呼び出すことで取得できます。以下のコードを使って、座標を表示することができます：
+文字ごとの位置に興味がある場合、文字検出モデルの訓練に役立ちます。この機能はすでに実装済みで、`points` 属性を呼び出すだけで取得可能です。以下のように描画して確認できます：
 
 ```python
 import cv2
-import docsaidkit as D
+from capybara import draw_points
 from wordcanvas import MRZGenerator
-
-
-def draw_points(img, points, color=(0, 255, 0), radius=5):
-    for point in points:
-        cv2.circle(img, point, radius, color, -1)
-    return img
-
 
 mrz_gen = MRZGenerator(
     text_color=(0, 0, 0),
     background_color=(255, 255, 255),
-    interval=None,
-    delimiter='&',
 )
 
 output_infos = mrz_gen()
 
-img = draw_points(results['image'], results['points'])
-D.imwrite(img)
+img = output_infos['image']
+points = output_infos['points']
+points_img = draw_points(img, points, scales=5)
 ```
 
 ![mrz_points](./resources/mrz_points.jpg)
 
-## 文字の背景色と間隔の調整
+## 文字背景色と間隔の変更
 
-`text_color` と `background_color` パラメータを使って、文字と背景の色を変更できます：
+`text_color` と `background_color` パラメータを使用して、文字と背景の色を変更できます：
 
 ```python
 mrz_gen = MRZGenerator(
@@ -129,36 +114,36 @@ mrz_gen = MRZGenerator(
 )
 
 output_infos = mrz_gen()
-D.imwrite(output_infos['image'])
+img = output_infos['image']
 ```
 
 ![mrz_color](./resources/mrz_color.jpg)
 
 ---
 
-`interval` パラメータを使って、文字の間隔を調整できます：
+`spacing` パラメータを使用して文字間隔を調整できます：
 
 ```python
 mrz_gen = MRZGenerator(
-    interval=100,
+    spacing=100,
 )
 
 output_infos = mrz_gen()
-D.imwrite(output_infos['image'])
+img = output_infos['image']
 ```
 
 ![mrz_interval](./resources/mrz_interval.jpg)
 
-## 指定された MRZ 文字の生成
+## MRZ 文字の指定
 
-指定した MRZ 文字を使いたい場合は、`mrz_type` と `mrz_text` パラメータを渡すことができます。関数内では、文字の長さとタイプが一致するかどうかを簡単にチェックします。
+MRZ 文字を指定したい場合、呼び出し時に `mrz_type` と `mrz_text` パラメータを渡すことができます。関数内部で基本的なチェック（文字長さや種類との一致など）は実施済みです。
 
 :::warning
-ハッシュチェックは行っていませんので、この機能は実際の有効な MRZ 文字を必要としません。
+注意：ハッシュチェックは実施していません。この機能は画像の合成を目的としており、有効な MRZ 文字である必要はありません。
 :::
 
 ```python
-mrz_gen = MRZGenerator(interval=32)
+mrz_gen = MRZGenerator(spacing=32)
 
 output_infos = mrz_gen(
     mrz_type='TD1',
@@ -169,12 +154,12 @@ output_infos = mrz_gen(
     ]
 )
 
-D.imwrite(output_infos['image'])
+img = output_infos['image']
 ```
 
 ![mrz_assign_text](./resources/mrz_assign_text.jpg)
 
-## 参考文献
+## 関連資料
 
 - [**Arg0s1080/mrz**](https://github.com/Arg0s1080/mrz)
 - [**Detecting machine-readable zones in passport images**](https://pyimagesearch.com/2015/11/30/detecting-machine-readable-zones-in-passport-images/)

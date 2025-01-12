@@ -4,23 +4,29 @@ sidebar_position: 5
 
 # Augmentation
 
-We have not included image augmentation functionality directly within `WordCanvas` because we believe it is a highly "customizable" requirement. Different application scenarios may require different augmentation methods. However, we provide some simple examples to illustrate how to implement image augmentation.
+We did not implement the image augmentation feature within `WordCanvas` because we consider it a highly "customized" requirement. Different use cases may require different augmentation methods. However, we provide some simple examples to demonstrate how the image augmentation process can be implemented.
 
-We prefer using the [**albumentations**](https://github.com/albumentations-team/albumentations) package for image augmentation, but you can use any library you prefer.
+We typically use the [**albumentations**](https://github.com/albumentations-team/albumentations) library for image augmentation, but you are free to use any library of your choice.
+
+:::info
+After `albumentations` was updated to v2.0.0, many operation parameter names have changed. Please be aware of this.
+
+For more details, refer to: [**albumentations v2.0.0**](https://github.com/albumentations-team/albumentations/releases/tag/2.0.0)
+:::
 
 ## Example 1: Shear Transformation
 
-After generating a text image, apply custom operations.
+After generating the text image, apply custom operations.
 
-First, we demonstrate applying a shear transformation using `Shear`:
+Here, we demonstrate applying a shear transformation using `Shear`:
 
-The `Shear` class is responsible for performing shear transformations on images. Shearing changes the geometric shape of an image, creating a horizontal slant, which can help models learn to recognize objects in different directions and positions.
+The `Shear` class is responsible for applying a shear transformation to the image. Shearing alters the geometric shape of the image, creating a horizontal tilt, which can help the model learn to recognize objects at different angles and positions.
 
 - **Parameters**
 
-  - max_shear_left: Maximum shear angle to the left. Default is 20 degrees.
-  - max_shear_right: Maximum shear angle to the right. Default is also 20 degrees.
-  - p: Probability of applying the operation. Default is 0.5, meaning any given image has a 50% chance of being sheared.
+  - max_shear_left: Maximum shear angle to the left. The default is 20 degrees.
+  - max_shear_right: Maximum shear angle to the right. The default is also 20 degrees.
+  - p: Probability of applying the operation. The default is 0.5, meaning there’s a 50% chance that any given image will be sheared.
 
 - **Usage**
 
@@ -30,7 +36,7 @@ The `Shear` class is responsible for performing shear transformations on images.
   gen = WordCanvas()
   shear = Shear(max_shear_left=20, max_shear_right=20, p=0.5)
 
-  img, _ = gen('Hello, World!')
+  img = gen('Hello, World!')
   img = shear(img)
   ```
 
@@ -38,50 +44,55 @@ The `Shear` class is responsible for performing shear transformations on images.
 
 ## Example 2: Rotation Transformation
 
-To implement rotation transformation, we use the `SafeRotate` class from `albumentations`.
+To implement rotation transformation, we import the `SafeRotate` class from `albumentations`.
 
-When using operations like Shift, Scale, or Rotate, you might encounter background color filling issues.
+When using operations like `Shift`, `Scale`, or `Rotate`, issues related to background color filling may arise.
 
-In this case, you should call the `infos` information to get the background color.
+In this case, you should call `infos` to obtain the background color.
 
 ```python
+import cv2
 from wordcanvas import ExampleAug, WordCanvas
 import albumentations as A
 
 gen = WordCanvas(
     background_color=(255, 255, 0),
-    text_color=(0, 0, 0)
-)
-
-aug =  A.SafeRotate(
-    limit=30,
-    border_mode=cv2.BORDER_CONSTANT,
-    value=infos['background_color'],
-    p=1
+    text_color=(0, 0, 0),
+    return_infos=True
 )
 
 img, infos = gen('Hello, World!')
+
+aug = A.SafeRotate(
+    limit=30,
+    border_mode=cv2.BORDER_CONSTANT,
+    fill=infos['background_color'],
+    p=1
+)
+
 img = aug(image=img)['image']
 ```
 
 ![rotate_example](./resources/rotate_example.jpg)
 
-## Example 3: Modifying Class Behavior
+## Example 3: Modify Class Behavior
 
-By now, you might notice:
+At this point in the code, you might notice:
 
-- If each time `WordCanvas` generates an image with a random background color, it requires reinitializing the `albumentations` class every time, which might seem inefficient.
+- If each image generated has a random background color, then `albumentations` needs to be reinitialized every time, which doesn’t seem efficient.
 
-Perhaps we can modify the behavior of `albumentations` so that it can be used continuously after a single initialization?
+Perhaps we can modify the behavior of `albumentations` so that it only needs to be initialized once and can be reused?
 
 ```python
 import albumentations as A
 import cv2
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 
-gen = WordCanvas(
-    random_background_color=True
+
+gen = RandomWordCanvas(
+    random_background_color=True,
+    return_infos=True
 )
 
 aug = A.SafeRotate(
@@ -95,7 +106,7 @@ for _ in range(8):
     img, infos = gen('Hello, World!')
 
     # Modify albu class behavior
-    aug.value = infos['background_color']
+    aug.fill = infos['background_color']
 
     img = aug(image=img)['image']
 
@@ -108,34 +119,33 @@ img = np.concatenate(imgs, axis=0)
 ![bgcolor_example](./resources/bgcolor_example.jpg)
 
 :::danger
-We still recommend using the method from Example 2 (even though it might seem a bit cumbersome) because if you directly modify the behavior of `albumentations` classes, it can cause issues in multi-threaded training environments. Please be careful!
+We still recommend using the method from Example 2 (even though it may seem inefficient), as modifying `albumentations`' class behavior could cause issues in multi-threaded training environments. Please be cautious!
 :::
 
-## Example 4: Adding Backgrounds
+## Example 4: Adding Background
 
-You might want more than just plain text images and want to add backgrounds to improve the generalization ability of your model.
-
-In this case, you need to prepare a set of background images and then refer to the following example:
+If you’re not satisfied with a simple text image and want to add a background to enhance the model's generalization ability, you will need to prepare a set of background images and follow the example below:
 
 ```python
 import albumentations as A
 import cv2
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 from albumentations import RandomCrop
 
-gen = WordCanvas(
+gen = RandomWordCanvas(
     random_text_color=True,
-    random_background_color=True
+    random_background_color=True,
+    return_infos=True
 )
 
-# Generate a random color text image
+# Generate a random text image
 img, infos = gen('Hello, World!')
 ```
 
 ![sample25](./resources/sample25.jpg)
 
-Next, load a background image:
+Then, load a background image:
 
 ```python
 bg = cv2.imread('path/to/your/background.jpg')
@@ -143,7 +153,7 @@ bg = cv2.imread('path/to/your/background.jpg')
 
 [![bg_example](./resources/bg_example.jpg)](https://www.lccnet.com.tw/lccnet/article/details/2274)
 
-Finally, randomly crop a region from the background and place the text image on it:
+Finally, crop a random region from the background and place the text image on top:
 
 ```python
 bg = RandomCrop(img.shape[0], img.shape[1])(image=bg)['image']
@@ -155,9 +165,9 @@ result_img = np.where(img == infos['background_color'], bg, img)
 
 ## Example 5: Perspective Transformation
 
-Perspective transformation is a technique that projects an image onto a new viewpoint, simulating the appearance of objects from different angles and distances.
+Perspective transformation projects an image onto a new viewplane. This type of transformation can simulate how objects appear from different angles and distances.
 
-Continuing from the previous example, apply a perspective transformation to the image before overlaying the background:
+We continue with the previous example and apply a perspective transformation to the image before adding the background:
 
 ```python
 from albumentations import Perspective
@@ -165,7 +175,7 @@ from albumentations import Perspective
 aug = A.Perspective(
     keep_size=True,
     fit_output=True,
-    pad_val=infos['background_color'],
+    fill=infos['background_color'],
 )
 
 img = aug(image=img)['image']
@@ -175,12 +185,12 @@ result_img = np.where(img == infos['background_color'], bg, img)
 ![sample27](./resources/sample27.jpg)
 
 :::tip
-For spatial transformation image augmentations, we recommend applying perspective transformation to the original image first, then overlaying the background image. This way, the background image won't have strange black edges.
+For "spatial transformation" augmentation operations, we recommend performing the perspective transformation first, followed by adding the background image. This ensures that the background won’t have strange black edges.
 :::
 
-## Example 6: Strong Light Reflection
+## Example 6: Sun Flare
 
-Text images are also prone to issues with strong light reflections. In this case, we can use `RandomSunFlare` to simulate this condition:
+Text images often have issues with strong light reflections. In this case, we can use `RandomSunFlare` to simulate this effect:
 
 ```python
 from albumentations import RandomSunFlare
@@ -196,13 +206,13 @@ result_img = aug(image=result_img)['image']
 ![sample28](./resources/sample28.jpg)
 
 :::tip
-For pixel-level image augmentations, we recommend overlaying the background image first, then applying image augmentation transformations. This way, you won't lose background information and avoid messy spots.
+For "pixel modification" augmentation operations, we recommend adding the background image first and then applying the image transformation. This prevents background information from being lost, which could result in random noise.
 :::
 
 ## Conclusion
 
-This concludes the introduction to this project. If you have any questions or suggestions, feel free to leave a comment below, and we will respond as soon as possible.
+This concludes the introduction to the project. If you have any questions or suggestions, feel free to leave a comment below, and we will reply as soon as possible.
 
-Alternatively, if you're unsure how to implement a specific operation, feel free to leave a comment as well, and we will do our best to assist you.
+If you’re unsure how to implement a certain operation, you are also welcome to leave a comment. We will do our best to assist you.
 
-Happy using!
+Enjoy using it!

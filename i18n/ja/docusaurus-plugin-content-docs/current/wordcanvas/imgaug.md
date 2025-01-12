@@ -2,25 +2,31 @@
 sidebar_position: 5
 ---
 
-# 画像強化
+# 画像の拡張
 
-`WordCanvas` 内では画像強化の機能は実装していません。これは、画像強化が非常に「カスタマイズ可能な」ニーズであり、異なるアプリケーションシーンでは異なる強化方法が必要になる可能性があるためです。しかし、画像強化のプロセスを実装する方法について簡単な例をいくつか提供しています。
+私たちは、画像拡張の機能を `WordCanvas` に組み込んでいません。なぜなら、これは非常に「カスタマイズ性の高い」ニーズであり、異なる応用シナリオごとに異なる拡張方法が必要になるからです。しかし、いくつかの簡単なサンプルを提供し、画像拡張のフローをどのように実現するかを説明しています。
 
-私たちは [**albumentations**](https://github.com/albumentations-team/albumentations) ライブラリを使用して画像強化を実現するのが一般的ですが、好きなライブラリを使用してもかまいません。
+画像拡張を実現するために、[**albumentations**](https://github.com/albumentations-team/albumentations) というライブラリをよく使用しますが、お好みのライブラリを使うことも可能です。
 
-## 例 1: シアー変換
+:::info
+`albumentations` が v2.0.0 にアップデートされた後、多くの操作のパラメータ名が変更されましたのでご注意ください。
 
-文字画像を生成した後、カスタム操作を適用する方法を示します。
+関連情報は、[**albumentations v2.0.0**](https://github.com/albumentations-team/albumentations/releases/tag/2.0.0) を参照してください。
+:::
 
-まず、シアー変換を適用する例を示します。`Shear` クラスを使用します。
+## サンプル 1：せん断変換
 
-`Shear` クラスは画像にシアー変換を行います。シアーは画像の幾何学的形状を変え、水平な傾きを作り出します。これにより、モデルが異なる方向と位置でオブジェクトを認識するのを学習するのを助けます。
+生成したテキスト画像にカスタム操作を適用します。
+
+まず、せん断変換を適用する例を示します。ここでは `Shear` を例に取ります。
+
+`Shear` クラスは画像にせん断変換を適用します。せん断は画像の幾何形状を変化させ、水平方向の傾斜を作り出します。これにより、モデルが異なる方向や位置で対象を認識する能力を学習するのに役立ちます。
 
 - **パラメータ**
 
-  - `max_shear_left`: 左への最大シアー角度。デフォルト値は 20 度です。
-  - `max_shear_right`: 右への最大シアー角度。デフォルト値は同じく 20 度です。
-  - `p`: 操作の確率。デフォルトは 0.5 で、与えられた画像に 50%の確率でシアー変換が適用されます。
+  - max_shear_left: 左方向への最大せん断角度。デフォルトは 20 度。
+  - max_shear_right: 右方向への最大せん断角度。同じくデフォルトは 20 度。
+  - p: 操作の確率。デフォルトは 0.5 で、任意の画像が 50%の確率でせん断されます。
 
 - **使用方法**
 
@@ -30,58 +36,62 @@ sidebar_position: 5
   gen = WordCanvas()
   shear = Shear(max_shear_left=20, max_shear_right=20, p=0.5)
 
-  img, _ = gen('Hello, World!')
+  img = gen('Hello, World!')
   img = shear(img)
   ```
 
   ![shear_example](./resources/shear_example.jpg)
 
-## 例 2: 回転変換
+## サンプル 2：回転変換
 
-回転変換を実装するために、`albumentations` から `SafeRotate` クラスをインポートします。
+回転変換を実装するには、`albumentations` の `SafeRotate` クラスを使用します。
 
-`Shift`、`Scale`、`Rotate` に関連する操作を使用する際、背景色の埋め込み問題が発生します。
+`Shift`、`Scale`、`Rotate` 関連の操作を使用する場合、背景色の塗りつぶしに関する問題が発生します。
 
-この場合、`infos` から背景色を取得する必要があります。
+このとき、`infos` 情報を呼び出して背景色を取得する必要があります。
 
 ```python
+import cv2
 from wordcanvas import ExampleAug, WordCanvas
 import albumentations as A
 
 gen = WordCanvas(
     background_color=(255, 255, 0),
-    text_color=(0, 0, 0)
+    text_color=(0, 0, 0),
+    return_infos=True
 )
+
+img, infos = gen('Hello, World!')
 
 aug = A.SafeRotate(
     limit=30,
     border_mode=cv2.BORDER_CONSTANT,
-    value=infos['background_color'],
+    fill=infos['background_color'],
     p=1
 )
 
-img, infos = gen('Hello, World!')
 img = aug(image=img)['image']
 ```
 
 ![rotate_example](./resources/rotate_example.jpg)
 
-## 例 3: クラスの動作を変更
+## サンプル 3：クラス動作の変更
 
-ここまでのコードで気づいたかもしれませんが：
+コードを書き進めるうちに、以下の点に気付くかもしれません：
 
-- `WordCanvas` で生成した画像が毎回ランダムな背景色を持っていると、`albumentations` クラスを毎回再初期化する必要があるのは非効率です。
+- 毎回ランダムな背景色で画像を生成する場合、毎回 `albumentations` のクラスを再初期化する必要があるのは効率的ではないのでは？
 
-代わりに、`albumentations` の動作を変更して、一度の初期化で繰り返し使用できるようにする方法を示します。
+もしかすると、`albumentations` の動作を変更し、一度初期化するだけで使い続けられるようにできるかもしれません。
 
 ```python
 import albumentations as A
 import cv2
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 
-gen = WordCanvas(
-    random_background_color=True
+gen = RandomWordCanvas(
+    random_background_color=True,
+    return_infos=True
 )
 
 aug = A.SafeRotate(
@@ -95,7 +105,7 @@ for _ in range(8):
     img, infos = gen('Hello, World!')
 
     # albumentations クラスの動作を変更
-    aug.value = infos['background_color']
+    aug.fill = infos['background_color']
 
     img = aug(image=img)['image']
 
@@ -108,32 +118,35 @@ img = np.concatenate(imgs, axis=0)
 ![bgcolor_example](./resources/bgcolor_example.jpg)
 
 :::danger
-直接 `albumentations` のクラスの動作を変更する方法は、複数スレッドでのトレーニング環境では問題を引き起こす可能性があるため、推奨しません。なるべく `例2` の方法を使用してください。
+例 2 の方法を使用することを推奨します（たとえ少し冗長に見えても）。`albumentations` クラスの動作を直接変更すると、マルチスレッド環境で問題が発生する可能性がありますので、十分に注意してください。
 :::
 
-## 例 4: 背景の追加
+## サンプル 4：背景の追加
 
-単純な文字画像に加えて背景を追加したい場合、モデルの汎化能力を向上させるために背景画像を準備し、以下の例に従ってください。
+単なるテキスト画像では満足できず、背景を追加してモデルの汎化能力を向上させたい場合があります。
+
+その場合、背景画像を事前に用意し、以下の例を参考にしてください：
 
 ```python
 import albumentations as A
 import cv2
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 from albumentations import RandomCrop
 
-gen = WordCanvas(
+gen = RandomWordCanvas(
     random_text_color=True,
-    random_background_color=True
+    random_background_color=True,
+    return_infos=True
 )
 
-# ランダムな背景色の文字画像を生成
+# ランダムな色のテキスト画像を生成
 img, infos = gen('Hello, World!')
 ```
 
 ![sample25](./resources/sample25.jpg)
 
-次に、背景画像を読み込みます：
+次に、背景画像をロードします：
 
 ```python
 bg = cv2.imread('path/to/your/background.jpg')
@@ -141,7 +154,7 @@ bg = cv2.imread('path/to/your/background.jpg')
 
 [![bg_example](./resources/bg_example.jpg)](https://www.lccnet.com.tw/lccnet/article/details/2274)
 
-その後、背景からランダムに切り取った領域に文字画像を重ねます：
+最後に、背景画像からランダムに領域を切り取り、テキスト画像を重ねます：
 
 ```python
 bg = RandomCrop(img.shape[0], img.shape[1])(image=bg)['image']
@@ -151,11 +164,11 @@ result_img = np.where(img == infos['background_color'], bg, img)
 
 ![bg_result](./resources/sample26.jpg)
 
-## 例 5: 透視変換
+## サンプル 5：透視変換
 
-透視変換は、画像を新しい視点に投影する変換で、物体が異なる角度や距離でどう見えるかをシミュレートすることができます。
+透視変換は、画像を新しい視平面に投影する変換で、異なる角度や距離での外観をシミュレートできます。
 
-前の例に続き、透視変換を適用してから背景を合成する方法を示します：
+前の例を引き継ぎ、画像に透視変換を適用した後で背景を重ねます：
 
 ```python
 from albumentations import Perspective
@@ -163,7 +176,7 @@ from albumentations import Perspective
 aug = A.Perspective(
     keep_size=True,
     fit_output=True,
-    pad_val=infos['background_color'],
+    fill=infos['background_color'],
 )
 
 img = aug(image=img)['image']
@@ -173,12 +186,12 @@ result_img = np.where(img == infos['background_color'], bg, img)
 ![sample27](./resources/sample27.jpg)
 
 :::tip
-「空間変更」の画像強化操作では、透視変換を最初に行ってから背景を追加するのがベストです。こうすることで背景が変な黒い境界を持たないようにできます。
+「空間変化」の画像拡張操作については、まず元の画像に透視変換を適用し、その後で背景画像を重ねることを推奨します。これにより、背景画像に奇妙な黒い縁が生じることを防げます。
 :::
 
-## 例 6: 強い光の反射
+## サンプル 6：強光反射
 
-通常の文字にも強い光の反射が問題になることがあります。これをシミュレートするために、`RandomSunFlare` を使用します：
+一般的なテキスト画像では、強光反射の問題が発生することがあります。この場合、`RandomSunFlare` を使用してこの状況をシミュレートできます：
 
 ```python
 from albumentations import RandomSunFlare
@@ -194,13 +207,13 @@ result_img = aug(image=result_img)['image']
 ![sample28](./resources/sample28.jpg)
 
 :::tip
-「ピクセル変更」の画像強化操作では、背景を先に追加し、次に画像強化を行うのが推奨されます。これにより背景情報が失われず、雑な斑点が現れることを避けることができます。
+「ピクセル変化」の画像拡張操作については、背景画像を重ねた後で画像拡張変換を行うことを推奨します。これにより、背景情報が失われて雑多な斑点が生じるのを防げます。
 :::
 
 ## 結論
 
-このプロジェクトの紹介は以上です。ご質問や提案がある場合は、下記にコメントしてください。できるだけ早くお答えします。
+本プロジェクトの紹介は以上で終了です。ご質問やご提案がありましたら、下にコメントを残してください。できるだけ早く返信いたします。
 
-また、特定の操作方法が分からない場合も、コメントをいただければお手伝いできる限りサポートいたします。
+また、特定の操作をどのように実現するか分からない場合も、コメントを残していただければ、できる限りサポートします。
 
-ご利用をお楽しみください！
+楽しくご利用ください！

@@ -8,6 +8,12 @@ sidebar_position: 5
 
 我們習慣使用 [**albumentations**](https://github.com/albumentations-team/albumentations) 這個套件來實現圖像增強，但是你可以使用任何你喜歡的庫。
 
+:::info
+在 `albumentations` 更新到 v2.0.0 後，許多操作的參數名稱有所變動，請注意。
+
+相關資訊請參閱：[**albumentations v2.0.0**](https://github.com/albumentations-team/albumentations/releases/tag/2.0.0)
+:::
+
 ## 範例一：剪切變換
 
 生成文字圖像後，再套用自定義的操作。
@@ -30,7 +36,7 @@ sidebar_position: 5
   gen = WordCanvas()
   shear = Shear(max_shear_left=20, max_shear_right=20, p=0.5)
 
-  img, _ = gen('Hello, World!')
+  img = gen('Hello, World!')
   img = shear(img)
   ```
 
@@ -45,22 +51,25 @@ sidebar_position: 5
 這時應該調用 `infos` 資訊來獲取背景色。
 
 ```python
+import cv2
 from wordcanvas import ExampleAug, WordCanvas
 import albumentations as A
 
 gen = WordCanvas(
     background_color=(255, 255, 0),
-    text_color=(0, 0, 0)
+    text_color=(0, 0, 0),
+    return_infos=True
 )
+
+img, infos = gen('Hello, World!')
 
 aug =  A.SafeRotate(
     limit=30,
     border_mode=cv2.BORDER_CONSTANT,
-    value=infos['background_color'],
+    fill=infos['background_color'],
     p=1
 )
 
-img, infos = gen('Hello, World!')
 img = aug(image=img)['image']
 ```
 
@@ -70,7 +79,7 @@ img = aug(image=img)['image']
 
 程式寫到這裡，你可能會注意到：
 
-- 如果每次 `WordCanvas` 生成圖像都帶有隨機背景色，那麼每次都需要重新初始化 `albumentations` 的類別，是不是不科學？
+- 如果每次生成圖像都帶有隨機背景色，那麼每次都需要重新初始化 `albumentations` 的類別，是不是不科學？
 
 或許我們可以修改 `albumentations` 的行為，讓它只需要一次初始化就可以一直使用？
 
@@ -78,11 +87,12 @@ img = aug(image=img)['image']
 import albumentations as A
 import cv2
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 
 
-gen = WordCanvas(
-    random_background_color=True
+gen = RandomWordCanvas(
+    random_background_color=True,
+    return_infos=True
 )
 
 aug = A.SafeRotate(
@@ -96,7 +106,7 @@ for _ in range(8):
     img, infos = gen('Hello, World!')
 
     # 修改 albu 類別行為
-    aug.value = infos['background_color']
+    aug.fill = infos['background_color']
 
     img = aug(image=img)['image']
 
@@ -122,12 +132,13 @@ img = np.concatenate(imgs, axis=0)
 import albumentations as A
 import cv2
 import numpy as np
-from wordcanvas import WordCanvas
+from wordcanvas import RandomWordCanvas
 from albumentations import RandomCrop
 
-gen = WordCanvas(
+gen = RandomWordCanvas(
     random_text_color=True,
-    random_background_color=True
+    random_background_color=True,
+    return_infos=True
 )
 
 # 生成一張隨機顏色文字圖
@@ -166,7 +177,7 @@ from albumentations import Perspective
 aug = A.Perspective(
     keep_size=True,
     fit_output=True,
-    pad_val=infos['background_color'],
+    fill=infos['background_color'],
 )
 
 img = aug(image=img)['image']

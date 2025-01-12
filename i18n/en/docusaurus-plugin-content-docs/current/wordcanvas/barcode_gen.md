@@ -4,10 +4,6 @@ sidebar_position: 7
 
 # BarcodeGenerator
 
-:::tip
-This feature was added in version 0.5.0.
-:::
-
 This functionality is a small feature we often implement in practice. Creating a separate project for it would be excessive, so we included it here.
 
 We implemented barcode generators for Code 39 and Code 128 formats.
@@ -23,7 +19,6 @@ Information above excerpted from [**Wikipedia: Code39**](https://en.wikipedia.or
 Usage example:
 
 ```python
-import docsaidkit as D
 from wordcanvas import Code39Generator
 
 gen = Code39Generator(
@@ -32,7 +27,6 @@ gen = Code39Generator(
 )
 
 img = gen('ABCD1234', w=400, h=128)
-D.imwrite(img)
 ```
 
 - `width_rate` sets the ratio between narrow and wide bars, defaulting to 2. The recommended ratio is between 1:2 and 1:3.
@@ -53,7 +47,6 @@ Compared to Code 39, Code 128 uses fewer elements to represent more characters, 
 Usage example:
 
 ```python
-import docsaidkit as D
 from wordcanvas import Code128Generator, CodeType
 
 # Using default values
@@ -63,7 +56,6 @@ gen = Code128Generator(
 )
 
 barcode_img = gen("ABCD1234", w=400, h=128)
-D.imwrite(barcode_img)
 ```
 
 ![code128 example](./resources/code128_example.jpg)
@@ -76,7 +68,6 @@ Draw a 128 x 400 Code 39 barcode on a 200 x 600 canvas, placing it at coordinate
 
 ```python
 import numpy as np
-import docsaidkit as D
 from wordcanvas import Code39Generator
 
 gen = Code39Generator()

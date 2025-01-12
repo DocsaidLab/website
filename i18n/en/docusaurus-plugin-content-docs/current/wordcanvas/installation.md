@@ -4,15 +4,31 @@ sidebar_position: 2
 
 # Installation
 
-Currently, there is no package available on PyPI, and there are no plans to provide one in the near future. To use this project, you must clone it directly from Github and then install the required dependencies.
+We offer installation via PyPI or by cloning this project from GitHub.
+
+## Install via PyPI
+
+1. Install `wordcanvas-docsaid`:
+
+   ```bash
+   pip install wordcanvas-docsaid
+   ```
+
+2. Verify the installation:
+
+   ```bash
+   python -c "import wordcanvas; print(wordcanvas.__version__)"
+   ```
+
+3. If you see the version number, the installation was successful.
+
+## Install via GitHub
 
 :::tip
-Before installation, please ensure you have installed `DocsaidKit`.
+To install via GitHub, make sure you have `Capybara` installed.
 
-If you have not installed `DocsaidKit`, please refer to the [**DocsaidKit Installation Guide**](../docsaidkit/installation).
+If not, refer to the [**Capybara Installation Guide**](../capybara/installation.md).
 :::
-
-## Installation Steps
 
 1. **Clone the project:**
 
@@ -20,16 +36,16 @@ If you have not installed `DocsaidKit`, please refer to the [**DocsaidKit Instal
    git clone https://github.com/DocsaidLab/WordCanvas.git
    ```
 
-2. **Enter the project directory:**
+2. **Navigate to the project directory:**
 
    ```bash
    cd WordCanvas
    ```
 
-3. **Install dependencies:**
+3. **Install the dependencies:**
 
    ```bash
-   pip install wheel
+   pip install setuptools wheel
    ```
 
 4. **Build the package:**
@@ -41,20 +57,16 @@ If you have not installed `DocsaidKit`, please refer to the [**DocsaidKit Instal
 5. **Install the package:**
 
    ```bash
-   pip install dist/wordcanvas-*-py3-none-any.whl
+   pip install dist/wordcanvas_docsaid-*-py3-none-any.whl
    ```
 
-Following these steps, you should be able to successfully install `WordCanvas`.
+By following these steps, you should be able to successfully install `WordCanvas`.
 
-Once installed, you are ready to use the project.
-
-## Test the Installation
-
-You can test whether the installation was successful with the following command:
+Once the installation is complete, you can use the following command to test if the installation was successful:
 
 ```bash
 python -c "import wordcanvas; print(wordcanvas.__version__)"
-# >>> 0.4.2
+# >>> 2.0.0
 ```
 
-If you see a version number similar to `0.4.2`, it indicates the installation was successful.
+If you see a version number like `2.0.0`, the installation was successful.
