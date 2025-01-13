@@ -36,7 +36,7 @@ Currently, we have several completed projects available on GitHub, including:
 
   ***
 
-- [**DocsaidKit (soon to be deprecated)**](./docsaidkit/index.md):
+- **DocsaidKit (deprecated)**:
 
   After some time of usage, we've decided to split this toolkit by removing the PyTorch-related training tools and keeping only the model inference and image processing functionalities.
 
@@ -47,6 +47,8 @@ Currently, we have several completed projects available on GitHub, including:
   - [**Otter**](https://github.com/DocsaidLab/Otter): PyTorch-Lightning-based training tools.
 
   By splitting these modules, we gain more flexibility during training and deployment, making them easier to maintain.
+
+  We've updated all projects that depend on `DocsaidKit` to the new modules, so this project is no longer maintained. We've removed the related documentation and kept this page only as a memorial.
 
   :::tip
   You might wonder why these packages have such names? Did we drink too much? 🤔🤔🤔
