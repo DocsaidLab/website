@@ -54,7 +54,6 @@ images = convert_from_bytes(open('/path/to/your/pdf/file.pdf', 'rb').read())
 詳細については以下を参照してください：
 
 - `pdf2image` の[**公式ドキュメント**](https://github.com/Belval/pdf2image/tree/master)；
-- または、私たちが改良したツール [**pdf2imgs**](https://github.com/DocsaidLab/DocsaidKit/blob/eb8ac0a56779a75dcc951c683001e6129052cc5a/docsaidkit/vision/improc.py#L275)。
 
 ## 結論
 

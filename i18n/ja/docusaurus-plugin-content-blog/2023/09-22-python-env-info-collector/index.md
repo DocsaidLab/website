@@ -26,15 +26,15 @@ pip install psutil requests
 :::tip
 完全なコードは GitHub 上に公開しています。本記事の最後にもコードを掲載しています。
 
-- [**system_info.py**](https://github.com/DocsaidLab/DocsaidKit/blob/main/docsaidkit/utils/system_info.py)
+- [**system_info.py**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
   :::
 
 ## `get_package_versions` の使用
 
-`docsaidkit` をインストール済みでプロジェクトに含まれている場合、以下のコードでテストできます：
+`capybara` をインストール済みでプロジェクトに含まれている場合、以下のコードでテストできます：
 
 ```python
-from docsaidkit import get_package_versions
+from capybara import get_package_versions
 
 get_package_versions()
 ```
@@ -68,7 +68,7 @@ get_package_versions()
 テストコード：
 
 ```python
-from docsaidkit import get_gpu_cuda_versions
+from capybara import get_gpu_cuda_versions
 
 get_gpu_cuda_versions()
 ```
@@ -90,7 +90,7 @@ get_gpu_cuda_versions()
 テストコード：
 
 ```python
-from docsaidkit import get_system_info
+from capybara import get_system_info
 
 get_system_info()
 ```

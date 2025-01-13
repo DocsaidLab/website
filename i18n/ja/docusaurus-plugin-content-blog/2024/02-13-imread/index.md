@@ -176,5 +176,3 @@ def imread(
 
     return img
 ```
-
-詳細なコードについては以下を参照してください：[imread.py](https://github.com/DocsaidLab/DocsaidKit/blob/eb8ac0a56779a75dcc951c683001e6129052cc5a/docsaidkit/vision/improc.py#L197)

@@ -55,10 +55,6 @@ You can refer to the:
 
 - [**official documentation**](https://github.com/Belval/pdf2image/tree/master) of `pdf2image`;
 
-or check our own modified:
-
-- [**pdf2imgs**](https://github.com/DocsaidLab/DocsaidKit/blob/eb8ac0a56779a75dcc951c683001e6129052cc5a/docsaidkit/vision/improc.py#L275)
-
 function for more usage examples.
 
 ## Conclusion

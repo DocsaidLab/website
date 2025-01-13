@@ -55,10 +55,6 @@ images = convert_from_bytes(open('/path/to/your/pdf/file.pdf', 'rb').read())
 
 - `pdf2image` 的[**官方文件**](https://github.com/Belval/pdf2image/tree/master)；
 
-或是參考我們自己改寫的
-
-- [**pdf2imgs**](https://github.com/DocsaidLab/DocsaidKit/blob/eb8ac0a56779a75dcc951c683001e6129052cc5a/docsaidkit/vision/improc.py#L275)
-
 來了解更多用法。
 
 ## 結語

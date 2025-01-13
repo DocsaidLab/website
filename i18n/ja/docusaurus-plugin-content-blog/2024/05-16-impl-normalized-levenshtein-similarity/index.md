@@ -129,10 +129,6 @@ def compute(self) -> torch.Tensor:
 
 ## 完全な実装
 
-:::info
-コードは [**DocsaidKit/.../normalized_levenshtein_similarity.py**](https://github.com/DocsaidLab/DocsaidKit/blob/main/docsaidkit/torch/metrics/normalized_levenshtein_similarity.py) に同期されています。
-:::
-
 以下は完全な実装コードです：
 
 ```python

@@ -127,11 +127,7 @@ def compute(self) -> torch.Tensor:
 
 這裡需要注意的部分是當我們指定 `reduction` 為 `none` 時，我們需要將所有的 NLS 值返回，而不是計算平均值。這邊我參考了 `torchmetrics.text.EditDistance` 的實現方式，使用了 `dim_zero_cat` 來將列表中的值拼接在一起，確保回傳的是一個 `Tensor`。
 
-## 完整的實作
-
-:::info
-我們將程式同步更新到 [**DocsaidKit/.../normalized_levenshtein_similarity.py**](https://github.com/DocsaidLab/DocsaidKit/blob/main/docsaidkit/torch/metrics/normalized_levenshtein_similarity.py)
-:::
+## 程式碼
 
 完整的實作如下：
 

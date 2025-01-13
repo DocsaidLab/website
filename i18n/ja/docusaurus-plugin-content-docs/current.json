@@ -19,10 +19,7 @@
     "message": "DocClassifier",
     "description": "The label for category DocClassifier in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.DocsaidKit": {
-    "message": "DocsaidKit",
-    "description": "The label for category DocsaidKit in sidebar tutorialSidebar"
-  },
+
   "sidebar.tutorialSidebar.category.函式庫": {
     "message": "関数ライブラリ",
     "description": "The label for category 函式庫 in sidebar tutorialSidebar"

@@ -11,10 +11,6 @@
     "message": "MasterLink",
     "description": "The label for category 元富證券 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.DocsaidKit": {
-    "message": "DocsaidKit",
-    "description": "The label for category DocsaidKit in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.函式庫": {
     "message": "Libraries",
     "description": "The label for category 函式庫 in sidebar tutorialSidebar"
