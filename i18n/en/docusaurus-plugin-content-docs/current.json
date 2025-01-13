@@ -130,5 +130,13 @@
   "sidebar.tutorialSidebar.category.MRZScanner": {
     "message": "MRZScanner",
     "description": "The label for category MRZScanner in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Model Training Guide": {
+    "message": "Model Training Guide",
+    "description": "The label for category Model Training Guide in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Capybara": {
+    "message": "Capybara",
+    "description": "The label for category Capybara in sidebar tutorialSidebar"
   }
 }

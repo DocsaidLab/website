@@ -478,11 +478,14 @@
     "description": "Title for homepage tagline"
   },
   "homepage.recentUpdatesTitle": {
-    "message": "Recent Paper Updates",
-    "description": "Title for homepage recent updates"
+    "message": "Recent Paper Updates"
   },
   "homepage.latestBlogPostsTitle": {
     "message": "Recent Blog Posts",
     "description": "Title for homepage latest blog posts"
+  },
+  "theme.blog.author.noPosts": {
+    "message": "This author has not written any posts yet.",
+    "description": "The text for authors with 0 blog post"
   }
 }

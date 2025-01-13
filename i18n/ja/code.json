@@ -474,8 +474,7 @@
     "description": "Title for homepage tagline"
   },
   "homepage.recentUpdatesTitle": {
-    "message": "最近の論文更新",
-    "description": "Title for homepage recent updates"
+    "message": "最近の論文更新"
   },
   "homepage.latestBlogPostsTitle": {
     "message": "最新のブログ記事",

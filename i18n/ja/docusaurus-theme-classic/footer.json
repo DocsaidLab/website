@@ -29,7 +29,7 @@
   },
   "link.item.label.成為作者": {
     "message": "著者になる",
-    "description": "The label of footer link with label=成為作者"
+    "description": "The label of footer link with label=成為作者 linking to /become-an-author"
   },
   "copyright": {
     "message": "Copyright © 2024 DOCSAID.",

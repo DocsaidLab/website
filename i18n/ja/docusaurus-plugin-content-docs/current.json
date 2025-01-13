@@ -19,7 +19,6 @@
     "message": "DocClassifier",
     "description": "The label for category DocClassifier in sidebar tutorialSidebar"
   },
-
   "sidebar.tutorialSidebar.category.函式庫": {
     "message": "関数ライブラリ",
     "description": "The label for category 函式庫 in sidebar tutorialSidebar"
@@ -131,5 +130,13 @@
   "sidebar.tutorialSidebar.category.WordCanvas": {
     "message": "WordCanvas",
     "description": "The label for category WordCanvas in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.モデル訓練ガイド": {
+    "message": "モデル訓練ガイド",
+    "description": "The label for category モデル訓練ガイド in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Capybara": {
+    "message": "Capybara",
+    "description": "The label for category Capybara in sidebar tutorialSidebar"
   }
 }

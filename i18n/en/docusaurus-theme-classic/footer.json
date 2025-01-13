@@ -17,15 +17,15 @@
   },
   "link.item.label.工作日誌": {
     "message": "Worklog",
-    "description": "The label of footer link with label=Worklog linking to https://docsaid.org/worklog"
+    "description": "The label of footer link with label=工作日誌 linking to /worklog"
   },
   "link.item.label.使用條款": {
     "message": "TermsOfUse",
-    "description": "The label of footer link with label=使用條款 linking to https://docsaid.org/terms-of-service"
+    "description": "The label of footer link with label=使用條款 linking to /terms-of-service"
   },
   "link.item.label.隱私政策": {
     "message": "Privacy Policy",
-    "description": "The label of footer link with label=隱私政策 linking to https://docsaid.org/privacy-policy"
+    "description": "The label of footer link with label=隱私政策 linking to /privacy-policy"
   },
   "copyright": {
     "message": "Copyright © 2024 DOCSAID.",
@@ -49,6 +49,6 @@
   },
   "link.item.label.成為作者": {
     "message": "Become an author",
-    "description": "The label of footer link with label=成為作者"
+    "description": "The label of footer link with label=成為作者 linking to /become-an-author"
   }
 }
