@@ -2,11 +2,106 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://docsaid.org/ja/blog</id>
     <title>DOCSAID Blog</title>
-    <updated>2024-12-26T00:00:00.000Z</updated>
+    <updated>2025-01-13T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://docsaid.org/ja/blog"/>
     <subtitle>DOCSAID Blog</subtitle>
     <icon>https://docsaid.org/ja/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[便利な GitHub Markdown の文法]]></title>
+        <id>https://docsaid.org/ja/blog/github-markdown-advanced-syntax</id>
+        <link href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax"/>
+        <updated>2025-01-13T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[あまり知られていないが便利な文法について紹介します。]]></summary>
+        <content type="html"><![CDATA[<p>GitHub 上で README ファイルを書くことに慣れている方も多いでしょう。しかし、多くの場合、基本的な文法しか使用されていないことがほとんどです。</p>
+<p>実は、見栄えがよく、便利な文法機能がたくさんあります。それを見逃さないでください！</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="基本的な文法">基本的な文法<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E6%96%87%E6%B3%95" class="hash-link" aria-label="基本的な文法 への直接リンク" title="基本的な文法 への直接リンク">​</a></h2>
+<p>まずは 10 秒で復習しましょう。よく使われる基本的な文法は以下の通りです：</p>
+<table><thead><tr><th>機能</th><th>文法</th><th>サンプル</th></tr></thead><tbody><tr><td><strong>見出し</strong></td><td><code># 見出し1</code>, <code>## 見出し2</code>, <code>### 見出し3</code></td><td><code># 見出し1</code>, <code>## 見出し2</code>, <code>### 見出し3</code></td></tr><tr><td><strong>太字</strong></td><td><code>**文字**</code> または <code>__文字__</code></td><td><code>**太字の文字**</code></td></tr><tr><td><strong>斜体</strong></td><td><code>*文字*</code> または <code>_文字_</code></td><td><code>*斜体の文字*</code></td></tr><tr><td><strong>取り消し線</strong></td><td><code>~~文字~~</code></td><td><code>~~取り消し文字~~</code></td></tr><tr><td><strong>引用</strong></td><td><code>&gt; 引用文</code></td><td><code>&gt; これは引用です</code></td></tr><tr><td><strong>コード（1 行）</strong></td><td><code>`コード内容`</code></td><td><code>`print("Hello, World!")`</code></td></tr><tr><td><strong>コード（複数行）</strong></td><td>```</td><td><code>print("複数行コード")</code></td></tr><tr><td><strong>箇条書き</strong></td><td><code>- 項目</code> または <code>* 項目</code></td><td><code>- 箇条書き1</code> または <code>* 箇条書き2</code></td></tr><tr><td><strong>番号付きリスト</strong></td><td><code>1. 項目</code></td><td><code>1. 項目1</code> <br> <code>2. 項目2</code></td></tr><tr><td><strong>リンク</strong></td><td><code>[リンクテキスト](URL)</code></td><td><code>[GitHub](https://github.com)</code></td></tr><tr><td><strong>区切り線</strong></td><td><code>---</code> または <code>***</code></td><td><code>---</code> または <code>***</code></td></tr><tr><td><strong>絵文字</strong></td><td><code>:絵文字コード:</code></td><td><code>:smile:</code>, <code>:thumbsup:</code></td></tr></tbody></table>
+<p>簡単ですね！これらは誰もが知っている基本的な文法です。</p>
+<p>しかし、これら以外にも、Markdown には文書を整理するための高度な機能が多数存在します。</p>
+<p>以下では、いくつかの便利な文法機能を見ていきましょう。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="1-タスクリスト">1. タスクリスト<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#1-%E3%82%BF%E3%82%B9%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88" class="hash-link" aria-label="1. タスクリスト への直接リンク" title="1. タスクリスト への直接リンク">​</a></h2>
+<p>タスクリストは、項目の計画、進行状況、または未完了のタスクをチェックボックス形式で表示できます。</p>
+<p>特に複数人で協力する際に、完了した項目と未完了の項目を明確に示すことができ、進捗追跡や分担に役立ちます。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="書き方例">書き方例<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E6%9B%B8%E3%81%8D%E6%96%B9%E4%BE%8B" class="hash-link" aria-label="書き方例 への直接リンク" title="書き方例 への直接リンク">​</a></h3>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">- [x] プロジェクトの初期設定を完了</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- [ ] ユーザー要件文書の作成</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- [ ] フロントエンドとバックエンドの統合</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>上記の例では、<code>[x]</code> は完了を、<code>[ ]</code> は未完了を意味します。</p>
+<p>GitHub の Issues、Pull Requests、または Discussions では、誰かが作業をチェックすると、タスクリスト全体が即座に更新されます。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="効果の表示">効果の表示<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E5%8A%B9%E6%9E%9C%E3%81%AE%E8%A1%A8%E7%A4%BA" class="hash-link" aria-label="効果の表示 への直接リンク" title="効果の表示 への直接リンク">​</a></h3>
+<ul class="contains-task-list containsTaskList_mC6p">
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->プロジェクトの初期設定を完了</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->ユーザー要件文書の作成</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->フロントエンドとバックエンドの統合</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="2-警告メッセージ">2. 警告メッセージ<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#2-%E8%AD%A6%E5%91%8A%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8" class="hash-link" aria-label="2. 警告メッセージ への直接リンク" title="2. 警告メッセージ への直接リンク">​</a></h2>
+<p>警告メッセージは、読者にとって「無視できない」重要な情報を特別な枠線やアイコンで示します。</p>
+<p>この機能は Markdown のネイティブ文法ではなく、GitHub が提供する拡張機能の一つです。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>ヒント</div><div class="admonitionContent_BuS1"><p>拡張機能であるため、他の Markdown エディタやウェブサイトでは正しく表示されない可能性があります。</p><p>また、Docusaurus の文法とは異なるため、変換時に注意が必要です。</p></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="書き方例-1">書き方例<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E6%9B%B8%E3%81%8D%E6%96%B9%E4%BE%8B-1" class="hash-link" aria-label="書き方例 への直接リンク" title="書き方例 への直接リンク">​</a></h3>
+<p>GitHub では、<code>NOTE</code>、<code>TIP</code>、<code>IMPORTANT</code>、<code>WARNING</code>、<code>CAUTION</code> の 5 種類の警告タイプが提供されています。</p>
+<div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> [!NOTE]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> Useful information that users should know, even when skimming content.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> [!TIP]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> Helpful advice for doing things better or more easily.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> [!IMPORTANT]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> Key information users need to know to achieve their goal.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> [!WARNING]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> Urgent info that needs immediate user attention to avoid problems.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> [!CAUTION]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> Advises about risks or negative outcomes of certain actions.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="効果の表示-1">効果の表示<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E5%8A%B9%E6%9E%9C%E3%81%AE%E8%A1%A8%E7%A4%BA-1" class="hash-link" aria-label="効果の表示 への直接リンク" title="効果の表示 への直接リンク">​</a></h3>
+<p>この場所では直接効果を表示できないため、GitHub からのスクリーンショットを以下に示します：</p>
+<p><img decoding="async" loading="lazy" alt="GitHub 警告の効果" src="https://docsaid.org/ja/assets/images/img1-5dc9f0d59fde6f084fa1ba4305ada261.jpg" width="1224" height="756" class="img_ev3q"></p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="3-脚注">3. 脚注<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#3-%E8%84%9A%E6%B3%A8" class="hash-link" aria-label="3. 脚注 への直接リンク" title="3. 脚注 への直接リンク">​</a></h2>
+<p>長文の説明文や論文形式のテキストを書く際、参考文献や補足説明を追加する必要があります。</p>
+<p>GitHub Markdown では、脚注機能を利用して、テキストをすっきりと保ちながら補足情報をリンク形式で呼び出すことができます。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p>このセクションはカスタムアンカーセクションの例示用です。気にしないでください。</p><p><a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#my-custom-anchor"><strong>ここをクリックしてカスタムセクションに移動</strong></a></p></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="書き方例-2">書き方例<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E6%9B%B8%E3%81%8D%E6%96%B9%E4%BE%8B-2" class="hash-link" aria-label="書き方例 への直接リンク" title="書き方例 への直接リンク">​</a></h3>
+<div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">このステップでは、特別な機能を使用します[^1]。</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token url-reference url punctuation" style="color:#393A34">[</span><span class="token url-reference url variable" style="color:#36acaa">^1</span><span class="token url-reference url punctuation" style="color:#393A34">]</span><span class="token url-reference url punctuation" style="color:#393A34">:</span><span class="token url-reference url" style="color:#36acaa"> ここに詳しい補足説明や外部リンクを記載できます。</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>レンダリング後、本文には小さな上付き番号が表示され、読者がクリックすると詳細な注釈が書かれた本文の下部にジャンプします。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="効果の表示-2">効果の表示<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E5%8A%B9%E6%9E%9C%E3%81%AE%E8%A1%A8%E7%A4%BA-2" class="hash-link" aria-label="効果の表示 への直接リンク" title="効果の表示 への直接リンク">​</a></h3>
+<p>このステップでは、特別な機能を使用します<sup><a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#user-content-fn-1-ea19a7" id="user-content-fnref-1-ea19a7" data-footnote-ref="true" aria-describedby="footnote-label">1</a></sup>。（👈 上付き番号をクリックしてみてください）</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="4-エスケープ文字">4. エスケープ文字<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#4-%E3%82%A8%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%97%E6%96%87%E5%AD%97" class="hash-link" aria-label="4. エスケープ文字 への直接リンク" title="4. エスケープ文字 への直接リンク">​</a></h2>
+<p>特定の記号（例えばアスタリスク（*）やバッククォート（`）など）が Markdown のコマンド記号として解釈される場合に、それらをそのまま表示させたい場合があります。このとき、「エスケープ」（Escaping）を使ってこれらの記号が Markdown として解釈されないようにします。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="書き方例-3">書き方例<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E6%9B%B8%E3%81%8D%E6%96%B9%E4%BE%8B-3" class="hash-link" aria-label="書き方例 への直接リンク" title="書き方例 への直接リンク">​</a></h3>
+<div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token code-snippet code keyword" style="color:#00009f">`*`</span><span class="token plain"> 記号を表示する場合、前にバックスラッシュを追加します：\*</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Let's rename \*our-new-project\* to \*our-old-project\*.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="効果の表示-3">効果の表示<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E5%8A%B9%E6%9E%9C%E3%81%AE%E8%A1%A8%E7%A4%BA-3" class="hash-link" aria-label="効果の表示 への直接リンク" title="効果の表示 への直接リンク">​</a></h3>
+<p><code>*</code> 記号を表示する場合、前にバックスラッシュを追加します：*</p>
+<p>Let's rename *our-new-project* to *our-old-project*.</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="5-カスタムアンカー">5. カスタムアンカー<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#5-%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%A2%E3%83%B3%E3%82%AB%E3%83%BC" class="hash-link" aria-label="5. カスタムアンカー への直接リンク" title="5. カスタムアンカー への直接リンク">​</a></h2>
+<p>見出しには自動的にアンカーが生成され、特定のセクションへのリンクを簡単に作成できます。しかし、時には非見出し部分（特定の段落や重要な表など）にもリンクを提供したい場合があります。その場合、HTML のアンカータグを手動で挿入することで対応可能です。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="書き方例-4">書き方例<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E6%9B%B8%E3%81%8D%E6%96%B9%E4%BE%8B-4" class="hash-link" aria-label="書き方例 への直接リンク" title="書き方例 への直接リンク">​</a></h3>
+<ol>
+<li>
+<p>見出しへのリンク：</p>
+<div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token url" style="color:#36acaa">[</span><span class="token url content" style="color:#36acaa">「脚注」セクションへのリンク</span><span class="token url" style="color:#36acaa">](</span><span class="token url" style="color:#36acaa">#3-脚注</span><span class="token url" style="color:#36acaa">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p>カスタム段落へのリンク：</p>
+<div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token tag punctuation" style="color:#393A34">&lt;</span><span class="token tag" style="color:#00009f">a</span><span class="token tag" style="color:#00009f"> </span><span class="token tag attr-name" style="color:#00a4db">name</span><span class="token tag attr-value punctuation attr-equals" style="color:#393A34">=</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag attr-value" style="color:#e3116c">my-custom-anchor</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag punctuation" style="color:#393A34">&gt;</span><span class="token tag punctuation" style="color:#393A34">&lt;/</span><span class="token tag" style="color:#00009f">a</span><span class="token tag punctuation" style="color:#393A34">&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ここは特別な段落で、文書内で直接リンクしたい部分です。</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token url" style="color:#36acaa">[</span><span class="token url content" style="color:#36acaa">カスタム段落へのリンク</span><span class="token url" style="color:#36acaa">](</span><span class="token url" style="color:#36acaa">#my-custom-anchor</span><span class="token url" style="color:#36acaa">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ol>
+<p>技術文書やガイドを作成する際にアンカーをうまく活用することで、ユーザーが効率的に内容を参照できるようになります。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="効果の表示-4">効果の表示<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E5%8A%B9%E6%9E%9C%E3%81%AE%E8%A1%A8%E7%A4%BA-4" class="hash-link" aria-label="効果の表示 への直接リンク" title="効果の表示 への直接リンク">​</a></h3>
+<p><a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#3-%E8%84%9A%E6%B3%A8"><strong>ここをクリックして「脚注」セクションへ移動</strong></a></p>
+<hr>
+<a name="my-custom-anchor"></a>
+<p><strong>ここは特別な段落で、文書内で直接リンクしたい部分です。</strong></p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E7%B5%90%E8%AB%96" class="hash-link" aria-label="結論 への直接リンク" title="結論 への直接リンク">​</a></h2>
+<p>これらの機能を活用することで、文書の作成がより柔軟になり、内容をより豊かに表現することができます。</p>
+<p>この記事が、GitHub Markdown の高度な文法を理解し、文書作成の際に自信を持って使いこなせるようになる一助となれば幸いです。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="参考資料">参考資料<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#%E5%8F%82%E8%80%83%E8%B3%87%E6%96%99" class="hash-link" aria-label="参考資料 への直接リンク" title="参考資料 への直接リンク">​</a></h2>
+<ul>
+<li><a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" target="_blank" rel="noopener noreferrer"><strong>Basic writing and formatting syntax</strong></a></li>
+</ul>
+<!-- -->
+<section data-footnotes="true" class="footnotes"><h2 class="anchor anchorWithHideOnScrollNavbar_WYt5 sr-only" id="footnote-label">Footnotes<a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#footnote-label" class="hash-link" aria-label="Footnotes への直接リンク" title="Footnotes への直接リンク">​</a></h2>
+<ol>
+<li id="user-content-fn-1-ea19a7">
+<p>脚注セクション用の補足説明例。 <a href="https://docsaid.org/ja/blog/github-markdown-advanced-syntax#user-content-fnref-1-ea19a7" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>]]></content>
+        <author>
+            <name>Zephyr</name>
+            <uri>https://github.com/zephyr-sh</uri>
+        </author>
+        <category label="GitHub" term="GitHub"/>
+        <category label="Markdown" term="Markdown"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[フォントファイルの情報を取得]]></title>
         <id>https://docsaid.org/ja/blog/extract-font-info-by-python</id>
@@ -2163,144 +2258,5 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
         </author>
         <category label="vscode" term="vscode"/>
         <category label="settings" term="settings"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Nextcloud 構築記録]]></title>
-        <id>https://docsaid.org/ja/blog/setting-up-nextcloud</id>
-        <link href="https://docsaid.org/ja/blog/setting-up-nextcloud"/>
-        <updated>2024-03-04T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Ubuntu 22.04 上での Nextcloud 構築プロセスを記録します。]]></summary>
-        <content type="html"><![CDATA[<p>以前、ファイルを Google Drive に保存しており、ファイルのダウンロードは wget コマンドを使っていました。</p>
-<p>しかし、ある日突然、以前のダウンロードコマンドが使えなくなりました...</p>
-<p>そういうわけで、Nextcloud を試してみることにしました。</p>
-<p>以下は Ubuntu 22.04 を基にした設定手順です。</p>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>ヒント</div><div class="admonitionContent_BuS1"><p>始める前に、ドメインを用意し、そのドメインをサーバーにポイントしてください。</p><p>やり方が分からない場合は、Google で「<strong>namecheap 使い方</strong>」を検索してください。</p></div></div>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="nextcloud-のインストール">Nextcloud のインストール<a href="https://docsaid.org/ja/blog/setting-up-nextcloud#nextcloud-%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB" class="hash-link" aria-label="Nextcloud のインストール への直接リンク" title="Nextcloud のインストール への直接リンク">​</a></h2>
-<p><strong>質問 1：なぜ Nextcloud を使うのか？</strong></p>
-<ul>
-<li>自分専用のクラウドを持ちたい、他人のサーバーにファイルを置きたくないから。</li>
-</ul>
-<p><strong>質問 2：Nextcloud と Owncloud の違いは？</strong></p>
-<ul>
-<li>Nextcloud は Owncloud の開発者が分派して作ったものです。機能はほとんど同じですが、Nextcloud の開発スピードが速いのが特徴です。</li>
-</ul>
-<p><strong>質問 3：Nextcloud をどうやってインストールするのか？</strong></p>
-<ul>
-<li>この質問は少し複雑です。Nextcloud には多くのインストール方法があり、それぞれにメリットとデメリットがあります。</li>
-<li>本記事では、唯一お勧めする方法として Docker を使ったインストール手順を紹介します。</li>
-</ul>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="nextcloud-all-in-one-の設定">Nextcloud All-in-One の設定<a href="https://docsaid.org/ja/blog/setting-up-nextcloud#nextcloud-all-in-one-%E3%81%AE%E8%A8%AD%E5%AE%9A" class="hash-link" aria-label="Nextcloud All-in-One の設定 への直接リンク" title="Nextcloud All-in-One の設定 への直接リンク">​</a></h2>
-<ul>
-<li>公式ドキュメント：<a href="https://github.com/nextcloud/all-in-one" target="_blank" rel="noopener noreferrer"><strong>Nextcloud All-in-One</strong></a></li>
-</ul>
-<p>まず、Docker と Docker Compose がインストールされていることを確認してください。</p>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>ヒント</div><div class="admonitionContent_BuS1"><p>まだインストールしていない場合は、Google で「Docker &amp; Docker Compose インストール方法」を検索してください。</p></div></div>
-<p>次に、NextCloud 用のフォルダを作成し、<code>docker-compose.yml</code> という Docker Compose 設定ファイルを作成します：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">mkdir nextcloud</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">vim nextcloud/docker-compose.yml</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>以下の内容を <code>docker-compose.yml</code> に貼り付けます：</p>
-<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">services</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">nextcloud-aio-mastercontainer</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">image</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> nextcloud/all</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">in</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">one</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">latest</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">init</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token boolean important" style="color:#36acaa">true</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">restart</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> always</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">container_name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> nextcloud</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">aio</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">mastercontainer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">volumes</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> nextcloud_aio_mastercontainer</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">/mnt/docker</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">aio</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">config</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> /var/run/docker.sock</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">/var/run/docker.sock</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">ro</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">ports</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token datetime number" style="color:#36acaa">80:80</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> 8080</span><span class="token punctuation" style="color:#393A34">:</span><span class="token number" style="color:#36acaa">8080</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> 8443</span><span class="token punctuation" style="color:#393A34">:</span><span class="token number" style="color:#36acaa">8443</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">volumes</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">nextcloud_aio_mastercontainer</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> nextcloud_aio_mastercontainer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>上記のコマンド内容を簡単に説明します：</p>
-<ul>
-<li><code>--init</code>：ゾンビプロセスが発生しないようにします。</li>
-<li><code>--name nextcloud-aio-mastercontainer</code>：コンテナの名前を設定します。この名前は変更不可です。変更すると mastercontainer の更新が失敗する可能性があります。</li>
-<li><code>--restart always</code>：コンテナを Docker デーモンと一緒に常に再起動するように設定します。</li>
-<li><code>--publish 80:80</code>：コンテナのポート 80 をホストのポート 80 に公開します。有効な証明書を取得するために必要です（必要なければ削除可能）。</li>
-<li><code>--publish 8080:8080</code>：コンテナのポート 8080 をホストのポート 8080 に公開します。このポートはデフォルトで自己署名証明書を使用します。他のプロセスがポート 8080 を使用している場合、例えば <code>8081:8080</code> に変更可能です。</li>
-<li><code>--publish 8443:8443</code>：コンテナのポート 8443 をホストのポート 8443 に公開します。このポートを使用して AIO インターフェースにアクセスし、有効な証明書を取得できます（必要なければ削除可能）。</li>
-<li><code>--volume nextcloud_aio_mastercontainer:/mnt/docker-aio-config</code>：mastercontainer が作成するファイルを nextcloud_aio_mastercontainer という名前の Docker ボリュームに保存します。この設定は変更不可です。</li>
-<li><code>--volume /var/run/docker.sock:/var/run/docker.sock:ro</code>：Docker ソケットをコンテナにマウントし、他のコンテナの起動や追加機能をサポートします。Windows/macOS や Docker のルートレスモードの場合は調整が必要です。</li>
-<li><code>nextcloud/all-in-one:latest</code>：使用する Docker イメージを指定します。</li>
-</ul>
-<p>その他の詳細な設定については、公式ドキュメントを参照してください：<a href="https://github.com/nextcloud/all-in-one/blob/main/compose.yaml" target="_blank" rel="noopener noreferrer">compose.yaml</a></p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="システムサービスの設定">システムサービスの設定<a href="https://docsaid.org/ja/blog/setting-up-nextcloud#%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AE%E8%A8%AD%E5%AE%9A" class="hash-link" aria-label="システムサービスの設定 への直接リンク" title="システムサービスの設定 への直接リンク">​</a></h2>
-<p>上記の設定が完了したら、次にシステムサービスの設定を行います。</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo vim /etc/systemd/system/nextcloud.service</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>以下の内容を貼り付けます：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[Unit]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Description=NextCloud Docker Compose</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Requires=docker.service</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">After=docker.service</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">[Service]</span><br></span><span class="token-line theme-code-block-highlighted-line" style="color:#393A34"><span class="token plain">WorkingDirectory=/home/[YourName]/nextcloud</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ExecStart=/usr/bin/docker compose up --remove-orphans</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ExecStop=/usr/bin/docker compose down</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Restart=always</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">[Install]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">WantedBy=multi-user.target</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p><code>[YourName]</code> を自分のユーザー名に置き換えるのを忘れないでください。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="nextcloud-の起動">Nextcloud の起動<a href="https://docsaid.org/ja/blog/setting-up-nextcloud#nextcloud-%E3%81%AE%E8%B5%B7%E5%8B%95" class="hash-link" aria-label="Nextcloud の起動 への直接リンク" title="Nextcloud の起動 への直接リンク">​</a></h2>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl enable nextcloud</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl start nextcloud</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="nextcloud-の設定">Nextcloud の設定<a href="https://docsaid.org/ja/blog/setting-up-nextcloud#nextcloud-%E3%81%AE%E8%A8%AD%E5%AE%9A" class="hash-link" aria-label="Nextcloud の設定 への直接リンク" title="Nextcloud の設定 への直接リンク">​</a></h2>
-<ol>
-<li>
-<p><strong>Nextcloud AIO インターフェースへのアクセス</strong>：</p>
-<ul>
-<li>初回起動後、<code>https://ip.address.of.this.server:8080</code> にアクセスして Nextcloud AIO インターフェースを開きます。ここで、<code>ip.address.of.this.server</code> は Nextcloud サービスをデプロイしたサーバーの IP アドレスに置き換えてください。</li>
-<li>注意点として、このポート（8080）にはドメイン名ではなく IP アドレスを使ってアクセスしてください。これは HTTP Strict Transport Security（HSTS）がドメイン名でのアクセスをブロックする可能性があるためです。HSTS は、ブラウザに HTTPS 接続のみを要求する Web セキュリティポリシーです。</li>
-</ul>
-</li>
-<li>
-<p><strong>自己署名証明書の使用</strong>：</p>
-<ul>
-<li>ポート 8080 にアクセスすると、通信のセキュリティを確保するために自己署名証明書が使用される場合があります。自己署名証明書は信頼された認証局（CA）によって発行されたものではないため、ブラウザはこの証明書を信頼できないと警告するかもしれません。この証明書を手動でブラウザに受け入れる必要があります。</li>
-</ul>
-</li>
-<li>
-<p><strong>有効な証明書の自動取得</strong>：</p>
-<ul>
-<li>ファイアウォールやルーターでポート 80 と 8443 を開放または転送しており、ドメインをサーバーにポイントしている場合、<code>https://your-domain-that-points-to-this-server.tld:8443</code> にアクセスすることで、信頼された CA によって発行された有効な証明書を自動的に取得できます。</li>
-<li><code>your-domain-that-points-to-this-server.tld</code> はサーバーを指す実際のドメインに置き換えてください。</li>
-</ul>
-</li>
-<li>
-<p><strong>Nextcloud Talk 用ポートの開放</strong>：</p>
-<ul>
-<li>Nextcloud Talk の機能（ビデオ通話やメッセージング）が正常に動作するようにするため、ファイアウォールやルーターで Talk コンテナ用に 3478/TCP と 3478/UDP ポートを開放する必要があります。</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li>
-<p><strong>よくある質問：</strong></p>
-<ul>
-<li>
-<p><strong>家庭用ネットワークの動的 IP をドメインにポイントするには？</strong></p>
-<ul>
-<li>No-IP などのサービスを試しましたが、最終的には固定 IP を取得するために通信事業者（例：日本では NTT など）に直接依頼するのが最速で便利でした。</li>
-</ul>
-</li>
-<li>
-<p><strong>Docker を使いたくない場合の他の方法は？</strong></p>
-<ul>
-<li>ありますが、Nextcloud を直接インストールする必要があり、依存関係の問題をすべて自分で解決する必要があります。</li>
-<li>正直、かなり面倒です。</li>
-</ul>
-</li>
-<li>
-<p><strong>セットアップは完了したのに接続できない場合は？</strong></p>
-<ul>
-<li>ファイアウォールがブロックしている可能性があります。ファイアウォールが無効化されている場合、ルーターがブロックしている可能性があります。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>設定用の URL にアクセスすると、通常の管理画面よりもさらに詳細な設定が可能なインターフェースが表示されます。</p>
-<div align="center"><figure style="width:60%"><p><img decoding="async" loading="lazy" alt="login_1" src="https://docsaid.org/ja/assets/images/login_1-edb2b961d180558b75e337c1083a7202.jpg" width="1224" height="824" class="img_ev3q"></p></figure></div>
-<p>ここで、次のことに気づくかもしれません：</p>
-<ul>
-<li><strong>パスワードがない！</strong></li>
-</ul>
-<p>初回ログイン時にパスワードが表示されますが、見逃してしまうことがよくあります。</p>
-<p>その場合、以下のコマンドを使ってパスワードを確認できます：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo grep password /var/lib/docker/volumes/nextcloud_aio_mastercontainer/_data/data/configuration.json</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>ログイン後、以下のような設定画面が表示されます：</p>
-<div align="center"><figure style="width:60%"><p><img decoding="async" loading="lazy" alt="login_2" src="https://docsaid.org/ja/assets/images/login_2-6e2d377746b11b87dcd476a7db06ecb2.jpg" width="1224" height="696" class="img_ev3q"></p></figure></div>
-<p>この画面は、設定が完了した結果として表示されるものです。</p>
-<p>初回ログインの場合は、まず準備したドメインを入力する必要があります。その後、システムから追加の Docker イメージをダウンロードするよう求められます。ダウンロードが完了すると、システムが自動的に再起動します。</p>
-<p>再起動後、Nextcloud を使用できるようになります。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結論">結論<a href="https://docsaid.org/ja/blog/setting-up-nextcloud#%E7%B5%90%E8%AB%96" class="hash-link" aria-label="結論 への直接リンク" title="結論 への直接リンク">​</a></h2>
-<p>上記の手順を完了した後、ブラウザのアドレスバーに自分のドメインを入力すると、美しいインターフェースが表示されます。これがあなたのプライベートクラウドです。</p>
-<div align="center"><figure style="width:60%"><p><img decoding="async" loading="lazy" alt="login_3" src="https://docsaid.org/ja/assets/images/login_3-b4f2e8aa169715059997b910227d0773.jpg" width="2777" height="1595" class="img_ev3q"></p></figure></div>
-<p>このインターフェースには多くの機能があり、ファイルの管理や共有を簡単に行えます。</p>
-<p>さらに、スマートフォンに Nextcloud アプリをダウンロードすることで、モバイル端末から直接ファイルを管理することもできます。</p>
-<p>Nextcloud を使えば、Google Drive の容量制限を心配する必要がなくなります。</p>]]></content>
-        <author>
-            <name>Zephyr</name>
-            <uri>https://github.com/zephyr-sh</uri>
-        </author>
-        <category label="Nextcloud" term="Nextcloud"/>
-        <category label="Docker" term="Docker"/>
     </entry>
 </feed>

@@ -4,10 +4,104 @@
         <title>DOCSAID Blog</title>
         <link>https://docsaid.org/blog</link>
         <description>DOCSAID Blog</description>
-        <lastBuildDate>Thu, 26 Dec 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 13 Jan 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-hant</language>
+        <item>
+            <title><![CDATA[好用的 github markdown 語法]]></title>
+            <link>https://docsaid.org/blog/github-markdown-advanced-syntax</link>
+            <guid>https://docsaid.org/blog/github-markdown-advanced-syntax</guid>
+            <pubDate>Mon, 13 Jan 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[介紹一下不太常見但實用的語法。]]></description>
+            <content:encoded><![CDATA[<p>在 Github 上撰寫 README 檔案大家應該都不陌生，但大部分的時候，我們都只會用到一些基本的語法。</p>
+<p>還有很多好看，好用的語法功能，不要就這樣錯過了！</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="基礎語法">基礎語法<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E5%9F%BA%E7%A4%8E%E8%AA%9E%E6%B3%95" class="hash-link" aria-label="基礎語法的直接連結" title="基礎語法的直接連結">​</a></h2>
+<p>我們花 10 秒時間，快速複習一下，常用的基礎語法大概有這些：</p>
+<table><thead><tr><th>功能</th><th>語法</th><th>範例</th></tr></thead><tbody><tr><td><strong>標題</strong></td><td><code># 標題1</code>, <code>## 標題2</code>, <code>### 標題3</code></td><td><code># 標題1</code>, <code>## 標題2</code>, <code>### 標題3</code></td></tr><tr><td><strong>粗體</strong></td><td><code>**文字**</code> 或 <code>__文字__</code></td><td><code>**加粗文字**</code></td></tr><tr><td><strong>斜體</strong></td><td><code>*文字*</code> 或 <code>_文字_</code></td><td><code>*斜體文字*</code></td></tr><tr><td><strong>刪除線</strong></td><td><code>~~文字~~</code></td><td><code>~~刪除文字~~</code></td></tr><tr><td><strong>引用文字</strong></td><td><code>&gt; 引用內容</code></td><td><code>&gt; 這是一段引用</code></td></tr><tr><td><strong>單行程式</strong></td><td><code>`代碼內容`</code></td><td><code>`print("Hello, World!")`</code></td></tr><tr><td><strong>多行程式</strong></td><td>```</td><td><code>print("多行代碼")</code></td></tr><tr><td><strong>無序清單</strong></td><td><code>- 項目</code> 或 <code>* 項目</code></td><td><code>- 無序1</code> 或 <code>* 無序2</code></td></tr><tr><td><strong>有序清單</strong></td><td><code>1. 項目</code></td><td><code>1. 有序1</code> <br> <code>2. 有序2</code></td></tr><tr><td><strong>超連結</strong></td><td><code>[連結文字](網址)</code></td><td><code>[GitHub](https://github.com)</code></td></tr><tr><td><strong>分隔線</strong></td><td><code>---</code> 或 <code>***</code></td><td><code>---</code> 或 <code>***</code></td></tr><tr><td><strong>表情符號</strong></td><td><code>:表情代碼:</code></td><td><code>:smile:</code>, <code>:thumbsup:</code></td></tr></tbody></table>
+<p>簡單！這些基礎語法大家都會。</p>
+<p>除了上面這些，Markdown 其實還提供了不少進階用法，可以讓我們的文件更有條理。</p>
+<p>以下我們來看幾個語法功能：</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="一任務列表">一、任務列表<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E4%B8%80%E4%BB%BB%E5%8B%99%E5%88%97%E8%A1%A8" class="hash-link" aria-label="一、任務列表的直接連結" title="一、任務列表的直接連結">​</a></h2>
+<p>任務列表可以將事項規劃、開發進度或待辦事項以核取方框的形式呈現。</p>
+<p>尤其在多人協作時，能夠清楚顯示目前完成與未完成的項目，方便追蹤與分工。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="寫法示範">寫法示範<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E5%AF%AB%E6%B3%95%E7%A4%BA%E7%AF%84" class="hash-link" aria-label="寫法示範的直接連結" title="寫法示範的直接連結">​</a></h3>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">- [x] 完成專案初始設定</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- [ ] 撰寫使用者需求文件</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- [ ] 整合前後端程式碼</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>以上範例中，<code>[x]</code> 代表已完成，<code>[ ]</code> 代表尚未完成。</p>
+<p>在 GitHub 的 Issues、Pull Requests 或 Discussions 裏面，只要有人把某項工作核取完成，就能即時更新整個任務列表。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="效果展示">效果展示<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA" class="hash-link" aria-label="效果展示的直接連結" title="效果展示的直接連結">​</a></h3>
+<ul class="contains-task-list containsTaskList_mC6p">
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->完成專案初始設定</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->撰寫使用者需求文件</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->整合前後端程式碼</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="二警告訊息">二、警告訊息<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E4%BA%8C%E8%AD%A6%E5%91%8A%E8%A8%8A%E6%81%AF" class="hash-link" aria-label="二、警告訊息的直接連結" title="二、警告訊息的直接連結">​</a></h2>
+<p>警報可以在文件中呈現特殊的框線與圖示，用以顯示對讀者來說「不可忽視」的重要訊息。</p>
+<p>此功能並非 Markdown 的原生語法，而是 GitHub 提供的擴充功能之一。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>由於是擴充功能，因此在其他 Markdown 編輯器或網站上可能無法正確顯示。</p><p>另外，這個部分跟 Docusaurus 的語法截然不同，因此在轉換時要特別注意。</p></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="寫法示範-1">寫法示範<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E5%AF%AB%E6%B3%95%E7%A4%BA%E7%AF%84-1" class="hash-link" aria-label="寫法示範的直接連結" title="寫法示範的直接連結">​</a></h3>
+<p>GitHub 提供五種不同的警報類型，分別是 <code>NOTE</code>、<code>TIP</code>、<code>IMPORTANT</code>、<code>WARNING</code> 與 <code>CAUTION</code>。</p>
+<div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> [!NOTE]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> Useful information that users should know, even when skimming content.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> [!TIP]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> Helpful advice for doing things better or more easily.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> [!IMPORTANT]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> Key information users need to know to achieve their goal.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> [!WARNING]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> Urgent info that needs immediate user attention to avoid problems.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> [!CAUTION]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> Advises about risks or negative outcomes of certain actions.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>上述語法在 GitHub 上渲染後，就會呈現不同的底色與圖示，以區分註解、重要說明與警告等內容。</p>
+<p>如果有多行內容需要加入警報框，只要在每行前面加上 <code>&gt;</code> 符號即可，例如：</p>
+<div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> [!TIP]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> This is a tip.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token blockquote punctuation" style="color:#393A34">&gt;</span><span class="token plain"> This is another tip.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="效果展示-1">效果展示<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA-1" class="hash-link" aria-label="效果展示的直接連結" title="效果展示的直接連結">​</a></h3>
+<p>由於這裡無法直接展示效果，我們直接從 github 截圖來看：</p>
+<p><img decoding="async" loading="lazy" alt="GitHub 警報效果" src="https://docsaid.org/assets/images/img1-5dc9f0d59fde6f084fa1ba4305ada261.jpg" width="1224" height="756" class="img_ev3q"></p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="三腳註">三、腳註<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E4%B8%89%E8%85%B3%E8%A8%BB" class="hash-link" aria-label="三、腳註的直接連結" title="三、腳註的直接連結">​</a></h2>
+<p>在寫作長篇說明文件或論文式文本時，常需要加入參考來源或補充說明。</p>
+<p>GitHub Markdown 提供了腳註功能，可在文件中以連結的方式呼叫補充資訊，讓文本保持整潔。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p>這個區塊是示範給自定錨點章節用的，不用理會。</p><p><a href="https://docsaid.org/blog/github-markdown-advanced-syntax#my-custom-anchor"><strong>點我，連到自定義的段落</strong></a></p></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="寫法示範-2">寫法示範<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E5%AF%AB%E6%B3%95%E7%A4%BA%E7%AF%84-2" class="hash-link" aria-label="寫法示範的直接連結" title="寫法示範的直接連結">​</a></h3>
+<div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">在這個步驟中，我們會使用到特別的功能[^1]。</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token url-reference url punctuation" style="color:#393A34">[</span><span class="token url-reference url variable" style="color:#36acaa">^1</span><span class="token url-reference url punctuation" style="color:#393A34">]</span><span class="token url-reference url punctuation" style="color:#393A34">:</span><span class="token url-reference url" style="color:#36acaa"> 這裡可以寫更詳細的補充說明，也可以加入外部連結。</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>渲染後，文件正文中會有一個小型上標編號，讀者點擊後即可跳轉到文件下方的詳細註解。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="效果展示-2">效果展示<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA-2" class="hash-link" aria-label="效果展示的直接連結" title="效果展示的直接連結">​</a></h3>
+<p>在這個步驟中，我們會使用到特別的功能<sup><a href="https://docsaid.org/blog/github-markdown-advanced-syntax#user-content-fn-1-b23bfc" id="user-content-fnref-1-b23bfc" data-footnote-ref="true" aria-describedby="footnote-label">1</a></sup>。（👈 點點看那個小標）</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="四跳脫字元">四、跳脫字元<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E5%9B%9B%E8%B7%B3%E8%84%AB%E5%AD%97%E5%85%83" class="hash-link" aria-label="四、跳脫字元的直接連結" title="四、跳脫字元的直接連結">​</a></h2>
+<p>有些時候，我們希望在文件中顯示的某些字元恰好是 Markdown 的指令符號，例如星號（*）、反引號（`）等。此時，就需要進行「跳脫」（Escaping），使這些符號不被解譯為 Markdown 語法。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="寫法示範-3">寫法示範<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E5%AF%AB%E6%B3%95%E7%A4%BA%E7%AF%84-3" class="hash-link" aria-label="寫法示範的直接連結" title="寫法示範的直接連結">​</a></h3>
+<div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">如果要顯示 </span><span class="token code-snippet code keyword" style="color:#00009f">`*`</span><span class="token plain"> 號記號，可在前面加上反斜線：\*</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Let's rename \*our-new-project\* to \*our-old-project\*.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="效果展示-3">效果展示<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA-3" class="hash-link" aria-label="效果展示的直接連結" title="效果展示的直接連結">​</a></h3>
+<p>如果要顯示 <code>*</code> 號記號，可在前面加上反斜線：*</p>
+<p>Let's rename *our-new-project* to *our-old-project*.</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="五自訂錨點">五、自訂錨點<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E4%BA%94%E8%87%AA%E8%A8%82%E9%8C%A8%E9%BB%9E" class="hash-link" aria-label="五、自訂錨點的直接連結" title="五、自訂錨點的直接連結">​</a></h2>
+<p>雖然標題都會自動生成錨點，方便直接連結到某一段內容，但有時我們可能希望在非標題處（例如特定段落或重要表格）也能提供超連結定位。這時可以利用手動插入的 HTML 錨點標籤。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="寫法示範-4">寫法示範<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E5%AF%AB%E6%B3%95%E7%A4%BA%E7%AF%84-4" class="hash-link" aria-label="寫法示範的直接連結" title="寫法示範的直接連結">​</a></h3>
+<ol>
+<li>
+<p>連到標題：</p>
+<div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token url" style="color:#36acaa">[</span><span class="token url content" style="color:#36acaa">連到「腳註」的章節</span><span class="token url" style="color:#36acaa">](</span><span class="token url" style="color:#36acaa">#三腳註footnotes</span><span class="token url" style="color:#36acaa">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p>連到自定義的段落：</p>
+<div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token tag punctuation" style="color:#393A34">&lt;</span><span class="token tag" style="color:#00009f">a</span><span class="token tag" style="color:#00009f"> </span><span class="token tag attr-name" style="color:#00a4db">name</span><span class="token tag attr-value punctuation attr-equals" style="color:#393A34">=</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag attr-value" style="color:#e3116c">my-custom-anchor</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag punctuation" style="color:#393A34">&gt;</span><span class="token tag punctuation" style="color:#393A34">&lt;/</span><span class="token tag" style="color:#00009f">a</span><span class="token tag punctuation" style="color:#393A34">&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">這裡是一個特別的段落，我們想要在文件內部能直接連過來。</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token url" style="color:#36acaa">[</span><span class="token url content" style="color:#36acaa">連到自定義的段落</span><span class="token url" style="color:#36acaa">](</span><span class="token url" style="color:#36acaa">#my-custom-anchor</span><span class="token url" style="color:#36acaa">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ol>
+<p>無論是撰寫技術文件或教學指南，善用錨點都能有效提升使用者跳轉閱讀的效率。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="效果展示-4">效果展示<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA-4" class="hash-link" aria-label="效果展示的直接連結" title="效果展示的直接連結">​</a></h3>
+<p><a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E4%B8%89%E8%85%B3%E8%A8%BB"><strong>點我，連到「腳註」的章節</strong></a></p>
+<hr>
+<a name="my-custom-anchor"></a>
+<p><strong>這裡是一個特別的段落，我們想要在文件內部能直接連過來。</strong></p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="結語的直接連結" title="結語的直接連結">​</a></h2>
+<p>透過這些功能，我們可以更加靈活地撰寫文件，並且提供更豐富的內容呈現方式。</p>
+<p>希望這篇文章能夠幫助你更深入了解 GitHub Markdown 的進階語法，並且在撰寫文件時更加得心應手。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="參考資料">參考資料<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99" class="hash-link" aria-label="參考資料的直接連結" title="參考資料的直接連結">​</a></h2>
+<ul>
+<li><a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" target="_blank" rel="noopener noreferrer"><strong>Basic writing and formatting syntax</strong></a></li>
+</ul>
+<!-- -->
+<section data-footnotes="true" class="footnotes"><h2 class="anchor anchorWithHideOnScrollNavbar_WYt5 sr-only" id="footnote-label">Footnotes<a href="https://docsaid.org/blog/github-markdown-advanced-syntax#footnote-label" class="hash-link" aria-label="Footnotes的直接連結" title="Footnotes的直接連結">​</a></h2>
+<ol>
+<li id="user-content-fn-1-b23bfc">
+<p>示範給腳註章節用的補充說明。 <a href="https://docsaid.org/blog/github-markdown-advanced-syntax#user-content-fnref-1-b23bfc" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>]]></content:encoded>
+            <category>GitHub</category>
+            <category>Markdown</category>
+        </item>
         <item>
             <title><![CDATA[取得字型檔案的資訊]]></title>
             <link>https://docsaid.org/blog/extract-font-info-by-python</link>
@@ -2109,141 +2203,6 @@ c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span
 </ul>]]></content:encoded>
             <category>vscode</category>
             <category>settings</category>
-        </item>
-        <item>
-            <title><![CDATA[搭建 Nextcloud 記錄]]></title>
-            <link>https://docsaid.org/blog/setting-up-nextcloud</link>
-            <guid>https://docsaid.org/blog/setting-up-nextcloud</guid>
-            <pubDate>Mon, 04 Mar 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[記錄 Ubuntu 22.04 上搭建 Nextcloud 的過程。]]></description>
-            <content:encoded><![CDATA[<p>之前我們都把檔案放在 Google Drive 上，下載檔案的時候會透過 wget 指令來下載。</p>
-<p>直到某一天，原本的下載指令突然就不能用了...</p>
-<p>既然如此，那我們來試試看 Nextcloud。</p>
-<p>以下我們基於 Ubuntu 22.04 來進行相關配置。</p>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>在開始之前，請你準備好一個域名，並且把這個域名指向你的伺服器。</p><p>如果不知道該怎麼做，請直接 Google 搜尋：<strong>namecheap 怎麼用</strong>。</p></div></div>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="安裝-nextcloud">安裝 Nextcloud<a href="https://docsaid.org/blog/setting-up-nextcloud#%E5%AE%89%E8%A3%9D-nextcloud" class="hash-link" aria-label="安裝 Nextcloud的直接連結" title="安裝 Nextcloud的直接連結">​</a></h2>
-<p><strong>第一問：為什麼要用 Nextcloud？</strong></p>
-<ul>
-<li>我想要一個私有雲，不想要把檔案放在別人的伺服器上。</li>
-</ul>
-<p><strong>第二問：Nextcloud 跟 Owncloud 有什麼不一樣？</strong></p>
-<ul>
-<li>Nextcloud 是由 Owncloud 的開發者分家出來的，兩者的功能差不多，但 Nextcloud 的開發速度比較快。</li>
-</ul>
-<p><strong>第三問：Nextcloud 要怎麼安裝？</strong></p>
-<ul>
-<li>這個問題比較複雜，因為 Nextcloud 的安裝方式有很多種，而且每一種都有不同的優缺點。</li>
-<li>在本篇文章中，我唯一推薦的安裝方式是使用 Docker。</li>
-</ul>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="設定-nextcloud-all-in-one">設定 Nextcloud All-in-One<a href="https://docsaid.org/blog/setting-up-nextcloud#%E8%A8%AD%E5%AE%9A-nextcloud-all-in-one" class="hash-link" aria-label="設定 Nextcloud All-in-One的直接連結" title="設定 Nextcloud All-in-One的直接連結">​</a></h2>
-<ul>
-<li>參考官方文件：<a href="https://github.com/nextcloud/all-in-one" target="_blank" rel="noopener noreferrer"><strong>Nextcloud All-in-One</strong></a></li>
-</ul>
-<p>首先確保你已經安裝了 Docker 和 Docker Compose。</p>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>如果還沒有完成，請 Google 搜尋 『Docker &amp; Docker Compose 安裝方法』。</p></div></div>
-<p>接著，建立一個 NextCloud 資料夾，然後寫一個 Docker Compose 的設定檔 <code>docker-compose.yml</code>：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">mkdir nextcloud</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">vim nextcloud/docker-compose.yml</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>把以下的內容貼到 <code>docker-compose.yml</code> 裡面：</p>
-<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">services</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">nextcloud-aio-mastercontainer</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">image</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> nextcloud/all</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">in</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">one</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">latest</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">init</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token boolean important" style="color:#36acaa">true</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">restart</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> always</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">container_name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> nextcloud</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">aio</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">mastercontainer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">volumes</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> nextcloud_aio_mastercontainer</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">/mnt/docker</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">aio</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">config</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> /var/run/docker.sock</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">/var/run/docker.sock</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">ro</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">ports</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token datetime number" style="color:#36acaa">80:80</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> 8080</span><span class="token punctuation" style="color:#393A34">:</span><span class="token number" style="color:#36acaa">8080</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> 8443</span><span class="token punctuation" style="color:#393A34">:</span><span class="token number" style="color:#36acaa">8443</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">volumes</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">nextcloud_aio_mastercontainer</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> nextcloud_aio_mastercontainer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>簡要說明一下上面的指令內容：</p>
-<ul>
-<li><code>--init</code>：選項確保永遠不會建立殭屍行程。</li>
-<li><code>--name nextcloud-aio-mastercontainer</code>：設定容器的名稱，這個名稱不允許更改，因為更改後可能會導致 mastercontainer 更新失敗。</li>
-<li><code>--restart always</code>：設定容器的重啟策略為始終隨 Docker 守護程序一起啟動。</li>
-<li><code>--publish 80:80</code>：將容器的 80 端口發佈到宿主機的 80 端口，用於獲取 AIO 介面的有效證書，如果不需要可以移除。</li>
-<li><code>--publish 8080:8080</code>：將容器的 8080 端口發佈到宿主機的 8080 端口，此端口用於 AIO 介面，預設使用自簽名證書。 如果 8080 端口已被佔用，可以更改宿主機的端口，如：<code>--publish 8081:8080</code>。</li>
-<li><code>--publish 8443:8443</code>：將容器的 8443 端口發佈到宿主機的 8443 端口，如果公開到網路，可以通過此端口訪問 AIO 介面並獲取有效證書，如果不需要可以移除。</li>
-<li><code>--volume nextcloud_aio_mastercontainer:/mnt/docker-aio-config</code>：設定 mastercontainer 建立的檔案將儲存在名為 nextcloud_aio_mastercontainer 的 docker 磁碟區中，此設定不允許變更。</li>
-<li><code>--volume /var/run/docker.sock:/var/run/docker.sock:ro</code>：將 docker 套接字掛載到容器內，用於啟動所有其他容器和其他功能。 在 Windows/macOS 和 docker 無根模式下需要調整。</li>
-<li><code>nextcloud/all-in-one:latest</code>：指定使用的 Docker 容器映像。</li>
-</ul>
-<p>還有更多詳細的設定，請參考官方文件：<a href="https://github.com/nextcloud/all-in-one/blob/main/compose.yaml" target="_blank" rel="noopener noreferrer">compose.yaml</a></p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="設定系統服務">設定系統服務<a href="https://docsaid.org/blog/setting-up-nextcloud#%E8%A8%AD%E5%AE%9A%E7%B3%BB%E7%B5%B1%E6%9C%8D%E5%8B%99" class="hash-link" aria-label="設定系統服務的直接連結" title="設定系統服務的直接連結">​</a></h2>
-<p>完成了上述的設定之後，再來是設定系統服務。</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo vim /etc/systemd/system/nextcloud.service</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>貼上以下的內容：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">[Unit]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Description=NextCloud Docker Compose</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Requires=docker.service</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">After=docker.service</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">[Service]</span><br></span><span class="token-line theme-code-block-highlighted-line" style="color:#393A34"><span class="token plain">WorkingDirectory=/home/[YourName]/nextcloud</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ExecStart=/usr/bin/docker compose up --remove-orphans</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ExecStop=/usr/bin/docker compose down</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Restart=always</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">[Install]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">WantedBy=multi-user.target</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>記得要把 <code>[YourName]</code> 替換成你的使用者名稱。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="啟動-nextcloud">啟動 Nextcloud<a href="https://docsaid.org/blog/setting-up-nextcloud#%E5%95%9F%E5%8B%95-nextcloud" class="hash-link" aria-label="啟動 Nextcloud的直接連結" title="啟動 Nextcloud的直接連結">​</a></h2>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl enable nextcloud</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sudo systemctl start nextcloud</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="設定-nextcloud">設定 Nextcloud<a href="https://docsaid.org/blog/setting-up-nextcloud#%E8%A8%AD%E5%AE%9A-nextcloud" class="hash-link" aria-label="設定 Nextcloud的直接連結" title="設定 Nextcloud的直接連結">​</a></h2>
-<ol>
-<li>
-<p><strong>訪問 Nextcloud AIO 介面</strong>：</p>
-<ul>
-<li>在初始啟動後，你可以通過訪問 <code>https://ip.address.of.this.server:8080</code> 來開啟 Nextcloud AIO 介面，其中 <code>ip.address.of.this.server</code> 應該被替換為部署 Nextcloud 服務的伺服器的 IP 地址。</li>
-<li>重要的是使用 IP 地址而非域名來訪問這個連接埠（8080），因為 HTTP Strict Transport Security（HSTS）可能會阻止使用域名訪問。HSTS 是一種 Web 安全政策機制，它要求網路瀏覽器僅通過安全的 HTTPS 連接與網站建立連接。</li>
-</ul>
-</li>
-<li>
-<p><strong>自簽名證書的使用</strong>：</p>
-<ul>
-<li>訪問 8080 端口時，可能會使用自簽名證書來確保通信的安全性。自簽名證書不是由受信任的證書機構（CA）發行的，因此瀏覽器可能會警告這個證書不可信。你需要在瀏覽器中手動接受這個證書，以便繼續訪問。</li>
-</ul>
-</li>
-<li>
-<p><strong>獲取有效證書的自動化方式</strong>：</p>
-<ul>
-<li>如果你的防火牆或路由器已開放或轉發了 80 和 8443 端口，並且你已經將一個域名指向你的伺服器，那麼你可以通過訪問 <code>https://your-domain-that-points-to-this-server.tld:8443</code> 來自動獲取一個由受信任 CA 發行的有效證書，以增加安全性和便利性。</li>
-<li>這裡的 <code>your-domain-that-points-to-this-server.tld</code> 應該替換為你指向伺服器的實際域名。</li>
-</ul>
-</li>
-<li>
-<p><strong>Nextcloud Talk 的連接埠開放</strong>：</p>
-<ul>
-<li>為了確保 Nextcloud Talk 功能（如視訊通話和訊息）能夠正常運作，需要在防火牆或路由器中為 Talk 容器開放 3478/TCP 和 3478/UDP 連接埠。</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li>
-<p><strong>常見問題：</strong></p>
-<ul>
-<li>
-<p><strong>家用網路是動態 IP，怎麼指向域名？</strong></p>
-<ul>
-<li>我們有試過一些 No-IP 的方法，後來覺得直接去中華電信申請固定 IP 最快最方便。</li>
-</ul>
-</li>
-<li>
-<p><strong>我不想用 Docker，有沒有其他方法？</strong></p>
-<ul>
-<li>有，你可以直接安裝 Nextcloud，你需要自己來處理所有的依賴問題。</li>
-<li>相信我，很多坑。</li>
-</ul>
-</li>
-<li>
-<p><strong>為什麼架好了卻連不上？</strong></p>
-<ul>
-<li>你的防火牆擋住了，如果防火牆沒開，那就是你的路由器擋住了。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>輸入設定網址，你可以進入一個比後台還要後台的地方。</p>
-<div align="center"><figure style="width:60%"><p><img decoding="async" loading="lazy" alt="login_1" src="https://docsaid.org/assets/images/login_1-edb2b961d180558b75e337c1083a7202.jpg" width="1224" height="824" class="img_ev3q"></p></figure></div>
-<p>到這一步，你可能會驚恐地發現：</p>
-<ul>
-<li><strong>我沒有密碼啊！</strong></li>
-</ul>
-<p>密碼會在你第一次登入的時候給你，但通常你會錯過他。</p>
-<p>這時候你可以透過以下的指令來找到密碼：</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo grep password /var/lib/docker/volumes/nextcloud_aio_mastercontainer/_data/data/configuration.json</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="複製程式碼至剪貼簿" title="複製" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>登入之後，你會看到一個設定畫面：</p>
-<div align="center"><figure style="width:60%"><p><img decoding="async" loading="lazy" alt="login_2" src="https://docsaid.org/assets/images/login_2-6e2d377746b11b87dcd476a7db06ecb2.jpg" width="1224" height="696" class="img_ev3q"></p></figure></div>
-<p>你看到的這個畫面已經是我們設定完成的結果。</p>
-<p>如果你是第一次登入，在這裡，首先你要先輸入你之前準備好的網域，接著系統會要你再次下載一些 docker image，下載完成後，它會幫你重新啟動。</p>
-<p>啟動之後，你就可以開始使用 Nextcloud 了。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a href="https://docsaid.org/blog/setting-up-nextcloud#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="結語的直接連結" title="結語的直接連結">​</a></h2>
-<p>完成上面的步驟之後，在網址列中輸入你的網域後，你會看到一個很好看的介面，這個介面就是你的私有雲。</p>
-<div align="center"><figure style="width:60%"><p><img decoding="async" loading="lazy" alt="login_3" src="https://docsaid.org/assets/images/login_3-b4f2e8aa169715059997b910227d0773.jpg" width="2777" height="1595" class="img_ev3q"></p></figure></div>
-<p>這個介面有很多功能，你可以透過這個介面來管理你的檔案，也可以透過這個介面來分享檔案。</p>
-<p>除此之外，你可以在手機上下載 Nextcloud 的 App，然後你可以直接透過手機來管理你的檔案。</p>
-<p>有了 Nextcloud，你就不需要再擔心 Google Drive 的容量限制了。</p>]]></content:encoded>
-            <category>Nextcloud</category>
-            <category>Docker</category>
         </item>
     </channel>
 </rss>
