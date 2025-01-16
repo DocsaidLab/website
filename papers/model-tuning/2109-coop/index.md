@@ -168,7 +168,7 @@ CLIP 的訓練資料規模非常龐大，為了讓模型能夠學習更多樣化
 
 從上圖可見，CLIP+CoOp 在僅需兩個樣本（2-shot）的情況下，即可顯著超越零樣本 CLIP。當樣本數增加到 16-shot 時，平均性能增益約為 15%。
 
-在 EuroSAT 和 DTD 這兩個專門任務上，性能提升分別超過 45% 和 20%。在細粒度數據集（Flowers102、StanfordCars、FGVCAircraft）以及場景和行動識別數據集（SUN397、UCF101）上，性能增益也普遍超過 10%。
+在 EuroSAT 和 DTD 這兩個專門任務上，性能提升分別超過 45% 和 20%。在細粒度數據集（Flowers102、StanfordCars、FGVCAircraft）以及場景和行動辨識數據集（SUN397、UCF101）上，性能增益也普遍超過 10%。
 
 對於挑戰性較高的 ImageNet 數據集（包含 1,000 類別），也提升 4.77%。
 
