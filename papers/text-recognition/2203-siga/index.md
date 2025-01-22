@@ -82,7 +82,7 @@ O_0 = \phi([T(O_1, s_0), P_0]),
 \end{cases}
 $$
 
-其中 $\phi(\cdot)$ 表示包含批量正則化（BatchNorm）和 ReLU 激活函數的兩層卷積，$T(\cdot)$ 表示一個對 $O_k$ 進行 2 倍上采樣的操作，$s_k$ 為其分辨率（即$H_k \times W_k$），而 $[\cdot]$ 表示沿通道軸的串接操作。
+其中 $\phi(\cdot)$ 表示包含批量正則化（BatchNorm）和 ReLU 激活函數的兩層卷積，$T(\cdot)$ 表示一個對 $O_k$ 進行 2 倍上采樣的操作，$s_k$ 為其解析度（即$H_k \times W_k$），而 $[\cdot]$ 表示沿通道軸的串接操作。
 
 :::tip
 根據這段敘述，可以推斷這是個 U-Net like 的結構，透過上採樣和特徵串接來整合特徵。

@@ -141,7 +141,7 @@ Flamingo 僅使用 4 個任務範例，就可以在 16 個基準測試上，大�
 </figure>
 </div>
 
-在擴展數據註解的情況下，通過短期微調（低學習率、解凍視覺編碼器進行高分辨率處理），Flamingo 在 5 個額外基準測試上設立新的最佳表現，包括 VQAv2、VATEX、VizWiz、MSRVTTQA 和 HatefulMemes。
+在擴展數據註解的情況下，通過短期微調（低學習率、解凍視覺編碼器進行高解析度處理），Flamingo 在 5 個額外基準測試上設立新的最佳表現，包括 VQAv2、VATEX、VizWiz、MSRVTTQA 和 HatefulMemes。
 
 在 6 個基準測試上，Flamingo 僅使用單一模型權重和 32 個任務特定範例，就超越了最佳微調方法（Fine-Tuned SotA）。
 
