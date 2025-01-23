@@ -84,7 +84,7 @@ else
 fi
 ```
 
-詳細な例については以下を参考にしてください：[**DocClassifier training docker**](https://github.com/DocsaidLab/DocClassifier/blob/main/docker/Dockerfile)
+詳細な例については以下を参考にしてください：[**Example training docker**](https://github.com/DocsaidLab/Otter/blob/main/docker/Dockerfile)
 
 ### セキュリティに関する考慮事項
 

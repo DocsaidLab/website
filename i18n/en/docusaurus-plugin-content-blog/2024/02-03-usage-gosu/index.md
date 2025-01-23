@@ -82,7 +82,7 @@ else
 fi
 ```
 
-For a real-world example, refer to: [**DocClassifier training docker**](https://github.com/DocsaidLab/DocClassifier/blob/main/docker/Dockerfile)
+For a real-world example, refer to: [**Example training docker**](https://github.com/DocsaidLab/Otter/blob/main/docker/Dockerfile)
 
 ### Security Considerations
 

@@ -90,7 +90,7 @@ else
 fi
 ```
 
-如果需要實際的範例，可以參考：[**DocClassifier training docker**](https://github.com/DocsaidLab/DocClassifier/blob/main/docker/Dockerfile)
+如果需要實際的範例，可以參考：[**Example training docker**](https://github.com/DocsaidLab/Otter/blob/main/docker/Dockerfile)
 
 ### 安全性考量
 
