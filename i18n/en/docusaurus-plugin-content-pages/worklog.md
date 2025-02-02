@@ -14,6 +14,7 @@ This page is solely for recording our work activities.
 
 - Shut down GCP, change the model file storage location, and update all download links.
   - Update the model files for Capybara, DocAligner, and MRZScanner.
+- **DocsaidKit**: Completed the split, retired the project.
 
 ## 2024
 

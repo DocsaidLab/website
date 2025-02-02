@@ -14,6 +14,7 @@
 
 - 關閉 GCP，更換模型檔案位置，並更新所有下載連結。
   - 更新 Capybara, DocAligner, MRZScanner 模型檔案。
+- **DocsaidKit**：完成拆分，功成身退，下架該專案。
 
 ## 2024
 
