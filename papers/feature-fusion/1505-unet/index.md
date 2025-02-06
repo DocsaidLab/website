@@ -27,23 +27,37 @@ authors: Zephyr
 
 - [**[14.11] Fully Convolutional Networks for Semantic Segmentation**](https://arxiv.org/abs/1411.4038)
 
+  <div align="center">
+  <figure style={{"width": "70%"}}>
   ![fcn arch](./img/img3.jpg)
+  </figure>
+  </div>
 
 或許我們可以將這個架構應用到生物醫學影像分割的問題上，解決時上下文信息丟失的問題。
 
 ## 解決問題
 
-### 模型架構
+使用完整的影像確實解決了上下文信息丟失的問題，但資料不足的問題依然存在。
 
+於是作者提出了 U-Net 架構，如下圖：
+
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![U-Net arch](./img/img1.jpg)
+</figure>
+</div>
 
-使用完整的影像確實解決了上下文信息丟失的問題，但資料不足的問題依然存在。於是作者提出了 U-Net 架構，透過重複使用高解析度的特徵圖，來提高分割的準確度，同時降低模型對資料量的需求。
+透過重複使用高解析度的特徵圖，來提高分割的準確度，同時降低模型對資料量的需求。
 
-上圖是 U-Net 的架構，你可以先暫時忽略數字的部分，因為作者在卷積層上沒有使用 padding，所以每經過一次卷積層，特徵圖的大小會減少。這讓第一次看到這個架構的人，會受到數字的干擾而不能好好欣賞這個架構。
+這裡你可以先暫時忽略數字的部分，因為作者在卷積層上沒有使用 padding，所以每經過一次卷積層，特徵圖的大小會減少。這讓第一次看到這個架構的人，會受到數字的干擾而不能好好欣賞這個架構。
 
 我們把這張圖切一半，先看左邊：
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![U-Net arch left](./img/img4.jpg)
+</figure>
+</div>
 
 這裡就是我們常在講的 Backbone 的部分，這個部分可以隨意切換成不同的架構，你如果喜歡 MobileNet，就用 MobileNet，如果喜歡 ResNet，就用 ResNet。
 
@@ -51,7 +65,11 @@ authors: Zephyr
 
 接著我們看右邊：
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![U-Net arch right](./img/img5.jpg)
+</figure>
+</div>
 
 這邊就是我們常講的 Neck 的部分，這部分的特色就是從最底層開始上採樣，方法可以使用簡單的插值或是更複雜的反卷積，在這篇論文中作者使用了反卷積。
 
@@ -64,6 +82,12 @@ authors: Zephyr
 
 - [**[16.12] FPN: 金字塔架構**](../1612-fpn/index.md)
   :::
+
+:::tip
+另外一種流行的說法會把 Backbone 稱為 Encoder，把 Neck 稱為 Decoder。
+
+因為這裡的任務也是做圖像到圖像間的轉換，概念上相同於 AutoEncoder 的設計理念，
+:::
 
 ## 討論
 

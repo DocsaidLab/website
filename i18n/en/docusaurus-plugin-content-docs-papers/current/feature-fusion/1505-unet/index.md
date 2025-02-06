@@ -9,61 +9,83 @@ authors: Zephyr
 
 ---
 
-At a time when the VGG network had just emerged, many unmet needs still lingered.
+In the early days of VGG, there were still many unmet needs.
 
-Researchers discovered that traditional CNN architectures were insufficiently granular and failed to meet the challenges posed by biomedical image segmentation.
+Researchers found that traditional CNN architectures couldn't provide the fine-grained details necessary to address the challenges of biomedical image segmentation.
 
-This realization led to the development of a groundbreaking model, one that became a classic in the field of image segmentation.
+Thus, this work was born, which has become a classic in the field of image segmentation.
 
 ## Defining the Problem
 
-In contrast to the thriving image classification domain, where ImageNet dominated and satisfied the research community, biomedical image segmentation researchers faced a different reality.
+In contrast to the image classification field, where everyone is content with ImageNet, biomedical image segmentation researchers were not as fortunate. In this field, the amount of available data for training is extremely limited, not enough to support the training requirements of deep learning.
 
-In this field, the availability of training data was severely limited, falling short of the requirements for training deep learning models.
+The solution to this problem wasn't very clear. One approach was to slice the training data into multiple small pieces to generate more training samples. However, this resulted in another issue: the loss of contextual information, which in turn reduced segmentation accuracy.
 
-The solution to this problem was not straightforward. A previous approach involved dividing training data into multiple smaller patches to generate more training samples. However, this method led to another issue—the loss of contextual information, which in turn reduced segmentation accuracy.
-
-Around the same time, another research paper introduced the fully convolutional network (FCN) architecture, which provided some inspiration to the authors.
+Around this time, another study proposed the fully convolutional network (FCN) architecture, which provided some inspiration to the authors.
 
 - [**[14.11] Fully Convolutional Networks for Semantic Segmentation**](https://arxiv.org/abs/1411.4038)
 
+  <div align="center">
+  <figure style={{"width": "70%"}}>
   ![fcn arch](./img/img3.jpg)
+  </figure>
+  </div>
 
-Perhaps this architecture could be applied to the problem of biomedical image segmentation to address the issue of contextual information loss.
+Perhaps this architecture could be applied to biomedical image segmentation, solving the problem of losing contextual information.
 
 ## Solving the Problem
 
-### Model Architecture
+Using the entire image indeed solved the problem of losing contextual information, but the issue of insufficient data remained.
 
+Thus, the authors proposed the U-Net architecture, as shown in the diagram below:
+
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![U-Net arch](./img/img1.jpg)
+</figure>
+</div>
 
-Using the entire image did solve the problem of losing contextual information, but the issue of insufficient data remained. The authors proposed the U-Net architecture, which improves segmentation accuracy by reusing high-resolution feature maps and simultaneously reduces the model's data dependency.
+By reusing high-resolution feature maps, the accuracy of segmentation was improved while reducing the model's dependency on large amounts of data.
 
-The diagram above illustrates the U-Net architecture. You can ignore the numbers for now because the authors did not use padding in the convolutional layers, which results in a reduction in feature map size after each convolution. This can be distracting when first encountering the architecture.
+At this point, you can temporarily ignore the numbers, as the authors did not use padding in the convolutional layers. Hence, with each convolution layer, the size of the feature maps decreases. This might distract someone seeing the architecture for the first time, preventing them from appreciating the structure as a whole.
 
-Let's break the diagram in half and focus on the left side:
+Let's cut the image in half and first look at the left side:
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![U-Net arch left](./img/img4.jpg)
+</figure>
+</div>
 
-This is the part we often refer to as the Backbone. This section can be swapped out for different architectures. If you prefer MobileNet, use MobileNet. If you prefer ResNet, use ResNet.
+This is what we commonly refer to as the Backbone, which can be freely swapped for different architectures. If you like MobileNet, use MobileNet; if you prefer ResNet, use ResNet.
 
-A basic Backbone design includes five layers of downsampling, corresponding to the five output layers shown in the diagram.
+A basic Backbone design has five downsampling layers, corresponding to the five output layers in the image above.
 
-Now, let's look at the right side:
+Next, let's look at the right side:
 
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![U-Net arch right](./img/img5.jpg)
+</figure>
+</div>
 
-This section is commonly referred to as the Neck. The key characteristic here is the upsampling that begins from the lowest layer. The method can be simple interpolation or more complex transposed convolution. In this paper, the authors used transposed convolution.
+This is the Neck, characterized by upsampling from the lowest layer. The method can be simple interpolation or more complex deconvolution; in this paper, the authors used deconvolution.
 
-After upsampling, we obtain higher-resolution feature maps, which are then fused with the feature maps from the corresponding layers. The fusion can be done through simple concatenation or addition, and here the authors opted for concatenation.
+After upsampling, we obtain higher-resolution feature maps, which are then fused with the feature map from the previous layer. The fusion method can either be concatenation or addition; the authors used concatenation in this paper.
 
-Following this process, we finally obtain a segmentation result that matches the original image's size. The number of channels can be adjusted based on the segmentation task: one channel for binary segmentation and multiple channels for multi-class segmentation.
+After this process, we obtain a segmentation result with the same size as the original image. The number of channels in the output controls whether it’s a binary or multi-class segmentation. For binary segmentation, only one channel is needed; for multi-class segmentation, multiple channels are required.
 
 :::tip
-If you choose addition instead of concatenation, you'll end up with another classic architecture: FPN.
+If you opt for addition instead of concatenation, it leads to another classic architecture: FPN.
 
 - [**[16.12] FPN: The Pyramid Structure**](../1612-fpn/index.md)
   :::
+
+:::tip
+Another popular terminology would refer to the Backbone as the Encoder and the Neck as the Decoder.
+
+This is because the task here is also an image-to-image transformation, conceptually similar to the AutoEncoder design.
+:::
 
 ## Discussion
 
@@ -73,13 +95,13 @@ If you choose addition instead of concatenation, you'll end up with another clas
 
 The authors applied U-Net to the ISBI 2014 and 2015 Cell Tracking Challenges:
 
-- On the PhC-U373 dataset, U-Net achieved a 92% IoU, significantly outperforming the second-place model, which achieved 83%.
-- On the DIC-HeLa dataset, U-Net reached a 77.5% IoU, again vastly exceeding the second-place model's 46%.
+- In the PhC-U373 dataset, it achieved 92% IOU, significantly surpassing the second place at 83%.
+- In the DIC-HeLa dataset, it achieved 77.5% IOU, again greatly outperforming the second place at 46%.
 
-These results demonstrate that U-Net excels across different types of microscopy image segmentation tasks and significantly outperforms other existing methods.
+These results demonstrate that U-Net performs exceptionally well in different types of microscopy image segmentation tasks and outperforms existing methods by a large margin.
 
 ## Conclusion
 
-U-Net's design preserves high-resolution feature maps, enhancing segmentation accuracy through the fusion of contextual information while reducing the model's reliance on large datasets. The architecture is simple and easily extensible, making it suitable for various image segmentation tasks, including cell segmentation, organ segmentation, and lesion detection.
+The design of U-Net preserves high-resolution feature maps and integrates contextual information, improving segmentation accuracy while reducing data requirements. This architecture is simple, scalable, and applicable to various image segmentation tasks, including cell segmentation, organ segmentation, and lesion detection.
 
-Compared to FPN, the concatenation-based structure of U-Net results in a larger number of parameters and higher computational costs, which can be a limitation in resource-constrained environments. Each architecture has its strengths, and it is valuable to learn different designs and select the most appropriate architecture based on the specific requirements of the task at hand.
+Compared to FPN, the concatenation structure results in a higher number of parameters and computational load, which can be a concern when there are restrictions on model size. Each architecture has its strengths, and it’s valuable to learn different designs and choose the one most suitable for the task at hand.
