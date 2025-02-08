@@ -6,6 +6,7 @@ import {
   Col,
   Divider,
   InputNumber,
+  Progress,
   Row,
   Space,
   Spin,
@@ -14,7 +15,6 @@ import {
 } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './DocAlignerDemo.module.css';
-
 
 const { Title, Text } = Typography;
 
@@ -45,6 +45,8 @@ const DocAlignerDemo = ({
   const originalCanvasRef = useRef(null);
   const processedCanvasRef = useRef(null);
   const transformedCanvasRef = useRef(null);
+
+  // ------ 狀態管理 ------
   const [predictionData, setPredictionData] = useState(null);
   const [predictionDataScale, setPredictionDataScale] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -56,17 +58,24 @@ const DocAlignerDemo = ({
   const [inferenceTime, setInferenceTime] = useState(0);
   const [timestamp, setTimestamp] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [openCvLoaded, setOpenCvLoaded] = useState(false);
   const [outputWidth, setOutputWidth] = useState(768);
   const [outputHeight, setOutputHeight] = useState(480);
   const [apiStatus, setApiStatus] = useState(null);
 
+  // ------ OpenCV 下載與載入狀態 ------
+  const [openCvLoaded, setOpenCvLoaded] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadProgress, setDownloadProgress] = useState(0);
+  const [downloadError, setDownloadError] = useState(null);
+
+  // 若外部傳入影像路徑，則自動載入
   useEffect(() => {
     if (externalImage) {
       handleExternalImageChange(externalImage);
     }
   }, [externalImage]);
 
+  // 檢查後端 API 狀態
   useEffect(() => {
     checkApiStatus();
   }, []);
@@ -79,42 +88,28 @@ const DocAlignerDemo = ({
       } else {
         setApiStatus('offline');
       }
-    } catch (error) {
+    } catch (err) {
       setApiStatus('offline');
-      console.error('Error checking API status:', error);
+      console.error('Error checking API status:', err);
     }
   };
 
+  // 頁面載入時，就自動嘗試下載 OpenCV
   useEffect(() => {
-    window.Module = {
-      onRuntimeInitialized() {
-        console.log('OpenCV.js is ready');
-        setOpenCvLoaded(true);
-      },
-    };
-    const script = document.createElement('script');
-    script.src = 'https://docs.opencv.org/4.x/opencv.js';
-    script.async = true;
-    script.onload = () => {
-      console.log('OpenCV.js script loaded');
-    };
-    script.onerror = () => {
-      console.error('Failed to load OpenCV.js');
-      setError('Failed to load OpenCV.js');
-    };
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
+    if (!openCvLoaded) {
+      downloadOpenCv();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // 若成功取得 polygon 且已載入 OpenCV，執行攤平
   useEffect(() => {
     if (predictionData && openCvLoaded) {
       performPerspectiveTransform();
     }
   }, [predictionData, openCvLoaded, outputWidth, outputHeight]);
 
+  // ------ 載入圖片 (external or local) ------
   const handleExternalImageChange = (imageSource) => {
     clearAll();
     setError(null);
@@ -127,18 +122,18 @@ const DocAlignerDemo = ({
     if (!canvas) return;
 
     const img = new Image();
-    img.crossOrigin = "Anonymous";
+    img.crossOrigin = 'Anonymous';
     img.onload = function () {
       const originalWidth = img.width;
       const originalHeight = img.height;
-      let scale = 1;
+      let scaleFactor = 1;
       if (img.width > 2000 || img.height > 2000) {
-        scale = 2000 / Math.max(img.width, img.height);
+        scaleFactor = 2000 / Math.max(img.width, img.height);
       }
-      setScale(scale);
+      setScale(scaleFactor);
 
-      const scaledWidth = img.width * scale;
-      const scaledHeight = img.height * scale;
+      const scaledWidth = img.width * scaleFactor;
+      const scaledHeight = img.height * scaleFactor;
 
       canvas.width = scaledWidth;
       canvas.height = scaledHeight;
@@ -154,9 +149,9 @@ const DocAlignerDemo = ({
       setOriginalImageInfo({ width: originalWidth, height: originalHeight });
 
       canvas.toBlob(function (blob) {
-        const file = new File([blob], "example.jpg", { type: "image/jpeg" });
+        const file = new File([blob], 'example.jpg', { type: 'image/jpeg' });
         setSelectedFile(file);
-      }, "image/jpeg");
+      }, 'image/jpeg');
     };
     img.src = imageSource;
   };
@@ -186,14 +181,14 @@ const DocAlignerDemo = ({
         if (!canvas) return;
         const originalWidth = img.width;
         const originalHeight = img.height;
-        let scale = 1;
+        let scaleFactor = 1;
         if (img.width > 2000 || img.height > 2000) {
-          scale = 2000 / Math.max(img.width, img.height);
+          scaleFactor = 2000 / Math.max(img.width, img.height);
         }
-        setScale(scale);
+        setScale(scaleFactor);
 
-        const scaledWidth = img.width * scale;
-        const scaledHeight = img.height * scale;
+        const scaledWidth = img.width * scaleFactor;
+        const scaledHeight = img.height * scaleFactor;
 
         canvas.width = scaledWidth;
         canvas.height = scaledHeight;
@@ -220,6 +215,7 @@ const DocAlignerDemo = ({
     return false;
   };
 
+  // ------ 清除結果 ------
   const clearAll = () => {
     setPredictionData(null);
     setPredictionDataScale(null);
@@ -248,6 +244,7 @@ const DocAlignerDemo = ({
     }
   };
 
+  // ------ 上傳影像到後端預測 ------
   const uploadImage = () => {
     const originalCanvas = originalCanvasRef.current;
     const processedCanvas = processedCanvasRef.current;
@@ -280,45 +277,47 @@ const DocAlignerDemo = ({
       method: 'POST',
       body: formData
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(errorMessage.networkError);
-      }
-      return response.json();
-    })
-    .then(data => {
-      if (!data.polygon || data.polygon.length === 0) {
-        setWarning(warningMessage.noPolygon);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(errorMessage.networkError);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (!data.polygon || data.polygon.length === 0) {
+          setWarning(warningMessage.noPolygon);
+          setIsLoading(false);
+          return;
+        }
+
+        setInferenceTime(data.inference_time);
+        setTimestamp(data.timestamp);
+        setPredictionData(data);
+
+        // 將伺服器回傳的 polygon，等比縮放回到在原始 canvas 的座標
+        const adjustedPolygon = data.polygon.map((point) => [
+          point[0] / scale,
+          point[1] / scale,
+        ]);
+        setPredictionDataScale({ ...data, polygon: adjustedPolygon });
+
+        const ctx = processedCanvas.getContext('2d');
+        ctx.clearRect(0, 0, processedCanvas.width, processedCanvas.height);
+        processedCanvas.width = originalCanvas.width;
+        processedCanvas.height = originalCanvas.height;
+        ctx.drawImage(originalCanvas, 0, 0);
+        drawPolygon(ctx, data.polygon);
+      })
+      .catch((err) => {
+        console.error('Error:', err);
+        setError(`${errorMessage.uploadError}: ${err.message || err}`);
+      })
+      .finally(() => {
         setIsLoading(false);
-        return;
-      }
-
-      setInferenceTime(data.inference_time);
-      setTimestamp(data.timestamp);
-      setPredictionData(data);
-
-      const adjustedPolygon = data.polygon.map((point) => [
-        point[0] / scale,
-        point[1] / scale,
-      ]);
-      setPredictionDataScale({ ...data, polygon: adjustedPolygon });
-
-      const ctx = processedCanvas.getContext('2d');
-      ctx.clearRect(0, 0, processedCanvas.width, processedCanvas.height);
-      processedCanvas.width = originalCanvas.width;
-      processedCanvas.height = originalCanvas.height;
-      ctx.drawImage(originalCanvas, 0, 0);
-      drawPolygon(ctx, data.polygon);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      setError(`${errorMessage.uploadError}: ${error.message || error}`);
-    })
-    .finally(() => {
-      setIsLoading(false);
-    });
+      });
   };
 
+  // ------ 繪製多邊形與箭頭 ------
   const drawPolygon = (ctx, polygon) => {
     const colors = [
       [0, 255, 255],
@@ -334,11 +333,13 @@ const DocAlignerDemo = ({
       const color = `rgb(${colors[i % colors.length].join(',')})`;
       const thickness = Math.max(ctx.canvas.width * 0.005, 1);
 
+      // 畫點
       ctx.beginPath();
       ctx.arc(p1[0], p1[1], thickness * 2, 0, Math.PI * 2, false);
       ctx.fillStyle = color;
       ctx.fill();
 
+      // 畫箭頭
       drawArrow(ctx, p1[0], p1[1], p2[0], p2[1], thickness, color);
     });
   };
@@ -377,14 +378,15 @@ const DocAlignerDemo = ({
     ctx.fill();
   };
 
+  // ------ 下載或導出結果 ------
   const downloadJSON = () => {
     if (!predictionData) return;
     const dataStr =
-      "data:text/json;charset=utf-8," +
+      'data:text/json;charset=utf-8,' +
       encodeURIComponent(JSON.stringify(predictionData));
     const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "prediction.json");
+    downloadAnchorNode.setAttribute('href', dataStr);
+    downloadAnchorNode.setAttribute('download', 'prediction.json');
     document.body.appendChild(downloadAnchorNode);
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
@@ -403,50 +405,151 @@ const DocAlignerDemo = ({
     document.body.removeChild(link);
   };
 
+  // ------ 下載本地端 /opencv.js (顯示進度) ------
+  const downloadOpenCv = () => {
+    if (openCvLoaded || isDownloading) return; // 已載入或正在下載中，不要重複執行
+
+    setIsDownloading(true);
+    setDownloadProgress(0);
+    setDownloadError(null);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/opencv.js', true);
+    xhr.responseType = 'blob'; // 以 Blob 形式接收
+
+    // 進度事件
+    xhr.onprogress = (e) => {
+      if (e.lengthComputable) {
+        const percent = Math.floor((e.loaded / e.total) * 100);
+        setDownloadProgress(percent);
+      } else {
+        // 若無法計算長度，就顯示個大約值或保留 0
+        setDownloadProgress(50);
+      }
+    };
+
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        // 將 Blob 轉成 ObjectURL 再動態插 <script>
+        const blob = new Blob([xhr.response], { type: 'text/javascript' });
+        const scriptUrl = URL.createObjectURL(blob);
+
+        // OpenCV 初始化 callback
+        window.Module = {
+          onRuntimeInitialized() {
+            console.log('OpenCV.js is ready from local /opencv.js');
+            setOpenCvLoaded(true);
+          },
+        };
+
+        const script = document.createElement('script');
+        script.src = scriptUrl;
+        script.onload = () => {
+          console.log('OpenCV.js script loaded (local).');
+          // 若 window.cv 是 Promise，就等它 resolve
+          if (window.cv && typeof window.cv.then === 'function') {
+            window.cv.then((resolvedModule) => {
+              console.log('Resolved the Promise-based cv module', resolvedModule);
+              window.cv = resolvedModule;
+              setOpenCvLoaded(true);
+            });
+          } else {
+            // 不是 Promise 版 => 直接可用
+            setOpenCvLoaded(true);
+          }
+        };
+        script.onerror = (err) => {
+          console.error('Failed to load OpenCV.js from object URL', err);
+          setDownloadError('Failed to load OpenCV.js after fetching blob.');
+        };
+        document.body.appendChild(script);
+      } else {
+        setDownloadError(`Failed to download: status = ${xhr.status}`);
+      }
+      setIsDownloading(false);
+    };
+
+    xhr.onerror = () => {
+      setDownloadError('Network error while downloading /opencv.js');
+      setIsDownloading(false);
+    };
+
+    xhr.send();
+  };
+
+  // ------ 執行透視轉換 ------
   const performPerspectiveTransform = () => {
-    if (!predictionData || !openCvLoaded || !cv || !cv.imread) return;
+    if (!predictionData || !openCvLoaded || !window.cv || !window.cv.imread) {
+      console.log('Cannot transform yet: missing data or OpenCV not loaded.');
+
+      // detail info
+      console.log('predictionData:', predictionData);
+      console.log('openCvLoaded:', openCvLoaded);
+      console.log('window.cv:', window.cv);
+      console.log('window.cv.imread:', window.cv?.imread);
+
+      return;
+    }
 
     const originalCanvas = originalCanvasRef.current;
     const transformedCanvas = transformedCanvasRef.current;
-
-    if (!originalCanvas || !transformedCanvas) return;
+    if (!originalCanvas || !transformedCanvas) {
+      console.log('Canvas references not ready.');
+      return;
+    }
 
     try {
-      const src = cv.imread(originalCanvas);
+      const src = window.cv.imread(originalCanvas);
       const imgWidth = originalCanvas.width;
       const imgHeight = originalCanvas.height;
-      const scaledPolygon = predictionData.polygon.map(point => [
+
+      // 依照畫布尺寸調整 polygon
+      const scaledPolygon = predictionData.polygon.map((point) => [
         point[0] * (imgWidth / imageInfo.width),
         point[1] * (imgHeight / imageInfo.height),
       ]);
 
       const sortedPolygon = sortPolygonClockwise(scaledPolygon);
-
       if (sortedPolygon.length !== 4) {
         setError('Invalid number of points in polygon.');
+        console.log('sortedPolygon is not 4 corners:', sortedPolygon);
         return;
       }
 
-      const srcPts = cv.matFromArray(4, 1, cv.CV_32FC2, sortedPolygon.flat());
-      const dstPts = cv.matFromArray(4, 1, cv.CV_32FC2, [
-        0, 0,
-        outputWidth, 0,
-        outputWidth, outputHeight,
-        0, outputHeight
-      ]);
+      // 重新設定攤平 canvas 大小，避免出現空白
+      transformedCanvas.width = outputWidth;
+      transformedCanvas.height = outputHeight;
 
-      const M = cv.getPerspectiveTransform(srcPts, dstPts);
-      const dst = new cv.Mat();
-      const dsize = new cv.Size(outputWidth, outputHeight);
+      const srcPts = window.cv.matFromArray(4, 1, window.cv.CV_32FC2, sortedPolygon.flat());
+      const dstPts = window.cv.matFromArray(
+        4,
+        1,
+        window.cv.CV_32FC2,
+        [0, 0, outputWidth, 0, outputWidth, outputHeight, 0, outputHeight]
+      );
 
-      cv.warpPerspective(src, dst, M, dsize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, new cv.Scalar());
-      cv.imshow(transformedCanvas, dst);
+      const M = window.cv.getPerspectiveTransform(srcPts, dstPts);
+      const dst = new window.cv.Mat();
+      const dsize = new window.cv.Size(outputWidth, outputHeight);
+
+      window.cv.warpPerspective(
+        src,
+        dst,
+        M,
+        dsize,
+        window.cv.INTER_LINEAR,
+        window.cv.BORDER_CONSTANT,
+        new window.cv.Scalar()
+      );
+      window.cv.imshow(transformedCanvas, dst);
 
       src.delete();
       dst.delete();
       srcPts.delete();
       dstPts.delete();
       M.delete();
+
+      console.log('Perspective transform done, canvas updated.');
     } catch (e) {
       console.error('Error performing perspective transform:', e);
       setError('Error performing perspective transform: ' + e.message);
@@ -455,10 +558,55 @@ const DocAlignerDemo = ({
 
   const currentFile = selectedFile;
 
+  // -----------------------------------
+  //                RENDER
+  // -----------------------------------
   return (
     <div className={styles.demoWrapper}>
       <Space direction="vertical" style={{ width: '100%' }}>
 
+        {/* OpenCV Download Section */}
+        <Card title="OpenCV Download Status" style={{ marginBottom: 16 }}>
+          {!openCvLoaded && (
+            <Space direction="vertical">
+              <Button
+                type="primary"
+                onClick={downloadOpenCv}
+                loading={isDownloading}
+              >
+                {isDownloading ? 'Downloading...' : 'Retry Download OpenCV'}
+              </Button>
+
+              {/* 進度條 */}
+              {(isDownloading || downloadProgress > 0) && (
+                <Progress
+                  percent={downloadProgress}
+                  status={downloadError ? 'exception' : 'active'}
+                />
+              )}
+
+              {/* 下載錯誤 */}
+              {downloadError && (
+                <Alert
+                  message="OpenCV Download Error"
+                  description={downloadError}
+                  type="error"
+                  showIcon
+                />
+              )}
+            </Space>
+          )}
+
+          {openCvLoaded && (
+            <Alert
+              message="OpenCV.js loaded successfully."
+              type="success"
+              showIcon
+            />
+          )}
+        </Card>
+
+        {/* 上傳 / 狀態顯示 */}
         <Row justify="space-between" align="middle">
           <Col>
             <Upload
@@ -542,7 +690,7 @@ const DocAlignerDemo = ({
             <Divider />
             <Title level={3}>{inferenceInfoTitle}</Title>
             <ul className={styles.infoList}>
-              <li>{inferenceTimeLabel}: {inferenceTime.toFixed(2)} sec </li>
+              <li>{inferenceTimeLabel}: {inferenceTime.toFixed(2)} sec</li>
               <li>{timestampLabel}: {timestamp}</li>
             </ul>
           </>
@@ -553,7 +701,7 @@ const DocAlignerDemo = ({
             <Divider />
             <Title level={3}>{polygonInfoTitle}</Title>
             <ul className={styles.infoList}>
-              {predictionDataScale.polygon.map((point, index) => (
+              {predictionDataScale?.polygon?.map((point, index) => (
                 <li key={index}>
                   Point {index + 1}: ({Math.round(point[0])}, {Math.round(point[1])})
                 </li>
@@ -568,9 +716,9 @@ const DocAlignerDemo = ({
             <Title level={3}>{TransformedTitle}</Title>
             <Space>
               <Text>{TransformedWidthLabel}:</Text>
-              <InputNumber value={outputWidth} onChange={(val)=>setOutputWidth(val)} />
+              <InputNumber value={outputWidth} onChange={(val) => setOutputWidth(val)} />
               <Text>{TransformedHeightLabel}:</Text>
-              <InputNumber value={outputHeight} onChange={(val)=>setOutputHeight(val)} />
+              <InputNumber value={outputHeight} onChange={(val) => setOutputHeight(val)} />
             </Space>
             <div className={styles.canvasWrapper}>
               <canvas ref={transformedCanvasRef} className={styles.demoCanvas}></canvas>
@@ -582,7 +730,6 @@ const DocAlignerDemo = ({
             </div>
           </>
         )}
-
       </Space>
     </div>
   );
