@@ -84,13 +84,13 @@ The core concept is: for the same pair $(i, j)$ (which come from the same origin
 
 ### NT-Xent Loss Function
 
-Let:
+This is essentially the InfoNCE loss function we have seen before, except that the authors have modified the input format while keeping the formula unchanged. Here, ℓ₂ normalization is applied to the input features, which stabilizes the calculation of cosine similarity.
 
-- $zᵢ$ be the 128-dimensional vector obtained after passing the $i$-th augmented image through the projection head.
-- $\text{sim}(u, v) = \frac{u^\top v}{\|u\|\|v\|}$ represents the cosine similarity.
-- $τ$ (tau) is the temperature hyperparameter, controlling the scaling of similarity scores.
+:::tip
+If you are interested in the paper that introduced InfoNCE, you can refer to:
 
-In a batch, assume there are $N$ original images, each augmented twice, resulting in $2N$ augmented images. For a positive pair $(i, j)$ (i.e., two different augmentations of the same original image), when computing the loss, the remaining $2(N - 1)$ augmented images are considered negative samples.
+- [**[18.07] CPC: Today shapes tomorrow**](../1807-cpc/index.md)
+  :::
 
 The NT-Xent loss function is computed as follows:
 
@@ -101,25 +101,30 @@ $$
 
 Where:
 
-- The numerator $\exp(\text{sim}(z_i, z_j)/τ)$ represents the exponentiated similarity score between $z_i$ and the positive sample $z_j$.
+- $zᵢ$ is the 128-dimensional vector obtained from the projection head after processing the $i$-th augmented image.
+- $\text{sim}(u, v) = \frac{u^\top v}{\|u\|\|v\|}$ represents cosine similarity.
+- $τ$ (tau) is the temperature hyperparameter, which controls the scaling of similarity scores.
+- The numerator, $\exp(\text{sim}(z_i, z_j)/τ)$, represents the exponentiated similarity score between $z_i$ and the positive sample $z_j$.
 - The denominator is the sum of the exponentiated similarity scores between $z_i$ and all other vectors in the batch (excluding itself).
 
-The goal is to maximize the similarity between positive samples $(z_i, z_j)$ while minimizing the similarity with other negative samples, i.e., we want $\text{sim}(z_i, z_j)$ to be much larger than $\text{sim}(z_i, z_k)$ for all $k \neq i$. In this way, the model learns more discriminative representations, with similar samples clustering together and dissimilar ones being separated.
+In a batch, assume there are $N$ original images, each undergoing two different augmentations, resulting in a total of $2N$ augmented images. For a positive pair $(i, j)$ (i.e., two different augmentations of the same original image), the loss is computed while treating the remaining $2(N - 1)$ augmented images as negative samples.
 
-For every positive pair $(i, j)$ in the batch, the losses for both $(i, j)$ and $(j, i)$ are computed and summed for backpropagation.
+The objective is to maximize the similarity between positive samples $(z_i, z_j)$ while minimizing the similarity of all other negative samples. That is, we aim for $\text{sim}(z_i, z_j)$ to be much greater than $\text{sim}(z_i, z_k)$ (for all $k \neq i$). This encourages the model to learn more discriminative representations, ensuring that similar samples cluster together while dissimilar samples are pushed apart.
+
+Within a batch, for each positive pair $(i, j)$, both $(i, j)$ and $(j, i)$ losses are computed and summed for backpropagation.
 
 :::tip
-NT-Xent adapts the influence of negative samples via **cosine similarity** (with ℓ₂ normalization) and the "temperature" ($\tau$).
+NT-Xent adapts the impact of negative samples using **cosine similarity** (with ℓ₂ normalization) and the **temperature parameter** ($\tau$).
 
-- **Cosine similarity**: Focuses the model on the "direction" of the vectors, rather than their "magnitude," making the relative similarity between representations more accurate.
-- **Temperature parameter $\tau$**:
-  Controls the scaling of the similarity, influencing the weight of negative samples in the loss:
-  - **Small $\tau$** → Amplifies the similarity difference → Emphasizes "hard negatives."
-  - **Large $\tau$** → Smooths the similarity difference → More even influence of negative samples.
+- **Cosine similarity**: Ensures the model focuses on the **direction** of vectors rather than their **magnitude**, leading to a more accurate comparison of relative similarities.
+- **Temperature parameter ($\tau$)**:
+  Controls the scaling of similarity scores, affecting the weighting of negative samples in the loss function:
+  - **Small $\tau$** → Enlarges similarity differences → Emphasizes **hard negatives**.
+  - **Large $\tau$** → Smooths similarity differences → Negative samples have a more balanced impact.
 
-In traditional contrastive losses, to account for the effect of "easy/hard negatives," **semi-hard negative mining** is often required. Without this filtering, most negative samples may be too easy to distinguish (high contrast), which reduces learning effectiveness.
+In traditional contrastive loss functions, to properly handle the impact of **easy/hard negative samples**, manual **semi-hard negative mining** is often required. Without this selection, most negative samples may be too easily distinguishable (leading to excessive contrast), which could reduce the effectiveness of learning.
 
-However, NT-Xent uses **cosine similarity + temperature adjustment** to dynamically adjust the weight of negative samples based on their similarity, eliminating the need for manual negative sample selection. Experiments show that without semi-hard negative mining, other contrastive loss functions (e.g., logistic loss, margin loss) generally perform worse, and even with semi-hard negative mining, they may not outperform NT-Xent.
+However, NT-Xent dynamically adjusts the weighting of negative samples based on similarity scores using **cosine similarity + temperature scaling**, eliminating the need for manual negative sample selection. Experiments have shown that contrastive loss functions like logistic loss and margin loss generally perform worse without semi-hard negative mining. Even when semi-hard negative mining is applied, they may still not outperform NT-Xent.
 :::
 
 ## Discussion
