@@ -1,6 +1,6 @@
 ---
 title: "[21.04] EfficientNet-V2"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 深層畳み込みの這い進み

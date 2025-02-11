@@ -1,6 +1,6 @@
 ---
 title: "[19.08] VL-BERT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Watching from the Sidelines

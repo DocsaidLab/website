@@ -1,6 +1,6 @@
 ---
 title: "[22.07] PARSeq"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 文字の順序は読み取りに影響しない

@@ -1,7 +1,7 @@
 ---
 slug: buy-a-new-computer
 title: Building a New Computer
-authors: Zephyr
+authors: Z. Yuan
 tags: [rtx4090, 13900k]
 image: /en/img/2023/1012.webp
 description: Documenting the process of assembling a new computer.

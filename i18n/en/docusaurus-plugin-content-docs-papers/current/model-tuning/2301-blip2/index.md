@@ -1,6 +1,6 @@
 ---
 title: "[23.01] BLIP-2"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Q-Former debuts

@@ -1,6 +1,6 @@
 ---
 title: "[20.03] DRRG"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## A first look at GCN

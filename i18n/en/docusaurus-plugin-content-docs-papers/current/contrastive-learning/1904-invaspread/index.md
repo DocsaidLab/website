@@ -1,6 +1,6 @@
 ---
 title: "[19.04] InvaSpread"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Traces Under Difficulties

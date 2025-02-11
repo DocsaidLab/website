@@ -1,7 +1,7 @@
 ---
 slug: ubuntu-install-ssh
 title: 在 Ubuntu 上設定 SSH 伺服器
-authors: Zephyr
+authors: Z. Yuan
 tags: [ubuntu, ssh]
 image: /img/2023/0912.webp
 description: 伺服器的設定與無密碼登入教學。

@@ -1,6 +1,6 @@
 ---
 title: "[23.03] FastViT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 再パラメータ化された ViT の実験

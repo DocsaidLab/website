@@ -1,7 +1,7 @@
 ---
 slug: torch-layernorm-mismatch
 title: Discrepancy in LayerNorm Calculations?
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/0820.webp
 tags: [PyTorch, LayerNorm]
 description: Curious about the numbers? Let's calculate and compare.

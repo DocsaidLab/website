@@ -1,6 +1,6 @@
 ---
 title: "[21.04] Soft Prompts"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## A soft reminder

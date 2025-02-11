@@ -1,7 +1,7 @@
 ---
 slug: get-taiwan-all-stocks-info
 title: 取得 TWSE 所有股票代號資料
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/0610.webp
 tags: [beautifulsoup4, TWSE]
 description: Get Taiwan all stocks info from TWSE by Python.

@@ -1,7 +1,7 @@
 ---
 slug: unicode-table
 title: Unicode 編碼區段表
-authors: Zephyr
+authors: Z. Yuan
 tags: [unicode]
 image: /img/2023/0902.webp
 description: Unicode 編碼區段表，方便查詢。

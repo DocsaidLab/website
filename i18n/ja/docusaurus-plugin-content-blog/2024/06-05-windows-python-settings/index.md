@@ -1,7 +1,7 @@
 ---
 slug: windows-python-settings
 title: Win11 システムでの Python 環境の簡単設定
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/0605.webp
 tags: [win11, python]
 description: WindowsでのPython環境のセットアップ

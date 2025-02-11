@@ -1,6 +1,6 @@
 ---
 title: "[18.06] GPT-1"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 十二層解碼器

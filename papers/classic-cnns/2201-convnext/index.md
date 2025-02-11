@@ -1,6 +1,6 @@
 ---
 title: "[22.01] ConvNeXt"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 讓卷積再次偉大

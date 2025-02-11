@@ -1,6 +1,6 @@
 ---
 title: "[15.05] U-Net"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 融合的序幕

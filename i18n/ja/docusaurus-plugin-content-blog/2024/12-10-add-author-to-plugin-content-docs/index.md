@@ -1,7 +1,7 @@
 ---
 slug: customized-docusaurus-author-to-plugin-content-docs
 title: DocusaurusのDocsに著者情報を追加する
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/1210.webp
 tags: [Docusaurus, Author]
 description: オフィシャルにはサポートされていないので、自分たちで対応しました。
@@ -49,26 +49,26 @@ description: オフィシャルにはサポートされていないので、自�
 元々の設計では、著者情報は `blog/authors.yml` というファイルに格納されています。その内容はおおよそ以下のようになります：
 
 ```yml
-Zephyr:
-  name: Zephyr
+Z. Yuan:
+  name: Z. Yuan
   title: Dosaid maintainer, Full-Stack AI Engineer
-  url: https://github.com/zephyr-sh
-  image_url: https://github.com/zephyr-sh.png
+  url: https://github.com/Z. Yuan-sh
+  image_url: https://github.com/Z. Yuan-sh.png
   socials:
-    github: "zephyr-sh"
+    github: "Z. Yuan-sh"
 ```
 
 同じパスに新しく `blog/authors.json` というファイルを作成し、同じ内容を JSON 形式で書き換えます：
 
 ```json
 {
-  "Zephyr": {
-    "name": "Zephyr",
+  "Z. Yuan": {
+    "name": "Z. Yuan",
     "title": "Dosaid maintainer, Full-Stack AI Engineer",
-    "url": "https://github.com/zephyr-sh",
-    "image_url": "https://github.com/zephyr-sh.png",
+    "url": "https://github.com/Z. Yuan-sh",
+    "image_url": "https://github.com/Z. Yuan-sh.png",
     "socials": {
-      "github": "zephyr-sh"
+      "github": "Z. Yuan-sh"
     }
   }
 }
@@ -471,7 +471,7 @@ const socialIconMap = {
 ```mdx
 ---
 title: "[20.08] HiPPO"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## カバの記憶

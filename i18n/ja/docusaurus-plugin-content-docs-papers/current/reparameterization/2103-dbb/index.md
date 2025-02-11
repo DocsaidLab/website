@@ -1,6 +1,6 @@
 ---
 title: "[21.03] DBB"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 六人の弟子

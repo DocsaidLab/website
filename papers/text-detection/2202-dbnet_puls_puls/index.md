@@ -1,6 +1,6 @@
 ---
 title: "[22.02] DBNet++"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 自適應特徵融合

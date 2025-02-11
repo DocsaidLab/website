@@ -23,7 +23,7 @@ This project was conceived and initiated by [**kunkunlin1221**](https://github.c
 
 A special thanks to him for his contribution.
 
-2024 © Zephyr
+2024 © Z. Yuan
 :::
 
 ---

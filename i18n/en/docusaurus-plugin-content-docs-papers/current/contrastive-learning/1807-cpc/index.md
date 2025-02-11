@@ -1,6 +1,6 @@
 ---
 title: "[18.07] CPC"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Today shapes tomorrow

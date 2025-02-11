@@ -1,6 +1,6 @@
 ---
 title: "[19.08] LXMERT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## もっと多くの事前学習

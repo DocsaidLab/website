@@ -1,7 +1,7 @@
 ---
 slug: file-crawler-python-implementation
 title: Python Implementation of a Web File Downloader
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/0923.webp
 tags: [Python, File Crawler]
 description: Implement a simple web file downloader.

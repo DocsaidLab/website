@@ -1,6 +1,6 @@
 ---
 title: "[15.12] SSD"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 省時省力省池化

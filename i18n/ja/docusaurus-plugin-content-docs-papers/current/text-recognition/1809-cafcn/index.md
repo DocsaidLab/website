@@ -1,6 +1,6 @@
 ---
 title: "[18.09] CA-FCN"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 新しい次元の導入

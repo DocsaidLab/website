@@ -1,6 +1,6 @@
 ---
 title: "[19.08] PAN"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 像素聚合策略

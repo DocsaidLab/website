@@ -1,6 +1,6 @@
 ---
 title: "[20.10] AutoPrompt"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Model Language

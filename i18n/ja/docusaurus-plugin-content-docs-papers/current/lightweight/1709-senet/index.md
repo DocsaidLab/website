@@ -1,6 +1,6 @@
 ---
 title: "[17.09] SENet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 強く絞ってください

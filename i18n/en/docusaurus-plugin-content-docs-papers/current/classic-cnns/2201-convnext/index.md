@@ -1,6 +1,6 @@
 ---
 title: "[22.01] ConvNeXt"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Making Convolutions Great Again

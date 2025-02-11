@@ -1,6 +1,6 @@
 ---
 title: "[19.11] DBNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 可微分二值化函數

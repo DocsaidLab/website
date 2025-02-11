@@ -1,6 +1,6 @@
 ---
 title: "[19.04] CRAFT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## The Craft of Text

@@ -1,6 +1,6 @@
 ---
 title: "[20.09] TextFuseNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## A Beautiful Fusion of Three Feature Types

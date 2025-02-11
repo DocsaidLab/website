@@ -1,7 +1,7 @@
 ---
 slug: graph-convolutional-networks
 title: 淺談圖卷積網路
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/1205.webp
 tags: [graph-convolutional-networks, transformer]
 description: 簡單介紹一下圖卷積

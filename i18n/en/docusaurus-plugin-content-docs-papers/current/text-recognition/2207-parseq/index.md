@@ -1,6 +1,6 @@
 ---
 title: "[22.07] PARSeq"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Wrod oerdr dseon't mteartr for redaing

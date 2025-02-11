@@ -1,6 +1,6 @@
 ---
 title: "[22.09] FRVT-Twins"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Report on Twin Identification Accuracy

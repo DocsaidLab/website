@@ -1,6 +1,6 @@
 ---
 title: "[23.12] Mamba"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 誰是繼承人

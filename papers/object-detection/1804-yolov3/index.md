@@ -1,6 +1,6 @@
 ---
 title: "[18.04] YOLO-V3"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 引入多尺度檢測

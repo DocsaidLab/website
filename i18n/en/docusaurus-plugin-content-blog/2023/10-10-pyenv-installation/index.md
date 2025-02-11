@@ -1,7 +1,7 @@
 ---
 slug: pyenv-installation
 title: Managing Python Versions with pyenv
-authors: Zephyr
+authors: Z. Yuan
 tags: [pyenv, virtualenv]
 image: /en/img/2023/1010.webp
 description: Documenting the installation and usage of pyenv.

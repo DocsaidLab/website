@@ -1,7 +1,7 @@
 ---
 slug: opencv-imread
 title: Reading HEIC Images in Python
-authors: Zephyr
+authors: Z. Yuan
 tags: [HEIC, TurboJPEG]
 image: /en/img/2024/0213.webp
 description: Optimizing imread for reading HEIC images!

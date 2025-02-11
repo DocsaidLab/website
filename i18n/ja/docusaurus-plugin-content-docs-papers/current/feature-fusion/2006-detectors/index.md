@@ -1,6 +1,6 @@
 ---
 title: "[20.06] DetectoRS"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 再帰的特徴ピラミッド

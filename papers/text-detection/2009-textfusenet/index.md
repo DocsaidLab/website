@@ -1,6 +1,6 @@
 ---
 title: "[20.09] TextFuseNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 華麗融合三重奏

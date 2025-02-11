@@ -1,7 +1,7 @@
 ---
 slug: unicode-table
 title: Unicode コードポイント表
-authors: Zephyr
+authors: Z. Yuan
 tags: [unicode]
 image: /ja/img/2023/0902.webp
 description: Unicode コードポイント表で簡単に参照可能です。

@@ -1,6 +1,6 @@
 ---
 title: "[16.12] YOLO-V2"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Expanding a Large Number of Categories
@@ -8,7 +8,6 @@ authors: Zephyr
 [**YOLO9000: Better, Faster, Stronger**](https://arxiv.org/abs/1612.08242)
 
 ---
-
 
 ## Problem Definition
 

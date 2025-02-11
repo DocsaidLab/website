@@ -1,6 +1,6 @@
 ---
 title: "[21.10] MobileViT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 變更設計卷積核

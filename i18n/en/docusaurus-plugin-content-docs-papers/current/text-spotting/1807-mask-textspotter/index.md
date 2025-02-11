@@ -1,6 +1,6 @@
 ---
 title: "[18.07] Mask TextSpotter"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Localization as Recognition

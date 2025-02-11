@@ -1,7 +1,7 @@
 ---
 slug: graph-convolutional-networks
 title: グラフ畳み込みネットワークの概要
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/1205.webp
 tags: [graph-convolutional-networks, transformer]
 description: グラフ畳み込みの簡単な紹介

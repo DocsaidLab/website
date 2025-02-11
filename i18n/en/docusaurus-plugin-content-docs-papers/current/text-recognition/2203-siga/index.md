@@ -1,6 +1,6 @@
 ---
 title: "[22.03] SIGA"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Glyph Attention Mechanism

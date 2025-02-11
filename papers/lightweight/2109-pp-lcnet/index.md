@@ -1,6 +1,6 @@
 ---
 title: "[21.09] PP-LCNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 探索速度的邊界

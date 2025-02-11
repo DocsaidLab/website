@@ -1,6 +1,6 @@
 ---
 title: "[19.06] XLNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 双流注意機構

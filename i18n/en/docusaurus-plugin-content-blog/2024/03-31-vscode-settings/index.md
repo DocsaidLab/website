@@ -1,7 +1,7 @@
 ---
 slug: vscode-settings
 title: Common VSCode Configuration Settings
-authors: Zephyr
+authors: Z. Yuan
 tags: [vscode, settings]
 image: /en/img/2024/0331.webp
 description: VSCode settings for future reference.

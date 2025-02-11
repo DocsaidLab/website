@@ -1,6 +1,6 @@
 ---
 title: "[21.04] MDETR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## The Art of Continuity

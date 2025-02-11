@@ -1,12 +1,12 @@
 ---
 slug: otter-style
 title: Otter Style
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Based on Pytorch-Lightning
 
-This chapter introduces the construction method of the project managed by Zephyr, primarily based on the Pytorch-Lightning training framework.
+This chapter introduces the construction method of the project managed by Z. Yuan, primarily based on the Pytorch-Lightning training framework.
 
 :::info
 For detailed implementation details, please refer to: [**DocsaidLab/Otter**](https://github.com/DocsaidLab/Otter).
@@ -16,7 +16,7 @@ As for why it is called Otter... there is no special meaning, just a name chosen
 
 ## Setting Up the Environment
 
-The following sections use the `DocClassifier` project as an example to explain how to set up the model training environment. The content can also be applied to other projects such as `DocAligner` and `MRZScanner`, which are managed by Zephyr.
+The following sections use the `DocClassifier` project as an example to explain how to set up the model training environment. The content can also be applied to other projects such as `DocAligner` and `MRZScanner`, which are managed by Z. Yuan.
 
 :::info
 Most deep learning projects only offer the inference module. Currently, only the `DocClassifier` project offers the training module. If you need training modules for other projects, you can refer to the training methods in this chapter and implement them on your own.

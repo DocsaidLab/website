@@ -1,7 +1,7 @@
 ---
 slug: unicode-table
 title: Unicode Table
-authors: Zephyr
+authors: Z. Yuan
 tags: [unicode]
 image: /en/img/2023/0902.webp
 description: Unicode Table for easy reference.

@@ -1,7 +1,7 @@
 ---
 slug: error-record
 title: Daily Error Troubleshooting Log
-authors: Zephyr
+authors: Z. Yuan
 tags: [error, record]
 image: /en/img/2024/0204.webp
 description: A log of simple issues and their solutions.

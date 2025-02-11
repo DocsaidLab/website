@@ -1,6 +1,6 @@
 ---
 title: "[16.08] DenseNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 全部連起來

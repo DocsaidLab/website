@@ -1,6 +1,6 @@
 ---
 title: "[20.10] Deformable DETR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 可変形な注意力メカニズム

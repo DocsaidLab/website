@@ -1,6 +1,6 @@
 ---
 title: "[18.09] CA-FCN"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## A New Dimension

@@ -1,6 +1,6 @@
 ---
 title: "[20.12] UNIMO"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 錯綜の糸口

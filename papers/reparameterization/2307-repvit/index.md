@@ -1,6 +1,6 @@
 ---
 title: "[23.07] RepViT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 參考 ViT 的觀點

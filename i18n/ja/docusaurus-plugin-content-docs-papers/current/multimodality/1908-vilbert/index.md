@@ -1,6 +1,6 @@
 ---
 title: "[19.08] ViLBERT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 序幕における絡み合い

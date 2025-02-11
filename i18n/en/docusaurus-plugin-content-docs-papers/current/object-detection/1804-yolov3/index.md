@@ -1,6 +1,6 @@
 ---
 title: "[18.04] YOLO-V3"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Introducing Multi-Scale Detection

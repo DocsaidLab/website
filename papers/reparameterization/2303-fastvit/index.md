@@ -1,6 +1,6 @@
 ---
 title: "[23.03] FastViT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 重新參數化的 ViT 試驗

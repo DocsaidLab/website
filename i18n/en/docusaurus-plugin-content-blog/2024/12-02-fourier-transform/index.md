@@ -1,7 +1,7 @@
 ---
 slug: fourier-transform
 title: A Brief Introduction to Fourier Transform
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/1202.webp
 tags: [fourier-transform, signal-processing]
 description: A simple introduction to the basic concepts of Fourier Transform.

@@ -1,7 +1,7 @@
 ---
 slug: error-record
 title: 日常錯誤排除紀錄
-authors: Zephyr
+authors: Z. Yuan
 tags: [error, record]
 image: /img/2024/0204.webp
 description: 紀錄一些簡單問題和解法。

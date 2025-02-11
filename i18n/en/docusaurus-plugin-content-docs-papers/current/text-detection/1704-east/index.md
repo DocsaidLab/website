@@ -1,6 +1,6 @@
 ---
 title: "[17.04] EAST"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Simplifying Text Detection

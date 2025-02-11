@@ -1,7 +1,7 @@
 ---
 slug: login-rtf8207w
 title: Logging into RTF8207W Router
-authors: Zephyr
+authors: Z. Yuan
 tags: [rtf8207w]
 image: /en/img/2023/0904.webp
 description: RTF8207W account and password.

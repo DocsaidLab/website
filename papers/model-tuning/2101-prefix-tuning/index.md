@@ -1,6 +1,6 @@
 ---
 title: "[21.01] Prefix-Tuning"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 是他？不是他？

@@ -1,6 +1,6 @@
 ---
 title: "[19.07] RoBERTa"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 訓練 BERT 的說明書

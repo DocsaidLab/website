@@ -1,6 +1,6 @@
 ---
 title: "[23.09] TIVC"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Perspective on Twin Identification

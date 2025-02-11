@@ -1,6 +1,6 @@
 ---
 title: "[19.06] XLNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Two-Stream Attention Mechanism

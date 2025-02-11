@@ -1,6 +1,6 @@
 ---
 title: "[22.03] CoCoOp"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 先看過影像再說

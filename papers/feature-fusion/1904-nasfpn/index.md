@@ -1,6 +1,6 @@
 ---
 title: "[19.04] NAS-FPN"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 有錢就是任性

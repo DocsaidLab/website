@@ -1,7 +1,7 @@
 ---
 slug: fixed-pyenv-install-error
 title: pyenvビルドエラーを修復
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/1125.webp
 tags: [pyenv, python]
 description: ビルドエラーの解消

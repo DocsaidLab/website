@@ -1,6 +1,6 @@
 ---
 title: "[21.11] MAE"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 四分之一的線索

@@ -1,6 +1,6 @@
 ---
 title: "[18.01] MobileNet-V2"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## ボトルネック内の鍛錬

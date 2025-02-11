@@ -1,11 +1,12 @@
 {
-  "Zephyr": {
-    "name": "Zephyr",
+  "Z. Yuan": {
+    "name": "Z. Yuan",
     "title": "Dosaid maintainer, Full-Stack AI Engineer",
     "url": "https://github.com/zephyr-sh",
     "image_url": "https://github.com/zephyr-sh.png",
     "socials": {
-      "github": "zephyr-sh"
+      "github": "zephyr-sh",
+      "linkedin": "ze-yuan-sh7"
     }
   },
   "Jack": {

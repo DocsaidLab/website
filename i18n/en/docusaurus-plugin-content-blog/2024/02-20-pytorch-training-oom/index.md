@@ -1,7 +1,7 @@
 ---
 slug: pytorch-training-out-of-memory
 title: The Pitfall of Lists in PyTorch
-authors: Zephyr
+authors: Z. Yuan
 tags: [PyTorch, OOM]
 image: /en/img/2024/0220.webp
 description: Resolving PyTorch OOM Issues.

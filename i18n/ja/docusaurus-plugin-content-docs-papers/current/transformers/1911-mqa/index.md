@@ -1,6 +1,6 @@
 ---
 title: "[19.11] MQA"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 共有キーと値

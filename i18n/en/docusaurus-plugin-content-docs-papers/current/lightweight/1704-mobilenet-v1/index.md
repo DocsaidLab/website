@@ -1,6 +1,6 @@
 ---
 title: "[17.04] MobileNet-V1"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Pioneers of Depthwise Separable Convolutions

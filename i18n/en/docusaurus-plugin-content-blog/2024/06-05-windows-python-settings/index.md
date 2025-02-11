@@ -1,7 +1,7 @@
 ---
 slug: windows-python-settings
 title: Simple Configuration of Python Environment on Win11
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/0605.webp
 tags: [win11, python]
 description: Setting up Python on Windows.

@@ -1,6 +1,6 @@
 ---
 title: "[23.06] DiffusionSTR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 噪聲中的文字訊號

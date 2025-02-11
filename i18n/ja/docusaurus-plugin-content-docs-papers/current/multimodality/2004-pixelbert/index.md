@@ -1,6 +1,6 @@
 ---
 title: "[20.04] Pixel-BERT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## ピクセルの言語

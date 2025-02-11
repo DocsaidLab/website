@@ -1,7 +1,7 @@
 ---
 slug: customized-docusaurus-404-page
 title: Docusaurus の 404 ページをカスタマイズする
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/0910.webp
 tags: [Docusaurus, 404NotFound]
 description: デフォルトの 404 ページを改善します！

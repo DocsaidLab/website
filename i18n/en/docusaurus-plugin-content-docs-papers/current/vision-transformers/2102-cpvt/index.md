@@ -1,6 +1,6 @@
 ---
 title: "[21.02] CPVT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Conditional Positional Encodings

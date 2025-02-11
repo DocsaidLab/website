@@ -1,6 +1,6 @@
 ---
 title: "[20.12] DeiT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 蒸留後はより芳香が増す

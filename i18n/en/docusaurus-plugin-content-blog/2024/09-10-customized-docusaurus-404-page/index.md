@@ -1,7 +1,7 @@
 ---
 slug: customized-docusaurus-404-page
 title: Customizing the Docusaurus 404 Page
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/0910.webp
 tags: [Docusaurus, 404NotFound]
 description: The default 404 page needs a revamp!

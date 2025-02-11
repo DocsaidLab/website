@@ -1,6 +1,6 @@
 ---
 title: "[22.09] FRVT-Twins"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 双子識別能力報告

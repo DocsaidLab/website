@@ -1,6 +1,6 @@
 ---
 title: "[14.11] FCN"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Fully Convolutional Networks

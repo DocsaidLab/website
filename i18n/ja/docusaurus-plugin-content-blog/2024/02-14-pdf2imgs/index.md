@@ -1,7 +1,7 @@
 ---
 slug: convert-pdf-to-images
 title: Python で PDF を画像に変換する
-authors: Zephyr
+authors: Z. Yuan
 tags: [Python, pdf2image]
 image: /ja/img/2024/0214.webp
 description: オープンソースライブラリ pdf2image を使用して問題を解決します。

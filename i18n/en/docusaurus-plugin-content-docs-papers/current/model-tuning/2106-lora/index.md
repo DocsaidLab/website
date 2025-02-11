@@ -1,6 +1,6 @@
 ---
 title: "[21.06] LoRA"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## One in Ten Thousand LLM

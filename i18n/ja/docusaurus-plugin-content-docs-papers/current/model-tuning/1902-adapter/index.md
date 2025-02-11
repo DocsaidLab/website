@@ -1,6 +1,6 @@
 ---
 title: "[19.02] Adapter"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## パラメータ節約 96%

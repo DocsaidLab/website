@@ -1,6 +1,6 @@
 ---
 title: "[18.07] CPC"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 未知生，焉知死？

@@ -1,7 +1,7 @@
 ---
 slug: fourier-transform
 title: フーリエ変換の概要
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/1202.webp
 tags: [fourier-transform, signal-processing]
 description: フーリエ変換の基本的な概念について簡単に紹介します。

@@ -1,6 +1,6 @@
 ---
 title: "[22.08] BEiT-3"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Great Minds Think Alike

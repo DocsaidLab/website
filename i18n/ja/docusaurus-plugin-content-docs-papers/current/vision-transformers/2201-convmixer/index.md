@@ -1,6 +1,6 @@
 ---
 title: "[22.01] ConvMixer"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## コンボリューションミキサー

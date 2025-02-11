@@ -1,6 +1,6 @@
 ---
 title: "[23.07] RepViT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Revisiting Mobile CNN from the ViT Perspective

@@ -1,6 +1,6 @@
 ---
 title: "[17.07] NASNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Searching for Network Architectures

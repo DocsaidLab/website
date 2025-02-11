@@ -1,7 +1,7 @@
 ---
 slug: flexible-video-conversion-by-python
 title: Batch Video Conversion
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/1217.webp
 tags: [Media-Processing, Python, ffmpeg]
 description: Build a batch conversion process with Python and ffmpeg to convert to a specified format.

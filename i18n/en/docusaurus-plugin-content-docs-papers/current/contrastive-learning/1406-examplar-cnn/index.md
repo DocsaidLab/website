@@ -1,6 +1,6 @@
 ---
 title: "[14.06] Exemplar CNN"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Finding Invariant Features

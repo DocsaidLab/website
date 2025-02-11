@@ -1,7 +1,7 @@
 ---
 slug: fourier-transform
 title: 淺談傅立葉轉換
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/1202.webp
 tags: [fourier-transform, signal-processing]
 description: 簡單介紹一下傅立葉轉換的基本概念。

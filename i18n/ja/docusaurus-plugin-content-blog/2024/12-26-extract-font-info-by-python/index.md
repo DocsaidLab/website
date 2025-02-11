@@ -1,7 +1,7 @@
 ---
 slug: extract-font-info-by-python
 title: フォントファイルの情報を取得
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/1226.webp
 tags: [font-tools, Python]
 description: Pythonを使用してフォントファイルの情報を取得する。

@@ -1,6 +1,6 @@
 ---
 title: "[18.01] CosFace"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 大きな余弦損失

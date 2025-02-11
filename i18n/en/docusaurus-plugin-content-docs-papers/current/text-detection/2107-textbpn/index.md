@@ -1,6 +1,6 @@
 ---
 title: "[21.07] TextBPN"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Revisiting GCN

@@ -1,7 +1,7 @@
 ---
 slug: mount-disk-on-ubuntu
 title: Ubuntu での外付けハードディスクのマウント
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2025/0125.webp
 tags: [ubuntu, mount]
 description: ハードディスクのマウント手順を記録

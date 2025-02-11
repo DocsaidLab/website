@@ -1,7 +1,7 @@
 ---
 slug: latex-usage
 title: LaTeX 構文クイックリファレンス表
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/0604.webp
 tags: [LaTeX, Math]
 description: LaTeX 構文のクイックリファレンス

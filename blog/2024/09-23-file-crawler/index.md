@@ -1,7 +1,7 @@
 ---
 slug: file-crawler-python-implementation
 title: 下載網頁檔案的 Python 實作
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/0923.webp
 tags: [Python, File Crawler]
 description: 一個簡單的網頁檔案下載程式。

@@ -1,6 +1,6 @@
 ---
 title: "[21.02] TransUNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Convolutions Are Not Enough

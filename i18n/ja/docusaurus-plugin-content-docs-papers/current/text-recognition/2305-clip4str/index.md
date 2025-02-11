@@ -1,6 +1,6 @@
 ---
 title: "[23.05] CLIP4STR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 多モーダルな祝福

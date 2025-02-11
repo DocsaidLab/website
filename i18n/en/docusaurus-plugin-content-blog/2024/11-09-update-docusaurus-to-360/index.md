@@ -1,7 +1,7 @@
 ---
 slug: update-docusaurus-to-3-6-0
 title: Update Docusaurus to 3.6.0
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/1109.webp
 tags: [Docusaurus, Update]
 description: Troubleshooting issues during the update process

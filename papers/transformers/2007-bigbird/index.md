@@ -1,6 +1,6 @@
 ---
 title: "[20.07] BigBird"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 大鳥注意力機制

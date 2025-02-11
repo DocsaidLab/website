@@ -1,7 +1,7 @@
 ---
 slug: buy-a-new-computer
 title: パソコン購入記録
-authors: Zephyr
+authors: Z. Yuan
 tags: [rtx4090, 13900k]
 image: /ja/img/2023/1012.webp
 description: 自作 PC 組み立てのプロセスを記録しました。

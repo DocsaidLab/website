@@ -1,6 +1,6 @@
 ---
 title: "[15.06] YOLO-V1"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 只要看一次

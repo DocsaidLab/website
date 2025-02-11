@@ -1,6 +1,6 @@
 ---
 title: "[19.08] ViLBERT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Interwoven Layers in the Beginning

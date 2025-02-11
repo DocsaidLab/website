@@ -1,6 +1,6 @@
 ---
 title: "[19.05] MobileNet-V3"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## カスタマイズ検索アーキテクチャ

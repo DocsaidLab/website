@@ -1,6 +1,6 @@
 ---
 title: "[21.09] TrOCR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Pretraining is Justice

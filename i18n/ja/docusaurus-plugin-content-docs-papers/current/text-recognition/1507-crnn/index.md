@@ -1,6 +1,6 @@
 ---
 title: "[15.07] CRNN"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 私は全部欲しい！

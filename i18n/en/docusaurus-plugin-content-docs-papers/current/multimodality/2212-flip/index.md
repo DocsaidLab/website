@@ -1,6 +1,6 @@
 ---
 title: "[22.12] FLIP"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Fast CLIP

@@ -1,7 +1,7 @@
 ---
 slug: fail2ban-settings
 title: Fail2ban：SSH サービスを保護する
-authors: Zephyr
+authors: Z. Yuan
 tags: [ubuntu, fail2ban]
 image: /ja/img/2023/0903.webp
 description: 悪意ある攻撃をすべてブロックする。

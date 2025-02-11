@@ -1,6 +1,6 @@
 ---
 title: "[17.04] MobileNet-V1"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 深層分離可能な畳み込みの発揚者

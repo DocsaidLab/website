@@ -1,6 +1,6 @@
 ---
 title: "[22.06] MobileOne"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## One Millisecond Optimization

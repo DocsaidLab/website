@@ -1,7 +1,7 @@
 ---
 slug: setting-up-nextcloud
 title: Nextcloud 構築記録
-authors: Zephyr
+authors: Z. Yuan
 tags: [Nextcloud, Docker]
 image: /ja/img/2024/0304.webp
 description: Ubuntu 22.04 上での Nextcloud 構築プロセスを記録します。

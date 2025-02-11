@@ -1,7 +1,7 @@
 ---
 slug: login-rtf8207w
 title: RTF8207W ルーターにログインする
-authors: Zephyr
+authors: Z. Yuan
 tags: [rtf8207w]
 image: /ja/img/2023/0904.webp
 description: RTF8207W ルーターに密かにログインする方法。

@@ -1,6 +1,6 @@
 ---
 title: "[15.12] ResNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Convolutional with 100 Layers

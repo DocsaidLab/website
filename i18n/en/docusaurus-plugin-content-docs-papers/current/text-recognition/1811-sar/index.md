@@ -1,6 +1,6 @@
 ---
 title: "[18.11] SAR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 2D Attention Mechanism

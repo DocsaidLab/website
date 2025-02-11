@@ -1,7 +1,7 @@
 ---
 slug: python-js-basic-command-equivalents
 title: Python と JS の基本コマンドの対応
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/0407.webp
 tags: [npm, pip]
 description: Python と JS の基本コマンドを対応付けて整理しました。

@@ -1,6 +1,6 @@
 ---
 title: "[20.03] MoCo v2"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## A Comeback

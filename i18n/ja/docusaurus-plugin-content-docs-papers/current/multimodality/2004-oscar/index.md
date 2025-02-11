@@ -1,6 +1,6 @@
 ---
 title: "[20.04] Oscar"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## オスカーのアンカーポイント

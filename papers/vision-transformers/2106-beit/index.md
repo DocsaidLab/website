@@ -1,6 +1,6 @@
 ---
 title: "[21.06] BEiT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 離散編碼預訓練

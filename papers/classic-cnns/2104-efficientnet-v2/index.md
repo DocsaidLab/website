@@ -1,6 +1,6 @@
 ---
 title: "[21.04] EfficientNet-V2"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 深度卷積的蠕行

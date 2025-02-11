@@ -1,7 +1,7 @@
 ---
 slug: mount-disk-on-ubuntu
 title: 在 Ubuntu 上掛載隨身硬碟
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2025/0125.webp
 tags: [ubuntu, mount]
 description: 紀錄掛載硬碟流程

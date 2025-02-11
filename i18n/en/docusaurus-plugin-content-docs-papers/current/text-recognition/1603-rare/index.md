@@ -1,6 +1,6 @@
 ---
 title: "[16.03] RARE"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Automatic Rectification

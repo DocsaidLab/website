@@ -1,6 +1,6 @@
 ---
 title: "[21.02] PVT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Spatial Reduction Attention Mechanism

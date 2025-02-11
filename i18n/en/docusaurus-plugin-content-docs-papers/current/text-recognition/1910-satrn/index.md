@@ -1,6 +1,6 @@
 ---
 title: "[19.10] SATRN"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Transformer Reaches the Battlefield

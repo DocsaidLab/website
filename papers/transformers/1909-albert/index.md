@@ -1,6 +1,6 @@
 ---
 title: "[19.09] ALBERT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 愛因斯 BERT

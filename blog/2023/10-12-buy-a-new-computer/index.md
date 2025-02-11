@@ -1,7 +1,7 @@
 ---
 slug: buy-a-new-computer
 title: 買電腦紀錄
-authors: Zephyr
+authors: Z. Yuan
 tags: [rtx4090, 13900k]
 image: /img/2023/1012.webp
 description: 記錄組裝電腦的過程。

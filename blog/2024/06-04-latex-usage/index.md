@@ -1,7 +1,7 @@
 ---
 slug: latex-usage
 title: LaTeX 語法快速查詢表
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/0604.webp
 tags: [LaTeX, Math]
 description: LaTeX syntax quick reference

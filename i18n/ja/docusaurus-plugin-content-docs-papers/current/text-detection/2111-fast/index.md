@@ -1,6 +1,6 @@
 ---
 title: "[21.11] FAST"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## とても速い

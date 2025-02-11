@@ -1,6 +1,6 @@
 ---
 title: "[21.11] MAE"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## A Quarter of the Clue

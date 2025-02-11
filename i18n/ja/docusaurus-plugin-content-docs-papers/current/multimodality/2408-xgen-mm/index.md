@@ -1,6 +1,6 @@
 ---
 title: "[24.08] xGen-MM"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## またの名を BLIP-3

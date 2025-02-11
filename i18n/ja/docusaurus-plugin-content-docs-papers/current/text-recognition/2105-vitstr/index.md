@@ -1,6 +1,6 @@
 ---
 title: "[21.05] ViTSTR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## エンコーダだけで十分

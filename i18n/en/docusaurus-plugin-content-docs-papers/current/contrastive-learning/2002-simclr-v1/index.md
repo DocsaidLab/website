@@ -1,6 +1,6 @@
 ---
 title: "[20.02] SimCLR v1"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Winning with Batch Size

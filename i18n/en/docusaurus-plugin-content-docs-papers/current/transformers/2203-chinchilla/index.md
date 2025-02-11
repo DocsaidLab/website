@@ -1,6 +1,6 @@
 ---
 title: "[22.03] Chinchilla"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Chinchilla's Gaze

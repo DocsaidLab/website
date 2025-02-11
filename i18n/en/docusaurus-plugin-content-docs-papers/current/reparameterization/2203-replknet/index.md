@@ -1,6 +1,6 @@
 ---
 title: "[22.03] RepLKNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Giant Convolutional Kernels

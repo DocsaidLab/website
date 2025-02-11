@@ -1,6 +1,6 @@
 ---
 title: "[20.04] UNet 3+"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Design Changes UNet++

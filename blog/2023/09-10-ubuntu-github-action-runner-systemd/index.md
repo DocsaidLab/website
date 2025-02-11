@@ -1,7 +1,7 @@
 ---
 slug: ubuntu-github-runner-systemd
 title: 自動運行 GitHub Runner
-authors: Zephyr
+authors: Z. Yuan
 tags: [github-action, runner]
 image: /img/2023/0910.webp
 description: 用 Ubuntu Systemd 在背景執行並自動運行。

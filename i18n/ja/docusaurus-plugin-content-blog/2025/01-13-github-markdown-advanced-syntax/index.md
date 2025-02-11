@@ -1,7 +1,7 @@
 ---
 slug: github-markdown-advanced-syntax
 title: 便利な GitHub Markdown の文法
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2025/0113.webp
 tags: [GitHub, Markdown]
 description: あまり知られていないが便利な文法について紹介します。

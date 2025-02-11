@@ -1,6 +1,6 @@
 ---
 title: "[24.09] GOT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## OCR モデルを統一する

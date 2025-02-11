@@ -1,7 +1,7 @@
 ---
 slug: login-rtf8207w
 title: 登入 RTF8207W 路由器
-authors: Zephyr
+authors: Z. Yuan
 tags: [rtf8207w]
 image: /img/2023/0904.webp
 description: 偷偷登入 RTF8207W 路由器。

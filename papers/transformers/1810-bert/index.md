@@ -1,6 +1,6 @@
 ---
 title: "[18.10] BERT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 十二層編碼器

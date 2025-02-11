@@ -1,6 +1,6 @@
 ---
 title: "[23.02] TCM"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## ある者は喜び、ある者は悲しむ

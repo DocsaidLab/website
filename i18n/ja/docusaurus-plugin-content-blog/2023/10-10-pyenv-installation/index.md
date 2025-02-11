@@ -1,7 +1,7 @@
 ---
 slug: pyenv-installation
 title: pyenv を使用した Python バージョン管理
-authors: Zephyr
+authors: Z. Yuan
 tags: [pyenv, virtualenv]
 image: /ja/img/2023/1010.webp
 description: pyenv のインストールおよび使用方法を記録しました。

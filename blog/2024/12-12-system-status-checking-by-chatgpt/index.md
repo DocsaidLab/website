@@ -1,7 +1,7 @@
 ---
 slug: system-status-checking-by-chatgpt
 title: Ubuntu 系統基礎狀態檢查自動化
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/1212.webp
 tags: [System-Monitoring, Automation, OpenAI-Integration]
 description: 透過 ChatGPT 自動化檢查系統基礎狀態。

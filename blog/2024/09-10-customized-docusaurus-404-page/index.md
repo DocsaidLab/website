@@ -1,7 +1,7 @@
 ---
 slug: customized-docusaurus-404-page
 title: 自訂 Docusaurus 的 404 頁面
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/0910.webp
 tags: [Docusaurus, 404NotFound]
 description: 預設的 404 頁面必須改一改！

@@ -1,6 +1,6 @@
 ---
 title: "[22.12] QARepVGG"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## RepVGG を再び偉大に

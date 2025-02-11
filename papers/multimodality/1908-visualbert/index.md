@@ -1,6 +1,6 @@
 ---
 title: "[19.08] VisualBERT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 序幕上的凝視

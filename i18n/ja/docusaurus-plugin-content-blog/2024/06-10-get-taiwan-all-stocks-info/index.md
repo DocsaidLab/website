@@ -1,7 +1,7 @@
 ---
 slug: get-taiwan-all-stocks-info
 title: TWSEの全ての株式コード情報を取得する
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/0610.webp
 tags: [beautifulsoup4, TWSE]
 description: Pythonで台湾証券取引所（TWSE）から全ての株式情報を取得する。

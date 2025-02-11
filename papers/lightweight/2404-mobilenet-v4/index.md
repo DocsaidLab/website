@@ -1,6 +1,6 @@
 ---
 title: "[24.04] MobileNet-V4"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 時隔五年的傳承

@@ -1,6 +1,6 @@
 ---
 title: "[19.11] EfficientDet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## BiFPN 才是本體

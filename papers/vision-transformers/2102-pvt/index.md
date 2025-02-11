@@ -1,6 +1,6 @@
 ---
 title: "[21.02] PVT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 空間縮減注意力機制

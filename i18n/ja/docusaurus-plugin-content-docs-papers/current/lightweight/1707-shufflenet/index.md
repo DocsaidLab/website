@@ -1,6 +1,6 @@
 ---
 title: "[17.07] ShuffleNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## チャネルシャッフルネットワーク

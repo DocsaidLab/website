@@ -1,7 +1,7 @@
 ---
 slug: customized-docusaurus-author-to-plugin-content-docs
 title: 幫 Docusaurus 的 Docs 加上作者資訊
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/1210.webp
 tags: [Docusaurus, Author]
 description: 原廠不支援，我們只好硬著頭皮上了。
@@ -49,26 +49,26 @@ description: 原廠不支援，我們只好硬著頭皮上了。
 在原本的設計中，作者資訊放在 `blog/authors.yml` 這個檔案中，裡面內容大概長這樣：
 
 ```yml
-Zephyr:
-  name: Zephyr
+Z. Yuan:
+  name: Z. Yuan
   title: Dosaid maintainer, Full-Stack AI Engineer
-  url: https://github.com/zephyr-sh
-  image_url: https://github.com/zephyr-sh.png
+  url: https://github.com/Z. Yuan-sh
+  image_url: https://github.com/Z. Yuan-sh.png
   socials:
-    github: "zephyr-sh"
+    github: "Z. Yuan-sh"
 ```
 
 我們先在相同路徑下，建立一個新的檔案 `blog/authors.json`，把同樣的內容改寫成 json 格式：
 
 ```json
 {
-  "Zephyr": {
-    "name": "Zephyr",
+  "Z. Yuan": {
+    "name": "Z. Yuan",
     "title": "Dosaid maintainer, Full-Stack AI Engineer",
-    "url": "https://github.com/zephyr-sh",
-    "image_url": "https://github.com/zephyr-sh.png",
+    "url": "https://github.com/Z. Yuan-sh",
+    "image_url": "https://github.com/Z. Yuan-sh.png",
     "socials": {
-      "github": "zephyr-sh"
+      "github": "Z. Yuan-sh"
     }
   }
 }
@@ -471,7 +471,7 @@ const socialIconMap = {
 ```mdx
 ---
 title: "[20.08] HiPPO"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 河馬的記憶

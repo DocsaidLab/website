@@ -1,6 +1,6 @@
 ---
 title: "[22.08] BEiT v2"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 高次元に隠された暗号

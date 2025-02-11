@@ -1,6 +1,6 @@
 ---
 title: "[21.10] MobileViT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Changing the Design of Convolution Kernels

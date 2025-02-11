@@ -1,7 +1,7 @@
 ---
 slug: setting-up-nextcloud
 title: Setting Up Nextcloud Guide
-authors: Zephyr
+authors: Z. Yuan
 tags: [Nextcloud, Docker]
 image: /en/img/2024/0304.webp
 description: Setting up Nextcloud on Ubuntu 22.04.

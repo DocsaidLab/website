@@ -1,6 +1,6 @@
 ---
 title: "[21.01] RepVGG"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 讓 VGG 再次偉大

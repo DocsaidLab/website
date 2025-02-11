@@ -1,6 +1,6 @@
 ---
 title: "[21.02] VL-T5"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 出力は整然としていること

@@ -1,6 +1,6 @@
 ---
 title: "[18.03] PANet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 私にショートカットをくれ

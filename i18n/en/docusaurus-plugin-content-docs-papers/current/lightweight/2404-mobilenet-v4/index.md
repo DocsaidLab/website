@@ -1,6 +1,6 @@
 ---
 title: "[24.04] MobileNet-V4"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Five Years of Evolution

@@ -1,6 +1,6 @@
 ---
 title: "[17.04] EAST"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 日出東方

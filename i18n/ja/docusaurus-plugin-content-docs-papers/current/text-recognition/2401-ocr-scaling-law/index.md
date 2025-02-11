@@ -1,6 +1,6 @@
 ---
 title: "[24.01] OCR Scaling Law"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## OCR のモデルスケーリング法則

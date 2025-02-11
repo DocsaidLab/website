@@ -1,6 +1,6 @@
 ---
 title: "[23.06] DiffusionSTR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## ノイズの中の文字信号

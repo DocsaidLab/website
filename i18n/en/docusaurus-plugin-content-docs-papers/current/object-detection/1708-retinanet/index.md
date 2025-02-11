@@ -1,6 +1,6 @@
 ---
 title: "[17.08] RetinaNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Focal Loss is the Key

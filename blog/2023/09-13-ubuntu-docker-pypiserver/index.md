@@ -1,7 +1,7 @@
 ---
 slug: setting-up-pypiserver-on-ubuntu-with-docker
 title: 搭建 PyPiServer 記錄
-authors: Zephyr
+authors: Z. Yuan
 tags: [docker, pypiserver]
 image: /img/2023/0913.webp
 description: 記錄 Ubuntu 上搭建 PyPiServer 的過程。

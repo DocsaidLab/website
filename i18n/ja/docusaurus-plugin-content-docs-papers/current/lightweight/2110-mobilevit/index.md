@@ -1,6 +1,6 @@
 ---
 title: "[21.10] MobileViT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 設計変更による畳み込みカーネルの変更

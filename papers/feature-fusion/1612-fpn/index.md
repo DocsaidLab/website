@@ -1,6 +1,6 @@
 ---
 title: "[16.12] FPN"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 金字塔架構

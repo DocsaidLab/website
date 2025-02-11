@@ -1,6 +1,6 @@
 ---
 title: "[23.05] VanillaNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## バニラシンプルスタイル

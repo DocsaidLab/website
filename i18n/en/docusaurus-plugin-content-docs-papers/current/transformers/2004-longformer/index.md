@@ -1,6 +1,6 @@
 ---
 title: "[20.04] Longformer"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Long Attention Mechanism

@@ -1,6 +1,6 @@
 ---
 title: "[18.07] TextSnake"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## テキストスネーク

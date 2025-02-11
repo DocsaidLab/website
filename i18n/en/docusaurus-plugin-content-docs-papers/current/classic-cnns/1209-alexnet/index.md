@@ -1,6 +1,6 @@
 ---
 title: "[12.09] AlexNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## The Rise of Convolutional Networks

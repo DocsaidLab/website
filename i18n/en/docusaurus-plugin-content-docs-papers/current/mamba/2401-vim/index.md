@@ -1,6 +1,6 @@
 ---
 title: "[24.01] Vim"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## The Mamba's Eye

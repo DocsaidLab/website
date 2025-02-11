@@ -1,6 +1,6 @@
 ---
 title: "[14.09] GoogLeNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Also Known as Inception-V1

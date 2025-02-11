@@ -1,6 +1,6 @@
 ---
 title: "[21.03] CLIP"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 打碎次元的屏障

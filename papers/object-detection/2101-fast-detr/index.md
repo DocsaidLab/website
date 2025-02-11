@@ -1,6 +1,6 @@
 ---
 title: "[21.01] Fast DETR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 摻點高斯吧！

@@ -1,6 +1,6 @@
 ---
 title: "[18.11] SAR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 二次元注意力マップ

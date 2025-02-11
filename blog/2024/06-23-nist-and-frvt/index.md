@@ -1,7 +1,7 @@
 ---
 slug: nist-and-frvt
 title: NIST & FRVT
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/0623.webp
 tags: [NIST, FRVT]
 description: An brief introduction to NIST and FRVT.

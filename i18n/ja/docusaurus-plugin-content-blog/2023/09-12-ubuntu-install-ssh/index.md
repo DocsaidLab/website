@@ -1,7 +1,7 @@
 ---
 slug: ubuntu-install-ssh
 title: Ubuntu で SSH サーバーを設定する
-authors: Zephyr
+authors: Z. Yuan
 tags: [ubuntu, ssh]
 image: /ja/img/2023/0912.webp
 description: サーバーの設定とパスワードなしログインの手順。

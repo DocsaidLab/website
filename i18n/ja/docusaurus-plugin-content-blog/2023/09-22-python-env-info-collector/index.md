@@ -1,7 +1,7 @@
 ---
 slug: python-env-info-collector
 title: モデルトレーニング環境の問題記録とトラブルシューティング
-authors: Zephyr
+authors: Z. Yuan
 tags: [python, training-log]
 image: /ja/img/2023/0922.webp
 description: 自作の記録ツールを共有します。

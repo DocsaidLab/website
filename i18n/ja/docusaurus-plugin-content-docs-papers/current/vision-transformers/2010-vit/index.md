@@ -1,6 +1,6 @@
 ---
 title: "[20.10] ViT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 新世界の開拓者

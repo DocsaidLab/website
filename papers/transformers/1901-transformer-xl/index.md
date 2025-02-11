@@ -1,6 +1,6 @@
 ---
 title: "[19.01] Transformer-XL"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 更長的上下文

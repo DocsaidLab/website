@@ -1,6 +1,6 @@
 ---
 title: "[16.12] YOLO-V2"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 大量カテゴリの拡張

@@ -1,6 +1,6 @@
 ---
 title: "[21.08] SimVLM"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 少し簡単に

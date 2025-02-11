@@ -1,6 +1,6 @@
 ---
 title: "[22.04] Flamingo"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Richly Illustrated

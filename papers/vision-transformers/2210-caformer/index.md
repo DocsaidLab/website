@@ -1,6 +1,6 @@
 ---
 title: "[22.10] CAFormer"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## MetaFormer 使用說明書

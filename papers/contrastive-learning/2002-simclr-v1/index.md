@@ -1,6 +1,6 @@
 ---
 title: "[20.02] SimCLR v1"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 一力降十會

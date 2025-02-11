@@ -1,6 +1,6 @@
 ---
 title: "[24.03] CFPL-FAS"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 無類別提示學習

@@ -1,6 +1,6 @@
 ---
 title: "[20.08] HiPPO"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Hippo's Memory

@@ -1,6 +1,6 @@
 ---
 title: "[19.04] WWWSTR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 資料與模型分析

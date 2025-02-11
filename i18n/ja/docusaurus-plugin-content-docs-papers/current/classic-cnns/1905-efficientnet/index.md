@@ -1,6 +1,6 @@
 ---
 title: "[19.05] EfficientNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 結合スケーリングアーキテクチャ

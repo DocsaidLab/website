@@ -1,6 +1,6 @@
 ---
 title: "[20.06] ERNIE-ViL"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 知識的雙面刃

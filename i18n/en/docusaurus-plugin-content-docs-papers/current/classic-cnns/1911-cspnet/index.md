@@ -1,6 +1,6 @@
 ---
 title: "[19.11] CSPNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Half-Half-Half Plugin

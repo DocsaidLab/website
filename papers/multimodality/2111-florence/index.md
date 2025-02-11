@@ -1,6 +1,6 @@
 ---
 title: "[21.11] Florence"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 文藝復興

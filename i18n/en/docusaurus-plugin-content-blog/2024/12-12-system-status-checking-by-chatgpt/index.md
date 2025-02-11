@@ -1,7 +1,7 @@
 ---
 slug: system-status-checking-by-chatgpt
 title: Automating Ubuntu System Status Checks with ChatGPT
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/1212.webp
 tags: [System-Monitoring, Automation, OpenAI-Integration]
 description: Automate system status checks with ChatGPT.

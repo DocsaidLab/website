@@ -1,7 +1,7 @@
 ---
 slug: customized-docusaurus-sidebars-auto-count
 title: 讓 Docusaurus 的 Sidebar 自動計算文章數量
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/0914.webp
 tags: [Docusaurus, Sidebar]
 description: 幫 Sidebar 加點新功能。

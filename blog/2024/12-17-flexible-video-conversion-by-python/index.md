@@ -1,7 +1,7 @@
 ---
 slug: flexible-video-conversion-by-python
 title: 批次影片轉檔
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/1217.webp
 tags: [Media-Processing, Python, ffmpeg]
 description: 使用 Python 與 ffmpeg 建立指定格式的批次轉換流程。

@@ -1,6 +1,6 @@
 ---
 title: "[12.09] AlexNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 卷積網路的崛起

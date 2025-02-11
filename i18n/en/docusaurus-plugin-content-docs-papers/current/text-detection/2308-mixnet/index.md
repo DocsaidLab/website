@@ -1,6 +1,6 @@
 ---
 title: "[23.08] MixNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Multi-scale Shuffle Network

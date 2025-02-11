@@ -1,6 +1,6 @@
 ---
 title: "[19.11] MoCo v1"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## モメンタム対比学習

@@ -1,7 +1,7 @@
 ---
 slug: impl-normalized-levenshtein-similarity
 title: ANLS の実装
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/0516.webp
 tags: [pytorch, anls]
 description: Average Normalized Levenshtein Similarity

@@ -1,6 +1,6 @@
 ---
 title: "[23.06] DiffusionSTR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Text Signals Amidst Noise

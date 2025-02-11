@@ -1,6 +1,6 @@
 ---
 title: "[21.01] Switch Transformer"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 讓專家說話

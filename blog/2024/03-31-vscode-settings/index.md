@@ -1,7 +1,7 @@
 ---
 slug: vscode-settings
 title: 常用的 VScode 參數設定
-authors: Zephyr
+authors: Z. Yuan
 tags: [vscode, settings]
 image: /img/2024/0331.webp
 description: 記錄常用的 VScode 參數設定，以便日後使用。

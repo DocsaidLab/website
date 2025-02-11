@@ -1,6 +1,6 @@
 ---
 title: "[19.03] PSENet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 逐步拡張戦略

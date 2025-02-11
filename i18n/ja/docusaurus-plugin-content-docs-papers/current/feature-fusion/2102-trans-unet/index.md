@@ -1,6 +1,6 @@
 ---
 title: "[21.02] TransUNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 単に畳み込みだけでは足りない

@@ -1,6 +1,6 @@
 ---
 title: "[21.03] ABINet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## もう一度考えてみて？

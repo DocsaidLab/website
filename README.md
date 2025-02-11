@@ -136,7 +136,7 @@ Docusaurus 讓我們能直接使用 Markdown 撰寫網頁內容，並透過 Reac
    ---
    slug: flexible-video-conversion-by-python （文章的網址）
    title: 批次影片轉檔
-   authors: Zephyr （必須存在於 authors.yml）
+   authors: Z. Yuan （必須存在於 authors.yml）
    image: /img/2024/1217.webp （請 GPT 生成，並放在 /static/img 資料夾內）
    tags: [Media-Processing, Python, ffmpeg]
    description: 使用 Python 與 ffmpeg 建立指定格式的批次轉換流程。
@@ -169,13 +169,13 @@ Docusaurus 讓我們能直接使用 Markdown 撰寫網頁內容，並透過 Reac
    舉例來說，目前檔案內容如下：
 
    ```yaml
-   Zephyr: （用來定位作者的名稱）
-     name: Zephyr （網頁顯示的名稱）
+   Z. Yuan: （用來定位作者的名稱）
+     name: Z. Yuan （網頁顯示的名稱）
      title: Dosaid maintainer, Full-Stack AI Engineer （作者的職稱）
-     url: https://github.com/zephyr-sh （作者的github）
-     image_url: https://github.com/zephyr-sh.png （作者的頭像）
+     url: https://github.com/Z. Yuan-sh （作者的github）
+     image_url: https://github.com/Z. Yuan-sh.png （作者的頭像）
      socials:
-       github: "zephyr-sh" (作者的 github 帳號)
+       github: "Z. Yuan-sh" (作者的 github 帳號)
    ```
 
    更詳細的設定請參考：[**Docusaurus Blog Authors**](https://docusaurus.io/docs/blog#global-authors)
@@ -213,7 +213,7 @@ Docusaurus 讓我們能直接使用 Markdown 撰寫網頁內容，並透過 Reac
    ```markdown
    ---
    title: "[24.08] xGen-MM" （論文的標題，業界慣例或作者自己定義）
-   authors: Zephyr (作者名稱，相關定義請寫在 `/blog/authors.json` 檔案內)
+   authors: Z. Yuan (作者名稱，相關定義請寫在 `/blog/authors.json` 檔案內)
    ---
 
    ## 又叫做 BLIP-3 （自己想個有趣的副標題）
@@ -296,7 +296,7 @@ import HelloWorld from "./HelloWorld";
 
 寫完文章後，你愕然發現，我們的網站支援多國語系，可是你不懂其他語言啊！
 
-沒關係，一般來說，有個叫做 Zephyr 的人會幫你做完這件事（？），但你可以自己動手：
+沒關係，一般來說，有個叫做 Z. Yuan 的人會幫你做完這件事（？），但你可以自己動手：
 
 1. 把你寫的文章放到對應的 `i18n` 資料夾下，例如：
 
@@ -333,4 +333,4 @@ AI 只會取代不願意思考的人，我思，故我在。
 
 ＊
 
-2024 © Zephyr
+2024 © Z. Yuan

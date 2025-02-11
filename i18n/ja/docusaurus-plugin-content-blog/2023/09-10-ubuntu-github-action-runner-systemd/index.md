@@ -1,7 +1,7 @@
 ---
 slug: ubuntu-github-runner-systemd
 title: GitHub Runner の自動実行
-authors: Zephyr
+authors: Z. Yuan
 tags: [github-action, runner]
 image: /ja/img/2023/0910.webp
 description: Ubuntu Systemd を使ってバックグラウンドで実行し、自動起動を実現する。

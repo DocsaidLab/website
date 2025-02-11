@@ -1,6 +1,6 @@
 ---
 title: "[22.01] BLIP"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Synthetic Text Technology

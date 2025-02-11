@@ -1,6 +1,6 @@
 ---
 title: "[21.11] PoolFormer"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 你需要的是框架！

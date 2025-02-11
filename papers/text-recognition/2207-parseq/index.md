@@ -1,6 +1,6 @@
 ---
 title: "[22.07] PARSeq"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 文字的序順不影閱響讀

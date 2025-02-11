@@ -1,7 +1,7 @@
 ---
 slug: gosu-usage
 title: コンテナ内のユーザー切り替えツール：gosu
-authors: Zephyr
+authors: Z. Yuan
 tags: [docker, gosu]
 image: /ja/img/2024/0203.webp
 description: 便利なツール gosu を学びましょう。

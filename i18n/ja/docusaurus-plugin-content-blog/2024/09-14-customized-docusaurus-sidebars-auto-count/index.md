@@ -1,7 +1,7 @@
 ---
 slug: customized-docusaurus-sidebars-auto-count
 title: Docusaurusのサイドバーに記事数を自動計算させる
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/0914.webp
 tags: [Docusaurus, Sidebar]
 description: サイドバーに新機能を追加します。

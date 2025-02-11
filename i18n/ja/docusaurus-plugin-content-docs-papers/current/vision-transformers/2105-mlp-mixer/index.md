@@ -1,6 +1,6 @@
 ---
 title: "[21.05] MLP-Mixer"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 少しの損失があればそれは得

@@ -1,7 +1,7 @@
 ---
 slug: torch-layernorm-mismatch
 title: 手計算したLayerNormの値が合わない？
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/0820.webp
 tags: [PyTorch, LayerNorm]
 description: 暇つぶしに計算してみたら、あれ、値が合わない？

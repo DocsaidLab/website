@@ -1,6 +1,6 @@
 ---
 title: "[14.06] Exemplar CNN"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 不変の特徴を探る

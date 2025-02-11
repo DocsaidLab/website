@@ -1,6 +1,6 @@
 ---
 title: "[19.05] EfficientNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 聯合縮放架構

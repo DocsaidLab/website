@@ -1,7 +1,7 @@
 ---
 slug: mount-disk-on-ubuntu
 title: Mounting a USB Drive on Ubuntu
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2025/0125.webp
 tags: [ubuntu, mount]
 description: A guide to mounting a disk on Ubuntu

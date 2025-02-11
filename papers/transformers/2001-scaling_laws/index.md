@@ -1,6 +1,6 @@
 ---
 title: "[20.01] Scaling Laws"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 模型的縮放律

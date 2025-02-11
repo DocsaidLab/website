@@ -1,6 +1,6 @@
 ---
 title: "[21.01] VinVL"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Revisiting Oscar

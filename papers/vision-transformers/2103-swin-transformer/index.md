@@ -1,6 +1,6 @@
 ---
 title: "[21.03] Swin Transformer"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 舞會開始

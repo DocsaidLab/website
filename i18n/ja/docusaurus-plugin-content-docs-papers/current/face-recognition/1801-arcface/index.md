@@ -1,6 +1,6 @@
 ---
 title: "[18.01] ArcFace"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 反余弦損失

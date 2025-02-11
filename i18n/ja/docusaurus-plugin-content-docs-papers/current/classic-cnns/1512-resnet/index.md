@@ -1,6 +1,6 @@
 ---
 title: "[15.12] ResNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 畳み込みネットワーク 100 層

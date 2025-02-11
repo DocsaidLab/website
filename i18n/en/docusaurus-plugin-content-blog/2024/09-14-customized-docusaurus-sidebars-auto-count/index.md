@@ -1,7 +1,7 @@
 ---
 slug: customized-docusaurus-sidebars-auto-count
 title: Automatically Count Articles in Docusaurus Sidebar
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/0914.webp
 tags: [Docusaurus, Sidebar]
 description: Adding some new features to the sidebar.

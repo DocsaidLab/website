@@ -132,7 +132,7 @@ Below are the guidelines for writing a blog:
    ---
    slug: flexible-video-conversion-by-python (The URL of the article)
    title: Batch Video Conversion
-   authors: Zephyr (Must exist in authors.yml)
+   authors: Z. Yuan (Must exist in authors.yml)
    image: /img/2024/1217.webp (Please generate with GPT and place it in the /static/img folder)
    tags: [Media-Processing, Python, ffmpeg]
    description: Using Python and ffmpeg to create a batch conversion process for specified formats.
@@ -165,13 +165,13 @@ Below are the guidelines for writing a blog:
    For example, the current file content is as follows:
 
    ```yaml
-   Zephyr: (Name used to locate the author)
-     name: Zephyr (Name displayed on the webpage)
+   Z. Yuan: (Name used to locate the author)
+     name: Z. Yuan (Name displayed on the webpage)
      title: Dosaid maintainer, Full-Stack AI Engineer (Author's title)
-     url: https://github.com/zephyr-sh (Author's GitHub)
-     image_url: https://github.com/zephyr-sh.png (Author's avatar)
+     url: https://github.com/Z. Yuan-sh (Author's GitHub)
+     image_url: https://github.com/Z. Yuan-sh.png (Author's avatar)
      socials:
-       github: "zephyr-sh" (Author's GitHub account)
+       github: "Z. Yuan-sh" (Author's GitHub account)
    ```
 
    For more detailed settings, refer to: [**Docusaurus Blog Authors**](https://docusaurus.io/docs/blog#global-authors)
@@ -209,7 +209,7 @@ If you also want to take notes, here are the guidelines for writing paper notes:
    ```markdown
    ---
    title: "[24.08] xGen-MM" (Paper title, defined by industry norms or the authors themselves)
-   authors: Zephyr (Author name, related definitions should be written in the `/blog/authors.json` file)
+   authors: Z. Yuan (Author name, related definitions should be written in the `/blog/authors.json` file)
    ---
 
    ## Also known as BLIP-3 (A catchy subtitle)
@@ -292,7 +292,7 @@ Other content
 
 After writing the article, you suddenly realize that our website supports multiple languages, but you don't know any other languages!
 
-Don't worry, generally speaking, someone named Zephyr will help you with this, but you can do it yourself:
+Don't worry, generally speaking, someone named Z. Yuan will help you with this, but you can do it yourself:
 
 1. Place your written article in the corresponding `i18n` folder, for example:
 
@@ -329,4 +329,4 @@ AI will only replace those who are unwilling to think. I think, therefore I am.
 
 ＊
 
-2024 © Zephyr
+2024 © Z. Yuan

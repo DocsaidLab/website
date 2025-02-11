@@ -1,6 +1,6 @@
 ---
 title: "[22.06] MobileOne"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 一毫秒攻防

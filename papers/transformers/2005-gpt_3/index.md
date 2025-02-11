@@ -1,6 +1,6 @@
 ---
 title: "[20.05] GPT-3"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 九十六層解碼器

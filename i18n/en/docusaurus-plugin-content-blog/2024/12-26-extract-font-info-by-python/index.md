@@ -1,7 +1,7 @@
 ---
 slug: extract-font-info-by-python
 title: Extract Font File Information
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/1226.webp
 tags: [font-tools, Python]
 description: Retrieve font file information using Python.

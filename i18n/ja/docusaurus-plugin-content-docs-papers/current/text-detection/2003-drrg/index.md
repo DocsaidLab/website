@@ -1,6 +1,6 @@
 ---
 title: "[20.03] DRRG"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## グラフ畳み込みの初探

@@ -1,6 +1,6 @@
 ---
 title: "[23.07] Union14M"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## チェスの駒が星のように落ちる

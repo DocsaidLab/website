@@ -1,7 +1,7 @@
 ---
 slug: flexible-video-conversion-by-python
 title: バッチ動画変換
-authors: Zephyr
+authors: Z. Yuan
 image: /ja/img/2024/1217.webp
 tags: [Media-Processing, Python, ffmpeg]
 description: Python と ffmpeg を使用して指定された形式のバッチ変換プロセスを作成する。

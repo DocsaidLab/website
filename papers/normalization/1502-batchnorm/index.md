@@ -1,6 +1,6 @@
 ---
 title: "[15.02] BatchNorm"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 批次標準化

@@ -1,6 +1,6 @@
 ---
 title: "[22.08] BEiT v2"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Hidden Codes in High Dimensions

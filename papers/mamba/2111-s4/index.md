@@ -1,6 +1,6 @@
 ---
 title: "[21.11] S4"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 曼巴的序曲

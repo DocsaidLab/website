@@ -1,6 +1,6 @@
 ---
 title: "[21.09] CoOp"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 搖曳的呢喃

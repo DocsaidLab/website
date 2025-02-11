@@ -1,6 +1,6 @@
 ---
 title: "[19.04] Sparse Transformer"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Sparse Attention Mechanism

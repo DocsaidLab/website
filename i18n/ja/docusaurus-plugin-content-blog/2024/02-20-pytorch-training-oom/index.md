@@ -1,7 +1,7 @@
 ---
 slug: pytorch-training-out-of-memory
 title: PyTorch の List トラップ
-authors: Zephyr
+authors: Z. Yuan
 tags: [PyTorch, OOM]
 image: /ja/img/2024/0220.webp
 description: PyTorch OOM 問題の発見と解決。

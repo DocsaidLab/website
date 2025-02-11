@@ -1,6 +1,6 @@
 ---
 title: "[20.05] SEED"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## The Seed of Language

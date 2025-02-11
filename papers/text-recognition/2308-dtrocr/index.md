@@ -1,6 +1,6 @@
 ---
 title: "[23.08] DTrOCR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 解碼器就好

@@ -1,6 +1,6 @@
 ---
 title: "[21.05] ABCNet v2"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## The One-bit Challenge

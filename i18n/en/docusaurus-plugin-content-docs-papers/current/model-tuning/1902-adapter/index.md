@@ -1,6 +1,6 @@
 ---
 title: "[19.02] Adapter"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Saving 96% of Parameters

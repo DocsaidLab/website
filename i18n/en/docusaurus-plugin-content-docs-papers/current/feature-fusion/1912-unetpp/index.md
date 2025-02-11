@@ -1,6 +1,6 @@
 ---
 title: "[19.12] UNet++"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## The Subtle Weaver

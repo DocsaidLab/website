@@ -1,12 +1,12 @@
 ---
 slug: otter-style
 title: Otter Style
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Pytorch-Lightning に基づく
 
-本章では、Zephyr が担当するプロジェクトの構築方法について説明します。主に Pytorch-Lightning 訓練フレームワークを基盤としています。
+本章では、Z. Yuan が担当するプロジェクトの構築方法について説明します。主に Pytorch-Lightning 訓練フレームワークを基盤としています。
 
 :::info
 詳細な実装内容は、以下を参照してください：[**DocsaidLab/Otter**](https://github.com/DocsaidLab/Otter)。
@@ -16,7 +16,7 @@ authors: Zephyr
 
 ## 環境の構築
 
-以下のセクションでは、`DocClassifier` プロジェクトを例にとり、モデル訓練環境を構築する方法を説明します。この内容は、`DocAligner` や `MRZScanner` など、Zephyr が担当する他のプロジェクトにも応用可能です。
+以下のセクションでは、`DocClassifier` プロジェクトを例にとり、モデル訓練環境を構築する方法を説明します。この内容は、`DocAligner` や `MRZScanner` など、Z. Yuan が担当する他のプロジェクトにも応用可能です。
 
 :::info
 深層学習プロジェクトの多くは推論モジュールのみが公開されています。現在のところ、`DocClassifier` のみが訓練モジュールを公開しています。他のプロジェクトの訓練モジュールが必要な場合、本章の訓練方法を参考にして独自に実装することが可能です。

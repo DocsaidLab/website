@@ -1,7 +1,7 @@
 ---
 slug: mac-selective-vpn-routing
 title: VPN の選択的なトラフィックルーティングを設定する
-authors: Zephyr
+authors: Z. Yuan
 tags: [vpn-routing, macos]
 image: /ja/img/2023/0901.webp
 description: Mac 上で VPN ルーティングを設定する方法について解説します。

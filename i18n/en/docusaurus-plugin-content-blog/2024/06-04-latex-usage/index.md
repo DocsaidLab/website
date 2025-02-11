@@ -1,7 +1,7 @@
 ---
 slug: latex-usage
 title: LaTeX Syntax Quick Reference
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/0604.webp
 tags: [LaTeX, Math]
 description: Quick reference guide for LaTeX syntax

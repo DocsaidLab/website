@@ -2,7 +2,7 @@
 
 Welcome to my website!
 
-I’m Zephyr, an AI engineer based in Taiwan.
+I’m Z. Yuan, an AI engineer based in Taiwan.
 
 ## 👨‍💻 Are you an engineer?
 
@@ -78,7 +78,7 @@ Thank you for reading and supporting this site. I hope **DOCSAID** brings you va
 
 ＊
 
-2024 © Zephyr
+2024 © Z. Yuan
 
 <div align="center">
 <br />

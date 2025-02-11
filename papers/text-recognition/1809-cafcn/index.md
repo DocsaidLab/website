@@ -1,6 +1,6 @@
 ---
 title: "[18.09] CA-FCN"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 引入新的維度

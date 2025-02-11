@@ -1,6 +1,6 @@
 ---
 title: "[22.12] FLIP"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## CLIP 貳之型

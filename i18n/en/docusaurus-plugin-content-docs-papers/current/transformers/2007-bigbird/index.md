@@ -1,6 +1,6 @@
 ---
 title: "[20.07] BigBird"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## BigBird Attention Mechanism

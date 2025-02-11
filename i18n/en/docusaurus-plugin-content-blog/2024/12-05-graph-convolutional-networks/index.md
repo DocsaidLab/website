@@ -1,7 +1,7 @@
 ---
 slug: graph-convolutional-networks
 title: A Brief Introduction to Graph Convolutional Networks
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/1205.webp
 tags: [graph-convolutional-networks, transformer]
 description: A simple introduction to GCN

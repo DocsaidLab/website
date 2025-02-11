@@ -1,6 +1,6 @@
 ---
 title: "[20.12] DeiT"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 蒸餾後更香醇

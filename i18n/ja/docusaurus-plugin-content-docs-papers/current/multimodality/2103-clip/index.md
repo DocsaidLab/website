@@ -1,6 +1,6 @@
 ---
 title: "[21.03] CLIP"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 次元の壁を打破する

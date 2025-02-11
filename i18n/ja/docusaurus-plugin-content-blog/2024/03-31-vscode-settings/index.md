@@ -1,7 +1,7 @@
 ---
 slug: vscode-settings
 title: よく使う VScode 設定
-authors: Zephyr
+authors: Z. Yuan
 tags: [vscode, settings]
 image: /ja/img/2024/0331.webp
 description: よく使う VScode の設定を記録し、今後の参考にします。

@@ -1,6 +1,6 @@
 ---
 title: "[19.02] GPT-2"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Forty-Eight Layers of Decoders

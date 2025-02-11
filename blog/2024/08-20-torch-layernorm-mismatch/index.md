@@ -1,7 +1,7 @@
 ---
 slug: torch-layernorm-mismatch
 title: 手算的 LayerNorm 數值不對？
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/0820.webp
 tags: [PyTorch, LayerNorm]
 description: 閒來無事，動手算算。恩，怎麼不對啊？

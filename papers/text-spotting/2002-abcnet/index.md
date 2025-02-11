@@ -1,6 +1,6 @@
 ---
 title: "[20.02] ABCNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 貝茲曲線的問候

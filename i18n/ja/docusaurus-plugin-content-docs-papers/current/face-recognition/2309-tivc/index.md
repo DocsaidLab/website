@@ -1,6 +1,6 @@
 ---
 title: "[23.09] TIVC-DCNNSH"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 双子識別の視点

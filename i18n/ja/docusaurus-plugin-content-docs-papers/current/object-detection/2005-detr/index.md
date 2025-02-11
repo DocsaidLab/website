@@ -1,6 +1,6 @@
 ---
 title: "[20.05] DETR"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## クロスドメインのパイオニア

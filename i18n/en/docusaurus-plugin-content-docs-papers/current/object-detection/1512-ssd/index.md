@@ -1,6 +1,6 @@
 ---
 title: "[15.12] SSD"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Save Time, Save Pooling

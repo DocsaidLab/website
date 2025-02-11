@@ -1,6 +1,6 @@
 ---
 title: "[19.11] GhostNet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 特徴マップのゴースト

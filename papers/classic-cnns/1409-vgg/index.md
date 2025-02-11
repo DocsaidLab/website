@@ -1,6 +1,6 @@
 ---
 title: "[14.09] VGG"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 很深，還要更深

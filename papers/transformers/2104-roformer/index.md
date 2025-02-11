@@ -1,6 +1,6 @@
 ---
 title: "[21.04] RoFormer"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 旋轉位置編碼

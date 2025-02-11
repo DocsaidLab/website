@@ -1,6 +1,6 @@
 ---
 title: "[22.01] SAFL"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Focal Loss Can Help!

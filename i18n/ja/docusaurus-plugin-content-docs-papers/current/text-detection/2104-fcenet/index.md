@@ -1,6 +1,6 @@
 ---
 title: "[21.04] FCENet"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## フーリエの導き

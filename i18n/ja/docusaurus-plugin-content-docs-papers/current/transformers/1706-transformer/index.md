@@ -1,6 +1,6 @@
 ---
 title: "[17.06] Transformer"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 新世界の起点

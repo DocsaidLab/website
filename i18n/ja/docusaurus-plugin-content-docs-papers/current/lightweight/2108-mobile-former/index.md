@@ -1,6 +1,6 @@
 ---
 title: "[21.08] Mobile-Former"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 双方向接続ブリッジ

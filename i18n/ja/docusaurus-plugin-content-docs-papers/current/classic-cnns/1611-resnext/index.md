@@ -1,6 +1,6 @@
 ---
 title: "[16.11] ResNeXt"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 次元を探る

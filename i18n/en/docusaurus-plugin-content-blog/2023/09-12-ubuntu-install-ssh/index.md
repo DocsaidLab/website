@@ -1,7 +1,7 @@
 ---
 slug: ubuntu-install-ssh
 title: Setting Up SSH Server on Ubuntu
-authors: Zephyr
+authors: Z. Yuan
 tags: [ubuntu, ssh]
 image: /en/img/2023/0912.webp
 description: Tutorial on configuring ssh server.

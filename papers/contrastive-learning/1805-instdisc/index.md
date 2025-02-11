@@ -1,6 +1,6 @@
 ---
 title: "[18.05] InstDisc"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 多多益善

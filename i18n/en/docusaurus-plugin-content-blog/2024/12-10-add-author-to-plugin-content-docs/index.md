@@ -1,7 +1,7 @@
 ---
 slug: customized-docusaurus-author-to-plugin-content-docs
 title: Add Author Info to Docusaurus Docs
-authors: Zephyr
+authors: Z. Yuan
 image: /en/img/2024/1210.webp
 tags: [Docusaurus, Author]
 description: The official version doesn’t support it, so we had to do it ourselves.
@@ -49,26 +49,26 @@ It looks like it's better to rely on ourselves, so we had no choice but to forge
 In the original design, the author info is placed in the `blog/authors.yml` file, and the content looks something like this:
 
 ```yml
-Zephyr:
-  name: Zephyr
+Z. Yuan:
+  name: Z. Yuan
   title: Dosaid maintainer, Full-Stack AI Engineer
-  url: https://github.com/zephyr-sh
-  image_url: https://github.com/zephyr-sh.png
+  url: https://github.com/Z. Yuan-sh
+  image_url: https://github.com/Z. Yuan-sh.png
   socials:
-    github: "zephyr-sh"
+    github: "Z. Yuan-sh"
 ```
 
 We first create a new file `blog/authors.json` in the same path and rewrite the same content into JSON format:
 
 ```json
 {
-  "Zephyr": {
-    "name": "Zephyr",
+  "Z. Yuan": {
+    "name": "Z. Yuan",
     "title": "Dosaid maintainer, Full-Stack AI Engineer",
-    "url": "https://github.com/zephyr-sh",
-    "image_url": "https://github.com/zephyr-sh.png",
+    "url": "https://github.com/Z. Yuan-sh",
+    "image_url": "https://github.com/Z. Yuan-sh.png",
     "socials": {
-      "github": "zephyr-sh"
+      "github": "Z. Yuan-sh"
     }
   }
 }
@@ -471,7 +471,7 @@ So we modify it to:
 ```mdx
 ---
 title: "[20.08] HiPPO"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## Hippo's Memory

@@ -1,7 +1,7 @@
 ---
 slug: extract-font-info-by-python
 title: 取得字型檔案的資訊
-authors: Zephyr
+authors: Z. Yuan
 image: /img/2024/1226.webp
 tags: [font-tools, Python]
 description: 透過 Python 取得字型檔案的資訊。

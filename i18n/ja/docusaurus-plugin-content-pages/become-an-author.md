@@ -131,7 +131,7 @@ Docusaurus を使うことで、Markdown で Web コンテンツを書き、Reac
    ---
    slug: flexible-video-conversion-by-python （記事のURL）
    title: バッチ動画変換
-   authors: Zephyr （authors.ymlに存在する必要があります）
+   authors: Z. Yuan （authors.ymlに存在する必要があります）
    image: /img/2024/1217.webp （GPTで生成し、/static/imgフォルダ内に保存）
    tags: [Media-Processing, Python, ffmpeg]
    description: Pythonとffmpegを使用して指定された形式でバッチ変換のプロセスを作成する方法。
@@ -164,13 +164,13 @@ Docusaurus を使うことで、Markdown で Web コンテンツを書き、Reac
    例えば、ファイル内容は以下のようになります：
 
    ```yaml
-   Zephyr: （著者を識別する名前）
-     name: Zephyr （ウェブ上で表示される名前）
+   Z. Yuan: （著者を識別する名前）
+     name: Z. Yuan （ウェブ上で表示される名前）
      title: Dosaid maintainer, Full-Stack AI Engineer （著者の肩書き）
-     url: https://github.com/zephyr-sh （著者のGitHub）
-     image_url: https://github.com/zephyr-sh.png （著者のプロフィール画像）
+     url: https://github.com/Z. Yuan-sh （著者のGitHub）
+     image_url: https://github.com/Z. Yuan-sh.png （著者のプロフィール画像）
      socials:
-       github: "zephyr-sh" （著者のGitHubアカウント）
+       github: "Z. Yuan-sh" （著者のGitHubアカウント）
    ```
 
    詳細な設定については、[**Docusaurus Blog Authors**](https://docusaurus.io/docs/blog#global-authors)を参照してください。
@@ -208,7 +208,7 @@ Docusaurus を使うことで、Markdown で Web コンテンツを書き、Reac
    ```markdown
    ---
    title: "[24.08] xGen-MM" （論文のタイトル、業界の慣例または著者が定義したタイトル）
-   authors: Zephyr (著者名、関連定義は`/blog/authors.json`ファイルに記載)
+   authors: Z. Yuan (著者名、関連定義は`/blog/authors.json`ファイルに記載)
    ---
 
    ## BLIP-3 とも呼ばれる （面白い副題）
@@ -291,7 +291,7 @@ import HelloWorld from "./HelloWorld";
 
 記事を書いた後、突然気づいたのは、私たちのウェブサイトが多言語に対応しているということですが、あなたは他の言語を理解していません！
 
-大丈夫です。一般的に、Zephyr という人がこれを手伝ってくれますが、あなた自身で行うこともできます：
+大丈夫です。一般的に、Z. Yuan という人がこれを手伝ってくれますが、あなた自身で行うこともできます：
 
 1. 書いた記事を対応する`i18n`フォルダに入れてください。例えば：
 
@@ -328,4 +328,4 @@ AI は考えない人を置き換えるだけです。私は考える、だか�
 
 ＊
 
-2024 © Zephyr
+2024 © Z. Yuan

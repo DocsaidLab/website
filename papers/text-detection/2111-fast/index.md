@@ -1,6 +1,6 @@
 ---
 title: "[21.11] FAST"
-authors: Zephyr
+authors: Z. Yuan
 ---
 
 ## 放箭若流星趕月
