@@ -66,6 +66,12 @@ Currently, we have several completed projects available on GitHub, including:
 
   ***
 
+- [**Nginx Notes**](./nginx-notes/index.md):
+
+  This is not a project, but rather a collection of notes from our learning process with Nginx, primarily for recording commonly used configurations and techniques. We write as we learn, so feel free to take a look if you're interested in Nginx.
+
+  ***
+
 - [**WordCanvas**](./wordcanvas/index.md):
 
   Previously, we created several tools for synthetic training data, but they felt too scattered. So, we abstracted some basic functionalities and integrated them into a new tool. The main function of this project is to render font files into images.

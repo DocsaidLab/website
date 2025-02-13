@@ -138,5 +138,9 @@
   "sidebar.tutorialSidebar.category.Capybara": {
     "message": "Capybara",
     "description": "The label for category Capybara in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.補充資料": {
+    "message": "Supplementary",
+    "description": "The label for category 補充資料 in sidebar tutorialSidebar"
   }
 }
