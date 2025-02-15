@@ -439,7 +439,7 @@
 <li>
 <p><strong>OpenAI API Key</strong>：</p>
 <p>本程式會使用 OpenAI API 產生系統報告摘要與最終分析。</p>
-<p>請確保您已擁有有效的 OpenAI API 金鑰，並將此金鑰儲存於指定路徑</p>
+<p>請確保你已擁有有效的 OpenAI API 金鑰，並將此金鑰儲存於指定路徑</p>
 <ul>
 <li>預設為 <code>/home/your_user_name/.openai_api_key</code></li>
 </ul>
@@ -485,7 +485,7 @@
 <ol>
 <li><strong>API 金鑰安全性</strong>：請妥善保管 <code>OPENAI_API_KEY</code>，此金鑰不應公開，並建議限制檔案的讀取權限（如 600 權限）。</li>
 <li><strong>智慧調整檢測範圍</strong>：若希望擴充或縮減蒐集的系統資訊，可在 <code>collect_system_info()</code> 函數中新增或移除指令。</li>
-<li><strong>OpenAI API 模型與 Token 限制</strong>：預設使用 <code>MODEL="gpt-4o"</code>，請確保此模型在您的 API 權限中可用。若摘要或最終報告過長而導致 API 回應失敗或中斷，請考慮調整 <code>CHUNK_SIZE</code> 或降低輸出內容。</li>
+<li><strong>OpenAI API 模型與 Token 限制</strong>：預設使用 <code>MODEL="gpt-4o"</code>，請確保此模型在你的 API 權限中可用。若摘要或最終報告過長而導致 API 回應失敗或中斷，請考慮調整 <code>CHUNK_SIZE</code> 或降低輸出內容。</li>
 <li><strong>時區與日期格式</strong>：程式使用 <code>date +"%Y-%m-%d"</code> 格式化日期，可依需求修改。</li>
 </ol>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="範例流程">範例流程<a href="https://docsaid.org/blog/system-status-checking-by-chatgpt#%E7%AF%84%E4%BE%8B%E6%B5%81%E7%A8%8B" class="hash-link" aria-label="範例流程的直接連結" title="範例流程的直接連結">​</a></h2>
