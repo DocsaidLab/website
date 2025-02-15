@@ -46,11 +46,11 @@ We expect to learn the following:
 
 1. ✅ Install Nginx
 2. ✅ Configure Nginx Reverse Proxy
-3. ✅ Set up Nginx to Enable HTTPS
-4. ✅ Harden Nginx Security
-5. [ ] Configure Nginx to Serve Static Files
-6. [ ] Set Up Nginx Load Balancing
-7. [ ] Set Up Nginx Logging and Monitoring
+3. ✅ Nginx to Enable HTTPS
+4. ✅ Nginx Security
+5. ✅ Nginx Logging and Monitoring
+6. [ ] Configure Nginx to Serve Static Files
+7. [ ] Set Up Nginx Load Balancing
 
 ## References
 

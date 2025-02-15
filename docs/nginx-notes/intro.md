@@ -48,9 +48,9 @@ curl -X GET $API_URL
 2. ✅ 設定 Nginx 反向代理
 3. ✅ 設定 Nginx 啟用 HTTPS
 4. ✅ 設定 Nginx 安全強化
-5. [ ] 設定 Nginx 提供靜態資源
-6. [ ] 設定 Nginx 負載均衡
-7. [ ] 設定 Nginx 日誌與監控
+5. ✅ 設定 Nginx 日誌與監控
+6. [ ] 設定 Nginx 提供靜態資源
+7. [ ] 設定 Nginx 負載均衡
 
 ## 參考資料
 
