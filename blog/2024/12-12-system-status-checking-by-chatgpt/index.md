@@ -46,7 +46,7 @@ description: 透過 ChatGPT 自動化檢查系統基礎狀態。
 
    本程式會使用 OpenAI API 產生系統報告摘要與最終分析。
 
-   請確保您已擁有有效的 OpenAI API 金鑰，並將此金鑰儲存於指定路徑
+   請確保你已擁有有效的 OpenAI API 金鑰，並將此金鑰儲存於指定路徑
 
    - 預設為 `/home/your_user_name/.openai_api_key`
 
@@ -97,7 +97,7 @@ description: 透過 ChatGPT 自動化檢查系統基礎狀態。
 
 1. **API 金鑰安全性**：請妥善保管 `OPENAI_API_KEY`，此金鑰不應公開，並建議限制檔案的讀取權限（如 600 權限）。
 2. **智慧調整檢測範圍**：若希望擴充或縮減蒐集的系統資訊，可在 `collect_system_info()` 函數中新增或移除指令。
-3. **OpenAI API 模型與 Token 限制**：預設使用 `MODEL="gpt-4o"`，請確保此模型在您的 API 權限中可用。若摘要或最終報告過長而導致 API 回應失敗或中斷，請考慮調整 `CHUNK_SIZE` 或降低輸出內容。
+3. **OpenAI API 模型與 Token 限制**：預設使用 `MODEL="gpt-4o"`，請確保此模型在你的 API 權限中可用。若摘要或最終報告過長而導致 API 回應失敗或中斷，請考慮調整 `CHUNK_SIZE` 或降低輸出內容。
 4. **時區與日期格式**：程式使用 `date +"%Y-%m-%d"` 格式化日期，可依需求修改。
 
 ## 範例流程
