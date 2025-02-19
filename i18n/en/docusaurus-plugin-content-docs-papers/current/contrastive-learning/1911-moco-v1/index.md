@@ -3,7 +3,7 @@ title: "[19.11] MoCo v1"
 authors: Z. Yuan
 ---
 
-## Momentum Contrast Learning
+## Momentum Contrastive Learning
 
 [**Momentum Contrast for Unsupervised Visual Representation Learning**](https://arxiv.org/abs/1911.05722)
 
