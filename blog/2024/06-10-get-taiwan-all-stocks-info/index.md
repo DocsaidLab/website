@@ -172,3 +172,13 @@ target = df[df["產業別"] == "水泥工業"]
 ## 結語
 
 我們之後只需要不定期的執行這個程式，就可以取得最新的股票資訊。
+
+:::tip
+不過既然你都來一趟了，不妨喝杯茶再走。
+
+我們順手寫了一個 API，串接 FinMind 的股票資料。點選下面的下載按鈕，就可以從 FinMind 取得最新的股票資訊，資料格式可能和證交所有點差異，但你應該不會介意才對。
+
+import StockDownloader from '@site/src/components/StockDownloader.js';
+
+<StockDownloader lang="zh"/>
+:::

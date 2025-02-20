@@ -170,3 +170,13 @@ That could be due to changes in the TWSE website's layout, causing the HTML stru
 ## Conclusion
 
 By periodically running this program, we can obtain the latest stock information.
+
+:::tip
+Since you're here, why not take a moment to enjoy a cup of tea before you go?
+
+We also wrote an API to integrate FinMind's stock data. By clicking the download button below, you can retrieve the latest stock information from FinMind. The data format may differ from the one used by the stock exchange, but you probably won't mind.
+
+import StockDownloader from '@site/src/components/StockDownloader.js';
+
+<StockDownloader lang="en"/>
+:::

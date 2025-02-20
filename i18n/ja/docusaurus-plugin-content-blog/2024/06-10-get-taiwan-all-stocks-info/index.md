@@ -170,3 +170,13 @@ target = df[df["業種区分"] == "セメント工業"]
 ## 結論
 
 このプログラムを定期的に実行するだけで、最新の株式情報を取得できます。
+
+:::tip
+せっかくお越しいただいたので、どうぞお茶を一杯飲んでいってください。
+
+ついでに、FinMind の株データを接続する API を作成しました。下のダウンロードボタンをクリックすると、FinMind から最新の株情報を取得できます。データのフォーマットは証券取引所のものとは若干異なるかもしれませんが、きっと気にしないでしょう。
+
+import StockDownloader from '@site/src/components/StockDownloader.js';
+
+<StockDownloader lang="ja" />
+:::

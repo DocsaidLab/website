@@ -50,7 +50,7 @@ export function useStockData() {
     resetResults();
 
     try {
-      const url = `https://api.docsaid.org/stocks/prices/?stock_id=${stockId}`;
+      const url = `https://api.docsaid.org/stocks/prices?stock_id=${stockId}`;
       const res = await fetch(url);
 
       if (!res.ok) {
