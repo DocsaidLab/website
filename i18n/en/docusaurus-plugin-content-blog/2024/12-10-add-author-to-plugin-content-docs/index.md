@@ -52,10 +52,10 @@ In the original design, the author info is placed in the `blog/authors.yml` file
 Z. Yuan:
   name: Z. Yuan
   title: Dosaid maintainer, Full-Stack AI Engineer
-  url: https://github.com/Z. Yuan-sh
-  image_url: https://github.com/Z. Yuan-sh.png
+  url: https://github.com/zephyr-sh
+  image_url: https://github.com/zephyr-sh.png
   socials:
-    github: "Z. Yuan-sh"
+    github: "zephyr-sh"
 ```
 
 We first create a new file `blog/authors.json` in the same path and rewrite the same content into JSON format:
@@ -65,10 +65,10 @@ We first create a new file `blog/authors.json` in the same path and rewrite the 
   "Z. Yuan": {
     "name": "Z. Yuan",
     "title": "Dosaid maintainer, Full-Stack AI Engineer",
-    "url": "https://github.com/Z. Yuan-sh",
-    "image_url": "https://github.com/Z. Yuan-sh.png",
+    "url": "https://github.com/zephyr-sh",
+    "image_url": "https://github.com/zephyr-sh.png",
     "socials": {
-      "github": "Z. Yuan-sh"
+      "github": "zephyr-sh"
     }
   }
 }

@@ -52,10 +52,10 @@ description: 原廠不支援，我們只好硬著頭皮上了。
 Z. Yuan:
   name: Z. Yuan
   title: Dosaid maintainer, Full-Stack AI Engineer
-  url: https://github.com/Z. Yuan-sh
-  image_url: https://github.com/Z. Yuan-sh.png
+  url: https://github.com/zephyr-sh
+  image_url: https://github.com/zephyr-sh.png
   socials:
-    github: "Z. Yuan-sh"
+    github: "zephyr-sh"
 ```
 
 我們先在相同路徑下，建立一個新的檔案 `blog/authors.json`，把同樣的內容改寫成 json 格式：
@@ -65,10 +65,10 @@ Z. Yuan:
   "Z. Yuan": {
     "name": "Z. Yuan",
     "title": "Dosaid maintainer, Full-Stack AI Engineer",
-    "url": "https://github.com/Z. Yuan-sh",
-    "image_url": "https://github.com/Z. Yuan-sh.png",
+    "url": "https://github.com/zephyr-sh",
+    "image_url": "https://github.com/zephyr-sh.png",
     "socials": {
-      "github": "Z. Yuan-sh"
+      "github": "zephyr-sh"
     }
   }
 }

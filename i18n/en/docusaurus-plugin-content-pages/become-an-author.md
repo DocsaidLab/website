@@ -168,10 +168,10 @@ Below are the guidelines for writing a blog:
    Z. Yuan: (Name used to locate the author)
      name: Z. Yuan (Name displayed on the webpage)
      title: Dosaid maintainer, Full-Stack AI Engineer (Author's title)
-     url: https://github.com/Z. Yuan-sh (Author's GitHub)
-     image_url: https://github.com/Z. Yuan-sh.png (Author's avatar)
+     url: https://github.com/zephyr-sh (Author's GitHub)
+     image_url: https://github.com/zephyr-sh.png (Author's avatar)
      socials:
-       github: "Z. Yuan-sh" (Author's GitHub account)
+       github: "zephyr-sh" (Author's GitHub account)
    ```
 
    For more detailed settings, refer to: [**Docusaurus Blog Authors**](https://docusaurus.io/docs/blog#global-authors)

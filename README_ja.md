@@ -171,10 +171,10 @@ Docusaurus を使うことで、Markdown で Web コンテンツを書き、Reac
    Z. Yuan: （著者を識別する名前）
      name: Z. Yuan （ウェブ上で表示される名前）
      title: Dosaid maintainer, Full-Stack AI Engineer （著者の肩書き）
-     url: https://github.com/Z. Yuan-sh （著者のGitHub）
-     image_url: https://github.com/Z. Yuan-sh.png （著者のプロフィール画像）
+     url: https://github.com/zephyr-sh （著者のGitHub）
+     image_url: https://github.com/zephyr-sh.png （著者のプロフィール画像）
      socials:
-       github: "Z. Yuan-sh" （著者のGitHubアカウント）
+       github: "zephyr-sh" （著者のGitHubアカウント）
    ```
 
    詳細な設定については、[**Docusaurus Blog Authors**](https://docusaurus.io/docs/blog#global-authors)を参照してください。

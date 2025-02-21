@@ -52,10 +52,10 @@ description: オフィシャルにはサポートされていないので、自�
 Z. Yuan:
   name: Z. Yuan
   title: Dosaid maintainer, Full-Stack AI Engineer
-  url: https://github.com/Z. Yuan-sh
-  image_url: https://github.com/Z. Yuan-sh.png
+  url: https://github.com/zephyr-sh
+  image_url: https://github.com/zephyr-sh.png
   socials:
-    github: "Z. Yuan-sh"
+    github: "zephyr-sh"
 ```
 
 同じパスに新しく `blog/authors.json` というファイルを作成し、同じ内容を JSON 形式で書き換えます：
@@ -65,10 +65,10 @@ Z. Yuan:
   "Z. Yuan": {
     "name": "Z. Yuan",
     "title": "Dosaid maintainer, Full-Stack AI Engineer",
-    "url": "https://github.com/Z. Yuan-sh",
-    "image_url": "https://github.com/Z. Yuan-sh.png",
+    "url": "https://github.com/zephyr-sh",
+    "image_url": "https://github.com/zephyr-sh.png",
     "socials": {
-      "github": "Z. Yuan-sh"
+      "github": "zephyr-sh"
     }
   }
 }

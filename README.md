@@ -172,10 +172,10 @@ Docusaurus 讓我們能直接使用 Markdown 撰寫網頁內容，並透過 Reac
    Z. Yuan: （用來定位作者的名稱）
      name: Z. Yuan （網頁顯示的名稱）
      title: Dosaid maintainer, Full-Stack AI Engineer （作者的職稱）
-     url: https://github.com/Z. Yuan-sh （作者的github）
-     image_url: https://github.com/Z. Yuan-sh.png （作者的頭像）
+     url: https://github.com/zephyr-sh （作者的github）
+     image_url: https://github.com/zephyr-sh.png （作者的頭像）
      socials:
-       github: "Z. Yuan-sh" (作者的 github 帳號)
+       github: "zephyr-sh" (作者的 github 帳號)
    ```
 
    更詳細的設定請參考：[**Docusaurus Blog Authors**](https://docusaurus.io/docs/blog#global-authors)
