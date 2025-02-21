@@ -385,7 +385,7 @@ Finally, they test adding only a predictor to SimCLR, and the performance improv
 The innovation of BYOL lies in completely removing the need for negative sample pairs and using the combination of a target network and a predictor to avoid the collapse solution. On ImageNet, BYOL achieves state-of-the-art self-supervised learning results and is close to the supervised learning baseline. Additionally, BYOL outperforms many existing contrastive learning methods.
 
 :::info
-There has been significant discussion about whether BYOL can truly eliminate the need for negative samples. After the paper was published, several articles explored the issue of "BN cheating" we discussed earlier, which are quite insightful. The relevant discussions are as follows:
+There has been much discussion regarding whether BYOL can truly eliminate the need for negative samples. After the publication of the paper, several articles addressed the "BN cheating" issue we previously discussed, which is quite interesting. Relevant discussions are as follows:
 
 - **Critiques from other researchers**:
 
@@ -393,9 +393,16 @@ There has been significant discussion about whether BYOL can truly eliminate the
 
 - **The authors’ responses and follow-up experiments**:
 
-  - [**BYOL works _even_ without batch statistics**](https://arxiv.org/abs/2010.10241)
+  - [**[20.10] BYOL works _even_ without batch statistics**](https://arxiv.org/abs/2010.10241)
 
-    :::
+In short, after several rounds of experiments, other researchers found that when BYOL removed the BN structure, the model failed to converge. It was speculated that BN provided implicit negative samples, allowing the model to perform contrastive learning.
+
+If this conclusion holds true, the innovation of BYOL (i.e., not requiring negative samples) would be undermined.
+
+To defend the innovation of BYOL, the authors conducted a series of experiments and eventually found that even without BN, as long as the model was appropriately adjusted, BYOL could still be trained without BN and achieve performance comparable to the original setup.
+
+Therefore, the authors' final conclusion is that the role of BN in BYOL is "not" to provide implicit negative samples, but to stabilize the training process, which is one of the reasons why BYOL can be trained without negative samples.
+:::
 
 :::tip
 The "BN cheating" issue was also mentioned in MoCo v1, where the authors used the "Shuffle BN" method to address this problem.
