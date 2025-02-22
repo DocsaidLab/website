@@ -4,42 +4,44 @@ sidebar_position: 1
 
 # Introduction
 
-MRZ (Machine Readable Zone) refers to a specific area on travel documents such as passports, visas, and identity cards, where the information can be quickly read by machines. MRZ is designed and generated according to the International Civil Aviation Organization (ICAO) Document 9303, which helps speed up border checks and improve the accuracy of information processing.
+MRZ (Machine Readable Zone) refers to a specific area on travel documents such as passports, visas, and identity cards, where information can be quickly read by machines. MRZ is designed and generated according to the guidelines in ICAO Document 9303, to speed up border control and improve the accuracy of information processing.
 
 :::info
 Interested readers can refer to: [**Document 9303**](./reference.md#icao-9303)
 :::
 
-Most people may not know what MRZ is, but they usually have a passport in hand, which contains an MRZ block that looks like this, with the red-bordered part:
+Many people may not be familiar with MRZ, but almost everyone has a passport with an MRZ block, which looks like this, with the red box indicating the MRZ area:
 
-<figure>
+<div align="center">
+<figure style={{"width": "60%"}}>
 ![mrz example](./resources/img1.jpg)
 <figcaption>Image source: [**MIDV-2020 Synthetic Dataset**](http://l3i-share.univ-lr.fr/MIDV2020/midv2020.html)</figcaption>
 </figure>
+</div>
 
 ---
 
-In addition to passports, identity cards, driver's licenses, visas, and other documents in some countries also contain MRZ blocks.
+In addition to passports, some countries also have MRZ blocks on identity cards, driver’s licenses, visas, and other documents.
 
-We can observe that MRZ blocks have several distinct features:
+We can see that MRZ blocks have several obvious characteristics:
 
-1. **Fixed Structure**: Different types of MRZ have different structures, and the meaning of each field is fixed.
-2. **Clean Text Area**: The MRZ background is monochrome, the text is black, and there is a consistent gap between characters.
-3. **Simple Classification**: The MRZ block contains only numbers and uppercase letters, with only 37 possible characters in total.
+1. **Fixed Structure**: Different types of MRZs have different structures, and each field's meaning is fixed.
+2. **Clean Text Area**: The MRZ background is solid, the text is black, and there is a defined gap between characters.
+3. **Simple Classification**: MRZ text contains only numbers and uppercase letters, with just 37 possible characters.
 
 :::info
-The structure of MRZ varies depending on the document type, mainly including the following:
+MRZ structures differ based on the type of document. The main types are:
 
-1. **TD1 (Identity card, etc.):** Composed of three lines with 30 characters per line, totaling 90 characters.
-2. **TD2 (Passport cards, etc.):** Composed of two lines with 36 characters per line, totaling 72 characters.
-3. **TD3 (Passports, etc.):** Composed of two lines with 44 characters per line, totaling 88 characters.
-4. **MRVA (Visa Type A):** Composed of two lines with 44 characters per line, totaling 88 characters.
-5. **MRVB (Visa Type B):** Composed of two lines with 36 characters per line, totaling 72 characters.
+1. **TD1 (ID cards, etc.)**: Three lines with 30 characters per line, totaling 90 characters.
+2. **TD2 (Passport cards, etc.)**: Two lines with 36 characters per line, totaling 72 characters.
+3. **TD3 (Passports, etc.)**: Two lines with 44 characters per line, totaling 88 characters.
+4. **MRVA (Visa Type A)**: Two lines with 44 characters per line, totaling 88 characters.
+5. **MRVB (Visa Type B)**: Two lines with 36 characters per line, totaling 72 characters.
    :::
 
 ## Structure Overview
 
-We refer to the well-known MRZ parsing project on GitHub, [**Arg0s1080/mrz**](https://github.com/Arg0s1080/mrz), to explain the MRZ structure:
+We refer to the popular MRZ parsing GitHub project [**Arg0s1080/mrz**](https://github.com/Arg0s1080/mrz) to explain the structure of MRZ:
 
 ![field distribution](./resources/Fields_Distribution.png)
 
@@ -47,95 +49,92 @@ We refer to the well-known MRZ parsing project on GitHub, [**Arg0s1080/mrz**](ht
 
 From the above diagram, we can clearly understand the meaning of each MRZ block:
 
-1. **Type**: Document type, including passport, ID card, visa, etc.
-2. **Country Code**: Issuing country code
-3. **Surname**: Surname
-4. **Given Names**: Given names
-5. **Document Number**: Document number
-6. **National**: Nationality
-7. **Date of Birth**: Date of birth
-8. **Date of Expiry**: Expiry date
-9. **Optional**: Custom fields
+1. **Type**: Document type, such as passport, identity card, visa, etc.
+2. **Country Code**: Issuing country code.
+3. **Surname**: Surname.
+4. **Given Names**: Given names.
+5. **Document Number**: Document number.
+6. **National**: Nationality.
+7. **Date of Birth**: Date of birth.
+8. **Date of Expiry**: Expiry date.
+9. **Optional**: Custom fields.
 
 ## Text Recognition
 
-The topic of this article is "MRZ Text Recognition," which is a relatively niche subject with few research papers. However, if we break down the problem, it's essentially an OCR problem. By fine-tuning a few OCR models, the problem can be solved.
+Our focus in this project is "MRZ Text Recognition." This topic is somewhat niche, and there aren’t many research papers on it. But when you break down the problem, it's essentially an OCR task. A few OCR models can be fine-tuned, and the problem is solved.
 
-But that's a waste! A huge waste!
+But that’s wasteful! Too wasteful!
 
-OCR models are generally designed to recognize various types of text, including numbers, uppercase and lowercase letters, punctuation marks, etc. The prediction head might cover thousands of text classes, making such models more complex and requiring more computing resources.
+OCR models are typically designed to recognize a wide variety of text types, including numbers, uppercase letters, punctuation, etc. The prediction head might cover thousands of characters, making the model complex and requiring more computational resources.
 
-If such a model were directly applied to MRZ recognition, it would seem unprofessional, right?
+If we applied such a model directly to MRZ recognition, it would not be very professional, right?
 
-Therefore, we need to redesign the model specifically for MRZ's characteristics. A dedicated model like this can more efficiently complete the task, avoiding unnecessary text types, thus saving computing resources and improving recognition speed and accuracy.
+Therefore, we must redesign the model specifically for MRZ characteristics. This specialized model can perform the task more efficiently without having to handle unnecessary text types, saving computational resources and improving recognition speed and accuracy.
 
-### Two-Stage Recognition
+## Two-Stage Recognition
 
-Since we are designing a dedicated model, we can divide MRZ recognition into two stages:
+Since we are designing a specialized model, we can divide MRZ recognition into two stages:
 
-1. **Region Localization**: Use a lightweight model focused on locating the MRZ block in the image.
-2. **Text Recognition**: Use a lightweight model focused on recognizing the text within the MRZ block in the image.
+1. **Region Localization**: Using a lightweight model to focus on locating the MRZ region in the image.
+2. **Text Recognition**: Using a lightweight model to focus on recognizing the text within the MRZ region.
 
-We did it! We spent one week building the MRZ localization model, and another week for the MRZ recognition model. Combined, the two models are about 5 MB, and the recognition accuracy per frame of image is about 95%.
+We spent half a month completing the MRZ localization model and another month completing the MRZ recognition model. The overall performance is quite good. On our custom test set (around 300 MRZ documents), the full-image accuracy reached 97.02%, and the ANLS was 99.97%.
 
 :::tip
-**Definition:** The accuracy mentioned above refers to the correct recognition of all text within the MRZ block. If even one character is incorrect, the entire image is considered incorrect.
+Full-image accuracy and ANLS are the metrics we use to evaluate the model’s performance. For more information about these metrics, refer to another section: [**Model Evaluation**](./benchmark.md)
+:::
+
+:::info
+Since each MRZ region contains at least 72 characters and at most 90 characters, through experimentation, if we aim for a full-image accuracy of 95%, the ANLS value needs to be at least around 99.95%. This is not an easy task.
 :::
 
 The only downside to this approach is...
 
-### It's Boring
+### It’s Boring
 
-No matter how you look at it, we think that completing this task "smoothly" is just a procedural thing.
+No matter how you look at it, we feel that finishing this task smoothly is just doing our job.
 
-Since the customer sent the request, we just followed the steps and completed it. After delivering it to the customer, we threw the solution into the corner and began thinking about new solutions.
+Since the client gave us the requirement, we simply followed the steps and completed it. After delivering the solution to the client, we tossed it into the corner and began thinking about new solutions.
 
-> **If we don't use two-stage recognition, then it must be single-stage recognition!**
+> **If we don't use a two-stage recognition approach, then it has to be single-stage recognition!**
 
-We had to directly recognize the MRZ block's text from the raw image.
+We must directly recognize the text within the MRZ region from the raw image.
 
-### Single-Stage Recognition
+## Single-Stage Recognition
 
-We then spent another three months to complete a single-stage MRZ recognition model.
+Then we continued to spend three more months completing a single-stage MRZ recognition model. The results were somewhat unsatisfactory, with a full-image accuracy of only about 40% and an ANLS of just 97%.
 
-To be honest, we spent more time than expected, and it was a bit of a loss. This problem was more difficult than we imagined. Several times we thought about giving up—after all, the two-stage solution was boring, but at least it was accurate! Why bother creating more trouble for ourselves?
+Honestly, we spent more time than we initially expected, and it was a bit of a loss. This problem turned out to be more difficult than we imagined. Several times we thought, “Why not just stick with the two-stage solution? It’s boring, but at least it’s accurate! Why make things harder for ourselves?”
 
-The challenge with the single-stage model lies in that it must search the entire image for MRZ blocks of varying sizes and orientations and recognize the text within them. On top of that, the model must remain lightweight to meet mobile application requirements. These factors made model convergence difficult, and the results weren't great.
+There were several difficulties with the single-stage model:
+
+1. The size and scale of the full-image search are inconsistent.
+2. The MRZ region has unpredictable rotations.
+3. The need for fine-grained perception leads to a computational explosion.
+
+Given these challenges, the model had to remain lightweight to meet the requirements of mobile applications. These factors made the model difficult to converge and resulted in subpar performance.
 
 :::info
-We will introduce the technical details in the upcoming chapter: [**Model Design**](./model_arch.md)
+We will go into the technical details in the next chapters: [**Model Design**](./model_arch.md)
 :::
 
-In conclusion, while we were frustrated during development, we persevered and completed it. Since the time and money spent cannot be recovered, we decided to open-source this solution and share it with everyone.
+In the end, despite the frustration during the development process, we persisted and completed the task. Since the money and time spent can’t be recovered, we decided to open-source this solution and share it with everyone.
 
-We consider the entire single-stage solution as a "milestone." The ideal model in our minds should be more robust and accurate, and capable of handling more application scenarios.
+We view the single-stage solution as a "milestone." Our vision for the complete solution is a more robust, more accurate model that can handle more application scenarios.
 
 :::tip
-We will continue reading more papers and work on improving the model's performance in the future.
+We will continue to read more papers and improve the model's performance in the future.
 :::
 
-## Model Evaluation
+## Conclusion
 
-This part is really difficult.
+In this project, we have completed the following features:
 
-First, there is no standard dataset for this type of problem, so we had to synthesize our dataset and annotate it ourselves, which doesn't hold much credibility:
+1. Verified the validity of synthetic datasets.
+2. Completed a two-stage solution for MRZ region localization and recognition.
+3. Integrated MRZ localization and recognition into a single-stage recognition model.
+4. Integrated all MRZ document formats and provided a unified parsing interface.
 
-> Otherwise, everyone would just collect their own data and claim to have 100% accuracy! Brilliant!
+If you are interested in this topic, feel free to test it out yourself, and we look forward to your feedback.
 
-Secondly, while MIDV provides some data, most of it is based on synthetic samples. Fine-tuning models with it doesn't yield great results, let alone using it to evaluate model performance.
-
-Therefore, in this project, we can't provide a complete model evaluation report like in previous projects.
-
-## Final
-
-In this project, we completed several functions:
-
-1. Validated the effectiveness of the synthetic dataset.
-2. Integrated MRZ localization and recognition to create a single-stage recognition model.
-3. Integrated MRZ files of all formats and provided a unified parsing interface.
-
-We also borrowed some real passports and residence permits from friends and tested them on passports from different countries: under certain regulated conditions, we achieved fairly stable recognition results.
-
-If you are interested in this topic, feel free to test it yourself, and we look forward to your feedback.
-
-Also, feel free to leave suggestions. We are happy to communicate with you.
+We also welcome suggestions and are happy to engage in discussions with you.

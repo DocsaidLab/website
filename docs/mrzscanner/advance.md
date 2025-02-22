@@ -43,9 +43,12 @@ model = MRZScanner(backend=Backend.cpu) # 使用 CPU 後端
 
 ModelType 是一個列舉類型，用於指定 `MRZScanner` 使用的模型類型。
 
-它包含以下選項：
+目前包含以下選項：
 
-- **spotting**：使用端到端的模型架構。
+- **spotting**：使用端到端的模型架構，僅會載入一個模型。
+- **two_stage**：使用二階段的模型架構，會載入兩個模型。
+- **detection**：僅載入 MRZ 的偵測模型。
+- **recognition**：僅載入 MRZ 的辨識模型。
 
 你可以透過 `model_type` 參數來指定使用的模型。
 
@@ -63,84 +66,254 @@ model = MRZScanner(model_type=MRZScanner.spotting)
 from mrzscanner import MRZScanner
 
 print(MRZScanner().list_models())
-# >>> ['20240919']
+# {
+#    'spotting': ['20240919'],
+#    'detection': ['20250222'],
+#    'recognition': ['20250221']
+# }
 ```
 
-你可以透過 `model_cfg` 參數來指定模型的配置。
+選定你要的版本，並透過 `spotting_cfg`、`detection_cfg`、`recognition_cfg` 等參數，搭配 `ModelType` 來指定使用的模型。
+
+1. **spotting**：
+
+   ```python
+   model = MRZScanner(
+      model_type=ModelType.spotting,
+      spotting_cfg='20240919'
+   )
+   ```
+
+2. **two_stage**：
+
+   ```python
+   model = MRZScanner(
+      model_type=ModelType.two_stage,
+      detection_cfg='20250222',
+      recognition_cfg='20250221'
+   )
+   ```
+
+3. **detection**：
+
+   ```python
+   model = MRZScanner(
+      model_type=ModelType.detection,
+      detection_cfg='20250222'
+   )
+   ```
+
+4. **recognition**：
+
+   ```python
+   model = MRZScanner(
+      model_type=ModelType.recognition,
+      recognition_cfg='20250221'
+   )
+   ```
+
+你也可以完全不指定，反正我們都有配置每個模型的預設版本。
+
+## ModelType.spotting
+
+這個模型是端到端的模型，會直接偵測 MRZ 的位置並進行辨識，缺點是準確度較低，而且不會回傳 MRZ 的座標。
+
+使用範例如下：
 
 ```python
-model = MRZScanner(model_cfg='20240919') # 使用 '20240919' 配置
+import cv2
+from skimage import io
+from mrzscanner import MRZScanner, ModelType
+
+# 建立模型
+model = MRZScanner(
+   model_type=ModelType.spotting,
+   spotting_cfg='20240919'
+)
+
+# 讀取線上影像
+img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
+img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+# 模型推論
+result = model(img, do_center_crop=True, do_postprocess=False)
+
+# 輸出結果
+print(result)
+# {
+#    'mrz_polygon': None,
+#    'mrz_texts': [
+#        'PCAZEQAOARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
+#        'C946302620AZE6707297F23031072W12IMJ<<<<<<<40'
+#    ],
+#    'msg': <ErrorCodes.NO_ERROR: 'No error.'>
+# }
 ```
 
-## Inference
+## ModelType.two_stage
 
-以下是在推論階段的進階設定選項：
+這個模型是二階段的模型，會先偵測 MRZ 的位置，再進行辨識，優點是準確度較高，而且會回傳 MRZ 的座標。
 
-### 中心裁剪
-
-在進行推論階段，設定適當的進階選項能夠顯著影響模型的表現和效果。
-
-其中，`do_center_crop`是一個關鍵的參數，它決定是否在推論時進行中心裁剪。
-
-這項設定尤其重要，因為在實際應用中，我們遇到的圖像往往並非標準的正方形尺寸。
-
-實際上，圖像的尺寸和比例多種多樣，例如：
-
-- 手機拍攝的照片普遍採用 9:16 的寬高比；
-- 掃描的文件常見於 A4 的紙張比例；
-- 網頁截圖大多是 16:9 的寬高比；
-- 透過 webcam 拍攝的圖片，則通常是 4:3 的比例。
-
-這些非正方形的圖像，在不經過適當處理直接進行推論時，往往會包含大量的無關區域或空白，從而對模型的推論效果產生不利影響。進行中心裁剪能夠有效減少這些無關區域，專注於圖像的中心區域，從而提高推論的準確性和效率。
-
-使用方式如下：
+使用範例如下，最後我們還能畫出 MRZ 的位置：
 
 ```python
-import capybara as cb
-from mrzscanner import MRZScanner
+import cv2
+from skimage import io
+from mrzscanner import MRZScanner, ModelType
 
-model = MRZScanner()
+# 建立模型
+model = MRZScanner(
+   model_type=ModelType.two_stage,
+   detection_cfg='20250222',
+   recognition_cfg='20250221'
+)
 
-img = cb.imread('path/to/image.jpg')
-result = model(img, do_center_crop=True) # 使用中心裁剪
+# 讀取線上影像
+img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
+img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+# 模型推論
+result = model(img, do_center_crop=True, do_postprocess=False)
+
+# 輸出結果
+print(result)
+# {
+#     'mrz_polygon':
+#         array(
+#             [
+#                 [ 158.536 , 1916.3734],
+#                 [1682.7792, 1976.1683],
+#                 [1677.1018, 2120.8926],
+#                 [ 152.8586, 2061.0977]
+#             ],
+#             dtype=float32
+#         ),
+#     'mrz_texts': [
+#         'PCAZEQAQARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
+#         'C946302620AZE6707297F23031072W12IMJ<<<<<<<40'
+#     ],
+#     'msg': <ErrorCodes.NO_ERROR: 'No error.'>
+# }
+
+# 畫出 MRZ 的位置
+from capybara import draw_polygon, imwrite, centercrop
+
+poly_img = draw_polygon(img, result['mrz_polygon'], color=(0, 0, 255), thickness=5)
+imwrite(centercrop(poly_img))
 ```
 
-:::tip
-**使用時機**：『不會切到 MRZ 區域』且圖片比例不是正方形時，可以使用中心裁切。
+<div align="center" >
+<figure style={{width: "70%"}}>
+![demo_two_stage](./resources/demo_two_stage.jpg)
+</figure>
+</div>
+
+## ModelType.detection
+
+這個模型僅會偵測 MRZ 的位置，不會進行辨識。
+
+使用範例如下：
+
+```python
+import cv2
+from skimage import io
+from mrzscanner import MRZScanner, ModelType
+
+# 建立模型
+model = MRZScanner(
+   model_type=ModelType.detection,
+   detection_cfg='20250222',
+)
+
+# 讀取線上影像
+img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
+img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+# 模型推論
+result = model(img, do_center_crop=True)
+
+# 輸出結果
+print(result)
+# {
+#     'mrz_polygon':
+#         array(
+#             [
+#                 [ 158.536 , 1916.3734],
+#                 [1682.7792, 1976.1683],
+#                 [1677.1018, 2120.8926],
+#                 [ 152.8586, 2061.0977]
+#             ],
+#             dtype=float32
+#         ),
+#     'mrz_texts': None,
+#     'msg': <ErrorCodes.NO_ERROR: 'No error.'>
+# }
+```
+
+這裡 MRZ 定位的結果和剛才一樣，我們就不再重複畫出來了。
+
+## ModelType.recognition
+
+這個模型僅會進行 MRZ 的辨識，不會偵測 MRZ 的位置。
+
+要執行這個模型，你得先準備好 MRZ 裁切後的影像，並且將其傳入模型。
+
+我們先準備一下 MRZ 裁切後的影像，直接取用剛才定位的座標：
+
+```python
+import numpy as np
+from skimage import io
+from capybara import imwarp_quadrangle, imwrite
+
+polygon = np.array([
+    [ 158.536 , 1916.3734],
+    [1682.7792, 1976.1683],
+    [1677.1018, 2120.8926],
+    [ 152.8586, 2061.0977]
+], dtype=np.float32)
+
+img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
+img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+mrz_img = imwarp_quadrangle(img, polygon)
+imwrite(mrz_img)
+```
+
+執行上面程式後，我們可以取出 MRZ 裁切後的影像：
+
+<div align="center" >
+<figure style={{width: "90%"}}>
+![demo_recognition_warp](./resources/demo_recognition_warp.jpg)
+</figure>
+</div>
+
+有了影像之後，我們就可以單獨執行辨識模型：
+
+```python
+from mrzscanner import MRZScanner, ModelType
+
+# 建立模型
+model = MRZScanner(
+   model_type=ModelType.recognition,
+   recognition_cfg='20250221'
+)
+
+# 輸入 MRZ 裁切後的影像
+result = model(mrz_img, do_center_crop=False)
+
+
+# 輸出結果
+print(result)
+# {
+#     'mrz_polygon':None,
+#     'mrz_texts': [
+#         'PCAZEQAQARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
+#         'C946302620AZE6707297F23031072W12IMJ<<<<<<<40'
+#     ],
+#     'msg': <ErrorCodes.NO_ERROR: 'No error.'>
+# }
+```
+
+:::warning
+要注意這裡的參數設定是 `do_center_crop=False`，因為我們已經裁切好了。
 :::
-
-### 後處理
-
-除了中心裁剪外，我們還提供了一個後處理的選項，用於進一步提高模型的準確性。我們有提供一個後處理參數，預設為 `do_postprocess=True`。
-
-那是因為 MRZ 區塊中存在一些規則，例如國家代碼只能為大寫英文字母；性別只有 `M` 和 `F` 等等。這些是可以用來規範 MRZ 區塊的。
-
-因此我們針對可以規範的區塊進行人工校正，例如以下程式碼片段，在不可能出現數字的欄位中，把可能誤判的數字替換成正確的字元：
-
-```python
-import re
-
-def replace_digits(text: str):
-    text = re.sub('0', 'O', text)
-    text = re.sub('1', 'I', text)
-    text = re.sub('2', 'Z', text)
-    text = re.sub('4', 'A', text)
-    text = re.sub('5', 'S', text)
-    text = re.sub('8', 'B', text)
-    return text
-
-if doc_type == 3:  # TD1
-    if len(results[0]) != 30 or len(results[1]) != 30 or len(results[2]) != 30:
-        return [''], ErrorCodes.POSTPROCESS_FAILED_TD1_LENGTH
-    # Line1
-    doc = results[0][0:2]
-    country = replace_digits(results[0][2:5])
-```
-
-雖然在我們的時候中，這個替換字元的後處理沒有幫我們提高更多的準確度，但保留這個功能還是可以在某些情況下把錯誤的辨識結果修正回來。
-
-你可以在推論的時候把 `do_postprocess` 設為 `False`，這樣就可以得到原始的辨識結果。
-
-```python
-result, msg = model(img, do_postprocess=False)
-```

@@ -66,7 +66,7 @@ Once installed, you can test the installation with the following command:
 
 ```bash
 python -c "import mrzscanner; print(mrzscanner.__version__)"
-# >>> 0.3.2
+# >>> 1.0.6
 ```
 
-If you see a version number like `0.3.2`, the installation was successful.
+If you see a version number like `1.0.6`, the installation was successful.

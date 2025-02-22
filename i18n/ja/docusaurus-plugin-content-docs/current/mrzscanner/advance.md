@@ -4,17 +4,17 @@ sidebar_position: 4
 
 # 高度な設定
 
-`MRZScanner` モデルを使用する際、パラメータを渡すことで高度な設定を行うことができます。
+`MRZScanner` モデルを呼び出す際、パラメータを渡すことで高度な設定を行うことができます。
 
 ## 初期化
 
-以下は初期化時に利用可能な高度な設定オプションです：
+以下は、初期化時の高度な設定オプションです：
 
 ### 1. Backend
 
-Backend は列挙型で、`MRZScanner` の計算バックエンドを指定します。
+Backend は列挙型で、`MRZScanner` の計算バックエンドを指定するために使用されます。
 
-利用可能なオプション：
+以下のオプションが含まれています：
 
 - **cpu**：CPU を使用して計算。
 - **cuda**：GPU を使用して計算（適切なハードウェアサポートが必要）。
@@ -29,25 +29,28 @@ model = MRZScanner(backend=Backend.cuda) # CUDA バックエンドを使用
 model = MRZScanner(backend=Backend.cpu) # CPU バックエンドを使用
 ```
 
-ONNXRuntime を推論エンジンとして使用しています。ONNXRuntime は CPU、CUDA、OpenCL、DirectX、TensorRT など複数のバックエンドエンジンをサポートしていますが、一般的な使用環境を考慮して、現在は CPU と CUDA のみをサポートしています。CUDA 計算を使用するには適切なハードウェアサポートに加え、対応する CUDA ドライバーおよび CUDA ツールキットが必要です。
+私たちは ONNXRuntime をモデルの推論エンジンとして使用しており、ONNXRuntime は複数のバックエンドエンジン（CPU、CUDA、OpenCL、DirectX、TensorRT など）をサポートしていますが、日常的に使用する環境に合わせて少しラップを行い、現在は CPU と CUDA の 2 つのバックエンドエンジンのみを提供しています。さらに、cuda 計算を使用するには、適切なハードウェアサポートに加えて、対応する CUDA ドライバーと CUDA ツールキットのインストールが必要です。
 
-CUDA がインストールされていない場合、またはバージョンが適切でない場合は、CUDA 計算バックエンドを使用できません。
+もしシステムに CUDA がインストールされていない、またはインストールされているバージョンが正しくない場合、CUDA 計算バックエンドは使用できません。
 
 :::tip
 
-1. 他のバックエンドが必要な場合は、[**ONNXRuntime 公式ドキュメント**](https://onnxruntime.ai/docs/execution-providers/index.html)を参照してカスタマイズしてください。
-2. 依存関係のインストールに関する問題については、[**ONNXRuntime Release Notes**](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements)をご確認ください。
+1. 他に必要な場合は、[**ONNXRuntime 公式ドキュメント**](https://onnxruntime.ai/docs/execution-providers/index.html) を参照してカスタマイズしてください。
+2. 依存関係のインストールに関する問題については、[**ONNXRuntime リリースノート**](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements) を参照してください。
    :::
 
 ### 2. ModelType
 
-ModelType は列挙型で、`MRZScanner` が使用するモデルの種類を指定します。
+ModelType は列挙型で、`MRZScanner` が使用するモデルタイプを指定するために使用されます。
 
-利用可能なオプション：
+現在、以下のオプションがあります：
 
-- **spotting**：エンドツーエンドモデルアーキテクチャを使用。
+- **spotting**：エンドツーエンドのモデルアーキテクチャを使用、1 つのモデルのみを読み込みます。
+- **two_stage**：2 段階のモデルアーキテクチャを使用、2 つのモデルを読み込みます。
+- **detection**：MRZ の検出モデルのみを読み込みます。
+- **recognition**：MRZ の認識モデルのみを読み込みます。
 
-`model_type` パラメータでモデルの種類を指定できます。
+`model_type` パラメータを使用して、使用するモデルを指定できます。
 
 ```python
 from mrzscanner import MRZScanner
@@ -57,90 +60,259 @@ model = MRZScanner(model_type=MRZScanner.spotting)
 
 ### 3. ModelCfg
 
-`list_models` を使用して利用可能なすべてのモデルを確認できます。
+`list_models` を使用して、利用可能なすべてのモデルを確認できます。
 
 ```python
 from mrzscanner import MRZScanner
 
 print(MRZScanner().list_models())
-# >>> ['20240919']
+# {
+#    'spotting': ['20240919'],
+#    'detection': ['20250222'],
+#    'recognition': ['20250221']
+# }
 ```
 
-`model_cfg` パラメータを使用してモデル設定を指定できます。
+使用するバージョンを選択し、`spotting_cfg`、`detection_cfg`、`recognition_cfg` などのパラメータと一緒に `ModelType` を使用して、使用するモデルを指定します。
+
+1. **spotting**：
+
+   ```python
+   model = MRZScanner(
+      model_type=ModelType.spotting,
+      spotting_cfg='20240919'
+   )
+   ```
+
+2. **two_stage**：
+
+   ```python
+   model = MRZScanner(
+      model_type=ModelType.two_stage,
+      detection_cfg='20250222',
+      recognition_cfg='20250221'
+   )
+   ```
+
+3. **detection**：
+
+   ```python
+   model = MRZScanner(
+      model_type=ModelType.detection,
+      detection_cfg='20250222'
+   )
+   ```
+
+4. **recognition**：
+
+   ```python
+   model = MRZScanner(
+      model_type=ModelType.recognition,
+      recognition_cfg='20250221'
+   )
+   ```
+
+指定しないこともできます。各モデルのデフォルトバージョンはすでに設定されています。
+
+## ModelType.spotting
+
+このモデルはエンドツーエンドのモデルで、MRZ の位置を直接検出して認識します。欠点は精度が低く、MRZ の座標が返されないことです。
+
+使用例は以下の通りです：
 
 ```python
-model = MRZScanner(model_cfg='20240919') # '20240919' 設定を使用
+import cv2
+from skimage import io
+from mrzscanner import MRZScanner, ModelType
+
+# モデルの作成
+model = MRZScanner(
+   model_type=ModelType.spotting,
+   spotting_cfg='20240919'
+)
+
+# オンライン画像の読み込み
+img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
+img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+# モデル推論
+result = model(img, do_center_crop=True, do_postprocess=False)
+
+# 結果の出力
+print(result)
+# {
+#    'mrz_polygon': None,
+#    'mrz_texts': [
+#        'PCAZEQAOARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
+#        'C946302620AZE6707297F23031072W12IMJ<<<<<<<40'
+#    ],
+#    'msg': <ErrorCodes.NO_ERROR: 'No error.'>
+# }
 ```
 
-## 推論
+## ModelType.two_stage
 
-以下は推論時に利用可能な高度な設定オプションです：
+このモデルは二段階モデルで、まず MRZ の位置を検出し、次に認識を行います。利点は精度が高く、MRZ の座標も返されることです。
 
-### 中央クロップ
-
-推論段階で適切な高度設定を行うことで、モデルのパフォーマンスや精度に大きな影響を与えることができます。
-
-`do_center_crop` は中心クロップを行うかどうかを決定する重要なパラメータです。
-
-特に実用的なシナリオでは、画像が標準的な正方形サイズでない場合が多いため、この設定が重要です。
-
-例えば：
-
-- スマートフォンで撮影した写真は通常 9:16 のアスペクト比。
-- スキャンした書類は A4 用紙の比率。
-- ウェブページのスクリーンショットは 16:9 のアスペクト比。
-- ウェブカメラで撮影した画像は一般的に 4:3 の比率。
-
-これらの非正方形画像は、適切な処理を行わずに推論を実行すると、多くの不要な領域や空白が含まれ、モデルの推論性能に悪影響を及ぼします。中心クロップを行うことで、これらの不要な領域を削減し、画像の中心領域に焦点を当てることで、推論の精度と効率を向上させることができます。
-
-使用方法は以下の通りです：
+使用例は以下の通りで、最後に MRZ の位置を描画できます：
 
 ```python
-import capybara as cb
-from mrzscanner import MRZScanner
+import cv2
+from skimage import io
+from mrzscanner import MRZScanner, ModelType
 
-model = MRZScanner()
+# モデルの作成
+model = MRZScanner(
+   model_type=ModelType.two_stage,
+   detection_cfg='20250222',
+   recognition_cfg='20250221'
+)
 
-img = cb.imread('path/to/image.jpg')
-result = model(img, do_center_crop=True) # 中心クロップを使用
+# オンライン画像の読み込み
+img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
+img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+# モデル推論
+result = model(img, do_center_crop=True, do_postprocess=False)
+
+# 結果の出力
+print(result)
+# {
+#     'mrz_polygon':
+#         array(
+#             [
+#                 [ 158.536 , 1916.3734],
+#                 [1682.7792, 1976.1683],
+#                 [1677.1018, 2120.8926],
+#                 [ 152.8586, 2061.0977]
+#             ],
+#             dtype=float32
+#         ),
+#     'mrz_texts': [
+#         'PCAZEQAQARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
+#         'C946302620AZE6707297F23031072W12IMJ<<<<<<<40'
+#     ],
+#     'msg': <ErrorCodes.NO_ERROR: 'No error.'>
+# }
+
+# MRZの位置を描画
+from capybara import draw_polygon, imwrite, centercrop
+
+poly_img = draw_polygon(img, result['mrz_polygon'], color=(0, 0, 255), thickness=5)
+imwrite(centercrop(poly_img))
 ```
 
-:::tip
-**使用するべき場合**：MRZ エリアを切り取る心配がない場合や、画像のアスペクト比が正方形でない場合に中心クロップを使用できます。
+<div align="center" >
+<figure style={{width: "70%"}}>
+![demo_two_stage](./resources/demo_two_stage.jpg)
+</figure>
+</div>
+
+## ModelType.detection
+
+このモデルは MRZ の位置のみを検出し、認識は行いません。
+
+使用例は以下の通りです：
+
+```python
+import cv2
+from skimage import io
+from mrzscanner import MRZScanner, ModelType
+
+# モデルの作成
+model = MRZScanner(
+   model_type=ModelType.detection,
+   detection_cfg='20250222',
+)
+
+# オンライン画像の読み込み
+img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
+img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+# モデル推論
+result = model(img, do_center_crop=True)
+
+# 結果の出力
+print(result)
+# {
+#     'mrz_polygon':
+#         array(
+#             [
+#                 [ 158.536 , 1916.3734],
+#                 [1682.7792, 1976.1683],
+#                 [1677.1018, 2120.8926],
+#                 [ 152.8586, 2061.0977]
+#             ],
+#             dtype=float32
+#         ),
+#     'mrz_texts': None,
+#     'msg': <ErrorCodes.NO_ERROR: 'No error.'>
+# }
+```
+
+ここでの MRZ の位置は先ほどと同じ結果となるため、再度描画することはありません。
+
+## ModelType.recognition
+
+このモデルは MRZ の認識のみを行い、位置の検出は行いません。
+
+このモデルを実行するには、まず MRZ を切り出した画像を準備し、その画像をモデルに入力する必要があります。
+
+まず、先ほど検出した座標を使って MRZ を切り出した画像を準備します：
+
+```python
+import numpy as np
+from skimage import io
+from capybara import imwarp_quadrangle, imwrite
+
+polygon = np.array([
+    [ 158.536 , 1916.3734],
+    [1682.7792, 1976.1683],
+    [1677.1018, 2120.8926],
+    [ 152.8586, 2061.0977]
+], dtype=np.float32)
+
+img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
+img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+mrz_img = imwarp_quadrangle(img, polygon)
+imwrite(mrz_img)
+```
+
+上記のコードを実行すると、MRZ を切り出した画像が得られます：
+
+<div align="center" >
+<figure style={{width: "90%"}}>
+![demo_recognition_warp](./resources/demo_recognition_warp.jpg)
+</figure>
+</div>
+
+画像が準備できたら、認識モデルを単独で実行できます：
+
+```python
+from mrzscanner import MRZScanner, ModelType
+
+# モデルの作成
+model = MRZScanner(
+   model_type=ModelType.recognition,
+   recognition_cfg='20250221'
+)
+
+# MRZ切り出し後の画像を入力
+result = model(mrz_img, do_center_crop=False)
+
+# 結果の出力
+print(result)
+# {
+#     'mrz_polygon':None,
+#     'mrz_texts': [
+#         'PCAZEQAQARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
+#         'C946302620AZE6707297F23031072W12IMJ<<<<<<<40'
+#     ],
+#     'msg': <ErrorCodes.NO_ERROR: 'No error.'>
+# }
+```
+
+:::warning
+ここでは `do_center_crop=False` と設定しています。すでに切り出した画像を使用しているためです。
 :::
-
-### 後処理
-
-中心クロップ以外にも、モデルの精度をさらに向上させる後処理オプションを提供しています。後処理用のパラメータ `do_postprocess=True` がデフォルトで有効になっています。
-
-これは、MRZ エリアにはいくつかの規則（例：国コードは大文字のアルファベットのみ、性別は `M` または `F` のみなど）があるためです。
-
-このような規則を使用して MRZ エリアを修正することができます。以下のコード例のように、数字が出現しないはずのフィールドで誤認識された数字を正しい文字に置き換える後処理が可能です：
-
-```python
-import re
-
-def replace_digits(text: str):
-    text = re.sub('0', 'O', text)
-    text = re.sub('1', 'I', text)
-    text = re.sub('2', 'Z', text)
-    text = re.sub('4', 'A', text)
-    text = re.sub('5', 'S', text)
-    text = re.sub('8', 'B', text)
-    return text
-
-if doc_type == 3:  # TD1
-    if len(results[0]) != 30 or len(results[1]) != 30 or len(results[2]) != 30:
-        return [''], ErrorCodes.POSTPROCESS_FAILED_TD1_LENGTH
-    # Line1
-    doc = results[0][0:2]
-    country = replace_digits(results[0][2:5])
-```
-
-この後処理による精度向上は限られた状況で発生するものの、誤認識結果を修正する際に有効です。
-
-推論時に `do_postprocess` を `False` に設定することで、後処理を行わない生の認識結果を取得できます。
-
-```python
-result, msg = model(img, do_postprocess=False)
-```

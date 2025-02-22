@@ -6,38 +6,51 @@ sidebar_position: 3
 
 我們提供了一個簡單的模型推論介面，其中包含了前後處理的邏輯。
 
-首先，你需要導入所需的相關依賴並創建 `MRZScanner` 類別。
-
 ## 模型推論
 
-:::info
-我們有設計了自動下載模型的功能，當程式檢查你缺少模型時，會自動連接到我們的伺服器進行下載。
-:::
-
-以下是一個簡單的範例：
+首先，什麼都別管，跑跑看以下程式碼，看一下能不能完整執行：
 
 ```python
 import cv2
 from skimage import io
 from mrzscanner import MRZScanner
 
-# build model
+# 建立模型
 model = MRZScanner()
 
-# read image
+# 讀取線上影像
 img = io.imread('https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg?raw=true')
 img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 
-# inference
-result_mrz, error_msg = model(img)
+# 模型推論
+result = model(img, do_center_crop=True, do_postprocess=False)
 
-# 輸出為 MRZ 區塊的兩行文字及錯誤訊息提示
-print(result_mrz)
-# >>> ('PCAZEQAQARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
-#     'C946302620AZE6707297F23031072W12IMJ<<<<<<<40')
-print(error_msg)
-# >>> <ErrorCodes.NO_ERROR: 'No error.'>
+# 輸出結果
+print(result)
+# {
+#     'mrz_polygon':
+#         array(
+#             [
+#                 [ 158.536 , 1916.3734],
+#                 [1682.7792, 1976.1683],
+#                 [1677.1018, 2120.8926],
+#                 [ 152.8586, 2061.0977]
+#             ],
+#             dtype=float32
+#         ),
+#     'mrz_texts': [
+#         'PCAZEQAQARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
+#         'C946302620AZE6707297F23031072W12IMJ<<<<<<<40'
+#     ],
+#     'msg': <ErrorCodes.NO_ERROR: 'No error.'>
+# }
 ```
+
+成功執行後，我們往下看一下程式碼的細節。
+
+:::info
+我們有設計了自動下載模型的功能，當程式檢查你缺少模型時，會自動連接到我們的伺服器進行下載。
+:::
 
 :::tip
 在上面範例中，圖片下載連結請參考：[**midv2020_test_mrz.jpg**](https://github.com/DocsaidLab/MRZScanner/blob/main/docs/test_mrz.jpg)
@@ -51,32 +64,80 @@ print(error_msg)
 
 ## 使用 `do_center_crop` 參數
 
-這張影像應該是與行動裝置拍攝的，形狀偏狹長，如果直接給模型推論的話，會造成過多的文字形變，因此我們調用模型的時候，同時開啟 `do_center_crop` 參數，方式如下：
+這張影像應該是與行動裝置拍攝的，形狀偏狹長，如果直接給模型推論的話，會造成過多的文字形變。所以我們在推論的時候加入了 `do_center_crop` 參數，這個參數是用來對圖片進行中心裁剪。
+
+這個參數預設為 `False`，因為我們認為在未經過使用者的認知下，不應該對圖片進行任何的修改。但是在實際應用中，我們遇到的圖像往往並非標準的正方形尺寸。
+
+實際上，圖像的尺寸和比例多種多樣，例如：
+
+- 手機拍攝的照片普遍採用 9:16 的寬高比；
+- 掃描的文件常見於 A4 的紙張比例；
+- 網頁截圖大多是 16:9 的寬高比；
+- 透過 webcam 拍攝的圖片，則通常是 4:3 的比例。
+
+這些非正方形的圖像，在不經過適當處理直接進行推論時，往往會包含大量的無關區域或空白，從而對模型的推論效果產生不利影響。進行中心裁剪能夠有效減少這些無關區域，專注於圖像的中心區域，從而提高推論的準確性和效率。
+
+使用方式如下：
 
 ```python
 from mrzscanner import MRZScanner
 
 model = MRZScanner()
 
-result, msg = model(img, do_center_crop=True)
-print(result)
-# >>> ('PCAZEQAOARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
-#      'C946302620AZE6707297F23031072W12IMJ<<<<<<<40')
-print(msg)
-# >>> <ErrorCodes.NO_ERROR: 'No error.'>
+result = model(img, do_center_crop=True) # 使用中心裁剪
 ```
 
 :::tip
+**使用時機**：『不會切到 MRZ 區域』且圖片比例不是正方形時，可以使用中心裁切。
+:::
+
+:::info
 `MRZScanner` 已經用 `__call__` 進行了封裝，因此你可以直接呼叫實例進行推論。
 :::
 
+## 使用 `do_postprocess` 參數
+
+除了中心裁剪外，我們還提供了一個後處理的選項 `do_postprocess`，用於進一步提高模型的準確性。
+
+這個參數預設同樣是 `False`，原因和剛才一樣，我們認為在未經過使用者的認知下，不應該對辨識結果進行任何的修改。
+
+在實際應用中，MRZ 區塊中存在一些規則，例如：國家代碼只能為大寫英文字母、性別只有 `M` 和 `F` 以及跟日期有關的欄位只能是數字等。這些規則都可以用來規範 MRZ 區塊。
+
+因此我們針對可以規範的區塊進行人工校正，以下實作校正概念的程式碼片段，在不可能出現數字的欄位中，把可能誤判的數字替換成正確的字元：
+
+```python
+import re
+
+def replace_digits(text: str):
+    text = re.sub('0', 'O', text)
+    text = re.sub('1', 'I', text)
+    text = re.sub('2', 'Z', text)
+    text = re.sub('4', 'A', text)
+    text = re.sub('5', 'S', text)
+    text = re.sub('8', 'B', text)
+    return text
+
+if doc_type == 3:  # TD1
+    if len(results[0]) != 30 or len(results[1]) != 30 or len(results[2]) != 30:
+        return [''], ErrorCodes.POSTPROCESS_FAILED_TD1_LENGTH
+    # Line1
+    doc = results[0][0:2]
+    country = replace_digits(results[0][2:5])
+```
+
+雖然在我們的專案中，這個後處理沒有幫我們提高更多的準確度，但保留這個功能還是可以在某些情況下把錯誤的辨識結果修正回來。
+
+你可以考慮推論的時候把 `do_postprocess` 設為 `True`，通常結果會更好：
+
+```python
+result = model(img, do_postprocess=True)
+```
+
+又或是你更喜歡看到原始的模型輸出結果，那就用預設值即可。
+
 ## 搭配 `DocAligner` 使用
 
-仔細看看上面的輸出結果，發現儘管做了 `do_center_crop` ，但有幾個錯字。
-
-因為我們剛才使用全圖掃描，模型對於圖片中的文字可能會有一些誤判。
-
-為了提高準確度，我們加入 `DocAligner` 來幫助我們對齊 MRZ 區塊：
+有時候就算使用了 `do_center_crop` 參數，也有偵測失敗的可能，這時候我們可以使用 `DocAligner` 來幫助我們先找出證件的位置，然後再進行 MRZ 辨識。
 
 ```python
 import cv2
@@ -96,13 +157,31 @@ polygon = doc_aligner(img)
 flat_img = imwarp_quadrangle(img, polygon, dst_size=(800, 480))
 
 print(model(flat_img))
-# >>> ('PCAZEQAQARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
-#      'C946302620AZE6707297F23031072W12IMJ<<<<<<<40')
+# {
+#     'mrz_polygon':
+#         array(
+#         [
+#             [ 34.0408 , 378.497  ],
+#             [756.4258 , 385.0492 ],
+#             [755.8944 , 443.63843],
+#             [ 33.5094 , 437.08618]
+#         ], dtype=float32
+#     ),
+#     'mrz_texts': [
+#         'PCAZEQAQARIN<<FIDAN<<<<<<<<<<<<<<<<<<<<<<<<<',
+#         'C946302620AZE6707297F23031072W12IMJ<<<<<<<40'
+#     ],
+#     'msg': <ErrorCodes.NO_ERROR: 'No error.'>
+# }
 ```
 
-使用 `DocAligner` 之後，就不需要再使用 `do_center_crop` 參數了。
+:::warning
+如果使用 `DocAligner` 做前處理，表示 MRZ 可能已經佔據了一定的版面，這時候就不需要再使用 `do_center_crop` 參數了，因為中心裁切可能會導致 MRZ 部分被切掉。
+:::
 
-現在，你可以看到輸出結果更加準確，這張圖片的 MRZ 區塊已經成功辨識。
+:::tip
+`DocAligner` 的使用方式請參考 [**DocAligner 技術文件**](https://docsaid.org/docs/docaligner/)。
+:::
 
 ## 錯誤訊息
 

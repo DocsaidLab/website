@@ -10,83 +10,92 @@ Yes, we're the ones causing our own headaches—both annoyed and intrigued at th
 
 ## Two-Stage Recognition Model
 
-:::info
-During the testing phase, we are initially releasing an end-to-end single-stage model.
+A two-stage model refers to dividing MRZ recognition into two phases: localization and recognition.
 
-The two-stage model that separates localization and recognition is not yet available, but we plan to release it in the V1.0 stable version.
-
-However, that won't stop us from discussing the detailed approach here.
-:::
-
-The two-stage model splits MRZ recognition into two phases: localization and recognition.
-
-Based on this idea, we can start designing the model. Let’s first take a look at the localization model.
+Following this approach, we can start designing related models. First, let's look at the localization model.
 
 ### Localization Model
 
-MRZ localization can be approached in two ways:
+Localization of the MRZ area can generally be divided into two directions:
 
-1. **Locating MRZ corner points:**
+1. **Locate the corners of the MRZ area:**
 
    <div align="center">
    <figure style={{"width": "50%"}}>
-   ![Locating MRZ corner points](./resources/img2.jpg)
+   ![corners](./resources/img2.jpg)
    <figcaption>Image source: [**MIDV-2020 Synthetic Dataset**](http://l3i-share.univ-lr.fr/MIDV2020/midv2020.html)</figcaption>
    </figure>
    </div>
 
-   This is similar to previous document localization projects we've worked on, except here we’re localizing the MRZ area instead of the whole document.
+   This is similar to the document localization projects we've done before, except that here we are localizing the MRZ area instead of a document.
 
-   The difference is that document corners "physically" exist on the image, and the model doesn’t need to “imagine” a corner. For the MRZ area, however, the model needs to "guess" where these corners are.
+   The difference is that in document localization, the corner points exist "realistically" on the image and don't require the model to "imagine" a corner. In contrast, for the MRZ area, we need the model to "guess" these corner points.
 
-   It turns out that using this method leads to an unstable model. If the passport is slightly moved, the predicted corners of the MRZ area tend to jump around.
+   It turns out that using this method results in an unstable model; just a slight movement of the passport can cause the predicted corner points to wander around the MRZ area.
 
    ***
 
-2. **Segmenting the MRZ area:**
+2. **Segmentation of the MRZ area:**
 
     <div align="center">
     <figure style={{"width": "50%"}}>
-    ![Segmenting the MRZ area](./resources/img3.jpg)
+    ![area](./resources/img3.jpg)
     <figcaption>Image source: [**MIDV-2020 Synthetic Dataset**](http://l3i-share.univ-lr.fr/MIDV2020/midv2020.html)</figcaption>
     </figure>
     </div>
 
-   This approach is much more stable, as we can directly predict the MRZ region using a segmentation model. The text within the MRZ area physically exists in the image, so the model doesn’t have to "imagine" anything extra. This allows us to segment the MRZ region directly without worrying about corner points.
+   This approach is more stable because we can directly use a segmentation model to predict the MRZ area boundaries. The text in the MRZ area is realistically present in the image, so the model doesn't have to make unnecessary assumptions. This way, we can directly segment the MRZ area and avoid concerns about the corner points.
 
 ---
 
-We’ve chosen the segmentation method.
+We adopted the segmentation approach.
 
-In real-world scenarios, passports are often held at slight angles. Therefore, we need to correct the MRZ region to transform it into a proper rectangle.
+In real-world scenarios, the passport held by the user is inevitably tilted, so we need to correct the MRZ area to transform it into a proper rectangle.
 
-Regarding the loss function, we referred to a survey paper:
+For the loss function, we referred to a review paper:
 
-- [**[20.06] A Survey of Loss Functions for Semantic Segmentation**](https://arxiv.org/abs/2006.14822)
+- [**[20.06] A survey of loss functions for semantic segmentation**](https://arxiv.org/abs/2006.14822)
 
-This paper offers a unified comparison and introduction to various loss functions for segmentation proposed over recent years. It proposes a solution to existing issues: **Log-Cosh Dice Loss**.
+This paper provides a unified comparison and introduction of various segmentation loss functions proposed in recent years, and presents a solution to existing problems, namely **Log-Cosh Dice Loss**.
 
-For those interested, you can refer to the paper; we won’t go into detail here.
+Interested readers can refer to this paper; we won't go into further details here.
 
+<div align="center" >
+<figure style={{width: "90%"}}>
 ![Log-Cosh Dice Loss](./resources/img4.jpg)
+</figure>
+</div>
+
+In our experiments, using `Log-Cosh Dice Loss` alone yielded suboptimal results, so we had to combine it with pixel classification loss `CrossEntropyLoss` and pixel regression loss `SmoothL1Loss` for training.
 
 ### Recognition Model
 
-The recognition model is much simpler. Since we’ve already segmented the MRZ region, we just need to pass that region to a text recognition model to get the final result.
+The recognition model is simpler because we've already segmented the MRZ area, and we just need to input that area into a text recognition model to get the final result.
 
-At this stage, there are a couple of design options:
+At this stage, there are several design directions we can consider:
 
-1. **Segment the text and recognize it piece by piece:**
+1. **Segment the string and recognize them one by one:**
 
-   Some MRZs have two lines of text, such as in the TD2 and TD3 formats; others have three lines, like the TD1 format. We can segment these lines of text and recognize them one by one.
+   Some MRZs have two lines of text, such as the TD2 and TD3 formats, while others have three lines, such as the TD1 format. We can split these texts and recognize them one by one.
 
-   The recognition model’s job is to convert a string of text from an image into output. There are many methods available, such as the classic CRNN+CTC or more modern approaches like CLIP4STR.
+   The recognition model needs to convert a string of image text into text output. There are many possible methods, such as the earlier popular CRNN+CTC or the more recent CLIP4STR, among others.
 
-2. **Recognize the entire cropped MRZ region at once:**
+   This method has many drawbacks, such as the need for additional logic to handle two or three lines in the MRZ area, or difficulties in distinguishing characters due to narrow spacing between MRZ lines in some documents.
 
-   Since the aspect ratio of the MRZ region doesn’t vary much, we can crop the whole MRZ area and recognize it in one go. In this case, transformer-based models are especially suitable for solving this problem.
+   :::tip
+   If you're interested in the related papers, you can refer to the articles we've previously read:
 
-   For example, if you use a Transformer Encoder structure, the model design could look like this:
+   - [**[15.07] CRNN: I Want It All!**](https://docsaid.org/en/papers/text-recognition/crnn/)
+   - [**[23.05] CLIP4STR: The Blessing of Multimodality**](https://docsaid.org/en/papers/text-recognition/clip4str/)
+     :::
+
+---
+
+2. **Recognize the entire MRZ cropped image at once:**
+
+   Since the aspect ratio of the MRZ area is not significantly different, we can crop the entire MRZ area and recognize the entire image at once. This situation is particularly suitable for using Transformer-based models to solve the problem.
+
+   For example, if you only use the Transformer Encoder architecture, the model design can look like this:
 
     <div align="center">
     <figure style={{"width": "50%"}}>
@@ -94,24 +103,30 @@ At this stage, there are a couple of design options:
     </figure>
     </div>
 
-   Due to the self-attention mechanism, there could be multiple tokens pointing to the same character. Using a typical decoding method could confuse the model—why should it decode one character's image into another character?
+   Due to the self-attention mechanism, multiple Tokens may point to the same character in the image, which may confuse the model if a typical decoding approach is used:
 
-   Using CTC for text decoding works better here because each token corresponds to a part of the image related to a specific character. In the final stage, we just need to merge the outputs to get the final text result.
+   > It's clearly the image of this character, why should it be decoded as another character?
+
+   Based on our experiments, using CTC for text decoding yields better results in this case, because each Token originates from an image area of "a particular" character, and we just need to merge the outputs at the final stage to get the final text result.
 
    ***
 
-   If you don’t like CTC and find it cumbersome, you can use an Encoder-Decoder architecture instead, where the model design would look like this:
+   Of course, if you dislike CTC and think it’s a hassle, you could consider adopting an Encoder-Decoder architecture. The model design could look like this:
 
     <figure>
     ![Transformer Encoder-Decoder](./resources/img7.jpg)
     </figure>
 
-   This approach allows direct string decoding without needing CTC since the tokens fed into the Decoder are text queries, and each token is responsible for finding the corresponding character in sequence.
+   This approach allows direct string decoding without the need for an additional CTC layer, because the tokens input to the Decoder are queries for the characters, and each token is responsible for finding the corresponding character in the correct order.
 
    :::tip
-   The Decoder here can output in parallel; autoregressive decoding is unnecessary. Autoregressive decoding is typically used when each prediction depends on the previous one.
+   The Decoder here can output in parallel, without needing an autoregressive approach.
 
-   In this case, the character predicted at the first position doesn’t affect the second position. They’re independent, as all relevant information is already present in the Encoder output. The Decoder’s job is simply to query and retrieve it.
+   Upon further reflection, the reason we use autoregression is that we need to "base the next prediction on the previous prediction." However, in this case, such operations are clearly unnecessary.
+
+   Each MRZ character is independent, and the prediction for the first position does not affect the prediction for the second position. All the necessary information is already present in the Encoder’s output, and the Decoder's job is merely to query and retrieve the correct sequence.
+
+   Of course, simply talking about it isn't enough; we have also tested both parallel output and autoregressive training methods, and the result shows that parallel output converges faster, achieves better performance, and generalizes better.
    :::
 
 ### Error Propagation

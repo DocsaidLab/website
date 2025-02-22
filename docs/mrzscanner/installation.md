@@ -66,7 +66,7 @@ sidebar_position: 2
 
 ```bash
 python -c "import mrzscanner; print(mrzscanner.__version__)"
-# >>> 1.0.0
+# >>> 1.0.6
 ```
 
-如果你看到類似 `1.0.0` 的版本號，則表示安裝成功。
+如果你看到類似 `1.0.6` 的版本號，則表示安裝成功。
