@@ -479,5 +479,21 @@
   "homepage.latestBlogPostsTitle": {
     "message": "最新のブログ記事",
     "description": "Title for homepage latest blog posts"
+  },
+  "homepage.featuredProjectsTitle": {
+    "message": "注目のプロジェクト",
+    "description": "Title for homepage featured projects"
+  },
+  "homepage.learnMore": {
+    "message": "もっと詳しく",
+    "description": "Title for homepage featured projects"
+  },
+  "homepage.testimonialsTitle": {
+    "message": "お客様の声",
+    "description": "Title for homepage featured projects"
+  },
+  "homepage.loadMore": {
+    "message": "もっと読む",
+    "description": "Title for homepage featured projects"
   }
 }

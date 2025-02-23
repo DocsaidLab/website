@@ -487,5 +487,21 @@
   "theme.blog.author.noPosts": {
     "message": "This author has not written any posts yet.",
     "description": "The text for authors with 0 blog post"
+  },
+  "homepage.featuredProjectsTitle": {
+    "message": "Featured Projects",
+    "description": "Title for homepage featured projects"
+  },
+  "homepage.learnMore": {
+    "message": "Learn More...",
+    "description": "Title for homepage featured projects"
+  },
+  "homepage.testimonialsTitle": {
+    "message": "Testimonials",
+    "description": "Title for homepage featured projects"
+  },
+  "homepage.loadMore": {
+    "message": "Load More",
+    "description": "Title for homepage featured projects"
   }
 }

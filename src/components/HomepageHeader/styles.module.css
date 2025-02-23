@@ -1,0 +1,84 @@
+.heroBanner {
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.3)
+      ),
+      url("https://picsum.photos/1920/1080");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #ffffff;
+    position: relative;
+    text-align: center;
+    padding: 6rem 1rem 4rem;
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .heroBanner {
+      background-attachment: scroll;
+    }
+  }
+
+  .heroInner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .heroTitle {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+
+  .heroSubtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    color: #f5f5f5;
+  }
+
+  .buttons .button {
+    border-radius: 2rem;
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+    transition: background 0.3s ease;
+  }
+
+  .buttons .button.button--secondary {
+    background: #ffffff;
+    color: var(--ifm-color-primary) !important;
+    border: none;
+  }
+
+  .buttons .button.button--secondary:hover {
+    background: var(--ifm-color-primary-light);
+    color: #ffffff !important;
+  }
+
+  /* Scroll Down箭頭 */
+  .scrollDownArrow {
+    font-size: 2rem;
+    margin-top: 3rem;
+    cursor: pointer;
+    animation: arrow-bounce 1.5s infinite;
+    user-select: none;
+  }
+
+  @keyframes arrow-bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+    100% { transform: translateY(0); }
+  }
+
+  /* 波浪SVG分隔 */
+  .heroWave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: translateY(99%);
+  }
