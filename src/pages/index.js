@@ -1,10 +1,11 @@
+// index.js
 import Link from '@docusaurus/Link';
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import { Timeline } from 'antd';
-import { motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 
 import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo/DocAlignerDemoWrapper';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
@@ -16,17 +17,15 @@ import testimonialsData from '@site/src/data/testimonialsData';
 
 import styles from './index.module.css';
 
-// -- 1) 定義父容器 (container) 與 子元素 (item) 的 variants --
+// -- Timeline 交錯進入 variants --
 const containerVariants = {
-  hidden: {}, // 可以空著，代表尚未顯示
+  hidden: {},
   show: {
     transition: {
-      // 讓子元素交錯進入
       staggerChildren: 0.15,
     },
   },
 };
-
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   show: {
@@ -36,55 +35,7 @@ const itemVariants = {
   },
 };
 
-// -- 2) 精選作品：交錯進入範例 --
-function StaggeredFeaturedProjects({ projects }) {
-  return (
-    <motion.section
-      className={styles.sectionBox}
-      // 父容器，用 containerVariants
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
-      // 一次就好，捲動多少高度算進入
-    >
-      <motion.div variants={itemVariants}>
-        <h2 className={styles.sectionTitle}>
-          <Translate id="homepage.featuredProjectsTitle">精選作品</Translate>
-        </h2>
-      </motion.div>
-
-      {/* 作品列表容器，也用 containerVariants，讓底下 card 逐個進場 */}
-      <motion.div
-        className={styles.projectsGrid}
-        variants={containerVariants}
-      >
-        {projects.map((proj, idx) => (
-          <motion.div
-            key={idx}
-            className={styles.projectCard}
-            variants={itemVariants}
-          >
-            <img
-              src={proj.image}
-              alt={proj.title}
-              className={styles.projectImage}
-            />
-            <div className={styles.projectContent}>
-              <h3>{proj.title}</h3>
-              <p>{proj.description}</p>
-              <Link className={styles.projectLink} to={proj.link}>
-                <Translate id="homepage.learnMore">了解更多 →</Translate>
-              </Link>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
-    </motion.section>
-  );
-}
-
-// -- 3) Timeline 區塊：交錯進入範例 --
+// -- Timeline 區塊：交錯進入 --
 function StaggeredTimeline({ recentUpdates, visibleCount, setVisibleCount, convertMdLinkToRoute }) {
   return (
     <motion.section
@@ -106,7 +57,6 @@ function StaggeredTimeline({ recentUpdates, visibleCount, setVisibleCount, conve
             const finalRoute = convertMdLinkToRoute(item.link);
             return (
               <Timeline.Item key={idx} label={item.date}>
-                {/* 每項 Timeline 也可用 itemVariants 讓文字淡入 */}
                 <motion.div variants={itemVariants}>
                   <Link to={finalRoute} className={styles.timelineLink}>
                     {item.combinedTitle}
@@ -129,7 +79,7 @@ function StaggeredTimeline({ recentUpdates, visibleCount, setVisibleCount, conve
   );
 }
 
-// -- 4) Testimonials 區塊：交錯進入範例 --
+// -- Testimonials 區塊：交錯進入 --
 function StaggeredTestimonials({ testimonialsData }) {
   return (
     <motion.section
@@ -164,7 +114,158 @@ function StaggeredTestimonials({ testimonialsData }) {
   );
 }
 
-// -------------------------------------------------------------------------
+// -- 核心：有自動橫向捲動、Hover 停止、左右箭頭控制 --
+export default function AutoScrollingProjects({ projects }) {
+  // 卡片資料重複一次，形成「無縫銜接」
+  const scrollingItems = [...projects, ...projects];
+
+  // Framer Motion 控制 & 追蹤實際位移 x
+  const controls = useAnimation();
+  const xRef = useRef(0);
+
+  // 追蹤整個 track 寬度 (2倍內容的總寬)
+  const trackRef = useRef(null);
+  const [trackWidth, setTrackWidth] = useState(0);
+
+  // 可自行調整自動捲動速度：數值越大，捲動越慢
+  const AUTO_SCROLL_DURATION = 40;
+
+  // 幫助把 offset 限制在 [-half, 0) 之間
+  // 例如：x = -2500 時，若 half=2000，則 -2500 % 2000 = -500；剛好在 [-2000, 0) 之間
+  // 再進一步若為正，則再減掉 half，確保最終落在 [-half, 0)
+  function clampOffset(offset, half) {
+    let r = offset % half; // JS % 會有正負之分
+    if (r > 0) {
+      r = r - half;
+    }
+    return r;
+  }
+
+  // 圖片載入完後，量 trackWidth
+  useEffect(() => {
+    if (scrollingItems.length === 0) return;
+    let loadedCount = 0;
+    scrollingItems.forEach((proj) => {
+      const img = new Image();
+      img.src = proj.image;
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === scrollingItems.length && trackRef.current) {
+          setTrackWidth(trackRef.current.scrollWidth);
+        }
+      };
+    });
+  }, [scrollingItems]);
+
+  // trackWidth > 0後，啟動自動捲動
+  useEffect(() => {
+    if (trackWidth > 0) {
+      startAutoScroll();
+    }
+  }, [trackWidth]);
+
+  // 開始自動捲動 (無縫、無限)
+  const startAutoScroll = () => {
+    if (!trackWidth) return;
+    const half = trackWidth / 2;
+
+    // 1) 先把 xRef.current 校正到 [-half, 0)
+    xRef.current = clampOffset(xRef.current, half);
+
+    // 2) 先用 controls.set() 讓畫面瞬間跳到校正後的位置
+    controls.set({ x: xRef.current });
+
+    // 3) 接著從該位置開始動畫，往左移動 half 的距離
+    //    repeat: Infinity 表示無限次數，repeatType: 'loop' 會循環往同一方向跑
+    controls.start({
+      x: [xRef.current, xRef.current - half],
+      transition: {
+        duration: AUTO_SCROLL_DURATION,
+        ease: 'linear',
+        repeat: Infinity,
+        repeatType: 'loop',
+      },
+    });
+  };
+
+  // 停止自動捲動
+  const stopAutoScroll = () => {
+    controls.stop();
+  };
+
+  // 左右按鈕暫停 & 移動 300px
+  const handleArrowLeft = () => {
+    stopAutoScroll();
+    controls.start({
+      x: xRef.current + 300,
+      transition: { duration: 0.6, ease: 'easeOut' },
+    });
+  };
+
+  const handleArrowRight = () => {
+    stopAutoScroll();
+    controls.start({
+      x: xRef.current - 300,
+      transition: { duration: 0.6, ease: 'easeOut' },
+    });
+  };
+
+  return (
+    <section className={styles.sectionBox}>
+      <h2 className={styles.sectionTitle}>
+        <Translate id="homepage.featuredProjectsTitle">精選作品</Translate>
+      </h2>
+
+      <div
+        className={styles.projectsMarqueeOuter}
+        onMouseLeave={startAutoScroll}
+      >
+        {/* 左箭頭 */}
+        <button
+          className={`${styles.arrowButton} ${styles.arrowLeft}`}
+          onClick={handleArrowLeft}
+        >
+          ‹
+        </button>
+
+        {/* 內層 track：onUpdate 能即時拿到最新 x */}
+        <motion.div
+          className={styles.projectsMarqueeTrack}
+          ref={trackRef}
+          animate={controls}
+          onUpdate={(latest) => {
+            xRef.current = latest.x; // 同步記錄當前 x
+          }}
+        >
+          {scrollingItems.map((proj, idx) => (
+            <div key={idx} className={styles.projectCardMarquee}>
+              <img
+                src={proj.image}
+                alt={proj.title}
+                className={styles.projectImageMarquee}
+              />
+              <div className={styles.projectContentMarquee}>
+                <h3>{proj.title}</h3>
+                <p>{proj.description}</p>
+                <Link className={styles.projectLink} to={proj.link}>
+                  <Translate id="homepage.learnMore">了解更多 →</Translate>
+                </Link>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* 右箭頭 */}
+        <button
+          className={`${styles.arrowButton} ${styles.arrowRight}`}
+          onClick={handleArrowRight}
+        >
+          ›
+        </button>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   const { siteConfig, i18n } = useDocusaurusContext();
@@ -172,8 +273,10 @@ export default function Home() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [visibleCount, setVisibleCount] = useState(5);
 
-  // 載入對應語系
+  // 依照語系載入 featuredProjects
   const currentProjects = featuredProjectsData[currentLocale] || featuredProjectsData['en'];
+
+  // 依照語系載入 recentUpdates
   let recentUpdates;
   if (currentLocale === 'zh-hant') {
     recentUpdates = require('@site/papers/recent_updates_data.json');
@@ -186,7 +289,7 @@ export default function Home() {
   }
   const localeContent = demoContent[currentLocale] || demoContent['en'];
 
-  // 監聽捲動，顯示「回到頂端」按鈕
+  // 回到頂端按鈕
   useEffect(() => {
     const handleScroll = () => {
       setShowBackToTop(window.scrollY > 300);
@@ -208,19 +311,18 @@ export default function Home() {
 
   return (
     <Layout title={`Hello from ${siteConfig.title}`} description="Description">
-      {/* Hero 區塊 (保留原先) */}
       <HomepageHeader siteTitle={siteConfig.title} siteTagline={siteConfig.tagline} />
 
       <main className={styles.mainWrapper}>
-        {/* Features 用原本 FadeIn 或繼續使用 itemVariants 皆可。 這裡保留 FadeIn 說明 */}
+        {/* Features */}
         <section className={styles.sectionBox}>
           <HomepageFeatures />
         </section>
 
-        {/* 精選作品：交錯進入 */}
-        <StaggeredFeaturedProjects projects={currentProjects} />
+        {/* 改為帶箭頭 & Hover 暫停的自動橫向捲動 */}
+        <AutoScrollingProjects projects={currentProjects} />
 
-        {/* Timeline：交錯進入 */}
+        {/* Timeline: 交錯進入 */}
         <StaggeredTimeline
           recentUpdates={recentUpdates}
           visibleCount={visibleCount}
@@ -228,7 +330,7 @@ export default function Home() {
           convertMdLinkToRoute={convertMdLinkToRoute}
         />
 
-        {/* DocAligner Demo：示範容器+子項目簡易交錯 */}
+        {/* DocAligner Demo：保留交錯進入 */}
         <motion.section
           className={styles.sectionBox}
           variants={containerVariants}
@@ -240,7 +342,6 @@ export default function Home() {
             <h2 className={styles.sectionTitle}>{localeContent.title}</h2>
           </motion.div>
 
-          {/* 依情況可對 <p> 也使用 itemVariants */}
           <motion.div variants={itemVariants} className={styles.demoDescription}>
             {localeContent.description.split('\n').map((line, i) => (
               <p key={i}>{line}</p>
@@ -252,11 +353,10 @@ export default function Home() {
           </motion.div>
         </motion.section>
 
-        {/* 讀者回饋：交錯進入 */}
+        {/* Testimonials: 交錯進入 */}
         <StaggeredTestimonials testimonialsData={testimonialsData} />
       </main>
 
-      {/* 回到頂端按鈕 */}
       {showBackToTop && (
         <button className={styles.backToTopBtn} onClick={scrollToTop}>
           ⬆

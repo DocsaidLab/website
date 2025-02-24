@@ -450,7 +450,7 @@
     "description": "Title for the open source projects feature"
   },
   "homepage.feature.description1": {
-    "message": "Explore our open-source projects and join us in advancing AI technology through innovation and community collaboration.",
+    "message": "Explore our open-source projects and drive AI innovation with us.",
     "description": "Description for the open source projects feature"
   },
   "homepage.feature.title2": {
@@ -458,7 +458,7 @@
     "description": "Title for the technical documentation feature"
   },
   "homepage.feature.description2": {
-    "message": "We provide detailed insights into our open-source projects to help developers understand our vision and enhance the development process's efficiency.",
+    "message": "We share insights to clarify our vision and enhance development.",
     "description": "Description for the technical documentation feature"
   },
   "homepage.feature.title3": {
@@ -466,7 +466,7 @@
     "description": "Title for the paper notes feature"
   },
   "homepage.feature.description3": {
-    "message": "We document our thoughts and insights while reading research papers, offering a glimpse into our thinking process and key takeaways through these notes.",
+    "message": "We share notes to reveal our thoughts  from research papers.",
     "description": "Description for the paper notes feature"
   },
   "homepage.button1": {
@@ -493,7 +493,7 @@
     "description": "Title for homepage featured projects"
   },
   "homepage.learnMore": {
-    "message": "Learn More...",
+    "message": "Learn More",
     "description": "Title for homepage featured projects"
   },
   "homepage.testimonialsTitle": {

@@ -8,7 +8,7 @@
     "description": "Title for the open source projects feature"
   },
   "homepage.feature.description1": {
-    "message": "私たちのオープンソースプロジェクトを探索し、AI 技術の進歩とイノベーションを共に推進しましょう。コミュニティの力を通じて共に成長することを目指しています。",
+    "message": "オープンソースを探索し、共にAIを推進しましょう。",
     "description": "Description for the open source projects feature"
   },
   "homepage.feature.title2": {
@@ -16,7 +16,7 @@
     "description": "Title for the technical documentation feature"
   },
   "homepage.feature.description2": {
-    "message": "私たちのオープンソースプロジェクトに関する詳細な知見を提供し、開発者が私たちの考えを理解し、開発プロセスをスムーズに進められるよう支援します。",
+    "message": "私たちのオープンソースの知見を提供し、開発を支援します。",
     "description": "Description for the technical documentation feature"
   },
   "homepage.feature.title3": {
@@ -24,7 +24,7 @@
     "description": "Title for the paper notes feature"
   },
   "homepage.feature.description3": {
-    "message": "論文を読む際の感想や見解を記録しています。これらのノートを通じて、私たちの思考プロセスや重要な要点を共有します。",
+    "message": "論文の感想や見解を記録し、思考プロセスと要点を共有します。",
     "description": "Description for the paper notes feature"
   },
   "theme.blog.paginator.navAriaLabel": {
