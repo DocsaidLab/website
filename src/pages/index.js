@@ -42,8 +42,7 @@ function StaggeredTimeline({ recentUpdates, visibleCount, setVisibleCount, conve
       className={styles.sectionBox}
       variants={containerVariants}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
+      animate="show"
     >
       <motion.div variants={itemVariants}>
         <h2 className={styles.sectionTitle}>
@@ -51,8 +50,9 @@ function StaggeredTimeline({ recentUpdates, visibleCount, setVisibleCount, conve
         </h2>
       </motion.div>
 
+      {/* 給 Timeline 加 key，確保每次載入更多都會重繪 */}
       <motion.div variants={containerVariants}>
-        <Timeline mode="alternate">
+        <Timeline mode="alternate" key={visibleCount}>
           {recentUpdates.slice(0, visibleCount).map((item, idx) => {
             const finalRoute = convertMdLinkToRoute(item.link);
             return (
@@ -78,6 +78,7 @@ function StaggeredTimeline({ recentUpdates, visibleCount, setVisibleCount, conve
     </motion.section>
   );
 }
+
 
 // -- Testimonials 區塊：交錯進入 --
 function StaggeredTestimonials({ testimonialsData }) {
@@ -115,7 +116,7 @@ function StaggeredTestimonials({ testimonialsData }) {
 }
 
 // -- 核心：有自動橫向捲動、Hover 停止、左右箭頭控制 --
-export default function AutoScrollingProjects({ projects }) {
+export function AutoScrollingProjects({ projects }) {
   // 卡片資料重複一次，形成「無縫銜接」
   const scrollingItems = [...projects, ...projects];
 
@@ -128,13 +129,11 @@ export default function AutoScrollingProjects({ projects }) {
   const [trackWidth, setTrackWidth] = useState(0);
 
   // 可自行調整自動捲動速度：數值越大，捲動越慢
-  const AUTO_SCROLL_DURATION = 40;
+  const AUTO_SCROLL_DURATION = 80;
 
   // 幫助把 offset 限制在 [-half, 0) 之間
-  // 例如：x = -2500 時，若 half=2000，則 -2500 % 2000 = -500；剛好在 [-2000, 0) 之間
-  // 再進一步若為正，則再減掉 half，確保最終落在 [-half, 0)
   function clampOffset(offset, half) {
-    let r = offset % half; // JS % 會有正負之分
+    let r = offset % half;
     if (r > 0) {
       r = r - half;
     }
@@ -176,7 +175,6 @@ export default function AutoScrollingProjects({ projects }) {
     controls.set({ x: xRef.current });
 
     // 3) 接著從該位置開始動畫，往左移動 half 的距離
-    //    repeat: Infinity 表示無限次數，repeatType: 'loop' 會循環往同一方向跑
     controls.start({
       x: [xRef.current, xRef.current - half],
       transition: {
@@ -234,7 +232,7 @@ export default function AutoScrollingProjects({ projects }) {
           ref={trackRef}
           animate={controls}
           onUpdate={(latest) => {
-            xRef.current = latest.x; // 同步記錄當前 x
+            xRef.current = latest.x;
           }}
         >
           {scrollingItems.map((proj, idx) => (
