@@ -53,44 +53,13 @@ MIDV-2020 是個開源資料集，裡面有許多文件圖片，可以用來測�
 如果你有需要，可以從這裡下載：[**MIDV-2020 Download**](http://l3i-share.univ-lr.fr/MIDV2020/midv2020.html)
 :::
 
-import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo/DocAlignerDemoWrapper';
+import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo';
+import demoContent from '@site/src/data/demoContent';
 
-<DocAlignerDemoWrapper
-titleStage1="測試圖片"
-titleStage2="模型展示"
-chooseFileLabel="選擇檔案"
-uploadButtonLabel="上傳並預測"
-downloadButtonLabel="下載預測結果"
-clearButtonLabel="清除結果"
-processingMessage="正在處理，請稍候..."
-errorMessage={{
-    chooseFile: "請選擇一個檔案",
-    invalidFileType: "僅支援 JPG、PNG、Webp 格式的圖片",
-    networkError: "網路錯誤，請稍後再試。",
-    uploadError: "發生錯誤，請稍後再試。"
-  }}
-warningMessage={{
-    noPolygon: "沒有檢測到四個角點，模型可能不認識這種文件類型。",
-    imageTooLarge: "圖片太大，可能會導致瀏覽器故障。"
-  }}
-imageInfoTitle="圖像資訊"
-inferenceInfoTitle="模型推論資訊"
-polygonInfoTitle="偵測結果"
-inferenceTimeLabel="推論時間"
-timestampLabel="時間戳"
-fileNameLabel="檔案名稱"
-fileSizeLabel="檔案大小"
-fileTypeLabel="檔案類型"
-imageSizeLabel="圖像尺寸"
-TransformedTitle="攤平圖像"
-TransformedWidthLabel="輸出寬度"
-TransformedHeightLabel="輸出高度"
-TransformedButtonLabel="下載攤平圖像"
-defaultImages={[
-{ src: '/img/docalign-demo/000025.jpg', description: '文字干擾' },
-{ src: '/img/docalign-demo/000121.jpg', description: '部分遮擋' },
-{ src: '/img/docalign-demo/000139.jpg', description: '強烈反光' },
-{ src: '/img/docalign-demo/000169.jpg', description: '昏暗場景' },
-{ src: '/img/docalign-demo/000175.jpg', description: '高度歪斜' },
-]}
-/>
+export function Demo() {
+const currentLocale = 'zh-hant';
+const localeContent = demoContent[currentLocale];
+return <DocAlignerDemoWrapper {...localeContent.docAlignerProps} />;
+}
+
+<Demo />

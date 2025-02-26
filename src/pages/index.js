@@ -7,7 +7,7 @@ import { Timeline } from 'antd';
 import { motion, useAnimation } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 
-import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo/DocAlignerDemoWrapper';
+import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import HomepageHeader from '@site/src/components/HomepageHeader';
 

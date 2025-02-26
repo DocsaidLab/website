@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import DocAlignerDemo from './DocAlignerDemo';
-import styles from './DocAlignerDemo.module.css';
-
+import styles from './styles.module.css';
 
 const DocAlignerDemoWrapper = ({
   titleStage1,

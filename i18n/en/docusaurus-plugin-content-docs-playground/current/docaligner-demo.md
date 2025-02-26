@@ -53,44 +53,13 @@ MIDV-2020 is an open-source dataset containing many document images, perfect for
 If needed, you can download it here: [**MIDV-2020 Download**](http://l3i-share.univ-lr.fr/MIDV2020/midv2020.html)
 :::
 
-import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo/DocAlignerDemoWrapper';
+import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo';
+import demoContent from '@site/src/data/demoContent';
 
-<DocAlignerDemoWrapper
-titleStage1="Test Images"
-titleStage2="Demo"
-chooseFileLabel="Select File"
-uploadButtonLabel="Upload and Predict"
-downloadButtonLabel="Download Prediction Results"
-clearButtonLabel="Clear Results"
-processingMessage="Processing, please wait..."
-errorMessage={{
-    chooseFile: "Please select a file",
-    invalidFileType: "Only JPG, PNG, Webp images are supported",
-    networkError: "Network error, please try again later.",
-    uploadError: "An error occurred, please try again later."
-  }}
-warningMessage={{
-    noPolygon: "No four corners detected. The model might not recognize this document type.",
-    imageTooLarge: "The image is too large and may cause the browser to crash."
-  }}
-imageInfoTitle="Image Information"
-inferenceInfoTitle="Model Inference Information"
-polygonInfoTitle="Detection Results"
-inferenceTimeLabel="Inference Time"
-timestampLabel="Timestamp"
-fileNameLabel="File Name"
-fileSizeLabel="File Size"
-fileTypeLabel="File Type"
-imageSizeLabel="Image Size"
-TransformedTitle="Transformed Image"
-TransformedWidthLabel="Output Width"
-TransformedHeightLabel="Output Height"
-TransformedButtonLabel="Download Transformed Image"
-defaultImages={[
-{ src: '/en/img/docalign-demo/000025.jpg', description: 'Text Interference' },
-{ src: '/en/img/docalign-demo/000121.jpg', description: 'Partial Occlusion' },
-{ src: '/en/img/docalign-demo/000139.jpg', description: 'Strong Reflection' },
-{ src: '/en/img/docalign-demo/000169.jpg', description: 'Low Light Scene' },
-{ src: '/en/img/docalign-demo/000175.jpg', description: 'Highly Skewed' },
-]}
-/>
+export function Demo() {
+const currentLocale = 'en';
+const localeContent = demoContent[currentLocale];
+return <DocAlignerDemoWrapper {...localeContent.docAlignerProps} />;
+}
+
+<Demo />
