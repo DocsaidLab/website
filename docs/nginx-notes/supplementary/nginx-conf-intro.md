@@ -177,7 +177,7 @@ http {...}
   - **`include /etc/nginx/mime.types;`**：
   - 載入 `mime.types` 檔案，設定不同類型文件的 `Content-Type` 回應標頭。
   - **`default_type application/octet-stream;`**：
-  - 設定默認的 `Content-Type`，如果無法識別檔案類型則回應 `application/octet-stream`。
+  - 設定默認的 `Content-Type`，如果無法辨識檔案類型則回應 `application/octet-stream`。
 
 - **SSL 設定**
 

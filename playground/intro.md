@@ -8,7 +8,9 @@ sidebar_position: 1
 
 這裡是我用來展示和測試模型的地方。雖然目前只有一個 Demo，但隨著時間推移，會陸續增加更多有趣的模型供大家玩耍。
 
-- [**DocAligner Demo**](./docaligner-demo.md) – 這是一個可以自動對齊文件影像的工具，快來試試看！
+- [**DocAligner Demo**](./docaligner-demo.md) – 這是一個用來定位文件四個角點的工具，方便你對文件進行後續處理。
+- [**MRZScanner Demo**](./mrzscanner-demo.md) – 這是一個針對 MRZ 區域的 OCR 應用。
+- [**StockAnalysis Demo**](./stock-demo.md) – 這是一個股票分析工具，雖然現在還排不出時間，但未來會加入更多功能。
 
 ## 溫馨提示
 

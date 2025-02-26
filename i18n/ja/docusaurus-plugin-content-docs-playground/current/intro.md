@@ -8,7 +8,9 @@ sidebar_position: 1
 
 ここは、モデルを展示し、テストするための場所です。現在は 1 つのデモしかありませんが、時間が経つにつれて、さらに面白いモデルを追加していく予定です。
 
-- [**DocAligner デモ**](./docaligner-demo.md) – これはドキュメントの画像を自動的に整列させるツールです。ぜひ試してみてください！
+- [**DocAligner Demo**](./docaligner-demo.md) – これは文書の 4 つの角点を特定するツールで、後処理を行うために便利です。
+- [**MRZScanner Demo**](./mrzscanner-demo.md) – これは MRZ 領域向けの OCR アプリケーションです。
+- [**StockAnalysis Demo**](./stock-demo.md) – これは株式分析ツールで、現在は時間の都合で機能追加が難しいですが、今後さらに多くの機能を追加する予定です。
 
 ## ご案内
 

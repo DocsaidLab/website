@@ -8,7 +8,9 @@ Now that the models are built, it's time to showcase their capabilities!
 
 This is where I demonstrate and test the models. Currently, there's only one demo available, but more exciting models will be added over time for you to explore and play with.
 
-- [**DocAligner Demo**](./docaligner-demo.md) – This is a tool that automatically aligns document images. Give it a try!
+- [**DocAligner Demo**](./docaligner-demo.md) – This is a tool for locating the four corners of a document, helping you with subsequent processing.
+- [**MRZScanner Demo**](./mrzscanner-demo.md) – This is an OCR application specifically for the MRZ region.
+- [**StockAnalysis Demo**](./stock-demo.md) – This is a stock analysis tool. Although we haven't found time to complete it yet, more features will be added in the future.
 
 ## A Friendly Reminder
 
