@@ -503,5 +503,21 @@
   "homepage.loadMore": {
     "message": "Load More",
     "description": "Title for homepage featured projects"
+  },
+  "homepage.demoTitle": {
+    "message": "Showcase",
+    "description": "功能展示 for homepage featured projects"
+  },
+  "homepage.demoIntro": {
+    "message": "The following shows running demonstrations of DocAligner for document alignment, and MRZScanner for identifying machine-readable areas.",
+    "description": "功能描述 for homepage featured projects"
+  },
+  "homepage.docAlignerDemoDesc": {
+    "message": "Upload the image containing the file and try to detect the corners and complete the perspective correction.",
+    "description": "docAlignerDemoDesc for homepage featured projects"
+  },
+  "homepage.mrzScannerDemoDesc": {
+    "message": "Upload the image containing the MRZ area and try to detect the MRZ area.",
+    "description": "mrzScannerDemoDesc for homepage featured projects"
   }
 }

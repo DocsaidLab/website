@@ -495,5 +495,21 @@
   "homepage.loadMore": {
     "message": "もっと読む",
     "description": "Title for homepage featured projects"
+  },
+  "homepage.demoTitle": {
+    "message": "ショーケース",
+    "description": "機能展示 for homepage featured projects"
+  },
+  "homepage.demoIntro": {
+    "message": "以下は、文書アライメントのためのDocAlignerと、機械可読領域を識別するMRZScannerのデモを実行しています。",
+    "description": "機能描述 for homepage featured projects"
+  },
+  "homepage.docAlignerDemoDesc": {
+    "message": "ファイルを含む画像をアップロードし、コーナーを検出して透視補正を完了させてみてください。",
+    "description": "docAlignerDemoDesc for homepage featured projects"
+  },
+  "homepage.mrzScannerDemoDesc": {
+    "message": "MRZ領域を含む画像をアップロードし、MRZ領域を検出してみてください。",
+    "description": "mrzScannerDemoDesc for homepage featured projects"
   }
 }

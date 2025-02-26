@@ -3,16 +3,18 @@ import Link from '@docusaurus/Link';
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import { Timeline } from 'antd';
+import { Card, Col, Row, Timeline } from 'antd';
 import { motion, useAnimation } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 
 import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import HomepageHeader from '@site/src/components/HomepageHeader';
+import MRZScannerDemoWrapper from '@site/src/components/MRZScannerDemo';
 
 import demoContent from '@site/src/data/demoContent';
 import featuredProjectsData from '@site/src/data/featuredProjectsData';
+import mrzdemoContent from '@site/src/data/mrzdemoContent';
 import testimonialsData from '@site/src/data/testimonialsData';
 
 import styles from './index.module.css';
@@ -273,6 +275,7 @@ export default function Home() {
 
   // 依照語系載入 featuredProjects
   const currentProjects = featuredProjectsData[currentLocale] || featuredProjectsData['en'];
+  const localeMrz = mrzdemoContent[currentLocale] || mrzdemoContent['en'];
 
   // 依照語系載入 recentUpdates
   let recentUpdates;
@@ -337,17 +340,55 @@ export default function Home() {
           viewport={{ once: true, amount: 0.2 }}
         >
           <motion.div variants={itemVariants}>
-            <h2 className={styles.sectionTitle}>{localeContent.title}</h2>
+            <h2 className={styles.sectionTitle}>
+              <Translate id="homepage.demoTitle">功能展示</Translate>
+            </h2>
           </motion.div>
 
+          {/* 這裡可放一段總體描述，如想省略可移除 */}
           <motion.div variants={itemVariants} className={styles.demoDescription}>
-            {localeContent.description.split('\n').map((line, i) => (
-              <p key={i}>{line}</p>
-            ))}
+            <p>
+              <Translate id="homepage.demoIntro">
+                下方展示兩種模型的運行示範：DocAligner 用於文件對齊，MRZScanner 用於辨識機器可判讀區。
+              </Translate>
+            </p>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
-            <DocAlignerDemoWrapper {...localeContent.docAlignerProps} />
+          <motion.div variants={itemVariants} style={{ marginTop: '1.5rem' }}>
+            <Row gutter={[24, 24]}>
+              {/* 左欄：DocAligner 卡片 */}
+              <Col md={12} xs={24}>
+                <Card className={styles.demoCard}>
+                  {/* 自訂標題 */}
+                  <h3 style={{ marginBottom: '0.5rem', fontSize: '1.25rem' }}>
+                    <Translate id="homepage.docAlignerDemoTitle">DocAligner Demo</Translate>
+                  </h3>
+                  {/* 自訂描述 */}
+                  <p style={{ marginBottom: '1rem' }}>
+                    <Translate id="homepage.docAlignerDemoDesc">
+                      上傳含有文件的圖片，並嘗試檢測角點、完成透視校正。
+                    </Translate>
+                  </p>
+                  {/* Demo 元件本身 */}
+                  <DocAlignerDemoWrapper {...localeContent.docAlignerProps} />
+                </Card>
+              </Col>
+
+              {/* 右欄：MRZScanner 卡片 */}
+              <Col md={12} xs={24}>
+                <Card className={styles.demoCard}>
+                  <h3 style={{ marginBottom: '0.5rem', fontSize: '1.25rem' }}>
+                    <Translate id="homepage.mrzScannerDemoTitle">MRZScanner Demo</Translate>
+                  </h3>
+                  <p style={{ marginBottom: '1rem' }}>
+                    <Translate id="homepage.mrzScannerDemoDesc">
+                      上傳含 MRZ(機器可判讀區) 的圖片，偵測並解析其中的文字內容。
+                    </Translate>
+                  </p>
+                  <MRZScannerDemoWrapper {...localeMrz.mrzScannerProps} />
+                </Card>
+              </Col>
+            </Row>
           </motion.div>
         </motion.section>
 
