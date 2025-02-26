@@ -191,3 +191,30 @@ This article will be continuously updated.
   ```
 
   Setting `fetch-depth: 0` will solve the problem.
+
+## 8. Checking Error Logs in a Docker Container
+
+- **Description**
+
+  A service is running inside a Docker container, but it encounters an error and fails to function properly. It is necessary to check the error logs.
+
+- **Solution**
+
+  First, identify the target container's ID:
+
+  ```bash
+  docker ps
+  ```
+
+  Then, access the container and check the logs:
+
+  ```bash
+  docker exec -it container_id /bin/bash
+  cat /path/to/logfile
+  ```
+
+  Alternatively, view the logs directly:
+
+  ```bash
+  docker logs container_id
+  ```

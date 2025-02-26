@@ -19,7 +19,7 @@ description: 簡単な問題とその解決方法を記録。
 
 ## 1. `npx docusaurus start` を実行した際に以下のエラーが発生
 
-- **エラーメッセージ：**
+- **説明：**
 
   ```bash
   file:///home/user/workspace/blog/node_modules/@docusaurus/core/bin/docusaurus.mjs:30
@@ -40,7 +40,7 @@ description: 簡単な問題とその解決方法を記録。
 
 ## 2. choco コマンドが認識されない
 
-- **エラーメッセージ：**
+- **説明：**
 
   ```shell
   PS C:\Windows\System32> choco install git -y
@@ -65,7 +65,7 @@ description: 簡単な問題とその解決方法を記録。
 
 ## 3. Chocolatey のインストール失敗
 
-- **エラーメッセージ：**
+- **説明：**
 
   ```shell
   警告: An existing Chocolatey installation was detected. Installation will not continue. This script will not overwrite existing installations.
@@ -135,7 +135,7 @@ description: 簡単な問題とその解決方法を記録。
 
 ## 6. TurboJPEG で画像を読み込む際に警告が表示される
 
-- **説明**
+- **説明：**
 
   画像を読み込む際、以下のような警告メッセージが表示されます：
 
@@ -145,7 +145,7 @@ description: 簡単な問題とその解決方法を記録。
   turbojpeg.py:940: UserWarning: Corrupt JPEG data: premature end of data segment
   ```
 
-- **解決方法**
+- **解決方法：**
 
   見ていて煩わしいので、これらのデータをフィルタリングして除去します：
 
@@ -171,11 +171,11 @@ description: 簡単な問題とその解決方法を記録。
 
 ## 7. `Docusaurus` デプロイ後に `showLastUpdateTime: true` が機能しない
 
-- **説明**
+- **説明：**
 
   `docusaurus.config.js` に `showLastUpdateTime: true` と `showLastUpdateAuthor: true` を設定しましたが、デプロイ後、全ページで同じ時間と作者が表示されてしまう。
 
-- **解決方法**
+- **解決方法：**
 
   デプロイ時に分岐のチェックアウト設定が間違っていたため、`git` が正しく最終更新時間と作者を取得できませんでした。
 
@@ -189,3 +189,30 @@ description: 簡単な問題とその解決方法を記録。
   ```
 
   `fetch-depth: 0` を設定するだけで、この問題は解決します。
+
+## 8. Docker コンテナ内のエラーログを確認する
+
+- **説明：**
+
+  Docker コンテナ内でサービスを実行しているが、エラーが発生し正常に動作しないため、エラーログを確認する必要がある。
+
+- **解決方法：**
+
+  まず、対象のコンテナ ID を確認する：
+
+  ```bash
+  docker ps
+  ```
+
+  次に、コンテナ内に入ってログを確認する：
+
+  ```bash
+  docker exec -it container_id /bin/bash
+  cat /path/to/logfile
+  ```
+
+  または、直接ログを表示する：
+
+  ```bash
+  docker logs container_id
+  ```

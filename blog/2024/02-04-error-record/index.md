@@ -191,3 +191,30 @@ description: 紀錄一些簡單問題和解法。
   ```
 
   只要設定 `fetch-depth: 0`，問題就解決了。
+
+## 8. 查詢 Docker 容器內的錯誤日誌
+
+- **描述**
+
+  在 Docker 容器內運行了一個服務，但是服務出現了錯誤，無法正常運行，需要查看錯誤日誌。
+
+- **解決方法**
+
+  先確認目標容器的 ID：
+
+  ```bash
+  docker ps
+  ```
+
+  接著進入容器內部，查看日誌：
+
+  ```bash
+  docker exec -it container_id /bin/bash
+  cat /path/to/logfile
+  ```
+
+  或者直接查看日誌：
+
+  ```bash
+  docker logs container_id
+  ```
