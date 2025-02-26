@@ -83,3 +83,47 @@ export function sortPolygonClockwise(polygon) {
       drawArrow(ctx, p1[0], p1[1], p2[0], p2[1], thickness, color);
     });
   }
+
+  function sortPolygonByCenterAngle(polygon) {
+    if (!polygon || polygon.length < 2) return polygon || [];
+    // 計算多邊形頂點中心
+    let cx = 0, cy = 0;
+    polygon.forEach(pt => {
+      cx += pt[0];
+      cy += pt[1];
+    });
+    cx /= polygon.length;
+    cy /= polygon.length;
+
+    // 按與中心點的角度排序
+    return polygon.slice().sort((a, b) => {
+      const angleA = Math.atan2(a[1] - cy, a[0] - cx);
+      const angleB = Math.atan2(b[1] - cy, b[0] - cx);
+      return angleA - angleB;
+    });
+  }
+
+  /**
+   * 使用單一顏色繪製多邊形，先行以中心角度排序以避免交叉
+   * @param {CanvasRenderingContext2D} ctx
+   * @param {Array<[number, number]>} polygon
+   * @param {string} color
+   */
+  export function drawPolygonSimple(ctx, polygon, color = '#00FF00') {
+    const sorted = sortPolygonByCenterAngle(polygon);
+    if (sorted.length < 2) return;
+
+    const thickness = Math.max(ctx.canvas.width * 0.005, 1);
+    ctx.save();
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = thickness;
+
+    ctx.moveTo(sorted[0][0], sorted[0][1]);
+    for (let i = 1; i < sorted.length; i++) {
+      ctx.lineTo(sorted[i][0], sorted[i][1]);
+    }
+    ctx.closePath();
+    ctx.stroke();
+    ctx.restore();
+  }

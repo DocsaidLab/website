@@ -1,20 +1,13 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useEffect, useState } from 'react';
 
-
 export function useOpenCV() {
   const [openCvLoaded, setOpenCvLoaded] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [downloadError, setDownloadError] = useState(null);
 
-  useEffect(() => {
-    if (!openCvLoaded) {
-      downloadOpenCv();
-    }
-  }, []);
-
-  const { siteConfig, i18n } = useDocusaurusContext();
+  const { i18n } = useDocusaurusContext();
   const currentLocale = i18n.currentLocale;
 
   let opencvJsUrl;
@@ -24,10 +17,25 @@ export function useOpenCV() {
     opencvJsUrl = '/en/opencv.js';
   } else if (currentLocale === 'ja') {
     opencvJsUrl = '/ja/opencv.js';
+  } else {
+    opencvJsUrl = '/opencv.js';
   }
 
+  let opencvScriptAppended = false;
+
+  useEffect(() => {
+    if (openCvLoaded || window.cv?.Mat) {
+      setOpenCvLoaded(true);
+    } else {
+      downloadOpenCv();
+    }
+  }, []);
+
   const downloadOpenCv = () => {
-    if (openCvLoaded || isDownloading) return;
+    if (openCvLoaded || isDownloading || window.cv?.Mat) return;
+    if (opencvScriptAppended) return;
+
+    opencvScriptAppended = true;
 
     setIsDownloading(true);
     setDownloadProgress(0);
@@ -52,12 +60,14 @@ export function useOpenCV() {
         const blob = new Blob([xhr.response], { type: 'text/javascript' });
         const scriptUrl = URL.createObjectURL(blob);
 
-        window.Module = {
-          onRuntimeInitialized() {
-            setOpenCvLoaded(true);
-            console.log('OpenCV.js is ready from local /opencv.js');
-          }
-        };
+        if (!window.Module) { // 確保 Module 只初始化一次
+          window.Module = {
+            onRuntimeInitialized() {
+              console.log('OpenCV.js is ready from local /opencv.js');
+              setOpenCvLoaded(true);
+            },
+          };
+        }
 
         const script = document.createElement('script');
         script.src = scriptUrl;
