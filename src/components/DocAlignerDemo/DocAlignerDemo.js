@@ -319,6 +319,29 @@ const DocAlignerDemo = ({
     <div className={styles.demoWrapper}>
       <Space direction="vertical" style={{ width: '100%' }}>
 
+        {/* 上傳 / 狀態顯示 */}
+        <Row justify="space-between" align="middle">
+          <Col>
+            <Upload
+              beforeUpload={handleFileChange}
+              showUploadList={false}
+              disabled={apiStatus !== 'online'}
+            >
+              <Button
+                icon={<UploadOutlined />}
+                disabled={apiStatus !== 'online'}
+              >
+                {chooseFileLabel}
+              </Button>
+            </Upload>
+          </Col>
+          <Col>
+            {apiStatus === 'online' && <Text type="success">🟢</Text>}
+            {apiStatus === 'offline' && <Text type="danger">🔴</Text>}
+            {apiStatus === null && <Text type="secondary">⚪</Text>}
+          </Col>
+        </Row>
+
         {/* OpenCV Download Section */}
         <Card title="OpenCV Download Status" style={{ marginBottom: 16 }}>
           {!openCvLoaded && (
@@ -354,29 +377,6 @@ const DocAlignerDemo = ({
             />
           )}
         </Card>
-
-        {/* 上傳 / 狀態顯示 */}
-        <Row justify="space-between" align="middle">
-          <Col>
-            <Upload
-              beforeUpload={handleFileChange}
-              showUploadList={false}
-              disabled={apiStatus !== 'online'}
-            >
-              <Button
-                icon={<UploadOutlined />}
-                disabled={apiStatus !== 'online'}
-              >
-                {chooseFileLabel}
-              </Button>
-            </Upload>
-          </Col>
-          <Col>
-            {apiStatus === 'online' && <Text type="success">🟢</Text>}
-            {apiStatus === 'offline' && <Text type="danger">🔴</Text>}
-            {apiStatus === null && <Text type="secondary">⚪</Text>}
-          </Col>
-        </Row>
 
         {imageInfo && currentFile && originalImageInfo && (
           <Card className={styles.demoCard} title={imageInfoTitle}>
