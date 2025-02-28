@@ -45,7 +45,6 @@ function BlogPostPageContent({sidebar, children}) {
 
   // 新增：點閱數狀態
   const [viewCount, setViewCount] = useState(null);
-  console.log('metadata.slug =', slug);
 
   useEffect(() => {
     if (!slug) return;
