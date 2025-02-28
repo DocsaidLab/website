@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# HTTPS Configuration
+# Nginx HTTPS Settings
 
 In today's internet environment, website security has become a crucial concern, and SSL/TLS certificates are essential technologies to protect data transmission between websites and users.
 

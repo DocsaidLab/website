@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Nginx Logs and Monitoring
+# Nginx Monitoring
 
 Once we expose the API to the public, we immediately start receiving malicious requests from all directions.
 

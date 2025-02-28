@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Basic Settings
+# Nginx Configuration
 
 We will use Ubuntu as an example to install Nginx and set up basic configurations.
 

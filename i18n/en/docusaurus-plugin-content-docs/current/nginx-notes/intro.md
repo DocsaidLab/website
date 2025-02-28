@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Introduction
+# Nginx Introduction
 
 Starting from scratch can often seem dull and uninspiring.
 
@@ -44,12 +44,12 @@ Since Let's Encrypt requires domain name resolution and does not accept IP addre
 
 We expect to learn the following:
 
-1. ✅ Install Nginx
-2. ✅ Configure Nginx Reverse Proxy
-3. ✅ Nginx to Enable HTTPS
+1. ✅ Nginx Introduction
+2. ✅ Nginx Reverse Proxy
+3. ✅ Nginx HTTPS Configuration
 4. ✅ Nginx Security
-5. ✅ Nginx Logging and Monitoring
-6. [ ] Configure Nginx to Serve Static Files
+5. ✅ Nginx Monitoring
+6. ✅ Nginx Serving Static Resources
 7. [ ] Set Up Nginx Load Balancing
 
 ## References

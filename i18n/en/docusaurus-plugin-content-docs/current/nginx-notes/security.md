@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Security Hardening
+# Nginx Security
 
 Due to its flexibility and efficiency, Nginx is widely used in modern network environments. However, without proper security configurations, your well-set-up website could become a target for attackers.
 
