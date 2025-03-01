@@ -105,8 +105,6 @@ We have placed this model on this webpage, so you can try it out in the playgrou
 - [**DocAligner-Demo**](https://docsaid.org/en/playground/docaligner-demo)
 
 :::tip
-As an AI engineer, it is quite common to deploy a webpage and connect the front and back ends to allow others to try out the model.
-
 If you find any bugs while using it, please notify us privately to avoid malicious exploitation, and we will address them as soon as possible.
 :::
 

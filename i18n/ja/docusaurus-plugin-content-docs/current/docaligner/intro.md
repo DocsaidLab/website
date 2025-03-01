@@ -100,11 +100,9 @@ sidebar_position: 1
 
 このモデルをウェブページに組み込んでおり、遊び場で試すことができます。
 
-- [**DocAligner-Demo**](https://docsaid.org/playground/docaligner-demo)
+- [**DocAligner-Demo**](https://docsaid.org/ja/playground/docaligner-demo)
 
 :::tip
-AI エンジニアとして、他の人がモデルを試せるようにウェブデプロイや前後端の接続を自分で行うのはよくあることです。
-
 使用中にバグを見つけた場合は、悪用を避けるため、私たちにプライベートで通知してください。迅速に対応します。
 :::
 

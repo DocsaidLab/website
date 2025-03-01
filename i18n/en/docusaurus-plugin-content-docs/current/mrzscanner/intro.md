@@ -126,6 +126,16 @@ We view the single-stage solution as a "milestone." Our vision for the complete 
 We will continue to read more papers and improve the model's performance in the future.
 :::
 
+## Playground
+
+We have placed this model on this webpage, so you can try it out in the playground.
+
+- [**MRZScanner-Demo**](https://docsaid.org/en/playground/mrzscanner-demo)
+
+:::tip
+If you find any bugs while using it, please notify us privately to avoid malicious exploitation, and we will address them as soon as possible.
+:::
+
 ## Conclusion
 
 In this project, we have completed the following features:
