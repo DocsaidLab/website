@@ -218,3 +218,23 @@ description: 紀錄一些簡單問題和解法。
   ```bash
   docker logs container_id
   ```
+
+## 9. Docuasurus 查詢 i18n 狀態
+
+- **描述**
+
+  在 `Docusaurus` 中，如何確認目前的語系狀態？
+
+- **解決方法**
+
+  可以透過 `i18n` 來查詢當前的語系狀態：
+
+  ```javascript
+  import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+
+  const {
+    i18n: { currentLocale },
+  } = useDocusaurusContext();
+  ```
+
+  接著就能用這個 `currentLocale` 變數去取得對應的語系資料。

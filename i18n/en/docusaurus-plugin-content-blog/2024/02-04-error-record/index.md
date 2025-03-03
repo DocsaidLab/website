@@ -218,3 +218,23 @@ This article will be continuously updated.
   ```bash
   docker logs container_id
   ```
+
+## 9. Checking the i18n Status in Docusaurus
+
+- **Description**
+
+  How can we check the current language status in `Docusaurus`?
+
+- **Solution**
+
+  You can use `i18n` to retrieve the current language status:
+
+  ```javascript
+  import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+
+  const {
+    i18n: { currentLocale },
+  } = useDocusaurusContext();
+  ```
+
+  Then, you can use the `currentLocale` variable to obtain the corresponding language data.

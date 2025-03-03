@@ -216,3 +216,23 @@ description: 簡単な問題とその解決方法を記録。
   ```bash
   docker logs container_id
   ```
+
+## 9. Docusaurus で多言語の状態を確認する
+
+- **説明**
+
+  `Docusaurus` で現在の言語の状態を確認する方法は？
+
+- **解決方法**
+
+  `i18n` を使用して、現在の言語の状態を取得できます：
+
+  ```javascript
+  import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+
+  const {
+    i18n: { currentLocale },
+  } = useDocusaurusContext();
+  ```
+
+  その後、この `currentLocale` 変数を使って対応する言語のデータを取得できます。
