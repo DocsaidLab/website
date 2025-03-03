@@ -1,5 +1,5 @@
-import { FacebookOutlined, GoogleOutlined } from "@ant-design/icons";
-import { Button, Divider, Modal, Space, Tabs, Typography } from "antd";
+// /src/components/AuthModal.js
+import { Divider, Modal, Tabs, Typography } from "antd";
 import React, { useState } from "react";
 import useAuthHandler from "../hooks/useAuthHandler";
 import ForgotPasswordForm from "./forms/ForgotPasswordForm";
@@ -7,74 +7,52 @@ import LoginForm from "./forms/LoginForm";
 import RegisterForm from "./forms/RegisterForm";
 
 export default function AuthModal({ visible, onCancel }) {
-  // 用同一個 hook => 只管理登入 / 註冊 / 社群登入的 loading
-  const { login, register, socialLogin, loading } = useAuthHandler();
-  const [activeKey, setActiveKey] = useState("login");
+  // 1. 從自訂 Hook 取得登入 / 註冊 函式與 loading 狀態
+  const { login, register, loading } = useAuthHandler();
 
-  // 這裡額外用一個 state 記錄當前模式 => "login" / "register" / "forgotPassword"
+  // 2. 目前顯示的分頁 (login / register / forgotPassword)
   const [mode, setMode] = useState("login");
 
+  // 3. 切換畫面
   const goToForgotPassword = () => setMode("forgotPassword");
   const goToLogin = () => setMode("login");
   const goToRegister = () => setMode("register");
 
-  // 社群登入按鈕
-  const socialButtons = (
-    <Space style={{ width: "100%", justifyContent: "center" }}>
-      <Button
-        icon={<GoogleOutlined />}
-        onClick={async () => {
-          const success = await socialLogin("Google");
-          if (success) onCancel?.();
-        }}
-        loading={loading}
-      >
-        Google
-      </Button>
-      <Button
-        icon={<FacebookOutlined />}
-        onClick={async () => {
-          const success = await socialLogin("Facebook");
-          if (success) onCancel?.();
-        }}
-        loading={loading}
-      >
-        Facebook
-      </Button>
-    </Space>
-  );
-
-  // 對應登入 / 註冊 UI
+  // 4. 「登入」畫面內容
   const renderLoginContent = () => (
-    <>
-      <LoginForm onLogin={login} loading={loading} onSuccess={onCancel}
-        // 讓 LoginForm 內可用 props 方式呼叫 goToForgotPassword
-        onToggleForgotPassword={goToForgotPassword}
-      />
-      <Divider>或使用以下帳號登入</Divider>
-      {socialButtons}
-    </>
+    <LoginForm
+      onLogin={login}
+      loading={loading}
+      onSuccess={onCancel}
+      onToggleForgotPassword={goToForgotPassword}
+    />
   );
 
+  // 5. 「註冊」畫面內容
   const renderRegisterContent = () => (
-    <>
-      <RegisterForm onRegister={register} loading={loading} onSuccess={onCancel} />
-      <Divider>或使用以下帳號註冊 / 登入</Divider>
-      {socialButtons}
-    </>
+    <RegisterForm
+      onLogin={login}
+      onRegister={register}
+      loading={loading}
+      onSuccess={onCancel}
+    />
   );
 
-  // 忘記密碼畫面只需要一個 Email => 發送重設信
+  // 6. 「忘記密碼」畫面內容
   const renderForgotPasswordContent = () => (
     <>
       <ForgotPasswordForm onSuccess={onCancel} />
       <Divider />
-      <Typography.Text style={{ cursor: 'pointer', color: '#1890ff' }} onClick={goToLogin}>
+      <Typography.Text
+        style={{ cursor: "pointer", color: "#1890ff" }}
+        onClick={goToLogin}
+      >
         回到登入
       </Typography.Text>
     </>
   );
 
+  // 7. 依照 mode 顯示不同內容
   const renderContent = () => {
     switch (mode) {
       case "login":
@@ -94,11 +72,10 @@ export default function AuthModal({ visible, onCancel }) {
       title="會員中心"
       onCancel={onCancel}
       footer={null}
-      destroyOnClose
+      // 注意：如果想保留密碼輸入狀態，可移除 destroyOnClose
+      // destroyOnClose
     >
-      {/* 這裡若想維持 Tabs，也可以把三種狀態都做成 Tabs */}
-      {/* 不過常見做法是 forgotPassword 就脫離 Tabs，獨立顯示 */}
-
+      {/* 如果當前是忘記密碼模式，就脫離 Tabs，獨立顯示 */}
       {mode === "forgotPassword" ? (
         renderContent()
       ) : (
@@ -109,13 +86,13 @@ export default function AuthModal({ visible, onCancel }) {
             {
               key: "login",
               label: "登入",
-              children: renderLoginContent()
+              children: renderLoginContent(),
             },
             {
               key: "register",
               label: "註冊",
-              children: renderRegisterContent()
-            }
+              children: renderRegisterContent(),
+            },
           ]}
         />
       )}

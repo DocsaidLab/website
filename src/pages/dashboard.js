@@ -27,10 +27,10 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
 // Dashboard 子頁面
-import DashboardApiKey from "../components/dashboard/DashboardApiKey";
-import DashboardApiUsage from "../components/dashboard/DashboardApiUsage";
-import DashboardMyComments from "../components/dashboard/DashboardMyComments";
-import DashboardMyInfo from "../components/dashboard/DashboardMyInfo";
+import DashboardApiKey from "../components/Dashboard/ApiKey";
+import DashboardApiUsage from "../components/Dashboard/ApiUsage";
+import DashboardMyComments from "../components/Dashboard/MyComments";
+import DashboardMyInfo from "../components/Dashboard/MyInfo";
 
 const { Header: AntHeader, Sider, Content, Footer } = AntLayout;
 const { useToken } = antdTheme; // antd v5 提供的 useToken Hook，可讀取設計 tokens
@@ -222,9 +222,9 @@ export default function DashboardPage() {
                       style={{ backgroundColor: "#87d068", marginRight: 8 }}
                       // src={user?.avatarUrl} // 可放用戶頭像
                     >
-                      {user?.name?.[0] || "U"}
+                      {user?.username?.[0]?.toUpperCase() || "U"}
                     </Avatar>
-                    Hi, {user?.name || "User"}!
+                    Hi, {user?.username || "User"}!
                   </div>
                 </Dropdown>
               </Col>

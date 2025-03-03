@@ -1,7 +1,7 @@
 // src/theme/Navbar/Content/index.js
 import { UserOutlined } from '@ant-design/icons';
 import Link from "@docusaurus/Link";
-import { Avatar, Button, Dropdown, Menu, message } from 'antd';
+import { Avatar, Button, Dropdown, message } from 'antd';
 import React, { useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 
@@ -67,33 +67,29 @@ export default function NavbarContent() {
   const { token, logout } = useAuth();
   const [authVisible, setAuthVisible] = useState(false);
 
-  const userMenu = (
-    <Menu
-      items={[
-        {
-          key: 'dashboard',
-          label: (
-            <Link to="/dashboard" style={{ color: "inherit" }}>
-              儀表板
-            </Link>
-          )
-        },
-        {
-          key: 'logout',
-          label: (
-            <span
-              onClick={() => {
-                logout();
-                message.success('已登出');
-              }}
-            >
-              登出
-            </span>
-          ),
-        },
-      ]}
-    />
-  );
+  const userMenuItems = [
+    {
+      key: 'dashboard',
+      label: (
+        <Link to="/dashboard" style={{ color: "inherit" }}>
+          儀表板
+        </Link>
+      ),
+    },
+    {
+      key: 'logout',
+      label: (
+        <span
+          onClick={() => {
+            logout();
+            message.success('已登出');
+          }}
+        >
+          登出
+        </span>
+      ),
+    },
+  ];
 
   return (
     <>
@@ -125,7 +121,7 @@ export default function NavbarContent() {
 
             {/* 登入 / 登出 / Avatar */}
             {token ? (
-              <Dropdown overlay={userMenu} placement="bottomRight">
+              <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
                 <Avatar
                   icon={<UserOutlined />}
                   style={{ cursor: 'pointer', backgroundColor: '#87d068' }}
