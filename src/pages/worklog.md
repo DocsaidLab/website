@@ -10,6 +10,23 @@
 
 ## 2025
 
+### 3 月
+
+- 開始動手建置網站後台
+  - [x] 會員登入/註冊系統。
+  - [ ] 電子郵件系統。
+  - [ ] 留言評論系統。
+  - [ ] API 管理系統。
+
+### 2 月
+
+- 為了共用 Demo 相關功能，Demo 相關程式重構。
+- 網站首頁重構，重新設計排版並增加更多區塊。
+- 新增 `CookieBanner` 功能，以符合相關法規。
+- **MRZScanner**：完成 MRZ 二階段模型，並發布 1.0.6 版本。
+- 完成 MRZScanner Demo 的功能：[**mrzscanner-demo**](https://docsaid.org/playground/mrzscanner-demo)
+- 撰寫論文筆記，目前累計 165 篇。
+
 ### 1 月
 
 - 關閉 GCP，更換模型檔案位置，並更新所有下載連結。

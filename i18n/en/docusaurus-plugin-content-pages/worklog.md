@@ -10,6 +10,23 @@ This page is solely for recording our work activities.
 
 ## 2025
 
+### March
+
+- Begin building the website dashboard.
+  - [x] Member login/registration system.
+  - [ ] Email system.
+  - [ ] Comment and review system.
+  - [ ] API management system.
+
+### February
+
+- Refactored demo-related code for better functionality sharing.
+- Redesigned the website homepage layout and added more sections.
+- Added `CookieBanner` feature to comply with relevant regulations.
+- **MRZScanner**: Completed the second-phase MRZ model and released version 1.0.6.
+- Completed MRZScanner Demo functionality: [**mrzscanner-demo**](https://docsaid.org/en/playground/mrzscanner-demo)
+- Wrote research paper notes, totaling 165 entries so far.
+
 ### January
 
 - Shut down GCP, change the model file storage location, and update all download links.
@@ -21,7 +38,7 @@ This page is solely for recording our work activities.
 ### December
 
 - Invited four authors to share their daily development experiences.
-- Completed the **StockAnalysis Demo** feature: [**stock-demo**](https://docsaid.org/playground/stock-demo)
+- Completed the **StockAnalysis Demo** feature: [**stock-demo**](https://docsaid.org/en/playground/stock-demo)
 - Added an "Author Field" to the paper notes and also beautified the homepage, paper notes, and blog styles.
 - Started building the website's backend management system, database system, and member registration system.
 - Wrote paper notes, with a current total of 150 entries.
@@ -37,7 +54,7 @@ This page is solely for recording our work activities.
 
 ### October
 
-- Completed the model demo functionality: [**docaligner-demo**](https://docsaid.org/playground/docaligner-demo)
+- Completed the model demo functionality: [**docaligner-demo**](https://docsaid.org/en/playground/docaligner-demo)
 - Moved NextCloud from our own host to GCP and updated all download links.
 
 ### September

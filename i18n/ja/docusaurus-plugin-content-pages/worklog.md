@@ -10,6 +10,23 @@
 
 ## 2025
 
+### 3 月
+
+- ウェブサイトのバックエンド構築を開始
+  - [x] 会員ログイン/登録システム。
+  - [ ] メールシステム。
+  - [ ] コメント・レビューシステム。
+  - [ ] API 管理システム。
+
+### 2 月
+
+- デモ関連の機能を共有するため、デモ関連のコードをリファクタリング。
+- ウェブサイトのホームページをリニューアルし、レイアウトを再設計して新しいセクションを追加。
+- 関連規制に準拠するため、`CookieBanner` 機能を追加。
+- **MRZScanner**：MRZ の第 2 フェーズモデルを完成し、バージョン 1.0.6 をリリース。
+- MRZScanner デモの機能を完成：[**mrzscanner-demo**](https://docsaid.org/ja/playground/mrzscanner-demo)
+- 論文ノートを執筆、累計 165 本に到達。
+
 ### 1 月
 
 - GCP を終了し、モデルファイルの保存場所を変更し、すべてのダウンロードリンクを更新。
@@ -21,7 +38,7 @@
 ### 12 月
 
 - 4 人の著者を招待し、開発の日常を共有。
-- **StockAnalysis Demo**の機能を完成：[**stock-demo**](https://docsaid.org/playground/stock-demo)
+- **StockAnalysis Demo**の機能を完成：[**stock-demo**](https://docsaid.org/ja/playground/stock-demo)
 - 論文ノートに「著者欄」を追加し、ホームページ、論文ノート、ブログのデザインを整備。
 - ウェブサイトのバックエンド管理システム、データベースシステム、会員登録システムの構築を開始。
 - 論文ノートを執筆、現在累計 150 篇。
@@ -38,7 +55,7 @@
 ### 10 月
 
 - **TextRecognizer**：5 月の進捗を引き続き開発。
-- モデル Demo の機能を完成：[**docaligner-demo**](https://docsaid.org/playground/docaligner-demo)
+- モデル Demo の機能を完成：[**docaligner-demo**](https://docsaid.org/ja/playground/docaligner-demo)
 - NextCloud を自社サーバーから GCP に移転し、すべてのダウンロードリンクを更新。
 
 ### 9 月
