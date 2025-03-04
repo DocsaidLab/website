@@ -13,7 +13,7 @@
 ## 說明
 
 - **get_orientation_code**：從圖像的 EXIF 數據中提取方向信息，並將其轉換為適合於圖像旋轉的代碼。這一步是在 `jpgdecode` 和 `jpgread` 函數中自動完成的，以確保讀取的圖像顯示方向正確。
-- **jpgencode**：將 NumPy 圖像數組編碼為 JPG 格式的字節串，使用 `jpgencode` 函數時，可以通過調整 `quality` 參數來平衡圖像質量與文件大小。
+- **jpgencode**：將 NumPy 圖像數組編碼為 JPG 格式的字節串，使用 `jpgencode` 函數時，可以通過調整 `quality` 參數來平衡圖像品質與文件大小。
 - **jpgdecode**：將 JPG 格式的字節串解碼為 NumPy 圖像數組，並根據 EXIF 數據調整圖像方向。
 - **jpgread**：從文件中讀取 JPG 圖像，解碼為 NumPy 圖像數組，並根據 EXIF 數據調整圖像方向。
 
@@ -22,7 +22,7 @@
 ### jpgencode
 
 - **img** (`np.ndarray`)：要編碼的圖像數組。
-- **quality** (`int`)：編碼質量，範圍為 1 至 100。預設為 90。
+- **quality** (`int`)：編碼品質，範圍為 1 至 100。預設為 90。
 
 ### jpgdecode
 
@@ -64,7 +64,7 @@ img_array = cb.jpgread('path/to/image.jpg')
 
   - **高效率**：利用了 libjpeg-turbo 庫的高性能特性，相較於傳統的 JPEG 處理方法，TurboJPEG 可以大幅提高圖像處理的速度。
   - **易用性**：提供了簡潔明了的 API，使得開發者可以輕鬆地在應用程序中實現高效的 JPEG 圖像處理。
-  - **靈活性**：支持多種圖像質量和壓縮等級的設置，滿足不同場景下對圖像質量和文件大小的需求。
+  - **靈活性**：支持多種圖像品質和壓縮等級的設置，滿足不同場景下對圖像品質和文件大小的需求。
   - **跨平台**：支持 Windows、macOS 和 Linux 等多個作業系統，方便在不同開發環境中使用。
 
 安裝完成後，可以通過以下方式在 Python 中使用 TurboJPEG 進行編解碼的功能：

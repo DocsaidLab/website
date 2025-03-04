@@ -109,7 +109,7 @@ authors: Z. Yuan
 
 剛才也提到了，作者一開始就認為使用嘈雜的資料集來訓練模型對模型的表現是有損害的。
 
-為了提升文本資料的質量，作者提出了「Captioning and Filtering (CapFilt)」方法。
+為了提升文本資料的品質，作者提出了「Captioning and Filtering (CapFilt)」方法。
 
 如上流程圖所示，CapFilt 包含兩個模組：
 
@@ -164,7 +164,7 @@ filter 會移除原始網路文本 (Tw) 和合成文本 (Ts) 中的雜訊文本�
 
 - [**[19.04] The curious case of neural text degeneration**](https://arxiv.org/abs/1904.09751)
 
-Nucleus sampling 是一種隨機解碼方法，其中每個 token 是從累積機率質量超過閾值 $p$ 的 token 集合中抽取的（實驗中設置 $p = 0.9$）。
+Nucleus sampling 是一種隨機解碼方法，其中每個 token 是從累積機率超過閾值 $p$ 的 token 集合中抽取的（實驗中設置 $p = 0.9$）。
 
 在上表中，作者將其與 **beam search** 進行比較，後者是一種確定性的解碼方法，會生成機率最高的描述文本。儘管 nucleus sampling 產生的文本雜訊較高，但其性能明顯更好。作者推測原因在於 nucleus sampling 生成的文本更具多樣性和驚喜性，包含更多的新資訊，有助於模型學習。相比之下，beam search 傾向於生成常見、安全的描述，因而提供的額外知識較少。
 

@@ -93,7 +93,7 @@ authors: Z. Yuan
 
 - **M3W（MultiModal Massive-Web）數據集**：從約 4300 萬網頁中提取交錯的圖像與文本。
 - **ALIGN 數據集**：18 億張圖像與其 alt 文本對。
-- **LTIP（Long Text & Image Pairs）數據集**：312 萬張圖像及更高質量、長描述的文本對。
+- **LTIP（Long Text & Image Pairs）數據集**：312 萬張圖像及更高品質、長描述的文本對。
 - **VTP（Video & Text Pairs）數據集**：2700 萬段短影片及其對應的文本描述。
 
 目標函數最小化多數據集的加權負對數似然：
