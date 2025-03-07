@@ -326,9 +326,15 @@ export default function DashboardMyInfo() {
                   date ? date.format("YYYY-MM-DD") : null
                 }
               >
+
                 <DatePicker
                   style={{ width: "100%" }}
                   disabledDate={disabledFutureDates}
+                  onOpenChange={(open) => {
+                    if (open) {
+                      profileForm.setFieldsValue({ birth: null });
+                    }
+                  }}
                 />
               </Form.Item>
               <Form.Item>
