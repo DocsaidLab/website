@@ -1,24 +1,24 @@
 // 檔案： src/components/dashboard/DashboardMyComments.jsx
 
 import {
-  Button,
-  Card,
-  Col,
-  DatePicker,
-  Form,
-  Input,
-  message,
-  Modal,
-  Row,
-  Space,
-  Table,
+    Button,
+    Card,
+    Col,
+    DatePicker,
+    Form,
+    Input,
+    message,
+    Modal,
+    Row,
+    Space,
+    Table,
 } from "antd";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import {
-  deleteCommentApi,
-  getMyCommentsApi,
-  updateCommentApi,
+    deleteCommentApi,
+    getMyCommentsApi,
+    updateCommentApi,
 } from "../../../utils/mockApi";
 
 const { RangePicker } = DatePicker;
@@ -322,7 +322,7 @@ export async function getUserInfo(token) {
           id: 1,
           name: "Mock User",
           email: "mock@example.com",
-          isEmailVerified: false,
+          is_email_verified: false,
           avatar: null,
         });
       }

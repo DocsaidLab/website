@@ -1,17 +1,10 @@
 // /components/forms/RegisterForm.js
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { Alert, Button, Form, Input, Progress } from "antd";
+import { Alert, Button, Form, Input } from "antd";
 import React, { useState } from "react";
-import zxcvbn from "zxcvbn";
 import { useAuth } from "../../context/AuthContext";
+import PasswordInput from "../PasswordInput";
 
-function getPasswordScore(password) {
-  if (!password) return 0;
-  const result = zxcvbn(password);
-  return result.score; // 0~4
-}
-
-// 多國語系
 const localeText = {
   "zh-hant": {
     usernameLabel: "帳號",
@@ -54,12 +47,7 @@ const localeText = {
   },
 };
 
-export default function RegisterForm({
-  onLogin,
-  onSuccess,
-  onRegister,
-  loading
-}) {
+export default function RegisterForm({ onLogin, onSuccess, onRegister, loading }) {
   const {
     i18n: { currentLocale },
   } = useDocusaurusContext();
@@ -75,12 +63,9 @@ export default function RegisterForm({
   const [submitError, setSubmitError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  // 用來顯示即時強度
-  const [passwordScore, setPasswordScore] = useState(0);
-
   /**
    * 表單送出
-   * 不允許弱密碼 => 只要後端回 pwned=true => fail => 顯示錯誤
+   * 不允許弱密碼 => 後端若回 pwned=true，則註冊失敗並顯示錯誤
    */
   const onFinish = async (values) => {
     setSubmitError("");
@@ -103,31 +88,26 @@ export default function RegisterForm({
       }
       window.location.href = "/dashboard";
     } else {
-      // 若 pwned=true => 後端要求不允許 => 顯示錯誤
       if (result.pwned) {
         setSubmitError(text.pwnedWarning);
       } else {
-        // 其他錯誤 (ex: 帳號重複)
         setSubmitError(result.error || "Registration failed");
       }
     }
   };
 
   /**
-   * 註冊成功 => 重置表單 + (若需要) loginSuccess(token) + 跳轉
+   * 註冊成功後重置表單並自動登入（若後端回 token）
    */
   const finishRegisterSuccess = (result) => {
     setSuccessMessage(text.successMsg);
     form.resetFields();
-    setPasswordScore(0);
-
-    // 若後端回 token => 自動登入
     if (result.token) {
       loginSuccess(result.token);
     }
   };
 
-  // 基本規則: 必填 & >=8 chars
+  // 密碼欄位的基本規則
   const passwordRules = [
     {
       required: true,
@@ -145,23 +125,6 @@ export default function RegisterForm({
       },
     },
   ];
-
-  // 即時強度
-  const handlePasswordChange = (e) => {
-    const pwd = e.target.value;
-    setPasswordScore(getPasswordScore(pwd));
-  };
-
-  // zxcvbn: 0~4 => 0..100
-  const progressPercent = passwordScore * 25;
-  const strengthText = text.strengthTexts[passwordScore] || "";
-  const strokeColor = [
-    "#ff4d4f", // 0 = 非常弱
-    "#ff7a45", // 1 = 弱
-    "#faad14", // 2 = 中等
-    "#52c41a", // 3 = 強
-    "#1677ff", // 4 = 非常強
-  ][passwordScore] || "#ff4d4f";
 
   return (
     <Form
@@ -184,44 +147,17 @@ export default function RegisterForm({
         hasFeedback
         rules={passwordRules}
       >
-        <Input.Password onChange={handlePasswordChange} />
+        <PasswordInput />
       </Form.Item>
 
-      {/* 即時強度顯示 */}
-      <div style={{ marginBottom: 10 }}>
-        <div style={{ marginBottom: 5 }}>
-          {text.passwordStrengthTitle}
-          <strong>{strengthText}</strong>
-        </div>
-        <Progress percent={progressPercent} showInfo={false} strokeColor={strokeColor} />
-      </div>
+      <Alert style={{ marginBottom: 10 }} message={text.passphraseHint} type="info" showIcon />
 
-      {/* 顯示建議：使用長密碼短語 */}
-      <Alert
-        style={{ marginBottom: 10 }}
-        message={text.passphraseHint}
-        type="info"
-        showIcon
-      />
-
-      {/* 成功訊息 */}
       {successMessage && (
-        <Alert
-          style={{ marginBottom: 10 }}
-          message={successMessage}
-          type="success"
-          showIcon
-        />
+        <Alert style={{ marginBottom: 10 }} message={successMessage} type="success" showIcon />
       )}
 
-      {/* 錯誤訊息 */}
       {submitError && (
-        <Alert
-          style={{ marginBottom: 10 }}
-          message={submitError}
-          type="error"
-          showIcon
-        />
+        <Alert style={{ marginBottom: 10 }} message={submitError} type="error" showIcon />
       )}
 
       <Form.Item>

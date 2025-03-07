@@ -1,5 +1,5 @@
-// src/components/dashboard/DashboardMyInfo.jsx
-import { UploadOutlined } from "@ant-design/icons";
+// /src/components/Dashboard/MyInfo/index.js
+import { UploadOutlined, UserOutlined } from "@ant-design/icons";
 import {
   Alert,
   Avatar,
@@ -17,50 +17,65 @@ import {
   Upload,
 } from "antd";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import PasswordInput from "../../../components/PasswordInput";
 import { useAuth } from "../../../context/AuthContext";
-import {
-  deleteAccountApi,
-  getUserInfo,
-  resendVerificationEmailApi,
-  updatePasswordApi,
-  updateProfileApi,
-  uploadAvatarApi,
-} from "../../../utils/mockApi";
+
 
 const { Text } = Typography;
 
 export default function DashboardMyInfo() {
-  const { token, user, setUser } = useAuth();
+  const {
+    token,
+    user,
+    setUser,
+    updateProfile,
+    sendVerificationEmail,
+    changePassword,
+    deleteAccount,
+  } = useAuth();
+
   const [infoLoading, setInfoLoading] = useState(false);
   const [editing, setEditing] = useState(false);
   const [pwdModalVisible, setPwdModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [verificationModalVisible, setVerificationModalVisible] = useState(false);
   const [profileForm] = Form.useForm();
-
+  const [pwdForm] = Form.useForm();
+  const [uploadLoading, setUploadLoading] = useState(false);
   const [showEmailAlert, setShowEmailAlert] = useState(false);
 
-  // 額外顯示使用者的「最後登入時間」與「Email 是否驗證」等資料
-  const lastLoginTime = user?.lastLoginTime
-    ? moment(user.lastLoginTime).format("YYYY-MM-DD HH:mm")
-    : "無資料";
+  // 禁用未來日期
+  const disabledFutureDates = useCallback(
+    (current) => current && current.isAfter(moment(), "day"),
+    []
+  );
 
-  // 取得最新 user 資料
+  // 上次登入資訊
+  const lastLoginTime = user?.last_login_at
+    ? moment(user.last_login_at).format("YYYY-MM-DD HH:mm") + " (UTC+0)"
+    : "無資料";
+  const lastLoginIp = user?.last_login_ip || "無資料";
+
+  // =========== 1. 取得使用者資訊 ===========
   const refreshUserInfo = async () => {
     if (!token) return;
     setInfoLoading(true);
     try {
-      const data = await getUserInfo(token);
-      setUser(data);
-
-      // 依據回傳的 isEmailVerified 判斷是否要顯示警告
-      if (data.isEmailVerified === false) {
-        setShowEmailAlert(true);
-      } else {
-        setShowEmailAlert(false);
+      const res = await fetch("https://api.docsaid.org/auth/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!res.ok) {
+        throw new Error("取得使用者資訊失敗");
       }
-    } catch (error) {
-      message.error(error.message || "取得資料失敗");
+      const data = await res.json();
+      setUser(data);
+      // 若 email 存在但未驗證，顯示警示
+      setShowEmailAlert(data.email && data.is_email_verified === false);
+    } catch (err) {
+      message.error(err.message || "取得使用者資訊失敗");
     } finally {
       setInfoLoading(false);
     }
@@ -69,95 +84,125 @@ export default function DashboardMyInfo() {
   useEffect(() => {
     refreshUserInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [token]);
 
-  // 編輯個人資料
+  // 若 user 存在但尚未設定 email，自動切換至編輯模式
+  useEffect(() => {
+    if (user && !user.email) {
+      setEditing(true);
+    }
+  }, [user]);
+
+  // =========== 2. 編輯個人資料 ===========
   const onEditProfile = () => {
     setEditing(true);
     if (user) {
       profileForm.setFieldsValue({
-        nickname: user.nickname,
+        username: user.username,
         email: user.email,
         phone: user.phone,
-        birthday: user.birthday ? moment(user.birthday) : null,
+        birth: user.birth ? moment(user.birth, "YYYY-MM-DD") : null,
       });
     }
   };
 
+  // =========== 3. 儲存個人資料 ===========
   const onSaveProfile = async (values) => {
     try {
-      // 將 moment 格式的 birthday 轉為字串或後端需要的格式
-      const birthdayString = values.birthday
-        ? moment(values.birthday).format("YYYY-MM-DD")
+      const birthString = values.birth
+        ? moment(values.birth).format("YYYY-MM-DD")
         : null;
-
-      await updateProfileApi(token, {
-        ...values,
-        birthday: birthdayString,
-      });
-      message.success("更新成功");
-      setUser((prev) => ({
-        ...prev,
-        nickname: values.nickname,
-        email: values.email,
-        phone: values.phone,
-        birthday: birthdayString,
-      }));
+      const payload = { ...values, birth: birthString };
+      const updatedUser = await updateProfile(payload);
+      message.success("個人資料更新成功");
+      setUser(updatedUser);
+      setShowEmailAlert(
+        updatedUser.email && updatedUser.is_email_verified === false
+      );
       setEditing(false);
     } catch (err) {
-      message.error(err.message || "更新失敗");
+      if (err.message.includes("Email already exists")) {
+        profileForm.setFields([{ name: "email", errors: [err.message] }]);
+      }
+      message.error(err.message || "個人資料更新失敗");
     }
   };
 
-  // 上傳頭像
+  // =========== 4. 上傳頭像 ===========
   const onUploadAvatar = async ({ file }) => {
+    if (!token) return;
+    setUploadLoading(true);
     try {
-      const newUrl = await uploadAvatarApi(token, file);
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("https://api.docsaid.org/auth/avatar", {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.detail || "頭像上傳失敗");
+      }
+      const result = await res.json();
       message.success("頭像已更新");
       setUser((prev) => ({
         ...prev,
-        avatar: newUrl,
+        avatar: result.avatar,
       }));
     } catch (err) {
       message.error(err.message || "頭像上傳失敗");
+    } finally {
+      setUploadLoading(false);
     }
   };
 
-  // 變更密碼
+  // =========== 5. 變更密碼 ===========
   const openChangePwdModal = () => {
     setPwdModalVisible(true);
   };
+
   const onChangePassword = async (values) => {
     if (values.newPassword !== values.confirmPassword) {
-      return message.error("兩次輸入密碼不一致");
+      return message.error("兩次輸入的密碼不一致");
     }
     try {
-      await updatePasswordApi(token, values.oldPassword, values.newPassword);
-      message.success("密碼已變更！");
+      await changePassword(values.oldPassword, values.newPassword);
+      message.success("密碼變更成功！");
       setPwdModalVisible(false);
+      pwdForm.resetFields();
     } catch (err) {
-      message.error(err.message || "變更密碼失敗");
+      console.error("變更密碼錯誤:", err);
+      message.error(err.message || "密碼變更失敗");
     }
   };
 
-  // 重新寄送驗證信
-  const onResendVerification = async () => {
+  // =========== 6. 重新寄送驗證信 ===========
+  const onResendVerification = () => {
+    if (!user?.email) return;
+    setVerificationModalVisible(true);
+  };
+
+  const handleVerificationOk = async () => {
     try {
-      await resendVerificationEmailApi(token);
-      message.success("驗證信已重新寄送，請檢查您的信箱");
+      await sendVerificationEmail(user.email);
+      message.success("驗證信已寄出，請檢查信箱");
+      setVerificationModalVisible(false);
     } catch (err) {
       message.error(err.message || "寄送驗證信失敗");
     }
   };
 
-  // 刪除帳號
+  // =========== 7. 刪除帳號 ===========
   const onDeleteAccount = async () => {
     try {
-      await deleteAccountApi(token);
+      await deleteAccount();
       message.success("帳號已刪除，將導回主頁");
-      // 這裡也可以登出並導回主頁
-      // window.location.href = "/";
       setDeleteModalVisible(false);
+      window.location.href = "/";
     } catch (err) {
       message.error(err.message || "刪除帳號失敗");
     }
@@ -167,23 +212,51 @@ export default function DashboardMyInfo() {
     return <Spin style={{ margin: "50px auto", display: "block" }} />;
   }
 
+  const renderEmailStatus = () => {
+    if (!user?.email) {
+      return <Text type="secondary">尚未設定</Text>;
+    }
+    if (user.is_email_verified) {
+      return <Text style={{ color: "green" }}>已驗證</Text>;
+    }
+    return (
+      <span style={{ color: "red" }}>
+        未驗證
+        <Button type="link" onClick={onResendVerification}>
+          寄送驗證信
+        </Button>
+      </span>
+    );
+  };
+
   return (
     <div>
       <h2>我的資訊</h2>
 
-      {showEmailAlert && (
+      {showEmailAlert && user?.email && !user.is_email_verified && (
         <Alert
           style={{ marginBottom: 16 }}
           message="您的 Email 尚未驗證"
-          description={
-            <div>
-              請至信箱收信並點擊驗證連結，
-              <Button type="link" onClick={onResendVerification}>
-                或點此重新寄送
-              </Button>
-            </div>
-          }
+          description="請點選下方重新寄送驗證信，並檢查您的信箱。"
           type="warning"
+          showIcon
+        />
+      )}
+
+      {!user?.email && !editing && (
+        <Alert
+          style={{ marginBottom: 16 }}
+          message="尚未填寫 Email"
+          description={
+            <>
+              您尚未綁定 Email，請點
+              <Button type="link" onClick={onEditProfile}>
+                編輯
+              </Button>
+              補上 Email。
+            </>
+          }
+          type="info"
           showIcon
         />
       )}
@@ -192,10 +265,10 @@ export default function DashboardMyInfo() {
         <Col span={8}>
           <div style={{ textAlign: "center" }}>
             <Avatar
-              size={100}
-              src={
-                user?.avatar || "https://via.placeholder.com/100?text=No+Avatar"
-              }
+              size={160}
+              src={user?.avatar}
+              icon={<UserOutlined />}
+              onError={() => false}
             />
             <br />
             <Upload
@@ -204,7 +277,7 @@ export default function DashboardMyInfo() {
               customRequest={onUploadAvatar}
             >
               <Button icon={<UploadOutlined />} style={{ marginTop: 8 }}>
-                上傳頭像
+                {uploadLoading ? "上傳中..." : "上傳頭像"}
               </Button>
             </Upload>
           </div>
@@ -217,46 +290,47 @@ export default function DashboardMyInfo() {
               layout="vertical"
               onFinish={onSaveProfile}
               initialValues={{
-                nickname: user?.nickname,
+                username: user?.username,
                 email: user?.email,
                 phone: user?.phone,
-                birthday: user?.birthday
-                  ? moment(user.birthday, "YYYY-MM-DD")
-                  : null,
+                birth: user?.birth ? moment(user.birth, "YYYY-MM-DD") : null,
               }}
             >
               <Form.Item
-                label="暱稱"
-                name="nickname"
-                rules={[{ required: true, message: "請輸入暱稱" }]}
+                label="帳號"
+                name="username"
+                rules={[{ required: true, message: "請輸入帳號" }]}
               >
-                <Input />
+                <Input disabled />
               </Form.Item>
-
               <Form.Item
                 label="Email"
                 name="email"
-                rules={[{ required: true, type: "email" }]}
+                rules={[
+                  { required: true, message: "請輸入 Email" },
+                  { type: "email", message: "Email 格式錯誤" },
+                ]}
               >
+                {user?.is_email_verified === false ? <Input /> : <Input disabled />}
+              </Form.Item>
+              <Form.Item label="電話" name="phone">
                 <Input />
               </Form.Item>
-
               <Form.Item
-                label="電話"
-                name="phone"
-                rules={[{ pattern: /^09\d{8}$/, message: "請輸入正確手機格式" }]}
+                label="生日"
+                name="birth"
+                getValueProps={(value) => ({
+                  value: value ? moment(value, "YYYY-MM-DD").startOf("day") : null,
+                })}
+                getValueFromEvent={(date) =>
+                  date ? date.format("YYYY-MM-DD") : null
+                }
               >
-                <Input placeholder="09xxxxxxxx" />
-              </Form.Item>
-
-              <Form.Item label="生日" name="birthday">
                 <DatePicker
                   style={{ width: "100%" }}
-                  disabledDate={(current) => current && current > moment()}
-                  placeholder="選擇生日"
+                  disabledDate={disabledFutureDates}
                 />
               </Form.Item>
-
               <Form.Item>
                 <Button type="primary" htmlType="submit" style={{ marginRight: 8 }}>
                   儲存
@@ -266,20 +340,29 @@ export default function DashboardMyInfo() {
             </Form>
           ) : (
             <div>
-              <p>暱稱：{user?.nickname || "（未設定）"}</p>
-              <p>Email：{user?.email || "未知"}</p>
+              <p>帳號：{user?.username || "（未設定）"}</p>
+              <p>
+                Email：{user?.email || "（未設定）"}
+                {user?.email && (
+                  <span style={{ marginLeft: 8 }}>
+                    （狀態：{renderEmailStatus()}）
+                  </span>
+                )}
+              </p>
               <p>電話：{user?.phone || "（未設定）"}</p>
               <p>
                 生日：
-                {user?.birthday
-                  ? moment(user.birthday).format("YYYY-MM-DD")
+                {user?.birth
+                  ? moment(user.birth).format("YYYY-MM-DD")
                   : "（未設定）"}
               </p>
               <Divider />
               <p>
-                上次登入時間：<Text type="secondary">{lastLoginTime}</Text>
+                上次登入時間：
+                <Text type="secondary">{lastLoginTime}</Text>
+                <br />
+                上次登入 IP：<Text type="secondary">{lastLoginIp}</Text>
               </p>
-
               <Button type="link" onClick={onEditProfile}>
                 編輯
               </Button>
@@ -303,35 +386,59 @@ export default function DashboardMyInfo() {
         </Col>
       </Row>
 
-      {/* 密碼變更 Modal */}
       <ChangePasswordModal
         visible={pwdModalVisible}
-        onCancel={() => setPwdModalVisible(false)}
+        onCancel={() => {
+          setPwdModalVisible(false);
+          pwdForm.resetFields();
+        }}
         onSubmit={onChangePassword}
+        form={pwdForm}
       />
 
-      {/* 刪除帳號 Modal */}
       <DeleteAccountModal
         visible={deleteModalVisible}
         onCancel={() => setDeleteModalVisible(false)}
         onDelete={onDeleteAccount}
       />
+
+      {/* 狀態控制的驗證信 Modal */}
+      <Modal
+        open={verificationModalVisible}
+        title="寄送驗證信"
+        getContainer={() => document.body}
+        onOk={handleVerificationOk}
+        onCancel={() => setVerificationModalVisible(false)}
+        okText="確定"
+        cancelText="取消"
+        okButtonProps={{ disabled: /@example\.com$/i.test(user?.email) }}
+      >
+        {/@example\.com$/i.test(user?.email) ? (
+          <p style={{ color: "red" }}>
+            預設信箱 (example.com) 無法用於驗證，請更換為有效的 Email。
+          </p>
+        ) : (
+          <>
+            <p>
+              系統將發送驗證信至：
+              <strong style={{ marginLeft: 5 }}>{user?.email}</strong>
+            </p>
+            <p>請確認此 Email 是否正確？</p>
+          </>
+        )}
+      </Modal>
     </div>
   );
 }
 
-/** 變更密碼 Modal */
-function ChangePasswordModal({ visible, onCancel, onSubmit }) {
-  const [form] = Form.useForm();
+function ChangePasswordModal({ visible, onCancel, onSubmit, form }) {
   const [passwordStrength, setPasswordStrength] = useState("");
 
   const onFinish = (values) => {
     onSubmit(values);
     setPasswordStrength("");
-    form.resetFields();
   };
 
-  // 簡單示範一個密碼強度偵測
   const handlePasswordChange = (e) => {
     const pwd = e.target.value;
     if (pwd.length < 6) {
@@ -345,8 +452,8 @@ function ChangePasswordModal({ visible, onCancel, onSubmit }) {
 
   return (
     <Modal
+      open={visible}  // 改用 open 屬性
       title="變更密碼"
-      open={visible}
       onCancel={() => {
         onCancel();
         form.resetFields();
@@ -364,17 +471,16 @@ function ChangePasswordModal({ visible, onCancel, onSubmit }) {
         >
           <Input.Password />
         </Form.Item>
-
         <Form.Item
           label={
-            <div>
+            <>
               新密碼
               {passwordStrength && (
                 <span style={{ marginLeft: 8, color: "#999" }}>
                   (強度：{passwordStrength})
                 </span>
               )}
-            </div>
+            </>
           }
           name="newPassword"
           rules={[
@@ -382,9 +488,8 @@ function ChangePasswordModal({ visible, onCancel, onSubmit }) {
             { min: 8, message: "至少 8 碼" },
           ]}
         >
-          <Input.Password onChange={handlePasswordChange} />
+          <PasswordInput />
         </Form.Item>
-
         <Form.Item
           label="確認新密碼"
           name="confirmPassword"
@@ -408,12 +513,11 @@ function ChangePasswordModal({ visible, onCancel, onSubmit }) {
   );
 }
 
-/** 刪除帳號 Modal */
 function DeleteAccountModal({ visible, onCancel, onDelete }) {
   return (
     <Modal
+      open={visible}  // 改用 open 屬性
       title="刪除帳號"
-      open={visible}
       onCancel={onCancel}
       onOk={onDelete}
       okText="確定刪除"

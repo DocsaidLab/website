@@ -1,4 +1,3 @@
-// src/theme/Navbar/Content/index.js
 import { UserOutlined } from '@ant-design/icons';
 import Link from "@docusaurus/Link";
 import { Avatar, Button, Dropdown, message } from 'antd';
@@ -19,7 +18,7 @@ import NavbarItem from '@theme/NavbarItem';
 import SearchBar from '@theme/SearchBar';
 import styles from './styles.module.css';
 
-import AuthModal from '../../../components/AuthModal'; // 自訂的 Modal
+import AuthModal from '../../../components/AuthModal';
 
 function useNavbarItems() {
   return useThemeConfig().navbar.items;
@@ -29,16 +28,7 @@ function NavbarItems({items}) {
   return (
     <>
       {items.map((item, i) => (
-        <ErrorCauseBoundary
-          key={i}
-          onError={(error) =>
-            new Error(
-              `A theme navbar item failed to render.
-Please double-check the following navbar item (themeConfig.navbar.items) of your Docusaurus config:
-${JSON.stringify(item, null, 2)}`,
-              {cause: error},
-            )
-          }>
+        <ErrorCauseBoundary key={i}>
           <NavbarItem {...item} />
         </ErrorCauseBoundary>
       ))}
@@ -58,13 +48,10 @@ function NavbarContentLayout({left, right}) {
 export default function NavbarContent() {
   const mobileSidebar = useNavbarMobileSidebar();
   const items = useNavbarItems();
-  // 官方 internal function，將 config 中的 items 拆分左右
   const [leftItems, rightItems] = splitNavbarItems(items);
-  // 如果 config 中沒有 search item, 預設用 SearchBar
   const searchBarItem = items.find((item) => item.type === 'search');
 
-  // === Auth 狀態 / Modal ===
-  const { token, logout } = useAuth();
+  const { token, user, logout } = useAuth();
   const [authVisible, setAuthVisible] = useState(false);
 
   const userMenuItems = [
@@ -96,34 +83,25 @@ export default function NavbarContent() {
       <NavbarContentLayout
         left={
           <>
-            {/* 手機版側邊欄切換按鈕 */}
             {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
-            {/* Logo */}
             <NavbarLogo />
-            {/* 左側 items */}
             <NavbarItems items={leftItems} />
           </>
         }
         right={
           <>
-            {/* 右側 items */}
             <NavbarItems items={rightItems} />
-
-            {/* 顯示 Theme 切換按鈕 (若你 config 有 colorMode.enableSwitch) */}
             <NavbarColorModeToggle className={styles.colorModeToggle} />
-
-            {/* 若 config 裡沒定義 search，預設就顯示一個 SearchBar */}
             {!searchBarItem && (
               <NavbarSearch>
                 <SearchBar />
               </NavbarSearch>
             )}
-
-            {/* 登入 / 登出 / Avatar */}
             {token ? (
               <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
                 <Avatar
-                  icon={<UserOutlined />}
+                  src={user?.avatar}
+                  icon={!user?.avatar ? <UserOutlined /> : undefined}
                   style={{ cursor: 'pointer', backgroundColor: '#87d068' }}
                 />
               </Dropdown>
@@ -138,7 +116,6 @@ export default function NavbarContent() {
         }
       />
 
-      {/* Auth Modal 放最外層 */}
       <AuthModal visible={authVisible} onCancel={() => setAuthVisible(false)} />
     </>
   );
