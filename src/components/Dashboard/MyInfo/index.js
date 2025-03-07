@@ -21,7 +21,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import PasswordInput from "../../../components/PasswordInput";
 import { useAuth } from "../../../context/AuthContext";
 
-
 const { Text } = Typography;
 
 export default function DashboardMyInfo() {
@@ -165,9 +164,14 @@ export default function DashboardMyInfo() {
     setPwdModalVisible(true);
   };
 
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const onChangePassword = async (values) => {
     if (values.newPassword !== values.confirmPassword) {
-      return message.error("兩次輸入的密碼不一致");
+      setErrorMessage("兩次輸入的密碼不一致");
+      setErrorModalVisible(true);
+      return;
     }
     try {
       await changePassword(values.oldPassword, values.newPassword);
@@ -176,7 +180,9 @@ export default function DashboardMyInfo() {
       pwdForm.resetFields();
     } catch (err) {
       console.error("變更密碼錯誤:", err);
-      message.error(err.message || "密碼變更失敗");
+      const errorMsg = err.response?.data?.detail || err.message || "密碼變更失敗";
+      setErrorMessage(errorMsg);
+      setErrorModalVisible(true);
     }
   };
 
@@ -326,7 +332,6 @@ export default function DashboardMyInfo() {
                   date ? date.format("YYYY-MM-DD") : null
                 }
               >
-
                 <DatePicker
                   style={{ width: "100%" }}
                   disabledDate={disabledFutureDates}
@@ -433,6 +438,20 @@ export default function DashboardMyInfo() {
           </>
         )}
       </Modal>
+
+      <Modal
+        open={errorModalVisible}
+        title="變更密碼失敗"
+        onCancel={() => setErrorModalVisible(false)}
+        footer={[
+          <Button key="ok" type="primary" onClick={() => setErrorModalVisible(false)}>
+            確定
+          </Button>
+        ]}
+      >
+        <p>{errorMessage}</p>
+      </Modal>
+
     </div>
   );
 }
@@ -491,10 +510,20 @@ function ChangePasswordModal({ visible, onCancel, onSubmit, form }) {
           name="newPassword"
           rules={[
             { required: true, message: "請輸入新密碼" },
-            { min: 8, message: "至少 8 碼" },
+            {
+              validator: async (_, value) => {
+                if (!value) {
+                  return Promise.reject(new Error("請輸入新密碼"));
+                }
+                if (value.length < 8) {
+                  return Promise.reject(new Error("至少 8 碼"));
+                }
+                return Promise.resolve();
+              },
+            },
           ]}
         >
-          <PasswordInput />
+          <PasswordInput onChange={handlePasswordChange} />
         </Form.Item>
         <Form.Item
           label="確認新密碼"
