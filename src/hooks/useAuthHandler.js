@@ -1,7 +1,8 @@
 // /src/hooks/useAuthHandler.js
-import { message } from "antd"; // 若需要彈出提示
+import { message } from "antd";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+
 
 export default function useAuthHandler() {
   const { loginSuccess } = useAuth();
@@ -18,34 +19,52 @@ export default function useAuthHandler() {
     try {
       const res = await fetch("https://api.docsaid.org/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ username, password }),
       });
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        message.error(errData.detail || "登入失敗");
-        return false;
+
+      let data;
+      try {
+        data = await res.json();
+      } catch (err) {
+        data = {};
       }
 
-      // 成功 => 後端回傳 { access_token, token_type, ... }
-      const data = await res.json();
+      // 若非成功狀態，根據回傳內容整理錯誤訊息並回傳包含狀態碼的物件
+      if (!res.ok) {
+        let errorMsg = "登入失敗";
+        if (data.detail) {
+          if (typeof data.detail === "object") {
+            errorMsg = Object.entries(data.detail)
+              .map(([key, value]) => `${key}: ${value}`)
+              .join(" | ");
+          } else {
+            errorMsg = data.detail;
+          }
+        }
+        console.error(`Error ${res.status}:`, data);
+        return { success: false, errorMessage: `Error ${res.status}: ${errorMsg}`, status: res.status };
+      }
+
       if (data.access_token) {
-        // 呼叫 AuthContext => 寫入 localStorage => 抓 user 資訊
         await loginSuccess(data.access_token);
         message.success("登入成功");
-        return true;
+        return { success: true, status: res.status };
       }
 
       message.error("登入失敗: token 不存在");
-      return false;
+      return { success: false, errorMessage: "登入失敗: token 不存在", status: res.status };
     } catch (error) {
       console.error("login error:", error);
       message.error(error.message || "登入請求失敗");
-      return false;
+      return { success: false, errorMessage: error.message || "登入請求失敗", status: 500 };
     } finally {
       setLoading(false);
     }
   };
+
 
   /**
    * 註冊
@@ -60,7 +79,9 @@ export default function useAuthHandler() {
 
       const res = await fetch("https://api.docsaid.org/auth/register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           username,
           password,

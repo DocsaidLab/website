@@ -1,5 +1,6 @@
 // /src/components/Dashboard/MyInfo/index.js
 import { UploadOutlined, UserOutlined } from "@ant-design/icons";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
   Alert,
   Avatar,
@@ -23,7 +24,127 @@ import { useAuth } from "../../../context/AuthContext";
 
 const { Text } = Typography;
 
+const localeText = {
+  "zh-hant": {
+    myInfoTitle: "我的資訊",
+    emailNotVerifiedAlertTitle: "您的 Email 尚未驗證",
+    emailNotVerifiedAlertDesc: "沒有驗證信箱，帳號密碼丟失後無法找回。請點選下方寄送驗證信，並檢查您的信箱。",
+    noEmailAlertTitle: "尚未填寫 Email",
+    noEmailAlertDesc: "您尚未綁定 Email，請點 {editLink} 補上 Email。",
+    uploadAvatarButtonUploading: "上傳中...",
+    uploadAvatarButton: "上傳頭像",
+    accountLabel: "帳號",
+    emailLabel: "Email",
+    phoneLabel: "電話",
+    birthLabel: "生日",
+    notSet: "（未設定）",
+    lastLoginTimeLabel: "上次登入時間：",
+    lastLoginIpLabel: "上次登入 IP：",
+    statusLabel: "狀態",
+    editButton: "編輯",
+    changePasswordButton: "變更密碼",
+    deleteAccountButton: "刪除帳號",
+    successMsg: "個人資料更新成功",
+    fetchUserInfoFailure: "取得使用者資訊失敗",
+    avatarUploadFailure: "頭像上傳失敗",
+    avatarUploadSuccess: "頭像已更新",
+    verified: "已驗證",
+    notVerified: "未驗證",
+    resendVerification: "寄送驗證信",
+    changePasswordSuccess: "密碼變更成功！",
+    passwordMismatch: "兩次輸入的密碼不一致",
+    changePasswordFailureTitle: "變更密碼失敗",
+    verificationModalTitle: "寄送驗證信",
+    verificationModalOk: "確定",
+    verificationModalCancel: "取消",
+    verificationModalExampleEmail: "預設信箱 (example.com) 無法用於驗證，請更換為有效的 Email。",
+    verificationModalDesc: "系統將發送驗證信至：{email}\n請確認此 Email 是否正確？",
+    deleteAccountSuccess: "帳號已刪除，將導回主頁",
+    saveButton: "儲存",
+    cancelButton: "取消",
+  },
+  en: {
+    myInfoTitle: "My Information",
+    emailNotVerifiedAlertTitle: "Your Email is not verified",
+    emailNotVerifiedAlertDesc: "Please click the button below to resend the verification email and check your inbox.",
+    noEmailAlertTitle: "Email not set",
+    noEmailAlertDesc: "You have not bound an Email. Please click {editLink} to add an Email.",
+    uploadAvatarButtonUploading: "Uploading...",
+    uploadAvatarButton: "Upload Avatar",
+    accountLabel: "Account",
+    emailLabel: "Email",
+    phoneLabel: "Phone",
+    birthLabel: "Birth",
+    notSet: "(Not set)",
+    lastLoginTimeLabel: "Last Login Time: ",
+    lastLoginIpLabel: "Last Login IP: ",
+    statusLabel: "Status",
+    editButton: "Edit",
+    changePasswordButton: "Change Password",
+    deleteAccountButton: "Delete Account",
+    successMsg: "Profile updated successfully",
+    fetchUserInfoFailure: "Failed to fetch user information",
+    avatarUploadFailure: "Avatar upload failed",
+    avatarUploadSuccess: "Avatar updated",
+    verified: "Verified",
+    notVerified: "Not verified",
+    resendVerification: "Resend Verification",
+    changePasswordSuccess: "Password changed successfully!",
+    passwordMismatch: "Passwords do not match",
+    changePasswordFailureTitle: "Change Password Failed",
+    verificationModalTitle: "Resend Verification Email",
+    verificationModalOk: "Confirm",
+    verificationModalCancel: "Cancel",
+    verificationModalExampleEmail: "Default email (example.com) cannot be used for verification. Please change to a valid Email.",
+    verificationModalDesc: "The system will send a verification email to: {email}\nPlease confirm if this Email is correct.",
+    deleteAccountSuccess: "Account deleted, redirecting to homepage",
+    saveButton: "Save",
+    cancelButton: "Cancel",
+  },
+  ja: {
+    myInfoTitle: "私の情報",
+    emailNotVerifiedAlertTitle: "メールが未認証です",
+    emailNotVerifiedAlertDesc: "下のボタンをクリックして認証メールを再送信し、受信箱を確認してください。",
+    noEmailAlertTitle: "メール未設定",
+    noEmailAlertDesc: "メールが登録されていません。{editLink} をクリックしてメールを追加してください。",
+    uploadAvatarButtonUploading: "アップロード中...",
+    uploadAvatarButton: "アバターをアップロード",
+    accountLabel: "アカウント",
+    emailLabel: "メール",
+    phoneLabel: "電話",
+    birthLabel: "生年月日",
+    notSet: "(未設定)",
+    lastLoginTimeLabel: "最終ログイン時間：",
+    lastLoginIpLabel: "最終ログイン IP：",
+    statusLabel: "状態",
+    editButton: "編集",
+    changePasswordButton: "パスワード変更",
+    deleteAccountButton: "アカウント削除",
+    successMsg: "プロフィール更新成功",
+    fetchUserInfoFailure: "ユーザー情報の取得に失敗しました",
+    avatarUploadFailure: "アバターのアップロードに失敗しました",
+    avatarUploadSuccess: "アバターが更新されました",
+    verified: "認証済み",
+    notVerified: "未認証",
+    resendVerification: "認証メール再送信",
+    changePasswordSuccess: "パスワード変更成功！",
+    passwordMismatch: "入力したパスワードが一致しません",
+    changePasswordFailureTitle: "パスワード変更失敗",
+    verificationModalTitle: "認証メール再送信",
+    verificationModalOk: "確定",
+    verificationModalCancel: "キャンセル",
+    verificationModalExampleEmail: "デフォルトのメール (example.com) は認証に使用できません。有効なメールに変更してください。",
+    verificationModalDesc: "システムは以下のメールに認証メールを送信します：{email}\nこのメールが正しいか確認してください。",
+    deleteAccountSuccess: "アカウントが削除されました。ホームページにリダイレクトします。",
+    saveButton: "保存",
+    cancelButton: "キャンセル",
+  },
+};
+
 export default function DashboardMyInfo() {
+  const { i18n: { currentLocale } } = useDocusaurusContext();
+  const text = localeText[currentLocale] || localeText.en;
+
   const {
     token,
     user,
@@ -53,8 +174,8 @@ export default function DashboardMyInfo() {
   // 上次登入資訊
   const lastLoginTime = user?.last_login_at
     ? moment(user.last_login_at).format("YYYY-MM-DD HH:mm") + " (UTC+0)"
-    : "無資料";
-  const lastLoginIp = user?.last_login_ip || "無資料";
+    : text.notSet;
+  const lastLoginIp = user?.last_login_ip || text.notSet;
 
   // =========== 1. 取得使用者資訊 ===========
   const refreshUserInfo = async () => {
@@ -67,14 +188,14 @@ export default function DashboardMyInfo() {
         },
       });
       if (!res.ok) {
-        throw new Error("取得使用者資訊失敗");
+        throw new Error(text.fetchUserInfoFailure);
       }
       const data = await res.json();
       setUser(data);
       // 若 email 存在但未驗證，顯示警示
       setShowEmailAlert(data.email && data.is_email_verified === false);
     } catch (err) {
-      message.error(err.message || "取得使用者資訊失敗");
+      message.error(err.message || text.fetchUserInfoFailure);
     } finally {
       setInfoLoading(false);
     }
@@ -113,7 +234,7 @@ export default function DashboardMyInfo() {
         : null;
       const payload = { ...values, birth: birthString };
       const updatedUser = await updateProfile(payload);
-      message.success("個人資料更新成功");
+      message.success(text.successMsg);
       setUser(updatedUser);
       setShowEmailAlert(
         updatedUser.email && updatedUser.is_email_verified === false
@@ -123,7 +244,7 @@ export default function DashboardMyInfo() {
       if (err.message.includes("Email already exists")) {
         profileForm.setFields([{ name: "email", errors: [err.message] }]);
       }
-      message.error(err.message || "個人資料更新失敗");
+      message.error(err.message || text.fetchUserInfoFailure);
     }
   };
 
@@ -144,16 +265,16 @@ export default function DashboardMyInfo() {
       });
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.detail || "頭像上傳失敗");
+        throw new Error(errData.detail || text.avatarUploadFailure);
       }
       const result = await res.json();
-      message.success("頭像已更新");
+      message.success(text.avatarUploadSuccess);
       setUser((prev) => ({
         ...prev,
         avatar: result.avatar,
       }));
     } catch (err) {
-      message.error(err.message || "頭像上傳失敗");
+      message.error(err.message || text.avatarUploadFailure);
     } finally {
       setUploadLoading(false);
     }
@@ -169,18 +290,19 @@ export default function DashboardMyInfo() {
 
   const onChangePassword = async (values) => {
     if (values.newPassword !== values.confirmPassword) {
-      setErrorMessage("兩次輸入的密碼不一致");
+      setErrorMessage(text.passwordMismatch);
       setErrorModalVisible(true);
       return;
     }
     try {
       await changePassword(values.oldPassword, values.newPassword);
-      message.success("密碼變更成功！");
+      message.success(text.changePasswordSuccess);
       setPwdModalVisible(false);
       pwdForm.resetFields();
     } catch (err) {
       console.error("變更密碼錯誤:", err);
-      const errorMsg = err.response?.data?.detail || err.message || "密碼變更失敗";
+      const errorMsg =
+        err.response?.data?.detail || err.message || text.changePasswordFailureTitle;
       setErrorMessage(errorMsg);
       setErrorModalVisible(true);
     }
@@ -195,7 +317,9 @@ export default function DashboardMyInfo() {
   const handleVerificationOk = async () => {
     try {
       await sendVerificationEmail(user.email);
-      message.success("驗證信已寄出，請檢查信箱");
+      message.success(
+        text.verificationModalSent || "驗證信已寄出，請檢查信箱"
+      );
       setVerificationModalVisible(false);
     } catch (err) {
       message.error(err.message || "寄送驗證信失敗");
@@ -206,7 +330,7 @@ export default function DashboardMyInfo() {
   const onDeleteAccount = async () => {
     try {
       await deleteAccount();
-      message.success("帳號已刪除，將導回主頁");
+      message.success(text.deleteAccountSuccess);
       setDeleteModalVisible(false);
       window.location.href = "/";
     } catch (err) {
@@ -220,16 +344,16 @@ export default function DashboardMyInfo() {
 
   const renderEmailStatus = () => {
     if (!user?.email) {
-      return <Text type="secondary">尚未設定</Text>;
+      return <Text type="secondary">{text.notSet}</Text>;
     }
     if (user.is_email_verified) {
-      return <Text style={{ color: "green" }}>已驗證</Text>;
+      return <Text style={{ color: "green" }}>{text.verified}</Text>;
     }
     return (
       <span style={{ color: "red" }}>
-        未驗證
+        {text.notVerified}
         <Button type="link" onClick={onResendVerification}>
-          寄送驗證信
+          {text.resendVerification}
         </Button>
       </span>
     );
@@ -237,13 +361,13 @@ export default function DashboardMyInfo() {
 
   return (
     <div>
-      <h2>我的資訊</h2>
+      <h2>{text.myInfoTitle}</h2>
 
       {showEmailAlert && user?.email && !user.is_email_verified && (
         <Alert
           style={{ marginBottom: 16 }}
-          message="您的 Email 尚未驗證"
-          description="請點選下方重新寄送驗證信，並檢查您的信箱。"
+          message={text.emailNotVerifiedAlertTitle}
+          description={text.emailNotVerifiedAlertDesc}
           type="warning"
           showIcon
         />
@@ -252,14 +376,15 @@ export default function DashboardMyInfo() {
       {!user?.email && !editing && (
         <Alert
           style={{ marginBottom: 16 }}
-          message="尚未填寫 Email"
+          message={text.noEmailAlertTitle}
           description={
             <>
-              您尚未綁定 Email，請點
-              <Button type="link" onClick={onEditProfile}>
-                編輯
-              </Button>
-              補上 Email。
+              {text.noEmailAlertDesc.replace(
+                "{editLink}",
+                <Button type="link" onClick={onEditProfile} key="edit">
+                  {text.editButton}
+                </Button>
+              )}
             </>
           }
           type="info"
@@ -277,13 +402,11 @@ export default function DashboardMyInfo() {
               onError={() => false}
             />
             <br />
-            <Upload
-              showUploadList={false}
-              accept="image/*"
-              customRequest={onUploadAvatar}
-            >
+            <Upload showUploadList={false} accept="image/*" customRequest={onUploadAvatar}>
               <Button icon={<UploadOutlined />} style={{ marginTop: 8 }}>
-                {uploadLoading ? "上傳中..." : "上傳頭像"}
+                {uploadLoading
+                  ? text.uploadAvatarButtonUploading
+                  : text.uploadAvatarButton}
               </Button>
             </Upload>
           </div>
@@ -303,27 +426,27 @@ export default function DashboardMyInfo() {
               }}
             >
               <Form.Item
-                label="帳號"
+                label={text.accountLabel}
                 name="username"
-                rules={[{ required: true, message: "請輸入帳號" }]}
+                rules={[{ required: true, message: text.usernameRequired }]}
               >
                 <Input disabled />
               </Form.Item>
               <Form.Item
-                label="Email"
+                label={text.emailLabel}
                 name="email"
                 rules={[
-                  { required: true, message: "請輸入 Email" },
-                  { type: "email", message: "Email 格式錯誤" },
+                  { required: true, message: text.emailRequired || "請輸入 Email" },
+                  { type: "email", message: text.invalidEmail || "Email 格式錯誤" },
                 ]}
               >
                 {user?.is_email_verified === false ? <Input /> : <Input disabled />}
               </Form.Item>
-              <Form.Item label="電話" name="phone">
+              <Form.Item label={text.phoneLabel} name="phone">
                 <Input />
               </Form.Item>
               <Form.Item
-                label="生日"
+                label={text.birthLabel}
                 name="birth"
                 getValueProps={(value) => ({
                   value: value ? moment(value, "YYYY-MM-DD").startOf("day") : null,
@@ -344,38 +467,45 @@ export default function DashboardMyInfo() {
               </Form.Item>
               <Form.Item>
                 <Button type="primary" htmlType="submit" style={{ marginRight: 8 }}>
-                  儲存
+                  {text.saveButton || "儲存"}
                 </Button>
-                <Button onClick={() => setEditing(false)}>取消</Button>
+                <Button onClick={() => setEditing(false)}>
+                  {text.cancelButton || "取消"}
+                </Button>
               </Form.Item>
             </Form>
           ) : (
             <div>
-              <p>帳號：{user?.username || "（未設定）"}</p>
               <p>
-                Email：{user?.email || "（未設定）"}
+                {text.accountLabel}：{user?.username || text.notSet}
+              </p>
+              <p>
+                {text.emailLabel}：{user?.email || text.notSet}
                 {user?.email && (
                   <span style={{ marginLeft: 8 }}>
-                    （狀態：{renderEmailStatus()}）
+                    （{text.statusLabel}：{renderEmailStatus()}）
                   </span>
                 )}
               </p>
-              <p>電話：{user?.phone || "（未設定）"}</p>
               <p>
-                生日：
+                {text.phoneLabel}：{user?.phone || text.notSet}
+              </p>
+              <p>
+                {text.birthLabel}：
                 {user?.birth
                   ? moment(user.birth).format("YYYY-MM-DD")
-                  : "（未設定）"}
+                  : text.notSet}
               </p>
               <Divider />
               <p>
-                上次登入時間：
+                {text.lastLoginTimeLabel}
                 <Text type="secondary">{lastLoginTime}</Text>
                 <br />
-                上次登入 IP：<Text type="secondary">{lastLoginIp}</Text>
+                {text.lastLoginIpLabel}
+                <Text type="secondary">{lastLoginIp}</Text>
               </p>
               <Button type="link" onClick={onEditProfile}>
-                編輯
+                {text.editButton}
               </Button>
             </div>
           )}
@@ -387,12 +517,12 @@ export default function DashboardMyInfo() {
       <Row gutter={[16, 16]}>
         <Col>
           <Button type="primary" onClick={openChangePwdModal}>
-            變更密碼
+            {text.changePasswordButton}
           </Button>
         </Col>
         <Col>
           <Button danger onClick={() => setDeleteModalVisible(true)}>
-            刪除帳號
+            {text.deleteAccountButton}
           </Button>
         </Col>
       </Row>
@@ -413,50 +543,87 @@ export default function DashboardMyInfo() {
         onDelete={onDeleteAccount}
       />
 
-      {/* 狀態控制的驗證信 Modal */}
+      {/* 驗證信 Modal */}
       <Modal
         open={verificationModalVisible}
-        title="寄送驗證信"
+        title={text.verificationModalTitle}
         getContainer={() => document.body}
         onOk={handleVerificationOk}
         onCancel={() => setVerificationModalVisible(false)}
-        okText="確定"
-        cancelText="取消"
+        okText={text.verificationModalOk}
+        cancelText={text.verificationModalCancel}
         okButtonProps={{ disabled: /@example\.com$/i.test(user?.email) }}
       >
         {/@example\.com$/i.test(user?.email) ? (
-          <p style={{ color: "red" }}>
-            預設信箱 (example.com) 無法用於驗證，請更換為有效的 Email。
-          </p>
+          <p style={{ color: "red" }}>{text.verificationModalExampleEmail}</p>
         ) : (
           <>
-            <p>
-              系統將發送驗證信至：
-              <strong style={{ marginLeft: 5 }}>{user?.email}</strong>
-            </p>
-            <p>請確認此 Email 是否正確？</p>
+            <p>{text.verificationModalDesc.replace("{email}", user?.email)}</p>
           </>
         )}
       </Modal>
 
       <Modal
         open={errorModalVisible}
-        title="變更密碼失敗"
+        title={text.changePasswordFailureTitle}
         onCancel={() => setErrorModalVisible(false)}
         footer={[
           <Button key="ok" type="primary" onClick={() => setErrorModalVisible(false)}>
-            確定
-          </Button>
+            {text.changePasswordModalOk}
+          </Button>,
         ]}
       >
         <p>{errorMessage}</p>
       </Modal>
-
     </div>
   );
 }
 
 function ChangePasswordModal({ visible, onCancel, onSubmit, form }) {
+  const { i18n: { currentLocale } } = useDocusaurusContext();
+  const localeText = {
+    "zh-hant": {
+      modalTitle: "變更密碼",
+      oldPasswordLabel: "舊密碼",
+      oldPasswordRequired: "請輸入舊密碼",
+      newPasswordLabel: "新密碼",
+      newPasswordRequired: "請輸入新密碼",
+      newPasswordTooShort: "至少 8 碼",
+      confirmNewPasswordLabel: "確認新密碼",
+      confirmNewPasswordRequired: "請再次輸入新密碼",
+      passwordMismatch: "兩次輸入的密碼不一致",
+      okText: "儲存",
+      cancelText: "取消",
+    },
+    en: {
+      modalTitle: "Change Password",
+      oldPasswordLabel: "Old Password",
+      oldPasswordRequired: "Please enter your old password",
+      newPasswordLabel: "New Password",
+      newPasswordRequired: "Please enter your new password",
+      newPasswordTooShort: "At least 8 characters",
+      confirmNewPasswordLabel: "Confirm New Password",
+      confirmNewPasswordRequired: "Please re-enter your new password",
+      passwordMismatch: "Passwords do not match",
+      okText: "Save",
+      cancelText: "Cancel",
+    },
+    ja: {
+      modalTitle: "パスワード変更",
+      oldPasswordLabel: "旧パスワード",
+      oldPasswordRequired: "旧パスワードを入力してください",
+      newPasswordLabel: "新パスワード",
+      newPasswordRequired: "新パスワードを入力してください",
+      newPasswordTooShort: "8文字以上である必要があります",
+      confirmNewPasswordLabel: "新パスワード確認",
+      confirmNewPasswordRequired: "新パスワードを再入力してください",
+      passwordMismatch: "入力したパスワードが一致しません",
+      okText: "保存",
+      cancelText: "キャンセル",
+    },
+  };
+  const text = localeText[currentLocale] || localeText.en;
+
   const [passwordStrength, setPasswordStrength] = useState("");
 
   const onFinish = (values) => {
@@ -477,29 +644,29 @@ function ChangePasswordModal({ visible, onCancel, onSubmit, form }) {
 
   return (
     <Modal
-      open={visible}  // 改用 open 屬性
-      title="變更密碼"
+      open={visible}
+      title={text.modalTitle}
       onCancel={() => {
         onCancel();
         form.resetFields();
         setPasswordStrength("");
       }}
       onOk={() => form.submit()}
-      okText="儲存"
-      cancelText="取消"
+      okText={text.okText}
+      cancelText={text.cancelText}
     >
       <Form form={form} layout="vertical" onFinish={onFinish}>
         <Form.Item
-          label="舊密碼"
+          label={text.oldPasswordLabel}
           name="oldPassword"
-          rules={[{ required: true, message: "請輸入舊密碼" }]}
+          rules={[{ required: true, message: text.oldPasswordRequired }]}
         >
           <Input.Password />
         </Form.Item>
         <Form.Item
           label={
             <>
-              新密碼
+              {text.newPasswordLabel}
               {passwordStrength && (
                 <span style={{ marginLeft: 8, color: "#999" }}>
                   (強度：{passwordStrength})
@@ -509,14 +676,14 @@ function ChangePasswordModal({ visible, onCancel, onSubmit, form }) {
           }
           name="newPassword"
           rules={[
-            { required: true, message: "請輸入新密碼" },
+            { required: true, message: text.newPasswordRequired },
             {
               validator: async (_, value) => {
                 if (!value) {
-                  return Promise.reject(new Error("請輸入新密碼"));
+                  return Promise.reject(new Error(text.newPasswordRequired));
                 }
                 if (value.length < 8) {
-                  return Promise.reject(new Error("至少 8 碼"));
+                  return Promise.reject(new Error(text.newPasswordTooShort));
                 }
                 return Promise.resolve();
               },
@@ -526,17 +693,17 @@ function ChangePasswordModal({ visible, onCancel, onSubmit, form }) {
           <PasswordInput onChange={handlePasswordChange} />
         </Form.Item>
         <Form.Item
-          label="確認新密碼"
+          label={text.confirmNewPasswordLabel}
           name="confirmPassword"
           dependencies={["newPassword"]}
           rules={[
-            { required: true, message: "請再次輸入新密碼" },
+            { required: true, message: text.confirmNewPasswordRequired },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue("newPassword") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject("兩次輸入的密碼不一致");
+                return Promise.reject(text.passwordMismatch);
               },
             }),
           ]}
@@ -549,17 +716,41 @@ function ChangePasswordModal({ visible, onCancel, onSubmit, form }) {
 }
 
 function DeleteAccountModal({ visible, onCancel, onDelete }) {
+  const { i18n: { currentLocale } } = useDocusaurusContext();
+  const localeText = {
+    "zh-hant": {
+      modalTitle: "刪除帳號",
+      modalContent: "您確定要刪除帳號嗎？此操作無法復原！",
+      okText: "確定刪除",
+      cancelText: "取消",
+    },
+    en: {
+      modalTitle: "Delete Account",
+      modalContent:
+        "Are you sure you want to delete your account? This action cannot be undone!",
+      okText: "Confirm Delete",
+      cancelText: "Cancel",
+    },
+    ja: {
+      modalTitle: "アカウント削除",
+      modalContent: "本当にアカウントを削除しますか？この操作は元に戻せません！",
+      okText: "削除を確定",
+      cancelText: "キャンセル",
+    },
+  };
+  const text = localeText[currentLocale] || localeText.en;
+
   return (
     <Modal
-      open={visible}  // 改用 open 屬性
-      title="刪除帳號"
+      open={visible}
+      title={text.modalTitle}
       onCancel={onCancel}
       onOk={onDelete}
-      okText="確定刪除"
-      cancelText="取消"
+      okText={text.okText}
+      cancelText={text.cancelText}
       okButtonProps={{ danger: true }}
     >
-      <p>您確定要刪除帳號嗎？此操作無法復原！</p>
+      <p>{text.modalContent}</p>
     </Modal>
   );
 }

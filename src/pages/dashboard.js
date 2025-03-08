@@ -9,7 +9,7 @@ import {
   PoweroffOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import Layout from "@theme/Layout"; // Docusaurus Layout
+import Layout from "@theme/Layout";
 import {
   Layout as AntLayout,
   Breadcrumb,

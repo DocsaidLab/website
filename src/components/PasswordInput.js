@@ -1,4 +1,5 @@
 // /src/components/PasswordInput.js
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { Input, Progress, Typography } from "antd";
 import React, { useState } from "react";
 import zxcvbn from "zxcvbn";
@@ -6,15 +7,33 @@ import zxcvbn from "zxcvbn";
 const { Text } = Typography;
 
 export default function PasswordInput({ onChange, ...rest }) {
+  const { i18n: { currentLocale } } = useDocusaurusContext();
+
+  const localeText = {
+    "zh-hant": {
+      passwordStrengthTitle: "密碼強度：",
+      strengthTexts: ["非常弱", "弱", "中等", "強", "非常強"],
+    },
+    en: {
+      passwordStrengthTitle: "Password Strength: ",
+      strengthTexts: ["Very Weak", "Weak", "Medium", "Strong", "Very Strong"],
+    },
+    ja: {
+      passwordStrengthTitle: "パスワードの強度：",
+      strengthTexts: ["非常に弱い", "弱い", "普通", "強い", "非常に強い"],
+    },
+  };
+
+  const text = localeText[currentLocale] || localeText.en;
+
   const [score, setScore] = useState(0);
-  const strengthTexts = ["非常弱", "弱", "中等", "強", "非常強"];
   const progressPercent = score * 25;
   const strokeColor = [
-    "#ff4d4f", // 非常弱
-    "#ff7a45", // 弱
-    "#faad14", // 中等
-    "#52c41a", // 強
-    "#1677ff", // 非常強
+    "#ff4d4f", // 非常弱 / Very Weak
+    "#ff7a45", // 弱 / Weak
+    "#faad14", // 中等 / Medium
+    "#52c41a", // 強 / Strong
+    "#1677ff", // 非常強 / Very Strong
   ][score] || "#ff4d4f";
 
   const handleChange = (e) => {
@@ -28,7 +47,7 @@ export default function PasswordInput({ onChange, ...rest }) {
     <div>
       <Input.Password {...rest} onChange={handleChange} />
       <div style={{ marginTop: 8 }}>
-        <Text>{`密碼強度：${strengthTexts[score]}`}</Text>
+        <Text>{`${text.passwordStrengthTitle}${text.strengthTexts[score]}`}</Text>
         <Progress percent={progressPercent} showInfo={false} strokeColor={strokeColor} />
       </div>
     </div>

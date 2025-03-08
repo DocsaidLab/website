@@ -16,8 +16,6 @@ const localeText = {
     successMsg: "註冊成功！",
     pwnedWarning: "此密碼曾出現在外洩紀錄中，請使用更安全的密碼。",
     passwordTooShort: "密碼長度需至少 8 碼",
-    passwordStrengthTitle: "密碼強度：",
-    strengthTexts: ["非常弱", "弱", "中等", "強", "非常強"],
   },
   en: {
     usernameLabel: "Username",
@@ -29,8 +27,6 @@ const localeText = {
     successMsg: "Registration successful!",
     pwnedWarning: "This password has appeared in data breaches. Please use a more secure one.",
     passwordTooShort: "Password must be at least 8 characters",
-    passwordStrengthTitle: "Password Strength: ",
-    strengthTexts: ["Very Weak", "Weak", "Medium", "Strong", "Very Strong"],
   },
   ja: {
     usernameLabel: "ユーザー名",
@@ -42,8 +38,6 @@ const localeText = {
     successMsg: "登録が完了しました！",
     pwnedWarning: "このパスワードは漏洩した履歴があります。より安全なものを使用してください。",
     passwordTooShort: "パスワードは8文字以上である必要があります",
-    passwordStrengthTitle: "パスワードの強度：",
-    strengthTexts: ["非常に弱い", "弱い", "普通", "強い", "非常に強い"],
   },
 };
 
