@@ -1,5 +1,5 @@
 // /src/hooks/useAuthHandler.js
-import { message } from "antd";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
@@ -8,11 +8,25 @@ export default function useAuthHandler() {
   const { loginSuccess } = useAuth();
   const [loading, setLoading] = useState(false);
 
+  // 從 Docusaurus 取得當前語系
+  const {
+    i18n: { currentLocale },
+  } = useDocusaurusContext();
+
+  // 對應到後端需要的語系
+  const serverLang = currentLocale;
+
   /**
    * 登入
    * @param {string} username
    * @param {string} password
-   * @returns {boolean} 是否成功
+   * @returns {Promise<{
+   *   success: boolean;
+   *   errorMessage?: string;
+   *   status?: number;
+   *   userNotFound?: boolean;
+   *   remainingAttempts?: number;
+   * }>}
    */
   const login = async (username, password) => {
     setLoading(true);
@@ -21,6 +35,7 @@ export default function useAuthHandler() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Accept-Language": serverLang,
         },
         body: JSON.stringify({ username, password }),
       });
@@ -28,59 +43,87 @@ export default function useAuthHandler() {
       let data;
       try {
         data = await res.json();
-      } catch (err) {
+      } catch {
         data = {};
       }
 
-      // 若非成功狀態，根據回傳內容整理錯誤訊息並回傳包含狀態碼的物件
+      // 若非成功 (2xx)
       if (!res.ok) {
-        let errorMsg = "登入失敗";
-        if (data.detail) {
-          if (typeof data.detail === "object") {
-            errorMsg = Object.entries(data.detail)
-              .map(([key, value]) => `${key}: ${value}`)
-              .join(" | ");
-          } else {
-            errorMsg = data.detail;
-          }
-        }
+        const errorMsg = data?.error || "登入失敗";
         console.error(`Error ${res.status}:`, data);
-        return { success: false, errorMessage: `Error ${res.status}: ${errorMsg}`, status: res.status };
+
+        switch (res.status) {
+          case 404:
+            // 使用者不存在
+            return {
+              success: false,
+              status: 404,
+              userNotFound: true,            // 前端可用於判斷「使用者不存在」
+              errorMessage: errorMsg,
+            };
+          case 429:
+            // 達到最大嘗試次數 (後端封鎖)
+            return {
+              success: false,
+              status: 429,
+              errorMessage: errorMsg,
+              remainingAttempts: data.remaining_attempts ?? 0,
+            };
+          case 401:
+            // 密碼錯誤 / 尚有剩餘次數
+            return {
+              success: false,
+              status: 401,
+              errorMessage: errorMsg,
+              remainingAttempts: data.remaining_attempts, // 可能為 0, 1, 2, ...
+            };
+          default:
+            // 其他錯誤
+            return {
+              success: false,
+              status: res.status,
+              errorMessage: errorMsg,
+            };
+        }
       }
 
+      // 成功情況：帶有 access_token
       if (data.access_token) {
         await loginSuccess(data.access_token);
-        message.success("登入成功");
         return { success: true, status: res.status };
       }
 
-      message.error("登入失敗: token 不存在");
-      return { success: false, errorMessage: "登入失敗: token 不存在", status: res.status };
+      // 成功但沒有 token (較罕見)
+      return {
+        success: false,
+        status: res.status,
+        errorMessage: "登入失敗: token 不存在",
+      };
     } catch (error) {
       console.error("login error:", error);
-      message.error(error.message || "登入請求失敗");
-      return { success: false, errorMessage: error.message || "登入請求失敗", status: 500 };
+      return {
+        success: false,
+        status: 500,
+        errorMessage: error.message || "登入請求失敗",
+      };
     } finally {
       setLoading(false);
     }
   };
 
-
   /**
    * 註冊
-   * @param {{username: string, password: string, force?: boolean}} payload
-   * @returns {{success: boolean, pwned?: boolean, error?: string, token?: string}}
    */
-  const register = async ({ username, password, force = false }) => {
+  const register = async ({ username, password }) => {
     setLoading(true);
     try {
-      // 補上假 email (後端必填)
-      const fakeEmail = `${username}@example.com`;
+      const fakeEmail = `${username}@example.com`;  // 後端必填 email
 
       const res = await fetch("https://api.docsaid.org/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Accept-Language": serverLang,
         },
         body: JSON.stringify({
           username,
@@ -89,36 +132,31 @@ export default function useAuthHandler() {
           phone: null,
           birth: null,
           avatar: null,
-          force: force
         }),
       });
 
-      if (!res.ok) {
-        let errData = {};
-        try {
-          errData = await res.json();
-        } catch (parseError) {
-          console.error("parse error:", parseError);
-        }
+      let data = {};
+      try {
+        data = await res.json();
+      } catch (parseError) {
+        console.error("parse error:", parseError);
+      }
 
+      if (!res.ok) {
+        let errorMsg = data?.error || "Registration failed";
         // 若為 422 => { detail: [ {loc, msg, type} ] }
-        if (Array.isArray(errData.detail)) {
-          const msgs = errData.detail.map((d) => d.msg).join("; ");
-          return { success: false, error: msgs || "Registration failed" };
+        if (Array.isArray(data.detail)) {
+          const msgs = data.detail.map((d) => d.msg).join("; ");
+          errorMsg = msgs || errorMsg;
         }
-        // 其他錯誤 => 取 detail / error
         return {
           success: false,
-          error: errData.detail || errData.error || "Registration failed",
+          error: errorMsg,
         };
       }
 
-      // 成功 => 解析回傳 JSON => e.g. { id, username, pwned, token? }
-      const data = await res.json();
-
-      // 若後端同時回傳 token => 可以立即登入
+      // 成功 => 回傳
       if (data.token) {
-        // 寫入 AuthContext => localStorage
         await loginSuccess(data.token);
       }
 

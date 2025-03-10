@@ -15,6 +15,7 @@ const localeText = {
     loginRequestTooFrequent: "登入請求過於頻繁，請稍後再試",
     maxAttemptsReached: "已達最大嘗試次數，請稍後再試",
     wrongCredentials: "密碼錯誤，剩餘嘗試次數：",
+    userNotFound: "使用者不存在",
     countdownMessage: "請等待 {lockCountdown} 秒後再試",
   },
   en: {
@@ -28,6 +29,7 @@ const localeText = {
     loginRequestTooFrequent: "Too many login attempts, please try again later.",
     maxAttemptsReached: "Maximum attempts reached, please try again later.",
     wrongCredentials: "Incorrect password, remaining attempts: ",
+    userNotFound: "User does not exist",
     countdownMessage: "Please wait {lockCountdown} seconds before trying again.",
   },
   ja: {
@@ -38,39 +40,38 @@ const localeText = {
     loginBtn: "ログイン",
     forgotPassword: "パスワードをお忘れですか？",
     loginSuccessMsg: "ログイン成功！",
-    loginRequestTooFrequent: "ログインリクエストが頻繁すぎます。後でもう一度お試しください。",
+    loginRequestTooFrequent:
+      "ログインリクエストが頻繁すぎます。後でもう一度お試しください。",
     maxAttemptsReached: "最大試行回数に達しました。後でもう一度お試しください。",
     wrongCredentials: "ユーザー名またはパスワードが正しくありません。残り試行回数：",
+    userNotFound: "ユーザーが存在しません",
     countdownMessage: "{lockCountdown} 秒後に再試行してください。",
   },
 };
 
 export default function LoginForm({
-  onLogin,                // 呼叫後端 /auth/login 的函式，回傳格式：{ success, errorMessage, status }
-  onSuccess,             // 登入成功後的 callback (可用來跳轉 / 關閉 Modal)
-  loading,               // 登入按鈕的加載狀態
-  onToggleForgotPassword // 切換到「忘記密碼」畫面的函式 (若需要)
+  onLogin, // 從 useAuthHandler 傳進來, { success, errorMessage, status, userNotFound, remainingAttempts? }
+  onSuccess,
+  loading,
+  onToggleForgotPassword,
 }) {
   const {
     i18n: { currentLocale },
   } = useDocusaurusContext();
   const text = localeText[currentLocale] || localeText.en;
 
-  // 顯示錯誤與成功提示
+  const [form] = Form.useForm();
   const [submitError, setSubmitError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  // antd form
-  const [form] = Form.useForm();
-
-  // 錯誤嘗試計數與鎖定狀態
+  // 錯誤嘗試計數 & 鎖定
   const [failedAttempts, setFailedAttempts] = useState(0);
   const [isLocked, setIsLocked] = useState(false);
-  const MAX_ATTEMPTS = 5; // 可自訂最大嘗試次數
-  const LOCK_DURATION = 900; // 預設鎖定時長（秒）
+
+  const MAX_ATTEMPTS = 5; // 自訂最大嘗試次數
+  const LOCK_DURATION = 900; // 鎖定秒數
   const [lockCountdown, setLockCountdown] = useState(0);
 
-  // 當進入鎖定狀態時，啟動倒數計時
   useEffect(() => {
     let timer;
     if (isLocked) {
@@ -79,7 +80,6 @@ export default function LoginForm({
         setLockCountdown((prev) => {
           if (prev <= 1) {
             clearInterval(timer);
-            // 倒數結束，自動解鎖並重置失敗計數
             setIsLocked(false);
             setFailedAttempts(0);
             return 0;
@@ -93,17 +93,9 @@ export default function LoginForm({
     };
   }, [isLocked]);
 
-  /**
-   * 提交表單:
-   *  1. 清空錯誤與成功提示
-   *  2. 呼叫 onLogin(username, password)，預期回傳 { success, errorMessage, status }
-   *  3. 若成功 => 顯示成功訊息 / 呼叫 onSuccess
-   *  4. 若失敗：
-   *     - 若 status 為 429，表示後端正在封鎖，直接鎖定並顯示通用 ban 訊息
-   *     - 其他錯誤則累計失敗次數，達到上限時鎖定並啟動倒數，並只顯示通用錯誤訊息
-   */
   const onFinish = async (values) => {
-    if (isLocked) return; // 鎖定狀態下不執行登入
+    if (isLocked) return; // 已鎖定，不允許登入
+
     setSubmitError("");
     setSuccessMessage("");
 
@@ -113,13 +105,36 @@ export default function LoginForm({
       setFailedAttempts(0);
       onSuccess?.();
     } else {
-      // 若回傳 429，表示後端封鎖中，顯示通用 ban 訊息
+      // 先檢查是否為 429 => 後端封鎖
       if (result.status === 429) {
         setIsLocked(true);
         setSubmitError(text.loginRequestTooFrequent);
+        return;
+      }
+
+      // 檢查是否使用者不存在
+      if (result.userNotFound) {
+        // 不進行失敗次數紀錄，直接顯示「使用者不存在」
+        setSubmitError(text.userNotFound);
+        return;
+      }
+
+      // 其餘錯誤 (包含密碼錯誤)
+      // 如果後端帶有 remainingAttempts，則跟著更新
+      if (typeof result.remainingAttempts === "number") {
+        const rem = result.remainingAttempts;
+        if (rem <= 0) {
+          // 若後端表示剩餘次數0 => 也視為封鎖
+          setIsLocked(true);
+          setSubmitError(text.maxAttemptsReached);
+        } else {
+          setSubmitError(`${text.wrongCredentials}${rem}`);
+        }
       } else {
+        // 若後端沒有帶 remainingAttempts，則用本地邏輯做簡單累計
         const newCount = failedAttempts + 1;
         setFailedAttempts(newCount);
+
         if (newCount >= MAX_ATTEMPTS) {
           setIsLocked(true);
           setSubmitError(text.maxAttemptsReached);
@@ -137,7 +152,6 @@ export default function LoginForm({
       onFinish={onFinish}
       style={{ maxWidth: 400, margin: "0 auto" }}
     >
-      {/* 帳號欄位 */}
       <Form.Item
         label={text.usernameLabel}
         name="username"
@@ -146,7 +160,6 @@ export default function LoginForm({
         <Input disabled={isLocked} />
       </Form.Item>
 
-      {/* 密碼欄位 */}
       <Form.Item
         label={text.passwordLabel}
         name="password"
@@ -155,7 +168,6 @@ export default function LoginForm({
         <Input.Password disabled={isLocked} />
       </Form.Item>
 
-      {/* 登入成功訊息 */}
       {successMessage && (
         <Alert
           style={{ marginBottom: 10 }}
@@ -164,8 +176,6 @@ export default function LoginForm({
           showIcon
         />
       )}
-
-      {/* 錯誤訊息 */}
       {submitError && (
         <Alert
           style={{ marginBottom: 10 }}
@@ -174,18 +184,18 @@ export default function LoginForm({
           showIcon
         />
       )}
-
-      {/* 若鎖定中，顯示倒數訊息 */}
       {isLocked && (
         <Alert
           style={{ marginBottom: 10 }}
-          message={text.countdownMessage.replace("{lockCountdown}", lockCountdown)}
+          message={text.countdownMessage.replace(
+            "{lockCountdown}",
+            lockCountdown
+          )}
           type="warning"
           showIcon
         />
       )}
 
-      {/* 提交按鈕 */}
       <Form.Item>
         <Button
           type="primary"
@@ -198,7 +208,6 @@ export default function LoginForm({
         </Button>
       </Form.Item>
 
-      {/* 忘記密碼連結 */}
       {onToggleForgotPassword && (
         <Typography.Link
           style={{ float: "right", marginTop: 8 }}

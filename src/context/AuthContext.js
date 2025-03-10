@@ -1,4 +1,5 @@
 // /src/context/AuthContext.js
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const AuthContext = createContext({
@@ -15,55 +16,76 @@ const AuthContext = createContext({
   deleteAccount: () => {},
 });
 
+// 後端 API 網址
 const API_BASE = "https://api.docsaid.org";
 
-/**
- * 通用 API 請求工具
- * @param {string} endpoint API 路徑 (例如 /auth/me)
- * @param {string} method HTTP 方法
- * @param {string|null} token 若有 token 則自動加入 Authorization header
- * @param {object|FormData|null} body 若為物件則轉成 JSON；若為 FormData 則直接傳送
- */
-async function apiRequest(endpoint, method = "GET", token = null, body = null) {
-  const headers = {};
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
-  }
-  const isFormData = body instanceof FormData;
-  if (body && !isFormData) {
-    headers["Content-Type"] = "application/json";
-    body = JSON.stringify(body);
-  }
-  const res = await fetch(`${API_BASE}${endpoint}`, {
-    method,
-    headers,
-    body: body || undefined,
-  });
-
-  // 判斷回傳格式
-  const contentType = res.headers.get("Content-Type");
-  let data = {};
-  if (contentType && contentType.includes("application/json")) {
-    data = await res.json();
-  } else {
-    data = await res.text();
-  }
-  if (!res.ok) {
-    // 若在開發環境中，詳細錯誤資訊會輸出到 console；生產環境則只拋出簡單訊息
-    if (process.env.NODE_ENV !== "production") {
-      console.error(`API Request Failed [${method} ${endpoint}]:`, data);
-    }
-    throw new Error(data.detail || data || "請求失敗");
-  }
-  return data;
-}
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 啟動時檢查 localStorage 並取得使用者資訊
+  // 2. 取得 Docusaurus 的 currentLocale
+  const {
+    i18n: { currentLocale },
+  } = useDocusaurusContext();
+
+  // 3. 根據 currentLocale 對照，取得後端需要的語言代碼
+  const serverLang = currentLocale;
+
+  /**
+   * 通用 API 請求工具
+   * @param {string} endpoint API 路徑 (例如 /auth/me)
+   * @param {string} method HTTP 方法
+   * @param {string|null} token 若有 token 則自動加入 Authorization header
+   * @param {object|FormData|null} body 若為物件則轉成 JSON；若為 FormData 則直接傳送
+   */
+  async function apiRequest(endpoint, method = "GET", tokenArg = null, body = null) {
+    const headers = {};
+    // 加入 Bearer Token
+    if (tokenArg) {
+      headers.Authorization = `Bearer ${tokenArg}`;
+    }
+    // 加入語系
+    headers["Accept-Language"] = serverLang;
+
+    // 判斷是否為 FormData
+    const isFormData = body instanceof FormData;
+    if (body && !isFormData) {
+      headers["Content-Type"] = "application/json";
+      body = JSON.stringify(body);
+    }
+
+    const res = await fetch(`${API_BASE}${endpoint}`, {
+      method,
+      headers,
+      body: body || undefined,
+    });
+
+    const contentType = res.headers.get("Content-Type");
+    let data = {};
+    if (contentType && contentType.includes("application/json")) {
+      data = await res.json();
+    } else {
+      data = await res.text();
+    }
+
+    if (!res.ok) {
+      const errorMsg = data?.error || data?.detail || data || "請求失敗";
+      if (process.env.NODE_ENV !== "production") {
+        console.error(`API Request Failed [${method} ${endpoint}]:`, data);
+      }
+      const err = new Error(errorMsg);
+      // 若後端回傳特定欄位(如 remaining_attempts)，可一併加到 Error 物件
+      if (data?.remaining_attempts !== undefined) {
+        err.remaining_attempts = data.remaining_attempts;
+      }
+      throw err;
+    }
+    return data;
+  }
+
+  // App 啟動時從 localStorage 取得 token 並嘗試拉取用戶資料
   useEffect(() => {
     const initAuth = async () => {
       const savedToken = localStorage.getItem("token");
@@ -86,7 +108,7 @@ export function AuthProvider({ children }) {
     initAuth();
   }, []);
 
-  // 登入成功後，儲存 token 並刷新使用者資料
+  // 登入成功後，儲存 Token 並刷新使用者資料
   const loginSuccess = async (loginToken) => {
     try {
       const userData = await apiRequest("/auth/me", "GET", loginToken);
@@ -100,7 +122,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // 登出：清空 token 與使用者資料，並導向首頁
+  // 登出
   const logout = () => {
     setToken(null);
     setUser(null);
@@ -108,19 +130,12 @@ export function AuthProvider({ children }) {
     window.location.href = "/";
   };
 
-  // 更新個人資料，若 email 重複會拋出錯誤
+  // 更新個人資料
   const updateProfile = async (payload) => {
     if (!token) throw new Error("尚未登入");
-    try {
-      const newUser = await apiRequest("/auth/profile", "PUT", token, payload);
-      setUser(newUser);
-      return newUser;
-    } catch (error) {
-      if (process.env.NODE_ENV !== "production") {
-        console.error("更新個人資料錯誤:", error);
-      }
-      throw new Error(error.message || "更新失敗");
-    }
+    const newUser = await apiRequest("/auth/profile", "PUT", token, payload);
+    setUser(newUser);
+    return newUser;
   };
 
   // 寄送驗證信
@@ -129,18 +144,14 @@ export function AuthProvider({ children }) {
     return apiRequest("/auth/send-verification-email", "POST", token, { email });
   };
 
-  // 驗證 Email，成功後刷新使用者資訊
-  const verifyEmail = async (payload) => {
-    const data = await apiRequest("/auth/verify-email", "POST", null, payload);
+  // 驗證 Email (注意後端為 GET + Redirect 設計，fetch 可能只會拿到 redirect 前的狀態)
+  const verifyEmail = async (verifyToken) => {
+    // 範例：若前端還是想要直接呼叫
+    const data = await apiRequest(`/auth/verify-email?token=${verifyToken}`, "GET", null, null);
+    // 成功後可重新抓取 /auth/me 更新 user 狀態
     if (token) {
-      try {
-        const updatedUser = await apiRequest("/auth/me", "GET", token);
-        setUser(updatedUser);
-      } catch (e) {
-        if (process.env.NODE_ENV !== "production") {
-          console.error("刷新使用者資訊失敗", e);
-        }
-      }
+      const updatedUser = await apiRequest("/auth/me", "GET", token);
+      setUser(updatedUser);
     }
     return data;
   };
@@ -148,15 +159,13 @@ export function AuthProvider({ children }) {
   // 變更密碼
   const changePassword = async (oldPassword, newPassword) => {
     if (!token) throw new Error("尚未登入");
-    return apiRequest(
-      "/auth/change-password",
-      "POST",
-      token,
-      { old_password: oldPassword, new_password: newPassword }
-    );
+    return apiRequest("/auth/change-password", "POST", token, {
+      old_password: oldPassword,
+      new_password: newPassword,
+    });
   };
 
-  // 刪除帳號，成功後自動登出
+  // 刪除帳號
   const deleteAccount = async () => {
     if (!token) throw new Error("尚未登入");
     await apiRequest("/auth/delete", "DELETE", token);
