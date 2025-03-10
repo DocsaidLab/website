@@ -59,7 +59,7 @@ const localeText = {
     verificationModalCancel: "取消",
     verificationModalExampleEmail: "預設信箱 (example.com) 無法用於驗證，請更換為有效的 Email。",
     verificationModalDesc: "系統將發送驗證信至：{email}\n請確認此 Email 是否正確？",
-    deleteAccountSuccess: "帳號已刪除，將導回主頁",
+    deleteAccountSuccess: "帳號已刪除，將導回首頁",
     saveButton: "儲存",
     cancelButton: "取消",
   },

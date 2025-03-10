@@ -6,7 +6,7 @@ import zxcvbn from "zxcvbn";
 
 const { Text } = Typography;
 
-export default function PasswordInput({ onChange, ...rest }) {
+export default function PasswordInput({ onChange, hideStrength = false,...rest }) {
   const { i18n: { currentLocale } } = useDocusaurusContext();
 
   const localeText = {
@@ -46,10 +46,12 @@ export default function PasswordInput({ onChange, ...rest }) {
   return (
     <div>
       <Input.Password {...rest} onChange={handleChange} />
-      <div style={{ marginTop: 8 }}>
-        <Text>{`${text.passwordStrengthTitle}${text.strengthTexts[score]}`}</Text>
-        <Progress percent={progressPercent} showInfo={false} strokeColor={strokeColor} />
-      </div>
+      {!hideStrength && (
+        <div style={{ marginTop: 8 }}>
+          <Text>{`${text.passwordStrengthTitle}${text.strengthTexts[score]}`}</Text>
+          <Progress percent={progressPercent} showInfo={false} strokeColor={strokeColor} />
+        </div>
+      )}
     </div>
   );
 }
