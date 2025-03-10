@@ -80,7 +80,16 @@ export default function RegisterForm({ onLogin, onSuccess, onRegister, loading }
       if (ok) {
         onSuccess?.();
       }
-      window.location.href = "/dashboard";
+
+      // 根據語系決定路徑
+      let dashboardPath = '/dashboard';
+      if (currentLocale === 'en') {
+        dashboardPath = '/en/dashboard';
+      } else if (currentLocale === 'ja') {
+        dashboardPath = '/ja/dashboard';
+      }
+
+      window.location.href = dashboardPath;
     } else {
       if (result.pwned) {
         setSubmitError(text.pwnedWarning);

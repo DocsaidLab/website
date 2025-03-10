@@ -122,12 +122,20 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // 根據語系決定首頁路徑
+  let homePath = '/';
+  if (currentLocale === 'en') {
+    homePath = '/en';
+  } else if (currentLocale === 'ja') {
+    homePath = '/ja';
+  }
+
   // 登出
   const logout = () => {
     setToken(null);
     setUser(null);
     localStorage.removeItem("token");
-    window.location.href = "/";
+    window.location.href = homePath;
   };
 
   // 更新個人資料

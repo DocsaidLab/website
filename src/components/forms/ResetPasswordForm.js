@@ -145,8 +145,17 @@ export default function ResetPasswordForm({ onSuccess }) {
       if (onSuccess) {
         onSuccess();
       }
+
+      // 根據語系決定首頁路徑
+      let homePath = '/';
+      if (currentLocale === 'en') {
+        homePath = '/en';
+      } else if (currentLocale === 'ja') {
+        homePath = '/ja';
+      }
+
       setTimeout(() => {
-        window.location.href = "/";
+        window.location.href = homePath;
       }, 1500);
     } catch (error) {
       console.error("Reset password error:", error);

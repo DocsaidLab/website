@@ -396,24 +396,32 @@ export default function DashboardMyInfo() {
       )}
 
       <Row gutter={[16, 16]}>
-        <Col span={8}>
-          <div style={{ textAlign: "center" }}>
-            <Avatar
-              size={160}
-              src={user?.avatar}
-              icon={<UserOutlined />}
-              onError={() => false}
-            />
-            <br />
-            <Upload showUploadList={false} accept="image/*" customRequest={onUploadAvatar}>
-              <Button icon={<UploadOutlined />} style={{ marginTop: 8 }}>
-                {uploadLoading
-                  ? text.uploadAvatarButtonUploading
-                  : text.uploadAvatarButton}
-              </Button>
-            </Upload>
-          </div>
-        </Col>
+      <Col span={8}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+          }}
+        >
+          <Avatar
+            size={160}
+            src={user?.avatar}
+            icon={<UserOutlined />}
+            onError={() => false}
+          />
+          <br />
+          <Upload showUploadList={false} accept="image/*" customRequest={onUploadAvatar}>
+            <Button icon={<UploadOutlined />} style={{ marginTop: 8 }}>
+              {uploadLoading
+                ? text.uploadAvatarButtonUploading
+                : text.uploadAvatarButton}
+            </Button>
+          </Upload>
+        </div>
+      </Col>
 
         <Col span={16}>
           {editing ? (

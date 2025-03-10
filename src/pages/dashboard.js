@@ -9,6 +9,7 @@ import {
   PoweroffOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from "@theme/Layout";
 import {
   Layout as AntLayout,
@@ -33,7 +34,102 @@ import DashboardMyInfo from "../components/Dashboard/MyInfo";
 
 const { Header: AntHeader, Sider, Content, Footer } = AntLayout;
 
+const localeText = {
+  "zh-hant": {
+    dashboardTitle: "我的後台",
+    loginWarning: "請先登入",
+    notLoggedIn: "尚未登入",
+    sider: {
+      collapsed: "後台",
+      expanded: "我的後台",
+      menu: {
+        myinfo: "我的資訊",
+        comments: "我的留言",
+        apikey: "我的 API Key",
+        apiusage: "API 使用紀錄",
+      },
+    },
+    breadcrumb: {
+      dashboard: "我的後台",
+      myinfo: "我的資訊",
+      comments: "我的留言",
+      apikey: "我的 API Key",
+      apiusage: "API 使用紀錄",
+      undefined: "未定義",
+    },
+    userMenu: {
+      backHome: "回主站",
+      logout: "登出",
+    },
+    footer: {
+      text: "© {year} My Company. All rights reserved.",
+    },
+  },
+  en: {
+    dashboardTitle: "Dashboard",
+    loginWarning: "Please log in first",
+    notLoggedIn: "Not logged in",
+    sider: {
+      collapsed: "Dashboard",
+      expanded: "My Dashboard",
+      menu: {
+        myinfo: "My Information",
+        comments: "My Comments",
+        apikey: "My API Key",
+        apiusage: "API Usage",
+      },
+    },
+    breadcrumb: {
+      dashboard: "Dashboard",
+      myinfo: "My Information",
+      comments: "My Comments",
+      apikey: "My API Key",
+      apiusage: "API Usage",
+      undefined: "Undefined",
+    },
+    userMenu: {
+      backHome: "Back to Site",
+      logout: "Logout",
+    },
+    footer: {
+      text: "© {year} My Company. All rights reserved.",
+    },
+  },
+  ja: {
+    dashboardTitle: "ダッシュボード",
+    loginWarning: "まずログインしてください",
+    notLoggedIn: "ログインしていません",
+    sider: {
+      collapsed: "ダッシュボード",
+      expanded: "マイダッシュボード",
+      menu: {
+        myinfo: "マイ情報",
+        comments: "マイコメント",
+        apikey: "マイAPIキー",
+        apiusage: "API利用状況",
+      },
+    },
+    breadcrumb: {
+      dashboard: "ダッシュボード",
+      myinfo: "マイ情報",
+      comments: "マイコメント",
+      apikey: "マイAPIキー",
+      apiusage: "API利用状況",
+      undefined: "未定義",
+    },
+    userMenu: {
+      backHome: "サイトへ戻る",
+      logout: "ログアウト",
+    },
+    footer: {
+      text: "© {year} My Company. All rights reserved.",
+    },
+  },
+};
+
 export default function DashboardPage() {
+  const { i18n: { currentLocale } } = useDocusaurusContext();
+  const text = localeText[currentLocale] || localeText.en;
   const { token, user, loading, logout } = useAuth();
   const [selectedKey, setSelectedKey] = useState("myinfo");
   const [collapsed, setCollapsed] = useState(false);
@@ -42,10 +138,10 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!loading && !token) {
-      message.warning("請先登入");
+      message.warning(text.loginWarning);
       // 可根據需求導向登入頁面，例如：window.location.href = "/";
     }
-  }, [loading, token]);
+  }, [loading, token, text.loginWarning]);
 
   const contentComponent = useMemo(() => {
     switch (selectedKey) {
@@ -65,45 +161,51 @@ export default function DashboardPage() {
   const pageTitle = useMemo(() => {
     switch (selectedKey) {
       case "myinfo":
-        return "我的資訊";
+        return text.breadcrumb.myinfo;
       case "comments":
-        return "我的留言";
+        return text.breadcrumb.comments;
       case "apikey":
-        return "我的 API Key";
+        return text.breadcrumb.apikey;
       case "apiusage":
-        return "API 使用紀錄";
+        return text.breadcrumb.apiusage;
       default:
-        return "未定義";
+        return text.breadcrumb.undefined;
     }
-  }, [selectedKey]);
+  }, [selectedKey, text.breadcrumb]);
 
-  // 建立右上角用戶選單，使用新版 Dropdown API
+  // 根據語系決定首頁路徑
+  let homePath = '/';
+  if (currentLocale === 'en') {
+    homePath = '/en';
+  } else if (currentLocale === 'ja') {
+    homePath = '/ja';
+  }
+
   const userMenuItems = [
     {
       key: "backHome",
       icon: <HomeOutlined />,
-      label: "回主站",
+      label: text.userMenu.backHome,
       onClick: () => {
-        window.location.href = "/";
+        window.location.href = homePath;
       },
     },
     {
       key: "logout",
       icon: <PoweroffOutlined />,
-      label: "登出",
+      label: text.userMenu.logout,
       onClick: logout,
     },
   ];
 
-  // 使用新版 Breadcrumb API
   const breadcrumbItems = [
-    { title: "我的後台" },
+    { title: text.breadcrumb.dashboard },
     { title: pageTitle },
   ];
 
   if (loading) {
     return (
-      <Layout title="後台">
+      <Layout title={text.dashboardTitle}>
         <Spin style={{ margin: "50px auto", display: "block" }} />
       </Layout>
     );
@@ -111,16 +213,16 @@ export default function DashboardPage() {
 
   if (!token) {
     return (
-      <Layout title="後台">
+      <Layout title={text.dashboardTitle}>
         <div style={{ textAlign: "center", margin: 50 }}>
-          <h2>尚未登入</h2>
+          <h2>{text.notLoggedIn}</h2>
         </div>
       </Layout>
     );
   }
 
   return (
-    <Layout title="我的後台">
+    <Layout title={text.dashboardTitle}>
       <AntLayout style={{ minHeight: "calc(100vh - 60px)" }}>
         <Sider
           theme="light"
@@ -137,17 +239,17 @@ export default function DashboardPage() {
               borderBottom: "1px solid #eee",
             }}
           >
-            {collapsed ? "後台" : "我的後台"}
+            {collapsed ? text.sider.collapsed : text.sider.expanded}
           </div>
           <Menu
             mode="inline"
             selectedKeys={[selectedKey]}
             onClick={(e) => setSelectedKey(e.key)}
             items={[
-              { key: "myinfo", icon: <UserOutlined />, label: "我的資訊" },
-              { key: "comments", icon: <CommentOutlined />, label: "我的留言" },
-              { key: "apikey", icon: <KeyOutlined />, label: "我的 API Key" },
-              { key: "apiusage", icon: <DatabaseOutlined />, label: "API 使用紀錄" },
+              { key: "myinfo", icon: <UserOutlined />, label: text.sider.menu.myinfo },
+              { key: "comments", icon: <CommentOutlined />, label: text.sider.menu.comments },
+              { key: "apikey", icon: <KeyOutlined />, label: text.sider.menu.apikey },
+              { key: "apiusage", icon: <DatabaseOutlined />, label: text.sider.menu.apiusage },
             ]}
           />
         </Sider>
@@ -196,7 +298,7 @@ export default function DashboardPage() {
           </Content>
           <Footer style={{ textAlign: "center", background: "#fff" }}>
             <div style={{ borderTop: "1px solid #eee", paddingTop: 8 }}>
-              © {new Date().getFullYear()} My Company. All rights reserved.
+              {text.footer.text.replace("{year}", new Date().getFullYear())}
             </div>
           </Footer>
         </AntLayout>
