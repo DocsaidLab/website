@@ -62,6 +62,7 @@ const localeText = {
     deleteAccountSuccess: "帳號已刪除，將導回首頁",
     saveButton: "儲存",
     cancelButton: "取消",
+    changePasswordModalOk: "確定",
   },
   en: {
     myInfoTitle: "My Information",
@@ -100,6 +101,7 @@ const localeText = {
     deleteAccountSuccess: "Account deleted, redirecting to homepage",
     saveButton: "Save",
     cancelButton: "Cancel",
+    changePasswordModalOk: "Confirm",
   },
   ja: {
     myInfoTitle: "私の情報",
@@ -138,6 +140,7 @@ const localeText = {
     deleteAccountSuccess: "アカウントが削除されました。ホームページにリダイレクトします。",
     saveButton: "保存",
     cancelButton: "キャンセル",
+    changePasswordModalOk: "確定",
   },
 };
 
