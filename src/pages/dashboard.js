@@ -1,6 +1,5 @@
 // src/pages/dashboard.js
 import {
-  CommentOutlined,
   DatabaseOutlined,
   HomeOutlined,
   KeyOutlined,
@@ -29,7 +28,6 @@ import { useAuth } from "../context/AuthContext";
 // Dashboard 子頁面
 import DashboardApiKey from "../components/Dashboard/ApiKey";
 import DashboardApiUsage from "../components/Dashboard/ApiUsage";
-import DashboardMyComments from "../components/Dashboard/MyComments";
 import DashboardMyInfo from "../components/Dashboard/MyInfo";
 
 const { Header: AntHeader, Sider, Content, Footer } = AntLayout;
@@ -44,7 +42,6 @@ const localeText = {
       expanded: "我的後台",
       menu: {
         myinfo: "我的資訊",
-        comments: "我的留言",
         apikey: "我的 API Key",
         apiusage: "API 使用紀錄",
       },
@@ -52,7 +49,6 @@ const localeText = {
     breadcrumb: {
       dashboard: "我的後台",
       myinfo: "我的資訊",
-      comments: "我的留言",
       apikey: "我的 API Key",
       apiusage: "API 使用紀錄",
       undefined: "未定義",
@@ -74,7 +70,6 @@ const localeText = {
       expanded: "My Dashboard",
       menu: {
         myinfo: "My Information",
-        comments: "My Comments",
         apikey: "My API Key",
         apiusage: "API Usage",
       },
@@ -82,7 +77,6 @@ const localeText = {
     breadcrumb: {
       dashboard: "Dashboard",
       myinfo: "My Information",
-      comments: "My Comments",
       apikey: "My API Key",
       apiusage: "API Usage",
       undefined: "Undefined",
@@ -104,7 +98,6 @@ const localeText = {
       expanded: "マイダッシュボード",
       menu: {
         myinfo: "マイ情報",
-        comments: "マイコメント",
         apikey: "マイAPIキー",
         apiusage: "API利用状況",
       },
@@ -112,7 +105,6 @@ const localeText = {
     breadcrumb: {
       dashboard: "ダッシュボード",
       myinfo: "マイ情報",
-      comments: "マイコメント",
       apikey: "マイAPIキー",
       apiusage: "API利用状況",
       undefined: "未定義",
@@ -147,8 +139,6 @@ export default function DashboardPage() {
     switch (selectedKey) {
       case "myinfo":
         return <DashboardMyInfo />;
-      case "comments":
-        return <DashboardMyComments />;
       case "apikey":
         return <DashboardApiKey />;
       case "apiusage":
@@ -162,8 +152,6 @@ export default function DashboardPage() {
     switch (selectedKey) {
       case "myinfo":
         return text.breadcrumb.myinfo;
-      case "comments":
-        return text.breadcrumb.comments;
       case "apikey":
         return text.breadcrumb.apikey;
       case "apiusage":
@@ -247,7 +235,6 @@ export default function DashboardPage() {
             onClick={(e) => setSelectedKey(e.key)}
             items={[
               { key: "myinfo", icon: <UserOutlined />, label: text.sider.menu.myinfo },
-              { key: "comments", icon: <CommentOutlined />, label: text.sider.menu.comments },
               { key: "apikey", icon: <KeyOutlined />, label: text.sider.menu.apikey },
               { key: "apiusage", icon: <DatabaseOutlined />, label: text.sider.menu.apiusage },
             ]}
