@@ -206,17 +206,18 @@ description: 紀錄一些簡單問題和解法。
   docker ps
   ```
 
-  接著進入容器內部，查看日誌：
-
-  ```bash
-  docker exec -it container_id /bin/bash
-  cat /path/to/logfile
-  ```
-
-  或者直接查看日誌：
+  接著查看日誌：
 
   ```bash
   docker logs container_id
+  ```
+
+  想要看的錯誤訊息，還要輸入兩段指令非常麻煩，我們可以精簡成一行指令。
+
+  以下假設要查看的目標名稱叫做：TARGET_NAME，指令如下：
+
+  ```bash
+  docker logs $(docker ps -q --filter "ancestor=TARGET_NAME")
   ```
 
 ## 9. Docuasurus 查詢 i18n 狀態
