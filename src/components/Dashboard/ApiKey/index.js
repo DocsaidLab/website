@@ -1,395 +1,486 @@
-// 檔案： src/components/dashboard/DashboardApiKey/index.js
+// src/components/Dashboard/ApiKey/index.js
 
-import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
+import {
+  CopyOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+  EyeInvisibleOutlined,
+  EyeOutlined,
+  InfoCircleOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import {
   Button,
   Card,
-  Col,
+  Checkbox,
+  Collapse,
   Drawer,
   Form,
   Input,
+  InputNumber,
+  List,
   message,
   Modal,
   Popconfirm,
-  Progress,
-  Row,
+  Select,
   Space,
-  Switch,
-  Table,
-  Tag,
+  Tabs,
+  Tooltip,
 } from "antd";
-import moment from "moment";
-import React, { useEffect, useState } from "react";
-import {
-  createApiKeyApi,
-  deleteApiKeyApi,
-  getApiKeyUsageApi,
-  getMyApiKeysApi,
-  regenerateApiKeyApi,
-  updateApiKeyNameApi,
-} from "../../../utils/mockApi";
+import React, { useCallback, useEffect, useState } from "react";
+import { useAuth } from "../../../context/AuthContext";
+import styles from "./index.module.css";
+
+// API 基底路徑
+const API_BASE_URL = "https://api.docsaid.org/public/token";
+
+// 依據 usage_plan_id 回傳方案名稱
+const getPlanName = (id) => {
+  switch (id) {
+    case 1:
+      return "Basic (Free)";
+    case 2:
+      return "Pro (Paid)";
+    case 3:
+      return "PayAsYouGo";
+    default:
+      return "Unknown";
+  }
+};
+
+// Token 列表中的單一項目元件
+const TokenCard = ({ item, copyToken, handleRevoke, openDrawer, maskToken }) => {
+  const plan = getPlanName(item.usage_plan_id);
+  return (
+    <List.Item className={styles.tokenListItem}>
+      <Card
+        className={styles.tokenCard}
+        title={
+          <div className={styles.tokenTitle}>
+            <span className={styles.tokenName}>
+              {item.name || "Untitled Key"}
+            </span>
+            <span className={styles.tokenPlan}>{plan}</span>
+          </div>
+        }
+        extra={
+          item.is_active && (
+            <Popconfirm
+              title="確定撤銷這個 Token 嗎？"
+              icon={<ExclamationCircleOutlined style={{ color: "red" }} />}
+              onConfirm={() => handleRevoke(item)}
+            >
+              <Button danger icon={<DeleteOutlined />}>
+                Revoke
+              </Button>
+            </Popconfirm>
+          )
+        }
+      >
+        <div className={styles.tokenItemRow}>
+          <span className={styles.label}>Token：</span>
+          <Tooltip title="點擊複製 Token">
+            <a onClick={() => copyToken(item.jti)}>
+              {maskToken(item.jti)}
+              <CopyOutlined style={{ marginLeft: 6 }} />
+            </a>
+          </Tooltip>
+        </div>
+        <div className={styles.tokenItemRow}>
+          <span className={styles.label}>到期時間：</span>
+          {item.expires_at || "永久"}
+        </div>
+        <div className={styles.tokenItemRow}>
+          <span className={styles.label}>狀態：</span>
+          {item.is_active ? "Active" : "Revoked"}
+        </div>
+
+        {item.is_active && (
+          <div style={{ marginTop: 12, textAlign: "right" }}>
+            <Button onClick={() => openDrawer(item)}>詳細 / 用量</Button>
+          </div>
+        )}
+      </Card>
+    </List.Item>
+  );
+};
 
 export default function DashboardApiKey() {
+  const { token } = useAuth(); // 使用者登入 Token
   const [loading, setLoading] = useState(false);
   const [apiKeys, setApiKeys] = useState([]);
+
+  // 新增 Token 的 Modal
   const [createModalVisible, setCreateModalVisible] = useState(false);
+  const [createForm] = Form.useForm();
 
-  // Drawer 狀態：顯示單一 API Key 詳細資訊
-  const [detailDrawerVisible, setDetailDrawerVisible] = useState(false);
-  const [detailLoading, setDetailLoading] = useState(false);
-  const [detailData, setDetailData] = useState(null);
+  // Drawer 用於查看用量、詳細
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [drawerToken, setDrawerToken] = useState(null); // 目前開啟 Drawer 所顯示的 Token
 
-  // 「顯示 / 隱藏」 Key 內容
-  const [showKeys, setShowKeys] = useState({});
-  // 例如 { keyId: true/false }
+  // 是否顯示「明碼」(馬賽克開關)
+  const [showTokenPlain, setShowTokenPlain] = useState(false);
 
-  // 建立新的 Key 表單
-  const [form] = Form.useForm();
-
-  useEffect(() => {
-    fetchApiKeys();
-  }, []);
-
-  const fetchApiKeys = async () => {
+  // ===============================
+  // 1) 載入 Token 列表
+  // ===============================
+  const fetchTokens = useCallback(async () => {
+    if (!token) return;
     setLoading(true);
     try {
-      const data = await getMyApiKeysApi();
+      const res = await fetch(`${API_BASE_URL}/my-tokens`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!res.ok) {
+        throw new Error(`Fetch tokens failed: ${res.status}`);
+      }
+      const data = await res.json();
+      // data: [{ jti, usage_plan_id, expires_at, is_active }, ...]
       setApiKeys(data);
     } catch (err) {
-      message.error(err.message || "取得 API Key 失敗");
+      message.error(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [token]);
+
+  useEffect(() => {
+    fetchTokens();
+  }, [fetchTokens]);
+
+  // ===============================
+  // 2) 新增 Token
+  // ===============================
+  const handleOpenCreateModal = useCallback(() => {
+    createForm.resetFields();
+    setCreateModalVisible(true);
+  }, [createForm]);
+
+  const handleCreateToken = async (values) => {
+    // 從表單取 usage_plan_id, isPermanent, expires_minutes, name
+    const { usage_plan_id, isPermanent, expires_minutes, name } = values;
+    // 若勾選永久 => expires_minutes = 999999
+    const finalExpires = isPermanent ? 999999 : expires_minutes;
+
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `${API_BASE_URL}/?usage_plan_id=${usage_plan_id}&expires_minutes=${finalExpires}`,
+        {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      if (!res.ok) {
+        const e = await res.json().catch(() => ({}));
+        throw new Error(e.detail || `Create token failed ${res.status}`);
+      }
+      const data = await res.json();
+      // data: { access_token, expires_at, usage_plan_id, ... }
+
+      // 用 Modal.success 提示一次性顯示完整 Token
+      Modal.success({
+        title: "Token 已建立！",
+        content: (
+          <div>
+            <p>請妥善保存以下 Token，將不會再次顯示：</p>
+            <div className={styles.tokenBox}>{data.access_token}</div>
+          </div>
+        ),
+      });
+
+      // 新建列表中的項目
+      setApiKeys((prev) => [
+        {
+          jti: data.access_token,
+          usage_plan_id: data.usage_plan_id,
+          expires_at: data.expires_at,
+          is_active: true,
+          name: name || "", // 目前後端可能沒存 name
+        },
+        ...prev,
+      ]);
+
+      setCreateModalVisible(false);
+    } catch (err) {
+      message.error(err.message);
     } finally {
       setLoading(false);
     }
   };
 
-  // Modal：建立新的 API Key
-  const handleCreateKey = async (values) => {
-    try {
-      const newKeyObj = await createApiKeyApi(values.name);
-      message.success("已成功建立新 API Key");
-      setApiKeys((prev) => [...prev, newKeyObj]);
-      setCreateModalVisible(false);
-      form.resetFields();
-    } catch (err) {
-      message.error(err.message || "建立失敗");
-    }
-  };
+  // ===============================
+  // 3) 撤銷 Token
+  // ===============================
+  const handleRevoke = useCallback(
+    async (item) => {
+      setLoading(true);
+      try {
+        const res = await fetch(`${API_BASE_URL}/revoke`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ jti: item.jti }),
+        });
+        if (!res.ok) {
+          const e = await res.json().catch(() => ({}));
+          throw new Error(e.detail || `Revoke token failed: ${res.status}`);
+        }
+        message.success("Token 已撤銷");
+        // 從列表移除
+        setApiKeys((prev) => prev.filter((key) => key.jti !== item.jti));
+        // 若 Drawer 正在看該 Token => 關閉
+        if (drawerToken && drawerToken.jti === item.jti) {
+          setDrawerVisible(false);
+          setDrawerToken(null);
+        }
+      } catch (err) {
+        message.error(err.message);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [token, drawerToken]
+  );
 
-  // 「刪除」某把 Key
-  const handleDeleteKey = async (record) => {
-    try {
-      await deleteApiKeyApi(record.id);
-      message.success(`已刪除 API Key: ${record.name}`);
-      setApiKeys((prev) => prev.filter((k) => k.id !== record.id));
-    } catch (err) {
-      message.error(err.message || "刪除失敗");
-    }
-  };
+  // ===============================
+  // 4) 查看詳細(含用量)
+  // ===============================
+  const openDrawer = useCallback((item) => {
+    setDrawerToken(item);
+    setDrawerVisible(true);
+  }, []);
 
-  // 「重新生成」某把 Key
-  const handleRegenerateKey = async (record) => {
-    try {
-      const newKeyStr = await regenerateApiKeyApi(record.id);
-      message.success("已重新生成 API Key");
-      // 更新該 Key 的 keyString
-      setApiKeys((prev) =>
-        prev.map((item) =>
-          item.id === record.id ? { ...item, keyString: newKeyStr } : item
-        )
-      );
-    } catch (err) {
-      message.error(err.message || "重新生成失敗");
-    }
-  };
+  const closeDrawer = useCallback(() => {
+    setDrawerVisible(false);
+    setDrawerToken(null);
+  }, []);
 
-  // 「重新命名」Key
-  const handleRenameKey = async (record, newName) => {
+  // ===============================
+  // 5) 查詢用量
+  // ===============================
+  const handleCheckUsage = async (publicToken) => {
+    if (!publicToken) return;
     try {
-      await updateApiKeyNameApi(record.id, newName);
-      message.success("名稱已更新");
-      setApiKeys((prev) =>
-        prev.map((item) =>
-          item.id === record.id ? { ...item, name: newName } : item
-        )
-      );
-    } catch (err) {
-      message.error(err.message || "更新失敗");
-    }
-  };
-
-  // 打開 Drawer，顯示更詳細資訊 (例如：用量, IP白名單, 失效日期, etc.)
-  const openDetailDrawer = async (record) => {
-    setDetailDrawerVisible(true);
-    setDetailLoading(true);
-    try {
-      // 可能要呼叫後端取得更完整資訊 (例如 getApiKeyUsageApi)
-      const usageData = await getApiKeyUsageApi(record.id);
-      setDetailData({
-        ...record,
-        usage: usageData.usage,
-        limit: usageData.limit,
-        whitelist: usageData.ipWhitelist || [],
+      const res = await fetch(`${API_BASE_URL}/usage`, {
+        headers: { Authorization: `Bearer ${publicToken}` },
       });
+      if (!res.ok) {
+        const e = await res.json().catch(() => ({}));
+        throw new Error(e.detail || `Check usage error: ${res.status}`);
+      }
+      const usageData = await res.json();
+      // usageData: { billing_type, used_this_hour, remaining, ... }
+      if (usageData.billing_type === "rate_limit") {
+        message.info(
+          `使用次數：${usageData.used_this_hour}，剩餘：${usageData.remaining}`
+        );
+      } else {
+        message.info(`已用：${usageData.used_this_hour}（Pay-Per-Use, 無限）`);
+      }
     } catch (err) {
-      message.error("取得詳細資料失敗：" + err.message);
-    } finally {
-      setDetailLoading(false);
+      message.error(err.message);
     }
   };
 
-  // 顯示/隱藏某把 Key
-  const toggleShowKey = (record) => {
-    setShowKeys((prev) => ({
-      ...prev,
-      [record.id]: !prev[record.id],
-    }));
-  };
+  // ===============================
+  // 6) Token 顯示（馬賽克 + 複製）
+  // ===============================
+  const copyToken = useCallback(async (val) => {
+    try {
+      await navigator.clipboard.writeText(val);
+      message.success("已複製 Token");
+    } catch {
+      message.error("複製失敗");
+    }
+  }, []);
 
-  // Table欄位定義
-  const columns = [
-    {
-      title: "名稱",
-      dataIndex: "name",
-      render: (text, record) => (
-        <EditableText
-          text={text}
-          onSave={(newVal) => handleRenameKey(record, newVal)}
-        />
-      ),
+  const maskToken = useCallback(
+    (val) => {
+      if (!val) return "";
+      if (showTokenPlain) return val; // 顯示全文
+      // 預設只顯示前6 & 後4
+      const front = val.slice(0, 6);
+      const back = val.slice(-4);
+      return front + "****" + back;
     },
-    {
-      title: "API Key",
-      dataIndex: "keyString",
-      render: (text, record) => {
-        // 顯示 / 隱藏 Key
-        const showing = showKeys[record.id];
-        // 若不顯示則遮蔽中間段
-        const masked = text
-          ? showing
-            ? text
-            : maskKeyString(text)
-          : "N/A";
-        return (
-          <Space>
-            <span style={{ fontFamily: "monospace" }}>{masked}</span>
-            <Button
-              icon={showing ? <EyeInvisibleOutlined /> : <EyeOutlined />}
-              size="small"
-              onClick={() => toggleShowKey(record)}
-            />
-          </Space>
-        );
-      },
-    },
-    {
-      title: "建立日期",
-      dataIndex: "createdAt",
-      render: (val) => moment(val).format("YYYY-MM-DD HH:mm"),
-      width: 150,
-    },
-    {
-      title: "到期日",
-      dataIndex: "expireAt",
-      render: (val) =>
-        val ? moment(val).format("YYYY-MM-DD") : <Tag color="green">無到期</Tag>,
-      width: 120,
-    },
-    {
-      title: "狀態",
-      dataIndex: "status",
-      render: (val) => {
-        // val = "active" | "expired" | "disabled"
-        if (val === "active") return <Tag color="blue">啟用中</Tag>;
-        if (val === "expired") return <Tag color="red">已過期</Tag>;
-        return <Tag color="default">已停用</Tag>;
-      },
-      width: 100,
-    },
-    {
-      title: "操作",
-      width: 180,
-      render: (text, record) => (
-        <Space>
-          <Button size="small" onClick={() => openDetailDrawer(record)}>
-            詳細
-          </Button>
+    [showTokenPlain]
+  );
 
-          <Button size="small" onClick={() => handleRegenerateKey(record)}>
-            重生
-          </Button>
-
-          <Popconfirm
-            title={`確定刪除「${record.name}」？`}
-            onConfirm={() => handleDeleteKey(record)}
-          >
-            <Button danger size="small">
-              刪除
-            </Button>
-          </Popconfirm>
-        </Space>
-      ),
-    },
-  ];
-
+  // ===============================
+  // Render
+  // ===============================
   return (
-    <Card title="API Key 管理">
-      <Row justify="space-between" style={{ marginBottom: 16 }}>
-        <Col>
-          <Button type="primary" onClick={() => setCreateModalVisible(true)}>
-            建立新 API Key
-          </Button>
-        </Col>
-        <Col>
-          <Button onClick={fetchApiKeys} loading={loading}>
-            重新整理
-          </Button>
-        </Col>
-      </Row>
+    <div className={styles.apiKeyContainer}>
+      <header className={styles.header}>
+        <h2>My API Keys</h2>
+        <p>在此管理、檢視、撤銷你的公開 Token</p>
+      </header>
 
-      <Table
-        rowKey="id"
-        dataSource={apiKeys}
-        columns={columns}
-        loading={loading}
-        pagination={{ pageSize: 5 }}
-        scroll={{ x: "max-content" }}
-      />
+      <div className={styles.actions}>
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={handleOpenCreateModal}
+          style={{ marginRight: 16 }}
+        >
+          建立新 Token
+        </Button>
+        <Button onClick={() => setShowTokenPlain((prev) => !prev)}>
+          {showTokenPlain ? <EyeInvisibleOutlined /> : <EyeOutlined />}
+          {showTokenPlain ? "隱藏全部 Token" : "顯示全部 Token"}
+        </Button>
+      </div>
 
-      {/* 建立新 API Key 的 Modal */}
       <Modal
-        title="建立新的 API Key"
+        title="建立新的公開 Token"
         open={createModalVisible}
-        onCancel={() => {
-          setCreateModalVisible(false);
-          form.resetFields();
-        }}
-        onOk={() => form.submit()}
-        okText="建立"
-        cancelText="取消"
+        onCancel={() => setCreateModalVisible(false)}
+        footer={null}
         destroyOnClose
       >
         <Form
-          form={form}
+          form={createForm}
           layout="vertical"
-          onFinish={handleCreateKey}
-          preserve={false}
+          onFinish={handleCreateToken}
+          initialValues={{
+            usage_plan_id: 1,
+            expires_minutes: 60,
+            isPermanent: false,
+          }}
         >
           <Form.Item
-            label="Key 名稱"
+            label="Token 名稱"
             name="name"
-            rules={[{ required: true, message: "請輸入名稱" }]}
+            tooltip="選填，給 Token 一個易識別的名稱"
           >
-            <Input placeholder="e.g. MyProject Dev Key" />
+            <Input placeholder="e.g. MyDocAlignerKey" />
+          </Form.Item>
+          <Form.Item
+            label="方案"
+            name="usage_plan_id"
+            rules={[{ required: true }]}
+          >
+            <Select>
+              <Select.Option value={1}>Basic (Free)</Select.Option>
+              <Select.Option value={2}>Pro (Paid)</Select.Option>
+              <Select.Option value={3}>PayAsYouGo</Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
+            label="永久 (不過期)"
+            name="isPermanent"
+            valuePropName="checked"
+          >
+            <Checkbox>若勾選，忽略「有效期」</Checkbox>
+          </Form.Item>
+          <Form.Item
+            label="有效期 (分鐘)"
+            name="expires_minutes"
+            rules={[
+              { required: true, message: "請輸入有效期" },
+              { type: "number", min: 10, max: 999999 },
+            ]}
+          >
+            <InputNumber style={{ width: "100%" }} />
+          </Form.Item>
+
+          <Form.Item>
+            <Space>
+              <Button onClick={() => setCreateModalVisible(false)}>取消</Button>
+              <Button type="primary" htmlType="submit">
+                建立
+              </Button>
+            </Space>
           </Form.Item>
         </Form>
       </Modal>
 
-      {/* 詳細資訊 Drawer */}
+      <div style={{ marginTop: 24 }}>
+        <Collapse
+          bordered={false}
+          className={styles.collapseRoot}
+          defaultActiveKey={["tokens"]}
+        >
+          <Collapse.Panel
+            key="tokens"
+            header={
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <InfoCircleOutlined style={{ marginRight: 8 }} />
+                <span>我的 Token 列表</span>
+              </div>
+            }
+          >
+            <List
+              loading={loading}
+              dataSource={apiKeys}
+              rowKey={(item) => item.jti}
+              renderItem={(item) => (
+                <TokenCard
+                  item={item}
+                  copyToken={copyToken}
+                  handleRevoke={handleRevoke}
+                  openDrawer={openDrawer}
+                  maskToken={maskToken}
+                />
+              )}
+            />
+          </Collapse.Panel>
+        </Collapse>
+      </div>
+
       <Drawer
-        title={`API Key 詳細資訊：${detailData?.name || ""}`}
-        placement="right"
-        width={480}
-        open={detailDrawerVisible}
-        onClose={() => setDetailDrawerVisible(false)}
+        title={
+          drawerToken
+            ? `${drawerToken.name || "My Token"} - 詳細`
+            : "Token Info"
+        }
+        open={drawerVisible}
+        onClose={closeDrawer}
+        width={420}
       >
-        {detailLoading ? (
-          <p>載入中...</p>
-        ) : detailData ? (
-          <DetailContent detailData={detailData} />
-        ) : (
-          <p>無法載入資料</p>
+        {drawerToken && (
+          <>
+            <p>
+              <strong>Token (遮罩): </strong>
+              <Tooltip title="點擊複製 Token">
+                <a onClick={() => copyToken(drawerToken.jti)}>
+                  {maskToken(drawerToken.jti)}
+                  <CopyOutlined style={{ marginLeft: 6 }} />
+                </a>
+              </Tooltip>
+            </p>
+            <p>
+              <strong>到期時間:</strong>{" "}
+              {drawerToken.expires_at || "永久"}
+            </p>
+            <p>
+              <strong>狀態:</strong>{" "}
+              {drawerToken.is_active ? "Active" : "Revoked"}
+            </p>
+            <Tabs defaultActiveKey="usage" style={{ marginTop: 16 }}>
+              <Tabs.TabPane tab="用量資訊" key="usage">
+                <p>
+                  這裡可以顯示用量統計，或按下「查詢用量」按鈕。
+                </p>
+                <Button
+                  icon={<EyeOutlined />}
+                  onClick={() => handleCheckUsage(drawerToken.jti)}
+                >
+                  查詢用量
+                </Button>
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="其他" key="others">
+                <p>可以放一些額外的說明 / log / 版本紀錄…</p>
+              </Tabs.TabPane>
+            </Tabs>
+          </>
         )}
       </Drawer>
-    </Card>
-  );
-}
-
-/**
- * Drawer 內容
- * 這裡可以顯示更深入資訊，如「用量統計」、「IP 白名單」、「是否啟用 / 停用」等。
- */
-function DetailContent({ detailData }) {
-  const { usage = 0, limit = 1000, whitelist = [] } = detailData;
-
-  const usagePercent = Math.min(100, Math.round((usage / limit) * 100));
-
-  return (
-    <div>
-      <p>顯示更多資訊，例如 IP 白名單、用量概覽等。</p>
-      <Row style={{ marginBottom: 12 }}>
-        <Col span={8}>目前用量：</Col>
-        <Col span={16}>
-          <Progress
-            percent={usagePercent}
-            status={usagePercent < 100 ? "active" : "exception"}
-          />
-          <div style={{ marginTop: 8 }}>
-            {usage} / {limit} 次呼叫
-          </div>
-        </Col>
-      </Row>
-
-      <Row style={{ marginBottom: 12 }}>
-        <Col span={8}>IP 白名單：</Col>
-        <Col span={16}>
-          {whitelist.length === 0 ? (
-            <Tag color="blue">未設定</Tag>
-          ) : (
-            whitelist.map((ip) => <Tag key={ip}>{ip}</Tag>)
-          )}
-        </Col>
-      </Row>
-
-      <Row style={{ marginBottom: 12 }}>
-        <Col span={8}>啟用狀態：</Col>
-        <Col span={16}>
-          <Switch
-            checked={detailData.status === "active"}
-            // onChange={(checked) => ...} // 可在此呼叫後端 API 更新狀態
-          />
-        </Col>
-      </Row>
     </div>
   );
-}
-
-/**
- * 編輯 API Key 名稱的小組件：點擊文字 -> 變成可輸入
- */
-function EditableText({ text, onSave }) {
-  const [editing, setEditing] = useState(false);
-  const [val, setVal] = useState(text);
-
-  const handleSubmit = () => {
-    if (val.trim() && val !== text) {
-      onSave(val.trim());
-    }
-    setEditing(false);
-  };
-
-  if (editing) {
-    return (
-      <Input
-        autoFocus
-        value={val}
-        onChange={(e) => setVal(e.target.value)}
-        onBlur={handleSubmit}
-        onPressEnter={handleSubmit}
-        style={{ width: 150 }}
-      />
-    );
-  }
-  return <span onClick={() => setEditing(true)} style={{ cursor: "pointer" }}>{text}</span>;
-}
-
-/**
- * 將字串中段以 `*` 隱藏，例如: ABCDEFG123 => AB****3123
- */
-function maskKeyString(keyString = "") {
-  if (keyString.length < 8) {
-    return "****";
-  }
-  const prefix = keyString.slice(0, 2);
-  const suffix = keyString.slice(-4);
-  return prefix + "****" + suffix;
 }
