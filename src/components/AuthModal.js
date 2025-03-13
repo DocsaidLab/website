@@ -1,7 +1,7 @@
 // /src/components/AuthModal.js
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { Divider, Modal, Tabs, Typography } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAuthHandler from "../hooks/useAuthHandler";
 import ForgotPasswordForm from "./forms/ForgotPasswordForm";
 import LoginForm from "./forms/LoginForm";
@@ -39,6 +39,14 @@ export default function AuthModal({ visible, onCancel }) {
   const lang = currentLocale;
   const texts = i18nTexts[lang] || i18nTexts.en; // 預設英語
   const [mode, setMode] = useState("login");
+
+  // 當 modal 關閉時，自動重置模式為 "login"
+  useEffect(() => {
+    if (!visible) {
+      setMode("login");
+    }
+  }, [visible]);
+
   const goToForgotPassword = () => setMode("forgotPassword");
   const goToLogin = () => setMode("login");
   const goToRegister = () => setMode("register");
@@ -74,29 +82,16 @@ export default function AuthModal({ visible, onCancel }) {
     </>
   );
 
-  const renderContent = () => {
-    switch (mode) {
-      case "login":
-        return renderLoginContent();
-      case "register":
-        return renderRegisterContent();
-      case "forgotPassword":
-        return renderForgotPasswordContent();
-      default:
-        return null;
-    }
-  };
-
   return (
     <Modal
       open={visible}
-      title={texts.modalTitle}     // <-- 動態顯示標題
+      title={texts.modalTitle} // 動態顯示標題
       onCancel={onCancel}
       footer={null}
     >
-      {/* 如果當前是忘記密碼模式，就脫離 Tabs，獨立顯示 */}
+      {/* 若當前是忘記密碼模式，就不使用 Tabs */}
       {mode === "forgotPassword" ? (
-        renderContent()
+        renderForgotPasswordContent()
       ) : (
         <Tabs
           activeKey={mode}
@@ -104,12 +99,12 @@ export default function AuthModal({ visible, onCancel }) {
           items={[
             {
               key: "login",
-              label: texts.loginTab,   // <-- 動態顯示「登入」
+              label: texts.loginTab, // 動態顯示「登入」
               children: renderLoginContent(),
             },
             {
               key: "register",
-              label: texts.registerTab,  // <-- 動態顯示「註冊」
+              label: texts.registerTab, // 動態顯示「註冊」
               children: renderRegisterContent(),
             },
           ]}

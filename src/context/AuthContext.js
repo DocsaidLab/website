@@ -25,12 +25,12 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 2. 取得 Docusaurus 的 currentLocale
+  // 取得 Docusaurus 的 currentLocale
   const {
     i18n: { currentLocale },
   } = useDocusaurusContext();
 
-  // 3. 根據 currentLocale 對照，取得後端需要的語言代碼
+  // 根據 currentLocale，取得後端所需語言代碼
   const serverLang = currentLocale;
 
   /**
@@ -42,25 +42,30 @@ export function AuthProvider({ children }) {
    */
   async function apiRequest(endpoint, method = "GET", tokenArg = null, body = null) {
     const headers = {};
-    // 加入 Bearer Token
     if (tokenArg) {
       headers.Authorization = `Bearer ${tokenArg}`;
     }
-    // 加入語系
     headers["Accept-Language"] = serverLang;
 
-    // 判斷是否為 FormData
     const isFormData = body instanceof FormData;
     if (body && !isFormData) {
       headers["Content-Type"] = "application/json";
       body = JSON.stringify(body);
     }
 
-    const res = await fetch(`${API_BASE}${endpoint}`, {
-      method,
-      headers,
-      body: body || undefined,
-    });
+    let res;
+    try {
+      res = await fetch(`${API_BASE}${endpoint}`, {
+        method,
+        headers,
+        body: body || undefined,
+        // 可根據需求明確設定 redirect 選項，預設為 follow
+        redirect: "follow",
+      });
+    } catch (networkError) {
+      console.error(`Network error during ${method} ${endpoint}:`, networkError);
+      throw new Error("網路錯誤，請稍後再試");
+    }
 
     const contentType = res.headers.get("Content-Type");
     let data = {};
@@ -76,7 +81,6 @@ export function AuthProvider({ children }) {
         console.error(`API Request Failed [${method} ${endpoint}]:`, data);
       }
       const err = new Error(errorMsg);
-      // 若後端回傳特定欄位(如 remaining_attempts)，可一併加到 Error 物件
       if (data?.remaining_attempts !== undefined) {
         err.remaining_attempts = data.remaining_attempts;
       }
@@ -85,7 +89,7 @@ export function AuthProvider({ children }) {
     return data;
   }
 
-  // App 啟動時從 localStorage 取得 token 並嘗試拉取用戶資料
+  // App 啟動時從 localStorage 取得 token 並拉取用戶資料
   useEffect(() => {
     const initAuth = async () => {
       const savedToken = localStorage.getItem("token");
@@ -98,7 +102,7 @@ export function AuthProvider({ children }) {
         const data = await apiRequest("/auth/me", "GET", savedToken);
         setUser(data);
       } catch (error) {
-        // Token 失效 => 清空
+        // Token 失效，清空 token
         setToken(null);
         localStorage.removeItem("token");
       } finally {
@@ -108,7 +112,7 @@ export function AuthProvider({ children }) {
     initAuth();
   }, []);
 
-  // 登入成功後，儲存 Token 並刷新使用者資料
+  // 登入成功後，儲存 token 並刷新使用者資料
   const loginSuccess = async (loginToken) => {
     try {
       const userData = await apiRequest("/auth/me", "GET", loginToken);
@@ -123,14 +127,14 @@ export function AuthProvider({ children }) {
   };
 
   // 根據語系決定首頁路徑
-  let homePath = '/';
-  if (currentLocale === 'en') {
-    homePath = '/en';
-  } else if (currentLocale === 'ja') {
-    homePath = '/ja';
+  let homePath = "/";
+  if (currentLocale === "en") {
+    homePath = "/en";
+  } else if (currentLocale === "ja") {
+    homePath = "/ja";
   }
 
-  // 登出
+  // 登出：清除 token 與 user，並重導至首頁
   const logout = () => {
     setToken(null);
     setUser(null);
@@ -152,11 +156,10 @@ export function AuthProvider({ children }) {
     return apiRequest("/auth/send-verification-email", "POST", token, { email });
   };
 
-  // 驗證 Email (注意後端為 GET + Redirect 設計，fetch 可能只會拿到 redirect 前的狀態)
+  // 驗證 Email
   const verifyEmail = async (verifyToken) => {
-    // 範例：若前端還是想要直接呼叫
     const data = await apiRequest(`/auth/verify-email?token=${verifyToken}`, "GET", null, null);
-    // 成功後可重新抓取 /auth/me 更新 user 狀態
+    // 驗證成功後更新用戶資料
     if (token) {
       const updatedUser = await apiRequest("/auth/me", "GET", token);
       setUser(updatedUser);

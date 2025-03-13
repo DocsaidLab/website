@@ -227,6 +227,21 @@ export default function DashboardMyInfo() {
     return <Spin style={{ margin: "50px auto", display: "block" }} />;
   }
 
+  // 修正 Alert 中替換字串的問題
+  const renderNoEmailAlertDescription = () => {
+    // 假設 text.noEmailAlertDesc 為 "請設定您的 Email，點擊 {editLink} 進行設定"
+    const parts = text.noEmailAlertDesc.split("{editLink}");
+    return (
+      <>
+        {parts[0]}
+        <Button type="link" onClick={onEditProfile}>
+          {text.editButton}
+        </Button>
+        {parts[1]}
+      </>
+    );
+  };
+
   const renderEmailStatus = () => {
     if (!user?.email) {
       return <Text type="secondary">{text.notSet}</Text>;
@@ -262,16 +277,7 @@ export default function DashboardMyInfo() {
         <Alert
           style={{ marginBottom: 16 }}
           message={text.noEmailAlertTitle}
-          description={
-            <>
-              {text.noEmailAlertDesc.replace(
-                "{editLink}",
-                <Button type="link" onClick={onEditProfile} key="edit">
-                  {text.editButton}
-                </Button>
-              )}
-            </>
-          }
+          description={renderNoEmailAlertDescription()}
           type="info"
           showIcon
         />
