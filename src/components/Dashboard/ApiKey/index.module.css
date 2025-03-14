@@ -1,77 +1,97 @@
+/* src/components/Dashboard/ApiKey/index.module.css */
+
+/* 容器 */
 .apiKeyContainer {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 24px;
-    text-align: left; /* 左上角對齊 */
-  }
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  text-align: left; /* 左上角對齊 */
+}
 
-  .header {
-    margin-bottom: 16px;
-    text-align: left; /* 左上角對齊 */
-  }
-  .header h2 {
-    font-size: 1.6rem;
-    margin: 0 0 4px 0;
-  }
-  .header p {
-    color: #777;
-    margin: 0;
-  }
+/* 頁面標題 */
+.header {
+  margin-bottom: 16px;
+  text-align: left;
+}
+.header h2 {
+  font-size: 1.6rem;
+  margin: 0 0 4px 0;
+}
+.header p {
+  color: #777;
+  margin: 0;
+}
 
-  .actions {
-    margin-bottom: 16px;
-    text-align: left; /* 左對齊，也可 right */
-    display: flex;
-    gap: 8px;
-  }
+/* 操作按鈕列 */
+.actions {
+  margin-bottom: 16px;
+  display: flex;
+  gap: 8px;
+}
 
-  .tokenBox {
-    background: #f5f5f5;
-    padding: 8px;
-    word-break: break-all;
-    font-family: monospace;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
+/* 用於顯示建立完成後的 Token */
+.tokenBox {
+  background: #f5f5f5;
+  padding: 8px;
+  word-break: break-all;
+  font-family: monospace;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 
-  .collapseRoot {
-    background-color: #fff;
-    border: 1px solid #e8e8e8;
-    border-radius: 8px;
-  }
+/* Collapse 外框 */
+.collapseRoot {
+  background-color: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+}
 
-  .tokenListItem {
-    border: none !important;
-    margin-bottom: 16px;
-  }
+/* List.Item */
+.tokenListItem {
+  border: none !important;
+  margin-bottom: 16px;
+}
 
-  .tokenCard {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  }
+/* Token 卡片 */
+.tokenCard {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: box-shadow 0.2s ease;
+}
 
-  .tokenTitle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+.tokenCard:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
 
-  .tokenName {
-    font-weight: 600;
-    font-size: 1rem;
-  }
-  .tokenPlan {
-    font-size: 0.9rem;
-    color: #888;
-  }
+/* 卡片頂部區域 */
+.tokenCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
 
-  .tokenItemRow {
-    margin: 4px 0;
-    line-height: 1.6;
-  }
-  .label {
-    font-weight: 500;
-    color: #555;
-    margin-right: 4px;
-  }
+/* Token 名稱 */
+.tokenName {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+/* 方案標籤 */
+.planLabel {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* 一般欄位 */
+.tokenRow {
+  margin: 4px 0;
+  line-height: 1.6;
+}
+.label {
+  font-weight: 500;
+  color: #555;
+  margin-right: 4px;
+}

@@ -1,8 +1,6 @@
 // src/components/Dashboard/ApiKey/index.js
 import {
   CopyOutlined,
-  DeleteOutlined,
-  ExclamationCircleOutlined,
   EyeInvisibleOutlined,
   EyeOutlined,
   InfoCircleOutlined,
@@ -11,156 +9,55 @@ import {
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
   Button,
-  Card,
-  Checkbox,
   Collapse,
   Drawer,
-  Form,
-  Input,
-  InputNumber,
   List,
-  message,
-  Modal,
-  Popconfirm,
-  Progress,
-  Select,
-  Space,
-  Tabs,
-  Tooltip,
+  message
 } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
+
 import styles from "./index.module.css";
 import { apiKeyLocale } from "./locales";
 
+import CreateTokenModal from "./CreateTokenModal";
+import DocAlignerPanel from "./DocAlignerPanel";
+import TokenCard from "./TokenCard";
+import UsageOverview from "./UsageOverview";
+
 const API_BASE_URL = "https://api.docsaid.org/public/token";
 
-function getPlanName(id, text) {
-  switch (id) {
-    case 1:
-      return text.planBasic;
-    case 2:
-      return text.planProfessional;
-    case 3:
-      return text.planPayAsYouGo;
-    default:
-      return text.planUnknown;
-  }
-}
-
-/**
- * 單一 Token 卡片
- */
-function TokenCard({
-  item,
-  copyToken,
-  handleRevoke,
-  handleDelete,
-  openDrawer,
-  maskToken,
-}) {
-  const {
-    i18n: { currentLocale },
-  } = useDocusaurusContext();
-  const text = apiKeyLocale[currentLocale] || apiKeyLocale.en;
-  const plan = getPlanName(item.usage_plan_id, text);
-
-  const ActionButtons = () => {
-    if (item.is_active) {
-      return (
-        <Popconfirm
-          title={text.popconfirmRevokeTitle}
-          icon={<ExclamationCircleOutlined style={{ color: "red" }} />}
-          onConfirm={() => handleRevoke(item)}
-        >
-          <Button danger icon={<DeleteOutlined />}>
-            {text.revokeButton}
-          </Button>
-        </Popconfirm>
-      );
-    } else {
-      return (
-        <Popconfirm
-          title={text.popconfirmDeleteTitle}
-          icon={<ExclamationCircleOutlined style={{ color: "red" }} />}
-          onConfirm={() => handleDelete(item)}
-        >
-          <Button danger icon={<DeleteOutlined />}>
-            {text.deleteButton}
-          </Button>
-        </Popconfirm>
-      );
-    }
-  };
-
-  return (
-    <List.Item className={styles.tokenListItem}>
-      <Card
-        className={styles.tokenCard}
-        title={
-          <div className={styles.tokenTitle}>
-            <span className={styles.tokenName}>
-              {item.name || text.defaultTokenName}
-            </span>
-            <span className={styles.tokenPlan}>{plan}</span>
-          </div>
-        }
-        extra={<Space>{<ActionButtons />}</Space>}
-      >
-        <div className={styles.tokenItemRow}>
-          <span className={styles.label}>{text.tokenIdLabel}</span>
-          <Tooltip title={text.tooltipCopyToken}>
-            <a onClick={() => copyToken(item.jti)}>
-              {maskToken(item.jti)}
-              <CopyOutlined style={{ marginLeft: 6 }} />
-            </a>
-          </Tooltip>
-        </div>
-        <div className={styles.tokenItemRow}>
-          <span className={styles.label}>{text.expiryLabel}</span>
-          {item.expires_at || text.forever}
-        </div>
-        <div className={styles.tokenItemRow}>
-          <span className={styles.label}>{text.statusLabel}</span>
-          {item.is_active ? text.active : text.revoked}
-        </div>
-        {item.is_active && (
-          <div style={{ marginTop: 12, textAlign: "right" }}>
-            <Button onClick={() => openDrawer(item)}>
-              {text.detailUsageButton}
-            </Button>
-          </div>
-        )}
-      </Card>
-    </List.Item>
-  );
-}
-
 export default function DashboardApiKey() {
+  const { token: userToken } = useAuth();
   const {
     i18n: { currentLocale },
   } = useDocusaurusContext();
   const text = apiKeyLocale[currentLocale] || apiKeyLocale.en;
-  const { token: userToken } = useAuth();
-  const [loading, setLoading] = useState(false);
+
+  // ===== Global states =====
   const [apiKeys, setApiKeys] = useState([]);
+  const [userUsage, setUserUsage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // 新增 Token 的 Modal
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const [createForm] = Form.useForm();
-
-  // Drawer 用於查看用量與詳細
-  const [drawerVisible, setDrawerVisible] = useState(false);
-  const [drawerToken, setDrawerToken] = useState(null);
-
-  // 用來存查詢回來的用量資訊
-  const [drawerUsage, setDrawerUsage] = useState(null);
-
-  // 是否顯示明碼 (馬賽克開關)
+  // 控制 Token 明碼
   const [showTokenPlain, setShowTokenPlain] = useState(false);
 
-  // 載入 Token 列表
-  const fetchTokens = React.useCallback(async () => {
+  // 建立 Token Modal
+  const [createModalVisible, setCreateModalVisible] = useState(false);
+
+  // Drawer: 詳細資訊
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [detailToken, setDetailToken] = useState(null);
+
+  // ===== DocAligner Panel: 公開 Token 測試 =====
+  const [publicToken, setPublicToken] = useState("");
+  const [usageData, setUsageData] = useState(null);
+  const [checkLoading, setCheckLoading] = useState(false);
+
+  // ---------------------------------------
+  // 1) 載入 Token 列表
+  // ---------------------------------------
+  const fetchTokens = useCallback(async () => {
     if (!userToken) return;
     setLoading(true);
     try {
@@ -179,19 +76,36 @@ export default function DashboardApiKey() {
     }
   }, [userToken]);
 
+  // ---------------------------------------
+  // 2) 載入使用者整體用量
+  // ---------------------------------------
+  const fetchUserUsage = useCallback(async () => {
+    if (!userToken) return;
+    try {
+      const res = await fetch(`${API_BASE_URL}/user-usage`, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      });
+      if (!res.ok) {
+        const e = await res.json().catch(() => ({}));
+        throw new Error(e.detail || `Fetch user usage error: ${res.status}`);
+      }
+      const usage = await res.json();
+      setUserUsage(usage);
+    } catch (err) {
+      console.error(err);
+    }
+  }, [userToken]);
+
   useEffect(() => {
     fetchTokens();
-  }, [fetchTokens]);
+    fetchUserUsage();
+  }, [fetchTokens, fetchUserUsage]);
 
-  // 打開 "新建 Token" modal
-  const handleOpenCreateModal = React.useCallback(() => {
-    createForm.resetFields();
-    setCreateModalVisible(true);
-  }, [createForm]);
-
-  // 建立 Token
-  const handleCreateToken = async (values) => {
-    const { usage_plan_id, isPermanent, expires_minutes, name } = values;
+  // ---------------------------------------
+  // 3) 建立 Token
+  // ---------------------------------------
+  const handleCreateToken = async (formValues) => {
+    const { usage_plan_id, isPermanent, expires_minutes, name } = formValues;
     const finalExpires = isPermanent ? 999999 : expires_minutes;
 
     if (!userToken) {
@@ -201,13 +115,12 @@ export default function DashboardApiKey() {
 
     setLoading(true);
     try {
+      const planParam = `usage_plan_id=${usage_plan_id}`;
       const nameParam = name ? `&name=${encodeURIComponent(name)}` : "";
-      const url = `${API_BASE_URL}/?usage_plan_id=${usage_plan_id}&expires_minutes=${finalExpires}${nameParam}`;
+      const url = `${API_BASE_URL}/?${planParam}&expires_minutes=${finalExpires}${nameParam}`;
       const res = await fetch(url, {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
+        headers: { Authorization: `Bearer ${userToken}` },
       });
       if (!res.ok) {
         const e = await res.json().catch(() => ({}));
@@ -215,32 +128,20 @@ export default function DashboardApiKey() {
       }
       const data = await res.json();
 
-      Modal.success({
-        title: text.createTokenSuccessTitle,
-        content: (
-          <>
-            <p>{text.createTokenSuccessContent}</p>
-            <div className={styles.tokenBox}>{data.access_token}</div>
-          </>
-        ),
-      });
+      message.success(text.createTokenSuccessTitle);
+      // 也可用 Modal.success()
+      // -> 省略: 你可自行放 Token 的提示
 
-      // 解析 jti
-      const jti = parseJtiFromJWT(data.access_token);
-      if (!jti) {
-        message.warning(text.parseJtiWarning);
-      }
-
-      const newTokenItem = {
-        jti: jti || `temp-${Date.now()}`,
-        usage_plan_id: data.usage_plan_id,
+      const jti = _parseJti(data.access_token) || `temp-${Date.now()}`;
+      const newItem = {
+        jti,
+        usage_plan_id: data.usage_plan_id || usage_plan_id,
         expires_at: data.expires_at,
         is_active: true,
         name: name || "",
-        rawToken: data.access_token,
       };
 
-      setApiKeys((prev) => [newTokenItem, ...prev]);
+      setApiKeys((prev) => [newItem, ...prev]);
       setCreateModalVisible(false);
     } catch (err) {
       message.error(err.message);
@@ -249,7 +150,7 @@ export default function DashboardApiKey() {
     }
   };
 
-  function parseJtiFromJWT(jwtStr) {
+  function _parseJti(jwtStr) {
     try {
       const parts = jwtStr.split(".");
       if (parts.length !== 3) return null;
@@ -261,338 +162,205 @@ export default function DashboardApiKey() {
     }
   }
 
-  // 撤銷 Token
-  const handleRevoke = React.useCallback(
-    async (item) => {
-      if (!userToken) return;
-      setLoading(true);
-      try {
-        const res = await fetch(`${API_BASE_URL}/revoke`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ jti: item.jti }),
-        });
-        if (!res.ok) {
-          const e = await res.json().catch(() => ({}));
-          throw new Error(e.detail || `Revoke token failed: ${res.status}`);
-        }
-        message.success(text.tokenRevoked);
-        await fetchTokens();
-        if (drawerToken && drawerToken.jti === item.jti) {
-          setDrawerVisible(false);
-          setDrawerToken(null);
-        }
-      } catch (err) {
-        message.error(err.message);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [userToken, drawerToken, fetchTokens, text]
-  );
-
-  // 刪除 Token
-  const handleDelete = React.useCallback(
-    async (item) => {
-      if (!userToken) return;
-      setLoading(true);
-      try {
-        const res = await fetch(`${API_BASE_URL}/remove`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ jti: item.jti }),
-        });
-        if (!res.ok) {
-          const e = await res.json().catch(() => ({}));
-          throw new Error(e.detail || `Delete token failed: ${res.status}`);
-        }
-        message.success(text.tokenDeleted);
-        await fetchTokens();
-        if (drawerToken && drawerToken.jti === item.jti) {
-          setDrawerVisible(false);
-          setDrawerToken(null);
-        }
-      } catch (err) {
-        message.error(err.message);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [userToken, drawerToken, fetchTokens, text]
-  );
-
-  // 打開 Drawer
-  const openDrawer = React.useCallback((item) => {
-    setDrawerUsage(null);
-    setDrawerToken(item);
-    setDrawerVisible(true);
-  }, []);
-
-  // 關閉 Drawer
-  const closeDrawer = React.useCallback(() => {
-    setDrawerVisible(false);
-    setDrawerToken(null);
-    setDrawerUsage(null);
-  }, []);
-
-  // 查詢用量
-  const handleCheckUsage = async (rawToken) => {
-    if (!rawToken) {
-      message.error(text.missingFullToken);
-      return;
-    }
+  // ---------------------------------------
+  // 4) 撤銷 / 刪除 Token
+  // ---------------------------------------
+  const handleRevokeOrDelete = async (tokenItem) => {
+    if (!userToken) return;
+    setLoading(true);
+    const endpoint = tokenItem.is_active ? "revoke" : "remove";
     try {
-      const res = await fetch(`${API_BASE_URL}/usage`, {
+      const res = await fetch(`${API_BASE_URL}/${endpoint}`, {
+        method: "POST",
         headers: {
-          Authorization: `Bearer ${rawToken}`,
+          Authorization: `Bearer ${userToken}`,
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({ jti: tokenItem.jti }),
       });
       if (!res.ok) {
         const e = await res.json().catch(() => ({}));
-        throw new Error(e.detail || `Check usage error: ${res.status}`);
+        throw new Error(e.detail || `Operation failed: ${res.status}`);
       }
-      const usageData = await res.json();
-      setDrawerUsage(usageData);
+      message.success(tokenItem.is_active ? text.tokenRevoked : text.tokenDeleted);
+      await fetchTokens();
+
+      // 如果 Drawer 正在顯示這個 Token，關閉
+      if (detailToken && detailToken.jti === tokenItem.jti) {
+        setDrawerVisible(false);
+        setDetailToken(null);
+      }
     } catch (err) {
       message.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // 複製 Token
-  const copyToken = React.useCallback(async (val) => {
+  // ---------------------------------------
+  // 5) Drawer 打開 / 關閉
+  // ---------------------------------------
+  const openDrawer = (tokenItem) => {
+    setDetailToken(tokenItem);
+    setDrawerVisible(true);
+  };
+  const closeDrawer = () => {
+    setDrawerVisible(false);
+    setDetailToken(null);
+  };
+
+  // ---------------------------------------
+  // 6) 複製 Token
+  // ---------------------------------------
+  const copyToken = async (tokenId) => {
     try {
-      await navigator.clipboard.writeText(val);
+      await navigator.clipboard.writeText(tokenId);
       message.success(text.copySuccess);
     } catch {
       message.error(text.copyFailure);
     }
-  }, [text]);
+  };
 
-  // 遮罩 Token
-  const maskToken = React.useCallback(
-    (val) => {
-      if (!val) return "";
-      if (showTokenPlain) return val;
-      const front = val.slice(0, 6);
-      const back = val.slice(-4);
-      return front + "****" + back;
-    },
-    [showTokenPlain]
-  );
+  // ---------------------------------------
+  // 7) 遮罩 Token
+  // ---------------------------------------
+  const maskToken = (val) => {
+    if (!val) return "";
+    if (showTokenPlain) return val;
+    return val.slice(0, 6) + "****" + val.slice(-4);
+  };
+
+  // ---------------------------------------
+  // 8) DocAlignerPanel：查詢 usage
+  // ---------------------------------------
+  const handleCheckUsage = async () => {
+    if (!publicToken) {
+      message.warning("請先輸入公開 Token");
+      return;
+    }
+    setCheckLoading(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/usage`, {
+        headers: { Authorization: `Bearer ${publicToken}` },
+      });
+      if (!res.ok) {
+        const e = await res.json().catch(() => ({}));
+        throw new Error(e.detail || "Failed to get usage");
+      }
+      const data = await res.json();
+      setUsageData(data);
+      message.success("Usage updated!");
+    } catch (err) {
+      message.error(err.message);
+      setUsageData(null);
+    } finally {
+      setCheckLoading(false);
+    }
+  };
 
   return (
     <div className={styles.apiKeyContainer}>
+      {/* 頁面標題 */}
       <header className={styles.header}>
         <h2>{text.headerTitle}</h2>
         <p>{text.headerDescription}</p>
       </header>
 
+      {/* 用量概覽 */}
+      <UsageOverview userUsage={userUsage} />
+
+      {/* 操作按鈕區 */}
       <div className={styles.actions}>
         <Button
           type="primary"
           icon={<PlusOutlined />}
-          onClick={handleOpenCreateModal}
+          onClick={() => setCreateModalVisible(true)}
           style={{ marginRight: 16 }}
         >
           {text.createTokenButton}
         </Button>
-        <Button onClick={() => setShowTokenPlain((prev) => !prev)}>
+        <Button onClick={() => setShowTokenPlain(!showTokenPlain)}>
           {showTokenPlain ? <EyeInvisibleOutlined /> : <EyeOutlined />}
           {showTokenPlain ? text.toggleHideTokens : text.toggleShowTokens}
         </Button>
       </div>
 
-      <Modal
-        title={text.createModalTitle}
-        open={createModalVisible}
+      {/* Collapse: Token 列表 + DocAligner */}
+      <Collapse bordered={false} className={styles.collapseRoot} defaultActiveKey={["tokens"]}>
+        <Collapse.Panel
+          key="tokens"
+          header={
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <InfoCircleOutlined style={{ marginRight: 8 }} />
+              <span>{text.collapseHeader}</span>
+            </div>
+          }
+        >
+          <List
+            loading={loading}
+            grid={{ gutter: 16, column: 2 }}
+            dataSource={apiKeys}
+            rowKey={(item) => item.jti}
+            renderItem={(item) => (
+              <TokenCard
+                item={item}
+                onCopyToken={copyToken}
+                onRevokeOrDelete={handleRevokeOrDelete}
+                onOpenDetail={openDrawer}
+                maskToken={maskToken}
+              />
+            )}
+          />
+        </Collapse.Panel>
+
+        <Collapse.Panel key="docaligner" header="DocAligner Example">
+          <DocAlignerPanel
+            publicToken={publicToken}
+            setPublicToken={setPublicToken}
+            usageData={usageData}
+            setUsageData={setUsageData}
+            checkLoading={checkLoading}
+            onCheckUsage={handleCheckUsage}
+          />
+        </Collapse.Panel>
+      </Collapse>
+
+      {/* 建立 Token 的 Modal */}
+      <CreateTokenModal
+        visible={createModalVisible}
         onCancel={() => setCreateModalVisible(false)}
-        footer={null}
-        destroyOnClose
-      >
-        <Form
-          form={createForm}
-          layout="vertical"
-          onFinish={handleCreateToken}
-          initialValues={{
-            usage_plan_id: 1,
-            expires_minutes: 60,
-            isPermanent: false,
-          }}
-        >
-          <Form.Item
-            label={text.formTokenNameLabel}
-            name="name"
-            tooltip={text.formTokenNameTooltip}
-          >
-            <Input placeholder={text.formTokenNamePlaceholder} />
-          </Form.Item>
+        onSubmit={handleCreateToken}
+        loading={loading}
+      />
 
-          <Form.Item
-            label={text.formPlanLabel}
-            name="usage_plan_id"
-            rules={[{ required: true }]}
-          >
-            <Select>
-              <Select.Option value={1}>{text.planBasic}</Select.Option>
-              <Select.Option value={2} disabled>
-                {text.planProfessional}
-              </Select.Option>
-              <Select.Option value={3} disabled>
-                {text.planPayAsYouGo}
-              </Select.Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item
-            label={text.formPermanentLabel}
-            name="isPermanent"
-            valuePropName="checked"
-          >
-            <Checkbox>{text.formPermanentCheckbox}</Checkbox>
-          </Form.Item>
-
-          <Form.Item
-            label={text.formExpiryLabel}
-            name="expires_minutes"
-            rules={[
-              { required: true, message: text.formExpiryValidationMessage },
-              { type: "number", min: 10, max: 999999 },
-            ]}
-          >
-            <InputNumber style={{ width: "100%" }} />
-          </Form.Item>
-          <Form.Item>
-            <Space>
-              <Button onClick={() => setCreateModalVisible(false)}>
-                {text.cancelButton}
-              </Button>
-              <Button type="primary" htmlType="submit">
-                {text.createButton}
-              </Button>
-            </Space>
-          </Form.Item>
-        </Form>
-      </Modal>
-
-      <div style={{ marginTop: 24 }}>
-        <Collapse
-          bordered={false}
-          className={styles.collapseRoot}
-          defaultActiveKey={["tokens"]}
-        >
-          <Collapse.Panel
-            key="tokens"
-            header={
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <InfoCircleOutlined style={{ marginRight: 8 }} />
-                <span>{text.collapseHeader}</span>
-              </div>
-            }
-          >
-            <List
-              loading={loading}
-              dataSource={apiKeys}
-              rowKey={(item) => item.jti}
-              renderItem={(item) => (
-                <TokenCard
-                  item={item}
-                  copyToken={copyToken}
-                  handleRevoke={handleRevoke}
-                  handleDelete={handleDelete}
-                  openDrawer={openDrawer}
-                  maskToken={maskToken}
-                />
-              )}
-            />
-          </Collapse.Panel>
-        </Collapse>
-      </div>
-
+      {/* Drawer - Token 詳細資訊 */}
       <Drawer
         title={
-          drawerToken
-            ? `${drawerToken.name || text.defaultTokenName} - ${text.drawerDetail}`
+          detailToken
+            ? `${detailToken.name || text.defaultTokenName} - ${text.drawerDetail}`
             : text.drawerInfo
         }
         open={drawerVisible}
         onClose={closeDrawer}
         width={420}
       >
-        {drawerToken && (
+        {detailToken && (
           <>
             <p>
-              <strong>{text.drawerTokenIdLabel}</strong>
-              <Tooltip title={text.tooltipCopyToken}>
-                <a onClick={() => copyToken(drawerToken.jti)}>
-                  {maskToken(drawerToken.jti)}
-                  <CopyOutlined style={{ marginLeft: 6 }} />
-                </a>
-              </Tooltip>
+              <strong>{text.drawerTokenIdLabel}</strong>{" "}
+              <a onClick={() => copyToken(detailToken.jti)}>
+                {maskToken(detailToken.jti)}
+                <CopyOutlined style={{ marginLeft: 6 }} />
+              </a>
             </p>
             <p>
               <strong>{text.drawerExpiryLabel}</strong>{" "}
-              {drawerToken.expires_at || text.forever}
+              {detailToken.expires_at || text.forever}
             </p>
             <p>
               <strong>{text.drawerStatusLabel}</strong>{" "}
-              {drawerToken.is_active ? text.active : text.revoked}
+              {detailToken.is_active ? text.active : text.revoked}
             </p>
-
-            <Tabs defaultActiveKey="usage" style={{ marginTop: 16 }}>
-              <Tabs.TabPane tab={text.tabUsageInfo} key="usage">
-                <p>{text.usageInfoInstruction}</p>
-                <Button
-                  icon={<EyeOutlined />}
-                  onClick={() => handleCheckUsage(drawerToken.rawToken)}
-                  disabled={!drawerToken.is_active}
-                >
-                  {text.checkUsageButton}
-                </Button>
-                <p style={{ marginTop: 8, fontSize: 12, color: "#999" }}>
-                  {text.usageNote}
-                </p>
-
-                {drawerUsage && (
-                  <div style={{ marginTop: 16 }}>
-                    {drawerUsage.billing_type === "rate_limit" ? (
-                      <>
-                        <p>{`${text.usageThisHourLabel}${drawerUsage.used_this_hour} / ${drawerUsage.limit_per_hour}`}</p>
-                        <p>{`${text.remainingLabel}${drawerUsage.remaining}`}</p>
-                        <Progress
-                          percent={Math.min(
-                            100,
-                            (drawerUsage.used_this_hour /
-                              drawerUsage.limit_per_hour) *
-                              100
-                          )}
-                          status={
-                            drawerUsage.used_this_hour >=
-                            drawerUsage.limit_per_hour
-                              ? "exception"
-                              : "active"
-                          }
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <p>{`${text.usageThisHourLabel}${drawerUsage.used_this_hour} (${text.payPerUseInfo})`}</p>
-                        <p>{drawerUsage.note || ""}</p>
-                      </>
-                    )}
-                  </div>
-                )}
-              </Tabs.TabPane>
-
-              <Tabs.TabPane tab={text.tabOthers} key="others">
-                <p>{text.othersContent}</p>
-              </Tabs.TabPane>
-            </Tabs>
           </>
         )}
       </Drawer>

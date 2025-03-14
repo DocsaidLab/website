@@ -18,7 +18,7 @@ export const apiKeyLocale = {
     active: "Active",
     revoked: "Revoked",
     detailUsageButton: "詳細 / 用量",
-    headerTitle: "My API Keys",
+    headerTitle: "我的 API Keys",
     headerDescription: "管理、檢視、撤銷與刪除你的公開 Token",
     createTokenButton: "建立新 Token",
     toggleShowTokens: "顯示全部 Token",
