@@ -45,9 +45,7 @@ function formatToLocalTime(utcString) {
 
 export default function DashboardApiKey() {
   const { token: userToken } = useAuth();
-  const {
-    i18n: { currentLocale },
-  } = useDocusaurusContext();
+  const { i18n: { currentLocale } } = useDocusaurusContext();
   const text = apiKeyLocale[currentLocale] || apiKeyLocale.en;
 
   // ========================
@@ -167,7 +165,7 @@ export default function DashboardApiKey() {
     }
     const { isLongTerm, expires_minutes, name } = formValues;
 
-    // 長期 => 一年 (525600 分鐘)
+    // 長期使用設定為一年 (525600 分鐘)
     const finalExpires = isLongTerm ? 525600 : expires_minutes;
 
     if (!userToken) {
@@ -177,17 +175,21 @@ export default function DashboardApiKey() {
 
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/`, {
+      // 將 expires_minutes 與 name 以 query string 方式傳遞
+      const params = new URLSearchParams({
+        expires_minutes: finalExpires,
+        name: name || ""
+      });
+
+      const res = await fetch(`${API_BASE_URL}/?${params.toString()}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${userToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          expires_minutes: finalExpires,
-          name,
-        }),
+          "Content-Type": "application/json"
+        }
+        // 參數已在 URL 中傳遞，故不需要傳 body 資料
       });
+
       if (!res.ok) {
         const e = await res.json().catch(() => ({}));
         throw new Error(e.detail || `Create token failed: ${res.status}`);
@@ -196,18 +198,19 @@ export default function DashboardApiKey() {
 
       message.success(text.createTokenSuccessTitle);
 
-      // 後端回傳 { access_token, expires_at, token_type...}
+      // 後端回傳 { access_token, expires_at, token_type... }
       const newAccessToken = data.access_token;
       const jti = parseJti(newAccessToken) || `temp-${Date.now()}`;
 
-      // 新增到 apiKeys (但不重複存完整 token)
+      // 新增到 apiKeys (只存必要資訊)
       let newItem = {
         jti,
         is_active: true,
         expires_at: data.expires_at,
-        name: name || "",
+        name: name || ""
       };
-      // 檢查是否過期
+
+      // 檢查是否已過期
       if (newItem.expires_at) {
         const now = new Date();
         const dt = new Date(newItem.expires_at);
@@ -219,10 +222,13 @@ export default function DashboardApiKey() {
 
       setApiKeys((prev) => [newItem, ...prev]);
 
+      setTimeout(async () => {
+        await fetchTokens();
+      }, 1000);
+
       // 顯示一次性的完整 Token
       setLatestCreatedToken(newAccessToken);
       setNewTokenModalVisible(true);
-
       setCreateModalVisible(false);
     } catch (err) {
       message.error(err.message || "Create token failed");
