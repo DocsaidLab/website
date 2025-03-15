@@ -1,0 +1,96 @@
+/* src/components/Dashboard/MyInfo/index.module.css */
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  /* 統一頁面標題 */
+  .header {
+    margin-bottom: 24px;
+    text-align: left;
+  }
+
+  .header h2 {
+    font-size: 2rem;
+    margin: 0;
+    color: #333;
+  }
+
+  /* 針對手機、平板調整容器間距 */
+  @media (max-width: 576px) {
+    .container {
+      padding: 16px;
+    }
+    .header h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* Alert 設定 */
+  .alert {
+    margin-bottom: 16px;
+  }
+
+  /* Avatar 與上傳按鈕 */
+  .avatarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .uploadButton {
+    margin-top: 8px;
+  }
+
+  /* 調整 Avatar 尺寸於小裝置 */
+  @media (max-width: 576px) {
+    .avatarContainer .ant-avatar {
+      width: 120px;
+      height: 120px;
+      font-size: 1rem;
+    }
+  }
+
+  /* 表單與個人資訊區塊 */
+  .profileInfo {
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .profileInfo p {
+    margin-bottom: 8px;
+  }
+
+  /* Email 狀態提示 */
+  .emailStatus {
+    margin-left: 8px;
+  }
+
+  /* 編輯按鈕樣式 */
+  .editButton {
+    padding: 0;
+    font-size: 1rem;
+    text-decoration: underline;
+  }
+
+  /* 按鈕間距調整 */
+  .saveButton {
+    margin-right: 8px;
+  }
+
+
+  /* 平板與桌面，進一步優化間距 */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .container {
+      padding: 20px;
+    }
+    .header h2 {
+      font-size: 1.75rem;
+    }
+  }

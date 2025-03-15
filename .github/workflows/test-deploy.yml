@@ -10,15 +10,17 @@ on:
 jobs:
   test-deploy:
     name: Test deployment
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, unicorn]
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: yarn
 
       - name: Install dependencies
         run: yarn install
-      - name: Test build website
-        run: yarn build
+      - name: Build website
+        run: DOCUSAURUS_IGNORE_SSG_WARNINGS=true yarn build

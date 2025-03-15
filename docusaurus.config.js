@@ -133,19 +133,9 @@ const config = {
             position: 'right',
           },
           {
-            label: 'GitHub',
-            position: 'right',
-            href: 'https://github.com/DocsaidLab',
-          },
-          {
-            label: '支持我們',
-            position: 'right',
-            href: 'https://buymeacoffee.com/docsaid',
-          },
-          {
             label: '關於我們',
             href: '/aboutus',
-            position: 'right',
+            position: 'left',
           },
 
         ],
@@ -196,11 +186,7 @@ const config = {
           {
             label: '工作日誌',
             href: '/worklog',
-          },
-          {
-            label: '支持我們',
-            href: 'https://buymeacoffee.com/docsaid',
-          },
+          }
         ],
         copyright: `Copyright © ${new Date().getFullYear()} DOCSAID.`,
       },
