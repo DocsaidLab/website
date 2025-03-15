@@ -3,7 +3,27 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { Card, Progress } from "antd";
 import PropTypes from "prop-types";
 import React from "react";
-import { apiKeyLocale } from "./locales";
+
+const apiKeyLocale = {
+  "zh-hant": {
+    loadingUsage: "載入使用情況...",
+    usageOverviewTitle: "用量概覽",
+    usageThisHourLabel: "本小時用量：",
+    remainingLabel: "剩餘：",
+  },
+  en: {
+    loadingUsage: "Loading usage...",
+    usageOverviewTitle: "Usage Overview",
+    usageThisHourLabel: "Usage this hour:",
+    remainingLabel: "Remaining:",
+  },
+  ja: {
+    loadingUsage: "使用状況を読み込み中...",
+    usageOverviewTitle: "使用状況概観",
+    usageThisHourLabel: "今時間の使用量：",
+    remainingLabel: "残り：",
+  },
+};
 
 const cardStyle = { marginBottom: 24, borderRadius: 8 };
 

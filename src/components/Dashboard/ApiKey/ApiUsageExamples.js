@@ -2,9 +2,20 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { Card, Tabs } from "antd";
 import React from "react";
-import { apiKeyLocale } from "./locales";
 
 const { TabPane } = Tabs;
+
+const apiKeyLocale = {
+  "zh-hant": {
+    apiUsageExampleTitle: "API 使用範例",
+  },
+  en: {
+    apiUsageExampleTitle: "API Usage Examples",
+  },
+  ja: {
+    apiUsageExampleTitle: "API利用例",
+  },
+};
 
 export default function ApiUsageExamples() {
   const {
@@ -160,7 +171,7 @@ puts response.body`,
   };
 
   return (
-    <Card title={text.apiUsageExampleTitle || "API Usage Examples"} size="small">
+    <Card title={text.apiUsageExampleTitle} size="small">
       <Tabs defaultActiveKey="docaligner">
         <TabPane tab="DocAligner" key="docaligner">
           <Tabs defaultActiveKey="curl">
