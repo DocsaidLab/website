@@ -1,59 +1,55 @@
-// src/components/Dashboard/ApiKey/TokenCard.jsx
-import { CopyOutlined, DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { Button, Card, Popconfirm, Tooltip } from "antd";
+import { Button, Card, Popconfirm } from "antd";
+import PropTypes from "prop-types";
 import React from "react";
 import styles from "./index.module.css";
 import { apiKeyLocale } from "./locales";
-
-/** 取得方案名稱的輔助函式 */
-function getPlanName(id, text) {
-  switch (id) {
-    case 1:
-      return text.planBasic;
-    case 2:
-      return text.planProfessional;
-    case 3:
-      return text.planPayAsYouGo;
-    default:
-      return text.planUnknown;
-  }
-}
 
 /**
  * 單一 Token 卡片組件
  */
 export default function TokenCard({
   item,
-  onCopyToken,
   onRevokeOrDelete,
-  onOpenDetail,
   maskToken,
 }) {
   const {
     i18n: { currentLocale },
   } = useDocusaurusContext();
-
   const text = apiKeyLocale[currentLocale] || apiKeyLocale.en;
-  const isActive = item.is_active;
-  const planLabel = getPlanName(item.usage_plan_id, text);
 
-  // 按鈕文字 & Popconfirm 標題
-  const buttonText = isActive ? text.revokeButton : text.deleteButton;
-  const popConfirmTitle = isActive
+  const {
+    name,
+    is_active,
+    expires_local,     // 前端轉換後的當地時區時間
+    jti,
+    __frontend_expired // 若前端判定該 token 已自然過期
+  } = item;
+
+  // 狀態
+  //  1) 已過期 => 顯示「已過期」
+  //  2) 已撤銷 => 顯示「已撤銷」(revoked)
+  //  3) 否則 => "有效"
+  let statusText = text.active;
+  if (!is_active) {
+    // 若 .__frontend_expired === true => 顯示「已過期」
+    // 否則 => 「已撤銷」
+    statusText = __frontend_expired ? (text.expired || "已過期") : text.revoked;
+  }
+
+  // Popconfirm
+  const popConfirmTitle = is_active
     ? text.popconfirmRevokeTitle
     : text.popconfirmDeleteTitle;
+
+  const buttonText = is_active ? text.revokeButton : text.deleteButton;
 
   return (
     <Card hoverable className={styles.tokenCard}>
       {/* 卡片 Header */}
       <div className={styles.tokenCardHeader}>
-        <div>
-          <div className={styles.tokenName}>{item.name || text.defaultTokenName}</div>
-          <div className={styles.planLabel}>{planLabel}</div>
-        </div>
-
-        {/* Revoke / Delete 按鈕 */}
+        <div className={styles.tokenName}>{name || text.defaultTokenName}</div>
         <Popconfirm
           title={popConfirmTitle}
           icon={<ExclamationCircleOutlined style={{ color: "red" }} />}
@@ -73,32 +69,31 @@ export default function TokenCard({
       {/* 主要資訊 Rows */}
       <div className={styles.tokenRow}>
         <span className={styles.label}>{text.tokenIdLabel}</span>
-        <Tooltip title={text.tooltipCopyToken}>
-          <a onClick={() => onCopyToken(item.jti)}>
-            {maskToken(item.jti)}
-            <CopyOutlined style={{ marginLeft: 6 }} />
-          </a>
-        </Tooltip>
+        {/* 已移除複製功能 */}
+        <span>{maskToken(jti)}</span>
       </div>
 
       <div className={styles.tokenRow}>
         <span className={styles.label}>{text.expiryLabel}</span>
-        {item.expires_at || text.forever}
+        {expires_local || "-"}
       </div>
 
       <div className={styles.tokenRow}>
         <span className={styles.label}>{text.statusLabel}</span>
-        {isActive ? text.active : text.revoked}
+        {statusText}
       </div>
-
-      {/* 額外資訊 / Usage Detail 按鈕 */}
-      {isActive && onOpenDetail && (
-        <div style={{ marginTop: 12, textAlign: "right" }}>
-          <Button onClick={() => onOpenDetail(item)}>
-            {text.detailUsageButton}
-          </Button>
-        </div>
-      )}
     </Card>
   );
 }
+
+TokenCard.propTypes = {
+  item: PropTypes.shape({
+    name: PropTypes.string,
+    is_active: PropTypes.bool.isRequired,
+    expires_local: PropTypes.string,
+    jti: PropTypes.string.isRequired,
+    __frontend_expired: PropTypes.bool,
+  }).isRequired,
+  onRevokeOrDelete: PropTypes.func.isRequired,
+  maskToken: PropTypes.func.isRequired,
+};

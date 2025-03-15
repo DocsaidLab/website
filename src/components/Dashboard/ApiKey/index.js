@@ -1,31 +1,47 @@
-// src/components/Dashboard/ApiKey/index.js
 import {
   CopyOutlined,
   EyeInvisibleOutlined,
   EyeOutlined,
-  InfoCircleOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import {
-  Button,
-  Collapse,
-  Drawer,
-  List,
-  message
-} from "antd";
+import { Button, List, message, Modal, Spin, Tabs } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 
+import ApiUsageExamples from "./ApiUsageExamples";
+import CreateTokenModal from "./CreateTokenModal";
+import TokenCard from "./TokenCard";
+import UsageOverview from "./UsageOverview";
 import styles from "./index.module.css";
 import { apiKeyLocale } from "./locales";
 
-import CreateTokenModal from "./CreateTokenModal";
-import DocAlignerPanel from "./DocAlignerPanel";
-import TokenCard from "./TokenCard";
-import UsageOverview from "./UsageOverview";
-
+// 後端路徑
+const PROFILE_URL = "https://api.docsaid.org/auth/me";
 const API_BASE_URL = "https://api.docsaid.org/public/token";
+
+const { TabPane } = Tabs;
+
+/** 解析 JWT 中的 jti（供新建 Token 時使用） */
+function parseJti(jwtStr) {
+  try {
+    const parts = jwtStr.split(".");
+    if (parts.length !== 3) return null;
+    const payloadRaw = atob(parts[1]);
+    const payload = JSON.parse(payloadRaw);
+    return payload.jti;
+  } catch {
+    return null;
+  }
+}
+
+/** 將 UTC 時間字串轉成本地時間 (不顯示「永久」字樣) */
+function formatToLocalTime(utcString) {
+  if (!utcString) return ""; // 若後端返回空 => 視為無期限，但避免誤導就留空
+  const dt = new Date(utcString);
+  if (Number.isNaN(dt.getTime())) return utcString; // 解析失敗就原樣
+  return dt.toLocaleString(); // 可自行換成 dayjs/moment
+}
 
 export default function DashboardApiKey() {
   const { token: userToken } = useAuth();
@@ -34,29 +50,50 @@ export default function DashboardApiKey() {
   } = useDocusaurusContext();
   const text = apiKeyLocale[currentLocale] || apiKeyLocale.en;
 
-  // ===== Global states =====
+  // ========================
+  // State
+  // ========================
+  const [userProfile, setUserProfile] = useState(null);
+  const [loadingProfile, setLoadingProfile] = useState(false);
+
   const [apiKeys, setApiKeys] = useState([]);
   const [userUsage, setUserUsage] = useState(null);
+
   const [loading, setLoading] = useState(false);
-
-  // 控制 Token 明碼
-  const [showTokenPlain, setShowTokenPlain] = useState(false);
-
-  // 建立 Token Modal
   const [createModalVisible, setCreateModalVisible] = useState(false);
 
-  // Drawer: 詳細資訊
-  const [drawerVisible, setDrawerVisible] = useState(false);
-  const [detailToken, setDetailToken] = useState(null);
+  // 顯示/隱藏「新建 Token 後」Modal，並保存本次創建的 Token 完整字串
+  const [newTokenModalVisible, setNewTokenModalVisible] = useState(false);
+  const [latestCreatedToken, setLatestCreatedToken] = useState("");
 
-  // ===== DocAligner Panel: 公開 Token 測試 =====
-  const [publicToken, setPublicToken] = useState("");
-  const [usageData, setUsageData] = useState(null);
-  const [checkLoading, setCheckLoading] = useState(false);
+  // 是否顯示「明碼 jti」(可自行決定要不要保留此功能)
+  const [showTokenPlain, setShowTokenPlain] = useState(false);
 
-  // ---------------------------------------
-  // 1) 載入 Token 列表
-  // ---------------------------------------
+  // ========================
+  // 抓取使用者檔案 /auth/me
+  // ========================
+  const fetchUserProfile = useCallback(async () => {
+    if (!userToken) return;
+    setLoadingProfile(true);
+    try {
+      const res = await fetch(PROFILE_URL, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      });
+      if (!res.ok) {
+        throw new Error(`Fetch user profile failed: ${res.status}`);
+      }
+      const data = await res.json();
+      setUserProfile(data);
+    } catch (err) {
+      message.error(err.message);
+    } finally {
+      setLoadingProfile(false);
+    }
+  }, [userToken]);
+
+  // ========================
+  // 抓取 token 列表 /my-tokens
+  // ========================
   const fetchTokens = useCallback(async () => {
     if (!userToken) return;
     setLoading(true);
@@ -67,7 +104,21 @@ export default function DashboardApiKey() {
       if (!res.ok) {
         throw new Error(`Fetch tokens failed: ${res.status}`);
       }
-      const data = await res.json();
+      let data = await res.json();
+
+      // 前端做「是否已自然過期」的檢查
+      const now = new Date();
+      data = data.map((tk) => {
+        if (tk.expires_at) {
+          const dt = new Date(tk.expires_at);
+          if (dt <= now) {
+            // 標記為過期
+            return { ...tk, is_active: false, __frontend_expired: true };
+          }
+        }
+        return tk;
+      });
+
       setApiKeys(data);
     } catch (err) {
       message.error(err.message);
@@ -76,9 +127,9 @@ export default function DashboardApiKey() {
     }
   }, [userToken]);
 
-  // ---------------------------------------
-  // 2) 載入使用者整體用量
-  // ---------------------------------------
+  // ========================
+  // 抓取用量 /user-usage
+  // ========================
   const fetchUserUsage = useCallback(async () => {
     if (!userToken) return;
     try {
@@ -96,17 +147,28 @@ export default function DashboardApiKey() {
     }
   }, [userToken]);
 
+  // ========================
+  // 頁面初始載入
+  // ========================
   useEffect(() => {
+    fetchUserProfile();
     fetchTokens();
     fetchUserUsage();
-  }, [fetchTokens, fetchUserUsage]);
+  }, [fetchUserProfile, fetchTokens, fetchUserUsage]);
 
-  // ---------------------------------------
-  // 3) 建立 Token
-  // ---------------------------------------
+  // ========================
+  // 申請新 Token
+  // ========================
   const handleCreateToken = async (formValues) => {
-    const { usage_plan_id, isPermanent, expires_minutes, name } = formValues;
-    const finalExpires = isPermanent ? 999999 : expires_minutes;
+    if (!userProfile) return;
+    if (!userProfile.is_email_verified) {
+      message.error("尚未驗證電子郵件，無法申請 API Token。");
+      return;
+    }
+    const { isLongTerm, expires_minutes, name } = formValues;
+
+    // 長期 => 一年 (525600 分鐘)
+    const finalExpires = isLongTerm ? 525600 : expires_minutes;
 
     if (!userToken) {
       message.error(text.notLoggedIn);
@@ -115,12 +177,16 @@ export default function DashboardApiKey() {
 
     setLoading(true);
     try {
-      const planParam = `usage_plan_id=${usage_plan_id}`;
-      const nameParam = name ? `&name=${encodeURIComponent(name)}` : "";
-      const url = `${API_BASE_URL}/?${planParam}&expires_minutes=${finalExpires}${nameParam}`;
-      const res = await fetch(url, {
+      const res = await fetch(`${API_BASE_URL}/`, {
         method: "POST",
-        headers: { Authorization: `Bearer ${userToken}` },
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          expires_minutes: finalExpires,
+          name,
+        }),
       });
       if (!res.ok) {
         const e = await res.json().catch(() => ({}));
@@ -129,42 +195,45 @@ export default function DashboardApiKey() {
       const data = await res.json();
 
       message.success(text.createTokenSuccessTitle);
-      // 也可用 Modal.success()
-      // -> 省略: 你可自行放 Token 的提示
 
-      const jti = _parseJti(data.access_token) || `temp-${Date.now()}`;
-      const newItem = {
+      // 後端回傳 { access_token, expires_at, token_type...}
+      const newAccessToken = data.access_token;
+      const jti = parseJti(newAccessToken) || `temp-${Date.now()}`;
+
+      // 新增到 apiKeys (但不重複存完整 token)
+      let newItem = {
         jti,
-        usage_plan_id: data.usage_plan_id || usage_plan_id,
-        expires_at: data.expires_at,
         is_active: true,
+        expires_at: data.expires_at,
         name: name || "",
       };
+      // 檢查是否過期
+      if (newItem.expires_at) {
+        const now = new Date();
+        const dt = new Date(newItem.expires_at);
+        if (dt <= now) {
+          newItem.is_active = false;
+          newItem.__frontend_expired = true;
+        }
+      }
 
       setApiKeys((prev) => [newItem, ...prev]);
+
+      // 顯示一次性的完整 Token
+      setLatestCreatedToken(newAccessToken);
+      setNewTokenModalVisible(true);
+
       setCreateModalVisible(false);
     } catch (err) {
-      message.error(err.message);
+      message.error(err.message || "Create token failed");
     } finally {
       setLoading(false);
     }
   };
 
-  function _parseJti(jwtStr) {
-    try {
-      const parts = jwtStr.split(".");
-      if (parts.length !== 3) return null;
-      const payloadRaw = atob(parts[1]);
-      const payload = JSON.parse(payloadRaw);
-      return payload.jti;
-    } catch {
-      return null;
-    }
-  }
-
-  // ---------------------------------------
-  // 4) 撤銷 / 刪除 Token
-  // ---------------------------------------
+  // ========================
+  // Revoke / Remove
+  // ========================
   const handleRevokeOrDelete = async (tokenItem) => {
     if (!userToken) return;
     setLoading(true);
@@ -182,14 +251,10 @@ export default function DashboardApiKey() {
         const e = await res.json().catch(() => ({}));
         throw new Error(e.detail || `Operation failed: ${res.status}`);
       }
-      message.success(tokenItem.is_active ? text.tokenRevoked : text.tokenDeleted);
+      message.success(
+        tokenItem.is_active ? text.tokenRevoked : text.tokenDeleted
+      );
       await fetchTokens();
-
-      // 如果 Drawer 正在顯示這個 Token，關閉
-      if (detailToken && detailToken.jti === tokenItem.jti) {
-        setDrawerVisible(false);
-        setDetailToken(null);
-      }
     } catch (err) {
       message.error(err.message);
     } finally {
@@ -197,85 +262,96 @@ export default function DashboardApiKey() {
     }
   };
 
-  // ---------------------------------------
-  // 5) Drawer 打開 / 關閉
-  // ---------------------------------------
-  const openDrawer = (tokenItem) => {
-    setDetailToken(tokenItem);
-    setDrawerVisible(true);
-  };
-  const closeDrawer = () => {
-    setDrawerVisible(false);
-    setDetailToken(null);
-  };
-
-  // ---------------------------------------
-  // 6) 複製 Token
-  // ---------------------------------------
-  const copyToken = async (tokenId) => {
+  // ========================
+  // 複製 Token (於新建後的 Modal)
+  // ========================
+  const copyToken = async (tokenStr) => {
+    if (!tokenStr) {
+      message.error(text.copyFailure || "複製失敗");
+      return;
+    }
     try {
-      await navigator.clipboard.writeText(tokenId);
-      message.success(text.copySuccess);
+      await navigator.clipboard.writeText(tokenStr);
+      // ★ 第 3 點：message.success => 提示「已複製」
+      message.success("已複製");
     } catch {
-      message.error(text.copyFailure);
+      message.error(text.copyFailure || "複製失敗");
     }
   };
 
-  // ---------------------------------------
-  // 7) 遮罩 Token
-  // ---------------------------------------
+  // 遮罩 jti
   const maskToken = (val) => {
-    if (!val) return "";
+    if (!val) return "N/A";
     if (showTokenPlain) return val;
+    if (val.length < 10) {
+      return val.slice(0, 2) + "****" + val.slice(-2);
+    }
     return val.slice(0, 6) + "****" + val.slice(-4);
   };
 
-  // ---------------------------------------
-  // 8) DocAlignerPanel：查詢 usage
-  // ---------------------------------------
-  const handleCheckUsage = async () => {
-    if (!publicToken) {
-      message.warning("請先輸入公開 Token");
-      return;
+  // 顯示計費方案
+  function getPlanLabel(billingType) {
+    switch (billingType) {
+      case "rate_limit":
+        return "Basic (Free)";
+      case "pay_per_use":
+        return "Pay-As-You-Go";
+      default:
+        return "Unknown Plan";
     }
-    setCheckLoading(true);
-    try {
-      const res = await fetch(`${API_BASE_URL}/usage`, {
-        headers: { Authorization: `Bearer ${publicToken}` },
-      });
-      if (!res.ok) {
-        const e = await res.json().catch(() => ({}));
-        throw new Error(e.detail || "Failed to get usage");
-      }
-      const data = await res.json();
-      setUsageData(data);
-      message.success("Usage updated!");
-    } catch (err) {
-      message.error(err.message);
-      setUsageData(null);
-    } finally {
-      setCheckLoading(false);
-    }
+  }
+  const renderPlanBox = () => {
+    if (!userUsage) return null;
+    const planLabel = getPlanLabel(userUsage.billing_type);
+    return (
+      <div className={styles.planBox}>
+        <strong>{text.currentPlanLabel}: </strong> {planLabel}
+      </div>
+    );
   };
+
+  // ========================
+  // 主體渲染
+  // ========================
+  if (loadingProfile && !userProfile) {
+    return (
+      <div style={{ textAlign: "center", marginTop: 50 }}>
+        <Spin tip="Loading Profile..." />
+      </div>
+    );
+  }
+
+  if (userProfile && !userProfile.is_email_verified) {
+    return (
+      <div className={styles.apiKeyContainer} style={{ textAlign: "center", marginTop: 50 }}>
+        <h2>請先驗證電子郵件</h2>
+        <p>
+          您尚未完成電子郵件驗證，無法使用 API Token 功能。<br />
+          請前往 <strong>MyInfo</strong> 頁面完成驗證。
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.apiKeyContainer}>
-      {/* 頁面標題 */}
+      {/* Header */}
       <header className={styles.header}>
         <h2>{text.headerTitle}</h2>
         <p>{text.headerDescription}</p>
       </header>
 
-      {/* 用量概覽 */}
+      {/* 顯示方案 & 用量 */}
+      {renderPlanBox()}
       <UsageOverview userUsage={userUsage} />
 
-      {/* 操作按鈕區 */}
+      {/* 操作按鈕 */}
       <div className={styles.actions}>
         <Button
           type="primary"
           icon={<PlusOutlined />}
           onClick={() => setCreateModalVisible(true)}
-          style={{ marginRight: 16 }}
+          className={styles.createButton}
         >
           {text.createTokenButton}
         </Button>
@@ -285,45 +361,40 @@ export default function DashboardApiKey() {
         </Button>
       </div>
 
-      {/* Collapse: Token 列表 + DocAligner */}
-      <Collapse bordered={false} className={styles.collapseRoot} defaultActiveKey={["tokens"]}>
-        <Collapse.Panel
-          key="tokens"
-          header={
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <InfoCircleOutlined style={{ marginRight: 8 }} />
-              <span>{text.collapseHeader}</span>
-            </div>
-          }
-        >
+      <Tabs defaultActiveKey="tokens" className={styles.mainTabs}>
+        <TabPane tab={text.collapseHeader} key="tokens">
+          {/* 第4點: 調整排列 / 間距 */}
           <List
             loading={loading}
-            grid={{ gutter: 16, column: 2 }}
+            // 設定更大的 gutter，改成 1 欄 (若想 2 欄也可)
+            grid={{ gutter: 24, column: 1 }}
             dataSource={apiKeys}
             rowKey={(item) => item.jti}
-            renderItem={(item) => (
-              <TokenCard
-                item={item}
-                onCopyToken={copyToken}
-                onRevokeOrDelete={handleRevokeOrDelete}
-                onOpenDetail={openDrawer}
-                maskToken={maskToken}
-              />
-            )}
-          />
-        </Collapse.Panel>
+            renderItem={(item) => {
+              // 將 expires_at (UTC) => 本地時間字串
+              const localExpires = item.expires_at
+                ? formatToLocalTime(item.expires_at)
+                : ""; // 避免顯示 "forever" 改成空
 
-        <Collapse.Panel key="docaligner" header="DocAligner Example">
-          <DocAlignerPanel
-            publicToken={publicToken}
-            setPublicToken={setPublicToken}
-            usageData={usageData}
-            setUsageData={setUsageData}
-            checkLoading={checkLoading}
-            onCheckUsage={handleCheckUsage}
+              return (
+                <List.Item style={{ marginBottom: 24 }}>
+                  <TokenCard
+                    item={{
+                      ...item,
+                      expires_local: localExpires,
+                    }}
+                    onRevokeOrDelete={handleRevokeOrDelete}
+                    maskToken={maskToken}
+                  />
+                </List.Item>
+              );
+            }}
           />
-        </Collapse.Panel>
-      </Collapse>
+        </TabPane>
+        <TabPane tab={text.apiUsageExampleTitle} key="apiUsage">
+          <ApiUsageExamples />
+        </TabPane>
+      </Tabs>
 
       {/* 建立 Token 的 Modal */}
       <CreateTokenModal
@@ -333,37 +404,39 @@ export default function DashboardApiKey() {
         loading={loading}
       />
 
-      {/* Drawer - Token 詳細資訊 */}
-      <Drawer
-        title={
-          detailToken
-            ? `${detailToken.name || text.defaultTokenName} - ${text.drawerDetail}`
-            : text.drawerInfo
-        }
-        open={drawerVisible}
-        onClose={closeDrawer}
-        width={420}
+      {/* 新建 Token 後一次性顯示 */}
+      <Modal
+        title={text.newTokenModalTitle || "以下是您的新 Token"}
+        open={newTokenModalVisible}
+        onCancel={() => setNewTokenModalVisible(false)}
+        footer={null}
+        destroyOnClose
       >
-        {detailToken && (
-          <>
-            <p>
-              <strong>{text.drawerTokenIdLabel}</strong>{" "}
-              <a onClick={() => copyToken(detailToken.jti)}>
-                {maskToken(detailToken.jti)}
-                <CopyOutlined style={{ marginLeft: 6 }} />
-              </a>
-            </p>
-            <p>
-              <strong>{text.drawerExpiryLabel}</strong>{" "}
-              {detailToken.expires_at || text.forever}
-            </p>
-            <p>
-              <strong>{text.drawerStatusLabel}</strong>{" "}
-              {detailToken.is_active ? text.active : text.revoked}
-            </p>
-          </>
-        )}
-      </Drawer>
+        <p style={{ marginBottom: 10 }}>
+          {text.newTokenModalDesc || "請複製並保存，關閉後無法再次查看。"}
+        </p>
+        <div
+          style={{
+            wordBreak: "break-all",
+            background: "#f5f5f5",
+            padding: "8px 10px",
+            borderRadius: 6,
+            marginBottom: 16,
+          }}
+        >
+          {latestCreatedToken}
+        </div>
+        <Button
+          icon={<CopyOutlined />}
+          onClick={() => copyToken(latestCreatedToken)}
+          style={{ marginRight: 8 }}
+        >
+          {text.copyTokenButton || "複製 Token"}
+        </Button>
+        <Button type="primary" onClick={() => setNewTokenModalVisible(false)}>
+          {text.closeButton || "關閉"}
+        </Button>
+      </Modal>
     </div>
   );
 }

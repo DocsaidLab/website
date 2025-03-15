@@ -1,7 +1,7 @@
-// src/components/Dashboard/ApiKey/CreateTokenModal.jsx
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { Button, Checkbox, Form, Input, InputNumber, Modal, Select, Space } from "antd";
-import React from "react";
+import { Button, Checkbox, Form, Input, InputNumber, Modal, Space } from "antd";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
 import { apiKeyLocale } from "./locales";
 
 export default function CreateTokenModal({
@@ -10,9 +10,8 @@ export default function CreateTokenModal({
   onSubmit,
   loading = false,
   defaultValues = {
-    usage_plan_id: 1,
     expires_minutes: 60,
-    isPermanent: false,
+    isLongTerm: false, // 改用 isLongTerm
   },
 }) {
   const [form] = Form.useForm();
@@ -20,6 +19,10 @@ export default function CreateTokenModal({
     i18n: { currentLocale },
   } = useDocusaurusContext();
   const text = apiKeyLocale[currentLocale] || apiKeyLocale.en;
+
+  useEffect(() => {
+    form.setFieldsValue(defaultValues);
+  }, [defaultValues, form]);
 
   return (
     <Modal
@@ -44,24 +47,13 @@ export default function CreateTokenModal({
           <Input placeholder={text.formTokenNamePlaceholder} />
         </Form.Item>
 
+        {/* isLongTerm: 勾選即用 1年 */}
         <Form.Item
-          label={text.formPlanLabel}
-          name="usage_plan_id"
-          rules={[{ required: true }]}
-        >
-          <Select>
-            <Select.Option value={1}>{text.planBasic}</Select.Option>
-            <Select.Option value={2}>{text.planProfessional}</Select.Option>
-            <Select.Option value={3}>{text.planPayAsYouGo}</Select.Option>
-          </Select>
-        </Form.Item>
-
-        <Form.Item
-          label={text.formPermanentLabel}
-          name="isPermanent"
+          label="申請一年效期" // 你可改任何文字
+          name="isLongTerm"
           valuePropName="checked"
         >
-          <Checkbox>{text.formPermanentCheckbox}</Checkbox>
+          <Checkbox>勾選後自動設定 1 年效期 (525600 分鐘)</Checkbox>
         </Form.Item>
 
         <Form.Item
@@ -69,7 +61,7 @@ export default function CreateTokenModal({
           name="expires_minutes"
           rules={[
             { required: true, message: text.formExpiryValidationMessage },
-            { type: "number", min: 10, max: 999999 },
+            { type: "number", min: 10, max: 525600 },
           ]}
         >
           <InputNumber style={{ width: "100%" }} />
@@ -87,3 +79,15 @@ export default function CreateTokenModal({
     </Modal>
   );
 }
+
+CreateTokenModal.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+  defaultValues: PropTypes.shape({
+    expires_minutes: PropTypes.number,
+    isLongTerm: PropTypes.bool,
+    name: PropTypes.string,
+  }),
+};
