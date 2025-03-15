@@ -10,13 +10,13 @@ import { Button, List, message, Modal, Spin, Tabs } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 
+import { Tooltip } from "antd";
+import React from "react";
 import ApiUsageExamples from "./ApiUsageExamples";
 import CreateTokenModal from "./CreateTokenModal";
 import TokenCard from "./TokenCard";
 import UsageOverview from "./UsageOverview";
 import styles from "./index.module.css";
-
-const { TabPane } = Tabs;
 
 const apiKeyLocale = {
   "zh-hant": {
@@ -136,6 +136,47 @@ function parseJti(jwtStr) {
   }
 }
 
+
+function CopyTokenButton({ tokenStr, text }) {
+  const [tooltipTitle, setTooltipTitle] = useState(text.copyTokenButton);
+  const [visible, setVisible] = useState(false);
+
+  // 點擊複製
+  const handleCopy = async () => {
+    if (!tokenStr) return;
+    try {
+      await navigator.clipboard.writeText(tokenStr);
+      setTooltipTitle(text.copySuccess); // 設為「已複製」
+      setVisible(true);
+
+      // 1 秒後自動隱藏 tooltip，回復初始狀態
+      setTimeout(() => {
+        setVisible(false);
+        setTooltipTitle(text.copyTokenButton);
+      }, 1000);
+    } catch {
+      // 若要顯示錯誤，可在此提示
+      console.error("Failed to copy token");
+    }
+  };
+
+  return (
+    <Tooltip
+      title={tooltipTitle}
+      open={visible}
+      onOpenChange={(v) => setVisible(v)}
+    >
+      <Button
+        icon={<CopyOutlined />}
+        onClick={handleCopy}
+        style={{ marginRight: 8 }}
+      >
+        {text.copyTokenButton}
+      </Button>
+    </Tooltip>
+  );
+}
+
 /** 將 UTC 時間字串轉成本地時間 */
 function formatToLocalTime(utcString) {
   if (!utcString) return "";
@@ -253,10 +294,20 @@ export default function DashboardApiKey() {
       }
       const historyData = await res.json();
 
-      // 將 UTC 時間轉當地時間字串
+      // 轉換 UTC+0 時間為使用者當地時區時間
       const localHistory = historyData.map((item) => {
-        const dt = new Date(item.time);
-        const localTimeStr = dt.toLocaleString();
+        const dt = new Date(item.time + "Z"); // 確保時間被解析為 UTC
+        const localTimeStr = dt.toLocaleString(undefined, {
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, // 取得使用者當前時區
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false, // 24 小時制 (根據需求調整)
+        });
+
         return {
           ...item,
           time: localTimeStr,
@@ -267,7 +318,7 @@ export default function DashboardApiKey() {
     } catch (err) {
       console.error(err);
     }
-  }, [userToken]);
+}, [userToken]);
 
   // ========================
   // 封裝「刷新用量」函式
@@ -367,13 +418,9 @@ export default function DashboardApiKey() {
   const handleRevokeOrDelete = async (tokenItem) => {
     if (!userToken) return;
 
-    if (tokenItem.__frontend_expired) {
-      message.error(text.tokenDeleted);
-      return;
-    }
-
     setLoading(true);
     const endpoint = tokenItem.is_active ? "revoke" : "remove";
+
     try {
       const res = await fetch(`https://api.docsaid.org/public/token/${endpoint}`, {
         method: "POST",
@@ -497,31 +544,41 @@ export default function DashboardApiKey() {
         </Button>
       </div>
 
-      <Tabs defaultActiveKey="tokens" className={styles.mainTabs}>
-        <TabPane tab={text.collapseHeader} key="tokens">
-          <List
-            loading={loading}
-            grid={{ gutter: 24, column: 1 }}
-            dataSource={apiKeys}
-            rowKey={(item) => item.jti}
-            renderItem={(item) => {
-              const localExpires = item.expires_at ? formatToLocalTime(item.expires_at) : "";
-              return (
-                <List.Item style={{ marginBottom: 24 }}>
-                  <TokenCard
-                    item={{ ...item, expires_local: localExpires }}
-                    onRevokeOrDelete={handleRevokeOrDelete}
-                    maskToken={maskToken}
-                  />
-                </List.Item>
-              );
-            }}
-          />
-        </TabPane>
-        <TabPane tab={text.apiUsageExampleTitle} key="apiUsage">
-          <ApiUsageExamples />
-        </TabPane>
-      </Tabs>
+      <Tabs
+        defaultActiveKey="tokens"
+        className={styles.mainTabs}
+        items={[
+          {
+            key: "tokens",
+            label: text.collapseHeader,
+            children: (
+              <List
+                loading={loading}
+                grid={{ gutter: 24, column: 1 }}
+                dataSource={apiKeys}
+                rowKey={(item) => item.jti}
+                renderItem={(item) => {
+                  const localExpires = item.expires_at ? formatToLocalTime(item.expires_at) : "";
+                  return (
+                    <List.Item style={{ marginBottom: 24 }}>
+                      <TokenCard
+                        item={{ ...item, expires_local: localExpires }}
+                        onRevokeOrDelete={handleRevokeOrDelete}
+                        maskToken={maskToken}
+                      />
+                    </List.Item>
+                  );
+                }}
+              />
+            ),
+          },
+          {
+            key: "apiUsage",
+            label: text.apiUsageExampleTitle,
+            children: <ApiUsageExamples />,
+          },
+        ]}
+      />
 
       {/* 建立 Token 的 Modal */}
       <CreateTokenModal
@@ -551,16 +608,13 @@ export default function DashboardApiKey() {
         >
           {latestCreatedToken}
         </div>
-        <Button
-          icon={<CopyOutlined />}
-          onClick={() => copyToken(latestCreatedToken)}
-          style={{ marginRight: 8 }}
-        >
-          {text.copyTokenButton}
-        </Button>
+
+        <CopyTokenButton tokenStr={latestCreatedToken} text={text} />
+
         <Button type="primary" onClick={() => setNewTokenModalVisible(false)}>
           {text.closeButton}
         </Button>
+
       </Modal>
     </div>
   );

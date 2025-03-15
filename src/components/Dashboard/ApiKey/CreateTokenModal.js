@@ -60,8 +60,10 @@ export default function CreateTokenModal({
   const text = apiKeyLocale[currentLocale] || apiKeyLocale.en;
 
   useEffect(() => {
-    form.setFieldsValue(defaultValues);
-  }, [defaultValues, form]);
+    if (visible) {
+      form.setFieldsValue(defaultValues);
+    }
+  }, [defaultValues, form, visible]);
 
   return (
     <Modal

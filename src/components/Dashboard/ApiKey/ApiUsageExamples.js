@@ -170,78 +170,95 @@ puts response.body`,
     },
   };
 
+  // 建立「第二層 Tabs」的 items - 例如 DocAligner
+  const makeInnerTabs = (dataObj) => {
+    // dataObj: examples.docaligner 或 examples.mrzscanner
+    return [
+      {
+        label: "cURL",
+        key: "curl",
+        children: (
+          <pre style={preStyle}>
+            {dataObj.curl}
+          </pre>
+        ),
+      },
+      {
+        label: "Python",
+        key: "python",
+        children: (
+          <pre style={preStyle}>
+            {dataObj.python}
+          </pre>
+        ),
+      },
+      {
+        label: "Node.js",
+        key: "node",
+        children: (
+          <pre style={preStyle}>
+            {dataObj.node}
+          </pre>
+        ),
+      },
+      {
+        label: "JavaScript",
+        key: "javascript",
+        children: (
+          <pre style={preStyle}>
+            {dataObj.javascript}
+          </pre>
+        ),
+      },
+      {
+        label: "Java",
+        key: "java",
+        children: (
+          <pre style={preStyle}>
+            {dataObj.java}
+          </pre>
+        ),
+      },
+      {
+        label: "Ruby",
+        key: "ruby",
+        children: (
+          <pre style={preStyle}>
+            {dataObj.ruby}
+          </pre>
+        ),
+      },
+    ];
+  };
+
+  // 第一層 Tabs items
+  const topItems = [
+    {
+      label: "DocAligner",
+      key: "docaligner",
+      children: (
+        <Tabs defaultActiveKey="curl" items={makeInnerTabs(examples.docaligner)} />
+      ),
+    },
+    {
+      label: "MRZ Scanner",
+      key: "mrzscanner",
+      children: (
+        <Tabs defaultActiveKey="curl" items={makeInnerTabs(examples.mrzscanner)} />
+      ),
+    },
+  ];
+
   return (
     <Card title={text.apiUsageExampleTitle} size="small">
-      <Tabs defaultActiveKey="docaligner">
-        <TabPane tab="DocAligner" key="docaligner">
-          <Tabs defaultActiveKey="curl">
-            <TabPane tab="cURL" key="curl">
-              <pre style={{ background: "#f5f5f5", padding: 12, whiteSpace: "pre-wrap" }}>
-                {examples.docaligner.curl}
-              </pre>
-            </TabPane>
-            <TabPane tab="Python" key="python">
-              <pre style={{ background: "#f5f5f5", padding: 12, whiteSpace: "pre-wrap" }}>
-                {examples.docaligner.python}
-              </pre>
-            </TabPane>
-            <TabPane tab="Node.js" key="node">
-              <pre style={{ background: "#f5f5f5", padding: 12, whiteSpace: "pre-wrap" }}>
-                {examples.docaligner.node}
-              </pre>
-            </TabPane>
-            <TabPane tab="JavaScript" key="javascript">
-              <pre style={{ background: "#f5f5f5", padding: 12, whiteSpace: "pre-wrap" }}>
-                {examples.docaligner.javascript}
-              </pre>
-            </TabPane>
-            <TabPane tab="Java" key="java">
-              <pre style={{ background: "#f5f5f5", padding: 12, whiteSpace: "pre-wrap" }}>
-                {examples.docaligner.java}
-              </pre>
-            </TabPane>
-            <TabPane tab="Ruby" key="ruby">
-              <pre style={{ background: "#f5f5f5", padding: 12, whiteSpace: "pre-wrap" }}>
-                {examples.docaligner.ruby}
-              </pre>
-            </TabPane>
-          </Tabs>
-        </TabPane>
-        <TabPane tab="MRZ Scanner" key="mrzscanner">
-          <Tabs defaultActiveKey="curl">
-            <TabPane tab="cURL" key="curl">
-              <pre style={{ background: "#f5f5f5", padding: 12, whiteSpace: "pre-wrap" }}>
-                {examples.mrzscanner.curl}
-              </pre>
-            </TabPane>
-            <TabPane tab="Python" key="python">
-              <pre style={{ background: "#f5f5f5", padding: 12, whiteSpace: "pre-wrap" }}>
-                {examples.mrzscanner.python}
-              </pre>
-            </TabPane>
-            <TabPane tab="Node.js" key="node">
-              <pre style={{ background: "#f5f5f5", padding: 12, whiteSpace: "pre-wrap" }}>
-                {examples.mrzscanner.node}
-              </pre>
-            </TabPane>
-            <TabPane tab="JavaScript" key="javascript">
-              <pre style={{ background: "#f5f5f5", padding: 12, whiteSpace: "pre-wrap" }}>
-                {examples.mrzscanner.javascript}
-              </pre>
-            </TabPane>
-            <TabPane tab="Java" key="java">
-              <pre style={{ background: "#f5f5f5", padding: 12, whiteSpace: "pre-wrap" }}>
-                {examples.mrzscanner.java}
-              </pre>
-            </TabPane>
-            <TabPane tab="Ruby" key="ruby">
-              <pre style={{ background: "#f5f5f5", padding: 12, whiteSpace: "pre-wrap" }}>
-                {examples.mrzscanner.ruby}
-              </pre>
-            </TabPane>
-          </Tabs>
-        </TabPane>
-      </Tabs>
+      <Tabs defaultActiveKey="docaligner" items={topItems} />
     </Card>
   );
 }
+
+// 也可另行定義
+const preStyle = {
+  background: "#f5f5f5",
+  padding: 12,
+  whiteSpace: "pre-wrap",
+};
