@@ -21,7 +21,7 @@ import moment from "moment";
 import React, { useCallback, useEffect, useState } from "react";
 import PasswordInput from "../../../components/PasswordInput";
 import { useAuth } from "../../../context/AuthContext";
-import styles from "./index.module.css"; // 引入 CSS 模組
+import styles from "./index.module.css";
 import { changePasswordLocale, dashboardLocale, deleteAccountLocale } from "./locales";
 
 const { Text } = Typography;

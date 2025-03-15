@@ -11,6 +11,9 @@ const localeText = {
     usernameRequired: "請輸入帳號",
     passwordLabel: "密碼",
     passwordRequired: "請輸入密碼",
+    confirmPasswordLabel: "確認密碼",
+    confirmPasswordRequired: "請再次輸入密碼",
+    passwordMismatch: "兩次輸入的密碼不一致",
     registerBtn: "註冊",
     passphraseHint: "建議使用可記憶的長密碼（如短語）提升安全性。",
     successMsg: "註冊成功！",
@@ -22,6 +25,9 @@ const localeText = {
     usernameRequired: "Please enter your username",
     passwordLabel: "Password",
     passwordRequired: "Please enter your password",
+    confirmPasswordLabel: "Confirm Password",
+    confirmPasswordRequired: "Please confirm your password",
+    passwordMismatch: "The two passwords that you entered do not match",
     registerBtn: "Register",
     passphraseHint: "Consider using a memorable passphrase for better security.",
     successMsg: "Registration successful!",
@@ -33,6 +39,9 @@ const localeText = {
     usernameRequired: "ユーザー名を入力してください",
     passwordLabel: "パスワード",
     passwordRequired: "パスワードを入力してください",
+    confirmPasswordLabel: "パスワードを再入力",
+    confirmPasswordRequired: "パスワードをもう一度入力してください",
+    passwordMismatch: "入力された2つのパスワードが一致しません",
     registerBtn: "登録",
     passphraseHint: "覚えやすいパスフレーズを使用してセキュリティを向上させましょう。",
     successMsg: "登録が完了しました！",
@@ -46,24 +55,18 @@ export default function RegisterForm({ onLogin, onSuccess, onRegister, loading }
     i18n: { currentLocale },
   } = useDocusaurusContext();
   const text = localeText[currentLocale] || localeText.en;
-
-  // 如果後端回 token，可配合 AuthContext 寫入 localStorage
   const { loginSuccess } = useAuth();
-
-  // antd form
   const [form] = Form.useForm();
 
   // 狀態
   const [submitError, setSubmitError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  /**
-   * 表單送出
-   * 不允許弱密碼 => 後端若回 pwned=true，則註冊失敗並顯示錯誤
-   */
   const onFinish = async (values) => {
     setSubmitError("");
     setSuccessMessage("");
+
+    // 這裡的 values 會包含 username, password, confirmPassword
     const result = await onRegister({
       username: values.username,
       password: values.password,
@@ -81,14 +84,12 @@ export default function RegisterForm({ onLogin, onSuccess, onRegister, loading }
         onSuccess?.();
       }
 
-      // 根據語系決定路徑
-      let dashboardPath = '/dashboard';
-      if (currentLocale === 'en') {
-        dashboardPath = '/en/dashboard';
-      } else if (currentLocale === 'ja') {
-        dashboardPath = '/ja/dashboard';
+      let dashboardPath = "/dashboard";
+      if (currentLocale === "en") {
+        dashboardPath = "/en/dashboard";
+      } else if (currentLocale === "ja") {
+        dashboardPath = "/ja/dashboard";
       }
-
       window.location.href = dashboardPath;
     } else {
       if (result.pwned) {
@@ -99,9 +100,6 @@ export default function RegisterForm({ onLogin, onSuccess, onRegister, loading }
     }
   };
 
-  /**
-   * 註冊成功後重置表單並自動登入（若後端回 token）
-   */
   const finishRegisterSuccess = (result) => {
     setSuccessMessage(text.successMsg);
     form.resetFields();
@@ -153,12 +151,35 @@ export default function RegisterForm({ onLogin, onSuccess, onRegister, loading }
         <PasswordInput />
       </Form.Item>
 
+      {/* 新增：確認密碼欄位 */}
+      <Form.Item
+        label={text.confirmPasswordLabel}
+        name="confirmPassword"
+        dependencies={["password"]} // 依賴 password 欄位
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: text.confirmPasswordRequired,
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue("password") === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error(text.passwordMismatch));
+            },
+          }),
+        ]}
+      >
+        <PasswordInput hideStrength={true} />
+      </Form.Item>
+
       <Alert style={{ marginBottom: 10 }} message={text.passphraseHint} type="info" showIcon />
 
       {successMessage && (
         <Alert style={{ marginBottom: 10 }} message={successMessage} type="success" showIcon />
       )}
-
       {submitError && (
         <Alert style={{ marginBottom: 10 }} message={submitError} type="error" showIcon />
       )}

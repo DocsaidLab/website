@@ -3,7 +3,7 @@ export const dashboardLocale = {
     myInfoTitle: "我的資訊",
     emailNotVerifiedAlertTitle: "您的 Email 尚未驗證",
     emailNotVerifiedAlertDesc:
-      "我們會固定時間清除沒有驗證信箱的帳號。請點選下方寄送驗證信，並檢查您的信箱。",
+      "我們將定期清除未驗證電子郵件的帳號。若您希望長期保留此帳號，請點擊下方按鈕寄送驗證信，並檢查您的信箱完成驗證。",
     noEmailAlertTitle: "尚未填寫 Email",
     noEmailAlertDesc: "您尚未綁定 Email，請點 {editLink} 補上 Email。",
     uploadAvatarButtonUploading: "上傳中...",
@@ -45,7 +45,7 @@ export const dashboardLocale = {
     myInfoTitle: "My Information",
     emailNotVerifiedAlertTitle: "Your Email is not verified",
     emailNotVerifiedAlertDesc:
-      "Please click the button below to resend the verification email and check your inbox.",
+      "We regularly remove accounts with unverified email addresses. If you wish to keep your account, please click the button below to send a verification email and check your inbox to complete the verification process.",
     noEmailAlertTitle: "Email not set",
     noEmailAlertDesc: "You have not bound an Email. Please click {editLink} to add an Email.",
     uploadAvatarButtonUploading: "Uploading...",
@@ -87,7 +87,7 @@ export const dashboardLocale = {
     myInfoTitle: "私の情報",
     emailNotVerifiedAlertTitle: "メールが未認証です",
     emailNotVerifiedAlertDesc:
-      "下のボタンをクリックして認証メールを再送信し、受信箱を確認してください。",
+      "未確認のメールアドレスのアカウントは定期的に削除されます。引き続きアカウントを保持したい場合は、下のボタンをクリックして確認メールを送信し、受信箱をチェックして認証を完了してください。",
     noEmailAlertTitle: "メール未設定",
     noEmailAlertDesc: "メールが登録されていません。{editLink} をクリックしてメールを追加してください。",
     uploadAvatarButtonUploading: "アップロード中...",
