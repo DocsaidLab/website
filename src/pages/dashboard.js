@@ -1,11 +1,12 @@
 // src/pages/dashboard.js
 import {
+  BookOutlined,
   HomeOutlined,
   KeyOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PoweroffOutlined,
-  UserOutlined
+  UserOutlined,
 } from "@ant-design/icons";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
@@ -19,9 +20,10 @@ import {
   Row,
   Spin,
   theme as antdTheme,
-  message
+  message,
 } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
+import DashboardApiDocs from "../components/Dashboard/ApiDocs"; // 引入新的 API Docs 頁面
 import DashboardApiKey from "../components/Dashboard/ApiKey";
 import DashboardMyInfo from "../components/Dashboard/MyInfo";
 import { useAuth } from "../context/AuthContext";
@@ -39,19 +41,21 @@ const localeText = {
       expanded: "我的後台",
       menu: {
         myinfo: "我的資訊",
-        apikey: "我的 API Key"
-      }
+        apikey: "我的 API Key",
+        apidocs: "API 文件",  // 新增
+      },
     },
     breadcrumb: {
       dashboard: "我的後台",
       myinfo: "我的資訊",
       apikey: "我的 API Key",
-      undefined: "未定義"
+      apidocs: "API 文件",    // 新增
+      undefined: "未定義",
     },
     userMenu: {
       backHome: "回主站",
-      logout: "登出"
-    }
+      logout: "登出",
+    },
   },
   en: {
     dashboardTitle: "Dashboard",
@@ -62,19 +66,21 @@ const localeText = {
       expanded: "My Dashboard",
       menu: {
         myinfo: "My Information",
-        apikey: "My API Key"
-      }
+        apikey: "My API Key",
+        apidocs: "API Docs",
+      },
     },
     breadcrumb: {
       dashboard: "Dashboard",
       myinfo: "My Information",
       apikey: "My API Key",
-      undefined: "Undefined"
+      apidocs: "API Docs",
+      undefined: "Undefined",
     },
     userMenu: {
       backHome: "Back to Site",
-      logout: "Logout"
-    }
+      logout: "Logout",
+    },
   },
   ja: {
     dashboardTitle: "ダッシュボード",
@@ -85,25 +91,27 @@ const localeText = {
       expanded: "マイダッシュボード",
       menu: {
         myinfo: "マイ情報",
-        apikey: "マイAPIキー"
-      }
+        apikey: "マイAPIキー",
+        apidocs: "APIドキュメント",
+      },
     },
     breadcrumb: {
       dashboard: "ダッシュボード",
       myinfo: "マイ情報",
       apikey: "マイAPIキー",
-      undefined: "未定義"
+      apidocs: "APIドキュメント",
+      undefined: "未定義",
     },
     userMenu: {
       backHome: "サイトへ戻る",
-      logout: "ログアウト"
-    }
-  }
+      logout: "ログアウト",
+    },
+  },
 };
 
 export default function DashboardPage() {
   const {
-    i18n: { currentLocale }
+    i18n: { currentLocale },
   } = useDocusaurusContext();
   const text = localeText[currentLocale] || localeText.en;
   const { token, user, loading, logout } = useAuth();
@@ -114,27 +122,33 @@ export default function DashboardPage() {
   useEffect(() => {
     if (!loading && !token) {
       message.warning(text.loginWarning);
-      // 可根據需求導向登入頁面，例如：window.location.href = "/";
+      // 可根據需求導向登入頁面
     }
   }, [loading, token, text.loginWarning]);
 
+  // 依選單項目切換對應內容
   const contentComponent = useMemo(() => {
     switch (selectedKey) {
       case "myinfo":
         return <DashboardMyInfo />;
       case "apikey":
         return <DashboardApiKey />;
+      case "apidocs":
+        return <DashboardApiDocs />;
       default:
         return null;
     }
   }, [selectedKey]);
 
+  // 面包屑標題
   const pageTitle = useMemo(() => {
     switch (selectedKey) {
       case "myinfo":
         return text.breadcrumb.myinfo;
       case "apikey":
         return text.breadcrumb.apikey;
+      case "apidocs":
+        return text.breadcrumb.apidocs;
       default:
         return text.breadcrumb.undefined;
     }
@@ -155,19 +169,19 @@ export default function DashboardPage() {
       label: text.userMenu.backHome,
       onClick: () => {
         window.location.href = homePath;
-      }
+      },
     },
     {
       key: "logout",
       icon: <PoweroffOutlined />,
       label: text.userMenu.logout,
-      onClick: logout
-    }
+      onClick: logout,
+    },
   ];
 
   const breadcrumbItems = [
     { title: text.breadcrumb.dashboard },
-    { title: pageTitle }
+    { title: pageTitle },
   ];
 
   if (loading) {
@@ -211,18 +225,26 @@ export default function DashboardPage() {
               {
                 key: "myinfo",
                 icon: <UserOutlined />,
-                label: text.sider.menu.myinfo
+                label: text.sider.menu.myinfo,
               },
               {
                 key: "apikey",
                 icon: <KeyOutlined />,
-                label: text.sider.menu.apikey
-              }
+                label: text.sider.menu.apikey,
+              },
+              {
+                key: "apidocs",
+                icon: <BookOutlined />,
+                label: text.sider.menu.apidocs,
+              },
             ]}
           />
         </Sider>
         <AntLayout className={styles.rightSideLayout}>
-          <AntHeader className={styles.header} style={{ background: designToken.colorBgContainer }}>
+          <AntHeader
+            className={styles.header}
+            style={{ background: designToken.colorBgContainer }}
+          >
             <Row align="middle" justify="space-between" style={{ height: "100%" }}>
               <Col>
                 <Row align="middle" gutter={16}>
@@ -248,9 +270,7 @@ export default function DashboardPage() {
             </Row>
           </AntHeader>
           <Content className={styles.contentArea}>
-            <div className={styles.contentBox}>
-              {contentComponent}
-            </div>
+            <div className={styles.contentBox}>{contentComponent}</div>
           </Content>
         </AntLayout>
       </AntLayout>

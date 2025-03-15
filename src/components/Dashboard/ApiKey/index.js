@@ -11,8 +11,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 
 import { Tooltip } from "antd";
-import React from "react";
-import ApiUsageExamples from "./ApiUsageExamples";
 import CreateTokenModal from "./CreateTokenModal";
 import TokenCard from "./TokenCard";
 import UsageOverview from "./UsageOverview";
@@ -27,7 +25,7 @@ const apiKeyLocale = {
     toggleHideTokens: "隱藏全部",
     createTokenButton: "建立新 Token",
     collapseHeader: "我的 Token 列表",
-    apiUsageExampleTitle: "API 使用範例",
+    // apiUsageExampleTitle: "API 使用範例",  // 已移除，交由新頁面負責
     newTokenModalTitle: "以下是您的新 Token",
     newTokenModalDesc: "請複製並保存，關閉後無法再次查看。",
     copyTokenButton: "複製 Token",
@@ -61,7 +59,7 @@ const apiKeyLocale = {
     toggleHideTokens: "Hide All",
     createTokenButton: "Create New Token",
     collapseHeader: "My Token List",
-    apiUsageExampleTitle: "API Usage Examples",
+    // apiUsageExampleTitle: "API Usage Examples",
     newTokenModalTitle: "Your New Token",
     newTokenModalDesc: "Please copy and save it. It will not be shown again after closing.",
     copyTokenButton: "Copy Token",
@@ -95,7 +93,7 @@ const apiKeyLocale = {
     toggleHideTokens: "すべて非表示",
     createTokenButton: "新規トークン作成",
     collapseHeader: "マイトークン一覧",
-    apiUsageExampleTitle: "API利用例",
+    // apiUsageExampleTitle: "API利用例",
     newTokenModalTitle: "あなたの新しいトークン",
     newTokenModalDesc: "コピーして保存してください。閉じると再表示されません。",
     copyTokenButton: "トークンをコピー",
@@ -136,7 +134,6 @@ function parseJti(jwtStr) {
   }
 }
 
-
 function CopyTokenButton({ tokenStr, text }) {
   const [tooltipTitle, setTooltipTitle] = useState(text.copyTokenButton);
   const [visible, setVisible] = useState(false);
@@ -155,7 +152,6 @@ function CopyTokenButton({ tokenStr, text }) {
         setTooltipTitle(text.copyTokenButton);
       }, 1000);
     } catch {
-      // 若要顯示錯誤，可在此提示
       console.error("Failed to copy token");
     }
   };
@@ -199,7 +195,7 @@ export default function DashboardApiKey() {
   const [loadingProfile, setLoadingProfile] = useState(false);
   const [apiKeys, setApiKeys] = useState([]);
   const [userUsage, setUserUsage] = useState(null);
-  const [usageHistory, setUsageHistory] = useState([]); // 新增：歷史用量資料
+  const [usageHistory, setUsageHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [createModalVisible, setCreateModalVisible] = useState(false);
   const [newTokenModalVisible, setNewTokenModalVisible] = useState(false);
@@ -296,18 +292,17 @@ export default function DashboardApiKey() {
 
       // 轉換 UTC+0 時間為使用者當地時區時間
       const localHistory = historyData.map((item) => {
-        const dt = new Date(item.time + "Z"); // 確保時間被解析為 UTC
+        const dt = new Date(item.time + "Z");
         const localTimeStr = dt.toLocaleString(undefined, {
-          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, // 取得使用者當前時區
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           year: "numeric",
           month: "2-digit",
           day: "2-digit",
           hour: "2-digit",
           minute: "2-digit",
           second: "2-digit",
-          hour12: false, // 24 小時制 (根據需求調整)
+          hour12: false,
         });
-
         return {
           ...item,
           time: localTimeStr,
@@ -318,29 +313,22 @@ export default function DashboardApiKey() {
     } catch (err) {
       console.error(err);
     }
-}, [userToken]);
+  }, [userToken]);
 
-  // ========================
-  // 封裝「刷新用量」函式
-  //   同時抓取 user-usage 與 usage-history-minute
-  // ========================
+  // 同時抓取 user-usage 與 usage-history-minute
   const refreshUsageData = useCallback(async () => {
     await fetchUserUsage();
     await fetchUsageHistory();
   }, [fetchUserUsage, fetchUsageHistory]);
 
-  // ========================
   // 頁面初始載入
-  // ========================
   useEffect(() => {
     fetchUserProfile();
     fetchTokens();
     refreshUsageData();
   }, [fetchUserProfile, fetchTokens, refreshUsageData]);
 
-  // ========================
   // 申請新 Token
-  // ========================
   const handleCreateToken = async (formValues) => {
     if (!userProfile) return;
     if (!userProfile.is_email_verified) {
@@ -412,9 +400,7 @@ export default function DashboardApiKey() {
     }
   };
 
-  // ========================
   // Revoke / Remove Token
-  // ========================
   const handleRevokeOrDelete = async (tokenItem) => {
     if (!userToken) return;
 
@@ -443,9 +429,7 @@ export default function DashboardApiKey() {
     }
   };
 
-  // ========================
   // 複製 Token（新建後 Modal 使用）
-  // ========================
   const copyToken = async (tokenStr) => {
     if (!tokenStr) {
       message.error(text.copyFailure);
@@ -469,7 +453,7 @@ export default function DashboardApiKey() {
     return val.slice(0, 6) + "****" + val.slice(-4);
   };
 
-  // 顯示計費方案（使用 i18n）
+  // 顯示計費方案
   function getPlanLabel(billingType) {
     switch (billingType) {
       case "rate_limit":
@@ -490,9 +474,6 @@ export default function DashboardApiKey() {
     );
   };
 
-  // ========================
-  // 主體渲染
-  // ========================
   if (loadingProfile && !userProfile) {
     return (
       <div style={{ textAlign: "center", marginTop: 50 }}>
@@ -520,8 +501,6 @@ export default function DashboardApiKey() {
 
       {/* 顯示方案 & 用量 */}
       {renderPlanBox()}
-
-      {/* 傳入 usageHistory 使 UsageOverview 顯示更多資訊 */}
       <UsageOverview
         userUsage={userUsage}
         usageHistory={usageHistory}
@@ -544,6 +523,7 @@ export default function DashboardApiKey() {
         </Button>
       </div>
 
+      {/* 只剩一個 Tab：Token 列表 */}
       <Tabs
         defaultActiveKey="tokens"
         className={styles.mainTabs}
@@ -571,11 +551,6 @@ export default function DashboardApiKey() {
                 }}
               />
             ),
-          },
-          {
-            key: "apiUsage",
-            label: text.apiUsageExampleTitle,
-            children: <ApiUsageExamples />,
           },
         ]}
       />
@@ -614,7 +589,6 @@ export default function DashboardApiKey() {
         <Button type="primary" onClick={() => setNewTokenModalVisible(false)}>
           {text.closeButton}
         </Button>
-
       </Modal>
     </div>
   );
