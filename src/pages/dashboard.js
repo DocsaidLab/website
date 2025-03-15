@@ -42,14 +42,14 @@ const localeText = {
       menu: {
         myinfo: "我的資訊",
         apikey: "我的 API Key",
-        apidocs: "API 文件",  // 新增
+        apidocs: "API 使用說明",
       },
     },
     breadcrumb: {
       dashboard: "我的後台",
       myinfo: "我的資訊",
       apikey: "我的 API Key",
-      apidocs: "API 文件",    // 新增
+      apidocs: "API 使用說明",
       undefined: "未定義",
     },
     userMenu: {
@@ -67,14 +67,14 @@ const localeText = {
       menu: {
         myinfo: "My Information",
         apikey: "My API Key",
-        apidocs: "API Docs",
+        apidocs: "API Documentation",
       },
     },
     breadcrumb: {
       dashboard: "Dashboard",
       myinfo: "My Information",
       apikey: "My API Key",
-      apidocs: "API Docs",
+      apidocs: "API Documentation",
       undefined: "Undefined",
     },
     userMenu: {
@@ -92,14 +92,14 @@ const localeText = {
       menu: {
         myinfo: "マイ情報",
         apikey: "マイAPIキー",
-        apidocs: "APIドキュメント",
+        apidocs: "API利用ガイド",
       },
     },
     breadcrumb: {
       dashboard: "ダッシュボード",
       myinfo: "マイ情報",
       apikey: "マイAPIキー",
-      apidocs: "APIドキュメント",
+      apidocs: "API利用ガイド",
       undefined: "未定義",
     },
     userMenu: {
@@ -108,6 +108,7 @@ const localeText = {
     },
   },
 };
+
 
 export default function DashboardPage() {
   const {
