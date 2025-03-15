@@ -1,3 +1,4 @@
+// src/components/Dashboard/MyInfo/index.js
 import { UploadOutlined, UserOutlined } from "@ant-design/icons";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
@@ -20,6 +21,7 @@ import moment from "moment";
 import React, { useCallback, useEffect, useState } from "react";
 import PasswordInput from "../../../components/PasswordInput";
 import { useAuth } from "../../../context/AuthContext";
+import styles from "./index.module.css"; // 引入 CSS 模組
 import { changePasswordLocale, dashboardLocale, deleteAccountLocale } from "./locales";
 
 const { Text } = Typography;
@@ -224,12 +226,11 @@ export default function DashboardMyInfo() {
   };
 
   if (infoLoading) {
-    return <Spin style={{ margin: "50px auto", display: "block" }} />;
+    return <Spin className={styles.loadingSpinner} />;
   }
 
   // 修正 Alert 中替換字串的問題
   const renderNoEmailAlertDescription = () => {
-    // 假設 text.noEmailAlertDesc 為 "請設定您的 Email，點擊 {editLink} 進行設定"
     const parts = text.noEmailAlertDesc.split("{editLink}");
     return (
       <>
@@ -260,12 +261,14 @@ export default function DashboardMyInfo() {
   };
 
   return (
-    <div>
-      <h2>{text.myInfoTitle}</h2>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h2>{text.myInfoTitle}</h2>
+      </header>
 
       {showEmailAlert && user?.email && !user.is_email_verified && (
         <Alert
-          style={{ marginBottom: 16 }}
+          className={styles.alert}
           message={text.emailNotVerifiedAlertTitle}
           description={text.emailNotVerifiedAlertDesc}
           type="warning"
@@ -275,7 +278,7 @@ export default function DashboardMyInfo() {
 
       {!user?.email && !editing && (
         <Alert
-          style={{ marginBottom: 16 }}
+          className={styles.alert}
           message={text.noEmailAlertTitle}
           description={renderNoEmailAlertDescription()}
           type="info"
@@ -284,20 +287,13 @@ export default function DashboardMyInfo() {
       )}
 
       <Row gutter={[16, 16]}>
-        <Col span={8}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "100%",
-            }}
-          >
+        <Col xs={24} md={8}>
+          <div className={styles.avatarContainer}>
             <Avatar
               size={160}
               src={user?.avatar}
               icon={<UserOutlined />}
+              alt="User Avatar"
               onError={() => false}
             />
             <br />
@@ -306,7 +302,7 @@ export default function DashboardMyInfo() {
               accept="image/*"
               customRequest={onUploadAvatar}
             >
-              <Button icon={<UploadOutlined />} style={{ marginTop: 8 }}>
+              <Button icon={<UploadOutlined />} className={styles.uploadButton}>
                 {uploadLoading
                   ? text.uploadAvatarButtonUploading
                   : text.uploadAvatarButton}
@@ -315,7 +311,7 @@ export default function DashboardMyInfo() {
           </div>
         </Col>
 
-        <Col span={16}>
+        <Col xs={24} md={16}>
           {editing ? (
             <Form
               form={profileForm}
@@ -339,14 +335,8 @@ export default function DashboardMyInfo() {
                 label={text.emailLabel}
                 name="email"
                 rules={[
-                  {
-                    required: true,
-                    message: text.emailRequired || "請輸入 Email",
-                  },
-                  {
-                    type: "email",
-                    message: text.invalidEmail || "Email 格式錯誤",
-                  },
+                  { required: true, message: text.emailRequired || "請輸入 Email" },
+                  { type: "email", message: text.invalidEmail || "Email 格式錯誤" },
                 ]}
               >
                 {user?.is_email_verified === false ? <Input /> : <Input disabled />}
@@ -375,23 +365,23 @@ export default function DashboardMyInfo() {
                 />
               </Form.Item>
               <Form.Item>
-                <Button type="primary" htmlType="submit" style={{ marginRight: 8 }}>
+                <Button type="primary" htmlType="submit" className={styles.saveButton}>
                   {text.saveButton || "儲存"}
                 </Button>
-                <Button onClick={() => setEditing(false)}>
+                <Button onClick={() => setEditing(false)} className={styles.cancelButton}>
                   {text.cancelButton || "取消"}
                 </Button>
               </Form.Item>
             </Form>
           ) : (
-            <div>
+            <div className={styles.profileInfo}>
               <p>
                 {text.accountLabel}：{user?.username || text.notSet}
               </p>
               <p>
                 {text.emailLabel}：{user?.email || text.notSet}
                 {user?.email && (
-                  <span style={{ marginLeft: 8 }}>
+                  <span className={styles.emailStatus}>
                     （{text.statusLabel}：{renderEmailStatus()}）
                   </span>
                 )}
@@ -413,7 +403,7 @@ export default function DashboardMyInfo() {
                 {text.lastLoginIpLabel}
                 <Text type="secondary">{lastLoginIp}</Text>
               </p>
-              <Button type="link" onClick={onEditProfile}>
+              <Button type="link" onClick={onEditProfile} className={styles.editButton}>
                 {text.editButton}
               </Button>
             </div>
@@ -466,9 +456,7 @@ export default function DashboardMyInfo() {
         {/@example\.com$/i.test(user?.email) ? (
           <p style={{ color: "red" }}>{text.verificationModalExampleEmail}</p>
         ) : (
-          <>
-            <p>{text.verificationModalDesc.replace("{email}", user?.email)}</p>
-          </>
+          <p>{text.verificationModalDesc.replace("{email}", user?.email)}</p>
         )}
       </Modal>
 

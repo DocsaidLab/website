@@ -196,6 +196,8 @@ export default function DashboardPage() {
           collapsible
           collapsed={collapsed}
           onCollapse={setCollapsed}
+          breakpoint="md"
+          onBreakpoint={(broken) => setCollapsed(broken)}
           style={{ borderRight: "1px solid #ddd" }}
         >
           <div

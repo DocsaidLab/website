@@ -1,3 +1,4 @@
+// src/components/Dashboard/ApiKey/index.js
 import {
   CopyOutlined,
   EyeInvisibleOutlined,
@@ -22,8 +23,8 @@ const apiKeyLocale = {
     headerTitle: "我的 API Keys",
     headerDescription: "管理、檢視、撤銷與刪除你的公開 Token",
     currentPlanLabel: "目前方案",
-    toggleShowTokens: "顯示全部 Token",
-    toggleHideTokens: "隱藏全部 Token",
+    toggleShowTokens: "顯示全部",
+    toggleHideTokens: "隱藏全部",
     createTokenButton: "建立新 Token",
     collapseHeader: "我的 Token 列表",
     apiUsageExampleTitle: "API 使用範例",
@@ -56,8 +57,8 @@ const apiKeyLocale = {
     headerTitle: "My API Keys",
     headerDescription: "Manage, view, revoke, and delete your public tokens",
     currentPlanLabel: "Current Plan",
-    toggleShowTokens: "Show All Tokens",
-    toggleHideTokens: "Hide All Tokens",
+    toggleShowTokens: "Show All",
+    toggleHideTokens: "Hide All",
     createTokenButton: "Create New Token",
     collapseHeader: "My Token List",
     apiUsageExampleTitle: "API Usage Examples",
@@ -90,8 +91,8 @@ const apiKeyLocale = {
     headerTitle: "マイAPIキー",
     headerDescription: "公開トークンの管理、確認、取り消し、削除",
     currentPlanLabel: "Current Plan",
-    toggleShowTokens: "全トークンを表示",
-    toggleHideTokens: "全トークンを隠す",
+    toggleShowTokens: "すべて表示",
+    toggleHideTokens: "すべて非表示",
     createTokenButton: "新規トークン作成",
     collapseHeader: "マイトークン一覧",
     apiUsageExampleTitle: "API利用例",
@@ -157,6 +158,7 @@ export default function DashboardApiKey() {
   const [loadingProfile, setLoadingProfile] = useState(false);
   const [apiKeys, setApiKeys] = useState([]);
   const [userUsage, setUserUsage] = useState(null);
+  const [usageHistory, setUsageHistory] = useState([]); // 新增：歷史用量資料
   const [loading, setLoading] = useState(false);
   const [createModalVisible, setCreateModalVisible] = useState(false);
   const [newTokenModalVisible, setNewTokenModalVisible] = useState(false);
@@ -238,13 +240,52 @@ export default function DashboardApiKey() {
   }, [userToken, text]);
 
   // ========================
+  // 新增：抓取歷史用量資料
+  // ========================
+  const fetchUsageHistory = useCallback(async () => {
+    if (!userToken) return;
+    try {
+      const res = await fetch("https://api.docsaid.org/public/token/usage-history-minute", {
+        headers: { Authorization: `Bearer ${userToken}` },
+      });
+      if (!res.ok) {
+        throw new Error("Failed to fetch usage history");
+      }
+      const historyData = await res.json();
+
+      // 將 UTC 時間轉當地時間字串
+      const localHistory = historyData.map((item) => {
+        const dt = new Date(item.time);
+        const localTimeStr = dt.toLocaleString();
+        return {
+          ...item,
+          time: localTimeStr,
+        };
+      });
+
+      setUsageHistory(localHistory);
+    } catch (err) {
+      console.error(err);
+    }
+  }, [userToken]);
+
+  // ========================
+  // 封裝「刷新用量」函式
+  //   同時抓取 user-usage 與 usage-history-minute
+  // ========================
+  const refreshUsageData = useCallback(async () => {
+    await fetchUserUsage();
+    await fetchUsageHistory();
+  }, [fetchUserUsage, fetchUsageHistory]);
+
+  // ========================
   // 頁面初始載入
   // ========================
   useEffect(() => {
     fetchUserProfile();
     fetchTokens();
-    fetchUserUsage();
-  }, [fetchUserProfile, fetchTokens, fetchUserUsage]);
+    refreshUsageData();
+  }, [fetchUserProfile, fetchTokens, refreshUsageData]);
 
   // ========================
   // 申請新 Token
@@ -325,6 +366,12 @@ export default function DashboardApiKey() {
   // ========================
   const handleRevokeOrDelete = async (tokenItem) => {
     if (!userToken) return;
+
+    if (tokenItem.__frontend_expired) {
+      message.error(text.tokenDeleted);
+      return;
+    }
+
     setLoading(true);
     const endpoint = tokenItem.is_active ? "revoke" : "remove";
     try {
@@ -426,7 +473,13 @@ export default function DashboardApiKey() {
 
       {/* 顯示方案 & 用量 */}
       {renderPlanBox()}
-      <UsageOverview userUsage={userUsage} />
+
+      {/* 傳入 usageHistory 使 UsageOverview 顯示更多資訊 */}
+      <UsageOverview
+        userUsage={userUsage}
+        usageHistory={usageHistory}
+        onRefresh={refreshUsageData}
+      />
 
       {/* 操作按鈕 */}
       <div className={styles.actions}>

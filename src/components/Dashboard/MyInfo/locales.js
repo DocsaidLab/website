@@ -3,7 +3,7 @@ export const dashboardLocale = {
     myInfoTitle: "我的資訊",
     emailNotVerifiedAlertTitle: "您的 Email 尚未驗證",
     emailNotVerifiedAlertDesc:
-      "沒有驗證信箱，帳號密碼丟失後無法找回。請點選下方寄送驗證信，並檢查您的信箱。",
+      "我們會固定時間清除沒有驗證信箱的帳號。請點選下方寄送驗證信，並檢查您的信箱。",
     noEmailAlertTitle: "尚未填寫 Email",
     noEmailAlertDesc: "您尚未綁定 Email，請點 {editLink} 補上 Email。",
     uploadAvatarButtonUploading: "上傳中...",

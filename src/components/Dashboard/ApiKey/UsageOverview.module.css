@@ -1,0 +1,69 @@
+.usageCard {
+  margin-bottom: 24px;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  /* 視需要可加陰影：box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+}
+
+/* 最上方區域（標題與刷新按鈕） */
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.mainTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.refreshButton {
+  /* 讓刷新按鈕更醒目 */
+  margin-left: 12px;
+}
+
+/* 進度與用量區域 */
+.usageHeader {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.progressCircle {
+  flex-shrink: 0;
+}
+
+.usageDetails {
+  flex-grow: 1;
+}
+
+.usageText {
+  margin: 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.divider {
+  margin: 0 8px;
+  font-size: 1rem;
+  color: #999;
+}
+
+/* 歷史圖表區 */
+.dividerStyle {
+  margin: 16px 0;
+}
+
+.historyTitle {
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.errorText {
+  color: red;
+}
