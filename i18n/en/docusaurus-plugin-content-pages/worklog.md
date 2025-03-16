@@ -12,11 +12,10 @@ This page is solely for recording our work activities.
 
 ### March
 
-- Begin building the website dashboard.
-  - [x] Member login/registration system.
-  - [ ] Email system.
-  - [ ] Comment and review system.
-  - [ ] API management system.
+- Completed the second-generation backend of the website
+  - [x] User login/registration system.
+  - [x] Email system.
+  - [x] API management system.
 
 ### February
 
