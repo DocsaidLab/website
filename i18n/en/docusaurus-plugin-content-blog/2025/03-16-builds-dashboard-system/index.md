@@ -2,7 +2,7 @@
 slug: builds-dashboard-system
 title: I, an AI Engineer, Actually Built a Backend System?
 authors: Z. Yuan
-image: /img/2025/0316.webp
+image: /en/img/2025/0316.webp
 tags: [React, FastAPI, User Authentication]
 description: A sharing of the experience building a backend system from scratch.
 ---
@@ -332,9 +332,9 @@ graph LR
 
 ## Technical Stack Summary
 
-The second generation of the backend mainly involves the two systems mentioned above: user registration and API token issuance.
+The second-generation backend mainly introduced two core features: the user registration system and the API token issuance mechanism.
 
-With everything set up, the tech stack has turned out to be:
+After this upgrade, the overall tech stack is clearer and more complete, as listed below:
 
 - **Frontend Framework**: React (Docusaurus)
 - **Backend Framework**: FastAPI (Python)
@@ -342,28 +342,28 @@ With everything set up, the tech stack has turned out to be:
 - **Cache Service**: Redis
 - **Reverse Proxy and Load Balancing**: Nginx
 
-In fact, except for Redis, these components were already part of the first generation of the backend, but there wasn't a front-end page to display related information.
+Aside from the newly added Redis, most of these technologies were already part of the first generation of the backend. However, at that time, there wasn’t a dedicated frontend page to clearly present this information. Through this update, I created a dedicated frontend backend page, making management more intuitive and efficient.
 
-With this update, I also created a front-end backend page.
+As a deep learning engineer, Python with FastAPI is an essential tool for me. While this tech stack isn't particularly innovative, it significantly improves development efficiency and smoothness, as familiar tools allow for faster implementation.
 
-As a deep learning engineer, Python + FastAPI is like second nature. This time, I just used the tools I’m familiar with to create a backend system, nothing too advanced, but it certainly feels much smoother to use.
+For deployment, I continue to use Docker Compose with Nginx, hosted on my personal server. Although I would prefer to use a cloud server, the cost is too high, and I can't afford it, so I have to settle with hosting it on my home machine for now.
 
-For deployment, I still used the familiar Docker Compose with Nginx to set it up on my own server. Although I would have liked to put it on a cloud server, the cost was too high, and I couldn’t afford it, so I had to settle with hosting it on my own machine for now.
+In terms of development insights, I believe that clearly defining backend specifications early on is a crucial step. Well-defined input/output endpoints greatly reduce integration friction between the frontend and backend. Since I handled this project by myself, I avoided many of the communication issues common in cross-team collaboration. In practical terms, if developed by a separated frontend and backend team, simply clarifying responsibilities and interface specifications could lead to weeks of discussion.
 
-In conclusion, this system works, so I’ll let it run for now.
+In conclusion, the system is now running smoothly, and I’ll continue to observe and improve it as it runs.
 
 ## Final Thoughts
 
-While reading academic papers can be logically abstract, after a few readings, I usually have a chance to replicate them.
+While reading papers, the logic often feels abstract, but after reading through them a few times, I usually manage to replicate them successfully.
 
-Frontend documentation might seem straightforward, but each step in practice could hide potential pitfalls—truly deceptive. (~Not familiar? Don’t blame everything else!~)
+Frontend documentation might seem clear at first glance, but each step in practice could hide pitfalls—truly deceptive. (~Not familiar with it? Don’t blame everything else!~)
 
-In the past, late-night debugging would revolve around typical AI engineer problems like "loss not converging" or "GPU memory overload." Now, it's about React throwing errors, form buttons not working, or backend value specifications not matching...
+In the past, late-night debugging was often about issues like "loss not converging" or "GPU memory running out," which are everyday challenges for AI engineers. Now, it’s more about React throwing frequent errors, form buttons not working, and backend API specifications not matching, among other tedious problems.
 
-This is with ChatGPT available for consultation. If we were back in the pre-ChatGPT era, I’m not so sure whether I could have successfully built this backend.
+What’s more, this was done with the help of ChatGPT for immediate assistance. If it had been the pre-ChatGPT era, I’m not sure whether I would have been able to successfully build this backend.
 
-I’ll continue adding new features over time. If you encounter any issues or bugs, please email me privately for security reasons. I’d greatly appreciate it. Feel free to attach images or error messages to help me pinpoint the problem, and I will resolve it as soon as possible.
+I will continue adding more features in the future and keep improving the user experience. If you encounter any bugs or problems while using the system, for security reasons, please contact me via email. I’d greatly appreciate it if you could provide detailed error messages or screenshots to help me locate and fix the problem more quickly.
 
-If you have any suggestions or feedback, feel free to leave a comment and share with me.
+Also, if you have any suggestions or feedback on the system, feel free to share them in the comments.
 
-I hope you have a great time here!
+I hope you enjoy your time here!
