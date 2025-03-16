@@ -101,8 +101,8 @@
 <p>Once the user has the token, they can use it to call the API. Redis is used to limit traffic and track the number of calls. The general flow for API requests looks like this:</p>
 <!-- -->
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="technical-stack-summary">Technical Stack Summary<a href="https://docsaid.org/en/blog/builds-dashboard-system#technical-stack-summary" class="hash-link" aria-label="Direct link to Technical Stack Summary" title="Direct link to Technical Stack Summary">​</a></h2>
-<p>The second generation of the backend mainly involves the two systems mentioned above: user registration and API token issuance.</p>
-<p>With everything set up, the tech stack has turned out to be:</p>
+<p>The second-generation backend mainly introduced two core features: the user registration system and the API token issuance mechanism.</p>
+<p>After this upgrade, the overall tech stack is clearer and more complete, as listed below:</p>
 <ul>
 <li><strong>Frontend Framework</strong>: React (Docusaurus)</li>
 <li><strong>Backend Framework</strong>: FastAPI (Python)</li>
@@ -110,19 +110,19 @@
 <li><strong>Cache Service</strong>: Redis</li>
 <li><strong>Reverse Proxy and Load Balancing</strong>: Nginx</li>
 </ul>
-<p>In fact, except for Redis, these components were already part of the first generation of the backend, but there wasn't a front-end page to display related information.</p>
-<p>With this update, I also created a front-end backend page.</p>
-<p>As a deep learning engineer, Python + FastAPI is like second nature. This time, I just used the tools I’m familiar with to create a backend system, nothing too advanced, but it certainly feels much smoother to use.</p>
-<p>For deployment, I still used the familiar Docker Compose with Nginx to set it up on my own server. Although I would have liked to put it on a cloud server, the cost was too high, and I couldn’t afford it, so I had to settle with hosting it on my own machine for now.</p>
-<p>In conclusion, this system works, so I’ll let it run for now.</p>
+<p>Aside from the newly added Redis, most of these technologies were already part of the first generation of the backend. However, at that time, there wasn’t a dedicated frontend page to clearly present this information. Through this update, I created a dedicated frontend backend page, making management more intuitive and efficient.</p>
+<p>As a deep learning engineer, Python with FastAPI is an essential tool for me. While this tech stack isn't particularly innovative, it significantly improves development efficiency and smoothness, as familiar tools allow for faster implementation.</p>
+<p>For deployment, I continue to use Docker Compose with Nginx, hosted on my personal server. Although I would prefer to use a cloud server, the cost is too high, and I can't afford it, so I have to settle with hosting it on my home machine for now.</p>
+<p>In terms of development insights, I believe that clearly defining backend specifications early on is a crucial step. Well-defined input/output endpoints greatly reduce integration friction between the frontend and backend. Since I handled this project by myself, I avoided many of the communication issues common in cross-team collaboration. In practical terms, if developed by a separated frontend and backend team, simply clarifying responsibilities and interface specifications could lead to weeks of discussion.</p>
+<p>In conclusion, the system is now running smoothly, and I’ll continue to observe and improve it as it runs.</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="final-thoughts">Final Thoughts<a href="https://docsaid.org/en/blog/builds-dashboard-system#final-thoughts" class="hash-link" aria-label="Direct link to Final Thoughts" title="Direct link to Final Thoughts">​</a></h2>
-<p>While reading academic papers can be logically abstract, after a few readings, I usually have a chance to replicate them.</p>
-<p>Frontend documentation might seem straightforward, but each step in practice could hide potential pitfalls—truly deceptive. (<del>Not familiar? Don’t blame everything else!</del>)</p>
-<p>In the past, late-night debugging would revolve around typical AI engineer problems like "loss not converging" or "GPU memory overload." Now, it's about React throwing errors, form buttons not working, or backend value specifications not matching...</p>
-<p>This is with ChatGPT available for consultation. If we were back in the pre-ChatGPT era, I’m not so sure whether I could have successfully built this backend.</p>
-<p>I’ll continue adding new features over time. If you encounter any issues or bugs, please email me privately for security reasons. I’d greatly appreciate it. Feel free to attach images or error messages to help me pinpoint the problem, and I will resolve it as soon as possible.</p>
-<p>If you have any suggestions or feedback, feel free to leave a comment and share with me.</p>
-<p>I hope you have a great time here!</p>]]></content>
+<p>While reading papers, the logic often feels abstract, but after reading through them a few times, I usually manage to replicate them successfully.</p>
+<p>Frontend documentation might seem clear at first glance, but each step in practice could hide pitfalls—truly deceptive. (<del>Not familiar with it? Don’t blame everything else!</del>)</p>
+<p>In the past, late-night debugging was often about issues like "loss not converging" or "GPU memory running out," which are everyday challenges for AI engineers. Now, it’s more about React throwing frequent errors, form buttons not working, and backend API specifications not matching, among other tedious problems.</p>
+<p>What’s more, this was done with the help of ChatGPT for immediate assistance. If it had been the pre-ChatGPT era, I’m not sure whether I would have been able to successfully build this backend.</p>
+<p>I will continue adding more features in the future and keep improving the user experience. If you encounter any bugs or problems while using the system, for security reasons, please contact me via email. I’d greatly appreciate it if you could provide detailed error messages or screenshots to help me locate and fix the problem more quickly.</p>
+<p>Also, if you have any suggestions or feedback on the system, feel free to share them in the comments.</p>
+<p>I hope you enjoy your time here!</p>]]></content>
         <author>
             <name>Z. Yuan</name>
             <uri>https://github.com/zephyr-sh</uri>
