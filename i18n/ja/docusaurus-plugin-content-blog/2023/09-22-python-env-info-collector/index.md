@@ -1,45 +1,57 @@
 ---
 slug: python-env-info-collector
-title: モデルトレーニング環境の問題記録とトラブルシューティング
+title: モデル訓練環境の問題を記録してトラブルシューティング
 authors: Z. Yuan
 tags: [python, training-log]
 image: /ja/img/2023/0922.webp
-description: 自作の記録ツールを共有します。
+description: 自作の記録ツールをシェアします。
 ---
 
-モデルのトレーニングが失敗した場合、その原因を突き止めたいと思うのは自然なことです。その際、トレーニング環境の情報を確認する必要があります。例えば、Python バージョン、PyTorch バージョン、CUDA バージョン、GPU 情報、CPU 情報、RAM 情報、ディスク情報、IP アドレスなどです。
+自作のPythonツールをシェアします。
 
-ここでは、自作の Python ツールを共有します。このツールを使えば、これらの情報を簡単に確認できます。全てを網羅しているわけではありませんが、基本的なトラブルシューティングには十分です。
-
-通常、トレーニングを開始する段階で、環境情報をトレーニングログに記録します。
+このツールは、モデル訓練に関連する情報を簡単に確認するためのもので、全機能が網羅されているわけではありませんが、基本的なトラブルシューティングには十分です。
 
 <!-- truncate -->
 
+## 概要
+
+モデルの訓練がうまくいかなかった場合、原因を特定するために訓練ホストの環境情報をチェックする必要があります。例えば、Pythonのバージョン、PyTorchのバージョン、CUDAのバージョン、GPU情報、CPU情報、RAM情報、ディスク情報、IPアドレスなどです。
+
+面倒ですね！
+
+そこで、問題を解決するためのプログラムをいくつか書きました。一般的には、訓練開始時に環境情報を訓練ログに記録しておけば、モデルが壊れたときにすぐに確認できます。
+
 ## インストール
 
-まずは必要なパッケージをインストールします：
+必要なパッケージをインストールします：
 
 ```bash
 pip install psutil requests
 ```
 
 :::tip
-完全なコードは GitHub 上に公開しています。本記事の最後にもコードを掲載しています。
+完全なコードはGitHubにあります。この記事の最後にもリンクを掲載します。
 
 - [**system_info.py**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
   :::
 
 ## `get_package_versions` の使用
 
-`capybara` をインストール済みでプロジェクトに含まれている場合、以下のコードでテストできます：
+私はこのツールを `capybara-docsaid` に統合しました。直接インストールして使うこともできます：
 
-```python
+```bash
+pip install capybara-docsaid
+```
+
+インストール後、Pythonプログラム内で関数を呼び出します：
+
+```python title="get_package_versions.py"
 from capybara import get_package_versions
 
 get_package_versions()
 ```
 
-実行結果：
+実行後、以下の結果が得られます：
 
 ```json
 {
@@ -54,26 +66,26 @@ get_package_versions()
 }
 ```
 
-- PyTorch Version: PyTorch のバージョン
-- PyTorch Lightning Version: PyTorch Lightning のバージョン
-- TensorFlow Error: TensorFlow のバージョン
-- Keras Error: Keras のバージョン
-- NumPy Version: NumPy のバージョン
-- Pandas Version: Pandas のバージョン
-- Scikit-learn Version: Scikit-learn のバージョン
-- OpenCV Version: OpenCV のバージョン
+- PyTorch Version: PyTorchのバージョン
+- PyTorch Lightning Version: PyTorch Lightningのバージョン
+- TensorFlow Error: TensorFlowのエラー（インストールされていない場合）
+- Keras Error: Kerasのエラー（インストールされていない場合）
+- NumPy Version: NumPyのバージョン
+- Pandas Version: Pandasのバージョン
+- Scikit-learn Version: Scikit-learnのバージョン
+- OpenCV Version: OpenCVのバージョン
 
 ## `get_gpu_cuda_versions` の使用
 
-テストコード：
+次に、CUDAのバージョンを記録するプログラムです：
 
-```python
+```python title="get_gpu_cuda_versions.py"
 from capybara import get_gpu_cuda_versions
 
 get_gpu_cuda_versions()
 ```
 
-実行結果：
+実行後、以下の結果が得られます：
 
 ```json
 {
@@ -82,20 +94,20 @@ get_gpu_cuda_versions()
 }
 ```
 
-- CUDA Version: CUDA のバージョン
-- NVIDIA Driver Version: NVIDIA ドライバのバージョン
+- CUDA Version: CUDAのバージョン
+- NVIDIA Driver Version: NVIDIAドライバーのバージョン
 
 ## `get_system_info` の使用
 
-テストコード：
+次に、基本的なシステム情報を取得するプログラムです：
 
-```python
+```python title="get_system_info.py"
 from capybara import get_system_info
 
 get_system_info()
 ```
 
-実行結果：
+実行後、以下の結果が得られます：
 
 ```json
 {
@@ -115,29 +127,29 @@ get_system_info()
 }
 ```
 
-- OS Version: OS のバージョン
-- CPU Model: CPU モデル
-- Physical CPU Cores: 物理 CPU コア数
-- Logical CPU Cores (incl. hyper-threading): 論理 CPU コア数（ハイパースレッディングを含む）
-- Total RAM (GB): 総 RAM 容量 (GB)
-- Available RAM (GB): 利用可能な RAM 容量 (GB)
-- Disk Total (GB): ディスク総容量 (GB)
-- Disk Used (GB): 使用中のディスク容量 (GB)
-- Disk Free (GB): 空きディスク容量 (GB)
-- GPU Info: GPU 情報
-- IPV4 Address: 内部 IPV4 アドレス
-- IPV4 Address (External): 外部 IPV4 アドレス
-- MAC Address: MAC アドレス
+- OS Version: OSのバージョン
+- CPU Model: CPUのモデル
+- Physical CPU Cores: 物理的なCPUコア数
+- Logical CPU Cores (incl. hyper-threading): 論理的なCPUコア数（ハイパースレッディングを含む）
+- Total RAM (GB): 総RAM容量（GB）
+- Available RAM (GB): 利用可能なRAM容量（GB）
+- Disk Total (GB): ディスク総容量（GB）
+- Disk Used (GB): 使用中のディスク容量（GB）
+- Disk Free (GB): 空きディスク容量（GB）
+- GPU Info: GPUの情報
+- IPV4 Address: 内部IPV4アドレス
+- IPV4 Address (External): 外部IPV4アドレス
+- MAC Address: MACアドレス
 
-## 注意事項と代替案
+## 注意点と代替案
 
-このツールは Ubuntu で作成されたため、他の OS では予期せぬ挙動が発生する可能性があります。
+私のシステム環境はUbuntuですが、他のOSで実行する場合、動作が異なる可能性があります。
 
 以下の点に注意してください：
 
-- 一部の関数は OS に依存しており、すべてのプラットフォームで動作するとは限りません。例えば、`get_cpu_info` は Windows では完全な CPU モデルを表示しません。この場合、他のツールを使うか手動で情報を取得することを検討してください。
-- Windows 環境で `nvidia-smi` を直接使用して GPU 情報を取得できない場合、NVIDIA ドライバと関連ツールがインストールされていることを確認し、コマンドプロンプトで実行してください。
-- 外部 IP アドレスは `https://httpbin.org/ip` から取得しているため、ネットワーク接続がアクティブである必要があります。
+- OSの制限により、一部の関数はすべてのプラットフォームで動作しない場合があります。例えば、`get_cpu_info`はWindows上では完全なCPUモデルを表示しません。その場合は、他のツールを使用するか、手動で情報を取得することを検討してください。
+- Windows環境では、`nvidia-smi`を使ってGPU情報を直接取得できません。NVIDIAドライバーと関連ツールをインストールし、コマンドプロンプトで実行することを確認してください。
+- 外部IPアドレスは`https://httpbin.org/ip`から取得されるため、インターネット接続が必要です。
 
 ## コード
 

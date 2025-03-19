@@ -7,13 +7,19 @@ image: /img/2023/0922.webp
 description: 自己手刻的紀錄工具，分享給大家使用。
 ---
 
-當模型 train 壞了，我們總是會想知道是什麼原因導致的，這時候我們需要檢查訓練主機的環境資訊，例如：Python 版本、PyTorch 版本、CUDA 版本、GPU 資訊、CPU 資訊、RAM 資訊、磁碟資訊、IP 地址等等。
+我分享一個自己手刻的 Python 小工具。
 
-我們分享一個自己手刻的 Python 小工具，可以快速查看這些資訊，雖然說不是包山包海，但基本的問題排查應該足夠用。
-
-一般來說，我們會在訓練啟動的環節，將環境資訊紀錄到訓練主機的日誌裡面。
+主要功能是可以快速查看模型訓練相關資訊，雖然說不是包山包海，但基本的問題排查應該夠用。
 
 <!-- truncate -->
+
+## 簡介
+
+當模型 train 壞了，你一定會想知道是什麼原因導致的，這時候需要檢查訓練主機的環境資訊，例如：Python 版本、PyTorch 版本、CUDA 版本、GPU 資訊、CPU 資訊、RAM 資訊、磁碟資訊、IP 地址等等。
+
+好煩啊！
+
+所以我們得寫幾個程式來幫助我們解決問題，一般來說，我們會在訓練啟動的當下，就把環境資訊紀錄到訓練日誌裡面，如果模型壞掉就可以立刻查看。
 
 ## 安裝
 
@@ -24,16 +30,22 @@ pip install psutil requests
 ```
 
 :::tip
-完整的程式碼在 Github 上，並且我們同步放在本篇文章的最後面。
+完整的程式碼在 Github 上，並且我也會放在本篇文章的最後面。
 
 - [**system_info.py**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
   :::
 
 ## 使用 `get_package_versions`
 
-我們假設你有安裝 `capybara`，並且已經在專案裡面，則可以透過以下指令測試：
+我把程式整合到 `capybara-docsaid` 內，你可以考慮直接安裝：
 
-```python
+```bash
+pip install capybara-docsaid
+```
+
+安裝完成後，則可以 python 程式內調用相關函數：
+
+```python title="get_package_versions.py"
 from capybara import get_package_versions
 
 get_package_versions()
@@ -65,9 +77,9 @@ get_package_versions()
 
 ## 使用 `get_gpu_cuda_versions`
 
-測試程式：
+再來是紀錄 cuda 版本，程式如下：
 
-```python
+```python title="get_gpu_cuda_versions.py"
 from capybara import get_gpu_cuda_versions
 
 get_gpu_cuda_versions()
@@ -87,9 +99,9 @@ get_gpu_cuda_versions()
 
 ## 使用 `get_system_info`
 
-測試程式：
+接著是取得基本的系統資訊，程式如下：
 
-```python
+```python title="get_system_info.py"
 from capybara import get_system_info
 
 get_system_info()
@@ -131,17 +143,17 @@ get_system_info()
 
 ## 注意事項與替代方案
 
-由於我們是在 Ubuntu 上撰寫本函數，因此在其他作業系統上可能會有劇情之外的發展。
+我的系統環境是 Ubuntu 作業系統，所以如果你在其他作業系統上執行可能會有劇情之外的發展。
 
 以下幾個可能需要注意的要點：
 
 - 因作業系統的限制，某些函數可能無法在所有平台上運行。例如：`get_cpu_info` 在 Windows 上不會顯示完整的 CPU 型號。在這種情況下，你可以考慮使用其他工具或手動獲取此資訊。
 - 如果你在 Windows 環境中，無法直接使用 `nvidia-smi` 來獲取 GPU 資訊，請確保已安裝 NVIDIA 驅動和相關的工具，並在命令提示符視窗中執行它。
-- 外部 IP 地址是從 `https://httpbin.org/ip` 獲取的，所以必須確保網路連線是活躍的。
+- 外部 IP 地址是從 `https://httpbin.org/ip` 獲取的，所以必須確保網路連線是通順的。
 
 ## 程式碼
 
-```python showLineNumbers
+```python showLineNumbers title="capybara/utils/system_info.py"
 import platform
 import socket
 import subprocess

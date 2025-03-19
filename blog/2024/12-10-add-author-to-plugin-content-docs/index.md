@@ -20,7 +20,7 @@ description: 原廠不支援，我們只好硬著頭皮上了。
 
 ## 先去問問原廠
 
-我們首先到 Docusaurus 的 GitHub 上提出問題，看看原廠有沒有支援這個功能。
+首先，我前往 Docusaurus 的 GitHub 上提出問題，看看原廠有沒有支援這個功能。
 
 - [**How to add author info to docs? #10701**](https://github.com/facebook/docusaurus/discussions/10701)
 
@@ -30,7 +30,7 @@ description: 原廠不支援，我們只好硬著頭皮上了。
     </figure>
     </div>
 
-或許 Docusaurus 的作者可以大發慈悲，幫我們加上這個功能。
+或許 Docusaurus 的作者可以大發慈悲，幫我加上這個功能。
 
 但等了一段時間，得到原廠的回覆：
 
@@ -42,7 +42,7 @@ description: 原廠不支援，我們只好硬著頭皮上了。
 
 簡單來說，就是叫你自己想辦法，原廠不支援。
 
-看來求人不如求己，我們只好硬著頭皮上了。
+看來求人不如求己，又是我自己要硬著頭皮上了。
 
 ## 新增作者資訊
 
@@ -75,11 +75,11 @@ Z. Yuan:
 ```
 
 :::info
-我們在開發時，發現解析 YML 檔案的方式很麻煩，經過一輪測試，直接改 JSON 格式最簡單。
+我在開發時，發現解析 YML 檔案的方式很麻煩，經過一輪測試，直接改 JSON 格式最簡單。
 :::
 
 :::tip
-雖然這是要給 `docs` 用的檔案，但我們還是把它放在 `blog` 資料夾內，這樣更新時才會記得一起處理。
+雖然這是要給 `docs` 用的檔案，但我還是把它放在 `blog` 資料夾內，這樣更新時才會記得一起處理。
 :::
 
 ## 提取 DocItem/Content
@@ -90,7 +90,7 @@ Z. Yuan:
 之後 Docusaurus 若有破壞性的版本更新，該修改可能會導致網站無法正常運行，請確保你有維護網站的能力，再繼續進行。
 :::
 
-我們先把 `DocItemContent` 程式碼提取出來，請執行以下指令：
+先把 `DocItemContent` 程式碼提取出來，請執行以下指令：
 
 ```shell
 npx docusaurus swizzle @docusaurus/theme-classic DocItem/Content
@@ -100,15 +100,15 @@ npx docusaurus swizzle @docusaurus/theme-classic DocItem/Content
 
 1. **Which language do you want to use?**
 
-   我們選擇 `JavaScript`。
+   這裡選擇 `JavaScript`。
 
 2. **Which swizzle action do you want to do?**
 
-   我們選擇 `Eject`.
+   這裡選擇 `Eject`.
 
 3. **Do you really want to swizzle this unsafe internal component?**
 
-   我們選擇 `YES: I know what I am doing!`.
+   這裡選擇 `YES: I know what I am doing!`.
 
 ---
 
@@ -163,11 +163,9 @@ export default function DocItemContent({ children }) {
 
 - `import DocItemAuthors from "@theme/DocItem/Authors";`
 
-這個部分我們稍後實作。
-
 ## 實作 DocItem/Authors
 
-現在我們來實作 `Authors` 這個元件，請執行以下指令：
+現在來實作 `Authors` 這個元件，請執行以下指令：
 
 ```shell
 mkdir -p src/theme/DocItem/Authors
@@ -175,7 +173,7 @@ touch src/theme/DocItem/Authors/index.js
 touch src/theme/DocItem/Authors/styles.module.css
 ```
 
-這個部分，我們是參考 `Blog` 的 `Authors` 元件，依樣畫葫蘆地實作出來。
+這個部分，我是參考 `Blog` 的 `Authors` 元件，依樣畫葫蘆地實作出來。
 
 - [**docusaurus-theme-classic/src/theme/Blog/Components/Author**](https://github.com/facebook/docusaurus/tree/main/packages/docusaurus-theme-classic/src/theme/Blog/Components/Author)
 
@@ -338,7 +336,7 @@ export default function DocItemAuthors() {
 yarn add react-icons
 ```
 
-要注意到這裡有些地方我們是硬編碼的，例如：
+要注意到這裡有些地方我是硬編碼的，例如：
 
 ```jsx
 function normalizeSocialLink(platform, handleOrUrl) {
@@ -444,7 +442,7 @@ const socialIconMap = {
 }
 ```
 
-這裡的實作方式就看個人風格了，我們測了幾次，這個樣式看起來還不錯。
+這裡的實作方式就看個人風格了，我測了幾次，這個樣式看起來還不錯。
 
 你可以根據自己的需求，修改這些樣式。
 
@@ -452,7 +450,7 @@ const socialIconMap = {
 
 最後，為了讓 `docs` 的文件可以顯示作者資訊，我們需要在文件的 `FrontMatter` 中加入作者的資訊。
 
-以我們的網站文章為例：[**[20.08] HiPPO: 河馬的記憶**](https://docsaid.org/papers/mamba/hippo)
+以網站文章為例：[**[20.08] HiPPO: 河馬的記憶**](https://docsaid.org/papers/mamba/hippo)
 
 這篇文章原本的寫法是這樣：
 
@@ -466,7 +464,7 @@ const socialIconMap = {
 
 現在為了加入作者資訊，我們「**不可以**」使用 `#` 作為標題，而是要使用 `FrontMatter` 來定義標題。
 
-所以我們要修改成這樣：
+所以要修改成這樣：
 
 ```mdx
 ---
@@ -497,4 +495,4 @@ authors: Z. Yuan
 
 如上圖，我們終於成功的在 `docs` 的文件中加入了作者資訊，可喜可賀！
 
-以上就是我們的實作過程，希望對你有所幫助。
+以上就是所有的實作過程，希望對你有所幫助。

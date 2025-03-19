@@ -28,7 +28,7 @@ description: 把那些惡意都封鎖在外面。
 
 在大部分的 Linux 發行版上，你可以使用包管理工具來安裝 Fail2ban。
 
-我們自己的主機是 Ubuntu，所以我們使用 apt 來安裝：
+這裡由於我的主機是 Ubuntu，所以使用 apt 來安裝：
 
 ```bash
 sudo apt install fail2ban
@@ -38,7 +38,9 @@ sudo apt install fail2ban
 
 設定檔位於 `/etc/fail2ban/jail.conf`。
 
-建議不要直接修改此文件，而是複製一份到 `jail.local` 並修改它：
+但是等等！
+
+這裡不要直接修改這個文件，而是複製一份到 `jail.local` 並修改它：
 
 ```bash
 sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
@@ -73,7 +75,7 @@ sudo fail2ban-client status
 
 ## 4. 新增自定義規則
 
-如果你想為特定的服務設定特別的規則，你可以在 `jail.local` 裡新增或修改對應的段落，例如針對 SSH 的設定：
+如果你想為特定的服務設定特別的規則，可以在 `jail.local` 裡新增或修改對應的段落，例如針對 SSH 的設定：
 
 ```bash
 [sshd]
@@ -100,6 +102,14 @@ sudo service fail2ban restart
 
 ```bash
 sudo fail2ban-client status sshd
+```
+
+## 7. 解除封鎖
+
+如果你剛剛在測試的時候被封鎖了，這裡我們記得把你的測試 IP 解除封鎖：
+
+```bash
+sudo fail2ban-client set sshd unbanip <IP地址>
 ```
 
 ## 結語

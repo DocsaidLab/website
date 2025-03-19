@@ -7,20 +7,20 @@ image: /img/2024/0304.webp
 description: 記錄 Ubuntu 22.04 上搭建 Nextcloud 的過程。
 ---
 
-之前我們都把檔案放在 Google Drive 上，下載檔案的時候會透過 wget 指令來下載。
+之前我都把檔案放在 Google Drive 上，下載檔案的時候會透過 wget 指令來下載。
 
-直到某一天，原本的下載指令突然就不能用了...
+直到某一天，Google 稍作更新，原本的下載指令突然就不能用了......
 
-既然如此，那我們來試試看 Nextcloud。
+真無奈。
+
+既然如此，那就來試試看 Nextcloud 吧，以下我是基於 Ubuntu 22.04 來進行相關配置。
 
 <!-- truncate -->
-
-以下我們基於 Ubuntu 22.04 來進行相關配置。
 
 :::tip
 在開始之前，請你準備好一個域名，並且把這個域名指向你的伺服器。
 
-如果不知道該怎麼做，請直接 Google 搜尋：**namecheap 怎麼用**。
+如果不知道該怎麼做，可以直接向 ChatGPT 問問，它會告訴你。
 :::
 
 ## 安裝 Nextcloud
@@ -42,11 +42,7 @@ description: 記錄 Ubuntu 22.04 上搭建 Nextcloud 的過程。
 
 - 參考官方文件：[**Nextcloud All-in-One**](https://github.com/nextcloud/all-in-one)
 
-首先確保你已經安裝了 Docker 和 Docker Compose。
-
-:::tip
-如果還沒有完成，請 Google 搜尋 『Docker & Docker Compose 安裝方法』。
-:::
+**首先確保你已經安裝了 Docker 和 Docker Compose。**
 
 接著，建立一個 NextCloud 資料夾，然後寫一個 Docker Compose 的設定檔 `docker-compose.yml`：
 
@@ -60,35 +56,24 @@ vim nextcloud/docker-compose.yml
 ```yaml
 services:
   nextcloud-aio-mastercontainer:
-    image: nextcloud/all-in-one:latest
-    init: true
-    restart: always
-    container_name: nextcloud-aio-mastercontainer
+    image: nextcloud/all-in-one:latest  # 指定使用的 Docker 容器映像檔
+    init: true  # 防止建立殭屍（zombie）行程，建議保持此選項
+    restart: always  # 容器重啟策略設定為隨 Docker 守護程序（daemon）自動重啟
+    container_name: nextcloud-aio-mastercontainer  # 設定容器名稱，不應變更，以避免更新問題
     volumes:
-      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config  # mastercontainer 的檔案儲存位置，此設定不可變更
+      - /var/run/docker.sock:/var/run/docker.sock:ro  # 掛載 Docker 套接字，用於控制其他容器與功能，Windows/macOS 或 rootless 模式下需調整
     ports:
-      - 80:80
-      - 8080:8080
-      - 8443:8443
+      - 80:80    # 用於透過 AIO 介面取得有效證書，可選
+      - 8080:8080  # 預設提供 AIO 介面（自簽名證書），若宿主機 8080 埠被佔用，可改為其他埠，例如：8081:8080
+      - 8443:8443  # 若需公開至網路，可透過此埠存取 AIO 介面並取得有效證書，可選
+
 volumes:
   nextcloud_aio_mastercontainer:
-    name: nextcloud_aio_mastercontainer
+    name: nextcloud_aio_mastercontainer  # Docker Volume 名稱，此設定不可變更
 ```
 
-簡要說明一下上面的指令內容：
-
-- `--init`：選項確保永遠不會建立殭屍行程。
-- `--name nextcloud-aio-mastercontainer`：設定容器的名稱，這個名稱不允許更改，因為更改後可能會導致 mastercontainer 更新失敗。
-- `--restart always`：設定容器的重啟策略為始終隨 Docker 守護程序一起啟動。
-- `--publish 80:80`：將容器的 80 端口發佈到宿主機的 80 端口，用於獲取 AIO 介面的有效證書，如果不需要可以移除。
-- `--publish 8080:8080`：將容器的 8080 端口發佈到宿主機的 8080 端口，此端口用於 AIO 介面，預設使用自簽名證書。 如果 8080 端口已被佔用，可以更改宿主機的端口，如：`--publish 8081:8080`。
-- `--publish 8443:8443`：將容器的 8443 端口發佈到宿主機的 8443 端口，如果公開到網路，可以通過此端口訪問 AIO 介面並獲取有效證書，如果不需要可以移除。
-- `--volume nextcloud_aio_mastercontainer:/mnt/docker-aio-config`：設定 mastercontainer 建立的檔案將儲存在名為 nextcloud_aio_mastercontainer 的 docker 磁碟區中，此設定不允許變更。
-- `--volume /var/run/docker.sock:/var/run/docker.sock:ro`：將 docker 套接字掛載到容器內，用於啟動所有其他容器和其他功能。 在 Windows/macOS 和 docker 無根模式下需要調整。
-- `nextcloud/all-in-one:latest`：指定使用的 Docker 容器映像。
-
-還有更多詳細的設定，請參考官方文件：[compose.yaml](https://github.com/nextcloud/all-in-one/blob/main/compose.yaml)
+如需更詳盡設定資訊，請參考官方文件：[**compose.yaml**](https://github.com/nextcloud/all-in-one/blob/main/compose.yaml)
 
 ## 設定系統服務
 
@@ -129,78 +114,88 @@ sudo systemctl start nextcloud
 
 1. **訪問 Nextcloud AIO 介面**：
 
-   - 在初始啟動後，你可以通過訪問 `https://ip.address.of.this.server:8080` 來開啟 Nextcloud AIO 介面，其中 `ip.address.of.this.server` 應該被替換為部署 Nextcloud 服務的伺服器的 IP 地址。
-   - 重要的是使用 IP 地址而非域名來訪問這個連接埠（8080），因為 HTTP Strict Transport Security（HSTS）可能會阻止使用域名訪問。HSTS 是一種 Web 安全政策機制，它要求網路瀏覽器僅通過安全的 HTTPS 連接與網站建立連接。
+   初次啟動完成後，請使用 `https://ip.address.of.this.server:8080` 進入 Nextcloud AIO 介面，其中 `ip.address.of.this.server` 需替換為部署 Nextcloud 服務的伺服器 IP 地址。請確保 Docker 及 Nextcloud AIO 已正確安裝並啟動，初次啟動可能需要數分鐘。
+
+   建議使用 IP 地址而非域名來存取 8080 端口，因 HTTP Strict Transport Security（HSTS）可能限制域名存取。HSTS 是一種要求瀏覽器僅以 HTTPS 連線存取網站的安全機制。
 
 2. **自簽名證書的使用**：
 
-   - 訪問 8080 端口時，可能會使用自簽名證書來確保通信的安全性。自簽名證書不是由受信任的證書機構（CA）發行的，因此瀏覽器可能會警告這個證書不可信。你需要在瀏覽器中手動接受這個證書，以便繼續訪問。
+   當透過 8080 端口訪問時，系統可能採用自簽名證書來確保通訊安全。
+
+   由於此證書並非由受信任的證書機構（CA）簽發，瀏覽器可能顯示不可信警告，需依據瀏覽器指示手動接受。建議僅在測試環境中使用，自簽名證書不適用於正式上線環境。
 
 3. **獲取有效證書的自動化方式**：
 
-   - 如果你的防火牆或路由器已開放或轉發了 80 和 8443 端口，並且你已經將一個域名指向你的伺服器，那麼你可以通過訪問 `https://your-domain-that-points-to-this-server.tld:8443` 來自動獲取一個由受信任 CA 發行的有效證書，以增加安全性和便利性。
-   - 這裡的 `your-domain-that-points-to-this-server.tld` 應該替換為你指向伺服器的實際域名。
+   若你的防火牆或路由器已開放或正確轉發 80 與 8443 端口，且你已將一個域名指向伺服器，則可透過 `https://your-domain-that-points-to-this-server.tld:8443` 自動獲取由受信任 CA（例如 Let's Encrypt）簽發的有效證書，進一步提升安全性與便利性。
+
+   請確保 `your-domain-that-points-to-this-server.tld` 已替換為正確域名，且 DNS 設定已生效，同時檢查防火牆規則，確保連線不受阻擋。
 
 4. **Nextcloud Talk 的連接埠開放**：
-   - 為了確保 Nextcloud Talk 功能（如視訊通話和訊息）能夠正常運作，需要在防火牆或路由器中為 Talk 容器開放 3478/TCP 和 3478/UDP 連接埠。
 
-- **常見問題：**
+   為確保 Nextcloud Talk（如視訊通話與訊息功能）正常運作，必須在防火牆或路由器中為 Talk 容器開放 3478/TCP 與 3478/UDP 端口。
 
-  - **家用網路是動態 IP，怎麼指向域名？**
+   若位於 NAT 環境，請同時確認相應端口轉發已正確設定，並檢查 ISP 是否封鎖相關 UDP 端口。
 
-    - 我們有試過一些 No-IP 的方法，後來覺得直接去中華電信申請固定 IP 最快最方便。
+## 常見問題
 
-  - **我不想用 Docker，有沒有其他方法？**
+1. **家用網路是動態 IP，怎麼指向域名？**
 
-    - 有，你可以直接安裝 Nextcloud，你需要自己來處理所有的依賴問題。
-    - 相信我，很多坑。
+    除了試用 No-IP 等動態 DNS 方案，我們發現直接向中華電信申請固定 IP 是最快且最穩定的方法。
 
-  - **為什麼架好了卻連不上？**
+    :::tip
+    如果你不是住在台灣的讀者，可能要去詢問你國家的電信機構是否有提供相關服務。
+    :::
 
-    - 你的防火牆擋住了，如果防火牆沒開，那就是你的路由器擋住了。
+2. **我不想用 Docker，有沒有其他方法？**
 
----
+    有，你可以直接安裝 Nextcloud，但必須自行處理所有依賴與環境配置，過程中可能會遇到不少坑。
 
-輸入設定網址，你可以進入一個比後台還要後台的地方。
+    被坑了一輪之後，還是又回來走 Docker 流程，所以為什麼不一開始就用 Docker 呢？
+
+3. **為什麼架好了卻連不上？**
+
+    請先檢查防火牆設定是否允許必要連線；若防火牆設定無誤，則可能是路由器端口轉發配置出現問題，建議查看 Docker 日誌以獲取更詳細的錯誤資訊。
+
+## 最後
+
+輸入設定網址後，你將進入一個比後台更後台的設定介面。
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "70%"}}>
 ![login_1](./img/login_1.jpg)
 </figure>
 </div>
 
-到這一步，你可能會驚恐地發現：
+到這一步，你可能會驚訝地發現：
 
 - **我沒有密碼啊！**
 
-密碼會在你第一次登入的時候給你，但通常你會錯過他。
+首次登入時系統會生成密碼，但通常會被你忽略。
 
-這時候你可以透過以下的指令來找到密碼：
+如果忘記了也沒關係，還可以透過以下指令查詢：
 
 ```bash
 sudo grep password /var/lib/docker/volumes/nextcloud_aio_mastercontainer/_data/data/configuration.json
 ```
 
-登入之後，你會看到一個設定畫面：
+登入後，你會看到如下設定畫面：
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "70%"}}>
 ![login_2](./img/login_2.jpg)
 </figure>
 </div>
 
-你看到的這個畫面已經是我們設定完成的結果。
+此畫面表示設定已成功完成。
 
-如果你是第一次登入，在這裡，首先你要先輸入你之前準備好的網域，接著系統會要你再次下載一些 docker image，下載完成後，它會幫你重新啟動。
-
-啟動之後，你就可以開始使用 Nextcloud 了。
+若為首次登入，請依序輸入先前準備好的網域，系統隨後會下載必要的 docker image 並自動重新啟動。完成啟動後，即可開始使用 Nextcloud，同時建議儘速修改預設密碼並檢查其他安全性設定。
 
 ## 結語
 
-完成上面的步驟之後，在網址列中輸入你的網域後，你會看到一個很好看的介面，這個介面就是你的私有雲。
+完成上面的步驟之後，在網址列中輸入你的網域，就會看到一個好看的介面，這個就是你的私有雲。
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "70%"}}>
 ![login_3](./img/login_3.jpg)
 </figure>
 </div>
@@ -210,3 +205,9 @@ sudo grep password /var/lib/docker/volumes/nextcloud_aio_mastercontainer/_data/d
 除此之外，你可以在手機上下載 Nextcloud 的 App，然後你可以直接透過手機來管理你的檔案。
 
 有了 Nextcloud，你就不需要再擔心 Google Drive 的容量限制了。
+
+:::tip
+如果你的主機上有其他服務在工作，可以用 Nginx 反向代理，把 Nextcloud 的網域轉發過來即可。
+
+這部分超出本章的內容，我們有機會再聊。
+:::

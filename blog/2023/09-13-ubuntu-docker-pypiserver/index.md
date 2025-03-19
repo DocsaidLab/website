@@ -7,9 +7,11 @@ image: /img/2023/0913.webp
 description: 記錄 Ubuntu 上搭建 PyPiServer 的過程。
 ---
 
-今天我們想用 Docker 來建立一個 PyPi Server，並且在 Ubuntu 上運行，在此紀錄一下過程。
+最近我架了一個 PyPi Server 來存放我的套件安裝檔。使用 Ubuntu 系統搭配 Docker 來進行配置，也在這裡記錄一下配置過程。
 
-我們假設你已經在 Ubuntu 上安裝了 Docker，並且已經熟悉了 Docker 的基本操作。
+:::tip
+我會假設讀者已經在 Ubuntu 上安裝了 Docker，並且已經熟悉了 Docker 的基本操作。如果不是，可能得請你先去補充一下相關知識。
+:::
 
 <!-- truncate -->
 
@@ -21,7 +23,7 @@ docker pull pypiserver/pypiserver:latest
 
 ## 建立目錄
 
-不囉唆，我們直接在家目錄下建立一個目錄來存放 Python 包。
+不囉唆，直接在家目錄下建立一個目錄來存放 Python 包。
 
 ```bash
 mkdir ~/packages
@@ -35,11 +37,9 @@ mkdir ~/packages
 如果你不想設定密碼，可以跳過這一步。
 :::
 
-htpasswd 是一種用於存儲用戶名和密碼的文件格式，pypiserver 會使用此文件來驗證使用者。
+htpasswd 是一種用於存儲用戶名和密碼的文件格式，pypiserver 會使用此文件來驗證使用者。這是個簡單有效，又可以增強 pypiserver 安全性的方式。
 
-這是個簡單有效，又可以增強 pypiserver 安全性的方式。
-
-我們先安裝一下 apache2-utils：
+首先安裝 apache2-utils：
 
 ```bash
 sudo apt install apache2-utils
@@ -51,27 +51,19 @@ sudo apt install apache2-utils
 htpasswd -c ~/.htpasswd [username]
 ```
 
-它會提示你輸入 `username` 的密碼。輸入密碼後，`.htpasswd` 文件會在家目錄下建立檔案。
-
-建立檔案後，我們就可以使用上面提到的 `docker run` 命令來運行 `pypiserver`，並且使用 `.htpasswd` 文件驗證。
+它會提示你輸入 `username` 的密碼。輸入密碼後，`.htpasswd` 文件會在家目錄下建立檔案。建立檔案後，我們就可以使用上面提到的 `docker run` 命令來運行 `pypiserver`，並且使用 `.htpasswd` 文件驗證。
 
 ## 掛載為背景服務
 
-要將 Docker 容器作為背景服務運行，我們在這裡使用 Docker Compose 和 Systemd。
+要將 Docker 容器作為背景服務運行，在這裡採用 Docker Compose 和 Systemd 作為解決方案。
 
-### 安裝 Docker Compose
-
-如果你還沒有安裝 Docker Compose，首先進行安裝，請參考：
+如果你還沒有安裝 Docker Compose，需要進行安裝，請參考：
 
 - [**安裝 Docker Compose 的官方文件**](https://docs.docker.com/compose/install/)
 
-要注意的是 Docker Compose 最近有較大規模的更新，很多使用方式跟之前不一樣。
+要注意的是 Docker Compose 最近有較大規模的更新，很多使用方式跟之前不一樣。最明顯的就是原本使用 `docker-compose` 的指令，現在一律改成 `docker compose` 。
 
-最明顯的就是原本使用 `docker-compose` 的指令，現在一律改成 `docker compose` 。
-
-我們根據官方文件，把安裝內容寫在下面：
-
-安裝最新版本的 Docker Compose：
+根據官方文件，安裝最新版本的 Docker Compose：
 
 ```bash
 sudo apt update
@@ -88,7 +80,7 @@ docker compose version
 
 找個地方創建 `docker-compose.yml`，並填入以下內容：
 
-```yaml {6-7}
+```yaml {6-7} title="docker-compose.yml"
 version: "3.3"
 services:
   pypiserver:
@@ -102,7 +94,7 @@ services:
 ```
 
 - 請將上面重點劃記的 [使用者名稱] 替換為實際使用者名稱。
-- 我們可以在這裡修改外部 port 映射值，例如改成："18080:8080"。
+- 這裡可以修改外部 port 映射值，例如改成："18080:8080"。
 
 :::tip
 可以參考 `pypiserver` 提供的範本：[**docker-compose.yml**](https://github.com/pypiserver/pypiserver/blob/master/docker-compose.yml)
@@ -124,7 +116,7 @@ sudo vim /etc/systemd/system/pypiserver.service
 
 寫入以下內容：
 
-```bash {7}
+```bash {7} title="/etc/systemd/system/pypiserver.service"
 [Unit]
 Description=PypiServer Docker Compose
 Requires=docker.service
@@ -142,7 +134,6 @@ WantedBy=multi-user.target
 
 - 請確保將 `/path/to/your/docker-compose/directory` 替換為 `docker-compose.yml` 文件的實際路徑，寫到路徑就可以，不用檔案名稱。
 - 請確保 Docker 路徑正確，這裡可以使用 `which docker` 來確認。
-- 我們基於新版的 `docker compose` 指令，而不是用 `docker-compose`。
 
 ### 啟動服務
 
@@ -177,13 +168,11 @@ sudo systemctl status pypiserver.service
 
 ## 開始使用
 
-現在，我們可以使用 `pip` 來安裝和上傳套件了。
+現在，可以使用 `pip` 來安裝和上傳套件了。
 
 ### 上傳套件
 
-首先，假設我們已有一個名為 `example_package-0.1-py3-none-any.whl` 的包。
-
-接著用 `twine` 這個工具來上傳套件：
+首先，假設我們已有一個名為 `example_package-0.1-py3-none-any.whl` 的包。接著用 `twine` 這個工具來上傳套件：
 
 ```bash
 pip install twine
@@ -194,7 +183,7 @@ twine upload --repository-url http://localhost:8080/ example_package-0.1-py3-non
 
 ### 下載安裝套件
 
-我們使用 `pip` 來安裝套件，安裝時，需要指定 `pypiserver` 服務的地址和端口：
+安裝時，需要指定 `pypiserver` 服務的地址和端口：
 
 ```bash
 pip install --index-url http://localhost:8080/ example_package
@@ -224,17 +213,15 @@ pip install --index-url http://localhost:8080/ example_package
 
 ## 設定 `pip.conf`
 
-由於我們經常從此伺服器安裝套件，所以不想每次都在 `pip install` 時指定 `--index-url`。
-
-因此我們可以把相關配置資訊寫在 `pip.conf` 內。
+假設我們經常從此伺服器安裝套件，所以不想每次都在 `pip install` 時指定 `--index-url`。這時可以考慮把相關配置資訊寫在 `pip.conf` 內。
 
 ### 配置文件
 
-`pip.conf` 文件可以存在很多個地方，我們可以按照優先級順序去找：
+`pip.conf` 文件可以存在很多個地方，你可以按照優先級順序去找：
 
 - 優先級 1: 站點級別的配置文件：
 
-  - `/home/[使用者名稱]/.pyenv/versions/3.8.18/envs/main/pip.conf`
+  - `/home/[使用者名稱]/.pyenv/versions/3.x.x/envs/main/pip.conf`
 
 - 優先級 2: 使用者級別的配置文件：
 
@@ -246,7 +233,7 @@ pip install --index-url http://localhost:8080/ example_package
   - `/etc/pip.conf`
   - `/etc/xdg/pip/pip.conf`
 
-如果你也想設定，要先釐清一下當前的 python 環境會使用哪一份檔案，並找到該檔案後加入以下內容：
+先釐清一下當前的 python 環境會使用哪一份檔案，並找到該檔案後加入以下內容：
 
 ```bash
 [global]
@@ -260,6 +247,6 @@ trusted-host = [提供服務的主機IP位置]
 
 ## 結語
 
-現在，你已經跟著我們成功地建立了自己的 PyPI 伺服器，並學會了如何上傳和下載套件。
+現在，你應該也成功地建立了自己的 PyPI 伺服器，並學會了如何上傳和下載套件。
 
 希望本篇文章有解決你的問題。

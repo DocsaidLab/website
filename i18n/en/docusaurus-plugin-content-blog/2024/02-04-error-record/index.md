@@ -7,9 +7,9 @@ image: /en/img/2024/0204.webp
 description: A log of simple issues and their solutions.
 ---
 
-We always encounter a lot of problems when writing code.
+Writing code always comes with a bunch of problems.
 
-Here we record some trivial issues and their solutions.
+I am recording some of the trivial issues and their solutions here.
 
 :::tip
 This article will be continuously updated.

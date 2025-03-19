@@ -1,6 +1,6 @@
 ---
 slug: opencv-imread
-title: 用 Python 讀取 HEIC 圖檔
+title: 用 Python 讀取 HEIC 圖檔與加速載入
 authors: Z. Yuan
 tags: [HEIC, TurboJPEG]
 image: /img/2024/0213.webp
@@ -15,7 +15,7 @@ description: 來優化一下 OpenCV imread 吧！
 
 ## 基礎用法
 
-`imread` 函數的基礎用法非常簡單，你只需要傳入影像的路徑即可：
+`imread` 函數的基礎用法非常簡單，只要傳入影像的路徑即可：
 
 ```python
 import cv2
@@ -23,15 +23,15 @@ import cv2
 image = cv2.imread('path/to/image.jpg')
 ```
 
-其中，你可以使用的影像格式包括：BMP, JPG, PNG, TIF 等常見影像格式。
+其中，可以使用的影像格式包括：BMP, JPG, PNG, TIF 等常見影像格式。
 
 ## 限制一：HEIC 格式
 
-在 iOS 裝置上拍攝的照片通常是 HEIC 格式，這種格式在 OpenCV 中是不支援的。如果你嘗試使用 `imread` 函數讀取 HEIC 格式的影像，你會得到一個 `None` 的返回值。
+在 iOS 裝置上拍攝的照片通常是 HEIC 格式，這種格式在 OpenCV 中是不支援的。如果你嘗試使用 `imread` 函數讀取 HEIC 格式的影像，會得到一個 `None` 的返回值。
 
 為了解決這個問題，我們得用 pyheif 這個套件來讀取 HEIC 格式的影像，然後再將其轉換成 `numpy.ndarray` 類型的變數。
 
-首先，我們安裝必要套件：
+首先，安裝必要套件：
 
 ```bash
 sudo apt install libheif-dev
@@ -67,16 +67,16 @@ img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 
 在某些情況下，`imread` 函數讀取 JPG 格式的影像速度會非常慢。這是因為 OpenCV 在讀取 JPG 格式的影像時，會使用 libjpeg 這個庫，而 libjpeg 本身的效能就不是很好。
 
-在這邊，我們引入 TurboJPEG 這個套件，它是 libjpeg 的一個替代品，效能更好。我們可以使用 TurboJPEG 來加速讀取 JPG 格式的影像。
+在這邊，我們引入 TurboJPEG 這個套件，它是 libjpeg 的一個替代品，效能更好。
 
-跟之前一樣，我們先安裝必要套件：
+跟之前一樣，先安裝必要套件：
 
 ```bash
 sudo apt install libturbojpeg exiftool
 pip install PyTurboJPEG
 ```
 
-再來我們寫一點程式，幫他加速一下：
+再來寫一點程式，幫他加速一下：
 
 一般來說，可以加速大約 2-3 倍。
 
@@ -145,9 +145,9 @@ img = jpgread('path/to/image.jpg')
 
 那如果我們希望這個程式可以聰明一點，自己選一個適合載入的方式呢？
 
-我們可以寫一個函數，根據影像的格式來選擇合適的載入方式：
+這裡可以彙整一下上面的程式，根據影像的格式來選擇合適的載入方式：
 
-```python
+```python title="custom_imread.py"
 def imread(
     path: Union[str, Path],
     color_base: str = 'BGR',

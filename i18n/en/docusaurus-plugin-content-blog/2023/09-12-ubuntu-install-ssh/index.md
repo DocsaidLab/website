@@ -1,17 +1,19 @@
 ---
 slug: ubuntu-install-ssh
-title: Setting Up SSH Server on Ubuntu
+title: Set Up SSH Server on Ubuntu
 authors: Z. Yuan
 tags: [ubuntu, ssh]
 image: /en/img/2023/0912.webp
-description: Tutorial on configuring ssh server.
+description: Server setup and passwordless login tutorial.
 ---
 
-SSH is a network protocol that allows users to securely access and manage remote servers. This time, we will set up passwordless login.
+SSH is a network protocol that allows users to securely access and manage remote servers.
+
+This time, we’ll document the detailed steps for passwordless login.
 
 <!-- truncate -->
 
-## Installing the OpenSSH Server
+## Install OpenSSH Server
 
 Open the terminal.
 
@@ -24,7 +26,7 @@ sudo apt install openssh-server
 
 ## Check SSH Server Status
 
-Use the following command to check the status of the SSH server:
+Use the following command to check the SSH server’s status:
 
 ```bash
 sudo systemctl status ssh
@@ -34,21 +36,21 @@ If you see “Active: active (running),” then the SSH server has started succe
 
 ## SSH Passwordless Login Setup:
 
-### Generate SSH Key Pair on the Client Side
+### Generate SSH Key Pair on the Client
 
 Open the terminal.
 
-Enter the following command to generate an SSH key pair:
+Enter the following command to generate the key pair:
 
 ```bash
 ssh-keygen
 ```
 
-Follow the prompts. The default settings are usually sufficient. When prompted for a passphrase, you can simply press Enter to create a key pair without a password.
+Follow the prompts. The default settings are usually sufficient. When asked for a password, simply press Enter to create a key pair without a password.
 
 ### Copy the Public Key to the Server
 
-Use the `ssh-copy-id` command to copy the public key to the server. Replace `[username]` and `[server-ip]` with your server details.
+Use the `ssh-copy-id` command to copy the public key to the server. Replace [username] and [server-ip] with your server details.
 
 ```bash
 ssh-copy-id [username]@[server-ip]
@@ -60,31 +62,31 @@ For example:
 ssh-copy-id john@192.168.0.100
 ```
 
-If your server uses a non-default SSH port (e.g., 2222), use the `-p` parameter:
+If the server uses a different SSH port (e.g., 2222), use the `-p` parameter:
 
 ```bash
 ssh-copy-id -p 2222 john@192.168.0.100
 ```
 
-This command will prompt you to enter the server password.
+This command will prompt you for the server's password.
 
-Once authentication is successful, your public key will be added to the server’s `~/.ssh/authorized_keys` file.
+Once verified successfully, your public key will be added to the server's `~/.ssh/authorized_keys` file.
 
 ### Test Passwordless Login
 
-Try SSH-ing into the server:
+Try SSH into the server:
 
 ```bash
 ssh [username]@[server-ip]
 ```
 
-If everything is set up correctly, you should be able to log in to the server without a password.
+If everything is configured correctly, you should be able to log into the server without a password.
 
 ## Disable Password Authentication
 
-With SSH keys configured, you may consider disabling password authentication for added security.
+With the SSH key, you may want to disable password authentication for increased security.
 
-This can be set in the server’s `/etc/ssh/sshd_config` file:
+This can be configured in the server’s `/etc/ssh/sshd_config`:
 
 ```bash
 sudo vim /etc/ssh/sshd_config
@@ -92,4 +94,4 @@ sudo vim /etc/ssh/sshd_config
 
 Find the `PasswordAuthentication` option in the file and set it to `no`.
 
-After completing these steps, you’re ready to enjoy using SSH!
+After completing these steps, congratulations! You can now happily use SSH without a password.

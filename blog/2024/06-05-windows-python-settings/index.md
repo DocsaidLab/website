@@ -7,23 +7,23 @@ tags: [win11, python]
 description: Setting up Python on Windows.
 ---
 
-前陣子我們收到一個必須基於 Windows 的系統進行開發的任務。
+前陣子我收到一個必須基於 Windows 的系統進行開發的任務。
 
 可真是久違了！距離上次使用 Windows 已經有好幾年了。
 
 <!-- truncate -->
 
-我們先嘗試了幾個方法，最後決定使用 PowerShell 來配置 Python 環境。
+我先嘗試了幾個方法，最後決定使用 PowerShell 來配置 Python 環境。
 
 本來想要使用 WSL 來配置，但這會把環境變成 Linux 環境...（？）
 
-那我們手邊就有 Linux 環境了，還要在 Windows 上配置幹嘛？
+那我手邊就有 Linux 環境了，還要在 Windows 上配置幹嘛？
 
 ## 作業環境
 
-我們使用 Mac 所提供的虛擬環境工具：[**Parallels Desktop**](https://www.parallels.com/products/desktop/)。
+這裡使用 Mac 所提供的虛擬環境工具：[**Parallels Desktop**](https://www.parallels.com/products/desktop/)。
 
-透過 Parallels Desktop，我們可以在 Mac 上順利地運行 Windows 系統，現在預設安裝的是 Windows 11。
+透過 Parallels Desktop，大家都可以在 Mac 上順利地運行 Windows 系統，現在預設安裝的是 Windows 11。
 
 :::tip
 Apple M1 晶片是 ARM 架構，在剛推出時遇到許多相容性的問題，但過了幾年已經好很多了。
@@ -123,9 +123,7 @@ git --version
 我們使用 pyenv 來管理 Python 版本。
 
 :::tip
-雖然市面上有很多選擇，例如 Anaconda、Miniconda、WinPython 等，但我們還是選擇了 pyenv。
-
-因為我們常在 Linux 上開發，看到 pyenv 就覺得親切。
+雖然市面上有很多選擇，例如 Anaconda、Miniconda、WinPython 等，但基於我的開發習慣，還是選擇了 pyenv。
 :::
 
 在 Windows 上安裝和使用 `pyenv` 通常不是直接進行的，因為 `pyenv` 是為 Unix-like 環境設計的。然而，可以使用 `pyenv-win` 這個項目，它是 `pyenv` 的一個 Windows 端口。
@@ -202,7 +200,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
 最後，我們安裝 Visual Studio Code 作為開發工具。
 
-這邊我們就到 [**VS Code 官網**](https://code.visualstudio.com/Download) 下載安裝程式，然後安裝即可。
+這邊可以到 [**VS Code 官網**](https://code.visualstudio.com/Download) 下載安裝程式，然後安裝就可以了。
 
 <div align="center">
 <figure style={{"width": "70%"}}>
@@ -224,9 +222,9 @@ C:\Users\your_user_name\AppData\Local\Programs\Microsoft VS Code\bin
 
 ## 題外話
 
-其實我們覺得 PowerShell 的展示畫面實在難以直視。
+其實我覺得 PowerShell 的展示畫面實在難以直視。
 
-這個部分我們建議使用 [**oh-my-posh**](https://ohmyposh.dev/) 來美化 PowerShell 的外觀。
+這個部分我會建議使用 [**oh-my-posh**](https://ohmyposh.dev/) 來美化 PowerShell 的外觀。
 
 但這個部分不是本文的重點，有興趣的讀者請查看：
 
@@ -234,6 +232,6 @@ C:\Users\your_user_name\AppData\Local\Programs\Microsoft VS Code\bin
 
 ## 結語
 
-透過 PowerShell，我們可以快速地配置 Python 環境，並安裝開發工具。
+透過 PowerShell 可以快速地配置 Python 環境，並安裝開發工具。
 
 當然，以上僅涵蓋了最基本的配置，留此文章作為參考。

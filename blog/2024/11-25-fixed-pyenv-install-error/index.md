@@ -113,7 +113,7 @@ make: *** Waiting for unfinished jobs....
 
 ### 4. 重裝 binutils
 
-很好，知道錯誤了，那我們就更新一下 binutils：
+很好，知道錯誤了，那就更新一下 binutils：
 
 ```shell
 sudo apt update

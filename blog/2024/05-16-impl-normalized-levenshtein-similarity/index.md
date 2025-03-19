@@ -21,7 +21,7 @@ Levenshtein Similarity，以下我們簡稱為 LS。
 
 然後......
 
-我們總是找不到喜歡的實作，最後決定自己寫一個。
+我總是找不到喜歡的實作，最後決定自己寫一個。
 
 ## 參考資料
 
@@ -29,7 +29,7 @@ Levenshtein Similarity，以下我們簡稱為 LS。
 
 ## 導入必要的庫
 
-首先，我們需要導入一些必要的庫，特別是由 `torchmetrics` 實作的 `EditDistance`：
+首先，需要導入一些必要的庫，特別是由 `torchmetrics` 實作的 `EditDistance`：
 
 ```python
 from typing import Any, Literal, Optional, Sequence, Union
@@ -41,11 +41,11 @@ from torchmetrics.text import EditDistance
 from torchmetrics.utilities.data import dim_zero_cat
 ```
 
-由於 `EditDistance` 已經可以計算 Levenshtein 距離，我們可以直接使用它來計算兩個字串之間的編輯距離。然而，`EditDistance` 並沒有提供標準化的功能，所以我們需要自己實現這一部分。
+由於 `EditDistance` 已經可以計算 Levenshtein 距離，可以直接使用它來計算兩個字串之間的編輯距離。然而，`EditDistance` 並沒有提供標準化的功能，所以需要自己實現這一部分。
 
 ## 實作標準化功能
 
-在這裡，我們繼承 `torchmetrics.metric.Metric` 的介面，所以我們需要實作 `update` 和 `compute` 方法：
+在這裡，我們繼承 `torchmetrics.metric.Metric` 的介面，所以需要實作 `update` 和 `compute` 方法：
 
 ```python
 class NormalizedLevenshteinSimilarity(Metric):
@@ -98,7 +98,7 @@ def update(self, preds: Union[str, Sequence[str]], target: Union[str, Sequence[s
 
 ## 實作 `reduction` 參數
 
-我們還需要保留 `reduction` 參數的發揮空間，如果我們指定 `mean`，那就是常見的 ANLS 分數。
+我們還需要保留 `reduction` 參數的發揮空間，如果指定 `mean`，那就是常見的 ANLS 分數。
 
 除了一般的 `mean`，我們也可以使用 `sum` 或 `none`，來完成不同的需求。
 
@@ -125,7 +125,9 @@ def compute(self) -> torch.Tensor:
     return self._compute(self.nls_score, self.num_elements)
 ```
 
-這裡需要注意的部分是當我們指定 `reduction` 為 `none` 時，我們需要將所有的 NLS 值返回，而不是計算平均值。這邊我參考了 `torchmetrics.text.EditDistance` 的實現方式，使用了 `dim_zero_cat` 來將列表中的值拼接在一起，確保回傳的是一個 `Tensor`。
+這裡需要注意的部分是當我們指定 `reduction` 為 `none` 時，我們需要將所有的 NLS 值返回，而不是計算平均值。
+
+這邊我參考了 `torchmetrics.text.EditDistance` 的實現方式，使用了 `dim_zero_cat` 來將列表中的值拼接在一起，確保回傳的是一個 `Tensor`。
 
 ## 程式碼
 
@@ -288,6 +290,6 @@ if __name__ == "__main__":
 
 ## 最後
 
-我們可以保證這個實作是正確的嗎？
+所以，這個實作可以保證是正確的嗎？
 
-答案是不行，如果你發現了任何問題，請告訴我們，非常感謝！
+答案是不行，如果你發現了任何問題，請告訴我，非常感謝！

@@ -9,7 +9,7 @@ description: 排除更新過程中遇到的問題
 
 Docusaurus 發布了 3.6.0 版本，這個版本主要更新了打包工具，大幅提升編譯速度。
 
-但是我們在更新過程中又壞掉啦！
+但是我在更新過程中又壞掉啦！
 
 <!-- truncate -->
 
@@ -38,7 +38,7 @@ const config = {
 };
 ```
 
-當我們把這個設定加入到我們的 `docusaurus.config.js` 檔案中，就會出現以下錯誤：
+當我把這個設定加入到我們的 `docusaurus.config.js` 檔案中，就會出現以下錯誤：
 
 ```shell
 yarn run v1.22.22
@@ -53,19 +53,19 @@ info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this comm
 
 ---
 
-在看到這個錯誤的當下，我們其實是有點生氣的。
+在看到這個錯誤的當下，我其實是有點生氣的。
 
-這裡就只給我們一個 `Segmentation fault`？是怎樣？要通靈嗎？
+這裡就只給一個 `Segmentation fault`？是怎樣？要通靈嗎？
 
 ## 解決問題
 
-我們在官方的 issue 中也沒有找到相關的解決方案，只好自己手動排查。
+接著，我到官方的 issue 中也沒有找到相關的解決方案，只好自己手動排查。
 
-經過一番查找，我們發現這個問題在於 `_category_.json` 檔案中不能使用中文。
+經過一番查找，發現這個問題在於 `_category_.json` 檔案中不能使用中文。
 
-或者更正確的說，不能「特定」的中文字，至於具體是哪些字會導致錯誤，我們也不清楚。
+或者更正確的說，不能「特定」的中文字，至於具體是哪些字會導致錯誤，我也不清楚。
 
-例如，原本我們其中一個檔案是這樣的：
+例如，原本其中一個檔案是這樣的：
 
 ```json title="_category_.json"
 {
@@ -97,17 +97,17 @@ info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this comm
 
 ## 除此之外
 
-我們意外地發現另外一個錯誤，就是新設定不能支援奇怪字元的檔案名稱。
+我還意外地發現另外一個錯誤，就是新設定不能支援奇怪字元的檔案名稱。
 
-例如，我們原本有一個檔案名稱是：`Bézier`，這裡面有個重音符號，就會導致錯誤。
+例如，原本有一個檔案名稱是：`Bézier`，這裡面有個重音符號，就會導致錯誤。
 
 移除重音符號，就可以正常運行了。
 
 ## 最後
 
-這個特性我們最後決定不採用。
+這個特性我最後決定不採用。
 
-畢竟我們的網站也就這麼一丁點大，編譯速度並不是我們的瓶頸，但是這個特性卻要讓我們修改很多檔案。
+畢竟這個網站也就這麼一丁點大，編譯速度並不是瓶頸，但是這個特性卻要因此而修改很多檔案。
 
 還是改天再來看看吧！
 
@@ -115,7 +115,7 @@ info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this comm
 
 收到官方推送更新的消息了，這次版本更新到 v3.6.2，修復了上面文章提到的問題。
 
-在這個版本中，我們可以順利使用`experimental_faster` 這個設定：
+在這個版本中，可以順利使用`experimental_faster` 這個設定：
 
 ```js title="docusaurus.config.js"
 const config = {
@@ -147,14 +147,14 @@ error Command failed with exit code 134.
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 ```
 
-看起來是 rspack 的問題，我們立刻找到了相關的 issue：
+看起來是 rspack 的問題，找來相關的 issue 看看：
 
 - [**web-infra-dev/rspack: [Bug]:using docusaurus edit mdx or md file, process crash. #8480**](https://github.com/web-infra-dev/rspack/issues/8480)
 
-看來我們不孤單啊！還是再等等吧。
+看來我不孤單啊！還是再等等吧。
 
 ## 2024-11-24 更新
 
 延續上次的問題，這次把版本更新到 v3.6.3。
 
-rspack 的問題已經修復了，我們可以開心愉快地正常使用了！
+rspack 的問題已經修復了，可以開心愉快地正常使用了！

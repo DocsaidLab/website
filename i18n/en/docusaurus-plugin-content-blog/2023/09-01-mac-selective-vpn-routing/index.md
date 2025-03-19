@@ -1,57 +1,57 @@
 ---
 slug: mac-selective-vpn-routing
-title: Setting Up Selective Traffic Routing for VPN on Mac
+title: Configuring Selective Traffic Routing for VPN
 authors: Z. Yuan
-tags: [routing-vpn, macos]
+tags: [vpn-routing, macos]
 image: /en/img/2023/0901.webp
-description: Configuring VPN routing on Mac.
+description: Setting up VPN routing on macOS.
 ---
 
-When working remotely with a company VPN setup, sometimes you still need access to local devices and resources on your home network.
+Working remotely using a company-configured VPN, but still wanting to use other machines on your local network.
 
 <!-- truncate -->
 
 ## Configuration Guide
 
-We’ll use Mac as the operating system for this setup.
+This guide uses macOS as the operating system.
 
-## Problem Overview
+## Problem Description
 
 For example:
 
-- Company VPN network range: 192.168.25.XXX
-- Home network range: 192.168.1.XXX
+- **Company VPN subnet**: 192.168.25.XXX
+- **Home subnet**: 192.168.1.XXX
 
-When the VPN is active, all traffic is routed through the company's network, preventing access to devices on your home network within the same domain.
+When you connect to the VPN, all traffic is routed through the company's subnet, which means you won’t be able to connect to other machines on the same home network.
 
-In other words, even if you're at home streaming a funny video, the company's network admin might inadvertently catch a glimpse too. Something doesn’t feel quite right about this, does it?
+Not only that, but while you were watching a funny video at home, the company’s network administrator might have been laughing along with you. (???)
 
-Our goal here is to **route only the traffic meant for the company network through the VPN, while all other traffic stays on the local network.**
+Something seems off, right?
+
+So what we need to do is: **Route only the company's subnet through the VPN, and let all other traffic use the local network.**
 
 :::tip
-This guide assumes that your VPN is already configured and functioning correctly. Here, we’ll only address the selective routing issue.
+Here, we assume that you've already configured the VPN and it's working correctly, and now we’re only addressing the traffic routing issue.
 
-If the VPN isn’t working, please ensure your VPN settings are correct before proceeding.
+If the VPN isn’t working correctly yet, please check that your VPN settings are properly configured first.
 :::
 
-## Solving the Problem
+## Solution
 
-### Step 1: Identify Your Company’s Internal Network Range
+Step one: First, identify the company’s internal subnet, such as:
 
-First, identify the network range for your company, for example:
+- 192.168.25.XXX
 
-192.168.25.XXX
-
-Next, let’s open a system file to configure routing rules:
+This indicates that you're working with the 25 subnet. Now, let’s open a file:
 
 ```bash
 sudo vim /etc/ppp/ip-up
 ```
 
-Add the following content, replacing the network range with your company’s network range:
+Enter the following content, but be sure to replace it with your actual subnet:
 
 :::warning
-Note: This example assumes the VPN network range is 192.168.25.XXX. Modify according to your actual network setup.
+Please note, this example assumes the VPN subnet is 192.168.25.XXX. Modify it according to your actual setup.
 :::
 
 ```bash
@@ -59,42 +59,50 @@ Note: This example assumes the VPN network range is 192.168.25.XXX. Modify accor
 /sbin/route add -net 192.168.25.0/24 -interface ppp0
 ```
 
-Let’s break down what this command does:
+Let’s explain what the command above does:
 
-1. **/sbin/route**: This is the path to the `route` command, which is used for configuring and displaying routing tables.
-2. **-net 192.168.25.0/24**: This specifies that the route is a network route, not a host route. `192.168.25.0/24` represents the range of IP addresses from `192.168.25.0` to `192.168.25.255`.
-3. **-interface ppp0**: This specifies the network interface for the route, in this case, `ppp0` (point-to-point protocol interface 0).
+1. **/sbin/route**: This is the path to the route command, which is used to configure network routes.
+2. **-net 192.168.25.0/24**: The parameter specifies that this is a network route, not a host route.
+    - 192.168.25.0/24 represents the network address and subnet mask, covering the IP range from 192.168.25.0 to 192.168.25.255.
+3. **-interface ppp0**: Specifies the network interface through which the route should be set.
+    - In this example, it's ppp0 (point-to-point protocol interface 0).
 
-This command effectively adds a route through the `ppp0` interface for the `192.168.25.0/24` network range. When your system tries to access any IP address within this range, it will route the traffic through the `ppp0` interface.
+The whole command adds a route through the ppp0 interface to the 192.168.25.0/24 network.
+
+When your system tries to access any IP address in the 192.168.25.0/24 network, it will route the traffic through the ppp0 interface.
 
 ---
 
-After editing the file, save and exit, then give it the necessary permissions:
+After finishing the setup, save and exit the file, then give the file the correct permissions:
 
 ```bash
 sudo chmod 755 /etc/ppp/ip-up
 ```
 
-## Still Not Working?
+## Is it still not working?
 
-At this point, some devices might still have trouble accessing the internet, so let’s try adjusting the network service order in macOS.
+At this point, some machines may still be unable to access the internet. So, let’s move on:
 
-Open macOS’s System Preferences, and go to Network:
+Open the System Preferences on macOS and go to Network, as shown in the image below:
 
+<div align="center">
 <figure style={{"width": "80%"}}>
 ![vpn-setting](./img/vpn-setting.jpg)
 </figure>
+</div>
 
-- Step 1: Open System Preferences, and select “Network”
-- Step 2: Click the small options button (three dots)
-- Step 3: Select “Set Service Order”
-- Step 4: Drag the VPN service below Wi-Fi in the order
+- Step 1: Open System Preferences and click on "Network."
+- Step 2: Click on the small options button next to the VPN connection.
+- Step 3: Select "Set Service Order."
+- Step 4: Drag the VPN service below Wi-Fi in the list.
 
 ---
 
-Many people set the VPN at the top of the network service order, prioritizing all traffic through the VPN. Here, we’re lowering the VPN service order so that our custom network configuration can take effect.
+Many users, after setting up the VPN, move the VPN service to the top of the list, meaning all traffic is routed through the VPN by default.
 
-That’s it! To route additional traffic through the VPN in the future, simply add the specific addresses in the `ip-up` file.
+So here, we need to move the VPN down, which will allow the network settings above it to take effect.
+
+Once that’s done, you're all set. If you need other traffic to go through the VPN in the future, simply add the necessary routes to the `ip-up` file.
 
 ## References
 

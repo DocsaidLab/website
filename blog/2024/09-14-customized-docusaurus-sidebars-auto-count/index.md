@@ -9,7 +9,7 @@ description: 幫 Sidebar 加點新功能。
 
 Docusaurus 預設提供了功能非常豐富的 Sidebar，但不合用。
 
-這次讓我們動手改一改。
+這次讓我來動手改一改。
 
 <!-- truncate -->
 
@@ -49,11 +49,11 @@ Docusaurus 預設提供了功能非常豐富的 Sidebar，但不合用。
 
 然後每次更新文章，就手動更新數量？
 
-**不行！我們不能寫出這種丟人的程式。**
+**不行！我不能寫出這種丟人的程式。**
 
 ## 參考資料
 
-為了解決這個問題，照慣例，我們往 Docusaurus 的官方文件找找看：
+為了解決這個問題，照慣例，往 Docusaurus 的官方文件找找看：
 
 - [**Docusaurus Sidebar**](https://docusaurus.io/docs/sidebar)
 
@@ -103,7 +103,7 @@ export default sidebars;
 
 ## 實作
 
-我們直接把註解寫在程式碼裡面，如果你有需要，有幾個需要改動的位置需要注意：
+我直接把註解寫在程式碼裡面，如果你有需要，有幾個需要改動的位置需要注意：
 
 1.  第 8 行：`const baseDir = path.join(__dirname, "papers");`
 

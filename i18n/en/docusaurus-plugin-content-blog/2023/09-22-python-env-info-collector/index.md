@@ -1,45 +1,57 @@
 ---
 slug: python-env-info-collector
-title: Recording Model Training Environment Issues
+title: Recording and Troubleshooting Model Training Environment Issues
 authors: Z. Yuan
 tags: [python, training-log]
 image: /en/img/2023/0922.webp
 description: A custom logging tool.
 ---
 
-When a model's training goes awry, we always want to know the reasons behind it. At such times, it's essential to inspect the environment information of the training host, such as Python version, PyTorch version, CUDA version, GPU information, CPU information, RAM information, disk information, IP address, and more.
+I’m sharing a Python tool I created myself.
+
+The main function is to quickly view model training-related information. While it's not a comprehensive tool, it should be enough for basic troubleshooting.
 
 <!-- truncate -->
 
-In this article, we share a custom Python tool we've crafted to swiftly review this information. While it's not exhaustive, it should suffice for basic troubleshooting needs.
+## Introduction
 
-Typically, we record environment information in the training host's logs at the start of training.
+When a model training fails, you'll want to know what caused it. At this point, you’ll need to check the environment information of the training machine, such as Python version, PyTorch version, CUDA version, GPU information, CPU details, RAM stats, disk info, IP address, and more.
+
+It’s quite annoying!
+
+So, we need to write a few programs to help solve the problem. Typically, we’ll log the environment information into the training logs when the training starts, so that when a model fails, we can immediately check the logs.
 
 ## Installation
 
-Let's start by installing the necessary packages:
+First, let's install the necessary packages:
 
 ```bash
 pip install psutil requests
 ```
 
 :::tip
-The complete code is available on GitHub, and we've also included it at the end of this article.
+The complete code is available on GitHub, and I will also include it at the end of this article.
 
 - [**system_info.py**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
   :::
 
-## `get_package_versions`
+## Using `get_package_versions`
 
-Assuming you have installed `capybara` and it's already in your project, you can test it with the following command:
+I integrated the program into `capybara-docsaid`, so you might consider installing it directly:
 
-```python
+```bash
+pip install capybara-docsaid
+```
+
+Once installed, you can call the related functions within your Python program:
+
+```python title="get_package_versions.py"
 from capybara import get_package_versions
 
 get_package_versions()
 ```
 
-Upon execution, you'll receive the following result:
+The output will be:
 
 ```json
 {
@@ -63,17 +75,17 @@ Upon execution, you'll receive the following result:
 - Scikit-learn Version: Scikit-learn version
 - OpenCV Version: OpenCV version
 
-## `get_gpu_cuda_versions`
+## Using `get_gpu_cuda_versions`
 
-Test program:
+Next, let’s record the CUDA version. The program is as follows:
 
-```python
+```python title="get_gpu_cuda_versions.py"
 from capybara import get_gpu_cuda_versions
 
 get_gpu_cuda_versions()
 ```
 
-Upon execution, you'll receive the following result:
+The output will be:
 
 ```json
 {
@@ -85,17 +97,17 @@ Upon execution, you'll receive the following result:
 - CUDA Version: CUDA version
 - NVIDIA Driver Version: NVIDIA driver version
 
-## `get_system_info`
+## Using `get_system_info`
 
-Test program:
+Next, let’s retrieve basic system information. The program is as follows:
 
-```python
+```python title="get_system_info.py"
 from capybara import get_system_info
 
 get_system_info()
 ```
 
-Upon execution, you'll receive the following result:
+The output will be:
 
 ```json
 {
@@ -129,15 +141,15 @@ Upon execution, you'll receive the following result:
 - IPV4 Address (External): External IPV4 address
 - MAC Address: MAC address
 
-## Considerations and Alternatives
+## Notes and Alternatives
 
-Since we're writing this function on Ubuntu, there might be unexpected developments on other operating systems.
+My system environment is Ubuntu, so if you're running this on a different operating system, there may be some discrepancies.
 
 Here are a few points to note:
 
-- Due to OS limitations, some functions may not run on all platforms. For example, `get_cpu_info` won't display the complete CPU model on Windows. In such cases, consider using other tools or manually obtaining this information.
-- If you're on Windows, you can't directly use `nvidia-smi` to get GPU information. Make sure you have NVIDIA drivers and related tools installed and execute it in a command prompt window.
-- External IP address is fetched from `https://httpbin.org/ip`, so ensure an active internet connection.
+- Due to operating system restrictions, some functions might not work on all platforms. For example, `get_cpu_info` won’t show the full CPU model on Windows. In such cases, you can consider using other tools or manually obtaining this information.
+- If you’re in a Windows environment, you cannot directly use `nvidia-smi` to get GPU information. Ensure you have installed NVIDIA drivers and related tools, and execute them in the command prompt.
+- The external IP address is obtained from `https://httpbin.org/ip`, so ensure your network connection is working smoothly.
 
 ## Code
 

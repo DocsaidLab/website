@@ -7,19 +7,19 @@ image: /en/img/2023/1012.webp
 description: Documenting the process of assembling a new computer.
 ---
 
-We suddenly decided to buy a new computer.
+I suddenly thought about buying a new computer.
 
-The main reason? To use an RTX 4090 for model training.
+Not for any particular reason, just to use the RTX 4090 for training models.
 
 <!-- truncate -->
 
 ## Disclaimer
 
-We were busy and decided to build a training rig, so we documented the process.
+Recently, I've been busy for a while, putting together a machine for training purposes, and I thought I’d leave a record of the process.
 
-1. If you assemble a computer based on this documentation and encounter any issues or losses, we are not responsible.
-2. This article is for personal documentation purposes only and is not intended as a recommendation or advertisement.
-3. All products or brands mentioned in the article are for documentation purposes only and do not represent any commercial cooperation or endorsement.
+1. If you decide to assemble a machine based on this record and encounter any problems or incur any losses, it's not my responsibility.
+2. This article is solely for personal record-keeping and has no intention of recommending or advertising anything.
+3. All the products or brands mentioned in this article are for record-keeping purposes and do not imply any commercial partnership or endorsement.
 
 ## Purchase Details
 

@@ -1,13 +1,13 @@
 ---
 slug: fail2ban-settings
-title: "Fail2ban: Protecting SSH Service"
+title: "Fail2ban: Protecting SSH Services"
 authors: Z. Yuan
 tags: [ubuntu, fail2ban]
 image: /en/img/2023/0903.webp
-description: Keeping the malicious out.
+description: Block all the malicious access outside.
 ---
 
-As soon as you successfully open an external SSH channel, you'll notice a barrage of malicious connections attempting to log into your host.
+After you successfully open an external SSH channel, you’ll immediately notice a bunch of malicious connections trying to log into your machine.
 
 <!-- truncate -->
 
@@ -15,20 +15,20 @@ As soon as you successfully open an external SSH channel, you'll notice a barrag
 <figure style={{"width": "40%"}}>
 ![attack from ssh](./img/ban_1.jpg)
 </figure>
-<figcaption>Malicious Attack Illustration</figcaption>
+<figcaption>Illustration of a malicious attack</figcaption>
 </div>
 
 ---
 
-Common practice is to use Fail2ban to protect our host. It's software designed to protect servers from brute force attacks.
+A common approach is to use Fail2ban to protect our host. This is a software that prevents servers from brute-force attacks.
 
-It automatically adjusts firewall rules to block attackers' IP addresses when suspicious behavior, such as repeated login failures, occurs.
+When the system detects suspicious activity (e.g., repeated failed login attempts), Fail2ban automatically modifies firewall rules to block the attacker's IP address.
 
-## 1. Installation of Fail2ban
+## 1. Install Fail2ban
 
-On most Linux distributions, you can install Fail2ban using package management tools.
+On most Linux distributions, you can use a package manager to install Fail2ban.
 
-On Ubuntu, you can use apt to install:
+Since my host is Ubuntu, I’ll use apt to install it:
 
 ```bash
 sudo apt install fail2ban
@@ -38,7 +38,9 @@ sudo apt install fail2ban
 
 The configuration file is located at `/etc/fail2ban/jail.conf`.
 
-It's recommended not to modify this file directly but to make a copy named `jail.local` and edit it:
+But wait!
+
+Instead of directly modifying this file, copy it to `jail.local` and modify that:
 
 ```bash
 sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
@@ -50,12 +52,12 @@ Edit `jail.local`:
 sudo vim /etc/fail2ban/jail.local
 ```
 
-**Important configuration parameters:**
+This file contains several important configuration parameters with the following corresponding functions:
 
-- **ignoreip:** Ignored IP addresses or networks, e.g., 127.0.0.1/8
-- **bantime:** Duration of the ban in seconds (default is 600 seconds)
-- **findtime:** How many failures within this time frame (default is 600 seconds)
-- **maxretry:** Maximum number of failed attempts allowed within findtime.
+- **ignoreip:** IP addresses or ranges to ignore, e.g., 127.0.0.1/8
+- **bantime:** Block time in seconds (default is 600 seconds)
+- **findtime:** Time period to observe how many failed attempts (default is 600 seconds)
+- **maxretry:** Maximum number of allowed failed attempts within the `findtime` period.
 
 ## 3. Start and Monitor
 
@@ -65,15 +67,15 @@ Start Fail2ban:
 sudo service fail2ban start
 ```
 
-Check Fail2ban's status:
+Check the status of Fail2ban:
 
 ```bash
 sudo fail2ban-client status
 ```
 
-## 4. Adding Custom Rules
+## 4. Add Custom Rules
 
-If you want to set specific rules for particular services (e.g., SSH or Apache), you can add or modify corresponding sections in `jail.local`, for example, SSH settings:
+If you want to set specific rules for a particular service, you can add or modify the corresponding section in `jail.local`, such as for SSH:
 
 ```bash
 [sshd]
@@ -84,26 +86,34 @@ logpath = /var/log/auth.log
 maxretry = 3
 ```
 
-## 5. Testing
+## 5. Test
 
-After making configuration changes, restart Fail2ban to apply the changes:
+After making changes to the configuration, restart Fail2ban to apply the changes:
 
 ```bash
 sudo service fail2ban restart
 ```
 
-Then, from another machine or using a different IP, attempt multiple failed logins to see if it gets blocked.
+Then, test from another machine or use a different IP to attempt multiple failed logins and see if it gets blocked.
 
-## 6. Review
+## 6. View
 
-Ensure to periodically check log files and update rules for the best protection.
+Make sure to regularly check the log files and update rules for optimal protection.
 
 ```bash
 sudo fail2ban-client status sshd
 ```
 
+## 7. Unban
+
+If you were blocked during testing, remember to unban your test IP:
+
+```bash
+sudo fail2ban-client set sshd unbanip <IP_ADDRESS>
+```
+
 ## Conclusion
 
-The entire process is somewhat meticulous but not overly complex.
+The entire process is a bit tedious, but not complicated.
 
-Hopefully, this guide helps you smoothly complete the setup.
+I hope this article helps you successfully complete the relevant configuration.

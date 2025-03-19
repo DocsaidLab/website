@@ -1,15 +1,15 @@
 ---
 slug: ubuntu-github-runner-systemd
-title: GitHub Runner の自動実行
+title: GitHub Runnerの自動実行
 authors: Z. Yuan
 tags: [github-action, runner]
 image: /ja/img/2023/0910.webp
-description: Ubuntu Systemd を使ってバックグラウンドで実行し、自動起動を実現する。
+description: UbuntuのSystemdを使ってバックグラウンドで自動実行する方法。
 ---
 
-GitHub を使用してコラボレーションを行う際、プライベートサーバーを利用して CI/CD を実行することがよくあります。
+GitHubで協力して作業を行う際、プライベートサーバーを使ってCI/CDを行うことがよくあります。
 
-この部分について、GitHub では初期設定の方法を説明するドキュメントが提供されており、その手順に従えば設定が完了します。
+GitHubではこの設定方法についてのドキュメントが提供されており、その手順に従えば簡単に設定が完了します。
 
 <!-- truncate -->
 
@@ -22,19 +22,17 @@ GitHub を使用してコラボレーションを行う際、プライベート�
 
 ## 問題の説明
 
-しかし、しばらくして、何らかの理由でサーバーが再起動されると、Runner が自動的に起動しないという問題が発生しました。
+しかし、サーバーが再起動されるたびに、もし設定をしていなければ、Runnerサービスは永遠に停止したままになります。そのまま放置しておくと、反応がなくなったり、クレームが来たりするまで、何日も気づかないことがあります。
 
-この問題は忘れられがちで、CI/CD が機能していないことに気づく頃には数日が経過していることもあります。
+このようなことが何度も繰り返されて、非常に煩わしいことになります！
 
-こうした問題が繰り返し発生し、非常に困ります。
-
-そのため、自動的に起動する仕組みが必要です！
+そこで、私たちは自動実行が必要です！
 
 ## 設定手順
 
-サーバー起動後にタスクを自動的に実行するには、systemd を使用する必要があります。
+サーバーの起動時に特定のタスクを自動実行させるためには、systemdを使用します。
 
-1. **新しい systemd サービスファイルを作成します：**
+1. **新しいsystemdサービスファイルを作成する：**
 
    ```bash
    sudo vim /etc/systemd/system/actions-runner.service
@@ -42,7 +40,7 @@ GitHub を使用してコラボレーションを行う際、プライベート�
 
 2. **以下の内容をファイルに貼り付けます：**
 
-   ```bash {7-9}
+   ```bash {7-9} title="/etc/systemd/system/actions-runner.service"
    [Unit]
    Description=GitHub Action Runner
    After=network.target
@@ -59,43 +57,43 @@ GitHub を使用してコラボレーションを行う際、プライベート�
    WantedBy=multi-user.target
    ```
 
-   特に注意すべき部分：
+   色で強調されている部分に注意してください：
 
-   - `User`、`ExecStart`、`WorkingDirectory` を自身のユーザー名に変更してください。
+   - `User`、`ExecStart`、`WorkingDirectory`は自分のユーザー名に変更してください。
 
-3. **systemd に新しいサービス設定を読み込ませます：**
+3. **systemdに新しいサービス設定を読み込ませる：**
 
    ```bash
    sudo systemctl daemon-reload
    ```
 
-4. **このサービスを有効にして、起動時に自動実行されるようにします：**
+4. **このサービスを有効にし、サーバー起動時に自動的に起動するように設定します：**
 
    ```bash
    sudo systemctl enable actions-runner.service
    ```
 
-5. **サービスを手動で起動するか、再起動してテストします：**
+5. **サービスを手動で開始するか、再起動してテストします：**
 
    ```bash
    sudo systemctl start actions-runner.service
    ```
 
-この方法を使用すると、サーバーが起動すると同時に actions-runner が自動的にバックグラウンドで実行されます。
+この方法を使うことで、サーバー起動時に`actions-runner`がバックグラウンドで自動的に実行されます。
 
-サービスを停止したい場合は、次のコマンドを使用します：
+サービスを停止したい場合は、以下のコマンドを使用します：
 
 ```bash
 sudo systemctl stop actions-runner.service
 ```
 
 :::warning
-`run.sh` に実行権限があることを確認してください。
+`run.sh`が実行可能な権限を持っていることを確認してください。
 :::
 
-## 状態の確認
+## ステータスの確認
 
-systemd を使用してサービスを管理する場合、ログを確認して動作状況を把握することができます。
+systemdでサービスを管理している場合、ログを確認してその動作状況を把握できます。
 
 以下のコマンドを使用してください：
 
@@ -103,18 +101,18 @@ systemd を使用してサービスを管理する場合、ログを確認して
 sudo journalctl -u actions-runner.service -f
 ```
 
-説明：
+パラメータの説明：
 
-- `-u actions-runner.service`：actions-runner という名前のサービスのログのみを表示します。
-- `-f`：リアルタイムで最新のログを追跡します。
+- `-u actions-runner.service`：`actions-runner`サービスのログのみを表示します。
+- `-f`：このオプションを使用すると、`journalctl`が新しいログをリアルタイムで追跡し、最新の出力を見ることができます。
 
-また、サービスの現在の状態を確認するには：
+また、サービスの現在の状態を確認したい場合は、以下のコマンドを使用できます：
 
 ```bash
 sudo systemctl status actions-runner.service
 ```
 
-これにより、`actions-runner` サービスの現在の状態、稼働状況、最近のログ出力が表示されます：
+これにより、`actions-runner`サービスの現在の状態や、実行中かどうか、最新のログ出力が表示されます：
 
 <div align="center">
 <figure style={{"width": "80%"}}>
@@ -124,12 +122,17 @@ sudo systemctl status actions-runner.service
 
 ## 再設定
 
-もし Runner が失われた場合、通常はリポジトリの公開/非公開の切り替え、または Runner の長期間の非稼働が原因です。この場合、Runner を再設定する必要があります。
+これは余談ですが、自動実行とは関係ありません。
 
-その際、actions-runner フォルダー内の `.runner` ファイルを削除し、再度実行してください：
+元々のRunnerが消えてしまった場合（通常はリポジトリをPublicとPrivateに切り替えたときなど）や、Runnerが長期間呼び出されていなかった場合、要するにRunnerを紛失した場合があります！
 
-```bash
-./config.sh --url ... （新しいトークンで設定）
-```
+この場合、再設定が必要です：
 
-他の手順は同じで、設定が完了したらサービスを再起動すれば問題ありません。
+1. GitHubアカウントから新しいTokenを取得します。
+2. actions-runnerディレクトリ（おそらく自分で設定した別の名前のディレクトリ）に戻り、`.runner`ファイルを削除し、設定コマンドを実行します：
+
+   ```bash
+   ./config.sh --url ... (新しいTokenで設定)
+   ```
+
+他の手順はそのままで、設定が完了したらサービスを再起動するだけです。

@@ -7,7 +7,7 @@ image: /img/2023/0910.webp
 description: 用 Ubuntu Systemd 在背景執行並自動運行。
 ---
 
-在使用 Github 協作的過程中，我們常會使用到私有主機來進行 CI / CD 的工作。
+在使用 Github 協作的過程中，我們常會使用到私有主機來進行 CI/CD 的工作。
 
 這個部分在 Github 中有提供說明文件，告訴使用者該如何進行初步的安裝，依照步驟做完就可以配置成功。
 
@@ -22,9 +22,7 @@ description: 用 Ubuntu Systemd 在背景執行並自動運行。
 
 ## 問題描述
 
-然而，在不久之後，因為某些原因，主機被重新啟動，但是 Runner 卻沒有自動啟動。
-
-這件事情就這樣被忘記，直到有人發現 CI / CD 沒有反應，這時可能已經過了好幾天。
+但是你的主機總會需要重新啟動，如果這時沒有做設定，Runner 的服務會永遠的沈睡下去。然後這件事情就這樣被忘記，直到有人發現沒反應或被客訴，這時可能已經過了好幾天。
 
 這種事情會一而再，再而三的發生，不堪其擾！
 
@@ -32,7 +30,7 @@ description: 用 Ubuntu Systemd 在背景執行並自動運行。
 
 ## 配置流程
 
-要在主機開機後自動執行某個任務，我們得使用 systemd 來做。
+要在主機開機後自動執行某個任務，可以使用 systemd 來做。
 
 1. **建立一個新的 systemd 服務檔案：**
 
@@ -42,7 +40,7 @@ description: 用 Ubuntu Systemd 在背景執行並自動運行。
 
 2. **貼上以下的內容到檔案中：**
 
-   ```bash {7-9}
+   ```bash {7-9} title="/etc/systemd/system/actions-runner.service"
    [Unit]
    Description=GitHub Action Runner
    After=network.target
@@ -59,7 +57,7 @@ description: 用 Ubuntu Systemd 在背景執行並自動運行。
    WantedBy=multi-user.target
    ```
 
-   特殊顏色匡起來的地方要注意：
+   用顏色匡起來的地方要注意：
 
    - `User`、`ExecStart` 與 `WorkingDirectory` 要改成你自己的使用者名稱。
 
@@ -90,7 +88,7 @@ sudo systemctl stop actions-runner.service
 ```
 
 :::warning
-請你要確保 `run.sh` 具有可執行的權限。
+要記得要確保 `run.sh` 具有可執行的權限。
 :::
 
 ## 查看狀態
@@ -103,7 +101,7 @@ sudo systemctl stop actions-runner.service
 sudo journalctl -u actions-runner.service -f
 ```
 
-解釋一下：
+解釋一下參數：
 
 - `-u actions-runner.service`：只查看名為 actions-runner 的服務的日誌。
 - `-f`：這個參數讓 journalctl 持續追踪最新的日誌，所以你可以實時看到新的輸出。
@@ -124,12 +122,17 @@ sudo systemctl status actions-runner.service
 
 ## 重新配置
 
-如果是原本的 Runner 不見了，通常會是在切換儲存庫的 Public 和 Private 的時候，或是原本 Runner 太久沒有調用，總之就是原本的 Runner 弄丟了，這時候就需要重新配置。
+這邊是題外話，跟自動運行無關。
 
-這時候，就到 actions-runner 資料夾底下，把 `.runner` 檔案刪掉，再重新跑一次：
+如果是原本的 Runner 不見了（通常會是在切換儲存庫的 Public 和 Private 的時候），或是原本 Runner 太久沒有調用，總之就是弄丟了！
 
-```bash
-./config.sh --url ... (改成新的 Token 配置)
-```
+這時候就需要重新配置：
+
+1. 到你的 github 帳號上取得一組新的 Token。
+2. 回到你的 actions-runner 資料夾底下（可能是其他你自己取的名稱），把 `.runner` 檔案刪掉，再執行配置指令：
+
+   ```bash
+   ./config.sh --url ... (改成新的 Token 配置)
+   ```
 
 其他流程都一樣，配置完之後，把服務重新啟動就好。

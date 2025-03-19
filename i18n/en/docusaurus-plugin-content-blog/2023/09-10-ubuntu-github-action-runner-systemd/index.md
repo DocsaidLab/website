@@ -1,13 +1,15 @@
 ---
 slug: ubuntu-github-runner-systemd
-title: Automating GitHub Runner with Systemd
+title: Auto-Run GitHub Runner
 authors: Z. Yuan
 tags: [github-action, runner]
 image: /en/img/2023/0910.webp
-description: Running automatically with Ubuntu Systemd.
+description: Run and automatically start in the background using Ubuntu Systemd.
 ---
 
-In collaborative development on GitHub, we often use private hosts to manage CI/CD workflows. GitHub provides documentation for setting up a self-hosted runner, and by following these steps, you can get the runner up and running quickly.
+When collaborating with GitHub, we often use private hosts for CI/CD tasks.
+
+GitHub provides documentation to guide users through the initial installation steps, and following the steps will successfully configure the setup.
 
 <!-- truncate -->
 
@@ -15,28 +17,30 @@ In collaborative development on GitHub, we often use private hosts to manage CI/
 <figure style={{"width": "80%"}}>
 ![github_set_runner](./img/github_set_runner.jpg)
 </figure>
-<figcaption>Documentation Screenshot</figcaption>
+<figcaption>Documentation</figcaption>
 </div>
 
-## The Issue
+## Problem Description
 
-However, after setup, if the host machine is restarted for any reason, the runner does not automatically start. Often, this issue goes unnoticed until someone realizes that CI/CD jobs have stopped running, sometimes several days later.
+However, your host will often need to reboot. If no configuration is set up, the Runner service will fall asleep indefinitely. This issue can be forgotten until someone notices there’s no response or receives a complaint, which may have already been days later.
 
-This situation can happen repeatedly and become quite a nuisance. So, to prevent this, we need to configure the runner to start automatically on boot!
+This kind of problem can happen repeatedly and become very annoying!
 
-## Setup Process
+Therefore, we need to make it run automatically!
 
-To automatically run a task on system startup, we’ll use `systemd`.
+## Configuration Process
 
-1. **Create a New `systemd` Service File:**
+To automatically run a task after the host boots, we can use systemd.
+
+1. **Create a new systemd service file:**
 
    ```bash
    sudo vim /etc/systemd/system/actions-runner.service
    ```
 
-2. **Paste the Following Content into the File:**
+2. **Paste the following content into the file:**
 
-   ```bash {7-9}
+   ```bash {7-9} title="/etc/systemd/system/actions-runner.service"
    [Unit]
    Description=GitHub Action Runner
    After=network.target
@@ -53,62 +57,62 @@ To automatically run a task on system startup, we’ll use `systemd`.
    WantedBy=multi-user.target
    ```
 
-   Pay close attention to the following fields:
+   Pay attention to the highlighted areas:
 
-   - `User`, `ExecStart`, and `WorkingDirectory` should be updated with your specific username.
+   - `User`, `ExecStart`, and `WorkingDirectory` should be changed to your own username.
 
-3. **Reload `systemd` to Apply the New Service Configuration:**
+3. **Tell systemd to reload the new service configuration:**
 
    ```bash
    sudo systemctl daemon-reload
    ```
 
-4. **Enable the Service to Start on Boot:**
+4. **Enable the service so it starts automatically when the host boots:**
 
    ```bash
    sudo systemctl enable actions-runner.service
    ```
 
-5. **Start the Service Manually or Reboot to Test:**
+5. **Now you can manually start the service or reboot to test it:**
 
    ```bash
    sudo systemctl start actions-runner.service
    ```
 
-With this setup, the `actions-runner` will automatically run in the background whenever your machine boots.
+With this method, the actions-runner will automatically run in the background when your host boots.
 
-To stop the service, you can use the following command:
+If you want to stop the service, you can use the following command:
 
 ```bash
 sudo systemctl stop actions-runner.service
 ```
 
 :::warning
-Ensure that `run.sh` has executable permissions.
+Make sure that `run.sh` has executable permissions.
 :::
 
-## Checking Service Status
+## Check the Status
 
-With `systemd` managing the service, you can check the logs to monitor the runner’s status.
+When managing a service with systemd, you can check the logs to understand its current status.
 
-Use the following command to view logs:
+Use the following command:
 
 ```bash
 sudo journalctl -u actions-runner.service -f
 ```
 
-Explanation:
+Explanation of the parameters:
 
-- `-u actions-runner.service`: Displays logs for the `actions-runner` service only.
-- `-f`: Follows the log output, allowing you to monitor new entries in real-time.
+- `-u actions-runner.service`: Only show logs for the service named actions-runner.
+- `-f`: This option makes journalctl follow the latest logs, so you can see the new output in real time.
 
-If you want to check the service’s current status, use:
+Additionally, if you want to check the current status of the service, you can use:
 
 ```bash
 sudo systemctl status actions-runner.service
 ```
 
-This command displays the current status of the `actions-runner` service, including whether it’s running and recent log output:
+This will display the current status of the `actions-runner` service, including whether it's running and the most recent log output:
 
 <div align="center">
 <figure style={{"width": "80%"}}>
@@ -116,14 +120,19 @@ This command displays the current status of the `actions-runner` service, includ
 </figure>
 </div>
 
-## Reconfiguring the Runner
+## Reconfigure
 
-If the original runner configuration is missing, this might occur when switching the repository’s visibility between Public and Private, or if the runner has been inactive for a long time. In such cases, you’ll need to reconfigure the runner.
+This part is off-topic and unrelated to auto-running.
 
-To do this, go to the `actions-runner` directory, delete the `.runner` file, and re-run the configuration script:
+If the original Runner is missing (usually due to switching a repository between Public and Private), or the Runner hasn’t been invoked in a long time and got lost!
 
-```bash
-./config.sh --url ... (use the new token configuration)
-```
+In this case, you’ll need to reconfigure:
 
-After completing the setup, restart the service to ensure everything is running smoothly.
+1. Obtain a new Token from your GitHub account.
+2. Go to your actions-runner folder (or another folder you named) and delete the `.runner` file, then run the configuration command:
+
+   ```bash
+   ./config.sh --url ... (use the new Token configuration)
+   ```
+
+The other steps are the same, and after configuring, just restart the service.

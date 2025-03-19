@@ -7,9 +7,9 @@ tags: [python, google-drive, download]
 description: 小檔案，大檔案，都可以下載。
 ---
 
-我們寫了個 Python 程式，想要從 Google Drive 下載檔案，但有時候可以順利工作，有時候卻只拿到了一個莫名其妙的 HTML...？
+我寫了個 Python 程式，想要從 Google Drive 下載檔案，但有時候可以順利工作，有時候卻只拿到了一個莫名其妙的 HTML...？
 
-肯定是程式有問題，我們得改一改。
+肯定是程式有問題，必須改一改。
 
 <!-- truncate -->
 
@@ -204,7 +204,7 @@ download_from_google(
 
 ## 指令列工具
 
-或是你希望可以直接用指令列來操作，那我們可以加一段程式來包裝一下：
+或是你希望可以直接用指令列來操作，那可以加一段程式來包裝一下：
 
 ```python title="download_from_google_cli.py"
 from download_from_google import download_from_google
@@ -234,6 +234,6 @@ python download_from_google_cli.py \
 
 沒有意外的話，它就會自動開始下載檔案並顯示進度條。
 
-我們測試了 70MB 和 900MB 的檔案，都能正常下載，至於 900GB 的檔案...（🤔 🤔 🤔）
+我自己測試了 70MB 和 900MB 的檔案，都能正常下載，至於 900GB 的檔案...（🤔 🤔 🤔）
 
-沒試過，我們手邊也沒有這麼大的檔案，改天有遇到再來更新吧！
+沒試過，我手邊也沒有這麼大的檔案，改天有遇到再來更新吧！

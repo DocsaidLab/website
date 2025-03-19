@@ -7,18 +7,20 @@ image: /img/2023/0902.webp
 description: Unicode 編碼區段表，方便查詢。
 ---
 
-Unicode 是一個由非營利組織 Unicode 聯盟所維護的國際性字元編碼標準。該標準統一了世界上大部分的文字系統，實現跨平臺和多語言環境下的資訊交流。
+有鑒於我每次需要查找 Unicode 編碼時，總是得花費半小時去把 wiki 的資料表翻出來，所以還是把一些基本的資訊儲存起來吧。
 
 <!-- truncate -->
 
-在 Unicode 標準中，每個字元都對應到一個唯一的數字代碼，這個代碼被稱為「區段」（Code Point）。區段是 Unicode 標準中一個重要的概念，用於確定每個獨特字元的位置。區段範圍從 `U+0000` 到 `U+10FFFF`，這意味著它可以容納 1,114,112 個不同的字元。
+## 什麼是 Unicode？
+
+Unicode 是一個由非營利組織 Unicode 聯盟所維護的國際性字元編碼標準。該標準統一了世界上大部分的文字系統，實現跨平臺和多語言環境下的資訊交流。
+
+在 Unicode 標準中，每個字元都對應到一個唯一的數字代碼，這個代碼被稱為「區段」（Code Point）。區段是 Unicode 標準中一個重要的概念，用於確定每個獨特字元的位置，區段範圍從 `U+0000` 到 `U+10FFFF`。
 
 這些區段按照不同的功能和用途被劃分成多個子集，例如：
 
 - **基本多文種平面（Basic Multilingual Plane, BMP）**：包括了拉丁字母、希臘字母、漢字等常用字元。
 - **補充平面（Supplementary Planes）**：包括了更多的象形文字、補充字元等。
-
-有鑒於我們每次需要查找 Unicode 編碼時，總是得花費半小時去把 wiki 的資料表翻出來，所以還是把一些基本的資訊儲存起來吧。
 
 :::tip
 如果你有更近一步的需求，我們還是推薦你去查原始表格：[**Unicode 區段**](https://zh.wikipedia.org/zh-tw/Unicode%E5%8D%80%E6%AE%B5)
@@ -26,8 +28,8 @@ Unicode 是一個由非營利組織 Unicode 聯盟所維護的國際性字元編
 
 ## 參考資料
 
-- [Unicode 字元平面對映](https://zh.wikipedia.org/zh-tw/Unicode%E5%AD%97%E7%AC%A6%E5%B9%B3%E9%9D%A2%E6%98%A0%E5%B0%84)
-- [Unicode 區段](https://zh.wikipedia.org/zh-tw/Unicode%E5%8D%80%E6%AE%B5)
+- [**Unicode 字元平面對映**](https://zh.wikipedia.org/zh-tw/Unicode%E5%AD%97%E7%AC%A6%E5%B9%B3%E9%9D%A2%E6%98%A0%E5%B0%84)
+- [**Unicode 區段**](https://zh.wikipedia.org/zh-tw/Unicode%E5%8D%80%E6%AE%B5)
 
 ## Unicode 區段表
 

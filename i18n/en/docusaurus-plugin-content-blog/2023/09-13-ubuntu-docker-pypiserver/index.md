@@ -1,15 +1,17 @@
 ---
 slug: setting-up-pypiserver-on-ubuntu-with-docker
-title: Setting Up PyPiServer on Ubuntu
+title: Setting Up PyPiServer on Ubuntu with Docker
 authors: Z. Yuan
 tags: [docker, pypiserver]
 image: /en/img/2023/0913.webp
-description: Setting up PyPiServer on Ubuntu using Docker.
+description: Recording the process of setting up PyPiServer on Ubuntu.
 ---
 
-Today, we’ll document the process of setting up a PyPi Server using Docker on Ubuntu.
+Recently, I set up a PyPi Server to host my package installation files. I used an Ubuntu system with Docker for the setup, and I’ll document the process here.
 
-We assume you have Docker installed on Ubuntu and are familiar with basic Docker operations.
+:::tip
+I assume the reader already has Docker installed on Ubuntu and is familiar with basic Docker operations. If not, you might want to first review related knowledge.
+:::
 
 <!-- truncate -->
 
@@ -19,23 +21,23 @@ We assume you have Docker installed on Ubuntu and are familiar with basic Docker
 docker pull pypiserver/pypiserver:latest
 ```
 
-## Create a Directory
+## Create Directory
 
-Let’s quickly create a directory in the home directory to store Python packages.
+No need for much explanation, simply create a directory under your home directory to store Python packages.
 
 ```bash
 mkdir ~/packages
 ```
 
-You can use a different name if you prefer, but remember to adjust it in the configuration files.
+You can choose your preferred name, but make sure to update the configuration files accordingly.
 
-## Set up htpasswd
+## Set Up htpasswd
 
 :::tip
-If you don’t want to set a password, you can skip this step.
+If you don’t want to set up a password, you can skip this step.
 :::
 
-htpasswd is a file format for storing usernames and passwords, which pypiserver uses for user authentication. This is a simple and effective way to enhance pypiserver’s security.
+htpasswd is a file format used to store usernames and passwords, which PyPiServer uses for user authentication. This is a simple yet effective way to enhance PyPiServer's security.
 
 First, install `apache2-utils`:
 
@@ -49,40 +51,36 @@ Then, use the following command to create a new `.htpasswd` file:
 htpasswd -c ~/.htpasswd [username]
 ```
 
-You will be prompted to enter a password for `username`. After entering the password, the `.htpasswd` file will be created in your home directory.
+It will prompt you to enter the password for `username`. After entering the password, the `.htpasswd` file will be created in your home directory. Once the file is created, we can run `pypiserver` with the `docker run` command and use the `.htpasswd` file for authentication.
 
-Once the file is created, you can run `pypiserver` with the `docker run` command and enable authentication with the `.htpasswd` file.
+## Mount as a Background Service
 
-## Run as a Background Service
+To run the Docker container as a background service, we will use Docker Compose and Systemd.
 
-To run the Docker container as a background service, we’ll use Docker Compose with Systemd.
-
-### Install Docker Compose
-
-If you haven’t installed Docker Compose, start by doing so:
+If you haven't installed Docker Compose yet, follow the installation instructions:
 
 - [**Official Docker Compose Installation Guide**](https://docs.docker.com/compose/install/)
 
-Docker Compose has recently undergone major updates, changing many commands. Notably, `docker-compose` has been replaced by `docker compose`.
+Note that Docker Compose has undergone significant updates recently, and many commands have changed. The most notable change is that the previously used `docker-compose` command is now simply `docker compose`.
 
-Install the latest version of Docker Compose:
+To install the latest version of Docker Compose, follow these steps:
 
 ```bash
 sudo apt update
 sudo apt install docker-compose-plugin
 ```
 
-Verify the installation:
+Check if Docker Compose is installed correctly:
 
 ```bash
 docker compose version
 ```
 
-### Create a Configuration File
+### Create Configuration File
 
-Find a location to create the `docker-compose.yml` file and add the following content:
+Create a `docker-compose.yml` file in a convenient location and add the following content:
 
-```yaml
+```yaml {6-7} title="docker-compose.yml"
 version: "3.3"
 services:
   pypiserver:
@@ -95,22 +93,22 @@ services:
       - "8080:8080"
 ```
 
-- Replace `[username]` with your actual username.
-- You can modify the external port mapping if needed, for example: `"18080:8080"`.
+- Make sure to replace `[username]` with your actual username.
+- You can modify the external port mapping, for example: `"18080:8080"`.
 
 :::tip
-You can refer to `pypiserver`’s example file here: [**docker-compose.yml**](https://github.com/pypiserver/pypiserver/blob/master/docker-compose.yml)
+You can refer to the example provided by `pypiserver` here: [**docker-compose.yml**](https://github.com/pypiserver/pypiserver/blob/master/docker-compose.yml)
 :::
 
-If you want to skip setting a password, modify the `command` line as follows:
+If you don’t want to set up a password for authentication, modify the `command` line in the `docker-compose.yml` file as follows:
 
 ```yaml
 command: run -a . -P . /data/packages --server wsgiref
 ```
 
-### Set up a Systemd Service
+### Create Systemd Service
 
-Create a configuration file:
+Create a configuration file for the service:
 
 ```bash
 sudo vim /etc/systemd/system/pypiserver.service
@@ -118,7 +116,7 @@ sudo vim /etc/systemd/system/pypiserver.service
 
 Add the following content:
 
-```bash
+```bash {7} title="/etc/systemd/system/pypiserver.service"
 [Unit]
 Description=PypiServer Docker Compose
 Requires=docker.service
@@ -134,13 +132,12 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-- Replace `/path/to/your/docker-compose/directory` with the actual path to the `docker-compose.yml` file (only the path, not the filename).
-- Ensure the Docker path is correct by using `which docker` to confirm.
-- This setup uses the new `docker compose` command instead of `docker-compose`.
+- Make sure to replace `/path/to/your/docker-compose/directory` with the actual path where your `docker-compose.yml` file is located, without the filename.
+- Verify that the Docker path is correct by using `which docker` if needed.
 
 ### Start the Service
 
-Let systemd know about the new service configuration:
+Tell systemd to reload the new service configuration:
 
 ```bash
 sudo systemctl daemon-reload
@@ -161,38 +158,42 @@ To check the current status of the service, use:
 sudo systemctl status pypiserver.service
 ```
 
-This will display the current status of the `pypiserver` service, including whether it’s running and the latest log output.
+This will show the current status of the `pypiserver` service, including whether it is running and the most recent log output.
 
-## Start Using the Server
+<div align="center">
+<figure style={{"width": "80%"}}>
+![pypiserver status](./img/pypiserver.jpg)
+</figure>
+</div>
 
-You can now use `pip` to install and upload packages.
+## Get Started
 
-### Uploading Packages
+Now, you can start using `pip` to install and upload packages.
 
-Let’s say you have a package named `example_package-0.1-py3-none-any.whl`.
+### Upload a Package
 
-Use `twine` to upload the package:
+Let’s assume we have a package named `example_package-0.1-py3-none-any.whl`. Use `twine` to upload the package:
 
 ```bash
 pip install twine
 twine upload --repository-url http://localhost:8080/ example_package-0.1-py3-none-any.whl
 ```
 
-- Make sure that `localhost:8080` is the address and port of your pypiserver.
+- Make sure that `localhost:8080` is the correct address and port of your PyPiServer.
 
-### Downloading and Installing Packages
+### Download and Install a Package
 
-Use `pip` to install packages by specifying the address and port of `pypiserver`:
+To install a package, specify the address and port of your PyPiServer:
 
 ```bash
 pip install --index-url http://localhost:8080/ example_package
 ```
 
-### Using Basic Authentication
+### Use Basic Authentication
 
-If you set up basic authentication for your pypiserver, you’ll need to provide credentials when uploading or downloading:
+If you have set up basic authentication for your PyPiServer, you will need to provide credentials when uploading or downloading packages:
 
-- To upload a package:
+- Upload a package:
 
   ```bash
   twine upload \
@@ -202,7 +203,7 @@ If you set up basic authentication for your pypiserver, you’ll need to provide
     example_package-0.1-py3-none-any.whl
   ```
 
-- To install a package:
+- Install a package:
 
   ```bash
   pip install \
@@ -210,42 +211,42 @@ If you set up basic authentication for your pypiserver, you’ll need to provide
     example_package
   ```
 
-## Configuring `pip.conf`
+## Set Up `pip.conf`
 
-To avoid specifying `--index-url` each time you use `pip install`, we can add the relevant configuration to `pip.conf`.
+If you often install packages from this server, you might not want to specify the `--index-url` every time you use `pip install`. Instead, you can add the related configuration to your `pip.conf`.
 
 ### Configuration File
 
-The `pip.conf` file can be located in several places, with the following order of precedence:
+The `pip.conf` file can exist in several places, and they are checked in the following order of priority:
 
-- Level 1: Site-level configuration:
+- Priority 1: Site-level configuration file:
 
-  - `/home/[username]/.pyenv/versions/3.8.18/envs/main/pip.conf`
+  - `/home/[username]/.pyenv/versions/3.x.x/envs/main/pip.conf`
 
-- Level 2: User-level configuration:
+- Priority 2: User-level configuration file:
 
   - `/home/[username]/.pip/pip.conf`
   - `/home/[username]/.config/pip/pip.conf`
 
-- Level 3: Global configuration:
+- Priority 3: Global configuration file:
 
   - `/etc/pip.conf`
   - `/etc/xdg/pip/pip.conf`
 
-Identify the file that corresponds to your Python environment and add the following content:
+Once you identify the correct `pip.conf` file for your current Python environment, add the following content:
 
 ```bash
 [global]
-index-url = http://[server_ip]:8080/
-trusted-host = [server_ip]
+index-url = http://[server-ip]:8080/
+trusted-host = [server-ip]
 ```
 
-Again, replace `[server_ip]:8080` with the correct address and port of your `pypiserver`.
+Make sure to replace `[server-ip]:8080` with the correct address and port of your PyPiServer.
 
-After setting this up, the server address configured in `pip.conf` will automatically be used as the package source when you use `pip install [package_name]`.
+After this configuration, whenever you run `pip install [package_name]`, the system will automatically use the server address set in `pip.conf` as the package source.
 
 ## Conclusion
 
-You’ve now successfully set up your own PyPI server, and you know how to upload and download packages.
+Now, you should have successfully set up your own PyPi server and learned how to upload and download packages.
 
-We hope this guide solves your problem.
+I hope this article helps resolve your setup issues.

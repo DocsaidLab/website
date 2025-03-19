@@ -7,27 +7,29 @@ image: /en/img/2023/0902.webp
 description: Unicode Table for easy reference.
 ---
 
-Unicode is an international character encoding standard maintained by the non-profit organization Unicode Consortium. The standard unifies most of the world's writing systems, enabling information exchange across platforms and languages.
+Since every time I need to look up Unicode codes, I end up spending half an hour searching through the Wiki tables, I decided to store some basic information for future use.
 
 <!-- truncate -->
 
-In the Unicode standard, each character corresponds to a unique numerical code, known as a "code point." The code point is an essential concept in the Unicode standard, used to determine the position of each unique character. The code points range from `U+0000` to `U+10FFFF`, meaning it can accommodate 1,114,112 different characters.
+## What is Unicode?
 
-These code points are divided into multiple subsets based on different functions and purposes, such as:
+Unicode is an international character encoding standard maintained by the non-profit organization Unicode Consortium. This standard unifies most of the world’s writing systems, enabling information exchange across platforms and in multilingual environments.
 
-- **Basic Multilingual Plane (BMP)**: Includes common characters like Latin letters, Greek letters, Chinese characters, etc.
-- **Supplementary Planes**: Includes additional ideographic characters, supplementary characters, etc.
+In the Unicode standard, each character corresponds to a unique numeric code, known as a "code point." A code point is an important concept in the Unicode standard, used to determine the location of each unique character. The range of code points spans from U+0000 to U+10FFFF.
 
-Given that we always spend half an hour looking up Unicode encoding every time we need it, it's better to store some basic information.
+These code points are divided into several subsets based on different functions and uses, such as:
+
+- **Basic Multilingual Plane (BMP)**: Includes commonly used characters such as Latin letters, Greek letters, Chinese characters, etc.
+- **Supplementary Planes**: Includes more ideographic characters, supplementary characters, etc.
 
 :::tip
-If you require further details, we recommend consulting the original table: [**Unicode Code Points**](https://en.wikipedia.org/wiki/Unicode#Code_points)
+If you have more specific needs, we still recommend checking the original tables: [**Unicode Code Points**](https://zh.wikipedia.org/zh-tw/Unicode%E5%8D%80%E6%AE%B5)
 :::
 
-## 參考資料
+## References
 
-- [Unicode 字元平面對映](https://zh.wikipedia.org/zh-tw/Unicode%E5%AD%97%E7%AC%A6%E5%B9%B3%E9%9D%A2%E6%98%A0%E5%B0%84)
-- [Unicode 區段](https://zh.wikipedia.org/zh-tw/Unicode%E5%8D%80%E6%AE%B5)
+- [**Unicode Character Plane Mapping**](https://zh.wikipedia.org/zh-tw/Unicode%E5%AD%97%E7%AC%A6%E5%B9%B3%E9%9D%A2%E6%98%A0%E5%B0%84)
+- [**Unicode Code Points**](https://zh.wikipedia.org/zh-tw/Unicode%E5%8D%80%E6%AE%B5)
 
 ## Unicode Code Point Range Table
 

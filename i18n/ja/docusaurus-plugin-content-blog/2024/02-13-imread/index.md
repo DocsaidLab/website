@@ -1,21 +1,21 @@
 ---
 slug: opencv-imread
-title: Python で HEIC 画像を読み込む
+title: PythonでHEIC画像を読み込む方法と読み込みの高速化
 authors: Z. Yuan
 tags: [HEIC, TurboJPEG]
 image: /ja/img/2024/0213.webp
-description: OpenCV imread を最適化しましょう！
+description: OpenCVのimreadを最適化してみよう！
 ---
 
-画像を読み込む際、OpenCV の `imread` 関数を使用することがよくあります。
+画像を読み込むとき、通常はOpenCVの`imread`関数を使用します。
 
-しかし、この関数は万能ではなく、場合によっては問題が発生することがあります。
+しかし、この関数は万能ではなく、時々いくつかの問題に直面することがあります。
 
 <!-- truncate -->
 
 ## 基本的な使い方
 
-`imread` 関数の基本的な使い方は非常に簡単で、画像のパスを渡すだけです：
+`imread`関数の基本的な使い方は非常に簡単で、画像のパスを渡すだけです：
 
 ```python
 import cv2
@@ -23,15 +23,15 @@ import cv2
 image = cv2.imread('path/to/image.jpg')
 ```
 
-この関数で使用できる画像フォーマットには、BMP、JPG、PNG、TIF などの一般的な形式が含まれます。
+使用可能な画像フォーマットには、BMP、JPG、PNG、TIFなどの一般的な画像フォーマットが含まれます。
 
-## 制限 1：HEIC フォーマット
+## 限界1: HEICフォーマット
 
-iOS デバイスで撮影した写真は通常 HEIC フォーマットです。この形式は OpenCV ではサポートされていません。もし `imread` 関数を使って HEIC 画像を読み込もうとすると、`None` が返されます。
+iOSデバイスで撮影した写真は通常HEICフォーマットで保存されますが、このフォーマットはOpenCVではサポートされていません。もし`imread`関数を使ってHEICフォーマットの画像を読み込もうとすると、`None`が返されます。
 
-この問題を解決するには、HEIC フォーマットの画像を読み込むために `pyheif` ライブラリを使用し、その後 `numpy.ndarray` 型の変数に変換する必要があります。
+この問題を解決するために、`pyheif`パッケージを使用してHEICフォーマットの画像を読み込み、その後`numpy.ndarray`型の変数に変換する方法を取ります。
 
-まず、必要なライブラリをインストールします：
+まず、必要なパッケージをインストールします：
 
 ```bash
 sudo apt install libheif-dev
@@ -63,22 +63,22 @@ img = read_heic_to_numpy('path/to/image.heic')
 img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 ```
 
-## 制限 2：JPG の読み込みが遅い
+## 限界2: JPGの読み込み速度が遅い
 
-特定の状況では、`imread` 関数を使用して JPG フォーマットの画像を読み込む速度が非常に遅い場合があります。これは、OpenCV が JPG フォーマットの画像を読み込む際に使用する `libjpeg` ライブラリのパフォーマンスがあまり良くないためです。
+場合によっては、`imread`関数でJPGフォーマットの画像を読み込む速度が非常に遅くなることがあります。これは、OpenCVがJPGフォーマットの画像を読み込む際に`libjpeg`ライブラリを使用しているためですが、`libjpeg`自体のパフォーマンスがあまり良くありません。
 
-そこで、`libjpeg` の代替として、より高性能な TurboJPEG ライブラリを導入します。TurboJPEG を使用することで、JPG フォーマットの画像の読み込み速度を向上させることができます。
+ここで、`libjpeg`の代替品である`TurboJPEG`パッケージを導入し、パフォーマンスを向上させる方法を取ります。
 
-まず、必要なライブラリをインストールします：
+先ほどと同様に、必要なパッケージをインストールします：
 
 ```bash
 sudo apt install libturbojpeg exiftool
 pip install PyTurboJPEG
 ```
 
-次に、以下のコードで読み込みを高速化します：
+次に、少しコードを書いて画像読み込みを高速化します：
 
-一般的に、読み込み速度は約 2 ～ 3 倍向上します。
+通常、約2〜3倍の速度向上が期待できます。
 
 ```python
 import cv2
@@ -86,8 +86,6 @@ import piexif
 from enum import IntEnum
 from pathlib import Path
 from turbojpeg import TurboJPEG
-import numpy as np
-from typing import Union
 
 
 jpeg = TurboJPEG()
@@ -141,15 +139,13 @@ def jpgread(img_file: Union[str, Path]) -> Union[np.ndarray, None]:
 img = jpgread('path/to/image.jpg')
 ```
 
-これで、JPG フォーマットの画像の読み込みを高速化することができます。
+これでJPGフォーマットの画像読み込みが高速化されます。
 
 ## 結論
 
-プログラムをもう少し賢くして、適切な読み込み方法を自動的に選択させたい場合はどうすればよいでしょうか？
+このプログラムを賢くして、画像のフォーマットに応じて最適な読み込み方法を選択できるようにしたい場合は、先ほどのコードを整理して適切な方法を選べるようにします。
 
-画像のフォーマットに応じて適切な読み込み方法を選択する関数を作成できます：
-
-```python
+```python title="custom_imread.py"
 def imread(
     path: Union[str, Path],
     color_base: str = 'BGR',

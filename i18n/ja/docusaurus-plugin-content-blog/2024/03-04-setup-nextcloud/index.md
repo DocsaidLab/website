@@ -1,104 +1,89 @@
 ---
 slug: setting-up-nextcloud
-title: Nextcloud 構築記録
+title: Nextcloud の設定記録
 authors: Z. Yuan
 tags: [Nextcloud, Docker]
 image: /ja/img/2024/0304.webp
-description: Ubuntu 22.04 上での Nextcloud 構築プロセスを記録します。
+description: Ubuntu 22.04 上で Nextcloud をセットアップする過程を記録します。
 ---
 
-以前、ファイルを Google Drive に保存しており、ファイルのダウンロードは wget コマンドを使っていました。
+以前はファイルを Google Drive に保存していて、ファイルをダウンロードする際は wget コマンドを使っていました。
 
-しかし、ある日突然、以前のダウンロードコマンドが使えなくなりました...
+しかし、ある日、Google が少し更新を行い、元々のダウンロードコマンドが突然使えなくなったのです……
 
-そういうわけで、Nextcloud を試してみることにしました。
+本当に困りました。
+
+そこで、Nextcloud を試してみることにしました。以下は Ubuntu 22.04 に基づいて行った設定手順です。
 
 <!-- truncate -->
 
-以下は Ubuntu 22.04 を基にした設定手順です。
-
 :::tip
-始める前に、ドメインを用意し、そのドメインをサーバーにポイントしてください。
+開始する前に、ドメイン名を準備し、そのドメインを自分のサーバーに向けてください。
 
-やり方が分からない場合は、Google で「**namecheap 使い方**」を検索してください。
+やり方がわからない場合は、ChatGPT に聞いてみてください。教えてくれますよ。
 :::
 
 ## Nextcloud のインストール
 
-**質問 1：なぜ Nextcloud を使うのか？**
+**第一の質問：なぜ Nextcloud を使うのか？**
 
-- 自分専用のクラウドを持ちたい、他人のサーバーにファイルを置きたくないから。
+- プライベートクラウドが欲しくて、他人のサーバーにファイルを置きたくないからです。
 
-**質問 2：Nextcloud と Owncloud の違いは？**
+**第二の質問：Nextcloud と Owncloud の違いは何か？**
 
-- Nextcloud は Owncloud の開発者が分派して作ったものです。機能はほとんど同じですが、Nextcloud の開発スピードが速いのが特徴です。
+- Nextcloud は Owncloud の開発者が分派して作ったもので、機能的にはほぼ同じですが、Nextcloud の方が開発速度が速いです。
 
-**質問 3：Nextcloud をどうやってインストールするのか？**
+**第三の質問：Nextcloud はどうやってインストールするのか？**
 
-- この質問は少し複雑です。Nextcloud には多くのインストール方法があり、それぞれにメリットとデメリットがあります。
-- 本記事では、唯一お勧めする方法として Docker を使ったインストール手順を紹介します。
+- これは少し複雑な問題です。というのも、Nextcloud のインストール方法は多数あり、それぞれに異なる利点と欠点があります。
+- この記事で私が唯一お勧めするインストール方法は、Docker を使うことです。
 
 ## Nextcloud All-in-One の設定
 
-- 公式ドキュメント：[**Nextcloud All-in-One**](https://github.com/nextcloud/all-in-one)
+- 公式ドキュメントを参照：[**Nextcloud All-in-One**](https://github.com/nextcloud/all-in-one)
 
-まず、Docker と Docker Compose がインストールされていることを確認してください。
+**まず、Docker と Docker Compose をインストールしていることを確認してください。**
 
-:::tip
-まだインストールしていない場合は、Google で「Docker & Docker Compose インストール方法」を検索してください。
-:::
-
-次に、NextCloud 用のフォルダを作成し、`docker-compose.yml` という Docker Compose 設定ファイルを作成します：
+次に、NextCloud 用のフォルダを作成し、Docker Compose の設定ファイル `docker-compose.yml` を書きます：
 
 ```bash
 mkdir nextcloud
 vim nextcloud/docker-compose.yml
 ```
 
-以下の内容を `docker-compose.yml` に貼り付けます：
+以下の内容を `docker-compose.yml` に貼り付けてください：
 
 ```yaml
 services:
   nextcloud-aio-mastercontainer:
-    image: nextcloud/all-in-one:latest
-    init: true
-    restart: always
-    container_name: nextcloud-aio-mastercontainer
+    image: nextcloud/all-in-one:latest  # 使用する Docker イメージを指定
+    init: true  # ゾンビプロセスを防止、必ずこのオプションは有効にしてください
+    restart: always  # コンテナ再起動ポリシーを Docker デーモンで自動的に再起動する設定
+    container_name: nextcloud-aio-mastercontainer  # コンテナ名を設定、変更しないでください。更新の問題を避けるため
     volumes:
-      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config  # mastercontainer のファイル保存場所、この設定は変更不可
+      - /var/run/docker.sock:/var/run/docker.sock:ro  # Docker ソケットをマウントし、他のコンテナや機能を管理。Windows/macOS や rootless モードの場合は調整が必要
     ports:
-      - 80:80
-      - 8080:8080
-      - 8443:8443
+      - 80:80    # AIO インターフェースを介して有効な証明書を取得するために使用、オプション
+      - 8080:8080  # デフォルトで AIO インターフェース（自己署名証明書）を提供、ホスト機の 8080 番ポートが使用中の場合、他のポートに変更可能（例：8081:8080）
+      - 8443:8443  # 公開する場合、このポートで AIO インターフェースにアクセスして有効な証明書を取得、オプション
+
 volumes:
   nextcloud_aio_mastercontainer:
-    name: nextcloud_aio_mastercontainer
+    name: nextcloud_aio_mastercontainer  # Docker ボリュームの名前、この設定は変更不可
 ```
 
-上記のコマンド内容を簡単に説明します：
-
-- `--init`：ゾンビプロセスが発生しないようにします。
-- `--name nextcloud-aio-mastercontainer`：コンテナの名前を設定します。この名前は変更不可です。変更すると mastercontainer の更新が失敗する可能性があります。
-- `--restart always`：コンテナを Docker デーモンと一緒に常に再起動するように設定します。
-- `--publish 80:80`：コンテナのポート 80 をホストのポート 80 に公開します。有効な証明書を取得するために必要です（必要なければ削除可能）。
-- `--publish 8080:8080`：コンテナのポート 8080 をホストのポート 8080 に公開します。このポートはデフォルトで自己署名証明書を使用します。他のプロセスがポート 8080 を使用している場合、例えば `8081:8080` に変更可能です。
-- `--publish 8443:8443`：コンテナのポート 8443 をホストのポート 8443 に公開します。このポートを使用して AIO インターフェースにアクセスし、有効な証明書を取得できます（必要なければ削除可能）。
-- `--volume nextcloud_aio_mastercontainer:/mnt/docker-aio-config`：mastercontainer が作成するファイルを nextcloud_aio_mastercontainer という名前の Docker ボリュームに保存します。この設定は変更不可です。
-- `--volume /var/run/docker.sock:/var/run/docker.sock:ro`：Docker ソケットをコンテナにマウントし、他のコンテナの起動や追加機能をサポートします。Windows/macOS や Docker のルートレスモードの場合は調整が必要です。
-- `nextcloud/all-in-one:latest`：使用する Docker イメージを指定します。
-
-その他の詳細な設定については、公式ドキュメントを参照してください：[compose.yaml](https://github.com/nextcloud/all-in-one/blob/main/compose.yaml)
+より詳細な設定情報については公式ドキュメントを参照してください：[**compose.yaml**](https://github.com/nextcloud/all-in-one/blob/main/compose.yaml)
 
 ## システムサービスの設定
 
-上記の設定が完了したら、次にシステムサービスの設定を行います。
+上記の設定が完了したら、次はシステムサービスの設定です。
 
 ```bash
 sudo vim /etc/systemd/system/nextcloud.service
 ```
 
-以下の内容を貼り付けます：
+以下の内容を貼り付けてください：
 
 ```bash {7}
 [Unit]
@@ -116,7 +101,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-`[YourName]` を自分のユーザー名に置き換えるのを忘れないでください。
+`[YourName]` を自分のユーザー名に置き換えることを忘れないでください。
 
 ## Nextcloud の起動
 
@@ -129,85 +114,100 @@ sudo systemctl start nextcloud
 
 1. **Nextcloud AIO インターフェースへのアクセス**：
 
-   - 初回起動後、`https://ip.address.of.this.server:8080` にアクセスして Nextcloud AIO インターフェースを開きます。ここで、`ip.address.of.this.server` は Nextcloud サービスをデプロイしたサーバーの IP アドレスに置き換えてください。
-   - 注意点として、このポート（8080）にはドメイン名ではなく IP アドレスを使ってアクセスしてください。これは HTTP Strict Transport Security（HSTS）がドメイン名でのアクセスをブロックする可能性があるためです。HSTS は、ブラウザに HTTPS 接続のみを要求する Web セキュリティポリシーです。
+   初回起動が完了したら、`https://ip.address.of.this.server:8080` を使用して Nextcloud AIO インターフェースにアクセスしてください。`ip.address.of.this.server` は Nextcloud サービスを展開したサーバーの IP アドレスに置き換えてください。Docker と Nextcloud AIO が正しくインストールされ、起動していることを確認してください。初回起動には数分かかる場合があります。
+
+   8080 ポートにアクセスするには、ドメイン名ではなく IP アドレスを使用することをお勧めします。HTTP Strict Transport Security（HSTS）がドメイン名でのアクセスを制限する可能性があるためです。HSTS は、ブラウザーに対して HTTPS 経由でのみウェブサイトにアクセスすることを要求するセキュリティ機能です。
 
 2. **自己署名証明書の使用**：
 
-   - ポート 8080 にアクセスすると、通信のセキュリティを確保するために自己署名証明書が使用される場合があります。自己署名証明書は信頼された認証局（CA）によって発行されたものではないため、ブラウザはこの証明書を信頼できないと警告するかもしれません。この証明書を手動でブラウザに受け入れる必要があります。
+   8080 ポートを介してアクセスすると、システムは自己署名証明書を使用して通信の安全を確保します。
 
-3. **有効な証明書の自動取得**：
+   この証明書は信頼された証明機関（CA）によって発行されたものではないため、ブラウザーは信頼できないという警告を表示する可能性があります。その場合は、ブラウザーの指示に従い手動で承認してください。自己署名証明書は、テスト環境でのみ使用することをお勧めします。正式な運用環境では適していません。
 
-   - ファイアウォールやルーターでポート 80 と 8443 を開放または転送しており、ドメインをサーバーにポイントしている場合、`https://your-domain-that-points-to-this-server.tld:8443` にアクセスすることで、信頼された CA によって発行された有効な証明書を自動的に取得できます。
-   - `your-domain-that-points-to-this-server.tld` はサーバーを指す実際のドメインに置き換えてください。
+3. **有効な証明書を取得するための自動化方法**：
 
-4. **Nextcloud Talk 用ポートの開放**：
+   ファイアウォールやルーターが 80 番および 8443 番ポートを開放している、または正しく転送している場合、そしてドメイン名をサーバーに向けている場合、`https://your-domain-that-points-to-this-server.tld:8443` を使用して、信頼された証明機関（例：Let's Encrypt）によって発行された有効な証明書を自動的に取得できます。これにより、セキュリティと利便性が向上します。
 
-   - Nextcloud Talk の機能（ビデオ通話やメッセージング）が正常に動作するようにするため、ファイアウォールやルーターで Talk コンテナ用に 3478/TCP と 3478/UDP ポートを開放する必要があります。
+   `your-domain-that-points-to-this-server.tld` は正しいドメイン名に置き換え、DNS 設定が有効になっていることを確認してください。また、ファイアウォール設定をチェックし、接続がブロックされていないことを確認してください。
 
-- **よくある質問：**
+4. **Nextcloud Talk のポート開放**：
 
-  - **家庭用ネットワークの動的 IP をドメインにポイントするには？**
+   Nextcloud Talk（ビデオ通話やメッセージ機能）が正常に動作するためには、ファイアウォールやルーターで Talk コンテナの 3478/TCP および 3478/UDP ポートを開放する必要があります。
 
-    - No-IP などのサービスを試しましたが、最終的には固定 IP を取得するために通信事業者（例：日本では NTT など）に直接依頼するのが最速で便利でした。
+   NAT 環境にいる場合は、対応するポート転送が正しく設定されていることを確認し、ISP が関連する UDP ポートをブロックしていないかをチェックしてください。
 
-  - **Docker を使いたくない場合の他の方法は？**
+## よくある質問
 
-    - ありますが、Nextcloud を直接インストールする必要があり、依存関係の問題をすべて自分で解決する必要があります。
-    - 正直、かなり面倒です。
+1. **家庭用ネットワークは動的 IP で、どうやってドメインに指すか？**
 
-  - **セットアップは完了したのに接続できない場合は？**
+    No-IP などの動的 DNS ソリューションを試すほか、最も速くて安定した方法として、直接中華電信に固定 IP を申し込むことをお勧めします。
 
-    - ファイアウォールがブロックしている可能性があります。ファイアウォールが無効化されている場合、ルーターがブロックしている可能性があります。
+    :::tip
+    台湾以外の国に住んでいる場合は、あなたの国の通信事業者に同様のサービスが提供されているかどうかを問い合わせてみてください。
+    :::
 
----
+2. **Docker を使いたくない、他に方法はあるか？**
 
-設定用の URL にアクセスすると、通常の管理画面よりもさらに詳細な設定が可能なインターフェースが表示されます。
+    あります。Nextcloud を直接インストールすることができますが、その場合、すべての依存関係や環境設定を手動で行う必要があり、途中で多くの問題に直面することがあります。
+
+    何度もトラブルに見舞われた後、最終的に Docker の方法に戻ってきたので、最初から Docker を使えばよかったと感じています。
+
+3. **セットアップしたのに接続できないのはなぜか？**
+
+    まず、ファイアウォールの設定が必要な接続を許可しているか確認してください。ファイアウォール設定に問題がない場合、ルーターのポート転送設定に問題がある可能性があります。Docker のログを確認して、詳細なエラー情報を取得してください。
+
+## 最後に
+
+設定 URL にアクセスすると、バックエンドのさらに奥にある設定インターフェースに入ります。
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "70%"}}>
 ![login_1](./img/login_1.jpg)
 </figure>
 </div>
 
-ここで、次のことに気づくかもしれません：
+ここまで進むと、驚くことに気づくかもしれません：
 
 - **パスワードがない！**
 
-初回ログイン時にパスワードが表示されますが、見逃してしまうことがよくあります。
+初回ログイン時にシステムがパスワードを生成しますが、通常は見逃しがちです。
 
-その場合、以下のコマンドを使ってパスワードを確認できます：
+もし忘れてしまっても心配無用です。以下のコマンドでパスワードを確認できます：
 
 ```bash
 sudo grep password /var/lib/docker/volumes/nextcloud_aio_mastercontainer/_data/data/configuration.json
 ```
 
-ログイン後、以下のような設定画面が表示されます：
+ログイン後、次のような設定画面が表示されます：
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "70%"}}>
 ![login_2](./img/login_2.jpg)
 </figure>
 </div>
 
-この画面は、設定が完了した結果として表示されるものです。
+この画面が表示されたら、設定が正常に完了したことを意味します。
 
-初回ログインの場合は、まず準備したドメインを入力する必要があります。その後、システムから追加の Docker イメージをダウンロードするよう求められます。ダウンロードが完了すると、システムが自動的に再起動します。
+初回ログインの場合、準備していたドメイン名を入力してください。その後、システムが必要な Docker イメージをダウンロードし、再起動を自動的に行います。起動が完了したら、Nextcloud を使い始めることができます。パスワードの変更とその他のセキュリティ設定の確認を早急に行うことをお勧めします。
 
-再起動後、Nextcloud を使用できるようになります。
+## 終わりに
 
-## 結論
-
-上記の手順を完了した後、ブラウザのアドレスバーに自分のドメインを入力すると、美しいインターフェースが表示されます。これがあなたのプライベートクラウドです。
+上記の手順が完了したら、ブラウザのアドレスバーにあなたのドメインを入力してください。そうすると、美しいインターフェースが表示され、これがあなたのプライベートクラウドです。
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "70%"}}>
 ![login_3](./img/login_3.jpg)
 </figure>
 </div>
 
-このインターフェースには多くの機能があり、ファイルの管理や共有を簡単に行えます。
+このインターフェースには多くの機能があり、ファイルの管理やファイルの共有をこのインターフェースを通じて行うことができます。
 
-さらに、スマートフォンに Nextcloud アプリをダウンロードすることで、モバイル端末から直接ファイルを管理することもできます。
+さらに、スマートフォンに Nextcloud のアプリをダウンロードすれば、スマートフォンから直接ファイルを管理することも可能です。
 
-Nextcloud を使えば、Google Drive の容量制限を心配する必要がなくなります。
+Nextcloud があれば、もう Google Drive の容量制限を心配する必要はありません。
+
+:::tip
+もしあなたのサーバーで他のサービスが稼働している場合、Nginx のリバースプロキシを使って、Nextcloud のドメインを転送することができます。
+
+この部分は本章の内容を超えているので、また機会があればお話ししましょう。
+:::

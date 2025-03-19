@@ -22,12 +22,12 @@ pip install requests beautifulsoup4 json
 ```
 
 :::tip
-這邊我們假設你已經有了可以正常運行的 Python 環境。
+這邊我會假設你已經有了可以正常運行的 Python 環境。
 :::
 
 ## 目標網頁
 
-股票相關的資料都在臺灣證券交易所（TWSE）的網站上，我們需要找到目標網頁：
+股票相關的資料都在臺灣證券交易所（TWSE）的網站上，因此我們需要找到目標網頁：
 
 - [**臺灣證券交易所/證券編碼公告**](https://www.twse.com.tw/zh/products/code/announcement.html)
 
@@ -37,7 +37,7 @@ pip install requests beautifulsoup4 json
   </figure>
   </div>
 
-我們先把這三個網頁記下來：
+先把這三個網頁記下來：
 
 ```python
 urls = [
@@ -57,7 +57,7 @@ urls = [
 
 網頁點進去之後，查詢一下主要表格對應的 HTML 標籤是：`class=h4`。
 
-好，找到目標之後，我們就可以開始寫程式了：
+好，找到目標之後，就可以開始寫程式了：
 
 ```python title="update_stocks_code.py"
 import json
@@ -139,7 +139,7 @@ print("All data has been processed and saved to stock_infos.json")
 }
 ```
 
-我們用 json 來輸出結果，這樣之後串接其他程式比較方便。
+最後用 json 來輸出結果，這樣之後串接其他程式比較方便。
 
 ## 常見問題
 
@@ -156,7 +156,7 @@ if len(code) != 4:
 
 這個需求可以拓展到特定的市場別、產業別、上市日期等，甚至是上一個「取得一般股票」的問題，都一樣！
 
-我們只需要把輸出的 json 檔案用 Pandas 讀進來，然後用條件篩選即可：
+你只需要把輸出的 json 檔案用 Pandas 讀進來，然後用條件篩選即可：
 
 ```python
 import pandas as pd
@@ -171,12 +171,12 @@ target = df[df["產業別"] == "水泥工業"]
 
 ## 結語
 
-我們之後只需要不定期的執行這個程式，就可以取得最新的股票資訊。
+之後只需要不定期的執行這個程式，就可以取得最新的股票資訊。
 
 :::tip
 不過既然你都來一趟了，不妨喝杯茶再走。
 
-我們順手寫了一個 API，串接 FinMind 的股票資料。點選下面的下載按鈕，就可以從 FinMind 取得最新的股票資訊，資料格式可能和證交所有點差異，但你應該不會介意才對。
+我這裡順手寫了一個 API，串接 FinMind 的股票資料。點選下面的下載按鈕，就可以從 FinMind 取得最新的股票資訊。雖然資料格式可能和證交所有點差異，但你應該不會介意才對。
 
 import StockDownloader from '@site/src/components/StockDownloader.js';
 

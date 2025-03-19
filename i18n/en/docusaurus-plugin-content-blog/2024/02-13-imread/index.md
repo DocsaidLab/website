@@ -1,21 +1,21 @@
 ---
 slug: opencv-imread
-title: Reading HEIC Images in Python
+title: Reading HEIC Images and Accelerating Loading with Python
 authors: Z. Yuan
 tags: [HEIC, TurboJPEG]
 image: /en/img/2024/0213.webp
-description: Optimizing imread for reading HEIC images!
+description: Let’s optimize OpenCV imread!
 ---
 
-When you want to read an image, you might use the `imread` function from OpenCV.
+When you want to read an image, you may use OpenCV's `imread` function.
 
-Unfortunately, this function is not universal, and you may encounter some problems.
+Unfortunately, this function is not perfect, and sometimes you may encounter certain issues.
 
 <!-- truncate -->
 
 ## Basic Usage
 
-The basic usage of the `imread` function is straightforward; you just need to pass the path to the image:
+The basic usage of the `imread` function is quite simple; just pass in the path of the image:
 
 ```python
 import cv2
@@ -23,15 +23,15 @@ import cv2
 image = cv2.imread('path/to/image.jpg')
 ```
 
-You can use common image formats such as BMP, JPG, PNG, TIF, and others.
+Supported image formats include common formats like BMP, JPG, PNG, TIF, etc.
 
 ## Limitation 1: HEIC Format
 
-Images captured on iOS devices are typically in HEIC format, which is not supported in OpenCV. If you try to use the `imread` function to read HEIC format images, you will get a `None` return value.
+Photos taken on iOS devices are usually in HEIC format, which is not supported by OpenCV. If you try to read a HEIC image using the `imread` function, you will get a `None` return value.
 
-To address this issue, we need to use the `pyheif` package to read HEIC format images and then convert them into `numpy.ndarray` variables.
+To solve this, we need to use the `pyheif` package to read HEIC images and then convert them to a `numpy.ndarray`.
 
-First, install the necessary packages:
+First, install the required packages:
 
 ```bash
 sudo apt install libheif-dev
@@ -63,22 +63,22 @@ img = read_heic_to_numpy('path/to/image.heic')
 img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 ```
 
-## Limitation 2: Slow JPG Reading
+## Limitation 2: Slow JPG Loading
 
-In some cases, the `imread` function's performance in reading JPG format images can be slow. This is because OpenCV uses the `libjpeg` library to read JPG format images, and `libjpeg` itself is not very efficient.
+In some cases, the `imread` function reads JPG images very slowly. This is because OpenCV uses the `libjpeg` library to read JPG images, and `libjpeg` is not particularly efficient.
 
-Here, we introduce the `TurboJPEG` package, an alternative to `libjpeg` with better performance. We can use `TurboJPEG` to accelerate the reading of JPG format images.
+To address this, we introduce the `TurboJPEG` package, which is an alternative to `libjpeg` and offers better performance.
 
-Similarly, install the necessary packages:
+As before, first install the required packages:
 
 ```bash
 sudo apt install libturbojpeg exiftool
 pip install PyTurboJPEG
 ```
 
-Then, let's optimize it a bit:
+Then, write some code to speed it up:
 
-Generally, this can speed up the process by about 2-3 times.
+Generally, it speeds up the process by about 2-3 times.
 
 ```python
 import cv2
@@ -139,15 +139,15 @@ def jpgread(img_file: Union[str, Path]) -> Union[np.ndarray, None]:
 img = jpgread('path/to/image.jpg')
 ```
 
-This way, reading JPG format images can be accelerated.
+This will speed up the reading of JPG images.
 
 ## Conclusion
 
-What if we want this program to be more intelligent, choosing a suitable way to load images on its own?
+What if we want this program to be smarter and choose the best loading method on its own?
 
-We can write a function to select the appropriate loading method based on the image's format:
+Here, we can consolidate the code above to select the appropriate loading method based on the image format:
 
-```python
+```python title="custom_imread.py"
 def imread(
     path: Union[str, Path],
     color_base: str = 'BGR',
@@ -155,7 +155,7 @@ def imread(
 ) -> Union[np.ndarray, None]:
 
     if not Path(path).exists():
-        raise FileExistsError(f'{path} can not be found.')
+        raise FileExistsError(f'{path} can not found.')
 
     if Path(path).suffix.lower() == '.heic':
         img = read_heic_to_numpy(str(path))

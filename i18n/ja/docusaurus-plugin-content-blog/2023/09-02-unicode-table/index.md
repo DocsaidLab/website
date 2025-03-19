@@ -7,27 +7,29 @@ image: /ja/img/2023/0902.webp
 description: Unicode コードポイント表で簡単に参照可能です。
 ---
 
-Unicode は、非営利組織 Unicode Consortium によって維持されている国際的な文字エンコーディング標準です。この標準は世界中のほとんどの文字システムを統一し、異なるプラットフォームや多言語環境での情報交換を実現しています。
+毎回Unicodeのコードを探すたびに、Wikiの表を見つけるのに30分もかかってしまうので、いくつかの基本的な情報を保存しておきます。
 
 <!-- truncate -->
 
-Unicode 標準では、各文字にユニークな数値コード（「コードポイント」）が割り当てられています。コードポイントは Unicode 標準の重要な概念であり、各文字の位置を特定するために使用されます。コードポイントの範囲は `U+0000` から `U+10FFFF` までで、1,114,112 個の異なる文字を収容できます。
+## Unicodeとは？
 
-これらのコードポイントは、異なる機能や用途に応じて複数のサブセットに分割されています。例えば：
+Unicodeは、非営利団体であるUnicodeコンソーシアムが管理している国際的な文字コード標準です。この標準は、世界中のほとんどの文字体系を統一し、クロスプラットフォームおよび多言語環境での情報交換を実現します。
 
-- **基本多言語面（Basic Multilingual Plane, BMP）**：ラテン文字、ギリシャ文字、漢字などの一般的な文字を含む。
-- **補助面（Supplementary Planes）**：象形文字や補助文字など、さらに多くの文字を含む。
+Unicode標準では、各文字には一意の数値コードが対応しており、このコードを「コードポイント（Code Point）」と呼びます。コードポイントはUnicode標準の重要な概念で、各文字がどこに位置するかを特定します。コードポイントの範囲は `U+0000` から `U+10FFFF` までです。
 
-Unicode コードを検索するたびに Wikipedia の表を探すのに時間がかかるため、基本的な情報をここにまとめました。
+これらのコードポイントは、さまざまな機能や用途に応じて複数のサブセットに分けられています。例えば：
+
+- **基本多言語平面（Basic Multilingual Plane, BMP）**：ラテン文字、ギリシャ文字、漢字などの一般的な文字が含まれます。
+- **補助平面（Supplementary Planes）**：象形文字や追加の文字など、さらに多くの文字が含まれています。
 
 :::tip
-さらに詳しい情報が必要な場合は、以下の公式リソースを参照することをお勧めします：[**Unicode 区分表**](https://zh.wikipedia.org/zh-tw/Unicode%E5%8D%80%E6%AE%B5)
+もし更なる詳細が必要な場合は、元の表を確認することをお勧めします：[**Unicode 区段**](https://zh.wikipedia.org/zh-tw/Unicode%E5%8D%80%E6%AE%B5)
 :::
 
 ## 参考資料
 
-- [Unicode 字符平面映射](https://zh.wikipedia.org/zh-tw/Unicode%E5%AD%97%E7%AC%A6%E5%B9%B3%E9%9D%A2%E6%98%A0%E5%B0%84)
-- [Unicode 区分](https://zh.wikipedia.org/zh-tw/Unicode%E5%8D%80%E6%AE%B5)
+- [**Unicode 文字平面の対応**](https://zh.wikipedia.org/zh-tw/Unicode%E5%AD%97%E7%AC%A6%E5%B9%B3%E9%9D%A2%E6%98%A0%E5%B0%84)
+- [**Unicode 区段**](https://zh.wikipedia.org/zh-tw/Unicode%E5%8D%80%E6%AE%B5)
 
 ## Unicode コードポイント表
 

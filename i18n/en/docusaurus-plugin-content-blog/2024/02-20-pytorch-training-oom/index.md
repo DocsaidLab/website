@@ -1,31 +1,31 @@
 ---
 slug: pytorch-training-out-of-memory
-title: The Pitfall of Lists in PyTorch
+title: The PyTorch List Trap
 authors: Z. Yuan
 tags: [PyTorch, OOM]
 image: /en/img/2024/0220.webp
-description: Resolving PyTorch OOM Issues.
+description: Discovering and solving PyTorch OOM issues.
 ---
 
-As a seasoned PyTorch user, you're likely well-versed in training models, hyperparameter tuning, and optimization techniques.
+As a professional PyTorch user, you should already be familiar with how to train models, tune hyperparameters, optimize performance, and more.
 
-How could you possibly write code that runs out of memory (OOM)?
+How could you possibly write a program that encounters OOM (Out of Memory) issues?
 
 <!-- truncate -->
 
 :::tip
-We're talking about system memory here, not GPU memory.
+This is referring to system memory, not GPU memory.
 :::
 
 ## Problem Description
 
-With OOM issues stemming from various causes, this time we'll focus on one commonly encountered by professionals:
+There are many potential causes for OOM errors, but this time, I will focus on a specific issue that even professional workers often encounter:
 
 - You might be using a List structure!
 
-After investigation, we've pinpointed the exact scenario where leaks occur.
+Based on my recent experience training models, I identified the exact scenario when the memory leak occurs.
 
-Consider the following code snippet:
+Consider the following code example:
 
 ```python
 from torch.utils.data import Dataset, DataLoader
@@ -58,33 +58,31 @@ for i, item in enumerate(train_loader):
 
 ---
 
-Cutting to the chase after examining this example:
+After reviewing this example, let's cut to the chase:
 
-See the `self.data` List? That's what leads to the OOM problem.
+- **Do you see the `self.data` List? This List will cause the OOM problem.**
 
-We attempted to find related information and it seems this isn't a PyTorch issue but rather a Python one.
+I did some research and found that this doesn't seem to be a PyTorch issue, but rather a Python issue.
 
-In essence, refrain from using Lists; use NumPy or Tensors to store data, and you won't encounter OOM problems.
+In any case, don't use List; use Numpy or Tensor to store data instead. This way, you won’t encounter OOM issues.
 
-At least, that's effective in this example.
+At least in this example, doing so was effective.
 
 ## What About Me?
 
-You might be wondering: I've written code like this, why haven't I encountered any issues?
+You might say: "I wrote it the same way, and nothing happened!"
 
 ---
 
-The world is a beautiful place until you encounter a large dataset.
+The world is great until you encounter a large dataset.
 
-Based on my own testing, when the dataset is small, using Lists doesn't trigger memory leaks.
+Based on my own test results, when the dataset is small, using a List does not cause memory leaks.
 
 More specifically:
 
-- When we use over 10,000 data points, no issues arise!
-- When we use over 1.2 million data points, it blows up!
+- Using around 10,000 data points? No problem!
+- Using over a million data points? Boom, it crashes!
 
-So, if your dataset isn't large, you might never encounter this problem.
+So, if your dataset is small, you may never encounter this issue.
 
-As for the threshold of data volume, we're unsure...
-
-We speculate this anomaly arises at a certain point during Python or PyTorch interaction.
+As for the boundary of the dataset size, I’m not sure... My guess is that it’s some anomaly that occurs at a specific moment in the interaction between Python and PyTorch.
