@@ -6,7 +6,13 @@ sidebar_position: 6
 
 完成 `WordCanvas` 的開發之後，我們可以利用這個工具來做點其他事情。
 
-在本章節中，我們開發一個生成「**機器閱讀區域（Machine Readable Zone, MRZ）**」的功能。
+在本章節中，我們開發一個由「給定輸入文字」來渲染「MRZ 圖像」的功能。
+
+:::info
+這個功能主要用來支援我們的 [**MRZScanner**](https://docsaid.org/docs/mrzscanner/) 模型訓練。
+
+有興趣的讀者可以自己動手操作一下我們提供的模型：[**MRZScanner Demo**](https://docsaid.org/playground/mrzscanner-demo)
+:::
 
 ## 什麼是 MRZ？
 

@@ -4,9 +4,15 @@ sidebar_position: 6
 
 # MRZGenerator
 
-After completing the development of `WordCanvas`, we can use this tool for other tasks as well.
+After completing the development of `WordCanvas`, we can use this tool to do some other tasks.
 
-In this chapter, we develop a feature to generate "**Machine Readable Zone (MRZ)**".
+In this chapter, we will develop a feature that renders the "MRZ image" from the "given input text."
+
+:::info
+This feature is mainly used to support the training of our [**MRZScanner**](https://docsaid.org/en/docs/mrzscanner) model.
+
+Interested readers can try out the model we provided: [**MRZScanner Demo**](https://docsaid.org/en/playground/mrzscanner-demo)
+:::
 
 ## What is MRZ?
 
