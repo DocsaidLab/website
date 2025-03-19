@@ -2234,57 +2234,6 @@ M1001 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlis
             <category>LayerNorm</category>
         </item>
         <item>
-            <title><![CDATA[NIST & FRVT]]></title>
-            <link>https://docsaid.org/en/blog/nist-and-frvt</link>
-            <guid>https://docsaid.org/en/blog/nist-and-frvt</guid>
-            <pubDate>Sun, 23 Jun 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[A brief introduction to NIST and FRVT.]]></description>
-            <content:encoded><![CDATA[<p>The National Institute of Standards and Technology (NIST) was founded in 1901 and is part of the United States Department of Commerce.</p>
-<ul>
-<li><a href="https://www.nist.gov/" target="_blank" rel="noopener noreferrer"><strong>FRVT Official</strong></a></li>
-</ul>
-<p>As a non-profit organization, NIST's mission is to advance U.S. innovation and competitiveness in science and technology through the development of standards, scientific research, and technology development, thereby promoting economic security and enhancing the quality of life.</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="core-missions-and-values-of-nist">Core Missions and Values of NIST<a href="https://docsaid.org/en/blog/nist-and-frvt#core-missions-and-values-of-nist" class="hash-link" aria-label="Direct link to Core Missions and Values of NIST" title="Direct link to Core Missions and Values of NIST">​</a></h2>
-<p>NIST's core missions include:</p>
-<ul>
-<li><strong>Measurement Science</strong>: Providing world-class measurement standards that support scientific research, business activities, and public safety.</li>
-<li><strong>Rigorous Traceability</strong>: Establishing and maintaining a comprehensive system of measurement standards to ensure international traceability and accuracy of measurement results.</li>
-<li><strong>Standardization and Application</strong>: Promoting the development and implementation of technical standards, particularly in information technology, environmental science, and manufacturing.</li>
-</ul>
-<p>NIST's core values emphasize perseverance, integrity, inclusivity, and excellence, which are foundational to its current and future work.</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="frvt-program">FRVT Program<a href="https://docsaid.org/en/blog/nist-and-frvt#frvt-program" class="hash-link" aria-label="Direct link to FRVT Program" title="Direct link to FRVT Program">​</a></h2>
-<p>The Face Recognition Vendor Test (FRVT) program is a key initiative by NIST.</p>
-<p>Its primary goal is to evaluate the performance of facial recognition technologies globally, providing an objective and impartial testing platform.</p>
-<p>FRVT encompasses various testing scenarios, including static image recognition and real-time recognition in dynamic environments, thereby helping users and developers comprehensively understand the performance of these technologies in practical applications.</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="importance-and-impact-of-the-frvt-program">Importance and Impact of the FRVT Program<a href="https://docsaid.org/en/blog/nist-and-frvt#importance-and-impact-of-the-frvt-program" class="hash-link" aria-label="Direct link to Importance and Impact of the FRVT Program" title="Direct link to Importance and Impact of the FRVT Program">​</a></h2>
-<p>The FRVT program significantly influences government agencies, businesses, and other organizations in selecting and deploying facial recognition systems by providing scientifically rigorous testing methods and objective performance assessment data.</p>
-<p>These test results not only help determine which technologies best suit specific security needs and operational environments but also foster innovation and advancement in the field of facial recognition technology.</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="participation-in-the-frvt-program">Participation in the FRVT Program<a href="https://docsaid.org/en/blog/nist-and-frvt#participation-in-the-frvt-program" class="hash-link" aria-label="Direct link to Participation in the FRVT Program" title="Direct link to Participation in the FRVT Program">​</a></h2>
-<p>Participation in the FRVT program involves several steps:</p>
-<ol>
-<li><strong>Submission of Participation Agreement</strong>: Developers need to submit a detailed participation agreement to NIST, indicating compliance with all FRVT regulations and standards.</li>
-<li><strong>Software Packaging and API Integration</strong>: Participants must encapsulate their algorithms behind the C++ API provided by NIST to ensure compatibility and functionality of the algorithms.</li>
-<li><strong>Execution of Verification Suites</strong>: Developers need to run their software through verification suites provided by NIST to ensure that the algorithm outputs submitted can be accurately reproduced by NIST.</li>
-<li><strong>Encryption and Data Submission</strong>: All algorithm submissions must be encrypted, correctly signed, and transmitted securely to NIST to ensure data security and integrity.</li>
-</ol>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="frte-program-and-its-projects">FRTE Program and Its Projects<a href="https://docsaid.org/en/blog/nist-and-frvt#frte-program-and-its-projects" class="hash-link" aria-label="Direct link to FRTE Program and Its Projects" title="Direct link to FRTE Program and Its Projects">​</a></h2>
-<p>The FRVT program has been split and renamed into Face Recognition Technology Evaluation (FRTE) and Face Analysis Technology Evaluation (FATE).</p>
-<p>The FRTE includes several subprojects:</p>
-<ul>
-<li>1:1 Verification</li>
-<li>1<!-- -->:N<!-- --> Identification</li>
-<li>Demographic Effects</li>
-<li>Face Mask Effects</li>
-<li>Paperless Travel</li>
-<li>Twins Demonstration</li>
-</ul>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="conclusion">Conclusion<a href="https://docsaid.org/en/blog/nist-and-frvt#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
-<p>As a key driver of global standardization and innovation in facial recognition technology, NIST continues to support technological advancements through its FRVT and FRTE programs, ensuring that these advancements not only serve public interests but also meet the needs of business and security.</p>
-<p>These initiatives not only enhance the accuracy and reliability of technologies but also promote sustained development across related industries.</p>]]></content:encoded>
-            <category>NIST</category>
-            <category>FRVT</category>
-        </item>
-        <item>
             <title><![CDATA[Get All Stock Code Information from TWSE]]></title>
             <link>https://docsaid.org/en/blog/get-taiwan-all-stocks-info</link>
             <guid>https://docsaid.org/en/blog/get-taiwan-all-stocks-info</guid>
@@ -2328,6 +2277,173 @@ M1001 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlis
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>Since you're here, why not take a moment to enjoy a cup of tea before you go?</p><p>We also wrote an API to integrate FinMind's stock data. By clicking the download button below, you can retrieve the latest stock information from FinMind. The data format may differ from the one used by the stock exchange, but you probably won't mind.</p><div style="text-align:center;margin-top:20px"><div class="ant-select ant-select-outlined css-7ny38l ant-select-single ant-select-show-arrow" style="width:120px;margin-right:10px"><div class="ant-select-selector"><span class="ant-select-selection-wrap"><span class="ant-select-selection-search"><input type="search" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-owns="undefined_list" aria-autocomplete="list" aria-controls="undefined_list" readonly="" unselectable="on" style="opacity:0" value=""></span><span class="ant-select-selection-item" title="JSON">JSON</span></span></div><span class="ant-select-arrow" style="user-select:none;-webkit-user-select:none" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span></div><button type="button" class="ant-btn css-7ny38l ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"><span class="ant-btn-icon"><span role="img" aria-label="download" class="anticon anticon-download"><svg viewBox="64 64 896 896" focusable="false" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span></span><span>Download Stocks</span></button></div></div></div>]]></content:encoded>
             <category>beautifulsoup4</category>
             <category>TWSE</category>
+        </item>
+        <item>
+            <title><![CDATA[Simple Configuration of Python Environment on Win11]]></title>
+            <link>https://docsaid.org/en/blog/windows-python-settings</link>
+            <guid>https://docsaid.org/en/blog/windows-python-settings</guid>
+            <pubDate>Wed, 05 Jun 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Setting up Python on Windows.]]></description>
+            <content:encoded><![CDATA[<p>We recently received a task that required development on a Windows-based system.</p>
+<p>It's been a long time! It's been several years since we last used Windows.</p>
+<p>We tried a few methods and finally settled on using PowerShell to set up the Python environment.</p>
+<p>We initially thought about using WSL for configuration, but that would turn the environment into a Linux environment... (?)</p>
+<p>If we already have a Linux environment at hand, why bother configuring one on Windows?</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="operating-environment">Operating Environment<a href="https://docsaid.org/en/blog/windows-python-settings#operating-environment" class="hash-link" aria-label="Direct link to Operating Environment" title="Direct link to Operating Environment">​</a></h2>
+<p>We're using the virtual environment tool provided by Mac: <a href="https://www.parallels.com/products/desktop/" target="_blank" rel="noopener noreferrer"><strong>Parallels Desktop</strong></a>.</p>
+<p>With Parallels Desktop, we can smoothly run a Windows system on Mac, and the currently installed one is Windows 11.</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>The Apple M1 chip is ARM-based, and it faced many compatibility issues when it was first launched, but it has improved a lot over the years.</p></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="installing-chocolatey">Installing Chocolatey<a href="https://docsaid.org/en/blog/windows-python-settings#installing-chocolatey" class="hash-link" aria-label="Direct link to Installing Chocolatey" title="Direct link to Installing Chocolatey">​</a></h2>
+<p>First, we need to launch PowerShell.</p>
+<div align="center"><figure style="width:70%"><p><img decoding="async" loading="lazy" alt="PowerShell" src="https://docsaid.org/en/assets/images/img1-72c7bd3a6fc465711d8d71512ee740b1.jpg" width="2511" height="2497" class="img_ev3q"></p></figure></div>
+<p>Chocolatey is a package manager for Windows. It automates the process of installing, upgrading, and managing software using NuGet and PowerShell technologies. It's similar to <code>apt-get</code> or <code>yum</code> on Linux, allowing Windows users to manage software in a simple and consistent way.</p>
+<p>Installing Chocolatey is relatively simple. Just run the following command in PowerShell with administrative privileges:</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>After installation, enter the following command to verify if Chocolatey was installed successfully:</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">choco -v</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>If you see the version number of Chocolatey, it means the installation was successful.</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>Here's what the above command does:</p><ol>
+<li>
+<p><strong>Set-ExecutionPolicy Bypass -Scope Process -Force</strong>:</p>
+<ul>
+<li>This command sets the PowerShell execution policy.</li>
+<li><code>Set-ExecutionPolicy</code> is used to change the execution policy to allow or disallow the execution of PowerShell scripts.</li>
+<li><code>Bypass</code> means bypassing all execution policies without any restrictions.</li>
+<li><code>-Scope Process</code> means applying this change only to the current PowerShell session, not affecting the entire system.</li>
+<li><code>-Force</code> is used to forcefully execute this operation without prompting for confirmation.</li>
+</ul>
+</li>
+<li>
+<p><strong>[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072</strong>:</p>
+<ul>
+<li>This command sets the network security protocol.</li>
+<li><code>[System.Net.ServicePointManager]::SecurityProtocol</code> is used to get or set the protocol type.</li>
+<li><code>-bor 3072</code> adds the TLS 1.2 (3072) protocol to the existing protocols. <code>-bor</code> is a bitwise operator, indicating a bitwise OR operation, allowing multiple protocols to be enabled simultaneously.</li>
+</ul>
+</li>
+<li>
+<p><strong>iex ((New-Object System.Net.WebClient).DownloadString('<a href="https://community.chocolatey.org/install.ps1" target="_blank" rel="noopener noreferrer">https://community.chocolatey.org/install.ps1</a>'))</strong>:</p>
+<ul>
+<li>This command downloads and executes the Chocolatey installation script.</li>
+<li><code>iex</code> is shorthand for <code>Invoke-Expression</code>, used to execute the content passed to it as a string.</li>
+<li><code>New-Object System.Net.WebClient</code> is used to create a new WebClient object, which is used for downloading data.</li>
+<li><code>.DownloadString('https://community.chocolatey.org/install.ps1')</code> is used to download the script content from the specified URL.</li>
+<li>Overall, the command <code>iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))</code> downloads and immediately executes the PowerShell script located at '<a href="https://community.chocolatey.org/install.ps1" target="_blank" rel="noopener noreferrer">https://community.chocolatey.org/install.ps1</a>', which is responsible for installing Chocolatey.</li>
+</ul>
+</li>
+</ol><p>In simple terms, the purpose of this command is: temporarily set the PowerShell execution policy to allow script execution, configure the network security protocol to support TLS 1.2, and then download and execute the Chocolatey installation script.</p></div></div>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Common Chocolatey Commands:</strong></p><ul>
+<li><strong>Install</strong>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">choco install &lt;packageName&gt;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li><strong>Upgrade</strong>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">choco upgrade &lt;packageName&gt;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li><strong>List installed packages</strong>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">choco list --localonly</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li><strong>Uninstall</strong>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">choco uninstall &lt;packageName&gt;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="installing-git">Installing git<a href="https://docsaid.org/en/blog/windows-python-settings#installing-git" class="hash-link" aria-label="Direct link to Installing git" title="Direct link to Installing git">​</a></h2>
+<p>After installation, continue running PowerShell as an administrator, and execute the following command to install Git:</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">choco install git -y</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>After installation, enter the following command to verify if Git was installed successfully:</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">git --version</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># &gt;&gt;&gt; git version 2.45.2.windows.1</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="installing-python">Installing Python<a href="https://docsaid.org/en/blog/windows-python-settings#installing-python" class="hash-link" aria-label="Direct link to Installing Python" title="Direct link to Installing Python">​</a></h2>
+<p>We use pyenv to manage Python versions.</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>Although there are many choices on the market, such as Anaconda, Miniconda, WinPython, etc., we still chose pyenv.</p><p>Because we often develop on Linux, seeing pyenv feels familiar.</p></div></div>
+<p>Installing and using <code>pyenv</code> on Windows is not usually straightforward because <code>pyenv</code> is designed for Unix-like environments. However, you can use the <code>pyenv-win</code> project, which is a Windows port of <code>pyenv</code>.</p>
+<p>Follow these steps:</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="step-1-installing-pyenv-win">Step 1: Installing <code>pyenv-win</code><a href="https://docsaid.org/en/blog/windows-python-settings#step-1-installing-pyenv-win" class="hash-link" aria-label="Direct link to step-1-installing-pyenv-win" title="Direct link to step-1-installing-pyenv-win">​</a></h3>
+<ul>
+<li><a href="https://github.com/pyenv-win/pyenv-win/blob/master/docs/installation.md" target="_blank" rel="noopener noreferrer"><strong>Reference: pyenv-win/docs/installation.md</strong></a></li>
+</ul>
+<p>Download the <code>pyenv-win</code> project:</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &amp;"./install-pyenv-win.ps1"</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>If you encounter any <code>UnauthorizedAccess</code> errors as shown below, please launch Windows PowerShell with the "Run as Administrator" option and execute:</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>After completion, rerun the installation command above.</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="step-2-verify-installation">Step 2: Verify Installation<a href="https://docsaid.org/en/blog/windows-python-settings#step-2-verify-installation" class="hash-link" aria-label="Direct link to Step 2: Verify Installation" title="Direct link to Step 2: Verify Installation">​</a></h3>
+<ol>
+<li>
+<p><strong>Restart PowerShell</strong>:</p>
+<ul>
+<li>Close and reopen the PowerShell window to apply the environment variable changes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check <code>pyenv</code> installation</strong>:</p>
+<ul>
+<li>
+<p>Enter the following command to check the <code>pyenv</code> version:</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pyenv --version</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="step-3-use-pyenv-to-install-python-versions">Step 3: Use <code>pyenv</code> to install Python versions<a href="https://docsaid.org/en/blog/windows-python-settings#step-3-use-pyenv-to-install-python-versions" class="hash-link" aria-label="Direct link to step-3-use-pyenv-to-install-python-versions" title="Direct link to step-3-use-pyenv-to-install-python-versions">​</a></h3>
+<ol>
+<li>
+<p><strong>View available Python versions</strong>:</p>
+<ul>
+<li>
+<p>List all available Python versions with the following command:</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pyenv install --list</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Install a specific Python version</strong>:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>For example, to install Python 3.10.11:</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pyenv install 3.10.11</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+<ol start="3">
+<li>
+<p><strong>Set a global Python version</strong>:</p>
+<ul>
+<li>
+<p>This step is not necessary, but if you want to use the same Python version across all shells, you can set the installed Python version as the global default:</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pyenv global 3.10.11</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Verify Python installation</strong>:</p>
+<ul>
+<li>
+<p>Enter the following command to verify if Python was installed successfully:</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">python --version</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+</ol>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="installing-vs-code">Installing VS Code<a href="https://docsaid.org/en/blog/windows-python-settings#installing-vs-code" class="hash-link" aria-label="Direct link to Installing VS Code" title="Direct link to Installing VS Code">​</a></h2>
+<p>Finally, we install Visual Studio Code as our development tool.</p>
+<p>Here, we'll go to the <a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener noreferrer"><strong>VS Code official website</strong></a> to download the installer and then proceed with the installation.</p>
+<div align="center"><figure style="width:70%"><p><img decoding="async" loading="lazy" alt="VS Code" src="https://docsaid.org/en/assets/images/img2-1b80c57a3c2c9d972c83528d2cba968d.jpg" width="2809" height="1668" class="img_ev3q"></p></figure></div>
+<p>After installation, we want to be able to use the <code>code</code> command directly in PowerShell to open VS Code.</p>
+<p>So, we need to add the installation path of VS Code to the environment variables. Copy the following path:</p>
+<div class="language-powershell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-powershell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">C:\Users\your_user_name\AppData\Local\Programs\Microsoft VS Code\bin</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>Remember to replace <code>your_user_name</code> with your username.</p></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="side-note">Side Note<a href="https://docsaid.org/en/blog/windows-python-settings#side-note" class="hash-link" aria-label="Direct link to Side Note" title="Direct link to Side Note">​</a></h2>
+<p>Actually, we find the PowerShell display screen really hard to look at.</p>
+<p>For this part, we suggest using <a href="https://ohmyposh.dev/" target="_blank" rel="noopener noreferrer"><strong>oh-my-posh</strong></a> to beautify the appearance of PowerShell.</p>
+<p>But this part is not the focus of this article. Interested readers can check out:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/windows/terminal/tutorials/custom-prompt-setup" target="_blank" rel="noopener noreferrer"><strong>Tutorial - Customize Your Prompt with Oh My Posh for PowerShell or WSL</strong></a></li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="conclusion">Conclusion<a href="https://docsaid.org/en/blog/windows-python-settings#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
+<p>Through PowerShell, we can quickly set up the Python environment and install development tools.</p>
+<p>Of course, the above only covers the most basic configurations, leaving this article as a reference.</p>]]></content:encoded>
+            <category>win11</category>
+            <category>python</category>
         </item>
     </channel>
 </rss>
