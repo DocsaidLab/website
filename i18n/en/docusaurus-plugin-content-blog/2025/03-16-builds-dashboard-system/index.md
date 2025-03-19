@@ -9,9 +9,9 @@ description: A sharing of the experience building a backend system from scratch.
 
 Good afternoon, or good evening.
 
-Recently, I've been a bit slack in updating articles, so I owe everyone an apology.
+I've been a bit slack on updating articles lately, so I want to apologize to everyone.
 
-The reason is that I've been sidetracked into writing both front-end and back-end code.
+Because I’ve been busy doing something unrelated to my main work: I’ve been working on both the frontend and backend.
 
 <!-- truncate -->
 
@@ -21,51 +21,73 @@ Well, yes.
 
 ---
 
-I just had a long vacation recently and finally had the time to tackle some problems I hadn’t been able to solve before:
+Recently, I had a long holiday, and finally had time to deal with some unresolved issues:
 
-- **This website doesn't have a backend!**
+- **This website doesn’t have a backend!**
 
-You might know that this website is built on the Docusaurus framework as a static site. When I first set up the website, I just wanted to occasionally write some blog posts and share some paper notes, without any specific planning or grand goals.
+You might know a bit about it, but this website is built on the Docusaurus framework, which is a static site. When I first set up this website, my idea was just to occasionally write some blogs and share paper notes; there wasn’t any special planning or grand goal behind it.
 
-The pros and cons of static websites versus dynamic websites are something I don't need to explain. I had tried using WordPress to set up a site before, but after a few steps, some guy would pop up asking for money, which was really annoying. After trying a few rounds, I went back to the static site setup.
+The pros and cons of static vs. dynamic websites are probably not new to you. I even tried using WordPress to set up a site, but after a short while, I was greeted by someone asking for money, which was really frustrating:
 
-There are pros and cons to everything, and as the content of the site gradually accumulated, I started receiving more and more emails from readers, most of which were about how to use the models—questions like how to configure the environment, install dependencies, or solve strange errors encountered during execution.
+> **Building a site myself already brings minimal returns, so why do some people always target my wallet?**
 
-These are easy problems to solve; I just tell them to ask ChatGPT, and it’s all good. (~Isn’t that too casual?~)
+I ended up using WordPress for a while but eventually gave it up.
 
-The trickier request was: some readers wanted to directly call my backend API!
+It wasn’t just because of expensive paid services, but because its code was hard to customize... okay, I admit it: I just can’t write PHP.
 
-## The First Generation Backend: Minimalist Style
+In contrast, I prefer the frontend-backend separation architecture, which is much more comfortable.
 
-Going back a little further in time, after writing a few articles, I wanted to make the models available for everyone to try, so I created a few model demos and built the first generation of the backend: yes! It’s the "Playground" on the navigation bar of this website. If you haven’t tried it, you can give it a go.
+You know what happened after that—I chose Docusaurus and stuck with it. After all that, I ended up back with a static site architecture.
 
-That said, if you want to use the models on a webpage, generally there are two solutions:
+＊
 
-- **1. Load the model directly from the webpage and perform inference in the browser.**
+As the content of the website accumulated, I started receiving emails from readers, mostly asking about model usage: such as how to configure environments, install dependencies, or even how to resolve strange errors that appeared during execution.
 
-  I rejected this solution immediately.
+These were easy to handle; I just told them to ask ChatGPT, and that was it. (~Too casual, huh?~)
 
-  Because it would mean I would have to provide a model download endpoint, and the traffic issues that would arise could potentially bring me down.
+Not casual at all! With the power of AI tools these days, most problems can be resolved directly by asking, saving a lot of time compared to emailing back and forth.
 
-- **2. Provide a backend service that returns the inference results.**
+Of course, there are still problems AI can't solve, like when readers asked if they could directly call my backend API!
 
-  This was the solution I ended up adopting.
+Hey! At first glance, it sounds like a simple request, but when you try to implement it, the issues pile up. Let’s talk about it in a moment.
 
-  But this also meant that, one way or another, I had to handcraft a backend system to provide the corresponding service.
+## The First Version of the Backend
+
+Let’s rewind a bit.
+
+After working on a few models, I wanted to make them available for everyone to try. It's like building a sandcastle by the sea and eagerly waiting for a big wave to test how sturdy your wall is. Even if the wave washes it away, at least you tried.
+
+It’s the same with models. I don’t think any engineer would build a model and then hide it away... what would be the point of that?
+
+So, I made a few model demos myself and built the first generation of the backend: that’s right! The "Playground" section in the navigation bar of this site. If you haven’t tried it yet, feel free to explore.
+
+You might ask, why would you need a backend just for a demo?
+
+That’s a fair point. Generally, there are two solutions if you want to use a model on a website:
+
+1. **Load the model directly in the browser and run inference in the browser.**
+
+   I rejected this solution immediately.
+
+   Running models in the browser is technically possible but very cumbersome. At the very least, it needs to support three or more browsers, each with different configuration environments. This reminded me of the frontend colleagues who struggled with WebAssembly. If they knew I was considering this, they would definitely stop me.
+
+2. **Provide a backend service to return inference results.**
+
+   This is the solution I chose.
+
+   The frontend simply handles data input and output, leaving all the troublesome work to the backend. But that means I have to build a backend system to provide the necessary services.
 
 ---
 
-Since I was already using Docusaurus for the front-end, I had to adopt a decoupled architecture for the front-end and back-end. Before starting to code, I drew an architecture diagram.
+Since I was already using Docusaurus for the frontend, I had to adopt a frontend-backend separation architecture.
 
-In fact, aside from the architecture diagram, I also wrote a bunch of specifications, system operation flows, and detailed input/output designs, etc. But here, I'll just show the architecture diagram, as the details would be too long to explain.
-
-The architecture should look something like this:
+Before starting the coding, I drew a diagram. This is what the architecture should look like:
 
 ```mermaid
 graph LR
     subgraph Frontend
-        Input[Send Data]
-        Render[Receive Data and Render]
+        Input[Send data]
+        Render[Receive data and render]
     end
 
     subgraph Backend
@@ -77,9 +99,9 @@ graph LR
 
     Input -->|HTTP Request| Nginx
     Nginx -->|Forward Request| FastAPI
-    FastAPI --> |Store Result| SQL
+    FastAPI --> |Save Results| SQL
     FastAPI --> Model
-    Model -->|Store Result| SQL
+    Model -->|Save Results| SQL
     FastAPI -->|HTTP Response| Nginx
     Nginx -->|Send Response| Render
 
@@ -91,73 +113,97 @@ graph LR
     style Model fill:#cbaacb,stroke:#9a6d9a,stroke-width:2px
 ```
 
-After finalizing the specifications, I followed the diagram to implement the system, which is now the operational logic behind the "Playground" feature on the website.
+Apart from the architecture diagram, I also created lots of specifications and system operation processes, as well as detailed input and output designs. But it’s too tedious to include everything here, so I’ll just share the architecture diagram.
 
-Up to this point, although it looks simple, it's worth discussing the technologies I chose to use.
+Once the specifications were ready, I started working based on the diagram, and that’s how the backend logic for the current "Playground" on the site was built.
 
-After all, behind every technology choice, there are often unseen little details:
+At this point, although it seems relatively simple, let’s talk about the technologies I chose:
 
 1. **Nginx**
 
-   Another common choice here is Apache, which was once the king of web servers, rich in features, with many modules, a large community, and a very broad user base. But Apache's configuration is a bit more complex, and its ability to handle high concurrency connections is somewhat inferior to Nginx.
+   Another common choice here is Apache, which was once the king of web servers, with rich features, many modules, and a large community. But Apache’s configuration can be complex, and it’s not as good at handling high-concurrency connections as Nginx.
 
-   To be honest, I don’t think Apache is bad, it’s just that I really like the clean and intuitive configuration style of Nginx. Whether it’s static resource proxying, reverse proxying, or load balancing, Nginx’s setup always gets straight to the point, and it’s easy to understand at a glance.
+   Honestly, I don’t think Apache is bad, but I prefer Nginx’s clean and intuitive configuration style. Whether it’s for static resource proxying, reverse proxying, or load balancing, Nginx’s setup is easier to understand. But of course, this is subjective—some people may not like this style.
 
-   Moreover, Nginx was specifically designed to handle a large number of concurrent connections, and its stability and performance have been tested by the market and time, making it particularly reliable to use.
+   Ultimately, Nginx was designed to handle a large number of concurrent connections, and its stability and performance have been tested over time. It seems like a solid choice.
 
    ***
 
 2. **FastAPI**
 
-   The reason I chose FastAPI is partly because I’m more familiar with the Python development environment. If I suddenly switched to learn NodeJS or another backend framework, it would involve a lot of learning costs, potentially delaying the development process.
+   The backend frameworks I hear most about are C# and NodeJS, but unfortunately, I’m not familiar with them.
 
-   Besides familiarity, FastAPI’s other features also made it hard to resist: it natively supports asynchronous (async) operations, which are perfect for backend model inference scenarios that are time-consuming but require high efficiency in handling concurrent requests. Plus, it has Pydantic validation built-in, which automatically generates API documentation and even prepares a test interface for you, greatly reducing the pain during API development and maintenance.
+   As an AI engineer, I’m most comfortable in the Python environment. If I suddenly switched to learning NodeJS or other backend frameworks, I’d incur a lot of additional learning costs, which could delay development for several months.
 
-   More importantly, FastAPI’s design structure is clear and easy to understand. It’s neither as heavy and cumbersome as Django nor as free-form as Flask, which might lead to chaotic architecture. The development experience is just right.
+   So, I chose FastAPI.
+
+   FastAPI natively supports asynchronous operations, making it perfect for backend model inference, where requests need to be processed efficiently even if they are time-consuming. Plus, it has Pydantic built-in for validation and can automatically generate API documentation and testing interfaces, which greatly reduces the pain of developing and maintaining the API.
+
+   More importantly, FastAPI’s design is clean and easy to understand. It’s not as bulky and complex as Django, nor as free-form as Flask, which could lead to architectural chaos. The development experience is just right.
 
    ***
 
 3. **PostgreSQL**
 
-   Speaking of databases, I used to be more familiar with MySQL.
+   When it comes to databases, I’m actually more familiar with MySQL.
 
-   MySQL certainly has a good reputation in the development community and is the go-to choice for many newcomers to databases, but since Oracle acquired it, MySQL’s open-source license has gradually shifted toward commercialization, increasing the uncertainty of its ecosystem, which makes me a bit worried.
+   MySQL has a great reputation in the developer community and is the go-to choice for many beginners. But since Oracle acquired MySQL, its open-source license has gradually become more commercial, which raises some concerns about the ecosystem’s uncertainty.
 
-   In contrast, PostgreSQL has shown a stable and gradually growing healthy state in the open-source community. Apart from ongoing community support, PostgreSQL also supports many powerful advanced features, such as native JSON data types and GIS geographic information processing, which make it more flexible and practical in situations where complex data requirements are needed.
+   In contrast, PostgreSQL has maintained a stable and steadily growing presence in the open-source community. In addition to continuous community support, PostgreSQL also supports powerful advanced features, such as native JSON data types and GIS for geographical information processing, making it more useful in complex data scenarios.
 
-   Additionally, PostgreSQL integrates seamlessly with FastAPI and various ORM tools (like SQLAlchemy), providing a smooth and enjoyable experience. Not to mention, PostgreSQL performs excellently when handling a large number of concurrent and high-load requests, so if the website traffic increases or the backend requirements become more complex in the future, at least I won’t have to worry about the database becoming a bottleneck.
+   Furthermore, PostgreSQL integrates smoothly with FastAPI and various ORM tools (like SQLAlchemy), making for a pleasant user experience. It also handles high-concurrency and high-load requests very well, so if traffic increases or backend requirements get more complex in the future, I won’t have to worry about the database becoming a bottleneck.
 
    ***
 
-I’ve said a lot, but this may not necessarily be the best combination; it’s mainly sufficient to meet the current needs.
+I’ve mentioned a lot, but this might not necessarily be the best combination—it’s just enough to handle the current needs.
 
-## Second Generation Backend: Minimalist Style
+For this simple architecture, it works well enough.
 
-Back to the issue I mentioned at the beginning, a reader emailed asking to directly call my backend API through their program.
+## Second Generation Backend
 
-The originally designed API was simply intended for web use and did not include a complete security mechanism or authentication process. Exposing it publicly could lead to various security issues. Therefore, I had to build a more complete API authentication and authorization system by myself.
+Returning to the issue mentioned at the beginning, a reader emailed me asking if they could directly call my backend API via code, instead of interacting through the web interface. This is an interesting request, indicating that the user may want a more automated and efficient way to interact with the system.
 
-But I don’t understand it!
+So, what issues arise when we open the API directly for users to call?
 
-Although I didn’t understand it, since the goal was set, I had to dive in and do it anyway!
+1. **It Could Overload the Traffic**
+
+   When an API is exposed externally, users can send high-frequency requests via code, which could lead to a sudden surge in server traffic and potentially exceed its load capacity.
+
+   For example, some users may fail to set appropriate request frequencies, causing the API to receive a large number of requests in a short period of time, which can affect other users’ ability to access the system normally. Or someone might use a crawler or malicious script to test the API, occupying the server’s bandwidth and computational resources, which could affect service stability.
+
+   ***
+
+2. **Security Risks**
+
+   Once the API is open, if there is no strict authentication and access control, anyone could obtain data they shouldn't have access to or even execute dangerous operations. If the API lacks proper authentication mechanisms (such as OAuth or JWT), malicious individuals might simulate legitimate users through simple requests, leading to potential security risks.
+
+   ***
+
+There are many other extended problems that could be discussed in detail, but I’ll skip over those for now.
+
+In conclusion, I can’t open the API directly, because both I and my server could face significant risks.
+
+So, to meet the demand for open APIs, I had to build a complete user authentication and API authorization system myself.
+
+Alright, here we go again: engineers aren’t afraid of being inexperienced, they’re just afraid of not taking action. Time to write some code!
 
 ### User Login System
 
-The prerequisite for API authentication is building a complete user system, including user registration, login, permission management, email verification, and other features.
+A complete user system includes features like user registration, login, permission management, and email verification.
 
-In addition to the existing FastAPI and PostgreSQL database, I introduced Redis to handle session caching and token management. To enhance user experience, I also designed email verification and password recovery features, sending verification emails via an SMTP service.
+In addition to FastAPI and the PostgreSQL database that I was already using, I also integrated Redis for session caching and token management. To enhance the user experience, I designed email verification and password recovery features, using SMTP services to send verification emails.
 
-Now, I can draw another architecture diagram. Let me sketch it out:
+Now, I can create a new architecture diagram for this part—let me sketch it out simply:
 
 ```mermaid
 graph LR
-    %% Frontend Block
+    %% Frontend Section
     subgraph Frontend
         UserRegister[User Registration]
         UserLogin[User Login]
     end
 
-    %% Backend Block
+    %% Backend Section
     subgraph Backend
         Nginx[Nginx]
         FastAPI[Backend API]
@@ -170,7 +216,7 @@ graph LR
     %% Registration Process (Blue)
     UserRegister -- "Registration Request" --> Nginx
     Nginx -- "Forward Registration Request" --> FastAPI
-    FastAPI -- "Validate and Store Data" --> UserDB
+    FastAPI -- "Validate and Save Data" --> UserDB
     FastAPI -- "Write to Cache/Create Session" --> Redis
     FastAPI -- "Respond with Registration Result" --> Nginx
     Nginx -- "Send Result" --> UserRegister
@@ -183,12 +229,12 @@ graph LR
     FastAPI -- "Respond with Login Result (JWT/Session)" --> Nginx
     Nginx -- "Send Result" --> UserLogin
 
-    %% Email Verification Process (Purple) - Example of Interaction with Backend
+    %% Account Email Verification Process (Purple) - Demonstrating Backend Interaction
     FastAPI -- "Send Verification Email" --> EmailVerification
     EmailVerification -- "Update User Verification Status" --> UserDB
     EmailVerification -- "Respond with Result" --> FastAPI
 
-    %% Forgot Password Process (Pink) - Example of Interaction with Backend
+    %% Forgot Password Process (Pink) - Demonstrating Backend Interaction
     FastAPI -- "Forgot Password Request" --> ForgotPassword
     ForgotPassword -- "Update User Password" --> UserDB
     ForgotPassword -- "Respond with Result" --> FastAPI
@@ -208,22 +254,22 @@ graph LR
     linkStyle 10 stroke:#fd7e14,stroke-width:2px
     linkStyle 11 stroke:#fd7e14,stroke-width:2px
 
-    %% Email Verification Arrows (Purple: from line 12)
+    %% Email Verification Process Arrows (Purple: From Step 12)
     linkStyle 12 stroke:#6f42c1,stroke-width:2px
     linkStyle 13 stroke:#6f42c1,stroke-width:2px
     linkStyle 14 stroke:#6f42c1,stroke-width:2px
 
-    %% Forgot Password Arrows (Pink: from line 15)
+    %% Forgot Password Process Arrows (Pink: From Step 15)
     linkStyle 15 stroke:#d63384,stroke-width:2px
     linkStyle 16 stroke:#d63384,stroke-width:2px
     linkStyle 17 stroke:#d63384,stroke-width:2px
 ```
 
-This user system needs to include a user database, password encryption, registration email verification, password reset flow, and various other details. I haven’t considered integrating third-party login services yet, like allowing users to log in via Google or Facebook accounts. If I were to integrate third-party login verification, that would be a whole other task, which I’ll leave for the future.
+This user system needs to include a user database, password encryption, registration email verification, forgotten password reset processes, and other details. I haven’t considered integrating third-party login services yet, such as logging in via Google or Facebook accounts. If I were to add third-party login verification, that would involve a lot more work, which I’ll leave for my future self.
 
-Speaking of registration email verification, it turned out to be more troublesome than I expected.
+Speaking of registration email verification, this turned out to be more troublesome than expected.
 
-At first, I applied for Amazon SES, but after a day of waiting, they rejected me, saying that I looked suspicious. (What?)
+I first applied for Amazon SES, but after waiting for a day, they rejected me, saying I looked suspicious. (What?)
 
 <div align="center">
 <figure style={{"width": "60%"}}>
@@ -231,24 +277,32 @@ At first, I applied for Amazon SES, but after a day of waiting, they rejected me
 </figure>
 </div>
 
-Fine, then I thought I could just set up my own email server, right?
+Since that didn’t work, I thought maybe I could set up my own mail server.
 
-But after I set up the server, the emails I sent were rejected by Gmail, and they too thought I was suspicious. (😭 😭 😭)
+After a day of setup and troubleshooting, I finally got it working!
 
-Anyway, after some setbacks, I finally found another supplier to sort this out.
+But then, the emails I sent were still rejected by Gmail because they also thought I looked suspicious. (😭 😭 😭)
+
+In the end, after some twists and turns, I found another provider who helped me get it sorted out, but I’ll spare you the details.
+
+After more than a week of work, I finally completed the specifications I set out to do. Although the result is just a simple page, I still wrote over a thousand lines of code. It feels like a very low-effort payoff.
+
+By the time I reached this point in the coding process, I finally understood why frontend and backend developers often don’t see eye to eye and end up arguing and shifting blame all the time. I can only say that setting clear specifications is really important—though it was just me doing everything, without clear specifications, I’d still end up in a messy situation.
 
 ### API Token Issuance System
 
-After completing the user system, I finally got to work on the API Token functionality.
+After finishing the user system, I finally got around to implementing the API Token functionality.
 
-Here, I used the JWT (JSON Web Token) mechanism to generate and verify tokens. The user logs in to authenticate their identity, and the system generates a JWT that is stored in Redis. When the user sends an API request, the JWT is sent as a Bearer Token to the backend for identity verification. Once the token is validated successfully, the user can access the backend model inference service.
+The most common token format these days is JWT (JSON Web Token), and one of its key features is that JWT is self-contained. As long as we verify that the token is valid, we can know the user's identity and permissions, reducing the need for frequent database queries and improving performance. JWT can store information like the user ID, permissions, and expiration date, thus avoiding additional API queries.
 
-This part is fairly simple, so here’s an architecture diagram for the token request flow:
+So I decided to use JWT directly. Users verify their identity through login, after which the system generates a JWT and stores it in Redis. When the user sends an API request, the JWT is sent to the backend as a Bearer Token for authentication. Once the token is verified successfully, the user can proceed to access the backend model inference services.
+
+The architecture for applying for a token is quite simple, and here’s the diagram for it:
 
 ```mermaid
 graph LR
     subgraph Frontend
-        apiClient[API Request Client]
+        apiClient[API Client]
     end
 
     subgraph Backend
@@ -262,8 +316,8 @@ graph LR
 
     apiClient -- "Token Request" --> Nginx
     Nginx -- "Forward Token Request" --> APIToken
-    APIToken -- "Verify (Redis)" --> Redis
-    APIToken -- "Verify (UserDB)" --> UserDB
+    APIToken -- "Query Verification (Redis)" --> Redis
+    APIToken -- "Query Verification (UserDB)" --> UserDB
     APIToken -- "Generate and Store Token" --> Redis
     APIToken -- "Respond with Token" --> Nginx
     Nginx -- "Send Token" --> apiClient
@@ -284,12 +338,12 @@ graph LR
     style Redis fill:#cbaacb,stroke:#9a6d9a,stroke-width:2px
 ```
 
-Once the user has the token, they can use it to call the API. Redis is used to limit traffic and track the number of calls. The general flow for API requests looks like this:
+Once the user receives the token, they can use this token to call the API. For this part, Redis is used to limit traffic and calculate the number of calls. The overall calling process is as follows:
 
 ```mermaid
 graph LR
     subgraph Frontend
-        apiClient[API Request Client]
+        apiClient[API Client]
     end
 
     subgraph Backend
@@ -307,11 +361,11 @@ graph LR
     APIToken -- "Verify Token (Redis)" --> Redis
     APIToken -- "Verify Token (UserDB)" --> UserDB
     APIToken -- "Token Verified" --> ModelService
-    ModelService -- "Return Inference Result" --> APIToken
+    ModelService -- "Respond with Inference Result" --> APIToken
     APIToken -- "Respond with Result" --> Nginx
     Nginx -- "Send Inference Result" --> apiClient
 
-    %% Change line colors to pink
+    %% Change lines to pink
     linkStyle 0 stroke:#ff1493,stroke-width:2px
     linkStyle 1 stroke:#ff1493,stroke-width:2px
     linkStyle 2 stroke:#ff1493,stroke-width:2px
@@ -321,7 +375,7 @@ graph LR
     linkStyle 6 stroke:#ff1493,stroke-width:2px
     linkStyle 7 stroke:#ff1493,stroke-width:2px
 
-    %% Node Styles (can be kept or modified as needed)
+    %% Node Styles (can be modified as needed)
     style apiClient fill:#ffe0b3,stroke:#ffb366,stroke-width:2px
     style Nginx fill:#7eaefc,stroke:#4c84d9,stroke-width:2px
     style APIToken fill:#d9c8f5,stroke:#a58bdd,stroke-width:2px
@@ -330,40 +384,119 @@ graph LR
     style Redis fill:#cbaacb,stroke:#9a6d9a,stroke-width:2px
 ```
 
-## Technical Stack Summary
+### API Token Management Mechanism
 
-The second-generation backend mainly introduced two core features: the user registration system and the API token issuance mechanism.
+After designing the Token, I didn’t implement a renewal mechanism. Instead, I allowed users to set the token's expiration time and provided manual revocation and deletion mechanisms to ensure flexibility and security in API access permissions.
 
-After this upgrade, the overall tech stack is clearer and more complete, as listed below:
+When users request a token, they can specify its expiration time (e.g., 1 hour, 1 day, 7 days, or even 1 year). Once the token expires, the system will automatically invalidate it, and users will need to request a new token.
+
+This design allows developers to choose an appropriate token validity period based on their needs, avoiding frequent reauthorization.
+
+Users can revoke or delete their tokens at any time. If a token is compromised or is no longer needed, it can be deleted immediately, rendering it inactive.
+
+Token status is stored in Redis. When a user manually revokes a token, the system will immediately mark it as invalid, and subsequent API requests will be rejected. This avoids unnecessary long-term authorization risks and ensures control over the system.
+
+Here is the architecture diagram for this process:
+
+```mermaid
+sequenceDiagram
+    participant Client as API Client
+    participant Server as Authentication Service
+    participant Redis as Redis (Token Cache)
+    participant UserDB as User Database
+
+    Client->>Server: Request Token (Specify Expiration)
+    Server->>UserDB: Save Token and Expiration
+    Server->>Redis: Cache Token for Faster Validation
+    Server-->>Client: Return Token
+
+    Note over Client,Server: Use Token for API Access
+
+    Client->>Server: API Request (With Token)
+    Server->>Redis: Check if Token is Valid
+    alt Token Exists in Redis
+        Redis-->>Server: Token is Valid
+    else Token Does Not Exist
+        Server->>UserDB: Query Token
+        UserDB-->>Server: Token is Valid
+        Server->>Redis: Cache Token for Efficiency
+    end
+    Server-->>Client: API Response
+
+    Note over Client,Server: User Decides to Revoke Token
+
+    Client->>Server: Request to Delete Token
+    Server->>UserDB: Delete Token from Database
+    Server->>Redis: Delete Token from Redis Cache
+    Server-->>Client: Token Deleted Successfully
+```
+
+:::info
+**Why Not Use a Renewal Mechanism?**
+
+- Allowing users to set expiration times increases API flexibility, avoiding the system from overly interfering with user token management.
+- Without a renewal mechanism, we can ensure that the token remains valid within the set period, preventing the additional verification burden caused by frequent renewals.
+- Manual token revocation ensures that if a token is compromised or no longer needed, it can be invalidated immediately, enhancing security.
+
+This design provides a simple yet controlled token management approach, ideal for users who need long-term access but still want to maintain security.
+:::
+
+### API Rate Limiting
+
+With tokens in place, the next challenge is: "How to prevent malicious users from abusing the API?"
+
+Since the API could involve a large number of inference requests (e.g., AI model inference, batch queries), if not limited, it could easily be attacked or affect regular users' experience. Therefore, I introduced a "Rate Limiting" mechanism, which uses Redis to track the number of requests and temporarily blocks requests when the limit is reached within a short time.
+
+Here’s the architecture diagram for this process:
+
+```mermaid
+sequenceDiagram
+    participant Client as API Client
+    participant Nginx as Nginx Proxy
+    participant AuthService as Authentication Service
+    participant Redis as Redis (Request Count)
+    participant ModelService as Deep Learning Model Service
+
+    Client->>Nginx: Send API Request (with Token)
+    Nginx->>Redis: Check Request Count
+    Redis-->>Nginx: Count Below Limit
+    Nginx->>AuthService: Validate Token
+    AuthService->>Redis: Verify Token Validity
+    Redis-->>AuthService: Token Valid
+    AuthService->>ModelService: Execute Inference
+    ModelService-->>AuthService: Return Inference Result
+    AuthService-->>Nginx: Return API Response
+    Nginx-->>Client: Send API Response
+
+    Note over Client,Redis: If Request Count is Too High, Redis Will Block the Request
+```
+
+## Technology Stack Summary
+
+After upgrading the backend of this website, the overall technology stack is now updated as follows:
 
 - **Frontend Framework**: React (Docusaurus)
 - **Backend Framework**: FastAPI (Python)
 - **Database**: PostgreSQL
 - **Cache Service**: Redis
-- **Reverse Proxy and Load Balancing**: Nginx
+- **Reverse Proxy and Load Balancer**: Nginx
 
-Aside from the newly added Redis, most of these technologies were already part of the first generation of the backend. However, at that time, there wasn’t a dedicated frontend page to clearly present this information. Through this update, I created a dedicated frontend backend page, making management more intuitive and efficient.
+Apart from the newly added Redis, most of the technologies above were already present in the first-generation backend. It’s just that, at the time, there wasn’t a dedicated frontend page to clearly present this related information. With this upgrade, I’ve added a frontend backend page where users can interact with it and access more services and features.
 
-As a deep learning engineer, Python with FastAPI is an essential tool for me. While this tech stack isn't particularly innovative, it significantly improves development efficiency and smoothness, as familiar tools allow for faster implementation.
+For me, Python with FastAPI is an everyday essential tool. While this technology stack isn’t necessarily groundbreaking, it has significantly increased development efficiency and the smoothness of usage. As for deployment, I’m still using Docker Compose combined with Nginx and hosting it on my own machine. While I would have liked to move it to the cloud, the cost is too high (low-cost options have poor performance), so I have to make do with what I have.
 
-For deployment, I continue to use Docker Compose with Nginx, hosted on my personal server. Although I would prefer to use a cloud server, the cost is too high, and I can't afford it, so I have to settle with hosting it on my home machine for now.
-
-In terms of development insights, I believe that clearly defining backend specifications early on is a crucial step. Well-defined input/output endpoints greatly reduce integration friction between the frontend and backend. Since I handled this project by myself, I avoided many of the communication issues common in cross-team collaboration. In practical terms, if developed by a separated frontend and backend team, simply clarifying responsibilities and interface specifications could lead to weeks of discussion.
-
-In conclusion, the system is now running smoothly, and I’ll continue to observe and improve it as it runs.
+In summary, the system is now running smoothly. I’ll continue observing and improving it as I go.
 
 ## Final Thoughts
 
-While reading papers, the logic often feels abstract, but after reading through them a few times, I usually manage to replicate them successfully.
+When reading papers, I often find the logic abstract, but after reading several times, I can usually reproduce it successfully (ignoring issues with insufficient computing power).
 
-Frontend documentation might seem clear at first glance, but each step in practice could hide pitfalls—truly deceptive. (~Not familiar with it? Don’t blame everything else!~)
+Frontend documentation seems straightforward, but every step when implementing it can hide traps—it’s incredibly tricky. (~Just admit it, you’re not familiar with it!~) In the past, late-night debugging often involved dealing with issues like “Loss not converging” or “GPU memory insufficient,” which are daily struggles for an AI engineer. Now, I’m facing frequent React errors, form button malfunctions, and backend API mismatches—such tedious problems.
 
-In the past, late-night debugging was often about issues like "loss not converging" or "GPU memory running out," which are everyday challenges for AI engineers. Now, it’s more about React throwing frequent errors, form buttons not working, and backend API specifications not matching, among other tedious problems.
+Moreover, all of this was done with ChatGPT available for instant help. If this were before ChatGPT’s release, I’m not so sure if I would have been able to make this backend system work.
 
-What’s more, this was done with the help of ChatGPT for immediate assistance. If it had been the pre-ChatGPT era, I’m not sure whether I would have been able to successfully build this backend.
+If I have time in the future, I will add more features. If you have any suggestions or feedback on this system, feel free to share them with me in the comment section.
 
-I will continue adding more features in the future and keep improving the user experience. If you encounter any bugs or problems while using the system, for security reasons, please contact me via email. I’d greatly appreciate it if you could provide detailed error messages or screenshots to help me locate and fix the problem more quickly.
+If you encounter any bugs or issues while using it, please contact me privately via email to protect the system’s security. I would really appreciate it. If you can provide detailed error messages or screenshots, it would help me quickly locate and fix the issue.
 
-Also, if you have any suggestions or feedback on the system, feel free to share them in the comments.
-
-I hope you enjoy your time here!
+I hope you enjoy using this system!
