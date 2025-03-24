@@ -1,0 +1,265 @@
+/* resume.css */
+.resume-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .resume-container h3 {
+    font-size: 1.1em !important;
+    border-left: none !important;
+    padding: 0 !important;
+  }
+
+  /* Left Column */
+  .left-column {
+    width: 30%;
+    background-color: #2E3A59;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Right Column */
+  .right-column {
+    width: 70%;
+    padding: 10px;
+  }
+
+  /* Name and Title */
+  .name-title {
+    margin-bottom: 40px;
+  }
+  .name-title h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom: 0.2em;
+  }
+  .name-title h2 {
+    font-size: 1em;
+    font-weight: 400;
+    color: #a8dadc;
+  }
+
+  /* Left Column Sections */
+  .section {
+    margin-bottom: 35px;
+  }
+  .section h3 {
+    font-size: 1em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fff;
+    border-bottom: 1px solid #f1faee;
+    padding-bottom: 5px;
+  }
+  .contact-list {
+    list-style: none;
+    margin-bottom: 15px;
+  }
+  .contact-list li {
+    color: #f1faee;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+  }
+  .website-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 14px;
+    background-color: #457b9d; /* 修改背景顏色 */
+    color: #f1faee;            /* 修改文字顏色 */
+    border-radius: 5px;        /* 調整圓角 */
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  .website-button:hover {
+    background-color: #e67e22;
+  }
+
+  /* Skills */
+  .skills-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .skills-list li {
+    color: #f1faee;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+  }
+  .skill-item {
+    margin-bottom: 5px;
+  }
+  .skill-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .skill-label span {
+    color: #f1faee;
+    font-weight: 600;
+  }
+  .skill-bar {
+    width: 100%;
+    background-color: #394766;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 6px;
+  }
+  .skill-level {
+    height: 6px;
+    background-color: #F39C12;
+    transition: width 0.4s ease;
+  }
+
+  /* Right Column Sections */
+  .section-right {
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px 25px;
+    border: 1px solid #ddd;
+  }
+  .section-right h3 {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #2E3A59;
+    margin-bottom: 15px;
+    position: relative;
+  }
+  .section-right h3::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 2px;
+    background-color: #2E3A59;
+    margin-top: 8px;
+  }
+  .about-me {
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    line-height: 1.4;
+  }
+  .section-right ul {
+    padding-left: 1.2em;
+    margin-top: 0.5em;
+  }
+  .section-right ul li {
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  /* Card Container and Cards */
+  .card-container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .card {
+    flex: 1;
+    background-color: #fafafa;
+    padding: 14px 16px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+  .card h4 {
+    margin-bottom: 4px;
+    font-size: 0.95em;
+    font-weight: bold;
+    color: #2E3A59;
+  }
+  .card .company {
+    font-weight: normal;
+    margin-left: 4px;
+  }
+  .card .date {
+    font-size: 0.8em;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  .card ul {
+    list-style-type: disc;
+    padding-left: 1.2em;
+    font-size: 0.85em;
+    line-height: 1.4;
+    margin-bottom: 0;
+  }
+  .card ul li {
+    margin-bottom: 0.75em;
+  }
+  .card p {
+    margin: 0;
+    font-size: 0.85em;
+    line-height: 1.4;
+  }
+
+  /* Education */
+  .education-block {
+    display: flex;
+    gap: 20px;
+  }
+  .education-item {
+    flex: 1;
+  }
+  .education-item h4 {
+    font-size: 0.85em;
+    font-weight: bold;
+    color: #2E3A59;
+    margin-bottom: 2px;
+  }
+  .education-item .date {
+    font-size: 0.8em;
+    color: #555;
+    margin-bottom: 2px;
+  }
+  .education-item p {
+    margin: 0;
+    font-size: 0.8em;
+    line-height: 1.4;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .resume-container {
+      flex-direction: column;
+    }
+    .left-column,
+    .right-column {
+      width: 100%;
+    }
+    .left-column {
+      padding: 20px 15px;
+    }
+    .right-column {
+      padding: 20px 15px;
+    }
+    .card-container {
+      flex-direction: column;
+    }
+  }
+
+  /* Print */
+  @media print {
+    body {
+      background-color: white !important;
+    }
+    .left-column {
+      background-color: #2E3A59 !important;
+    }
+    .section-right,
+    .card {
+      background-color: white !important;
+      box-shadow: none !important;
+    }
+  }
+
+.left-column .contact-list a {
+color: #f1faee;
+text-decoration: none;
+}
