@@ -8,10 +8,6 @@ To solve this problem, we developed several conversion functions that make it ea
 
 Here is a diagram illustrating the relationships between these functions:
 
-![time2time](time2time.png)
-
-If you're curious about how the diagram above was created, you can refer to the following Mermaid code:
-
 ```mermaid
 graph TD
     timestamp(timestamp)

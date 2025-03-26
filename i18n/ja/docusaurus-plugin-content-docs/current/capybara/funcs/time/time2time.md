@@ -6,10 +6,6 @@ Python では、異なる時間ライブラリ間での変換はよく問題に�
 
 以下は、これらの関数の関係図です：
 
-![time2time](time2time.png)
-
-もし上記の図がどのように描かれたのか興味があれば、以下の Mermaid コードを参考にしてください：
-
 ```mermaid
 graph TD
     timestamp(timestamp)

@@ -8,10 +8,6 @@
 
 以下是這些函數之間關係圖：
 
-![time2time](time2time.png)
-
-如果你好奇上面那張圖是怎麼畫出來的，可以參考下面的 Mermaid 程式碼：
-
 ```mermaid
 graph TD
     timestamp(timestamp)
