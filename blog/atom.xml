@@ -17,7 +17,7 @@
 <p>每當我抬頭仰望天空，總會覺得自己宛如螻蟻般的渺小。</p>
 <p>於是我做了一件無聊的事 —— 去找 ChatGPT 聊天。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="對話">對話<a href="https://docsaid.org/blog/looking-up-the-ten-steps-of-a-master#%E5%B0%8D%E8%A9%B1" class="hash-link" aria-label="對話的直接連結" title="對話的直接連結">​</a></h2>
-<div style="border:1px solid #ccc;border-radius:4px;padding:10px;margin:10px 0;background:#fff7e6;max-width:70%;margin-left:auto"><strong>Me:</strong><div><p>我們來做個想像。
+<div style="border:1px solid #ccc;border-radius:4px;padding:10px;margin:10px 0;background:#fff7e6;max-width:70%;margin-left:auto"><strong>我：</strong><div><p>我們來做個想像。
 假設我們把深度學習這個領域的科學家和工程師分為十個等級。
 如果每個等級都要用一句話來表達他們的工作狀態。
 根據你過去的知識和對於世界的理解，這十個等級的人分別會是什麼樣的？</p></div></div>
@@ -63,12 +63,12 @@
 「我想探索並闡明智能與學習的本質，為下一代智慧系統奠定新的理論基礎。」</p>
 </li>
 </ol></div></div>
-<div style="border:1px solid #ccc;border-radius:4px;padding:10px;margin:10px 0;background:#fff7e6;max-width:70%;margin-left:auto"><strong>Me:</strong><div><p>如果是用量化的經驗數值來比喻，這十個等級的差距大概是多少？</p></div></div>
+<div style="border:1px solid #ccc;border-radius:4px;padding:10px;margin:10px 0;background:#fff7e6;max-width:70%;margin-left:auto"><strong>我：</strong><div><p>如果是用量化的經驗數值來比喻，這十個等級的差距大概是多少？</p></div></div>
 <div style="border:1px solid #ccc;border-radius:4px;padding:10px;margin:10px 0;background:#e6f7ff;max-width:80%;margin-right:auto"><strong>ChatGPT:</strong><div><p>若用量化經驗值的角度來比喻這十個等級之間的差距，考量深度學習領域的學習曲線呈現「指數型」或「非線性」增長的特性。</p><p>以實務來說，真正能成為領域內的思想開創者或大師級泰斗的人，非常罕見且往往跨越的是極端的障礙，因此這十個等級之間的差距可能會呈現如下比例：</p><table><thead><tr><th>等級</th><th>身分描述</th><th>經驗數值（量化比喻）</th></tr></thead><tbody><tr><td>1</td><td>新手入門</td><td>1</td></tr><tr><td>2</td><td>初階探索</td><td>5</td></tr><tr><td>3</td><td>基礎工程師</td><td>20</td></tr><tr><td>4</td><td>熟練工程師</td><td>100</td></tr><tr><td>5</td><td>高階工程師</td><td>500</td></tr><tr><td>6</td><td>資深研究員</td><td>2,500</td></tr><tr><td>7</td><td>領域專家</td><td>12,500</td></tr><tr><td>8</td><td>技術領袖</td><td>62,500</td></tr><tr><td>9</td><td>學術權威</td><td>312,500</td></tr><tr><td>10</td><td>思想開創者（大師級泰斗）</td><td>1,500,000+</td></tr></tbody></table><h4 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="-設計邏輯">🔑 設計邏輯：<a href="https://docsaid.org/blog/looking-up-the-ten-steps-of-a-master#-%E8%A8%AD%E8%A8%88%E9%82%8F%E8%BC%AF" class="hash-link" aria-label="🔑 設計邏輯：的直接連結" title="🔑 設計邏輯：的直接連結">​</a></h4><ul>
 <li>每個等級的差距約為前一個等級的 5 倍，形成指數級增長。</li>
 <li>最頂端與底層之間的差距超過百萬倍，充分呈現頂尖思想者與入門者之間的巨大鴻溝。</li>
 </ul></div></div>
-<div style="border:1px solid #ccc;border-radius:4px;padding:10px;margin:10px 0;background:#fff7e6;max-width:70%;margin-left:auto"><strong>Me:</strong><div><p>目前 AI 工具盛行，應該可以彌平低階開發者或研究員的差距。如果把 AI 工具考慮進來，那對應的經驗數值大概會是多少？</p></div></div>
+<div style="border:1px solid #ccc;border-radius:4px;padding:10px;margin:10px 0;background:#fff7e6;max-width:70%;margin-left:auto"><strong>我：</strong><div><p>目前 AI 工具盛行，應該可以彌平低階開發者或研究員的差距。如果把 AI 工具考慮進來，那對應的經驗數值大概會是多少？</p></div></div>
 <div style="border:1px solid #ccc;border-radius:4px;padding:10px;margin:10px 0;background:#e6f7ff;max-width:80%;margin-right:auto"><strong>ChatGPT:</strong><div><p>你提出了一個很好的觀察。</p><p>AI 工具（如 ChatGPT、Copilot、AutoML）確實能夠大幅降低初學者和中階開發者的門檻，讓他們的工作效率迅速提高，甚至能接近比自己高出數個等級的工程師。</p><p>如果將 AI 工具的加成效應考量進去，以下是調整後更符合現實的經驗數值：</p><table><thead><tr><th>等級</th><th>身分描述</th><th>無 AI 工具</th><th>有 AI 工具</th></tr></thead><tbody><tr><td>1</td><td>新手入門</td><td>1</td><td>20</td></tr><tr><td>2</td><td>初階探索</td><td>5</td><td>50</td></tr><tr><td>3</td><td>基礎工程師</td><td>20</td><td>100</td></tr><tr><td>4</td><td>熟練工程師</td><td>100</td><td>400</td></tr><tr><td>5</td><td>高階工程師</td><td>500</td><td>1,500</td></tr><tr><td>6</td><td>資深研究員</td><td>2,500</td><td>6,000</td></tr><tr><td>7</td><td>領域專家</td><td>12,500</td><td>20,000</td></tr><tr><td>8</td><td>技術領袖</td><td>62,500</td><td>90,000</td></tr><tr><td>9</td><td>學術權威</td><td>312,500</td><td>400,000</td></tr><tr><td>10</td><td>思想開創者（大師級泰斗）</td><td>1,500,000+</td><td>1,600,000+</td></tr></tbody></table><h4 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="-主要邏輯">🔑 主要邏輯：<a href="https://docsaid.org/blog/looking-up-the-ten-steps-of-a-master#-%E4%B8%BB%E8%A6%81%E9%82%8F%E8%BC%AF" class="hash-link" aria-label="🔑 主要邏輯：的直接連結" title="🔑 主要邏輯：的直接連結">​</a></h4><ul>
 <li><strong>低階開發者（1~4級）</strong>：受 AI 工具加持影響最大，經驗值提升約 20 倍左右。（能更快學習、排除困難、完成原本做不到的任務）</li>
 <li><strong>中階、高階（5~7級）</strong>：AI 工具依然明顯，但差距逐步收斂，約提升 1.5～3 倍。（可提升生產力，突破瓶頸，但仍需紮實經驗與理解力）</li>
