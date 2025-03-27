@@ -15,10 +15,6 @@ Given the immense impact they’ve made, let’s take some time to review their 
 
 This paper is 48 pages long, filled with extensive experimental data and technical details, so we’ll focus on the key points.
 
-:::info
-In the past, we referred to the authors as “authors” in our notes. However, this paper involved a large number of contributors, with multiple small teams responsible for different functions and chapters. Therefore, in this note, we will refer to the contributors as the “research team.”
-:::
-
 ## Defining the Problem
 
 The performance gap between open-source and closed-source models has long been a popular topic. Previous research has shown that open-source models generally perform significantly worse than closed-source models on most benchmarks, primarily due to the scale and resource limitations of open-source models.

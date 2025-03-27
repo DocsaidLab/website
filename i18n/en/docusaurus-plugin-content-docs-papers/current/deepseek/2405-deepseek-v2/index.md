@@ -13,10 +13,6 @@ The previous paper was discussing testing the effects of MoE, and not even three
 
 This paper has 52 pages, with a large amount of experimental data and technical details. As usual, we'll focus on the key points.
 
-:::info
-In the past, we would refer to the authors as "the authors" in our notes. However, this paper has a large number of contributors, with many small teams responsible for different functions and sections. Therefore, in this note, we will refer to them as "the research team."
-:::
-
 :::warning
 Mathematics warning: The main focus of this paper is on optimizing the model modules, which involves a significant amount of mathematics. Please read carefully.
 :::
