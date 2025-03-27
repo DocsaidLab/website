@@ -273,7 +273,7 @@ if __name__ == \"__main__\":
 
 1. **`-e USER_ID=$(id -u)` 和 `-e GROUP_ID=$(id -g)`**：將當前用戶的 UID 和 GID 傳遞到容器內，確保容器內的文件操作權限與主機一致。
 2. **`--gpus all`**：啟用 GPU 支援，將所有可用的 GPU 資源分配給容器。
-3. **`--shm-size=64g`**：設置共享內存大小為 64GB，適合需要大量內存的深度學習任務。
+3. **`--shm-size=64g`**：設置共享記憶體大小為 64GB，適合需要大量記憶體的深度學習任務。
 4. **`--ipc=host` 和 `--net=host`**：共享主機的進程間通訊和網絡資源，以提高性能和兼容性。
 5. **`--cpuset-cpus="0-31"`**：限制容器僅使用 CPU 0-31 核心，避免影響其他進程。
 6. **`-v $PWD/DocClassifier:/code/DocClassifier`**：將主機當前目錄的 `DocClassifier` 資料夾掛載到容器內 `/code/DocClassifier`。
