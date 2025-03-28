@@ -3,23 +3,28 @@ slug: looking-up-the-ten-steps-of-a-master
 title: 仰望大師的十級階梯
 authors: Z. Yuan
 image: /img/2025/0327.jpg
-tags: [隨筆]
+tags: [Essays]
 description: 或許我只是個在群山裡的迷途者。
 ---
 
 
 import { UserCard, ChatGPTCard } from '@site/src/components/cards.js'
 
+看論文可以增廣見聞，但不免有副作用。
 
-不管何時何地，不論我如何拾級而上。
-
-每當我抬頭仰望天空，總會覺得自己宛如螻蟻般的渺小。
-
-於是我做了一件無聊的事 —— 去找 ChatGPT 聊天。
+因為不知道這條路的盡頭在哪裡，讓人感到自己像是滄海之一粟。
 
 <!-- truncate -->
 
 ## 對話
+
+不如來玩個 RPG 吧！
+
+如果我們可以把深度學習這個領域的工作者分為十個等級，並且轉成 RPG 的經驗值系統。
+
+那麼這十個等級的差距會是什麼樣的？
+
+我跟 ChatGPT 玩了一下這個遊戲，以下是我們的對話紀錄：
 
 <UserCard>
 我們來做個想像。

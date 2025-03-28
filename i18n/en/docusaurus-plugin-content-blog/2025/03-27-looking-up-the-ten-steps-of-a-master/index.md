@@ -9,16 +9,19 @@ description: Perhaps I am just a lost traveler in the mountains.
 
 import { UserCard, ChatGPTCard } from '@site/src/components/cards.js'
 
+Reading papers can broaden one's horizons, but it inevitably comes with side effects.
 
-No matter when or where, no matter how I climb the steps.
-
-Every time I look up at the sky, I always feel as small as an ant.
-
-So, I did something boring—talked to ChatGPT.
+Because we don't know where this path ends, it makes us feel like a mere speck in the vast ocean.
 
 <!-- truncate -->
 
 ## Dialogue
+
+Why not play an RPG?
+
+If we were to divide the workers in the field of deep learning into ten levels and turn them into an RPG experience system, what would the difference between these ten levels look like?
+
+I played this game with ChatGPT, and here is the record of our conversation:
 
 <UserCard>
 Let's imagine something.
