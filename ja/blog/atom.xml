@@ -8,15 +8,17 @@
     <subtitle>DOCSAID Blog</subtitle>
     <icon>https://docsaid.org/ja/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[大師の十段階の階段を仰ぎ見て]]></title>
+        <title type="html"><![CDATA[大師の十段階を仰ぎ見る]]></title>
         <id>https://docsaid.org/ja/blog/looking-up-the-ten-steps-of-a-master</id>
         <link href="https://docsaid.org/ja/blog/looking-up-the-ten-steps-of-a-master"/>
         <updated>2025-03-27T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[おそらく私は山中で迷子になった者に過ぎない。]]></summary>
-        <content type="html"><![CDATA[<p>いつでも、どこでも、どんなに一歩ずつ登っても。</p>
-<p>空を見上げるたびに、自分が蟻のように小さいと感じることがよくある。</p>
-<p>そこで私は一つの退屈なことをした —— ChatGPTと会話をしてみた。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="会話">会話<a href="https://docsaid.org/ja/blog/looking-up-the-ten-steps-of-a-master#%E4%BC%9A%E8%A9%B1" class="hash-link" aria-label="会話 への直接リンク" title="会話 への直接リンク">​</a></h2>
+        <summary type="html"><![CDATA[もしかしたら私はただの迷子の旅人かもしれません。]]></summary>
+        <content type="html"><![CDATA[<p>論文を読むことは視野を広げることができますが、避けがたい副作用もあります。</p>
+<p>この道の先がどこにあるのか分からないため、自分が広大な海の中の一粒の砂のように感じてしまいます。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="対話">対話<a href="https://docsaid.org/ja/blog/looking-up-the-ten-steps-of-a-master#%E5%AF%BE%E8%A9%B1" class="hash-link" aria-label="対話 への直接リンク" title="対話 への直接リンク">​</a></h2>
+<p>RPGをやってみましょうか！</p>
+<p>もし深層学習の分野の作業者を10段階に分け、それをRPGの経験値システムに変換したら、この10段階の差はどのようになるでしょうか？</p>
+<p>私はChatGPTとこのゲームを少し遊びました。以下はその対話記録です：</p>
 <div style="border:1px solid #ccc;border-radius:4px;padding:10px;margin:10px 0;background:#fff7e6;max-width:70%;margin-left:auto"><strong>私：</strong><div><p>想像してみましょう。
 深層学習の分野における科学者やエンジニアを10段階に分け、それぞれの段階を一言で表現するなら、どんな状態でしょうか？
 あなたの過去の知識と世界への理解に基づいて、この10段階の人々はどのような状態にあるのでしょうか？</p></div></div>
@@ -87,7 +89,7 @@
             <name>Z. Yuan</name>
             <uri>https://github.com/zephyr-sh</uri>
         </author>
-        <category label="エッセイ" term="エッセイ"/>
+        <category label="Essays" term="Essays"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[JSを使って履歴書を書いてみよう！]]></title>
