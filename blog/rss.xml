@@ -21,8 +21,9 @@
 <p>其實我一開始選的是 WordPress.org。（想不到吧？）</p>
 <p>因為它的聲量大，很多人用，生態系完整成熟。很多功能都有現成的 plugin 可以用，像是 SEO、社群分享、網站地圖等等。而且 WordPress 的使用者介面也很友善，對於不熟悉程式碼的人來說，簡單易上手。</p>
 <p>可是，我會寫程式啊！</p>
-<p>會寫程式有時候也是一種詛咒，因為當你一無所知的時候，就照著網路上的教學走就好，沒有太多選擇。但當你知道有其他選擇時，你就會開始懷疑這個選擇的正確性。特別是當你知道你「可以」做到某些事情時，你就會開始想要去做它。</p>
-<p>例如：</p>
+<p>會寫程式有時候也是一種詛咒，因為當你一無所知的時候，就照著網路上的教學走就好，沒有太多選擇。</p>
+<p>但當你知道有其他選擇時，你就會開始懷疑這個選擇的正確性：這樣真的好？</p>
+<p>特別是你知道你「可以」做到某些事情時，例如：</p>
 <ul>
 <li>
 <p><strong>我為什麼不能用 Markdown 寫文章？</strong></p>
@@ -40,7 +41,8 @@
 <hr>
 </li>
 </ul>
-<p>你以為你節省了時間，但是實際上你卻浪費了更多時間在這些問題上。這些問題的解決方案都不是一個簡單的 plugin 就能解決的，反而需要你自己去寫程式碼。</p>
+<p>你以為你節省了時間，但是實際上你卻浪費了更多時間在這些問題上。</p>
+<p>這些問題的解決方案都不是一個簡單的 plugin 就能解決的，反而需要你自己去寫程式碼。</p>
 <p>說到底還是要自己寫程式碼，那我還要 WordPress 幹嘛？</p>
 <p>而且 WordPress 的 plugin 生態系也不是完美的，很多 plugin 都是由第三方開發的，品質參差不齊，有些甚至會影響網站效能或安全性。</p>
 <p>這一來一回之間，到底是賺了？還是虧了？</p>
@@ -53,6 +55,36 @@
 <p>基於 Markdown 的靜態網站生成工具很多，各有強項。</p>
 <p>我們從網路上找了一些資料，這裡簡單對比一下：</p>
 <div style="white-space:nowrap;overflow-x:auto;font-size:1rem;line-height:0.8;justify-content:center;display:flex"><table><thead><tr><th>功能</th><th>Docusaurus</th><th>Hugo</th><th>Jekyll</th><th>Hexo</th><th>Astro</th></tr></thead><tbody><tr><td>文件導向</td><td>✅ 強</td><td>⚠️ 普通</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>❌ 較弱</td></tr><tr><td>多語系支援</td><td>✅ 強</td><td>❌ 差</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td></tr><tr><td>部署便利</td><td>✅ 強</td><td>✅ 強</td><td>✅ 強</td><td>✅ 強</td><td>✅ 強</td></tr><tr><td>前端互動支援</td><td>⚠️ 尚可</td><td>❌ 差</td><td>❌ 差</td><td>❌ 差</td><td>✅ 強</td></tr><tr><td>Markdown 支援</td><td>✅ 強</td><td>✅ 強</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>✅ 強</td></tr><tr><td>Git/版本控管</td><td>✅ 強</td><td>✅ 強</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>✅ 強</td></tr><tr><td>主題與社群</td><td>⚠️ 較弱</td><td>✅ 強</td><td>⚠️ 尚可</td><td>✅ 強</td><td>⚠️ 較弱</td></tr><tr><td>架構彈性</td><td>⚠️ 尚可</td><td>✅ 強</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>✅ 強</td></tr><tr><td>學習曲線</td><td>❌ 難</td><td>⚠️ 中等</td><td>✅ 易</td><td>✅ 易</td><td>⚠️ 中等</td></tr><tr><td>編譯速度</td><td>⚠️ 尚可</td><td>✅ 極快</td><td>⚠️ 普通</td><td>⚠️ 普通</td><td>✅ 快</td></tr><tr><td>SEO 友善度</td><td>✅ 強</td><td>✅ 強</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>✅ 強</td></tr><tr><td>外掛與生態</td><td>⚠️ 較弱</td><td>✅ 強</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>⚠️ 較弱</td></tr><tr><td>資料來源整合</td><td>⚠️ 尚可</td><td>✅ 強</td><td>⚠️ 尚可</td><td>❌ 較弱</td><td>✅ 強</td></tr><tr><td>程式語言</td><td>⚛️ React</td><td>🐹 Go</td><td>💎 Ruby</td><td>🟢 Node.js</td><td>📜 JS/TS</td></tr><tr><td>維護頻率</td><td>✅ 強</td><td>✅ 強</td><td>⚠️ 尚可</td><td>❌ 較弱</td><td>✅ 強</td></tr><tr><td>適合誰使用</td><td>👨‍💻 技術文件</td><td>✍️ 部落格</td><td>📝 個人頁</td><td>🌏 中文圈</td><td>🚧 高自訂</td></tr></tbody></table></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="docusaurus">Docusaurus<a href="https://docsaid.org/blog/should-you-choose-docusaurus#docusaurus" class="hash-link" aria-label="Docusaurus的直接連結" title="Docusaurus的直接連結">​</a></h3>
+<ol>
+<li><strong>最適合技術文件與多語系站點建置</strong>： 在「文件導向」、「多語系支援」上表現最佳，強化其作為開發文件網站首選的地位。</li>
+<li><strong>前端互動具備一定彈性，但需有 React 經驗</strong>： 支援 React 架構，雖然互動性可達尚可，但也使其「學習曲線」相對較難，較適合前端熟手。</li>
+<li><strong>維護頻率高、版本控管整合佳，適合多人協作</strong>： 適合需要 Git 工作流程的團隊開發情境，並具備活躍的更新頻率。</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="hugo">Hugo<a href="https://docsaid.org/blog/should-you-choose-docusaurus#hugo" class="hash-link" aria-label="Hugo的直接連結" title="Hugo的直接連結">​</a></h3>
+<ol>
+<li><strong>靜態網站編譯極快，適合追求速度與效率者</strong>：Hugo 使用 Go 語言打造，編譯速度為所有框架中最快，部署迅速。</li>
+<li><strong>在架構彈性與外掛整合上表現強大</strong>：支援高度自訂化與資料來源整合能力，使其成為大型內容網站的熱門選擇。</li>
+<li><strong>多語系與前端互動支援較弱，不適合作國際化或動態應用</strong>：這些弱點使 Hugo 較偏向單語系內容網站或部落格用途。</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="jekyll">Jekyll<a href="https://docsaid.org/blog/should-you-choose-docusaurus#jekyll" class="hash-link" aria-label="Jekyll的直接連結" title="Jekyll的直接連結">​</a></h3>
+<ol>
+<li><strong>學習曲線最平易近人，適合初學者入門靜態網站</strong>：Jekyll 語法簡單，適合非工程背景使用者快速上手 GitHub Pages 部署。</li>
+<li><strong>多數功能表現中庸，難以滿足複雜應用</strong>：雖然部署、SEO 都不錯，但缺乏強項，使其逐漸被其他框架取代。</li>
+<li><strong>生態系與維護動能趨弱，未來延展性有限</strong>：相對其他框架，其更新頻率與社群活力明顯下滑，適合低維護個人頁使用。</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="hexo">Hexo<a href="https://docsaid.org/blog/should-you-choose-docusaurus#hexo" class="hash-link" aria-label="Hexo的直接連結" title="Hexo的直接連結">​</a></h3>
+<ol>
+<li><strong>中文社群活躍，適合中文使用者</strong>：雖然國際支援度不高，但中文資源豐富，易於找到教學與主題套件。</li>
+<li><strong>上手簡單、部署方便，適合寫作為主的使用者</strong>：Hexo 以 Node.js 為基礎，對 JS 熟悉者相當友善，快速建站無壓力。</li>
+<li><strong>外掛與多語系支援較弱，不適合長期大型維護專案</strong>：較適合用於簡單部落格或個人介紹網站，較難應對多國語言與企業級文件。</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="astro">Astro<a href="https://docsaid.org/blog/should-you-choose-docusaurus#astro" class="hash-link" aria-label="Astro的直接連結" title="Astro的直接連結">​</a></h3>
+<ol>
+<li><strong>前端互動與現代技術整合能力最強</strong>：支援 React/Vue/Svelte 等現代框架組合，適合打造互動豐富、靜態兼具的網站。</li>
+<li><strong>架構彈性高，資料整合能力佳，適合高自訂專案</strong>：能接多來源資料、支援複合架構，利於內容驅動或設計導向網站。</li>
+<li><strong>多語系、主題生態仍在發展中，學習曲線偏中等</strong>：對於需要國際化與即用型模板的使用者來說，目前仍不夠成熟。</li>
+</ol>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="它幫我做了哪些事">它幫我做了哪些事？<a href="https://docsaid.org/blog/should-you-choose-docusaurus#%E5%AE%83%E5%B9%AB%E6%88%91%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B" class="hash-link" aria-label="它幫我做了哪些事？的直接連結" title="它幫我做了哪些事？的直接連結">​</a></h2>
 <p>我沒有足夠的時間逐一嘗試，所以憑藉著現有的資料，我選擇了 Docusaurus。</p>
 <ul>

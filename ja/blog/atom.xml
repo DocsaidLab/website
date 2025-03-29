@@ -14,36 +14,38 @@
         <updated>2025-03-28T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[私が1年間の実践経験を通じて得た知見をシェアします]]></summary>
         <content type="html"><![CDATA[<p>Docusaurus は使いやすいのか？</p>
-<p>これは、Docsaid でサイトを構築してから 1 年以上経過した今、最もよく聞かれる質問の 1 つです。</p>
-<p>答えは「はい」です。しかし、その「使いやすさ」は、おそらくあなたが考えているものとは少し違います。</p>
+<p>これは私が Docsaid でサイトを立ち上げて 1 年以上経った後、最もよく聞かれる質問の 1 つです。</p>
+<p>答えは「はい」、ですが、使いやすい理由はあなたが思っているものとは少し異なるかもしれません。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="なぜ最初に-docusaurus-を選んだのか">なぜ最初に Docusaurus を選んだのか？<a href="https://docsaid.org/ja/blog/should-you-choose-docusaurus#%E3%81%AA%E3%81%9C%E6%9C%80%E5%88%9D%E3%81%AB-docusaurus-%E3%82%92%E9%81%B8%E3%82%93%E3%81%A0%E3%81%AE%E3%81%8B" class="hash-link" aria-label="なぜ最初に Docusaurus を選んだのか？ への直接リンク" title="なぜ最初に Docusaurus を選んだのか？ への直接リンク">​</a></h2>
-<p>実は、最初に選んだのは WordPress.org でした。（驚きましたか？）</p>
-<p>なぜなら、WordPress は認知度が高く、多くの人々が使用しており、エコシステムが非常に成熟しているからです。SEO、ソーシャルメディアのシェア、サイトマップなど、さまざまな機能に既存のプラグインが使えるのです。また、WordPress のユーザーインターフェースも非常にフレンドリーで、コードに不慣れな人でも簡単に扱うことができます。</p>
-<p>でも、私はプログラムを書くことができます！</p>
-<p>プログラムを書くことができるのは時に呪いのようなもので、最初は何も知らないときはインターネットのチュートリアルに従えば良いだけですが、他の選択肢があることを知ると、その選択肢が正しいのか疑問を感じるようになります。特に、自分でできると知っていることに対しては、実際にそれをやりたくなります。</p>
-<p>例えば：</p>
+<p>実は最初に選んだのは WordPress.org でした。（意外でしょ？）</p>
+<p>なぜなら、その知名度が高く、たくさんの人が使っており、エコシステムも完成して成熟しているからです。多くの機能がすぐに使えるプラグインとして提供されていて、SEO やソーシャルメディアのシェア、サイトマップなどが簡単に設定できます。さらに、WordPress のユーザーインターフェースは非常に親しみやすく、コードに不慣れな人にとっても、簡単に使い始めることができます。</p>
+<p>でも、私はプログラムが書けるんです！</p>
+<p>プログラムを書くことができるとき、それが時には呪いになることもあります。なぜなら、何も知らないときは、ネットのチュートリアルを見ながら進めるだけで、選択肢はあまりありません。</p>
+<p>でも、他の選択肢があることを知ると、この選択が本当に正しいのか疑問を持ち始めます：これで本当にいいのか？</p>
+<p>特に、あなたが「できる」ことを知っている場合、例えば：</p>
 <ul>
 <li>
 <p><strong>なぜ Markdown で記事を書けないのか？</strong></p>
-<p>実際にはできますが、プラグインを追加する必要があり、開発者ツールによる構文ハイライト、バージョン管理、メタデータの統合が難しくなります。</p>
+<p>実は可能ですが、プラグインを追加でインストールする必要があり、開発者ツールのシンタックスハイライト、バージョン管理、メタデータの統合などが難しくなります。</p>
 <hr>
 </li>
 <li>
 <p><strong>なぜ Git でバージョン管理できないのか？</strong></p>
-<p>実際にはできますが、ほとんどの WordPress の変更はバックエンドで行われるため、Git との同期は非常に難しく、多くの内容はファイルではなくデータベースに保存されています。</p>
+<p>実は可能ですが、ほとんどの WordPress の変更はバックエンドから行われるため、Git に同期するのが難しく、しかも多くのコンテンツはデータベースに保存されており、ファイルではありません。</p>
 <hr>
 </li>
 <li>
 <p><strong>なぜ外部 API を呼び出せないのか？</strong></p>
-<p>実際にはできますが、CORS を回避したり、カスタム JS を書いたり、テーマを汚さないようにフロントエンドコードを注入したりする必要があります。</p>
+<p>実は可能ですが、CORS を回避したり、カスタム JS を書いたり、テーマを汚さないようにフロントエンドコードを注入する方法を考えたりしなければなりません。</p>
 <hr>
 </li>
 </ul>
-<p>あなたは時間を節約したと思っているかもしれませんが、実際にはこれらの問題にもっと多くの時間を費やしてしまっています。これらの問題を解決するには、単純なプラグインでは解決できず、結局自分でコードを書く必要があります。</p>
-<p>結局は自分でコードを書くことになるのなら、なぜ WordPress を使うのでしょうか？</p>
-<p>また、WordPress のプラグインエコシステムも完璧ではなく、多くのプラグインはサードパーティによって開発されており、品質にばらつきがあり、サイトのパフォーマンスやセキュリティに影響を与えることもあります。</p>
-<p>このやり取りの中で、結局は得をしたのか？それとも損をしたのか？</p>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>ヒント</div><div class="admonitionContent_BuS1"><p>私は損をしたと思っています。</p></div></div>
+<p>時間を節約できたと思っているかもしれませんが、実際にはこれらの問題にもっと多くの時間を費やしていることになります。</p>
+<p>これらの問題を解決する方法は、単純なプラグインで解決できるものではなく、結局は自分でコードを書く必要があります。</p>
+<p>結局のところ、やはり自分でコードを書くのなら、WordPress は何のために使うのでしょうか？</p>
+<p>さらに、WordPress のプラグインエコシステムも完璧ではなく、多くのプラグインはサードパーティーが開発しており、品質にバラツキがあります。一部はサイトのパフォーマンスやセキュリティに悪影響を及ぼすこともあります。</p>
+<p>このやり取りの間、結局得をしたのでしょうか？それとも損をしたのでしょうか？</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>ヒント</div><div class="admonitionContent_BuS1"><p>私は損をしたと思います。</p></div></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="他に選択肢はないのか">他に選択肢はないのか？<a href="https://docsaid.org/ja/blog/should-you-choose-docusaurus#%E4%BB%96%E3%81%AB%E9%81%B8%E6%8A%9E%E8%82%A2%E3%81%AF%E3%81%AA%E3%81%84%E3%81%AE%E3%81%8B" class="hash-link" aria-label="他に選択肢はないのか？ への直接リンク" title="他に選択肢はないのか？ への直接リンク">​</a></h2>
 <p>自分のニーズをよく考えたとき、最も基本的なニーズは「記事を書くこと」だと気づきました。</p>
 <p>記事を書くこと自体がそれなりの負担であり、さらにレイアウトツールに気を取られると、すぐに疲れ果ててしまいます。</p>
@@ -52,6 +54,36 @@
 <p>Markdown ベースの静的サイトジェネレーターはたくさんあり、それぞれに得意分野があります。</p>
 <p>インターネットで調べた情報をもとに、簡単に比較してみました：</p>
 <div style="white-space:nowrap;overflow-x:auto;font-size:0.9rem;line-height:0.8;justify-content:center;display:flex"><table><thead><tr><th>機能</th><th>Docusaurus</th><th>Hugo</th><th>Jekyll</th><th>Hexo</th><th>Astro</th></tr></thead><tbody><tr><td>ドキュメント指向</td><td>✅ 強</td><td>⚠️ 普通</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>❌ 較弱</td></tr><tr><td>多言語サポート</td><td>✅ 強</td><td>❌ 差</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td></tr><tr><td>デプロイの便利さ</td><td>✅ 強</td><td>✅ 強</td><td>✅ 強</td><td>✅ 強</td><td>✅ 強</td></tr><tr><td>フロントエンドサポート</td><td>⚠️ 尚可</td><td>❌ 差</td><td>❌ 差</td><td>❌ 差</td><td>✅ 強</td></tr><tr><td>Markdown サポート</td><td>✅ 強</td><td>✅ 強</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>✅ 強</td></tr><tr><td>Git/バージョン管理</td><td>✅ 強</td><td>✅ 強</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>✅ 強</td></tr><tr><td>テーマとコミュニティ</td><td>⚠️ 較弱</td><td>✅ 強</td><td>⚠️ 尚可</td><td>✅ 強</td><td>⚠️ 較弱</td></tr><tr><td>構造の柔軟性</td><td>⚠️ 尚可</td><td>✅ 強</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>✅ 強</td></tr><tr><td>学習曲線</td><td>❌ 難</td><td>⚠️ 中等</td><td>✅ 易</td><td>✅ 易</td><td>⚠️ 中等</td></tr><tr><td>コンパイル速度</td><td>⚠️ 尚可</td><td>✅ 極快</td><td>⚠️ 普通</td><td>⚠️ 普通</td><td>✅ 快</td></tr><tr><td>SEO 友好度</td><td>✅ 強</td><td>✅ 強</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>✅ 強</td></tr><tr><td>プラグインとエコシステム</td><td>⚠️ 較弱</td><td>✅ 強</td><td>⚠️ 尚可</td><td>⚠️ 尚可</td><td>⚠️ 較弱</td></tr><tr><td>データソース統合</td><td>⚠️ 尚可</td><td>✅ 強</td><td>⚠️ 尚可</td><td>❌ 較弱</td><td>✅ 強</td></tr><tr><td>プログラミング言語</td><td>⚛️ React</td><td>🐹 Go</td><td>💎 Ruby</td><td>🟢 Node.js</td><td>📜 JS/TS</td></tr><tr><td>メンテナンス頻度</td><td>✅ 強</td><td>✅ 強</td><td>⚠️ 尚可</td><td>❌ 較弱</td><td>✅ 強</td></tr><tr><td>適しているユーザー</td><td>👨‍💻 技術文書</td><td>✍️ ブログ</td><td>📝 個人ページ</td><td>🌏 中国圏</td><td>🚧 高度なカスタマイズ</td></tr></tbody></table></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="docusaurus">Docusaurus<a href="https://docsaid.org/ja/blog/should-you-choose-docusaurus#docusaurus" class="hash-link" aria-label="Docusaurus への直接リンク" title="Docusaurus への直接リンク">​</a></h3>
+<ol>
+<li><strong>技術文書と多言語サイトの構築に最適</strong>： 「文書指向」や「多言語サポート」に優れており、開発文書サイトの選択肢としての地位を強化しています。</li>
+<li><strong>フロントエンドのインタラクションには一定の柔軟性があり、React の経験が必要</strong>： React フレームワークをサポートし、インタラクティブ性は一定の水準を達成していますが、学習曲線が急であり、フロントエンドに慣れた開発者に向いています。</li>
+<li><strong>頻繁な更新と優れたバージョン管理統合、チームでの共同作業に適している</strong>： Git ワークフローを必要とするチーム開発に適しており、活発な更新頻度を誇ります。</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="hugo">Hugo<a href="https://docsaid.org/ja/blog/should-you-choose-docusaurus#hugo" class="hash-link" aria-label="Hugo への直接リンク" title="Hugo への直接リンク">​</a></h3>
+<ol>
+<li><strong>静的サイトのコンパイルが非常に速く、速度と効率を重視する人に最適</strong>： Hugo は Go 言語で構築されており、すべてのフレームワークの中で最速のコンパイル速度を誇り、迅速なデプロイが可能です。</li>
+<li><strong>アーキテクチャの柔軟性とプラグイン統合に強み</strong>： 高度なカスタマイズやデータソース統合をサポートしており、大規模なコンテンツサイトに人気があります。</li>
+<li><strong>多言語とフロントエンドのインタラクションサポートが弱い、国際化や動的アプリケーションには向かない</strong>： これらの弱点により、Hugo は単言語のコンテンツサイトやブログ向けに適しています。</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="jekyll">Jekyll<a href="https://docsaid.org/ja/blog/should-you-choose-docusaurus#jekyll" class="hash-link" aria-label="Jekyll への直接リンク" title="Jekyll への直接リンク">​</a></h3>
+<ol>
+<li><strong>最も学習曲線が平易で、静的サイト初心者に最適</strong>： Jekyll の構文は簡単で、エンジニアリングのバックグラウンドがないユーザーでも GitHub Pages デプロイを迅速に学べます。</li>
+<li><strong>多くの機能が平均的で、複雑なアプリケーションには適していない</strong>： デプロイや SEO は良好ですが、特に優れた点がないため、他のフレームワークに取って代わられる傾向があります。</li>
+<li><strong>エコシステムとメンテナンスの動向が低下しており、将来の拡張性が限られている</strong>： 他のフレームワークと比較して、更新頻度やコミュニティの活発さが明らかに減少しており、低メンテナンスの個人ページに適しています。</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="hexo">Hexo<a href="https://docsaid.org/ja/blog/should-you-choose-docusaurus#hexo" class="hash-link" aria-label="Hexo への直接リンク" title="Hexo への直接リンク">​</a></h3>
+<ol>
+<li><strong>中国語コミュニティが活発で、中国語ユーザーに最適</strong>： 国際的なサポートは限られていますが、中国語のリソースが豊富で、チュートリアルやテーマパッケージを簡単に見つけることができます。</li>
+<li><strong>簡単に学べ、デプロイも便利で、執筆を主な目的とするユーザーに最適</strong>： Hexo は Node.js を基盤としており、JS に慣れたユーザーには非常にフレンドリーで、迅速なウェブサイト作成が可能です。</li>
+<li><strong>プラグインと多言語サポートが弱く、長期的な大規模メンテナンスプロジェクトには適していない</strong>： よりシンプルなブログや個人紹介サイトに向いており、多言語対応や企業レベルの文書管理には難があります。</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="astro">Astro<a href="https://docsaid.org/ja/blog/should-you-choose-docusaurus#astro" class="hash-link" aria-label="Astro への直接リンク" title="Astro への直接リンク">​</a></h3>
+<ol>
+<li><strong>フロントエンドのインタラクションと現代技術の統合能力が最強</strong>： React、Vue、Svelte などの現代的なフレームワークをサポートしており、インタラクティブで静的なハイブリッドサイトの構築に最適です。</li>
+<li><strong>アーキテクチャの柔軟性が高く、データ統合能力が優れており、高度にカスタマイズされたプロジェクトに最適</strong>： 複数のデータソースからの取得や複合的なアーキテクチャのサポートが可能で、コンテンツ駆動型やデザイン指向のサイトに有利です。</li>
+<li><strong>多言語やテーマのエコシステムはまだ発展中で、学習曲線は中程度</strong>： 国際化や即時使用可能なテンプレートを必要とするユーザーにとっては、まだ成熟していない部分があります。</li>
+</ol>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="それが私にどんなことをしてくれたのか">それが私にどんなことをしてくれたのか？<a href="https://docsaid.org/ja/blog/should-you-choose-docusaurus#%E3%81%9D%E3%82%8C%E3%81%8C%E7%A7%81%E3%81%AB%E3%81%A9%E3%82%93%E3%81%AA%E3%81%93%E3%81%A8%E3%82%92%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%81%9F%E3%81%AE%E3%81%8B" class="hash-link" aria-label="それが私にどんなことをしてくれたのか？ への直接リンク" title="それが私にどんなことをしてくれたのか？ への直接リンク">​</a></h2>
 <p>私は全てを試す時間がなかったため、既存の資料を元に Docusaurus を選びました。</p>
 <ul>

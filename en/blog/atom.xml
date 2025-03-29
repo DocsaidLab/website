@@ -13,37 +13,39 @@
         <link href="https://docsaid.org/en/blog/should-you-choose-docusaurus"/>
         <updated>2025-03-28T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[A year of practical experience shared.]]></summary>
-        <content type="html"><![CDATA[<p>Is Docusaurus useful?</p>
-<p>This is one of the most common questions I get asked after over a year of running my site, Docsaid.</p>
-<p>The answer is yes, but the reasons it's useful might be different from what you expect.</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="why-did-i-choose-docusaurus-in-the-first-place">Why did I choose Docusaurus in the first place?<a href="https://docsaid.org/en/blog/should-you-choose-docusaurus#why-did-i-choose-docusaurus-in-the-first-place" class="hash-link" aria-label="Direct link to Why did I choose Docusaurus in the first place?" title="Direct link to Why did I choose Docusaurus in the first place?">​</a></h2>
-<p>Actually, I initially chose WordPress.org. (Surprised?)</p>
-<p>Because it has a large user base, a lot of people use it, and its ecosystem is mature and complete. Many functions have ready-to-use plugins, like SEO, social sharing, sitemaps, etc. The user interface of WordPress is also very friendly, making it easy to use for people who are not familiar with coding.</p>
-<p>But I can write code!</p>
-<p>Sometimes knowing how to code can be a curse because when you're clueless, you just follow the tutorials online and there's not much to consider. But once you know there are other options, you start to question whether this choice is the right one. Especially when you know you "can" do certain things yourself, you’ll start to want to do them.</p>
-<p>For example:</p>
+        <content type="html"><![CDATA[<p>Is Docusaurus easy to use?</p>
+<p>This is the most common question I get asked after running Docsaid for over a year.</p>
+<p>The answer is yes, but the reasons it’s easy to use might not be what you expect.</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="why-did-i-initially-choose-docusaurus">Why did I initially choose Docusaurus?<a href="https://docsaid.org/en/blog/should-you-choose-docusaurus#why-did-i-initially-choose-docusaurus" class="hash-link" aria-label="Direct link to Why did I initially choose Docusaurus?" title="Direct link to Why did I initially choose Docusaurus?">​</a></h2>
+<p>Actually, my first choice was WordPress.org. (Surprised?)</p>
+<p>It has a large user base, is widely used, and has a well-established ecosystem. Many features come with ready-made plugins, such as SEO, social sharing, sitemaps, and so on. Plus, WordPress has a very user-friendly interface, which makes it easy for those who are not familiar with code to get started.</p>
+<p>But hey, I can write code!</p>
+<p>Sometimes, being able to write code is a curse. When you don’t know much, it’s fine to follow tutorials online without questioning much, as there aren’t many choices.</p>
+<p>But once you realize there are other options, you begin to question whether this choice is the right one: is this really the best approach?</p>
+<p>Especially when you know you "can" do certain things, like:</p>
 <ul>
 <li>
-<p><strong>Why can't I write articles using Markdown?</strong></p>
-<p>Actually, you can, but you need to install an additional plugin. Writing articles in this way doesn't have developer tools, syntax highlighting, version control, or easy integration of metadata.</p>
+<p><strong>Why can’t I write articles using Markdown?</strong></p>
+<p>Actually, you can, but it requires installing extra plugins. Writing with Markdown doesn’t have the developer tools like syntax highlighting, version control, or easy metadata integration.</p>
 <hr>
 </li>
 <li>
-<p><strong>Why can't I use Git for version control?</strong></p>
-<p>Actually, you can, but most WordPress changes are made via the backend, making it difficult to sync with Git. Additionally, a lot of content is stored in the database, not in files.</p>
+<p><strong>Why can’t I manage versions with Git?</strong></p>
+<p>You can, but most modifications in WordPress are done via the backend, making it hard to sync with Git. Plus, much of the content is stored in the database, not as files.</p>
 <hr>
 </li>
 <li>
-<p><strong>Why can't I call external APIs?</strong></p>
-<p>Actually, you can, but you'd need to bypass CORS, write custom JavaScript, and somehow inject frontend code without polluting the theme.</p>
+<p><strong>Why can’t I call external APIs?</strong></p>
+<p>You can, but you have to bypass CORS, write custom JS, and figure out how to inject frontend code without affecting the theme.</p>
 <hr>
 </li>
 </ul>
-<p>You might think you saved time, but in reality, you're wasting more time dealing with these issues. The solutions to these problems are not as simple as installing a plugin; they require you to write your own code.</p>
-<p>In the end, if you still have to write code, why even use WordPress?</p>
-<p>Moreover, the plugin ecosystem of WordPress isn't perfect. Many plugins are developed by third parties, and their quality varies. Some even impact website performance or security.</p>
-<p>So, in the back-and-forth process, did I gain anything? Or did I lose?</p>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>I personally think I lost.</p></div></div>
+<p>You think you’re saving time, but in reality, you end up wasting more time dealing with these issues.</p>
+<p>The solutions to these problems aren’t simple plugins but require you to write your own code.</p>
+<p>In the end, if you still have to write your own code, then why bother with WordPress?</p>
+<p>Also, the WordPress plugin ecosystem isn’t perfect. Many plugins are developed by third parties, and their quality can vary widely. Some even affect website performance or security.</p>
+<p>So, was it really worth it?</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>Personally, I think it wasn’t.</p></div></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="what-other-options-are-there">What other options are there?<a href="https://docsaid.org/en/blog/should-you-choose-docusaurus#what-other-options-are-there" class="hash-link" aria-label="Direct link to What other options are there?" title="Direct link to What other options are there?">​</a></h2>
 <p>After carefully considering my needs, my most basic requirement is: writing articles.</p>
 <p>Writing articles itself is already quite a task, and if I had to spend energy on formatting tools, it wouldn't take long before I'd be mentally drained.</p>
@@ -52,6 +54,36 @@
 <p>There are many static site generators based on Markdown, each with its own strengths.</p>
 <p>We gathered some information online and here’s a quick comparison:</p>
 <div style="white-space:nowrap;overflow-x:auto;font-size:0.8rem;line-height:0.8;justify-content:center;display:flex"><table><thead><tr><th>Feature</th><th>Docusaurus</th><th>Hugo</th><th>Jekyll</th><th>Hexo</th><th>Astro</th></tr></thead><tbody><tr><td>Document-oriented</td><td>✅ Strong</td><td>⚠️ Fair</td><td>⚠️ Acceptable</td><td>⚠️ Acceptable</td><td>❌ Weak</td></tr><tr><td>Multilingual Support</td><td>✅ Strong</td><td>❌ Poor</td><td>⚠️ Acceptable</td><td>⚠️ Acceptable</td><td>⚠️ Acceptable</td></tr><tr><td>Deployment Ease</td><td>✅ Strong</td><td>✅ Strong</td><td>✅ Strong</td><td>✅ Strong</td><td>✅ Strong</td></tr><tr><td>Frontend Interactivity</td><td>⚠️ Acceptable</td><td>❌ Poor</td><td>❌ Poor</td><td>❌ Poor</td><td>✅ Strong</td></tr><tr><td>Markdown Support</td><td>✅ Strong</td><td>✅ Strong</td><td>⚠️ Acceptable</td><td>⚠️ Acceptable</td><td>✅ Strong</td></tr><tr><td>Git/Version Control</td><td>✅ Strong</td><td>✅ Strong</td><td>⚠️ Acceptable</td><td>⚠️ Acceptable</td><td>✅ Strong</td></tr><tr><td>Themes &amp; Community</td><td>⚠️ Weak</td><td>✅ Strong</td><td>⚠️ Acceptable</td><td>✅ Strong</td><td>⚠️ Weak</td></tr><tr><td>Arch Flexibility</td><td>⚠️ Acceptable</td><td>✅ Strong</td><td>⚠️ Acceptable</td><td>⚠️ Acceptable</td><td>✅ Strong</td></tr><tr><td>Learning Curve</td><td>❌ Difficult</td><td>⚠️ Moderate</td><td>✅ Easy</td><td>✅ Easy</td><td>⚠️ Moderate</td></tr><tr><td>Build Speed</td><td>⚠️ Acceptable</td><td>✅ Very Fast</td><td>⚠️ Average</td><td>⚠️ Average</td><td>✅ Fast</td></tr><tr><td>SEO Friendliness</td><td>✅ Strong</td><td>✅ Strong</td><td>⚠️ Acceptable</td><td>⚠️ Acceptable</td><td>✅ Strong</td></tr><tr><td>Plugins &amp; Ecosystem</td><td>⚠️ Weak</td><td>✅ Strong</td><td>⚠️ Acceptable</td><td>⚠️ Acceptable</td><td>⚠️ Weak</td></tr><tr><td>Data Integration</td><td>⚠️ Acceptable</td><td>✅ Strong</td><td>⚠️ Acceptable</td><td>❌ Weak</td><td>✅ Strong</td></tr><tr><td>Programming Language</td><td>⚛️ React</td><td>🐹 Go</td><td>💎 Ruby</td><td>🟢 Node.js</td><td>📜 JS/TS</td></tr><tr><td>Maintenance Frequency</td><td>✅ Strong</td><td>✅ Strong</td><td>⚠️ Acceptable</td><td>❌ Weak</td><td>✅ Strong</td></tr><tr><td>Suitable for</td><td>👨‍💻 Technical Doc</td><td>✍️ Blogs</td><td>📝 Personal Pages</td><td>🌏 Chinese</td><td>🚧 Customization</td></tr></tbody></table></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="docusaurus">Docusaurus<a href="https://docsaid.org/en/blog/should-you-choose-docusaurus#docusaurus" class="hash-link" aria-label="Direct link to Docusaurus" title="Direct link to Docusaurus">​</a></h3>
+<ol>
+<li><strong>Best for technical documentation and multilingual sites</strong>: Excels in "documentation-oriented" and "multilingual support," solidifying its position as the top choice for development documentation websites.</li>
+<li><strong>Frontend interaction is flexible, but requires React experience</strong>: Supports the React framework, providing decent interactivity but also a steeper "learning curve," making it better suited for experienced frontend developers.</li>
+<li><strong>Frequent updates and excellent version control integration, ideal for team collaboration</strong>: Well-suited for team development scenarios requiring Git workflows, with an active update frequency.</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="hugo">Hugo<a href="https://docsaid.org/en/blog/should-you-choose-docusaurus#hugo" class="hash-link" aria-label="Direct link to Hugo" title="Direct link to Hugo">​</a></h3>
+<ol>
+<li><strong>Static site compilation is incredibly fast, perfect for speed and efficiency seekers</strong>: Hugo is built using Go, with the fastest compile time among all frameworks, enabling quick deployment.</li>
+<li><strong>Strong flexibility in structure and plugin integration</strong>: Supports highly customizable features and data source integration, making it a popular choice for large content websites.</li>
+<li><strong>Weak multilingual and frontend interaction support, not suitable for internationalization or dynamic applications</strong>: These weaknesses make Hugo more suitable for single-language content websites or blogs.</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="jekyll">Jekyll<a href="https://docsaid.org/en/blog/should-you-choose-docusaurus#jekyll" class="hash-link" aria-label="Direct link to Jekyll" title="Direct link to Jekyll">​</a></h3>
+<ol>
+<li><strong>Most beginner-friendly learning curve, ideal for newcomers to static sites</strong>: Jekyll's simple syntax makes it easy for non-technical users to get started with GitHub Pages deployment.</li>
+<li><strong>Most features are average, making it unsuitable for complex applications</strong>: Although deployment and SEO are good, it lacks standout strengths, which has led to its gradual replacement by other frameworks.</li>
+<li><strong>Ecosystem and maintenance momentum are declining, with limited future scalability</strong>: Compared to other frameworks, its update frequency and community activity are notably declining, making it more suitable for low-maintenance personal pages.</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="hexo">Hexo<a href="https://docsaid.org/en/blog/should-you-choose-docusaurus#hexo" class="hash-link" aria-label="Direct link to Hexo" title="Direct link to Hexo">​</a></h3>
+<ol>
+<li><strong>Active Chinese community, ideal for Chinese-speaking users</strong>: While international support is limited, there is abundant Chinese-language resources, making it easy to find tutorials and theme packages.</li>
+<li><strong>Easy to learn and deploy, ideal for writing-focused users</strong>: Built on Node.js, Hexo is very friendly for those familiar with JavaScript, allowing for rapid website creation without much hassle.</li>
+<li><strong>Weak plugin and multilingual support, unsuitable for long-term large-scale maintenance projects</strong>: More suitable for simple blogs or personal websites, it struggles with handling multiple languages and enterprise-level documentation.</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="astro">Astro<a href="https://docsaid.org/en/blog/should-you-choose-docusaurus#astro" class="hash-link" aria-label="Direct link to Astro" title="Direct link to Astro">​</a></h3>
+<ol>
+<li><strong>Strongest frontend interaction and modern technology integration capabilities</strong>: Supports modern frameworks like React, Vue, and Svelte, making it ideal for building rich interactive and static hybrid websites.</li>
+<li><strong>Highly flexible architecture with excellent data integration capabilities, perfect for highly customized projects</strong>: Can pull from multiple data sources and supports complex architectures, making it useful for content-driven or design-oriented websites.</li>
+<li><strong>Multilingual and theme ecosystems are still developing, with a moderate learning curve</strong>: For users needing internationalization and ready-to-use templates, it’s not yet mature enough.</li>
+</ol>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="what-has-it-done-for-me">What Has It Done for Me?<a href="https://docsaid.org/en/blog/should-you-choose-docusaurus#what-has-it-done-for-me" class="hash-link" aria-label="Direct link to What Has It Done for Me?" title="Direct link to What Has It Done for Me?">​</a></h2>
 <p>I didn't have enough time to try everything individually, so based on the available information, I chose Docusaurus.</p>
 <ul>
