@@ -29,7 +29,11 @@ authors: Z. Yuan
 
 ### 大量のメモリ使用
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![memory usage](./img/img4.jpg)
+</figure>
+</div>
 
 Inception、ResNet、DenseNet の登場により、多くの研究は精巧に設計されたアーキテクチャにシフトし、モデルはますます複雑になってきました。その一方で、いくつかのアーキテクチャは NAS（Neural Architecture Search）を基に自動で検索され、また複合スケーリング戦略を使用しています。
 
@@ -41,11 +45,19 @@ Inception、ResNet、DenseNet の登場により、多くの研究は精巧に�
 
 いくつかの操作はハードウェアのサポートが不足しており、たとえば MobileNets の深層畳み込みでは、この方法はパラメータ数を約 80％削減できますが、速度は逆に遅くなります：
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![mobilenet depthwise conv](./img/img8.jpg)
+</figure>
+</div>
 
 また、ShuffleNet 内のチャネルシャッフルなど、この操作は計算量が少ないように見えますが、推論速度を低下させる原因となります：
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![shufflenet channel shuffle](./img/img9.jpg)
+</figure>
+</div>
 
 ### しかし…
 
@@ -55,7 +67,11 @@ Inception、ResNet、DenseNet の登場により、多くの研究は精巧に�
 
 - [**[16.05] Residual networks behave like ensembles of relatively shallow networks**](https://arxiv.org/abs/1605.06431)
 
+  <div align="center">
+  <figure style={{"width": "80%"}}>
   ![resnet ensemble](./img/img10.jpg)
+  </figure>
+  </div>
 
 残差接続はショートカットを提供するため、ResNet を例に挙げると、理論的には N 個のブロックに対してモデルは 2N 個のモデルの集合体として解釈できます。なぜなら、各ブロックは 2 つの経路を選択できるからです。
 
@@ -67,7 +83,11 @@ ResNet の成功は残差接続の有効性を証明しており、それを放�
 
 ### モデルアーキテクチャ
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![model architecture](./img/img3.jpg)
+</figure>
+</div>
 
 上記の問題を解決するために、この論文ではまず ResNet の残差構造を変更しました。
 
@@ -85,7 +105,11 @@ ResNet の成功は残差接続の有効性を証明しており、それを放�
 
 ### 再パラメータ化
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![reparameterization](./img/img1.jpg)
+</figure>
+</div>
 
 分岐の削除は単に削除するだけではなく、過去の多くのモデル削減研究は、単に分岐を削除することが性能低下を引き起こすことを示しています。
 
@@ -138,7 +162,11 @@ $$
 
 ### パラメータ設定
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![parameter configuration](./img/img5.jpg)
+</figure>
+</div>
 
 最後に RepVGG のパラメータ設定について、著者は幾つかの異なる設定を提供しています。上記の表では、`Layers of each stage`が異なる解像度の特徴マップにおける層数を示しています。
 
@@ -146,15 +174,22 @@ $$
 
 パラメータ a と b はチャンネル数を制御するために使用され、具体的な設定は以下の表に示されています：
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![channel configuration](./img/img11.jpg)
+</figure>
+</div>
 
 ## 討論
 
 ### ImageNet 性能
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![imagenet result 1](./img/img2.jpg)
-
 ![imagenet result 2](./img/img6.jpg)
+</figure>
+</div>
 
 この研究で、著者は RepVGG を ImageNet-1K データセット上のいくつかの古典的かつ最先端のモデルと比較しました。
 
@@ -174,7 +209,11 @@ $$
 
 ### 消融実験
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![ablation 1](./img/img7.jpg)
+</figure>
+</div>
 
 著者は RepVGG の性能に対する構造的再パラメータ化技術の重要性を検証するため、詳細な実験と消融研究を行いました。
 
@@ -186,7 +225,11 @@ $$
 
 ---
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![ablation 2](./img/img12.jpg)
+</figure>
+</div>
 
 さらに比較するために、著者は RepVGG-B0 を用いていくつかの変種とベースラインモデルを比較しました（上表参照）。
 

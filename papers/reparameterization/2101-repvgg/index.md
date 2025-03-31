@@ -29,7 +29,11 @@ authors: Z. Yuan
 
 ### 大量記憶體佔用
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![memory usage](./img/img4.jpg)
+</figure>
+</div>
 
 隨著 Inception，ResNet 和 DenseNet 的出現，許多研究興趣轉移到了精心設計的架構上，使得模型變得越來越複雜。除此之外，還有些架構基於 NAS 自動搜索，或是使用複合縮放策略。
 
@@ -41,11 +45,19 @@ authors: Z. Yuan
 
 有一些操作缺乏硬體的支援，例如 MobileNets 的深度卷積，這個方法雖然參數量比一般卷積大概減少 80%，但是速度更慢：
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![mobilenet depthwise conv](./img/img8.jpg)
+</figure>
+</div>
 
 還有像是 ShuffleNet 內的通道洗牌，這個操作看起來不占計算量，但也會降低推論速度：
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![shufflenet channel shuffle](./img/img9.jpg)
+</figure>
+</div>
 
 ### 可是...
 
@@ -55,7 +67,11 @@ authors: Z. Yuan
 
 - [**[16.05] Residual networks behave like ensembles of relatively shallow networks**](https://arxiv.org/abs/1605.06431)
 
+  <div align="center">
+  <figure style={{"width": "80%"}}>
   ![resnet ensemble](./img/img10.jpg)
+  </figure>
+  </div>
 
 因為殘差連結提供了一個捷徑，以 ResNet 為例：理論上來說對於 N 個區塊，模型可以解釋成 2N 個模型的集合，因為每個區塊可以分為兩條路徑可以選擇。
 
@@ -67,7 +83,11 @@ ResNet 的成功已經證實了殘差連接的有效性，怎麼能說放棄就�
 
 ### 模型架構
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![model architecture](./img/img3.jpg)
+</figure>
+</div>
 
 為了解決上述的問題，這篇論文首先修改了 ResNet 的殘差結構。
 
@@ -85,7 +105,11 @@ ResNet 的成功已經證實了殘差連接的有效性，怎麼能說放棄就�
 
 ### 重新參數化
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![reparameterization](./img/img1.jpg)
+</figure>
+</div>
 
 移除分支不是直接刪除，在過去許多模型裁減研究已經告訴我們直接刪除分支會導致性能下降。
 
@@ -138,7 +162,11 @@ $$
 
 ### 參數配置
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![parameter configuration](./img/img5.jpg)
+</figure>
+</div>
 
 最後是 RepVGG 的參數配置，作者提供了幾個不同的配置，在上表中，`Layers of each stage` 表示了不同解析度特徵圖的層數。
 
@@ -146,15 +174,22 @@ $$
 
 參數 a 和 b 用來控制通道數量，具體配置如下表：
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![channel configuration](./img/img11.jpg)
+</figure>
+</div>
 
 ## 討論
 
 ### ImageNet 性能
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![imagenet result 1](./img/img2.jpg)
-
 ![imagenet result 2](./img/img6.jpg)
+</figure>
+</div>
 
 在這篇研究中，作者將 RepVGG 與 ImageNet-1K 數據集上的一些經典和最先進模型進行了比較。
 
@@ -174,7 +209,11 @@ $$
 
 ### 消融實驗
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![ablation 1](./img/img7.jpg)
+</figure>
+</div>
 
 這裡作者為了驗證了結構重新參數化技術的重要性，進行了詳細的實驗和消融研究，以探討其對模型性能的影響。
 
@@ -186,7 +225,11 @@ $$
 
 ---
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![ablation 2](./img/img12.jpg)
+</figure>
+</div>
 
 為了進一步比較，作者建立了一系列變體和基線模型，在 RepVGG-B0 上進行比較，如上表。
 

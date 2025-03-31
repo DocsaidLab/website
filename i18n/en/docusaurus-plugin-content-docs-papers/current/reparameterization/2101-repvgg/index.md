@@ -29,7 +29,11 @@ This is a typical gap between academia and industry, and as engineers, we can't 
 
 ### High Memory Usage
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![memory usage](./img/img4.jpg)
+</figure>
+</div>
 
 With the advent of Inception, ResNet, and DenseNet, many researchers shifted their focus to carefully designed architectures, making models increasingly complex. Moreover, some architectures are based on NAS (Neural Architecture Search) or use compound scaling strategies.
 
@@ -41,11 +45,19 @@ In residual structures, branches require additional memory to store branch resul
 
 Some operations lack hardware support, such as the depthwise convolution in MobileNets. This method reduces parameters by about 80% compared to standard convolution but is slower:
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![mobilenet depthwise conv](./img/img8.jpg)
+</figure>
+</div>
 
 Similarly, the channel shuffle operation in ShuffleNet, although not computationally intensive, also reduces inference speed:
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![shufflenet channel shuffle](./img/img9.jpg)
+</figure>
+</div>
 
 ### However...
 
@@ -55,7 +67,11 @@ Multi-branch structures are very effective!
 
 - [**[16.05] Residual networks behave like ensembles of relatively shallow networks**](https://arxiv.org/abs/1605.06431)
 
+  <div align="center">
+  <figure style={{"width": "80%"}}>
   ![resnet ensemble](./img/img10.jpg)
+  </figure>
+  </div>
 
 Residual connections provide a shortcut. For ResNet, theoretically, for N blocks, the model can be interpreted as an ensemble of 2N models because each block can be split into two possible paths.
 
@@ -67,7 +83,11 @@ ResNet's success has already proven the effectiveness of residual connections, s
 
 ### Model Architecture
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![model architecture](./img/img3.jpg)
+</figure>
+</div>
 
 To address the above issues, this paper first modifies the residual structure of ResNet.
 
@@ -85,7 +105,11 @@ The training structure is defined this way to satisfy the multi-branch training 
 
 ### Reparameterization
 
+<div align="center">
+<figure style={{"width": "80%"}}>
 ![reparameterization](./img/img1.jpg)
+</figure>
+</div>
 
 Removing branches isn't about directly deleting them; past research on model pruning has shown that direct deletion leads to performance degradation.
 
@@ -138,7 +162,11 @@ They use a different mathematical expression of convolution structures to make t
 
 ### Parameter Configuration
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![parameter configuration](./img/img5.jpg)
+</figure>
+</div>
 
 Finally, the authors provide several different configurations of RepVGG. In the table above, `Layers of each stage` indicates the number of layers at different resolution features.
 
@@ -146,15 +174,22 @@ The first stage only has one layer because the image size is large, taking up a 
 
 The parameters a and b are used to control the number of channels, with the specific configuration shown in the table below:
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![channel configuration](./img/img11.jpg)
+</figure>
+</div>
 
 ## Discussion
 
 ### ImageNet Performance
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![imagenet result 1](./img/img2.jpg)
-
 ![imagenet result 2](./img/img6.jpg)
+</figure>
+</div>
 
 In this study, the authors compared RepVGG with some classic and state-of-the-art models on the ImageNet-1K dataset.
 
@@ -174,7 +209,11 @@ Finally, RepVGG also shows good performance compared to state-of-the-art baselin
 
 ### Ablation Experiments
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![ablation 1](./img/img7.jpg)
+</figure>
+</div>
 
 To verify the importance of structural reparameterization technology, the authors conducted detailed experiments and ablation studies to explore its impact on model performance.
 
@@ -186,7 +225,11 @@ From the inference speed of the model during training, the structural reparamete
 
 ---
 
+<div align="center">
+<figure style={{"width": "70%"}}>
 ![ablation 2](./img/img12.jpg)
+</figure>
+</div>
 
 To further compare, the authors established a series of variants and baseline models, compared with RepVGG-B0, as shown in the table above.
 
