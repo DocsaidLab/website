@@ -1,6 +1,5 @@
 // index.js
 import Link from '@docusaurus/Link';
-import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import { Card, Col, Row, Timeline } from 'antd';
@@ -14,10 +13,16 @@ import MRZScannerDemoWrapper from '@site/src/components/MRZScannerDemo';
 
 import demoContent from '@site/src/data/demoContent';
 import featuredProjectsData from '@site/src/data/featuredProjectsData';
+import i18nMessages from '@site/src/data/indexContent';
 import mrzdemoContent from '@site/src/data/mrzdemoContent';
 import testimonialsData from '@site/src/data/testimonialsData';
 
 import styles from './index.module.css';
+
+
+const getTranslation = (id, locale) => {
+  return i18nMessages[id]?.[locale] || i18nMessages[id]?.['zh-hant'] || '';
+};
 
 // -- Timeline 交錯進入 variants --
 const containerVariants = {
@@ -39,6 +44,8 @@ const itemVariants = {
 
 // -- Timeline 區塊：交錯進入 --
 function StaggeredTimeline({ recentUpdates, visibleCount, setVisibleCount, convertMdLinkToRoute }) {
+  const { i18n } = useDocusaurusContext();
+  const currentLocale = i18n.currentLocale;
   return (
     <motion.section
       className={styles.sectionBox}
@@ -48,7 +55,7 @@ function StaggeredTimeline({ recentUpdates, visibleCount, setVisibleCount, conve
     >
       <motion.div variants={itemVariants}>
         <h2 className={styles.sectionTitle}>
-          <Translate id="homepage.recentUpdatesTitle">論文筆記近期更新</Translate>
+          {getTranslation('homepage.recentUpdatesTitle', currentLocale)}
         </h2>
       </motion.div>
 
@@ -73,7 +80,7 @@ function StaggeredTimeline({ recentUpdates, visibleCount, setVisibleCount, conve
       {visibleCount < recentUpdates.length && (
         <motion.div variants={itemVariants} className={styles.loadMoreWrapper}>
           <button onClick={() => setVisibleCount((prev) => prev + 5)} className={styles.loadMoreBtn}>
-            <Translate id="homepage.loadMore">載入更多</Translate>
+            {getTranslation('homepage.loadMore', currentLocale)}
           </button>
         </motion.div>
       )}
@@ -81,9 +88,10 @@ function StaggeredTimeline({ recentUpdates, visibleCount, setVisibleCount, conve
   );
 }
 
-
 // -- Testimonials 區塊：交錯進入 --
 function StaggeredTestimonials({ testimonialsData }) {
+  const { i18n } = useDocusaurusContext();
+  const currentLocale = i18n.currentLocale;
   return (
     <motion.section
       className={styles.sectionBox}
@@ -94,7 +102,7 @@ function StaggeredTestimonials({ testimonialsData }) {
     >
       <motion.div variants={itemVariants}>
         <h2 className={styles.sectionTitle}>
-          <Translate id="homepage.testimonialsTitle">讀者回饋</Translate>
+          {getTranslation('homepage.testimonialsTitle', currentLocale)}
         </h2>
       </motion.div>
 
@@ -119,6 +127,8 @@ function StaggeredTestimonials({ testimonialsData }) {
 
 // -- 核心：有自動橫向捲動、Hover 停止、左右箭頭控制 --
 export function AutoScrollingProjects({ projects }) {
+  const { i18n } = useDocusaurusContext();
+  const currentLocale = i18n.currentLocale;
   // 卡片資料重複一次，形成「無縫銜接」
   const scrollingItems = [...projects, ...projects];
 
@@ -213,7 +223,7 @@ export function AutoScrollingProjects({ projects }) {
   return (
     <section className={styles.sectionBox}>
       <h2 className={styles.sectionTitle}>
-        <Translate id="homepage.featuredProjectsTitle">精選作品</Translate>
+        {getTranslation('homepage.featuredProjectsTitle', currentLocale)}
       </h2>
 
       <div
@@ -248,7 +258,7 @@ export function AutoScrollingProjects({ projects }) {
                 <h3>{proj.title}</h3>
                 <p>{proj.description}</p>
                 <Link className={styles.projectLink} to={proj.link}>
-                  <Translate id="homepage.learnMore">了解更多 →</Translate>
+                  {getTranslation('homepage.learnMore', currentLocale)}
                 </Link>
               </div>
             </div>
@@ -323,13 +333,51 @@ export default function Home() {
         {/* 改為帶箭頭 & Hover 暫停的自動橫向捲動 */}
         <AutoScrollingProjects projects={currentProjects} />
 
-        {/* Timeline: 交錯進入 */}
-        <StaggeredTimeline
-          recentUpdates={recentUpdates}
-          visibleCount={visibleCount}
-          setVisibleCount={setVisibleCount}
-          convertMdLinkToRoute={convertMdLinkToRoute}
-        />
+        {/* Timeline + Facebook 粉專 雙欄併排 */}
+        <section className={styles.sectionBox}>
+          <Row gutter={[32, 32]}>
+            {/* 左欄：StaggeredTimeline */}
+            <Col xs={24} md={16}>
+              <StaggeredTimeline
+                recentUpdates={recentUpdates}
+                visibleCount={visibleCount}
+                setVisibleCount={setVisibleCount}
+                convertMdLinkToRoute={convertMdLinkToRoute}
+              />
+            </Col>
+
+            {/* 右欄：Facebook 粉專 - 標題靠左，iframe 置中 */}
+            <Col xs={24} md={8}>
+              <div style={{ width: '100%' }}>
+                <h2
+                  style={{
+                    fontSize: '1.25rem',
+                    fontWeight: 600,
+                    marginBottom: '1rem',
+                    textAlign: 'left',
+                  }}
+                >
+                  {getTranslation('homepage.followUs', currentLocale)}
+                </h2>
+                <div style={{ maxWidth: 320, margin: '0 auto' }}>
+                  <iframe
+                    title="Facebook Page"
+                    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F61574315987805&tabs=timeline&width=300&height=400&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                    width="100%"
+                    height="400"
+                    style={{
+                      border: 'none',
+                      overflow: 'hidden',
+                      display: 'block',
+                    }}
+                    allowFullScreen={true}
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  ></iframe>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </section>
 
         {/* DocAligner Demo：保留交錯進入 */}
         <motion.section
@@ -341,16 +389,14 @@ export default function Home() {
         >
           <motion.div variants={itemVariants}>
             <h2 className={styles.sectionTitle}>
-              <Translate id="homepage.demoTitle">功能展示</Translate>
+              {getTranslation('homepage.demoTitle', currentLocale)}
             </h2>
           </motion.div>
 
           {/* 這裡可放一段總體描述，如想省略可移除 */}
           <motion.div variants={itemVariants} className={styles.demoDescription}>
             <p>
-              <Translate id="homepage.demoIntro">
-                下方展示兩種模型的運行示範：DocAligner 用於文件對齊，MRZScanner 用於辨識機器可判讀區。
-              </Translate>
+              {getTranslation('homepage.demoIntro', currentLocale)}
             </p>
           </motion.div>
 
@@ -361,13 +407,11 @@ export default function Home() {
                 <Card className={styles.demoCard}>
                   {/* 自訂標題 */}
                   <h3 style={{ marginBottom: '0.5rem', fontSize: '1.25rem' }}>
-                    <Translate id="homepage.docAlignerDemoTitle">DocAligner Demo</Translate>
+                    {getTranslation('homepage.docAlignerDemoTitle', currentLocale)}
                   </h3>
                   {/* 自訂描述 */}
                   <p style={{ marginBottom: '1rem' }}>
-                    <Translate id="homepage.docAlignerDemoDesc">
-                      上傳含有文件的圖片，並嘗試檢測角點、完成透視校正。
-                    </Translate>
+                    {getTranslation('homepage.docAlignerDemoDesc', currentLocale)}
                   </p>
                   {/* Demo 元件本身 */}
                   <DocAlignerDemoWrapper {...localeContent.docAlignerProps} />
@@ -378,12 +422,10 @@ export default function Home() {
               <Col md={12} xs={24}>
                 <Card className={styles.demoCard}>
                   <h3 style={{ marginBottom: '0.5rem', fontSize: '1.25rem' }}>
-                    <Translate id="homepage.mrzScannerDemoTitle">MRZScanner Demo</Translate>
+                    {getTranslation('homepage.mrzScannerDemoTitle', currentLocale)}
                   </h3>
                   <p style={{ marginBottom: '1rem' }}>
-                    <Translate id="homepage.mrzScannerDemoDesc">
-                      上傳含 MRZ(機器可判讀區) 的圖片，偵測並解析其中的文字內容。
-                    </Translate>
+                    {getTranslation('homepage.mrzScannerDemoDesc', currentLocale)}
                   </p>
                   <MRZScannerDemoWrapper {...localeMrz.mrzScannerProps} />
                 </Card>
