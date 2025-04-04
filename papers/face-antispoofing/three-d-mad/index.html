@@ -1,0 +1,204 @@
+<!doctype html><html lang=zh-hant dir=ltr class="docs-wrapper plugin-docs plugin-id-papers docs-version-current docs-doc-page docs-doc-id-face-antispoofing/three-d-mad/index" data-has-hydrated=false><meta charset=UTF-8><meta name=generator content="Docusaurus v3.7.0"><title data-rh=true>[14.05] 3DMAD | DOCSAID</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"><meta data-rh=true name=twitter:card content=summary_large_image><meta data-rh=true property=og:image content=https://docsaid.org/img/docsaid-social-card.jpg><meta data-rh=true name=twitter:image content=https://docsaid.org/img/docsaid-social-card.jpg><meta data-rh=true property=og:url content=https://docsaid.org/papers/face-antispoofing/three-d-mad/><meta data-rh=true property=og:locale content=zh_hant><meta data-rh=true property=og:locale:alternate content=en><meta data-rh=true property=og:locale:alternate content=ja><meta data-rh=true name=docusaurus_locale content=zh-hant><meta data-rh=true name=docsearch:language content=zh-hant><meta data-rh=true name=docusaurus_version content=current><meta data-rh=true name=docusaurus_tag content=docs-papers-current><meta data-rh=true name=docsearch:version content=current><meta data-rh=true name=docsearch:docusaurus_tag content=docs-papers-current><meta data-rh=true property=og:title content="[14.05] 3DMAD | DOCSAID"><meta data-rh=true name=description content=真實的假面><meta data-rh=true property=og:description content=真實的假面><link data-rh=true rel=icon href=/img/favicon.ico><link data-rh=true rel=canonical href=https://docsaid.org/papers/face-antispoofing/three-d-mad/><link data-rh=true rel=alternate href=https://docsaid.org/papers/face-antispoofing/three-d-mad/ hreflang=zh-hant><link data-rh=true rel=alternate href=https://docsaid.org/en/papers/face-antispoofing/three-d-mad/ hreflang=en><link data-rh=true rel=alternate href=https://docsaid.org/ja/papers/face-antispoofing/three-d-mad/ hreflang=ja><link data-rh=true rel=alternate href=https://docsaid.org/papers/face-antispoofing/three-d-mad/ hreflang=x-default><link data-rh=true rel=preconnect href=https://S9NC0RYCHF-dsn.algolia.net crossorigin=anonymous><link rel=alternate type=application/rss+xml href=/blog/rss.xml title="DOCSAID RSS Feed"><link rel=alternate type=application/atom+xml href=/blog/atom.xml title="DOCSAID Atom Feed"><link rel=preconnect href=https://www.google-analytics.com><link rel=preconnect href=https://www.googletagmanager.com><script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script><link rel=search type=application/opensearchdescription+xml title=DOCSAID href=/opensearch.xml><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css type=text/css integrity=sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM crossorigin=anonymous><link rel=stylesheet href=/assets/css/styles.31895f42.css><script src=/assets/js/runtime~main.44302bdf.js defer></script><script src=/assets/js/main.c53f00dc.js defer></script><body class=navigation-with-keyboard><script>!function(){var t,e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t=null!==e?e:"light",document.documentElement.setAttribute("data-theme",t)}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id=__docusaurus><link rel=preload as=image href=/img/docsaid_logo.png><link rel=preload as=image href=/img/docsaid_logo_white.png><link rel=preload as=image href=https://github.com/zephyr-sh.png><div role=region aria-label=跳至主要内容><a class=skipToContent_fXgn href=#__docusaurus_skipToContent_fallback>跳至主要内容</a></div><nav aria-label=主導航 class="navbar navbar--fixed-top navbarHideable_jvwV"><div class=navbar__inner><div class=navbar__items><button aria-label=切換導覽列 aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"/></svg></button><a class=navbar__brand href=/><div class=navbar__logo><img src=/img/docsaid_logo.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src=/img/docsaid_logo_white.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href=/docs/>開源專案</a><a aria-current=page class="navbar__item navbar__link navbar__link--active" href=/papers/intro>論文筆記</a><a class="navbar__item navbar__link" href=/blog>部落格</a><a class="navbar__item navbar__link" href=/playground/intro>遊樂場</a><a class="navbar__item navbar__link" href=/aboutus>關於我們</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link><svg viewBox="0 0 24 24" width=20 height=20 aria-hidden=true class=iconLanguage_nlXk><path fill=currentColor d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>繁體中文</a><ul class=dropdown__menu><li><a href=/papers/face-antispoofing/three-d-mad/ target=_self rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang=zh-hant>繁體中文</a><li><a href=/en/papers/face-antispoofing/three-d-mad/ target=_self rel="noopener noreferrer" class=dropdown__link lang=en>English</a><li><a href=/ja/papers/face-antispoofing/three-d-mad/ target=_self rel="noopener noreferrer" class=dropdown__link lang=ja>日本語</a></ul></div><div class=navbarSearchContainer_dCNk><button type=button class="DocSearch DocSearch-Button" aria-label="搜尋 (Command+K)"><span class=DocSearch-Button-Container><svg width=20 height=20 class=DocSearch-Search-Icon viewBox="0 0 20 20" aria-hidden=true><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke=currentColor fill=none fill-rule=evenodd stroke-linecap=round stroke-linejoin=round /></svg><span class=DocSearch-Button-Placeholder>搜尋</span></span><span class=DocSearch-Button-Keys></span></button></div><button type=button class="ant-btn css-7ny38l ant-btn-circle ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only"><span class=ant-btn-icon><span role=img aria-label=user style=font-size:18px class="anticon anticon-user"><svg viewBox="64 64 896 896" focusable=false data-icon=user width=1em height=1em fill=currentColor aria-hidden=true><path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"/></svg></span></span></button></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="main-wrapper mainWrapper_eExm"><div class=docsWrapper_hBAB><button aria-label=回到頂部 class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type=button></button><div class=docRoot_UBD9><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class=sidebarViewport_aRkj><div class="sidebar_njMd sidebarWithHideableNavbar_wUlq"><a tabindex=-1 class=sidebarLogo_isFc href=/><img src=/img/docsaid_logo.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src=/img/docsaid_logo_white.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"><b></b></a><nav aria-label=文件側邊欄 class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/papers/intro>論文筆記</a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/classic-cnns-11>Classic CNNs (11)</a><button aria-label="展開側邊欄分類 'Classic CNNs (11)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/contrastive-learning-13>Contrastive Learning (13)</a><button aria-label="展開側邊欄分類 'Contrastive Learning (13)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/deepseek-5>DeepSeek (5)</a><button aria-label="展開側邊欄分類 'DeepSeek (5)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist menu__link--active" href=/papers/category/face-anti-spoofing-4>Face Anti-Spoofing (4)</a><button aria-label="收起側邊欄分類 'Face Anti-Spoofing (4)'" aria-expanded=true type=button class="clean-btn menu__caret"></button></div><ul style=display:block;overflow:visible;height:auto class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/face-antispoofing/slrbd/>[10.09] SLRBD</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/face-antispoofing/lbp/>[12.09] LBP</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current=page tabindex=0 href=/papers/face-antispoofing/three-d-mad/>[14.05] 3DMAD</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/face-antispoofing/cfpl-fas/>[24.03] CFPL-FAS</a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/face-recognition-4>Face Recognition (4)</a><button aria-label="展開側邊欄分類 'Face Recognition (4)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/feature-fusion-10>Feature Fusion (10)</a><button aria-label="展開側邊欄分類 'Feature Fusion (10)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/lightweight-10>Lightweight (10)</a><button aria-label="展開側邊欄分類 'Lightweight (10)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/mamba-4>Mamba (4)</a><button aria-label="展開側邊欄分類 'Mamba (4)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/model-tuning-8>Model Tuning (8)</a><button aria-label="展開側邊欄分類 'Model Tuning (8)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/multimodality-24>Multimodality (24)</a><button aria-label="展開側邊欄分類 'Multimodality (24)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/normalization-1>Normalization (1)</a><button aria-label="展開側邊欄分類 'Normalization (1)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/object-detection-8>Object Detection (8)</a><button aria-label="展開側邊欄分類 'Object Detection (8)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/reparameterization-8>Reparameterization (8)</a><button aria-label="展開側邊欄分類 'Reparameterization (8)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/segmentation-1>Segmentation (1)</a><button aria-label="展開側邊欄分類 'Segmentation (1)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/text-detection-14>Text Detection (14)</a><button aria-label="展開側邊欄分類 'Text Detection (14)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/text-recognition-20>Text Recognition (20)</a><button aria-label="展開側邊欄分類 'Text Recognition (20)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/text-spotting-4>Text Spotting (4)</a><button aria-label="展開側邊欄分類 'Text Spotting (4)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/transformers-17>Transformers (17)</a><button aria-label="展開側邊欄分類 'Transformers (17)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/vision-transformers-12>Vision Transformers (12)</a><button aria-label="展開側邊欄分類 'Vision Transformers (12)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/papers/intro>All Notes: 178 entries</a></ul></nav><button type=button title=收起側邊欄 aria-label=收起側邊欄 class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width=20 height=20 aria-hidden=true class=collapseSidebarButtonIcon_kv0_><g fill=#7a7a7a><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"/><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"/></g></svg></button></div></div></aside><main class=docMainContainer_TBSr><div class="container padding-top--md padding-bottom--lg"><div class=row><div class="col docItemCol_VOVn"><div class=docItemContainer_Djhp><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label=頁面路徑><ul class=breadcrumbs itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumbs__item><a aria-label=主頁面 class=breadcrumbs__link href=/><svg viewBox="0 0 24 24" class=breadcrumbHomeIcon_YNFT><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill=currentColor /></svg></a><li itemscope itemprop=itemListElement itemtype=https://schema.org/ListItem class=breadcrumbs__item><a class=breadcrumbs__link itemprop=item href=/papers/category/face-anti-spoofing-4><span itemprop=name>Face Anti-Spoofing (4)</span></a><meta itemprop=position content=1><li itemscope itemprop=itemListElement itemtype=https://schema.org/ListItem class="breadcrumbs__item breadcrumbs__item--active"><span class=breadcrumbs__link itemprop=name>[14.05] 3DMAD</span><meta itemprop=position content=2></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type=button class="clean-btn tocCollapsibleButton_TO0P">本頁導覽</button></div><div class="theme-doc-markdown markdown"><header><h1>[14.05] 3DMAD</h1><div class="undefined margin-bottom--md"><div class=docAuthor_y7l7><img src=https://github.com/zephyr-sh.png alt="Z. Yuan" class=docAuthorImg_vlJe><div><div class=docAuthorName_aSh4><a href=https://github.com/zephyr-sh target=_blank rel="noopener noreferrer">Z. Yuan</a></div><div class=docAuthorTitle_Yp5_>Dosaid maintainer, Full-Stack AI Engineer</div><div class=docAuthorSocials_M3ba><a href=https://github.com/zephyr-sh target=_blank rel="noopener noreferrer" class=docAuthorSocialLink_trj9><svg stroke=currentColor fill=currentColor stroke-width=0 viewBox="0 0 496 512" height=20 width=20 xmlns=http://www.w3.org/2000/svg><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a><a href=https://www.linkedin.com/in/ze-yuan-sh7/ target=_blank rel="noopener noreferrer" class=docAuthorSocialLink_trj9><svg stroke=currentColor fill=currentColor stroke-width=0 viewBox="0 0 448 512" height=20 width=20 xmlns=http://www.w3.org/2000/svg><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a></div></div></div></div><h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=真實的假面>真實的假面<a href=#真實的假面 class=hash-link aria-label=真實的假面的直接連結 title=真實的假面的直接連結>​</a></h2>
+<p><a href=https://infoscience.epfl.ch/server/api/core/bitstreams/1694cd6d-ff27-4323-8993-c76232d5aa14/content target=_blank rel="noopener noreferrer"><strong>Spoofing Face Recognition with 3D Masks</strong></a></p>
+<hr>
+<p>還記得我們之前看過了什麼惡意攻擊？</p>
+<ul>
+<li><strong>Print Attack</strong>：攻擊者將目標用戶的照片列印出來，然後將其用來突破人臉辨識系統的安全防護。</li>
+<li><strong>Replay Attack</strong>：攻擊者錄製目標用戶的影片，然後將其重播以欺騙人臉辨識系統。</li>
+</ul>
+<p>你說這解析度太低？好說，找一台 4K 螢幕來播放就行了。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=定義問題>定義問題<a href=#定義問題 class=hash-link aria-label=定義問題的直接連結 title=定義問題的直接連結>​</a></h2>
+<p>在我們都還著眼於這些 2D 攻擊的時候，3D 攻擊已經來了。</p>
+<p>這篇論文的作者指出：隨著 3D 重建和列印技術的進步，過去研究對於攻擊型態還停留在 2D 攻擊的假設上，這種假設不再成立。</p>
+<p>因為我們可以輕易地從 2D 照片重建出 3D 模型，然後列印出來，這樣就能夠製作出一個與目標用戶的面部結構極為相似的面具。</p>
+<p>這個面具可以輕易製造出：</p>
+<ol>
+<li><strong>景深效果</strong>：可以突破景深檢測系統。</li>
+<li><strong>臉部表情</strong>：可以突破主動式活體檢測系統。</li>
+</ol>
+<p>它既不是印刷，也不是錄影回放。它可以直接突破基於所有 2D 攻擊的防禦系統。</p>
+<p>哎呀！完蛋了。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=解決問題>解決問題<a href=#解決問題 class=hash-link aria-label=解決問題的直接連結 title=解決問題的直接連結>​</a></h2>
+<p>針對 3D 面具攻擊的挑戰，作者提出一個直接的解決方案：</p>
+<ul>
+<li><strong>先建立一套具代表性的 3D 面具攻擊資料集，然後基於這些資料來訓練新一代防禦系統</strong>。</li>
+</ul>
+<p>這樣的策略從資料實作出發，有助於釐清真實場景中的攻擊樣態與辨識模型的弱點。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=morpho-資料集>Morpho 資料集<a href=#morpho-資料集 class=hash-link aria-label="Morpho 資料集的直接連結" title="Morpho 資料集的直接連結">​</a></h3>
+<p>Morpho 是由 MORPHO 公司在 TABULA RASA 計畫中收集的私有資料集。雖然無法公開取得，但它仍是少數包含高精度 3D 面具攻擊樣本的資料集之一，對早期的 FAS 研究有指標性意義。</p>
+<p>資料集中共收錄：</p>
+<ul>
+<li>207 個真實訪問樣本</li>
+<li>199 個 3D 面具攻擊樣本</li>
+<li>同時提供 2D 彩色影像與 3D 臉部模型</li>
+</ul>
+<p>這些面具是針對 16 位特定用戶製作，先使用結構光 3D 掃描器建構臉部模型，再透過 3D 列印技術製成灰階材質、外型逼真的面具。錄製過程中每位用戶拍攝 9 至 15 次，總共包含 20 位受試者資料，並在每幀中標註兩個眼角與鼻尖座標。</p>
+<p><strong>特色與限制如下：</strong></p>
+<ul>
+<li>面具具備極高形狀精度，是真實臉部的準確複製</li>
+<li>所有樣本均於單一拍攝場次完成，避免環境變異</li>
+<li>錄製對象須配合靜止，增加攻擊者取得掃描資料的難度</li>
+<li>資料集為私有資源，無法作為公開研究基準</li>
+</ul>
+<p>資料集樣本如下圖，最左側為目標用戶的灰階臉部影像，中間為深度圖，最右側為 3D 面具的灰階影像。這些樣本均來自於 Morpho 資料集。</p>
+<div align=center><figure style=width:60%><p><img decoding=async loading=lazy alt="morpho dataset" src=/assets/images/img1-60a266eece1f09dc279accd1f0535831.jpg width=544 height=476 class=img_ev3q></figure></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=3d-mask-attack-database-3dmad>3D Mask Attack Database (3DMAD)<a href=#3d-mask-attack-database-3dmad class=hash-link aria-label="3D Mask Attack Database (3DMAD)的直接連結" title="3D Mask Attack Database (3DMAD)的直接連結">​</a></h3>
+<p>在傳統上，製作方式需仰賴 3D 掃描器，<strong>需近距離並取得使用者配合</strong>，在真實攻擊場景中不易實現。雖然掃描精度提升，但在沒有授權的情況下取得「高品質 3D 臉部資料」仍非常困難。因此在早期的研究中，3D 面具攻擊的普及性受到限制。</p>
+<p>然而近年來，<strong>3D 列印與臉部建模技術的商業化服務快速發展</strong>，降低了面具製作的技術門檻與取得難度。我們只需要取得使用者的 2D 臉部照片（如網路社群大頭照）且幾乎無感知風險，更具實務威脅。</p>
+<p>為了模擬這種<strong>低成本、高可取得性</strong>的攻擊模式，作者選用了一家名為 <strong><a href=https://www.thatsmyface.com/ target=_blank rel="noopener noreferrer">ThatsMyFace.com</a></strong> 的第三方服務進行面具製作。</p>
+<p>製作步驟如下：</p>
+<ul>
+<li>
+<p><strong>影像蒐集：</strong> 每位受試者需提供 <strong>一張正面照</strong> 與 <strong>兩張側面照</strong>（左側與右側），共三張高品質的 2D 臉部影像。這些影像將成為 3D 臉部重建的輸入來源。</p>
+</li>
+<li>
+<p><strong>模型重建與面具列印：</strong> 上傳至 ThatsMyFace 之後，平台會自動將這三張照片重建成 3D 臉部模型。用戶可於網站上預覽模型，確認外觀後下單訂製。</p>
+<p>作者為每位使用者製作了兩種面具：</p>
+<ul>
+<li>
+<p><strong>可穿戴全尺寸面具</strong>：硬樹脂材質、有眼孔與鼻孔，模擬實際攻擊。</p>
+<div align=center><figure style=width:80%><p><img decoding=async loading=lazy alt="all masks" src=/assets/images/img3-afce73aa3c527e66790bbe4aea35c861.jpg width=752 height=480 class=img_ev3q></figure></div>
+</li>
+<li>
+<p><strong>紙藝組裝面具</strong>：較低成本，僅用於展示與未來參考。</p>
+<div align=center><figure style=width:70%><p><img decoding=async loading=lazy alt="3d mask" src=/assets/images/img2-0788f771751abacaa0e488cd9016b6d4.jpg width=816 height=480 class=img_ev3q></figure></div>
+</li>
+</ul>
+</li>
+</ul>
+<p>在資料集中，每位用戶的上傳影像（正面與側面照）、紙藝面具檔案、列印用 STL 模型檔，也一併收錄於資料集中，以供未來研究用途。</p>
+<hr>
+<p>完成 3D 面具後，作者設計了一套嚴謹的資料錄製流程，以模擬真實訪問與攻擊行為，並蒐集可供模型訓練的彩色與深度影像。</p>
+<p>整體錄製工作由 Microsoft Kinect for Xbox 360 完成，該裝置可同步擷取 RGB 與深度影像，對於偵測與分析 3D 面具攻擊具有重要價值。</p>
+<p>Kinect 的特色如下：</p>
+<ul>
+<li><strong>每秒 30 幀</strong>：同步擷取 RGB 與深度畫面</li>
+<li><strong>影像解析度</strong>：<!-- -->
+<ul>
+<li>彩色影像：640 × 480 像素，24 位元（3 × 8 bits）</li>
+<li>深度影像：640 × 480 像素，11 位元（1 × 11 bits）</li>
+</ul>
+</li>
+<li><strong>支援手動標註</strong>：可針對彩色影像進行眼睛位置的人工標記</li>
+</ul>
+<p>這樣的設計使研究人員得以從多模態視角分析攻擊樣本，不僅有利於開發更穩健的防禦演算法，也能比較 2D 與 3D 模型在不同場景下的辨識能力。</p>
+<hr>
+<p>為了模擬不同情境下的真實行為，3DMAD 的錄製工作安排了三個不同的拍攝會話。這種設計考慮到時間、角色與攻擊變因的影響，能有效建立資料的多樣性。</p>
+<p>每位使用者參與的錄製安排如下：</p>
+<ul>
+<li>
+<p><strong>會話一、會話二</strong>（真實訪問）：</p>
+<ul>
+<li>間隔兩週拍攝，以反映生物辨識中「時間差異」的挑戰</li>
+<li>每場錄製 5 段影片，每段長度 10 秒</li>
+<li>使用者直視攝影機，正常臉部互動</li>
+</ul>
+</li>
+<li>
+<p><strong>會話三</strong>（面具攻擊）：</p>
+<ul>
+<li>由<strong>單一攻擊者</strong>佩戴先前製作好的 3D 面具進行模擬攻擊</li>
+<li>每個面具錄製 5 段影片，模擬不同攻擊動作與角度</li>
+</ul>
+</li>
+<li>
+<p><strong>總體規模</strong>：</p>
+<ul>
+<li>17 位使用者 × 3 個會話 × 5 段影片 = <strong>共 255 段影片</strong></li>
+<li>每段影片為 10 秒、共 300 幀，總計約 <strong>76,500 幀</strong> RGB 與深度資料</li>
+</ul>
+</li>
+</ul>
+<p>實際拍攝樣本如下圖範例，從左到右分別對應了上述的三個會話：</p>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt="3d mask" src=/assets/images/img4-e9fb27c48d5ab34ecbd46de25a734b08.jpg width=932 height=484 class=img_ev3q></figure></div>
+<hr>
+<p>為確保後續模型訓練的品質與一致性，作者針對資料標註與拍攝環境做了高度控制：</p>
+<ul>
+<li>
+<p><strong>眼睛位置標註</strong>：</p>
+<ul>
+<li>每段影片中，每隔 60 幀人工標註一次眼睛位置</li>
+<li>其餘幀數透過線性插值自動補齊，達成每幀皆有標註座標</li>
+</ul>
+</li>
+<li>
+<p><strong>拍攝環境設計</strong>：</p>
+<ul>
+<li>使用者正面面對攝影機</li>
+<li>背景統一（無干擾圖樣）</li>
+<li>照明充足，避免臉部陰影或過曝</li>
+</ul>
+</li>
+</ul>
+<p>此環境設定能最大化去除背景與光線干擾，聚焦於辨識面具與真臉的差異。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=討論>討論<a href=#討論 class=hash-link aria-label=討論的直接連結 title=討論的直接連結>​</a></h2>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class=admonitionHeading_Gvgb><span class=admonitionIcon_Rf37><svg viewBox="0 0 12 16"><path fill-rule=evenodd d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"/></svg></span>提示</div><div class=admonitionContent_BuS1><p>請先記得這兩個指標的定義，不然後面圖表會看不懂哦！</div></div>
+<p>為了系統性評估人臉辨識系統在面具攻擊下的脆弱性，作者在本研究中提出了多項基準實驗，並以 <strong>Equal Error Rate（EER）</strong> 與 <strong>Spoofing False Acceptance Rate（SFAR）</strong> 作為兩項主要評估指標：</p>
+<ul>
+<li><strong>EER</strong> 表示系統在驗證任務中，錯誤接受與錯誤拒絕發生機率相等時的閾值錯誤率，「越低」表示驗證系統越準確。</li>
+<li><strong>SFAR</strong> 則是專門針對偽造攻擊設計的指標，用以量化「攻擊樣本通過驗證閾值」的比率，反映系統在面具攻擊下的抗偽能力，「越低」表示系統越安全。</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=3d-面具攻擊安全性分析>3D 面具攻擊安全性分析<a href=#3d-面具攻擊安全性分析 class=hash-link aria-label="3D 面具攻擊安全性分析的直接連結" title="3D 面具攻擊安全性分析的直接連結">​</a></h3>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class=admonitionHeading_Gvgb><span class=admonitionIcon_Rf37><svg viewBox="0 0 14 16"><path fill-rule=evenodd d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"/></svg></span>資訊</div><div class=admonitionContent_BuS1><p><strong>在本論文中，參考文獻 [22] 指的是：</strong><ul>
+<li><a href=https://ieeexplore.ieee.org/abstract/document/6638076 target=_blank rel="noopener noreferrer"><strong>[13.03] On the vulnerability of face recognition systems to spoofing mask attacks</strong></a></li>
+</ul></div></div>
+<p><img decoding=async loading=lazy alt="3d mask attack" src=/assets/images/img5-227109784b9984d577ed7eeb878b5352.jpg width=1626 height=178 class=img_ev3q></p>
+<p>上表呈現了三組演算法（LBP-2D、LBP-2.5D、TPS-3D）在不同資料集與預處理策略下的驗證錯誤率（EER）與面具攻擊成功率（SFAR），共分為四個設定：</p>
+<ul>
+<li>(1): 文獻 [22] 中所報告的結果（限 Morpho 資料集，未提供 SFAR）</li>
+<li>(2): 採用文獻 [22] 提供的預處理影像，並以作者實作的演算法測試（Morpho）</li>
+<li>(3): 作者自建預處理流程與演算法的完整重建實驗（Morpho）</li>
+<li>(4): 使用自定義預處理與演算法，在 3DMAD 資料集上測試（包括驗證與攻擊）</li>
+</ul>
+<hr>
+<p>表中數據顯示，作者在 (2) 中成功重現了文獻 [22] 的 EER 結果，差異極小，顯示演算法實作與設定一致，具備良好的可重現性與參考價值。</p>
+<p>在 2D 模式下，即便更換了預處理方式（從 (2) 到 (3)），EER 表現並未顯著變化，顯示裁切與幾何標準化流程一致。然而，SFAR 卻有明顯上升，代表面具邊緣是否出現在影像中，對於攻擊成功率具有顯著影響。</p>
+<p>在 2.5D 與 3D 模式中，若省略如文獻 [22] 中的平滑與補洞處理，會導致 EER 與 SFAR 同時惡化。這說明預處理品質會嚴重影響模型的穩定性與抗攻擊能力。</p>
+<p>橫向比較不同資料集的結果顯示：在相同演算法下，3DMAD 的整體表現不如 Morpho，推測原因包括：</p>
+<ul>
+<li>Kinect 所取得的深度品質不如 Morpho 採用的雷射掃描器；</li>
+<li>3DMAD 的面具來自 2D 圖像重建，形狀精度較低，影響 spoofing 效果。</li>
+</ul>
+<hr>
+<p>作者進一步針對 3DMAD 中的 17 個面具逐一分析，並比較四種演算法（LBP、TPS、ISV、ICP）在 2D / 2.5D / 3D 三種模式下的 EER 與 SFAR，結果如下圖所示：</p>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=alaysis src=/assets/images/img6-fe045c9564ad4dfec1e7cbd3d28ef8c5.jpg width=1392 height=770 class=img_ev3q></figure></div>
+<p>分析顯示，不同面具間的 SFAR 差異極大，從 0% 到 98.4% 不等，這些落差主要來自：</p>
+<ul>
+<li>面具製作的形狀準確度</li>
+<li>臉部紋理的真實性與還原度</li>
+</ul>
+<p>這說明單一平均值難以反映整體攻擊風險，逐面具分析才是評估 spoofing 能力的必要方式。</p>
+<p>作者進一步觀察也發現，同一面具在不同模式下的攻擊表現差異顯著，例如：</p>
+<ul>
+<li>Mask #11 在 ISV-2D 模式下的 SFAR 高達 96.68%，但在 2.5D 僅為 7.52%。</li>
+</ul>
+<p>這顯示：</p>
+<ul>
+<li>紋理資訊強的面具可能在 2D 模式下具高攻擊性。</li>
+<li>但若 3D 結構不足，則難以在 2.5D 或 3D 模式中發動有效攻擊。</li>
+</ul>
+<p>同樣地，相同面具與模式下，不同演算法對攻擊的敏感程度也可能差異極大，例如：</p>
+<ul>
+<li>Mask #17 使用 ISV-2D 時的 SFAR 為 76.32%，但換成 LBP-2D 後僅剩 4.44%。</li>
+</ul>
+<p>這說明演算法本身的特性（如判別力、泛化能力）會直接影響其對面具攻擊的抵抗效果。</p>
+<hr>
+<p>這些觀察凸顯出一個關鍵事實：</p>
+<blockquote>
+<p><strong>人臉辨識的驗證準確度（EER）與抗攻擊能力（SFAR）之間存在非線性關係，甚至可能呈現反比。</strong></p>
+</blockquote>
+<p>特別是在 ISV 與 ICP 等高性能模型中，這種現象更為明顯。</p>
+<p>其背後原因推測可能是因為高性能模型具備強大的泛化能力，能容忍真實用戶的多種外觀變異（如表情、角度、光線等）。然而，這種泛化性也會讓模型「不小心將外觀近似的面具辨識為真用戶」，反而降低了安全性。</p>
+<p>這點在實務中極為重要，提醒我們在設計辨識系統時，不能僅追求低 EER，還必須同步評估 SFAR，確保系統對偽造攻擊具備抵抗能力。否則，即便系統在測試集上表現優異，實際部署時仍可能暴露於高風險環境中。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class=admonitionHeading_Gvgb><span class=admonitionIcon_Rf37><svg viewBox="0 0 12 16"><path fill-rule=evenodd d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"/></svg></span>提示</div><div class=admonitionContent_BuS1><p>除了這個討論章節之外，論文中還有一些基於當時演算法的成效分析。<p>不過這些分析對於現代的深度學習模型來說，參考價值不大，因此這裡就不贅述了。</div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=結論>結論<a href=#結論 class=hash-link aria-label=結論的直接連結 title=結論的直接連結>​</a></h2>
+<p>3DMAD 是較早系統性探討「3D 面具對人臉辨識系統構成威脅」的工作之一。</p>
+<p>作者透過 Morpho 與 3DMAD 兩組資料集，設計了多種驗證與防偽實驗，並分析不同模態（2D / 2.5D / 3D）、特徵（LBP variants）與分類器（SVM, LDA, <span class=katex><span class=katex-mathml><math xmlns=http://www.w3.org/1998/Math/MathML><semantics><mrow><msup><mi>χ</mi><mn>2</mn></msup></mrow><annotation encoding=application/x-tex>\chi^2</annotation></semantics></math></span><span class=katex-html aria-hidden=true><span class=base><span class=strut style=height:1.0085em;vertical-align:-0.1944em></span><span class=mord><span class="mord mathnormal">χ</span><span class=msupsub><span class=vlist-t><span class=vlist-r><span class=vlist style=height:0.8141em><span style=top:-3.063em;margin-right:0.05em><span class=pstrut style=height:2.7em></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>）的效能差異。</p>
+<p>整體而言，該研究在資料建構、實驗設計與指標評估上皆具有完整性，對當時尚未普及的 3D spoofing 領域具有參考價值。特別是對於面具製作精度與模型穩定性之間關係的分析，具有啟發意義。</p>
+<p>然而，從 2025 年的視角回顧，本研究也存在一些明顯的限制：</p>
+<ul>
+<li>評估主要基於封閉式資料集，缺乏對跨資料與未知攻擊的泛化測試。</li>
+<li>模型訓練依賴已知攻擊樣本，與實際應用中難以預知攻擊類型的情境有所落差。</li>
+<li>在資料分布變動下，部分結果表現不穩，顯示模型對面具多樣性的適應性仍有限。</li>
+</ul>
+<p>儘管如此，該研究在方法設計與分析觀點上仍具參考價值，為後續 3D 面具攻擊防禦研究奠定了初步基礎。隨著深度學習與感測技術的持續發展，這類議題仍值得進一步探索與拓展。</header></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class=col></div><div class="col lastUpdated_JAkA"><span class=theme-last-updated>最後<!-- -->由 <b>zephyr-sh</b> <!-- -->於 <b><time datetime=2025-04-04T03:44:08.000Z itemprop=dateModified>2025年4月4日</time></b> <!-- -->更新</span></div></div><div style=margin-top:3rem> </div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label=文件選項卡><a class="pagination-nav__link pagination-nav__link--prev" href=/papers/face-antispoofing/lbp/><div class=pagination-nav__sublabel>上一頁</div><div class=pagination-nav__label>[12.09] LBP</div></a><a class="pagination-nav__link pagination-nav__link--next" href=/papers/face-antispoofing/cfpl-fas/><div class=pagination-nav__sublabel>下一頁</div><div class=pagination-nav__label>[24.03] CFPL-FAS</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href=#真實的假面 class="table-of-contents__link toc-highlight">真實的假面</a><li><a href=#定義問題 class="table-of-contents__link toc-highlight">定義問題</a><li><a href=#解決問題 class="table-of-contents__link toc-highlight">解決問題</a><ul><li><a href=#morpho-資料集 class="table-of-contents__link toc-highlight">Morpho 資料集</a><li><a href=#3d-mask-attack-database-3dmad class="table-of-contents__link toc-highlight">3D Mask Attack Database (3DMAD)</a></ul><li><a href=#討論 class="table-of-contents__link toc-highlight">討論</a><ul><li><a href=#3d-面具攻擊安全性分析 class="table-of-contents__link toc-highlight">3D 面具攻擊安全性分析</a></ul><li><a href=#結論 class="table-of-contents__link toc-highlight">結論</a></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__links text--center"><div class=footer__links><a class=footer__link-item href=/docs>開源專案</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/papers/intro>論文筆記</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/blog>部落格</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/terms-of-service>使用條款</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/privacy-policy>隱私政策</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/become-an-author>成為作者</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/worklog>工作日誌</a></div></div><div class="footer__bottom text--center"><div class=footer__copyright>Copyright © 2025 DOCSAID.</div></div></div></footer></div>
