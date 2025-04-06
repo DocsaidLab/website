@@ -1,0 +1,381 @@
+<!doctype html><html lang=ja dir=ltr class="docs-wrapper plugin-docs plugin-id-papers docs-version-current docs-doc-page docs-doc-id-face-antispoofing/fas-survey/index" data-has-hydrated=false><meta charset=UTF-8><meta name=generator content="Docusaurus v3.7.0"><title data-rh=true>[22.10] FAS Survey | DOCSAID</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"><meta data-rh=true name=twitter:card content=summary_large_image><meta data-rh=true property=og:image content=https://docsaid.org/ja/img/docsaid-social-card.jpg><meta data-rh=true name=twitter:image content=https://docsaid.org/ja/img/docsaid-social-card.jpg><meta data-rh=true property=og:url content=https://docsaid.org/ja/papers/face-antispoofing/fas-survey/><meta data-rh=true property=og:locale content=ja><meta data-rh=true property=og:locale:alternate content=zh_hant><meta data-rh=true property=og:locale:alternate content=en><meta data-rh=true name=docusaurus_locale content=ja><meta data-rh=true name=docsearch:language content=ja><meta data-rh=true name=docusaurus_version content=current><meta data-rh=true name=docusaurus_tag content=docs-papers-current><meta data-rh=true name=docsearch:version content=current><meta data-rh=true name=docsearch:docusaurus_tag content=docs-papers-current><meta data-rh=true property=og:title content="[22.10] FAS Survey | DOCSAID"><meta data-rh=true name=description content=攻撃と防御の年代記><meta data-rh=true property=og:description content=攻撃と防御の年代記><link data-rh=true rel=icon href=/ja/img/favicon.ico><link data-rh=true rel=canonical href=https://docsaid.org/ja/papers/face-antispoofing/fas-survey/><link data-rh=true rel=alternate href=https://docsaid.org/papers/face-antispoofing/fas-survey/ hreflang=zh-hant><link data-rh=true rel=alternate href=https://docsaid.org/en/papers/face-antispoofing/fas-survey/ hreflang=en><link data-rh=true rel=alternate href=https://docsaid.org/ja/papers/face-antispoofing/fas-survey/ hreflang=ja><link data-rh=true rel=alternate href=https://docsaid.org/papers/face-antispoofing/fas-survey/ hreflang=x-default><link data-rh=true rel=preconnect href=https://S9NC0RYCHF-dsn.algolia.net crossorigin=anonymous><link rel=alternate type=application/rss+xml href=/ja/blog/rss.xml title="DOCSAID RSS Feed"><link rel=alternate type=application/atom+xml href=/ja/blog/atom.xml title="DOCSAID Atom Feed"><link rel=preconnect href=https://www.google-analytics.com><link rel=preconnect href=https://www.googletagmanager.com><script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script><link rel=search type=application/opensearchdescription+xml title=DOCSAID href=/ja/opensearch.xml><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css type=text/css integrity=sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM crossorigin=anonymous><link rel=stylesheet href=/ja/assets/css/styles.6e59090e.css><script src=/ja/assets/js/runtime~main.23234b6b.js defer></script><script src=/ja/assets/js/main.1ebaceff.js defer></script><body class=navigation-with-keyboard><script>!function(){var t,e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t=null!==e?e:"light",document.documentElement.setAttribute("data-theme",t)}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id=__docusaurus><link rel=preload as=image href=/ja/img/docsaid_logo.png><link rel=preload as=image href=/ja/img/docsaid_logo_white.png><link rel=preload as=image href=https://github.com/zephyr-sh.png><div role=region aria-label=メインコンテンツまでスキップ><a class=skipToContent_fXgn href=#__docusaurus_skipToContent_fallback>メインコンテンツまでスキップ</a></div><nav aria-label=ナビゲーション class="navbar navbar--fixed-top navbarHideable_jvwV"><div class=navbar__inner><div class=navbar__items><button aria-label=ナビゲーションバーを開く aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"/></svg></button><a class=navbar__brand href=/ja/><div class=navbar__logo><img src=/ja/img/docsaid_logo.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src=/ja/img/docsaid_logo_white.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href=/ja/docs/>オープンソースプロジェクト</a><a aria-current=page class="navbar__item navbar__link navbar__link--active" href=/ja/papers/intro>論文ノート</a><a class="navbar__item navbar__link" href=/ja/blog>ブログ</a><a class="navbar__item navbar__link" href=/ja/playground/intro>遊び場</a><a class="navbar__item navbar__link" href=/ja/aboutus>私たちについて</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link><svg viewBox="0 0 24 24" width=20 height=20 aria-hidden=true class=iconLanguage_nlXk><path fill=currentColor d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>日本語</a><ul class=dropdown__menu><li><a href=/papers/face-antispoofing/fas-survey/ target=_self rel="noopener noreferrer" class=dropdown__link lang=zh-hant>繁體中文</a><li><a href=/en/papers/face-antispoofing/fas-survey/ target=_self rel="noopener noreferrer" class=dropdown__link lang=en>English</a><li><a href=/ja/papers/face-antispoofing/fas-survey/ target=_self rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang=ja>日本語</a></ul></div><div class=navbarSearchContainer_dCNk><button type=button class="DocSearch DocSearch-Button" aria-label="検索 (Command+K)"><span class=DocSearch-Button-Container><svg width=20 height=20 class=DocSearch-Search-Icon viewBox="0 0 20 20" aria-hidden=true><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke=currentColor fill=none fill-rule=evenodd stroke-linecap=round stroke-linejoin=round /></svg><span class=DocSearch-Button-Placeholder>検索</span></span><span class=DocSearch-Button-Keys></span></button></div><button type=button class="ant-btn css-7ny38l ant-btn-circle ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only"><span class=ant-btn-icon><span role=img aria-label=user style=font-size:18px class="anticon anticon-user"><svg viewBox="64 64 896 896" focusable=false data-icon=user width=1em height=1em fill=currentColor aria-hidden=true><path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"/></svg></span></span></button></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="main-wrapper mainWrapper_eExm"><div class=docsWrapper_hBAB><button aria-label=先頭へ戻る class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type=button></button><div class=docRoot_UBD9><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class=sidebarViewport_aRkj><div class="sidebar_njMd sidebarWithHideableNavbar_wUlq"><a tabindex=-1 class=sidebarLogo_isFc href=/ja/><img src=/ja/img/docsaid_logo.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src=/ja/img/docsaid_logo_white.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"><b></b></a><nav aria-label=ドキュメントのサイドバー class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/ja/papers/intro>論文ノート</a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/classic-cnns-11>Classic CNNs (11)</a><button aria-label="'Classic CNNs (11)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/contrastive-learning-13>Contrastive Learning (13)</a><button aria-label="'Contrastive Learning (13)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/deepseek-5>DeepSeek (5)</a><button aria-label="'DeepSeek (5)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist menu__link--active" href=/ja/papers/category/face-anti-spoofing-6>Face Anti-Spoofing (6)</a><button aria-label="'Face Anti-Spoofing (6)'の目次を隠す" aria-expanded=true type=button class="clean-btn menu__caret"></button></div><ul style=display:block;overflow:visible;height:auto class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/slrbd/>[10.09] SLRBD</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/lbp/>[12.09] LBP</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/three-d-mad/>[14.05] 3DMAD</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/wmca/>[19.09] WMCA</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current=page tabindex=0 href=/ja/papers/face-antispoofing/fas-survey/>[22.10] FAS Survey</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/cfpl-fas/>[24.03] CFPL-FAS</a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/face-recognition-4>Face Recognition (4)</a><button aria-label="'Face Recognition (4)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/feature-fusion-10>Feature Fusion (10)</a><button aria-label="'Feature Fusion (10)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/lightweight-10>Lightweight (10)</a><button aria-label="'Lightweight (10)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/mamba-4>Mamba (4)</a><button aria-label="'Mamba (4)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/model-tuning-8>Model Tuning (8)</a><button aria-label="'Model Tuning (8)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/multimodality-24>Multimodality (24)</a><button aria-label="'Multimodality (24)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/normalization-1>Normalization (1)</a><button aria-label="'Normalization (1)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/object-detection-8>Object Detection (8)</a><button aria-label="'Object Detection (8)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/reparameterization-8>Reparameterization (8)</a><button aria-label="'Reparameterization (8)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/segmentation-1>Segmentation (1)</a><button aria-label="'Segmentation (1)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/text-detection-14>Text Detection (14)</a><button aria-label="'Text Detection (14)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/text-recognition-20>Text Recognition (20)</a><button aria-label="'Text Recognition (20)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/text-spotting-4>Text Spotting (4)</a><button aria-label="'Text Spotting (4)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/transformers-17>Transformers (17)</a><button aria-label="'Transformers (17)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/vision-transformers-12>Vision Transformers (12)</a><button aria-label="'Vision Transformers (12)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/ja/papers/intro>All Notes: 180 entries</a></ul></nav><button type=button title=サイドバーを隠す aria-label=サイドバーを隠す class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width=20 height=20 aria-hidden=true class=collapseSidebarButtonIcon_kv0_><g fill=#7a7a7a><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"/><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"/></g></svg></button></div></div></aside><main class=docMainContainer_TBSr><div class="container padding-top--md padding-bottom--lg"><div class=row><div class="col docItemCol_VOVn"><div class=docItemContainer_Djhp><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label=パンくずリストのナビゲーション><ul class=breadcrumbs itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumbs__item><a aria-label=ホームページ class=breadcrumbs__link href=/ja/><svg viewBox="0 0 24 24" class=breadcrumbHomeIcon_YNFT><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill=currentColor /></svg></a><li itemscope itemprop=itemListElement itemtype=https://schema.org/ListItem class=breadcrumbs__item><a class=breadcrumbs__link itemprop=item href=/ja/papers/category/face-anti-spoofing-6><span itemprop=name>Face Anti-Spoofing (6)</span></a><meta itemprop=position content=1><li itemscope itemprop=itemListElement itemtype=https://schema.org/ListItem class="breadcrumbs__item breadcrumbs__item--active"><span class=breadcrumbs__link itemprop=name>[22.10] FAS Survey</span><meta itemprop=position content=2></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type=button class="clean-btn tocCollapsibleButton_TO0P">このページの見出し</button></div><div class="theme-doc-markdown markdown"><header><h1>[22.10] FAS Survey</h1><div class="undefined margin-bottom--md"><div class=docAuthor_y7l7><img src=https://github.com/zephyr-sh.png alt="Z. Yuan" class=docAuthorImg_vlJe><div><div class=docAuthorName_aSh4><a href=https://github.com/zephyr-sh target=_blank rel="noopener noreferrer">Z. Yuan</a></div><div class=docAuthorTitle_Yp5_>Dosaid maintainer, Full-Stack AI Engineer</div><div class=docAuthorSocials_M3ba><a href=https://github.com/zephyr-sh target=_blank rel="noopener noreferrer" class=docAuthorSocialLink_trj9><svg stroke=currentColor fill=currentColor stroke-width=0 viewBox="0 0 496 512" height=20 width=20 xmlns=http://www.w3.org/2000/svg><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a><a href=https://www.linkedin.com/in/ze-yuan-sh7/ target=_blank rel="noopener noreferrer" class=docAuthorSocialLink_trj9><svg stroke=currentColor fill=currentColor stroke-width=0 viewBox="0 0 448 512" height=20 width=20 xmlns=http://www.w3.org/2000/svg><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a></div></div></div></div><h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=攻撃と防御の年代記>攻撃と防御の年代記<a href=#攻撃と防御の年代記 class=hash-link aria-label="攻撃と防御の年代記 への直接リンク" title="攻撃と防御の年代記 への直接リンク">​</a></h2>
+<p><a href=https://ieeexplore.ieee.org/abstract/document/9925105 target=_blank rel="noopener noreferrer"><strong>Deep Learning for Face Anti-Spoofing: A Survey</strong></a></p>
+<hr>
+<p>過去のいくつかの論文を見た後、私たちは FAS の研究背景と発展の流れを大体理解しました。</p>
+<p>ここでは、過去十数年のさまざまな方法を振り返りましょう。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class=admonitionHeading_Gvgb><span class=admonitionIcon_Rf37><svg viewBox="0 0 12 16"><path fill-rule=evenodd d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"/></svg></span>ヒント</div><div class=admonitionContent_BuS1><p>このレビュー論文には約 200 本の参考文献があり、興味のある読者はそれを取り出して読んでみてください。</div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=fas-アーキテクチャ>FAS アーキテクチャ<a href=#fas-アーキテクチャ class=hash-link aria-label="FAS アーキテクチャ への直接リンク" title="FAS アーキテクチャ への直接リンク">​</a></h2>
+<p>すべての攻撃の第一歩は、センサーを欺くことです。</p>
+<p>そのため、攻撃は大まかに次の 2 種類に分けることができます：</p>
+<ul>
+<li><strong>デジタル攻撃（Digital Manipulation）</strong>：例えばディープフェイク（deepfake）や画像処理など、仮想領域での改造。</li>
+<li><strong>物理的提示攻撃（Physical Presentation Attacks）</strong>：これは本論文の主な焦点で、実世界で物理的なメディアを使用してカメラを欺くことを目的としています。</li>
+</ul>
+<p>一般的な攻撃のタイプと FAS システムの構築方法は、以下の図に示されています：</p>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=model_arch src=/ja/assets/images/img1-c392f98720b419bc92f8bb5bab9a71cf.jpg width=1224 height=836 class=img_ev3q></figure></div>
+<p>物理的提示攻撃から、さらに意図に応じて次のように区別できます：</p>
+<ul>
+<li><strong>なりすまし（Impersonation）</strong>：他人を模倣する、例えば写真を持つ、または 3D マスクを着用し、システムに特定の人物だと認識させる。</li>
+<li><strong>隠蔽（Obfuscation）</strong>：自分自身を隠す、例えば化粧、サングラス、ウィッグなどを使って、システムに自分を認識させなくする。</li>
+</ul>
+<p>幾何学的構造に基づいて、さらに次のように区別できます：</p>
+<ul>
+<li><strong>2D 攻撃</strong>：例えば平面の写真、スクリーンリプレイ映像、穴の開いた写真など。</li>
+<li><strong>3D 攻撃</strong>：紙、石膏、シリコン、樹脂などの素材で作られた立体マスクを含む。これらの攻撃はよりリアルであり、挑戦的でもあります。</li>
+</ul>
+<p>興味深いことに、顔全体を使った「正攻法」に加えて、「側面攻撃」とも言える<strong>局所的攻撃</strong>が多数登場しています。例えば、目元におかしな眼鏡をかける、頬にシールを貼るなど、部分的な領域を狙った攻撃であり、防御の難易度を高めています。</p>
+<p>深層学習方法の発展に伴い、データセットの規模と複雑さも段階的に進化しています。</p>
+<p>本論文では、次の三つの大きなトレンドをまとめています：</p>
+<ol>
+<li><strong>大規模化</strong>：例えば CelebA-Spoof、HiFiMask など、画像や映像の数が数十万に達し、訓練データが飽和しています。</li>
+<li><strong>多様性の強化</strong>：新しいデータセットは、一般的な印刷や再生攻撃だけでなく、詳細な分類型の 3D 攻撃、変動する照明、跨るシーン録画などのシナリオも導入しています。例えば SiW-M は 13 種類もの攻撃タイプを含んでいます。</li>
+<li><strong>センサーのアップグレード</strong>：単一の RGB カメラから、深度（Depth）、近赤外（NIR）、熱感（Thermal）、短波赤外（SWIR）などのモード、さらには光場カメラを使った記録にまで拡張されました。</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=深層学習方法の概要>深層学習方法の概要<a href=#深層学習方法の概要 class=hash-link aria-label="深層学習方法の概要 への直接リンク" title="深層学習方法の概要 への直接リンク">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=method_tree src=/ja/assets/images/img2-87fe8dfeb05f28fa7046756b309f1a1c.jpg width=1224 height=504 class=img_ev3q></figure></div>
+<p>上記の図は<strong>FAS 方法分類ツリー</strong>を示しており、センサーから始まり、各レベルで異なるモデル設計と一般化戦略へと展開しています。</p>
+<p>センサー層からの分類は次の通りです：</p>
+<ul>
+<li><strong>商業用 RGB カメラ</strong>：現在最も一般的なデバイスのタイプで、多くのスマートフォンやノート PC はこのタイプに分類されます。このデバイス用に開発された FAS 方法は、可視光単一モードでの偽造検出に重点を置いています。</li>
+<li><strong>高度なセンサー</strong>：例えば NIR、深度、熱感、SWIR、光場カメラなど、より豊富な画像特徴を提供します。このタイプのデバイスに適用されるモデルは、跨るモード情報を組み合わせることで識別能力を向上させますが、開発と展開コストも増加します。</li>
+</ul>
+<hr>
+<p>ほとんどのシナリオでは、RGB カメラしか利用できないため、私たちはこのモードでの FAS 方法に焦点を当てます。</p>
+<ul>
+<li>
+<p><strong>一般的な深層学習方法</strong></p>
+<p>最も伝統的な二項分類の監視学習（例えば Binary Cross-Entropy）を使用したり、さらなるピクセル単位の監視（Pixel-wise Supervision）を行ったりして、モデルの局所的な spoof cue 学習能力を強調します。</p>
+<p>よく使われる補助設計として：</p>
+<ul>
+<li><strong>補助監視</strong>：中間特徴の監視や深層特徴の補助的な判断を導入。</li>
+<li><strong>生成モデル</strong>：GAN や再構成方法を使用して異常サンプルの識別能力を向上させます。</li>
+</ul>
+</li>
+<li>
+<p><strong>ハイブリッド方法</strong></p>
+<p>異なる監視構造を融合（例えば BCE +再構成損失）し、分類と局所的再構成能力を両立させ、偽造の手掛かりをよりよく捉えることを目指します。</p>
+</li>
+<li>
+<p><strong>一般化深層学習方法</strong></p>
+<p>このアプローチの核心目標は「<strong>ドメイン一般化（Domain Generalization）</strong>」であり、訓練シナリオ内でうまく動作するだけでなく、未知のデータ分布にも対応できることを目指します。
+主な技術分支は次の通りです：</p>
+<ul>
+<li><strong>ドメイン適応</strong>：目標データが少量の場合、モデルを微調整します。</li>
+<li><strong>ドメイン一般化</strong>：完全に目標データがない場合でも、一般化能力を保持する必要があります。</li>
+<li><strong>フェデレーテッドラーニング</strong>：複数の端末からの学習を統合し、プライバシーを保護しつつ一般化性能を向上させます。</li>
+</ul>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class=admonitionHeading_Gvgb><span class=admonitionIcon_Rf37><svg viewBox="0 0 12 16"><path fill-rule=evenodd d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"/></svg></span>ヒント</div><div class=admonitionContent_BuS1><p>この時代にはまだ流行していなかった Vision Language Model（VLM）方法について、関連する方法については後でまた話します。</div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=評価指標>評価指標<a href=#評価指標 class=hash-link aria-label="評価指標 への直接リンク" title="評価指標 への直接リンク">​</a></h3>
+<p>FAS タスクの評価は、2 つの主要な側面に焦点を当てています：</p>
+<ul>
+<li><strong>FAR（False Acceptance Rate）</strong>：攻撃サンプルを誤って正規のユーザーと判定する割合。</li>
+<li><strong>FRR（False Rejection Rate）</strong>：正規ユーザーを誤って攻撃サンプルと判定する割合。</li>
+</ul>
+<p>これら 2 つのバランスを取るために、よく使われる総合指標には以下のものがあります：</p>
+<ul>
+<li>
+<p><strong>HTER（Half Total Error Rate）</strong>：FAR と FRR の平均値</p>
+<span class=katex-display><span class=katex><span class=katex-mathml><math xmlns=http://www.w3.org/1998/Math/MathML display=block><semantics><mrow><mtext>HTER</mtext><mo>=</mo><mfrac><mrow><mtext>FAR</mtext><mo>+</mo><mtext>FRR</mtext></mrow><mn>2</mn></mfrac></mrow><annotation encoding=application/x-tex>\text{HTER} = \frac{\text{FAR} + \text{FRR}}{2}</annotation></semantics></math></span><span class=katex-html aria-hidden=true><span class=base><span class=strut style=height:0.6833em></span><span class="mord text"><span class=mord>HTER</span></span><span class=mspace style=margin-right:0.2778em></span><span class=mrel>=</span><span class=mspace style=margin-right:0.2778em></span></span><span class=base><span class=strut style=height:2.0463em;vertical-align:-0.686em></span><span class=mord><span class="mopen nulldelimiter"></span><span class=mfrac><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:1.3603em><span style=top:-2.314em><span class=pstrut style=height:3em></span><span class=mord><span class=mord>2</span></span></span><span style=top:-3.23em><span class=pstrut style=height:3em></span><span class=frac-line style=border-bottom-width:0.04em></span></span><span style=top:-3.677em><span class=pstrut style=height:3em></span><span class=mord><span class="mord text"><span class=mord>FAR</span></span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>+</span><span class=mspace style=margin-right:0.2222em></span><span class="mord text"><span class=mord>FRR</span></span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:0.686em><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+</li>
+<li>
+<p><strong>EER（Equal Error Rate）</strong>：FAR と FRR が等しくなるときのエラー率（すなわち HTER のバランスポイントの値）、これはモデル性能の総合評価指標としてよく使われます。</p>
+</li>
+<li>
+<p><strong>AUC（Area Under Curve）</strong>：ROC 曲線の下の面積を計算し、モデルが bonafide（正規）と spoof（攻撃）を区別する能力を反映します。値が 1 に近いほど良いとされます。</p>
+</li>
+</ul>
+<p>さらに、<strong>ISO/IEC 30107-3</strong>規格に基づき、以下の 3 つの誤分類指標が導入されつつあります：</p>
+<ul>
+<li>
+<p><strong>APCER（Attack Presentation Classification Error Rate）</strong>：攻撃サンプルが誤って bonafide と判定される割合。</p>
+</li>
+<li>
+<p><strong>BPCER（Bonafide Presentation Classification Error Rate）</strong>：正規サンプルが誤って攻撃サンプルと判定される割合。</p>
+</li>
+<li>
+<p><strong>ACER（Average Classification Error Rate）</strong>：APCER と BPCER の平均値</p>
+<span class=katex-display><span class=katex><span class=katex-mathml><math xmlns=http://www.w3.org/1998/Math/MathML display=block><semantics><mrow><mtext>ACER</mtext><mo>=</mo><mfrac><mrow><mtext>APCER</mtext><mo>+</mo><mtext>BPCER</mtext></mrow><mn>2</mn></mfrac></mrow><annotation encoding=application/x-tex>\text{ACER} = \frac{\text{APCER} + \text{BPCER}}{2}</annotation></semantics></math></span><span class=katex-html aria-hidden=true><span class=base><span class=strut style=height:0.6833em></span><span class="mord text"><span class=mord>ACER</span></span><span class=mspace style=margin-right:0.2778em></span><span class=mrel>=</span><span class=mspace style=margin-right:0.2778em></span></span><span class=base><span class=strut style=height:2.0463em;vertical-align:-0.686em></span><span class=mord><span class="mopen nulldelimiter"></span><span class=mfrac><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:1.3603em><span style=top:-2.314em><span class=pstrut style=height:3em></span><span class=mord><span class=mord>2</span></span></span><span style=top:-3.23em><span class=pstrut style=height:3em></span><span class=frac-line style=border-bottom-width:0.04em></span></span><span style=top:-3.677em><span class=pstrut style=height:3em></span><span class=mord><span class="mord text"><span class=mord>APCER</span></span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>+</span><span class=mspace style=margin-right:0.2222em></span><span class="mord text"><span class=mord>BPCER</span></span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:0.686em><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+</li>
+</ul>
+<p>これらの指標は、モデルが異なる誤分類のシナリオにおける具体的な定量的根拠を提供し、特に実際の展開環境で誤判定のリスクを詳細に評価するのに役立ちます。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class=admonitionHeading_Gvgb><span class=admonitionIcon_Rf37><svg viewBox="0 0 12 16"><path fill-rule=evenodd d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"/></svg></span>ヒント</div><div class=admonitionContent_BuS1><p>HTER と ACER は同じものであり、単に名称をつけた機関が異なるだけです。</div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=評価プロトコル>評価プロトコル<a href=#評価プロトコル class=hash-link aria-label="評価プロトコル への直接リンク" title="評価プロトコル への直接リンク">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=evaluation_protocol src=/ja/assets/images/img3-32c7164bf0e1c9a06cae881610959663.jpg width=1224 height=880 class=img_ev3q></figure><figcaption>4つの主流なテストプロトコルにおける、深層学習FAS方法の性能比較。</figcaption></div>
+<hr>
+<p>異なるプロトコル設定は、モデルが<strong>実際のデプロイシナリオで直面する挑戦の程度</strong>を反映しています。これらの設定は、モデルが「慣れた」状況から「未知」の状況に向けて成長する段階として見ることができます。一般的に、次の 4 つのテストプロトコルに分けられます：</p>
+<ol>
+<li>
+<p><strong>Intra-Dataset Intra-Type</strong></p>
+<p>同一データセット、同一タイプの攻撃。最も基本的な評価方法で、モデルは訓練とテストの両方で同じ分布のデータを使用します。</p>
+<p>OULU-NPU や SiW などのデータセットのデフォルトサブプロトコルに見られます。この状況ではドメインギャップが非常に小さいため、深層モデルが高精度を達成しやすい設定です。</p>
+<p>上図 (a) に示されているように、多くの方法は OULU-NPU の Protocol-4 テストで優れた性能を発揮し、ACER は通常 5％未満です。</p>
+<hr>
+</li>
+<li>
+<p><strong>Cross-Dataset Intra-Type</strong></p>
+<p>訓練とテストのデータが<strong>異なるデータセット</strong>から来ており、攻撃タイプは同じですが、モデルのドメイン一般化能力をテストします。</p>
+<p>実際の「開発環境」と「実際のアプリケーションシナリオ」が一致しないという課題を模倣します。上図 (b) は Replay-Attack で訓練し、CASIA-MFSD でテストした結果を示しています。単一データセットで訓練した場合（緑色の柱）HTER は高くなる傾向があります。複数のデータセット（紫色の柱）を使用して訓練し、クロスドメイン学習法（例：SSDG, SSAN）を使用することで、一般化性能が大幅に向上することが確認できます。</p>
+<hr>
+</li>
+<li>
+<p><strong>Intra-Dataset Cross-Type</strong></p>
+<p>Leave-one-type-out 設定を使用し、ある攻撃タイプが<strong>テスト段階でのみ登場</strong>し、訓練データには含まれていません。</p>
+<p>このプロトコルは、モデルが「未知の攻撃タイプ」にどれだけ対応できるかを検証するためのものです。上図 (c) は SiW-M のテスト結果を示しており、13 種類の攻撃タイプが含まれており、それぞれの難易度に差が大きいため、モデルの平均 EER は高く（約 10％）なることが分かりますが、標準偏差が大きいです。</p>
+<p>事前学習と転移学習を使用することで、例えば ViTranZFAS では EER を 6.7％に低減できます。</p>
+<hr>
+</li>
+<li>
+<p><strong>Cross-Dataset Cross-Type</strong></p>
+<p>現在最も挑戦的な設定で、<strong>データソースと攻撃タイプの両方を変更</strong>します。</p>
+<p>訓練には OULU-NPU と SiW（主に 2D 攻撃）を使用し、テストには HKBU-MARs や CASIA-SURF 3DMask などの 3D マスクデータセットを使用します。上図 (d) は、現在の方法（例：NAS-FAS、DTN）がいくつかの低リアルな 3D マスクのみを検出でき、高精度なマテリアルを区別するのが難しいことを示しています。</p>
+<p>このプロトコルは、現実のデプロイシナリオで直面する未知のシナリオと複合攻撃の課題に最も近いものであり、今後の研究の重要な方向性となります。</p>
+</li>
+</ol>
+<hr>
+<p>各プロトコルの設計は、モデルの能力を徐々に引き上げるものです：
+最も理想的な「閉じた訓練テスト」から、実世界の「開かれた未知シナリオ」へと、FAS システムがどのように成長し、未見の攻撃を識別する方法を学ぶかが、この防偽対抗戦の核心的課題です。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=rgb-ベースの-fas>RGB ベースの FAS<a href=#rgb-ベースの-fas class=hash-link aria-label="RGB ベースの FAS への直接リンク" title="RGB ベースの FAS への直接リンク">​</a></h2>
+<p><img decoding=async loading=lazy alt=models src=/ja/assets/images/img4-0f7a381abf330dd154090802dda936e1.jpg width=1224 height=296 class=img_ev3q></p>
+<p>上図は、RGB カメラを基にした FAS 技術の進化の流れを整理したものです。</p>
+<p>初期の手作り特徴量に依存していた時代から、マルチモーダル融合と一般化能力を強調する深層モデル設計へと進化しました。</p>
+<p>RGB カメラはほとんどすべてのデバイスに標準装備されているため、このようなデバイス用に開発された防偽システムは、FAS 技術の実用化の主要な戦場となっています。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=ハイブリッド型方法>ハイブリッド型方法<a href=#ハイブリッド型方法 class=hash-link aria-label="ハイブリッド型方法 への直接リンク" title="ハイブリッド型方法 への直接リンク">​</a></h2>
+<div align=center><figure style=width:70%><p><img decoding=async loading=lazy alt=hybrid_method src=/ja/assets/images/img5-6f5e4782e288e6dc94b71209347f45b3.jpg width=1076 height=1056 class=img_ev3q></figure></div>
+<p>深層学習は分類や検出タスクで非常に強力ですが、FAS タスクの実際の状況は少し現実的です：</p>
+<blockquote>
+<p><strong>データ量が一般的に少なく、サンプル分布が頻繁に不均衡であるため、モデルの訓練は過学習に陥りやすい。</strong></p>
+</blockquote>
+<p>このような状況で、いくつかの研究は伝統的な手作り特徴量と深層モデルを組み合わせる方向に転換しました。この「補完」アプローチにより、非テクスチャ特徴（光影の変化、心拍リズム、異常な動きなど）に対するモデルの感知の盲点を補おうとしています。</p>
+<p>このアプローチは大きく分けて 3 つの方法に分類できます。</p>
+<p>第一の方法は「<strong>特徴量の前融合</strong>」、すなわち、まず伝統的な方法で静的または動的な特徴を抽出し、それを深層モデルに入力して分類を行う方法です。よく使われる方法としては、multi-scale LBP や Weber descriptors を用いて細かいテクスチャを抽出する方法や、LBP と CNN を組み合わせてエッジや強度などの低レベル情報を保持する方法があります。</p>
+<p>動的な手がかりを捕えることが目標であれば、dense optical flow を使って動きの軌跡を分析したり、rPPG を時系列データに変換して Vision Transformer に入力する手法もあります。さらに、輝度の変化を捕えたヒストグラムを使ってリプレイ攻撃を反制する研究もあります。</p>
+<blockquote>
+<p><strong>この方法の基本的なロジックは、モデルが学ぶべき特徴を先に準備しておいて、モデルの学習をサポートすることです。</strong></p>
+</blockquote>
+<hr>
+<p>第二の方法は「<strong>特徴量の後融合</strong>」、こちらでは流れが逆になります。最初に深層モデルが特徴を抽出し、その後に手作りの特徴量を追加して補強します。例えば、PCA を使って VGG-face から不要な情報を取り除く方法や、直接 CNN の畳み込み層からカラー LBP を抽出し、統計的信号を強化しようとする方法があります。また、時系列特徴に LBP-TOP や optical flow を加えて時間的ダイナミクスの解像度を上げる方法もあります。</p>
+<blockquote>
+<p><strong>この方法の最大の課題は、CNN 特徴が層ごとに意味が変わるため、適切な融合層を選ぶ必要があり、これは経験と実験に依存し、標準的な答えがないことです。</strong></p>
+</blockquote>
+<hr>
+<p>第三の方法は「<strong>二流融合</strong>」、すなわち手作り特徴と深層モデルをそれぞれ別々に走らせ、最終的に特徴層やスコア層で統合する方法です。</p>
+<p>ここでの例はさらに多くあります。例えば、LBP と VGG16 の予測スコアをそのまま加算する方法や、HOG や LBP の特徴マップを使って CNN の下層学習方向を誘導する方法があります。さらに、1D CNN を使って輝度やぼやけた手がかりを融合し、特にリプレイ攻撃に対応する方法もあります。</p>
+<blockquote>
+<p><strong>この方法は、異なるモデルを組み合わせ、それぞれの専門性を活かして、最終的に結果を統合するものです。</strong></p>
+</blockquote>
+<hr>
+<p>全体として、ハイブリッド方法の最大の利点は、純粋な深層モデルが苦手とする部分、特に微弱だが有意義な非テクスチャ特徴（顔の微光反射、心拍周期、カメラの動的ぼかしなど）を補える点です。データ量が不足しており、シーンに差異が大きい場合、この方法は追加的な安定性と柔軟性を提供します。</p>
+<p>しかし、明確な制限もあります。例えば、手作り特徴は学習できず、専門家によるパラメータ調整が必要で、一般化能力が限られていることです。さらに、手作り特徴と深層特徴の間で意味的に不一致が生じることがあり、融合時に情報がぶつかり、モデルが迷子になることもあります。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=従来型深層学習方法>従来型深層学習方法<a href=#従来型深層学習方法 class=hash-link aria-label="従来型深層学習方法 への直接リンク" title="従来型深層学習方法 への直接リンク">​</a></h2>
+<p>ハイブリッド方法が存在する理由は、当時の深層モデルがまだ発展途上で、データが十分でなかったため、手作り特徴で場を支える必要があったからです。</p>
+<p>しかし、CNN アーキテクチャが成熟し、大規模な防偽データセットが次々に公開されるようになると、FAS コミュニティは「データをもっと増やし、ネットワークを厚くし、監視を厳しくする」という全端学習のアプローチを受け入れ始めました。</p>
+<p>この方法は、画像から<strong>活体と偽造の違いを直接学習する</strong>ことに重点を置き、学習できない外部の補助を捨て、入力から出力まで一貫して学習する方式で、現在の商用 RGB FAS の主流のアプローチとなっています。</p>
+<p>形式はさまざまですが、これらの方法は大きく 2 つに分けられます：</p>
+<ul>
+<li>FAS を二項分類問題として扱う方法。</li>
+<li>ピクセルレベルの監視と生成的設計を使用して、モデルにより微細な spoof パターンを学ばせる方法。</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=二項分類監視>二項分類監視<a href=#二項分類監視 class=hash-link aria-label="二項分類監視 への直接リンク" title="二項分類監視 への直接リンク">​</a></h3>
+<div align=center><figure style=width:85%><p><img decoding=async loading=lazy alt=binary_classification src=/ja/assets/images/img6a-25b3280c857e428134cd48b89983ded8.jpg width=922 height=276 class=img_ev3q></figure></div>
+<p>最も直感的な方法は、FAS を Bonafide と Spoof の二項分類問題として扱い、BCE Loss を損失関数として使用し、入力画像から直接ラベルを予測することです。</p>
+<p>初期のネットワークでは、8 層 CNN、VGG16、ResNet18 がよく使用され、後には MobileNet ベースの軽量化アーキテクチャが登場しました。さらに、CNN と LSTM を組み合わせて、モデルが「複数のフレーム」の微細な動きを見られるようにし、例えばまばたきや頭の微動など、時間的な信号を判断基準に加えました。</p>
+<p>モデルが誤認しにくくするために、損失関数も進化しています：</p>
+<ul>
+<li><strong>多分類への変更</strong>：攻撃タイプのラベル（multi-class CE）を加え、モデルにリプレイ、印刷、3D マスクなど異なる spoof 手法を識別させ、二項分類問題を多分類問題に変換します。</li>
+<li><strong>対比学習</strong>：Triplet や Contrastive Loss を使用し、同一クラスの特徴を近く、異なるクラスの特徴を遠く保つように学習させ、表現能力を強化します。</li>
+</ul>
+<p>Focal Loss や非対称 Softmax などの設計も導入され、サンプル不均衡や spoof 分布の偏りに対応しています。</p>
+<p>この設計の利点は、実装が簡単で収束が早いことですが、リスクもあります。最大のリスクは：</p>
+<blockquote>
+<p><strong>モデルが学んではいけないものを学んでしまうことです</strong>。</p>
+</blockquote>
+<p>例えば、スクリーンの枠、黒い縁、光の異常など「ヒント」を学んでしまうと、一時的には高い精度を出せますが、実際にはデータセットを記憶してしまい、一般化能力が低下し、少し注意を怠ると電子ゴミに成り果ててしまいます。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=ピクセル単位監視>ピクセル単位監視<a href=#ピクセル単位監視 class=hash-link aria-label="ピクセル単位監視 への直接リンク" title="ピクセル単位監視 への直接リンク">​</a></h3>
+<p>モデルが誤ってヒントに頼る問題を解決するために、いくつかの研究はピクセル単位の監視信号を導入し、モデルが顔自体の物理的および材質的特徴にもっと焦点を当て、背景やデバイスから生じる雑音に頼らないようにしています。</p>
+<hr>
+<ul>
+<li>
+<p><strong>(a) 補助タスク監視（Auxiliary Task Supervision）</strong></p>
+<div align=center><figure style=width:85%><p><img decoding=async loading=lazy alt=fig8b src=/ja/assets/images/img6b-fa238d38ca8166c71c1e06e1ae9d05a7.jpg width=1038 height=302 class=img_ev3q></figure></div>
+<p>この方法では、1 つまたは複数の補助ラベルを組み合わせます。いくつかの例を挙げると：</p>
+<ul>
+<li>擬似深度マップを使用して平面攻撃と実際の顔を区別する</li>
+<li>バイナリマスクで spoof 領域の範囲を示す、またはさらに進んだ ternary map、rPPG、光反射マップなど</li>
+</ul>
+<p>これにより、モデルは認識と解釈の両方を学びます。（出力された画像は解釈結果として使用されます）</p>
+<p>DepthNet や CDCN は最初に深度マップを監視として使ったアーキテクチャです。FAS-SGTD は短期および長期の動作推定を加え、「どれだけ完璧に見せかけても、必ず見破られる」というリズム感を構築しようとしました。</p>
+<p>マスク系の方法は George & Marcel によって推進され、その後、注意モジュールが加わり、モデルの注意の偏り問題を解決した研究もあります。また、ternary mask を導入して背景の信号を排除し、モデルが重要な領域に集中できるようにした研究もあります。</p>
+<p>この方法の利点は明確です：</p>
+<blockquote>
+<p><strong>解釈可能性が強く、空間的意味があり、マルチタスク学習をサポートしますが、同時にデータの品質に大きく依存します。</strong></p>
+</blockquote>
+<p>ほとんどのピクセルラベルは外部のモデルや手作業で構築されるため、品質が悪いと逆に誤解を招く可能性があります。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p><strong>(b) 生成的監視（Generative Supervision）</strong></p>
+<div align=center><figure style=width:85%><p><img decoding=async loading=lazy alt=generative src=/ja/assets/images/img6c-cf4d0d7273ba278ec0cc293f9c77cfb6.jpg width=1224 height=298 class=img_ev3q></figure></div>
+<p>直接的なラベリングの代わりに、モデル自身が異常を発見するという視点からアプローチする研究もあります。</p>
+<p>これらの方法は、主にオートエンコーダやエンコーダーデコーダー構造を採用し、モデルに bonafide 画像の再構築を試みさせ、再構築誤差を使って spoof の程度を判断します。</p>
+<p>また、spoof は「ノイズが加えられた入力」であると定義し、ノイズ推定から破綻を見つけようとする研究もあります。さらに進んだものでは、meta-teacher の概念を導入し、教師モデルが自動的にピクセル単位の監視を生成し、生徒モデルが spoof 特徴を学習する仕組みもあります。これはまるで内蔵の QA システムのようなものです。</p>
+<p>これらの方法の利点は：</p>
+<blockquote>
+<p><strong>視覚化が強力で、解釈可能性があり、特にデータ駆動型の一般化学習に適しています。</strong></p>
+</blockquote>
+<p>しかし、欠点も少なくありません：訓練は不安定で、収束が遅く、時にはセンサー固有のノイズを学んでしまい、過学習のリスクを高めることがあります。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class=admonitionHeading_Gvgb><span class=admonitionIcon_Rf37><svg viewBox="0 0 12 16"><path fill-rule=evenodd d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"/></svg></span>ヒント</div><div class=admonitionContent_BuS1><p>例えば、モデルが iPhone の画像特性を学習し、その後、他のブランドのスマホで撮影された画像をすべて spoof と判断する場合などです。</div></div>
+</li>
+</ul>
+<hr>
+<p>これらの伝統的な深層学習方法から、FAS コミュニティは単純な分類精度に満足せず、モデルの解釈可能性、一般化能力、シーン適応性に注目し始めています。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=一般化指向の深層学習方法>一般化指向の深層学習方法<a href=#一般化指向の深層学習方法 class=hash-link aria-label="一般化指向の深層学習方法 への直接リンク" title="一般化指向の深層学習方法 への直接リンク">​</a></h2>
+<p>伝統的な深層学習方法の課題が「データが足りない」「モデルが誤ったヒントを信じすぎる」だとすれば、一般化指向の課題はさらに現実的です：</p>
+<blockquote>
+<p><strong>モデルは「見たことのある」シーンではうまく動作するが、カメラを変えたり、光源を変えたり、顔を変えたりすると、すぐに崩れてしまう。</strong></p>
+</blockquote>
+<p>この「訓練はうまくいくが、実際の状況ではうまくいかない」という問題は、FAS 分野では特に深刻です。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class=admonitionHeading_Gvgb><span class=admonitionIcon_Rf37><svg viewBox="0 0 12 16"><path fill-rule=evenodd d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"/></svg></span>ヒント</div><div class=admonitionContent_BuS1><p>以前はオフィスで非常に良い結果が得られましたが、その後、コンビニの入り口にデプロイしたところ、モデルはすぐに誤動作しました。<p>このような状況は、アクセス制御、支払い、リモート認証などのアプリケーションでは明らかに受け入れられません。そのため、ますます多くの研究が FAS モデルの「<strong>一般化能力</strong>」に注目し始めています。</div></div>
+<p>一般化の課題は大きく分けて 2 種類に分けられます：</p>
+<ul>
+<li>一つは環境の変動（unseen domains）から来るもの、例えば光照、センサー、背景ノイズなど；</li>
+<li>もう一つは攻撃タイプの未知性（unknown attacks）から来るもの、例えば、見たことのない 3D マスクや変形したカバーなどです。</li>
+</ul>
+<p>これらの 2 つの問題は本質的に異なり、解決方法も異なります。それぞれについて詳しく見ていきましょう：</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=未知の環境への対応>未知の環境への対応<a href=#未知の環境への対応 class=hash-link aria-label="未知の環境への対応 への直接リンク" title="未知の環境への対応 への直接リンク">​</a></h3>
+<div align=center><figure style=width:85%><p><img decoding=async loading=lazy alt=unseen src=/ja/assets/images/img7-5eec04eae7884907e889feccc9db8954.jpg width=940 height=440 class=img_ev3q></figure></div>
+<p>データ分布が環境変動により偏ると、どんなに訓練が優れているモデルでも、安定した出力を保証することはできません。</p>
+<p>このようなシーンでは、一般化戦略は主に次の 2 つのアプローチに分かれます：</p>
+<ul>
+<li><strong>ドメイン適応（Domain Adaptation）</strong></li>
+<li><strong>ドメイン一般化（Domain Generalization）</strong></li>
+</ul>
+<p>これらの違いは、「目標環境のデータにアクセスできるかどうか」です。</p>
+<hr>
+<ul>
+<li>
+<p><strong>ドメイン適応：行き先はわかっているから、少し調整するだけ</strong></p>
+<p>この方法では、モデルがどの環境にデプロイされるかを既に知っている、あるいは目標データが手に入ると仮定します。目的地がわかっているので、方向を事前に修正できます。</p>
+<p>一部の方法では、教師なしの調整を行います。例えば、Li らは MMD（最大平均差異）を使って、ソースとターゲットの特徴分布の違いを最小化し、または敵対的学習を使って、モデルがソースドメインを区別しにくくし、共通の特徴を学ばせます。</p>
+<p>半教師あり学習では、ターゲットドメインの少数サンプル（例えば各クラスに 3 サンプル）を仮定することで、モデルの性能を大幅に向上させることができます。しかし、この方法にも欠点があります。例えば、bonafide サンプルだけしかない場合、モデルが偏ってしまう可能性があります。</p>
+<p>より高度な設計では、multi-layer MMD やドメイン固有の正規化、知識蒸留など、ネットワークアーキテクチャ自体を調整しようとします。いくつかの研究では、フィルタープルーニングを行い、移行と同時にネットワークをスリム化する方法もあります。</p>
+<blockquote>
+<p><strong>欠点は明白です：実際の環境では spoof サンプルがどのようなものかがわからないため、効果的なデータを収集するのが難しいことです。</strong></p>
+</blockquote>
+<hr>
+</li>
+<li>
+<p><strong>ドメイン一般化：行き先がわからないけど、どこでも通用するようにしたい</strong></p>
+<p>対照的に、ドメイン一般化の仮定はもっと厳格です。ターゲットドメインのデータが完全にない場合、複数のソースドメインを使って「すべての未来に対応できる」モデルを訓練するしかありません。これは AI の冒険者訓練キャンプのように聞こえますが、それが最近の研究のホットトピックになった理由です。</p>
+<p>方法は大きくいくつかに分類できます。最も基本的なものは敵対的学習で、ドメイン識別器を設計して特徴がソース情報を含まないように強制します。また、特徴の分離（feature disentanglement）を通じて、アイデンティティやカメラのノイズなどの干渉を取り除き、シーンを越えて生存できる spoof の表現を残す方法もあります。</p>
+<p>メタ学習アプローチは「ロールプレイ」的な精神を持っており、異なるソースドメインを異なるタスクとして訓練し、モデルが新しい環境に迅速に適応できる能力を身につけさせます。さらに、ドメインラベルを使用せず、クラスタリングを使って動的に擬似ドメインを生成する方法もあります。これは、一般化を内的な能力として育成する方法と言えるでしょう。</p>
+<p>さらに、Liu が提案した BIAN（バッチ + インスタンス適応型正規化）などの簡単で効果的な設計が、ドメインバイアスを取り除くために複数の正規化戦略を組み合わせています。この方法は意外にも良い結果をもたらしました。</p>
+<blockquote>
+<p><strong>欠点は訓練が難しく、エッジサンプルに影響されやすく、全体的なパフォーマンスが低下する可能性があることです。</strong></p>
+</blockquote>
+</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=未知の攻撃への対応>未知の攻撃への対応<a href=#未知の攻撃への対応 class=hash-link aria-label="未知の攻撃への対応 への直接リンク" title="未知の攻撃への対応 への直接リンク">​</a></h3>
+<p>もう一つの挑戦は、攻撃手法の多様化です：</p>
+<blockquote>
+<p><strong>事前に異なる spoof タイプを準備できますが、攻撃者があなたが見たことのない方法を発明しないとは限りません。</strong></p>
+</blockquote>
+<p>この時、「既知の攻撃だけを学ぶ」モデルは盲点が生まれ、誤判定を引き起こします。</p>
+<p>そのため、未知の攻撃に対する対策も、閉じたセット（closed-set）思考から開かれたセット（open-set）思考へと変化し、主に次の 2 つのアプローチが登場しました：</p>
+<ol>
+<li><strong>ゼロショット / フューショット学習（Zero / Few-Shot Learning）</strong></li>
+<li><strong>異常検出（Anomaly Detection）</strong></li>
+</ol>
+<hr>
+<ul>
+<li>
+<p><strong>ゼロショット / フューショット学習：見たことがないが、予感がある</strong></p>
+<p>ゼロショット学習の概念は、既知の spoof タイプから抽象的な特徴を学び、未見の攻撃に遭遇した際に「意味的に推測する」ことです。例えば、Liu らは Deep Tree Network（DTN）を提案し、spoof を分類し、ツリー状の意味構造を構築して、この構造を使って未知の攻撃タイプを判断します。</p>
+<p>フューショット学習はさらに実践的で、新しいサンプル（例えば 5 サンプル）をモデルに見せ、メタ学習を使ってモデルパラメータを素早く更新し、迅速に適応できるようにします。Qin の方法は、ゼロショットとフューショットの両方の利点を組み合わせ、動的な学習率機構を加えています。Perez-Cabo は連続的なフューショット学習機構を設計し、モデルはデータの成長に応じて更新され、古いタスクを忘れないようにします。</p>
+<p>このアプローチの共通の利点は迅速な反応と拡張性ですが、サンプルが極端に少ない場合やゼロの場合、混乱が生じる可能性があります。特に spoof 手法が非常にリアルに見える場合、モデルが識別するのは簡単ではありません。</p>
+<hr>
+</li>
+<li>
+<p><strong>異常検出（Anomaly Detection）：私はあなたを知らないので、信じません</strong></p>
+<p>異常検出は比較的単純で粗暴なアプローチです：bonafide だけを学習し、bonafide に似ていないものをすべて疑わしいと見なします。</p>
+<p>この方法は通常、one-class 訓練戦略を採用します。例えば、GMM、One-Class SVM、オートエンコーダの再構築誤差を使って「正常領域」を定義します。</p>
+<p>さらに進んだ設計では、特徴空間内で bonafide を 1 つのハイパースフィアに収束させ、球の外にある点が spoof である可能性があると判断します。また、George が提案した One-Class Contrastive Loss（OCCL）では、対比学習と後処理スコアを組み合わせ、異常点を識別する能力を強化します。</p>
+<p>この方法の利点は open-world に適しており、攻撃サンプルが不要な点です。ただし、欠点も明確です：</p>
+<blockquote>
+<p><strong>spoof サンプルが bonafide に似すぎていると混乱を招き、分類の境界が明確に定義できないことです。</strong></p>
+</blockquote>
+</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=多センサーを用いた深層学習方法>多センサーを用いた深層学習方法<a href=#多センサーを用いた深層学習方法 class=hash-link aria-label="多センサーを用いた深層学習方法 への直接リンク" title="多センサーを用いた深層学習方法 への直接リンク">​</a></h2>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class=admonitionHeading_Gvgb><span class=admonitionIcon_Rf37><svg viewBox="0 0 14 16"><path fill-rule=evenodd d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"/></svg></span>備考</div><div class=admonitionContent_BuS1><p>この論文では、近赤外線、熱画像、3D 深度センサーなど、進化したセンサーを使用した関連研究方法も取り上げています。これらの方法の利点は、より多くの生体特徴や環境変化をキャプチャし、モデルの精度と安定性を向上させることです。<p>しかし、実際の生活では RGB カメラが主流であるため、この部分の内容は省略します。<p>興味のある読者は、元の論文の関連章を参照してください。</div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=討論>討論<a href=#討論 class=hash-link aria-label="討論 への直接リンク" title="討論 への直接リンク">​</a></h2>
+<p>深層学習技術の急速な進展により、FAS モデルは過去数年で大きな進歩を遂げました。</p>
+<p>多くのベンチマークテスト（例：OULU、SiW、CASIA-SURF など）によると、既存のモデルは主要なプロトコルで安定して ACER &lt; 5%、EER &lt; 10%、HTER &lt; 15%の水準に達しています。特に、精緻に設計されたアーキテクチャ（例：NAS-FAS、FAS-SGTD）や精密なピクセル単位の監視（pseudo depth、reflection map など）を組み合わせることで、2D および一部の 3D 攻撃に対する認識効果は良好です。</p>
+<p>しかし、これらのデータは紙上の話に過ぎません。モデルが実験室を出て、実世界に出ると、多くの問題に直面することがわかります：</p>
+<ul>
+<li>光源が変わると崩壊する。</li>
+<li>攻撃方法が変わるとクラッシュする。</li>
+<li>データが少ないと自信満々に誤判定する。</li>
+</ul>
+<p>たとえ一般化指向の設計（例：SSDG、SSAN、FGHV）がドメイン間の潜在能力を示したとしても、全体的に見て、FAS はまだ解決されていないタスクです。</p>
+<p>本論文の著者は、以下の 5 つの側面から現在の課題と今後の研究の突破口をまとめています。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=アーキテクチャ設計監視戦略とモデルの解釈性>アーキテクチャ設計、監視戦略とモデルの解釈性<a href=#アーキテクチャ設計監視戦略とモデルの解釈性 class=hash-link aria-label="アーキテクチャ設計、監視戦略とモデルの解釈性 への直接リンク" title="アーキテクチャ設計、監視戦略とモデルの解釈性 への直接リンク">​</a></h3>
+<p>現在の主流の方法は、依然として古典的な CNN アーキテクチャ（例：ResNet、MobileNet）と手作りの監視信号（例：depth map、mask）に大きく依存しています。これらの設定は安定していますが、データの多様性が高い実務のシナリオではうまく機能しないことが多いです。</p>
+<p>今後は自動化メカニズムの導入を検討することができます：</p>
+<ul>
+<li><strong>AutoML</strong>を使用して、異なるモダリティや時間条件下で最適なモデルアーキテクチャを探索する；</li>
+<li>RGB、Depth、NIR などの多モダリティ入力に対して、自動的に合理的な融合戦略を設計し、人為的な積み重ねを置き換える；</li>
+<li>軽量モデル設計を組み合わせて、FAS をサーバー専用からスマートフォンや IoT に展開できるようにする；</li>
+<li>解釈性を強化：Grad-CAM から spoof map、さらには自然言語生成による予測の説明を加え、モデルの判断プロセスをブラックボックスから脱却させる。</li>
+</ul>
+<p>モデルが「なぜこの顔が偽物だと認定したのか」を説明できるようになることは、未来の信頼できる FAS システムにとって重要な一歩となります。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=表現学習>表現学習<a href=#表現学習 class=hash-link aria-label="表現学習 への直接リンク" title="表現学習 への直接リンク">​</a></h3>
+<p>FAS の本質は、実は表現学習の高度な応用です。問題は「違いをつかんだかどうか」ではなく、「つかんだ違いが本当に spoof に関連するものかどうか」です。</p>
+<p>今後は次の方向に焦点を当てることができます：</p>
+<ul>
+<li><strong>転送学習</strong>と大規模事前訓練モデル（例：ViT、SAM）を導入し、一般的な視覚知識を転送する；</li>
+<li><strong>特徴の分解</strong>：アイデンティティ、光照、画質から spoof 専用の信号を分離する；</li>
+<li><strong>メトリック学習</strong>（Triplet, Hypersphere Loss）を組み合わせ、bonafide と spoof の特徴分布を広げる；</li>
+<li><strong>自己監視学習</strong>を利用して、ラベルなしのパッチから地域的な対比を学び、詳細な識別能力を構築する；</li>
+<li>より進んだ敵対的データ増強、例えば合成反射、微細な動きの歪み、極端な材質を使って、モデルが不慣れな攻撃に対しても判断できるようにする。</li>
+</ul>
+<p>簡単に言えば、モデルに「あなたが活体でないのはわかっているだけでなく、どこが違うのかもわかっている」と学ばせることです。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=実世界のオープンシナリオテスト>実世界のオープンシナリオテスト<a href=#実世界のオープンシナリオテスト class=hash-link aria-label="実世界のオープンシナリオテスト への直接リンク" title="実世界のオープンシナリオテスト への直接リンク">​</a></h3>
+<p>現在の FAS テストプロトコルはほとんどが「小規模、単因子、閉じた型」になっています。例えば、光源の変動だけをテストしたり、単一の spoof タイプだけをテストしたりします。しかし、現実のシーンでは変数が一つだけではなく、攻撃者自身も変わることがあります。</p>
+<p>そのため、<strong>実世界で使用できるオープンセットテストフレームワーク</strong>を構築することが、新世代のモデル評価に必要な条件となるでしょう。</p>
+<p>今後は以下の方向に発展できるでしょう：</p>
+<ul>
+<li>GrandTest やクロスプロトコルテスト：モデルが見たことのないドメイン+spoof に直面させる；</li>
+<li>多モダリティ訓練：訓練時には RGB のみを使用し、推論時に RGB + Depth に直面したとき、モデルは一般化できるか？擬似モダリティを予測できるか？</li>
+<li>多様な混合プロトコル：例えば、RGB-NIR-D のランダムな組み合わせ、センサーの不一致シーンを模擬する。</li>
+</ul>
+<p>過去のテストがモデルを合格させることだったとすれば、今後のテストはモデルにエラーを起こさせることです。なぜなら、モデルが間違える場所でこそ、私たちは本当にそれが学んだことを知ることができるからです。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=汎用的および統合型の攻撃検出>汎用的および統合型の攻撃検出<a href=#汎用的および統合型の攻撃検出 class=hash-link aria-label="汎用的および統合型の攻撃検出 への直接リンク" title="汎用的および統合型の攻撃検出 への直接リンク">​</a></h3>
+<p>Deepfake、モーフィング、GAN 生成などのデジタル偽造攻撃が登場したことで、FAS の守備範囲は次第に拡大しています。今後の防偽タスクは、もはや「顔が本物かどうか」だけでなく、次のようになります：</p>
+<blockquote>
+<p><strong>この画像の出所、完全性、真実性は信頼できるか？</strong></p>
+</blockquote>
+<p>これにより、FAS モデルは次の能力を持つ必要があります：</p>
+<ul>
+<li><strong>マルチタスク学習能力</strong>を持ち、書類、商品、顔などの複数の領域から共通の spoof パターンを学習する；</li>
+<li><strong>ドメイン間知識統合</strong>、実体 spoof（眼鏡、化粧）とデジタル spoof（StyleGAN、FaceSwap）を一緒にモデル化する；</li>
+<li><strong>敵対的攻撃防御</strong>、物理的な敵対的眼鏡、ステッカー、特殊なパターンなどの擾乱手法を識別し抵抗する。</li>
+</ul>
+<p>汎用 PAD（Presentation Attack Detection）は次の重要な転換点となり、FAS の商業化応用を実現するための最後の一歩となります。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=プライバシー保護下での訓練方法>プライバシー保護下での訓練方法<a href=#プライバシー保護下での訓練方法 class=hash-link aria-label="プライバシー保護下での訓練方法 への直接リンク" title="プライバシー保護下での訓練方法 への直接リンク">​</a></h3>
+<p>GDPR などのプライバシー規制が進んだ現在、「データを集めて訓練する」という方法はますます難しくなっています。データを共有できず、ラベルを付けられない現実に直面して、モデル訓練は「データは動かさず、モデルを動かす」戦略に転換する必要があります。</p>
+<p>現在注目されている方向には以下があります：</p>
+<ul>
+<li><strong>フェデレーティッドラーニング（Federated Learning）</strong>：各クライアント端末で個別に訓練し、モデルパラメータを統合して、プライバシーと学習効果を両立させる；</li>
+<li><strong>ソースフリー学習（Source-Free Learning）</strong>：モデルは公開され、データは封存され、デプロイ後に擬似ラベルで継続的に学習する；</li>
+<li><strong>プライベートデータ学習のリスク管理</strong>：モデルがユーザーの特徴を記憶しないように、信頼できる去識別化を行う方法などは、FAS と AI セキュリティを結びつける新たな戦場となります。</li>
+</ul>
+<p>「あなたが誰かを知らなくても、本物か偽物かを判断できるか」が、プライバシー時代における FAS の新たな課題です。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=結論>結論<a href=#結論 class=hash-link aria-label="結論 への直接リンク" title="結論 への直接リンク">​</a></h2>
+<p>過去の FAS は紙や携帯電話を防ぐためのものでした；現在の FAS はサーバーサイド生成、ドメイン間攻撃、偽装干渉と戦っています。この進化の過程で、私たちは分類モデルから生成モデルへ、閉じたセットからオープンセットへ、単一の監視からマルチタスク学習と自己監視最適化へと進んできました。</p>
+<p>しかし、まだ十分ではありません。</p>
+<p>FAS は攻撃者への第一線の防御でありながら、AI システムの最も脆弱な部分でもあります。未来の FAS には、モダリティを超えた理解、データ間学習、シーンを超えた生存能力を持つ統合型システムが必要です。それは、信頼性を判断し、戦略を調整し、リスクを認識し、未知の攻撃に直面したときに自己調整し適応する能力を持つべきです。</p>
+<p>この分野の探求は続いており、今後の道のりは長いものです。</header></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class=col></div><div class="col lastUpdated_JAkA"><span class=theme-last-updated><b><time datetime=2025-04-06T15:28:22.000Z itemprop=dateModified>2025年4月6日</time></b>に<b>zephyr-sh</b>が<!-- -->最終更新</span></div></div><div style=margin-top:3rem> </div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label=ドキュメントページ><a class="pagination-nav__link pagination-nav__link--prev" href=/ja/papers/face-antispoofing/wmca/><div class=pagination-nav__sublabel>前へ</div><div class=pagination-nav__label>[19.09] WMCA</div></a><a class="pagination-nav__link pagination-nav__link--next" href=/ja/papers/face-antispoofing/cfpl-fas/><div class=pagination-nav__sublabel>次へ</div><div class=pagination-nav__label>[24.03] CFPL-FAS</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href=#攻撃と防御の年代記 class="table-of-contents__link toc-highlight">攻撃と防御の年代記</a><li><a href=#fas-アーキテクチャ class="table-of-contents__link toc-highlight">FAS アーキテクチャ</a><ul><li><a href=#深層学習方法の概要 class="table-of-contents__link toc-highlight">深層学習方法の概要</a><li><a href=#評価指標 class="table-of-contents__link toc-highlight">評価指標</a><li><a href=#評価プロトコル class="table-of-contents__link toc-highlight">評価プロトコル</a></ul><li><a href=#rgb-ベースの-fas class="table-of-contents__link toc-highlight">RGB ベースの FAS</a><li><a href=#ハイブリッド型方法 class="table-of-contents__link toc-highlight">ハイブリッド型方法</a><li><a href=#従来型深層学習方法 class="table-of-contents__link toc-highlight">従来型深層学習方法</a><ul><li><a href=#二項分類監視 class="table-of-contents__link toc-highlight">二項分類監視</a><li><a href=#ピクセル単位監視 class="table-of-contents__link toc-highlight">ピクセル単位監視</a></ul><li><a href=#一般化指向の深層学習方法 class="table-of-contents__link toc-highlight">一般化指向の深層学習方法</a><ul><li><a href=#未知の環境への対応 class="table-of-contents__link toc-highlight">未知の環境への対応</a><li><a href=#未知の攻撃への対応 class="table-of-contents__link toc-highlight">未知の攻撃への対応</a></ul><li><a href=#多センサーを用いた深層学習方法 class="table-of-contents__link toc-highlight">多センサーを用いた深層学習方法</a><li><a href=#討論 class="table-of-contents__link toc-highlight">討論</a><ul><li><a href=#アーキテクチャ設計監視戦略とモデルの解釈性 class="table-of-contents__link toc-highlight">アーキテクチャ設計、監視戦略とモデルの解釈性</a><li><a href=#表現学習 class="table-of-contents__link toc-highlight">表現学習</a><li><a href=#実世界のオープンシナリオテスト class="table-of-contents__link toc-highlight">実世界のオープンシナリオテスト</a><li><a href=#汎用的および統合型の攻撃検出 class="table-of-contents__link toc-highlight">汎用的および統合型の攻撃検出</a><li><a href=#プライバシー保護下での訓練方法 class="table-of-contents__link toc-highlight">プライバシー保護下での訓練方法</a></ul><li><a href=#結論 class="table-of-contents__link toc-highlight">結論</a></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__links text--center"><div class=footer__links><a class=footer__link-item href=/ja/docs>オープンソースプロジェクト</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/ja/papers/intro>論文ノート</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/ja/blog>ブログ</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/ja/terms-of-service>利用規約</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/ja/privacy-policy>プライバシーポリシー</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/ja/become-an-author>著者になる</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/ja/worklog>作業日誌</a></div></div><div class="footer__bottom text--center"><div class=footer__copyright>Copyright © 2024 DOCSAID.</div></div></div></footer></div>
