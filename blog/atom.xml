@@ -26,22 +26,27 @@
 <li>
 <p><a href="https://parnec.nuaa.edu.cn/_upload/article/files/4d/43/8a227f2c46bda4c20da97715f010/db1eef47-b25f-4af9-88d4-a8afeccda889.pdf" target="_blank" rel="noopener noreferrer"><strong>[10.09] Face Liveness Detection from a Single Image with Sparse Low Rank Bilinear Discriminative Model</strong></a>
 利用 Lambertian 模型與稀疏低秩表示建構特徵空間，有效分離真臉與照片，為早期單張影像活體檢測提供理論與實作依據。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/slrbd/" target="_blank" rel="noopener noreferrer"><strong>[10.09] SLRBD: 沈默的反射光</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://ieeexplore.ieee.org/document/6313548" target="_blank" rel="noopener noreferrer"><strong>[12.09] On the Effectiveness of Local Binary Patterns in Face Anti-Spoofing</strong></a>
 使用 LBP 與其變種特徵，針對平面照片與螢幕重播攻擊進行辨識，並建立 REPLAY-ATTACK 資料集，是最早公開資料集與經典 baseline 組合之一。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/lbp/" target="_blank" rel="noopener noreferrer"><strong>[12.09] LBP: 輕快的微紋理</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://ieeexplore.ieee.org/document/6810829" target="_blank" rel="noopener noreferrer"><strong>[14.05] Spoofing Face Recognition with 3D Masks</strong></a>
 系統性分析 3D 假面對不同臉部辨識系統（2D/2.5D/3D）的攻擊效果，指出傳統對平面假臉的假設在 3D 印製技術下已不再成立。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/three-d-mad/" target="_blank" rel="noopener noreferrer"><strong>[14.05] 3DMAD: 真實的假面</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/1909.08848" target="_blank" rel="noopener noreferrer"><strong>[19.09] Biometric Face Presentation Attack Detection with Multi-Channel Convolutional Neural Network</strong></a>
 提出多通道 CNN 架構，結合 RGB、深度、紅外與熱感訊號進行辨識，並釋出 WMCA 資料集，提升對高階假臉（如矽膠面具）的偵測能力。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/wmca/" target="_blank" rel="noopener noreferrer"><strong>[19.09] WMCA: 看不見的臉</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://ieeexplore.ieee.org/abstract/document/9925105" target="_blank" rel="noopener noreferrer"><strong>[22.10] Deep Learning for Face Anti-Spoofing: A Survey</strong></a>
 為 FAS 領域第一篇以深度學習為主軸的系統性綜述，涵蓋 pixel-wise 監督、多模態感測器與 domain generalization 等新趨勢，建立知識全景。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/fas-survey/" target="_blank" rel="noopener noreferrer"><strong>[22.10] FAS Survey: 攻與防的編年史</strong></a></p></div></div>
 </li>
 </ol>
 <hr>
