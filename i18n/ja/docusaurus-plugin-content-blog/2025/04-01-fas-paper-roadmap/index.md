@@ -26,17 +26,37 @@ Face Anti-Spoofing の初期の研究は主に伝統的な画像処理技術に�
 1. [**[10.09] Face Liveness Detection from a Single Image with Sparse Low Rank Bilinear Discriminative Model**](https://parnec.nuaa.edu.cn/_upload/article/files/4d/43/8a227f2c46bda4c20da97715f010/db1eef47-b25f-4af9-88d4-a8afeccda889.pdf)
    ランバーティアンモデルと疎低ランク表示を用いて特徴空間を構築し、真顔と写真を効果的に分離。初期の単一画像での活体検出に理論的および実装の基盤を提供しました。
 
+   :::info
+   **論文ノート**：[**[10.09] SLRBD: 静かな反射光**](https://docsaid.org/ja/papers/face-antispoofing/slrbd/)
+   :::
+
 2. [**[12.09] On the Effectiveness of Local Binary Patterns in Face Anti-Spoofing**](https://ieeexplore.ieee.org/document/6313548)
    LBP とその変種を用いて、平面写真とスクリーン再生攻撃を識別し、REPLAY-ATTACK データセットを構築。最も初期の公開データセットおよび古典的なベースラインの組み合わせの一つです。
+
+   :::info
+   **論文ノート**：[**[12.09] LBP: 軽快な微細構造**](https://docsaid.org/ja/papers/face-antispoofing/lbp/)
+   :::
 
 3. [**[14.05] Spoofing Face Recognition with 3D Masks**](https://ieeexplore.ieee.org/document/6810829)
    3D マスクが異なる顔認識システム（2D/2.5D/3D）に対する攻撃効果を系統的に分析し、伝統的な平面顔に対する仮定が 3D 印刷技術では成り立たないことを指摘。
 
+   :::info
+   **論文ノート**：[**[14.05] 3DMAD: 現実の仮面**](https://docsaid.org/ja/papers/face-antispoofing/three-d-mad/)
+   :::
+
 4. [**[19.09] Biometric Face Presentation Attack Detection with Multi-Channel Convolutional Neural Network**](https://arxiv.org/abs/1909.08848)
    RGB、深度、赤外線、熱感知信号を組み合わせた多チャネル CNN アーキテクチャを提案し、WMCA データセットを発表。高次の偽顔（シリコンマスクなど）の検出能力を向上。
 
+   :::info
+   **論文ノート**：[**[19.09] WMCA: 見えない顔**](https://docsaid.org/ja/papers/face-antispoofing/wmca/)
+   :::
+
 5. [**[22.10] Deep Learning for Face Anti-Spoofing: A Survey**](https://ieeexplore.ieee.org/abstract/document/9925105)
    FAS 分野で初めての深層学習に基づいた系統的なレビュー論文。ピクセル単位の監視、多モーダルセンサー、ドメイン一般化など新しいトレンドを取り上げ、知識の全体像を構築。
+
+   :::info
+   **論文ノート**：[**[22.10] FAS Survey: 攻撃と防御の年代記**](https://docsaid.org/ja/papers/face-antispoofing/fas-survey/)
+   :::
 
 ---
 

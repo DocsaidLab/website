@@ -26,17 +26,37 @@ Face Anti-Spoofing 的早期研究主要建立在傳統影像處理技術之上�
 1. [**[10.09] Face Liveness Detection from a Single Image with Sparse Low Rank Bilinear Discriminative Model**](https://parnec.nuaa.edu.cn/_upload/article/files/4d/43/8a227f2c46bda4c20da97715f010/db1eef47-b25f-4af9-88d4-a8afeccda889.pdf)
    利用 Lambertian 模型與稀疏低秩表示建構特徵空間，有效分離真臉與照片，為早期單張影像活體檢測提供理論與實作依據。
 
+   :::info
+   **論文筆記**：[**[10.09] SLRBD: 沈默的反射光**](https://docsaid.org/papers/face-antispoofing/slrbd/)
+   :::
+
 2. [**[12.09] On the Effectiveness of Local Binary Patterns in Face Anti-Spoofing**](https://ieeexplore.ieee.org/document/6313548)
    使用 LBP 與其變種特徵，針對平面照片與螢幕重播攻擊進行辨識，並建立 REPLAY-ATTACK 資料集，是最早公開資料集與經典 baseline 組合之一。
+
+   :::info
+   **論文筆記**：[**[12.09] LBP: 輕快的微紋理**](https://docsaid.org/papers/face-antispoofing/lbp/)
+   :::
 
 3. [**[14.05] Spoofing Face Recognition with 3D Masks**](https://ieeexplore.ieee.org/document/6810829)
    系統性分析 3D 假面對不同臉部辨識系統（2D/2.5D/3D）的攻擊效果，指出傳統對平面假臉的假設在 3D 印製技術下已不再成立。
 
+   :::info
+   **論文筆記**：[**[14.05] 3DMAD: 真實的假面**](https://docsaid.org/papers/face-antispoofing/three-d-mad/)
+   :::
+
 4. [**[19.09] Biometric Face Presentation Attack Detection with Multi-Channel Convolutional Neural Network**](https://arxiv.org/abs/1909.08848)
    提出多通道 CNN 架構，結合 RGB、深度、紅外與熱感訊號進行辨識，並釋出 WMCA 資料集，提升對高階假臉（如矽膠面具）的偵測能力。
 
+   :::info
+   **論文筆記**：[**[19.09] WMCA: 看不見的臉**](https://docsaid.org/papers/face-antispoofing/wmca/)
+   :::
+
 5. [**[22.10] Deep Learning for Face Anti-Spoofing: A Survey**](https://ieeexplore.ieee.org/abstract/document/9925105)
    為 FAS 領域第一篇以深度學習為主軸的系統性綜述，涵蓋 pixel-wise 監督、多模態感測器與 domain generalization 等新趨勢，建立知識全景。
+
+   :::info
+   **論文筆記**：[**[22.10] FAS Survey: 攻與防的編年史**](https://docsaid.org/papers/face-antispoofing/fas-survey/)
+   :::
 
 ---
 

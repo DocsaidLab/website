@@ -26,17 +26,37 @@ Early research on Face Anti-Spoofing primarily relied on traditional image proce
 1. [**[10.09] Face Liveness Detection from a Single Image with Sparse Low Rank Bilinear Discriminative Model**](https://parnec.nuaa.edu.cn/_upload/article/files/4d/43/8a227f2c46bda4c20da97715f010/db1eef47-b25f-4af9-88d4-a8afeccda889.pdf)
    Using the Lambertian model and sparse low-rank representation to construct feature space, effectively separating real faces from photos, providing theoretical and practical basis for early single-image liveness detection.
 
+   :::info
+   **Paper Notes**：[**[10.09] SLRBD: Silent Reflective Light**](https://docsaid.org/en/papers/face-antispoofing/slrbd/)
+   :::
+
 2. [**[12.09] On the Effectiveness of Local Binary Patterns in Face Anti-Spoofing**](https://ieeexplore.ieee.org/document/6313548)
    Utilizing LBP and its variants, this paper recognizes flat photos and screen replay attacks and establishes the REPLAY-ATTACK dataset, one of the earliest publicly available datasets and classic baselines.
+
+   :::info
+   **Paper Notes**：[**[12.09] LBP: Lively Micro-textures**](https://docsaid.org/en/papers/face-antispoofing/lbp/)
+   :::
 
 3. [**[14.05] Spoofing Face Recognition with 3D Masks**](https://ieeexplore.ieee.org/document/6810829)
    A systematic analysis of the attack effects of 3D masks on different face recognition systems (2D/2.5D/3D), pointing out that the traditional assumption of flat fake faces is no longer valid with 3D printing technologies.
 
+   :::info
+   **Paper Notes**：[**[14.05] 3DMAD: The Real Mask**](https://docsaid.org/en/papers/face-antispoofing/three-d-mad/)
+   :::
+
 4. [**[19.09] Biometric Face Presentation Attack Detection with Multi-Channel Convolutional Neural Network**](https://arxiv.org/abs/1909.08848)
    Proposing a multi-channel CNN architecture that combines RGB, depth, infrared, and thermal signals for recognition, and releasing the WMCA dataset to enhance detection of advanced fake faces (e.g., silicone masks).
 
+   :::info
+   **Paper Notes**：[**[19.09] WMCA: The Invisible Face**](https://docsaid.org/en/papers/face-antispoofing/wmca/)
+   :::
+
 5. [**[22.10] Deep Learning for Face Anti-Spoofing: A Survey**](https://ieeexplore.ieee.org/abstract/document/9925105)
    The first systematic survey in the FAS field focusing on deep learning, covering pixel-wise supervision, multi-modal sensors, and domain generalization trends, establishing a comprehensive knowledge base.
+
+   :::info
+   **Paper Notes**：[**[22.10] FAS Survey: A Chronicle of Attacks and Defenses**](https://docsaid.org/en/papers/face-antispoofing/fas-survey/)
+   :::
 
 ---
 
