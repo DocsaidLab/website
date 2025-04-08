@@ -137,6 +137,11 @@ const config = {
             position: 'right',
           },
           {
+            label: '技術服務',
+            href: '/services',
+            position: 'left',
+          },
+          {
             label: '關於我們',
             href: '/aboutus',
             position: 'left',

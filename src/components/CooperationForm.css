@@ -1,0 +1,39 @@
+/* src/components/CooperationForm.css */
+.cooperation-form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    background-color: #fefefe;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .cooperation-form-wrapper h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .cooperation-form-wrapper p {
+    margin-bottom: 1.5rem;
+    color: #666;
+  }
+
+  .cooperation-form .ant-form-item-label > label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .cooperation-form .ant-input,
+  .cooperation-form .ant-select-selector,
+  .cooperation-form .ant-input-textarea {
+    /* 可以客製邊框、圓角、focus 效果等 */
+    border-radius: 4px;
+  }
+
+  .cooperation-form .ant-btn-primary {
+    background-color: #1677ff; /* antd 預設藍 */
+    border-color: #1677ff;
+  }
+  .cooperation-form .ant-btn-primary:hover {
+    background-color: #0958d9;
+    border-color: #0958d9;
+  }

@@ -30,5 +30,9 @@
   "item.label.關於我們": {
     "message": "私たちについて",
     "description": "Navbar item with label 關於我們"
+  },
+  "item.label.技術服務": {
+    "message": "技術サービス",
+    "description": "Navbar item with label 技術服務"
   }
 }
