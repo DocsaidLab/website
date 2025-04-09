@@ -8,7 +8,6 @@ img {
 /* ==== Main Wrapper ==== */
 .mainWrapper {
   padding: 2rem 1rem;
-  /* 在桌面上可達 1200px，但若螢幕小於 1200，就跟著縮 */
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
@@ -17,18 +16,23 @@ img {
 }
 
 /* ==== Common Section Box ==== */
+/* 建議：讓偶數段落帶一點淺底色、或視需求加 class .sectionBoxAlt 做區分 */
 .sectionBox {
   background: #ffffff;
   padding: 2rem;
   border-radius: 8px;
   margin-bottom: 2rem;
   border: 1px solid #eaeaea;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease;
 }
-
 .sectionBox:hover {
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* 如果想讓偶數序號的 .sectionBox 有淺底色，可加這段： */
+.sectionBox:nth-of-type(even) {
+  background: #f9fafc;
 }
 
 /* ==== Title ==== */
@@ -45,7 +49,6 @@ img {
   color: var(--ifm-color-primary-darker);
   transition: color 0.2s ease;
 }
-
 .timelineLink:hover {
   color: var(--ifm-color-primary-light);
 }
@@ -54,7 +57,6 @@ img {
   text-align: center;
   margin-top: 1rem;
 }
-
 .loadMoreBtn {
   background-color: var(--ifm-color-primary);
   color: #fff;
@@ -65,16 +67,8 @@ img {
   font-size: 1rem;
   transition: background 0.3s ease;
 }
-
 .loadMoreBtn:hover {
   background-color: var(--ifm-color-primary-dark);
-}
-
-/* ==== Demo Description ==== */
-.demoDescription p {
-  margin-bottom: 0.5rem;
-  line-height: 1.6;
-  color: var(--ifm-font-color-base);
 }
 
 /* ==== Testimonials ==== */
@@ -83,34 +77,29 @@ img {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
 }
-
 .testimonialCard {
   background: #ffffff;
   border-radius: 8px;
   padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   display: flex;
   gap: 1rem;
   align-items: center;
 }
-
 .testimonialAvatar {
   width: 64px;
   height: 64px;
   border-radius: 50%;
   object-fit: cover;
 }
-
 .testimonialContent {
   flex: 1;
 }
-
 .testimonialFeedback {
   font-style: italic;
   color: var(--ifm-font-color-base);
   margin-bottom: 0.4rem;
 }
-
 .testimonialAuthor {
   text-align: right;
   color: var(--ifm-color-primary-dark);
@@ -131,13 +120,12 @@ img {
   font-size: 1.2rem;
   cursor: pointer;
   z-index: 999;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: background 0.3s ease;
 }
-
 .backToTopBtn:hover {
   background-color: var(--ifm-color-primary-dark);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* ---- AutoScrollingProjects ---- */
@@ -145,10 +133,8 @@ img {
   position: relative;
   overflow: hidden;
   width: 100%;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
-
 .projectsMarqueeTrack {
   display: flex;
   flex-wrap: nowrap;
@@ -156,6 +142,7 @@ img {
   transform: translateZ(0);
 }
 
+/* 可點區塊強化：讓整個 .projectCardMarquee 看起來更像卡片可點 */
 .projectCardMarquee {
   flex: 0 0 auto;
   display: flex;
@@ -165,37 +152,38 @@ img {
   width: 280px;
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  will-change: transform;
-  transform: translateZ(0);
+  cursor: pointer; /* 鼠標指標 */
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.projectCardMarquee:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
 }
 
+/* 圖片 */
 .projectImageMarquee {
   width: 100%;
   height: 160px;
   object-fit: cover;
 }
-
 .projectContentMarquee {
   padding: 1rem;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-
 .projectContentMarquee h3 {
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
   color: var(--ifm-color-primary-darker);
 }
-
 .projectContentMarquee p {
   flex: 1;
   margin-bottom: 1rem;
   color: var(--ifm-font-color-base);
 }
-
 .projectLink {
   font-weight: bold;
   color: var(--ifm-color-primary);
@@ -203,7 +191,6 @@ img {
   align-self: flex-end;
   transition: color 0.2s ease;
 }
-
 .projectLink:hover {
   color: var(--ifm-color-primary-dark);
 }
@@ -227,42 +214,133 @@ img {
   justify-content: center;
   transition: background 0.2s ease;
 }
-
 .arrowButton:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 .arrowLeft {
   left: 0.5rem;
 }
-
 .arrowRight {
   right: 0.5rem;
 }
 
-/* ====================================== */
-/* ========== 手機端優化：純 CSS ========== */
-/* ====================================== */
+/* ========== 新增區塊：Facebook、Demo、Consulting ========== */
 
-/* -- (1) 平板含以下：max-width: 768px -- */
+/* --- Facebook --- */
+.facebookContainer {
+  width: 100%;
+}
+.facebookTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.facebookFrameWrapper {
+  max-width: 320px;
+  margin: 0 auto;
+}
+.facebookIframe {
+  border: none;
+  overflow: hidden;
+  display: block;
+}
+
+/* --- DocAligner Demo 區段 --- */
+.demoSectionRow {
+  margin-top: 1.5rem;
+}
+.demoCardTitle {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+.demoCardDesc {
+  margin-bottom: 1rem;
+}
+
+/* === Consulting 區段 === */
+.consultingTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* 可讀性：max-width 避免大螢幕過長行 */
+.consultingIntro {
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  max-width: 66ch;
+}
+
+/* 針對右側區塊可加淺色背景做視覺區隔 */
+.consultingRight {
+  background-color: #f9f9ff; /* 淺底色，可依需求調整 */
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.consultingList {
+  padding-left: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.consultingNote {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+.consultingSubtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+.consultingProjects {
+  padding-left: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.consultingClosing {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* 卡片高亮：ant-card 或 .Card hoverable */
+.ant-card:hover,
+.Card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* 用於「合作表單區塊」RWD 下視覺空間更寬鬆 */
+.cooperationFormContainer {
+  margin-top: 1rem; /* 與標題或其他段落的間距 */
+  background: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.04);
+  padding: 1.5rem;
+}
+.cooperationFormTitle {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/* ========== 手機端優化 ========== */
 @media (max-width: 768px) {
-  /* 讓整體 wrapper 跟著縮，而不是一直鎖在 1200px */
   .mainWrapper {
     max-width: 100%;
     padding: 1rem 0.5rem;
   }
-
   .sectionBox {
     padding: 1rem;
     margin-bottom: 1rem;
   }
-
   .sectionTitle {
     font-size: 1.3rem;
     margin-bottom: 1rem;
   }
-
-  /* Timeline(antd) 在小螢幕時隱藏 label，強制置左 */
+  .loadMoreBtn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+  /* Timeline (antd) 小螢幕隱藏 label，並置左 */
   .ant-timeline-item-label {
     display: none !important;
   }
@@ -275,13 +353,11 @@ img {
     left: 0 !important;
     right: auto !important;
   }
-
-  /* Testimonials：可改成單欄 */
+  /* Testimonials 改為單欄 */
   .testimonialsWrapper {
     grid-template-columns: 1fr;
   }
-
-  /* 精選作品卡片略縮 */
+  /* 精選作品卡片及箭頭尺寸縮小 */
   .projectCardMarquee {
     width: 220px;
     margin-right: 0.5rem;
@@ -291,31 +367,28 @@ img {
     height: 2.5rem;
     font-size: 1.2rem;
   }
+  /* Consulting 區塊：預設上下 stack */
+  .consultingRight {
+    margin-top: 1rem;
+  }
 }
 
-/* -- (2) 更小的手機：max-width: 480px -- */
 @media (max-width: 480px) {
-  /* 再進一步縮 */
   .mainWrapper {
     padding: 0.8rem 0.5rem;
   }
-
   .sectionBox {
     padding: 0.8rem;
     margin-bottom: 0.8rem;
   }
-
   .sectionTitle {
     font-size: 1.1rem;
     margin-bottom: 0.8rem;
   }
-
   .loadMoreBtn {
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
   }
-
-  /* 再縮精選卡片 */
   .projectCardMarquee {
     width: 180px;
     margin-right: 0.4rem;
@@ -325,7 +398,6 @@ img {
     height: 2.2rem;
     font-size: 1rem;
   }
-
   .backToTopBtn {
     width: 2.5rem;
     height: 2.5rem;

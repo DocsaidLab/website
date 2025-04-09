@@ -6,6 +6,7 @@ import { Card, Col, Row, Timeline } from 'antd';
 import { motion, useAnimation } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 
+import CooperationForm from '@site/src/components/CooperationForm';
 import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import HomepageHeader from '@site/src/components/HomepageHeader';
@@ -18,7 +19,6 @@ import mrzdemoContent from '@site/src/data/mrzdemoContent';
 import testimonialsData from '@site/src/data/testimonialsData';
 
 import styles from './index.module.css';
-
 
 const getTranslation = (id, locale) => {
   return i18nMessages[id]?.[locale] || i18nMessages[id]?.['zh-hant'] || '';
@@ -180,7 +180,7 @@ export function AutoScrollingProjects({ projects }) {
     if (!trackWidth) return;
     const half = trackWidth / 2;
 
-    // 1) 先把 xRef.current 校正到 [-half, 0)
+    // 1) 先把 xRef.current 校正到 [-half, 0) 之間
     xRef.current = clampOffset(xRef.current, half);
 
     // 2) 先用 controls.set() 讓畫面瞬間跳到校正後的位置
@@ -330,7 +330,7 @@ export default function Home() {
           <HomepageFeatures />
         </section>
 
-        {/* 改為帶箭頭 & Hover 暫停的自動橫向捲動 */}
+        {/* 精選作品：自動橫向捲動 */}
         <AutoScrollingProjects projects={currentProjects} />
 
         {/* Timeline + Facebook 粉專 雙欄併排 */}
@@ -346,30 +346,19 @@ export default function Home() {
               />
             </Col>
 
-            {/* 右欄：Facebook 粉專 - 標題靠左，iframe 置中 */}
+            {/* 右欄：Facebook 粉專 */}
             <Col xs={24} md={8}>
-              <div style={{ width: '100%' }}>
-                <h2
-                  style={{
-                    fontSize: '1.25rem',
-                    fontWeight: 600,
-                    marginBottom: '1rem',
-                    textAlign: 'left',
-                  }}
-                >
+              <div className="facebookContainer">
+                <h2 className="facebookTitle">
                   {getTranslation('homepage.followUs', currentLocale)}
                 </h2>
-                <div style={{ maxWidth: 320, margin: '0 auto' }}>
+                <div className="facebookFrameWrapper">
                   <iframe
                     title="Facebook Page"
                     src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F61574315987805&tabs=timeline&width=300&height=400&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
                     width="100%"
                     height="400"
-                    style={{
-                      border: 'none',
-                      overflow: 'hidden',
-                      display: 'block',
-                    }}
+                    className="facebookIframe"
                     allowFullScreen={true}
                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                   ></iframe>
@@ -379,7 +368,95 @@ export default function Home() {
           </Row>
         </section>
 
-        {/* DocAligner Demo：保留交錯進入 */}
+        {/* AI 顧問與技術服務：精簡後的關鍵內容 */}
+        <motion.section
+          className={styles.sectionBox}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <Row gutter={[32, 32]}>
+            {/* 左欄：重點說明與服務清單 */}
+            <Col xs={24} md={currentLocale === 'zh-hant' ? 12 : 16}>
+              <motion.div variants={itemVariants} className="consultingLeft">
+
+                {/* 1) 取得標題 */}
+                <h2 className="consultingTitle">
+                  {getTranslation('homepage.consultingTitle', currentLocale)}
+                </h2>
+
+                {/* 2) 介紹段落 */}
+                <p className="consultingIntro">
+                  {getTranslation('homepage.consultingIntro', currentLocale)}
+                </p>
+
+                {/* 3) 服務項目卡片：用 .map() 根據語系動態產生 */}
+                <Row gutter={[16, 16]} style={{ marginTop: '1rem' }}>
+                  {getTranslation('homepage.consultingCards', currentLocale).map((card, idx) => (
+                    <Col xs={24} sm={12} key={idx}>
+                      <Card hoverable>
+                        <h3>{card.title}</h3>
+                        <p>{card.desc}</p>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+
+                {/* 3.5) 更多資訊提示 */}
+                <p style={{ fontSize: '0.95rem', color: '#555', marginTop: '1.25rem' }}>
+                  📚{' '}
+                  <strong>
+                    {getTranslation('homepage.consultingMoreInfo', currentLocale)}
+                  </strong>{' '}
+                  <a
+                    href={getTranslation('homepage.consultingMoreInfoLinkUrl', currentLocale)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'underline' }}
+                  >
+                    <strong>{getTranslation('homepage.consultingMoreInfoLinkText', currentLocale)}</strong>
+                  </a>
+                </p>
+
+                {/* 4) 注意事項 */}
+                <div style={{ marginTop: '1rem' }}>
+                  <div
+                    style={{
+                      border: '1px solid #ffe58f',
+                      padding: '1rem',
+                      borderRadius: 6,
+                      background: '#fffbe6'
+                    }}
+                  >
+                    <strong>
+                      {getTranslation('homepage.consultingNoticeTitle', currentLocale)}
+                    </strong>
+                    <ul style={{ paddingLeft: '1.25rem', marginTop: '0.5rem' }}>
+                      {getTranslation('homepage.consultingNoticeList', currentLocale).map((note, idx) => (
+                        <li key={idx}>{note}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
+            </Col>
+
+            {/* 右欄：合作需求表單 */}
+            <Col xs={24} md={currentLocale === 'zh-hant' ? 12 : 8}>
+              <motion.div variants={itemVariants} className="consultingRight">
+                <div className="cooperationFormContainer">
+                  <h2 className="cooperationFormTitle">
+                    {getTranslation('homepage.cooperationFormTitle', currentLocale)}
+                  </h2>
+                  <CooperationForm />
+                </div>
+              </motion.div>
+            </Col>
+          </Row>
+        </motion.section>
+
+        {/* DocAligner & MRZScanner Demo 區段 */}
         <motion.section
           className={styles.sectionBox}
           variants={containerVariants}
@@ -393,38 +470,34 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          {/* 這裡可放一段總體描述，如想省略可移除 */}
-          <motion.div variants={itemVariants} className={styles.demoDescription}>
+          <motion.div variants={itemVariants} className="demoSectionRow">
             <p>
               {getTranslation('homepage.demoIntro', currentLocale)}
             </p>
           </motion.div>
 
-          <motion.div variants={itemVariants} style={{ marginTop: '1.5rem' }}>
+          <motion.div variants={itemVariants} className="demoSectionRow">
             <Row gutter={[24, 24]}>
-              {/* 左欄：DocAligner 卡片 */}
+              {/* 左欄：DocAligner */}
               <Col md={12} xs={24}>
                 <Card className={styles.demoCard}>
-                  {/* 自訂標題 */}
-                  <h3 style={{ marginBottom: '0.5rem', fontSize: '1.25rem' }}>
+                  <h3 className="demoCardTitle">
                     {getTranslation('homepage.docAlignerDemoTitle', currentLocale)}
                   </h3>
-                  {/* 自訂描述 */}
-                  <p style={{ marginBottom: '1rem' }}>
+                  <p className="demoCardDesc">
                     {getTranslation('homepage.docAlignerDemoDesc', currentLocale)}
                   </p>
-                  {/* Demo 元件本身 */}
                   <DocAlignerDemoWrapper {...localeContent.docAlignerProps} />
                 </Card>
               </Col>
 
-              {/* 右欄：MRZScanner 卡片 */}
+              {/* 右欄：MRZScanner */}
               <Col md={12} xs={24}>
                 <Card className={styles.demoCard}>
-                  <h3 style={{ marginBottom: '0.5rem', fontSize: '1.25rem' }}>
+                  <h3 className="demoCardTitle">
                     {getTranslation('homepage.mrzScannerDemoTitle', currentLocale)}
                   </h3>
-                  <p style={{ marginBottom: '1rem' }}>
+                  <p className="demoCardDesc">
                     {getTranslation('homepage.mrzScannerDemoDesc', currentLocale)}
                   </p>
                   <MRZScannerDemoWrapper {...localeMrz.mrzScannerProps} />
@@ -434,8 +507,9 @@ export default function Home() {
           </motion.div>
         </motion.section>
 
-        {/* Testimonials: 交錯進入 */}
+        {/* Testimonials */}
         <StaggeredTestimonials testimonialsData={testimonialsData} />
+
       </main>
 
       {showBackToTop && (
