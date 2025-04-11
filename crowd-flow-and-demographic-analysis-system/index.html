@@ -1,0 +1,327 @@
+<!doctype html><html lang=zh-hant dir=ltr class="mdx-wrapper mdx-page plugin-pages plugin-id-default" data-has-hydrated=false><meta charset=UTF-8><meta name=generator content="Docusaurus v3.7.0"><title data-rh=true>人流與人口特徵分析系統 | 模組化提案報告書 | DOCSAID</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"><meta data-rh=true name=twitter:card content=summary_large_image><meta data-rh=true property=og:image content=https://docsaid.org/img/docsaid-social-card.jpg><meta data-rh=true name=twitter:image content=https://docsaid.org/img/docsaid-social-card.jpg><meta data-rh=true property=og:url content=https://docsaid.org/crowd-flow-and-demographic-analysis-system><meta data-rh=true property=og:locale content=zh_hant><meta data-rh=true property=og:locale:alternate content=en><meta data-rh=true property=og:locale:alternate content=ja><meta data-rh=true name=docusaurus_locale content=zh-hant><meta data-rh=true name=docusaurus_tag content=default><meta data-rh=true name=docsearch:language content=zh-hant><meta data-rh=true name=docsearch:docusaurus_tag content=default><meta data-rh=true property=og:title content="人流與人口特徵分析系統 | 模組化提案報告書 | DOCSAID"><meta data-rh=true name=description content=我們希望透過本提案，協助您打造一套即時且靈活的人流與人口特徵分析系統。><meta data-rh=true property=og:description content=我們希望透過本提案，協助您打造一套即時且靈活的人流與人口特徵分析系統。><link data-rh=true rel=icon href=/img/favicon.ico><link data-rh=true rel=canonical href=https://docsaid.org/crowd-flow-and-demographic-analysis-system><link data-rh=true rel=alternate href=https://docsaid.org/crowd-flow-and-demographic-analysis-system hreflang=zh-hant><link data-rh=true rel=alternate href=https://docsaid.org/en/crowd-flow-and-demographic-analysis-system hreflang=en><link data-rh=true rel=alternate href=https://docsaid.org/ja/crowd-flow-and-demographic-analysis-system hreflang=ja><link data-rh=true rel=alternate href=https://docsaid.org/crowd-flow-and-demographic-analysis-system hreflang=x-default><link data-rh=true rel=preconnect href=https://S9NC0RYCHF-dsn.algolia.net crossorigin=anonymous><link rel=alternate type=application/rss+xml href=/blog/rss.xml title="DOCSAID RSS Feed"><link rel=alternate type=application/atom+xml href=/blog/atom.xml title="DOCSAID Atom Feed"><link rel=preconnect href=https://www.google-analytics.com><link rel=preconnect href=https://www.googletagmanager.com><script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script><link rel=search type=application/opensearchdescription+xml title=DOCSAID href=/opensearch.xml><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css type=text/css integrity=sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM crossorigin=anonymous><link rel=stylesheet href=/assets/css/styles.211469b5.css><script src=/assets/js/runtime~main.c3f0ecfc.js defer></script><script src=/assets/js/main.81a54cd9.js defer></script><body class=navigation-with-keyboard><script>!function(){var t,e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t=null!==e?e:"light",document.documentElement.setAttribute("data-theme",t)}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id=__docusaurus><link rel=preload as=image href=/img/docsaid_logo.png><link rel=preload as=image href=/img/docsaid_logo_white.png><div role=region aria-label=跳至主要内容><a class=skipToContent_fXgn href=#__docusaurus_skipToContent_fallback>跳至主要内容</a></div><nav aria-label=主導航 class="navbar navbar--fixed-top navbarHideable_jvwV"><div class=navbar__inner><div class=navbar__items><button aria-label=切換導覽列 aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"/></svg></button><a class=navbar__brand href=/><div class=navbar__logo><img src=/img/docsaid_logo.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src=/img/docsaid_logo_white.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href=/docs/>開源專案</a><a class="navbar__item navbar__link" href=/papers/intro>論文筆記</a><a class="navbar__item navbar__link" href=/blog>部落格</a><a class="navbar__item navbar__link" href=/playground/intro>遊樂場</a><a class="navbar__item navbar__link" href=/services>技術服務</a><a class="navbar__item navbar__link" href=/aboutus>關於我們</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link><svg viewBox="0 0 24 24" width=20 height=20 aria-hidden=true class=iconLanguage_nlXk><path fill=currentColor d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>繁體中文</a><ul class=dropdown__menu><li><a href=/crowd-flow-and-demographic-analysis-system target=_self rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang=zh-hant>繁體中文</a><li><a href=/en/crowd-flow-and-demographic-analysis-system target=_self rel="noopener noreferrer" class=dropdown__link lang=en>English</a><li><a href=/ja/crowd-flow-and-demographic-analysis-system target=_self rel="noopener noreferrer" class=dropdown__link lang=ja>日本語</a></ul></div><div class=navbarSearchContainer_dCNk><button type=button class="DocSearch DocSearch-Button" aria-label="搜尋 (Command+K)"><span class=DocSearch-Button-Container><svg width=20 height=20 class=DocSearch-Search-Icon viewBox="0 0 20 20" aria-hidden=true><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke=currentColor fill=none fill-rule=evenodd stroke-linecap=round stroke-linejoin=round /></svg><span class=DocSearch-Button-Placeholder>搜尋</span></span><span class=DocSearch-Button-Keys></span></button></div><button type=button class="ant-btn css-7ny38l ant-btn-circle ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only"><span class=ant-btn-icon><span role=img aria-label=user style=font-size:18px class="anticon anticon-user"><svg viewBox="64 64 896 896" focusable=false data-icon=user width=1em height=1em fill=currentColor aria-hidden=true><path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"/></svg></span></span></button></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="main-wrapper mainWrapper_eExm"><main class="container container--fluid margin-vert--lg"><div class="row mdxPageWrapper_j9I6"><div class="col col--8"><article><header><h1>人流與人口特徵分析系統 | 模組化提案報告書</h1></header>
+<p>我們希望透過本提案，協助您打造一套<strong>即時且靈活</strong>的人流與人口特徵分析系統。</p>
+<p>此系統可隨時監控現場人潮，並同步提供年齡、性別等結構資訊，讓您在<strong>空間配置、營運策略或行銷調整</strong>上更有根據。</p>
+<p>系統適用於商場、門市、展館、公共空間或智慧城市等各種場域。若遇隱私或法規疑慮（如個資保護、地區合規問題），也能透過<strong>去識別化</strong>與<strong>客製化</strong>設定，符合各類法規需求。此系統亦可根據預算與場域條件，客製部署模式（本地端、邊緣裝置或內網環境），並在後續升級時以模組化方式減少重複開發或「被綁住」的風險。</p>
+<blockquote>
+<p><strong>補充說明：</strong>
+為強化此專案在各種實際應用的落地可行性，我們將依需求考量環境光線、鏡頭位置、隱私條件與網路基礎設施等面向，並在開發早期進行小範圍的試點，以確保系統在正式部署前就能獲得實務驗證與調整。</p>
+</blockquote>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=1-專案背景與目標>1. 專案背景與目標<a href=#1-專案背景與目標 class=hash-link aria-label="1. 專案背景與目標的直接連結" title="1. 專案背景與目標的直接連結">​</a></h2>
+<ul>
+<li>
+<p><strong>精準配置空間</strong>
+透過高峰時段與人潮分布分析，有效進行人員調度與動線規劃。</p>
+</li>
+<li>
+<p><strong>提升營運效率</strong>
+依年齡、性別等結構數據，制定更貼合目標族群的促銷或服務策略。</p>
+</li>
+<li>
+<p><strong>落實隱私保護</strong>
+支援去識別化與客製化隱私設定，減少個資外流風險。</p>
+</li>
+<li>
+<p><strong>多場域彈性佈署</strong>
+若您已有影像設備或正評估增設攝影機，可因地制宜地選配功能。</p>
+</li>
+<li>
+<p><strong>合規與可擴充</strong>
+因應各地區法規（GDPR 等）或大規模多攝影機整合，系統可模組化調整。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>補充說明：</strong>
+為了讓決策單位與現場管理者更快速掌握變化，我們也可透過實時通知或圖表介面，協助即時因應人潮波動，確保營運決策與空間配置能有最及時的參考依據。</p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=2-模組與功能明細>2. 模組與功能明細<a href=#2-模組與功能明細 class=hash-link aria-label="2. 模組與功能明細的直接連結" title="2. 模組與功能明細的直接連結">​</a></h2>
+<p>為因應客製化需求，本系統採用「模組化」設計。以下列出核心模組與其工時參考，方便您根據預算與階段計畫，彈性選擇所需工項。若您預算有限，也能只挑選所需的關鍵功能模組進行最小可行性方案（MVP）或概念驗證（POC），後續再逐步擴充。</p>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=21-模型工項>2.1 模型工項<a href=#21-模型工項 class=hash-link aria-label="2.1 模型工項的直接連結" title="2.1 模型工項的直接連結">​</a></h3>
+<table><thead><tr><th>子模組名稱<th>功能說明<th>常見技術挑戰<th>工時（天）<th>可否獨立運行<tbody><tr><td>行人偵測與預處理<td>即時判斷畫面中所有行人位置，並進行框線／座標標記<td>光線變化、遮蔽與解析度影響穩定性<td>6<td>✅<tr><td>行人追蹤模組<td>為每位行人分配 ID，持續追蹤其移動軌跡，支援單鏡頭與多鏡頭整合<td>出入口交錯導致 ID 混淆、多鏡頭重複<td>5<td>需偵測模組<tr><td>年齡性別預測<td>判斷行人所屬年齡層與性別，支援側臉與模糊臉應對<td>模糊臉、側臉角度降低準確度<td>6<td>可裁切<tr><td>臉部去識別化（選配）<td>模糊化／打碼處理，避免保留過多個人特徵<td>需在不影響統計前提下進行遮蔽處理<td>3<td>可選<tr><td>場域熱點分析（選配）<td>透過行人軌跡辨識空間熱區<td>跨時間軸聚合與座標熱區轉換<td>5<td>可選<tr><td>多攝像頭合併策略<td>多視角下人員識別整合，避免重複計算<td>無 GPS 定位時需路徑重疊策略<td>7<td>可選<tr><td>模型效能優化<td>在高密度場景下保持推論速度與穩定性<td>壓力測試與參數微調<td>4<td>需偵測模組<tr><td>模型版本管理<td>支援多種推論格式（ONNX、TensorRT），提供升級與替換彈性<td>格式轉換穩定性與推論一致性<td>4<td>可選</table>
+<hr>
+<h4 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=-常見場域挑戰與應對策略高角度攝影機視角>📌 常見場域挑戰與應對策略：高角度攝影機視角<a href=#-常見場域挑戰與應對策略高角度攝影機視角 class=hash-link aria-label="📌 常見場域挑戰與應對策略：高角度攝影機視角的直接連結" title="📌 常見場域挑戰與應對策略：高角度攝影機視角的直接連結">​</a></h4>
+<p>若系統部署於天花板或高處，採用俯視或近垂直視角進行拍攝，將帶來以下技術影響，建議於規劃階段一併考量：</p>
+<ol>
+<li>
+<p><strong>人臉特徵受限，屬性預測模組（年齡／性別）準確度大幅下降</strong>
+由於俯視視角下多數臉部特徵（如眼睛、鼻口輪廓）難以辨識，將影響人臉偵測與後續屬性推論。建議此類場域可選擇停用相關模組，或改用身體輪廓推估方式（準確率相對較低）。</p>
+</li>
+<li>
+<p><strong>行人偵測與追蹤準確度受人物形變影響</strong>
+高角度拍攝會導致人物比例變形（頭部比例放大），可能影響邊框標定與 ID 穩定性。此情況下建議使用針對俯視視角優化之偵測模型，並改採足點（footpoint）為追蹤基準，以提升熱點分析的空間精度。</p>
+</li>
+<li>
+<p><strong>多鏡頭併檔與跨區追蹤難度增加</strong>
+俯視視角攝影機之間重疊區域較少，難以進行有效的跨鏡頭 ID 對應與合併。若部署多攝影機建議將畫面切分為單元區塊，獨立統計再合併輸出，或引入環境標記（如室內地圖）輔助整合。</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>補充說明：</strong>
+高角度攝影機部署若與其他角度攝影機搭配，可透過不同視角的融合與場景參考點同步校正，藉此提升整體覆蓋率與偵測準確度。若您場域規模較大，我們建議在規劃初期即定義好各鏡頭區域重疊與邊界，以避免後續合併策略過於複雜。</p>
+</blockquote>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=22-後端工項>2.2 後端工項<a href=#22-後端工項 class=hash-link aria-label="2.2 後端工項的直接連結" title="2.2 後端工項的直接連結">​</a></h3>
+<table><thead><tr><th>子模組名稱<th>功能說明<th>常見技術挑戰<th>工時（天）<th>可否獨立運行<tbody><tr><td>API 架構與開發<td>提供前端與第三方系統的資料讀寫服務，支援擴充、OAuth2 權限驗證與版本控管<td>多來源資料一致性、API 錯誤處理與版本迭代<td>4<td>需 DB 模組<tr><td>資料儲存設計<td>建立 SQL / NoSQL 架構與索引，處理高頻寫入與查詢<td>寫入負載與查詢效能平衡<td>4<td>✅<tr><td>排程與統計計算（可選）<td>自動生成報表與備份，支援日／週／月彈性排程與 CSV / JSON / PDF 輸出格式<td>錯誤排程重試與資料完整性<td>4<td>依賴資料儲存<tr><td>權限驗證系統（可選）<td>多角色登入（管理 / 瀏覽 / 操作），控制敏感資料存取，支援角色與功能層級管控<td>權限分層與模組擴充<td>3<td>可選<tr><td>人口結構統計（可選）<td>統計年齡、性別分布與時間分段彙整，並支援資料分區匯總<td>多場域資料同步整併<td>3<td>可選<tr><td>多場域合併策略（可選）<td>匯總多地點資料，生成跨場域報表，支援時區與資料欄位對齊<td>各場域標準不一致需對齊處理<td>3<td>可選<tr><td>系統日誌與告警（可選）<td>記錄錯誤與異常事件，支援 Email／Slack／Webhook 等自動通報機制<td>效能監控與異常分類設定<td>3<td>可選<tr><td>測試與 API 文件撰寫<td>撰寫 Swagger / Postman 文件，確保維運易讀性與一致性<td>欄位版本同步與測試佈建<td>4<td>需 API 模組<tr><td>Docker 化與部署（可選）<td>使用容器快速部署、封裝測試環境，支援 GitHub Actions / GitLab CI/CD 流程<td>多環境相容性與相依管理<td>5<td>可選<tr><td>非同步任務佇列（可選）<td>使用 Celery / Kafka 等處理非同步任務，分散高頻資料與事件處理壓力<td>任務穩定性與訊息佇列管理<td>4<td>可選<tr><td>熱點資料快取（可選）<td>使用 Redis 快取熱門統計數據，提升前端查詢效能與回應速度<td>快取更新策略與資料一致性<td>3<td>可選</table>
+<blockquote>
+<p><strong>補充說明：</strong>
+由於後端工項範疇廣、可延伸空間大，實際執行時需根據企業現有系統架構（如既有的 Database、API Gateway 等）做彈性銜接。若您已有成熟的內部系統，我們會盡量減少重複建置，優先考慮整合現有環境。</p>
+</blockquote>
+<hr>
+<h4 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=-模組整合與彈性擴充建議>📌 模組整合與彈性擴充建議<a href=#-模組整合與彈性擴充建議 class=hash-link aria-label="📌 模組整合與彈性擴充建議的直接連結" title="📌 模組整合與彈性擴充建議的直接連結">​</a></h4>
+<p>為兼顧系統彈性與效能穩定性，我們建議後端模組採「微服務 + 非同步處理 + 快取優化」三層架構設計：</p>
+<ul>
+<li><strong>微服務化 API 架構</strong>：各模組可獨立部署與維運，支援後續場域擴充與模組熱更新。</li>
+<li><strong>非同步佇列處理</strong>：針對大量推論、跨場域資料彙整，建議使用 Celery 任務隊列，避免主系統阻塞。</li>
+<li><strong>即時快取策略</strong>：常查詢的統計資訊將透過 Redis 建立熱區快取，提升回應速度並減少資料庫負載。</li>
+</ul>
+<p>此架構亦支援 Docker 化佈署與 CI/CD 流程，方便企業內部上雲或私有部署需求。</p>
+<blockquote>
+<p><strong>補充說明：</strong>
+若未來擴大到多國、多資料中心或高併發場景，後端的彈性擴充能力至關重要。我們可根據預測人流量或跨時區需求，提前設計水平擴充（horizontal scaling）機制，包含自動化部署腳本與負載平衡設定，確保系統在高流量衝擊時依然穩定。</p>
+</blockquote>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=23-前端工項>2.3 前端工項<a href=#23-前端工項 class=hash-link aria-label="2.3 前端工項的直接連結" title="2.3 前端工項的直接連結">​</a></h3>
+<table><thead><tr><th>子模組名稱<th>功能說明<th>常見技術挑戰<th>工時（天）<th>可否獨立運行<tbody><tr><td>儀表板設計<td>設計主控台 UI，包括登入首頁、總覽頁、模組入口、即時警示列等<td>元件效能、圖表渲染與互動流暢性<td>5<td>需 API 接口<tr><td>登入與角色權限管理<td>前端對應不同角色檢視或操作權限介面<td>權限顯示邏輯與資料安全性設定<td>3<td>可選<tr><td>流量趨勢視覺化<td>折線圖／長條圖呈現人流趨勢，支援日週月切換、滑動縮放與 Tooltip<td>缺值補償與前端效能<td>4<td>需 DB & API<tr><td>人口結構圖表<td>圓餅圖呈現性別、年齡分布，支援分區篩選與估算區間提示<td>資料不完整時需保持視覺準確性<td>3<td>可選<tr><td>高峰時段標註<td>自動標記每日人流最高時段，提供圖上標示與導出數據<td>波峰誤判與標準定義<td>2<td>可選<tr><td>API 串接<td>整合前後端資料，支援時間戳對齊、錯誤重試、Token 授權與跨域控管<td>錯誤同步與安全性設定<td>5<td>✅（依後端）<tr><td>多鏡頭畫面切換<td>顯示多個場域即時畫面，支援 RTSP 串流、快照輪播與手動切換<td>畫面延遲與畫面同步控制<td>3<td>可選<tr><td>響應式設計<td>適配手機／平板／桌機畫面，支援基本 PWA 架構以提升行動裝置體驗<td>CSS 配置、跨裝置測試<td>4<td>可選<tr><td>報表匯出<td>匯出統計圖表與數據至 Excel / CSV / PDF，支援欄位選擇與格式轉換<td>字型／格式相容性與匯出圖表呈現<td>3<td>可選<tr><td>即時警示機制<td>可自設閾值推播，畫面顯示警示彈窗、聲音提示，支援 Email / 簡訊通知選項<td>閾值定義、通知頻率與多通道管理<td>3<td>可選<tr><td>自訂儀表板模組（可選）<td>使用者可拖拉組合儀表板區塊，自訂顯示內容與配置<td>區塊依賴與設定儲存<td>4<td>可選<tr><td>使用者行為追蹤（可選）<td>記錄使用者點擊與模組使用情況，提供 UI 優化與使用率分析依據<td>匿名性保護、前端與後端資料分離<td>3<td>可選</table>
+<blockquote>
+<p><strong>補充說明：</strong>
+前端介面除了提供視覺化儀表板，也可因應各部門角色差異，設定不同權限下可視或可操作的項目。若您已有內部 BI 平台，可僅需開放部分 API 串接與報表匯出功能，以降低重複建置的成本。</p>
+</blockquote>
+<hr>
+<h4 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=-前端模組配置建議與使用情境說明>📌 前端模組配置建議與使用情境說明<a href=#-前端模組配置建議與使用情境說明 class=hash-link aria-label="📌 前端模組配置建議與使用情境說明的直接連結" title="📌 前端模組配置建議與使用情境說明的直接連結">​</a></h4>
+<p>前端模組設計以「彈性開關」、「角色分層」、「高互動性」為核心原則，讓不同部門可依需求調整視覺化介面與功能模組，常見使用情境如下：</p>
+<ol>
+<li>
+<p><strong>營運與策略單位</strong></p>
+<ul>
+<li>建議開啟模組：<code>流量趨勢視覺化</code>、<code>人口結構圖表</code>、<code>高峰時段標註</code>、<code>報表匯出</code></li>
+<li>使用目的：觀測來客變化、評估行銷效果、產出營運週報或月報</li>
+</ul>
+</li>
+<li>
+<p><strong>現場管理人員</strong></p>
+<ul>
+<li>建議開啟模組：<code>儀表板設計</code>、<code>即時警示機制</code>、<code>多鏡頭畫面切換</code></li>
+<li>使用目的：即時掌握人流是否超標、快速檢視場域分布與即時畫面</li>
+</ul>
+</li>
+<li>
+<p><strong>資訊部門或內部系統整合者</strong></p>
+<ul>
+<li>建議開啟模組：<code>API 串接</code>、<code>登入與角色權限管理</code>、<code>使用者行為追蹤（可選）</code></li>
+<li>使用目的：整合內部帳號權限、串接既有系統或進行資料流量監控</li>
+</ul>
+</li>
+<li>
+<p><strong>跨部門管理與高階主管</strong></p>
+<ul>
+<li>建議開啟模組：<code>自訂儀表板模組（可選）</code>，依照關注重點組合出專屬畫面</li>
+<li>使用目的：不干擾其他部門設定前提下，自由打造個人視覺化總覽</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>補充說明：</strong>
+若部分使用者僅需要關鍵數據（如每天的人流總量或特定時段增減），前端可提供最簡化的「Quick View」模式，快速輸出圖表或數值；而對於深度分析需求，則透過完整儀表板進行多維度篩選與探勘。</p>
+</blockquote>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=24-邊緣部署工項>2.4 邊緣部署工項<a href=#24-邊緣部署工項 class=hash-link aria-label="2.4 邊緣部署工項的直接連結" title="2.4 邊緣部署工項的直接連結">​</a></h3>
+<table><thead><tr><th>子模組名稱<th>功能說明<th>常見技術挑戰<th>工時（天）<th>可否獨立運行<tbody><tr><td>硬體評估與選型<td>根據場域條件推薦 Jetson / Coral 等設備，並考量戶外遮蔽、電源與 PoE 等配置<td>設備差異大、空間限制與成本估算<td>3<td>可選<tr><td>模型轉換與加速<td>將模型轉為 ONNX / TensorRT / FP16，調整 Batch size 以強化推論效能<td>精度與速度平衡、trt 相容性調整<td>5<td>需模型基底<tr><td>本地暫存與補傳機制<td>當網路不穩時緩存統計結果／圖片，連線恢復後自動補傳<td>斷線資料同步驗證與併發一致性管理<td>4<td>可選<tr><td>遠端管理與監控<td>提供 WebUI 與 SSH 操作介面，支援設備狀態查詢、參數設定與重啟<td>管控安全性與操作介面整合<td>4<td>可選<tr><td>散熱與電源測試<td>現場評估設備於長時運作下是否過熱或斷電，調整風扇或 UPS 配置<td>現場條件差異、測試持久性與測點不穩定<td>4<td>可選<tr><td>批次更新與回報<td>支援 OTA 模型／程式批次更新，並提供更新結果與異常記錄回報<td>多節點同步控制與錯誤復原<td>4<td>可選<tr><td>Watchdog 自動重啟<td>偵測 GPU 異常、記憶體爆量或服務中斷等情況，自動重啟與狀態記錄<td>異常條件定義與誤判容錯<td>3<td>可選<tr><td>帶寬與畫面優化<td>回傳統計數據或 JPEG 壓縮圖片，支援抽幀頻率與畫質調整<td>即時性與畫質權衡、頻寬預估困難<td>3<td>可選<tr><td>邊緣設備儀表板（選配）<td>即時呈現各節點狀態、上傳速率、異常告警與資源使用率，可手動重啟設備<td>多節點資料整合與前端呈現<td>4<td>可選<tr><td>設備環境診斷（選配）<td>自動檢查現場攝影機串流穩定性、延遲與 FPS，提供部署前預警<td>串流協議相容、即時診斷彈性<td>3<td>可選<tr><td>區域佈署調度（選配）<td>多場域時集中控制任務下發、設備設定與部署排程<td>任務分派與併發部署策略<td>4<td>可選</table>
+<blockquote>
+<p><strong>補充說明：</strong>
+邊緣設備的選擇與部署往往受限於現場電力與網路環境，也需同時考量硬體成本。若頻寬受限，建議在邊緣即完成基礎推論，回傳僅有用的統計結果，減少影像傳輸量；若電力或空間不是問題，可考慮安裝較高階的 GPU 伺服器以獲得更高的推論效能與多路鏡頭支援。</p>
+</blockquote>
+<hr>
+<h4 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=-邊緣部署策略建議單點部署-vs-多節點規模化導入>📌 邊緣部署策略建議：單點部署 vs 多節點規模化導入<a href=#-邊緣部署策略建議單點部署-vs-多節點規模化導入 class=hash-link aria-label="📌 邊緣部署策略建議：單點部署 vs 多節點規模化導入的直接連結" title="📌 邊緣部署策略建議：單點部署 vs 多節點規模化導入的直接連結">​</a></h4>
+<p>本系統支援多樣化的邊緣部署策略，可依照場域規模、網路狀況與運維條件進行彈性調整。以下提供兩種常見情境的模組選配建議：</p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=-情境一單點部署強調穩定與自動復原>✅ <strong>情境一：單點部署，強調穩定與自動復原</strong><a href=#-情境一單點部署強調穩定與自動復原 class=hash-link aria-label=-情境一單點部署強調穩定與自動復原的直接連結 title=-情境一單點部署強調穩定與自動復原的直接連結>​</a></h5>
+<p>適用於：中小型門市、獨立櫃點、臨時展區等</p>
+<ul>
+<li><strong>建議開啟模組</strong>：<!-- -->
+<ul>
+<li><code>硬體評估與選型</code></li>
+<li><code>模型轉換與加速</code></li>
+<li><code>本地暫存與補傳機制</code></li>
+<li><code>Watchdog 自動重啟</code></li>
+<li><code>帶寬與畫面優化</code></li>
+</ul>
+</li>
+<li><strong>部署重點</strong>：<!-- -->
+<ul>
+<li>強化離線容忍度</li>
+<li>降低人力維運負擔</li>
+<li>具備自動復原與網路補償能力</li>
+</ul>
+</li>
+</ul>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=-情境二多節點部署需集中管控與遠端維運>✅ <strong>情境二：多節點部署，需集中管控與遠端維運</strong><a href=#-情境二多節點部署需集中管控與遠端維運 class=hash-link aria-label=-情境二多節點部署需集中管控與遠端維運的直接連結 title=-情境二多節點部署需集中管控與遠端維運的直接連結>​</a></h5>
+<p>適用於：連鎖門市、大型展館、多地點商場、智慧建築等</p>
+<ul>
+<li><strong>建議開啟模組</strong>：<!-- -->
+<ul>
+<li><code>遠端管理與監控</code></li>
+<li><code>批次更新與回報</code></li>
+<li><code>邊緣設備儀表板</code></li>
+<li><code>區域佈署調度（選配）</code></li>
+<li><code>設備環境診斷（選配）</code></li>
+</ul>
+</li>
+<li><strong>部署重點</strong>：<!-- -->
+<ul>
+<li>中央化控管與 OTA 更新</li>
+<li>多節點狀態即時掌握</li>
+<li>降低實地巡檢與部署失誤風險</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>補充說明：</strong>
+不論單點或多節點，若預期人流數據需要跨部門或跨系統進行整合，建議從初期就規劃好資料同步方式（如 API 或訊息佇列），並預留機制以便後續快速擴充。</p>
+</blockquote>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=25-開發流程建議>2.5 開發流程建議<a href=#25-開發流程建議 class=hash-link aria-label="2.5 開發流程建議的直接連結" title="2.5 開發流程建議的直接連結">​</a></h3>
+<p>本系統建議採「<strong>漸進式導入 + 敏捷開發</strong>」，以降低一次性投入風險。</p>
+<p>開發過程將以模組為單位，分三階段導入，每階段皆產出具體可驗收之 MVP 功能，可依預算與時程進行彈性調整或拆分模組。</p>
+<hr>
+<ul>
+<li>
+<p><strong>階段一｜核心模型建置</strong></p>
+<ul>
+<li><strong>主要內容</strong>：完成基礎模型與資料流管線建構，建立後端 API 框架</li>
+<li><strong>對應模組（節）</strong>：行人偵測、追蹤、年齡性別預測（2.1）、CLI、API 架構、資料儲存（2.2）</li>
+<li><strong>可交付成果</strong>：<!-- -->
+<ul>
+<li>CLI 測試腳本</li>
+<li>API 介接文件</li>
+<li>影像送入 → 結構化資料匯出流程</li>
+</ul>
+</li>
+<li><strong>工期預估</strong>：約 30 天</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p><strong>階段二｜視覺化與統計模組建置</strong></p>
+<ul>
+<li><strong>主要內容</strong>：製作前端初版儀表板與圖表介面，搭配排程與資料整併</li>
+<li><strong>對應模組（節）</strong>：流量趨勢圖表、人口結構圖表（2.3）、排程與統計模組、多場域合併（2.2）</li>
+<li><strong>可交付成果</strong>：<!-- -->
+<ul>
+<li>前端畫面原型</li>
+<li>報表範本</li>
+<li>自動排程與每日統計資料</li>
+</ul>
+</li>
+<li><strong>工期預估</strong>：約 24 天</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p><strong>階段三｜整合部署與邊緣模組實測</strong></p>
+<ul>
+<li><strong>主要內容</strong>：建立權限系統、前後端整合與 Docker 化，並進行邊緣設備現場測試與優化</li>
+<li><strong>對應模組（節）</strong>：權限管理、警示機制、Docker（2.2 ～ 2.3）、邊緣選型與管理模組（2.4）</li>
+<li><strong>可交付成果</strong>：<!-- -->
+<ul>
+<li>可上線版本</li>
+<li>邊緣設備連線測試紀錄</li>
+<li>多鏡頭併檔測試報告</li>
+</ul>
+</li>
+<li><strong>工期預估</strong>：約 42 天</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<ul>
+<li>各階段皆可獨立執行驗收與交付，適合以週為單位規劃衝刺（Sprint）。</li>
+<li>若初期僅需驗證模型與資料流程，可僅執行<strong>階段一</strong>作為 POC（Proof of Concept）。</li>
+<li>開發可依實際人力資源調整為<strong>前後端併行開發</strong>（如 API 初版完成後同步進行前端串接）。</li>
+<li>階段三若需投入更多隱私與法規測試，也可延長測試時間，以確保正式上線後的合規性與穩定度。</li>
+</ul>
+</blockquote>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=3-方案與功能說明>3. 方案與功能說明<a href=#3-方案與功能說明 class=hash-link aria-label="3. 方案與功能說明的直接連結" title="3. 方案與功能說明的直接連結">​</a></h2>
+<p>為因應不同場域、預算與發展階段的需求，我們規劃了<strong>四種</strong>可彈性搭配的解決方案，並透過「核心功能模組」的組合方式，讓您能隨時擴充或升級。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=31-方案概覽>3.1 方案概覽<a href=#31-方案概覽 class=hash-link aria-label="3.1 方案概覽的直接連結" title="3.1 方案概覽的直接連結">​</a></h3>
+<p>下表提供從初期概念驗證（POC）到完整系統建置的整體方案，並列出授權與買斷模式的參考費用（實際依功能與場域而定）：</p>
+<div style=white-space:nowrap;overflow-x:auto;font-size:1rem;line-height:0.8;justify-content:center;display:flex><table><thead><tr><th>方案等級<th>適用對象<th>功能定位<th>授權費用（USD）<th>買斷費用（USD）<tbody><tr><td><strong>POC</strong><td>初期探索、短期概念驗證<td>使用預設模型組合，快速部署於單機，驗證系統效果與資料可行性<td>USD 5,000<td>—<tr><td><strong>L1</strong><td>單點部署、正式長期使用<td>可調式模型與追蹤模組，支援排程、自動儲存及後續擴充<td>USD 20,000<td>USD 60,000<tr><td><strong>L2</strong><td>有內部分析與簡報需求<td>加入可視化統計模組，支援後台瀏覽與趨勢觀測<td>USD 32,000<td>USD 96,000<tr><td><strong>L3</strong><td>多部門、多場域、需對外串接<td>完整後台系統、API 串接、多攝影機與邊緣裝置部署<td>USD 50,000<td>USD 150,000</table></div>
+<blockquote>
+<p><strong>授權模式</strong>：僅提供系統使用權，原始碼與著作權由本團隊持有；若需後續升級或維運，可另議服務方案。</p>
+</blockquote>
+<blockquote>
+<p><strong>買斷模式</strong>：可獲取完整原始碼與著作權，後續可自行開發與維護；如需技術支援亦可簽訂維運合約。</p>
+</blockquote>
+<blockquote>
+<p><strong>補充說明：</strong>
+若您以 POC 起步，經實測後確定成效良好，後續可彈性升級到 L1 / L2 / L3，不會產生重複或浪費的開發成本。我們採用模組化的程式架構，能無縫整合先前 POC 結果，讓專案開發效率與成果延續最大化。</p>
+</blockquote>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=32-模組功能比較>3.2 模組功能比較<a href=#32-模組功能比較 class=hash-link aria-label="3.2 模組功能比較的直接連結" title="3.2 模組功能比較的直接連結">​</a></h3>
+<p>以下比較各版本的核心功能模組，方便您依實際需求彈性選擇或日後升級：</p>
+<ol>
+<li>
+<p><strong>模型與偵測能力</strong></p>
+<div style=white-space:nowrap;overflow-x:auto;font-size:1rem;line-height:0.8;justify-content:center;display:flex><table><thead><tr><th>模組項目<th>精簡版<th>Level 1<th>Level 2<th>Level 3<tbody><tr><td>🎯 人流偵測模型<td>✅（固定模型）<td>✅（可調版本）<td>✅<td>✅<tr><td>🔁 多人追蹤模組<td>❌<td>✅<td>✅<td>✅<tr><td>🧠 年齡／性別預測模型<td>✅（預設模型）<td>✅（可升級）<td>✅<td>✅<tr><td>⚙️ 模型參數設定（信心門檻、IOU 等）<td>❌<td>✅<td>✅<td>✅<tr><td>🔄 模型升級／替換（ONNX / PyTorch）<td>❌<td>✅<td>✅<td>✅</table></div>
+</li>
+<li>
+<p><strong>系統模組與部署彈性</strong></p>
+<div style=white-space:nowrap;overflow-x:auto;font-size:1rem;line-height:0.8;justify-content:center;display:flex><table><thead><tr><th>模組項目<th>精簡版<th>Level 1<th>Level 2<th>Level 3<tbody><tr><td>📦 CLI 操作介面<td>✅<td>✅<td>✅<td>✅<tr><td>💾 資料儲存（CSV / SQLite）<td>✅（CSV）<td>✅（SQLite）<td>✅<td>✅<tr><td>🔁 自動排程與每日輸出<td>❌<td>✅<td>✅<td>✅<tr><td>🐳 Docker 打包部署<td>❌<td>☑️ 可選<td>☑️ 可選<td>✅<tr><td>🧱 邊緣部署模組（Jetson / Coral）<td>❌<td>☑️ 可選<td>☑️ 可選<td>☑️ 可選</table></div>
+</li>
+<li>
+<p><strong>可視化與後台模組</strong></p>
+<div style=white-space:nowrap;overflow-x:auto;font-size:1rem;line-height:0.8;justify-content:center;display:flex><table><thead><tr><th>模組項目<th>精簡版<th>Level 1<th>Level 2<th>Level 3<tbody><tr><td>🧪 資料彙整與每日統計<td>❌<td>✅<td>✅<td>✅<tr><td>📊 簡易報表介面（Streamlit）<td>❌<td>❌<td>✅<td>❌<tr><td>🧱 前端儀表板（React）<td>❌<td>❌<td>❌<td>✅<tr><td>🔐 登入與權限管理<td>❌<td>❌<td>❌<td>✅<tr><td>🛠 API 查詢介面（FastAPI）<td>❌<td>❌<td>❌<td>✅</table></div>
+</li>
+</ol>
+<blockquote>
+<ul>
+<li><strong>精簡版（POC）</strong>：著重快速測試，無法擴充，不含多人追蹤與模型參數調整。</li>
+<li><strong>Level 1</strong>：可正式上線、支援排程與模組化擴充。</li>
+<li><strong>Level 2</strong>：增強可視化報表功能，內部簡報與策略分析更直觀。</li>
+<li><strong>Level 3</strong>：完整架構，多部門協作與對外整合串接。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>補充說明：</strong>
+您可根據實際預算與部門需求，直接由 L1 / L2 起步，無須先經過 POC 段落。若企業已具備成熟的後台與前端團隊，可將重心放在模型與部署層面。</p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=4-資料隱私與法規合規>4. 資料隱私與法規合規<a href=#4-資料隱私與法規合規 class=hash-link aria-label="4. 資料隱私與法規合規的直接連結" title="4. 資料隱私與法規合規的直接連結">​</a></h2>
+<p>本系統於設計之初即考量各類場域的隱私與法規風險，並提供彈性設定、最小資料化處理策略與完整操作留痕機制，協助您在合法範圍內安全運用。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=41-個資與隱私保護>4.1 個資與隱私保護<a href=#41-個資與隱私保護 class=hash-link aria-label="4.1 個資與隱私保護的直接連結" title="4.1 個資與隱私保護的直接連結">​</a></h3>
+<ul>
+<li>系統遵循 GDPR、個資法等法規精神，預設不儲存完整人臉影像。</li>
+<li>可啟用「去識別化」模式，輸出僅包含人數、年齡區間等統計結果。</li>
+<li>可依客戶需求，設定遮蔽區域（如櫃檯、人員休息區）與可偵測區域。</li>
+<li>支援資料最小化設計，可關閉人臉模組或替換為低精度輪廓模型。</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=42-資料責任分界>4.2 資料責任分界<a href=#42-資料責任分界 class=hash-link aria-label="4.2 資料責任分界的直接連結" title="4.2 資料責任分界的直接連結">​</a></h3>
+<ul>
+<li>提供導入前資料保護影響評估（DPIA）或合作方資料處理協議（DPA）模板。</li>
+<li>明確定義資料責任邊界：原始影像保留由客戶自行控管，本團隊僅處理匿名化推論輸出。</li>
+<li>系統內建帳號分層設計：管理員可存取設備與系統設定，分析人員僅讀取統計數據。</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=43-安全性與稽核>4.3 安全性與稽核<a href=#43-安全性與稽核 class=hash-link aria-label="4.3 安全性與稽核的直接連結" title="4.3 安全性與稽核的直接連結">​</a></h3>
+<ul>
+<li>支援 HTTPS / TLS 安全通訊、JWT 權限驗證與操作日誌完整留存。</li>
+<li>可針對年齡區間等敏感數據進行 token 化或雜湊處理。</li>
+<li>所有存取與修改行為皆紀錄於系統日誌，並可匯出備存。</li>
+<li>若有需要，亦可提供模型版本簽章與 hash 存證，用於未來報告或佐證。</li>
+</ul>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=44-風險防控機制>4.4 風險防控機制<a href=#44-風險防控機制 class=hash-link aria-label="4.4 風險防控機制的直接連結" title="4.4 風險防控機制的直接連結">​</a></h3>
+<ul>
+<li>提供「資料保留期」自定義模組，可自動定期清除歷史資料。</li>
+<li>可搭配「區塊鏈記錄模組」，建立不可竄改之推論與調用紀錄（適用政府或金融單位）。</li>
+<li>支援第三方安控驗證（如 DNV、SGS）或客戶內部資安稽核對接需求。</li>
+</ul>
+<blockquote>
+<p><strong>補充說明：</strong>
+在高隱私敏感度領域（如金融、醫療、政府單位），我們建議在專案初期就與法務及資安部門合作，明確界定資料範圍與儲存週期，並於技術層面落實「最小化」原則，降低未來合規衝擊。</p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=5-結語>5. 結語<a href=#5-結語 class=hash-link aria-label="5. 結語的直接連結" title="5. 結語的直接連結">​</a></h2>
+<p>以上為<strong>人流與人口特徵分析系統</strong>的模組化提案報告書，內容針對不同導入階段與需求類型做了清晰劃分，也補充了隱私與法規合規的重要性。若您有更多特定功能需求（如 VIP 識別、行為分析、區域熱點圖等），我們亦能根據此模組架構進一步擴充，讓系統真正落地並創造最大效益。同時，也可彈性調整專案預算與合作模式，確保在資源有限的情況下，依舊能達成核心目標並預留後續升級空間。</article></div><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href=#1-專案背景與目標 class="table-of-contents__link toc-highlight">1. 專案背景與目標</a><li><a href=#2-模組與功能明細 class="table-of-contents__link toc-highlight">2. 模組與功能明細</a><ul><li><a href=#21-模型工項 class="table-of-contents__link toc-highlight">2.1 模型工項</a><li><a href=#22-後端工項 class="table-of-contents__link toc-highlight">2.2 後端工項</a><li><a href=#23-前端工項 class="table-of-contents__link toc-highlight">2.3 前端工項</a><li><a href=#24-邊緣部署工項 class="table-of-contents__link toc-highlight">2.4 邊緣部署工項</a><li><a href=#25-開發流程建議 class="table-of-contents__link toc-highlight">2.5 開發流程建議</a></ul><li><a href=#3-方案與功能說明 class="table-of-contents__link toc-highlight">3. 方案與功能說明</a><ul><li><a href=#31-方案概覽 class="table-of-contents__link toc-highlight">3.1 方案概覽</a><li><a href=#32-模組功能比較 class="table-of-contents__link toc-highlight">3.2 模組功能比較</a></ul><li><a href=#4-資料隱私與法規合規 class="table-of-contents__link toc-highlight">4. 資料隱私與法規合規</a><ul><li><a href=#41-個資與隱私保護 class="table-of-contents__link toc-highlight">4.1 個資與隱私保護</a><li><a href=#42-資料責任分界 class="table-of-contents__link toc-highlight">4.2 資料責任分界</a><li><a href=#43-安全性與稽核 class="table-of-contents__link toc-highlight">4.3 安全性與稽核</a><li><a href=#44-風險防控機制 class="table-of-contents__link toc-highlight">4.4 風險防控機制</a></ul><li><a href=#5-結語 class="table-of-contents__link toc-highlight">5. 結語</a></ul></div></div></div></main></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__links text--center"><div class=footer__links><a class=footer__link-item href=/docs>開源專案</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/papers/intro>論文筆記</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/blog>部落格</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/terms-of-service>使用條款</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/privacy-policy>隱私政策</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/become-an-author>成為作者</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/worklog>工作日誌</a></div></div><div class="footer__bottom text--center"><div class=footer__copyright>Copyright © 2025 DOCSAID.</div></div></div></footer></div>
