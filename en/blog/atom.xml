@@ -141,7 +141,7 @@
         <id>https://docsaid.org/en/blog/fas-paper-roadmap</id>
         <link href="https://docsaid.org/en/blog/fas-paper-roadmap"/>
         <updated>2025-04-01T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[A guide to 40 papers from traditional to future advancements.]]></summary>
+        <summary type="html"><![CDATA[A guide to 40 papers from FAS.]]></summary>
         <content type="html"><![CDATA[<p>What is Face Anti-Spoofing? Why is it important? How do I get started?</p>
 <p>This article is a comprehensive roadmap I’ve put together after reading a substantial amount of literature, designed for those who are learning, researching, or developing FAS systems.</p>
 <p>I have selected the 40 most representative papers, divided into eight major themes based on time and technological advancements. Each paper includes reasons to read, key contributions, and the appropriate positioning. From traditional LBP, rPPG, and CNN to Transformer, CLIP, and Vision-Language Models, you will get the full scope.</p>
@@ -190,22 +190,27 @@ The first systematic survey in the FAS field focusing on deep learning, covering
 <li>
 <p><a href="https://ieeexplore.ieee.org/document/7961798" target="_blank" rel="noopener noreferrer"><strong>[17.06] OULU-NPU: A Mobile Face Presentation Attack Database with Real-World Variations</strong></a>
 A mobile-specific FAS dataset designed for real-world factors such as device, environmental lighting, and attack methods, with four testing protocols, becoming a milestone in "generalization ability" evaluation.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Paper Notes</strong>: <a href="https://docsaid.org/en/papers/face-antispoofing/oulu-npu/" target="_blank" rel="noopener noreferrer"><strong>[17.06] OULU-NPU: Four Challenges</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2003.05136" target="_blank" rel="noopener noreferrer"><strong>[20.03] CASIA-SURF CeFA: A Benchmark for Multi-modal Cross-ethnicity Face Anti-Spoofing</strong></a>
 The world’s first large-scale multi-modal FAS dataset with "ethnicity annotations," covering RGB, Depth, IR, and multiple attack types, specifically used to study ethnic bias and modality fusion strategies.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Paper Notes</strong>: <a href="https://docsaid.org/en/papers/face-antispoofing/cefa/" target="_blank" rel="noopener noreferrer"><strong>[20.03] CeFA: Discrimination in Models</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2007.12342" target="_blank" rel="noopener noreferrer"><strong>[20.07] CelebASpoof: Large-scale Face Anti-Spoofing Dataset with Rich Annotations</strong></a>
 The largest FAS dataset currently, with over 620,000 images and 10 types of spoof annotations, along with 40 attributes from the original CelebA, enabling multi-task and spoof trace learning.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Paper Notes</strong>: <a href="https://docsaid.org/en/papers/face-antispoofing/celeba-spoof/" target="_blank" rel="noopener noreferrer"><strong>[20.07] CelebA-Spoof: Large-Scale Anti-Spoofing Trials</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://openaccess.thecvf.com/content/WACV2022W/MAP-A/html/Belli_A_Personalized_Benchmark_for_Face_Anti-Spoofing_WACVW_2022_paper.html" target="_blank" rel="noopener noreferrer"><strong>[22.01] A Personalized Benchmark for Face Anti-Spoofing</strong></a>
 Advocating for including liveness images from user registration in the recognition process, proposing two new test configurations, CelebA-Spoof-Enroll and SiW-Enroll, exploring the possibility of personalized FAS systems.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Paper Notes</strong>: <a href="https://docsaid.org/en/papers/face-antispoofing/personalized-fas/" target="_blank" rel="noopener noreferrer"><strong>[22.01] Personalized-FAS: Personalized Attempt</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2402.04178" target="_blank" rel="noopener noreferrer"><strong>[24.02] SHIELD: An Evaluation Benchmark for Face Spoofing and Forgery Detection with Multimodal Large Language Models</strong></a>
 Combining LLM and multi-modal inputs, proposing a QA task format to evaluate the reasoning ability of MLLMs in spoof/forgery detection, opening a new field of "understanding attacks with language modeling."</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Paper Notes</strong>: <a href="https://docsaid.org/en/papers/face-antispoofing/shield/" target="_blank" rel="noopener noreferrer"><strong>[24.02] SHIELD: Tell me, why?</strong></a></p></div></div>
 </li>
 </ol>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="chapter-3-the-cross-domain-battleground">Chapter 3: The Cross-Domain Battleground<a href="https://docsaid.org/en/blog/fas-paper-roadmap#chapter-3-the-cross-domain-battleground" class="hash-link" aria-label="Direct link to Chapter 3: The Cross-Domain Battleground" title="Direct link to Chapter 3: The Cross-Domain Battleground">​</a></h2>

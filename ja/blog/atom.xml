@@ -146,7 +146,7 @@
         <id>https://docsaid.org/ja/blog/fas-paper-roadmap</id>
         <link href="https://docsaid.org/ja/blog/fas-paper-roadmap"/>
         <updated>2025-04-01T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[伝統から未来への40本の論文ガイド。]]></summary>
+        <summary type="html"><![CDATA[FAS の40本の論文ガイド。]]></summary>
         <content type="html"><![CDATA[<p>Face Anti-Spoofing とは何か？ なぜ重要なのか？ どう始めれば良いのか？</p>
 <p>この記事は、私が膨大な文献を読んだ後、FAS システムを学び、研究し、開発しているあなたのために整理した完全なガイドマップです。</p>
 <p>最も代表的な 40 本の論文を、時系列と技術の発展に基づいて 8 つのテーマに分け、各論文がなぜ読むべきか、重要な貢献と適切なポジショニングについて説明します。伝統的な LBP、rPPG、CNN から、Transformer、CLIP、Vision-Language Model に至るまで、すべて一度に把握できます。</p>
@@ -195,22 +195,27 @@ FAS 分野で初めての深層学習に基づいた系統的なレビュー論�
 <li>
 <p><a href="https://ieeexplore.ieee.org/document/7961798" target="_blank" rel="noopener noreferrer"><strong>[17.06] OULU-NPU: A Mobile Face Presentation Attack Database with Real-World Variations</strong></a>
 モバイルシーン向けに設計された FAS データセットで、デバイス、環境光、攻撃手法などのさまざまな変数を含み、4 つのテストプロトコルを設計。これにより「一般化能力」の評価が可能になったマイルストーン。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/oulu-npu/" target="_blank" rel="noopener noreferrer"><strong>[17.06] OULU-NPU: 四つの試練</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2003.05136" target="_blank" rel="noopener noreferrer"><strong>[20.03] CASIA-SURF CeFA: A Benchmark for Multi-modal Cross-ethnicity Face Anti-Spoofing</strong></a>
 世界初の「民族タグ付け」のある大型多モーダル FAS データセットで、RGB、深度、IR および複数の攻撃タイプを含み、特に民族偏向とモーダル融合戦略の研究に役立つ。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/cefa/" target="_blank" rel="noopener noreferrer"><strong>[20.03] CeFA: モデルの偏見</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2007.12342" target="_blank" rel="noopener noreferrer"><strong>[20.07] CelebASpoof: Large-scale Face Anti-Spoofing Dataset with Rich Annotations</strong></a>
 現在最大規模の FAS データセットで、62 万枚以上の画像を含み、10 種類の spoof タグと元の CelebA の 40 の属性が含まれており、多タスクおよび spoof トレース学習に適しています。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/celeba-spoof/" target="_blank" rel="noopener noreferrer"><strong>[20.07] CelebA-Spoof: 大規模な偽造防止の試練</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://openaccess.thecvf.com/content/WACV2022W/MAP-A/html/Belli_A_Personalized_Benchmark_for_Face_Anti-Spoofing_WACVW_2022_paper.html" target="_blank" rel="noopener noreferrer"><strong>[22.01] A Personalized Benchmark for Face Anti-Spoofing</strong></a>
 ユーザー登録時の活体画像を識別プロセスに組み込む提案。CelebA-Spoof-Enroll および SiW-Enroll という 2 つの新しいテスト設定を提案し、個人化 FAS システムの可能性を探る。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/personalized-fas/" target="_blank" rel="noopener noreferrer"><strong>[22.01] Personalized-FAS: 個人化の試み</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2402.04178" target="_blank" rel="noopener noreferrer"><strong>[24.02] SHIELD: An Evaluation Benchmark for Face Spoofing and Forgery Detection with Multimodal Large Language Models</strong></a>
 LLM と多モーダル入力を組み合わせ、QA タスク形式で MLLM の spoof/forgery 検出における推論能力を評価。攻撃を「言語モデリングで理解する」という新しい領域を開拓。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/shield/" target="_blank" rel="noopener noreferrer"><strong>[24.02] SHIELD: 教えてください、なぜ？</strong></a></p></div></div>
 </li>
 </ol>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="第三章跨領域の修羅場">第三章：跨領域の修羅場<a href="https://docsaid.org/ja/blog/fas-paper-roadmap#%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%B7%A8%E9%A0%98%E5%9F%9F%E3%81%AE%E4%BF%AE%E7%BE%85%E5%A0%B4" class="hash-link" aria-label="第三章：跨領域の修羅場 への直接リンク" title="第三章：跨領域の修羅場 への直接リンク">​</a></h2>
