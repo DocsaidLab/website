@@ -4,7 +4,7 @@ title: Face Anti-Spoofing 技術地図
 authors: Z. Yuan
 image: /ja/img/2025/0401.jpg
 tags: [face-anti-spoofing, liveness-detection]
-description: 伝統から未来への40本の論文ガイド。
+description: FAS の40本の論文ガイド。
 ---
 
 Face Anti-Spoofing とは何か？ なぜ重要なのか？ どう始めれば良いのか？
@@ -73,17 +73,37 @@ FAS 技術は、単一のシーンから複数のデバイス、複数の光源�
 6. [**[17.06] OULU-NPU: A Mobile Face Presentation Attack Database with Real-World Variations**](https://ieeexplore.ieee.org/document/7961798)
    モバイルシーン向けに設計された FAS データセットで、デバイス、環境光、攻撃手法などのさまざまな変数を含み、4 つのテストプロトコルを設計。これにより「一般化能力」の評価が可能になったマイルストーン。
 
+   :::info
+   **論文ノート**：[**[17.06] OULU-NPU: 四つの試練**](https://docsaid.org/ja/papers/face-antispoofing/oulu-npu/)
+   :::
+
 7. [**[20.03] CASIA-SURF CeFA: A Benchmark for Multi-modal Cross-ethnicity Face Anti-Spoofing**](https://arxiv.org/abs/2003.05136)
    世界初の「民族タグ付け」のある大型多モーダル FAS データセットで、RGB、深度、IR および複数の攻撃タイプを含み、特に民族偏向とモーダル融合戦略の研究に役立つ。
+
+   :::info
+   **論文ノート**：[**[20.03] CeFA: モデルの偏見**](https://docsaid.org/ja/papers/face-antispoofing/cefa/)
+   :::
 
 8. [**[20.07] CelebASpoof: Large-scale Face Anti-Spoofing Dataset with Rich Annotations**](https://arxiv.org/abs/2007.12342)
    現在最大規模の FAS データセットで、62 万枚以上の画像を含み、10 種類の spoof タグと元の CelebA の 40 の属性が含まれており、多タスクおよび spoof トレース学習に適しています。
 
+   :::info
+   **論文ノート**：[**[20.07] CelebA-Spoof: 大規模な偽造防止の試練**](https://docsaid.org/ja/papers/face-antispoofing/celeba-spoof/)
+   :::
+
 9. [**[22.01] A Personalized Benchmark for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/WACV2022W/MAP-A/html/Belli_A_Personalized_Benchmark_for_Face_Anti-Spoofing_WACVW_2022_paper.html)
    ユーザー登録時の活体画像を識別プロセスに組み込む提案。CelebA-Spoof-Enroll および SiW-Enroll という 2 つの新しいテスト設定を提案し、個人化 FAS システムの可能性を探る。
 
+   :::info
+   **論文ノート**：[**[22.01] Personalized-FAS: 個人化の試み**](https://docsaid.org/ja/papers/face-antispoofing/personalized-fas/)
+   :::
+
 10. [**[24.02] SHIELD: An Evaluation Benchmark for Face Spoofing and Forgery Detection with Multimodal Large Language Models**](https://arxiv.org/abs/2402.04178)
     LLM と多モーダル入力を組み合わせ、QA タスク形式で MLLM の spoof/forgery 検出における推論能力を評価。攻撃を「言語モデリングで理解する」という新しい領域を開拓。
+
+    :::info
+    **論文ノート**：[**[24.02] SHIELD: 教えてください、なぜ？**](https://docsaid.org/ja/papers/face-antispoofing/shield/)
+    :::
 
 ## 第三章：跨領域の修羅場
 

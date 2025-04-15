@@ -4,7 +4,7 @@ title: Face Anti-Spoofing Technology Map
 authors: Z. Yuan
 image: /en/img/2025/0401.jpg
 tags: [face-anti-spoofing, liveness-detection]
-description: A guide to 40 papers from traditional to future advancements.
+description: A guide to 40 papers from FAS.
 ---
 
 What is Face Anti-Spoofing? Why is it important? How do I get started?
@@ -73,17 +73,37 @@ FAS technology expanded from a single scene to multiple devices, lighting condit
 6. [**[17.06] OULU-NPU: A Mobile Face Presentation Attack Database with Real-World Variations**](https://ieeexplore.ieee.org/document/7961798)
    A mobile-specific FAS dataset designed for real-world factors such as device, environmental lighting, and attack methods, with four testing protocols, becoming a milestone in "generalization ability" evaluation.
 
+   :::info
+   **Paper Notes**: [**[17.06] OULU-NPU: Four Challenges**](https://docsaid.org/en/papers/face-antispoofing/oulu-npu/)
+   :::
+
 7. [**[20.03] CASIA-SURF CeFA: A Benchmark for Multi-modal Cross-ethnicity Face Anti-Spoofing**](https://arxiv.org/abs/2003.05136)
    The world’s first large-scale multi-modal FAS dataset with "ethnicity annotations," covering RGB, Depth, IR, and multiple attack types, specifically used to study ethnic bias and modality fusion strategies.
+
+   :::info
+   **Paper Notes**: [**[20.03] CeFA: Discrimination in Models**](https://docsaid.org/en/papers/face-antispoofing/cefa/)
+   :::
 
 8. [**[20.07] CelebASpoof: Large-scale Face Anti-Spoofing Dataset with Rich Annotations**](https://arxiv.org/abs/2007.12342)
    The largest FAS dataset currently, with over 620,000 images and 10 types of spoof annotations, along with 40 attributes from the original CelebA, enabling multi-task and spoof trace learning.
 
+   :::info
+   **Paper Notes**: [**[20.07] CelebA-Spoof: Large-Scale Anti-Spoofing Trials**](https://docsaid.org/en/papers/face-antispoofing/celeba-spoof/)
+   :::
+
 9. [**[22.01] A Personalized Benchmark for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/WACV2022W/MAP-A/html/Belli_A_Personalized_Benchmark_for_Face_Anti-Spoofing_WACVW_2022_paper.html)
    Advocating for including liveness images from user registration in the recognition process, proposing two new test configurations, CelebA-Spoof-Enroll and SiW-Enroll, exploring the possibility of personalized FAS systems.
 
+   :::info
+   **Paper Notes**: [**[22.01] Personalized-FAS: Personalized Attempt**](https://docsaid.org/en/papers/face-antispoofing/personalized-fas/)
+   :::
+
 10. [**[24.02] SHIELD: An Evaluation Benchmark for Face Spoofing and Forgery Detection with Multimodal Large Language Models**](https://arxiv.org/abs/2402.04178)
     Combining LLM and multi-modal inputs, proposing a QA task format to evaluate the reasoning ability of MLLMs in spoof/forgery detection, opening a new field of "understanding attacks with language modeling."
+
+    :::info
+    **Paper Notes**: [**[24.02] SHIELD: Tell me, why?**](https://docsaid.org/en/papers/face-antispoofing/shield/)
+    :::
 
 ## Chapter 3: The Cross-Domain Battleground
 

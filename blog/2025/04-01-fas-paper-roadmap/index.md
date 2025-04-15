@@ -4,7 +4,7 @@ title: Face Anti-Spoofing 技術地圖
 authors: Z. Yuan
 image: /img/2025/0401.jpg
 tags: [face-anti-spoofing, liveness-detection]
-description: 從傳統到未來的 40 篇論文導讀。
+description: FAS 的 40 篇論文導讀。
 ---
 
 Face Anti-Spoofing 是什麼？為什麼它重要？我該怎麼入門？
@@ -73,17 +73,37 @@ FAS 技術從單一場景走向多設備、多光源、多攻擊手法，是透�
 6. [**[17.06] OULU-NPU: A Mobile Face Presentation Attack Database with Real-World Variations**](https://ieeexplore.ieee.org/document/7961798)
    針對手機場景設計的 FAS 資料集，涵蓋裝置、環境光與攻擊手法等多種變因，並設計四種測試協定，成為「泛化能力」評估的里程碑。
 
+   :::info
+   **論文筆記**：[**[17.06] OULU-NPU: 四道關卡**](https://docsaid.org/papers/face-antispoofing/oulu-npu/)
+   :::
+
 7. [**[20.03] CASIA-SURF CeFA: A Benchmark for Multi-modal Cross-ethnicity Face Anti-Spoofing**](https://arxiv.org/abs/2003.05136)
    全球首個具有「族群標註」的大型多模態 FAS 資料集，涵蓋 RGB、Depth、IR 與多種攻擊類型，特別用於研究族群偏差與模態融合策略。
+
+   :::info
+   **論文筆記**：[**[20.03] CeFA: 模型的歧視**](https://docsaid.org/papers/face-antispoofing/cefa/)
+   :::
 
 8. [**[20.07] CelebASpoof: Large-scale Face Anti-Spoofing Dataset with Rich Annotations**](https://arxiv.org/abs/2007.12342)
    目前最大規模的 FAS 資料集，超過 62 萬張影像，並含 10 類 spoof 標註與原始 CelebA 的 40 個屬性，可進行多任務與 spoof trace 學習。
 
+   :::info
+   **論文筆記**：[**[20.07] CelebA-Spoof: 大規模防偽試煉**](https://docsaid.org/papers/face-antispoofing/celeba-spoof/)
+   :::
+
 9. [**[22.01] A Personalized Benchmark for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/WACV2022W/MAP-A/html/Belli_A_Personalized_Benchmark_for_Face_Anti-Spoofing_WACVW_2022_paper.html)
    主張將使用者註冊時的活體影像納入辨識流程，提出 CelebA-Spoof-Enroll 與 SiW-Enroll 兩個新測試配置，探索個人化 FAS 系統的可能性。
 
+   :::info
+   **論文筆記**：[**[22.01] Personalized-FAS: 個人化的嘗試**](https://docsaid.org/papers/face-antispoofing/personalized-fas/)
+   :::
+
 10. [**[24.02] SHIELD: An Evaluation Benchmark for Face Spoofing and Forgery Detection with Multimodal Large Language Models**](https://arxiv.org/abs/2402.04178)
     結合 LLM 與多模態輸入，提出以 QA 任務形式評估 MLLM 在 spoof/forgery 檢測的推理能力，開啟「以語言建模理解攻擊」的新場域。
+
+    :::info
+    **論文筆記**：[**[24.02] SHIELD: 告訴我，為什麼？**](https://docsaid.org/papers/face-antispoofing/shield/)
+    :::
 
 ## 第三章：跨域的修羅場
 
