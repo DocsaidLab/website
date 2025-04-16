@@ -233,8 +233,8 @@ Proposing the SA-FAS framework, emphasizing maintaining feature separability acr
 A deep analysis of the multi-modal DG problem, using U-Adapter to suppress unstable modal interference, paired with ReGrad to dynamically adjust the convergence speed of each modality, providing a complete solution for modality imbalance and reliability issues.</p>
 </li>
 <li>
-<p><a href="https://ieeexplore.ieee.org/document/10448156" target="_blank" rel="noopener noreferrer"><strong>[24.04] VL-FAS: Domain Generalization via Vision-Language Model for Face Anti-Spoofing</strong></a>
-Introducing Vision-Language mechanisms for the first time, guiding attention to face regions via semantic guidance, combined with image-text contrastive learning (SLVT) for semantic layer generalization, significantly improving ViT's cross-domain stability.</p>
+<p><a href="https://arxiv.org/abs/2403.14333" target="_blank" rel="noopener noreferrer"><strong>[24.03] CFPL-FAS: Class Free Prompt Learning for Generalizable Face Anti-spoofing</strong></a>
+Focuses on a prompt learning approach that emphasizes class-free prompt design, eliminating the need for manually defined categories. This represents a new direction in leveraging language prompts to enhance the generalization ability of FAS models.</p>
 </li>
 </ol>
 <hr>

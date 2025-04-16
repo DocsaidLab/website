@@ -222,7 +222,7 @@ LLM と多モーダル入力を組み合わせ、QA タスク形式で MLLM の 
 <blockquote>
 <p><strong>単一データ学習から多シーン展開の核心技術</strong></p>
 </blockquote>
-<p>Face Anti-Spoofing（FAS）の最も難しい問題の一つは、一般化能力です——モデルが訓練データだけでなく、新しいデバイス、新しい環境、新しい攻撃にも対応できるようにする方法。</p>
+<p>Face Anti-Spoofing（FAS）の最も難しい問題の一つは、一般化能力です: モデルが訓練データだけでなく、新しいデバイス、新しい環境、新しい攻撃にも対応できるようにする方法。</p>
 <ol start="11">
 <li>
 <p><a href="https://arxiv.org/abs/2004.14043" target="_blank" rel="noopener noreferrer"><strong>[20.04] Single-Side Domain Generalization for Face Anti-Spoofing</strong></a>
@@ -241,8 +241,8 @@ SA-FAS フレームワークを提案し、異なるドメインで特徴の分�
 多モーダル DG 問題を深く分析し、U-Adapter を使用して不安定なモーダルの干渉を抑制し、ReGrad で各モーダルの収束速度を動的に調整することで、モーダル不均衡と信頼性の問題に対する完全な解決策を提供。</p>
 </li>
 <li>
-<p><a href="https://ieeexplore.ieee.org/document/10448156" target="_blank" rel="noopener noreferrer"><strong>[24.04] VL-FAS: Domain Generalization via Vision-Language Model for Face Anti-Spoofing</strong></a>
-初めて Vision-Language メカニズムを導入し、意味的に顔の領域に注意を集中させることで、SLVT による意味的層の一般化を行い、ViT のクロスドメイン安定性を大幅に向上。</p>
+<p><a href="https://arxiv.org/abs/2403.14333" target="_blank" rel="noopener noreferrer"><strong>[24.03] CFPL-FAS: Class Free Prompt Learning for Generalizable Face Anti-spoofing</strong></a>
+　 プロンプトラーニングの手法に焦点を当てており、「手動でクラスを定義する必要がない」プロンプト設計を強調している。これは、言語プロンプトを活用して FAS モデルの汎化能力を高める新たなアプローチである。</p>
 </li>
 </ol>
 <hr>

@@ -222,7 +222,7 @@
 <blockquote>
 <p><strong>從單一資料學習到多場景部署的核心技術</strong></p>
 </blockquote>
-<p>Face Anti-Spoofing 最棘手的問題之一是泛化能力——如何讓模型不只在訓練資料上有效，也能應對新裝置、新環境與新攻擊。</p>
+<p>Face Anti-Spoofing 最棘手的問題之一是泛化能力：如何讓模型不只在訓練資料上有效，也能應對新裝置、新環境與新攻擊。</p>
 <ol start="11">
 <li>
 <p><a href="https://arxiv.org/abs/2004.14043" target="_blank" rel="noopener noreferrer"><strong>[20.04] Single-Side Domain Generalization for Face Anti-Spoofing</strong></a>
@@ -241,8 +241,8 @@
 對多模態 DG 問題進行深入剖析，透過 U-Adapter 壓制不穩定模態的干擾，搭配 ReGrad 動態調節各模態收斂速度，是模態不均與可靠性問題的完整解法。</p>
 </li>
 <li>
-<p><a href="https://ieeexplore.ieee.org/document/10448156" target="_blank" rel="noopener noreferrer"><strong>[24.04] VL-FAS: Domain Generalization via Vision-Language Model for Face Anti-Spoofing</strong></a>
-首度引入 Vision-Language 機制，透過語意引導注意力聚焦於人臉區域，搭配圖文對比學習（SLVT）進行語意層泛化，顯著提升 ViT 的跨域穩定性。</p>
+<p><a href="https://arxiv.org/abs/2403.14333" target="_blank" rel="noopener noreferrer"><strong>[24.03] CFPL-FAS: Class Free Prompt Learning for Generalizable Face Anti-spoofing</strong></a>
+聚焦於 prompt learning 的手法，強調「無需手動定義類別」的 prompt 設計，屬於一種利用語言提示來協助 FAS 模型泛化的新思路。</p>
 </li>
 </ol>
 <hr>
@@ -643,9 +643,9 @@
 </ul></div></div>
 <div style="border:1px solid #ccc;border-radius:4px;padding:10px;margin:10px 0;background:#fff7e6;max-width:70%;margin-left:auto"><strong>我：</strong><div><p>目前 AI 工具盛行，應該可以彌平低階開發者或研究員的差距。如果把 AI 工具考慮進來，那對應的經驗數值大概會是多少？</p></div></div>
 <div style="border:1px solid #ccc;border-radius:4px;padding:10px;margin:10px 0;background:#e6f7ff;max-width:80%;margin-right:auto"><strong>ChatGPT:</strong><div><p>你提出了一個很好的觀察。</p><p>AI 工具（如 ChatGPT、Copilot、AutoML）確實能夠大幅降低初學者和中階開發者的門檻，讓他們的工作效率迅速提高，甚至能接近比自己高出數個等級的工程師。</p><p>如果將 AI 工具的加成效應考量進去，以下是調整後更符合現實的經驗數值：</p><table><thead><tr><th>等級</th><th>身分描述</th><th>無 AI 工具</th><th>有 AI 工具</th></tr></thead><tbody><tr><td>1</td><td>新手入門</td><td>1</td><td>20</td></tr><tr><td>2</td><td>初階探索</td><td>5</td><td>50</td></tr><tr><td>3</td><td>基礎工程師</td><td>20</td><td>100</td></tr><tr><td>4</td><td>熟練工程師</td><td>100</td><td>400</td></tr><tr><td>5</td><td>高階工程師</td><td>500</td><td>1,500</td></tr><tr><td>6</td><td>資深研究員</td><td>2,500</td><td>6,000</td></tr><tr><td>7</td><td>領域專家</td><td>12,500</td><td>20,000</td></tr><tr><td>8</td><td>技術領袖</td><td>62,500</td><td>90,000</td></tr><tr><td>9</td><td>學術權威</td><td>312,500</td><td>400,000</td></tr><tr><td>10</td><td>思想開創者（大師級泰斗）</td><td>1,500,000+</td><td>1,600,000+</td></tr></tbody></table><h4 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="-主要邏輯">🔑 主要邏輯：<a href="https://docsaid.org/blog/looking-up-the-ten-steps-of-a-master#-%E4%B8%BB%E8%A6%81%E9%82%8F%E8%BC%AF" class="hash-link" aria-label="🔑 主要邏輯：的直接連結" title="🔑 主要邏輯：的直接連結">​</a></h4><ul>
-<li><strong>低階開發者（1~4級）</strong>：受 AI 工具加持影響最大，經驗值提升約 20 倍左右。（能更快學習、排除困難、完成原本做不到的任務）</li>
-<li><strong>中階、高階（5~7級）</strong>：AI 工具依然明顯，但差距逐步收斂，約提升 1.5～3 倍。（可提升生產力，突破瓶頸，但仍需紮實經驗與理解力）</li>
-<li><strong>頂尖研究者（8~10級）</strong>：AI 工具影響相對較小，因為此時決定性的因素更多來自於創新力、深層思考、直覺、經驗與理論突破的能力，AI 只能作為輔助。</li>
+<li><strong>低階開發者（1~4 級）</strong>：受 AI 工具加持影響最大，經驗值提升約 20 倍左右。（能更快學習、排除困難、完成原本做不到的任務）</li>
+<li><strong>中階、高階（5~7 級）</strong>：AI 工具依然明顯，但差距逐步收斂，約提升 1.5 ～ 3 倍。（可提升生產力，突破瓶頸，但仍需紮實經驗與理解力）</li>
+<li><strong>頂尖研究者（8~10 級）</strong>：AI 工具影響相對較小，因為此時決定性的因素更多來自於創新力、深層思考、直覺、經驗與理論突破的能力，AI 只能作為輔助。</li>
 </ul><p>透過這樣的調整，更貼切地反映出 AI 工具的實質幫助及其在不同階段的影響差異，同時也清楚說明了頂尖領域的人才之間，最重要的差距依然在於更高階的洞察力與創新能力，而非單純的執行效率提升。</p></div></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="技術之外">技術之外<a href="https://docsaid.org/blog/looking-up-the-ten-steps-of-a-master#%E6%8A%80%E8%A1%93%E4%B9%8B%E5%A4%96" class="hash-link" aria-label="技術之外的直接連結" title="技術之外的直接連結">​</a></h2>
 <p>到底真實的情況是不是這樣五倍又五倍的差距，我也不敢說。</p>
@@ -654,7 +654,7 @@
 <p>最後，現在的 AI 工具真的很強，在初階水平可以提升 20 倍戰鬥力，我也覺得這個估計很合理。但隨著我們自己等級的提升，AI 工具的幫助就會越來越小，甚至有時候會變成累贅。</p>
 <p>所以結論或許可以是：「我就不努力啦！靠 AI 養我！」</p>
 <p>嘿嘿嘿，開玩笑的。</p>
-<p>我在這次的對話中，大概找到了自己的能力區間。心裡有個底，也知道自己還有多遠的路要走 —— 甚至知道有些路是永遠走不到了。(要認命 😅)</p>
+<p>我在這次的對話中，大概找到了自己的能力區間。心裡有個底，也知道自己還有多遠的路要走，甚至知道有些路是永遠走不到了。(要認命 😅)</p>
 <p>雖然 AI 讓你可以扮演任何人，但你始終是你自己。</p>
 <p>唯有提升自己的能力，才能真正走得更遠。</p>
 <p>至少我是這麼認為的。</p>]]></content>
