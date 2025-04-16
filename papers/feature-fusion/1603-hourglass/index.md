@@ -83,7 +83,7 @@ Hourglass 架構是專為人體姿勢估計任務而設計。這個架構通過�
 
 實話說，也不一定。
 
-因為比這篇論文再更早半年前 ——
+因為比這篇論文再更早半年前：
 
 - **[U-Net: Convolutional Networks for Biomedical Image Segmentation](https://arxiv.org/abs/1505.04597)**
 

@@ -109,7 +109,7 @@ FAS 技術從單一場景走向多設備、多光源、多攻擊手法，是透�
 
 > **從單一資料學習到多場景部署的核心技術**
 
-Face Anti-Spoofing 最棘手的問題之一是泛化能力——如何讓模型不只在訓練資料上有效，也能應對新裝置、新環境與新攻擊。
+Face Anti-Spoofing 最棘手的問題之一是泛化能力：如何讓模型不只在訓練資料上有效，也能應對新裝置、新環境與新攻擊。
 
 11. [**[20.04] Single-Side Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2004.14043)
     提出單邊對抗學習策略，只對真臉進行跨域對齊，讓假臉特徵在不同 domain 中自然分散，避免過度壓縮錯誤資訊，是 DG 設計上極具啟發性的方向。
@@ -123,8 +123,8 @@ Face Anti-Spoofing 最棘手的問題之一是泛化能力——如何讓模型�
 14. [**[24.02] Suppress and Rebalance: Towards Generalized Multi-Modal Face Anti-Spoofing**](https://arxiv.org/abs/2402.19298)
     對多模態 DG 問題進行深入剖析，透過 U-Adapter 壓制不穩定模態的干擾，搭配 ReGrad 動態調節各模態收斂速度，是模態不均與可靠性問題的完整解法。
 
-15. [**[24.04] VL-FAS: Domain Generalization via Vision-Language Model for Face Anti-Spoofing**](https://ieeexplore.ieee.org/document/10448156)
-    首度引入 Vision-Language 機制，透過語意引導注意力聚焦於人臉區域，搭配圖文對比學習（SLVT）進行語意層泛化，顯著提升 ViT 的跨域穩定性。
+15. [**[24.03] CFPL-FAS: Class Free Prompt Learning for Generalizable Face Anti-spoofing**](https://arxiv.org/abs/2403.14333)
+    聚焦於 prompt learning 的手法，強調「無需手動定義類別」的 prompt 設計，屬於一種利用語言提示來協助 FAS 模型泛化的新思路。
 
 ---
 

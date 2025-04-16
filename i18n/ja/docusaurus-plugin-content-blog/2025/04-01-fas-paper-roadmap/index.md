@@ -109,7 +109,7 @@ FAS 技術は、単一のシーンから複数のデバイス、複数の光源�
 
 > **単一データ学習から多シーン展開の核心技術**
 
-Face Anti-Spoofing（FAS）の最も難しい問題の一つは、一般化能力です——モデルが訓練データだけでなく、新しいデバイス、新しい環境、新しい攻撃にも対応できるようにする方法。
+Face Anti-Spoofing（FAS）の最も難しい問題の一つは、一般化能力です: モデルが訓練データだけでなく、新しいデバイス、新しい環境、新しい攻撃にも対応できるようにする方法。
 
 11. [**[20.04] Single-Side Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2004.14043)
     単一の対抗学習戦略を提案し、真顔のみでドメイン間調整を行い、偽顔の特徴を異なるドメインで自然に分散させることで、誤った情報の過度な圧縮を避ける。これは DG 設計における非常に示唆に富んだ方向性です。
@@ -123,8 +123,8 @@ Face Anti-Spoofing（FAS）の最も難しい問題の一つは、一般化能�
 14. [**[24.02] Suppress and Rebalance: Towards Generalized Multi-Modal Face Anti-Spoofing**](https://arxiv.org/abs/2402.19298)
     多モーダル DG 問題を深く分析し、U-Adapter を使用して不安定なモーダルの干渉を抑制し、ReGrad で各モーダルの収束速度を動的に調整することで、モーダル不均衡と信頼性の問題に対する完全な解決策を提供。
 
-15. [**[24.04] VL-FAS: Domain Generalization via Vision-Language Model for Face Anti-Spoofing**](https://ieeexplore.ieee.org/document/10448156)
-    初めて Vision-Language メカニズムを導入し、意味的に顔の領域に注意を集中させることで、SLVT による意味的層の一般化を行い、ViT のクロスドメイン安定性を大幅に向上。
+15. [**[24.03] CFPL-FAS: Class Free Prompt Learning for Generalizable Face Anti-spoofing**](https://arxiv.org/abs/2403.14333)
+    　 プロンプトラーニングの手法に焦点を当てており、「手動でクラスを定義する必要がない」プロンプト設計を強調している。これは、言語プロンプトを活用して FAS モデルの汎化能力を高める新たなアプローチである。
 
 ---
 

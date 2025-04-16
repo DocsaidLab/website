@@ -123,8 +123,8 @@ One of the most challenging problems in Face Anti-Spoofing is generalization—h
 14. [**[24.02] Suppress and Rebalance: Towards Generalized Multi-Modal Face Anti-Spoofing**](https://arxiv.org/abs/2402.19298)
     A deep analysis of the multi-modal DG problem, using U-Adapter to suppress unstable modal interference, paired with ReGrad to dynamically adjust the convergence speed of each modality, providing a complete solution for modality imbalance and reliability issues.
 
-15. [**[24.04] VL-FAS: Domain Generalization via Vision-Language Model for Face Anti-Spoofing**](https://ieeexplore.ieee.org/document/10448156)
-    Introducing Vision-Language mechanisms for the first time, guiding attention to face regions via semantic guidance, combined with image-text contrastive learning (SLVT) for semantic layer generalization, significantly improving ViT's cross-domain stability.
+15. [**[24.03] CFPL-FAS: Class Free Prompt Learning for Generalizable Face Anti-spoofing**](https://arxiv.org/abs/2403.14333)
+    Focuses on a prompt learning approach that emphasizes class-free prompt design, eliminating the need for manually defined categories. This represents a new direction in leveraging language prompts to enhance the generalization ability of FAS models.
 
 ---
 
