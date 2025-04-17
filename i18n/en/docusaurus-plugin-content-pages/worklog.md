@@ -10,12 +10,19 @@ This page is solely for recording our work activities.
 
 ## 2025
 
+### April
+
+- Added [**Technical Services**](https://docsaid.org/en/services) page
+- Added CTA module embedded in blog and paper pages
+- Wrote new paper notes, total count now 185
+
 ### March
 
-- Completed the second-generation backend of the website
-  - [x] User login/registration system.
-  - [x] Email system.
-  - [x] API management system.
+- Completed the second-generation backend for the website
+  - [x] Member login/registration system
+  - [x] Email system
+  - [x] API management system
+- Wrote new paper notes, total count now 175
 
 ### February
 
