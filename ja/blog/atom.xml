@@ -2,263 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://docsaid.org/ja/blog</id>
     <title>DOCSAID Blog</title>
-    <updated>2025-04-14T00:00:00.000Z</updated>
+    <updated>2025-04-12T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://docsaid.org/ja/blog"/>
     <subtitle>DOCSAID Blog</subtitle>
     <icon>https://docsaid.org/ja/img/favicon.ico</icon>
-    <entry>
-        <title type="html"><![CDATA[Pedestrian Detection 技術地圖]]></title>
-        <id>https://docsaid.org/ja/blog/pedestrian-paper-roadmap</id>
-        <link href="https://docsaid.org/ja/blog/pedestrian-paper-roadmap"/>
-        <updated>2025-04-14T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[行人偵測的 40 篇論文導讀。]]></summary>
-        <content type="html"><![CDATA[<p>最近想做個相關的專案，先從文獻回顧做起吧。</p>
-<p>我去翻了一下過去的論文，過去十幾年間大概有近千篇論文，這次我們先挑個幾篇來讀一讀，看看行人偵測的技術脈絡與發展。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="第一章馬路上的神經網路">第一章：馬路上的神經網路<a href="https://docsaid.org/ja/blog/pedestrian-paper-roadmap#%E7%AC%AC%E4%B8%80%E7%AB%A0%E9%A6%AC%E8%B7%AF%E4%B8%8A%E7%9A%84%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF" class="hash-link" aria-label="第一章：馬路上的神經網路 への直接リンク" title="第一章：馬路上的神經網路 への直接リンク">​</a></h2>
-<blockquote>
-<p><strong>入門必讀：了解行人偵測在自動駕駛或其他應用領域的核心議題與技術脈絡</strong></p>
-</blockquote>
-<ol>
-<li>
-<p>[<strong>2021 - Design guidelines on deep learning–based pedestrian detection methods for supporting autonomous vehicles</strong>]
-從自動駕駛應用出發，系統性歸納深度學習式行人偵測的方法、考量與設計準則，包括資料增強策略與網路架構選擇建議。</p>
-</li>
-<li>
-<p>[<strong>2022 - Performance evaluation of cnn-based pedestrian detectors for autonomous vehicles</strong>]
-評估多種 CNN-based 行人偵測器在自動駕駛場景下的效能與時間複雜度，提供對模型選型與硬體部署的重要參考。</p>
-</li>
-<li>
-<p><a href="https://arxiv.org/pdf/2210.10489" target="_blank" rel="noopener noreferrer"><strong>2022 - A robust pedestrian detection approach for autonomous vehicles</strong></a>
-著眼於自動駕駛對準確率與可靠性的高要求，透過融合複數特徵層以及後處理策略，提出兼具精度與穩定度的偵測方法。</p>
-</li>
-<li>
-<p>[<strong>2021 - Deep neural network based vehicle and pedestrian detection for autonomous driving: A survey</strong>]
-行人偵測與車輛偵測常被同時討論，本文從整合視角出發，系統回顧 DNN 技術在自動駕駛下的偵測方案，涵蓋多種卷積網路與先進架構。</p>
-</li>
-<li>
-<p><a href="https://www.mdpi.com/2079-9292/11/21/3551" target="_blank" rel="noopener noreferrer"><strong>2022 - Deep learning-based pedestrian detection in autonomous vehicles: Substantial issues and challenges</strong></a>
-聚焦深度學習在自動駕駛行人偵測上碰到的顯著挑戰，如夜間/惡劣天候、資料偏差、運算成本等，並總結未來可能的研究方向。</p>
-</li>
-</ol>
-<hr>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="第二章標註世界的基石">第二章：標註世界的基石<a href="https://docsaid.org/ja/blog/pedestrian-paper-roadmap#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%A8%99%E8%A8%BB%E4%B8%96%E7%95%8C%E7%9A%84%E5%9F%BA%E7%9F%B3" class="hash-link" aria-label="第二章：標註世界的基石 への直接リンク" title="第二章：標註世界的基石 への直接リンク">​</a></h2>
-<blockquote>
-<p><strong>從經典 KITTI 到夜間、多光譜基準，這些 Dataset 與 Benchmark 塑造了行人偵測的研究生態</strong></p>
-</blockquote>
-<ol start="6">
-<li>
-<p><a href="https://projet.liris.cnrs.fr/imagine/pub/proceedings/CVPR2012/data/papers/424_O3C-04.pdf" target="_blank" rel="noopener noreferrer"><strong>2012 - Are we ready for autonomous driving? the kitti vision benchmark suite</strong></a>
-KITTI 是自動駕駛場景的經典資料集，提供多感測器（RGB、LiDAR）輸入與完整標註，被廣泛用於行人偵測與車輛辨識評測。</p>
-</li>
-<li>
-<p><a href="https://wiki.epfl.ch/edicpublic/documents/Candidacy%20exam/01Ped.pdf" target="_blank" rel="noopener noreferrer"><strong>2011 - Pedestrian detection: An evaluation of the state of the art</strong></a>
-早期經典綜述，針對當時各種傳統特徵（如 HOG、Haar、LBP）及機器學習技術進行評估與比較，至今仍是理解行人偵測歷程的必備讀物。</p>
-</li>
-<li>
-<p><a href="https://openaccess.thecvf.com/content_cvpr_2017/papers/Zhang_CityPersons_A_Diverse_CVPR_2017_paper.pdf" target="_blank" rel="noopener noreferrer"><strong>2017 - Citypersons: A diverse dataset for pedestrian detection</strong></a>
-衍生自 Cityscapes，特別標註與設計以評估行人偵測，包含擁擠場景與各種遮蔽情形，成為研究深度學習行人偵測的重要基準。</p>
-</li>
-<li>
-<p><a href="https://ora.ox.ac.uk/objects/uuid:48f374c8-eac3-4a98-8628-92039a76c17b/download_file?file_format=pdf&amp;safe_filename=neumann18b.pdf&amp;type_of_work=Conference+item" target="_blank" rel="noopener noreferrer"><strong>2019 - Nightowls: A pedestrians at night dataset</strong></a>
-針對夜間行人打造的大型資料集，解決夜間行人能見度低、成像品質差的痛點，推動各種昏暗場景下的偵測技術演進。</p>
-</li>
-<li>
-<p><a href="https://openaccess.thecvf.com/content_cvpr_2015/papers/Hwang_Multispectral_Pedestrian_Detection_2015_CVPR_paper.pdf" target="_blank" rel="noopener noreferrer"><strong>2015 - Multispectral pedestrian detection: Benchmark dataset and baseline</strong></a>
-首度提出可見光 + 紅外線的多光譜 Benchmark，為研究者提供跨波段的行人偵測資料，奠定多光譜偵測評估體系的基礎。</p>
-</li>
-</ol>
-<hr>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="第三章多光譜的視線">第三章：多光譜的視線<a href="https://docsaid.org/ja/blog/pedestrian-paper-roadmap#%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%A4%9A%E5%85%89%E8%AD%9C%E7%9A%84%E8%A6%96%E7%B7%9A" class="hash-link" aria-label="第三章：多光譜的視線 への直接リンク" title="第三章：多光譜的視線 への直接リンク">​</a></h2>
-<blockquote>
-<p><strong>可見光不足時，紅外線/熱成像融合成解方：行人偵測從單波段邁入多波段</strong></p>
-</blockquote>
-<ol start="11">
-<li>
-<p>[<strong>2018 - Multispectral pedestrian detection based on deep convolutional neural networks</strong>]
-在可見光與紅外線上同時訓練深度卷積網路，結合多通道特徵學習來提升對低光與背光場景的偵測性能。</p>
-</li>
-<li>
-<p><a href="https://thefoxofsky.github.io/files/dataset.pdf" target="_blank" rel="noopener noreferrer"><strong>2019 - Benchmarking a large-scale fir dataset for on-road pedestrian detection</strong></a>
-提出大規模 FIR（熱紅外）資料集，並對多種偵測器進行性能評估，系統性說明在高溫或夜間偵測的挑戰。</p>
-</li>
-<li>
-<p><a href="https://www.researchgate.net/profile/Chan-Hung-Tse-2/publication/372212101_Multispectral_Pedestrian_Detection_Via_Two-Stream_YOLO_With_Complementarity_Fusion_For_Autonomous_Driving/links/64ba0799c41fb852dd887152/Multispectral-Pedestrian-Detection-Via-Two-Stream-YOLO-With-Complementarity-Fusion-For-Autonomous-Driving.pdf" target="_blank" rel="noopener noreferrer"><strong>2023 - Multispectral pedestrian detection via two-stream yolo with complementarity fusion for autonomous driving</strong></a>
-採用雙路 YOLO 模型分別處理 RGB 與熱成像，再在中後期進行特徵融合，實驗顯示可大幅提升在極端光源差異時的檢測率。</p>
-</li>
-<li>
-<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9187824" target="_blank" rel="noopener noreferrer"><strong>2020 - Attention based multi-layer fusion of multispectral images for pedestrian detection</strong></a>
-將注意力機制（attention）引入多光譜融合，透過多層次特徵的引導式權重分配，有效強化行人邊緣與細節訊號。</p>
-</li>
-<li>
-<p><a href="https://arxiv.org/pdf/2111.00273" target="_blank" rel="noopener noreferrer"><strong>2021 - Cross-modality fusion transformer for multispectral object detection</strong></a>
-雖然標題泛指物件偵測，但文中針對行人（尤其夜間）特別做了深度實驗，利用 Transformer 在跨模態注意力機制的優勢，精準提取可見光與紅外互補資訊。</p>
-</li>
-</ol>
-<hr>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="第四章像素邊緣的旅人">第四章：像素邊緣的旅人<a href="https://docsaid.org/ja/blog/pedestrian-paper-roadmap#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%83%8F%E7%B4%A0%E9%82%8A%E7%B7%A3%E7%9A%84%E6%97%85%E4%BA%BA" class="hash-link" aria-label="第四章：像素邊緣的旅人 への直接リンク" title="第四章：像素邊緣的旅人 への直接リンク">​</a></h2>
-<blockquote>
-<p><strong>多數城市環境下常見的難題：大範圍或局部遮蔽、遠距離行人縮小等挑戰</strong></p>
-</blockquote>
-<ol start="16">
-<li>
-<p><a href="https://www.sciencedirect.com/science/article/pii/S2590005623000437" target="_blank" rel="noopener noreferrer"><strong>2023 - Occlusion and multi-scale pedestrian detection a review</strong></a>
-系統梳理近年行人遮蔽與多尺度偵測研究方法，對於想了解這兩大難題的脈絡與解法趨勢相當受用。</p>
-</li>
-<li>
-<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9718221" target="_blank" rel="noopener noreferrer"><strong>2022 - Occlusion handling and multi-scale pedestrian detection based on deep learning: a review</strong></a>
-重於深度學習方法之間的差異與挑戰，特別討論目標分割、關鍵點定位、姿勢估計等技術在遮蔽情況下的有效性。</p>
-</li>
-<li>
-<p><a href="https://d1wqtxts1xzle7.cloudfront.net/82239902/2003.08799v2-libre.pdf?1647444211=&amp;response-content-disposition=inline%3B+filename%3DPedestrian_Detection_The_Elephant_In_The.pdf&amp;Expires=1744617541&amp;Signature=aoYOmdL4KXL2ldxXLTSI~wthVshxFwcwG8pWOnLeQ5S2iNus0fJjYpp7zmoPvqhWJF3QRHKkNoNjvETt5DT2wukKxy3UUwV7av66qMXxmQ6qj~5rCidGCLrGHG5SDeftbchdMhYhCFkwXFFjtV6yE3y0VNGg524BKMZ-p061syN~jDk-mBL1WYXSpJ13twbqnk4PHnu4EideOFSHXiHPF2ys0D8cS4LHxo9OrMuIhRPf7RpYDiV0fvK5XZFbs9GllaSk6NezHnmy0KDJW-WjxvAg61ySBW0UEvw1IQ0MzwYyDPQEuGyhD~ymnYHMWsrzZiNWsmH~1oyb7TY8JlUaXQ__&amp;Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA" target="_blank" rel="noopener noreferrer"><strong>2020 - Pedestrian detection: The elephant in the room</strong></a>
-作者針對各資料集中「被忽略或難處理」的 occlusion case 做分析，直指當前演算法在嚴重遮擋下的痛點，呼籲社群重視此「房間裡的大象」。</p>
-</li>
-<li>
-<p><a href="https://openaccess.thecvf.com/content/ICCV2021/papers/Kim_Robust_Small-Scale_Pedestrian_Detection_With_Cued_Recall_via_Memory_Learning_ICCV_2021_paper.pdf" target="_blank" rel="noopener noreferrer"><strong>2021 - Robust small-scale pedestrian detection with cued recall via memory learning</strong></a>
-面對遠距離或影像中極度縮小的行人，提出「記憶學習」機制，讓模型能重新提取被忽略的細微特徵，顯著增強偵測率。</p>
-</li>
-<li>
-<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/20001" target="_blank" rel="noopener noreferrer"><strong>2022 - Towards versatile pedestrian detector with multisensory-matching and multispectral recalling memory</strong></a>
-進一步結合多模態匹配與記憶網路，針對小目標與遮蔽同時應對，展現如何在單一模型下擴增偵測器的適用範圍。</p>
-</li>
-</ol>
-<hr>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="第五章域之裂縫">第五章：域之裂縫<a href="https://docsaid.org/ja/blog/pedestrian-paper-roadmap#%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%9F%9F%E4%B9%8B%E8%A3%82%E7%B8%AB" class="hash-link" aria-label="第五章：域之裂縫 への直接リンク" title="第五章：域之裂縫 への直接リンク">​</a></h2>
-<blockquote>
-<p><strong>同一個偵測模型如何在日夜、紅外、低品質、不同城市場景都能穩健運作？</strong></p>
-</blockquote>
-<ol start="21">
-<li>
-<p><a href="https://www.amazon.science/publications/domain-adaptive-pedestrian-detection-in-thermal-images" target="_blank" rel="noopener noreferrer"><strong>2019 - Domain-adaptive pedestrian detection in thermal images</strong></a>
-以對抗學習將可見光資料的偵測特徵遷移到熱成像領域，無需大規模標註 IR 資料即可達到不錯的檢測效能。</p>
-</li>
-<li>
-<p><a href="https://www.researchgate.net/profile/Kieu-My/publication/343167450_Task-conditioned_Domain_Adaptation_for_Pedestrian_Detection_in_Thermal_Imagery/links/5f19f8a2a6fdcc9626ad1e77/Task-conditioned-Domain-Adaptation-for-Pedestrian-Detection-in-Thermal-Imagery.pdf" target="_blank" rel="noopener noreferrer"><strong>2020 - Task-conditioned domain adaptation for pedestrian detection in thermal imagery</strong></a>
-更進一步考慮任務需求，透過條件約束增強可見光到 IR 的跨域對齊效果，縮小日夜場景的性能落差。</p>
-</li>
-<li>
-<p><a href="https://www.researchgate.net/profile/Kieu-My/publication/335603374_Domain_Adaptation_for_Privacy-Preserving_Pedestrian_Detection_in_Thermal_Imagery/links/5d95aeeb458515c1d38efa58/Domain-Adaptation-for-Privacy-Preserving-Pedestrian-Detection-in-Thermal-Imagery.pdf" target="_blank" rel="noopener noreferrer"><strong>2019 - Domain adaptation for privacy-preserving pedestrian detection in thermal imagery</strong></a>
-以隱私保護為出發點，強調使用熱成像替代可見光，同時利用跨域學習避免標註成本，是領域自適應在實際應用的一大案例。</p>
-</li>
-<li>
-<p><a href="https://openaccess.thecvf.com/content_CVPRW_2019/papers/MULA/Guan_Unsupervised_Domain_Adaptation_for_Multispectral_Pedestrian_Detection_CVPRW_2019_paper.pdf" target="_blank" rel="noopener noreferrer"><strong>2019 - Unsupervised domain adaptation for multispectral pedestrian detection</strong></a>
-結合多光譜與無監督學習，自動對齊源域（可見光）與目標域（紅外）特徵分布，以最小的人工成本達成跨波段人形偵測。</p>
-</li>
-<li>
-<p>[<strong>2023 - Cross modality knowledge distillation for robust pedestrian detection in low light and adverse weather conditions</strong>]
-以知識蒸餾（knowledge distillation）架構，讓紅外線路徑的模型教導可見光路徑，在夜間或強烈天候環境下依舊保持高偵測率。</p>
-</li>
-</ol>
-<hr>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="第六章霧中之影">第六章：霧中之影<a href="https://docsaid.org/ja/blog/pedestrian-paper-roadmap#%E7%AC%AC%E5%85%AD%E7%AB%A0%E9%9C%A7%E4%B8%AD%E4%B9%8B%E5%BD%B1" class="hash-link" aria-label="第六章：霧中之影 への直接リンク" title="第六章：霧中之影 への直接リンク">​</a></h2>
-<blockquote>
-<p><strong>霧霾、暴雨、昏暗街頭都是常見卻棘手的實際場景</strong></p>
-</blockquote>
-<ol start="26">
-<li>
-<p><a href="https://d1wqtxts1xzle7.cloudfront.net/64964371/Deep_Learning_Approaches_on_Pedestrian_Detection_in_Hazy_Weather-libre.pdf?1605650125=&amp;response-content-disposition=inline%3B+filename%3DDeep_Learning_Approaches_on_Pedestrian_D.pdf&amp;Expires=1744617719&amp;Signature=Ew95oMy5WCXwuYQzPUw5pO1i5AbeervP5OaLKm1fQ4QZH4I9kxpwAGeUf5c3DwpzMwA5XQCHthwM9RZz9GaI~LTnRV5TUjevH4PNrRFuodW5aOOgmYhgcnln3XHY4~wF2eeZxTC7kigOz75hPeDFKwFoEnYYdcfXUV9S0BOAHNDaBbmzaXtWktDo-NQCYAFRJH~-oZILL5azgNRg7JGYFQXH111Z1rxVQcz92pn5S00h3cGfH9VD9VPD0K7biMkYfF45j7Kfz0~HcqsWPhL-mWouY-j2bLzK1-2D5u~tHwuSUXuls1ZGtppQDM1WMCVBfRWMHNdHOINX0vvyoHTUMw__&amp;Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA" target="_blank" rel="noopener noreferrer"><strong>2019 - Deep learning approaches on pedestrian detection in hazy weather</strong></a>
-提出針對霧霾環境的失真補償與深度學習架構，協助模型克服圖像清晰度下降的問題，有效提升在陰霾天氣的檢測表現。</p>
-</li>
-<li>
-<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9044295" target="_blank" rel="noopener noreferrer"><strong>2020 - Pedestrian detection in severe weather conditions</strong></a>
-系統分析雨、雪、霧、低光源對偵測結果的影響，並提出多任務學習框架，利用輔助任務（如天氣分類、對比度校正）增強行人辨識。</p>
-</li>
-<li>
-<p>[<strong>2018 - Pedestrian detection at night time in fir domain: Comprehensive study about temperature and brightness and new benchmark</strong>]
-聚焦夜晚熱成像（FIR）特性，提出溫度與亮度對比分析並釋出新基準，徹底釐清夜間環境下行人溫度梯度的偵測意涵。</p>
-</li>
-<li>
-<p>[<strong>2022 - Pedestrian detection at daytime and nighttime conditions based on yolo-v5</strong>]
-雖基於 YOLO 架構，但全程針對行人偵測進行優化，並特別討論白天與夜晚在可見光下的資料差異，給出多種引導調參策略。</p>
-</li>
-<li>
-<p><a href="https://www.mdpi.com/2079-9292/12/10/2312" target="_blank" rel="noopener noreferrer"><strong>2023 - All-weather pedestrian detection based on double-stream multispectral network</strong></a>
-進一步深化至「全天候」場景，將可見光與紅外線整合為雙流式網路，在雨、霧、夜間等不利條件下顯示出高穩定度。</p>
-</li>
-</ol>
-<hr>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="第七章深度與雷射交響曲">第七章：深度與雷射交響曲<a href="https://docsaid.org/ja/blog/pedestrian-paper-roadmap#%E7%AC%AC%E4%B8%83%E7%AB%A0%E6%B7%B1%E5%BA%A6%E8%88%87%E9%9B%B7%E5%B0%84%E4%BA%A4%E9%9F%BF%E6%9B%B2" class="hash-link" aria-label="第七章：深度與雷射交響曲 への直接リンク" title="第七章：深度與雷射交響曲 への直接リンク">​</a></h2>
-<blockquote>
-<p><strong>在自動駕駛與機器人領域，除了相機外，LiDAR、深度攝影機同樣扮演關鍵角色</strong></p>
-</blockquote>
-<ol start="31">
-<li>
-<p>[<strong>2022 - Active pedestrian detection for excavator robots based on multi-sensor fusion</strong>]
-針對工程機械的安全需求，整合 RGB 與感測器訊號，將「主動偵測」策略引入挖掘機系統，提升機器人週邊環境感知。</p>
-</li>
-<li>
-<p>[<strong>2022 - Pedestrian detection and tracking based on 2d lidar and rgb-d camera</strong>]
-單純依靠 2D LiDAR 難以判斷行人輪廓，故引入 RGB-D 融合對應，以動態聚類方式辨識並追蹤行人，是室內外應用的參考示例。</p>
-</li>
-<li>
-<p>[<strong>2019 - An efficient 3d pedestrian detector with calibrated rgb camera and 3d lidar</strong>]
-利用同步標定後的 RGB + 3D LiDAR 資料，提出可在空間中回歸立體包圍盒的偵測器，顯示多感測器能顯著降低誤檢與漏檢。</p>
-</li>
-<li>
-<p><a href="https://www.mdpi.com/2076-3417/12/4/1799" target="_blank" rel="noopener noreferrer"><strong>2022 - Lidar-based dense pedestrian detection and tracking</strong></a>
-專注於「密集行人」環境，透過高密度 LiDAR 點雲與前景估計模型結合，解決人群中互相遮擋與重疊的定位困境。</p>
-</li>
-<li>
-<p><a href="https://rasd3.github.io/assets/publications/2018_iv_robust_fusion/paper.pdf" target="_blank" rel="noopener noreferrer"><strong>2018 - Robust camera lidar sensor fusion via deep gated information fusion network</strong></a>
-將「深度閘門機制」應用於攝影機與雷射點雲的融合流程，依據場景動態自適應調整權重，顯示在夜間、高速移動等極端情況下的抗干擾能力。</p>
-</li>
-</ol>
-<hr>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="第八章像素叢林的行者">第八章：像素叢林的行者<a href="https://docsaid.org/ja/blog/pedestrian-paper-roadmap#%E7%AC%AC%E5%85%AB%E7%AB%A0%E5%83%8F%E7%B4%A0%E5%8F%A2%E6%9E%97%E7%9A%84%E8%A1%8C%E8%80%85" class="hash-link" aria-label="第八章：像素叢林的行者 への直接リンク" title="第八章：像素叢林的行者 への直接リンク">​</a></h2>
-<blockquote>
-<p><strong>從交通要道到公共場所，行人偵測在監控場景中仍是主力需求</strong></p>
-</blockquote>
-<ol start="36">
-<li>
-<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8610075" target="_blank" rel="noopener noreferrer"><strong>2019 - Fast pedestrian detection in surveillance video based on soft target training of shallow random forest</strong></a>
-強調監控影片的多幀冗餘性，提出「軟標籤訓練」與淺層隨機森林，加速監控端的行人偵測並保持足夠精度。</p>
-</li>
-<li>
-<p>[<strong>2019 - Pedestrian detection and behaviour characterization for video surveillance systems</strong>]
-不只做偵測，還結合行為分析，透過局部動作特徵理解人群在監控影片中的互動模式，是監控應用的進一步延伸。</p>
-</li>
-<li>
-<p><a href="https://books.google.com.tw/books?hl=zh-TW&amp;lr=&amp;id=MJn8DwAAQBAJ&amp;oi=fnd&amp;pg=PA163&amp;dq=Pedestrian+detection+and+tracking+in+video+surveillance+system:+issues,+comprehensive+review,+and+challenges&amp;ots=51-oqHj4Pa&amp;sig=gDtUli58fCA2bLvUQx9p4fB-oQY&amp;redir_esc=y#v=onepage&amp;q=Pedestrian%20detection%20and%20tracking%20in%20video%20surveillance%20system%3A%20issues%2C%20comprehensive%20review%2C%20and%20challenges&amp;f=false" target="_blank" rel="noopener noreferrer"><strong>2020 - Pedestrian detection and tracking in video surveillance system: issues, comprehensive review, and challenges</strong></a>
-從大量監控場景難點（擁擠、部份遮蔽、光源變化）著手，對行人偵測與追蹤方法作全面討論並列舉未來挑戰。</p>
-</li>
-<li>
-<p><a href="https://cmst.eu/wp-content/uploads/files/10.12921_cmst.2015.21.03.005_Piniarski.pdf" target="_blank" rel="noopener noreferrer"><strong>2015 - Video processing algorithms for detection of pedestrians</strong></a>
-較早期的監控場景方法，多以背景分割、光流與傳統機器學習特徵為主，回顧這篇能了解深度模型普及前的基礎思路。</p>
-</li>
-<li>
-<p><a href="https://www.researchgate.net/profile/Ahmad-Jalal-9/publication/384675317_A_Smart_Surveillance_System_for_Pedestrian_Tracking_and_Counting_using_Template_Matching/links/67026403f599e0392fbc3885/A-Smart-Surveillance-System-for-Pedestrian-Tracking-and-Counting-using-Template-Matching.pdf" target="_blank" rel="noopener noreferrer"><strong>2021 - A smart surveillance system for pedestrian tracking and counting using template matching</strong></a>
-在姿勢或深度模型資源不足的情況下，嘗試以樣板匹配與輕量級特徵實現基本行人偵測與計數功能，展現監控端對即時性和硬體限制的考量。</p>
-</li>
-</ol>
-<hr>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a href="https://docsaid.org/ja/blog/pedestrian-paper-roadmap#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="結語 への直接リンク" title="結語 への直接リンク">​</a></h2>
-<p>行人偵測是電腦視覺領域持續發展的重要課題，從最初的傳統影像特徵到今日的深度學習框架，再延伸到紅外、多光譜、LiDAR 等多種感測器，都為了在真實世界中辨識並追蹤人類行為。</p>
-<p>在這張地圖裡，我們看到了：</p>
-<ul>
-<li><strong>多樣感知技術的融合</strong>：從可見光到熱成像與點雲，充分利用不同感測器的互補性。</li>
-<li><strong>跨域與泛化的強化</strong>：面對日夜差異、惡劣天候、不同場景，要做的並不只是增減資料，而是如何自動遷移與對齊特徵。</li>
-<li><strong>遮蔽與群體挑戰</strong>：人群中重疊、人形被部份掩蓋，小目標在畫面中只剩下幾個像素等問題，永遠是行人偵測的難題。</li>
-<li><strong>多場景應用的擴張</strong>：從自動駕駛、都市監控到機器人安全，行人偵測同時考驗即時性、穩定性與隱私安全。</li>
-</ul>
-<p>如果你正打算進入這個領域，以上 40 篇論文提供了從入門到進階的關鍵方向。</p>
-<p>行人偵測的未來，將不只侷限於單一波段或特定場景，也不斷帶動安全、交通、零售、機器人等多元領域的研究與發展。</p>
-<p>期望這份導讀能協助你快速找到合適的參考與切入點，一起為更可靠、更智慧的行人偵測技術持續努力。</p><section class="ctaSection_iCjC"><div class="
-        simpleCta_ji_Y
-        simple-cta__coffee_YwC8
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ 1杯のコーヒーが支えになります</h3><p class="simple-cta__subtitle_ol86">AIやフルスタックの情報発信を続けるため、ご支援お願いします。</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/ja/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-7ny38l" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-7ny38l"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-7ny38l" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/ja/img/icons/all_in.svg" alt="AI・開発・運用まで一括対応 icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-7ny38l">ALL</span><h4 class="card__title_SQBY">AI・開発・運用まで一括対応</h4><p class="card__concept_Ak8F">アイデアからリリースまで、技術面はまるごとお任せください。</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">対応内容</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">技術相談 + 開発 + デプロイ</li><li class="card__bulletItem_wCRd">継続サポート &amp; 拡張</li></ul></div></div></div></div><div class="
-        simpleCta_ji_Y
-        simple-cta__outro_AXbn
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 次のプロジェクト、始めましょう！</h3><p class="simple-cta__subtitle_ol86">カスタム開発や長期支援をご希望の方は、ぜひご相談ください。</p></div></section><div style="margin-top:3rem"> </div>]]></content>
-        <author>
-            <name>Z. Yuan</name>
-            <uri>https://github.com/zephyr-sh</uri>
-        </author>
-        <category label="pedestrian-detection" term="pedestrian-detection"/>
-    </entry>
     <entry>
         <title type="html"><![CDATA[ターミナルは黒と白だけではない]]></title>
         <id>https://docsaid.org/ja/blog/colorful-cli-with-ansi-escape-codes</id>
@@ -3236,5 +2984,41 @@ M1001 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlis
         </author>
         <category label="Docusaurus" term="Docusaurus"/>
         <category label="Update" term="Update"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ウェブページのファイルをダウンロードするPython実装]]></title>
+        <id>https://docsaid.org/ja/blog/file-crawler-python-implementation</id>
+        <link href="https://docsaid.org/ja/blog/file-crawler-python-implementation"/>
+        <updated>2024-09-23T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[シンプルなウェブファイルダウンロードプログラム。]]></summary>
+        <content type="html"><![CDATA[<p>あるウェブページを見つけたところ、そこには数百個の PDF ファイルリンクが含まれていました。</p>
+<p>エンジニアとして、一つずつ手動でクリックしてダウンロードするのは、ちょっと違いますよね？</p>
+<p>そこで、小さなプログラムを書いて、すべてのファイルをダウンロードしてみましょう。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="パッケージのインストール">パッケージのインストール<a href="https://docsaid.org/ja/blog/file-crawler-python-implementation#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB" class="hash-link" aria-label="パッケージのインストール への直接リンク" title="パッケージのインストール への直接リンク">​</a></h2>
+<p>まず、必要なパッケージをインストールする必要があります。まだインストールしていない場合は、以下のコマンドを実行してください：</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pip install requests beautifulsoup4 urllib3</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="プログラムコード">プログラムコード<a href="https://docsaid.org/ja/blog/file-crawler-python-implementation#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%82%B3%E3%83%BC%E3%83%89" class="hash-link" aria-label="プログラムコード への直接リンク" title="プログラムコード への直接リンク">​</a></h2>
+<p>さて、プログラムが完成したので、早速コードを共有します！</p>
+<p>重要な箇所は枠で囲まれている部分で、あなたのニーズに応じて調整する必要があります。</p>
+<div class="language-python codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_Ktv7">file_crawler.py</div><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> os</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">from</span><span class="token plain"> urllib</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">parse </span><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> urljoin</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> requests</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">from</span><span class="token plain"> bs4 </span><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> BeautifulSoup</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># ブラウザのヘッダーを模倣</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">headers </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token string" style="color:#e3116c">"User-Agent"</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># ウェブページのURL</span><span class="token plain"></span><br></span><span class="token-line theme-code-block-highlighted-line" style="color:#393A34"><span class="token plain">url </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"put_your_url_here"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 対象ファイル形式</span><span class="token plain"></span><br></span><span class="token-line theme-code-block-highlighted-line" style="color:#393A34"><span class="token plain">target_format </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">".pdf"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># HTTP GETリクエストを送信し、ヘッダーを追加</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">response </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> requests</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">get</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">url</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> headers</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">headers</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># リクエストが成功したか確認</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">if</span><span class="token plain"> response</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">status_code </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">200</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic"># BeautifulSoupでHTMLを解析</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    soup </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> BeautifulSoup</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">response</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">text</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"html.parser"</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic"># すべての&lt;a&gt;タグを検索し、href属性が対象形式に一致するリンクを抽出</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    target_links </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">for</span><span class="token plain"> link </span><span class="token keyword" style="color:#00009f">in</span><span class="token plain"> soup</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">find_all</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">"a"</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        href </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> link</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">get</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">"href"</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token keyword" style="color:#00009f">if</span><span class="token plain"> href </span><span class="token keyword" style="color:#00009f">and</span><span class="token plain"> href</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">endswith</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">target_format</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token comment" style="color:#999988;font-style:italic"># ここでダウンロードするファイル形式を指定</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            target_links</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">append</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">urljoin</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">url</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> href</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic"># ファイルを保存するフォルダを作成</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    os</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">makedirs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">"downloads"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> exist_ok</span><span class="token operator" style="color:#393A34">=</span><span class="token boolean" style="color:#36acaa">True</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic"># 各ファイルをダウンロード</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">for</span><span class="token plain"> url </span><span class="token keyword" style="color:#00009f">in</span><span class="token plain"> target_links</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        file_name </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> url</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">split</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">"/"</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">[</span><span class="token operator" style="color:#393A34">-</span><span class="token number" style="color:#36acaa">1</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain">  </span><span class="token comment" style="color:#999988;font-style:italic"># URLからファイル名を抽出</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        file_path </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> os</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">path</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">join</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">"downloads"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> file_name</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token comment" style="color:#999988;font-style:italic"># リクエストを送信してダウンロード</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        response </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> requests</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">get</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">url</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> headers</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">headers</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain">  </span><span class="token comment" style="color:#999988;font-style:italic"># ヘッダーを同様に追加</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token keyword" style="color:#00009f">if</span><span class="token plain"> response</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">status_code </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">200</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token keyword" style="color:#00009f">with</span><span class="token plain"> </span><span class="token builtin">open</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">file_path</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"wb"</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">as</span><span class="token plain"> f</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                f</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">write</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">response</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">content</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token keyword" style="color:#00009f">print</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string-interpolation string" style="color:#e3116c">f"ダウンロード完了: </span><span class="token string-interpolation interpolation punctuation" style="color:#393A34">{</span><span class="token string-interpolation interpolation">file_name</span><span class="token string-interpolation interpolation punctuation" style="color:#393A34">}</span><span class="token string-interpolation string" style="color:#e3116c">"</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token keyword" style="color:#00009f">else</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token keyword" style="color:#00009f">print</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string-interpolation string" style="color:#e3116c">f"ダウンロード失敗: </span><span class="token string-interpolation interpolation punctuation" style="color:#393A34">{</span><span class="token string-interpolation interpolation">url</span><span class="token string-interpolation interpolation punctuation" style="color:#393A34">}</span><span class="token string-interpolation string" style="color:#e3116c">"</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">else</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">print</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string-interpolation string" style="color:#e3116c">f"ウェブページにアクセスできません。ステータスコード: </span><span class="token string-interpolation interpolation punctuation" style="color:#393A34">{</span><span class="token string-interpolation interpolation">response</span><span class="token string-interpolation interpolation punctuation" style="color:#393A34">.</span><span class="token string-interpolation interpolation">status_code</span><span class="token string-interpolation interpolation punctuation" style="color:#393A34">}</span><span class="token string-interpolation string" style="color:#e3116c">"</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="プログラムの実行">プログラムの実行<a href="https://docsaid.org/ja/blog/file-crawler-python-implementation#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E5%AE%9F%E8%A1%8C" class="hash-link" aria-label="プログラムの実行 への直接リンク" title="プログラムの実行 への直接リンク">​</a></h2>
+<p>コードが完成したら、プログラムを実行して、対象形式のすべてのファイルをダウンロードできます。</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">python file_crawler.py</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="クリップボードにコードをコピー" title="コピー" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div><section class="ctaSection_iCjC"><div class="
+        simpleCta_ji_Y
+        simple-cta__coffee_YwC8
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ 1杯のコーヒーが支えになります</h3><p class="simple-cta__subtitle_ol86">AIやフルスタックの情報発信を続けるため、ご支援お願いします。</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/ja/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-7ny38l" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-7ny38l"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-7ny38l" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/ja/img/icons/all_in.svg" alt="AI・開発・運用まで一括対応 icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-7ny38l">ALL</span><h4 class="card__title_SQBY">AI・開発・運用まで一括対応</h4><p class="card__concept_Ak8F">アイデアからリリースまで、技術面はまるごとお任せください。</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">対応内容</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">技術相談 + 開発 + デプロイ</li><li class="card__bulletItem_wCRd">継続サポート &amp; 拡張</li></ul></div></div></div></div><div class="
+        simpleCta_ji_Y
+        simple-cta__outro_AXbn
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 次のプロジェクト、始めましょう！</h3><p class="simple-cta__subtitle_ol86">カスタム開発や長期支援をご希望の方は、ぜひご相談ください。</p></div></section><div style="margin-top:3rem"> </div>]]></content>
+        <author>
+            <name>Z. Yuan</name>
+            <uri>https://github.com/zephyr-sh</uri>
+        </author>
+        <category label="Python" term="Python"/>
+        <category label="File Crawler" term="File Crawler"/>
     </entry>
 </feed>
