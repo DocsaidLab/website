@@ -49,6 +49,7 @@ export default function DocItemFooter() {
       {title && (
         <MultiCardsCTA
           showServiceCards={true}
+          maxColumns={2}
         />
       )}
 

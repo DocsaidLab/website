@@ -1,21 +1,16 @@
 /* src/components/MultiCardsCTA/index.module.css */
-/* 以下只示範保留原本的動畫、色彩、佈局等，可以視情況調整或移除重複樣式 */
-
-/* 1) 變數 */
 :root {
   --brand-color: #fa8c16;
   --transition-speed: 0.3s;
   --hover-scale: 1.03;
 
-  /* 字體改小一些 */
   --font-size-base: 0.875rem; /* 14px */
   --font-size-h3: 1.25rem;    /* 20px */
   --font-size-h4: 1.125rem;   /* 18px */
-
   --line-height-base: 1.6;
 }
 
-/* 2) 進場動畫 */
+/* 進場動畫 */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -30,7 +25,7 @@
   animation: fadeInUp var(--transition-speed) ease;
 }
 
-/* 3) hover 浮起 */
+/* hover 浮起 */
 .hoverTransform {
   transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
@@ -39,30 +34,27 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* 4) 主容器區域：內距變小 */
+/* 主容器區域：內距變小 & 強制覆蓋 h3 樣式 */
 .ctaSection {
   width: 100%;
-  padding: 2rem 1rem; /* 由原本 3rem 改小 */
+  padding: 3rem 1rem;
   box-sizing: border-box;
-  background-color: #fafafa;
-
-  /* 改用更兼容的自動換行屬性 */
   overflow-wrap: break-word;
 }
 .ctaSection h3 {
-  font-size: var(--font-size-h3);
-  margin: 0 0 1rem;
-  line-height: var(--line-height-base);
-  color: #222;
+  /* 覆蓋全域 h3 */
+  font-size: var(--font-size-h3) !important;
+  margin: 0 0 1rem !important;
+  line-height: var(--line-height-base) !important;
+  color: #222 !important;
+  text-decoration: none !important;
 }
 
-/* =======================
-   SimpleCTA (coffee/outro)
-   ======================= */
+/* SimpleCTA */
 .simpleCta {
   max-width: 960px;
   margin: 0 auto 2rem;
-  padding: 1.5rem 1rem; /* 由原本 2rem 1.5rem 改小 */
+  padding: 1.5rem 1rem;
   text-align: center;
   border-radius: 6px;
   background-color: #fff;
@@ -96,16 +88,13 @@
 .simple-cta__buttonWrapper {
   margin-bottom: 0.5rem;
 }
-/* 圖片改用 max-width: 100% 以避免小螢幕溢出 */
+/* 圖片改為 50% */
 .simple-cta__buttonImg {
-  max-width: 50%;
+  max-width: 10%;
   height: auto;
 }
 
-/* =====================
-   Cards 區域 (ServiceCards)
-   ===================== */
-/* 增加左右內距，避免 Row gutter 溢出 */
+/* Cards 區域 */
 .cardsSection {
   max-width: 1080px;
   margin: 0 auto 3rem;
@@ -120,11 +109,19 @@
   font-style: italic;
 }
 
-/* =====================
-   Card (ServiceCard)
-   ===================== */
+/* Card */
 .card {
   border-radius: 6px;
+  /* 整張卡 clickable 時，文字不帶底線 */
+  cursor: pointer;
+}
+.card a {
+  text-decoration: none;
+  color: inherit;
+}
+.card a:hover {
+  text-decoration: none;
+  color: inherit;
 }
 .card__tag {
   margin-bottom: 1rem;
@@ -133,8 +130,6 @@
   font-size: var(--font-size-h4);
   margin: 0 0 0.75rem;
   color: #222;
-
-  /* 改用 overflow-wrap  */
   overflow-wrap: break-word;
 }
 .card__concept {
@@ -143,8 +138,6 @@
   color: #555;
   margin: 0 0 1rem;
   font-style: italic;
-
-  /* 同樣改用 overflow-wrap */
   overflow-wrap: break-word;
 }
 .card__bulletHeader {

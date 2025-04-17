@@ -1,29 +1,36 @@
 // src/components/MultiCardsCTA/SimpleCTA.js
-import { Button } from 'antd';
 import React from 'react';
 import styles from './index.module.css';
 
+/**
+ * 已移除按鈕及連結標籤，改為整塊卡片 clickable
+ */
 export default function SimpleCTA({
   iconSrc,
   iconAlt,
   title,
   subtitle,
   buttonLink,
-  buttonText,
   buttonImg,
   variant = 'default',
 }) {
-  const hasButton = (buttonText && buttonLink) || (buttonImg && buttonLink);
-
   return (
     <div
-      /* 同樣修正：CSS Module 與字串混用 */
       className={`
         ${styles.simpleCta}
         ${styles[`simple-cta__${variant}`]}
         ${styles.fadeInUp}
         ${styles.hoverTransform}
       `}
+      /* 如果有 link，就可以點擊 */
+      onClick={() => {
+        if (buttonLink) {
+          window.open(buttonLink, '_blank');
+        }
+      }}
+      style={{
+        cursor: buttonLink ? 'pointer' : 'default',
+      }}
     >
       {iconSrc && (
         <img
@@ -36,30 +43,14 @@ export default function SimpleCTA({
       <h3 className={styles['simple-cta__title']}>{title}</h3>
       <p className={styles['simple-cta__subtitle']}>{subtitle}</p>
 
-      {hasButton && (
+      {/* 如果有圖片, 仍顯示; 移除按鈕, 讓整塊卡片可點擊 */}
+      {buttonImg && (
         <div className={styles['simple-cta__buttonWrapper']}>
-          {buttonImg ? (
-            <a
-              href={buttonLink}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                src={buttonImg}
-                alt={iconAlt || 'cta-button'}
-                className={styles['simple-cta__buttonImg']}
-              />
-            </a>
-          ) : (
-            <Button
-              type="primary"
-              href={buttonLink}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {buttonText}
-            </Button>
-          )}
+          <img
+            src={buttonImg}
+            alt={iconAlt || 'cta-button'}
+            className={styles['simple-cta__buttonImg']}
+          />
         </div>
       )}
     </div>

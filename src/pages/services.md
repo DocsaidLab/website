@@ -32,7 +32,7 @@
 :::
 
 :::info
-所有服務目前採用 [**Buy Me a Coffee**](https://buymeacoffee.com/docsaid) 作為支付管道，以美元為計價單位。
+所有服務目前採用 [**Buy Me a Coffee**](https://buymeacoffee.com/zyuan) 作為支付管道，以美元為計價單位。
 
 > **1 杯咖啡 = USD 5 ≒ NTD 150**。
 

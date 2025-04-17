@@ -1,5 +1,5 @@
 // src/components/MultiCardsCTA/ServiceCard.js
-import { Button, Card, Tag } from 'antd';
+import { Card, Tag } from 'antd';
 import React from 'react';
 import styles from './index.module.css';
 
@@ -11,28 +11,35 @@ export default function ServiceCard({ cardData }) {
     concept,
     bulletTitle,
     bulletPoints,
-    buttonText,
     buttonLink,
   } = cardData;
 
   return (
     <Card
-      /* 修正：CSS Module 的 class 要透過 styles.xxx */
       className={`${styles.card} ${styles.fadeInUp} ${styles.hoverTransform}`}
-      hoverable
-      // 有 icon 則可以放在 Card cover
-      cover={
-        icon ? (
-          <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-            <img
-              src={icon}
-              alt={`${title} icon`}
-              style={{ width: 48, height: 48 }}
-            />
-          </div>
-        ) : null
-      }
+      /* 讓 Card 撐滿父層 Col 的高度 */
+      style={{
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+      /* 移除原本按鈕，改成整張卡片點擊 */
+      onClick={() => {
+        if (buttonLink) {
+          window.open(buttonLink, '_blank');
+        }
+      }}
     >
+      {icon && (
+        <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+          <img
+            src={icon}
+            alt={`${title} icon`}
+            style={{ width: 48, height: 48 }}
+          />
+        </div>
+      )}
+
       {tag && (
         <Tag color="orange" className={styles['card__tag']}>
           {tag}
@@ -53,20 +60,7 @@ export default function ServiceCard({ cardData }) {
         ))}
       </ul>
 
-      {/* Footer 區塊 */}
-      {buttonText && buttonLink && (
-        <div className={styles['card__footer']}>
-          <Button
-            type="primary"
-            href={buttonLink}
-            target="_blank"
-            rel="noreferrer"
-            block
-          >
-            {buttonText}
-          </Button>
-        </div>
-      )}
+      {/* 移除按鈕，footer 區塊也一起拿掉 */}
     </Card>
   );
 }

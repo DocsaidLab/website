@@ -3,13 +3,14 @@ import { Grid } from 'antd';
 const { useBreakpoint } = Grid;
 
 /**
- * 根據 antd 提供的斷點資訊，回傳 'threeCards' | 'twoCards' | 'oneCard'
+ * 傳入參數來決定是否開啟 3 欄顯示
  */
-export default function useLayoutType() {
+export default function useLayoutType(options = {}) {
+  const { maxColumns = 3 } = options;
   const screens = useBreakpoint();
 
-  // 修正：若要在 576px 就顯示兩欄，改用 screens.sm
-  if (screens.lg) return 'threeCards';
-  if (screens.sm) return 'twoCards';
+  // 如果 maxColumns < 3，就自動不會回傳 threeCards
+  if (screens.lg && maxColumns >= 3) return 'threeCards';
+  if (screens.sm && maxColumns >= 2) return 'twoCards';
   return 'oneCard';
 }

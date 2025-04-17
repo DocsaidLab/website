@@ -1,4 +1,5 @@
 // src/components/MultiCardsCTA/index.js
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { Col, Row } from 'antd';
 import React from 'react';
 import useLayoutType from '../../hooks/useLayoutType';
@@ -7,17 +8,33 @@ import styles from './index.module.css';
 import ServiceCard from './ServiceCard';
 import SimpleCTA from './SimpleCTA';
 
-export default function MultiCardsCTA(props) {
-  const { locale = 'zh-hant', showServiceCards = true } = props;
-  const data = i18nContentData[locale] || i18nContentData['zh-hant'];
 
-  const layoutType = useLayoutType();
+export default function MultiCardsCTA(props) {
+
+  const {
+    showServiceCards = true,
+    maxColumns = 3,  // 預設允許三欄，可在 docs 裡呼叫時設為 2
+  } = props;
+
+  const {
+    i18n: { currentLocale },
+  } = useDocusaurusContext();
+
+  const data = i18nContentData[currentLocale] || i18nContentData['zh-hant'];
+
+  // 依照 maxColumns 得到實際的 layoutType ('oneCard', 'twoCards', 'threeCards')
+  const layoutType = useLayoutType({ maxColumns });
   const cardsData = data?.[layoutType] || [];
 
   return (
     <section className={styles.ctaSection}>
       <CoffeeIntro coffeeData={data.coffeeCTA} />
-      {showServiceCards && <ServiceCards cardsData={cardsData} />}
+      {showServiceCards && (
+        <ServiceCards
+          cardsData={cardsData}
+          layoutType={layoutType}
+        />
+      )}
       <Outro outroData={data.outroCTA} />
     </section>
   );
@@ -28,33 +45,47 @@ function CoffeeIntro({ coffeeData }) {
   return (
     <SimpleCTA
       variant="coffee"
-      iconSrc={coffeeData.icon} // <--- 新增 iconSrc 傳遞，若有 coffeeData.icon
+      iconSrc={coffeeData.icon}
       title={coffeeData.title}
       subtitle={coffeeData.subtitle}
       buttonLink={coffeeData.buttonLink}
-      buttonText={coffeeData.buttonText}
       buttonImg={coffeeData.buttonImg}
     />
   );
 }
 
-function ServiceCards({ cardsData }) {
+function ServiceCards({ cardsData, layoutType }) {
   if (!cardsData.length) {
     return <p className={styles.emptyState}>目前沒有可顯示的卡片資料</p>;
   }
 
-  // 使用 antd 的 Row / Col 做 RWD 排版
   return (
-    <Row className={styles.cardsSection} gutter={[16, 16]}>
+    <Row
+      className={styles.cardsSection}
+      gutter={[16, 16]}
+      align="stretch"
+    >
       {cardsData.map((card, idx) => {
-        // 改用 card.id 或 fallback idx 作為 key，避免 title 重複
         const keyValue = card.id ? card.id : `card-${idx}`;
+
+        // 依照 layoutType 決定 Col 的屬性
+        let colProps = {};
+        if (layoutType === 'oneCard') {
+          // 只顯示一欄
+          colProps = { xs: 24 };
+        } else if (layoutType === 'twoCards') {
+          // 最多兩欄: 576px 以上就會切兩欄
+          colProps = { xs: 24, sm: 12 };
+        } else if (layoutType === 'threeCards') {
+          // 三欄: 在 lg(≥992px) 才會切 3 欄
+          colProps = { xs: 24, sm: 12, lg: 8 };
+        }
+
         return (
           <Col
-            xs={{ span: 24 }}
-            sm={{ span: 12 }}
-            lg={{ span: 8 }}
             key={keyValue}
+            {...colProps}
+            style={{ display: 'flex' }}
           >
             <ServiceCard cardData={card} />
           </Col>
@@ -72,7 +103,6 @@ function Outro({ outroData }) {
       title={outroData.title}
       subtitle={outroData.subtitle}
       buttonLink={outroData.buttonLink}
-      buttonText={outroData.buttonText}
     />
   );
 }

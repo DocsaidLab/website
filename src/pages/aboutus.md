@@ -70,7 +70,7 @@
 
 如果這個網站有幫上你，或是你認可我的努力，歡迎通過以下方式支持我：
 
-- [**Buy Me A Coffee**](https://buymeacoffee.com/docsaid)，你可以留下訊息指名要給請哪位作者喝咖啡，或是不指名，那我就用來支付雲端主機的費用。不論如何，我都會非常感激你的支持！
+- [**Buy Me A Coffee**](https://buymeacoffee.com/zyuan)，你可以留下訊息指名要給請哪位作者喝咖啡，或是不指名，那我就用來支付雲端主機的費用。不論如何，我都會非常感激你的支持！
 - 或是在 GitHub 上為專案點個星星 ⭐️
 - 或是在你喜歡的文章底下提供建議或鼓勵！
 
@@ -83,7 +83,7 @@
 <div align="center">
 <br />
 <figure style={{ width: "50%"}}>
-[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/docsaid)
+[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/zyuan)
 </figure>
 <br />
 </div>

@@ -70,7 +70,7 @@
 
 もしこのウェブサイトがあなたに役立ったり、私の努力を評価していただけるなら、以下の方法でサポートをお願いできれば嬉しいです：
 
-- [**Buy Me A Coffee**](https://buymeacoffee.com/docsaid)：どの作者へのサポートか指定することもできますし、指定しない場合はクラウドホスティング費用に使わせていただきます。いずれにしても、心から感謝いたします！
+- [**Buy Me A Coffee**](https://buymeacoffee.com/zyuan)：どの作者へのサポートか指定することもできますし、指定しない場合はクラウドホスティング費用に使わせていただきます。いずれにしても、心から感謝いたします！
 - GitHub プロジェクトにスターを付ける ⭐️
 - 気に入った記事にコメントやアドバイスを残す！
 
@@ -83,7 +83,7 @@
 <div align="center">
 <br />
 <figure style={{ width: "50%"}}>
-[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/docsaid)
+[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/zyuan)
 </figure>
 <br />
 </div>

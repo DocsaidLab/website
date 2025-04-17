@@ -32,7 +32,7 @@ If your needs involve **large language models (LLM), RAG applications, chatbots,
 :::
 
 :::info
-All services currently use [**Buy Me a Coffee**](https://buymeacoffee.com/docsaid) as the payment channel, with USD as the pricing unit.
+All services currently use [**Buy Me a Coffee**](https://buymeacoffee.com/zyuan) as the payment channel, with USD as the pricing unit.
 
 > **1 coffee = USD 5 ≒ NTD 150**.
 
@@ -76,7 +76,7 @@ I won’t just "translate" the paper for you, I’ll "reinterpret" it into actio
 :::tip
 📎 **Example Reference**: You can refer to the reading guide article I wrote:
 
-> [**Face Anti-Spoofing Technology Roadmap**](https://docsaid.org/blog/fas-paper-roadmap).
+> [**Face Anti-Spoofing Technology Roadmap**](https://docsaid.org/en/blog/fas-paper-roadmap).
 
 This is an example where I selected 40 papers from over 135, organizing them into eight major themes to create an introductory map for the FAS field.
 :::
@@ -409,7 +409,7 @@ You can start the collaboration process by following these steps:
 3. **Start the Service**: Once both parties confirm the scope and delivery method, the task can officially begin.
 
 - 📮 Contact Email: **docsaidlab@gmail.com**
-- 🌐 Project Records and Technical Articles: [**https://docsaid.org**](https://docsaid.org/)
+- 🌐 Project Records and Technical Articles: [**https://docsaid.org/en**](https://docsaid.org/en)
 
 ---
 
