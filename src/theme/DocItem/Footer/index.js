@@ -6,10 +6,13 @@ import TagsListInline from '@theme/TagsListInline';
 import clsx from 'clsx';
 import React from 'react';
 
+import MultiCardsCTA from '@site/src/components/MultiCardsCTA';
+
+
 
 export default function DocItemFooter() {
   const {metadata, frontMatter} = useDoc();
-  const {no_comments} = frontMatter;
+  const {no_comments, title} = frontMatter;
   const {editUrl, lastUpdatedAt, lastUpdatedBy, tags} = metadata;
   const canDisplayTagsRow = tags.length > 0;
   const canDisplayEditMetaRow = !!(editUrl || lastUpdatedAt || lastUpdatedBy);
@@ -42,9 +45,18 @@ export default function DocItemFooter() {
           lastUpdatedBy={lastUpdatedBy}
         />
       )}
+
+      {title && (
+        <MultiCardsCTA
+          showServiceCards={true}
+        />
+      )}
+
+      {/* 如果不需要評論功能，則不顯示 GiscusComment */}
       {!no_comments && (
         <GiscusComment />
       )}
+
     </footer>
   );
 }

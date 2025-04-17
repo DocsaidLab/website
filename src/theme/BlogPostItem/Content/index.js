@@ -1,8 +1,13 @@
-import React from 'react';
-import clsx from 'clsx';
-import {blogPostContainerID} from '@docusaurus/utils-common';
-import {useBlogPost} from '@docusaurus/plugin-content-blog/client';
+import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
+import { blogPostContainerID } from '@docusaurus/utils-common';
 import MDXContent from '@theme/MDXContent';
+import clsx from 'clsx';
+import React from 'react';
+
+import GiscusComment from '@site/src/components/GiscusComment';
+import MultiCardsCTA from '@site/src/components/MultiCardsCTA';
+
+
 export default function BlogPostItemContent({children, className}) {
   const {isBlogPostPage} = useBlogPost();
   return (
@@ -11,6 +16,8 @@ export default function BlogPostItemContent({children, className}) {
       id={isBlogPostPage ? blogPostContainerID : undefined}
       className={clsx('markdown', className)}>
       <MDXContent>{children}</MDXContent>
+      <MultiCardsCTA />
+      <GiscusComment />
     </div>
   );
 }

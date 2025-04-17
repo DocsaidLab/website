@@ -1,0 +1,171 @@
+/* src/components/MultiCardsCTA/index.module.css */
+/* 以下只示範保留原本的動畫、色彩、佈局等，可以視情況調整或移除重複樣式 */
+
+/* 1) 變數 */
+:root {
+  --brand-color: #fa8c16;
+  --transition-speed: 0.3s;
+  --hover-scale: 1.03;
+
+  --font-size-base: 1rem;
+  --font-size-h3: 1.5rem;
+  --font-size-h4: 1.25rem;
+
+  --line-height-base: 1.6;
+}
+
+/* 2) 進場動畫 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fadeInUp {
+  animation: fadeInUp var(--transition-speed) ease;
+}
+
+/* 3) hover 浮起 */
+.hoverTransform {
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+.hoverTransform:hover {
+  transform: scale(var(--hover-scale));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 4) 主容器區域 */
+.ctaSection {
+  width: 100%;
+  padding: 3rem 1rem;
+  box-sizing: border-box;
+  background-color: #fafafa;
+  word-break: break-word;
+}
+.ctaSection h3 {
+  font-size: var(--font-size-h3);
+  margin: 0 0 1rem;
+  line-height: var(--line-height-base);
+  color: #222;
+}
+
+/* =======================
+   SimpleCTA (coffee/outro)
+   ======================= */
+.simpleCta {
+  max-width: 960px;
+  margin: 0 auto 2rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #222;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.simple-cta__coffee {
+  background-color: #fff3e8;
+}
+.simple-cta__outro {
+  background-color: #e8f7ff;
+}
+.simple-cta__icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+}
+.simple-cta__title {
+  font-size: var(--font-size-h3);
+  margin: 0 0 1rem;
+  line-height: var(--line-height-base);
+  color: #222;
+}
+.simple-cta__subtitle {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: #555;
+  margin: 0 auto 1.5rem;
+  max-width: 600px;
+}
+.simple-cta__buttonWrapper {
+  margin-bottom: 0.5rem;
+}
+.simple-cta__buttonImg {
+  width: 80px;
+  height: auto;
+}
+
+/* =====================
+   Cards 區域 (ServiceCards)
+   ===================== */
+.cardsSection {
+  max-width: 1080px;
+  margin: 0 auto 3rem;
+}
+
+/* 空狀態顯示 */
+.emptyState {
+  text-align: center;
+  color: #999;
+  padding: 1rem;
+  font-style: italic;
+}
+
+/* =====================
+   Card (ServiceCard)
+   ===================== */
+.card {
+  border-radius: 6px;
+}
+.card__tag {
+  margin-bottom: 1rem;
+}
+.card__title {
+  font-size: var(--font-size-h4);
+  margin: 0 0 0.75rem;
+  color: #222;
+  word-break: break-word;
+}
+.card__concept {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: #555;
+  margin: 0 0 1rem;
+  font-style: italic;
+  word-break: break-word;
+}
+.card__bulletHeader {
+  margin-bottom: 0.5rem;
+}
+.card__bulletTitle {
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 600;
+  color: #222;
+}
+.card__bulletList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.card__bulletItem {
+  margin-bottom: 0.5rem;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  position: relative;
+  padding-left: 1.5rem;
+}
+.card__bulletItem::before {
+  content: '✅';
+  position: absolute;
+  left: 0;
+  color: var(--brand-color);
+}
+.card__footer {
+  margin-top: 1rem;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}

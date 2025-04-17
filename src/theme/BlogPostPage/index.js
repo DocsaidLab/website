@@ -4,7 +4,6 @@ import {
   useBlogPost,
 } from '@docusaurus/plugin-content-blog/client';
 import { HtmlClassNameProvider, ThemeClassNames } from '@docusaurus/theme-common';
-import GiscusComment from '@site/src/components/GiscusComment';
 import BlogLayout from '@theme/BlogLayout';
 import BlogPostItem from '@theme/BlogPostItem';
 import BlogPostPageMetadata from '@theme/BlogPostPage/Metadata';
@@ -185,9 +184,6 @@ function BlogPostPageContent({sidebar, children}) {
       >
         <BlogPostItem>{children}</BlogPostItem>
       </article>
-
-      {/* 留言區（Giscus） */}
-      {!no_comments && <GiscusComment />}
 
       {/* 上一篇/下一篇 */}
       {(nextItem || prevItem) && (

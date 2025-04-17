@@ -1,0 +1,302 @@
+// src/components/MultiCardsCTA/i18nContext.js
+
+const i18nContentData = {
+  'zh-hant': {
+    coffeeCTA: {
+      // 加入「☕」表情符號，增加情緒感
+      title: '☕ 一杯咖啡，就是我創作的燃料！',
+      subtitle: '贊助我持續分享 AI 實作、全端架構與開源經驗，讓好文章不斷更新。',
+      buttonImg: '/img/yellow-button.png',
+      buttonAlt: 'Buy Me A Coffee',
+      buttonLink: 'https://buymeacoffee.com/docsaid',
+      coffeeIcon: '/img/icons/coffee.svg',
+    },
+
+    threeCards: [
+      {
+        // 加入 id、icon、tag
+        id: 'ai',
+        icon: '/img/icons/brain.svg',
+        tag: 'AI',
+        title: 'AI 顧問',
+        concept: '從研究到實作，打造專屬 AI 解決方案，加速你的技術落地。',
+        bulletTitle: '你會得到',
+        bulletPoints: ['技術評估 + 商業規劃', '模型選型與訓練', '趨勢前瞻與 PoC 驗證'],
+        buttonText: '技術方案詳解',
+        buttonLink: '/services?type=ai',
+      },
+      {
+        id: 'fullstack',
+        icon: '/img/icons/code.svg',
+        tag: '全端',
+        title: '全端整合',
+        concept: '前後端與部署流程一次到位，讓你的系統快速上線且穩定運行。',
+        bulletTitle: '專業組合',
+        bulletPoints: ['FastAPI + Docker 後端', 'React 前端', 'CI/CD 自動化部署'],
+        buttonText: '系統整合內容',
+        buttonLink: '/services?type=fullstack',
+      },
+      {
+        id: 'custom',
+        icon: '/img/icons/custom.svg',
+        tag: '客製',
+        title: '客製方案',
+        concept: '應對複雜需求，設計具擴充性的架構，讓你的系統更具延展性。',
+        bulletTitle: '包含服務',
+        bulletPoints: ['專案評估與技術驗證', 'MVP 快速開發', '長期維運與功能升級'],
+        buttonText: '開始規劃',
+        buttonLink: '/services?type=custom',
+      },
+    ],
+
+    twoCards: [
+      {
+        id: 'ai_fullstack',
+        icon: '/img/icons/integrate.svg',
+        tag: '整合',
+        title: 'AI × 全端 打造整合系統',
+        concept: '兼具 AI 智能與工程效能，讓服務平台具備未來競爭力。',
+        bulletTitle: '融合優勢',
+        bulletPoints: ['整合式技術架構', '持續迭代與部署最佳化'],
+        buttonText: '探索整合方案',
+        buttonLink: '/services?type=ai_fullstack',
+      },
+      {
+        id: 'flex_custom',
+        icon: '/img/icons/custom.svg',
+        tag: '客製',
+        title: '彈性客製方案',
+        concept: '從 0 到 1 打造最合適的專屬模組，為複雜需求量身設計。',
+        bulletTitle: '服務內容',
+        bulletPoints: ['模組化系統開發', '雲端部署與資料整合'],
+        buttonText: '需求洽談',
+        buttonLink: '/services?type=custom',
+      },
+    ],
+
+    oneCard: [
+      {
+        id: 'all_in_one',
+        icon: '/img/icons/all_in.svg',
+        tag: 'ALL',
+        title: 'AI / 全端 / 客製 一次搞定',
+        concept: '從構想到上線，涵蓋顧問、開發與部署，全方位支援你的技術實作。',
+        bulletTitle: '包含內容',
+        bulletPoints: ['顧問服務 + 系統建置 + 客製開發', '長期維運與擴充規劃'],
+        buttonText: '立即開始',
+        buttonLink: '/services?type=all',
+      },
+    ],
+
+    // 在標題中插入火箭表情符號
+    outroCTA: {
+      title: '🚀 你的專案準備好了嗎？',
+      subtitle: '如果你需要客製服務或長期顧問，歡迎與我聯繫！',
+      buttonText: '聯絡我',
+      buttonLink: '/contact',
+    },
+  },
+
+  en: {
+    coffeeCTA: {
+      title: 'Fuel my writing with a coffee',
+      subtitle: 'Your support helps me keep sharing hands-on AI and full-stack insights.',
+      buttonImg: '/img/yellow-button.png',
+      buttonAlt: 'Buy Me A Coffee',
+      buttonLink: 'https://buymeacoffee.com/docsaid',
+      coffeeIcon: '/en/img/coffee.svg',
+    },
+    threeCards: [
+      {
+        id: 'ai',
+        icon: '/img/icons/brain.svg',
+        tag: 'AI',
+        title: 'AI Consulting',
+        concept: 'From research to deployment, I help bring your AI ideas to life—fast and practical.',
+        bulletTitle: 'What You’ll Get',
+        bulletPoints: [
+          'Tech insights + real use cases',
+          'Tailored model building',
+          'PoC support & trend guidance',
+        ],
+        buttonText: 'Explore AI Services',
+        buttonLink: '/en/services?type=ai',
+      },
+      {
+        id: 'fullstack',
+        icon: '/img/icons/code.svg',
+        tag: 'FullStack',
+        title: 'Full-Stack Dev',
+        concept: 'Frontend, backend, and deployment in one seamless pipeline—built for scale and speed.',
+        bulletTitle: 'Tech Stack',
+        bulletPoints: ['FastAPI + Docker', 'React', 'CI/CD automation'],
+        buttonText: 'See How It Works',
+        buttonLink: '/en/services?type=fullstack',
+      },
+      {
+        id: 'custom',
+        icon: '/img/icons/custom.svg',
+        tag: 'Custom',
+        title: 'Custom Solutions',
+        concept: 'Flexible and future-ready setups, designed to fit your unique needs across domains.',
+        bulletTitle: 'Scope of Work',
+        bulletPoints: [
+          'Project scoping & PoC',
+          'MVP development',
+          'Ongoing scaling & support',
+        ],
+        buttonText: 'Start Planning',
+        buttonLink: '/en/services?type=custom',
+      },
+    ],
+    twoCards: [
+      {
+        id: 'ai_fullstack',
+        icon: '/img/icons/integrate.svg',
+        tag: 'Combo',
+        title: 'AI × Full-Stack Combo',
+        concept: 'Get the best of both worlds—AI power and solid system design, all in one flow.',
+        bulletTitle: 'Why It Works',
+        bulletPoints: [
+          'Integrated stack, scalable base',
+          'Built for iteration & upgrades',
+        ],
+        buttonText: 'Learn the Stack',
+        buttonLink: '/en/services?type=ai_fullstack',
+      },
+      {
+        id: 'flex_custom',
+        icon: '/img/icons/custom.svg',
+        tag: 'Custom',
+        title: 'Custom Solutions',
+        concept: 'Zero to one, with smart modules and clean deployment—tailored just for you.',
+        bulletTitle: 'What’s Included',
+        bulletPoints: ['Modular builds', 'Cloud setup & data handling'],
+        buttonText: 'Let’s Talk',
+        buttonLink: '/en/services?type=custom',
+      },
+    ],
+    oneCard: [
+      {
+        id: 'all_in_one',
+        icon: '/img/icons/all_in.svg',
+        tag: 'All-in',
+        title: 'AI / Full-Stack / Custom — All In',
+        concept: 'From idea to launch, I help you build systems that are useful, lean, and long-term ready.',
+        bulletTitle: 'Service Bundle',
+        bulletPoints: [
+          'Consulting + Dev + Deploy',
+          'Maintenance & future upgrades',
+        ],
+        buttonText: 'Get Started Now',
+        buttonLink: '/en/services?type=all',
+      },
+    ],
+    outroCTA: {
+      // 加個火箭表情
+      title: '🚀 Your next project starts here',
+      subtitle: 'Need a long-term tech partner or a custom solution? I’m here to help you build it.',
+      buttonText: 'Reach Out',
+      buttonLink: '/en/contact',
+    },
+  },
+
+  ja: {
+    coffeeCTA: {
+      title: '1杯のコーヒーが原動力になります',
+      subtitle: 'AIやフルスタックの技術共有を続けるため、ご支援いただけると嬉しいです。',
+      buttonImg: '/img/yellow-button.png',
+      buttonAlt: 'Buy Me A Coffee',
+      buttonLink: 'https://buymeacoffee.com/docsaid',
+      coffeeIcon: '/ja/img/coffee.svg',
+    },
+    threeCards: [
+      {
+        id: 'ai',
+        icon: '/img/icons/brain.svg',
+        tag: 'AI',
+        title: 'AIコンサルティング',
+        concept: 'リサーチから導入まで、あなたのAI構想を実現に導きます。',
+        bulletTitle: 'サービス概要',
+        bulletPoints: [
+          '技術調査 + ビジネス設計',
+          'カスタムモデル構築',
+          'PoC支援と最新トレンド',
+        ],
+        buttonText: '詳しく見る',
+        buttonLink: '/ja/services?type=ai',
+      },
+      {
+        id: 'fullstack',
+        icon: '/img/icons/code.svg',
+        tag: 'フルスタック',
+        title: 'フルスタック開発',
+        concept: 'フロント・バックエンドとデプロイまで一気通貫でサポートします。',
+        bulletTitle: '対応技術',
+        bulletPoints: ['FastAPI + Docker', 'React', 'CI/CD 自動化'],
+        buttonText: '開発内容を見る',
+        buttonLink: '/ja/services?type=fullstack',
+      },
+      {
+        id: 'custom',
+        icon: '/img/icons/custom.svg',
+        tag: 'カスタム',
+        title: 'カスタム開発',
+        concept: '複雑なニーズにも対応する、柔軟で将来性あるアーキテクチャをご提案。',
+        bulletTitle: '提供内容',
+        bulletPoints: ['プロジェクト評価 & PoC', 'MVP 開発', '長期運用サポート'],
+        buttonText: 'まずは相談',
+        buttonLink: '/ja/services?type=custom',
+      },
+    ],
+    twoCards: [
+      {
+        id: 'ai_fullstack',
+        icon: '/img/icons/integrate.svg',
+        tag: '連携',
+        title: 'AI × フルスタック連携',
+        concept: 'AIと開発基盤の力を融合し、実用的なサービスを形にします。',
+        bulletTitle: '強み',
+        bulletPoints: ['統合技術と拡張性ある構成', '継続的な改善と運用'],
+        buttonText: 'サービスを見る',
+        buttonLink: '/ja/services?type=ai_fullstack',
+      },
+      {
+        id: 'flex_custom',
+        icon: '/img/icons/custom.svg',
+        tag: 'カスタム',
+        title: 'フルカスタム対応',
+        concept: 'ゼロから構築するオーダーメイドの技術ソリューション。',
+        bulletTitle: '対応範囲',
+        bulletPoints: ['モジュール開発', 'クラウド & データ基盤構築'],
+        buttonText: 'お問い合わせ',
+        buttonLink: '/ja/services?type=custom',
+      },
+    ],
+    oneCard: [
+      {
+        id: 'all_in_one',
+        icon: '/img/icons/all_in.svg',
+        tag: 'ALL',
+        title: 'AI・開発・運用まで一括対応',
+        concept: 'アイデアからリリースまで、技術面をまるごと任せてください。',
+        bulletTitle: '対応内容',
+        bulletPoints: [
+          '技術相談 + 開発 + デプロイ',
+          '継続サポートと将来拡張',
+        ],
+        buttonText: '今すぐ始める',
+        buttonLink: '/ja/services?type=all',
+      },
+    ],
+    outroCTA: {
+      // 加火箭表情
+      title: '🚀 次のプロジェクト、ご一緒しませんか？',
+      subtitle: 'カスタム開発や長期支援をご希望なら、ぜひ一度ご相談ください。',
+      buttonText: 'お問い合わせ',
+      buttonLink: '/ja/contact',
+    },
+  },
+};
+
+export default i18nContentData;
