@@ -4,7 +4,7 @@ Welcome to my website!
 
 I’m Z. Yuan, an AI engineer based in Taiwan.
 
-## 👨‍💻 Are you an engineer?
+## Are you an engineer?
 
 Yes.
 
@@ -26,17 +26,19 @@ Looking back now, it all boils down to this:
 
 > Yes, that's right! AI Engineer!
 
-## 💡 What is this?
+## So, what is this?
 
-While browsing one day, I stumbled upon Meta’s open-source tool [**Docusaurus**](https://docusaurus.io/) and found it quite feature-rich.
+It was probably in 2023.
 
-I thought, why not use it to start a blog? So, I began by deploying the website on GitHub Pages and started writing articles.
+During one of my casual strolls, I stumbled upon Meta's open-source [**Docusaurus**](https://docusaurus.io/) and found that its features were quite rich.
 
-As I wrote, I thought about launching some open-source projects, so I added project introductions. Then, I felt Docusaurus' native functionality wasn’t enough, so I started writing plugins, creating technical notes, and eventually shaping the website into what it is today.
+I thought to myself, why not use it to create a blog? First, I deployed the website on GitHub Pages and then started writing articles.
 
-That said, as I kept tinkering and expanding, this site is now nearing GitHub Pages' storage limit. I’ll probably need to migrate it elsewhere soon... (Life’s tough. 😮‍💨)
+As I wrote more posts, I thought it would be nice to create some open-source projects, so I added project introductions. Then, I felt the native Docusaurus features weren't enough, so I started writing some plugins. I also wrote a few technical notes, and before I knew it, it turned into what you see now.
 
-## 🚀 The Origin of the Website's Name
+That said, with all the continuous tweaks and changes, this website is almost at the storage limit for GitHub Pages, so I’ll have to move it somewhere else soon... (Sigh, life is tough 😮‍💨)
+
+## The Origin of the Website's Name
 
 Naming a website is the hardest challenge for me.
 
@@ -52,38 +54,28 @@ So, what is the text trying to convey? All we need to do is analyze it!
 
 Interestingly, after finalizing this name, I noticed it contains the letters "AI"—a delightful coincidence.
 
-## 💻 About the Website Design
+## About the Website Design
 
 Stop calling my website’s design plain! I know, I know! 😅
 
 My main job involves building models, reading papers, coding, and tuning parameters. As for web design and backend development, I can barely manage. Maybe someday, if I get the chance, I’ll hire a professional to revamp it.
 
-## ✉️ Contact Information
+## Contact Information
 
 If you have any questions or are interested in my work, feel free to reach out!
 
 Here’s my work email: **docsaidlab@gmail.com**. You can send me an email or leave a comment under any article on this site—I’ll see it.
 
-## 🍹 Lastly
+## The End
 
-I’ve poured considerable effort into developing these projects and writing technical notes. It’s not only a process of technical learning but also my way of contributing to the open-source community.
+These projects and notes are things I spent a lot of time on, figuring things out as I went along. For me, they represent both a learning process and a way to give back to the community.
 
-If this website has helped you or you appreciate my efforts, you’re welcome to support me in the following ways:
+If you've learned something from this website, or even just thought that a particular note was well-written, feel free to support me in one of the following ways:
 
-- [**Buy Me A Coffee**](https://buymeacoffee.com/zyuan): You can leave a message specifying which author you’re treating, or make a general donation to cover hosting costs. Either way, I deeply appreciate your support!
-- Star the projects on GitHub ⭐️
-- Offer suggestions or encouragement in the comments under your favorite articles.
+- [**Buy Me A Coffee**](https://buymeacoffee.com/zyuan) (So I can keep staying up late writing notes ☕️)
+- Star the projects on GitHub ⭐️ (Every star secretly makes me happy)
+- Or simply leave a message or suggestion, that too is a huge motivator for me!
 
-Thank you for reading and supporting this site. I hope **DOCSAID** brings you value and inspiration!
+Thank you for taking the time to read this, and I hope **DOCSAID** can help or inspire you at some point.
 
-＊
-
-2024 © Z. Yuan
-
-<div align="center">
-<br />
-<figure style={{ width: "50%"}}>
-[![Buy Me A Coffee](/img/yellow-button.png)](https://buymeacoffee.com/zyuan)
-</figure>
-<br />
-</div>
+**Z. Yuan**
