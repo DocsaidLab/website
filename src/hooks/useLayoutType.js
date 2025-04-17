@@ -7,7 +7,9 @@ const { useBreakpoint } = Grid;
  */
 export default function useLayoutType() {
   const screens = useBreakpoint();
+
+  // 修正：若要在 576px 就顯示兩欄，改用 screens.sm
   if (screens.lg) return 'threeCards';
-  if (screens.md) return 'twoCards';
+  if (screens.sm) return 'twoCards';
   return 'oneCard';
 }

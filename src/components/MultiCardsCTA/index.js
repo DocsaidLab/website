@@ -28,6 +28,7 @@ function CoffeeIntro({ coffeeData }) {
   return (
     <SimpleCTA
       variant="coffee"
+      iconSrc={coffeeData.icon} // <--- 新增 iconSrc 傳遞，若有 coffeeData.icon
       title={coffeeData.title}
       subtitle={coffeeData.subtitle}
       buttonLink={coffeeData.buttonLink}
@@ -45,8 +46,9 @@ function ServiceCards({ cardsData }) {
   // 使用 antd 的 Row / Col 做 RWD 排版
   return (
     <Row className={styles.cardsSection} gutter={[16, 16]}>
-      {cardsData.map((card) => {
-        const keyValue = card.title;
+      {cardsData.map((card, idx) => {
+        // 改用 card.id 或 fallback idx 作為 key，避免 title 重複
+        const keyValue = card.id ? card.id : `card-${idx}`;
         return (
           <Col
             xs={{ span: 24 }}

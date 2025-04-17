@@ -17,7 +17,8 @@ export default function ServiceCard({ cardData }) {
 
   return (
     <Card
-      className={`${styles.card} fadeInUp hoverTransform`}
+      /* 修正：CSS Module 的 class 要透過 styles.xxx */
+      className={`${styles.card} ${styles.fadeInUp} ${styles.hoverTransform}`}
       hoverable
       // 有 icon 則可以放在 Card cover
       cover={

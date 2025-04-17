@@ -6,7 +6,7 @@ const i18nContentData = {
       // 加入「☕」表情符號，增加情緒感
       title: '☕ 一杯咖啡，就是我創作的燃料！',
       subtitle: '贊助我持續分享 AI 實作、全端架構與開源經驗，讓好文章不斷更新。',
-      buttonImg: '/img/yellow-button.png',
+      buttonImg: '/img/bmc-full-logo.svg',
       buttonAlt: 'Buy Me A Coffee',
       buttonLink: 'https://buymeacoffee.com/docsaid',
       coffeeIcon: '/img/icons/coffee.svg',

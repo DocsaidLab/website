@@ -17,7 +17,13 @@ export default function SimpleCTA({
 
   return (
     <div
-      className={`${styles.simpleCta} simple-cta__${variant} fadeInUp hoverTransform`}
+      /* 同樣修正：CSS Module 與字串混用 */
+      className={`
+        ${styles.simpleCta}
+        ${styles[`simple-cta__${variant}`]}
+        ${styles.fadeInUp}
+        ${styles.hoverTransform}
+      `}
     >
       {iconSrc && (
         <img
