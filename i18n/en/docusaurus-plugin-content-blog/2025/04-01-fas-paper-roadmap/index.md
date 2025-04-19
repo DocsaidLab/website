@@ -114,17 +114,37 @@ One of the most challenging problems in Face Anti-Spoofing is generalization—h
 11. [**[20.04] Single-Side Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2004.14043)
     Proposing a one-sided adversarial learning strategy, aligning only real faces across domains, allowing fake face features to naturally scatter across domains, and preventing over-compression of erroneous information. This is an enlightening direction for DG design.
 
+    :::info
+    **Paper Notes**: [**[20.04] SSDG: Stable Realness**](https://docsaid.org/en/papers/face-antispoofing/ssdg/)
+    :::
+
 12. [**[21.05] Generalizable Representation Learning for Mixture Domain Face Anti-Spoofing**](https://arxiv.org/abs/2105.02453)
     Not assuming known domain labels, but using instance normalization and MMD for unsupervised clustering and alignment, achieving a generalization training process that does not rely on manual grouping.
+
+    :::info
+    **Paper Notes**: [**[21.05] D2AM: Thousand-Domain Soul Forging**](https://docsaid.org/en/papers/face-antispoofing/d2am/)
+    :::
 
 13. [**[23.03] Rethinking Domain Generalization for Face Anti-Spoofing: Separability and Alignment**](https://arxiv.org/abs/2303.13662)
     Proposing the SA-FAS framework, emphasizing maintaining feature separability across different domains while ensuring that the live-to-spoof transition path is consistent across domains, a deep application of IRM theory in FAS.
 
+    :::info
+    **Paper Notes**: [**[23.03] SA-FAS: The Law of the Hyperplane**](https://docsaid.org/en/papers/face-antispoofing/sa-fas/)
+    :::
+
 14. [**[24.02] Suppress and Rebalance: Towards Generalized Multi-Modal Face Anti-Spoofing**](https://arxiv.org/abs/2402.19298)
     A deep analysis of the multi-modal DG problem, using U-Adapter to suppress unstable modal interference, paired with ReGrad to dynamically adjust the convergence speed of each modality, providing a complete solution for modality imbalance and reliability issues.
 
+    :::info
+    **Paper Notes**: [**[24.02] MMDG: Trust Management**](https://docsaid.org/en/papers/face-antispoofing/mmdg/)
+    :::
+
 15. [**[24.03] CFPL-FAS: Class Free Prompt Learning for Generalizable Face Anti-spoofing**](https://arxiv.org/abs/2403.14333)
     Focuses on a prompt learning approach that emphasizes class-free prompt design, eliminating the need for manually defined categories. This represents a new direction in leveraging language prompts to enhance the generalization ability of FAS models.
+
+    :::info
+    **Paper Notes**: [**[24.03] CFPL-FAS: Class-Free Prompt Learning**](https://docsaid.org/en/papers/face-antispoofing/cfpl-fas/)
+    :::
 
 ---
 

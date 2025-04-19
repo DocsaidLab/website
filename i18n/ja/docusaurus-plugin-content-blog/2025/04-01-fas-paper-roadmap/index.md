@@ -114,17 +114,37 @@ Face Anti-Spoofing（FAS）の最も難しい問題の一つは、一般化能�
 11. [**[20.04] Single-Side Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2004.14043)
     単一の対抗学習戦略を提案し、真顔のみでドメイン間調整を行い、偽顔の特徴を異なるドメインで自然に分散させることで、誤った情報の過度な圧縮を避ける。これは DG 設計における非常に示唆に富んだ方向性です。
 
+    :::info
+    **論文ノート**：[**[20.04] SSDG: 安定した真実**](https://docsaid.org/ja/papers/face-antispoofing/ssdg/)
+    :::
+
 12. [**[21.05] Generalizable Representation Learning for Mixture Domain Face Anti-Spoofing**](https://arxiv.org/abs/2105.02453)
     ドメインラベルを既知とせず、インスタンス正規化と MMD を使用して、無監督のクラスタリングと調整を実現。人工的なクラスタリングに依存しない一般化訓練フローを実現。
+
+    :::info
+    **論文ノート**：[**[21.05] D2AM: 千界鍛魂術**](https://docsaid.org/ja/papers/face-antispoofing/d2am/)
+    :::
 
 13. [**[23.03] Rethinking Domain Generalization for Face Anti-Spoofing: Separability and Alignment**](https://arxiv.org/abs/2303.13662)
     SA-FAS フレームワークを提案し、異なるドメインで特徴の分離性を保ちながら、live→spoof の変化軌跡が各ドメインで一貫するように強調。これは IRM 理論を FAS に深く適用したものです。
 
+    :::info
+    **論文ノート**：[**[23.03] SA-FAS: 超平面の法則**](https://docsaid.org/ja/papers/face-antispoofing/sa-fas/)
+    :::
+
 14. [**[24.02] Suppress and Rebalance: Towards Generalized Multi-Modal Face Anti-Spoofing**](https://arxiv.org/abs/2402.19298)
     多モーダル DG 問題を深く分析し、U-Adapter を使用して不安定なモーダルの干渉を抑制し、ReGrad で各モーダルの収束速度を動的に調整することで、モーダル不均衡と信頼性の問題に対する完全な解決策を提供。
 
+    :::info
+    **論文ノート**：[**[24.02] MMDG: 信頼管理学**](https://docsaid.org/ja/papers/face-antispoofing/mmdg/)
+    :::
+
 15. [**[24.03] CFPL-FAS: Class Free Prompt Learning for Generalizable Face Anti-spoofing**](https://arxiv.org/abs/2403.14333)
     　 プロンプトラーニングの手法に焦点を当てており、「手動でクラスを定義する必要がない」プロンプト設計を強調している。これは、言語プロンプトを活用して FAS モデルの汎化能力を高める新たなアプローチである。
+
+    :::info
+    **論文ノート**：[**[24.03] CFPL-FAS: クラスなしのプロンプト学習**](https://docsaid.org/ja/papers/face-antispoofing/cfpl-fas/)
+    :::
 
 ---
 

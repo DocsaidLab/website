@@ -114,17 +114,37 @@ Face Anti-Spoofing 最棘手的問題之一是泛化能力：如何讓模型不�
 11. [**[20.04] Single-Side Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2004.14043)
     提出單邊對抗學習策略，只對真臉進行跨域對齊，讓假臉特徵在不同 domain 中自然分散，避免過度壓縮錯誤資訊，是 DG 設計上極具啟發性的方向。
 
+    :::info
+    **論文筆記**：[**[20.04] SSDG: 穩定的真實**](https://docsaid.org/papers/face-antispoofing/ssdg/)
+    :::
+
 12. [**[21.05] Generalizable Representation Learning for Mixture Domain Face Anti-Spoofing**](https://arxiv.org/abs/2105.02453)
     不假設已知 domain label，而是透過 instance normalization 與 MMD 做無監督聚類與對齊，實現不依賴人工分群的泛化訓練流程。
+
+    :::info
+    **論文筆記**：[**[21.05] D2AM: 千域鍛魂術**](https://docsaid.org/papers/face-antispoofing/d2am/)
+    :::
 
 13. [**[23.03] Rethinking Domain Generalization for Face Anti-Spoofing: Separability and Alignment**](https://arxiv.org/abs/2303.13662)
     提出 SA-FAS 框架，強調在不同 domain 保留 feature separability，同時讓 live→spoof 的轉變軌跡在各 domain 中一致，是 IRM 理論在 FAS 上的深度應用。
 
+    :::info
+    **論文筆記**：[**[23.03] SA-FAS: 超平面的律令**](https://docsaid.org/papers/face-antispoofing/sa-fas/)
+    :::
+
 14. [**[24.02] Suppress and Rebalance: Towards Generalized Multi-Modal Face Anti-Spoofing**](https://arxiv.org/abs/2402.19298)
     對多模態 DG 問題進行深入剖析，透過 U-Adapter 壓制不穩定模態的干擾，搭配 ReGrad 動態調節各模態收斂速度，是模態不均與可靠性問題的完整解法。
 
+    :::info
+    **論文筆記**：[**[24.02] MMDG: 信任管理學**](https://docsaid.org/papers/face-antispoofing/mmdg/)
+    :::
+
 15. [**[24.03] CFPL-FAS: Class Free Prompt Learning for Generalizable Face Anti-spoofing**](https://arxiv.org/abs/2403.14333)
     聚焦於 prompt learning 的手法，強調「無需手動定義類別」的 prompt 設計，屬於一種利用語言提示來協助 FAS 模型泛化的新思路。
+
+    :::info
+    **論文筆記**：[**[24.03] CFPL-FAS: 無類別提示學習**](https://docsaid.org/papers/face-antispoofing/cfpl-fas/)
+    :::
 
 ---
 
