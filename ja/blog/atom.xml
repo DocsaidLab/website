@@ -365,22 +365,27 @@ LLM と多モーダル入力を組み合わせ、QA タスク形式で MLLM の 
 <li>
 <p><a href="https://arxiv.org/abs/2004.14043" target="_blank" rel="noopener noreferrer"><strong>[20.04] Single-Side Domain Generalization for Face Anti-Spoofing</strong></a>
 単一の対抗学習戦略を提案し、真顔のみでドメイン間調整を行い、偽顔の特徴を異なるドメインで自然に分散させることで、誤った情報の過度な圧縮を避ける。これは DG 設計における非常に示唆に富んだ方向性です。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/ssdg/" target="_blank" rel="noopener noreferrer"><strong>[20.04] SSDG: 安定した真実</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2105.02453" target="_blank" rel="noopener noreferrer"><strong>[21.05] Generalizable Representation Learning for Mixture Domain Face Anti-Spoofing</strong></a>
 ドメインラベルを既知とせず、インスタンス正規化と MMD を使用して、無監督のクラスタリングと調整を実現。人工的なクラスタリングに依存しない一般化訓練フローを実現。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/d2am/" target="_blank" rel="noopener noreferrer"><strong>[21.05] D2AM: 千界鍛魂術</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2303.13662" target="_blank" rel="noopener noreferrer"><strong>[23.03] Rethinking Domain Generalization for Face Anti-Spoofing: Separability and Alignment</strong></a>
 SA-FAS フレームワークを提案し、異なるドメインで特徴の分離性を保ちながら、live→spoof の変化軌跡が各ドメインで一貫するように強調。これは IRM 理論を FAS に深く適用したものです。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/sa-fas/" target="_blank" rel="noopener noreferrer"><strong>[23.03] SA-FAS: 超平面の法則</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2402.19298" target="_blank" rel="noopener noreferrer"><strong>[24.02] Suppress and Rebalance: Towards Generalized Multi-Modal Face Anti-Spoofing</strong></a>
 多モーダル DG 問題を深く分析し、U-Adapter を使用して不安定なモーダルの干渉を抑制し、ReGrad で各モーダルの収束速度を動的に調整することで、モーダル不均衡と信頼性の問題に対する完全な解決策を提供。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/mmdg/" target="_blank" rel="noopener noreferrer"><strong>[24.02] MMDG: 信頼管理学</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2403.14333" target="_blank" rel="noopener noreferrer"><strong>[24.03] CFPL-FAS: Class Free Prompt Learning for Generalizable Face Anti-spoofing</strong></a>
 　 プロンプトラーニングの手法に焦点を当てており、「手動でクラスを定義する必要がない」プロンプト設計を強調している。これは、言語プロンプトを活用して FAS モデルの汎化能力を高める新たなアプローチである。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/cfpl-fas/" target="_blank" rel="noopener noreferrer"><strong>[24.03] CFPL-FAS: クラスなしのプロンプト学習</strong></a></p></div></div>
 </li>
 </ol>
 <hr>
