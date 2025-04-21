@@ -9,7 +9,7 @@ authors: Z. Yuan
 
 ---
 
-For the topic of Face Anti-Spoofing (FAS), we first explored solutions based on Domain Generalization (DG) such as SSDG, and then adaptive DG solutions like D2AM.
+For the topic of Face Anti-Spoofing (FAS), we first explored solutions based on Domain Generalization (DG) such as SSDG, and then adaptive DG solutions like D²AM.
 
 So, is DG truly the correct direction?
 
@@ -17,7 +17,7 @@ So, is DG truly the correct direction?
 For readers who have not seen the previous papers, you can refer to our previous notes:
 
 - [**[20.04] SSDG: Stable Realness**](../2004-ssdg/index.md)
-- [**[21.05] D2AM: Thousand-Domain Soul Forging**](../2105-d2am/index.md)
+- [**[21.05] D²AM: Thousand-Domain Soul Forging**](../2105-d2am/index.md)
   :::
 
 ## Defining the Problem

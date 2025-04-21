@@ -9,7 +9,7 @@ authors: Z. Yuan
 
 ---
 
-對於 FAS 這個題目，我們先是看過了基於 Domain Generalization（DG）的解決方案 SSDG，然後又是自適應 DG 的解決方案 D2AM。
+對於 FAS 這個題目，我們先是看過了基於 Domain Generalization（DG）的解決方案 SSDG，然後又是自適應 DG 的解決方案 D²AM。
 
 那麼 DG 到底是不是一個正確的方向呢？
 
@@ -17,7 +17,7 @@ authors: Z. Yuan
 沒看過之前論文的讀者，可以參考我們之前的筆記：
 
 - [**[20.04] SSDG: 穩定的真實**](../2004-ssdg/index.md)
-- [**[21.05] D2AM: 千域鍛魂術**](../2105-d2am/index.md)
+- [**[21.05] D²AM: 千域鍛魂術**](../2105-d2am/index.md)
   :::
 
 ## 定義問題

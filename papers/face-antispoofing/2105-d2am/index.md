@@ -1,5 +1,5 @@
 ---
-title: "[21.05] D2AM"
+title: "[21.05] D²AM"
 authors: Z. Yuan
 ---
 
@@ -44,7 +44,7 @@ authors: Z. Yuan
 
 讓模型自己產生 pseudo-domain，然後再從這些 pseudo-domain 中訓練泛化能力。
 
-這就是 D2AM 的核心想法。
+這就是 D²AM 的核心想法。
 
 ## 解決問題
 
@@ -89,7 +89,7 @@ authors: Z. Yuan
   df(x) = \{\mu(F_1), \sigma(F_1), ..., \mu(F_M), \sigma(F_M)\}
   $$
 
-  這種來自預訓練模型的特徵可以**避開太多任務資訊污染 domain 分類**。然後做完第一輪之後，就會改成用 D2AM 自己的特徵抽出器 $E$ 來做這件事（Algo1：第 6–7 行）。
+  這種來自預訓練模型的特徵可以**避開太多任務資訊污染 domain 分類**。然後做完第一輪之後，就會改成用 D²AM 自己的特徵抽出器 $E$ 來做這件事（Algo1：第 6–7 行）。
 
   ***
 
@@ -222,13 +222,13 @@ authors: Z. Yuan
 </figure>
 </div>
 
-說了這麼多，D2AM 到底有沒有真的比較強？
+說了這麼多，D²AM 到底有沒有真的比較強？
 
 作者在上表中列出一系列實驗結果，拿四個主流 FAS 資料集輪流當作「未知測試集」，讓模型在只有三個來源 domain 的情況下，挑戰泛化能力。
 
-實驗結果顯示，在所有實驗設定中，D2AM 幾乎全面超越其他方法。不只是傳統 FAS 模型，連帶 domain label 的 DG 方法都輸了。
+實驗結果顯示，在所有實驗設定中，D²AM 幾乎全面超越其他方法。不只是傳統 FAS 模型，連帶 domain label 的 DG 方法都輸了。
 
-尤其在 OULU、CASIA、REPLAYATTACK 上，D2AM 不只 AUC 高、HTER 低，穩定性也更好。最重要的是：它做到這一切，不需要人工 domain label，完全靠自己猜出來的 domain。
+尤其在 OULU、CASIA、REPLAYATTACK 上，D²AM 不只 AUC 高、HTER 低，穩定性也更好。最重要的是：它做到這一切，不需要人工 domain label，完全靠自己猜出來的 domain。
 
 ### t-SNE 可視化
 
@@ -253,27 +253,27 @@ authors: Z. Yuan
 
 作者進一步觀察 pseudo-domain 的行為，做出一些很有趣的發現：
 
-- 隨著 epoch 推進，D2AM 分群的依據會變：
+- 隨著 epoch 推進，D²AM 分群的依據會變：
 
   - Epoch 3 聚焦在光線
   - Epoch 6 聚焦在背景
 
 - 每次 clustering 結果都會變（NMI 約 0.6~0.8），這表示它不是只會死記第一輪分法，而是會根據模型的適應狀況來調整 domain 劃分。
 
-最讓人驚訝的是 **D2AM 分出來的 pseudo-domain，跟真實 domain 的重疊率只有 60% ~ 70% 之間。**
+最讓人驚訝的是 **D²AM 分出來的 pseudo-domain，跟真實 domain 的重疊率只有 60% ~ 70% 之間。**
 
 我們以前以為 domain label 是標準的起手式，但其實它也可能不是最好的切法。
 
 ## 結論
 
-D2AM 在 DG 這條路上，提出了一條截然不同的路線。
+D²AM 在 DG 這條路上，提出了一條截然不同的路線。
 
 > **不需要你幫我標 domain，我自己分群、自己訓練、自己變強。**
 
 它的核心觀念很簡單：**「泛化能力，不該建立在你事先知道每個 domain 是什麼。」**
 
-透過 DRLM 模組 + Entropy Loss + MMD 正則化，D2AM 能在沒有 domain label 的情況下，學出「更有挑戰性」的 domain 劃分方式，進一步訓練出真正穩定的 FAS 模型。
+透過 DRLM 模組 + Entropy Loss + MMD 正則化，D²AM 能在沒有 domain label 的情況下，學出「更有挑戰性」的 domain 劃分方式，進一步訓練出真正穩定的 FAS 模型。
 
 這不只是一個 FAS 案例，也是一種更通用的機器學習思維。
 
-對於那些資料來源混雜、domain 不明的場景來說，D2AM 給出了一個極具啟發性的起點。
+對於那些資料來源混雜、domain 不明的場景來說，D²AM 給出了一個極具啟發性的起點。

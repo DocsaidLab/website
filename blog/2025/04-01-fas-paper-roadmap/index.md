@@ -122,7 +122,7 @@ Face Anti-Spoofing 最棘手的問題之一是泛化能力：如何讓模型不�
     不假設已知 domain label，而是透過 instance normalization 與 MMD 做無監督聚類與對齊，實現不依賴人工分群的泛化訓練流程。
 
     :::info
-    **論文筆記**：[**[21.05] D2AM: 千域鍛魂術**](https://docsaid.org/papers/face-antispoofing/d2am/)
+    **論文筆記**：[**[21.05] D²AM: 千域鍛魂術**](https://docsaid.org/papers/face-antispoofing/d2am/)
     :::
 
 13. [**[23.03] Rethinking Domain Generalization for Face Anti-Spoofing: Separability and Alignment**](https://arxiv.org/abs/2303.13662)

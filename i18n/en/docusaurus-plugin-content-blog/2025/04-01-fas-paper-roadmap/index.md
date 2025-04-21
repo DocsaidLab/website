@@ -122,7 +122,7 @@ One of the most challenging problems in Face Anti-Spoofing is generalization—h
     Not assuming known domain labels, but using instance normalization and MMD for unsupervised clustering and alignment, achieving a generalization training process that does not rely on manual grouping.
 
     :::info
-    **Paper Notes**: [**[21.05] D2AM: Thousand-Domain Soul Forging**](https://docsaid.org/en/papers/face-antispoofing/d2am/)
+    **Paper Notes**: [**[21.05] D²AM: Thousand-Domain Soul Forging**](https://docsaid.org/en/papers/face-antispoofing/d2am/)
     :::
 
 13. [**[23.03] Rethinking Domain Generalization for Face Anti-Spoofing: Separability and Alignment**](https://arxiv.org/abs/2303.13662)

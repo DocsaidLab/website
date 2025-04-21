@@ -122,7 +122,7 @@ Face Anti-Spoofing（FAS）の最も難しい問題の一つは、一般化能�
     ドメインラベルを既知とせず、インスタンス正規化と MMD を使用して、無監督のクラスタリングと調整を実現。人工的なクラスタリングに依存しない一般化訓練フローを実現。
 
     :::info
-    **論文ノート**：[**[21.05] D2AM: 千界鍛魂術**](https://docsaid.org/ja/papers/face-antispoofing/d2am/)
+    **論文ノート**：[**[21.05] D²AM: 千界鍛魂術**](https://docsaid.org/ja/papers/face-antispoofing/d2am/)
     :::
 
 13. [**[23.03] Rethinking Domain Generalization for Face Anti-Spoofing: Separability and Alignment**](https://arxiv.org/abs/2303.13662)
