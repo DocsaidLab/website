@@ -402,8 +402,8 @@ To solve the issues of modality loss and high-fidelity attacks, the paper introd
 Using an Efficient Parameter Transfer Learning architecture, this approach inserts statistical adapters into ViT while fixing the main network parameters. Token Style Regularization helps suppress style differences, providing a lightweight solution for cross-domain FAS.</p>
 </li>
 <li>
-<p><a href="https://ieeexplore.ieee.org/document/10222330" target="_blank" rel="noopener noreferrer"><strong>[23.10] LDCFormer: Incorporating Learnable Descriptive Convolution to Vision Transformer for Face Anti-Spoofing</strong></a>
-Combining learnable descriptive convolution (LDC) with ViT to enhance local detail representation, the paper introduces a decoupled optimization version (LDCformerD), achieving state-of-the-art performance across multiple benchmarks.</p>
+<p><a href="https://dl.acm.org/doi/pdf/10.1145/3664647.3680856" target="_blank" rel="noopener noreferrer"><strong>[24.10] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing</strong></a>
+By utilizing Cross-Modal Spoofing Enhancer (CMS-Enhancer) and text-guided (LGPA) dynamic alignment of spoofing cues, it maintains high detection accuracy across multi-modal training and single or multi-modal testing, demonstrating excellent generalization ability across multiple datasets.</p>
 </li>
 </ol>
 <hr>

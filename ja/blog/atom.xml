@@ -413,8 +413,8 @@ ViT が多モーダル FAS における主要な問題を全面的に再考。�
 Efficient Parameter Transfer Learning アーキテクチャを利用して、ViT に統計的アダプターを挿入し、主ネットワークのパラメータを固定。Token Style Regularization でスタイル差を抑制し、クロスドメイン FAS に特化した軽量ソリューション。</p>
 </li>
 <li>
-<p><a href="https://ieeexplore.ieee.org/document/10222330" target="_blank" rel="noopener noreferrer"><strong>[23.10] LDCFormer: Incorporating Learnable Descriptive Convolution to Vision Transformer for Face Anti-Spoofing</strong></a>
-学習可能な記述的畳み込み（LDC）を ViT に統合し、局所的な詳細表現能力を強化。複数のベンチマークで SOTA（最先端技術）を達成するために、最適化されたバージョン LDCformerD を提案。</p>
+<p><a href="https://dl.acm.org/doi/pdf/10.1145/3664647.3680856" target="_blank" rel="noopener noreferrer"><strong>[24.10] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing</strong></a>
+クロスモーダル詐欺強化器（CMS-Enhancer）とテキスト誘導（LGPA）による偽顔の動的アライメントにより、マルチモーダル訓練および単一または複数のモーダルテストで高い検出精度を維持し、複数のデータセットにおいて優れた汎化能力を示します。</p>
 </li>
 </ol>
 <hr>
