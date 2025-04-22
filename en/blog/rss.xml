@@ -386,6 +386,10 @@ Focuses on a prompt learning approach that emphasizes class-free prompt design, 
 <p>The rise of Vision Transformers (ViT) has ushered in an era of global modeling for image tasks, shifting away from local convolutions. Face Anti-Spoofing (FAS) is no exception.</p>
 <ol start="16">
 <li>
+<p><a href="https://openaccess.thecvf.com/content/WACV2023/papers/Liao_Domain_Invariant_Vision_Transformer_Learning_for_Face_Anti-Spoofing_WACV_2023_paper.pdf" target="_blank" rel="noopener noreferrer"><strong>[23.01] Domain Invariant Vision Transformer Learning for Face Anti-Spoofing</strong></a>
+Proposed the DiVT architecture, which enhances cross-domain generalization through two core loss functions. It aggregates genuine face features to form more consistent domain-invariant representations. Experiments show that DiVT achieves state-of-the-art results on various DG-FAS tasks, offering a streamlined yet effective approach to capturing key information for cross-domain recognition.</p>
+</li>
+<li>
 <p><a href="https://arxiv.org/abs/2302.05744" target="_blank" rel="noopener noreferrer"><strong>[23.02] Rethinking Vision Transformer and Masked Autoencoder in Multimodal Face Anti-Spoofing</strong></a>
 A comprehensive review of the core issues of ViT in multimodal FAS, including input design, pre-training strategies, and fine-tuning processes. The paper proposes the AMA adapter and M2A2E pre-training architecture to construct cross-modal, label-free self-supervised workflows.</p>
 </li>
@@ -394,15 +398,11 @@ A comprehensive review of the core issues of ViT in multimodal FAS, including in
 Using a single-branch early fusion architecture, this paper implements modality-agnostic recognition ability through Modal-Disentangle Attention and Cross-Modal Attention, balancing memory efficiency and flexible deployment, marking an important step in ViT's practicality.</p>
 </li>
 <li>
-<p><a href="https://arxiv.org/abs/2305.03277" target="_blank" rel="noopener noreferrer"><strong>[23.05] FM-ViT: Flexible Modal Vision Transformers for Face Anti-Spoofing</strong></a>
-To solve the issues of modality loss and high-fidelity attacks, the paper introduces a cross-modal attention design (MMA + MFA), which strengthens the focus on spoof patches while preserving the characteristics of each modality, serving as a model for deployment flexibility.</p>
-</li>
-<li>
 <p><a href="https://arxiv.org/abs/2309.04038" target="_blank" rel="noopener noreferrer"><strong>[23.09] Sadapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens</strong></a>
 Using an Efficient Parameter Transfer Learning architecture, this approach inserts statistical adapters into ViT while fixing the main network parameters. Token Style Regularization helps suppress style differences, providing a lightweight solution for cross-domain FAS.</p>
 </li>
 <li>
-<p><a href="https://dl.acm.org/doi/pdf/10.1145/3664647.3680856" target="_blank" rel="noopener noreferrer"><strong>[24.10] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing</strong></a>
+<p><a href="https://dl.acm.org/doi/pdf/10.1145/3664647.3680856" target="_blank" rel="noopener noreferrer"><strong>[24.07] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing</strong></a>
 By utilizing Cross-Modal Spoofing Enhancer (CMS-Enhancer) and text-guided (LGPA) dynamic alignment of spoofing cues, it maintains high detection accuracy across multi-modal training and single or multi-modal testing, demonstrating excellent generalization ability across multiple datasets.</p>
 </li>
 </ol>
