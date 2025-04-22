@@ -156,19 +156,19 @@ Face Anti-Spoofing（FAS）の最も難しい問題の一つは、一般化能�
 
 Vision Transformer（ViT）の登場により、画像タスクは局所的な畳み込みから全体的なモデリング時代へと進化しました。Face Anti-Spoofing も例外ではありません。
 
-16. [**[23.02] Rethinking Vision Transformer and Masked Autoencoder in Multimodal Face Anti-Spoofing**](https://arxiv.org/abs/2302.05744)
+16. [**[23.01] Domain Invariant Vision Transformer Learning for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/WACV2023/papers/Liao_Domain_Invariant_Vision_Transformer_Learning_for_Face_Anti-Spoofing_WACV_2023_paper.pdf)
+    DiVT アーキテクチャを提案し、2 つの主要な損失関数を通じてクロスドメイン汎化性能を強化。真の顔特徴を集約することで、より一貫性のあるドメイン不変表現を形成する。実験では、DiVT が複数の DG-FAS タスクにおいて SOTA の成果を達成しており、手法は簡潔でありながら、クロスドメイン認識における重要な情報を効果的に捉えることができることが示された。
+
+17. [**[23.02] Rethinking Vision Transformer and Masked Autoencoder in Multimodal Face Anti-Spoofing**](https://arxiv.org/abs/2302.05744)
     ViT が多モーダル FAS における主要な問題を全面的に再考。入力設計、事前学習戦略、パラメータ微調整フローを含む、AMA アダプターと M2A2E 事前学習アーキテクチャを提案し、クロスモーダルかつラベルなしの自己監督プロセスを構築。
 
-17. [**[23.04] Ma-ViT: Modality-Agnostic Vision Transformers for Face Anti-Spoofing**](https://arxiv.org/abs/2304.07549)
+18. [**[23.04] Ma-ViT: Modality-Agnostic Vision Transformers for Face Anti-Spoofing**](https://arxiv.org/abs/2304.07549)
     単一分岐の早期融合アーキテクチャを採用し、Modal-Disentangle Attention と Cross-Modal Attention を通じて、モーダルに依存しない識別能力を実現。記憶効率と柔軟な展開を両立させた、ViT の実用性における重要な一歩。
-
-18. [**[23.05] FM-ViT: Flexible Modal Vision Transformers for Face Anti-Spoofing**](https://arxiv.org/abs/2305.03277)
-    モーダル欠損と高精度攻撃の問題を解決するために、クロスモーダルアテンション設計（MMA + MFA）を提案。各モーダルの特徴を保ちつつ、偽顔のパッチへの焦点を強化する、展開の柔軟性を考慮した設計のテンプレート。
 
 19. [**[23.09] Sadapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens**](https://arxiv.org/abs/2309.04038)
     Efficient Parameter Transfer Learning アーキテクチャを利用して、ViT に統計的アダプターを挿入し、主ネットワークのパラメータを固定。Token Style Regularization でスタイル差を抑制し、クロスドメイン FAS に特化した軽量ソリューション。
 
-20. [**[24.10] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
+20. [**[24.07] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
     クロスモーダル詐欺強化器（CMS-Enhancer）とテキスト誘導（LGPA）による偽顔の動的アライメントにより、マルチモーダル訓練および単一または複数のモーダルテストで高い検出精度を維持し、複数のデータセットにおいて優れた汎化能力を示します。
 
 ---

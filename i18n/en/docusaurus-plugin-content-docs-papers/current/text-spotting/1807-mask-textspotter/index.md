@@ -13,8 +13,6 @@ When we first encountered this paper, both the model design philosophy and the i
 
 - [**[18.09] CA-FCN: A New Dimension**](../../text-recognition/1809-cafcn/index.md)
 
-Many of their papers have been published in CVPR and have had a major impact in the field.
-
 ---
 
 Returning to this paper, the authors were inspired by Mask R-CNN. Using pixel-level prediction, they simultaneously predict the position and class of text.

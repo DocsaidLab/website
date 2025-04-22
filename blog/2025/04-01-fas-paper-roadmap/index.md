@@ -156,19 +156,19 @@ Face Anti-Spoofing 最棘手的問題之一是泛化能力：如何讓模型不�
 
 Vision Transformer（ViT）的崛起讓影像任務從局部卷積邁入全局建模時代，Face Anti-Spoofing 也不例外。
 
-16. [**[23.02] Rethinking Vision Transformer and Masked Autoencoder in Multimodal Face Anti-Spoofing**](https://arxiv.org/abs/2302.05744)
+16. [**[23.01] Domain Invariant Vision Transformer Learning for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/WACV2023/papers/Liao_Domain_Invariant_Vision_Transformer_Learning_for_Face_Anti-Spoofing_WACV_2023_paper.pdf)
+    提出 DiVT 架構，透過兩個核心損失函數強化跨域泛化，聚合真臉特徵，形成更一致的 domain-invariant 表徵。實驗顯示，DiVT 在多項 DG-FAS 任務上達成 SOTA 成績，方法精簡卻能有效捕捉跨域辨識的關鍵資訊。
+
+17. [**[23.02] Rethinking Vision Transformer and Masked Autoencoder in Multimodal Face Anti-Spoofing**](https://arxiv.org/abs/2302.05744)
     全面檢討 ViT 在多模態 FAS 中的核心議題，包含輸入設計、預訓練策略與參數微調流程，並提出 AMA adapter 與 M2A2E 預訓練架構，建構跨模態、無標註的自監督流程。
 
-17. [**[23.04] Ma-ViT: Modality-Agnostic Vision Transformers for Face Anti-Spoofing**](https://arxiv.org/abs/2304.07549)
+18. [**[23.04] Ma-ViT: Modality-Agnostic Vision Transformers for Face Anti-Spoofing**](https://arxiv.org/abs/2304.07549)
     採單分支 early fusion 架構，透過 Modal-Disentangle Attention 與 Cross-Modal Attention，實現模態不可知的辨識能力，兼顧記憶效率與彈性部署，是 ViT 在實用性上邁出的重要一步。
-
-18. [**[23.05] FM-ViT: Flexible Modal Vision Transformers for Face Anti-Spoofing**](https://arxiv.org/abs/2305.03277)
-    為解決模態缺失與高保真攻擊問題，提出跨模態注意力設計（MMA + MFA），在保留各模態特性的同時，強化對 spoof patch 的聚焦能力，是針對部署彈性設計的範本。
 
 19. [**[23.09] Sadapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens**](https://arxiv.org/abs/2309.04038)
     利用 Efficient Parameter Transfer Learning 架構，在 ViT 上插入 statistical adapters 並固定主網參數，搭配 Token Style Regularization 抑制風格差異，是專為 cross-domain FAS 設計的輕量方案。
 
-20. [**[24.10] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
+20. [**[24.07] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
     透過跨模態頻率提取 (CMS-Enhancer) 與文字引導 (LGPA) 動態對齊假臉線索，能於多模態訓練、單一或多模態測試中維持高偵測準確度，在多組資料集上均展現優異的泛化能力。
 
 ---

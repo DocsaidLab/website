@@ -13,8 +13,6 @@ authors: Z. Yuan
 
 - [**[18.09] CA-FCN: 引入新的維度**](../../text-recognition/1809-cafcn/index.md)
 
-他們很多論文都發在 CVPR 上，在該領域內有非常大的影響力。
-
 ---
 
 回到這篇論文，作者受到 Mask R-CNN 的啟發，用像素級的預測方式，將文字的位置和類別直接預測出來。
