@@ -168,8 +168,8 @@ Vision Transformer（ViT）の登場により、画像タスクは局所的な�
 19. [**[23.09] Sadapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens**](https://arxiv.org/abs/2309.04038)
     Efficient Parameter Transfer Learning アーキテクチャを利用して、ViT に統計的アダプターを挿入し、主ネットワークのパラメータを固定。Token Style Regularization でスタイル差を抑制し、クロスドメイン FAS に特化した軽量ソリューション。
 
-20. [**[23.10] LDCFormer: Incorporating Learnable Descriptive Convolution to Vision Transformer for Face Anti-Spoofing**](https://ieeexplore.ieee.org/document/10222330)
-    学習可能な記述的畳み込み（LDC）を ViT に統合し、局所的な詳細表現能力を強化。複数のベンチマークで SOTA（最先端技術）を達成するために、最適化されたバージョン LDCformerD を提案。
+20. [**[24.10] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
+    クロスモーダル詐欺強化器（CMS-Enhancer）とテキスト誘導（LGPA）による偽顔の動的アライメントにより、マルチモーダル訓練および単一または複数のモーダルテストで高い検出精度を維持し、複数のデータセットにおいて優れた汎化能力を示します。
 
 ---
 

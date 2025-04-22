@@ -168,8 +168,8 @@ The rise of Vision Transformers (ViT) has ushered in an era of global modeling f
 19. [**[23.09] Sadapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens**](https://arxiv.org/abs/2309.04038)
     Using an Efficient Parameter Transfer Learning architecture, this approach inserts statistical adapters into ViT while fixing the main network parameters. Token Style Regularization helps suppress style differences, providing a lightweight solution for cross-domain FAS.
 
-20. [**[23.10] LDCFormer: Incorporating Learnable Descriptive Convolution to Vision Transformer for Face Anti-Spoofing**](https://ieeexplore.ieee.org/document/10222330)
-    Combining learnable descriptive convolution (LDC) with ViT to enhance local detail representation, the paper introduces a decoupled optimization version (LDCformerD), achieving state-of-the-art performance across multiple benchmarks.
+20. [**[24.10] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
+    By utilizing Cross-Modal Spoofing Enhancer (CMS-Enhancer) and text-guided (LGPA) dynamic alignment of spoofing cues, it maintains high detection accuracy across multi-modal training and single or multi-modal testing, demonstrating excellent generalization ability across multiple datasets.
 
 ---
 

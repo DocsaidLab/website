@@ -168,8 +168,8 @@ Vision Transformer（ViT）的崛起讓影像任務從局部卷積邁入全局�
 19. [**[23.09] Sadapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens**](https://arxiv.org/abs/2309.04038)
     利用 Efficient Parameter Transfer Learning 架構，在 ViT 上插入 statistical adapters 並固定主網參數，搭配 Token Style Regularization 抑制風格差異，是專為 cross-domain FAS 設計的輕量方案。
 
-20. [**[23.10] LDCFormer: Incorporating Learnable Descriptive Convolution to Vision Transformer for Face Anti-Spoofing**](https://ieeexplore.ieee.org/document/10222330)
-    將可學習的描述性卷積（LDC）結合 ViT，以強化局部細節表徵能力，並提出 decoupled 優化版本 LDCformerD，在多個 benchmark 上達成 SOTA 表現。
+20. [**[24.10] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
+    透過跨模態頻率提取 (CMS-Enhancer) 與文字引導 (LGPA) 動態對齊假臉線索，能於多模態訓練、單一或多模態測試中維持高偵測準確度，在多組資料集上均展現優異的泛化能力。
 
 ---
 
