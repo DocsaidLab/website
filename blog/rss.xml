@@ -474,22 +474,27 @@
 <li>
 <p><a href="https://openaccess.thecvf.com/content/WACV2023/papers/Liao_Domain_Invariant_Vision_Transformer_Learning_for_Face_Anti-Spoofing_WACV_2023_paper.pdf" target="_blank" rel="noopener noreferrer"><strong>[23.01] Domain Invariant Vision Transformer Learning for Face Anti-Spoofing</strong></a>
 提出 DiVT 架構，透過兩個核心損失函數強化跨域泛化，聚合真臉特徵，形成更一致的 domain-invariant 表徵。實驗顯示，DiVT 在多項 DG-FAS 任務上達成 SOTA 成績，方法精簡卻能有效捕捉跨域辨識的關鍵資訊。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/divt/" target="_blank" rel="noopener noreferrer"><strong>[23.01] DiVT: 全明星錦標賽</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2302.05744" target="_blank" rel="noopener noreferrer"><strong>[23.02] Rethinking Vision Transformer and Masked Autoencoder in Multimodal Face Anti-Spoofing</strong></a>
 全面檢討 ViT 在多模態 FAS 中的核心議題，包含輸入設計、預訓練策略與參數微調流程，並提出 AMA adapter 與 M2A2E 預訓練架構，建構跨模態、無標註的自監督流程。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/m2a2e/" target="_blank" rel="noopener noreferrer"><strong>[23.02] M²A²E: 舉一反三</strong></a></p></div></div>
 </li>
 <li>
-<p><a href="https://arxiv.org/abs/2304.07549" target="_blank" rel="noopener noreferrer"><strong>[23.04] Ma-ViT: Modality-Agnostic Vision Transformers for Face Anti-Spoofing</strong></a>
+<p><a href="https://arxiv.org/abs/2304.07549" target="_blank" rel="noopener noreferrer"><strong>[23.04] MA-ViT: Modality-Agnostic Vision Transformers for Face Anti-Spoofing</strong></a>
 採單分支 early fusion 架構，透過 Modal-Disentangle Attention 與 Cross-Modal Attention，實現模態不可知的辨識能力，兼顧記憶效率與彈性部署，是 ViT 在實用性上邁出的重要一步。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/ma-vit/" target="_blank" rel="noopener noreferrer"><strong>[23.04] MA-ViT: 凡所有相，皆是虛妄</strong></a></p></div></div>
 </li>
 <li>
-<p><a href="https://arxiv.org/abs/2309.04038" target="_blank" rel="noopener noreferrer"><strong>[23.09] Sadapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens</strong></a>
+<p><a href="https://arxiv.org/abs/2309.04038" target="_blank" rel="noopener noreferrer"><strong>[23.09] S-Adapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens</strong></a>
 利用 Efficient Parameter Transfer Learning 架構，在 ViT 上插入 statistical adapters 並固定主網參數，搭配 Token Style Regularization 抑制風格差異，是專為 cross-domain FAS 設計的輕量方案。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/s-adapter/" target="_blank" rel="noopener noreferrer"><strong>[23.09] S-Adapter: 真實筆記本</strong></a></p></div></div>
 </li>
 <li>
-<p><a href="https://dl.acm.org/doi/pdf/10.1145/3664647.3680856" target="_blank" rel="noopener noreferrer"><strong>[24.07] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing</strong></a>
+<p><a href="https://dl.acm.org/doi/pdf/10.1145/3664647.3680856" target="_blank" rel="noopener noreferrer"><strong>[24.10] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing</strong></a>
 透過跨模態頻率提取 (CMS-Enhancer) 與文字引導 (LGPA) 動態對齊假臉線索，能於多模態訓練、單一或多模態測試中維持高偵測準確度，在多組資料集上均展現優異的泛化能力。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/fm-clip/" target="_blank" rel="noopener noreferrer"><strong>[24.10] FM-CLIP: 來自語言的指引</strong></a></p></div></div>
 </li>
 </ol>
 <hr>
