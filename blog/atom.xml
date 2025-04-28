@@ -518,24 +518,24 @@
 <p>這一章聚焦於風格解耦、對抗學習、測試時自適應（test-time adaptation）與 instance-aware 設計，這些方法嘗試讓模型能在未知風格與樣本分布下，依然保持穩定的辨識性能。</p>
 <ol start="21">
 <li>
-<p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0031320321000753" target="_blank" rel="noopener noreferrer"><strong>[21.07] Unified Unsupervised and Semi-Supervised Domain Adaptation Network for Cross-Scenario Face Anti-Spoofing</strong></a>
-提出 USDAN 框架，同時支援無監督與半監督設定，透過邊際與條件對齊模組，配合對抗訓練，學習兼容不同任務配置的泛化表徵。</p>
+<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/25443" target="_blank" rel="noopener noreferrer"><strong>[23.02] Cyclically Disentangled Feature Translation for Face Anti-spoofing</strong></a>
+提出 CDFTN，透過對抗式學習將活體與風格成分分離，生成結合真實標籤與目標域樣貌的 pseudo-labeled 样本，顯著提升跨域偽裝辨識的準確度與魯棒性。</p>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2203.05340" target="_blank" rel="noopener noreferrer"><strong>[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing</strong></a>
 採內容與風格分離策略，重組風格空間來模擬 style shift，搭配對比學習強調活體相關風格，是 style-aware DG 設計的重要突破。</p>
 </li>
 <li>
-<p><a href="https://link.springer.com/article/10.1007/s11263-023-01778-x" target="_blank" rel="noopener noreferrer"><strong>[23.03] Adversarial Learning Domain-Invariant Conditional Features for Robust Face Anti-Spoofing</strong></a>
-不僅對齊邊際分布，更引入條件對齊的對抗結構，以類別為單位學習可區分的跨域共享表徵，有效解決錯誤對齊問題。</p>
-</li>
-<li>
-<p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0957417422021248" target="_blank" rel="noopener noreferrer"><strong>[23.03] Style Selective Normalization with Meta Learning for Test-Time Adaptive Face Anti-Spoofing</strong></a>
-利用統計資訊推估輸入圖像所屬風格，動態選擇 normalization 參數進行測試時自適應，並結合 meta-learning 預先模擬未知 domain 的遷移過程。</p>
-</li>
-<li>
 <p><a href="https://arxiv.org/abs/2304.05640" target="_blank" rel="noopener noreferrer"><strong>[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing</strong></a>
 拋棄粗略的 domain label，改採 instance-level 的風格對齊策略，透過不對稱 whitening、風格增強與動態 kernel 設計，提煉出對風格不敏感的辨識特徵。</p>
+</li>
+<li>
+<p><a href="https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Towards_Unsupervised_Domain_Generalization_for_Face_Anti-Spoofing_ICCV_2023_paper.html" target="_blank" rel="noopener noreferrer"><strong>[23.10] Towards Unsupervised Domain Generalization for Face Anti-Spoofing</strong></a>
+將 unlabeled 資料納入學習流程，透過分割重組與跨域相似度尋找機制，提煉出能適應多種未標註場景的泛化表徵，達成真正無監督的 DG FAS。</p>
+</li>
+<li>
+<p><a href="https://papers.bmvc2023.org/0379.pdf" target="_blank" rel="noopener noreferrer"><strong>[23.11] Test-Time Adaptation for Robust Face Anti-Spoofing</strong></a>
+在推理階段針對新場景動態調整模型，結合 activation-based pseudo-labeling 與對比學習防止遺忘，使預先訓練的 FAS 模型能在測試時自我優化，提升對未知攻擊的敏銳度。</p>
 </li>
 </ol>
 <hr>

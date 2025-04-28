@@ -496,34 +496,34 @@ By utilizing Cross-Modal Spoofing Enhancer (CMS-Enhancer) and text-guided (LGPA)
 <p>These five papers demonstrate how the Transformer architecture handles critical challenges in multimodal input, modality loss, cross-domain style, and local patch representations, representing a comprehensive shift in the logic of FAS model design.</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="chapter-5-the-battle-of-styles">Chapter 5: The Battle of Styles<a href="https://docsaid.org/en/blog/fas-paper-roadmap#chapter-5-the-battle-of-styles" class="hash-link" aria-label="Direct link to Chapter 5: The Battle of Styles" title="Direct link to Chapter 5: The Battle of Styles">​</a></h2>
 <blockquote>
-<p><strong>When spoofing comes from different worlds, how can we build style-invariant models?</strong></p>
+<p><strong>When spoofing comes from different worlds, how to build a style-agnostic model?</strong></p>
 </blockquote>
-<p>The generalization of FAS models is not only challenged by domain shifts but also by the interference caused by asymmetric information between different styles.</p>
-<p>This chapter focuses on style decoupling, adversarial learning, test-time adaptation, and instance-aware designs. These approaches attempt to enable models to maintain stable recognition performance even under unknown styles and sample distributions.</p>
+<p>The generalization of FAS models is challenged not only by domain shift but also by the interference caused by the asymmetry of information between different styles.</p>
+<p>This chapter focuses on style disentanglement, adversarial learning, test-time adaptation, and instance-aware design. These methods aim to help the model maintain stable recognition performance under unknown styles and sample distributions.</p>
 <ol start="21">
 <li>
-<p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0031320321000753" target="_blank" rel="noopener noreferrer"><strong>[21.07] Unified Unsupervised and Semi-Supervised Domain Adaptation Network for Cross-Scenario Face Anti-Spoofing</strong></a>
-Proposing the USDAN framework, which supports both unsupervised and semi-supervised settings, and learns generalized representations compatible with different task configurations through marginal and conditional alignment modules, along with adversarial training.</p>
+<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/25443" target="_blank" rel="noopener noreferrer"><strong>[23.02] Cyclically Disentangled Feature Translation for Face Anti-Spoofing</strong></a>
+Proposes CDFTN, which separates liveness and style components through adversarial learning, generating pseudo-labeled samples that combine real labels and target domain appearances. This significantly improves the accuracy and robustness of cross-domain spoof detection.</p>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2203.05340" target="_blank" rel="noopener noreferrer"><strong>[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing</strong></a>
-Adopting content and style separation strategies, this paper reshuffles the style space to simulate style shifts, emphasizing live-related styles through contrastive learning. It represents a significant breakthrough in style-aware domain generalization (DG) design.</p>
-</li>
-<li>
-<p><a href="https://link.springer.com/article/10.1007/s11263-023-01778-x" target="_blank" rel="noopener noreferrer"><strong>[23.03] Adversarial Learning Domain-Invariant Conditional Features for Robust Face Anti-Spoofing</strong></a>
-Not only aligning marginal distributions, but also introducing adversarial structures for conditional alignment, learning distinguishable cross-domain shared representations at the class level, effectively solving misalignment issues.</p>
-</li>
-<li>
-<p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0957417422021248" target="_blank" rel="noopener noreferrer"><strong>[23.03] Style Selective Normalization with Meta Learning for Test-Time Adaptive Face Anti-Spoofing</strong></a>
-Utilizing statistical information to estimate the style of input images, this method dynamically selects normalization parameters for test-time adaptation, and combines meta-learning to pre-simulate the transfer process for unknown domains.</p>
+Employs a content-style separation strategy, reorganizing the style space to simulate style shift. Combined with contrastive learning that emphasizes style related to liveness, this is a significant breakthrough in style-aware domain generalization (DG) design.</p>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2304.05640" target="_blank" rel="noopener noreferrer"><strong>[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing</strong></a>
-Discarding coarse domain labels, this paper adopts an instance-level style alignment strategy, refining style-invariant recognition features through asymmetric whitening, style enhancement, and dynamic kernel designs.</p>
+Abandons coarse domain labels in favor of instance-level style alignment strategies. Through asymmetric whitening, style enhancement, and dynamic kernel design, this refines recognition features that are insensitive to style.</p>
+</li>
+<li>
+<p><a href="https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Towards_Unsupervised_Domain_Generalization_for_Face_Anti-Spoofing_ICCV_2023_paper.html" target="_blank" rel="noopener noreferrer"><strong>[23.10] Towards Unsupervised Domain Generalization for Face Anti-Spoofing</strong></a>
+Incorporates unlabeled data into the learning process, using segmentation and cross-domain similarity searching mechanisms to extract generalized representations that adapt to multiple unlabeled scenarios, achieving true unsupervised domain generalization (DG) for FAS.</p>
+</li>
+<li>
+<p><a href="https://papers.bmvc2023.org/0379.pdf" target="_blank" rel="noopener noreferrer"><strong>[23.11] Test-Time Adaptation for Robust Face Anti-Spoofing</strong></a>
+Dynamically adjusts the model at inference time for new scenes, combining activation-based pseudo-labeling and contrastive learning to prevent forgetting, allowing pre-trained FAS models to self-optimize during testing, improving sensitivity to unknown attacks.</p>
 </li>
 </ol>
 <hr>
-<p>These five papers challenge the "style generalization" theme from different angles, particularly with attempts at instance-based and test-time adaptation, gradually approaching the demands of real-world applications.</p>
+<p>These five papers challenge the theme of "style generalization" from different angles, especially with their attempts in instance-based and test-time adaptation, gradually approaching the demands of practical application scenarios.</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="chapter-6-the-summoning-of-multimodality">Chapter 6: The Summoning of Multimodality<a href="https://docsaid.org/en/blog/fas-paper-roadmap#chapter-6-the-summoning-of-multimodality" class="hash-link" aria-label="Direct link to Chapter 6: The Summoning of Multimodality" title="Direct link to Chapter 6: The Summoning of Multimodality">​</a></h2>
 <blockquote>
 <p><strong>When images are no longer the only modality, sound and physiological signals come into play</strong></p>

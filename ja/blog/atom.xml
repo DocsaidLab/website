@@ -509,36 +509,36 @@ Efficient Parameter Transfer Learning アーキテクチャを利用して、ViT
 </ol>
 <hr>
 <p>この段階の 5 本の論文は、Transformer アーキテクチャが多モーダル入力、モーダル欠損、クロスドメインスタイル、局所パッチ表現などの重要な課題をどのように処理しているかを示しています。これは FAS モデル設計ロジックの全面的な転換を表しています。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="第五章風格の戦い">第五章：風格の戦い<a href="https://docsaid.org/ja/blog/fas-paper-roadmap#%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A2%A8%E6%A0%BC%E3%81%AE%E6%88%A6%E3%81%84" class="hash-link" aria-label="第五章：風格の戦い への直接リンク" title="第五章：風格の戦い への直接リンク">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="第五章スタイルの戦い">第五章：スタイルの戦い<a href="https://docsaid.org/ja/blog/fas-paper-roadmap#%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%81%AE%E6%88%A6%E3%81%84" class="hash-link" aria-label="第五章：スタイルの戦い への直接リンク" title="第五章：スタイルの戦い への直接リンク">​</a></h2>
 <blockquote>
-<p><strong>異なる世界からの spoof、風格に敏感でないモデルをどのように作成するか？</strong></p>
+<p><strong>異なる世界からのスプーフィング、どのようにしてスタイルに敏感でないモデルを作るか？</strong></p>
 </blockquote>
-<p>FAS モデルの一般化能力は、ドメインシフトの挑戦だけでなく、異なるスタイル（style）間の情報不対称の干渉を受けます。</p>
-<p>この章では、スタイルの解耦、対抗学習、テスト時適応（test-time adaptation）およびインスタンスアウェア設計に焦点を当てています。これらの方法は、モデルが未知のスタイルやサンプル分布でも安定した識別性能を維持できるようにすることを試みています。</p>
+<p>FAS モデルの一般化は、ドメインシフトの挑戦だけでなく、異なるスタイル間の情報の非対称性による干渉も受けています。</p>
+<p>この章では、スタイルの解消、対抗学習、テスト時適応、インスタンス認識設計に焦点を当てています。これらの手法は、未知のスタイルやサンプル分布のもとでも安定した認識性能を保つことを目指しています。</p>
 <ol start="21">
 <li>
-<p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0031320321000753" target="_blank" rel="noopener noreferrer"><strong>[21.07] Unified Unsupervised and Semi-Supervised Domain Adaptation Network for Cross-Scenario Face Anti-Spoofing</strong></a>
-USDAN フレームワークを提案し、無監督および半監督設定を同時にサポート。境界と条件調整モジュールを通じて、対抗訓練を行い、異なるタスク設定に対応できる一般化表現を学習。</p>
+<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/25443" target="_blank" rel="noopener noreferrer"><strong>[23.02] Cyclically Disentangled Feature Translation for Face Anti-Spoofing</strong></a>
+CDFTN を提案し、対抗学習によって生体性とスタイル成分を分離し、実際のラベルとターゲットドメインの外観を組み合わせた擬似ラベル付きサンプルを生成します。これにより、クロスドメインでの偽装認識の精度と堅牢性が大幅に向上します。</p>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2203.05340" target="_blank" rel="noopener noreferrer"><strong>[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing</strong></a>
-内容とスタイルを分離する戦略を採用し、スタイル空間を再構成してスタイルシフトをシミュレート。対比学習を通じて、ライブ顔に関連するスタイルを強調することは、スタイル認識を伴う DG 設計の重要な突破口。</p>
-</li>
-<li>
-<p><a href="https://link.springer.com/article/10.1007/s11263-023-01778-x" target="_blank" rel="noopener noreferrer"><strong>[23.03] Adversarial Learning Domain-Invariant Conditional Features for Robust Face Anti-Spoofing</strong></a>
-境界分布の調整だけでなく、条件調整の対抗構造を導入し、クラス単位で区別可能なクロスドメイン共有表現を学習。誤った調整問題を効果的に解決。</p>
-</li>
-<li>
-<p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0957417422021248" target="_blank" rel="noopener noreferrer"><strong>[23.03] Style Selective Normalization with Meta Learning for Test-Time Adaptive Face Anti-Spoofing</strong></a>
-統計情報を利用して入力画像のスタイルを推定し、テスト時に適応的に正規化パラメータを選択。メタ学習を組み合わせて未知のドメインへの転送プロセスを事前にシミュレート。</p>
+コンテンツとスタイルの分離戦略を採用し、スタイル空間を再構成してスタイルシフトをシミュレートします。コントラスト学習を組み合わせ、生体性に関連するスタイルを強調することで、スタイル認識に基づいたドメイン一般化（DG）設計における重要なブレークスルーを実現します。</p>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2304.05640" target="_blank" rel="noopener noreferrer"><strong>[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing</strong></a>
-粗いドメインラベルを放棄し、インスタンスレベルのスタイル調整戦略を採用。非対称ホワイトニング、スタイル強化、動的カーネル設計を通じて、スタイルに敏感でない識別特徴を抽出。</p>
+粗いドメインラベルを放棄し、インスタンスレベルのスタイルアライメント戦略を採用します。非対称ホワイトニング、スタイル強化、動的カーネル設計を通じて、スタイルに敏感でない認識特徴を洗練させます。</p>
+</li>
+<li>
+<p><a href="https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Towards_Unsupervised_Domain_Generalization_for_Face_Anti-Spoofing_ICCV_2023_paper.html" target="_blank" rel="noopener noreferrer"><strong>[23.10] Towards Unsupervised Domain Generalization for Face Anti-Spoofing</strong></a>
+ラベルのないデータを学習プロセスに取り入れ、分割再構成とクロスドメイン類似度検索機構を使用して、複数のラベルなしシナリオに適応する一般化された表現を抽出します。これにより、真の無監督型ドメイン一般化（DG）FAS が達成されます。</p>
+</li>
+<li>
+<p><a href="https://papers.bmvc2023.org/0379.pdf" target="_blank" rel="noopener noreferrer"><strong>[23.11] Test-Time Adaptation for Robust Face Anti-Spoofing</strong></a>
+推論段階で新しいシーンに対してモデルを動的に調整し、アクティベーションベースの擬似ラベリングとコントラスト学習を組み合わせて忘却を防止し、事前に学習した FAS モデルがテスト時に自己最適化できるようにし、未知の攻撃に対する感度を向上させます。</p>
 </li>
 </ol>
 <hr>
-<p>これらの 5 本の論文は、さまざまな角度から「スタイル一般化」というテーマに挑戦しており、特にインスタンスベースおよびテスト時適応の試みでは、実際のアプリケーションシナリオに近づいています。</p>
+<p>これらの 5 篇は、異なる観点から「スタイル一般化」というテーマに挑戦しています。特に、インスタンスベースとテスト時適応の試みでは、実際の応用シナリオの要求に徐々に近づいています。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="第六章多モーダルの召喚術">第六章：多モーダルの召喚術<a href="https://docsaid.org/ja/blog/fas-paper-roadmap#%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%A4%9A%E3%83%A2%E3%83%BC%E3%83%80%E3%83%AB%E3%81%AE%E5%8F%AC%E5%96%9A%E8%A1%93" class="hash-link" aria-label="第六章：多モーダルの召喚術 への直接リンク" title="第六章：多モーダルの召喚術 への直接リンク">​</a></h2>
 <blockquote>
 <p><strong>画像だけではなく、音声や生理信号も登場</strong></p>
