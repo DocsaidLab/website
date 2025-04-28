@@ -159,17 +159,37 @@ The rise of Vision Transformers (ViT) has ushered in an era of global modeling f
 16. [**[23.01] Domain Invariant Vision Transformer Learning for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/WACV2023/papers/Liao_Domain_Invariant_Vision_Transformer_Learning_for_Face_Anti-Spoofing_WACV_2023_paper.pdf)
     Proposed the DiVT architecture, which enhances cross-domain generalization through two core loss functions. It aggregates genuine face features to form more consistent domain-invariant representations. Experiments show that DiVT achieves state-of-the-art results on various DG-FAS tasks, offering a streamlined yet effective approach to capturing key information for cross-domain recognition.
 
+    :::info
+    **Paper Notes**: [**[23.01] DiVT: All-Star Championship**](https://docsaid.org/en/papers/face-antispoofing/divt/)
+    :::
+
 17. [**[23.02] Rethinking Vision Transformer and Masked Autoencoder in Multimodal Face Anti-Spoofing**](https://arxiv.org/abs/2302.05744)
     A comprehensive review of the core issues of ViT in multimodal FAS, including input design, pre-training strategies, and fine-tuning processes. The paper proposes the AMA adapter and M2A2E pre-training architecture to construct cross-modal, label-free self-supervised workflows.
 
-18. [**[23.04] Ma-ViT: Modality-Agnostic Vision Transformers for Face Anti-Spoofing**](https://arxiv.org/abs/2304.07549)
+    :::info
+    **Paper Notes**: [**[23.02] M²A²E: Drawing Parallels**](https://docsaid.org/en/papers/face-antispoofing/m2a2e/)
+    :::
+
+18. [**[23.04] MA-ViT: Modality-Agnostic Vision Transformers for Face Anti-Spoofing**](https://arxiv.org/abs/2304.07549)
     Using a single-branch early fusion architecture, this paper implements modality-agnostic recognition ability through Modal-Disentangle Attention and Cross-Modal Attention, balancing memory efficiency and flexible deployment, marking an important step in ViT's practicality.
 
-19. [**[23.09] Sadapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens**](https://arxiv.org/abs/2309.04038)
+    :::info
+    **Paper Notes**: [**[23.04] MA-ViT: All appearances Are Illusions**](https://docsaid.org/en/papers/face-antispoofing/ma-vit/)
+    :::
+
+19. [**[23.09] S-Adapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens**](https://arxiv.org/abs/2309.04038)
     Using an Efficient Parameter Transfer Learning architecture, this approach inserts statistical adapters into ViT while fixing the main network parameters. Token Style Regularization helps suppress style differences, providing a lightweight solution for cross-domain FAS.
 
-20. [**[24.07] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
+    :::info
+    **Paper Notes**: [**[23.09] S-Adapter: Real Notebook**](https://docsaid.org/en/papers/face-antispoofing/s-adapter/)
+    :::
+
+20. [**[24.10] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
     By utilizing Cross-Modal Spoofing Enhancer (CMS-Enhancer) and text-guided (LGPA) dynamic alignment of spoofing cues, it maintains high detection accuracy across multi-modal training and single or multi-modal testing, demonstrating excellent generalization ability across multiple datasets.
+
+    :::info
+    **Paper Notes**: [**[24.10] FM-CLIP: Guidance from Language**](https://docsaid.org/en/papers/face-antispoofing/fm-clip/)
+    :::
 
 ---
 
@@ -177,30 +197,30 @@ These five papers demonstrate how the Transformer architecture handles critical 
 
 ## Chapter 5: The Battle of Styles
 
-> **When spoofing comes from different worlds, how can we build style-invariant models?**
+> **When spoofing comes from different worlds, how to build a style-agnostic model?**
 
-The generalization of FAS models is not only challenged by domain shifts but also by the interference caused by asymmetric information between different styles.
+The generalization of FAS models is challenged not only by domain shift but also by the interference caused by the asymmetry of information between different styles.
 
-This chapter focuses on style decoupling, adversarial learning, test-time adaptation, and instance-aware designs. These approaches attempt to enable models to maintain stable recognition performance even under unknown styles and sample distributions.
+This chapter focuses on style disentanglement, adversarial learning, test-time adaptation, and instance-aware design. These methods aim to help the model maintain stable recognition performance under unknown styles and sample distributions.
 
-21. [**[21.07] Unified Unsupervised and Semi-Supervised Domain Adaptation Network for Cross-Scenario Face Anti-Spoofing**](https://www.sciencedirect.com/science/article/abs/pii/S0031320321000753)
-    Proposing the USDAN framework, which supports both unsupervised and semi-supervised settings, and learns generalized representations compatible with different task configurations through marginal and conditional alignment modules, along with adversarial training.
+21. [**[23.02] Cyclically Disentangled Feature Translation for Face Anti-Spoofing**](https://ojs.aaai.org/index.php/AAAI/article/view/25443)
+    Proposes CDFTN, which separates liveness and style components through adversarial learning, generating pseudo-labeled samples that combine real labels and target domain appearances. This significantly improves the accuracy and robustness of cross-domain spoof detection.
 
 22. [**[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing**](https://arxiv.org/abs/2203.05340)
-    Adopting content and style separation strategies, this paper reshuffles the style space to simulate style shifts, emphasizing live-related styles through contrastive learning. It represents a significant breakthrough in style-aware domain generalization (DG) design.
+    Employs a content-style separation strategy, reorganizing the style space to simulate style shift. Combined with contrastive learning that emphasizes style related to liveness, this is a significant breakthrough in style-aware domain generalization (DG) design.
 
-23. [**[23.03] Adversarial Learning Domain-Invariant Conditional Features for Robust Face Anti-Spoofing**](https://link.springer.com/article/10.1007/s11263-023-01778-x)
-    Not only aligning marginal distributions, but also introducing adversarial structures for conditional alignment, learning distinguishable cross-domain shared representations at the class level, effectively solving misalignment issues.
+23. [**[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2304.05640)
+    Abandons coarse domain labels in favor of instance-level style alignment strategies. Through asymmetric whitening, style enhancement, and dynamic kernel design, this refines recognition features that are insensitive to style.
 
-24. [**[23.03] Style Selective Normalization with Meta Learning for Test-Time Adaptive Face Anti-Spoofing**](https://www.sciencedirect.com/science/article/abs/pii/S0957417422021248)
-    Utilizing statistical information to estimate the style of input images, this method dynamically selects normalization parameters for test-time adaptation, and combines meta-learning to pre-simulate the transfer process for unknown domains.
+24. [**[23.10] Towards Unsupervised Domain Generalization for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Towards_Unsupervised_Domain_Generalization_for_Face_Anti-Spoofing_ICCV_2023_paper.html)
+    Incorporates unlabeled data into the learning process, using segmentation and cross-domain similarity searching mechanisms to extract generalized representations that adapt to multiple unlabeled scenarios, achieving true unsupervised domain generalization (DG) for FAS.
 
-25. [**[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2304.05640)
-    Discarding coarse domain labels, this paper adopts an instance-level style alignment strategy, refining style-invariant recognition features through asymmetric whitening, style enhancement, and dynamic kernel designs.
+25. [**[23.11] Test-Time Adaptation for Robust Face Anti-Spoofing**](https://papers.bmvc2023.org/0379.pdf)
+    Dynamically adjusts the model at inference time for new scenes, combining activation-based pseudo-labeling and contrastive learning to prevent forgetting, allowing pre-trained FAS models to self-optimize during testing, improving sensitivity to unknown attacks.
 
 ---
 
-These five papers challenge the "style generalization" theme from different angles, particularly with attempts at instance-based and test-time adaptation, gradually approaching the demands of real-world applications.
+These five papers challenge the theme of "style generalization" from different angles, especially with their attempts in instance-based and test-time adaptation, gradually approaching the demands of practical application scenarios.
 
 ## Chapter 6: The Summoning of Multimodality
 

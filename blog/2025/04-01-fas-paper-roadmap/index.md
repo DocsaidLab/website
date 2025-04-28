@@ -159,17 +159,37 @@ Vision Transformer（ViT）的崛起讓影像任務從局部卷積邁入全局�
 16. [**[23.01] Domain Invariant Vision Transformer Learning for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/WACV2023/papers/Liao_Domain_Invariant_Vision_Transformer_Learning_for_Face_Anti-Spoofing_WACV_2023_paper.pdf)
     提出 DiVT 架構，透過兩個核心損失函數強化跨域泛化，聚合真臉特徵，形成更一致的 domain-invariant 表徵。實驗顯示，DiVT 在多項 DG-FAS 任務上達成 SOTA 成績，方法精簡卻能有效捕捉跨域辨識的關鍵資訊。
 
+    :::info
+    **論文筆記**：[**[23.01] DiVT: 全明星錦標賽**](https://docsaid.org/papers/face-antispoofing/divt/)
+    :::
+
 17. [**[23.02] Rethinking Vision Transformer and Masked Autoencoder in Multimodal Face Anti-Spoofing**](https://arxiv.org/abs/2302.05744)
     全面檢討 ViT 在多模態 FAS 中的核心議題，包含輸入設計、預訓練策略與參數微調流程，並提出 AMA adapter 與 M2A2E 預訓練架構，建構跨模態、無標註的自監督流程。
 
-18. [**[23.04] Ma-ViT: Modality-Agnostic Vision Transformers for Face Anti-Spoofing**](https://arxiv.org/abs/2304.07549)
+    :::info
+    **論文筆記**：[**[23.02] M²A²E: 舉一反三**](https://docsaid.org/papers/face-antispoofing/m2a2e/)
+    :::
+
+18. [**[23.04] MA-ViT: Modality-Agnostic Vision Transformers for Face Anti-Spoofing**](https://arxiv.org/abs/2304.07549)
     採單分支 early fusion 架構，透過 Modal-Disentangle Attention 與 Cross-Modal Attention，實現模態不可知的辨識能力，兼顧記憶效率與彈性部署，是 ViT 在實用性上邁出的重要一步。
 
-19. [**[23.09] Sadapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens**](https://arxiv.org/abs/2309.04038)
+    :::info
+    **論文筆記**：[**[23.04] MA-ViT: 凡所有相，皆是虛妄**](https://docsaid.org/papers/face-antispoofing/ma-vit/)
+    :::
+
+19. [**[23.09] S-Adapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens**](https://arxiv.org/abs/2309.04038)
     利用 Efficient Parameter Transfer Learning 架構，在 ViT 上插入 statistical adapters 並固定主網參數，搭配 Token Style Regularization 抑制風格差異，是專為 cross-domain FAS 設計的輕量方案。
 
-20. [**[24.07] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
+    :::info
+    **論文筆記**：[**[23.09] S-Adapter: 真實筆記本**](https://docsaid.org/papers/face-antispoofing/s-adapter/)
+    :::
+
+20. [**[24.10] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
     透過跨模態頻率提取 (CMS-Enhancer) 與文字引導 (LGPA) 動態對齊假臉線索，能於多模態訓練、單一或多模態測試中維持高偵測準確度，在多組資料集上均展現優異的泛化能力。
+
+    :::info
+    **論文筆記**：[**[24.10] FM-CLIP: 來自語言的指引**](https://docsaid.org/papers/face-antispoofing/fm-clip/)
+    :::
 
 ---
 
@@ -183,20 +203,20 @@ FAS 模型的泛化不只受到 domain shift 的挑戰，更受到不同風格�
 
 這一章聚焦於風格解耦、對抗學習、測試時自適應（test-time adaptation）與 instance-aware 設計，這些方法嘗試讓模型能在未知風格與樣本分布下，依然保持穩定的辨識性能。
 
-21. [**[21.07] Unified Unsupervised and Semi-Supervised Domain Adaptation Network for Cross-Scenario Face Anti-Spoofing**](https://www.sciencedirect.com/science/article/abs/pii/S0031320321000753)
-    提出 USDAN 框架，同時支援無監督與半監督設定，透過邊際與條件對齊模組，配合對抗訓練，學習兼容不同任務配置的泛化表徵。
+21. [**[23.02] Cyclically Disentangled Feature Translation for Face Anti-spoofing**](https://ojs.aaai.org/index.php/AAAI/article/view/25443)
+    提出 CDFTN，透過對抗式學習將活體與風格成分分離，生成結合真實標籤與目標域樣貌的 pseudo-labeled 样本，顯著提升跨域偽裝辨識的準確度與魯棒性。
 
 22. [**[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing**](https://arxiv.org/abs/2203.05340)
     採內容與風格分離策略，重組風格空間來模擬 style shift，搭配對比學習強調活體相關風格，是 style-aware DG 設計的重要突破。
 
-23. [**[23.03] Adversarial Learning Domain-Invariant Conditional Features for Robust Face Anti-Spoofing**](https://link.springer.com/article/10.1007/s11263-023-01778-x)
-    不僅對齊邊際分布，更引入條件對齊的對抗結構，以類別為單位學習可區分的跨域共享表徵，有效解決錯誤對齊問題。
-
-24. [**[23.03] Style Selective Normalization with Meta Learning for Test-Time Adaptive Face Anti-Spoofing**](https://www.sciencedirect.com/science/article/abs/pii/S0957417422021248)
-    利用統計資訊推估輸入圖像所屬風格，動態選擇 normalization 參數進行測試時自適應，並結合 meta-learning 預先模擬未知 domain 的遷移過程。
-
-25. [**[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2304.05640)
+23. [**[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2304.05640)
     拋棄粗略的 domain label，改採 instance-level 的風格對齊策略，透過不對稱 whitening、風格增強與動態 kernel 設計，提煉出對風格不敏感的辨識特徵。
+
+24. [**[23.10] Towards Unsupervised Domain Generalization for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Towards_Unsupervised_Domain_Generalization_for_Face_Anti-Spoofing_ICCV_2023_paper.html)
+    將 unlabeled 資料納入學習流程，透過分割重組與跨域相似度尋找機制，提煉出能適應多種未標註場景的泛化表徵，達成真正無監督的 DG FAS。
+
+25. [**[23.11] Test-Time Adaptation for Robust Face Anti-Spoofing**](https://papers.bmvc2023.org/0379.pdf)
+    在推理階段針對新場景動態調整模型，結合 activation-based pseudo-labeling 與對比學習防止遺忘，使預先訓練的 FAS 模型能在測試時自我優化，提升對未知攻擊的敏銳度。
 
 ---
 

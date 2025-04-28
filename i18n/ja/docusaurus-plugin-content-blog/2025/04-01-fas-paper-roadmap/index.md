@@ -159,48 +159,68 @@ Vision Transformer（ViT）の登場により、画像タスクは局所的な�
 16. [**[23.01] Domain Invariant Vision Transformer Learning for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/WACV2023/papers/Liao_Domain_Invariant_Vision_Transformer_Learning_for_Face_Anti-Spoofing_WACV_2023_paper.pdf)
     DiVT アーキテクチャを提案し、2 つの主要な損失関数を通じてクロスドメイン汎化性能を強化。真の顔特徴を集約することで、より一貫性のあるドメイン不変表現を形成する。実験では、DiVT が複数の DG-FAS タスクにおいて SOTA の成果を達成しており、手法は簡潔でありながら、クロスドメイン認識における重要な情報を効果的に捉えることができることが示された。
 
+    :::info
+    **論文ノート**：[**[23.01] DiVT: オールスター選手権**](https://docsaid.org/ja/papers/face-antispoofing/divt/)
+    :::
+
 17. [**[23.02] Rethinking Vision Transformer and Masked Autoencoder in Multimodal Face Anti-Spoofing**](https://arxiv.org/abs/2302.05744)
     ViT が多モーダル FAS における主要な問題を全面的に再考。入力設計、事前学習戦略、パラメータ微調整フローを含む、AMA アダプターと M2A2E 事前学習アーキテクチャを提案し、クロスモーダルかつラベルなしの自己監督プロセスを構築。
 
-18. [**[23.04] Ma-ViT: Modality-Agnostic Vision Transformers for Face Anti-Spoofing**](https://arxiv.org/abs/2304.07549)
+    :::info
+    **論文ノート**：[**[23.02] M²A²E: 舉一反三**](https://docsaid.org/ja/papers/face-antispoofing/m2a2e/)
+    :::
+
+18. [**[23.04] MA-ViT: Modality-Agnostic Vision Transformers for Face Anti-Spoofing**](https://arxiv.org/abs/2304.07549)
     単一分岐の早期融合アーキテクチャを採用し、Modal-Disentangle Attention と Cross-Modal Attention を通じて、モーダルに依存しない識別能力を実現。記憶効率と柔軟な展開を両立させた、ViT の実用性における重要な一歩。
 
-19. [**[23.09] Sadapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens**](https://arxiv.org/abs/2309.04038)
+    :::info
+    **論文ノート**：[**[23.04] MA-ViT: 凡所有相，皆是虚妄**](https://docsaid.org/ja/papers/face-antispoofing/ma-vit/)
+    :::
+
+19. [**[23.09] S-Adapter: Generalizing Vision Transformer for Face Anti-Spoofing with Statistical Tokens**](https://arxiv.org/abs/2309.04038)
     Efficient Parameter Transfer Learning アーキテクチャを利用して、ViT に統計的アダプターを挿入し、主ネットワークのパラメータを固定。Token Style Regularization でスタイル差を抑制し、クロスドメイン FAS に特化した軽量ソリューション。
 
-20. [**[24.07] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
+    :::info
+    **論文ノート**：[**[23.09] S-Adapter: 実際のノート**](https://docsaid.org/ja/papers/face-antispoofing/s-adapter/)
+    :::
+
+20. [**[24.10] FM-CLIP: Flexible Modal CLIP for Face Anti-Spoofing**](https://dl.acm.org/doi/pdf/10.1145/3664647.3680856)
     クロスモーダル詐欺強化器（CMS-Enhancer）とテキスト誘導（LGPA）による偽顔の動的アライメントにより、マルチモーダル訓練および単一または複数のモーダルテストで高い検出精度を維持し、複数のデータセットにおいて優れた汎化能力を示します。
+
+    :::info
+    **論文ノート**：[**[24.10] FM-CLIP: 言語からの指針**](https://docsaid.org/ja/papers/face-antispoofing/fm-clip/)
+    :::
 
 ---
 
 この段階の 5 本の論文は、Transformer アーキテクチャが多モーダル入力、モーダル欠損、クロスドメインスタイル、局所パッチ表現などの重要な課題をどのように処理しているかを示しています。これは FAS モデル設計ロジックの全面的な転換を表しています。
 
-## 第五章：風格の戦い
+## 第五章：スタイルの戦い
 
-> **異なる世界からの spoof、風格に敏感でないモデルをどのように作成するか？**
+> **異なる世界からのスプーフィング、どのようにしてスタイルに敏感でないモデルを作るか？**
 
-FAS モデルの一般化能力は、ドメインシフトの挑戦だけでなく、異なるスタイル（style）間の情報不対称の干渉を受けます。
+FAS モデルの一般化は、ドメインシフトの挑戦だけでなく、異なるスタイル間の情報の非対称性による干渉も受けています。
 
-この章では、スタイルの解耦、対抗学習、テスト時適応（test-time adaptation）およびインスタンスアウェア設計に焦点を当てています。これらの方法は、モデルが未知のスタイルやサンプル分布でも安定した識別性能を維持できるようにすることを試みています。
+この章では、スタイルの解消、対抗学習、テスト時適応、インスタンス認識設計に焦点を当てています。これらの手法は、未知のスタイルやサンプル分布のもとでも安定した認識性能を保つことを目指しています。
 
-21. [**[21.07] Unified Unsupervised and Semi-Supervised Domain Adaptation Network for Cross-Scenario Face Anti-Spoofing**](https://www.sciencedirect.com/science/article/abs/pii/S0031320321000753)
-    USDAN フレームワークを提案し、無監督および半監督設定を同時にサポート。境界と条件調整モジュールを通じて、対抗訓練を行い、異なるタスク設定に対応できる一般化表現を学習。
+21. [**[23.02] Cyclically Disentangled Feature Translation for Face Anti-Spoofing**](https://ojs.aaai.org/index.php/AAAI/article/view/25443)
+    CDFTN を提案し、対抗学習によって生体性とスタイル成分を分離し、実際のラベルとターゲットドメインの外観を組み合わせた擬似ラベル付きサンプルを生成します。これにより、クロスドメインでの偽装認識の精度と堅牢性が大幅に向上します。
 
 22. [**[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing**](https://arxiv.org/abs/2203.05340)
-    内容とスタイルを分離する戦略を採用し、スタイル空間を再構成してスタイルシフトをシミュレート。対比学習を通じて、ライブ顔に関連するスタイルを強調することは、スタイル認識を伴う DG 設計の重要な突破口。
+    コンテンツとスタイルの分離戦略を採用し、スタイル空間を再構成してスタイルシフトをシミュレートします。コントラスト学習を組み合わせ、生体性に関連するスタイルを強調することで、スタイル認識に基づいたドメイン一般化（DG）設計における重要なブレークスルーを実現します。
 
-23. [**[23.03] Adversarial Learning Domain-Invariant Conditional Features for Robust Face Anti-Spoofing**](https://link.springer.com/article/10.1007/s11263-023-01778-x)
-    境界分布の調整だけでなく、条件調整の対抗構造を導入し、クラス単位で区別可能なクロスドメイン共有表現を学習。誤った調整問題を効果的に解決。
+23. [**[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2304.05640)
+    粗いドメインラベルを放棄し、インスタンスレベルのスタイルアライメント戦略を採用します。非対称ホワイトニング、スタイル強化、動的カーネル設計を通じて、スタイルに敏感でない認識特徴を洗練させます。
 
-24. [**[23.03] Style Selective Normalization with Meta Learning for Test-Time Adaptive Face Anti-Spoofing**](https://www.sciencedirect.com/science/article/abs/pii/S0957417422021248)
-    統計情報を利用して入力画像のスタイルを推定し、テスト時に適応的に正規化パラメータを選択。メタ学習を組み合わせて未知のドメインへの転送プロセスを事前にシミュレート。
+24. [**[23.10] Towards Unsupervised Domain Generalization for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Towards_Unsupervised_Domain_Generalization_for_Face_Anti-Spoofing_ICCV_2023_paper.html)
+    ラベルのないデータを学習プロセスに取り入れ、分割再構成とクロスドメイン類似度検索機構を使用して、複数のラベルなしシナリオに適応する一般化された表現を抽出します。これにより、真の無監督型ドメイン一般化（DG）FAS が達成されます。
 
-25. [**[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2304.05640)
-    粗いドメインラベルを放棄し、インスタンスレベルのスタイル調整戦略を採用。非対称ホワイトニング、スタイル強化、動的カーネル設計を通じて、スタイルに敏感でない識別特徴を抽出。
+25. [**[23.11] Test-Time Adaptation for Robust Face Anti-Spoofing**](https://papers.bmvc2023.org/0379.pdf)
+    推論段階で新しいシーンに対してモデルを動的に調整し、アクティベーションベースの擬似ラベリングとコントラスト学習を組み合わせて忘却を防止し、事前に学習した FAS モデルがテスト時に自己最適化できるようにし、未知の攻撃に対する感度を向上させます。
 
 ---
 
-これらの 5 本の論文は、さまざまな角度から「スタイル一般化」というテーマに挑戦しており、特にインスタンスベースおよびテスト時適応の試みでは、実際のアプリケーションシナリオに近づいています。
+これらの 5 篇は、異なる観点から「スタイル一般化」というテーマに挑戦しています。特に、インスタンスベースとテスト時適応の試みでは、実際の応用シナリオの要求に徐々に近づいています。
 
 ## 第六章：多モーダルの召喚術
 
