@@ -23,7 +23,7 @@ const i18nContentData = {
         bulletTitle: '你會得到',
         bulletPoints: ['技術評估 + 商業規劃', '模型選型與訓練', '趨勢前瞻與 PoC 驗證'],
         buttonText: '技術方案詳解',
-        buttonLink: 'https://docsaid.org/services#-%E6%8A%80%E8%A1%93%E8%AB%96%E6%96%87%E5%B0%8E%E8%AE%80%E8%88%87%E6%87%89%E7%94%A8%E7%AD%96%E7%95%A5%E5%BB%BA%E8%AD%B0',
+        buttonLink: 'https://docsaid.org/services',
       },
       {
         id: 'fullstack',
@@ -34,7 +34,7 @@ const i18nContentData = {
         bulletTitle: '專業組合',
         bulletPoints: ['FastAPI + Docker 後端', 'React 前端', 'CI/CD 自動化部署'],
         buttonText: '系統整合內容',
-        buttonLink: 'https://docsaid.org/services#-ai-%E6%A8%A1%E5%9E%8B-api-%E5%8C%96%E8%88%87%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8B%99',
+        buttonLink: 'https://docsaid.org/services',
       },
       {
         id: 'custom',
@@ -45,7 +45,7 @@ const i18nContentData = {
         bulletTitle: '包含服務',
         bulletPoints: ['專案評估與技術驗證', 'MVP 快速開發', '長期維運與功能升級'],
         buttonText: '開始規劃',
-        buttonLink: 'https://docsaid.org/services#-%E5%BE%9E%E9%9B%B6%E6%89%93%E9%80%A0-ai-%E6%A8%A1%E5%9E%8B%E7%94%A2%E5%93%81%E9%80%B2%E9%9A%8E%E5%B0%88%E6%A1%88',
+        buttonLink: 'https://docsaid.org/services',
       },
     ],
 
@@ -59,7 +59,7 @@ const i18nContentData = {
         bulletTitle: '融合優勢',
         bulletPoints: ['整合式技術架構', '持續迭代與部署最佳化'],
         buttonText: '探索整合方案',
-        buttonLink: 'https://docsaid.org/services#-ai-%E6%A8%A1%E5%9E%8B-api-%E5%8C%96%E8%88%87%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8B%99',
+        buttonLink: 'https://docsaid.org/services',
       },
       {
         id: 'flex_custom',
@@ -70,7 +70,7 @@ const i18nContentData = {
         bulletTitle: '服務內容',
         bulletPoints: ['模組化系統開發', '雲端部署與資料整合'],
         buttonText: '需求洽談',
-        buttonLink: 'https://docsaid.org/services#-%E5%BE%9E%E9%9B%B6%E6%89%93%E9%80%A0-ai-%E6%A8%A1%E5%9E%8B%E7%94%A2%E5%93%81%E9%80%B2%E9%9A%8E%E5%B0%88%E6%A1%88',
+        buttonLink: 'https://docsaid.org/services',
       },
     ],
 
@@ -84,7 +84,7 @@ const i18nContentData = {
         bulletTitle: '包含內容',
         bulletPoints: ['顧問服務 + 系統建置 + 客製開發', '長期維運與擴充規劃'],
         buttonText: '立即開始',
-        buttonLink: 'https://docsaid.org/services#-%E5%BE%9E%E9%9B%B6%E6%89%93%E9%80%A0-ai-%E6%A8%A1%E5%9E%8B%E7%94%A2%E5%93%81%E9%80%B2%E9%9A%8E%E5%B0%88%E6%A1%88',
+        buttonLink: 'https://docsaid.org/services',
       },
     ],
 
@@ -93,7 +93,7 @@ const i18nContentData = {
       title: '🚀 你的專案準備好了嗎？',
       subtitle: '如果你需要客製服務或長期顧問，歡迎與我聯繫！',
       buttonText: '聯絡我',
-      buttonLink: 'https://docsaid.org/services#-%E5%A6%82%E4%BD%95%E8%81%AF%E7%B9%AB%E8%88%87%E5%90%88%E4%BD%9C',
+      buttonLink: 'https://docsaid.org/services',
     },
   },
 
@@ -120,7 +120,7 @@ const i18nContentData = {
           'PoC & trend guidance',
         ],
         buttonText: 'Explore AI Services',
-        buttonLink: 'https://docsaid.org/en/services/#-technical-paper-reading-and-application-strategy-advice',
+        buttonLink: 'https://docsaid.org/en/services',
       },
       {
         id: 'fullstack',
@@ -131,7 +131,7 @@ const i18nContentData = {
         bulletTitle: 'Tech Stack',
         bulletPoints: ['FastAPI + Docker', 'React', 'CI/CD automation'],
         buttonText: 'See How It Works',
-        buttonLink: 'https://docsaid.org/en/services/#-ai-model-api-integration-and-deployment-services',
+        buttonLink: 'https://docsaid.org/en/services',
       },
       {
         id: 'custom',
@@ -146,7 +146,7 @@ const i18nContentData = {
           'Scaling & support',
         ],
         buttonText: 'Start Planning',
-        buttonLink: 'https://docsaid.org/en/services/#-building-ai-model-products-from-scratch-advanced-project',
+        buttonLink: 'https://docsaid.org/en/services',
       },
     ],
     twoCards: [
@@ -162,7 +162,7 @@ const i18nContentData = {
           'Built for iteration & upgrades',
         ],
         buttonText: 'Learn the Stack',
-        buttonLink: 'https://docsaid.org/en/services/#-ai-model-api-integration-and-deployment-services',
+        buttonLink: 'https://docsaid.org/en/services',
       },
       {
         id: 'flex_custom',
@@ -173,7 +173,7 @@ const i18nContentData = {
         bulletTitle: 'Includes',
         bulletPoints: ['Modular builds', 'Cloud & data handling'],
         buttonText: 'Let’s Talk',
-        buttonLink: 'https://docsaid.org/en/services/#-building-ai-model-products-from-scratch-advanced-project',
+        buttonLink: 'https://docsaid.org/en/services',
       },
     ],
     oneCard: [
@@ -189,14 +189,14 @@ const i18nContentData = {
           'Maintenance & upgrades',
         ],
         buttonText: 'Get Started Now',
-        buttonLink: 'https://docsaid.org/en/services/#-building-ai-model-products-from-scratch-advanced-project',
+        buttonLink: 'https://docsaid.org/en/services',
       },
     ],
     outroCTA: {
       title: '🚀 Ready for your next project?',
-      subtitle: 'Need a tech partner or custom solution? Let’s connect.',
+      subtitle: 'Need a tech partner or custom solution? Let\'s connect.',
       buttonText: 'Reach Out',
-      buttonLink: 'https://docsaid.org/en/services/#-how-to-contact-and-collaborate',
+      buttonLink: 'https://docsaid.org/en/services',
     },
   },
 
@@ -223,7 +223,7 @@ const i18nContentData = {
           'PoC & 最新トレンド',
         ],
         buttonText: '詳しく見る',
-        buttonLink: 'https://docsaid.org/ja/services/#-%E6%8A%80%E8%A1%93%E8%AB%96%E6%96%87%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E6%88%A6%E7%95%A5%E3%81%AE%E6%8F%90%E6%A1%88',
+        buttonLink: 'https://docsaid.org/ja/services',
       },
       {
         id: 'fullstack',
@@ -234,7 +234,7 @@ const i18nContentData = {
         bulletTitle: '対応技術',
         bulletPoints: ['FastAPI + Docker', 'React', 'CI/CD 自動化'],
         buttonText: '開発内容を見る',
-        buttonLink: 'https://docsaid.org/ja/services/#-ai-%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AE-api-%E5%8C%96%E3%81%A8%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%83%A1%E3%83%B3%E3%83%88%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9',
+        buttonLink: 'https://docsaid.org/ja/services',
       },
       {
         id: 'custom',
@@ -245,7 +245,7 @@ const i18nContentData = {
         bulletTitle: '提供内容',
         bulletPoints: ['プロジェクト評価 & PoC', 'MVP 開発', '長期運用サポート'],
         buttonText: 'まずは相談',
-        buttonLink: 'https://docsaid.org/ja/services/#-%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89-ai-%E3%83%A2%E3%83%87%E3%83%AB%E8%A3%BD%E5%93%81%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%E9%AB%98%E5%BA%A6%E3%81%AA%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88',
+        buttonLink: 'https://docsaid.org/ja/services',
       },
     ],
     twoCards: [
@@ -258,7 +258,7 @@ const i18nContentData = {
         bulletTitle: '強み',
         bulletPoints: ['統合技術 & 拡張性', '継続運用と改善'],
         buttonText: 'サービスを見る',
-        buttonLink: 'https://docsaid.org/ja/services/#-ai-%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AE-api-%E5%8C%96%E3%81%A8%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%83%A1%E3%83%B3%E3%83%88%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9',
+        buttonLink: 'https://docsaid.org/ja/services',
       },
       {
         id: 'flex_custom',
@@ -269,7 +269,7 @@ const i18nContentData = {
         bulletTitle: '対応範囲',
         bulletPoints: ['モジュール開発', 'クラウド & データ基盤'],
         buttonText: 'お問い合わせ',
-        buttonLink: 'https://docsaid.org/ja/services/#-%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89-ai-%E3%83%A2%E3%83%87%E3%83%AB%E8%A3%BD%E5%93%81%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%E9%AB%98%E5%BA%A6%E3%81%AA%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88',
+        buttonLink: 'https://docsaid.org/ja/services',
       },
     ],
     oneCard: [
@@ -285,14 +285,14 @@ const i18nContentData = {
           '継続サポート & 拡張',
         ],
         buttonText: '今すぐ始める',
-        buttonLink: 'https://docsaid.org/ja/services/#-%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89-ai-%E3%83%A2%E3%83%87%E3%83%AB%E8%A3%BD%E5%93%81%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%E9%AB%98%E5%BA%A6%E3%81%AA%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88',
+        buttonLink: 'https://docsaid.org/ja/services',
       },
     ],
     outroCTA: {
       title: '🚀 次のプロジェクト、始めましょう！',
       subtitle: 'カスタム開発や長期支援をご希望の方は、ぜひご相談ください。',
       buttonText: 'お問い合わせ',
-      buttonLink: 'https://docsaid.org/ja/services/#-%E9%80%A3%E7%B5%A1%E6%96%B9%E6%B3%95%E3%81%A8%E5%8D%94%E5%8A%9B%E3%81%AE%E6%B5%81%E3%82%8C',
+      buttonLink: 'https://docsaid.org/ja/services',
     },
   },
 };
