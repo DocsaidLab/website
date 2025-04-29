@@ -40,8 +40,6 @@ Before you can start using it, there are a few things you’ll need to handle on
 
    - [**WordCanvas Docs**](../wordcanvas/intro.md)
 
-   ![wordcanvas](../wordcanvas/resources/title.jpg)
-
    <figure style={{width: "80%"}}>
    ![wordcanvas](../wordcanvas/resources/title.jpg)
     </figure>
