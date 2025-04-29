@@ -6,11 +6,11 @@ import { Card, Col, Row, Timeline } from 'antd';
 import { motion, useAnimation } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 
-import CooperationForm from '@site/src/components/CooperationForm';
 import DocAlignerDemoWrapper from '@site/src/components/DocAlignerDemo';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import HomepageHeader from '@site/src/components/HomepageHeader';
 import MRZScannerDemoWrapper from '@site/src/components/MRZScannerDemo';
+import CooperationForm from '@site/src/components/ServicePage/CooperationForm';
 
 import demoContent from '@site/src/data/demoContent';
 import featuredProjectsData from '@site/src/data/featuredProjectsData';

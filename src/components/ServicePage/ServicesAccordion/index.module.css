@@ -1,0 +1,127 @@
+:root {
+  /* 基礎色彩與動效參數 */
+  --color-border: #ddd;
+  --color-border-active: #aaa;
+  --transition-duration: 0.2s;
+  --transition-ease: ease-in-out;
+
+  /* 背景與陰影 */
+  --color-bg-light: #fff;
+  --color-bg-detail: #f8f9fa; /* 與白底略微區分 */
+  --shadow-hover: 0 3px 8px rgba(0, 0, 0, 0.05);
+
+  /* 圓角設定 & hover 微調 */
+  --border-radius-base: 8px;
+}
+
+/* =========== 全域互動效果 =========== */
+.hoverTransform {
+  transition: box-shadow var(--transition-duration) var(--transition-ease);
+}
+.hoverTransform:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* =========== 主要容器區 =========== */
+.servicesSection {
+  width: 100%;
+  /* 若想要更顯示區塊感，可以加個淡淡漸層或灰底 */
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background-color: var(--color-bg-light);
+}
+
+/* =========== CTA 區塊 =========== */
+.simpleCta {
+  max-width: 960px;
+  margin: 0 auto 3rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background-color: var(--color-bg-light);
+  border-radius: var(--border-radius-base);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+/* =========== Accordion 區塊 =========== */
+.accordionSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* 卡片間距 */
+  padding: 0.5rem;
+}
+
+/* 卡片容器 */
+.cardWrapper {
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-base);
+  background-color: var(--color-bg-light);
+
+  transition: box-shadow var(--transition-duration) var(--transition-ease);
+}
+.cardWrapper:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.5rem 1.25rem;
+  cursor: pointer;
+  touch-action: manipulation;
+
+  background-color: transparent;
+  border-radius: var(--border-radius-base);
+  transition: background-color var(--transition-duration) var(--transition-ease);
+}
+.activeCard {
+  background-color: var(--color-bg-detail);
+  border-bottom: 1px solid var(--color-border-active);
+}
+
+/* 箭頭旋轉動畫 */
+.iconArrow {
+  transition: transform var(--transition-duration) var(--transition-ease);
+  transform: rotate(0deg);
+  margin-top: 0.3rem;
+}
+.iconArrow.rotate {
+  transform: rotate(90deg);
+}
+
+/* 詳細內容 (展開區) */
+.detailContent {
+  background-color: var(--color-bg-light);
+  overflow: hidden;
+  max-height: 0;
+  padding: 0 1.5rem;
+  opacity: 0;
+  transition:
+    max-height var(--transition-duration) var(--transition-ease),
+    padding var(--transition-duration) var(--transition-ease),
+    opacity var(--transition-duration) var(--transition-ease);
+}
+.expanded {
+  max-height: 9999px;
+  padding: 1rem 1.5rem;
+  opacity: 1;
+  background-color: var(--color-bg-detail);
+  border-bottom-left-radius: var(--border-radius-base);
+  border-bottom-right-radius: var(--border-radius-base);
+}
+
+.divider {
+  margin: 0.5rem 0 1rem;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+/* 警示區塊 */
+.warning {
+  background-color: #fffbe6;
+  border-left: 4px solid #ffa940;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: var(--border-radius-base);
+  box-shadow: inset 0 0 0 1px #fdf3d5;
+}

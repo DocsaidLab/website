@@ -1,0 +1,67 @@
+/* src/components/ServicePage/QnAAccordion.module.css */
+
+:root {
+  --qna-border-radius: 8px;
+  --qna-border-color: #ddd;
+  --qna-bg: #fff;
+  --qna-hover-bg: #f7f9fc;
+  --qna-active-bg: #f0f5ff;
+  --qna-transition: 0.2s ease;
+  --qna-shadow-hover: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+.qnaSection {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--qna-bg);
+  padding: 1rem;
+  border-radius: var(--qna-border-radius);
+}
+
+.heading {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.qnaContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.qnaItem {
+  border: 1px solid var(--qna-border-color);
+  border-radius: var(--qna-border-radius);
+  overflow: hidden;
+  transition: box-shadow var(--qna-transition);
+}
+.qnaItem:hover {
+  box-shadow: var(--qna-shadow-hover);
+}
+
+.question {
+  width: 100%;
+  text-align: left;
+  background: var(--qna-bg);
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  transition: background-color var(--qna-transition);
+  outline: none;
+}
+.question:hover {
+  background-color: var(--qna-hover-bg);
+}
+.active {
+  background-color: var(--qna-active-bg);
+}
+
+.answer {
+  background-color: var(--qna-bg);
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #eee;
+  line-height: 1.6;
+}
