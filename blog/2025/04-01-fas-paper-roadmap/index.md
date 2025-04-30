@@ -203,11 +203,11 @@ FAS 模型的泛化不只受到 domain shift 的挑戰，更受到不同風格�
 
 這一章聚焦於風格解耦、對抗學習、測試時自適應（test-time adaptation）與 instance-aware 設計，這些方法嘗試讓模型能在未知風格與樣本分布下，依然保持穩定的辨識性能。
 
-21. [**[23.02] Cyclically Disentangled Feature Translation for Face Anti-spoofing**](https://ojs.aaai.org/index.php/AAAI/article/view/25443)
-    提出 CDFTN，透過對抗式學習將活體與風格成分分離，生成結合真實標籤與目標域樣貌的 pseudo-labeled 样本，顯著提升跨域偽裝辨識的準確度與魯棒性。
-
-22. [**[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing**](https://arxiv.org/abs/2203.05340)
+21. [**[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing**](https://arxiv.org/abs/2203.05340)
     採內容與風格分離策略，重組風格空間來模擬 style shift，搭配對比學習強調活體相關風格，是 style-aware DG 設計的重要突破。
+
+22. [**[23.02] Cyclically Disentangled Feature Translation for Face Anti-spoofing**](https://ojs.aaai.org/index.php/AAAI/article/view/25443)
+    提出 CDFTN，透過對抗式學習將活體與風格成分分離，生成結合真實標籤與目標域樣貌的 pseudo-labeled 样本，顯著提升跨域偽裝辨識的準確度與魯棒性。
 
 23. [**[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2304.05640)
     拋棄粗略的 domain label，改採 instance-level 的風格對齊策略，透過不對稱 whitening、風格增強與動態 kernel 設計，提煉出對風格不敏感的辨識特徵。

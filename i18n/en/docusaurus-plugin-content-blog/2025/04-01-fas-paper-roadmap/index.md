@@ -203,11 +203,11 @@ The generalization of FAS models is challenged not only by domain shift but also
 
 This chapter focuses on style disentanglement, adversarial learning, test-time adaptation, and instance-aware design. These methods aim to help the model maintain stable recognition performance under unknown styles and sample distributions.
 
-21. [**[23.02] Cyclically Disentangled Feature Translation for Face Anti-Spoofing**](https://ojs.aaai.org/index.php/AAAI/article/view/25443)
-    Proposes CDFTN, which separates liveness and style components through adversarial learning, generating pseudo-labeled samples that combine real labels and target domain appearances. This significantly improves the accuracy and robustness of cross-domain spoof detection.
-
-22. [**[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing**](https://arxiv.org/abs/2203.05340)
+21. [**[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing**](https://arxiv.org/abs/2203.05340)
     Employs a content-style separation strategy, reorganizing the style space to simulate style shift. Combined with contrastive learning that emphasizes style related to liveness, this is a significant breakthrough in style-aware domain generalization (DG) design.
+
+22. [**[23.02] Cyclically Disentangled Feature Translation for Face Anti-Spoofing**](https://ojs.aaai.org/index.php/AAAI/article/view/25443)
+    Proposes CDFTN, which separates liveness and style components through adversarial learning, generating pseudo-labeled samples that combine real labels and target domain appearances. This significantly improves the accuracy and robustness of cross-domain spoof detection.
 
 23. [**[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2304.05640)
     Abandons coarse domain labels in favor of instance-level style alignment strategies. Through asymmetric whitening, style enhancement, and dynamic kernel design, this refines recognition features that are insensitive to style.
