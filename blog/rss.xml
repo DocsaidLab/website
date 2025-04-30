@@ -614,8 +614,8 @@
 採內容與風格分離策略，重組風格空間來模擬 style shift，搭配對比學習強調活體相關風格，是 style-aware DG 設計的重要突破。</p>
 </li>
 <li>
-<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/25443" target="_blank" rel="noopener noreferrer"><strong>[23.02] Cyclically Disentangled Feature Translation for Face Anti-spoofing</strong></a>
-提出 CDFTN，透過對抗式學習將活體與風格成分分離，生成結合真實標籤與目標域樣貌的 pseudo-labeled 样本，顯著提升跨域偽裝辨識的準確度與魯棒性。</p>
+<p><a href="https://arxiv.org/abs/2212.03651" target="_blank" rel="noopener noreferrer"><strong>[22.12] Cyclically Disentangled Feature Translation for Face Anti-spoofing</strong></a>
+提出 CDFTN，透過對抗式學習將活體與風格成分分離，生成結合真實標籤與目標域樣貌的 pseudo-labeled 样本，顯著提升跨域偽裝辨識的準確度與穩健性。</p>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2304.05640" target="_blank" rel="noopener noreferrer"><strong>[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing</strong></a>
