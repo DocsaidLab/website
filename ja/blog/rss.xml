@@ -506,12 +506,12 @@ Efficient Parameter Transfer Learning アーキテクチャを利用して、ViT
 <p>この章では、スタイルの解消、対抗学習、テスト時適応、インスタンス認識設計に焦点を当てています。これらの手法は、未知のスタイルやサンプル分布のもとでも安定した認識性能を保つことを目指しています。</p>
 <ol start="21">
 <li>
-<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/25443" target="_blank" rel="noopener noreferrer"><strong>[23.02] Cyclically Disentangled Feature Translation for Face Anti-Spoofing</strong></a>
-CDFTN を提案し、対抗学習によって生体性とスタイル成分を分離し、実際のラベルとターゲットドメインの外観を組み合わせた擬似ラベル付きサンプルを生成します。これにより、クロスドメインでの偽装認識の精度と堅牢性が大幅に向上します。</p>
-</li>
-<li>
 <p><a href="https://arxiv.org/abs/2203.05340" target="_blank" rel="noopener noreferrer"><strong>[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing</strong></a>
 コンテンツとスタイルの分離戦略を採用し、スタイル空間を再構成してスタイルシフトをシミュレートします。コントラスト学習を組み合わせ、生体性に関連するスタイルを強調することで、スタイル認識に基づいたドメイン一般化（DG）設計における重要なブレークスルーを実現します。</p>
+</li>
+<li>
+<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/25443" target="_blank" rel="noopener noreferrer"><strong>[23.02] Cyclically Disentangled Feature Translation for Face Anti-Spoofing</strong></a>
+CDFTN を提案し、対抗学習によって生体性とスタイル成分を分離し、実際のラベルとターゲットドメインの外観を組み合わせた擬似ラベル付きサンプルを生成します。これにより、クロスドメインでの偽装認識の精度と堅牢性が大幅に向上します。</p>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2304.05640" target="_blank" rel="noopener noreferrer"><strong>[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing</strong></a>

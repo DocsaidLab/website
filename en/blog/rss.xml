@@ -502,12 +502,12 @@ By utilizing Cross-Modal Spoofing Enhancer (CMS-Enhancer) and text-guided (LGPA)
 <p>This chapter focuses on style disentanglement, adversarial learning, test-time adaptation, and instance-aware design. These methods aim to help the model maintain stable recognition performance under unknown styles and sample distributions.</p>
 <ol start="21">
 <li>
-<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/25443" target="_blank" rel="noopener noreferrer"><strong>[23.02] Cyclically Disentangled Feature Translation for Face Anti-Spoofing</strong></a>
-Proposes CDFTN, which separates liveness and style components through adversarial learning, generating pseudo-labeled samples that combine real labels and target domain appearances. This significantly improves the accuracy and robustness of cross-domain spoof detection.</p>
-</li>
-<li>
 <p><a href="https://arxiv.org/abs/2203.05340" target="_blank" rel="noopener noreferrer"><strong>[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing</strong></a>
 Employs a content-style separation strategy, reorganizing the style space to simulate style shift. Combined with contrastive learning that emphasizes style related to liveness, this is a significant breakthrough in style-aware domain generalization (DG) design.</p>
+</li>
+<li>
+<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/25443" target="_blank" rel="noopener noreferrer"><strong>[23.02] Cyclically Disentangled Feature Translation for Face Anti-Spoofing</strong></a>
+Proposes CDFTN, which separates liveness and style components through adversarial learning, generating pseudo-labeled samples that combine real labels and target domain appearances. This significantly improves the accuracy and robustness of cross-domain spoof detection.</p>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2304.05640" target="_blank" rel="noopener noreferrer"><strong>[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing</strong></a>
