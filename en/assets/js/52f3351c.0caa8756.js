@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocsaid_website=self.webpackChunkdocsaid_website||[]).push([["6719"],{39898:function(e){e.exports=JSON.parse('{"metadata":{"permalink":"/en/blog/page/8","page":8,"postsPerPage":6,"totalPages":8,"totalCount":48,"previousPage":"/en/blog/page/7","blogDescription":"Docsaid Blog.","blogTitle":"Blog"}}')}}]);
