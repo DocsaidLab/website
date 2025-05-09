@@ -206,17 +206,37 @@ FAS 模型的泛化不只受到 domain shift 的挑戰，更受到不同風格�
 21. [**[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing**](https://arxiv.org/abs/2203.05340)
     採內容與風格分離策略，重組風格空間來模擬 style shift，搭配對比學習強調活體相關風格，是 style-aware DG 設計的重要突破。
 
+    :::info
+    **論文筆記**：[**[22.03] SSAN: 風格的殘影**](https://docsaid.org/papers/face-antispoofing/ssan/)
+    :::
+
 22. [**[22.12] Cyclically Disentangled Feature Translation for Face Anti-spoofing**](https://arxiv.org/abs/2212.03651)
     提出 CDFTN，透過對抗式學習將活體與風格成分分離，生成結合真實標籤與目標域樣貌的 pseudo-labeled 样本，顯著提升跨域偽裝辨識的準確度與穩健性。
+
+    :::info
+    **論文筆記**：[**[22.12] CDFTN: 風格的糾纏**](https://docsaid.org/papers/face-antispoofing/cdftn/)
+    :::
 
 23. [**[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2304.05640)
     拋棄粗略的 domain label，改採 instance-level 的風格對齊策略，透過不對稱 whitening、風格增強與動態 kernel 設計，提煉出對風格不敏感的辨識特徵。
 
+    :::info
+    **論文筆記**：[**[23.04] IADG: 風格的獨白**](https://docsaid.org/papers/face-antispoofing/iadg/)
+    :::
+
 24. [**[23.10] Towards Unsupervised Domain Generalization for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Towards_Unsupervised_Domain_Generalization_for_Face_Anti-Spoofing_ICCV_2023_paper.html)
     將 unlabeled 資料納入學習流程，透過分割重組與跨域相似度尋找機制，提煉出能適應多種未標註場景的泛化表徵，達成真正無監督的 DG FAS。
 
+    :::info
+    **論文筆記**：[**[23.10] UDG-FAS: 風格的碎片**](https://docsaid.org/papers/face-antispoofing/udg-fas/)
+    :::
+
 25. [**[23.11] Test-Time Adaptation for Robust Face Anti-Spoofing**](https://papers.bmvc2023.org/0379.pdf)
     在推理階段針對新場景動態調整模型，結合 activation-based pseudo-labeling 與對比學習防止遺忘，使預先訓練的 FAS 模型能在測試時自我優化，提升對未知攻擊的敏銳度。
+
+    :::info
+    **論文筆記**：[**[23.11] 3A-TTA: 荒野求生**](https://docsaid.org/papers/face-antispoofing/three-a-tta/)
+    :::
 
 ---
 

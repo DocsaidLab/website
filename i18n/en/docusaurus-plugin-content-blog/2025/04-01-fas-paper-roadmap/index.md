@@ -206,17 +206,37 @@ This chapter focuses on style disentanglement, adversarial learning, test-time a
 21. [**[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing**](https://arxiv.org/abs/2203.05340)
     Employs a content-style separation strategy, reorganizing the style space to simulate style shift. Combined with contrastive learning that emphasizes style related to liveness, this is a significant breakthrough in style-aware domain generalization (DG) design.
 
+    :::info
+    **Paper Notes**: [**[22.03] SSAN: The Shadow of Style**](https://docsaid.org/en/papers/face-antispoofing/ssan/)
+    :::
+
 22. [**[22.12] Cyclically Disentangled Feature Translation for Face Anti-spoofing**](https://arxiv.org/abs/2212.03651)
     Proposes CDFTN, which separates liveness and style components through adversarial learning, generating pseudo-labeled samples that combine real labels and target domain appearances. This significantly improves the accuracy and robustness of cross-domain spoof detection.
+
+    :::info
+    **Paper Notes**: [**[22.12] CDFTN: The Entanglement of Style**](https://docsaid.org/en/papers/face-antispoofing/cdftn/)
+    :::
 
 23. [**[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2304.05640)
     Abandons coarse domain labels in favor of instance-level style alignment strategies. Through asymmetric whitening, style enhancement, and dynamic kernel design, this refines recognition features that are insensitive to style.
 
+    :::info
+    **Paper Notes**: [**[23.04] IADG: A Monologue of Styles**](https://docsaid.org/en/papers/face-antispoofing/iadg/)
+    :::
+
 24. [**[23.10] Towards Unsupervised Domain Generalization for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Towards_Unsupervised_Domain_Generalization_for_Face_Anti-Spoofing_ICCV_2023_paper.html)
     Incorporates unlabeled data into the learning process, using segmentation and cross-domain similarity searching mechanisms to extract generalized representations that adapt to multiple unlabeled scenarios, achieving true unsupervised domain generalization (DG) for FAS.
 
+    :::info
+    **Paper Notes**: [**[23.10] UDG-FAS: Fragments of Style**](https://docsaid.org/en/papers/face-antispoofing/udg-fas/)
+    :::
+
 25. [**[23.11] Test-Time Adaptation for Robust Face Anti-Spoofing**](https://papers.bmvc2023.org/0379.pdf)
     Dynamically adjusts the model at inference time for new scenes, combining activation-based pseudo-labeling and contrastive learning to prevent forgetting, allowing pre-trained FAS models to self-optimize during testing, improving sensitivity to unknown attacks.
+
+    :::info
+    **Paper Notes**: [**[23.11] 3A-TTA: Surviving the Wilderness**](https://docsaid.org/en/papers/face-antispoofing/three-a-tta/)
+    :::
 
 ---
 

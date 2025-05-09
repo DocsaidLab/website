@@ -206,17 +206,37 @@ FAS モデルの一般化は、ドメインシフトの挑戦だけでなく、�
 21. [**[22.03] Domain Generalization via Shuffled Style Assembly for Face Anti-Spoofing**](https://arxiv.org/abs/2203.05340)
     コンテンツとスタイルの分離戦略を採用し、スタイル空間を再構成してスタイルシフトをシミュレートします。コントラスト学習を組み合わせ、生体性に関連するスタイルを強調することで、スタイル認識に基づいたドメイン一般化（DG）設計における重要なブレークスルーを実現します。
 
+    :::info
+    **論文ノート**：[**[22.03] SSAN: スタイルの残像**](https://docsaid.org/ja/papers/face-antispoofing/ssan/)
+    :::
+
 22. [**[22.12] Cyclically Disentangled Feature Translation for Face Anti-spoofing**](https://arxiv.org/abs/2212.03651)
     CDFTN を提案し、対抗学習によって生体性とスタイル成分を分離し、実際のラベルとターゲットドメインの外観を組み合わせた擬似ラベル付きサンプルを生成します。これにより、クロスドメインでの偽装認識の精度と堅牢性が大幅に向上します。
+
+    :::info
+    **論文ノート**：[**[22.12] CDFTN: スタイルの絡み合い**](https://docsaid.org/ja/papers/face-antispoofing/cdftn/)
+    :::
 
 23. [**[23.04] Instance-Aware Domain Generalization for Face Anti-Spoofing**](https://arxiv.org/abs/2304.05640)
     粗いドメインラベルを放棄し、インスタンスレベルのスタイルアライメント戦略を採用します。非対称ホワイトニング、スタイル強化、動的カーネル設計を通じて、スタイルに敏感でない認識特徴を洗練させます。
 
+    :::info
+    **論文ノート**：[**[23.04] IADG: スタイルの独白**](https://docsaid.org/ja/papers/face-antispoofing/iadg/)
+    :::
+
 24. [**[23.10] Towards Unsupervised Domain Generalization for Face Anti-Spoofing**](https://openaccess.thecvf.com/content/ICCV2023/html/Liu_Towards_Unsupervised_Domain_Generalization_for_Face_Anti-Spoofing_ICCV_2023_paper.html)
     ラベルのないデータを学習プロセスに取り入れ、分割再構成とクロスドメイン類似度検索機構を使用して、複数のラベルなしシナリオに適応する一般化された表現を抽出します。これにより、真の無監督型ドメイン一般化（DG）FAS が達成されます。
 
+    :::info
+    **論文ノート**：[**[23.10] UDG-FAS: スタイルの断片**](https://docsaid.org/ja/papers/face-antispoofing/udg-fas/)
+    :::
+
 25. [**[23.11] Test-Time Adaptation for Robust Face Anti-Spoofing**](https://papers.bmvc2023.org/0379.pdf)
     推論段階で新しいシーンに対してモデルを動的に調整し、アクティベーションベースの擬似ラベリングとコントラスト学習を組み合わせて忘却を防止し、事前に学習した FAS モデルがテスト時に自己最適化できるようにし、未知の攻撃に対する感度を向上させます。
+
+    :::info
+    **論文ノート**：[**[23.11] 3A-TTA: 荒野でのサバイバル**](https://docsaid.org/ja/papers/face-antispoofing/three-a-tta/)
+    :::
 
 ---
 
