@@ -214,14 +214,12 @@ The results showed that under these common background noise conditions, the mode
 
 ## Conclusion
 
-This paper represents one of the early explorations of "sound waves as a liveness cue" in practical implementations, and it provides a feasible solution given the hardware constraints of the time.
+This paper is one of the early explorations of "sound waves as a liveness cue" in practical implementations, and it provides a feasible solution given the hardware constraints of the time.
 
-What it proposes is not a singular creative idea, but a complete deployable and evaluable system: from chirp design, echo segmentation, CNN feature extraction, and bimodal concatenation, to mobile implementation strategies and latency control, ultimately with real-world tests to counter static photos and dynamic videos.
+It doesn’t rely excessively on new hardware, nor does it assume more ideal data conditions.
 
-The system does not overly rely on new hardware and does not assume ideal data conditions. It is grounded in engineering realities, posing a fundamental question given resource limits:
+Instead, it presents an engineering reality, raising a critical question given resource limitations:
 
 > **If a smartphone only has a microphone, speaker, and front camera, how much defensive space do we have left?**
 
-Given the hardware conditions, algorithmic design, and types of attacks at the time, such a system could effectively differentiate between real faces and fakes, and between living users and video playback.
-
-The answer this research provides is: **It’s enough**.
+The answer this research attempts to provide is: **Faces in sound waves are enough**.
