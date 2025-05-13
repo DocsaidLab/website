@@ -250,14 +250,14 @@ FAS 模型的泛化不只受到 domain shift 的挑戰，更受到不同風格�
 
 本章精選五篇橫跨生理信號、3D 幾何與聲學感知的代表作，展示多模態 FAS 技術的潛力與未來性。
 
-26. [**[18.09] Remote Photoplethysmography Correspondence Feature for 3D Mask Face Presentation Attack Detection**](https://dl.acm.org/doi/10.1007/978-3-030-01270-0_34)
+26. [**[16.12] Generalized face anti-spoofing by detecting pulse from face videos**](https://projet.liris.cnrs.fr/imagine/pub/proceedings/ICPR-2016/media/files/1223.pdf)
+    在早期 FAS 場景，就示範了如何在沒有深度或紅外感測器的條件下，光靠人臉心跳訊號也能辨識假臉，凸顯 rPPG 的潛力。
+
+27. [**[18.09] Remote Photoplethysmography Correspondence Feature for 3D Mask Face Presentation Attack Detection**](https://dl.acm.org/doi/10.1007/978-3-030-01270-0_34)
     首度提出 CFrPPG（對應式 rPPG）特徵來強化活體訊號擷取，在低光源或攝影機晃動情況下也能準確提取心跳軌跡，對抗 3D 面具攻擊表現優異。
 
-27. [**[19.05] Multi-Modal Face Authentication Using Deep Visual and Acoustic Features**](https://ieeexplore.ieee.org/document/8761776)
+28. [**[19.05] Multi-Modal Face Authentication Using Deep Visual and Acoustic Features**](https://ieeexplore.ieee.org/document/8761776)
     利用智慧型手機內建喇叭與麥克風，發射超音波並解析臉部回音，結合 CNN 提取的圖像特徵，打造不需額外硬體的雙模態安全驗證系統。
-
-28. [**[21.04] Contrastive Context-Aware Learning for 3D High-Fidelity Mask Face Presentation Attack Detection**](https://arxiv.org/abs/2104.06148)
-    為解決高擬真 3D 面具的困境，建立 HiFiMask 大型資料集，並提出 CCL 對比式學習方法，利用上下文資訊（人物、材質、光線）提升攻擊辨識能力。
 
 29. [**[22.08] Beyond the Pixel World: A Novel Acoustic-Based Face Anti-Spoofing System for Smartphones**](https://ieeexplore.ieee.org/document/9868051)
     建立 Echo-Spoof 聲學 FAS 資料集，並設計 Echo-FAS 架構，利用聲波重建 3D 幾何與材料資訊，完全不依賴攝影機，是行動裝置中低成本、高抗性的應用典範。

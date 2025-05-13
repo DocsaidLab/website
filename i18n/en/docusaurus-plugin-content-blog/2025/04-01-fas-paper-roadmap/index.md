@@ -250,14 +250,14 @@ When traditional RGB models face bottlenecks in high-fidelity attacks and cross-
 
 This chapter features five representative papers spanning physiological signals, 3D geometry, and acoustic perception, showcasing the potential and future of multimodal FAS technology.
 
-26. [**[18.09] Remote Photoplethysmography Correspondence Feature for 3D Mask Face Presentation Attack Detection**](https://dl.acm.org/doi/10.1007/978-3-030-01270-0_34)
+26. [**[16.12] Generalized face anti-spoofing by detecting pulse from face videos**](https://projet.liris.cnrs.fr/imagine/pub/proceedings/ICPR-2016/media/files/1223.pdf)
+    In the early FAS (Face Anti-Spoofing) scenario, this paper demonstrated how facial heartbeat signals alone, without depth or infrared sensors, can be used to detect fake faces, highlighting the potential of rPPG.
+
+27. [**[18.09] Remote Photoplethysmography Correspondence Feature for 3D Mask Face Presentation Attack Detection**](https://dl.acm.org/doi/10.1007/978-3-030-01270-0_34)
     Introducing CFrPPG (Correspondence rPPG) features to enhance liveness signal acquisition, ensuring accurate heart rate tracking even under low light or camera shake, showing strong performance against 3D mask attacks.
 
-27. [**[19.05] Multi-Modal Face Authentication Using Deep Visual and Acoustic Features**](https://ieeexplore.ieee.org/document/8761776)
+28. [**[19.05] Multi-Modal Face Authentication Using Deep Visual and Acoustic Features**](https://ieeexplore.ieee.org/document/8761776)
     Using the built-in speakers and microphones of smartphones, this method emits ultrasound and analyzes facial echoes, combined with CNN-extracted image features, creating a dual-modal authentication system that requires no additional hardware.
-
-28. [**[21.04] Contrastive Context-Aware Learning for 3D High-Fidelity Mask Face Presentation Attack Detection**](https://arxiv.org/abs/2104.06148)
-    To address the challenge of high-fidelity 3D masks, the HiFiMask dataset is introduced, along with a Contrastive Context-Aware Learning method, using context information (person, material, lighting) to enhance attack detection capability.
 
 29. [**[22.08] Beyond the Pixel World: A Novel Acoustic-Based Face Anti-Spoofing System for Smartphones**](https://ieeexplore.ieee.org/document/9868051)
     Creating the Echo-Spoof acoustic FAS dataset and designing the Echo-FAS framework, which uses sound waves to reconstruct 3D geometry and material information, entirely independent of cameras, showcasing a low-cost and high-resilience mobile device application.
