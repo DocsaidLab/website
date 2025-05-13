@@ -92,7 +92,6 @@ const config = {
   ],
   themes: [
     '@docusaurus/theme-mermaid',
-    '@docusaurus/theme-live-codeblock',
   ],
   markdown: {
     mermaid: true,
