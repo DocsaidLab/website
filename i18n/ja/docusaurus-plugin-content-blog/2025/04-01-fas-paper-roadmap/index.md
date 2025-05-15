@@ -253,17 +253,37 @@ FAS モデルの一般化は、ドメインシフトの挑戦だけでなく、�
 26. [**[16.12] Generalized face anti-spoofing by detecting pulse from face videos**](https://projet.liris.cnrs.fr/imagine/pub/proceedings/ICPR-2016/media/files/1223.pdf)
     初期の FAS シナリオにおいて、深度センサーや赤外線センサーがなくても、顔の心拍信号だけで偽顔を識別できる方法が示され、rPPG の潜在能力を強調しています。
 
+    :::info
+    **論文ノート**：[**[16.12] rPPG: 生命の光斑**](https://docsaid.org/ja/papers/face-antispoofing/rppg)
+    :::
+
 27. [**[18.09] Remote Photoplethysmography Correspondence Feature for 3D Mask Face Presentation Attack Detection**](https://dl.acm.org/doi/10.1007/978-3-030-01270-0_34)
     初めて CFrPPG（対応型 rPPG）特徴を提案し、低光量やカメラの揺れなどの条件下でも心拍軌跡を正確に抽出。3D マスク攻撃に対して優れたパフォーマンスを発揮。
+
+    :::info
+    **論文ノート**：[**[18.09] CFrPPG: 心拍の残響**](https://docsaid.org/ja/papers/face-antispoofing/cfrppg)
+    :::
 
 28. [**[19.05] Multi-Modal Face Authentication Using Deep Visual and Acoustic Features**](https://ieeexplore.ieee.org/document/8761776)
     スマートフォン内蔵のスピーカーとマイクを使用して超音波を発射し、顔面エコーを解析。CNN で抽出した画像特徴と組み合わせ、追加のハードウェアなしで二重モーダルセキュリティ認証システムを構築。
 
+    :::info
+    **論文ノート**：[**[19.05] VA-FAS: 音波の中の顔**](https://docsaid.org/ja/papers/face-antispoofing/vafas)
+    :::
+
 29. [**[22.08] Beyond the Pixel World: A Novel Acoustic-Based Face Anti-Spoofing System for Smartphones**](https://ieeexplore.ieee.org/document/9868051)
     Echo-Spoof という音響 FAS データセットを構築し、Echo-FAS アーキテクチャを設計。音波を使用して 3D 幾何学と材料情報を再構築し、カメラに依存せず、モバイルデバイスにおける低コスト・高耐性のアプリケーション事例。
 
+    :::info
+    **論文ノート**：[**[22.08] Echo-FAS: 偽造のエコー**](https://docsaid.org/ja/papers/face-antispoofing/echo-fas)
+    :::
+
 30. [**[24.03] AFace: Range-Flexible Anti-Spoofing Face Authentication via Smartphone Acoustic Sensing**](https://dl.acm.org/doi/10.1145/3643510)
     Echo-FAS のアイデアを拡張し、iso-depth モデルと距離適応アルゴリズムを追加。3D プリントマスクに対抗し、ユーザーの距離に応じて自動調整。音波による活体認証の実用化への重要な設計。
+
+    :::info
+    **論文ノート**：[**[24.03] AFace: 波動の邊界**](https://docsaid.org/ja/papers/face-antispoofing/aface)
+    :::
 
 ---
 

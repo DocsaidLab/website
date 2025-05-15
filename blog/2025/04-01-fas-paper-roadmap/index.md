@@ -253,17 +253,37 @@ FAS 模型的泛化不只受到 domain shift 的挑戰，更受到不同風格�
 26. [**[16.12] Generalized face anti-spoofing by detecting pulse from face videos**](https://projet.liris.cnrs.fr/imagine/pub/proceedings/ICPR-2016/media/files/1223.pdf)
     在早期 FAS 場景，就示範了如何在沒有深度或紅外感測器的條件下，光靠人臉心跳訊號也能辨識假臉，凸顯 rPPG 的潛力。
 
+    :::info
+    **論文筆記**：[**[16.12] rPPG: 生命的光斑**](https://docsaid.org/papers/face-antispoofing/rppg)
+    :::
+
 27. [**[18.09] Remote Photoplethysmography Correspondence Feature for 3D Mask Face Presentation Attack Detection**](https://dl.acm.org/doi/10.1007/978-3-030-01270-0_34)
     首度提出 CFrPPG（對應式 rPPG）特徵來強化活體訊號擷取，在低光源或攝影機晃動情況下也能準確提取心跳軌跡，對抗 3D 面具攻擊表現優異。
+
+    :::info
+    **論文筆記**：[**[18.09] CFrPPG: 心跳的殘響**](https://docsaid.org/papers/face-antispoofing/cfrppg)
+    :::
 
 28. [**[19.05] Multi-Modal Face Authentication Using Deep Visual and Acoustic Features**](https://ieeexplore.ieee.org/document/8761776)
     利用智慧型手機內建喇叭與麥克風，發射超音波並解析臉部回音，結合 CNN 提取的圖像特徵，打造不需額外硬體的雙模態安全驗證系統。
 
+    :::info
+    **論文筆記**：[**[19.05] VA-FAS: 聲波裡的臉**](https://docsaid.org/papers/face-antispoofing/vafas)
+    :::
+
 29. [**[22.08] Beyond the Pixel World: A Novel Acoustic-Based Face Anti-Spoofing System for Smartphones**](https://ieeexplore.ieee.org/document/9868051)
     建立 Echo-Spoof 聲學 FAS 資料集，並設計 Echo-FAS 架構，利用聲波重建 3D 幾何與材料資訊，完全不依賴攝影機，是行動裝置中低成本、高抗性的應用典範。
 
+    :::info
+    **論文筆記**：[**[22.08] Echo-FAS: 仿冒的回音**](https://docsaid.org/papers/face-antispoofing/echo-fas)
+    :::
+
 30. [**[24.03] AFace: Range-Flexible Anti-Spoofing Face Authentication via Smartphone Acoustic Sensing**](https://dl.acm.org/doi/10.1145/3643510)
     延伸 Echo-FAS 思路，加入 iso-depth 模型與距離自適應演算法，能對抗 3D 列印面具，並根據使用者距離自我調整，是聲波式活體驗證走向實用化的關鍵設計。
+
+    :::info
+    **論文筆記**：[**[24.03] AFace: 波動的邊界**](https://docsaid.org/papers/face-antispoofing/aface)
+    :::
 
 ---
 

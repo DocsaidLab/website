@@ -253,17 +253,37 @@ This chapter features five representative papers spanning physiological signals,
 26. [**[16.12] Generalized face anti-spoofing by detecting pulse from face videos**](https://projet.liris.cnrs.fr/imagine/pub/proceedings/ICPR-2016/media/files/1223.pdf)
     In the early FAS (Face Anti-Spoofing) scenario, this paper demonstrated how facial heartbeat signals alone, without depth or infrared sensors, can be used to detect fake faces, highlighting the potential of rPPG.
 
+    :::info
+    **Paper Notes**: [**[16.12] rPPG: The Flicker of Life**](https://docsaid.org/en/papers/face-antispoofing/rppg/)
+    :::
+
 27. [**[18.09] Remote Photoplethysmography Correspondence Feature for 3D Mask Face Presentation Attack Detection**](https://dl.acm.org/doi/10.1007/978-3-030-01270-0_34)
     Introducing CFrPPG (Correspondence rPPG) features to enhance liveness signal acquisition, ensuring accurate heart rate tracking even under low light or camera shake, showing strong performance against 3D mask attacks.
+
+    :::info
+    **Paper Notes**: [**[18.09] CFrPPG: The Echo of a Heartbeat**](https://docsaid.org/en/papers/face-antispoofing/cfrppg)
+    :::
 
 28. [**[19.05] Multi-Modal Face Authentication Using Deep Visual and Acoustic Features**](https://ieeexplore.ieee.org/document/8761776)
     Using the built-in speakers and microphones of smartphones, this method emits ultrasound and analyzes facial echoes, combined with CNN-extracted image features, creating a dual-modal authentication system that requires no additional hardware.
 
+    :::info
+    **Paper Notes**: [**[19.05] VA-FAS: Faces in Sound Waves**](https://docsaid.org/en/papers/face-antispoofing/vafas)
+    :::
+
 29. [**[22.08] Beyond the Pixel World: A Novel Acoustic-Based Face Anti-Spoofing System for Smartphones**](https://ieeexplore.ieee.org/document/9868051)
     Creating the Echo-Spoof acoustic FAS dataset and designing the Echo-FAS framework, which uses sound waves to reconstruct 3D geometry and material information, entirely independent of cameras, showcasing a low-cost and high-resilience mobile device application.
 
+    :::info
+    **Paper Notes**: [**[22.08] Echo-FAS: The Echo of Spoofing**](https://docsaid.org/en/papers/face-antispoofing/echo-fas)
+    :::
+
 30. [**[24.03] AFace: Range-Flexible Anti-Spoofing Face Authentication via Smartphone Acoustic Sensing**](https://dl.acm.org/doi/10.1145/3643510)
     Extending the Echo-FAS concept, incorporating an iso-depth model and distance-adaptive algorithm to combat 3D printed masks, and adjusting based on user distance, this is a crucial design in the practical implementation of acoustic-based liveness verification.
+
+    :::info
+    **Paper Notes**: [**[24.03] AFace: The Boundary of Waves**](https://docsaid.org/en/papers/face-antispoofing/aface)
+    :::
 
 ---
 
