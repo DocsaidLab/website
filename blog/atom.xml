@@ -756,22 +756,27 @@
 <li>
 <p><a href="https://projet.liris.cnrs.fr/imagine/pub/proceedings/ICPR-2016/media/files/1223.pdf" target="_blank" rel="noopener noreferrer"><strong>[16.12] Generalized face anti-spoofing by detecting pulse from face videos</strong></a>
 在早期 FAS 場景，就示範了如何在沒有深度或紅外感測器的條件下，光靠人臉心跳訊號也能辨識假臉，凸顯 rPPG 的潛力。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/rppg" target="_blank" rel="noopener noreferrer"><strong>[16.12] rPPG: 生命的光斑</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://dl.acm.org/doi/10.1007/978-3-030-01270-0_34" target="_blank" rel="noopener noreferrer"><strong>[18.09] Remote Photoplethysmography Correspondence Feature for 3D Mask Face Presentation Attack Detection</strong></a>
 首度提出 CFrPPG（對應式 rPPG）特徵來強化活體訊號擷取，在低光源或攝影機晃動情況下也能準確提取心跳軌跡，對抗 3D 面具攻擊表現優異。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/cfrppg" target="_blank" rel="noopener noreferrer"><strong>[18.09] CFrPPG: 心跳的殘響</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://ieeexplore.ieee.org/document/8761776" target="_blank" rel="noopener noreferrer"><strong>[19.05] Multi-Modal Face Authentication Using Deep Visual and Acoustic Features</strong></a>
 利用智慧型手機內建喇叭與麥克風，發射超音波並解析臉部回音，結合 CNN 提取的圖像特徵，打造不需額外硬體的雙模態安全驗證系統。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/vafas" target="_blank" rel="noopener noreferrer"><strong>[19.05] VA-FAS: 聲波裡的臉</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://ieeexplore.ieee.org/document/9868051" target="_blank" rel="noopener noreferrer"><strong>[22.08] Beyond the Pixel World: A Novel Acoustic-Based Face Anti-Spoofing System for Smartphones</strong></a>
 建立 Echo-Spoof 聲學 FAS 資料集，並設計 Echo-FAS 架構，利用聲波重建 3D 幾何與材料資訊，完全不依賴攝影機，是行動裝置中低成本、高抗性的應用典範。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/echo-fas" target="_blank" rel="noopener noreferrer"><strong>[22.08] Echo-FAS: 仿冒的回音</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://dl.acm.org/doi/10.1145/3643510" target="_blank" rel="noopener noreferrer"><strong>[24.03] AFace: Range-Flexible Anti-Spoofing Face Authentication via Smartphone Acoustic Sensing</strong></a>
 延伸 Echo-FAS 思路，加入 iso-depth 模型與距離自適應演算法，能對抗 3D 列印面具，並根據使用者距離自我調整，是聲波式活體驗證走向實用化的關鍵設計。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/aface" target="_blank" rel="noopener noreferrer"><strong>[24.03] AFace: 波動的邊界</strong></a></p></div></div>
 </li>
 </ol>
 <hr>
