@@ -303,11 +303,11 @@ FAS 模型的泛化不只受到 domain shift 的挑戰，更受到不同風格�
 32. [**[20.08] Face Anti-Spoofing via Disentangled Representation Learning**](https://arxiv.org/abs/2008.08250)
     將人臉特徵解構為 liveness 與 identity 兩種子空間，透過 CNN 架構分離低階與高階訊號，建立更具可遷移性的活體分類器，提升在不同攻擊類型上的穩定性。
 
-33. [**[22.03] Spoof Trace Disentanglement for Generic Face Anti-Spoofing**](https://ieeexplore.ieee.org/document/9779478)
-    將 spoof trace 建模為可加性與可修復性圖樣，提出兩階段解耦框架並結合頻率域資訊，強化低階 spoof 偵測能力，亦可用於 spoof 數據增強，提升 long-tail 攻擊泛化。
+33. [**[21.10] Disentangled representation with dual-stage feature learning for face anti-spoofing**](https://arxiv.org/abs/2110.09157)
+    透過雙階段解耦訓練機制，將人臉影像分離成與活體相關及無關的兩種子空間，並有效增進模型對未知攻擊類型的辨識能力，是加強泛化性能的關鍵設計。
 
-34. [**[22.07] Learning to Augment Face Presentation Attack Dataset via Disentangled Feature Learning from Limited Spoof Data**](https://ieeexplore.ieee.org/document/9859657)
-    針對少量 spoof 樣本提出解耦式 remix 策略，在分離後的 liveness 與 identity 特徵空間進行生成，並以對比學習保持區辨性，顯著提升小樣本情境下的辨識性能。
+34. [**[21.12] Dual spoof disentanglement generation for face anti-spoofing with depth uncertainty learning**](https://arxiv.org/abs/2112.00568)
+    提出 DSDG 生成架構，利用 VAE 進行身份與攻擊紋理的因子化潛在表示，能大規模合成多樣化偽臉影像，並引入深度不確定性模組來穩定深度監督，是「以生成對抗偽裝」的典範之一。
 
 35. [**[22.12] Learning Polysemantic Spoof Trace: A Multi-Modal Disentanglement Network for Face Anti-Spoofing**](https://arxiv.org/abs/2212.03943)
     延伸 spoof trace 解耦架構至多模態，設計 RGB/Depth 雙路網路捕捉互補 spoof 線索，並透過 cross-modality fusion 結合兩者語義，是通用 FAS 模型的前瞻方案。

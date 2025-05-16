@@ -291,30 +291,30 @@ FAS モデルの一般化は、ドメインシフトの挑戦だけでなく、�
 
 ## 第七章：偽りの軌跡を解体する
 
-> **spoof の構造とセマンティクスを深くモデル化し、モデルの識別能力を向上させる**
+> **偽装の構造と意味を深くモデル化し、モデルの識別力を高める**
 
-FAS モデルが解釈性と一般化能力の両方の挑戦に向かって進む中で、研究者たちは「spoof trace」という概念に注目し始めました。これは、偽顔が画像に残す微細なパターン、例えば色の偏差、エッジの輪郭、周波数の異常などを指します。
+FAS（顔認証のなりすまし防止）モデルが、解釈可能性と汎化能力という二つの課題に直面する中で、研究者たちは「spoof trace（偽装痕跡）」という概念に注目し始めた。これは、偽顔が映像に残す微細なパターン、例えば色のずれや輪郭の異常、周波数の異変などを指す。
 
-この章の 5 本の論文はすべて**特徴の解耦**（disentanglement）の観点からアプローチし、spoof 特徴を顔の内容から分離し、偽装を再構築、分析、さらには合成することで、モデルが「偽装を見抜く」方法を学べるようにしています。
+本章の 5 本の論文は、表現の分離（disentanglement）の観点からアプローチし、偽装特徴を顔の本来の情報から切り離すことで、偽装サンプルの再構築・解析・さらには合成までを可能にし、モデルが「偽装を見抜く」ことを学習することを目指している。
 
 31. [**[20.07] On Disentangling Spoof Trace for Generic Face Anti-Spoofing**](https://arxiv.org/abs/2007.09273)
-    複数スケールの spoof trace 分離モデルを提案し、偽装信号を多層パターンの組み合わせとして捉え、対抗学習を通じて実際の顔と spoof マスクを再構築。新たな攻撃サンプルを合成するために応用可能で、spoof-aware な特徴学習の代表的な作品。
+    多尺度で偽装痕跡を分離するモデルを提案。偽装信号を多層のパターンの組み合わせと捉え、敵対的学習を通じて本物の顔と偽装マスクを再構築。新たな攻撃サンプルの合成にも応用できる、偽装認識表現学習の代表的研究。
 
 32. [**[20.08] Face Anti-Spoofing via Disentangled Representation Learning**](https://arxiv.org/abs/2008.08250)
-    顔の特徴を liveness と identity の 2 つのサブスペースに分解し、CNN アーキテクチャを使用して低次および高次の信号を分離。より移行性のある活体分類器を構築し、さまざまな攻撃タイプに対する安定性を向上。
+    顔の特徴を「生体（liveness）」と「個人識別（identity）」の 2 つのサブ空間に分解。CNN アーキテクチャで低次・高次信号を分離し、より転移可能な生体分類器を構築。異なる攻撃タイプに対する安定性を向上。
 
-33. [**[22.03] Spoof Trace Disentanglement for Generic Face Anti-Spoofing**](https://ieeexplore.ieee.org/document/9779478)
-    spoof trace を加算可能かつ修復可能なパターンとしてモデル化し、2 段階の解耦フレームワークを提案。周波数領域情報を統合することで、低次の spoof 検出能力を強化。spoof データ増強にも使用可能で、long-tail 攻撃の一般化を向上。
+33. [**[21.10] Disentangled representation with dual-stage feature learning for face anti-spoofing**](https://arxiv.org/abs/2110.09157)
+    二段階の分離学習機構を用い、顔画像を生体に関連する部分と無関係な部分の 2 つのサブ空間に分離。未知の攻撃タイプに対する認識能力を効果的に向上させ、汎化性能強化の重要な設計。
 
-34. [**[22.07] Learning to Augment Face Presentation Attack Dataset via Disentangled Feature Learning from Limited Spoof Data**](https://ieeexplore.ieee.org/document/9859657)
-    少量の spoof サンプルに対して解耦式の remix 戦略を提案。分離後の liveness と identity 特徴空間で生成し、対比学習を使用して識別性を維持。小規模サンプル環境での識別性能を大幅に向上。
+34. [**[21.12] Dual spoof disentanglement generation for face anti-spoofing with depth uncertainty learning**](https://arxiv.org/abs/2112.00568)
+    DSDG 生成フレームワークを提案。VAE を用いて個人識別と攻撃テクスチャの因子化潜在表現を学習し、多様な偽装画像を大規模に合成可能。深度不確実性モジュールを導入し深度監督の安定化を図る、「生成対抗偽装」の代表例。
 
 35. [**[22.12] Learning Polysemantic Spoof Trace: A Multi-Modal Disentanglement Network for Face Anti-Spoofing**](https://arxiv.org/abs/2212.03943)
-    spoof trace 解耦アーキテクチャを多モーダルに拡張し、RGB/Depth 二重経路ネットワークを設計して補完的な spoof 手がかりをキャプチャ。クロスモダリティ融合を通じて両者のセマンティクスを組み合わせ、汎用 FAS モデルの先駆けとなる提案。
+    偽装痕跡の分離構造をマルチモーダルに拡張。RGB/Depth の二系統ネットワークで相補的な偽装手がかりを捉え、クロスモーダル融合で両者の意味情報を結合。汎用的な FAS モデルの先進的な提案。
 
 ---
 
-この章では重要な転換点が示されています：活体の識別 → 偽装の分析 → 攻撃のシミュレーション。Face Anti-Spoofing の研究は「生成可能、解釈可能、操作可能」な次の段階へと進んでおり、これらの方法はモデルの精度向上に貢献するだけでなく、将来の攻防の進化の道を切り開くかもしれません。
+本章は重要な転換点を示している。すなわち「生体検出」から「偽装解析」へ、そして「攻撃のシミュレーション」へと、FAS 研究は徐々に「生成可能・解釈可能・制御可能」という次の段階へと進化している。これらの手法はモデルの精度向上だけでなく、将来の攻防の進化の道筋を示唆する可能性を秘めている。
 
 ## 第八章：未来の混沌
 
