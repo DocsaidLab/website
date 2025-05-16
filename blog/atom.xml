@@ -797,12 +797,12 @@
 將人臉特徵解構為 liveness 與 identity 兩種子空間，透過 CNN 架構分離低階與高階訊號，建立更具可遷移性的活體分類器，提升在不同攻擊類型上的穩定性。</p>
 </li>
 <li>
-<p><a href="https://ieeexplore.ieee.org/document/9779478" target="_blank" rel="noopener noreferrer"><strong>[22.03] Spoof Trace Disentanglement for Generic Face Anti-Spoofing</strong></a>
-將 spoof trace 建模為可加性與可修復性圖樣，提出兩階段解耦框架並結合頻率域資訊，強化低階 spoof 偵測能力，亦可用於 spoof 數據增強，提升 long-tail 攻擊泛化。</p>
+<p><a href="https://arxiv.org/abs/2110.09157" target="_blank" rel="noopener noreferrer"><strong>[21.10] Disentangled representation with dual-stage feature learning for face anti-spoofing</strong></a>
+透過雙階段解耦訓練機制，將人臉影像分離成與活體相關及無關的兩種子空間，並有效增進模型對未知攻擊類型的辨識能力，是加強泛化性能的關鍵設計。</p>
 </li>
 <li>
-<p><a href="https://ieeexplore.ieee.org/document/9859657" target="_blank" rel="noopener noreferrer"><strong>[22.07] Learning to Augment Face Presentation Attack Dataset via Disentangled Feature Learning from Limited Spoof Data</strong></a>
-針對少量 spoof 樣本提出解耦式 remix 策略，在分離後的 liveness 與 identity 特徵空間進行生成，並以對比學習保持區辨性，顯著提升小樣本情境下的辨識性能。</p>
+<p><a href="https://arxiv.org/abs/2112.00568" target="_blank" rel="noopener noreferrer"><strong>[21.12] Dual spoof disentanglement generation for face anti-spoofing with depth uncertainty learning</strong></a>
+提出 DSDG 生成架構，利用 VAE 進行身份與攻擊紋理的因子化潛在表示，能大規模合成多樣化偽臉影像，並引入深度不確定性模組來穩定深度監督，是「以生成對抗偽裝」的典範之一。</p>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2212.03943" target="_blank" rel="noopener noreferrer"><strong>[22.12] Learning Polysemantic Spoof Trace: A Multi-Modal Disentanglement Network for Face Anti-Spoofing</strong></a>

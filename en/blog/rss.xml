@@ -758,34 +758,34 @@ Extending the Echo-FAS concept, incorporating an iso-depth model and distance-ad
 <p>These five papers mark the beginning of the significant role non-image modalities play in FAS, and if you wish to bypass the limitations of traditional cameras, this is a promising direction worth exploring.</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="chapter-7-decoding-the-trace-of-deception">Chapter 7: Decoding the Trace of Deception<a href="https://docsaid.org/en/blog/fas-paper-roadmap#chapter-7-decoding-the-trace-of-deception" class="hash-link" aria-label="Direct link to Chapter 7: Decoding the Trace of Deception" title="Direct link to Chapter 7: Decoding the Trace of Deception">​</a></h2>
 <blockquote>
-<p><strong>Deeply modeling the structure and semantics of spoofing to enhance model discriminability</strong></p>
+<p><strong>Deeply modeling the structure and semantics of spoofing to enhance model discrimination</strong></p>
 </blockquote>
-<p>As FAS models face dual challenges of interpretability and generalization, researchers have begun to focus on the concept of "spoof trace": the subtle patterns left by fake faces in images, such as color biases, edge contours, or frequency anomalies.</p>
-<p>The five papers in this chapter all approach this from the perspective of <strong>representation disentanglement</strong>, attempting to separate spoof features from facial content, then reconstruct, analyze, or even synthesize spoof samples, allowing models to truly "see through the disguise."</p>
+<p>As Face Anti-Spoofing (FAS) models face the dual challenges of interpretability and generalization, researchers have begun to focus on the concept of the "spoof trace" — subtle patterns left by fake faces in images, such as color deviations, edge contours, or frequency anomalies.</p>
+<p>The five papers in this chapter approach the problem from the perspective of <strong>disentangled representation</strong>, attempting to separate spoof features from genuine facial content, enabling reconstruction, analysis, and even synthesis of spoof samples, allowing models to truly learn to "see through the disguise."</p>
 <ol start="31">
 <li>
 <p><a href="https://arxiv.org/abs/2007.09273" target="_blank" rel="noopener noreferrer"><strong>[20.07] On Disentangling Spoof Trace for Generic Face Anti-Spoofing</strong></a>
-Proposes a multi-scale spoof trace separation model, treating spoof signals as multi-layered patterns. Through adversarial learning, it reconstructs real faces and spoof masks, applicable for synthesizing new attack samples. It is a representative work in spoof-aware representation learning.</p>
+Proposes a multi-scale spoof trace separation model that treats spoof signals as combinations of multi-layer patterns. Through adversarial learning, it reconstructs genuine faces and spoof masks, which can be used to synthesize new attack samples. This work is a representative example of spoof-aware representation learning.</p>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2008.08250" target="_blank" rel="noopener noreferrer"><strong>[20.08] Face Anti-Spoofing via Disentangled Representation Learning</strong></a>
-Decomposes facial features into two subspaces: liveness and identity. Through a CNN structure, it separates low- and high-level signals to build a more transferable liveness classifier, improving stability across different attack types.</p>
+Decomposes facial features into two subspaces: liveness and identity. Using a CNN architecture to separate low-level and high-level signals, it builds a more transferable live-face classifier, improving stability across different attack types.</p>
 </li>
 <li>
-<p><a href="https://ieeexplore.ieee.org/document/9779478" target="_blank" rel="noopener noreferrer"><strong>[22.03] Spoof Trace Disentanglement for Generic Face Anti-Spoofing</strong></a>
-Models spoof traces as additive and repairable patterns, proposing a two-stage disentanglement framework that incorporates frequency domain information to strengthen low-level spoof detection, also useful for spoof data augmentation to enhance long-tail attack generalization.</p>
+<p><a href="https://arxiv.org/abs/2110.09157" target="_blank" rel="noopener noreferrer"><strong>[21.10] Disentangled representation with dual-stage feature learning for face anti-spoofing</strong></a>
+Employs a dual-stage disentanglement training mechanism to separate facial images into two subspaces—related and unrelated to liveness—and effectively enhances the model’s ability to recognize unseen attack types. This is a key design to strengthen generalization performance.</p>
 </li>
 <li>
-<p><a href="https://ieeexplore.ieee.org/document/9859657" target="_blank" rel="noopener noreferrer"><strong>[22.07] Learning to Augment Face Presentation Attack Dataset via Disentangled Feature Learning from Limited Spoof Data</strong></a>
-Proposes a disentangled remix strategy for limited spoof samples, generating in the separated liveness and identity feature spaces, and using contrastive learning to maintain discriminability, significantly improving recognition performance in small-sample scenarios.</p>
+<p><a href="https://arxiv.org/abs/2112.00568" target="_blank" rel="noopener noreferrer"><strong>[21.12] Dual spoof disentanglement generation for face anti-spoofing with depth uncertainty learning</strong></a>
+Introduces the DSDG generation framework that factorizes latent representations of identity and attack texture via a Variational Autoencoder (VAE). It can synthesize large-scale diverse spoof images and incorporates a depth uncertainty module to stabilize depth supervision, serving as a paradigm for "generative adversarial spoofing."</p>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2212.03943" target="_blank" rel="noopener noreferrer"><strong>[22.12] Learning Polysemantic Spoof Trace: A Multi-Modal Disentanglement Network for Face Anti-Spoofing</strong></a>
-Extends the spoof trace disentanglement framework to multimodal settings, designing an RGB/Depth dual-network to capture complementary spoof clues and integrating cross-modality fusion to combine their semantics, offering a forward-looking solution for universal FAS models.</p>
+Extends spoof trace disentanglement to multi-modal data by designing a dual-stream RGB/Depth network to capture complementary spoof clues, and combines their semantics via cross-modality fusion. This represents a forward-looking solution for generalizable FAS models.</p>
 </li>
 </ol>
 <hr>
-<p>This chapter marks a key turning point: from recognizing liveness → analyzing disguises → simulating attacks, Face Anti-Spoofing research is gradually moving toward the next stage of "generative, interpretable, and controllable" models. These methods not only improve model accuracy but may also inspire the future evolution of offense and defense strategies.</p>
+<p>This chapter marks a critical turning point: from detecting liveness → analyzing spoofing → simulating attacks, Face Anti-Spoofing research is gradually progressing toward a next phase that is “generative, interpretable, and controllable.” These approaches not only improve model accuracy but may also inspire future evolutionary paths in attack and defense strategies.</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="chapter-8-the-chaotic-landscape-of-the-future">Chapter 8: The Chaotic Landscape of the Future<a href="https://docsaid.org/en/blog/fas-paper-roadmap#chapter-8-the-chaotic-landscape-of-the-future" class="hash-link" aria-label="Direct link to Chapter 8: The Chaotic Landscape of the Future" title="Direct link to Chapter 8: The Chaotic Landscape of the Future">​</a></h2>
 <blockquote>
 <p><strong>From CLIP to human perception, the next frontier of FAS</strong></p>
