@@ -123,7 +123,7 @@ authors: nbswords
 </div>
 
 ## Implementation
-- Diffusion Loss：consine形狀的noise schedule，訓練時DDPM有1000 step而推論則僅有100 step
+- Diffusion Loss：cosine形狀的noise schedule，訓練時DDPM有1000 step而推論則僅有100 step
 - Denoising MLP(small MLP)：3層1024個channel的block，每一個block包含LayerNorm, linear layer， SiLU 激活函數並使用residual connection連接，實作上是使用AdaLN將transformer的輸出z加入到LayerNorm層當中
 - Tokenizer：使用LDM提供的公開tokenizer，包括VQ-16和KL-16。其中VQ-16是基於VQ-GAN的量化模型，使用GAN loss和感知loss，KL-16則透過KL散度做regularization且不依賴VQ
 - Transformer：使用 ViT 來接收 tokenizer 處理後的 token sequence，加上位置編碼和類別token [CLS]，然後通過32層1024個channel的transformer block
