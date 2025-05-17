@@ -195,7 +195,7 @@ authors: nbswords
 可見即使無法使用kv cache這個模型也有不差的推論速度，不過default設定(step=64)還是慢了不少
 
 ### System-level comparison
-與其他模型的比較，最大的模型MAR-H才能獲得SOTA，但MAR-L表現也幾乎已經不錯
+與其他模型的比較，最大的模型MAR-H才能獲得最好的表現，但MAR-L表現也已經不錯
 
 <div align="center">
 <figure style={{"width": "80%"}}>
