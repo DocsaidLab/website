@@ -1,17 +1,12 @@
 ---
-title: "[24.06] Autoregressive Image Generation without Vector Quantization"
+title: "[24.06] MAR"
 authors: nbswords
 ---
 
-## Autoregressive Image Generation without Vector Quantization
-
+## 將自迴歸圖片生成模型應用在連續值空間的開拓者
 [**Autoregressive Image Generation without Vector Quantization**](https://arxiv.org/abs/2406.11838)
 
-[Github](https://github.com/LTH14/mar)
-
 本篇同步發表於[nbswords 的 Medium](https://medium.com/@nbswords/autoregressive-image-generation-without-vector-quantization-516b68b5acfa)
-
-## Intro
 
 當前的自迴歸圖片生成模型常使用vector quantized(VQ)將圖片離散化成一個個token來模擬自迴歸模型在NLP領域上的成功，但作者認為這種離散值空間對於自迴歸圖片生成模型並不是必要的，因此提出一種基於連續空間的自迴歸圖片生成模型，兼具更高的準度以及快速的推論時間。
 
@@ -25,7 +20,7 @@ authors: nbswords
 </figure>
 </div>
 
-詳細作法可參考 https://medium.com/@nbswords/survey-of-vector-space-search-26555890ca5e 或是 https://en.wikipedia.org/wiki/Vector_quantization
+詳細作法可參考 [Survey Of Vector Space Search](https://medium.com/@nbswords/survey-of-vector-space-search-26555890ca5e) 或是 [Vector quantization wiki](https://en.wikipedia.org/wiki/Vector_quantization)
 
 ### Auto-regressive image generation
 
@@ -37,7 +32,7 @@ authors: nbswords
     - Decode階段則使用從q映射回來的Z_q做圖片生成。
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![VQ-VAE](./img/img2.png)
 </figure>
 </div>
@@ -51,13 +46,13 @@ authors: nbswords
 既然diffusion model可以用來表現一張圖片中所有pixels或tokens的聯合機率分布，那為何不能用來表現每一個token的機率分布呢?
   - Diffusion可以將輸入的prompt/image作為條件從noise中產圖
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![diffusion+text_prompt](./img/img3.png)
 </figure>
 </div>
   - 而現在是改為將一個transformer的輸出作為條件從noise中產圖 (這個transformer的輸入是什麼等等會講到)
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![diffusion+transformer](./img/img4.png)
 </figure>
 </div>
@@ -97,7 +92,7 @@ authors: nbswords
 仔細想就會發現，這是一個將VAE的條件生成以及DDPM的降噪結合在一起使用的方法，用VAE壓縮圖像特徵並用DDPM來生成圖片，非常精妙
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![diffusion+text_prompt](./img/img9.png)
 </figure>
 </div>
@@ -139,7 +134,7 @@ authors: nbswords
 - Fréchet inception distance (FID) 是越低越好，Inception Score (IS)則是越高越好，兩個metrics都是在衡量生成的圖片品質
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![diffusion+text_prompt](./img/img12.png)
 </figure>
 </div>
@@ -151,7 +146,7 @@ authors: nbswords
 - reconstruction FID (rFID) 越低越好，用來評估tokenizer
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![diffusion+text_prompt](./img/img13.png)
 </figure>
 </div>
@@ -195,7 +190,7 @@ authors: nbswords
 與其他模型的比較，最大的模型MAR-H才能獲得SOTA，但MAR-L表現也幾乎已經不錯
 
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![diffusion+text_prompt](./img/img17.png)
 </figure>
 </div>
