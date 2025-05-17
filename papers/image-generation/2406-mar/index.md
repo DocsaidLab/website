@@ -165,7 +165,7 @@ authors: nbswords
 ### Sampling steps of Diffusion Loss
 不同Diffusion steps對於生成品質的影響，steps=100就可以獲得很好的效果
 <div align="center">
-<figure style={{"width": "60%"}}>
+<figure style={{"width": "80%"}}>
 ![Sampling steps of Diffusion Loss](./img/img15.png)
 </figure>
 </div>
