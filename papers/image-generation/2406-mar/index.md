@@ -128,7 +128,7 @@ authors: nbswords
 - Tokenizer：使用LDM提供的公開tokenizer，包括VQ-16和KL-16。其中VQ-16是基於VQ-GAN的量化模型，使用GAN loss和感知loss，KL-16則透過KL散度做regularization且不依賴VQ
 - Transformer：使用 ViT 來接收 tokenizer 處理後的 token sequence，加上位置編碼和類別token [CLS]，然後通過32層1024個channel的transformer block
 - Masked autoregressive models：在訓練階段使用 [0.7, 1.0] 的masking ratio，0.7代表隨機遮蔽掉70%的token，另外為了避免抽樣出來的序列太短，他們始終pad 64個[cls] token到其中。在推理階段會逐步將1.0的masking ratio降低到0，並使用cosine schedule來調整步數，預設是64步
-- Baseline Autoregressive Model: casual attention的GPT模型，輸入有append一個[cls]，並且有使用kv cache以及溫度參數
+- Baseline Autoregressive Model: causal attention的GPT模型，輸入有append一個[cls]，並且有使用kv cache以及溫度參數
 
 ## Experiments
 模型實驗設定都是 AR/MAR-L (∼400M parameters), 400 epochs, ImageNet 256×256
