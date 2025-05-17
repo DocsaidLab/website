@@ -60,19 +60,19 @@ authors: nbswords
 他們的做法是自迴歸地去預測出每一個token的條件z，然後利用一個diffusion model(small MLP)做denosing來得到output x的機率分布p(x|z)
 <div align="center">
 <figure style={{"width": "60%"}}>
-![diffusion+text_prompt](./img/img5.png)
+![autoregressive_diffusion](./img/img5.png)
 </figure>
 </div>
 
 提出 Diffusion Loss 來取代原本的 categorical cross entropy
 <div align="center">
 <figure style={{"width": "60%"}}>
-![diffusion+text_prompt](./img/img6.png)
+![diffusion_cal](./img/img6.png)
 </figure>
 </div>
 <div align="center">
 <figure style={{"width": "60%"}}>
-![diffusion+text_prompt](./img/img7.png)
+![diffusion_cal_2](./img/img7.png)
 </figure>
 </div>
 - ε 是一個從(0, 1)常態分布中抽樣出來的noise sample
@@ -83,7 +83,7 @@ authors: nbswords
 
 <div align="center">
 <figure style={{"width": "60%"}}>
-![diffusion+text_prompt](./img/img8.png)
+![reverse_diff](./img/img8.png)
 </figure>
 </div>
 
@@ -93,7 +93,7 @@ authors: nbswords
 
 <div align="center">
 <figure style={{"width": "80%"}}>
-![diffusion+text_prompt](./img/img9.png)
+![VAE_and_Diffusion](./img/img9.png)
 </figure>
 </div>
 
@@ -105,7 +105,7 @@ authors: nbswords
     - 這樣做的好處是圖片生成的表現會變好，壞處是這會讓transformer的訓練和推論無法使用kv cache加速，但也由於可以同時預測多個token，這個方法並不會太慢
 <div align="center">
 <figure style={{"width": "60%"}}>
-![diffusion+text_prompt](./img/img10.png)
+![bidirect](./img/img10.png)
 </figure>
 </div>
 
@@ -113,7 +113,7 @@ authors: nbswords
     - 這裡就揭曉了前面那個transformer的輸入是一個masked image
 <div align="center">
 <figure style={{"width": "60%"}}>
-![diffusion+text_prompt](./img/img11.png)
+![AR_and_MAR](./img/img11.png)
 </figure>
 </div>
 
@@ -135,7 +135,7 @@ authors: nbswords
 
 <div align="center">
 <figure style={{"width": "80%"}}>
-![diffusion+text_prompt](./img/img12.png)
+![Diffusion Loss](./img/img12.png)
 </figure>
 </div>
 
@@ -147,7 +147,7 @@ authors: nbswords
 
 <div align="center">
 <figure style={{"width": "80%"}}>
-![diffusion+text_prompt](./img/img13.png)
+![Tokenizers](./img/img13.png)
 </figure>
 </div>
 
@@ -158,7 +158,15 @@ authors: nbswords
 
 <div align="center">
 <figure style={{"width": "60%"}}>
-![diffusion+text_prompt](./img/img14.png)
+![Denosing MLP](./img/img14.png)
+</figure>
+</div>
+
+### Sampling steps of Diffusion Loss
+不同Diffusion steps對於生成品質的影響，steps=100就可以獲得很好的效果
+<div align="center">
+<figure style={{"width": "60%"}}>
+![Sampling steps of Diffusion Loss](./img/img15.png)
 </figure>
 </div>
 
@@ -167,7 +175,7 @@ authors: nbswords
 
 <div align="center">
 <figure style={{"width": "60%"}}>
-![diffusion+text_prompt](./img/img15.png)
+![Temperature](./img/img16.png)
 </figure>
 </div>
 
@@ -176,7 +184,7 @@ authors: nbswords
 
 <div align="center">
 <figure style={{"width": "60%"}}>
-![diffusion+text_prompt](./img/img16.png)
+![Speed](./img/img17.png)
 </figure>
 </div>
 
@@ -191,7 +199,7 @@ authors: nbswords
 
 <div align="center">
 <figure style={{"width": "80%"}}>
-![diffusion+text_prompt](./img/img17.png)
+![System-level comparison](./img/img18.png)
 </figure>
 </div>
 
@@ -202,7 +210,7 @@ authors: nbswords
 
 <div align="center">
 <figure style={{"width": "60%"}}>
-![diffusion+text_prompt](./img/img18.png)
+![result](./img/img19.png)
 </figure>
 </div>
 
