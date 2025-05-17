@@ -38,7 +38,7 @@ authors: nbswords
 
 <div align="center">
 <figure style={{"width": "60%"}}>
-![VQ-VAE](./img/img2.jpg)
+![VQ-VAE](./img/img2.png)
 </figure>
 </div>
 
