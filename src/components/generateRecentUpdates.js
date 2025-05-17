@@ -1,12 +1,16 @@
+// recent-updates.js
+// 用途：抓取最近新增的 article (.md/.mdx) 並為各語系 docs 目錄產生 recent_updates_data.json
+
 const simpleGit = require('simple-git');
 const fs = require('fs-extra');
 const path = require('path');
 
 const git = simpleGit();
 
-// 可根據需求調整
+// 可根據需求調整：抓取最近 N 天的新增檔案
 const RECENT_DAYS = 30;
 
+// 對應到各語系的 intro.md 檔案所在資料夾
 const TARGET_FILES = [
   path.join(__dirname, '..', '..', 'papers', 'intro.md'),
   path.join(__dirname, '..', '..', 'i18n', 'en', 'docusaurus-plugin-content-docs-papers', 'current', 'intro.md'),
@@ -14,38 +18,42 @@ const TARGET_FILES = [
 ];
 
 async function getAddedArticles(sinceOption) {
-  const log = await git.log({'--since': sinceOption});
-  if (log.total === 0) {
-    console.log('No commits found in the given date range.');
-    return [];
-  }
-  console.log(`Found ${log.total} commits.`);
+  // 直接用 git log + diff-filter=A 找出所有新增檔案
+  const raw = await git.raw([
+    'log',
+    `--since=${sinceOption}`,
+    '--diff-filter=A',
+    '--name-only',
+    '--pretty=format:'
+  ]);
+
+  const files = raw
+    .split('\n')
+    .map(f => f.trim())
+    .filter(f => f && (f.endsWith('.md') || f.endsWith('.mdx')));
+
+  const uniqueFiles = Array.from(new Set(files));
 
   const addedArticles = [];
-  for (const commit of log.all) {
-    // 僅針對訊息中包含 "[A] Add article" 的 commit
-    if (/\[A\] Add article/i.test(commit.message)) {
-      const diff = await git.show(['--name-status', commit.hash]);
-      const lines = diff.split('\n');
-      for (const line of lines) {
-        if (line.startsWith('A\t')) {
-          const filePath = line.substring(2);
-          if (filePath.endsWith('.md') || filePath.endsWith('.mdx')) {
-            const articleFullPath = path.resolve(__dirname, '..', '..', filePath);
-            addedArticles.push({ filePath, fullPath: articleFullPath, date: commit.date });
-          }
-        }
-      }
-    }
+  for (const filePath of uniqueFiles) {
+    const fullPath = path.resolve(__dirname, '..', '..', filePath);
+    // 查這個檔案最後一次 commit 的日期（也就是新增日期）
+    const logForFile = await git.log({
+      file: filePath,
+      '--max-count': 1,
+      '--format': '%cI'
+    });
+    const date = logForFile.latest ? logForFile.latest.date : null;
+    addedArticles.push({ filePath, fullPath, date });
   }
 
-  console.log('Total added articles found:', addedArticles.length);
+  console.log(`Found ${addedArticles.length} added article(s) in the last ${sinceOption}.`);
   return addedArticles;
 }
 
 async function extractTitleInfo(article) {
   if (!(await fs.pathExists(article.fullPath))) {
-    console.log(`File does not exist: ${article.fullPath}`);
+    console.warn(`File does not exist: ${article.fullPath}`);
     return null;
   }
 
@@ -54,83 +62,85 @@ async function extractTitleInfo(article) {
 
   let mainTitle = '';
   let subTitle = '';
+  let inYaml = false;
 
-  // 解析 YAML 頭部的 title
-  let inYamlBlock = false;
   for (const line of lines) {
     if (line.trim() === '---') {
-      inYamlBlock = !inYamlBlock;
+      inYaml = !inYaml;
       continue;
     }
-    if (inYamlBlock && line.startsWith('title:')) {
-      mainTitle = line.replace('title:', '').trim().replace(/^["']|["']$/g, ''); // 去掉引號
+    if (inYaml && line.startsWith('title:')) {
+      mainTitle = line.replace('title:', '').trim().replace(/^["']|["']$/g, '');
     }
-    if (!inYamlBlock && line.startsWith('## ')) {
+    if (!inYaml && line.startsWith('## ')) {
       subTitle = line.replace('## ', '').trim();
       break;
     }
   }
 
-  // 若未找到主標題則以檔名替代
   if (!mainTitle) {
     mainTitle = path.basename(article.filePath, path.extname(article.filePath));
   }
 
-  const combinedTitle = subTitle ? `${mainTitle}: ${subTitle}` : mainTitle;
-  return combinedTitle;
+  return subTitle ? `${mainTitle}: ${subTitle}` : mainTitle;
 }
 
 async function writeRecentUpdatesData(targetDir, articles) {
   if (articles.length === 0) {
-    console.log('No articles to write for', targetDir);
+    console.log(`No new articles for ${targetDir}, skipping.`);
     return;
   }
 
   const data = articles.map(a => ({
-    date: a.date,
+    date: a.date ? a.date.split('T')[0] : '',
     link: a.link,
     combinedTitle: a.combinedTitle,
   }));
 
   const outputFile = path.join(targetDir, 'recent_updates_data.json');
   await fs.writeJson(outputFile, data, { spaces: 2 });
-  console.log(`✅ Generated recent updates data at: ${outputFile}\nPlease make sure this file is in .gitignore if you don't want it tracked.`);
+  console.log(`✅ Generated recent updates data at: ${outputFile}`);
+  console.log('   (請確認該檔案已加入 .gitignore)');
 }
 
 (async () => {
   try {
     const sinceOption = `${RECENT_DAYS} days ago`;
-    console.log('Since option:', sinceOption);
+    console.log(`🔍 Scanning commits since: ${sinceOption}`);
 
-    // 取得最近 N 天 commits 中的已新增文章清單
     const addedArticles = await getAddedArticles(sinceOption);
     if (addedArticles.length === 0) {
-      console.log('No added articles found, no updates needed.');
+      console.log('No added articles found—nothing to update.');
       return;
     }
 
-    // 對每個 TARGET_FILE 產生獨立的 recent_updates_data.json
-    for (const TARGET_FILE of TARGET_FILES) {
-      const targetDir = path.dirname(TARGET_FILE);
+    for (const targetFile of TARGET_FILES) {
+      const targetDir = path.dirname(targetFile);
 
-      const filteredArticles = [];
-      for (const article of addedArticles) {
-        if (!article.fullPath.startsWith(targetDir)) continue;
+      // 篩選出屬於此語系資料夾的檔案
+      const filtered = [];
+      for (const art of addedArticles) {
+        if (!art.fullPath.startsWith(targetDir)) continue;
 
-        const combinedTitle = await extractTitleInfo(article);
+        const combinedTitle = await extractTitleInfo(art);
         if (!combinedTitle) continue;
 
-        const relativeLink = './' + path.relative(targetDir, article.fullPath).replace(/\\/g, '/');
-        const date = article.date.split('T')[0];
-        filteredArticles.push({ combinedTitle, link: relativeLink, date });
+        const rel = './' + path.relative(targetDir, art.fullPath).replace(/\\/g, '/');
+        filtered.push({
+          combinedTitle,
+          link: rel,
+          date: art.date,
+        });
       }
 
-      filteredArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
-      await writeRecentUpdatesData(targetDir, filteredArticles);
+      // 按日期由新到舊排序
+      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      await writeRecentUpdatesData(targetDir, filtered);
     }
 
-    console.log('\nAll TARGET_FILES have been processed. The recent updates are now stored in their respective `recent_updates_data.json` files.');
-  } catch (error) {
-    console.error('❌ Error：', error);
+    console.log('\n🎉 All TARGET_FILES processed. Done!');
+  } catch (err) {
+    console.error('❌ Error:', err);
   }
 })();
