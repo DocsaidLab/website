@@ -87,7 +87,7 @@ authors: nbswords
 </figure>
 </div>
 
-除此之外，若讀者們有使用過diffusion model來做圖片生成肯定曾看到過一個超參數叫做溫度(temperature)，溫度越高表示越高的隨機性，溫度越低則隨機性越低，這是一個控制採樣隨機性的參數，在本作中採用溫度 $\tau$ * $\sigma_t \delta$ 來控制，這個方法出自[Diffusion Models Beat GANs on Image Synthesis](https://arxiv.org/abs/2105.05233)
+除此之外，若讀者們有使用過diffusion model來做圖片生成肯定曾看到過一個超參數叫做溫度(temperature)，溫度越高表示有越高的隨機性，溫度越低則隨機性越低，這是一個控制採樣隨機性的參數，在本作中採用溫度 $\tau$ * $\sigma_t \delta$ 來控制，這個方法出自[Diffusion Models Beat GANs on Image Synthesis](https://arxiv.org/abs/2105.05233)
 
 仔細想就會發現，這是一個將VAE的條件生成以及DDPM的降噪結合在一起使用的方法，用VAE壓縮圖像特徵並用DDPM來生成圖片，非常精妙
 
