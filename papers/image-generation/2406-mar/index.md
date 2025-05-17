@@ -9,7 +9,7 @@ authors: nbswords
 
 [Github](https://github.com/LTH14/mar)
 
-本篇同步發表於[nbsword's medium](https://medium.com/@nbswords/autoregressive-image-generation-without-vector-quantization-516b68b5acfa)
+本篇同步發表於[nbswords 的 Medium](https://medium.com/@nbswords/autoregressive-image-generation-without-vector-quantization-516b68b5acfa)
 
 ## Intro
 
