@@ -9,6 +9,10 @@ authors: nbswords
 
 ---
 
+:::info
+This article is simultaneously published on [**nbswords 的 Medium**](https://medium.com/@nbswords/autoregressive-image-generation-without-vector-quantization-516b68b5acfa)
+:::
+
 Current autoregressive image generation models often use vector quantization (VQ) to discretize images into tokens, mimicking the success of autoregressive models in the NLP domain. However, the authors argue that such a discrete space is not necessary for autoregressive image generation. Therefore, they propose an autoregressive image generation model based on continuous space, which achieves higher accuracy and faster inference time.
 
 ## Background Knowledge
