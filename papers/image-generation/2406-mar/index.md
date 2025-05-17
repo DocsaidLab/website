@@ -213,4 +213,3 @@ authors: nbswords
 
 ## Reference
 https://zhouyifan.net/2024/07/27/20240717-ar-wo-vq/
-https://speechprocessingbook.aalto.fi/Modelling/Vector_quantization_VQ.html
