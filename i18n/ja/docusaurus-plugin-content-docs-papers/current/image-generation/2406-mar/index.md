@@ -10,7 +10,7 @@ authors: nbswords
 ---
 
 :::info
-本記事は [**nbswords 的 Medium**](https://medium.com/@nbswords/autoregressive-image-generation-without-vector-quantization-516b68b5acfa) に同時公開されています。
+本記事は [**nbswords の Medium**](https://medium.com/@nbswords/autoregressive-image-generation-without-vector-quantization-516b68b5acfa) に同時公開されています。
 :::
 
 現在の自己回帰型画像生成モデルは、NLP 分野の自己回帰モデルの成功を模倣するために、画像をベクトル量子化（VQ）して複数のトークンに離散化する手法が一般的ですが、著者はこの離散空間が自己回帰型画像生成に必須ではないと考え、連続空間に基づく自己回帰画像生成モデルを提案しました。これにより、より高い精度と高速な推論時間を両立しています。
