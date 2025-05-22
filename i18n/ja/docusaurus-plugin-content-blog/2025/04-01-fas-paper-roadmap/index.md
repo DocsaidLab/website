@@ -297,20 +297,40 @@ FAS（顔認証のなりすまし防止）モデルが、解釈可能性と汎�
 
 本章の 5 本の論文は、表現の分離（disentanglement）の観点からアプローチし、偽装特徴を顔の本来の情報から切り離すことで、偽装サンプルの再構築・解析・さらには合成までを可能にし、モデルが「偽装を見抜く」ことを学習することを目指している。
 
-31. [**[20.07] On Disentangling Spoof Trace for Generic Face Anti-Spoofing**](https://arxiv.org/abs/2007.09273)
+31. [**[20.03] Searching Central Difference Convolutional Networks for Face Anti-Spoofing**](https://arxiv.org/abs/2003.04092)
+    中心差分（CDC）手法を提案。人工的に「偽装は局所的な勾配に差異を残すべきである」という仮説を定義し、実際の顔と潜在的な偽装の勾配信号を分離する。さらに多尺度注意モジュールを組み合わせることで、高効率なデプロイとクロスデータセットでの一般化能力を実現した FAS 手法であり、非常に多く引用されている。
+
+    :::info
+    **論文ノート**：[**[20.03] CDCN: 真と偽の入り混じる境界**](https://docsaid.org/ja/papers/face-antispoofing/cdcn)
+    :::
+
+32. [**[20.07] On Disentangling Spoof Trace for Generic Face Anti-Spoofing**](https://arxiv.org/abs/2007.09273)
     多尺度で偽装痕跡を分離するモデルを提案。偽装信号を多層のパターンの組み合わせと捉え、敵対的学習を通じて本物の顔と偽装マスクを再構築。新たな攻撃サンプルの合成にも応用できる、偽装認識表現学習の代表的研究。
 
-32. [**[20.08] Face Anti-Spoofing via Disentangled Representation Learning**](https://arxiv.org/abs/2008.08250)
+    :::info
+    **論文ノート**：[**[20.07] STDN: 偽装の痕跡**](https://docsaid.org/ja/papers/face-antispoofing/stdn)
+    :::
+
+33. [**[20.08] Face Anti-Spoofing via Disentangled Representation Learning**](https://arxiv.org/abs/2008.08250)
     顔の特徴を「生体（liveness）」と「個人識別（identity）」の 2 つのサブ空間に分解。CNN アーキテクチャで低次・高次信号を分離し、より転移可能な生体分類器を構築。異なる攻撃タイプに対する安定性を向上。
 
-33. [**[21.10] Disentangled representation with dual-stage feature learning for face anti-spoofing**](https://arxiv.org/abs/2110.09157)
+    :::info
+    **論文ノート**：[**[20.08] Disentangle-FAS: 魂の結び目を解く**](https://docsaid.org/ja/papers/face-antispoofing/disentangle-fas)
+    :::
+
+34. [**[21.10] Disentangled representation with dual-stage feature learning for face anti-spoofing**](https://arxiv.org/abs/2110.09157)
     二段階の分離学習機構を用い、顔画像を生体に関連する部分と無関係な部分の 2 つのサブ空間に分離。未知の攻撃タイプに対する認識能力を効果的に向上させ、汎化性能強化の重要な設計。
 
-34. [**[21.12] Dual spoof disentanglement generation for face anti-spoofing with depth uncertainty learning**](https://arxiv.org/abs/2112.00568)
+    :::info
+    **論文ノート**：[**[21.10] DualStage: 複解耦の術**](https://docsaid.org/ja/papers/face-antispoofing/dualstage)
+    :::
+
+35. [**[21.12] Dual spoof disentanglement generation for face anti-spoofing with depth uncertainty learning**](https://arxiv.org/abs/2112.00568)
     DSDG 生成フレームワークを提案。VAE を用いて個人識別と攻撃テクスチャの因子化潜在表現を学習し、多様な偽装画像を大規模に合成可能。深度不確実性モジュールを導入し深度監督の安定化を図る、「生成対抗偽装」の代表例。
 
-35. [**[22.12] Learning Polysemantic Spoof Trace: A Multi-Modal Disentanglement Network for Face Anti-Spoofing**](https://arxiv.org/abs/2212.03943)
-    偽装痕跡の分離構造をマルチモーダルに拡張。RGB/Depth の二系統ネットワークで相補的な偽装手がかりを捉え、クロスモーダル融合で両者の意味情報を結合。汎用的な FAS モデルの先進的な提案。
+    :::info
+    **論文ノート**：[**[21.12] DSDG: 偽りの再構成の前夜**](https://docsaid.org/ja/papers/face-antispoofing/dsdg)
+    :::
 
 ---
 
@@ -324,20 +344,20 @@ FAS（顔認証のなりすまし防止）モデルが、解釈可能性と汎�
 
 これらの 5 本の代表作は、FAS の未来に向けた 3 つの主要な発展軸：**融合識別、言語モデル、そして人間の感知**を示しています。
 
-36. [**[20.07] Face Anti-Spoofing with Human Material Perception**](https://arxiv.org/abs/2007.02157)
-    材質知覚を FAS モデル設計に取り入れ、BCN アーキテクチャを用いて人間の知覚レベル（マクロ/ミクロ）で材質差を判定。皮膚、紙、シリコンなどの材質差を軸に、モデルのセマンティックな解釈性と材質間識別能力を向上。
-
-37. [**[23.09] FLIP: Cross-domain Face Anti-Spoofing with Language Guidance**](https://arxiv.org/abs/2309.16649)
+36. [**[23.09] FLIP: Cross-domain Face Anti-Spoofing with Language Guidance**](https://arxiv.org/abs/2309.16649)
     CLIP モデルを FAS タスクに応用し、自然言語による記述で視覚的特徴空間を導く。クロスドメインでの一般化能力を向上させ、セマンティックアライメントと多モーダル対比学習戦略を提案。言語駆動でのゼロショット FAS を実現。
 
-38. [**[24.04] Joint Physical-Digital Facial Attack Detection via Simulating Spoofing Clues**](https://arxiv.org/abs/2404.08450)
+37. [**[24.04] Joint Physical-Digital Facial Attack Detection via Simulating Spoofing Clues**](https://arxiv.org/abs/2404.08450)
     SPSC と SDSC データ拡張戦略を提案し、物理的およびデジタル攻撃の手がかりをシミュレート。単一のモデルで両方の攻撃タイプを識別できるようにし、CVPR2024 コンペで優勝。融合型モデルの新たな基準を打ち立てました。
 
-39. [**[24.04] Unified Physical-Digital Attack Detection Challenge**](https://arxiv.org/abs/2404.06211)
+38. [**[24.04] Unified Physical-Digital Attack Detection Challenge**](https://arxiv.org/abs/2404.06211)
     初の統一攻撃識別挑戦コンペを立ち上げ、2.8 万件の複合型攻撃データセット UniAttackData を公開。各チームのモデルアーキテクチャを分析し、Unified Attack Detection への道を開くカタリストとなりました。
 
-40. [**[24.08] La-SoftMoE CLIP for Unified Physical-Digital Face Attack Detection**](https://arxiv.org/abs/2408.12793)
+39. [**[24.08] La-SoftMoE CLIP for Unified Physical-Digital Face Attack Detection**](https://arxiv.org/abs/2408.12793)
     CLIP と Mixture of Experts アーキテクチャを組み合わせ、soft-adaptive メカニズムを導入してサブモデルを動的に割り当て、複雑な意思決定境界に対応。物理的およびデジタル攻撃の融合処理に効率的なパラメータ選択を提供。
+
+40. [**[25.01] Interpretable Face Anti-Spoofing: Enhancing Generalization with Multimodal Large Language Models**](https://arxiv.org/abs/2501.01720)
+    マルチモーダル大型言語モデルを統合した新しいフレームワーク I-FAS を提案。顔の活体認証タスクを解釈可能な視覚的質問応答問題に変換し、意味注釈、非対称言語損失、グローバル認識コネクタという三つの重要な設計を通じて、モデルのドメイン間一般化能力と推論性能を大幅に向上させている。
 
 ---
 
