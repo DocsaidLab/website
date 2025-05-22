@@ -770,24 +770,29 @@
 <p>這一章的五篇論文皆從<strong>表徵解耦</strong>（disentanglement）的角度切入，試圖將 spoof 特徵從人臉內容中分離出來，進而重建、分析、甚至合成 spoof 樣本，讓模型真正學會「看穿偽裝」。</p>
 <ol start="31">
 <li>
+<p><a href="https://arxiv.org/abs/2003.04092" target="_blank" rel="noopener noreferrer"><strong>[20.03] Searching Central Difference Convolutional Networks for Face Anti-Spoofing</strong></a>
+提出中心差分（CDC）方法：藉由人工定義出「假象應該在局部梯度中留有差異」的假設，將真實臉與潛在偽裝的梯度訊號分開。再搭配多尺度注意力模組，實現高效部署與跨資料集泛化能力的 FAS 解法，有非常高的引用數。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/cdcn" target="_blank" rel="noopener noreferrer"><strong>[20.03] CDCN: 真與假的錯落之間</strong></a></p></div></div>
+</li>
+<li>
 <p><a href="https://arxiv.org/abs/2007.09273" target="_blank" rel="noopener noreferrer"><strong>[20.07] On Disentangling Spoof Trace for Generic Face Anti-Spoofing</strong></a>
 提出多尺度 spoof trace 分離模型，將偽裝訊號視為多層圖樣組合，透過對抗學習重建真實臉部與 spoof mask，可應用於合成新攻擊樣本，是 spoof-aware 表徵學習的代表作。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/stdn" target="_blank" rel="noopener noreferrer"><strong>[20.07] STDN: 偽裝的痕跡</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2008.08250" target="_blank" rel="noopener noreferrer"><strong>[20.08] Face Anti-Spoofing via Disentangled Representation Learning</strong></a>
 將人臉特徵解構為 liveness 與 identity 兩種子空間，透過 CNN 架構分離低階與高階訊號，建立更具可遷移性的活體分類器，提升在不同攻擊類型上的穩定性。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/disentangle-fas" target="_blank" rel="noopener noreferrer"><strong>[20.08] Disentangle-FAS: 斷開魂結</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2110.09157" target="_blank" rel="noopener noreferrer"><strong>[21.10] Disentangled representation with dual-stage feature learning for face anti-spoofing</strong></a>
 透過雙階段解耦訓練機制，將人臉影像分離成與活體相關及無關的兩種子空間，並有效增進模型對未知攻擊類型的辨識能力，是加強泛化性能的關鍵設計。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/dualstage" target="_blank" rel="noopener noreferrer"><strong>[21.10] DualStage: 複解耦之術</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2112.00568" target="_blank" rel="noopener noreferrer"><strong>[21.12] Dual spoof disentanglement generation for face anti-spoofing with depth uncertainty learning</strong></a>
 提出 DSDG 生成架構，利用 VAE 進行身份與攻擊紋理的因子化潛在表示，能大規模合成多樣化偽臉影像，並引入深度不確定性模組來穩定深度監督，是「以生成對抗偽裝」的典範之一。</p>
-</li>
-<li>
-<p><a href="https://arxiv.org/abs/2212.03943" target="_blank" rel="noopener noreferrer"><strong>[22.12] Learning Polysemantic Spoof Trace: A Multi-Modal Disentanglement Network for Face Anti-Spoofing</strong></a>
-延伸 spoof trace 解耦架構至多模態，設計 RGB/Depth 雙路網路捕捉互補 spoof 線索，並透過 cross-modality fusion 結合兩者語義，是通用 FAS 模型的前瞻方案。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/dsdg" target="_blank" rel="noopener noreferrer"><strong>[21.12] DSDG: 假象重組的前夜</strong></a></p></div></div>
 </li>
 </ol>
 <hr>
@@ -799,10 +804,6 @@
 <p>當單一模態、單一攻擊型態都已難以滿足實戰需求，FAS 正邁入更高層次的挑戰：<strong>物理 + 數位雙重攻擊、語意導向辨識、多樣環境的零樣本泛化</strong>。</p>
 <p>這五篇代表作是未來 FAS 的三大發展主軸：<strong>融合辨識、語言建模、與人本感知</strong>。</p>
 <ol start="36">
-<li>
-<p><a href="https://arxiv.org/abs/2007.02157" target="_blank" rel="noopener noreferrer"><strong>[20.07] Face Anti-Spoofing with Human Material Perception</strong></a>
-將材質感知納入 FAS 模型設計，BCN 架構模擬人類感知層級（macro/micro）判斷材質差異，將皮膚、紙張、矽膠等材料差異視為主軸，提升模型語義解釋性與跨材質辨識能力。</p>
-</li>
 <li>
 <p><a href="https://arxiv.org/abs/2309.16649" target="_blank" rel="noopener noreferrer"><strong>[23.09] FLIP: Cross-domain Face Anti-Spoofing with Language Guidance</strong></a>
 將 CLIP 模型應用於 FAS 任務，透過自然語言描述導引視覺表徵空間，提升跨 domain 的泛化能力，並提出語義對齊與多模態對比學習策略，達成真正語言引導下的 zero-shot FAS。</p>
@@ -818,6 +819,10 @@
 <li>
 <p><a href="https://arxiv.org/abs/2408.12793" target="_blank" rel="noopener noreferrer"><strong>[24.08] La-SoftMoE CLIP for Unified Physical-Digital Face Attack Detection</strong></a>
 將 CLIP 與 Mixture of Experts 架構結合，引入 soft-adaptive 機制動態分配子模型以應對複雜決策邊界，為物理與數位攻擊融合處理提供高效參數選擇方案。</p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/2501.01720" target="_blank" rel="noopener noreferrer"><strong>[25.01] Interpretable Face Anti-Spoofing: Enhancing Generalization with Multimodal Large Language Models</strong></a>
+提出一種結合多模態大型語言模型的全新架構 I-FAS，將人臉活體辨識任務轉化為具可解釋性的視覺問答問題，並透過語意標註、非對稱語言損失與全域感知連結器三項關鍵設計，大幅提升模型的跨域泛化與推理能力。</p>
 </li>
 </ol>
 <hr>

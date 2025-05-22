@@ -787,24 +787,29 @@ Echo-FAS のアイデアを拡張し、iso-depth モデルと距離適応アル�
 <p>本章の 5 本の論文は、表現の分離（disentanglement）の観点からアプローチし、偽装特徴を顔の本来の情報から切り離すことで、偽装サンプルの再構築・解析・さらには合成までを可能にし、モデルが「偽装を見抜く」ことを学習することを目指している。</p>
 <ol start="31">
 <li>
+<p><a href="https://arxiv.org/abs/2003.04092" target="_blank" rel="noopener noreferrer"><strong>[20.03] Searching Central Difference Convolutional Networks for Face Anti-Spoofing</strong></a>
+中心差分（CDC）手法を提案。人工的に「偽装は局所的な勾配に差異を残すべきである」という仮説を定義し、実際の顔と潜在的な偽装の勾配信号を分離する。さらに多尺度注意モジュールを組み合わせることで、高効率なデプロイとクロスデータセットでの一般化能力を実現した FAS 手法であり、非常に多く引用されている。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/cdcn" target="_blank" rel="noopener noreferrer"><strong>[20.03] CDCN: 真と偽の入り混じる境界</strong></a></p></div></div>
+</li>
+<li>
 <p><a href="https://arxiv.org/abs/2007.09273" target="_blank" rel="noopener noreferrer"><strong>[20.07] On Disentangling Spoof Trace for Generic Face Anti-Spoofing</strong></a>
 多尺度で偽装痕跡を分離するモデルを提案。偽装信号を多層のパターンの組み合わせと捉え、敵対的学習を通じて本物の顔と偽装マスクを再構築。新たな攻撃サンプルの合成にも応用できる、偽装認識表現学習の代表的研究。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/stdn" target="_blank" rel="noopener noreferrer"><strong>[20.07] STDN: 偽装の痕跡</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2008.08250" target="_blank" rel="noopener noreferrer"><strong>[20.08] Face Anti-Spoofing via Disentangled Representation Learning</strong></a>
 顔の特徴を「生体（liveness）」と「個人識別（identity）」の 2 つのサブ空間に分解。CNN アーキテクチャで低次・高次信号を分離し、より転移可能な生体分類器を構築。異なる攻撃タイプに対する安定性を向上。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/disentangle-fas" target="_blank" rel="noopener noreferrer"><strong>[20.08] Disentangle-FAS: 魂の結び目を解く</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2110.09157" target="_blank" rel="noopener noreferrer"><strong>[21.10] Disentangled representation with dual-stage feature learning for face anti-spoofing</strong></a>
 二段階の分離学習機構を用い、顔画像を生体に関連する部分と無関係な部分の 2 つのサブ空間に分離。未知の攻撃タイプに対する認識能力を効果的に向上させ、汎化性能強化の重要な設計。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/dualstage" target="_blank" rel="noopener noreferrer"><strong>[21.10] DualStage: 複解耦の術</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2112.00568" target="_blank" rel="noopener noreferrer"><strong>[21.12] Dual spoof disentanglement generation for face anti-spoofing with depth uncertainty learning</strong></a>
 DSDG 生成フレームワークを提案。VAE を用いて個人識別と攻撃テクスチャの因子化潜在表現を学習し、多様な偽装画像を大規模に合成可能。深度不確実性モジュールを導入し深度監督の安定化を図る、「生成対抗偽装」の代表例。</p>
-</li>
-<li>
-<p><a href="https://arxiv.org/abs/2212.03943" target="_blank" rel="noopener noreferrer"><strong>[22.12] Learning Polysemantic Spoof Trace: A Multi-Modal Disentanglement Network for Face Anti-Spoofing</strong></a>
-偽装痕跡の分離構造をマルチモーダルに拡張。RGB/Depth の二系統ネットワークで相補的な偽装手がかりを捉え、クロスモーダル融合で両者の意味情報を結合。汎用的な FAS モデルの先進的な提案。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/dsdg" target="_blank" rel="noopener noreferrer"><strong>[21.12] DSDG: 偽りの再構成の前夜</strong></a></p></div></div>
 </li>
 </ol>
 <hr>
@@ -816,10 +821,6 @@ DSDG 生成フレームワークを提案。VAE を用いて個人識別と攻�
 <p>単一モーダル、単一攻撃タイプだけでは実際のニーズを満たすのが難しくなったとき、FAS はさらに高次の挑戦に直面しています：<strong>物理的+デジタルな二重攻撃、セマンティクス駆動の識別、さまざまな環境でのゼロショット一般化</strong>。</p>
 <p>これらの 5 本の代表作は、FAS の未来に向けた 3 つの主要な発展軸：<strong>融合識別、言語モデル、そして人間の感知</strong>を示しています。</p>
 <ol start="36">
-<li>
-<p><a href="https://arxiv.org/abs/2007.02157" target="_blank" rel="noopener noreferrer"><strong>[20.07] Face Anti-Spoofing with Human Material Perception</strong></a>
-材質知覚を FAS モデル設計に取り入れ、BCN アーキテクチャを用いて人間の知覚レベル（マクロ/ミクロ）で材質差を判定。皮膚、紙、シリコンなどの材質差を軸に、モデルのセマンティックな解釈性と材質間識別能力を向上。</p>
-</li>
 <li>
 <p><a href="https://arxiv.org/abs/2309.16649" target="_blank" rel="noopener noreferrer"><strong>[23.09] FLIP: Cross-domain Face Anti-Spoofing with Language Guidance</strong></a>
 CLIP モデルを FAS タスクに応用し、自然言語による記述で視覚的特徴空間を導く。クロスドメインでの一般化能力を向上させ、セマンティックアライメントと多モーダル対比学習戦略を提案。言語駆動でのゼロショット FAS を実現。</p>
@@ -835,6 +836,10 @@ SPSC と SDSC データ拡張戦略を提案し、物理的およびデジタル
 <li>
 <p><a href="https://arxiv.org/abs/2408.12793" target="_blank" rel="noopener noreferrer"><strong>[24.08] La-SoftMoE CLIP for Unified Physical-Digital Face Attack Detection</strong></a>
 CLIP と Mixture of Experts アーキテクチャを組み合わせ、soft-adaptive メカニズムを導入してサブモデルを動的に割り当て、複雑な意思決定境界に対応。物理的およびデジタル攻撃の融合処理に効率的なパラメータ選択を提供。</p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/2501.01720" target="_blank" rel="noopener noreferrer"><strong>[25.01] Interpretable Face Anti-Spoofing: Enhancing Generalization with Multimodal Large Language Models</strong></a>
+マルチモーダル大型言語モデルを統合した新しいフレームワーク I-FAS を提案。顔の活体認証タスクを解釈可能な視覚的質問応答問題に変換し、意味注釈、非対称言語損失、グローバル認識コネクタという三つの重要な設計を通じて、モデルのドメイン間一般化能力と推論性能を大幅に向上させている。</p>
 </li>
 </ol>
 <hr>

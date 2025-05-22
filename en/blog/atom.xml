@@ -783,24 +783,29 @@ Extending the Echo-FAS concept, incorporating an iso-depth model and distance-ad
 <p>The five papers in this chapter approach the problem from the perspective of <strong>disentangled representation</strong>, attempting to separate spoof features from genuine facial content, enabling reconstruction, analysis, and even synthesis of spoof samples, allowing models to truly learn to "see through the disguise."</p>
 <ol start="31">
 <li>
+<p><a href="https://arxiv.org/abs/2003.04092" target="_blank" rel="noopener noreferrer"><strong>[20.03] Searching Central Difference Convolutional Networks for Face Anti-Spoofing</strong></a>
+Proposes the Central Difference Convolution (CDC) method: by manually defining the hypothesis that "spoof traces should leave differences in local gradients," it disentangles gradient signals of real faces from potential spoofs. Combined with a multiscale attention module, it achieves efficient deployment and strong cross-dataset generalization in face anti-spoofing (FAS) tasks. This work has received a high number of citations.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Paper Notes</strong>: <a href="https://docsaid.org/en/papers/face-antispoofing/cdcn" target="_blank" rel="noopener noreferrer"><strong>[20.03] CDCN: Between Truth and Falsehood</strong></a></p></div></div>
+</li>
+<li>
 <p><a href="https://arxiv.org/abs/2007.09273" target="_blank" rel="noopener noreferrer"><strong>[20.07] On Disentangling Spoof Trace for Generic Face Anti-Spoofing</strong></a>
 Proposes a multi-scale spoof trace separation model that treats spoof signals as combinations of multi-layer patterns. Through adversarial learning, it reconstructs genuine faces and spoof masks, which can be used to synthesize new attack samples. This work is a representative example of spoof-aware representation learning.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Paper Notes</strong>: <a href="https://docsaid.org/en/papers/face-antispoofing/stdn" target="_blank" rel="noopener noreferrer"><strong>[20.07] STDN: Traces of Disguise</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2008.08250" target="_blank" rel="noopener noreferrer"><strong>[20.08] Face Anti-Spoofing via Disentangled Representation Learning</strong></a>
 Decomposes facial features into two subspaces: liveness and identity. Using a CNN architecture to separate low-level and high-level signals, it builds a more transferable live-face classifier, improving stability across different attack types.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Paper Notes</strong>: <a href="https://docsaid.org/en/papers/face-antispoofing/disentangle-fas" target="_blank" rel="noopener noreferrer"><strong>[20.08] Disentangle-FAS: Untangling the Soul Knot</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2110.09157" target="_blank" rel="noopener noreferrer"><strong>[21.10] Disentangled representation with dual-stage feature learning for face anti-spoofing</strong></a>
 Employs a dual-stage disentanglement training mechanism to separate facial images into two subspaces—related and unrelated to liveness—and effectively enhances the model’s ability to recognize unseen attack types. This is a key design to strengthen generalization performance.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Paper Notes</strong>: <a href="https://docsaid.org/en/papers/face-antispoofing/dualstage" target="_blank" rel="noopener noreferrer"><strong>[21.10] DualStage: The Technique of Dual Disentanglement</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2112.00568" target="_blank" rel="noopener noreferrer"><strong>[21.12] Dual spoof disentanglement generation for face anti-spoofing with depth uncertainty learning</strong></a>
 Introduces the DSDG generation framework that factorizes latent representations of identity and attack texture via a Variational Autoencoder (VAE). It can synthesize large-scale diverse spoof images and incorporates a depth uncertainty module to stabilize depth supervision, serving as a paradigm for "generative adversarial spoofing."</p>
-</li>
-<li>
-<p><a href="https://arxiv.org/abs/2212.03943" target="_blank" rel="noopener noreferrer"><strong>[22.12] Learning Polysemantic Spoof Trace: A Multi-Modal Disentanglement Network for Face Anti-Spoofing</strong></a>
-Extends spoof trace disentanglement to multi-modal data by designing a dual-stream RGB/Depth network to capture complementary spoof clues, and combines their semantics via cross-modality fusion. This represents a forward-looking solution for generalizable FAS models.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Paper Notes</strong>: <a href="https://docsaid.org/en/papers/face-antispoofing/dsdg" target="_blank" rel="noopener noreferrer"><strong>[21.12] DSDG: The Eve of Illusion Recombination</strong></a></p></div></div>
 </li>
 </ol>
 <hr>
@@ -812,10 +817,6 @@ Extends spoof trace disentanglement to multi-modal data by designing a dual-stre
 <p>As single-modal and single-attack-type solutions fail to meet real-world needs, FAS is stepping into higher-level challenges: <strong>physical + digital dual attacks, semantic-driven recognition, and zero-shot generalization in diverse environments</strong>.</p>
 <p>These five representative works are the three major development axes for the future of FAS: <strong>fusion recognition, language modeling, and human-centered perception</strong>.</p>
 <ol start="36">
-<li>
-<p><a href="https://arxiv.org/abs/2007.02157" target="_blank" rel="noopener noreferrer"><strong>[20.07] Face Anti-Spoofing with Human Material Perception</strong></a>
-Integrates material perception into FAS model design, with the BCN architecture simulating human perception at macro and micro levels to judge material differences (skin, paper, silicone), enhancing the model's semantic interpretability and cross-material recognition ability.</p>
-</li>
 <li>
 <p><a href="https://arxiv.org/abs/2309.16649" target="_blank" rel="noopener noreferrer"><strong>[23.09] FLIP: Cross-domain Face Anti-Spoofing with Language Guidance</strong></a>
 Applies the CLIP model to the FAS task, guiding visual representation spaces through natural language descriptions to improve cross-domain generalization. The paper proposes semantic alignment and multimodal contrastive learning strategies, achieving true zero-shot FAS under language guidance.</p>
@@ -831,6 +832,10 @@ Launched the first unified attack detection challenge, releasing the 28,000-entr
 <li>
 <p><a href="https://arxiv.org/abs/2408.12793" target="_blank" rel="noopener noreferrer"><strong>[24.08] La-SoftMoE CLIP for Unified Physical-Digital Face Attack Detection</strong></a>
 Combines CLIP with the Mixture of Experts architecture, introducing a soft-adaptive mechanism to dynamically assign sub-models for complex decision boundaries, providing an efficient parameter selection solution for physical and digital attack fusion handling.</p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/2501.01720" target="_blank" rel="noopener noreferrer"><strong>[25.01] Interpretable Face Anti-Spoofing: Enhancing Generalization with Multimodal Large Language Models</strong></a>
+Proposes a novel architecture I-FAS that integrates multimodal large language models, transforming face anti-spoofing into an interpretable visual question answering task. Through semantic annotation, an asymmetric language loss, and a globally aware connector, it significantly improves cross-domain generalization and reasoning capabilities of the model.</p>
 </li>
 </ol>
 <hr>
