@@ -285,8 +285,6 @@ Traditional convolution tends to overfit the training set and perform poorly on 
 
 Using t-SNE visualization of features before and after CDC, the authors found CDC yields clearer clustering of genuine and fake face representations, reflecting its more effective "separation" of real vs. spoof cues.
 
-The heatmaps from the multiscale attention module (MAFM) reveal that low-level features broadly focus on contours and brightness, while high-level features concentrate on key facial details (e.g., nose wings, eye areas). This complementary focus significantly strengthens final recognition.
-
 ## Conclusion
 
 The core hypothesis of this paper is a highly symbolic handcrafted disentanglement:
@@ -297,8 +295,8 @@ This is both a design simplification and an intuitive observation.
 
 If a real face is continuous, delicate, and three-dimensional, any reproduced spoof will inevitably show some "difference" at edges, textures, or reflections.
 
-What CDC does is extract such differences and embed them into the convolution operation in a controllable, interpretable way. From this perspective, **it is a handcrafted feature disentanglement of spoof traces**, more primitive than later automated latent factor separation architectures, but methodologically purer: not just boosting recognition, but explicitly decomposing the syntax.
+What CDC does is extract such differences and embed them into the convolution operation in a controllable, interpretable way. From this perspective, **it is a handcrafted feature disentanglement of spoof traces**, more primitive than later automated latent factor separation architectures, but methodologically purer.
 
-This "disentangle first, then recognize" technical stance has been repeatedly echoed in style transfer, feature separation, and domain generalization research — though with different forms, languages, and prettier packaging.
+This "disentangle first, then recognize" technical stance has been repeatedly echoed in style transfer, feature separation, and domain generalization research, with different forms, and prettier packaging.
 
 And CDC is one of the early tools that attempts to describe the "shape of difference."

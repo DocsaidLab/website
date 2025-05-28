@@ -89,7 +89,7 @@ Mamba 是嚴格的序列模型，有別於 Transformer 那樣可以一次性看�
 
 - **Normalization**：對輸入 $T^{l-1}$ 做正規化，輸出稱為 $\widetilde{T}$。
 - **線性投影**：將 $\widetilde{T}$ 投影成 $x, z$，維度大小為 $E$。
-- **1-D 捲積**：對 $x$ 分別做「正向」和「反向」的 1-D 卷積，得到 $x'_o$。
+- **1-D 卷積**：對 $x$ 分別做「正向」和「反向」的 1-D 卷積，得到 $x'_o$。
 - **透過 SSM 參數化**：將 $x'_o$ 映射到 $(A_o, B_o, C_o, \Delta_o)$，再透過離散化得到對應的 $A, B$。
 - **正向/反向 SSM**：各自得到 $y_{\text{forward}}, y_{\text{backward}}$。
 - **門控整合**：使用 $z$ 來加權 $y_{\text{forward}}$ 與 $y_{\text{backward}}$，最後輸出 $T^l$。

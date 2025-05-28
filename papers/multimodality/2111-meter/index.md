@@ -179,7 +179,7 @@ authors: Z. Yuan
     </figure>
     </div>
 
-   CLIP-ViT-224/16 和 Swin Transformer 在此設定下均可達到不錯的效能。但 Swin Transformer 在沒有任何 VLP 的測試開發集上可以達到 72.38 的 VQA 分數，這在預訓練後已經可以與一些 VLP 模型相媲美。
+   CLIP-ViT-224/16 和 Swin Transformer 在此設定下均可達到不錯的效能。但 Swin Transformer 在沒有任何 VLP 的測試訓練集上可以達到 72.38 的 VQA 分數，這在預訓練後已經可以與一些 VLP 模型相媲美。
 
 ### V+L 綜合評估
 

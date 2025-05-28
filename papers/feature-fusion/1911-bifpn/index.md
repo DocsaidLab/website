@@ -122,7 +122,7 @@ FPN 這一項開創性的工作自從發布以來，已經廣泛應用到各種�
 
 實驗結果顯示，EfficientDet 在不同精度和資源限制下均表現出優異的效率。相比於先前的偵測器，EfficientDet 模型在尺寸上縮小了 4 至 9 倍，FLOPs（浮點運算次數）減少了 13 至 42 倍。特別是，EfficientDet-D0 與 YOLOv3 在精度相當的情況下，FLOP 次數減少了 28 倍。與 RetinaNet 和 Mask-RCNN 相比，EfficientDet 在保持相似精度的同時，參數數量減少了 8 倍，FLOP 減少了 21 倍。
 
-在高精度的設定下，EfficientDet-D7x 在測試開發集中達到了 55.1 AP，顯著超越了現有技術，在準確性提升 4 AP 的同時，效率提高了 7 倍。此外，作者還比較了 Titan-V FP32、V100 GPU FP16 和單執行緒 CPU 上的推理延遲，並指出 V100 的推理延遲包含了端對端的預處理和後處理，展示了 EfficientDet 在推理速度上的優勢。
+在高精度的設定下，EfficientDet-D7x 在測試訓練集中達到了 55.1 AP，顯著超越了現有技術，在準確性提升 4 AP 的同時，效率提高了 7 倍。此外，作者還比較了 Titan-V FP32、V100 GPU FP16 和單執行緒 CPU 上的推理延遲，並指出 V100 的推理延遲包含了端對端的預處理和後處理，展示了 EfficientDet 在推理速度上的優勢。
 
 ![bifpn speed](./img/img6.jpg)
 
