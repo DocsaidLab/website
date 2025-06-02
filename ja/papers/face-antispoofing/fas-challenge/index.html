@@ -1,0 +1,413 @@
+<!doctype html><html lang=ja dir=ltr class="docs-wrapper plugin-docs plugin-id-papers docs-version-current docs-doc-page docs-doc-id-face-antispoofing/fas-challenge/index" data-has-hydrated=false><meta charset=UTF-8><meta name=generator content="Docusaurus v3.8.0"><title data-rh=true>[24.04] FAS-Challenge | DOCSAID</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"><meta data-rh=true name=twitter:card content=summary_large_image><meta data-rh=true property=og:image content=https://docsaid.org/ja/img/docsaid-social-card.jpg><meta data-rh=true name=twitter:image content=https://docsaid.org/ja/img/docsaid-social-card.jpg><meta data-rh=true property=og:url content=https://docsaid.org/ja/papers/face-antispoofing/fas-challenge/><meta data-rh=true property=og:locale content=ja><meta data-rh=true property=og:locale:alternate content=zh_hant><meta data-rh=true property=og:locale:alternate content=en><meta data-rh=true name=docusaurus_locale content=ja><meta data-rh=true name=docsearch:language content=ja><meta data-rh=true name=docusaurus_version content=current><meta data-rh=true name=docusaurus_tag content=docs-papers-current><meta data-rh=true name=docsearch:version content=current><meta data-rh=true name=docsearch:docusaurus_tag content=docs-papers-current><meta data-rh=true property=og:title content="[24.04] FAS-Challenge | DOCSAID"><meta data-rh=true name=description content=兵器譜><meta data-rh=true property=og:description content=兵器譜><link data-rh=true rel=icon href=/ja/img/favicon.ico><link data-rh=true rel=canonical href=https://docsaid.org/ja/papers/face-antispoofing/fas-challenge/><link data-rh=true rel=alternate href=https://docsaid.org/papers/face-antispoofing/fas-challenge/ hreflang=zh-hant><link data-rh=true rel=alternate href=https://docsaid.org/en/papers/face-antispoofing/fas-challenge/ hreflang=en><link data-rh=true rel=alternate href=https://docsaid.org/ja/papers/face-antispoofing/fas-challenge/ hreflang=ja><link data-rh=true rel=alternate href=https://docsaid.org/papers/face-antispoofing/fas-challenge/ hreflang=x-default><link data-rh=true rel=preconnect href=https://S9NC0RYCHF-dsn.algolia.net crossorigin=anonymous><script data-rh=true type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://docsaid.org/ja/papers/category/face-anti-spoofing-38","name":"Face Anti-Spoofing (38)","position":1},{"@type":"ListItem","item":"https://docsaid.org/ja/papers/face-antispoofing/fas-challenge/","name":"[24.04] FAS-Challenge","position":2}]}</script><link rel=alternate type=application/rss+xml href=/ja/blog/rss.xml title="DOCSAID RSS Feed"><link rel=alternate type=application/atom+xml href=/ja/blog/atom.xml title="DOCSAID Atom Feed"><link rel=preconnect href=https://www.google-analytics.com><link rel=preconnect href=https://www.googletagmanager.com><script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script><link rel=search type=application/opensearchdescription+xml title=DOCSAID href=/ja/opensearch.xml><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css type=text/css integrity=sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM crossorigin=anonymous><link rel=stylesheet href=/ja/assets/css/styles.523de46a.css><script src=/ja/assets/js/runtime~main.f14b8596.js defer></script><script src=/ja/assets/js/main.f6448879.js defer></script><body class=navigation-with-keyboard><svg xmlns=http://www.w3.org/2000/svg style="display: none;"><defs>
+<symbol id=theme-svg-external-link viewBox="0 0 24 24"><path fill=currentColor d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t="light",e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",e||t),document.documentElement.setAttribute("data-theme-choice",e||t)}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id=__docusaurus><div role=region aria-label=メインコンテンツまでスキップ><a class=skipToContent_fXgn href=#__docusaurus_skipToContent_fallback>メインコンテンツまでスキップ</a></div><nav aria-label=ナビゲーション class="navbar navbar--fixed-top navbarHideable_jvwV"><div class=navbar__inner><div class=navbar__items><button aria-label=ナビゲーションバーを開く aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"/></svg></button><a class=navbar__brand href=/ja/><div class=navbar__logo><img src=/ja/img/docsaid_logo.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src=/ja/img/docsaid_logo_white.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href=/ja/docs/>オープンソースプロジェクト</a><a aria-current=page class="navbar__item navbar__link navbar__link--active" href=/ja/papers/intro>論文ノート</a><a class="navbar__item navbar__link" href=/ja/blog>ブログ</a><a class="navbar__item navbar__link" href=/ja/playground/intro>遊び場</a><a class="navbar__item navbar__link" href=/ja/services>技術サービス</a><a class="navbar__item navbar__link" href=/ja/aboutus>私たちについて</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link><svg viewBox="0 0 24 24" width=20 height=20 aria-hidden=true class=iconLanguage_nlXk><path fill=currentColor d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>日本語</a><ul class=dropdown__menu><li><a href=/papers/face-antispoofing/fas-challenge/ target=_self rel="noopener noreferrer" class=dropdown__link lang=zh-hant>繁體中文</a><li><a href=/en/papers/face-antispoofing/fas-challenge/ target=_self rel="noopener noreferrer" class=dropdown__link lang=en>English</a><li><a href=/ja/papers/face-antispoofing/fas-challenge/ target=_self rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang=ja>日本語</a></ul></div><div class=navbarSearchContainer_dCNk><button type=button class="DocSearch DocSearch-Button" aria-label="検索 (Command+K)"><span class=DocSearch-Button-Container><svg width=20 height=20 class=DocSearch-Search-Icon viewBox="0 0 20 20" aria-hidden=true><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke=currentColor fill=none fill-rule=evenodd stroke-linecap=round stroke-linejoin=round /></svg><span class=DocSearch-Button-Placeholder>検索</span></span><span class=DocSearch-Button-Keys></span></button></div><button type=button class="ant-btn css-5uvb3z ant-btn-circle ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only"><span class=ant-btn-icon><span role=img aria-label=user style=font-size:18px class="anticon anticon-user"><svg viewBox="64 64 896 896" focusable=false data-icon=user width=1em height=1em fill=currentColor aria-hidden=true><path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"/></svg></span></span></button></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="main-wrapper mainWrapper_eExm"><div class=docsWrapper_hBAB><button aria-label=先頭へ戻る class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type=button></button><div class=docRoot_UBD9><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class=sidebarViewport_aRkj><div class="sidebar_njMd sidebarWithHideableNavbar_wUlq"><a tabindex=-1 class=sidebarLogo_isFc href=/ja/><img src=/ja/img/docsaid_logo.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src=/ja/img/docsaid_logo_white.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"><b></b></a><nav aria-label=ドキュメントのサイドバー class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/ja/papers/intro>論文ノート</a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/classic-cnns-11>Classic CNNs (11)</a><button aria-label="'Classic CNNs (11)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/contrastive-learning-13>Contrastive Learning (13)</a><button aria-label="'Contrastive Learning (13)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/deepseek-5>DeepSeek (5)</a><button aria-label="'DeepSeek (5)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist menu__link--active" href=/ja/papers/category/face-anti-spoofing-38>Face Anti-Spoofing (38)</a><button aria-label="'Face Anti-Spoofing (38)'の目次を隠す" aria-expanded=true type=button class="clean-btn menu__caret"></button></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/slrbd/>[10.09] SLRBD</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/lbp/>[12.09] LBP</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/three-d-mad/>[14.05] 3DMAD</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/rppg/>[16.12] rPPG</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/oulu-npu/>[17.06] OULU-NPU</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/cfrppg/>[18.09] CFrPPG</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/vafas/>[19.05] VA-FAS</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/wmca/>[19.09] WMCA</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/cdcn/>[20.03] CDCN</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/cefa/>[20.03] CeFA</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/ssdg/>[20.04] SSDG</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/celeba-spoof/>[20.07] CelebA-Spoof</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/stdn/>[20.07] STDN</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/disentangle-fas/>[20.08] Disentangle-FAS</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/d2am/>[21.05] D²AM</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/dualstage/>[21.10] DualStage</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/dsdg/>[21.12] DSDG</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/personalized-fas/>[22.01] Personalized-FAS</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/ssan/>[22.03] SSAN</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/echo-fas/>[22.08] Echo-FAS</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/fas-survey/>[22.10] FAS Survey</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/cdftn/>[22.12] CDFTN</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/divt/>[23.01] DiVT</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/m2a2e/>[23.02] M²A²E</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/sa-fas/>[23.03] SA-FAS</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/iadg/>[23.04] IADG</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/ma-vit/>[23.04] MA-ViT</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/flip/>[23.09] FLIP</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/s-adapter/>[23.09] S-Adapter</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/udg-fas/>[23.10] UDG-FAS</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/three-a-tta/>[23.11] 3A-TTA</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/mmdg/>[24.02] MMDG</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/shield/>[24.02] SHIELD</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/aface/>[24.03] AFace</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/cfpl-fas/>[24.03] CFPL-FAS</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current=page tabindex=0 href=/ja/papers/face-antispoofing/fas-challenge/>[24.04] FAS-Challenge</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/pd-fas/>[24.04] PD-FAS</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/ja/papers/face-antispoofing/fm-clip/>[24.10] FM-CLIP</a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/face-recognition-4>Face Recognition (4)</a><button aria-label="'Face Recognition (4)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/feature-fusion-10>Feature Fusion (10)</a><button aria-label="'Feature Fusion (10)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/image-generation-1>Image Generation (1)</a><button aria-label="'Image Generation (1)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/lightweight-10>Lightweight (10)</a><button aria-label="'Lightweight (10)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/mamba-4>Mamba (4)</a><button aria-label="'Mamba (4)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/model-tuning-8>Model Tuning (8)</a><button aria-label="'Model Tuning (8)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/multimodality-24>Multimodality (24)</a><button aria-label="'Multimodality (24)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/normalization-1>Normalization (1)</a><button aria-label="'Normalization (1)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/object-detection-8>Object Detection (8)</a><button aria-label="'Object Detection (8)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/reparameterization-8>Reparameterization (8)</a><button aria-label="'Reparameterization (8)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/segmentation-1>Segmentation (1)</a><button aria-label="'Segmentation (1)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/text-detection-14>Text Detection (14)</a><button aria-label="'Text Detection (14)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/text-recognition-20>Text Recognition (20)</a><button aria-label="'Text Recognition (20)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/text-spotting-4>Text Spotting (4)</a><button aria-label="'Text Spotting (4)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/transformers-17>Transformers (17)</a><button aria-label="'Transformers (17)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/ja/papers/category/vision-transformers-12>Vision Transformers (12)</a><button aria-label="'Vision Transformers (12)'の目次を開く" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/ja/papers/intro>All Notes: 213 entries</a></ul></nav><button type=button title=サイドバーを隠す aria-label=サイドバーを隠す class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width=20 height=20 aria-hidden=true class=collapseSidebarButtonIcon_kv0_><g fill=#7a7a7a><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"/><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"/></g></svg></button></div></div></aside><main class=docMainContainer_TBSr><div class="container padding-top--md padding-bottom--lg"><div class=row><div class="col docItemCol_VOVn"><div class=docItemContainer_Djhp><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label=パンくずリストのナビゲーション><ul class=breadcrumbs><li class=breadcrumbs__item><a aria-label=ホームページ class=breadcrumbs__link href=/ja/><svg viewBox="0 0 24 24" class=breadcrumbHomeIcon_YNFT><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill=currentColor /></svg></a><li class=breadcrumbs__item><a class=breadcrumbs__link href=/ja/papers/category/face-anti-spoofing-38><span>Face Anti-Spoofing (38)</span></a><li class="breadcrumbs__item breadcrumbs__item--active"><span class=breadcrumbs__link>[24.04] FAS-Challenge</span></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type=button class="clean-btn tocCollapsibleButton_TO0P">このページの見出し</button></div><div class="theme-doc-markdown markdown"><header><h1>[24.04] FAS-Challenge</h1><div class="undefined margin-bottom--md"><div class=docAuthor_y7l7><img src=https://github.com/zephyr-sh.png alt="Z. Yuan" class=docAuthorImg_vlJe><div><div class=docAuthorName_aSh4><a href=https://github.com/zephyr-sh target=_blank rel="noopener noreferrer">Z. Yuan</a></div><div class=docAuthorTitle_Yp5_>Dosaid maintainer, Full-Stack AI Engineer</div><div class=docAuthorSocials_M3ba><a href=https://github.com/zephyr-sh target=_blank rel="noopener noreferrer" class=docAuthorSocialLink_trj9><svg stroke=currentColor fill=currentColor stroke-width=0 viewBox="0 0 496 512" height=20 width=20 xmlns=http://www.w3.org/2000/svg><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a><a href=https://www.linkedin.com/in/ze-yuan-sh7/ target=_blank rel="noopener noreferrer" class=docAuthorSocialLink_trj9><svg stroke=currentColor fill=currentColor stroke-width=0 viewBox="0 0 448 512" height=20 width=20 xmlns=http://www.w3.org/2000/svg><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a></div></div></div></div><h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=兵器譜>兵器譜<a href=#兵器譜 class=hash-link aria-label="兵器譜 への直接リンク" title="兵器譜 への直接リンク">​</a></h2>
+<p><a href=https://arxiv.org/abs/2404.06211 target=_blank rel="noopener noreferrer"><strong>Unified Physical-Digital Attack Detection Challenge</strong></a></p>
+<hr>
+<p>これは CVPR2024 で開催された FAS コンペティションで、正式名称は：</p>
+<p><a href=https://sites.google.com/view/face-anti-spoofing-challenge/welcome/challengecvpr2024 target=_blank rel="noopener noreferrer"><strong>5th Chalearn Face Anti-spoofing Workshop and Challenge@CVPR2024</strong></a></p>
+<p>非常に盛況で、FAS 分野の研究者なら誰でも訪れる価値があります。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=問題定義>問題定義<a href=#問題定義 class=hash-link aria-label="問題定義 への直接リンク" title="問題定義 への直接リンク">​</a></h2>
+<p>Face Anti-Spoofing（FAS）の本質的なタスクは、映像から「ライブ（生体）」の文法を掘り起こすことです。</p>
+<p>しかし現実には、攻撃手法が以下の二つの並行した技術分野に発展しています：</p>
+<ul>
+<li><strong>物理攻撃（Physical Attacks）</strong>：模倣者が紙、ディスプレイ、シリコンマスクなどの実体媒体を用いて顔を提示します。これらはセンサー層で干渉が発生し、現実世界と直接的に相互作用します。</li>
+<li><strong>デジタル攻撃（Digital Attacks）</strong>：Deepfake、フェイススワッピング、敵対的サンプルなど、データ生成元や特徴空間で操作が行われます。映像はリアルに見えますが、本質的には虚構です。</li>
+</ul>
+<p>従来の手法は多くがどちらか一方に特化してモデル化しており、結果としてモデルの性能は訓練分布に限定され、広範な転移が困難です。</p>
+<p>物理攻撃とデジタル攻撃はどちらも最終的な分類上は「偽物（fake）」に属しますが、画像統計的特徴と変異方向に高度な異質性があり、偽クラス内の特徴距離が予想以上に大きく、これが一般化の壁となっています。</p>
+<p>現在「統一モデル」の構築が難しい主な理由は二つあります：</p>
+<ol>
+<li><strong>大規模な統一データセットの欠如</strong>：従来は物理攻撃（PA）とデジタル攻撃（DA）のデータセットを別々に収集し結合する形で、一つの ID に対する完全な攻撃パターンを含みませんでした。</li>
+<li><strong>共通の評価基準の不足</strong>：物理攻撃とデジタル攻撃で異なる指標やプロトコルを使用しており、クロスドメインのアルゴリズム比較ができません。</li>
+</ol>
+<p>これがまさに <strong>Unified Physical-Digital Attack Detection Challenge</strong> が立ち上げられた背景です。新たなデータセット、標準プロトコル、公開競技を通じて、新しい問題設定を試みます：</p>
+<blockquote>
+<p><strong>一つのモデルで異質な二種の偽装を同時に処理し、未知のドメインでも識別能力を保てるか？</strong></p>
+</blockquote>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=統一データセットuniattackdata>統一データセット：UniAttackData<a href=#統一データセットuniattackdata class=hash-link aria-label="統一データセット：UniAttackData への直接リンク" title="統一データセット：UniAttackData への直接リンク">​</a></h2>
+<div align=center><figure style=width:70%><p><img decoding=async loading=lazy alt=uniattackdata src=/ja/assets/images/img1-8a5cd34f0ce53328e21f3125ac8ac38b.jpg width=996 height=532 class=img_ev3q></figure></div>
+<p><strong>UniAttackData</strong> は現時点で最大規模かつ最も包括的に設計された統一攻撃データセットであり、1,800 名の被験者、計 28,706 本の顔動画から構成され、以下の 3 種類のサンプルを含みます：</p>
+<ul>
+<li><strong>Live</strong>：1,800 本の実映像</li>
+<li><strong>Physical Attacks（PA）</strong>：5,400 本（プリント、ディスプレイ、3D マスク等含む）</li>
+<li><strong>Digital Attacks（DA）</strong>：21,506 本（Deepfake、フェイススワップ、敵対的サンプル等含む）</li>
+</ul>
+<p>データセット最大の特徴は：<strong>各 ID ごとに完全な攻撃対応サンプルを持つこと</strong>で、攻撃タイプの偏りによるモデル学習の歪みを防ぎます。この設計により、モデルは ID、民族、照明など無関係な副次的特徴に依存せず、「偽装」自体の検知に集中できます。</p>
+<p>モデルが事前にデータ規則を察知しないよう、研究チームは顔領域を切り出し、命名にステガノグラフィ（隠蔽処理）を施し、画像のピクセルレベルで余計な手がかりが残らないよう細心の注意を払っています。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=評価プロトコルと一般化設計>評価プロトコルと一般化設計<a href=#評価プロトコルと一般化設計 class=hash-link aria-label="評価プロトコルと一般化設計 への直接リンク" title="評価プロトコルと一般化設計 への直接リンク">​</a></h3>
+<p>今回のチャレンジは二つの主要なプロトコルを含み、異なる実世界シナリオのモデル運用要求をシミュレートします：</p>
+<ul>
+<li>
+<p><strong>Protocol 1：統一攻撃検知</strong>
+PA と DA の両方を同時に識別する必要がある状況を模擬し、混合攻撃の統合的分類能力を評価。</p>
+</li>
+<li>
+<p><strong>Protocol 2：未見攻撃への一般化</strong>
+未知の攻撃タイプを zero-shot で評価し、さらに細分化して：</p>
+<ul>
+<li><strong>Protocol 2.1：未見のデジタル攻撃</strong></li>
+<li><strong>Protocol 2.2：未見の物理攻撃</strong></li>
+</ul>
+</li>
+</ul>
+<p>leave-one-type-out 戦略を採用し、特定攻撃タイプを完全に排除して訓練し、より意味論的な一般化識別能力をモデルに要求します。</p>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=大会スケジュールとルール>大会スケジュールとルール<a href=#大会スケジュールとルール class=hash-link aria-label="大会スケジュールとルール への直接リンク" title="大会スケジュールとルール への直接リンク">​</a></h3>
+<p>競技全体は CodaLab プラットフォーム上で二段階に分けて実施：</p>
+<ul>
+<li>
+<p><strong>開発フェーズ（2/1–2/22）</strong>
+ラベル付き訓練データとラベル無し開発セットを提供し、何度でも予測結果を提出可能なランキングシステムでモデル改善を支援。</p>
+</li>
+<li>
+<p><strong>最終フェーズ（2/23–3/3）</strong>
+開発セットのラベル公開とテストセットの非公開ラベル提供。参加チームはテストラベルにアクセスできずに最終モデルの予測を提出。最終提出が公式成績となり、コードと技術シート（fact sheet）の公開が受賞資格となる。</p>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=評価指標>評価指標<a href=#評価指標 class=hash-link aria-label="評価指標 への直接リンク" title="評価指標 への直接リンク">​</a></h3>
+<p>チャレンジは ISO/IEC 30107-3 国際標準に準拠した指標を用いて、モデルの偽装識別能力を定量化します。具体的には：</p>
+<ul>
+<li><strong>APCER</strong>（Attack Presentation Classification Error Rate）</li>
+<li><strong>BPCER</strong>（Bona Fide Presentation Classification Error Rate）</li>
+<li><strong>ACER</strong>（Average Classification Error Rate）</li>
+<li><strong>AUC</strong>（ROC 曲線下面積）</li>
+</ul>
+<p>主なランキング指標は ACER とし、AUC は補助的に用います。評価の一貫性を保つため、最終 ACER は開発セット上の Equal Error Rate（EER）で算出された閾値を用います。</p>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=兵器譜-1>兵器譜<a href=#兵器譜-1 class=hash-link aria-label="兵器譜 への直接リンク" title="兵器譜 への直接リンク">​</a></h2>
+<div align=center><figure style=width:70%><p><img decoding=async loading=lazy alt=participants src=/ja/assets/images/img2-1523068332cc59f1541c54bc01e76275.jpg width=984 height=960 class=img_ev3q></figure></div>
+<p>続いて、上位 13 チームの技術概要を順に見ていきましょう。彼らが具体的に何を行ったのかを探ります。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=1-mtface>1. MTFace<a href=#1-mtface class=hash-link aria-label="1. MTFace への直接リンク" title="1. MTFace への直接リンク">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=mtface src=/ja/assets/images/img3-c251938668e977ee1c78a4a9b56cdd56.jpg width=1224 height=664 class=img_ev3q></figure></div>
+<p>デジタルと物理の攻撃を横断するこの挑戦において、<strong>MTFace</strong> チームは最終的に優勝を勝ち取りました。</p>
+<p>MTFace の提案した構成は以下のように略せます：</p>
+<blockquote>
+<p><strong>Optimized Data Augmentation for Comprehensive Face Attack Detection Across Physical and Digital Domains</strong></p>
+</blockquote>
+<p>長い名称ですが、本質を突いています。つまり、モデルが訓練時に「十分に多様で、十分にリアルな」偽装を見られるようにする方法です。</p>
+<p>MTFace の構成の核となるのは、データ拡張と損失バランスの共同設計にあります。</p>
+<p>データ前処理は以下の通りです：</p>
+<ol>
+<li><strong>顔検出と切り出し</strong>：すべての画像に対し顔検出を行い、周辺特徴を残すためにさらに 20 ピクセル拡張。</li>
+<li><strong>顔マスク抽出</strong>：ライブデータの顔マスクを事前抽出し、後の拡張に利用。</li>
+</ol>
+<p>次に、異なるプロトコルの一般化能力に応じて、二種類の「意味的対応の拡張戦略」を設計：</p>
+<ul>
+<li>
+<p><strong>モアレ模倣拡張</strong>（Protocol 1 と 2.1 に適用）
+スクリーン再生はモアレパターンを生みやすく、これは攻撃識別に重要な視覚的手がかりとなる。
+MTFace はこれを模倣し、モアレを原画像に注入して物理的現象の影響を予習させる。</p>
+</li>
+<li>
+<p><strong>自己融合拡張</strong>（Protocol 1 と 2.2 に適用）
+既存文献に触発され、ライブデータを基底にデジタル攻撃の表面特徴を注入。
+色歪み、空間変形、マスク折り畳みなどで「デジタル偽装の混合サンプル」を生成し、Deepfake 型攻撃の識別力を高める。</p>
+</li>
+</ul>
+<p>各プロトコルで、真実サンプルと偽装サンプルの比率が大きく異なります。</p>
+<p>無調整だと、サンプル数が多い方に偏り、希少なパターンの識別力が失われます。</p>
+<p>そこで MTFace は各プロトコルでクロスエントロピーの重み配分を調整：</p>
+<ul>
+<li><strong>Protocol 1：live : fake = 1 : 1</strong>
+損失のバランスを保ち、公平な学習を促進。</li>
+<li><strong>Protocol 2.1（未見デジタル攻撃）</strong>：live : fake = 5 : 1
+ライブ特徴の学習を強化し、デジタル攻撃への防御力向上。</li>
+<li><strong>Protocol 2.2（未見物理攻撃）</strong>：live : fake = 2 : 1
+物理攻撃サンプルの割合を抑制し、モアレやマスク輪郭への過剰依存を防止。</li>
+</ul>
+<p>こうした細やかな調整により、モデルは各プロトコルに応じて重要な特徴へ的確に注力し、堅牢な一般化性能を実現。</p>
+<p>MTFace は最終的に <strong>ResNet-50 をバックボーン</strong> とし、<strong>ImageNet 事前学習済み重みをロード</strong>。</p>
+<p>ViT や大型独自モデルは用いず、戦略とデータにより今回のコンペを制しました。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=2-searecluse>2. SeaRecluse<a href=#2-searecluse class=hash-link aria-label="2. SeaRecluse への直接リンク" title="2. SeaRecluse への直接リンク">​</a></h3>
+<p><strong>SeaRecluse</strong> はデータの境界と比率調整に重点を置いた防壁を築きました。</p>
+<p>彼らの手法は：</p>
+<blockquote>
+<p><strong>Cross-domain Face Anti-spoofing in Unified Physical-Digital Attack Dataset</strong></p>
+</blockquote>
+<p>この構成は過度な変形を求めず、スタイル変換も用いず、<strong>データ使用比率と切り出し戦略</strong>に着目。</p>
+<p>より実運用に近い条件下でのモデルの安定性と一般化を最適化しようと試みています。</p>
+<p>SeaRecluse は <strong>SCRFD</strong> を用いて訓練セットの未切り出し画像に顔検出・切り出しを実施。</p>
+<p>しかし他チームと異なり、切り出しにおいて「緩めの切り出し」と「きつめの切り出し」を区別し、両者をデータ拡張の一つとして併用。</p>
+<p>また、各タスクプロトコルで <strong>データ分割比率と拡張戦略を完全に変化</strong> させています：</p>
+<ul>
+<li>
+<p><strong>Protocol 1：追加拡張なし</strong>
+最も基本的な条件での識別性能を模擬し、80%の訓練データと検証セット混合で学習。</p>
+</li>
+<li>
+<p><strong>Protocol 2.1（未見デジタル攻撃）</strong>
+ライブデータに対しダウンサンプリングと縁補完を行い、リアルフェイス数を元の <strong>3 倍</strong> に増強。偽装と真実のバランスを取る。</p>
+</li>
+<li>
+<p><strong>Protocol 2.2（未見物理攻撃）</strong>
+偽装検知能力強化のため、偽装顔画像を <strong>4 倍および 8 倍</strong> のダウンサンプリングで拡張し、計 <strong>7 倍</strong> のデータ量に増加。</p>
+</li>
+</ul>
+<p>さらに、長辺・短辺比率が異常な画像を修正し、自然な比率に戻すことで視覚的歪みからの誤学習を回避。</p>
+<p>画像拡張は全タスクで標準的な反転やランダムクロップを行い、P2.1 ではさらに <strong>ガウスぼかし</strong> を加え、撮影のブレや遠距離ぼけを模擬。</p>
+<p>バックボーンは <strong>ConvNeXt V2</strong> を採用し、性能と計算コストのバランスを考慮した選択。</p>
+<p>また一般化を強化するために以下の学習技術も併用：</p>
+<ul>
+<li><strong>Image CutMix</strong>：二枚の画像とラベルを混ぜ、視覚的境界や空間変異に対応させる。</li>
+<li><strong>Label Smoothing</strong>：ハードラベルをソフトラベルに変換し、過学習リスクを軽減。</li>
+</ul>
+<p>これらによりモデルは意味的特徴に集中し、データ不均衡による過度な記憶を緩和。</p>
+<p>SeaRecluse の手法は大掛かりな変革ではなく、一歩ずつ壁を築くように、タスクごとの比率や切り出しスケールを丁寧に扱い、偽装を視界に封じ込める。</p>
+<p>これは忍耐強い解法であり、現実運用を見据えた思考法でもあります。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=3-duileduile>3. duileduile<a href=#3-duileduile class=hash-link aria-label="3. duileduile への直接リンク" title="3. duileduile への直接リンク">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=duileduile src=/ja/assets/images/img4-e8bd4c8d043ae908fb86df3aeeb387ab.jpg width=1064 height=688 class=img_ev3q></figure></div>
+<p><strong>duileduile</strong> チームはモジュール化された二段階学習プロセスを設計し、抽象的な視覚表現でリアルと偽装の流動的な境界に挑みます。その構成の核心は：</p>
+<blockquote>
+<p><strong>Swin Transformer + Masked Image Modeling + 物理・デジタル攻撃対応の強化</strong></p>
+</blockquote>
+<p>モデルのバックボーンには <strong>Swin-Large Transformer</strong> を採用し、1536 次元の特徴ベクトルを抽出。優れた局所認識と階層的抽象能力を備えます。</p>
+<p><strong>事前学習フェーズ</strong> では、duileduile は <strong>simMIM（Simple Masked Image Modeling）</strong> 戦略を用い、画像を非重複パッチに分割しランダムにマスク。欠損部分から全体を復元する学習を行います。</p>
+<p>この自己教師あり手法は、特徴欠損や遮蔽攻撃の環境下での識別耐性を高め、特に Protocol 2 の「未知攻撃タイプ」への対応に効果的です。</p>
+<p>視覚文法の学習完了後、<strong>微調整（Fine-tuning）フェーズ</strong> へ。ここでは大量データの単純積み重ねでなく、攻撃タイプごとに的確な模倣を施す拡張処理を設計：</p>
+<ul>
+<li><strong>ガウシアンノイズ</strong>：デジタル攻撃で生じるピクセルレベルのノイズや圧縮痕跡を模擬</li>
+<li><strong>ColorJitter + モアレパターン + ガンマ補正</strong>：物理攻撃に伴う光影変動や表示ズレを再現</li>
+</ul>
+<p>これらの拡張はすべてのデータに強制適用せず、訓練サンプルやプロトコルに応じて確率的に適用し、モデルが多様な干渉と偽装に曝露されるようにしています。</p>
+<p>前二チームがデータ比率や意味的拡充に注力したのに対し、duileduile の手法はプラットフォーム的な偽装防止策に近く、各プロトコルで同じ設定を適用可能。高い転移性と構造的一貫性を持ちます。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=4-bsp-idiap>4. BSP-Idiap<a href=#4-bsp-idiap class=hash-link aria-label="4. BSP-Idiap への直接リンク" title="4. BSP-Idiap への直接リンク">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=bsp-idiap src=/ja/assets/images/img5-3934b23d1af1d92f25595e9655148b29.jpg width=1224 height=492 class=img_ev3q></figure></div>
+<p><strong>BSP-Idiap</strong> チームは異なる路線を選びました：<strong>信号自体のテクスチャリズムに立ち返り、攻撃信号を周波数次元から復元</strong>する方法です。</p>
+<p>この手法は <strong>DBPixBiS（Dual-Branch Pixel-wise Binary Supervision）</strong> と呼ばれます。</p>
+<p>彼らの前作を踏襲しつつ、二分岐構造に拡張。</p>
+<p><strong>DBPixBiS</strong> は二つの枝を持つニューラルネットワーク：</p>
+<ol>
+<li><strong>RGB 枝</strong>：従来の畳み込みに代え <strong>Central Difference Convolution（CDC）</strong> を使用。局所的なテクスチャ変化を強調し、異常エッジや微細変動を感知。</li>
+<li><strong>フーリエ枝</strong>：入力画像をフーリエ変換し、別経路で周波数領域の偽装テクスチャ（繰り返し性、ノイズ、圧縮残留など）を抽出。</li>
+</ol>
+<p>これにより、「画像上の像」と「信号中の偽」の二重認識が可能に。</p>
+<p>過学習と敵対的サンプルの難読化に対抗するため、BSP-Idiap は特異的な学習設計を採用：</p>
+<ul>
+<li><strong>ピクセル単位の二値監督</strong>：特徴マップの各ピクセルに二値分類監督を行い、局所的な偽装検出を強化。</li>
+<li><strong>Attentional Angular Margin Loss</strong>：角度マージン損失を加え、live と spoof の特徴ベクトル間の距離を明確にし分類境界の安定性を高める。</li>
+</ul>
+<p>推論時は特徴マップを全体平均し、<strong>平均活性化値</strong>を最終的な spoof スコアとします。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=5-vai-face>5. VAI-Face<a href=#5-vai-face class=hash-link aria-label="5. VAI-Face への直接リンク" title="5. VAI-Face への直接リンク">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=vaiface src=/ja/assets/images/img6-9908645fe3b714d593151a33d5ebacad.jpg width=1064 height=520 class=img_ev3q></figure></div>
+<p>この統一識別の戦いにおいて、あるチームはメカニズムを構築し、別のチームは文法を復元しましたが、<strong>VAI-Face</strong> は第三の道を選びました：<strong>異常を作り出し識別力を強化する</strong>。</p>
+<p>彼らの手法は <strong>Dinov2 Vision Transformer（ViT-Large）</strong> を基盤に置き、<strong>変形した顔が視覚注意下で欠陥を露わにすることを狙う</strong>ものです。</p>
+<p>データ拡張の最大特徴は、<strong>live と fake の対称的処理を敢えて破壊すること</strong>。</p>
+<p>両者を意味的に異質なデータとみなし、まったく異なる拡張パイプラインを採用：</p>
+<ul>
+<li><strong>Live 画像</strong>：ランダムリサイズクロップと水平反転のみで自然な分布と幾何安定性を保持。</li>
+<li><strong>Fake 画像</strong>：ぼかし、歪み、カスタムカットアウトなど大量の非対称的擾乱を加え、不自然な痕跡や構造破綻を模倣。</li>
+</ul>
+<p>この戦略で ViT は異常な幾何・テクスチャを学習。</p>
+<p>また、学習設定でも高度な工夫を示し：</p>
+<ul>
+<li><strong>OneCycleLR</strong>：学習率の上昇下降を精密制御し収束と一般化を促進。</li>
+<li><strong>Label Smoothing</strong>：過信を防ぎ過学習を緩和。</li>
+<li><strong>Mixup Augmentation</strong>：画像とラベルの混合でサンプル空間の境界を滑らかに。</li>
+<li><strong>Optimizer</strong>：ADAN を採用。適応勾配とモメンタムを融合した新型最適化手法で、安定した勾配推進力を実現。</li>
+</ul>
+<p>ViT-Large は優れた領域間関連性モデリング能力を持ち、spoof 画像では微細な不調和を全域注意で捉え、偽装の隠し難い歪みを拡大。</p>
+<p>追加の分岐や生成モジュールは用いず、主幹視覚モデルの識別力を最大化し、洗練されたデータ擾乱と学習曲線でシンプル構成の中に一般化可能性を引き出しています。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=6-llw>6. L&L&W<a href=#6-llw class=hash-link aria-label="6. L&L&W への直接リンク" title="6. L&L&W への直接リンク">​</a></h3>
+<p>大半のモデルが全体画像で判定する中、<strong>L&L&W</strong> チームは逆に局所に着目。顔を多数の断片に分解し、真偽の痕跡を繋ぎ合わせます。</p>
+<p>彼らの核心は：</p>
+<blockquote>
+<p><strong>パッチベース特徴学習 + 周波数志向サンプリング + 局所注意誘導</strong></p>
+</blockquote>
+<p>処理は画像パッチ抽出から始まり、入力画像を複数の小領域に分解し独立特徴を学習。</p>
+<p>そこに <strong>Centre Difference Attention（CDA）</strong> を導入。</p>
+<p>CDA は細部テクスチャの差異に焦点を当て、「本来一致すべきだが微細なズレがある」部分（例：エッジのぼやけ、位置ズレ、低周波融合失敗など）に注意を払います。</p>
+<p>空間的詳細に加え、L&L&W は周波数信号の潜在的手がかりも無視しません。彼らは <strong>High-Frequency Wavelet Sampler（HFWS）</strong> モジュールを設計し、高周波帯域に集中。圧縮残留、融合失敗、非自然なテクスチャ変化を識別します。</p>
+<p>この空間・周波数二領域融合特徴戦略により、モデルは「どこが変？」を見るだけでなく、「どの周波数帯で変？」も察知。</p>
+<p>予測の安定性と多角的カバーを高めるため、テスト時には各画像から <strong>36 種の異なるクロップ</strong> を生成。各パッチを独立判定し結果を平均し、最終スコアとします。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=7-sarm>7. SARM<a href=#7-sarm class=hash-link aria-label="7. SARM への直接リンク" title="7. SARM への直接リンク">​</a></h3>
+<p><strong>SARM</strong> チームの設計は複雑な構造やデータ変形に依らず、「トレーナーを訓練する」反復プロセスにあります。</p>
+<p>手法は以下の通り：</p>
+<blockquote>
+<p><strong>Multi-Attention Training（MAT） + Label Flip Augmentation</strong></p>
+</blockquote>
+<p>これは「段階的視覚調整法」であり、まずタスクを理解したモデルを訓練し、それを基に異なる攻撃タイプへ細かく適用します。</p>
+<p>SARM は全体を二段階に分けています：</p>
+<ol>
+<li><strong>第 1 段階</strong>：各プロトコル（P1, P2.1, P2.2）に特化した事前検知器を訓練。<strong>教師ありコントラスト学習</strong>を用い、live と fake の表現間の意味的距離を最大化。</li>
+<li><strong>第 2 段階</strong>：第 1 段階で得た表現を初期重みとして微調整し、本格的な偽装検出モデルを構築。</li>
+</ol>
+<p>この設計により各タスクの「期待対象理解」を強化し、直接の end-to-end 訓練で起こりうる誤誘導を抑制。特にクロスドメイン一般化（P2.1・P2.2）で効果的です。</p>
+<p>データ拡張の革新点は、<strong>ライブ画像を偽画像に変換し fake とラベル付けすること</strong>。</p>
+<p>単なる合成偽装ではなく、<strong>OpenCV スタイル変換</strong>による弱偽装シミュレーション。</p>
+<p>P2.1・P2.2 の訓練データに色調変化、照明変動、ガンマ補正、偽装フィルターを適用。</p>
+<p>こうした処理済みの live 画像を <strong>spoof</strong> として扱う <strong>label-flip augmentation</strong> を形成し、多様でターゲットドメインに近い「弱攻撃サンプル」を増やしドメインギャップを縮小。</p>
+<p>最適化は <strong>Adam</strong>、クロスエントロピーとコントラスト損失の組み合わせで安定的な学習曲線を維持。P1 は標準戦略で収束、P2.1・P2.2 に強化拡張を投入。</p>
+<p>この方法は「タスク意図の事前理解」によってモデル収束を促します。</p>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=8-m2-purdue>8. M2-Purdue<a href=#8-m2-purdue class=hash-link aria-label="8. M2-Purdue への直接リンク" title="8. M2-Purdue への直接リンク">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=m2-purdue src=/ja/assets/images/img7-b8999c9986b76d02b625d8ce0c0bd160.jpg width=1064 height=368 class=img_ev3q></figure></div>
+<p><strong>M2-Purdue</strong> チームは異なるアプローチを持ち込みました。</p>
+<p>複雑な構造設計や強化データ増強を捨て、CLIP の意味的表現と「極値リスク指向」損失を組み合わせます。手法は：</p>
+<blockquote>
+<p><strong>Robust Face Attack Detection with CLIP + MLP + CVAR–AUC Loss Fusion</strong></p>
+</blockquote>
+<p>標準画像前処理で全入力を <strong>224×224</strong> に統一し、スケールを揃えます。</p>
+<p>続いて <strong>CLIP の画像エンコーダー</strong> で意味特徴を抽出し、視覚情報を深層埋め込みに変換。</p>
+<p>新特徴創出ではなく、「膨大なデータを学習済みのモデル」を借用し、汎用的意味特徴を得るのが肝。</p>
+<p>後続に三層の <strong>MLP 分類器</strong> を置き、タスク特化の判断器として微調整。構成は極めてシンプルで軽量展開に適します。</p>
+<p>最大の特徴は二重損失設計：</p>
+<ul>
+<li><strong>CVAR（Conditional Value at Risk）損失</strong>：金融リスク管理由来で、誤判しやすいリスク領域に着目。</li>
+<li><strong>AUC 損失</strong>：全体の判別性能、特に正確な順位付けを促進。</li>
+</ul>
+<p>損失は次の形：</p>
+<span class=katex-display><span class=katex><span class=katex-mathml><math xmlns=http://www.w3.org/1998/Math/MathML display=block><semantics><mrow><mi mathvariant=script>L</mi><mo>=</mo><mi>λ</mi><mo>⋅</mo><msub><mi mathvariant=script>L</mi><mrow><mi mathvariant=normal>C</mi><mi mathvariant=normal>V</mi><mi mathvariant=normal>A</mi><mi mathvariant=normal>R</mi></mrow></msub><mo>+</mo><mo stretchy=false>(</mo><mn>1</mn><mo>−</mo><mi>λ</mi><mo stretchy=false>)</mo><mo>⋅</mo><msub><mi mathvariant=script>L</mi><mrow><mi mathvariant=normal>A</mi><mi mathvariant=normal>U</mi><mi mathvariant=normal>C</mi></mrow></msub></mrow><annotation encoding=application/x-tex>\mathcal{L} = \lambda \cdot \mathcal{L}_{\mathrm{CVAR}} + (1 - \lambda) \cdot \mathcal{L}_{\mathrm{AUC}}</annotation></semantics></math></span><span class=katex-html aria-hidden=true><span class=base><span class=strut style=height:0.6833em></span><span class="mord mathcal">L</span><span class=mspace style=margin-right:0.2778em></span><span class=mrel>=</span><span class=mspace style=margin-right:0.2778em></span></span><span class=base><span class=strut style=height:0.6944em></span><span class="mord mathnormal">λ</span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>⋅</span><span class=mspace style=margin-right:0.2222em></span></span><span class=base><span class=strut style=height:0.8333em;vertical-align:-0.15em></span><span class=mord><span class="mord mathcal">L</span><span class=msupsub><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:0.3283em><span style=top:-2.55em;margin-left:0em;margin-right:0.05em><span class=pstrut style=height:2.7em></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">CVAR</span></span></span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:0.15em><span></span></span></span></span></span></span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>+</span><span class=mspace style=margin-right:0.2222em></span></span><span class=base><span class=strut style=height:1em;vertical-align:-0.25em></span><span class=mopen>(</span><span class=mord>1</span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>−</span><span class=mspace style=margin-right:0.2222em></span></span><span class=base><span class=strut style=height:1em;vertical-align:-0.25em></span><span class="mord mathnormal">λ</span><span class=mclose>)</span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>⋅</span><span class=mspace style=margin-right:0.2222em></span></span><span class=base><span class=strut style=height:0.8333em;vertical-align:-0.15em></span><span class=mord><span class="mord mathcal">L</span><span class=msupsub><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:0.3283em><span style=top:-2.55em;margin-left:0em;margin-right:0.05em><span class=pstrut style=height:2.7em></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">AUC</span></span></span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:0.15em><span></span></span></span></span></span></span></span></span></span></span>
+<p>パラメータ <span class=katex><span class=katex-mathml><math xmlns=http://www.w3.org/1998/Math/MathML><semantics><mrow><mi>λ</mi></mrow><annotation encoding=application/x-tex>\lambda</annotation></semantics></math></span><span class=katex-html aria-hidden=true><span class=base><span class=strut style=height:0.6944em></span><span class="mord mathnormal">λ</span></span></span></span> でリスク感知と全体性能のバランス調整。</p>
+<p>この設計の核心は「全面正解は求めず、誤りやすい箇所の誤りを減らす」こと。</p>
+<p>学習は <strong>Adam</strong> を用い、過度な調整なしに CLIP 特徴を基盤にリスク領域重視で安定収束し、一定のクロスドメイン識別力を実現。</p>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=9-cloud-recesses>9. Cloud Recesses<a href=#9-cloud-recesses class=hash-link aria-label="9. Cloud Recesses への直接リンク" title="9. Cloud Recesses への直接リンク">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=cloud-recesses src=/ja/assets/images/img8-a95385ae759abf761b195b11da68c59b.jpg width=1224 height=202 class=img_ev3q></figure></div>
+<p>偽装検出の本質が「顔の破綻を探す」ことなら、<strong>Cloud Recesses</strong> チームは逆説的に「最も判別しやすい部分を隠し、より微細な信号から真偽を推測させる」方法を示しました。</p>
+<p>手法名：</p>
+<blockquote>
+<p><strong>Random Masking for Face Anti-Spoofing Detection</strong></p>
+</blockquote>
+<p>データレベルの対抗訓練であり、画像中の重要部位をマスクし、<strong>目や口が見えない状態でも活体判別を学習させる</strong>狙い。</p>
+<p>手順は三段階：</p>
+<ol>
+<li><strong>顔検出</strong>：<strong>RetinaFace</strong> で原画像から顔を切り出し、256×256 に統一。</li>
+<li><strong>キーポイント検出</strong>：<strong>dlib</strong> で 68 点の顔のキーポイントを抽出し、目、鼻先、唇などの位置を特定。</li>
+<li><strong>ランダムマスク</strong>：各訓練画像にて、<strong>3 ～ 5 か所の重要領域をランダムに遮蔽</strong>し、モデルの顔特徴依存を阻害。</li>
+</ol>
+<p>この設計は、モデルが過剰に頼る可能性のある白目や口の輪郭などの特徴を乱し、皮膚の粒状感、顔輪郭の連続性、局所的な動的ぼかしといったより抽象的かつ安定した活体情報を学ばせます。</p>
+<p>バックボーンは精度と効率を両立する <strong>EfficientNet</strong>。</p>
+<p>訓練は複雑な調整なしに、マスク戦略をデータ正則化の核心と位置付け、視覚的なプレッシャーを与え不完全情報からの真偽推定力を鍛えます。</p>
+<p>Cloud Recesses の構成には追加モジュールや二分岐、特徴融合はなく、顔の重要視覚情報をただ遮断し、暗闇の中で真偽を見極められるかを試みるのみです。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=10-image-lab>10. Image Lab<a href=#10-image-lab class=hash-link aria-label="10. Image Lab への直接リンク" title="10. Image Lab への直接リンク">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=image_lab src=/ja/assets/images/img9-45f8e28df018874a2b203fa2a595e56d.jpg width=1224 height=592 class=img_ev3q></figure></div>
+<p>偽装検知タスクではモデルに「よく見させる」ことが通常ですが、<strong>Image Lab</strong> チームは「何度も見させる」ことを選択しました。彼らの提案は：</p>
+<blockquote>
+<p><strong>Multiattention-Net：多層注意機構から成る深層視覚認識ネットワーク</strong></p>
+</blockquote>
+<p>多段階の空間情報と多重注意を統合し、画像の異なる次元から偽装の兆候を体系的に抽出します。</p>
+<p>ネットワークはまず <strong>7×7 畳み込み層</strong> で局所テクスチャを捉え、続く 10 層の <strong>改良型スクイーズ残差ブロック（modified squeezed residual blocks）</strong> を重ねます。各層は <strong>max pooling</strong> を伴い、入力情報は層を追うごとに下サンプリングされつつ、より大域的な空間意味に抽象化されます。</p>
+<p>各層で空間情報を継続抽出し、最終的に <strong>二重注意モジュール（Dual Attention Block）</strong> を通して重要部位の重みを強化。これによりモデルは細部と構造の両面から偽装痕跡を発見。</p>
+<p>最後は <strong>Global Average Pooling（GAP）</strong> で次元圧縮し、全層出力を結合して全結合層で分類。</p>
+<p>学習には <strong>Binary Focal Cross Entropy Loss</strong> を採用。これは少数クラスや高信頼誤分類に特にペナルティを与える損失で、具体的には：</p>
+<span class=katex-display><span class=katex><span class=katex-mathml><math xmlns=http://www.w3.org/1998/Math/MathML display=block><semantics><mrow><mi mathvariant=script>L</mi><mo stretchy=false>(</mo><mi>y</mi><mo separator=true>,</mo><mover accent=true><mi>y</mi><mo>^</mo></mover><mo stretchy=false>)</mo><mo>=</mo><mo>−</mo><mi>α</mi><mo>⋅</mo><mo stretchy=false>(</mo><mn>1</mn><mo>−</mo><mover accent=true><mi>y</mi><mo>^</mo></mover><msup><mo stretchy=false>)</mo><mi>γ</mi></msup><mo>⋅</mo><mi>log</mi><mo>⁡</mo><mo stretchy=false>(</mo><mover accent=true><mi>y</mi><mo>^</mo></mover><mo stretchy=false>)</mo><mo>−</mo><mo stretchy=false>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy=false>)</mo><mo>⋅</mo><msup><mover accent=true><mi>y</mi><mo>^</mo></mover><mi>γ</mi></msup><mo>⋅</mo><mi>log</mi><mo>⁡</mo><mo stretchy=false>(</mo><mn>1</mn><mo>−</mo><mover accent=true><mi>y</mi><mo>^</mo></mover><mo stretchy=false>)</mo></mrow><annotation encoding=application/x-tex>\mathcal{L}(y, \hat{y}) = -\alpha \cdot (1 - \hat{y})^\gamma \cdot \log(\hat{y}) - (1 - \alpha) \cdot \hat{y}^\gamma \cdot \log(1 - \hat{y})</annotation></semantics></math></span><span class=katex-html aria-hidden=true><span class=base><span class=strut style=height:1em;vertical-align:-0.25em></span><span class="mord mathcal">L</span><span class=mopen>(</span><span class="mord mathnormal" style=margin-right:0.03588em>y</span><span class=mpunct>,</span><span class=mspace style=margin-right:0.1667em></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:0.6944em><span style=top:-3em><span class=pstrut style=height:3em></span><span class="mord mathnormal" style=margin-right:0.03588em>y</span></span><span style=top:-3em><span class=pstrut style=height:3em></span><span class=accent-body style=left:-0.1944em><span class=mord>^</span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:0.1944em><span></span></span></span></span></span><span class=mclose>)</span><span class=mspace style=margin-right:0.2778em></span><span class=mrel>=</span><span class=mspace style=margin-right:0.2778em></span></span><span class=base><span class=strut style=height:0.6667em;vertical-align:-0.0833em></span><span class=mord>−</span><span class="mord mathnormal" style=margin-right:0.0037em>α</span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>⋅</span><span class=mspace style=margin-right:0.2222em></span></span><span class=base><span class=strut style=height:1em;vertical-align:-0.25em></span><span class=mopen>(</span><span class=mord>1</span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>−</span><span class=mspace style=margin-right:0.2222em></span></span><span class=base><span class=strut style=height:1em;vertical-align:-0.25em></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:0.6944em><span style=top:-3em><span class=pstrut style=height:3em></span><span class="mord mathnormal" style=margin-right:0.03588em>y</span></span><span style=top:-3em><span class=pstrut style=height:3em></span><span class=accent-body style=left:-0.1944em><span class=mord>^</span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:0.1944em><span></span></span></span></span></span><span class=mclose><span class=mclose>)</span><span class=msupsub><span class=vlist-t><span class=vlist-r><span class=vlist style=height:0.7144em><span style=top:-3.113em;margin-right:0.05em><span class=pstrut style=height:2.7em></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style=margin-right:0.05556em>γ</span></span></span></span></span></span></span></span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>⋅</span><span class=mspace style=margin-right:0.2222em></span></span><span class=base><span class=strut style=height:1em;vertical-align:-0.25em></span><span class=mop>lo<span style=margin-right:0.01389em>g</span></span><span class=mopen>(</span><span class="mord accent"><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:0.6944em><span style=top:-3em><span class=pstrut style=height:3em></span><span class="mord mathnormal" style=margin-right:0.03588em>y</span></span><span style=top:-3em><span class=pstrut style=height:3em></span><span class=accent-body style=left:-0.1944em><span class=mord>^</span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:0.1944em><span></span></span></span></span></span><span class=mclose>)</span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>−</span><span class=mspace style=margin-right:0.2222em></span></span><span class=base><span class=strut style=height:1em;vertical-align:-0.25em></span><span class=mopen>(</span><span class=mord>1</span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>−</span><span class=mspace style=margin-right:0.2222em></span></span><span class=base><span class=strut style=height:1em;vertical-align:-0.25em></span><span class="mord mathnormal" style=margin-right:0.0037em>α</span><span class=mclose>)</span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>⋅</span><span class=mspace style=margin-right:0.2222em></span></span><span class=base><span class=strut style=height:0.9088em;vertical-align:-0.1944em></span><span class=mord><span class="mord accent"><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:0.6944em><span style=top:-3em><span class=pstrut style=height:3em></span><span class="mord mathnormal" style=margin-right:0.03588em>y</span></span><span style=top:-3em><span class=pstrut style=height:3em></span><span class=accent-body style=left:-0.1944em><span class=mord>^</span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:0.1944em><span></span></span></span></span></span><span class=msupsub><span class=vlist-t><span class=vlist-r><span class=vlist style=height:0.7144em><span style=top:-3.113em;margin-right:0.05em><span class=pstrut style=height:2.7em></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style=margin-right:0.05556em>γ</span></span></span></span></span></span></span></span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>⋅</span><span class=mspace style=margin-right:0.2222em></span></span><span class=base><span class=strut style=height:1em;vertical-align:-0.25em></span><span class=mop>lo<span style=margin-right:0.01389em>g</span></span><span class=mopen>(</span><span class=mord>1</span><span class=mspace style=margin-right:0.2222em></span><span class=mbin>−</span><span class=mspace style=margin-right:0.2222em></span></span><span class=base><span class=strut style=height:1em;vertical-align:-0.25em></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:0.6944em><span style=top:-3em><span class=pstrut style=height:3em></span><span class="mord mathnormal" style=margin-right:0.03588em>y</span></span><span style=top:-3em><span class=pstrut style=height:3em></span><span class=accent-body style=left:-0.1944em><span class=mord>^</span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:0.1944em><span></span></span></span></span></span><span class=mclose>)</span></span></span></span></span>
+<p>ここで、</p>
+<ul>
+<li><span class=katex><span class=katex-mathml><math xmlns=http://www.w3.org/1998/Math/MathML><semantics><mrow><mover accent=true><mi>y</mi><mo>^</mo></mover></mrow><annotation encoding=application/x-tex>\hat{y}</annotation></semantics></math></span><span class=katex-html aria-hidden=true><span class=base><span class=strut style=height:0.8889em;vertical-align:-0.1944em></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:0.6944em><span style=top:-3em><span class=pstrut style=height:3em></span><span class="mord mathnormal" style=margin-right:0.03588em>y</span></span><span style=top:-3em><span class=pstrut style=height:3em></span><span class=accent-body style=left:-0.1944em><span class=mord>^</span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:0.1944em><span></span></span></span></span></span></span></span></span> は予測確率、<span class=katex><span class=katex-mathml><math xmlns=http://www.w3.org/1998/Math/MathML><semantics><mrow><mi>y</mi></mrow><annotation encoding=application/x-tex>y</annotation></semantics></math></span><span class=katex-html aria-hidden=true><span class=base><span class=strut style=height:0.625em;vertical-align:-0.1944em></span><span class="mord mathnormal" style=margin-right:0.03588em>y</span></span></span></span> は真ラベル、</li>
+<li><span class=katex><span class=katex-mathml><math xmlns=http://www.w3.org/1998/Math/MathML><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.25</mn></mrow><annotation encoding=application/x-tex>\alpha = 0.25</annotation></semantics></math></span><span class=katex-html aria-hidden=true><span class=base><span class=strut style=height:0.4306em></span><span class="mord mathnormal" style=margin-right:0.0037em>α</span><span class=mspace style=margin-right:0.2778em></span><span class=mrel>=</span><span class=mspace style=margin-right:0.2778em></span></span><span class=base><span class=strut style=height:0.6444em></span><span class=mord>0.25</span></span></span></span>（データ不均衡補正）、</li>
+<li><span class=katex><span class=katex-mathml><math xmlns=http://www.w3.org/1998/Math/MathML><semantics><mrow><mi>γ</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding=application/x-tex>\gamma = 3</annotation></semantics></math></span><span class=katex-html aria-hidden=true><span class=base><span class=strut style=height:0.625em;vertical-align:-0.1944em></span><span class="mord mathnormal" style=margin-right:0.05556em>γ</span><span class=mspace style=margin-right:0.2778em></span><span class=mrel>=</span><span class=mspace style=margin-right:0.2778em></span></span><span class=base><span class=strut style=height:0.6444em></span><span class=mord>3</span></span></span></span>（誤分類強調パラメータ）。</li>
+</ul>
+<p>Multiattention-Net は他参加モデルに比べ深層ですが、モジュール化設計と残差安定性により訓練は安定。繊細な損失重み調整と相まって高い一般化能力と収束効率を示します。</p>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=11-bovifocr-ufpr>11. BOVIFOCR-UFPR<a href=#11-bovifocr-ufpr class=hash-link aria-label="11. BOVIFOCR-UFPR への直接リンク" title="11. BOVIFOCR-UFPR への直接リンク">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=bovifocr-ufpr src=/ja/assets/images/img10-b475a1dfa8c62536b27fe66be5d8eb40.jpg width=1224 height=548 class=img_ev3q></figure></div>
+<p>偽装認識に特化した競技において、<strong>BOVIFOCR-UFPR</strong> は珍しく視点を 2D 平面から引き上げました。単に画像の色彩やテクスチャを分析するのではなく、<strong>顔の 3D リアリティを再構築し、偽装が再現できない空間的誤りを検出</strong>します。</p>
+<p>手法の核心は：</p>
+<blockquote>
+<p><strong>3D 再構築 + ArcFace + Chamfer 損失</strong></p>
+</blockquote>
+<p>全体構造は <strong>3DPC-Net</strong> に着想を得た <strong>エンコーダ-デコーダ</strong>：</p>
+<ol>
+<li><strong>前処理</strong>：高品質なアライメントと切り出しにより全画像のスケール統一。</li>
+<li><strong>エンコーダ</strong>：<strong>ResNet-50</strong> バックボーンで高次特徴を抽出。</li>
+<li><strong>デコーダ</strong>：特徴を対応する <strong>3D 点群表現（Point Cloud）</strong> に変換し、空間的顔形状を模擬。</li>
+</ol>
+<p>これによりモデルは「似ているか」ではなく「合理的か」、空間座標系での整合性を学習。</p>
+<p>学習時は以下損失を併用：</p>
+<ul>
+<li><strong>ArcFace 損失</strong>：クラス間の角度的分離を強化。</li>
+<li><strong>Chamfer 距離損失</strong>：出力点群と真の 3D 点群間の距離を測り、幾何構造近似を促進。</li>
+</ul>
+<p>モデルは live/fake の分類に加え、真実構造に沿った 3D 形状生成も課題とします。</p>
+<p>この方法は唯一の「3D 点群再構築」利用チームであり、幾何検証に基づく偽装対策の可能性を示しています。</p>
+<hr>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=12-inria-cenatav-tec>12. Inria-CENATAV-Tec<a href=#12-inria-cenatav-tec class=hash-link aria-label="12. Inria-CENATAV-Tec への直接リンク" title="12. Inria-CENATAV-Tec への直接リンク">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=inria-cenatav-tec src=/ja/assets/images/img11-f9acab71992cd26ce0f352cec1c5f5ca.jpg width=1224 height=356 class=img_ev3q></figure></div>
+<p><strong>Inria-CENATAV-Tec</strong> は古典的な問題に立ち返りました：</p>
+<blockquote>
+<p><strong>計算資源が限られた環境でも安定した偽装検知を達成できるか？</strong></p>
+</blockquote>
+<p>答えは：<strong>MobileNetV3-spoof にハイパーパラメータ調整を施す</strong></p>
+<p>モデルの複雑度と認識精度のバランスを追求した実験です。</p>
+<p>開始からシステム的かつ保守的な設計：</p>
+<ol>
+<li><strong>顔位置特定</strong>：<strong>ResNet-50</strong> によるランドマーク検出。</li>
+<li><strong>アライメント＆階層処理</strong>：ランドマーク検出成功時は <strong>InsightFace テンプレート</strong> で顔を整列、失敗時は元画像のサイズ変更のみ。</li>
+</ol>
+<p>この処理は厳密さ（検出時の精密整列）と耐障害性（検出不可時も除外せず）の両立で、現実運用を見据えた実装。</p>
+<p>バックボーンに選んだ <strong>MobileNetV3-large1.25</strong> はエッジ AI・低消費電力向けに最適化され、畳み込み効率を保ちつつ <strong>SE attention block</strong> と <strong>h-swish 活性化</strong> を導入。パラメータ数と性能の合理的折衷を実現。</p>
+<p>学習は <strong>SGD オプティマイザ</strong> と <strong>マルチステップ学習率調整</strong> で段階的かつ安定的な収束を図る。</p>
+<p>基本的拡張（クロップ、反転等）に加え、各プロトコルデータセットの平均・標準偏差で正規化し、異質なソース由来の特徴ズレを防止。</p>
+<p>このプロトコル毎の前処理調整は工学的な手法ながら、軽量モデルでありつつ多タスク環境下で安定した認識性能維持に大きく寄与しています。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=13-vicognit>13. Vicognit<a href=#13-vicognit class=hash-link aria-label="13. Vicognit への直接リンク" title="13. Vicognit への直接リンク">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=vicognit src=/ja/assets/images/img12-050b94ce8aab2e913e31313c4e054670.jpg width=1224 height=472 class=img_ev3q></figure></div>
+<p>参加チームの中で、<strong>Vicognit</strong> は明確に ViT に注力した数少ないチームの一つです。</p>
+<p>彼らの提案は：</p>
+<blockquote>
+<p><strong>FASTormer：Vision Transformer を活用した Face Anti-Spoofing</strong></p>
+</blockquote>
+<p>非常にシンプルかつ明確な戦略で、データ加工や追加モジュール、多分岐経路を用いず、Transformer の関連性エンコードと系列構造捕捉能力に全面的に依存。モデルが空間情報から顔の真偽文法を自律的に構築します。</p>
+<p>Vicognit の核は、原解像度のまま ViT に入力し、余分な次元削減や圧縮を行わず空間構造の詳細を保持し、セルフアテンションが全画像関係に自然に作用できる点です。</p>
+<p>この方針は新奇ではありませんが、顔偽装検知では非常に挑戦的。偽顔と真顔の差異は幾何的でなく、テクスチャ・材質・微細ノイズにあり、ViT の全域関連モデリングがこれら微妙で不規則な意味的裂け目を学習するのに最適です。</p>
+<p>訓練戦略は以下：</p>
+<ul>
+<li>精密な <strong>学習率（Learning Rate）</strong> と <strong>重み減衰（Weight Decay）</strong> の調整により、安定かつ精密な収束を実現；</li>
+<li>Transformer にありがちな早期過学習を避ける適応的トレーニング；</li>
+<li>追加拡張なしで構造をシンプルに保ち、モデル学習の負荷を系列パターン構築へ集中。</li>
+</ul>
+<p>この戦略により、FASTormer は追加情報なしでも意味的キーポイントを効果的に捉え、良好な一般化力をもち未知の偽装パターンにも柔軟に対応します。</p>
+<p>Vicognit の貢献は、純粋な Transformer アーキテクチャにおける FAS 実現可能性の実証にあります。</p>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=議論>議論<a href=#議論 class=hash-link aria-label="議論 への直接リンク" title="議論 への直接リンク">​</a></h2>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=result src=/ja/assets/images/img13-0f39a57e34a5766d4b9a7a521f62d8f9.jpg width=1224 height=636 class=img_ev3q></figure></div>
+<p>公式最終統計によると、上位 5 チームには以下の特徴が見られます：</p>
+<ol>
+<li><strong>トップ 3 チームが ACER 指標で明確に他をリード</strong>し、高い一般化安定性を示す。</li>
+<li><strong>1 位チームは ACER、AUC、BPCER 全てで首位を獲得</strong>、しかし最高の APCER は 5 位チームが記録し、モデルごとに誤り種別で得意分野があることを示唆。</li>
+<li><strong>上位 5 チームは全て業界チーム</strong>であり、実務志向の設計が UAD 成果に強く影響。</li>
+<li><strong>ACER に大きなばらつきがある</strong>ことから、UAD はまだ技術探求の初期段階で、安定したコンセンサスや絶対的アーキテクチャは未確立。</li>
+</ol>
+<p>本チャレンジの真価は単なる勝敗だけでなく、「どのモデル設計哲学が有効か」の検証でもあります。</p>
+<p>全体観察から、現在の UAD における一般化設計の秘訣は主に以下三路線：</p>
+<ul>
+<li><strong>路線 1：大規模モデルによる全域認識構築（例：ViT、CLIP）</strong></li>
+<li><strong>路線 2：データ擾乱で一般化耐性構築（例：マスク、スタイル変換、自己融合等の強化）</strong></li>
+<li><strong>路線 3：意味的整合を特徴圧力源に（例：教師あり対比学習、ArcFace、二分岐整合）</strong></li>
+</ul>
+<p>ほぼ全ての効果的解法は、これらのロジックの組み合わせを何らかの形で包含しています。</p>
+<hr>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=結論>結論<a href=#結論 class=hash-link aria-label="結論 への直接リンク" title="結論 への直接リンク">​</a></h2>
+<p>本競技と主催者のまとめから、UAD の今後の課題は主に三つ：</p>
+<ol>
+<li>
+<p><strong>より包括的なデータセット構築</strong>
+UniAttackData は攻撃タイプ横断の基盤を作ったものの、攻撃多様性、被験者多様性、画質面で改善余地あり。特に対抗攻撃やスタイル変換偽装等新型態では、現行サンプル数が体系的な一般化検証に不足。</p>
+</li>
+<li>
+<p><strong>視覚言語モデル（VLM）を活用した一般化戦略</strong>
+CLIP、DINOv2 等の VLM 導入は意味レベルでの一般化圧力を設計可能に。今後これら多モーダル事前学習知識を効果的に UAD へ誘導できれば、ラベル付き偽装データへの依存軽減が期待。</p>
+</li>
+<li>
+<p><strong>タスクプロトコル・基準の再構築</strong>
+現行プロトコルは代表的だが混合攻撃、多モーダル、モバイル展開等新環境を十分包含せず。誤判を高リスク・許容誤差等に層別する高次評価機構の開発が、実環境信頼度向上に不可欠。</p>
+</li>
+</ol>
+<p>我々は今なお偽装認識の霧の中を歩んでいる。</p>
+<p>各チームは様々なアルゴリズムの道を照らし、注意機構で異常を見抜き、マスクで耐性を育み、3D 空間で形態の真偽を抽出してきた。</p>
+<p>しかし根本の問いは変わらない：</p>
+<blockquote>
+<p><strong>偽顔は一体どのように構成されているのか？</strong></p>
+</blockquote>
+<p>答えはまだ形を成さずとも、この技術公開戦の後、我々はまた一歩、答えに近づいた。</header></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class=col></div><div class="col lastUpdated_JAkA"><span class=theme-last-updated><b><time datetime=2025-06-02T15:13:46.000Z itemprop=dateModified>2025年6月2日</time></b>に<b>zephyr-sh</b>が<!-- -->最終更新</span></div></div><section class=ctaSection_iCjC><div class="
+        simpleCta_ji_Y
+        simple-cta__coffee_YwC8
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style=cursor:pointer><h3 class=simple-cta__title_i7hn>☕ 1杯のコーヒーが支えになります</h3><p class=simple-cta__subtitle_ol86>AIやフルスタックの情報発信を続けるため、ご支援お願いします。<div class=simple-cta__buttonWrapper_jk1Y><img src=/ja/img/bmc-logo.svg alt=cta-button class=simple-cta__buttonImg_Q9VV></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-5uvb3z" style=margin-left:-8px;margin-right:-8px;row-gap:16px><div style=padding-left:8px;padding-right:8px;display:flex class="ant-col ant-col-xs-24 css-5uvb3z"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-5uvb3z" style=flex:1;display:flex;flex-direction:column><div class=ant-card-body><div style=text-align:center;margin-top:1rem><img src=/ja/img/icons/all_in.svg alt="AI・開発・運用まで一括対応 icon" style=width:48px;height:48px></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-5uvb3z">ALL</span><h4 class=card__title_SQBY>AI・開発・運用まで一括対応</h4><p class=card__concept_Ak8F>アイデアからリリースまで、技術面はまるごとお任せください。<div class=card__bulletHeader_b6cf><h5 class=card__bulletTitle_R_wg>対応内容</h5></div><ul class=card__bulletList_SrNN><li class=card__bulletItem_wCRd>技術相談 + 開発 + デプロイ<li class=card__bulletItem_wCRd>継続サポート & 拡張</ul></div></div></div></div><div class="
+        simpleCta_ji_Y
+        simple-cta__outro_AXbn
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style=cursor:pointer><h3 class=simple-cta__title_i7hn>🚀 次のプロジェクト、始めましょう！</h3><p class=simple-cta__subtitle_ol86>カスタム開発や長期支援をご希望の方は、ぜひご相談ください。</div></section><div style=margin-top:3rem> </div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label=ドキュメントページ><a class="pagination-nav__link pagination-nav__link--prev" href=/ja/papers/face-antispoofing/cfpl-fas/><div class=pagination-nav__sublabel>前へ</div><div class=pagination-nav__label>[24.03] CFPL-FAS</div></a><a class="pagination-nav__link pagination-nav__link--next" href=/ja/papers/face-antispoofing/pd-fas/><div class=pagination-nav__sublabel>次へ</div><div class=pagination-nav__label>[24.04] PD-FAS</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href=#兵器譜 class="table-of-contents__link toc-highlight">兵器譜</a><li><a href=#問題定義 class="table-of-contents__link toc-highlight">問題定義</a><li><a href=#統一データセットuniattackdata class="table-of-contents__link toc-highlight">統一データセット：UniAttackData</a><ul><li><a href=#評価プロトコルと一般化設計 class="table-of-contents__link toc-highlight">評価プロトコルと一般化設計</a><li><a href=#大会スケジュールとルール class="table-of-contents__link toc-highlight">大会スケジュールとルール</a><li><a href=#評価指標 class="table-of-contents__link toc-highlight">評価指標</a></ul><li><a href=#兵器譜-1 class="table-of-contents__link toc-highlight">兵器譜</a><ul><li><a href=#1-mtface class="table-of-contents__link toc-highlight">1. MTFace</a><li><a href=#2-searecluse class="table-of-contents__link toc-highlight">2. SeaRecluse</a><li><a href=#3-duileduile class="table-of-contents__link toc-highlight">3. duileduile</a><li><a href=#4-bsp-idiap class="table-of-contents__link toc-highlight">4. BSP-Idiap</a><li><a href=#5-vai-face class="table-of-contents__link toc-highlight">5. VAI-Face</a><li><a href=#6-llw class="table-of-contents__link toc-highlight">6. L&L&W</a><li><a href=#7-sarm class="table-of-contents__link toc-highlight">7. SARM</a><li><a href=#8-m2-purdue class="table-of-contents__link toc-highlight">8. M2-Purdue</a><li><a href=#9-cloud-recesses class="table-of-contents__link toc-highlight">9. Cloud Recesses</a><li><a href=#10-image-lab class="table-of-contents__link toc-highlight">10. Image Lab</a><li><a href=#11-bovifocr-ufpr class="table-of-contents__link toc-highlight">11. BOVIFOCR-UFPR</a><li><a href=#12-inria-cenatav-tec class="table-of-contents__link toc-highlight">12. Inria-CENATAV-Tec</a><li><a href=#13-vicognit class="table-of-contents__link toc-highlight">13. Vicognit</a></ul><li><a href=#議論 class="table-of-contents__link toc-highlight">議論</a><li><a href=#結論 class="table-of-contents__link toc-highlight">結論</a></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__links text--center"><div class=footer__links><a class=footer__link-item href=/ja/docs>オープンソースプロジェクト</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/ja/papers/intro>論文ノート</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/ja/blog>ブログ</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/ja/terms-of-service>利用規約</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/ja/privacy-policy>プライバシーポリシー</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/ja/become-an-author>著者になる</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/ja/worklog>作業日誌</a></div></div><div class="footer__bottom text--center"><div class=footer__copyright>Copyright © 2024 DOCSAID.</div></div></div></footer></div>
