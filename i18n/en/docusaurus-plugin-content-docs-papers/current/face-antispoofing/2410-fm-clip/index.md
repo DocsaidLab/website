@@ -9,37 +9,42 @@ authors: Z. Yuan
 
 ---
 
-In the field of Face Anti-Spoofing (FAS), "multimodal" usually refers to different sensors such as RGB, depth, and infrared.
+In the field of Face Anti-Spoofing (FAS), the term "multimodal" typically refers to different sensors such as RGB, depth, and infrared.
 
-However, in recent years, another "modality" has gained prominence: natural language.
+However, in recent years, another kind of "modality" has become popular: natural language.
 
 ## Problem Definition
 
-Face Anti-Spoofing (FAS) originally focused on images themselves.
+The original battlefield of Face Anti-Spoofing (FAS) is the image itself.
 
-Researchers designed convolutional networks to extract features such as texture, depth, and reflectivity to distinguish between genuine and fake faces. However, as attack methods evolved, high-resolution printing, replay attacks, and 3D masks gradually made the single-modality defense fragile.
+Researchers designed convolutional networks to extract features like texture, depth, and reflectance to distinguish between genuine and fake faces.
 
-To address this escalation of attacks and defenses, the FAS community introduced multimodal fusion. RGB captures color, IR detects heat sources, and Depth measures structure. By combining signals from different sensors, researchers attempt to piece together a more accurate representation of reality.
+However, as attack methods evolve—such as high-resolution printing, replay attacks, and 3D masks—the defense relying on a single modality has gradually fractured.
 
-But this approach has its cracks.
+To cope with this escalation, the FAS community introduced multimodal fusion. RGB captures color, IR senses heat, Depth measures structure; by interleaving signals from different sensors, they attempt to piece together a more realistic picture.
 
-Multimodal fusion relies on all modalities being present during both the training and testing phases. If any sensor data is missing, the system's recognition capability collapses. Hardware costs and variations in environmental conditions make "modality consistency" a luxury.
+Yet this approach has its cracks.
 
-The concept of Flexible Modal emerges, aiming to design a model that learns multimodal features during training but does not rely on all modalities being present during testing. However, previous research on Flexible Modal focused on traditional modalities like spectral, thermal, and geometric signals.
+Multimodal fusion depends on having all modalities available during both training and testing. Once any sensor data is missing, the system’s recognition ability collapses like a breached dam, becoming almost completely ineffective. Hardware costs for deployment and variable scene conditions make "modality consistency" a luxury.
 
-The rise of natural language presents another possibility.
+The concept of Flexible Modal emerged in response.
 
-Language does not directly capture the light and form of the world but describes, interprets, and aligns experiences. It offers an alignment mechanism beyond the sensor level, allowing heterogeneous observations to find commonality at the semantic level.
+Its goal is to design a model that learns multimodal features during training but does not rely on the presence of all modalities during testing. However, past research on Flexible Modal still focused on traditional modalities such as spectral, thermal, or geometric signals.
 
-Perhaps, in the gaps of these fragmented modalities, we can rebuild the ability to discern authenticity using natural language as a bridge.
+The rise of natural language offers another possibility.
+
+Language does not directly capture the world's light and shape; instead, it describes, interprets, and aligns experiences.
+
+It provides an alignment mechanism beyond the sensor level, enabling heterogeneous observations to find commonality at the semantic level.
+
+Perhaps, through natural language as a bridge, we can reconstruct the cognition of authenticity within the gaps of these fragmented modalities.
 
 ## Solution
 
 :::tip
-This paper uses CLIP as the underlying architecture. If you're unfamiliar with CLIP, you can refer to our previous paper:
+This paper uses CLIP as its foundational architecture. If you are not familiar with CLIP, you can refer to our previous paper.
 
 - [**[21.03] CLIP: Breaking the Dimensional Barrier**](../../multimodality/2103-clip/index.md)
-
   :::
 
 ### Model Architecture
@@ -50,60 +55,66 @@ This paper uses CLIP as the underlying architecture. If you're unfamiliar with C
 </figure>
 </div>
 
-The authors propose **FM-CLIP**, a multimodal alignment model specifically designed for FAS, based on CLIP.
+The authors propose **FM-CLIP**, a multimodal alignment model based on CLIP, specifically designed for Face Anti-Spoofing (FAS).
 
-The entire architecture is built on a frozen CLIP model.
+The entire architecture is built upon a frozen CLIP model.
 
-As shown in the figure above, FM-CLIP consists of two main branches:
+As shown in the figure above, FM-CLIP can be divided into two main branches:
 
-- **Visual Branch**: Receives sensor data such as RGB and Depth and processes it through a ViT image encoder.
-- **Language Branch**: Uses text vectors generated via prompt learning as auxiliary signals to guide visual feature alignment.
+- **Visual Branch**: Takes sensor data such as RGB and Depth, processed by a ViT image encoder.
+- **Language Branch**: Uses prompt learning to generate text vectors as auxiliary signals to guide the alignment of visual features.
 
-Next, we will carefully examine the design of each component according to the flow of signals.
+Next, we examine each component in the order of signal flow.
 
 ### CMS-Enhancer
 
-ViT, originally a pure self-attention network, lacks sensitivity to local structures and frequency signals.
+The original ViT is purely self-attention based and lacks sensitivity to local structures and frequency signals.
 
-To address this shortcoming, FM-CLIP inserts a **Cross-Modal Spoofing Enhancer (CMS-Enhancer)** at each ViT stage.
+To compensate for this, the authors insert a cross-modal spoofing enhancement module at each ViT stage:
 
-This enhancement splits the input features into two parallel channels:
+- **Cross-Modal Spoofing Enhancer (CMS-Enhancer)**
 
-- **Spatial Features** — Extracted using the Spatial Extractor (SE) for fine-grained texture extraction.
-- **Frequency Features** — Extracted using the Frequency Extractor (FE) that maps the image to the frequency domain, capturing high-level structural differences.
+The input features are decomposed into two parallel streams:
 
-**Spatial Extractor (SE)** operates as follows:
+- **Spatial Features**: Fine-grained texture extraction by the Spatial Extractor (SE).
+- **Frequency Features**: The Frequency Extractor (FE) maps images to the frequency domain to extract high-level structural differences.
+
+The **Spatial Extractor (SE)** operates as:
 
 $$
 F_{\text{SE\_output}}^{(j)} = \text{Conv1}(\text{GELU}(\text{Conv3}(\text{GELU}(\text{Conv1}(F_{\text{input}}^{(j)})))))
 $$
 
+This is a simple convolutional structure with GELU activation to obtain local image features.
+
+A residual connection is added:
+
 $$
 \hat{F}_{\text{spatial}}^{(j)} = F_{\text{SE\_output}}^{(j)} \oplus F_{\text{input}}^{(j)}
 $$
 
-**Frequency Extractor (FE)** works as:
+The **Frequency Extractor (FE)** is defined as:
 
 $$
 F_{\text{FE\_output}}^{(j)} = \sigma(\text{Conv1}(\text{GELU}(\text{Conv1}(\text{DCT}(F_{\text{input}}^{(j)})))))
 $$
 
+After transforming the image into a spectral map, convolution and GELU are applied. Although the operation is similar, the target is now the spectral domain, extracting distinctly different features.
+
+Finally, the output is element-wise multiplied with the original input to strengthen or weaken certain frequencies:
+
 $$
 \hat{F}_{\text{frequency}}^{(j)} = F_{\text{FE\_output}}^{(j)} \otimes F_{\text{input}}^{(j)}
 $$
 
-Here, the DCT (Discrete Cosine Transform) allows the model to understand structural and texture differences between modalities from a frequency perspective.
-
 ### Cross-Modal Interactor
 
-Different modalities may vary greatly in spatial features, but in the frequency domain, they can be mapped onto a shared intermediate plane.
+Different modalities may vary greatly in spatial features, but in frequency space they can be mapped onto a shared intermediate plane. To facilitate this frequency-domain interaction, the authors design the **Cross-Modal Interactor (CMI)** module:
 
-To facilitate this interaction in the frequency domain, FM-CLIP designs the **Cross-Modal Interactor (CMI)** module:
+- Compute a gate map for each modality indicating regions of high and low information density.
+- Use the gate maps to supplement useful information from the other modality, repairing weak regions.
 
-- First, a gate map is computed for each modality, marking regions with high and low information density.
-- Then, based on the gate map, useful information from another modality is used to supplement and strengthen the weaker regions of the current modality.
-
-**Calculating the gate map:**
+Gate maps are computed as:
 
 $$
 M_{\text{freq.RGB}} = \sigma(\text{Conv3}(F_{\text{freq.RGB}}))
@@ -113,105 +124,107 @@ $$
 M_{\text{freq.Depth}} = \sigma(\text{Conv3}(F_{\text{freq.Depth}}))
 $$
 
-**Interactive supplementation process:**
+Since the output passes through a sigmoid function, values range between 0 and 1, representing retention or suppression of image regions deemed unnecessary by the model.
+
+The interaction and supplementation process is:
 
 $$
-eF_{\text{freq.RGB-Depth}} = (1-M_{\text{freq.RGB}}) \otimes eF_{\text{freq.Depth}}
-$$
-
-$$
-eF_{\text{freq.Depth-RGB}} = (1-M_{\text{freq.Depth}}) \otimes eF_{\text{freq.RGB}}
-$$
-
-Finally, the original features of the modality, enhanced features, and supplemented features are fused:
-
-$$
-F_{E\_\text{freq.RGB}} = F_{\text{freq.RGB}} \oplus eF_{\text{freq.RGB}} \oplus eF_{\text{freq.RGB-Depth}}
+eF_{\text{freq.RGB-Depth}} = (1 - M_{\text{freq.RGB}}) \otimes eF_{\text{freq.Depth}}
 $$
 
 $$
-F_{E\_\text{freq.Depth}} = F_{\text{freq.Depth}} \oplus eF_{\text{freq.Depth}} \oplus eF_{\text{freq.Depth-RGB}}
+eF_{\text{freq.Depth-RGB}} = (1 - M_{\text{freq.Depth}}) \otimes eF_{\text{freq.RGB}}
 $$
 
-These are then combined with the corresponding spatial features to form enhanced features.
+This means that, for example, for RGB features, regions not retained by the model are supplemented with corresponding information from the Depth features, encouraging cross-modality inspection.
 
-In this way, the visual branch in each ViT block not only learns the details of its own modality but also absorbs frequency supplementation information from other modalities.
+Finally, the original features, enhanced features, and supplemented features are fused:
+
+$$
+F_{E_\text{freq.RGB}} = F_{\text{freq.RGB}} \oplus eF_{\text{freq.RGB}} \oplus eF_{\text{freq.RGB-Depth}}
+$$
+
+$$
+F_{E_\text{freq.Depth}} = F_{\text{freq.Depth}} \oplus eF_{\text{freq.Depth}} \oplus eF_{\text{freq.Depth-RGB}}
+$$
+
+These are then combined with the corresponding spatial features to form enhanced representations.
+
+In this way, the visual branch within each ViT block learns not only its own modality details but also receives frequency supplementation from other modalities.
 
 ### Language-Guided Patch Alignment
 
-Once the visual signals are processed, the authors introduce the natural language modality to further guide each patch to focus on spoofing cues.
+After processing visual signals, the authors introduce the natural language modality to further guide each patch to focus on spoofing cues.
 
-In the text branch, FM-CLIP uses **Prompt Learning** technology to initialize a set of learnable context vectors $\mathbf{v} = \{v_1, v_2, ..., v_M\}$, and combines class labels $c_i$ to form the prompt:
+In the text branch, **Prompt Learning** is used to initialize a set of learnable context vectors $\mathbf{v} = {v_1, v_2, ..., v_M}$, combined with class labels $c_i$, forming the prompt:
 
 $$
 t_i = \{v_1, v_2, ..., v_M, c_i\}
 $$
 
-After processing through the text encoder $g(\cdot)$, a text feature $f_{\text{text}}$ is generated.
+This technique is not novel per se; it has become a common and effective method to leverage large model capabilities. Its downside is that learned tokens are often hard to interpret.
 
-In the visual branch, we have already obtained the CLS token $f_{\text{img}}^{(0)}$ and the Patch tokens $f_{\text{img}}^{(1:N)}$.
+After passing through the text encoder $g(\cdot)$, text features $f_{\text{text}}$ are obtained.
 
-FM-CLIP adopts dual alignment:
+From the visual branch, we have the CLS token $f_{\text{img}}^{(0)}$ and Patch tokens $f_{\text{img}}^{(1\:N)}$.
 
-1. **CLS token alignment** — The similarity between the CLS token and the EOS (real/fake) vector is calculated for global classification.
-2. **Patch token alignment (LGPA)** — A similarity matrix is computed for each Patch token and the text feature:
+The authors adopt dual alignment:
+
+1. **CLS Token Alignment**: Compute similarity between CLS and EOS (real/fake) vectors for global classification.
+2. **Patch Token Alignment (LGPA)**: Calculate similarity matrix between each Patch token and text features:
 
 $$
 S = f_{\text{img}}^{(1:N)} \cdot (f_{\text{text}})^T
 $$
 
-Then, weighted fusion is performed:
+Then perform weighted fusion:
 
 $$
 \hat{f}_{\text{img}}^{(1:N)} = \text{softmax}(S) \cdot f_{\text{text}} + f_{\text{img}}^{(1:N)}
 $$
 
-This allows each patch to refocus, guided by language, on local cues where spoofing traces may exist.
+Thus, each patch can refocus on local clues potentially indicating spoofing, guided by language.
 
 ### Loss Function Design
 
-To supervise both global and local alignment, FM-CLIP introduces two loss terms:
+To supervise both global and local alignment, the authors introduce two loss terms:
 
-- **CLS Loss (global alignment):**
+- **CLS Loss (Global Alignment)**:
 
   $$
   L_C = \text{CrossEntropy}(p_{\text{cls\_token}}, y)
   $$
 
-- **Patch Loss (local alignment):**
+- **Patch Loss (Local Alignment)**:
 
   $$
   L_P = \text{CrossEntropy}(p_{\text{patch\_token}}, y)
   $$
 
-The final total loss is:
+The total loss is:
 
 $$
 L_{\text{total}} = L_C + L_P
 $$
 
-This design maintains a balance between global recognition and local detail, allowing the model to capture both macro semantics and focus on microscopic flaws.
+This design maintains tension between global recognition and local detail, capturing both high-level semantics and subtle flaws.
 
 ## Discussion
 
-The authors tested the model on three commonly used multimodal FAS datasets:
+The authors evaluated their method on three commonly used multimodal FAS datasets:
 
-- **CASIA-SURF (SURF)**: A three-modal dataset primarily focused on unknown attack types.
-- **CASIA-SURF CeFA (CeFA)**: Includes racial and modality variations, using Protocols 1, 2, and 4.
-- **WMCA**: High-fidelity multi-attack scenarios, covering both "seen" and "unseen" evaluation contexts.
+- **CASIA-SURF (SURF)**: A tri-modal dataset focusing on unknown attack types.
+- **CASIA-SURF CeFA (CeFA)**: Contains variations in race and modality, using Protocols 1, 2, and 4.
+- **WMCA**: A highly realistic multi-attack scenario dataset, covering both “seen” and “unseen” evaluation settings.
 
-The experiments include two testing settings:
+Experiments were conducted under two testing settings:
 
-- **Fixed Modal**: Training and testing modalities are the same.
-- **Flexible Modal**: Only one modality's data is provided during testing.
+- **Fixed Modal**: Training and testing modalities are consistent.
+- **Flexible Modal**: Only a single modality is provided during testing.
 
-Evaluation metrics used include APCER, BPCER, and ACER as standards.
+Evaluation metrics include APCER, BPCER, and ACER.
 
 ### Fixed Modal Results
-
-:::tip
-Due to space limitations, only the SURF dataset charts are shown here. Please refer to the original paper for the charts of the other two datasets.
-:::
 
 <div align="center">
 <figure style={{"width": "90%"}}>
@@ -219,31 +232,31 @@ Due to space limitations, only the SURF dataset charts are shown here. Please re
 </figure>
 </div>
 
-In the fixed modality setting, FM-CLIP shows a stable improvement trend.
+Under the fixed modal setting, FM-CLIP demonstrates a stable improvement trend.
 
 - **SURF dataset**:
-  After introducing CMS-Enhancer, the ACER decreased from 0.45 to 0.44; after integrating LGPA, it further dropped to 0.43.
+  After introducing CMS-Enhancer, ACER dropped from 0.45 to 0.44; with LGPA integration, it further decreased to 0.43.
 - **WMCA dataset (unseen protocol)**:
-  CMS-Enhancer reduced the ACER from 2.49% to 2.36%, and with LGPA, FM-CLIP finally dropped to 2.29%.
+  CMS-Enhancer reduced ACER from 2.49% to 2.36%; with LGPA, FM-CLIP finally reached 2.29%.
 - **CeFA dataset**:
-  On the three protocols, FM-CLIP slightly reduced the APCER, BPCER, and ACER metrics, demonstrating robust cross-domain generalization capabilities.
+  FM-CLIP slightly lowered APCER, BPCER, and ACER across three protocols, showing robust cross-domain generalization.
 
-Since FM-CLIP has fewer trainable parameters than FM-ViT, its absolute performance is slightly lower than FM-ViT in the WMCA "seen" scenario, which is an expected trade-off.
+Since FM-CLIP has fewer trainable parameters than FM-ViT, its absolute performance under WMCA “seen” scenario is slightly lower than FM-ViT, an expected trade-off.
 
 ### Flexible Modal Results
 
 ![flexible_modal](./img/img3.jpg)
 
-In the more challenging flexible modal tests, FM-CLIP shows a clear advantage.
+In the more challenging flexible modal tests, FM-CLIP exhibits clear advantages.
 
 - **SURF dataset**:
-  In the RGB, Depth, and IR single-modal settings, FM-CLIP outperforms FM-ViT across the board, achieving up to a 2.17% reduction in ACER.
+  Across RGB, Depth, and IR single modalities, FM-CLIP consistently outperformed FM-ViT, achieving up to a 2.17% reduction in ACER.
 - **CeFA Protocol 4**:
-  Especially in the IR modality, FM-CLIP reduced the ACER by 8.1 points compared to FM-ViT, showing its particular effectiveness in handling challenging infrared data.
+  Especially in the IR modality, FM-CLIP reduced ACER by 8.1 compared to FM-ViT, showing particular effectiveness for difficult infrared data.
 - **WMCA (seen protocol)**:
-  FM-CLIP showed additional improvement across all modalities (RGB, Depth, IR), maintaining a stable low error rate.
+  FM-CLIP showed additional gains across all modalities (RGB, Depth, IR), maintaining stable low error rates.
 
-### Core Component Analysis
+### Core Components Analysis
 
 <div align="center">
 <figure style={{"width": "70%"}}>
@@ -251,23 +264,23 @@ In the more challenging flexible modal tests, FM-CLIP shows a clear advantage.
 </figure>
 </div>
 
-The authors conducted ablation experiments on the two main modules of FM-CLIP, CMS-Enhancer and VLA (Vision-Language Alignment). The experiments were conducted on the WMCA (seen), SURF, and CeFA (Protocol 4) datasets in the flexible modal setting.
+Ablation studies on FM-CLIP’s two main modules—CMS-Enhancer and VLA (Vision-Language Alignment)—were conducted on WMCA (seen), SURF, and CeFA (Protocol 4) datasets under the flexible modal setting.
 
-The results show:
+Results show:
 
-- When **CMS-Enhancer** was introduced alone, the ACER decreased by more than 4%, effectively improving the stability of visual features.
-- When **VLA** was introduced alone, it also resulted in approximately a 4% decrease, proving the role of language guidance in aligning local features.
-- After **integrating both modules (FM-CLIP)**, the ACER dropped by 8% to 9% across all datasets, demonstrating the complementary nature of the two modules.
+- Introducing **CMS-Enhancer** alone lowered ACER by over 4%, effectively stabilizing visual features.
+- Introducing **VLA** alone similarly reduced ACER by about 4%, demonstrating the role of language guidance in local feature alignment.
+- Combining both modules (**FM-CLIP**) resulted in ACER reductions of 8% to 9% across datasets, indicating their complementary nature.
 
 ## Conclusion
 
-The introduction of Vision-Language Models (VLM) into the FAS field has become a popular trend in recent years.
+Introducing Vision-Language Models (VLMs) into the FAS domain has become a popular trend in recent years.
 
-In the context of heterogeneous data sources and varying attack methods, relying on a single sensor or handcrafted feature design has become increasingly difficult to maintain a stable recognition system. Natural language, as a high-level alignment mechanism, provides potential links across sensors and attack types and has become a direction many researchers are attempting to leverage.
+Given the heterogeneity of data sources and diversity of attack types, relying solely on single sensors or handcrafted features is increasingly inadequate for maintaining stable recognition systems. Natural language, as a high-level alignment mechanism, offers potential links across sensors and attack modes, making it a promising direction many researchers are exploring.
 
-From this research, we can observe two important directions in current studies:
+From this study, two key directions emerge:
 
-1. **When physical-level observations inevitably fragment, alignment and repair at the semantic level will become an essential pillar for recognition systems.**
-2. **Simple language guidance is not enough to fully replace sensor-level information reinforcement; frequency space, local structure, and semantic correlations need to be more tightly integrated.**
+1. **When physical-layer observations inevitably fragment, semantic-level alignment and repair will become a crucial pillar of recognition systems.**
+2. **Pure language guidance alone is insufficient to fully replace sensor-level information enhancement; frequency domain, local structures, and semantic relations still need to be tightly integrated.**
 
-FM-CLIP, with its lightweight design, demonstrates the feasibility of cross-modal alignment and opens up the possibility of deeper structural modeling and active perception repair.
+FM-CLIP demonstrates the feasibility of cross-modal alignment with a lightweight design, leaving room for further exploration in deeper structural modeling and active perceptual repair.
