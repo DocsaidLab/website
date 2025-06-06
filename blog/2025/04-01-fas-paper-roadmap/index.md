@@ -347,17 +347,37 @@ FAS 模型的泛化不只受到 domain shift 的挑戰，更受到不同風格�
 36. [**[23.09] FLIP: Cross-domain Face Anti-Spoofing with Language Guidance**](https://arxiv.org/abs/2309.16649)
     將 CLIP 模型應用於 FAS 任務，透過自然語言描述導引視覺表徵空間，提升跨 domain 的泛化能力，並提出語義對齊與多模態對比學習策略，達成真正語言引導下的 zero-shot FAS。
 
+    :::info
+    **論文筆記**：[**[23.09] FLIP: 防禦咒**](https://docsaid.org/papers/face-antispoofing/flip)
+    :::
+
 37. [**[24.04] Joint Physical-Digital Facial Attack Detection via Simulating Spoofing Clues**](https://arxiv.org/abs/2404.08450)
     提出 SPSC 與 SDSC 資料擴增策略，模擬物理與數位攻擊線索，讓單一模型能學習同時辨識兩類攻擊，成功在 CVPR2024 比賽中奪冠，樹立融合式模型新典範。
+
+    :::info
+    **論文筆記**：[**[24.04] PD-FAS: 幻象的演武場**](https://docsaid.org/papers/face-antispoofing/pd-fas)
+    :::
 
 38. [**[24.04] Unified Physical-Digital Attack Detection Challenge**](https://arxiv.org/abs/2404.06211)
     發起首屆統一攻擊辨識挑戰賽，釋出 2.8 萬筆複合型攻擊資料集 UniAttackData，並分析各隊模型架構，是研究界邁向 Unified Attack Detection 的催化劑。
 
+    :::info
+    **論文筆記**：[**[24.04] FAS-Challenge: 兵器譜**](https://docsaid.org/papers/face-antispoofing/fas-challenge)
+    :::
+
 39. [**[24.08] La-SoftMoE CLIP for Unified Physical-Digital Face Attack Detection**](https://arxiv.org/abs/2408.12793)
     將 CLIP 與 Mixture of Experts 架構結合，引入 soft-adaptive 機制動態分配子模型以應對複雜決策邊界，為物理與數位攻擊融合處理提供高效參數選擇方案。
 
+    :::info
+    **論文筆記**：[**[24.08] La-SoftMoE: 稀疏的裂縫**](https://docsaid.org/papers/face-antispoofing/la-softmoe)
+    :::
+
 40. [**[25.01] Interpretable Face Anti-Spoofing: Enhancing Generalization with Multimodal Large Language Models**](https://arxiv.org/abs/2501.01720)
     提出一種結合多模態大型語言模型的全新架構 I-FAS，將人臉活體辨識任務轉化為具可解釋性的視覺問答問題，並透過語意標註、非對稱語言損失與全域感知連結器三項關鍵設計，大幅提升模型的跨域泛化與推理能力。
+
+    :::info
+    **論文筆記**：[**[25.01] I-FAS: 分類的終章**](https://docsaid.org/papers/face-antispoofing/i-fas)
+    :::
 
 ---
 

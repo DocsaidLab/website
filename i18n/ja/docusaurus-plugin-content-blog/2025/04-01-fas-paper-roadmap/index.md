@@ -347,17 +347,37 @@ FAS（顔認証のなりすまし防止）モデルが、解釈可能性と汎�
 36. [**[23.09] FLIP: Cross-domain Face Anti-Spoofing with Language Guidance**](https://arxiv.org/abs/2309.16649)
     CLIP モデルを FAS タスクに応用し、自然言語による記述で視覚的特徴空間を導く。クロスドメインでの一般化能力を向上させ、セマンティックアライメントと多モーダル対比学習戦略を提案。言語駆動でのゼロショット FAS を実現。
 
+    :::info
+    **論文ノート**：[**[23.09] FLIP: 防御の呪文**](https://docsaid.org/ja/papers/face-antispoofing/flip)
+    :::
+
 37. [**[24.04] Joint Physical-Digital Facial Attack Detection via Simulating Spoofing Clues**](https://arxiv.org/abs/2404.08450)
     SPSC と SDSC データ拡張戦略を提案し、物理的およびデジタル攻撃の手がかりをシミュレート。単一のモデルで両方の攻撃タイプを識別できるようにし、CVPR2024 コンペで優勝。融合型モデルの新たな基準を打ち立てました。
+
+    :::info
+    **論文ノート**：[**[24.04] PD-FAS: 幻影の演武場**](https://docsaid.org/ja/papers/face-antispoofing/pd-fas)
+    :::
 
 38. [**[24.04] Unified Physical-Digital Attack Detection Challenge**](https://arxiv.org/abs/2404.06211)
     初の統一攻撃識別挑戦コンペを立ち上げ、2.8 万件の複合型攻撃データセット UniAttackData を公開。各チームのモデルアーキテクチャを分析し、Unified Attack Detection への道を開くカタリストとなりました。
 
+    :::info
+    **論文ノート**：[**[24.04] FAS-Challenge: 兵器譜**](https://docsaid.org/ja/papers/face-antispoofing/fas-challenge)
+    :::
+
 39. [**[24.08] La-SoftMoE CLIP for Unified Physical-Digital Face Attack Detection**](https://arxiv.org/abs/2408.12793)
     CLIP と Mixture of Experts アーキテクチャを組み合わせ、soft-adaptive メカニズムを導入してサブモデルを動的に割り当て、複雑な意思決定境界に対応。物理的およびデジタル攻撃の融合処理に効率的なパラメータ選択を提供。
 
+    :::info
+    **論文ノート**：[**[24.08] La-SoftMoE: 希薄な亀裂**](https://docsaid.org/ja/papers/face-antispoofing/la-softmoe)
+    :::
+
 40. [**[25.01] Interpretable Face Anti-Spoofing: Enhancing Generalization with Multimodal Large Language Models**](https://arxiv.org/abs/2501.01720)
     マルチモーダル大型言語モデルを統合した新しいフレームワーク I-FAS を提案。顔の活体認証タスクを解釈可能な視覚的質問応答問題に変換し、意味注釈、非対称言語損失、グローバル認識コネクタという三つの重要な設計を通じて、モデルのドメイン間一般化能力と推論性能を大幅に向上させている。
+
+    :::info
+    **論文ノート**：[**[25.01] I-FAS: 分類の終章**](https://docsaid.org/ja/papers/face-antispoofing/i-fas)
+    :::
 
 ---
 

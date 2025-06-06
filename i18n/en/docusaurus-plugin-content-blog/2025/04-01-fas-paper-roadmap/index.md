@@ -347,17 +347,37 @@ These five representative works are the three major development axes for the fut
 36. [**[23.09] FLIP: Cross-domain Face Anti-Spoofing with Language Guidance**](https://arxiv.org/abs/2309.16649)
     Applies the CLIP model to the FAS task, guiding visual representation spaces through natural language descriptions to improve cross-domain generalization. The paper proposes semantic alignment and multimodal contrastive learning strategies, achieving true zero-shot FAS under language guidance.
 
+    :::info
+    **Paper Notes**: [**[23.09] FLIP: The Defense Spell**](https://docsaid.org/en/papers/face-antispoofing/flip)
+    :::
+
 37. [**[24.04] Joint Physical-Digital Facial Attack Detection via Simulating Spoofing Clues**](https://arxiv.org/abs/2404.08450)
     Proposes SPSC and SDSC data augmentation strategies to simulate both physical and digital attack clues, enabling a single model to learn to recognize both types of attacks. This won the CVPR 2024 competition, setting a new paradigm for fusion models.
+
+    :::info
+    **Paper Notes**: [**[24.04] PD-FAS: The Illusionary Arena**](https://docsaid.org/en/papers/face-antispoofing/pd-fas)
+    :::
 
 38. [**[24.04] Unified Physical-Digital Attack Detection Challenge**](https://arxiv.org/abs/2404.06211)
     Launched the first unified attack detection challenge, releasing the 28,000-entry UniAttackData complex attack dataset and analyzing model architectures, catalyzing the research community toward Unified Attack Detection.
 
+    :::info
+    **Paper Notes**: [**[24.04] FAS-Challenge: Arsenal**](https://docsaid.org/en/papers/face-antispoofing/fas-challenge)
+    :::
+
 39. [**[24.08] La-SoftMoE CLIP for Unified Physical-Digital Face Attack Detection**](https://arxiv.org/abs/2408.12793)
     Combines CLIP with the Mixture of Experts architecture, introducing a soft-adaptive mechanism to dynamically assign sub-models for complex decision boundaries, providing an efficient parameter selection solution for physical and digital attack fusion handling.
 
+    :::info
+    **Paper Notes**: [**[24.08] La-SoftMoE: Sparse Cracks**](https://docsaid.org/en/papers/face-antispoofing/la-softmoe)
+    :::
+
 40. [**[25.01] Interpretable Face Anti-Spoofing: Enhancing Generalization with Multimodal Large Language Models**](https://arxiv.org/abs/2501.01720)
     Proposes a novel architecture I-FAS that integrates multimodal large language models, transforming face anti-spoofing into an interpretable visual question answering task. Through semantic annotation, an asymmetric language loss, and a globally aware connector, it significantly improves cross-domain generalization and reasoning capabilities of the model.
+
+    :::info
+    **Paper Notes**: [**[25.01] I-FAS: The Final Chapter of Classification**](https://docsaid.org/en/papers/face-antispoofing/i-fas)
+    :::
 
 ---
 
