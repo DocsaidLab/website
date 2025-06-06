@@ -826,27 +826,32 @@
 <li>
 <p><a href="https://arxiv.org/abs/2309.16649" target="_blank" rel="noopener noreferrer"><strong>[23.09] FLIP: Cross-domain Face Anti-Spoofing with Language Guidance</strong></a>
 將 CLIP 模型應用於 FAS 任務，透過自然語言描述導引視覺表徵空間，提升跨 domain 的泛化能力，並提出語義對齊與多模態對比學習策略，達成真正語言引導下的 zero-shot FAS。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/flip" target="_blank" rel="noopener noreferrer"><strong>[23.09] FLIP: 防禦咒</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2404.08450" target="_blank" rel="noopener noreferrer"><strong>[24.04] Joint Physical-Digital Facial Attack Detection via Simulating Spoofing Clues</strong></a>
 提出 SPSC 與 SDSC 資料擴增策略，模擬物理與數位攻擊線索，讓單一模型能學習同時辨識兩類攻擊，成功在 CVPR2024 比賽中奪冠，樹立融合式模型新典範。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/pd-fas" target="_blank" rel="noopener noreferrer"><strong>[24.04] PD-FAS: 幻象的演武場</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2404.06211" target="_blank" rel="noopener noreferrer"><strong>[24.04] Unified Physical-Digital Attack Detection Challenge</strong></a>
 發起首屆統一攻擊辨識挑戰賽，釋出 2.8 萬筆複合型攻擊資料集 UniAttackData，並分析各隊模型架構，是研究界邁向 Unified Attack Detection 的催化劑。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/fas-challenge" target="_blank" rel="noopener noreferrer"><strong>[24.04] FAS-Challenge: 兵器譜</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2408.12793" target="_blank" rel="noopener noreferrer"><strong>[24.08] La-SoftMoE CLIP for Unified Physical-Digital Face Attack Detection</strong></a>
 將 CLIP 與 Mixture of Experts 架構結合，引入 soft-adaptive 機制動態分配子模型以應對複雜決策邊界，為物理與數位攻擊融合處理提供高效參數選擇方案。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/la-softmoe" target="_blank" rel="noopener noreferrer"><strong>[24.08] La-SoftMoE: 稀疏的裂縫</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2501.01720" target="_blank" rel="noopener noreferrer"><strong>[25.01] Interpretable Face Anti-Spoofing: Enhancing Generalization with Multimodal Large Language Models</strong></a>
 提出一種結合多模態大型語言模型的全新架構 I-FAS，將人臉活體辨識任務轉化為具可解釋性的視覺問答問題，並透過語意標註、非對稱語言損失與全域感知連結器三項關鍵設計，大幅提升模型的跨域泛化與推理能力。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>論文筆記</strong>：<a href="https://docsaid.org/papers/face-antispoofing/i-fas" target="_blank" rel="noopener noreferrer"><strong>[25.01] I-FAS: 分類的終章</strong></a></p></div></div>
 </li>
 </ol>
 <hr>
 <p>這一章標誌著 FAS 領域的未來趨勢：<strong>從辨識假臉 → 推測攻擊類型 → 理解語義 → 結合多模態語言邏輯推理</strong>。研究正從「視覺理解」進化到「語意認知」，而攻擊也正從單一模式演化為複雜混合型。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a href="https://docsaid.org/blog/fas-paper-roadmap#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="結語的直接連結" title="結語的直接連結">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="結語">結語<a href="https://docsaid.org/blog/fas-paper-roadmap#%E7%B5%90%E8%AA%9E" class="hash-link" aria-label="結語的直接��連結" title="結語的直接連結">​</a></h2>
 <p>真實世界最不缺的就是惡意，只要人臉辨識的需求存在，防偽的需求就不會停止。</p>
 <p>從最初的紋理分析、光影建模，到卷積網路的入場，再到 ViT、CLIP、聲波與人類知覺的加入，FAS 技術不斷擴展其邊界。這幾篇論文不只是經典與趨勢的整理，更是一張跨越數十年技術進化的地圖，串連了過去、現在與未來。</p>
 <p>在這張地圖中，我們看見：</p>

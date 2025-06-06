@@ -824,22 +824,27 @@ DSDG 生成フレームワークを提案。VAE を用いて個人識別と攻�
 <li>
 <p><a href="https://arxiv.org/abs/2309.16649" target="_blank" rel="noopener noreferrer"><strong>[23.09] FLIP: Cross-domain Face Anti-Spoofing with Language Guidance</strong></a>
 CLIP モデルを FAS タスクに応用し、自然言語による記述で視覚的特徴空間を導く。クロスドメインでの一般化能力を向上させ、セマンティックアライメントと多モーダル対比学習戦略を提案。言語駆動でのゼロショット FAS を実現。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/flip" target="_blank" rel="noopener noreferrer"><strong>[23.09] FLIP: 防御の呪文</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2404.08450" target="_blank" rel="noopener noreferrer"><strong>[24.04] Joint Physical-Digital Facial Attack Detection via Simulating Spoofing Clues</strong></a>
 SPSC と SDSC データ拡張戦略を提案し、物理的およびデジタル攻撃の手がかりをシミュレート。単一のモデルで両方の攻撃タイプを識別できるようにし、CVPR2024 コンペで優勝。融合型モデルの新たな基準を打ち立てました。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/pd-fas" target="_blank" rel="noopener noreferrer"><strong>[24.04] PD-FAS: 幻影の演武場</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2404.06211" target="_blank" rel="noopener noreferrer"><strong>[24.04] Unified Physical-Digital Attack Detection Challenge</strong></a>
 初の統一攻撃識別挑戦コンペを立ち上げ、2.8 万件の複合型攻撃データセット UniAttackData を公開。各チームのモデルアーキテクチャを分析し、Unified Attack Detection への道を開くカタリストとなりました。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/fas-challenge" target="_blank" rel="noopener noreferrer"><strong>[24.04] FAS-Challenge: 兵器譜</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2408.12793" target="_blank" rel="noopener noreferrer"><strong>[24.08] La-SoftMoE CLIP for Unified Physical-Digital Face Attack Detection</strong></a>
 CLIP と Mixture of Experts アーキテクチャを組み合わせ、soft-adaptive メカニズムを導入してサブモデルを動的に割り当て、複雑な意思決定境界に対応。物理的およびデジタル攻撃の融合処理に効率的なパラメータ選択を提供。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/la-softmoe" target="_blank" rel="noopener noreferrer"><strong>[24.08] La-SoftMoE: 希薄な亀裂</strong></a></p></div></div>
 </li>
 <li>
 <p><a href="https://arxiv.org/abs/2501.01720" target="_blank" rel="noopener noreferrer"><strong>[25.01] Interpretable Face Anti-Spoofing: Enhancing Generalization with Multimodal Large Language Models</strong></a>
 マルチモーダル大型言語モデルを統合した新しいフレームワーク I-FAS を提案。顔の活体認証タスクを解釈可能な視覚的質問応答問題に変換し、意味注釈、非対称言語損失、グローバル認識コネクタという三つの重要な設計を通じて、モデルのドメイン間一般化能力と推論性能を大幅に向上させている。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>論文ノート</strong>：<a href="https://docsaid.org/ja/papers/face-antispoofing/i-fas" target="_blank" rel="noopener noreferrer"><strong>[25.01] I-FAS: 分類の終章</strong></a></p></div></div>
 </li>
 </ol>
 <hr>
