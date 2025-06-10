@@ -1,5 +1,5 @@
 ---
-title: "[16.12] YOLO-V2"
+title: "[16.12] YOLOv2"
 authors: Z. Yuan
 ---
 

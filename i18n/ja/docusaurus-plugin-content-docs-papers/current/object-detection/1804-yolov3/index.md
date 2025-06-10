@@ -1,5 +1,5 @@
 ---
-title: "[18.04] YOLO-V3"
+title: "[18.04] YOLOv3"
 authors: Z. Yuan
 ---
 
@@ -19,7 +19,7 @@ authors: Z. Yuan
 
 その中で、Bounding Box の予測部分は変更せず、YOLOv2 の設計をそのまま使用していますので、ここでは再度詳述しません。
 
-- [**[16.12] YOLO-V2: 大量カテゴリの拡張**](../1612-yolov2/index.md)
+- [**[16.12] YOLOv2: 大量カテゴリの拡張**](../1612-yolov2/index.md)
 
 ## 解決策
 

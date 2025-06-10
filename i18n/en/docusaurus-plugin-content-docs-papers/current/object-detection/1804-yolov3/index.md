@@ -1,5 +1,5 @@
 ---
-title: "[18.04] YOLO-V3"
+title: "[18.04] YOLOv3"
 authors: Z. Yuan
 ---
 
@@ -17,7 +17,7 @@ Recently, there have been numerous advancements in the field of object detection
 
 The author felt it was time to integrate these new ideas into YOLO and make some improvements. The bounding box prediction part remains unchanged and continues to use the design from YOLOv2. We won't delve into that here.
 
-- [**[16.12] YOLO-V2: Expanding a Large Number of Categories**](../1612-yolov2/index.md)
+- [**[16.12] YOLOv2: Expanding a Large Number of Categories**](../1612-yolov2/index.md)
 
 ## Problem Solution
 

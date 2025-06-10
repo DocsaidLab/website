@@ -1,5 +1,5 @@
 ---
-title: "[15.06] YOLO-V1"
+title: "[15.06] YOLOv1"
 authors: Z. Yuan
 ---
 

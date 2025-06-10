@@ -1,5 +1,5 @@
 ---
-title: "[24.01] YOLO World"
+title: "[24.01] YOLO-World"
 authors: Z. Yuan
 ---
 

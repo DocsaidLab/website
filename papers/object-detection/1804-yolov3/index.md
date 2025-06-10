@@ -1,5 +1,5 @@
 ---
-title: "[18.04] YOLO-V3"
+title: "[18.04] YOLOv3"
 authors: Z. Yuan
 ---
 
@@ -19,7 +19,7 @@ authors: Z. Yuan
 
 其中，Bounding Box 預測的部分沒有更改，直接沿用 YOLOv2 的設計，這邊我們就不再贅述。
 
-- [**[16.12] YOLO-V2: 擴展大量類別**](../1612-yolov2/index.md)
+- [**[16.12] YOLOv2: 擴展大量類別**](../1612-yolov2/index.md)
 
 ## 解決問題
 
