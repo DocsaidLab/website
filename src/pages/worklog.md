@@ -10,10 +10,15 @@
 
 ## 2025
 
+### 5 月
+
+- 完成專題論文導讀：[**Face Anti-Spoofing 技術地圖**](https://docsaid.org/blog/fas-paper-roadmap)
+- 撰寫論文筆記，目前累計 210 篇。
+
 ### 4 月
 
-- 新增 [**技術服務**](https://docsaid.org/services) 頁面
-- 新增內嵌於 Blog 和 Paper 的 CTA 模組
+- 新增 [**技術服務**](https://docsaid.org/services) 頁面。
+- 新增內嵌於 Blog 和 Paper 的 CTA 模組。
 - 撰寫論文筆記，目前累計 185 篇。
 
 ### 3 月
@@ -28,7 +33,6 @@
 
 - 為了共用 Demo 相關功能，Demo 相關程式重構。
 - 網站首頁重構，重新設計排版並增加更多區塊。
-- 新增 `CookieBanner` 功能，以符合相關法規。
 - **MRZScanner**：完成 MRZ 二階段模型，並發布 1.0.6 版本。
 - 完成 MRZScanner Demo 的功能：[**mrzscanner-demo**](https://docsaid.org/playground/mrzscanner-demo)
 - 撰寫論文筆記，目前累計 165 篇。

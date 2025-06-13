@@ -10,6 +10,11 @@
 
 ## 2025
 
+### 5 月
+
+- 専題論文の読解完了：[**Face Anti-Spoofing 技術マップ**](https://docsaid.org/ja/blog/fas-paper-roadmap)
+- 論文ノートを執筆、現在の累計は 210 本に到達
+
 ### 4 月
 
 - [**技術サービス**](https://docsaid.org/ja/services) ページを追加
@@ -28,7 +33,6 @@
 
 - デモ関連の機能を共有するため、デモ関連のコードをリファクタリング。
 - ウェブサイトのホームページをリニューアルし、レイアウトを再設計して新しいセクションを追加。
-- 関連規制に準拠するため、`CookieBanner` 機能を追加。
 - **MRZScanner**：MRZ の第 2 フェーズモデルを完成し、バージョン 1.0.6 をリリース。
 - MRZScanner デモの機能を完成：[**mrzscanner-demo**](https://docsaid.org/ja/playground/mrzscanner-demo)
 - 論文ノートを執筆、累計 165 本に到達。

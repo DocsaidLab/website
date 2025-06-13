@@ -10,6 +10,11 @@ This page is solely for recording our work activities.
 
 ## 2025
 
+### May
+
+- Completed a guided reading of the project paper: [**Face Anti-Spoofing Technology Roadmap**](https://docsaid.org/en/blog/fas-paper-roadmap)
+- Wrote new paper notes, total count now 210
+
 ### April
 
 - Added [**Technical Services**](https://docsaid.org/en/services) page
@@ -28,7 +33,6 @@ This page is solely for recording our work activities.
 
 - Refactored demo-related code for better functionality sharing.
 - Redesigned the website homepage layout and added more sections.
-- Added `CookieBanner` feature to comply with relevant regulations.
 - **MRZScanner**: Completed the second-phase MRZ model and released version 1.0.6.
 - Completed MRZScanner Demo functionality: [**mrzscanner-demo**](https://docsaid.org/en/playground/mrzscanner-demo)
 - Wrote research paper notes, totaling 165 entries so far.

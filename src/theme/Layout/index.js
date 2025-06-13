@@ -12,8 +12,6 @@ import LayoutProvider from '@theme/Layout/Provider';
 import Navbar from '@theme/Navbar';
 import SkipToContent from '@theme/SkipToContent';
 import clsx from 'clsx';
-import React from 'react';
-import CookieBanner from '../../components/CookieBanner'; // 路徑視你實際檔案位置
 import styles from './styles.module.css';
 
 export default function Layout(props) {
@@ -47,8 +45,6 @@ export default function Layout(props) {
           {children}
         </ErrorBoundary>
       </div>
-
-      <CookieBanner />
 
       {!noFooter && <Footer />}
     </LayoutProvider>
