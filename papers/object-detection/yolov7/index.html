@@ -1,0 +1,275 @@
+<!doctype html><html lang=zh-hant dir=ltr class="docs-wrapper plugin-docs plugin-id-papers docs-version-current docs-doc-page docs-doc-id-object-detection/yolov7/index" data-has-hydrated=false><meta charset=UTF-8><meta name=generator content="Docusaurus v3.8.1"><title data-rh=true>[22.07] YOLOv7 | DOCSAID</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"><meta data-rh=true name=twitter:card content=summary_large_image><meta data-rh=true property=og:image content=https://docsaid.org/img/docsaid-social-card.jpg><meta data-rh=true name=twitter:image content=https://docsaid.org/img/docsaid-social-card.jpg><meta data-rh=true property=og:url content=https://docsaid.org/papers/object-detection/yolov7/><meta data-rh=true property=og:locale content=zh_hant><meta data-rh=true property=og:locale:alternate content=en><meta data-rh=true property=og:locale:alternate content=ja><meta data-rh=true name=docusaurus_locale content=zh-hant><meta data-rh=true name=docsearch:language content=zh-hant><meta data-rh=true name=docusaurus_version content=current><meta data-rh=true name=docusaurus_tag content=docs-papers-current><meta data-rh=true name=docsearch:version content=current><meta data-rh=true name=docsearch:docusaurus_tag content=docs-papers-current><meta data-rh=true property=og:title content="[22.07] YOLOv7 | DOCSAID"><meta data-rh=true name=description content=配角的逆襲><meta data-rh=true property=og:description content=配角的逆襲><link data-rh=true rel=icon href=/img/favicon.ico><link data-rh=true rel=canonical href=https://docsaid.org/papers/object-detection/yolov7/><link data-rh=true rel=alternate href=https://docsaid.org/papers/object-detection/yolov7/ hreflang=zh-hant><link data-rh=true rel=alternate href=https://docsaid.org/en/papers/object-detection/yolov7/ hreflang=en><link data-rh=true rel=alternate href=https://docsaid.org/ja/papers/object-detection/yolov7/ hreflang=ja><link data-rh=true rel=alternate href=https://docsaid.org/papers/object-detection/yolov7/ hreflang=x-default><link data-rh=true rel=preconnect href=https://S9NC0RYCHF-dsn.algolia.net crossorigin=anonymous><script data-rh=true type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://docsaid.org/papers/category/object-detection-12","name":"Object Detection (12)","position":1},{"@type":"ListItem","item":"https://docsaid.org/papers/object-detection/yolov7/","name":"[22.07] YOLOv7","position":2}]}</script><link rel=alternate type=application/rss+xml href=/blog/rss.xml title="DOCSAID RSS Feed"><link rel=alternate type=application/atom+xml href=/blog/atom.xml title="DOCSAID Atom Feed"><link rel=preconnect href=https://www.google-analytics.com><link rel=preconnect href=https://www.googletagmanager.com><script async src="https://www.googletagmanager.com/gtag/js?id=G-RDF83L9R4M"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-RDF83L9R4M",{anonymize_ip:!0})</script><link rel=search type=application/opensearchdescription+xml title=DOCSAID href=/opensearch.xml><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css type=text/css integrity=sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM crossorigin=anonymous><link rel=stylesheet href=/assets/css/styles.8e7b88e9.css><script src=/assets/js/runtime~main.5d22583c.js defer></script><script src=/assets/js/main.68cff078.js defer></script><body class=navigation-with-keyboard><svg xmlns=http://www.w3.org/2000/svg style="display: none;"><defs>
+<symbol id=theme-svg-external-link viewBox="0 0 24 24"><path fill=currentColor d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t="light",e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",e||t),document.documentElement.setAttribute("data-theme-choice",e||t)}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id=__docusaurus><div role=region aria-label=跳至主要内容><a class=skipToContent_fXgn href=#__docusaurus_skipToContent_fallback>跳至主要内容</a></div><nav aria-label=主導航 class="navbar navbar--fixed-top navbarHideable_jvwV"><div class=navbar__inner><div class=navbar__items><button aria-label=切換導覽列 aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"/></svg></button><a class=navbar__brand href=/><div class=navbar__logo><img src=/img/docsaid_logo.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src=/img/docsaid_logo_white.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href=/docs/>開源專案</a><a aria-current=page class="navbar__item navbar__link navbar__link--active" href=/papers/intro>論文筆記</a><a class="navbar__item navbar__link" href=/blog>部落格</a><a class="navbar__item navbar__link" href=/playground/intro>遊樂場</a><a class="navbar__item navbar__link" href=/services>技術服務</a><a class="navbar__item navbar__link" href=/aboutus>關於我們</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link><svg viewBox="0 0 24 24" width=20 height=20 aria-hidden=true class=iconLanguage_nlXk><path fill=currentColor d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>繁體中文</a><ul class=dropdown__menu><li><a href=/papers/object-detection/yolov7/ target=_self rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang=zh-hant>繁體中文</a><li><a href=/en/papers/object-detection/yolov7/ target=_self rel="noopener noreferrer" class=dropdown__link lang=en>English</a><li><a href=/ja/papers/object-detection/yolov7/ target=_self rel="noopener noreferrer" class=dropdown__link lang=ja>日本語</a></ul></div><div class=navbarSearchContainer_dCNk><button type=button class="DocSearch DocSearch-Button" aria-label="搜尋 (Command+K)"><span class=DocSearch-Button-Container><svg width=20 height=20 class=DocSearch-Search-Icon viewBox="0 0 20 20" aria-hidden=true><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke=currentColor fill=none fill-rule=evenodd stroke-linecap=round stroke-linejoin=round /></svg><span class=DocSearch-Button-Placeholder>搜尋</span></span><span class=DocSearch-Button-Keys></span></button></div><button type=button class="ant-btn css-mc1tut ant-btn-circle ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only"><span class=ant-btn-icon><span role=img aria-label=user style=font-size:18px class="anticon anticon-user"><svg viewBox="64 64 896 896" focusable=false data-icon=user width=1em height=1em fill=currentColor aria-hidden=true><path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"/></svg></span></span></button></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="main-wrapper mainWrapper_eExm"><div class=docsWrapper_hBAB><button aria-label=回到頂部 class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type=button></button><div class=docRoot_UBD9><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class=sidebarViewport_aRkj><div class="sidebar_njMd sidebarWithHideableNavbar_wUlq"><a tabindex=-1 class=sidebarLogo_isFc href=/><img src=/img/docsaid_logo.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src=/img/docsaid_logo_white.png alt="Docsaid Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"><b></b></a><nav aria-label=文件側邊欄 class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/papers/intro>論文筆記</a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/classic-cnns-11>Classic CNNs (11)</a><button aria-label="展開側邊欄分類 'Classic CNNs (11)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/contrastive-learning-13>Contrastive Learning (13)</a><button aria-label="展開側邊欄分類 'Contrastive Learning (13)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/deepseek-5>DeepSeek (5)</a><button aria-label="展開側邊欄分類 'DeepSeek (5)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/face-anti-spoofing-40>Face Anti-Spoofing (40)</a><button aria-label="展開側邊欄分類 'Face Anti-Spoofing (40)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/face-recognition-4>Face Recognition (4)</a><button aria-label="展開側邊欄分類 'Face Recognition (4)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/feature-fusion-10>Feature Fusion (10)</a><button aria-label="展開側邊欄分類 'Feature Fusion (10)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/image-generation-1>Image Generation (1)</a><button aria-label="展開側邊欄分類 'Image Generation (1)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/lightweight-10>Lightweight (10)</a><button aria-label="展開側邊欄分類 'Lightweight (10)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/mamba-4>Mamba (4)</a><button aria-label="展開側邊欄分類 'Mamba (4)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/model-tuning-8>Model Tuning (8)</a><button aria-label="展開側邊欄分類 'Model Tuning (8)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/multimodality-24>Multimodality (24)</a><button aria-label="展開側邊欄分類 'Multimodality (24)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/normalization-1>Normalization (1)</a><button aria-label="展開側邊欄分類 'Normalization (1)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist menu__link--active" href=/papers/category/object-detection-12>Object Detection (12)</a><button aria-label="收起側邊欄分類 'Object Detection (12)'" aria-expanded=true type=button class="clean-btn menu__caret"></button></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/object-detection/yolov1/>[15.06] YOLOv1</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/object-detection/ssd/>[15.12] SSD</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/object-detection/yolov2/>[16.12] YOLOv2</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/object-detection/retinanet/>[17.08] RetinaNet</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/object-detection/yolov3/>[18.04] YOLOv3</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/object-detection/yolov4/>[20.04] YOLOv4</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/object-detection/detr/>[20.05] DETR</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/object-detection/deformable-detr/>[20.10] Deformable DETR</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/object-detection/fast-detr/>[21.01] Fast DETR</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current=page tabindex=0 href=/papers/object-detection/yolov7/>[22.07] YOLOv7</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/object-detection/yolov6/>[22.09] YOLOv6</a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/papers/object-detection/yolo-world/>[24.01] YOLO-World</a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/reparameterization-8>Reparameterization (8)</a><button aria-label="展開側邊欄分類 'Reparameterization (8)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/segmentation-1>Segmentation (1)</a><button aria-label="展開側邊欄分類 'Segmentation (1)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/text-detection-14>Text Detection (14)</a><button aria-label="展開側邊欄分類 'Text Detection (14)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/text-recognition-20>Text Recognition (20)</a><button aria-label="展開側邊欄分類 'Text Recognition (20)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/text-spotting-4>Text Spotting (4)</a><button aria-label="展開側邊欄分類 'Text Spotting (4)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/transformers-17>Transformers (17)</a><button aria-label="展開側邊欄分類 'Transformers (17)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="menu__link menu__link--sublist" href=/papers/category/vision-transformers-13>Vision Transformers (13)</a><button aria-label="展開側邊欄分類 'Vision Transformers (13)'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/papers/intro>All Notes: 220 entries</a></ul></nav><button type=button title=收起側邊欄 aria-label=收起側邊欄 class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width=20 height=20 aria-hidden=true class=collapseSidebarButtonIcon_kv0_><g fill=#7a7a7a><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"/><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"/></g></svg></button></div></div></aside><main class=docMainContainer_TBSr><div class="container padding-top--md padding-bottom--lg"><div class=row><div class="col docItemCol_VOVn"><div class=docItemContainer_Djhp><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label=頁面路徑><ul class=breadcrumbs><li class=breadcrumbs__item><a aria-label=主頁面 class=breadcrumbs__link href=/><svg viewBox="0 0 24 24" class=breadcrumbHomeIcon_YNFT><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill=currentColor /></svg></a><li class=breadcrumbs__item><a class=breadcrumbs__link href=/papers/category/object-detection-12><span>Object Detection (12)</span></a><li class="breadcrumbs__item breadcrumbs__item--active"><span class=breadcrumbs__link>[22.07] YOLOv7</span></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type=button class="clean-btn tocCollapsibleButton_TO0P">本頁導覽</button></div><div class="theme-doc-markdown markdown"><header><h1>[22.07] YOLOv7</h1><div class="undefined margin-bottom--md"><div class=docAuthor_y7l7><img src=https://github.com/zephyr-sh.png alt="Z. Yuan" class=docAuthorImg_vlJe><div><div class=docAuthorName_aSh4><a href=https://github.com/zephyr-sh target=_blank rel="noopener noreferrer">Z. Yuan</a></div><div class=docAuthorTitle_Yp5_>Dosaid maintainer, Full-Stack AI Engineer</div><div class=docAuthorSocials_M3ba><a href=https://github.com/zephyr-sh target=_blank rel="noopener noreferrer" class=docAuthorSocialLink_trj9><svg stroke=currentColor fill=currentColor stroke-width=0 viewBox="0 0 496 512" height=20 width=20 xmlns=http://www.w3.org/2000/svg><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a><a href=https://www.linkedin.com/in/ze-yuan-sh7/ target=_blank rel="noopener noreferrer" class=docAuthorSocialLink_trj9><svg stroke=currentColor fill=currentColor stroke-width=0 viewBox="0 0 448 512" height=20 width=20 xmlns=http://www.w3.org/2000/svg><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a></div></div></div></div><h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=配角的逆襲>配角的逆襲<a href=#配角的逆襲 class=hash-link aria-label=配角的逆襲的直接連結 title=配角的逆襲的直接連結>​</a></h2>
+<p><a href=https://arxiv.org/abs/2207.02696 target=_blank rel="noopener noreferrer"><strong>YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors</strong></a></p>
+<hr>
+<p>YOLOv7 這篇論文的作者團隊來自臺灣中研院。</p>
+<p>等等，為什麼 v7 會比 v6 還要早兩個月發布？這是因為全世界有很多團隊都想要成為原初 YOLO 的正統繼承者，歡迎來到群星薈萃的 YOLO 宇宙！</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=定義問題>定義問題<a href=#定義問題 class=hash-link aria-label=定義問題的直接連結 title=定義問題的直接連結>​</a></h2>
+<p>即時物件偵測這個領域，一直都在平衡四件事：<strong>速度、準確率、參數量、可部署性</strong>。</p>
+<p>這些平衡在不同場景裡會被重新排序：在自駕車裡，我們會在意延遲；在嵌入式裝置裡，我們則在意功耗；而在醫療影像裡，精度高於一切。</p>
+<p>過去幾年，即時偵測器的設計大致走向兩條主路線：</p>
+<p>第一條是追求「<strong>極限輕量化</strong>」：針對微處理器和邊緣 CPU 設計，像是 MCUNet、NanoDet；另一條則在「<strong>高效架構上壓榨效能</strong>」：例如 YOLOX、YOLOR，藉由 backbone 改造、Neck 優化、特徵融合設計等方式，提高推論速度與準確率。</p>
+<p>這些方法的共同點是：</p>
+<ul>
+<li><strong>它們幾乎都從推論架構下手，試圖用更快的路徑跑出更準的答案。</strong></li>
+</ul>
+<p>但 YOLOv7 選擇了一條逆向的路。</p>
+<p>作者在這篇論文提出了一個相對少被關注的切入點：</p>
+<blockquote>
+<p><strong>如果我們不改模型架構，而是重新設計訓練流程，可好？</strong></p>
+</blockquote>
+<p>這個出發點促成了 YOLOv7 的核心理念：<strong>trainable bag-of-freebies</strong>。</p>
+<p>所謂 bag-of-freebies，指的是那些只會增加訓練成本、但不會增加推論成本的技術。</p>
+<p>YOLOv7 的創新之處在於，將這些技巧升級為「可訓練」的組件，進一步提升模型性能，而不動到任何推論結構。</p>
+<p>這樣的設計雖然聽起來簡潔，卻馬上引出兩個結構層級的棘手問題：</p>
+<ol>
+<li><strong>模組的重參數化該如何設計，才能同時利於訓練與推論？</strong></li>
+<li><strong>當使用動態標籤分配技術時，如何處理多層輸出之間的分配對齊問題？</strong></li>
+</ol>
+<p>這兩個問題過去常被當成「訓練細節」略過，但在 YOLOv7 的路線裡，這些<strong>訓練過程中的非顯性瓶頸反而成為設計的主戰場</strong>。</p>
+<p>這一次，YOLOv7 把焦點從「推論表現」移到「訓練效能」。</p>
+<p>思維順序在此刻已經悄然反轉。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=解決問題>解決問題<a href=#解決問題 class=hash-link aria-label=解決問題的直接連結 title=解決問題的直接連結>​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=extended-elan>Extended-ELAN<a href=#extended-elan class=hash-link aria-label=Extended-ELAN的直接連結 title=Extended-ELAN的直接連結>​</a></h3>
+<p><img decoding=async loading=lazy alt=Extended-ELAN src=/assets/images/img1-0c1dc7c792538843c31a3034ddab63b4.jpg width=1736 height=644 class=img_ev3q></p>
+<p>YOLOv7 引入的第一個設計關鍵，是名為 <strong>E-ELAN（Extended Efficient Layer Aggregation Networks）</strong> 的 backbone 架構。</p>
+<p>它的前身是 YOLOX 使用的 ELAN 架構，而 E-ELAN 的核心設計理念是：</p>
+<blockquote>
+<p><strong>在不改變 gradient path 長度的前提下，提升參數利用率與特徵表達多樣性。</strong></p>
+</blockquote>
+<p>從上圖中可以清楚看出，E-ELAN 完全保留了原始 ELAN 的 gradient 傳遞路徑。</p>
+<p>我們都知道，神經網路中有效的梯度路徑會直接影響訓練效率與收斂能力。</p>
+<p>E-ELAN 在維持這條主幹不變的同時，做了幾個關鍵改造：</p>
+<ul>
+<li><strong>擴張（expand）</strong>：透過 group convolution 擴展 channel 與 cardinality。</li>
+<li><strong>重組（shuffle）</strong>：對 feature map 進行分組重排。</li>
+<li><strong>合併（merge）</strong>：將分組後的特徵進行融合，以促進跨群學習。</li>
+</ul>
+<p>這些操作讓每個 block 學到的特徵更加多樣，同時也讓網路的記憶體與計算密度達到更高的效率，而不破壞原本 ELAN 架構的穩定性。</p>
+<p>整體來說，E-ELAN 是一種針對 backbone 進行「計算密度與學習多樣性」雙優化的技術。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=串接式架構的縮放>串接式架構的縮放<a href=#串接式架構的縮放 class=hash-link aria-label=串接式架構的縮放的直接連結 title=串接式架構的縮放的直接連結>​</a></h3>
+<p><img decoding=async loading=lazy alt="model scaling" src=/assets/images/img2-d8c07e4af3aa3116255e4428bb1c311c.jpg width=1880 height=396 class=img_ev3q></p>
+<p>第二個設計重點，是 <strong>針對串接式架構提出的複合縮放策略（Compound Model Scaling）</strong>。</p>
+<p>過去我們在 EfficientNet 中看到過 model scaling 的概念，也就是對網路的 <strong>寬度（width）、深度（depth）、解析度（resolution）</strong> 同時進行縮放。</p>
+<p>但這種 scaling 方法大多針對的是像 ResNet、PlainNet 等「單一路徑」架構。</p>
+<p>然而，YOLO 系列是典型的「多分支、層間串接」架構，當你單獨放大某個 block 的深度，會改變 transition layer 的輸入 channel；一旦前後 channel 不對稱，就會出現運算資源浪費、記憶體碎片化的問題。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class=admonitionHeading_Gvgb><span class=admonitionIcon_Rf37><svg viewBox="0 0 12 16"><path fill-rule=evenodd d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"/></svg></span>提示</div><div class=admonitionContent_BuS1><p>GPU/TPU 在做卷積時，是根據固定的輸入通道數與張量形狀排程。一旦我們讓某些 layer 通道數爆炸，但接下來的運算又沒有好好使用這些通道，會造成「冗餘計算」，與此同時還會讓某些核心模組運行效率下降。<p>現代深度學習系統（如 PyTorch、TensorRT）會試圖預先配置記憶體。若張量的尺寸變化頻繁（例如某些 block channel 變 128、某些變 256），會導致 memory allocator 產生不規則區塊，最終可能導致 GPU 記憶體無法有效打包利用，出現浪費或失敗。</div></div>
+<p>因此，作者在此提出了解法：</p>
+<blockquote>
+<p><strong>縮放深度的同時，應連帶調整寬度，讓通道比例保持穩定。</strong></p>
+</blockquote>
+<p>這種策略避免了不對稱的 layer scaling 導致的資源浪費，也維持了模型在原始設計下的硬體友善特性。</p>
+<p>具體做法是：</p>
+<ol>
+<li>先進行 depth scaling，增加 block 中的堆疊層數；</li>
+<li>根據擴張後的輸出通道變化，對應地對 transition layer 做寬度縮放；</li>
+<li>維持整體通道配比不變，避免模型在硬體上出現非對齊記憶體分配或計算瓶頸。</li>
+</ol>
+<p>這是一種「耦合式的縮放方法」，將不同層級的參數變化一起考慮，才能在保有高效計算的前提下擴大模型規模。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=trainable-bof>Trainable BoF<a href=#trainable-bof class=hash-link aria-label="Trainable BoF的直接連結" title="Trainable BoF的直接連結">​</a></h3>
+<p>YOLOv7 所提出的 <strong>trainable bag-of-freebies</strong>，並不僅僅是使用現有技巧的堆疊，而是進一步讓訓練流程成為模型優化的主場。</p>
+<p>我們仔細看一下三項關鍵創新。</p>
+<ol>
+<li>
+<p><strong>Planned Re-parameterized Convolution</strong></p>
+<div align=center><figure style=width:80%><p><img decoding=async loading=lazy alt=re-parameterized src=/assets/images/img3-4c2d0718489c323a7d343b9d41d19a56.jpg width=1072 height=824 class=img_ev3q></figure></div>
+<p>重參數化卷積（RepConv） 是一種訓練/推論分離的結構設計：</p>
+<ul>
+<li>在訓練階段，它包含三個分支：一個 3×3 卷積、一個 1×1 卷積、再加上一條 identity shortcut（直接傳遞輸入）；</li>
+<li>在推論階段，這三個路徑會合併為單一路徑，達到零額外成本的效果。</li>
+</ul>
+<p>這個設計在一些平鋪結構（例如 VGG）上表現很好，能夠加速收斂、提升準確率。</p>
+<p>但作者發現：</p>
+<blockquote>
+<p><strong>當你把原始 RepConv 用在 ResNet 或 DenseNet 這類已經有 shortcut 或 feature concatenation 的網路中，準確率會明顯下降。</strong></p>
+</blockquote>
+<p>這是因為 ResNet 的設計已經內建一條 residual shortcut，再加上 RepConv 的 identity 分支，會導致梯度在多條 identity path 中重疊、產生干擾。</p>
+<p>如果是 DenseNet 的情況下，該架構的特性是將多層輸出透過 concatenation 串接起來，如果每層都額外插入 identity 分支，會破壞特徵多樣性的學習路徑，導致各分支間學不到不同的特徵。</p>
+<p>於是作者提出了解法：</p>
+<blockquote>
+<p><strong>根據網路內部的結構特性（是否已有 residual/concat），決定是否使用不含 identity 分支的 RepConvN。</strong></p>
+</blockquote>
+<p>這個做法被稱為 Planned Re-parameterized Convolution，目的是「依據模型結構，做有計畫的替換與配置」。舉例來說：</p>
+<ul>
+<li>如果在一個 PlainNet（沒有殘差的基礎網路）上使用 RepConv，那完整的 3×3、1×1、identity 三路結構是有幫助的；</li>
+<li>但如果是 ResNet 或 DenseNet，則應使用 RepConvN（只保留 3×3 + 1×1，移除 identity 分支），才能避免梯度傳遞混亂。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol start=2>
+<li>
+<p><strong>Coarse-to-Fine 標籤設計</strong></p>
+<p><img decoding=async loading=lazy alt=Coarse-to-Fine src=/assets/images/img4-355b1a556f4bd31cfedaf61f949df5d7.jpg width=1938 height=396 class=img_ev3q></p>
+<p>在訓練多層偵測頭時，作者導入了一種創新的監督機制：</p>
+<ul>
+<li><strong>Coarse-to-Fine Label Assignment</strong>。</li>
+</ul>
+<p>這個機制包含兩個重要角色：</p>
+<ul>
+<li><strong>Lead Head</strong>：主輸出頭，負責最終偵測任務；</li>
+<li><strong>Auxiliary Head</strong>：輔助輸出頭，協助淺層學習收斂。</li>
+</ul>
+<p>傳統的深度監督會對每一個 head 單獨進行標籤分配，但在這裡作者不這麼做，而是提出了一個嶄新觀點：</p>
+<blockquote>
+<p><strong>讓 Lead Head 的預測結果反過來作為整體訓練的領導者。</strong></p>
+</blockquote>
+<p>操作上分為兩種設計策略：</p>
+<ul>
+<li><strong>Lead Head Guided Label Assigner</strong>：以 Lead Head 預測結果 + ground truth 為基礎產生 soft label，套用於所有 head；</li>
+<li><strong>Coarse-to-Fine Label Assigner</strong>：產生兩種 soft label，分別為粗略（coarse）與精細（fine），用於 Auxiliary Head 與 Lead Head，提升前者的 recall、後者的 precision。</li>
+</ul>
+<p>這種策略背後的邏輯是：</p>
+<ul>
+<li><strong>Lead Head 學習力強，適合做為指標；</strong></li>
+<li><strong>Auxiliary Head 學習力弱，需放寬正樣本條件以提升召回率；</strong></li>
+<li><strong>以 residual learning 的精神，讓 Lead Head 聚焦於尚未被學到的部分。</strong></li>
+</ul>
+<p>為避免 coarse label 產生不良的先驗知識，作者在 decoder 中進一步加以限制，使其在訓練中逐步收斂，形成動態調節的監督機制。</p>
+</li>
+</ol>
+<hr>
+<ol start=3>
+<li>
+<p><strong>其他可訓練 Freebies</strong></p>
+<p>最後，作者也整合了數項過去被視為「訓練技巧」的作法，並提升為 <strong>可訓練的設計單元</strong>：</p>
+<ul>
+<li><strong>BN 與卷積層融合</strong>：將 BatchNorm 的均值與方差併入卷積權重與 bias，以利推論階段的運算精簡。</li>
+<li><strong>YOLOR 式隱式知識注入</strong>：將隱式向量結合於卷積層，可於推論階段預先計算並簡化為固定向量權重。</li>
+<li><strong>EMA（Exponential Moving Average）模型</strong>：使用移動平均方式對訓練參數進行平滑，並以 EMA 模型作為最終推論模型，提升穩定性與泛化能力。</li>
+</ul>
+<p>這些技巧雖然不新，但在 YOLOv7 裡，它們的角色被重新定義為 <strong>模型訓練性能的加速器</strong>，而不再是僅供調參的黑盒工具。</p>
+</li>
+</ol>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=實驗配置>實驗配置<a href=#實驗配置 class=hash-link aria-label=實驗配置的直接連結 title=實驗配置的直接連結>​</a></h3>
+<p>YOLOv7 全部的實驗皆在 <strong>Microsoft COCO 2017</strong> 資料集上進行，並強調以下幾點：</p>
+<ul>
+<li><strong>從頭訓練（train from scratch）</strong>，不使用任何 ImageNet 預訓練權重；</li>
+<li>使用 <code>train2017</code> 做為訓練集，<code>val2017</code> 做為驗證與超參數調整，<code>test2017</code> 做為最終評估。</li>
+</ul>
+<p>此外，為了對應不同應用場景，YOLOv7 系列模型分為以下幾類：</p>
+<div style=white-space:nowrap;overflow-x:auto;font-size:1rem;line-height:0.8;justify-content:center;display:flex><table><thead><tr><th>模型名稱<th>設計目標<th>縮放技術<th>備註<tbody><tr><td>v7-tiny<td>邊緣裝置<td>輕量化設計<td>使用 LeakyReLU<tr><td>v7<td>一般 GPU<td>Neck 擴張 + compound scaling<td>使用 SiLU<tr><td>v7-W6<td>高效能 GPU<td>compound scaling + W6 設計<td><tr><td>v7-E6/E6E<td>E-ELAN 結構<td>深化與通道擴張 + group shuffle<td>E6E 為強化版本<tr><td>v7-D6/X<td>雲端模型<td>-<td>-</table></div>
+<p>所有縮放策略皆使用前面介紹的複合式模型縮放法，避免因通道不匹配導致運算資源浪費。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=討論>討論<a href=#討論 class=hash-link aria-label=討論的直接連結 title=討論的直接連結>​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=與舊版-yolo-的對比>與舊版 YOLO 的對比<a href=#與舊版-yolo-的對比 class=hash-link aria-label="與舊版 YOLO 的對比的直接連結" title="與舊版 YOLO 的對比的��直接連結">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=compare src=/assets/images/img5-0fb8f01bcbb1be815f52dc6ecb9b3c37.jpg width=1224 height=796 class=img_ev3q></figure></div>
+<p>首先來看與過去 YOLO 系列與 YOLOR 相比的結果，如上表。</p>
+<p>這裡可以看出，YOLOv7 在幾乎所有對比項目中都實現了「<strong>更小、更快、精度更高</strong>」的目標，尤其在小模型（tiny）與中階模型（W6）上表現亮眼。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=與最新-sota-模型對比>與最新 SoTA 模型對比<a href=#與最新-sota-模型對比 class=hash-link aria-label="與最新 SoTA 模型對比的直接連結" title="與最新 SoTA 模型對比的直接連結">​</a></h3>
+<div align=center><figure style=width:90%><p><img decoding=async loading=lazy alt=compare src=/assets/images/img6-a87123d1e13424ff90c1bb1b7769d07c.jpg width=1224 height=976 class=img_ev3q></figure></div>
+<p>在速度與準確率權衡方面：</p>
+<ul>
+<li><strong>YOLOv7-tiny-SiLU</strong> vs <strong>YOLOv5-N (r6.1)</strong>：多出 <strong>127 fps</strong>，準確率提升 <strong>10.7% AP</strong></li>
+<li><strong>YOLOv7</strong>：在 161 fps 下達成 <strong>51.4% AP</strong>，而 PPYOLOE-L 達到同樣精度時，僅有 <strong>78 fps</strong></li>
+</ul>
+<p>如果和高階模型對比，結果如下：</p>
+<ul>
+<li><strong>YOLOv7-X</strong> vs <strong>YOLOv5-L (r6.1)</strong>：推論速度快了 <strong>15 fps</strong>，準確率高出 <strong>3.9%</strong></li>
+<li><strong>YOLOv7-X</strong> vs <strong>YOLOv5-X (r6.1)</strong>：推論速度快 <strong>31 fps</strong>，參數減少 <strong>22%</strong>，計算量減少 <strong>8%</strong>，但 AP 還提升 <strong>2.2%</strong></li>
+</ul>
+<p>最後是巨量模型對比：</p>
+<ul>
+<li><strong>YOLOv7-E6</strong> vs <strong>YOLOv5-X6 (r6.1)</strong>：提升 <strong>0.9% AP</strong>，<strong>參數 -45%、計算量 -63%、速度快 47%</strong></li>
+<li><strong>YOLOv7-D6</strong> vs <strong>YOLOR-E6</strong>：速度相當，AP 提升 <strong>0.8%</strong></li>
+<li><strong>YOLOv7-E6E</strong> vs <strong>YOLOR-D6</strong>：速度相當，AP 提升 <strong>0.3%</strong></li>
+</ul>
+<p>從這些比較可歸納出幾項關鍵觀察：</p>
+<ol>
+<li><strong>從輕量到大型模型，YOLOv7 都能維持高效率表現</strong>；</li>
+<li>即便在不使用預訓練模型的前提下，YOLOv7 仍能擊敗大多數 SOTA 模型；</li>
+<li>模型縮放策略與模組訓練設計（如 RepConvN、Coarse-to-Fine Label Assigner）直接轉化為實際效能提升。</li>
+</ol>
+<p>YOLOv7 不只是訓練技巧的展示，而是一次全面考量實務部署需求的架構設計範本。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=消融實驗模型縮放>消融實驗：模型縮放<a href=#消融實驗模型縮放 class=hash-link aria-label=消融實驗：模型縮放的直接連結 title=消融實驗：模型縮放的直接連結>​</a></h3>
+<p>傳統的模型縮放常見三種做法：</p>
+<ul>
+<li><strong>只放大寬度（width）</strong>：增加每層的通道數；</li>
+<li><strong>只放大深度（depth）</strong>：增加層數或 block 數量；</li>
+<li><strong>複合縮放</strong>（如 EfficientNet）：同時調整 depth、width、resolution。</li>
+</ul>
+<p>作者採用的是一種針對 <strong>concatenation-based 架構特化</strong> 的做法：</p>
+<blockquote>
+<p><strong>將 computational block 的深度擴張 1.5 倍，並同步將 transition block 的寬度擴張 1.25 倍。</strong></p>
+</blockquote>
+<p>這種設計背後的邏輯，是要保持幾個重要參數：</p>
+<ul>
+<li>block 的輸出 feature map 結構穩定；</li>
+<li>各層之間的 channel 對齊；</li>
+<li>降低 memory fragmentation，提升硬體計算效率。</li>
+</ul>
+<p>效果如下表：</p>
+<div align=center><figure style=width:70%><p><img decoding=async loading=lazy alt=ablation src=/assets/images/img7-b879791b1da0265d7d7366f02aa7e85b.jpg width=808 height=256 class=img_ev3q></figure></div>
+<p>從數據中可以看到：</p>
+<ul>
+<li><strong>單獨放大寬度</strong>：雖然簡單，但效率最低，參數增多卻沒帶來明顯的精度提升；</li>
+<li><strong>單獨放大深度</strong>：能帶來些微精度提升，但會導致 block 輸出不對齊，計算使用率下降；</li>
+<li><strong>複合式縮放策略</strong>：能在「更少的參數與計算成本」下達成 <strong>最多的 AP 提升（+0.5%）</strong>。</li>
+</ul>
+<p>複合式模型縮放不只是 scale 的問題，而是一種針對特定網路架構（如 ELAN、YOLO-style）所設計的幾何穩定縮放法。</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=標籤指派策略>標籤指派策略<a href=#標籤指派策略 class=hash-link aria-label=標籤指派策略的直接連結 title=標籤指派策略的直接連結>​</a></h3>
+<p>在以往的多頭偵測器中，<strong>Auxiliary Head</strong> 常常只是單純加上一個中層監督點，讓梯度更快穿透模型、加速收斂。</p>
+<p>但 YOLOv7 的設計進一步提出：</p>
+<blockquote>
+<p><strong>為何不讓輔助頭的學習內容也由主輸出（Lead Head）來主導？</strong></p>
+</blockquote>
+<p>這正是 <strong>Assistant Loss for Auxiliary Head</strong> 的設計核心，透過 Lead Head 的預測，來建立更有語意層次感的監督結構。</p>
+<ol>
+<li>
+<p><strong>實驗一：三種標籤指派策略策略比較</strong></p>
+<div align=center><figure style=width:70%><p><img decoding=async loading=lazy alt="label assign" src=/assets/images/img8-34175c3218372839359e45d06e5817c7.jpg width=782 height=262 class=img_ev3q></figure></div>
+<p>從實驗的結果可以看到：</p>
+<ul>
+<li><strong>只要加上輔助損失（assistant loss）就能提升效能</strong>；</li>
+<li>而 <strong>由 Lead Head 引導的 soft label（Lead-guided Assigner）</strong> 更勝傳統的監督方式；</li>
+<li>最好的結果來自 <strong>Coarse-to-Fine 引導策略</strong>，對 lead 給精細標籤，對 auxiliary 給較寬鬆、recall-oriented 的標籤，達成 supervision 的層次分工。</li>
+</ul>
+<p>作者進一步在下圖中展示不同策略下的 <strong>Objectness Map</strong>：</p>
+<p><img decoding=async loading=lazy alt=vis src=/assets/images/img9-1301f47eb294d83c83f5519a70edf6c9.jpg width=1826 height=416 class=img_ev3q></p>
+<p>在傳統方法下，Auxiliary Head 常會學到不一致的特徵，但使用 Lead-guided soft label 後，輔助頭學到的特徵與主頭更一致，甚至有助於主頭學習剩餘資訊（residual information）。</p>
+<p>這種從中層往高層的引導式資訊傳遞，構成一種特殊的「殘差式學習架構」，提升整體網路的學習分工與效率。</p>
+</li>
+</ol>
+<hr>
+<ol start=2>
+<li>
+<p><strong>實驗二：Decoder 的上界限制效果</strong></p>
+<div align=center><figure style=width:70%><p><img decoding=async loading=lazy alt="decoder limit" src=/assets/images/img10-366735b37a9a3ecc2d8efac8f47bf0c8.jpg width=736 height=224 class=img_ev3q></figure></div>
+<p>為了避免 Coarse Label 對最終輸出產生負面影響，作者在 decoder 中加了一項限制條件：<strong>限制 coarse label 的 objectness 分數上限，根據目標中心距離做衰減。</strong></p>
+<p>上表的結果顯示，這項設計不僅讓 Coarse Label 更具容錯空間，也讓模型更聚焦於「應該讓 auxiliary head 學到什麼」，而非讓它誤學到不必要的雜訊。</p>
+</li>
+</ol>
+<hr>
+<ol start=3>
+<li>
+<p><strong>實驗三：Partial Auxiliary Head 的設計</strong></p>
+<div align=center><figure style=width:70%><p><img decoding=async loading=lazy alt="Partial Auxiliary Head" src=/assets/images/img11-3b35309d750019ade52114b64f933e64.jpg width=640 height=224 class=img_ev3q></figure></div>
+<p>在 YOLOv7 中，作者還提出了一種新的設計：</p>
+<blockquote>
+<p><strong>將輔助頭連接在 E-ELAN 中間層的 pyramid（特徵金字塔）上，而非最終輸出處。</strong></p>
+</blockquote>
+<p>這麼做有兩個目的：</p>
+<ol>
+<li><strong>避免 Assistant Loss 直接干擾最終 feature 的更新權重</strong>；</li>
+<li><strong>讓不同尺寸的物件在不同層中被學習，保持 pyramid 對小中大目標的學習分布。</strong></li>
+</ol>
+<p>結果如上表所示：<strong>Partial Coarse-to-Fine 策略表現最好</strong>，能維持各層學習目標的清晰邊界。</p>
+</li>
+</ol>
+<p>由 Lead Head 主導 supervision，不只是資訊再利用，更是讓整個網路形成一種語意一致、梯度互補的訓練路徑。</p>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id=結論>結論<a href=#結論 class=hash-link aria-label=結論的直接連結 title=結論的直接連結>​</a></h2>
+<p>YOLOv7 是一套以 <strong>訓練流程為主體、推論結構為背景</strong> 的物件偵測設計理念。</p>
+<p>從模型縮放、模組替換到標籤分配，作者將那些被視為「訓練細節」的部分，重新拉到設計舞台的正中央，展現出訓練本身就是優化模型的關鍵因素。</p>
+<p>對實務開發者來說，YOLOv7 最大的啟發在於，我們應該要認識到 <strong>memory alignment、channel matching、gradient flow</strong> 等硬體導向設計對實際部署有多重要，此外模組替換（如 RepConv）時不能只看參數，而要考慮資訊路徑與架構邏輯。</p>
+<p>這是工程與研究交會的路口，有太多觀念值得我們學習。</header></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class=col></div><div class="col lastUpdated_JAkA"><span class=theme-last-updated>最後<!-- -->由 <b>zephyr-sh</b> <!-- -->於 <b><time datetime=2025-06-14T04:21:55.000Z itemprop=dateModified>2025年6月14日</time></b> <!-- -->更新</span></div></div><section class=ctaSection_iCjC><div class="
+        simpleCta_ji_Y
+        simple-cta__coffee_YwC8
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style=cursor:pointer><h3 class=simple-cta__title_i7hn>☕ 一杯咖啡，就是我創作的燃料！</h3><p class=simple-cta__subtitle_ol86>贊助我持續分享 AI 實作、全端架構與開源經驗，讓好文章不斷更新。<div class=simple-cta__buttonWrapper_jk1Y><img src=/img/bmc-logo.svg alt=cta-button class=simple-cta__buttonImg_Q9VV></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style=margin-left:-8px;margin-right:-8px;row-gap:16px><div style=padding-left:8px;padding-right:8px;display:flex class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style=flex:1;display:flex;flex-direction:column><div class=ant-card-body><div style=text-align:center;margin-top:1rem><img src=/img/icons/all_in.svg alt="AI / 全端 / 客製 一次搞定 icon" style=width:48px;height:48px></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">ALL</span><h4 class=card__title_SQBY>AI / 全端 / 客製 一次搞定</h4><p class=card__concept_Ak8F>從構想到上線，涵蓋顧問、開發與部署，全方位支援你的技術實作。<div class=card__bulletHeader_b6cf><h5 class=card__bulletTitle_R_wg>包含內容</h5></div><ul class=card__bulletList_SrNN><li class=card__bulletItem_wCRd>顧問服務 + 系統建置 + 客製開發<li class=card__bulletItem_wCRd>長期維運與擴充規劃</ul></div></div></div></div><div class="
+        simpleCta_ji_Y
+        simple-cta__outro_AXbn
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style=cursor:pointer><h3 class=simple-cta__title_i7hn>🚀 你的專案準備好了嗎？</h3><p class=simple-cta__subtitle_ol86>如果你需要客製服務或長期顧問，歡迎與我聯繫！</div></section><div style=margin-top:3rem> </div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label=文件選項卡><a class="pagination-nav__link pagination-nav__link--prev" href=/papers/object-detection/fast-detr/><div class=pagination-nav__sublabel>上一頁</div><div class=pagination-nav__label>[21.01] Fast DETR</div></a><a class="pagination-nav__link pagination-nav__link--next" href=/papers/object-detection/yolov6/><div class=pagination-nav__sublabel>下一頁</div><div class=pagination-nav__label>[22.09] YOLOv6</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href=#配角的逆襲 class="table-of-contents__link toc-highlight">配角的逆襲</a><li><a href=#定義問題 class="table-of-contents__link toc-highlight">定義問題</a><li><a href=#解決問題 class="table-of-contents__link toc-highlight">解決問題</a><ul><li><a href=#extended-elan class="table-of-contents__link toc-highlight">Extended-ELAN</a><li><a href=#串接式架構的縮放 class="table-of-contents__link toc-highlight">串接式架構的縮放</a><li><a href=#trainable-bof class="table-of-contents__link toc-highlight">Trainable BoF</a><li><a href=#實驗配置 class="table-of-contents__link toc-highlight">實驗配置</a></ul><li><a href=#討論 class="table-of-contents__link toc-highlight">討論</a><ul><li><a href=#與舊版-yolo-的對比 class="table-of-contents__link toc-highlight">與舊版 YOLO 的對比</a><li><a href=#與最新-sota-模型對比 class="table-of-contents__link toc-highlight">與最新 SoTA 模型對比</a><li><a href=#消融實驗模型縮放 class="table-of-contents__link toc-highlight">消融實驗：模型縮放</a><li><a href=#標籤指派策略 class="table-of-contents__link toc-highlight">標籤指派策略</a></ul><li><a href=#結論 class="table-of-contents__link toc-highlight">結論</a></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__links text--center"><div class=footer__links><a class=footer__link-item href=/docs>開源專案</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/papers/intro>論文筆記</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/blog>部落格</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/terms-of-service>使用條款</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/privacy-policy>隱私政策</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/become-an-author>成為作者</a><span class=footer__link-separator>·</span><a class=footer__link-item href=/worklog>工作日誌</a></div></div><div class="footer__bottom text--center"><div class=footer__copyright>Copyright © 2025 DOCSAID.</div></div></div></footer></div>
