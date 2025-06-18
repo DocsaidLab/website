@@ -209,7 +209,7 @@ YOLOv4 の訓練戦略は以下の 2 つの古典的概念に基づく：
 - **Bag of Freebies (BoF)**：訓練コストは増やすが推論負荷は増やさない
 - **Bag of Specials (BoS)**：推論コストを多少増やして精度を大幅向上させる
 
-訓練構造として、YOLOv4 は収束しにくい活性化関数（PReLU や SELU）、量子化対応の ReLU6 を廃し、効果のバランスが良い**Mish activation**を採用。正規化には複数 GPU 訓練に必要な SyncBN をやめ、単 GPU 訓練に適した\*\*Cross mini-Batch Normalization (CmBN)\*\*を新設計した。
+訓練構造として、YOLOv4 は収束しにくい活性化関数（PReLU や SELU）、量子化対応の ReLU6 を廃し、効果のバランスが良い**Mish activation**を採用。正規化には複数 GPU 訓練に必要な SyncBN をやめ、単 GPU 訓練に適した Cross mini-Batch Normalization (CmBN)を新設計した。
 
 <div align="center">
 <figure style={{ "width": "80%"}}>
