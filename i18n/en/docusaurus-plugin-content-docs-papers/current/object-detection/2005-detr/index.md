@@ -3,247 +3,372 @@ title: "[20.05] DETR"
 authors: Z. Yuan
 ---
 
-## A Foundation Across Domains
+## A Cross-Domain Pioneer
 
-**[End-to-End Object Detection with Transformers](https://arxiv.org/abs/2005.12872)**
+[**End-to-End Object Detection with Transformers**](https://arxiv.org/abs/2005.12872)
 
 ---
 
-Object detection has always been a core task in computer vision.
-
-Anchor-based methods like Faster R-CNN, SSD, and YOLOv2 use predefined bounding boxes (anchors) to predict the locations of objects. These anchors are manually selected for their size and aspect ratios, aiming to cover all possible object shapes. Anchor-based methods have inherent advantages, especially in detecting objects of various scales and shapes, as they generalize well to objects with different scales and aspect ratios.
-
-However, choosing appropriate anchor sizes and ratios often requires prior knowledge and manual tuning, which may not be suitable for all applications or datasets. Additionally, using multiple anchors at each position can lead to numerous redundant predictions, particularly in background regions without objects, necessitating additional non-maximum suppression (NMS) steps to clean up.
-
-Meanwhile, in the NLP domain, the development of Transformer architecture has advanced rapidly, yielding significant breakthroughs. These factors led the authors of this paper to decide:
-
-- **Why not apply Transformers in object detection too?**
+Object detection has always been a core task in the field of computer vision.
 
 ## Problem Definition
 
-The authors define several current issues in the paper:
+In the domain of object detection, anchor-based methods have been quite popular in recent years. Architectures like Faster R-CNN, SSD, or YOLO predefine a set of anchor boxes on the image and then perform classification and box regression for each anchor.
 
-### Anchor-based Methods are Complicated
+Although effective, this design introduces several problems:
 
-Anchor-based methods have become popular for object detection. These methods use predefined anchors to predict bounding boxes and categories. These anchors are typically predefined bounding boxes of various sizes and aspect ratios, uniformly placed across the image.
+- The sizes and aspect ratios of anchors need to be manually designed based on the dataset characteristics, limiting generalization.
+- Multiple anchors correspond to each location, causing many redundant predictions that require Non-Maximum Suppression (NMS) to filter.
+- The alignment process between predicted boxes and ground truth is cumbersome, making the training pipeline highly coupled.
 
-However, anchor-based methods pose several challenges:
+Not user-friendly?
 
-1. **Redundant Predictions**
+What if we do not use anchors?
 
-   Due to the numerous anchors covering the image, a single object may be detected multiple times, resulting in multiple overlapping bounding boxes for the same object.
+That is possible — anchor-free architectures have been developed for this purpose.
 
-2. **Complex Post-processing**
+However, in practical scenarios, people want accuracy above all else! Users can tolerate a little delay (just a few seconds), and systems can be somewhat complex (after all, engineers handle that).
 
-   To address the redundant prediction problem, post-processing techniques such as non-maximum suppression (NMS) are required. NMS removes overlapping bounding boxes, keeping only the best prediction for each object, adding computational and parameter adjustment complexity.
+**But if the model is inaccurate, I will complain!**
 
-3. **Anchor Design and Matching**
+Generally speaking, anchor-free architectures do not deliver satisfactory accuracy and fail to shine on standard object detection benchmarks.
 
-   Designing the size and aspect ratios of anchors is critical for model performance. Inappropriate anchor design can lead to inaccurate detections. Additionally, matching new predictions with the closest anchors involves extra computation.
+Meanwhile, on the very same timeline, the neighboring field (NLP) has been vigorously advancing the latest Transformer architectures and achieving remarkable breakthroughs.
 
-If anchor-based methods are complex, can we avoid using anchors?
+The authors of this paper propose:
 
-### Anchor-free Methods Lack Accuracy
-
-Accuracy remains paramount in practical scenarios. Users may tolerate slower speeds or complex systems, but:
-
-- **Inaccurate models will lead to complaints.**
-
-Direct prediction has been an attractive concept in object detection. Unlike anchor-based strategies, direct prediction aims to predict object bounding boxes and category labels directly from image pixels without intermediate anchors.
-
-Despite the theoretical appeal, previous attempts at direct prediction often fell short in performance. These methods might not perform well on common object detection benchmarks compared to leading methods.
-
-Although direct prediction methods offer theoretical advantages with simplified model structures and fewer manual priors, their practical performance and competitiveness need improvement. Researchers continue to seek ways to improve these strategies to achieve true end-to-end object detection.
+> **Why don’t we discard these complicated mechanisms and try using Transformers together?**
 
 ## Solution
 
-### DETR Model Design
+![model_arch](./img/detr_1.jpg)
 
-![DETR Model Architecture](./img/detr_1.jpg)
+The overall architecture, as shown in the paper’s figure above, consists of three main modules:
 
-1. **Backbone**
+1. **CNN Backbone**: Extracts feature maps from the input image.
+2. **Transformer Encoder-Decoder**: Models the global context of the image and relationships between objects.
+3. **Prediction Head (FFN)**: Outputs bounding boxes and classes.
 
-   The backbone extracts features from the input image using a convolutional neural network (CNN). The input image produces a set of feature maps that capture various details and contextual information, albeit at a reduced resolution.
+### Model Architecture
 
-2. **Transformer Encoder**
+First, let’s look at the Backbone.
 
-   The Transformer Encoder receives the output feature maps from the backbone. To help the Transformer understand the relative positions of each feature, positional encodings are added. Unlike CNNs, Transformers are not inherently sensitive to input order, and positional encodings provide a way to input positional information, allowing the Transformer to consider the relative positions of features.
+The Backbone takes an input image $x_{img} \in \mathbb{R}^{3 \times H_0 \times W_0}$ and outputs features $f \in \mathbb{R}^{C \times H \times W}$ via a CNN backbone (e.g., ResNet50, typically with $C=2048$, $H=W=H_0/32$).
 
-3. **Transformer Decoder**
+A $1 \times 1$ convolution is applied to reduce the channel dimension to $d$ (e.g., $d=256$), producing a feature map $z_0 \in \mathbb{R}^{d \times H \times W}$. This is then flattened into a sequence of length $HW$ and fed into the Transformer encoder.
 
-   The Decoder input consists of fixed-size vectors called "object queries," representing general expectations for detected objects. Through multiple layers of the decoder, these queries attend to the encoder outputs, identifying features corresponding to specific objects.
+<div align="center">
+<figure style={{ "width": "60%"}}>
+![transformer](./img/detr_3.jpg)
+</figure>
+</div>
 
-4. **Feed-Forward Network (FFN)**
+The Transformer Encoder is a standard architecture with each layer containing Multi-Head Self-Attention (MHSA) and a Feed-Forward Network (FFN). Because transformer tokens lack explicit positional relationships, fixed positional encodings (such as sine/cosine) are added at the input stage.
 
-   Each output from the decoder goes through the FFN, converting the decoder outputs into specific predictions, including object center coordinates (x, y), height (H), and width (W). The number of predictions is fixed at N, typically much larger than the actual number of objects in the image. If no object is found, it can output a special "no object" category.
+Next is the Transformer Decoder. The output simultaneously produces $N$ object predictions. Note this is not an autoregressive process since objects do not have strong dependency relations, allowing parallel output.
 
-   The overall architecture is illustrated below:
+Each output position corresponds to a learnable **object query** ($\in \mathbb{R}^d$). The multiple decoder layers use self-attention and encoder-decoder attention to allow object queries to communicate with each other and align with image features. This enables the model to perform global reasoning across objects (e.g., considering relative object relations and overall distribution).
 
-   ![DETR Model Architecture](./img/detr_3.jpg)
+Finally, the prediction head attaches a 3-layer feed-forward network to each of the $N$ decoder outputs, producing:
 
-   :::tip
-   I was curious about how the spatial positional encoding in the paper differs from the typical Transformer, so I looked into the implementation. It turns out it's based on learnable parameters for rows and columns.
+- Class probabilities (softmax over $K+1$, where +1 denotes the "no object" class)
+- Bounding box coordinates (normalized center coordinates, width, and height)
 
-   ![DETR Model Architecture](./img/detr_4.jpg)
-   :::
+Here, the model predicts a fixed-length set of candidate boxes, unlike traditional dense grids or anchor boxes. This design allows training via a set-based loss.
 
-### Loss Function Design
+### Loss Design
 
-1. **Set Prediction Loss**
+In past object detection training pipelines, the problem of **"which ground truth should a predicted box align with?"** is almost unavoidable.
 
-   This enforces a unique matching loss between predicted boxes and ground truth boxes.
+For example, Faster R-CNN considers proposals with IoU > 0.5 as positive samples, and YOLO series assign predictions to the closest anchor box. These are all **heuristic assignment rules**, aiming to align predictions with ground truth to enable classification and regression training.
 
-   - **Matching Loss (L_match)**
+DETR, however, treats this as an optimization problem directly: it uses the **Hungarian Algorithm** for optimal matching, enforcing each prediction to correspond to a unique ground truth, thus avoiding duplicate predictions, overlapping boxes, and complicated post-processing rules.
 
-     DETR outputs a fixed-size set of N predictions. Here, N is set to be significantly larger than the typical number of objects in an image. The loss produces the best bipartite matching between predicted and ground truth objects. If an image has 5 ground truth objects but the model predicts 8, we still need to find the best match between these 5 ground truths and 8 predictions.
+- **Step 1: Optimal Matching (Bipartite Matching)**
 
-   - **Hungarian Algorithm**
+  :::tip
+  An introduction to the Hungarian algorithm could fill an entire article, so we will not elaborate here. Readers unfamiliar with this algorithm are encouraged to refer to the following link:
 
-     The Hungarian algorithm finds the best match, considering class predictions and similarity between predicted and ground truth boxes.
+  - [**Hungarian algorithm**](https://en.wikipedia.org/wiki/Hungarian_algorithm)
+    :::
 
-     The Hungarian algorithm solves the bipartite matching problem, commonly used in assignment problems. It finds the optimal assignment minimizing the total cost of assigning n tasks to n workers.
+  Suppose:
 
-     Additionally, the log probability term for the "no object" class is down-weighted by a factor of 10 to avoid excessive background or non-object region interference during training.
+  - $y = \{ y_1, y_2, \dots, y_M \}$ is the set of ground truth objects, where each $y_i = (c_i, b_i)$ includes class and bounding box.
+  - $\hat{y} = \{ \hat{y}_1, \hat{y}_2, \dots, \hat{y}_N \}$ is the set of predictions from the decoder, where $N \gg M$, and $\hat{y}_j = (\hat{p}_j, \hat{b}_j)$.
 
-2. **Bounding Box Loss**
+  To perform set matching, the authors pad $y$ with $N - M$ "no object" entries (denoted as $\varnothing$) to equalize set lengths, then define a **matching cost function $L_{\text{match}}$** to compute errors between predictions and ground truth:
 
-   In object detection, the model predicts the location and extent of objects, usually represented as a "bounding box." Bounding boxes are typically described by four coordinates (e.g., top-left and bottom-right x, y coordinates) or a center point and width-height.
+  $$
+  \hat{\sigma} = \arg\min_{\sigma \in S_N} \sum_{i=1}^N L_{\text{match}}(y_i, \hat{y}_{\sigma(i)})
+  $$
 
-   - **Bounding Box Loss (L_box)**
+  Here, $\sigma$ is a permutation of the $N$ predictions, searching for the best one-to-one alignment.
 
-     Unlike traditional methods that adjust candidate boxes (anchors or proposals), DETR directly predicts object bounding boxes.
+- **Step 2: Define Matching Cost**
 
-     Using common losses like L1 loss may yield different values for objects of varying sizes even with the same relative position deviation.
+  The cost between a pair $y_i = (c_i, b_i)$ and prediction $\hat{y}_j = (\hat{p}_j(c), \hat{b}_j)$ consists of two parts:
 
-     :::tip
-     If a model predicts a small and a large object, both deviating 10 pixels from their true positions, the 10-pixel deviation might be significant for the small object but negligible for the large one. Using L1 loss, these cases might have significantly different loss values.
-     :::
+  - Classification cost: the smaller the predicted class probability $\hat{p}_j(c_i)$, the higher the cost.
+  - Box cost: the larger the discrepancy between predicted box $\hat{b}_j$ and ground truth box $b_i$, the higher the cost.
 
-   - **Problem Solving**
+  Note: **These losses apply only when $c_i \neq \varnothing$**, i.e., for actual object matches.
 
-     To address this, DETR combines L1 loss with Generalized IoU (Intersection over Union) loss. Generalized IoU loss mitigates the impact of object size by considering the overlap between predicted and ground truth boxes, aiming to maximize their intersection. Combining these losses provides a consistent loss scale across different object sizes, aiding the model in learning bounding boxes for objects of various sizes more uniformly.
+  Formally:
+
+  $$
+  L_{\text{match}}(y_i, \hat{y}_j) = -1_{\{c_i \neq \varnothing\}} \cdot \hat{p}_j(c_i) + 1_{\{c_i \neq \varnothing\}} \cdot L_{\text{box}}(b_i, \hat{b}_j)
+  $$
+
+  Log probabilities are not used here because the authors want the matching cost scale to be consistent with the box loss, avoiding domination by either term during optimization.
+
+- **Step 3: Calculate Final Loss (Hungarian Loss)**
+
+  After matching, the loss is computed as:
+
+  $$
+  L_{\text{Hungarian}}(y, \hat{y}) = \sum_{i=1}^N \left[ -\log \hat{p}_{\hat{\sigma}(i)}(c_i) + 1_{\{c_i \neq \varnothing\}} L_{\text{box}}(b_i, \hat{b}_{\hat{\sigma}(i)}) \right]
+  $$
+
+  - The first term is the classification loss: lower predicted class probabilities for objects result in higher loss.
+  - The second term is the box loss (explained below).
+  - For $c_i = \varnothing$ (background), the classification loss is down-weighted by a factor of 0.1 to prevent background samples from overwhelming object signals (similar to subsampling in Faster R-CNN).
+
+- **Step 4: Box Loss Design ($L_{\text{box}}$)**
+
+  Unlike YOLO or Faster R-CNN, DETR predicts **absolute normalized bounding box coordinates directly** rather than relative offsets. While simple, this causes a problem:
+
+  > **$\ell_1$ loss scale differs between small and large boxes, even if relative errors are the same.**
+
+  To address this, the authors combine two losses:
+
+  - $\ell_1$ loss: directly measures coordinate difference, encouraging positional accuracy.
+  - **Generalized IoU (GIoU) loss**: measures overlap quality between boxes, invariant to scale.
+
+  The combined formula is:
+
+  $$
+  L_{\text{box}}(b_i, \hat{b}_j) = \lambda_{\text{IoU}} \cdot L_{\text{GIoU}}(b_i, \hat{b}_j) + \lambda_{\ell_1} \cdot \| b_i - \hat{b}_j \|_1
+  $$
+
+  - $\lambda_{\text{IoU}}$ and $\lambda_{\ell_1}$ are weight hyperparameters that require tuning.
+  - All losses are normalized by the total number of objects per batch.
+
+  ***
+
+  :::tip
+  For details on GIoU, please refer to the following paper:
+
+  - [**[19.02] Generalized Intersection over Union: A Metric and A Loss for Bounding Box Regression**](https://arxiv.org/abs/1902.09630)
+    :::
+
+To summarize the key points of this loss design:
+
+- **One-to-one matching**: each object predicted once, no duplicates or overlaps, fully eliminating post-processing.
+- **Simple background handling**: background treated as $\varnothing$ class, no dense negative sampling required.
+- Combination of **GIoU + $\ell_1$** balances location and overlap learning.
+
+This is the core reason why, despite its simple architecture, DETR can truly realize end-to-end object detection in training.
 
 ### Dataset
 
-- **Dataset Used**: The COCO 2017 detection and panoptic segmentation datasets were used for experiments.
-- **Dataset Size**: The dataset contains 118,000 training images and 5,000 validation images.
-- **Data Annotation**: Each image is annotated with bounding boxes and panoptic segmentation information.
-- **Image Details**: On average, each image contains 7 object instances, with a maximum of 63 instances in the training set, ranging from small to large objects.
-- **Evaluation Metric**: Average Precision (AP) was used as the evaluation metric, with AP based on bounding boxes by default. To compare with Faster R-CNN, the paper reports validation AP of the final training epoch.
+Experiments were conducted on the COCO 2017 dataset, covering object detection and panoptic segmentation tasks. The dataset contains 118,000 training images and 5,000 validation images, each annotated with bounding boxes and panoptic segmentation. On average, each image contains 7 object instances, with up to 63 in some cases. Object sizes vary widely, with a mix of small and large objects, posing a challenging setting.
+
+Model performance is mainly evaluated by Average Precision (AP) on bounding boxes. When comparing with Faster R-CNN, the authors use validation results from the last training epoch; for ablation studies, median results over the last 10 epochs are reported.
 
 ### Technical Details
 
-- **Training Optimizer**: AdamW was used to train the DETR model.
-- **Learning Rate Settings**:
-  - Transformer initial learning rate: 1e-4
-  - Backbone network learning rate: 1e-5
-  - Weight decay: 1e-4.
-- **Weight Initialization**: Transformer weights were initialized using Xavier init. The backbone network used an ImageNet pre-trained ResNet model with frozen BatchNorm layers.
-- **Model Architecture**: The paper reports results for two backbone networks: ResNet50 and ResNet-101, named DETR and DETR-R101, respectively. A modified version, DETR-DC5 and DETR-DC5-R101, was also tested to improve small object detection at the cost of increased computation.
-- **Image Preprocessing**: Images were resized with scale augmentation, ensuring the shortest side was between 480 and 800 pixels, with a maximum longest side of 1333 pixels. Random cropping augmentation during training improved performance by about 1 AP.
-- **Other Details**: Dropout of 0.1 was used for training. During inference, some predictions were empty, and confidence scores were used to cover these empty predictions, increasing AP by 2.
+The model is trained using the AdamW optimizer with an initial learning rate of $1 \times 10^{-4}$ for the Transformer and $1 \times 10^{-5}$ for the backbone, and weight decay set to $1 \times 10^{-4}$. Transformer weights are initialized with Xavier initialization, and the backbone uses ImageNet-pretrained ResNet models with frozen BatchNorm layers.
+
+The authors evaluate several backbone variants, including standard ResNet-50 (DETR) and ResNet-101 (DETR-R101), as well as DC5 variants (DETR-DC5 and DETR-DC5-R101) that add dilation in the last layer to increase feature resolution. The DC5 design improves small object detection but increases self-attention computation in the encoder by 16 times, roughly doubling overall FLOPs.
+
+Multi-scale augmentation is used during training by resizing the shorter image side between 480 and 800 pixels, while limiting the longer side to 1333 pixels. To enhance global relational learning, random cropping augmentation is applied with a 0.5 probability, cropping random patches then resizing back to original scale, yielding roughly +1 AP improvement.
+
+Additionally, a simple but effective inference strategy is employed: for "no object" prediction slots, if the second-highest scoring class has reasonable confidence, it replaces the original prediction, improving AP by about 2 points. Dropout of 0.1 is used during training, with other hyperparameters detailed in the paper’s Appendix A.4.
 
 ## Discussion
 
-### Is It Effective?
+### How does it perform this time?
 
-![DETR Performance](./img/detr_2.jpg)
+<div align="center">
+<figure style={{ "width": "80%"}}>
+![DETR result](./img/detr_2.jpg)
+</figure>
+</div>
 
-Small object detection performance drops significantly (AP 27.2 -> AP 23.7), but overall, it looks promising!
+Small object detection suffers significantly (AP$_S$: 27.2 → 23.7), but overall performance still appears reasonable.
 
-When comparing DETR to Faster R-CNN, several key points emerge:
+---
 
-1. **Differences in Training Methods**
+Carefully comparing DETR and Faster R-CNN training conditions and model performances reveals several key points:
 
-   - DETR uses a Transformer architecture, typically with Adam or Adagrad optimizers. Longer training schedules and dropout are often employed to allow the model to learn more in-depth representations.
-   - Faster R-CNN mainly uses SGD for training, with relatively fewer data augmentations.
+1. **Fundamental Differences in Training Strategies**
 
-2. **Enhancing the Faster R-CNN Baseline**
+   DETR employs a Transformer architecture naturally paired with optimizers like AdamW or Adagrad, which suit sparse updates, and relies on longer training schedules with dropout for stable learning.
 
-   - To make Faster R-CNN more comparable to DETR, researchers added generalized IoU to its loss function, applied the same random crop augmentation, and adopted longer training schedules.
-   - These adjustments improved Faster R-CNN's performance on the COCO detection task by 1-2 AP.
+   In contrast, traditional Faster R-CNN typically uses SGD with more conservative data augmentation. Conceptually, their design philosophies diverge significantly.
 
-3. **Model Comparison**
+2. **Adjustments for Fair Comparison**
 
-   - The authors reported results for Faster R-CNN trained with a 3x schedule and enhanced with augmentations and a 9x schedule.
-   - For DETR, models with similar parameter counts were considered, meaning DETR and Faster R-CNN had similar model complexity.
+   To ensure Faster R-CNN competes fairly, the authors applied enhancements including:
 
-4. **Performance Comparison**
+   - Adding generalized IoU to the box loss;
+   - Applying the same random cropping data augmentation as DETR;
+   - Extending training cycles to 9× (109 epochs).
 
-   - DETR achieved 42 AP on the COCO val subset with the same number of parameters as Faster R-CNN, demonstrating competitive performance.
-   - DETR improved its overall performance mainly through better large object detection (APL). However, it still lagged in small object detection (APS).
-   - DETR-DC5, despite higher overall AP, still underperformed Faster R-CNN in small object detection.
-   - Faster R-CNN and DETR showed similar trends when using ResNet-101 as the backbone.
+   These modifications yield about 1–2 AP improvement, establishing a more balanced baseline against DETR.
 
-### Component Analysis
+3. **Model Design and Parameter Alignment**
 
-The authors delved into the importance of various components in the DETR architecture:
+   DETR’s configuration uses 6 encoder + 6 decoder layers, model dimension 256, and 8 attention heads, resulting in roughly 41.3M parameters—comparable to Faster R-CNN + FPN (23.5M in ResNet-50 backbone and 17.8M in Transformer). This ensures fair comparison in terms of model capacity.
 
-1. **Encoder Layers**
+4. **Experimental Results and Key Observations**
 
-   - Increasing encoder layers affects global image-level self-attention.
-   - Removing encoder layers entirely causes a 3.9 AP drop, particularly impacting large objects (6.0 AP).
-   - Encoders are crucial for object unmixing, providing global scene reasoning.
-   - Encoders can separate instances, benefiting object extraction and localization in decoders.
+- **Overall performance**: DETR reaches 42 AP on COCO validation, on par with the tuned Faster R-CNN.
+- **Large object detection (AP$_L$)**: DETR shows clear advantage (+7.8), the main reason for catching up overall.
+- **Small object detection (AP$_S$)**: DETR lags behind significantly (-5.5), forming the primary bottleneck.
+- **Higher-resolution variant (DETR-DC5)**: Despite improved total AP, it still fails to surpass Faster R-CNN on small objects.
+- **Backbone variations**: Using ResNet-101 backbone, the trends remain consistent across both models, indicating robustness of comparison.
 
-2. **Decoder Layers**
+Overall, DETR, under long training and high-resolution settings, can truly compete with Faster R-CNN at similar parameter counts.
 
-   - Increasing decoder layers improves AP and AP50.
-   - Due to set-based loss, DETR does not require NMS.
-   - Running NMS after the first decoder layer improves performance.
-   - With more layers, NMS's improvement diminishes.
-   - Decoder attention is local, focusing on object extremities like heads or limbs.
+However, its small object recognition is limited by the global attention’s resolution bottleneck, leaving room for improvements in subsequent architectures (e.g., Deformable DETR).
 
-3. **Importance of FFN**
+### Component Analysis of the Model
 
-   - FFN acts as a 1x1 convolution layer.
-   - Removing FFN entirely reduces performance by 2.3 AP, indicating its significance for good results.
+The authors thoroughly investigate the importance of each DETR component:
 
-4. **Importance of Positional Encoding**
+1. **Effect of Encoder Layers**
 
-   - There are two types of positional encodings in the model: spatial and output positional encodings.
-   - Removing spatial positional encoding entirely leads to a 7.8 AP drop.
-   - Using sinusoidal or learnable encoding results in only a slight 1.3 AP drop.
-   - Positional encoding significantly impacts model performance.
+   <div align="center">
+   <figure style={{ "width": "90%"}}>
+   ![layers](./img/detr_4.jpg)
+   </figure>
+   </div>
 
-5. **Importance of Loss Components**
+   Removing the encoder eliminates image-level global self-attention, causing a 3.9 AP drop overall, with the largest impact on large objects (6.0 AP loss).
 
-   - Classification Loss is indispensable.
-   - GIoU Loss significantly contributes to model performance, with its absence causing a 0.7 AP drop.
-   - Using L1 Loss alone degrades results.
+   This suggests the encoder does more than filtering features; it segments potential objects in the scene globally. Visualizations of the last encoder layer’s attention weights confirm its ability to roughly separate instances, crucial for decoder recognition and localization.
 
-### Application to Panoptic Segmentation
+   <div align="center">
+   <figure style={{ "width": "90%"}}>
+   ![vis](./img/detr_8.jpg)
+   </figure>
+   </div>
 
-Panoptic segmentation has garnered significant attention recently. This section is not the main focus of the paper, but the authors briefly explain its application, highlighting its future importance.
+2. **Decoder Layers and NMS Relationship**
 
-- **Experimental Setup**
+   <div align="center">
+   <figure style={{ "width": "60%"}}>
+   ![decoder layers](./img/detr_9.jpg)
+   </figure>
+   </div>
 
-  DETR was tested on the COCO dataset for panoptic segmentation. This dataset includes 80 object categories and 53 stuff categories. During DETR training, the model must predict bounding boxes around objects and stuff classes. Bounding box prediction is essential for training as the Hungarian matching algorithm relies on box distance calculations.
+   The DETR decoder has auxiliary supervision at every layer, with each layer trained to produce independent object predictions. Experiments show AP steadily improves with layer depth; the gap between first and last layer reaches +8.2 (AP) / +9.5 (AP$_{50}$).
 
-- **New Mask Head**
+   Early layers suffer from duplicated predictions due to lack of context interaction. Applying traditional NMS after the first layer significantly reduces duplicates. However, as layers deepen, the model learns to suppress duplicates internally, making NMS benefit diminish, and even cause true positive removals in the final layer, reducing AP.
 
-  ![DETR Mask Architecture](./img/detr_5.jpg)
+   Attention visualizations show decoder attention is relatively local, often focusing on object extremities (e.g., heads, feet). This aligns with encoder-driven global instance separation, indicating the decoder refines classification and localization on detailed contours.
 
-  Besides the basic DETR architecture, a new mask head was added to predict a binary mask for each predicted box. This mask head takes the Transformer decoder output for each object and computes multi-headed attention scores on encoder outputs, generating attention heatmaps for each object. To get final predictions and increase resolution, an FPN-like structure was used.
+   <div align="center">
+   <figure style={{ "width": "90%"}}>
+   ![decoder vis](./img/detr_10.jpg)
+   </figure>
+   </div>
 
-  During training, DETR was first trained to predict bounding boxes, followed by 25 epochs of mask head training. This could be done end-to-end or with separate training stages, with similar results. For final panoptic segmentation, the model uses argmax on mask scores for each pixel and assigns corresponding classes to the resulting masks, ensuring no overlap between final masks.
+3. **Role of FFN in Transformer**
 
-- **Results**
+   The feed-forward network (FFN) inside each Transformer block acts like a channel-wise 1×1 convolution. Removing FFNs reduces Transformer parameters from 17.8M to 4.8M, and total model size from 41.3M to 28.7M.
 
-  ![DETR Mask Results 1](./img/detr_6.jpg)
+   However, this causes a 2.3 AP drop, indicating FFNs, despite structural simplicity, contribute substantially to semantic separation and feature transformation.
 
-  DETR showed strong performance in panoptic segmentation, especially for stuff classes, likely due to the encoder's global reasoning ability. Despite a performance gap in stuff class mask prediction, DETR achieved competitive PQ scores, reaching 46 PQ on the COCO test set.
+4. **Positional Encoding Design and Alternatives**
 
-  ![DETR Mask Results 2](./img/detr_7.jpg)
+   <div align="center">
+   <figure style={{ "width": "90%"}}>
+   ![pos_enc](./img/detr_11.jpg)
+   </figure>
+   </div>
+
+   DETR uses two positional encodings:
+
+   - Spatial positional encoding: input image position information.
+   - Output positional encoding: embedded vectors for object queries.
+
+   Output encoding is essential and cannot be removed. For spatial encoding, several variants were tested:
+
+   - Removing spatial encoding entirely drops AP by 7.8 but still achieves over 32, showing some robustness.
+   - Using sinusoidal or learned encodings injected into attention layers yields only minor AP drops (\~1.3–1.4).
+   - Removing spatial encoding only in encoder causes just 1.3 AP loss, suggesting positional encoding is mostly critical in the decoder.
+
+   These results confirm that although Transformers naturally model sequences, explicit spatial cues remain indispensable for learning object positions and boundaries in vision tasks.
+
+5. **Decomposing Loss Contributions**
+
+   <div align="center">
+   <figure style={{ "width": "90%"}}>
+   ![loss fcn](./img/detr_12.jpg)
+   </figure>
+   </div>
+
+   DETR’s training loss consists of three parts:
+
+   - Classification loss
+   - Bounding box L1 loss
+   - Generalized IoU (GIoU) loss
+
+   Classification loss is indispensable. The authors tested ablations turning off L1 or GIoU losses:
+
+   - Using only GIoU still yields reasonable accuracy, highlighting its key contribution to localization.
+   - Using only L1 leads to significant performance drops.
+
+   The combined design remains the most stable configuration.
+
+   This validates DETR’s core loss design philosophy: rather than relying on complex post-processing, incorporate spatial and semantic metrics directly into cost calculation and loss backpropagation.
+
+### Model Behavior Analysis
+
+![analysis](./img/detr_13.jpg)
+
+In the figure above, the authors visualize prediction results on the entire COCO 2017 validation set. They randomly sample 20 object query slots and analyze the distribution of all bounding boxes predicted by these slots in terms of position and size.
+
+Each predicted box is represented by its normalized center coordinates in the \[0, 1] × \[0, 1] space, and color-coded according to its shape: green denotes small boxes, red indicates large horizontal boxes, and blue represents large vertical boxes.
+
+The results show that each slot does not operate indistinctly, but naturally develops several preference patterns:
+
+- Some slots focus on specific spatial regions (e.g., top-left corner, center),
+- Some tend to predict boxes of particular scales or shapes,
+- Almost all slots have a pattern of predicting a “full-image sized” box, common for prominent objects in COCO such as large vehicles or buildings.
+
+This spatial and scale specialization is not explicitly supervised but emerges naturally through the learning dynamics induced by the set matching loss. This indicates that DETR internally learns a form of **implicit structured prediction strategy based on query specialization**.
+
+Without relying on anchors or region proposals, each query slot effectively “attends” to specific regions or object scales, a unique behavior of set-based approaches.
+
+### Generalization to Unseen Object Counts
+
+<div align="center">
+<figure style={{ "width": "70%"}}>
+![unknown](./img/detr_14.jpg)
+</figure>
+</div>
+
+Most COCO images contain a limited number of objects per class. For instance, the training set never contains more than 13 giraffes appearing simultaneously. To test whether DETR can generalize to such extreme cases, the authors created a synthetic image containing 24 giraffes.
+
+The results show DETR successfully detects all 24 instances, providing a clear out-of-distribution test case. This demonstrates:
+
+- DETR’s object queries are not hard-coded to specific classes;
+- The model operates by flexibly assigning queries to objects based on the entire image, rather than binding classes to specific slots.
+
+This echoes the earlier design philosophy: object queries act as blank slots in set prediction, with their behavior fully driven by loss matching and attention, not predefined semantic roles. Despite this, the model spontaneously learns effective and scalable object separation capabilities.
 
 ## Conclusion
 
-No technology is perfect.
+No technique is perfect.
 
-DETR's primary challenge is detecting small objects, where it still has significant room for improvement.
+DETR clearly exhibits a bottleneck in small object detection, as confirmed by experimental data and visual analysis. Even with long training schedules and increased resolution, it still lags behind traditional methods on the AP$_S$ metric. Compared to the well-established and engineering-mature Faster R-CNN, DETR only achieves comparable performance in certain scenarios, reminding us that it is not yet a universal solution for all tasks.
 
-Moreover, compared to Faster R-CNN, which has undergone years of refinement, DETR only achieves comparable results in some scenarios, indicating it may not always be the best choice.
+However, DETR’s value lies not in outright performance superiority, but in the new conceptual and architectural possibilities it opens.
 
-However, this does not diminish the significance and importance of this paper. DETR is not just a new technology but a new way of thinking. By combining advanced Transformer architecture with bipartite matching loss, it offers a novel, direct set prediction approach.
+This is the first work to meaningfully apply the Transformer architecture to object detection, replacing traditional engineering dependencies such as anchors, proposals, and NMS with set prediction and Hungarian matching. Its highly simplified end-to-end design compresses complex pipelines into a pure sequence-to-set transformation, combining conceptual clarity with implementation elegance, endowing it with strong extensibility and theoretical appeal.
 
-DETR's simplicity and intuitiveness are major selling points. In many object detection methods, we need to go through complex annotation and specific anchor selection processes, but DETR eliminates these constraints, making the entire process simpler. Furthermore, its application range is broad, extending beyond object detection to panoptic segmentation, achieving notable results in this area. Most impressively, when dealing with large objects, its self-attention mechanism effectively captures global information in the image, surpassing other traditional methods in this aspect.
+Follow-up works based on this architecture number at least a hundred, making this a classic paper well worth multiple readings.
