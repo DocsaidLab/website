@@ -11,9 +11,7 @@ authors: Z. Yuan
 
 DETR 留給研究者們一個很好發揮的空間。
 
-- [**[20.05] DETR： 跨領域的奠基者**](../2005-detr/index.md)
-
-在 DETR 中，只有用最基本的 Transformer 架構，做最樸素的物件偵測。裡面也沒有用到什麼提點的技巧，只是單純的把圖片丟進去，然後就可以得到物件的位置和類別。
+它只用了最基本的 Transformer 架構，做最樸素的物件偵測。裡面也沒有用到什麼提升分數的技巧，只是單純的把圖片丟進去，然後就可以得到物件的位置和類別。
 
 多麽美好的論文！
 
@@ -21,29 +19,41 @@ DETR 留給研究者們一個很好發揮的空間。
 
 ## 定義問題
 
-和目前的物件偵測器相比，DETR 實在是太慢了。比時下最流行的 Faster-RCNN 比起來，推論速度慢了 2 倍，看起來好像也不是什麼大問題？
+和目前的物件偵測器相比，DETR 實在是太慢了。
 
-但訓練收斂速度慢了 20 倍！
+如果我們把它和時下最流行的 Faster-RCNN 比起來，推論速度慢了 2 倍！
 
-原本只需要 1 天的訓練時間，現在變成需要 20 天，這是多麽可怕的事情？韶光易逝，年華易老。等待模型收斂，等到頭髮都白了。
+那又怎樣？感覺好像也不是什麼大問題？
+
+沒錯，問題不在推論速度，而是訓練收斂速度，慢了 20 倍！
+
+原本只需要 1 天的訓練時間，現在變成需要 20 天，這是多麽可怕的事情？
+
+韶光易逝，年華易老。等模型收斂，等到頭髮都白了。
 
 這不行，肯定要改。
 
 ## 解決問題
 
-作者認為問題出在 Transformer 的注意力機制上。在圖片上使用 Transformer，每個像素都要對所有的像素做注意力，這表示大部分的算力都浪費在無效的地方。
+作者認為問題出在 Transformer 的注意力機制上。
 
-所以這裡不能再使用原本的 Transformer 注意力機制，而是借鑒了可變形卷積的思路，將原本的注意力機制改成一種「可變形的注意力機制」。
+在圖片上使用 Transformer，每個 pixel 都要對其他所有 pixel 做注意力運算，這表示大部分的算力都浪費在無效的地方。
+
+所以這裡不能再使用原本的 Transformer 注意力機制，而是借鑒了「可變形卷積」的思路，將原本的注意力機制改成一種「可變形的注意力機制」。
 
 :::tip
-這個時候 ViT 尚未發表，因此操作的時候都是基於每個像素點，而不是每個切分影像區塊。
+此時 ViT 尚未發表，因此操作的時候都是基於每個像素點，而不是每個切分影像區塊。
 :::
 
 ### 可變形注意力
 
+<div align="center">
+<figure style={{ "width": "80%"}}>
 ![deformable attention](./img/img2.jpg)
+</figure>
+</div>
 
-在圖像特徵圖中，給定每個查詢元素（Query Element），作者會選擇一個參考點作為基準，並且在其周圍的一些重要採樣點進行注意力操作。這與傳統 Transformer 不同，傳統方法會對整個空間上的所有點計算注意力。
+在圖像特徵圖中，給定每個查詢元素（Query Element），有別於傳統 Transformer，作者會選擇一個參考點作為基準，並且在其周圍的一些重要採樣點進行注意力操作。
 
 假設輸入的特徵圖為：
 
@@ -62,14 +72,9 @@ $$
 
 其中：
 
-- $M$ 表示注意力頭（Attention Head）的數量。
+- $M$ 表示注意力頭的數量。
 - $K$ 表示每個查詢點所選擇的採樣點數量，這些點從參考點附近的一小區域中選取。
-- $A_{mqk}$ 是第 $m$ 個注意力頭中第 $k$ 個採樣點的注意力權重，範圍在 $[0, 1]$ 之間，並且滿足歸一化條件：
-
-  $$
-  \sum_{k=1}^{K} A_{mqk} = 1
-  $$
-
+- $A_{mqk}$ 是第 $m$ 個注意力頭中第 $k$ 個採樣點的注意力權重，範圍在 $[0, 1]$ 之間。
 - $\Delta p_{mqk}$ 是第 $m$ 個注意力頭中第 $k$ 個採樣點的偏移量，這些偏移量可以是任意的實數。
 - $W_m$ 和 $W_m^{\prime}$ 是可學習的權重矩陣，負責將輸入特徵進行線性變換。
 - $x(p_q + \Delta p_{mqk})$ 表示在位置 $p_q + \Delta p_{mqk}$ 處的特徵值，因為該位置是分數值（即非整數點），因此使用雙線性插值來計算。
@@ -79,13 +84,17 @@ $$
 - 前 $2mk$ 個通道用來編碼每個採樣點的偏移量 $\Delta p_{mqk}$。
 - 剩餘的 $mk$ 個通道會經過 softmax 操作，計算出對應的注意力權重 $A_{mqk}$。
 
-這樣設計可以保證偏移量與注意力權重都是從查詢元素的特徵中學習得到的，而不是基於固定的規則。
+這種設計方式，可以保證「偏移量」與「注意力權重」都是從查詢元素的特徵中學習得到的，而不是基於固定的規則。
 
 ### 多尺度計算
 
-現代物件偵測框架通常會使用多尺度特徵圖來進行物件偵測。可變形注意力模組也可以自然地擴展為多尺度版本，允許同時在多個特徵圖層上進行採樣和操作。
+現代物件偵測框架通常會使用多尺度特徵圖來進行物件偵測。
 
-假設輸入的多尺度特徵圖為 $\{x_l\}_{l=1}^L$，每個特徵圖 $x_l \in \mathbb{R}^{C \times H_l \times W_l}$。查詢元素的參考點用正規化坐標 $\hat{p}_q \in [0, 1]^2$ 表示，則多尺度可變形注意力模組的計算公式為：
+可變形注意力模組當然也得支援多尺度版本，允許同時在多個特徵圖層上進行採樣和操作。
+
+假設輸入的多尺度特徵圖為 $\{x_l\}_{l=1}^L$，每個特徵圖 $x_l \in \mathbb{R}^{C \times H_l \times W_l}$。
+
+查詢元素的參考點用正規化坐標 $\hat{p}_q \in [0, 1]^2$ 表示，則多尺度的計算公式為：
 
 $$
 \text{MSDeformAttn}(z_q, \hat{p}_q, \{x_l\}_{l=1}^L) =
@@ -101,11 +110,13 @@ $$
 
 ### 模型架構
 
+<div align="center">
+<figure style={{ "width": "80%"}}>
 ![model](./img/img1.jpg)
+</figure>
+</div>
 
-如上圖，當我們解決了可變形注意力的問題之後，把原本 DETR 架構中的 Transformer 模組全部抽換掉。
-
-這樣就得到了 Deformable DETR。
+如上圖，當我們解決了可變形注意力的問題之後，把原本 DETR 架構中的 Transformer 模組全部抽換掉，於是就得到了 Deformable DETR。
 
 :::info
 如果理論知識你不感興趣，也可以直接到官方的 Github 上取得他們的實作。
@@ -113,6 +124,127 @@ $$
 - [**fundamentalvision/Deformable-DETR**](https://github.com/fundamentalvision/Deformable-DETR)
 
 :::
+
+### 程式碼拆解
+
+我們單獨把作者的實作拿出來看一下，到底 MSDeformAttn 和一般的 Attn 有什麼差異：
+
+```python
+class MSDeformAttn(nn.Module):
+
+    def __init__(self, d_model=256, n_levels=4, n_heads=8, n_points=4):
+        """
+        Multi-Scale Deformable Attention Module
+        :param d_model      hidden dimension
+        :param n_levels     number of feature levels
+        :param n_heads      number of attention heads
+        :param n_points     number of sampling points per attention head per feature level
+        """
+        super().__init__()
+        if d_model % n_heads != 0:
+            raise ValueError('d_model must be divisible by n_heads, but got {} and {}'.format(d_model, n_heads))
+        _d_per_head = d_model // n_heads
+        # you'd better set _d_per_head to a power of 2 which is more efficient in our CUDA implementation
+        if not _is_power_of_2(_d_per_head):
+            warnings.warn("You'd better set d_model in MSDeformAttn to make the dimension of each attention head a power of 2 "
+                          "which is more efficient in our CUDA implementation.")
+
+        self.im2col_step = 64
+
+        self.d_model = d_model
+        self.n_levels = n_levels
+        self.n_heads = n_heads
+        self.n_points = n_points
+
+        self.sampling_offsets = nn.Linear(d_model, n_heads * n_levels * n_points * 2)
+        self.attention_weights = nn.Linear(d_model, n_heads * n_levels * n_points)
+        self.value_proj = nn.Linear(d_model, d_model)
+        self.output_proj = nn.Linear(d_model, d_model)
+
+        self._reset_parameters()
+
+    def _reset_parameters(self):
+        constant_(self.sampling_offsets.weight.data, 0.)
+        thetas = torch.arange(self.n_heads, dtype=torch.float32) * (2.0 * math.pi / self.n_heads)
+        grid_init = torch.stack([thetas.cos(), thetas.sin()], -1)
+        grid_init = (grid_init / grid_init.abs().max(-1, keepdim=True)[0]).view(self.n_heads, 1, 1, 2).repeat(1, self.n_levels, self.n_points, 1)
+        for i in range(self.n_points):
+            grid_init[:, :, i, :] *= i + 1
+        with torch.no_grad():
+            self.sampling_offsets.bias = nn.Parameter(grid_init.view(-1))
+        constant_(self.attention_weights.weight.data, 0.)
+        constant_(self.attention_weights.bias.data, 0.)
+        xavier_uniform_(self.value_proj.weight.data)
+        constant_(self.value_proj.bias.data, 0.)
+        xavier_uniform_(self.output_proj.weight.data)
+        constant_(self.output_proj.bias.data, 0.)
+
+    def forward(self, query, reference_points, input_flatten, input_spatial_shapes, input_level_start_index, input_padding_mask=None):
+        """
+        :param query                       (N, Length_{query}, C)
+        :param reference_points            (N, Length_{query}, n_levels, 2), range in [0, 1], top-left (0,0), bottom-right (1, 1), including padding area
+                                        or (N, Length_{query}, n_levels, 4), add additional (w, h) to form reference boxes
+        :param input_flatten               (N, \sum_{l=0}^{L-1} H_l \cdot W_l, C)
+        :param input_spatial_shapes        (n_levels, 2), [(H_0, W_0), (H_1, W_1), ..., (H_{L-1}, W_{L-1})]
+        :param input_level_start_index     (n_levels, ), [0, H_0*W_0, H_0*W_0+H_1*W_1, H_0*W_0+H_1*W_1+H_2*W_2, ..., H_0*W_0+H_1*W_1+...+H_{L-1}*W_{L-1}]
+        :param input_padding_mask          (N, \sum_{l=0}^{L-1} H_l \cdot W_l), True for padding elements, False for non-padding elements
+
+        :return output                     (N, Length_{query}, C)
+        """
+        N, Len_q, _ = query.shape
+        N, Len_in, _ = input_flatten.shape
+        assert (input_spatial_shapes[:, 0] * input_spatial_shapes[:, 1]).sum() == Len_in
+
+        value = self.value_proj(input_flatten)
+        if input_padding_mask is not None:
+            value = value.masked_fill(input_padding_mask[..., None], float(0))
+        value = value.view(N, Len_in, self.n_heads, self.d_model // self.n_heads)
+        sampling_offsets = self.sampling_offsets(query).view(N, Len_q, self.n_heads, self.n_levels, self.n_points, 2)
+        attention_weights = self.attention_weights(query).view(N, Len_q, self.n_heads, self.n_levels * self.n_points)
+        attention_weights = F.softmax(attention_weights, -1).view(N, Len_q, self.n_heads, self.n_levels, self.n_points)
+        # N, Len_q, n_heads, n_levels, n_points, 2
+        if reference_points.shape[-1] == 2:
+            offset_normalizer = torch.stack([input_spatial_shapes[..., 1], input_spatial_shapes[..., 0]], -1)
+            sampling_locations = reference_points[:, :, None, :, None, :] \
+                                 + sampling_offsets / offset_normalizer[None, None, None, :, None, :]
+        elif reference_points.shape[-1] == 4:
+            sampling_locations = reference_points[:, :, None, :, None, :2] \
+                                 + sampling_offsets / self.n_points * reference_points[:, :, None, :, None, 2:] * 0.5
+        else:
+            raise ValueError(
+                'Last dim of reference_points must be 2 or 4, but get {} instead.'.format(reference_points.shape[-1]))
+        output = MSDeformAttnFunction.apply(
+            value, input_spatial_shapes, input_level_start_index, sampling_locations, attention_weights, self.im2col_step)
+        output = self.output_proj(output)
+        return output
+```
+
+從架構上來看，傳統 Attention 模組通常處理一張特徵圖，但這裡支援多層特徵（不同解析度），例如 ResNet FPN 輸出的多個 stage，會被展平成一大張 `input_flatten`，搭配 `input_spatial_shapes` 和 `input_level_start_index` 標記每層的大小與位置。
+
+- **每個 Query 自行學習偏移量**
+
+  ```python
+  self.sampling_offsets = nn.Linear(d_model, n_heads * n_levels * n_points * 2)
+  ```
+
+  這行的意思是，對於每一個 Query，模型會輸出多個 offset (dx, dy)，表示從 reference point 偏移的方向與距離，也就是「往哪看」。這些偏移點是學出來的，而非預先定義的固定格點。
+
+  ***
+
+- **Reference Points 決定「基準位置」**
+
+  ```python
+  if reference_points.shape[-1] == 2:
+      ...
+  elif reference_points.shape[-1] == 4:
+      ...
+  ```
+
+  注意力不再是 Query 對整張圖計算，而是以指定的 `reference_points` 為中心，在周圍偏移幾個點，做「局部加權」。這些 reference points 可以來自 Decoder query，也可以是 Encoder 特徵點的 grid 座標。
+
+  ***
+
+大概就這些，其他跟原本的 Attn 差異不大。
 
 ### 訓練策略
 
@@ -140,13 +272,21 @@ $$
 
 ### 與 DETR 的比較
 
+<div align="center">
+<figure style={{ "width": "90%"}}>
 ![table1](./img/img4.jpg)
+</figure>
+</div>
 
 根據上表，與 Faster R-CNN + FPN 相比，DETR 需要更多的訓練 epoch 才能收斂，且在小物體檢測上的表現較差。與 DETR 相比，Deformable DETR 在只需和 Faster R-CNN 相近的訓練 epoch，能夠達到更好的性能，特別是在小物體檢測方面。
 
 詳細的收斂曲線見下圖：
 
+<div align="center">
+<figure style={{ "width": "90%"}}>
 ![convergence](./img/img3.jpg)
+</figure>
+</div>
 
 通過迭代的邊界框優化和兩階段機制，該方法進一步提升了檢測準確性。
 
@@ -156,7 +296,11 @@ DETR-DC5 速度較慢的原因主要在於 Transformer 注意力機制中大量�
 
 ### 消融實驗
 
+<div align="center">
+<figure style={{ "width": "90%"}}>
 ![table2](./img/img5.jpg)
+</figure>
+</div>
 
 上表展示了變形注意力模組中不同設計選項的消融研究。
 
@@ -166,7 +310,11 @@ DETR-DC5 速度較慢的原因主要在於 Transformer 注意力機制中大量�
 
 ### SoTA 比較
 
+<div align="center">
+<figure style={{ "width": "90%"}}>
 ![table3](./img/img6.jpg)
+</figure>
+</div>
 
 在上表中，Deformable DETR 均使用了迭代邊界框優化與兩階段機制。
 

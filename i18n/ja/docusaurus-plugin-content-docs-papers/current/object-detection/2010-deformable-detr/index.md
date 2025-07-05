@@ -9,50 +9,62 @@ authors: Z. Yuan
 
 ---
 
-DETR は研究者にとって非常に良い発展の余地を残しています。
+DETR は研究者にとって非常に自由に発展させられる余地を残している。
 
-- [**[20.05] DETR: クロスドメインのパイオニア**](../2005-detr/index.md)
+それは最も基本的な Transformer 構造のみを用い、最も素朴な物体検出を行っている。中にはスコア向上のためのテクニックは特に使われておらず、ただ単純に画像を入力して物体の位置とクラスを得るだけだ。
 
-DETR では、最も基本的な Transformer アーキテクチャを使用し、最も素朴な物体検出を行っています。その中で特別な工夫はなく、単純に画像を入力して物体の位置とクラスを得ることができます。
+なんと美しい論文だろう！
 
-なんて素晴らしい論文でしょう！
+以降の研究者たちはこの考え方を基にモデルを改良すれば、論文が次々と量産されるだろう。
 
-これからの研究者たちは、このアイデアを基にモデルを改善すれば、論文は次々と出てくるのではないでしょうか？
+## 問題定義
 
-## 問題の定義
+現行の物体検出器と比べて、DETR はあまりにも遅い。
 
-現在の物体検出器と比べて、DETR は非常に遅いです。現在最も人気のある Faster-RCNN と比べると、推論速度は 2 倍遅く、見た目には大きな問題ではないように思えますが、問題は訓練の収束速度が 20 倍遅いことです！
+もし最も流行っている Faster-RCNN と比較すれば、推論速度は 2 倍遅い！
 
-元々 1 日で収束していた訓練が、今では 20 日かかるようになりました。これはどれほど恐ろしいことか！ 時間はどんどん過ぎていき、年を取っていきます。モデルが収束するのを待っている間に、髪の毛が白くなってしまいます。
+それがどうした？大した問題ではないように思える？
 
-これは許せません。改善しなければなりません。
+いいえ、問題は推論速度ではなく、訓練の収束速度が 20 倍遅いことだ！
 
-## 解決策
+本来 1 日で済む訓練が 20 日かかるとは、なんて恐ろしいことだろう。
 
-著者は問題が Transformer の注意力メカニズムにあると考えました。画像に Transformer を使用する場合、すべてのピクセルが他のすべてのピクセルに対して注意を払うため、大部分の計算リソースが無駄に使われてしまいます。
+時は流れ、若さは失われる。モデルが収束するまでに、髪は白くなってしまう。
 
-したがって、元々の Transformer の注意力メカニズムは使用できず、代わりに「可変形の注意力メカニズム」として、可変形畳み込みの考え方を借用して注意力メカニズムを変更しました。
+これは許されない、必ず改善しなければならない。
+
+## 問題解決
+
+著者は問題の原因を Transformer の注意機構にあると考えた。
+
+画像に Transformer を使う場合、各ピクセルが他のすべてのピクセルに対して注意を払う必要があり、大部分の計算リソースが無駄に消費されている。
+
+したがって、ここで従来の Transformer 注意機構は使えず、「変形可能な畳み込み（Deformable Convolution）」の発想を借りて、元の注意機構を「変形可能な注意機構」に改良した。
 
 :::tip
-この時点では ViT はまだ発表されていなかったため、操作はすべて各ピクセルを基にして行われており、画像のブロックごとに行われているわけではありません。
+この時点で ViT はまだ発表されていなかったため、処理は各ピクセル単位で行われており、画像パッチ単位ではなかった。
 :::
 
-### 可変形注意力
+### 変形可能注意機構
 
+<div align="center">
+<figure style={{ "width": "80%"}}>
 ![deformable attention](./img/img2.jpg)
+</figure>
+</div>
 
-画像の特徴マップにおいて、各クエリエレメント（Query Element）について、著者は基準点として参照点を選び、その周辺の重要なサンプリングポイントで注意力操作を行います。これは従来の Transformer とは異なり、従来の方法では全ての空間の点に対して注意を計算します。
+画像の特徴マップにおいて、各クエリ要素（Query Element）に対し、従来の Transformer と異なり、著者は基準となる参照点を選び、その周囲の重要なサンプリング点で注意操作を行う。
 
-入力特徴マップが次のようになっていると仮定します：
+入力特徴マップを次のように仮定する：
 
 $$
 x
 \in \mathbb{R}^{C \times H \times W}
 $$
 
-ここで、$C$はチャネル数、$H$と$W$は特徴マップの高さと幅を示します。
+ここで、$C$はチャネル数、$H$と$W$は特徴マップの高さと幅を表す。
 
-クエリエレメント$q$は内容特徴$z_q$と 2D 参照点$p_q$を含み、可変形注意力特徴の計算式は次のようになります：
+クエリ要素$q$は、内容特徴$z_q$と 2 次元の参照点$p_q$を含み、変形可能注意特徴の計算式は以下の通り：
 
 $$
 \text{DeformAttn}(z_q, p_q, x) = \sum_{m=1}^{M} W_m \sum_{k=1}^{K} A_{mqk} \cdot W_m^{\prime} x(p_q + \Delta p_{mqk})
@@ -60,30 +72,29 @@ $$
 
 ここで：
 
-- $M$は注意力ヘッド（Attention Head）の数。
-- $K$は各クエリポイントに選択されるサンプリング点の数で、これらの点は参照点周辺の小さな領域から選ばれます。
-- $A_{mqk}$は第$m$個の注意力ヘッドにおける第$k$個のサンプリング点の注意力重みで、範囲は$[0, 1]$であり、正規化条件を満たします：
+- $M$は注意ヘッドの数。
+- $K$は各クエリ点が選択するサンプリング点の数で、これらの点は参照点の近傍の小領域から選ばれる。
+- $A_{mqk}$は第$m$注意ヘッドにおける第$k$サンプリング点の注意重みで、$\[0,1]$の範囲を取る。
+- $\Delta p_{mqk}$は第$m$注意ヘッドにおける第$k$サンプリング点のオフセットで、任意の実数値となり得る。
+- $W_m$と$W_m^{\prime}$は学習可能な重み行列で、入力特徴を線形変換する役割を持つ。
+- $x(p_q + \Delta p_{mqk})$は位置$p_q + \Delta p_{mqk}$での特徴値を表し、その位置は実数座標（整数点でない）であるため、双線形補間で計算される。
 
-  $$
-  \sum_{k=1}^{K} A_{mqk} = 1
-  $$
+クエリ特徴$z_q$は線形射影を経て、$3mk$チャネルのテンソルを出力する：
 
-- $\Delta p_{mqk}$は第$m$個の注意力ヘッドにおける第$k$個のサンプリング点のオフセットで、これらのオフセットは任意の実数値です。
-- $W_m$と$W_m^{\prime}$は学習可能な重み行列で、入力特徴を線形変換します。
-- $x(p_q + \Delta p_{mqk})$は位置$p_q + \Delta p_{mqk}$における特徴値で、位置はスコア値（すなわち非整数点）であるため、バイリニア補間を使用して計算されます。
+- 最初の$2mk$チャネルは各サンプリング点のオフセット$\Delta p_{mqk}$をエンコード。
+- 残りの$mk$チャネルは softmax 操作により対応する注意重み$A_{mqk}$を計算。
 
-クエリ特徴$z_q$は線形投影操作を経て、$3mk$チャネルのテンソルを出力します：
+この設計により、「オフセット」と「注意重み」はいずれもクエリ要素の特徴から学習されるものであり、固定ルールに基づくものではない。
 
-- 最初の$2mk$チャネルは各サンプリング点のオフセット$\Delta p_{mqk}$をエンコードします。
-- 残りの$mk$チャネルは softmax 操作を経て、対応する注意力重み$A_{mqk}$を計算します。
+### マルチスケール計算
 
-この設計により、オフセットと注意力重みは固定のルールに基づくのではなく、クエリエレメントの特徴から学習されることが保証されます。
+現代の物体検出フレームワークは通常、マルチスケールの特徴マップを使って物体検出を行う。
 
-### 多尺度計算
+変形可能注意モジュールも当然マルチスケールをサポートし、複数の特徴マップ層で同時にサンプリングと操作を行える。
 
-現代の物体検出フレームワークでは、物体検出を行うために多尺度特徴マップを使用することが一般的です。可変形注意力モジュールは、自然に多尺度バージョンに拡張でき、複数の特徴マップ層で同時にサンプリングと操作を行うことを可能にします。
+入力のマルチスケール特徴マップを${x_l}_{l=1}^L$とし、各特徴マップ$x_l \in \mathbb{R}^{C \times H_l \times W_l}$とする。
 
-入力される多尺度特徴マップを$\{x_l\}_{l=1}^L$と仮定し、各特徴マップ$x_l \in \mathbb{R}^{C \times H_l \times W_l}$であるとします。クエリエレメントの参照点は正規化座標$\hat{p}_q \in [0, 1]^2$で表現され、多尺度可変形注意力モジュールの計算式は次のように定義されます：
+クエリ要素の参照点は正規化座標$\hat{p}_q \in \[0,1]^2$で表され、多尺度の計算式は：
 
 $$
 \text{MSDeformAttn}(z_q, \hat{p}_q, \{x_l\}_{l=1}^L) =
@@ -93,93 +104,230 @@ $$
 \sum_{m=1}^{M} W_m \sum_{l=1}^{L} \sum_{k=1}^{K} A_{mlqk} \cdot W_m^{\prime} x_l(\phi_l(\hat{p}_q) + \Delta p_{mlqk})
 $$
 
-- $L$ は入力される特徴マップの層数を表します。
-- $\phi_l(\hat{p}_q)$ はスケーリング関数で、正規化された座標を第$l$層の特徴マップ上の実際の座標に変換します。
-- 他の記号の意味は単一スケールの場合と同様です。
+- $L$は入力特徴マップの層数。
+- $\phi_l(\hat{p}_q)$は正規化座標を$l$層の特徴マップの実座標に変換するスケーリング関数。
+- その他の記号は単一スケールの場合と同様。
 
-### モデルアーキテクチャ
+### モデル構造
 
+<div align="center">
+<figure style={{ "width": "80%"}}>
 ![model](./img/img1.jpg)
+</figure>
+</div>
 
-上の図のように、可変形注意力の問題を解決した後、元々の DETR アーキテクチャの Transformer モジュールを全て取り替えました。
-
-これで、Deformable DETR が完成しました。
+上図のように、変形可能注意問題を解決した後、元の DETR の Transformer モジュールを全て置き換えたことで、Deformable DETR が得られる。
 
 :::info
-理論知識に興味がない場合は、公式の GitHub で実装を直接確認することができます。
+理論的な知識に興味がない場合は、公式の Github で実装を直接入手できる。
 
 - [**fundamentalvision/Deformable-DETR**](https://github.com/fundamentalvision/Deformable-DETR)
+  :::
 
-:::
+### コード解析
 
-### 訓練戦略
+作者の実装を単独で見てみましょう。MSDeformAttn と一般的な Attention の違いは何か：
 
-著者は**COCO 2017**データセットで実験を行いました。
+```python
+class MSDeformAttn(nn.Module):
 
-まず、バックボーンには**ResNet-50**を使用し、**ImageNet**で事前学習を行いました。ネック部分では、FPN は使用せず、直接多尺度特徴マップから特徴を抽出しています。
+    def __init__(self, d_model=256, n_levels=4, n_heads=8, n_points=4):
+        """
+        Multi-Scale Deformable Attention Module
+        :param d_model      隠れ次元数
+        :param n_levels     特徴レベル数
+        :param n_heads      アテンションヘッド数
+        :param n_points     各ヘッド・各レベルでのサンプリング点数
+        """
+        super().__init__()
+        if d_model % n_heads != 0:
+            raise ValueError('d_modelはn_headsで割り切れる必要がありますが、{}と{}が与えられました'.format(d_model, n_heads))
+        _d_per_head = d_model // n_heads
+        # CUDA実装の効率化のため、_d_per_headは2のべき乗が望ましい
+        if not _is_power_of_2(_d_per_head):
+            warnings.warn("MSDeformAttnでは各Attentionヘッドの次元を2のべき乗に設定することを推奨します。")
 
-可変形注意力の設定：
+        self.im2col_step = 64
 
-- 注意力ヘッドの数：**M = 8**
-- 各クエリが選択するサンプリングポイントの数：**K = 4**
+        self.d_model = d_model
+        self.n_levels = n_levels
+        self.n_heads = n_heads
+        self.n_points = n_points
 
-可変形トランスフォーマーエンコーダのパラメータは、異なる特徴層間で共有されています。
+        self.sampling_offsets = nn.Linear(d_model, n_heads * n_levels * n_points * 2)
+        self.attention_weights = nn.Linear(d_model, n_heads * n_levels * n_points)
+        self.value_proj = nn.Linear(d_model, d_model)
+        self.output_proj = nn.Linear(d_model, d_model)
 
-ハイパーパラメータと訓練戦略は主に DETR の設定に従っていますが、以下の点が異なります：
+        self._reset_parameters()
 
-- バウンディングボックス分類には Focal Loss を使用し、損失重みは 2 に設定されています。
-- 物体クエリの数を 100 から 300 に増加させました。
+    def _reset_parameters(self):
+        constant_(self.sampling_offsets.weight.data, 0.)
+        thetas = torch.arange(self.n_heads, dtype=torch.float32) * (2.0 * math.pi / self.n_heads)
+        grid_init = torch.stack([thetas.cos(), thetas.sin()], -1)
+        grid_init = (grid_init / grid_init.abs().max(-1, keepdim=True)[0]).view(self.n_heads, 1, 1, 2).repeat(1, self.n_levels, self.n_points, 1)
+        for i in range(self.n_points):
+            grid_init[:, :, i, :] *= i + 1
+        with torch.no_grad():
+            self.sampling_offsets.bias = nn.Parameter(grid_init.view(-1))
+        constant_(self.attention_weights.weight.data, 0.)
+        constant_(self.attention_weights.bias.data, 0.)
+        xavier_uniform_(self.value_proj.weight.data)
+        constant_(self.value_proj.bias.data, 0.)
+        xavier_uniform_(self.output_proj.weight.data)
+        constant_(self.output_proj.bias.data, 0.)
 
-モデルは 50 エポックをデフォルトで訓練し、40 エポック目に学習率は元の 0.1 倍に減少します。訓練には Adam オプティマイザーを使用し、基本学習率は$2 \times 10^{-4}$、$\beta_1 = 0.9$、$\beta_2 = 0.999$、重み減衰は$10^{-4}$です。
+    def forward(self, query, reference_points, input_flatten, input_spatial_shapes, input_level_start_index, input_padding_mask=None):
+        """
+        :param query                       (N, Length_{query}, C)
+        :param reference_points            (N, Length_{query}, n_levels, 2), 範囲は[0,1]、左上が(0,0)、右下が(1,1)、パディング領域含む
+                                        または (N, Length_{query}, n_levels, 4)、追加で(w, h)を含む参照ボックス
+        :param input_flatten               (N, \sum_{l=0}^{L-1} H_l \cdot W_l, C)
+        :param input_spatial_shapes        (n_levels, 2), [(H_0, W_0), (H_1, W_1), ..., (H_{L-1}, W_{L-1})]
+        :param input_level_start_index     (n_levels, ), [0, H_0*W_0, H_0*W_0+H_1*W_1, ...]
+        :param input_padding_mask          (N, \sum_{l=0}^{L-1} H_l \cdot W_l), パディング要素はTrue、非パディングはFalse
 
-予測物体クエリの参照点とサンプリングオフセットの線形投影の学習率は、0.1 のスケーリング係数を掛けています。
+        :return output                     (N, Length_{query}, C)
+        """
+        N, Len_q, _ = query.shape
+        N, Len_in, _ = input_flatten.shape
+        assert (input_spatial_shapes[:, 0] * input_spatial_shapes[:, 1]).sum() == Len_in
 
-## 討論
+        value = self.value_proj(input_flatten)
+        if input_padding_mask is not None:
+            value = value.masked_fill(input_padding_mask[..., None], float(0))
+        value = value.view(N, Len_in, self.n_heads, self.d_model // self.n_heads)
+        sampling_offsets = self.sampling_offsets(query).view(N, Len_q, self.n_heads, self.n_levels, self.n_points, 2)
+        attention_weights = self.attention_weights(query).view(N, Len_q, self.n_heads, self.n_levels * self.n_points)
+        attention_weights = F.softmax(attention_weights, -1).view(N, Len_q, self.n_heads, self.n_levels, self.n_points)
+        # N, Len_q, n_heads, n_levels, n_points, 2
+        if reference_points.shape[-1] == 2:
+            offset_normalizer = torch.stack([input_spatial_shapes[..., 1], input_spatial_shapes[..., 0]], -1)
+            sampling_locations = reference_points[:, :, None, :, None, :] \
+                                 + sampling_offsets / offset_normalizer[None, None, None, :, None, :]
+        elif reference_points.shape[-1] == 4:
+            sampling_locations = reference_points[:, :, None, :, None, :2] \
+                                 + sampling_offsets / self.n_points * reference_points[:, :, None, :, None, 2:] * 0.5
+        else:
+            raise ValueError(
+                'reference_pointsの最後の次元は2か4である必要がありますが、{}が与えられました。'.format(reference_points.shape[-1]))
+        output = MSDeformAttnFunction.apply(
+            value, input_spatial_shapes, input_level_start_index, sampling_locations, attention_weights, self.im2col_step)
+        output = self.output_proj(output)
+        return output
+```
+
+構造的に見ると、従来の Attention モジュールは単一の特徴マップを扱うが、ここでは複数レベル（異なる解像度）の特徴をサポートしている。例えば ResNet の FPN からの複数のステージを一つの大きな`input_flatten`に展開し、`input_spatial_shapes`や`input_level_start_index`で各レベルのサイズや位置を示している。
+
+- **各 Query ごとにオフセットを学習**
+
+  ```python
+  self.sampling_offsets = nn.Linear(d_model, n_heads * n_levels * n_points * 2)
+  ```
+
+  これは各 Query に対して複数のオフセット(dx, dy)を出力し、参照点からどの方向・距離を「見る」かを示す。これらのオフセットは学習によって得られ、事前に決められた固定格子ではない。
+
+  ***
+
+- **Reference Points が「基準位置」を決める**
+
+  ```python
+  if reference_points.shape[-1] == 2:
+      ...
+  elif reference_points.shape[-1] == 4:
+      ...
+  ```
+
+  注意はもはや Query が画像全体を見るのではなく、指定された`reference_points`を中心にその周囲数点を「局所的に重み付け」している。これらの reference points は Decoder の Query 由来や Encoder の特徴グリッド座標由来である。
+
+  ***
+
+以上が主な違いで、その他は従来の Attention とほぼ変わらない。
+
+### トレーニング戦略
+
+著者は **COCO 2017** データセットで実験を行った。
+
+まずバックボーンに **ResNet-50** を使用し、**ImageNet** で事前学習済み。ネック部分はマルチスケール特徴マップから直接特徴を抽出し、FPN は使っていない。
+
+変形可能注意機構の設定：
+
+- 注意ヘッド数：**M = 8**
+- 各クエリが選択するサンプリング点数：**K = 4**
+
+変形可能トランスフォーマーのエンコーダー内のパラメータは異なる特徴層間で共有されている。
+
+ハイパーパラメータとトレーニング戦略は主に DETR の設定に準じているが、以下の点が異なる：
+
+- バウンディングボックス分類に Focal Loss を採用し、損失重みは 2 に設定。
+- オブジェクトクエリ数を 100 から 300 に増加。
+
+モデルは 50 エポックで訓練され、40 エポック時に学習率を 0.1 倍に減衰させる。Adam オプティマイザを用い、基本学習率は $2 \times 10^{-4}$、$\beta_1=0.9$、$\beta_2=0.999$、重み減衰は $10^{-4}$。
+
+オブジェクトクエリの参照点とサンプリングオフセットの線形射影の学習率は 0.1 倍のスケールをかけている。
+
+## 議論
 
 ### DETR との比較
 
+<div align="center">
+<figure style={{ "width": "90%"}}>
 ![table1](./img/img4.jpg)
+</figure>
+</div>
 
-上表に基づくと、Faster R-CNN + FPN と比較して、DETR は収束するためにより多くの訓練エポックが必要であり、特に小物体の検出性能が低いことがわかります。DETR と比較して、Deformable DETR は Faster R-CNN と同程度の訓練エポックで、特に小物体検出においてより良い性能を達成しています。
+上表より、Faster R-CNN + FPN と比べると DETR はより多くのエポックが必要で収束が遅く、小物体検出性能が低い。一方、Deformable DETR は Faster R-CNN とほぼ同等のエポック数で学習可能で、特に小物体検出において優れた性能を示す。
 
-収束曲線の詳細は以下の通りです：
+収束曲線の詳細は以下の図を参照：
 
+<div align="center">
+<figure style={{ "width": "90%"}}>
 ![convergence](./img/img3.jpg)
+</figure>
+</div>
 
-反復的なバウンディングボックス最適化と二段階メカニズムによって、この方法は検出精度をさらに向上させました。
+反復的なバウンディングボックス最適化と二段階機構により、検出精度がさらに向上している。
 
-Deformable DETR の FLOPs は Faster R-CNN + FPN と DETR-DC5 と同程度ですが、実行速度は DETR-DC5 よりも 1.6 倍速く、Faster R-CNN + FPN よりも 25％遅いです。
+Deformable DETR の FLOPs は Faster R-CNN + FPN および DETR-DC5 とほぼ同等だが、動作速度は DETR-DC5 より 1.6 倍高速で、Faster R-CNN + FPN より 25%遅いのみである。
 
-DETR-DC5 の速度が遅い理由は、Transformer の注意力メカニズムにおける大量のメモリアクセスが原因であり、Deformable Attention はこの問題を緩和できますが、無秩序なメモリアクセスの特性により、依然として従来の畳み込みアーキテクチャ（Faster R-CNN）よりも若干遅いです。
+DETR-DC5 が遅い主因は Transformer 注意機構における大量のメモリアクセスであり、Deformable Attention はこの問題を軽減するが、メモリアクセスが非連続的になるため、伝統的な畳み込みよりやや遅い。
 
-### 消融実験
+### アブレーション実験
 
+<div align="center">
+<figure style={{ "width": "90%"}}>
 ![table2](./img/img5.jpg)
+</figure>
+</div>
 
-上表は、可変形注意力モジュール内の異なる設計選択に関する消融実験の結果を示しています。
+上表は変形注意機構における各種設計選択肢のアブレーション研究。
 
-単一スケールの入力を多尺度入力に変更することで、検出精度が効果的に向上し、平均精度（AP）が 1.7%増加し、特に小物体検出（APS）では 2.9%向上しました。サンプリングポイント数$K$を増加させることで、さらに 0.9%の AP 向上が見られました。
+マルチスケール入力を用いることで、単一スケール入力に比べ平均精度（AP）が 1.7%向上し、特に小物体検出（APS）は 2.9%改善。サンプリング点数$K$の増加でさらに 0.9%の AP 向上が見られる。
 
-多尺度の可変形注意力を使用すると、異なるスケールの層間で情報が交換され、さらに 1.5%の AP 向上が得られます。すでに層間特徴交換が使用されているため、FPN を追加しても性能は向上しません。多尺度注意力を使用せず、$K=1$のとき、可変形注意力モジュールは可変形畳み込みに退化し、精度が顕著に低下します。
+マルチスケール変形注意を用いることで異なるスケール間で情報交換が可能となり、追加で 1.5%の AP 向上が得られる。既に層間特徴交換があるため、FPN を導入しても性能向上は見られない。マルチスケール注意を用いず$K=1$の場合、変形注意は変形畳み込みに退化し、精度は大幅に低下する。
 
-### SoTA 比較
+### SoTA との比較
 
+<div align="center">
+<figure style={{ "width": "90%"}}>
 ![table3](./img/img6.jpg)
+</figure>
+</div>
 
-上表では、Deformable DETR は反復的なバウンディングボックス最適化と二段階メカニズムを使用しています。
+上表の Deformable DETR はすべて反復バウンディングボックス最適化と二段階機構を利用。
 
-ResNet-101 と ResNeXt-101 を使用した場合、この方法はそれぞれ 48.7 AP と 49.0 AP を達成し、追加の最適化技術は必要ありません。DCN を備えた ResNeXt-101 を使用すると、精度は 50.1 AP に向上します。
+ResNet-101 および ResNeXt-101 使用時、48.7 AP と 49.0 AP を達成し、追加の最適化技術は不要。DCN 付き ResNeXt-101 使用時は 50.1 AP に向上。
 
-テスト時増強（test-time augmentations）を追加すると、52.3 AP に達しました。
+テスト時増強（TTA）を加えると、52.3 AP を達成。
 
 :::info
-TTA（Test-Time Augmentations）は、テスト時に画像を複数回強化し、その結果を平均する技術です。これにより、モデルの堅牢性が向上し、精度も向上します。
+TTA（Test-Time Augmentation）はテスト時に画像を複数回強化し、複数の予測結果を平均化する技術であり、モデルの頑健性と精度を向上させる。
 :::
 
 ## 結論
 
-Deformable DETR は、従来の DETR と比較して訓練時間を大幅に短縮しました。特に小物体の検出において、DETR よりも顕著な優位性を示しました。
+Deformable DETR は従来の DETR に比べ、トレーニング時間を大幅に短縮。小物体検出性能で明確な優位を示す。
 
-Deformable DETR は、可変形注意力を導入することで運用速度を改善しましたが、無秩序なメモリアクセス特性により、従来の畳み込みニューラルネットワーク（Faster R-CNN など）よりわずかに遅いです。そのため、即時性が求められるアプリケーションでは、速度が依然として考慮すべき問題となります。
+変形注意機構を導入し速度向上を図ったが、非連続的なメモリアクセスにより伝統的な畳み込みネット（Faster R-CNN 等）よりやや遅い。そのため即時性が求められる用途では速度面の課題が残る。
 
-Deformable DETR の設計は、より効率的で実用的なエンドツーエンドの物体検出器の変種を探る新たな方向性を開き、広範な研究と応用の可能性を秘めています。
+Deformable DETR の設計は、より効率的かつ実用的なエンドツーエンド物体検出器の探求に新たな方向性を示し、広範な研究・応用の可能性を持つ。
