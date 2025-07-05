@@ -1,5 +1,5 @@
 ---
-title: "[21.01] Fast DETR"
+title: "[21.01] SMCA DETR"
 authors: Z. Yuan
 ---
 
@@ -35,7 +35,7 @@ This paper introduces prior knowledge into the cross-attention mechanism.
 
 The core idea behind the Spatially Modulated Co-Attention (SMCA) mechanism is:
 
-**Combining learnable cross-attention maps with hand-crafted query spatial priors.**
+> **Combining learnable cross-attention maps with hand-crafted query spatial priors.**
 
 SMCA dynamically predicts the initial center and scale of the box corresponding to each object query, generating 2D spatial Gaussian-weighted maps. These weight maps are element-wise multiplied with the co-attended feature maps of object queries and image features, allowing for more efficient aggregation of query-relevant information from the visual feature map.
 

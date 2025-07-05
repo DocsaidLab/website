@@ -1,5 +1,5 @@
 ---
-title: "[21.01] Fast DETR"
+title: "[21.01] SMCA DETR"
 authors: Z. Yuan
 ---
 
@@ -33,11 +33,15 @@ DETR 做的事情，相信讀者都已經很熟悉了。
 
 ### 空間調製共注意力
 
+<div align="center">
+<figure style={{ "width": "80%"}}>
 ![smca](./img/img1.jpg)
+</figure>
+</div>
 
 空間調製共注意力機制，（Spatially Modulated Co-Attention, SMCA）的核心思想是：
 
-**將可學習的跨注意力圖與手工設計的查詢空間先驗資訊相結合。**
+> **將可學習的跨注意力圖與手工設計的查詢空間先驗資訊相結合。**
 
 SMCA 動態預測與每個物件查詢對應的框的初始中心和比例，以產生 2D 空間類高斯權重圖。權重圖按元素與物件查詢和圖像特徵的共同關注特徵圖相乘，以更有效地聚合來自視覺特徵圖的查詢相關資訊。
 
