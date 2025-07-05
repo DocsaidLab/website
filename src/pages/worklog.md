@@ -10,6 +10,12 @@
 
 ## 2025
 
+### 6 月
+
+- 研究 [**ultralytics**](https://github.com/ultralytics/ultralytics) 的使用方式，試著自行撰寫一個簡單的物件偵測訓練模組。
+- **Detquark**：開始進行開發。
+- 撰寫論文筆記，目前累計 225 篇。
+
 ### 5 月
 
 - 完成專題論文導讀：[**Face Anti-Spoofing 技術地圖**](https://docsaid.org/blog/fas-paper-roadmap)

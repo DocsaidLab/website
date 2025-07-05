@@ -10,6 +10,12 @@
 
 ## 2025
 
+### 6 月
+
+- [**ultralytics**](https://github.com/ultralytics/ultralytics) の使い方を調査し、簡単な物体検出用の学習モジュールを自作してみた。
+- **Detquark**：開発を開始。
+- 論文ノートを執筆、現在の累計は 225 本に到達
+
 ### 5 月
 
 - 専題論文の読解完了：[**Face Anti-Spoofing 技術マップ**](https://docsaid.org/ja/blog/fas-paper-roadmap)

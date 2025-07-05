@@ -10,6 +10,12 @@ This page is solely for recording our work activities.
 
 ## 2025
 
+### June
+
+- Studied how to use [**ultralytics**](https://github.com/ultralytics/ultralytics) and attempted to implement a simple object detection training module from scratch.
+- **Detquark**: Development started.
+- Wrote research paper notes, currently totaling 225 entries.
+
 ### May
 
 - Completed a guided reading of the project paper: [**Face Anti-Spoofing Technology Roadmap**](https://docsaid.org/en/blog/fas-paper-roadmap)
