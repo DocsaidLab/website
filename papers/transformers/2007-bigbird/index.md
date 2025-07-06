@@ -243,7 +243,7 @@ OVC 是精細計算複雜性理論中一個廣泛使用的假設，它指出在�
 - **任務與資料集**：同樣包括 HotpotQA、Natural Questions、TriviaQA 和 WikiHop。
 - **比較基準**：將 BIGBIRD-ETC 模型與不包括 BIGBIRD 的排行榜前三名進行比較。
 
-在這個實驗中，BIGBIRD-ETC 在多個資料集上設立了新的 SoTA，特別是在 Natural Questions 的長答案、TriviaQA 和 WikiHop 測試中。與僅使用單一模型的 BIGBIRD 相比，其他領先條目多為集合模型，這可能解釋了在某些情況下 BIGBIRD 在精確答案選擇上準確率略低的原因。
+在這個實驗中，BIGBIRD-ETC 在多個資料集上設立了新的 SOTA，特別是在 Natural Questions 的長答案、TriviaQA 和 WikiHop 測試中。與僅使用單一模型的 BIGBIRD 相比，其他領先條目多為集合模型，這可能解釋了在某些情況下 BIGBIRD 在精確答案選擇上準確率略低的原因。
 
 ### 長文件摘要能力
 

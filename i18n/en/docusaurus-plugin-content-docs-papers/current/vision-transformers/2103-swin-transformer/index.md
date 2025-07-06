@@ -258,7 +258,7 @@ Table (b) shows DeiT-S performance with Cascade Mask R-CNN.
 
 DeiT's slower inference speed is mainly due to its quadratic complexity concerning input image size.
 
-### Swin vs SoTA
+### Swin vs SOTA
 
 Table (c) compares the best results with previous state-of-the-art models.
 

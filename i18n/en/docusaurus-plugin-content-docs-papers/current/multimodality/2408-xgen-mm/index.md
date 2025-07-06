@@ -215,14 +215,14 @@ The authors conducted a comprehensive evaluation of the fine-tuned model on mult
 - **OCR Capability**: Handling text-rich images (e.g., documents and charts).
 - **Hallucination Mitigation**: Reducing the generation of false content.
 
-The comparison included closed-source models under 5B parameters and state-of-the-art (SoTA) open-source models.
+The comparison included closed-source models under 5B parameters and state-of-the-art (SOTA) open-source models.
 
 :::tip
 Closed-source models under 5B parameters include:
 
 - [**[24.03] MM1: Methods, Analysis & Insights from Multimodal LLM Pre-training**](https://arxiv.org/abs/2403.09611)
 
-SoTA open-source models include:
+SOTA open-source models include:
 
 - [**[23.12] Vila: On Pre-training for Visual Language Models**](https://arxiv.org/abs/2312.07533)
 - [**[24.04] Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone**](https://arxiv.org/abs/2404.14219)

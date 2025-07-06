@@ -202,7 +202,7 @@ Replacing the 2Intra-Multi-2Intra design with a simple stack of 5 intra-scale se
 
 The authors ultimately chose the 2Intra-Multi-2Intra combination design, which achieved 43.7 mAP with fewer parameters. Sharing the weights of the Transformer and FFN further enhanced the model's generalization ability.
 
-### Comparison with Other SoTA Architectures
+### Comparison with Other SOTA Architectures
 
 ![sota](./img/img5.jpg)
 

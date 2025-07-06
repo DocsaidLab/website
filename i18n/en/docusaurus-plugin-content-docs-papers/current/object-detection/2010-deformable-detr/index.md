@@ -307,7 +307,7 @@ Using multi-scale input instead of single-scale input effectively improves detec
 
 Multi-scale deformable attention enables information exchange across different scale levels, providing an additional 1.5% AP gain. Since cross-level feature exchange is already adopted, adding FPN does not further improve performance. When multi-scale attention is not used and $K=1$, the deformable attention module degenerates to deformable convolution, with a significant drop in accuracy.
 
-### SoTA Comparison
+### SOTA Comparison
 
 <div align="center">
 <figure style={{ "width": "90%"}}>

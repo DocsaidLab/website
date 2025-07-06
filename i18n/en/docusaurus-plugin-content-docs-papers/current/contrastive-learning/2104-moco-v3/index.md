@@ -19,7 +19,7 @@ The MoCo research team couldn’t contain their excitement and eagerly began exp
 
 After the ViT architecture was released, the authors of the original paper indicated that when using a BERT-like MASK mechanism for pre-training on this architecture, the results were somewhat disappointing.
 
-Due to the looser nature of image features, simply introducing MASK to have the model perform reconstruction didn’t yield the expected results. Instead, using a supervised learning approach with a massive dataset for pre-training allowed the model to surpass other CNN architectures and achieve state-of-the-art (SoTA) performance.
+Due to the looser nature of image features, simply introducing MASK to have the model perform reconstruction didn’t yield the expected results. Instead, using a supervised learning approach with a massive dataset for pre-training allowed the model to surpass other CNN architectures and achieve state-of-the-art (SOTA) performance.
 
 This conclusion in the ViT paper indeed sparked a lot of researchers to try their hand at it:
 

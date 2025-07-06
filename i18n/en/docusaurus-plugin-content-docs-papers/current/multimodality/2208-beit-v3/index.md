@@ -156,7 +156,7 @@ This batch size is actually much smaller than many contrastive learning models, 
 
 The authors performed extensive evaluations of BEiT-3 on various public benchmarks for vision-language and vision tasks.
 
-BEiT-3 achieved state-of-the-art (SoTA) performance on multiple tasks, surpassing previous models comprehensively, as summarized in the table below:
+BEiT-3 achieved state-of-the-art (SOTA) performance on multiple tasks, surpassing previous models comprehensively, as summarized in the table below:
 
 <div align="center">
 <figure style={{"width": "90%"}}>

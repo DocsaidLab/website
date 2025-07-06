@@ -222,7 +222,7 @@ SMCA 的收斂速度比基於 DETR 的方法快 10 倍。SMCA 使用較薄的 Tr
 
 作者最後選擇 2Intra-Multi-2Intra 組合設計，該設計在參數較少的情況下達到了 43.7 mAP，並且共享 Transformer 和 FFN 的權重進一步增強了模型的泛化能力。
 
-### 對比其他 SoTA 架構
+### 對比其他 SOTA 架構
 
 ![sota](./img/img5.jpg)
 

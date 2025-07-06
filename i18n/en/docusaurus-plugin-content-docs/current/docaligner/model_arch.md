@@ -106,7 +106,7 @@ This model architecture retains the original feature extractor but modifies the 
 
 ### 1. Feature Extraction
 
-Apart from using LCNet for mobile-friendly models, we also employ a larger model to extract more features. Because we aim to develop a model that surpasses SoTA, LCNet alone isn't sufficient.
+Apart from using LCNet for mobile-friendly models, we also employ a larger model to extract more features. Because we aim to develop a model that surpasses SOTA, LCNet alone isn't sufficient.
 
 In this model, we attempt using lightweight convolutional neural networks like FastViT, MobileNetV2, etc., especially suitable for efficient feature extraction in resource-constrained environments. We expect the Backbone to extract sufficient feature information from input data to prepare for subsequent heatmap regression.
 

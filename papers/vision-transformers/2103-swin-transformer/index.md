@@ -259,7 +259,7 @@ PVT 使用 SRA 機制（Spatial Reduction Attention）來減少注意力機制�
 
 DeiT 的推理速度較低主要是由於其輸入影像大小的二次複雜度。
 
-### Swin vs SoTA
+### Swin vs SOTA
 
 表 (c) 將最佳結果與先前最先進模型的結果進行了比較。
 

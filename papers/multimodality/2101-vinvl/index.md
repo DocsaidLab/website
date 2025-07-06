@@ -123,17 +123,17 @@ authors: Z. Yuan
 
 ![VinVL results](./img/vinvl_result.jpg)
 
-1. 為了評估模型參數效率，最先進的模型 (SoTA) 被劃分為三類：
+1. 為了評估模型參數效率，最先進的模型 (SOTA) 被劃分為三類：
 
-   - SoTAS: 小型模型，在基於 Transformer 的 VLP 模型之前達到最佳表現。
-   - SoTAB: 大小與 BERT 基礎類似的 VLP 模型的最佳效能。
-   - SoTAL: 大小與 BERT Large 類似的 VLP 模型的最佳表現。
+   - SOTAS: 小型模型，在基於 Transformer 的 VLP 模型之前達到最佳表現。
+   - SOTAB: 大小與 BERT 基礎類似的 VLP 模型的最佳效能。
+   - SOTAL: 大小與 BERT Large 類似的 VLP 模型的最佳表現。
 
-2. OSCAR+ 和 VINVL 在 7 個視覺語言任務上的結果比先前的 SoTA 更好，大多數情況下都遠遠超出。
+2. OSCAR+ 和 VINVL 在 7 個視覺語言任務上的結果比先前的 SOTA 更好，大多數情況下都遠遠超出。
 3. VQA：OSCAR+B 模型優於 VQA 排行榜上的最佳模型。
 4. GQA：OSCAR+B 搭配 VINVL 是第一個超越神經狀態機 (NSM) 的 VLP 模型。
 5. 圖像字幕：OSCAR+B 模型在 COCO 圖像字幕線上排行榜上排名第一，超越了 263 個模型。
-6. NoCaps：沒有使用任何 VLP，基於 BERT 的模型加上新的視覺特徵（VinVL）已經超越了人類的 CIDEr 效能。再加上 VIVO 預訓練後，效能進一步提高，成為新的 SoTA。
+6. NoCaps：沒有使用任何 VLP，基於 BERT 的模型加上新的視覺特徵（VinVL）已經超越了人類的 CIDEr 效能。再加上 VIVO 預訓練後，效能進一步提高，成為新的 SOTA。
 
 ### 視覺特徵有多重要？
 

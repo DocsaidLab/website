@@ -246,7 +246,7 @@ OVC は計算複雑性理論の中で広く使用されている仮定であり�
 - **タスクとデータセット**：HotpotQA、Natural Questions、TriviaQA、WikiHop を含む。
 - **ベンチマーク**：BIGBIRD-ETC モデルと BIGBIRD を除いたランキング上位 3 つのモデルを比較。
 
-この実験では、BIGBIRD-ETC が複数のデータセットで新しい SoTA（最先端技術）を確立しました。特に Natural Questions の長い答え、TriviaQA、WikiHop のテストで優れた結果を示しました。単一モデルの BIGBIRD と比較して、他の上位エントリーは集合モデルが多いため、BIGBIRD が精度の高い答え選択で若干劣る理由はここにある可能性があります。
+この実験では、BIGBIRD-ETC が複数のデータセットで新しい SOTA（最先端技術）を確立しました。特に Natural Questions の長い答え、TriviaQA、WikiHop のテストで優れた結果を示しました。単一モデルの BIGBIRD と比較して、他の上位エントリーは集合モデルが多いため、BIGBIRD が精度の高い答え選択で若干劣る理由はここにある可能性があります。
 
 ### 長文書要約能力
 

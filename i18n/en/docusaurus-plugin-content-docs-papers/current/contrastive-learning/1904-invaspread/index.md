@@ -159,7 +159,7 @@ The results show that the proposed method reaches a kNN classification accuracy 
 Clearly, the learning speed of the proposed method is much faster than other competing methods. This efficiency is attributed to the direct optimization of instance features, rather than relying on classifier weights or memory banks.
 
 :::tip
-Another STL-10 dataset also achieves SoTA performance, but for brevity, it is not discussed here.
+Another STL-10 dataset also achieves SOTA performance, but for brevity, it is not discussed here.
 :::
 
 ### Experiments with Unknown Classes

@@ -217,6 +217,6 @@ Let’s summarize the semi-supervised learning framework proposed by the authors
 2. **Supervised Fine-tuning**: Adapt to a specific classification task using limited labeled data.
 3. **Knowledge Distillation**: Use unlabeled data and the teacher model’s soft labels to further enhance the student model’s performance.
 
-This approach, while already common in NLP, remains an underexplored baseline in the CV domain. The authors' experimental results show that this method significantly outperforms existing SoTA methods on ImageNet.
+This approach, while already common in NLP, remains an underexplored baseline in the CV domain. The authors' experimental results show that this method significantly outperforms existing SOTA methods on ImageNet.
 
 The power of large models in CV is becoming increasingly evident.

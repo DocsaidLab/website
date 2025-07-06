@@ -89,7 +89,7 @@ Transformer 的自注意力機制的計算複雜度為 $O(n^2)$。
 
 參考論文的 Table 2，實驗結果顯示，在小規模的模型上，Longformer 的表現得到了最優秀的結果。
 
-參考論文的 Table 3，另外在同等規模的大模型上，Longformer 的效果和其他 SoTA 模型持平。
+參考論文的 Table 3，另外在同等規模的大模型上，Longformer 的效果和其他 SOTA 模型持平。
 
 ### 自編碼實驗結果
 

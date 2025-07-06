@@ -234,7 +234,7 @@ YOLOv7 全部的實驗皆在 **Microsoft COCO 2017** 資料集上進行，並強
 
 這裡可以看出，YOLOv7 在幾乎所有對比項目中都實現了「**更小、更快、精度更高**」的目標，尤其在小模型（tiny）與中階模型（W6）上表現亮眼。
 
-### 與最新 SoTA 模型對比
+### 與最新 SOTA 模型對比
 
 <div align="center">
 <figure style={{ "width": "90%"}}>

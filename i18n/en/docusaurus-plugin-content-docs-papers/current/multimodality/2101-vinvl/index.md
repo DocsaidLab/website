@@ -114,17 +114,17 @@ Dilated Convolution, also known as atrous convolution, introduces gaps within th
 
 ![VinVL results](./img/vinvl_result.jpg)
 
-1. To evaluate model parameter efficiency, state-of-the-art models (SoTA) are categorized into three groups:
+1. To evaluate model parameter efficiency, state-of-the-art models (SOTA) are categorized into three groups:
 
-   - SoTAS: Small models that achieved the best performance before Transformer-based VLP models.
-   - SoTAB: The best-performing VLP models comparable in size to BERT Base.
-   - SoTAL: The best-performing VLP models comparable in size to BERT Large.
+   - SOTAS: Small models that achieved the best performance before Transformer-based VLP models.
+   - SOTAB: The best-performing VLP models comparable in size to BERT Base.
+   - SOTAL: The best-performing VLP models comparable in size to BERT Large.
 
-2. OSCAR+ and VinVL outperform previous SoTA across seven VL tasks, often by a significant margin.
+2. OSCAR+ and VinVL outperform previous SOTA across seven VL tasks, often by a significant margin.
 3. VQA: The OSCAR+B model outperforms the best model on the VQA leaderboard.
 4. GQA: The OSCAR+B with VinVL is the first VLP model to surpass Neural State Machine (NSM).
 5. Image Captioning: The OSCAR+B model ranks first on the COCO Image Captioning leaderboard, outperforming 263 models.
-6. NoCaps: Without any VLP, BERT-based models with new visual features (VinVL) surpass human CIDEr performance. Adding VIVO pretraining further improves performance, setting new SoTA.
+6. NoCaps: Without any VLP, BERT-based models with new visual features (VinVL) surpass human CIDEr performance. Adding VIVO pretraining further improves performance, setting new SOTA.
 
 ### How Important Are Visual Features?
 

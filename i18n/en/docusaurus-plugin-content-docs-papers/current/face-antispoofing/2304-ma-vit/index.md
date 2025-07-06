@@ -201,7 +201,7 @@ In WMCA, MA-ViT not only defeated the previous best method, CMFL (seen: 1.70%, u
 </figure>
 </div>
 
-On the WMCA test set, **MA-ViT achieved an HTER of 20.63%, outperforming the SoTA method’s 24.54%**. When ViT's CMA was replaced by MDA, the error decreased from 27.97% to 24.84%, showing that **MDA contributes more to generalization**.
+On the WMCA test set, **MA-ViT achieved an HTER of 20.63%, outperforming the SOTA method’s 24.54%**. When ViT's CMA was replaced by MDA, the error decreased from 27.97% to 24.84%, showing that **MDA contributes more to generalization**.
 
 This also echoes the original design intent of the model: **Rather than pursuing modality fusion, it is more important to address modality bias first.**
 

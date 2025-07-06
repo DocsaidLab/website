@@ -71,7 +71,7 @@ We offer two different models here: the "Heatmap Model" and the "Point Regressio
 
 On the technical side, we chose PyTorch as the training framework and converted the model to ONNX format for inference to facilitate deployment on different platforms. Additionally, we use ONNXRuntime for model inference, allowing efficient execution on both CPUs and GPUs.
 
-Our model achieves near state-of-the-art (SoTA) performance and demonstrates real-time inference speeds on mobile devices, reaching approximately 10-20 FPS. This is sufficient to meet the needs of most application scenarios.
+Our model achieves near state-of-the-art (SOTA) performance and demonstrates real-time inference speeds on mobile devices, reaching approximately 10-20 FPS. This is sufficient to meet the needs of most application scenarios.
 
 :::info
 In fields outside deep learning, "Localization" usually refers to translating a document into different languages.

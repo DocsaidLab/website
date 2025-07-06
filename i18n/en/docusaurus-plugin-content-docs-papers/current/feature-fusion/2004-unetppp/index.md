@@ -147,7 +147,7 @@ The table above shows the experimental results on the liver and spleen datasets.
 
 The results demonstrate that UNet 3+ leverages multi-scale features and deep supervision to achieve better segmentation performance with fewer parameters.
 
-### Comparison with SoTA
+### Comparison with SOTA
 
 <div align="center">
 <figure style={{"width": "70%"}}>

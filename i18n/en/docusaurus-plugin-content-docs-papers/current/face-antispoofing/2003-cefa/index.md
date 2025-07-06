@@ -35,7 +35,7 @@ As a result, anyone who wants to tackle this problem must collect a dataset for 
 
 This issue is also present in FAS.
 
-The authors found that current state-of-the-art (SoTA) models exhibit a significant performance drop when applied across ethnic groups. According to their experiments:
+The authors found that current state-of-the-art (SOTA) models exhibit a significant performance drop when applied across ethnic groups. According to their experiments:
 
 > **The same FAS model has an ACER at least 8% higher for Central Asian groups compared to East Asian groups.**
 

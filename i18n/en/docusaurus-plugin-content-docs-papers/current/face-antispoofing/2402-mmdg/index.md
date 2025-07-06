@@ -223,7 +223,7 @@ The horizontal axis in the table represents the test datasets (treated as unseen
 
 The test methods train on three datasets, testing each by leaving one out each time.
 
-The experimental results show that MMDG achieves **the best performance** in all combinations, outperforming the multi-modal baseline and achieving at least **6% better HTER / AUC** than the SoTA Flexible-modal method, VP-FAS.
+The experimental results show that MMDG achieves **the best performance** in all combinations, outperforming the multi-modal baseline and achieving at least **6% better HTER / AUC** than the SOTA Flexible-modal method, VP-FAS.
 
 This is a clear signal:
 
@@ -244,7 +244,7 @@ The results show that regardless of the method used (DG or multi-modal), replaci
 - **The baseline models using ViT (such as SSDG, IADG)** saw an immediate performance boost when the U-Adapter was inserted.
 - **Even without any fancy methods, just using ViT + U-Adapter + Cross Entropy** outperformed many older DG methods.
 
-When ReGrad was added, the overall performance reached SoTA levels, indicating that:
+When ReGrad was added, the overall performance reached SOTA levels, indicating that:
 
 1. **U-Adapter itself has "generalizability"**, able to apply to any ViT architecture without being picky.
 2. **It doesn't just fuse, but selectively ignores unreliable information**, making the feature space cleaner and more stable.

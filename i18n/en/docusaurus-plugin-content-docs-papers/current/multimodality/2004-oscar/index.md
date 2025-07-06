@@ -120,7 +120,7 @@ Oscar model inputs can be viewed from two different perspectives: here, x is the
 
 ![Oscar Parameter Efficiency Comparison](./img/oscar_3.jpg)
 
-The authors first discuss Oscar's performance and efficiency on vision-language (V+L) tasks, comparing Oscar’s performance and parameter efficiency with three different types of existing state-of-the-art (SoTA) models. Oscar shows relatively high parameter efficiency and excellent performance on most tasks compared to other large models.
+The authors first discuss Oscar's performance and efficiency on vision-language (V+L) tasks, comparing Oscar’s performance and parameter efficiency with three different types of existing state-of-the-art (SOTA) models. Oscar shows relatively high parameter efficiency and excellent performance on most tasks compared to other large models.
 
 ### Model Performance Comparison
 
@@ -130,7 +130,7 @@ The authors first discuss Oscar's performance and efficiency on vision-language 
 
    - Oscar demonstrates strong performance on most V+L (Vision-Language) tasks.
    - In 7 tasks, Oscar outperforms all existing VLP (Vision-Language Pre-training) methods.
-   - It achieves new state-of-the-art (SoTA) results in 6 out of these 7 tasks.
+   - It achieves new state-of-the-art (SOTA) results in 6 out of these 7 tasks.
 
 2. **Comparison with Other Models**
 
@@ -144,7 +144,7 @@ The authors first discuss Oscar's performance and efficiency on vision-language 
 
 4. **Demonstration of Generalization Ability**
    - The NoCaps experiment requires models to use only the COCO Captioning training set. Oscar adheres to this requirement, showcasing its strong performance and generalization ability with limited training data.
-   - Part 2 (f) might compare Oscar variants with the previous SoTA method UpDown, highlighting Oscar's advantages in different scenarios (in-domain or out-of-domain).
+   - Part 2 (f) might compare Oscar variants with the previous SOTA method UpDown, highlighting Oscar's advantages in different scenarios (in-domain or out-of-domain).
 
 Oscar significantly simplifies the learning of semantic alignment between images and text by using object labels as anchors, which is a key factor in its high efficiency and strong performance. In some tasks or scenarios, Oscar’s approach and model structure can be further enhanced by integrating other powerful techniques or prior knowledge.
 

@@ -294,7 +294,7 @@ Cross-Domain テストには、クラシックな MICO プロトコル（CASIA-F
 </figure>
 </div>
 
-HTER（半誤差率）や AUC（ROC 曲線下の面積）で見ると、**S-Adapter は四つの leave-one-out テストで ViT†ベースラインを全面的に上回り、近年の SoTA 手法である SSAN-R や MettaPattern なども凌駕しています**。
+HTER（半誤差率）や AUC（ROC 曲線下の面積）で見ると、**S-Adapter は四つの leave-one-out テストで ViT†ベースラインを全面的に上回り、近年の SOTA 手法である SSAN-R や MettaPattern なども凌駕しています**。
 
 これは、前述の設計の核心を再確認させるものです：**ViT を単に微調整するだけでなく、FAS タスクの特性に合わせて局所的な識別力とスタイルの耐干渉能力を強化しています**。
 

@@ -501,7 +501,7 @@ The results show that despite lacking a 2D structural bias, S4 is competitive wi
 
 WikiText-103 is a classic benchmark for language modeling, requiring the model to predict tokens in a sequence based on contextual order.
 
-The results demonstrate that S4, by replacing the self-attention layers in a Transformer, significantly narrows the performance gap with Transformers (just 0.8 ppl difference). Additionally, S4 sets a new state of the art (SoTA) for attention-free models, outperforming other models by over 2 ppl.
+The results demonstrate that S4, by replacing the self-attention layers in a Transformer, significantly narrows the performance gap with Transformers (just 0.8 ppl difference). Additionally, S4 sets a new state of the art (SOTA) for attention-free models, outperforming other models by over 2 ppl.
 
 ---
 

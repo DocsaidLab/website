@@ -295,7 +295,7 @@ Cross-Domain 測試採用的是經典的 MICO 協定（CASIA-FASD、Replay-Attac
 </figure>
 </div>
 
-可以看到，無論是以 HTER（半總錯誤率）還是 AUC（ROC 曲線下的面積）來看，**S-Adapter 都在四種 leave-one-out 測試中全面勝過 ViT† baseline**，也壓過多個近年 SoTA 方法，如 SSAN-R、MettaPattern 等。
+可以看到，無論是以 HTER（半總錯誤率）還是 AUC（ROC 曲線下的面積）來看，**S-Adapter 都在四種 leave-one-out 測試中全面勝過 ViT† baseline**，也壓過多個近年 SOTA 方法，如 SSAN-R、MettaPattern 等。
 
 這再次呼應了前面設計的核心精神：**不只是微調 ViT，而是針對 FAS 任務特性，增強了局部辨識與風格抗干擾能力。**
 

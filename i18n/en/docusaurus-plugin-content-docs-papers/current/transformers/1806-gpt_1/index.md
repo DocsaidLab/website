@@ -68,7 +68,7 @@ The authors did not introduce any special techniques for fine-tuning but used st
 
 ## Discussion
 
-Overall, the proposed method achieved state-of-the-art (SoTA) results in 9 out of 12 evaluated datasets, demonstrating the effectiveness of the decoder-only architecture for NLP tasks. The authors conducted a deeper exploration into the topic of zero-shot learning.
+Overall, the proposed method achieved state-of-the-art (SOTA) results in 9 out of 12 evaluated datasets, demonstrating the effectiveness of the decoder-only architecture for NLP tasks. The authors conducted a deeper exploration into the topic of zero-shot learning.
 
 ### Why is the Transformer Effective?
 

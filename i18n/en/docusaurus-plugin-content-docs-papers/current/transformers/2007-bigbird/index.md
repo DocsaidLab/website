@@ -236,7 +236,7 @@ This comparison includes multiple models, such as RoBERTa, Longformer, BIGBIRD-I
 - **Tasks and Datasets**: Including HotpotQA, Natural Questions, TriviaQA, and WikiHop.
 - **Comparison Benchmark**: Comparing the BIGBIRD-ETC model with the top three entries on the leaderboard excluding BIGBIRD.
 
-In this experiment, BIGBIRD-ETC established new SoTA in several datasets, notably in Natural Questions long answer, TriviaQA, and WikiHop tests. Compared to the single-model BIGBIRD, other leading entries are mostly ensemble models, which might explain why BIGBIRD's accuracy in precise answer selection is slightly lower in some cases.
+In this experiment, BIGBIRD-ETC established new SOTA in several datasets, notably in Natural Questions long answer, TriviaQA, and WikiHop tests. Compared to the single-model BIGBIRD, other leading entries are mostly ensemble models, which might explain why BIGBIRD's accuracy in precise answer selection is slightly lower in some cases.
 
 ### Long Document Summarization Ability
 

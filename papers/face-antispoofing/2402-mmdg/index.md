@@ -223,7 +223,7 @@ $$
 
 測試方法是將三個資料集做訓練，一個拿來測試，每次輪流 leave-one-out。
 
-實驗結果顯示：MMDG 的成績在所有組合中都是 **最好的**，不只超越了多模態的 baseline，也拉開了和 SoTA 的 Flexible-modal 方法 VP-FAS 至少 **6% HTER / AUC** 的差距。
+實驗結果顯示：MMDG 的成績在所有組合中都是 **最好的**，不只超越了多模態的 baseline，也拉開了和 SOTA 的 Flexible-modal 方法 VP-FAS 至少 **6% HTER / AUC** 的差距。
 
 這是一個蠻明確的訊號：
 
@@ -244,7 +244,7 @@ $$
 - **原本用 ViT 的 baseline 模型（像 SSDG、IADG）**，一旦插入 U-Adapter，表現立刻跳升。
 - **甚至不加任何 fancy 方法，只用 ViT + U-Adapter + Cross Entropy**，也能打贏一票老派 DG 方法。
 
-如果再加上 ReGrad，那整體表現直接達到 SoTA 水準，這說明了：
+如果再加上 ReGrad，那整體表現直接達到 SOTA 水準，這說明了：
 
 1. **U-Adapter 本身就有「泛用性」**，能套用在任意 ViT 架構上，不挑體質。
 2. **它不只是做融合，更會選擇性忽略不可靠資訊**，讓特徵空間變得更乾淨、更穩定。

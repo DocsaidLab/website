@@ -10,7 +10,7 @@ Here, we will discuss some insights and experiences we gained during the trainin
 
 ---
 
-- While our model can achieve scores close to SoTA, real-world scenarios are much more complex than this dataset. Therefore, we shouldn't overly focus on these scores. Our goal is simply to demonstrate the effectiveness of our model.
+- While our model can achieve scores close to SOTA, real-world scenarios are much more complex than this dataset. Therefore, we shouldn't overly focus on these scores. Our goal is simply to demonstrate the effectiveness of our model.
 
 - In our experiments, we found that the current design of our model architecture does not perform well in zero-shot scenarios, meaning the model requires fine-tuning to achieve optimal results in new environments. In the future, we should explore more robust model architectures with better generalization capabilities.
 
