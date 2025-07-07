@@ -256,6 +256,14 @@ $$
 
 DPSNet 的實驗結果被詳細整理於上表，並與兩個基線方法比較：參考文獻【1】是提出的原始結帳偵測系統的論文；參考文獻【8】是後續改進的 DPNet。
 
+:::tip
+這篇論文也沒有說明是他們是用 ResNet-50 還是 ResNet-101。
+
+在另外一篇 DPNet 論文中有提到在比較中使用的架構是 ResNet-101，所以這裡我們假設他們也是用 ResNet-101。
+
+參考文獻如下：[**[19.04] Data Priming Network for Automatic Check-Out**](https://arxiv.org/abs/1904.04978)
+:::
+
 每個方法都經歷了兩個版本的訓練資料：僅使用 CycleGAN 處理過的 Render 圖像，或額外加入 Copy-Paste 合成圖像構成的 Syn+Render 訓練集。DPSNet 額外補充了 Instance+Render 設定，用以驗證實例級 pseudo-label 在訓練中的影響力。
 
 我們從核心指標 **Checkout Accuracy（cAcc）** 講起，這是一項極具現實意義的衡量準則：

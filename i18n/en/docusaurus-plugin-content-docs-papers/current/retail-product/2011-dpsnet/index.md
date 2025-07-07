@@ -256,6 +256,14 @@ The regression targets $t_d$, $\hat{t}_d$ represent parameterized bounding box c
 
 The experimental results of DPSNet are detailed above, compared with two baselines: Reference [1] is the original checkout detection system paper; Reference [8] is the subsequent improved DPNet.
 
+:::tip
+This paper does not specify whether they used ResNet-50 or ResNet-101.
+
+However, another paper on DPNet mentions using ResNet-101 for comparisons, so here we assume they also used ResNet-101.
+
+Reference: [**[19.04] Data Priming Network for Automatic Check-Out**](https://arxiv.org/abs/1904.04978)
+:::
+
 Each method underwent training with two data versions: one using only CycleGAN-processed Render images, and another adding Copy-Paste synthetic images to form the Syn+Render training set. DPSNet also added an Instance+Render setup to evaluate the impact of instance-level pseudo-labels.
 
 We start with the core metric **Checkout Accuracy (cAcc)**, a highly practical measure:

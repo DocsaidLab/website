@@ -256,6 +256,14 @@ $$
 
 DPSNet の実験結果は上表に詳細にまとめられ、2 つのベースライン手法と比較されています。文献【1】は元のチェックアウト検出システムの論文、文献【8】は改良版 DPNet です。
 
+:::tip
+この論文では、使用したバックボーンが ResNet-50 か ResNet-101 かは明示されていません。
+
+一方、別の DPNet 論文では比較実験に ResNet-101 を用いていることが記載されているため、ここでは本論文でも ResNet-101 を使用していると仮定します。
+
+参考文献はこちらです：[**[19.04] Data Priming Network for Automatic Check-Out**](https://arxiv.org/abs/1904.04978)
+:::
+
 各手法は 2 種類の訓練セットで試されています：CycleGAN 処理済みの Render 画像のみを使う場合と、Copy-Paste 合成画像を加えた Syn+Render 訓練セット。DPSNet はさらに Instance+Render 設定を追加し、インスタンスレベルの疑似ラベルの影響を検証しています。
 
 主要指標である**Checkout Accuracy（cAcc）**について説明します。これは非常に実務的な評価基準です：
