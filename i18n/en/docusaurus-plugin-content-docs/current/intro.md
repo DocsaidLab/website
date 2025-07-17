@@ -100,6 +100,14 @@ Currently, we have several completed projects available on GitHub, including:
 
   Initially, I aimed to build an end-to-end model, but the results didn't meet expectations. However, I still achieved some small outcomes, so I organized it into an open-source project to help others in need.
 
+  ***
+
+- [**cifar100_training_demo**](./model-training-guide/cifar100_training_demo.md):
+
+  This is a sample project for training the CIFAR-100 dataset, primarily to demonstrate how to use PyTorch for model training.
+
+  This project includes a complete training process, including data preprocessing, model definition, training, and validation steps, making it suitable for beginners to reference.
+
 ## 🚧 Development and Unreleased Projects
 
 In addition to the above public projects, there are other projects currently under development or in internal testing.
