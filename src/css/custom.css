@@ -190,3 +190,21 @@ a:hover {
 .ant-timeline-item-content a:hover {
   color: #fe930f;
 }
+
+/* 修復水平線顯示問題 */
+.markdown hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1.5rem 0;
+  display: block;
+  height: 1px;
+}
+
+/* 確保文章內容中的水平線正常顯示 */
+article hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1.5rem 0;
+  display: block;
+  height: 1px;
+}
