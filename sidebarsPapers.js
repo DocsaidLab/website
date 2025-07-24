@@ -37,6 +37,7 @@ function countMarkdownFiles(directoryPath) {
  */
 function toSlug(relativePath) {
   return relativePath
+    .replace(/\\/g, "/")
     .split('/')
     .map(segment => encodeURIComponent(segment))
     .join('/');
