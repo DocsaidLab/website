@@ -16,10 +16,17 @@ We found that many related papers use this dataset. Moreover, starting from this
 Such an important node—you definitely can’t miss it.
 
 :::info
-**Dataset Download**: [**https://rpc-dataset.github.io/**](https://rpc-dataset.github.io/)
-
 **Leaderboard**: [**RPC-Leaderboard**](https://github.com/RPC-Dataset/RPC-Leaderboard?tab=readme-ov-file)
-:::
+
+---
+
+**Dataset Download**:
+
+1. [**https://rpc-dataset.github.io/**](https://rpc-dataset.github.io/)
+2. [**Kaggle - RPC Dataset**](https://www.kaggle.com/datasets/diyer22/retail-product-checkout-dataset?resource=download)
+
+- We recommend downloading from Kaggle, which is more convenient.
+  :::
 
 ## Problem Definition
 

@@ -16,10 +16,17 @@ authors: Z. Yuan
 これほど重要な節目は、見逃せないだろう。
 
 :::info
-**データセットダウンロード**：[**https://rpc-dataset.github.io/**](https://rpc-dataset.github.io/)
-
 **ランキング**：[**RPC-Leaderboard**](https://github.com/RPC-Dataset/RPC-Leaderboard?tab=readme-ov-file)
-:::
+
+---
+
+**データセットダウンロード**：
+
+1. [**https://rpc-dataset.github.io/**](https://rpc-dataset.github.io/)
+2. [**Kaggle - RPC Dataset**](https://www.kaggle.com/datasets/diyer22/retail-product-checkout-dataset?resource=download)
+
+- 我々は Kaggle からのダウンロードを推奨しており、より便利である。
+  :::
 
 ## 問題の定義
 

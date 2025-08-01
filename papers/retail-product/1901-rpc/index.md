@@ -16,10 +16,17 @@ authors: Z. Yuan
 這麼重要的節點，你肯定也不能錯過。
 
 :::info
-**資料集下載**：[**https://rpc-dataset.github.io/**](https://rpc-dataset.github.io/)
-
 **排行榜**：[**RPC-Leaderboard**](https://github.com/RPC-Dataset/RPC-Leaderboard?tab=readme-ov-file)
-:::
+
+---
+
+**資料集下載**：
+
+1. [**https://rpc-dataset.github.io/**](https://rpc-dataset.github.io/)
+2. [**Kaggle - RPC Dataset**](https://www.kaggle.com/datasets/diyer22/retail-product-checkout-dataset?resource=download)
+
+- 我們建議使用 Kaggle 下載，比較方便。
+  :::
 
 ## 定義問題
 
