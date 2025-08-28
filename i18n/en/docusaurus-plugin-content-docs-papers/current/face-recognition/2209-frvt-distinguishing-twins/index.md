@@ -17,10 +17,6 @@ This is an intriguing issue because the high similarity between twins can pose s
 
 In fact, "distinguishing twins" is an exceedingly challenging task for facial recognition systems.
 
-:::tip
-For more information about NIST, you can refer to [**NIST & FRVT**](https://docsaid.org/en/blog/nist-and-frvt/).
-:::
-
 ## Introduction
 
 Facial recognition technology is increasingly used in both public and private sectors for identity verification, transaction authorization, and access control.
