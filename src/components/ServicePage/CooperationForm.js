@@ -1,9 +1,10 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { Button, Form, Input, message, Select, Steps } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Button, Form, Input, message, Select, Steps, Typography } from 'antd';
+import { useEffect, useState } from 'react';
 import './CooperationForm.css';
 
 const { TextArea } = Input;
+const { Text } = Typography;
 
 export default function CooperationForm() {
   const {
@@ -85,9 +86,14 @@ export default function CooperationForm() {
         placeholder: { 'zh-hant': '-- 請選擇 --', 'en': '-- Please choose --', 'ja': '-- 選択してください --' },
       },
       budget: {
-        label: { 'zh-hant': '預期預算範圍', 'en': 'Expected budget range', 'ja': '予算範囲' },
+        label: { 'zh-hant': '預期預算範圍（TWD）', 'en': 'Expected budget range (TWD)', 'ja': '予算範囲（TWD）' },
         validation: { 'zh-hant': '請選擇預算範圍', 'en': 'Please select a budget range', 'ja': '予算範囲を選択してください' },
         placeholder: { 'zh-hant': '-- 請選擇 --', 'en': '-- Please choose --', 'ja': '-- 選択してください --' },
+        hint: {
+          'zh-hant': '區間僅供初步規劃，實際報價將於需求釐清後提供（維運型專案常採月費 Retainer）。',
+          'en': 'Ranges are for initial planning; final quote will be provided after scoping (retainer is common for ongoing work).',
+          'ja': '範囲は初期検討用です。最終見積は要件整理後に提示します（継続案件はリテイナーが一般的）。'
+        }
       },
       message: {
         label: { 'zh-hant': '需求說明 / 其他備註', 'en': 'Request details / Remarks', 'ja': '依頼内容 / その他の注意点' },
@@ -120,131 +126,65 @@ export default function CooperationForm() {
     },
   };
 
+  // ---------- Options aligned with your updated services ----------
   const projectTypeOptions = [
-    { label: currentLocale === 'en' ? 'Not sure' : currentLocale === 'ja' ? '未定' : '尚不確定', value: currentLocale === 'en' ? 'Not sure' : currentLocale === 'ja' ? '未定' : '尚不確定' },
+    { label: currentLocale === 'en' ? 'Not sure yet' : currentLocale === 'ja' ? '未定' : '尚不確定', value: 'Not sure' },
     {
       label: currentLocale === 'en'
-        ? 'Paper review and strategy advice'
+        ? 'Consulting (time-sliced, embedded collaboration)'
         : currentLocale === 'ja'
-          ? '論文レビューおよび戦略アドバイス'
-          : '論文導讀與策略建議',
-      value: currentLocale === 'en'
-        ? 'Paper review and strategy advice'
-        : currentLocale === 'ja'
-          ? '論文レビューおよび戦略アドバイス'
-          : '論文導讀與策略建議',
+          ? 'コンサル（週タイムスライス）'
+          : '顧問合作（週工時切分）',
+      value: 'Consulting (time-sliced)',
     },
     {
       label: currentLocale === 'en'
-        ? 'AI Model API integration and deployment'
+        ? 'Single model module: development & long-term maintenance'
         : currentLocale === 'ja'
-          ? 'AIモデルのAPI化と展開'
-          : 'AI模型API化與部署',
-      value: currentLocale === 'en'
-        ? 'AI Model API integration and deployment'
-        : currentLocale === 'ja'
-          ? 'AIモデルのAPI化と展開'
-          : 'AI模型API化與部署',
+          ? '単一モデルモジュール：開発と長期保守'
+          : '單一模型模組：開發與長期維護（模組制）',
+      value: 'Single model module (dev & maintenance)',
     },
     {
       label: currentLocale === 'en'
-        ? 'Educational website development'
+        ? 'MVP: demonstrable model product from 0'
         : currentLocale === 'ja'
-          ? '教育用ウェブサイトの構築'
-          : '教學型網站建置',
-      value: currentLocale === 'en'
-        ? 'Educational website development'
-        : currentLocale === 'ja'
-          ? '教育用ウェブサイトの構築'
-          : '教學型網站建置',
-    },
-    {
-      label: currentLocale === 'en'
-        ? 'AI model product MVP creation'
-        : currentLocale === 'ja'
-          ? 'AIモデル製品のMVP作成'
-          : 'AI模型產品MVP打造',
-      value: currentLocale === 'en'
-        ? 'AI model product MVP creation'
-        : currentLocale === 'ja'
-          ? 'AIモデル製品のMVP作成'
-          : 'AI模型產品MVP打造',
+          ? 'MVP：ゼロからのデモ可能なモデル製品'
+          : 'MVP 原型：從 0 打造可展示的模型產品',
+      value: 'MVP from zero',
     },
     {
       label: currentLocale === 'en'
         ? 'Other (please specify in remarks)'
         : currentLocale === 'ja'
           ? 'その他（備考に記入してください）'
-          : '其他(請在備註中說明)',
-      value: currentLocale === 'en'
-        ? 'Other (please specify in remarks)'
-        : currentLocale === 'ja'
-          ? 'その他（備考に記入してください）'
-          : '其他',
+          : '其他（請在備註中補充）',
+      value: 'Other',
     },
   ];
 
+  // TWD-only ranges (no “coffee cups”); bands cover your 100k/month retainer naturally.
   const budgetOptions = [
-    { label: currentLocale === 'en' ? 'Not sure' : currentLocale === 'ja' ? '未定' : '尚不確定', value: currentLocale === 'en' ? 'Not sure' : currentLocale === 'ja' ? '未定' : '尚不確定' },
+    { label: currentLocale === 'en' ? 'Not sure yet' : currentLocale === 'ja' ? '未定' : '尚不確定', value: 'Not sure' },
     {
-      label: currentLocale === 'en'
-        ? 'Less than 10 cups of coffee (Below NTD 1,500)'
-        : currentLocale === 'ja'
-          ? '10杯未満のコーヒー（NTD 1,500以下）'
-          : '10杯咖啡以下 (NTD 1,500 以下)',
-      value: currentLocale === 'en'
-        ? 'Less than 10 cups of coffee (Below NTD 1,500)'
-        : currentLocale === 'ja'
-          ? '10杯未満のコーヒー（NTD 1,500以下）'
-          : '10杯咖啡以下 (NTD 1,500 以下)',
+      label: currentLocale === 'en' ? 'Under TWD 50,000' : currentLocale === 'ja' ? 'TWD 50,000 未満' : 'TWD 50,000 以下',
+      value: 'Under TWD 50,000',
     },
     {
-      label: currentLocale === 'en'
-        ? '10 - 50 cups of coffee (NTD 1,500 - 8,000)'
-        : currentLocale === 'ja'
-          ? '10 - 50杯のコーヒー（NTD 1,500 - 8,000）'
-          : '10 - 50杯咖啡 (NTD 1,500 - 8,000)',
-      value: currentLocale === 'en'
-        ? '10 - 50 cups of coffee (NTD 1,500 - 8,000)'
-        : currentLocale === 'ja'
-          ? '10 - 50杯のコーヒー（NTD 1,500 - 8,000）'
-          : '10 - 50杯咖啡 (NTD 1,500 - 8,000)',
+      label: currentLocale === 'en' ? 'TWD 50,000 – 100,000' : currentLocale === 'ja' ? 'TWD 50,000 – 100,000' : 'TWD 50,000 – 100,000',
+      value: 'TWD 50,000 – 100,000',
     },
     {
-      label: currentLocale === 'en'
-        ? '50 - 200 cups of coffee (NTD 8,000 - 30,000)'
-        : currentLocale === 'ja'
-          ? '50 - 200杯のコーヒー（NTD 8,000 - 30,000）'
-          : '50 - 200杯咖啡 (NTD 8,000 - 30,000)',
-      value: currentLocale === 'en'
-        ? '50 - 200 cups of coffee (NTD 8,000 - 30,000)'
-        : currentLocale === 'ja'
-          ? '50 - 200杯のコーヒー（NTD 8,000 - 30,000）'
-          : '50 - 200杯咖啡 (NTD 8,000 - 30,000)',
+      label: currentLocale === 'en' ? 'TWD 100,000 – 200,000' : currentLocale === 'ja' ? 'TWD 100,000 – 200,000' : 'TWD 100,000 – 200,000',
+      value: 'TWD 100,000 – 200,000',
     },
     {
-      label: currentLocale === 'en'
-        ? '200 - 1,000 cups of coffee (NTD 30,000 - 150,000)'
-        : currentLocale === 'ja'
-          ? '200 - 1,000杯のコーヒー（NTD 30,000 - 150,000）'
-          : '200 - 1,000杯咖啡 (NTD 30,000 - 150,000)',
-      value: currentLocale === 'en'
-        ? '200 - 1,000 cups of coffee (NTD 30,000 - 150,000)'
-        : currentLocale === 'ja'
-          ? '200 - 1,000杯のコーヒー（NTD 30,000 - 150,000）'
-          : '200 - 1,000杯咖啡 (NTD 30,000 - 150,000)',
+      label: currentLocale === 'en' ? 'TWD 200,000 – 400,000' : currentLocale === 'ja' ? 'TWD 200,000 – 400,000' : 'TWD 200,000 – 400,000',
+      value: 'TWD 200,000 – 400,000',
     },
     {
-      label: currentLocale === 'en'
-        ? 'More than 1,000 cups of coffee (Above NTD 150,000)'
-        : currentLocale === 'ja'
-          ? '1,000杯以上のコーヒー（NTD 150,000以上）'
-          : '1,000杯咖啡以上 (NTD 150,000 以上)',
-      value: currentLocale === 'en'
-        ? 'More than 1,000 cups of coffee (Above NTD 150,000)'
-        : currentLocale === 'ja'
-          ? '1,000杯以上のコーヒー（NTD 150,000以上）'
-          : '1,000杯咖啡以上 (NTD 150,000 以上)',
+      label: currentLocale === 'en' ? 'Above TWD 400,000' : currentLocale === 'ja' ? 'TWD 400,000 以上' : 'TWD 400,000 以上',
+      value: 'Above TWD 400,000',
     },
   ];
 
@@ -290,7 +230,10 @@ export default function CooperationForm() {
         setSubmitted(true);
         setCurrentStep(0);
       } else {
-        message.error(getText(translations.messages.submitError) + (result.detail || result.message || (currentLocale === 'en' ? 'Please try again later' : currentLocale === 'ja' ? '後ほどお試しください。' : '請稍後再試')));
+        message.error(
+          getText(translations.messages.submitError) +
+          (result.detail || result.message || (currentLocale === 'en' ? 'Please try again later' : currentLocale === 'ja' ? '後ほどお試しください。' : '請稍後再試'))
+        );
       }
     } catch (error) {
       console.error(error);
@@ -382,6 +325,7 @@ export default function CooperationForm() {
           name="budget"
           rules={[{ required: true, message: getText(translations.formLabels.budget.validation) }]}
           initialValue={budgetOptions[0].value}
+          extra={<Text type="secondary" style={{ fontSize: 12 }}>{getText(translations.formLabels.budget.hint)}</Text>}
         >
           <Select placeholder={getText(translations.formLabels.budget.placeholder)} options={budgetOptions} />
         </Form.Item>

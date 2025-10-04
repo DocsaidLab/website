@@ -31,9 +31,9 @@ const i18nMessages = {
     ja: '機能展示'
   },
   'homepage.demoIntro': {
-    en: 'Below are demos of two models: DocAligner for document alignment and MRZScanner for machine-readable zone recognition.',
-    'zh-hant': '下方展示兩種模型的運行示範：DocAligner 用於文件對齊，MRZScanner 用於辨識機器可判讀區。',
-    ja: '下記に2つのモデルのデモを示します：DocAlignerは文書整列用、MRZScannerは機械可読領域の認識用です。'
+    en: 'Below are demos of two model modules: DocAligner for document alignment and MRZScanner for MRZ recognition.',
+    'zh-hant': '以下展示兩個模型模組的運行示範：DocAligner（文件對齊）與 MRZScanner（MRZ 辨識）。',
+    ja: '下記は2つのモデルモジュールのデモです：DocAligner（文書整列）と MRZScanner（MRZ認識）。'
   },
   'homepage.docAlignerDemoTitle': {
     en: 'DocAligner Demo',
@@ -41,9 +41,9 @@ const i18nMessages = {
     ja: 'DocAligner デモ'
   },
   'homepage.docAlignerDemoDesc': {
-    en: 'Upload an image containing a document to detect its corners and perform perspective correction.',
-    'zh-hant': '上傳含有文件的圖片，並嘗試檢測角點、完成透視校正。',
-    ja: '文書が含まれた画像をアップロードして、角点を検出し、透視補正を行います。'
+    en: 'Upload an image containing a document to detect key points and perform perspective correction.',
+    'zh-hant': '上傳含有文件的圖片，偵測關鍵點並進行透視校正。',
+    ja: '文書を含む画像をアップロードし、キーポイント検出と透視補正を行います。'
   },
   'homepage.mrzScannerDemoTitle': {
     en: 'MRZScanner Demo',
@@ -52,8 +52,8 @@ const i18nMessages = {
   },
   'homepage.mrzScannerDemoDesc': {
     en: 'Upload an image with MRZ (Machine Readable Zone) to detect and parse the text content.',
-    'zh-hant': '上傳含 MRZ(機器可判讀區) 的圖片，偵測並解析其中的文字內容。',
-    ja: 'MRZ（機械可読ゾーン）を含む画像をアップロードし、テキスト内容を検出・解析します。'
+    'zh-hant': '上傳含 MRZ（機器可判讀區）的圖片，偵測並解析其中的文字內容。',
+    ja: 'MRZ（機械可読ゾーン）を含む画像をアップロードし、テキストを検出・解析します。'
   },
   'homepage.followUs': {
     en: '👍 Follow our Facebook Page',
@@ -61,106 +61,118 @@ const i18nMessages = {
     ja: '👍 フェイスブックページをフォロー'
   },
 
+  // ===== Consulting & Services (re-aligned to model-centric, small studio, collaboration) =====
   'homepage.consultingTitle': {
-    en: '🤝 AI Consulting & Tech Services',
-    'zh-hant': '🤝 AI 顧問與技術服務',
-    ja: '🤝 AIコンサル＆技術サービス'
+    en: '🤝 Model-Centric Consulting & Services',
+    'zh-hant': '🤝 以模型為核心的顧問與技術服務',
+    ja: '🤝 モデル中心のコンサル＆技術サービス'
   },
   'homepage.consultingIntro': {
-    en: 'I specialize in turning research into AI applications that actually work. From paper research to model selection, API deployment, and tech site building — let’s turn your ideas into reality. 🚀',
-    'zh-hant': '我是一位深度學習與全端工程實作者，擅長將研究成果轉化為真正「跑得起來」的 AI 應用。\n從論文選題、模型選型、API 封裝，到技術網站建置，我能協助你快速落地，避免走冤枉路 🚀',
-    ja: '私は深層学習とフルスタック開発に精通しており、研究成果を実際に動作するAIアプリケーションに変換するのが得意です。論文選定からモデル選択、API構築、技術サイト制作まで、アイデアから実装まで最短ルートで確実にサポートします🚀'
+    en: 'A small model-focused studio. We turn real needs into maintainable, deployable, and evolvable model modules, working embedded with your team. Frontend/backend are lightweight—only to evaluate, showcase, and integrate models.',
+    'zh-hant': '這是一個以模型研發為核心的小型工作室。我們把真實需求轉成可維護、可部署、可演進的模型模組，並「內嵌式」與你方團隊協作。前後端僅作為輕量配套，用於評測、展示與接入。',
+    ja: '小規模なモデル特化スタジオです。実ニーズを、保守・デプロイ・進化が可能なモデルモジュールに変換し、あなたのチームと内製協働します。フロント/バックエンドは評価・デモ・接続の軽量補助のみです。'
   },
+
+  // Cards updated to match your three service lines
   'homepage.consultingCards': {
     en: [
       {
-        title: '🔧 Model Deployment & Integration',
-        desc: 'Encapsulate pretrained models into APIs and deploy with FastAPI + Docker'
+        title: '🧩 Module Dev & Maintenance',
+        desc: 'Productize one model module and maintain it long-term with versioned data & benchmarks'
       },
       {
-        title: '🌐 Tech Website Building',
-        desc: 'Use Docusaurus to quickly create doc sites, blogs, or simplified course platforms'
+        title: '🗓️ Consulting',
+        desc: '1–2 days/week embedded collaboration: experiment design, data governance, evaluation'
       },
       {
-        title: '📘 Technical Insights & Planning',
-        desc: 'Reading a paper is not the same as fully implementing it — let me guide your strategy'
+        title: '🚀 MVP from Zero',
+        desc: 'Build a minimal, demonstrable product around the model: selection, API, lightweight UI'
       },
       {
-        title: '🧠 AI MVP Project Consulting',
-        desc: 'Build an AI PoC with model, API, and basic frontend integration'
+        title: '⚡ Inference Optimization & Deployment',
+        desc: 'ONNX/TensorRT, quantization, latency budgeting; SDK/REST, batch/stream, private deploy'
       }
     ],
     'zh-hant': [
       {
-        title: '🔧 模型部署與整合',
-        desc: '協助將現成模型封裝為 API，使用 FastAPI + Docker 上線運行'
+        title: '🧩 模組開發與維護',
+        desc: '把一個模型模組產品化並長期維護，含資料版本化與 Benchmark 報表'
       },
       {
-        title: '🌐 教學網站建置',
-        desc: '用 Docusaurus 快速打造技術筆記站、部落格或簡易課程平台'
+        title: '🗓️ 顧問合作',
+        desc: '每週 1～2 天協作：實驗設計、資料治理建議、評測體系與報表'
       },
       {
-        title: '📘 技術導讀與應用規劃',
-        desc: '閱讀論文不等於懂怎麼用，我幫你提煉重點並給出落地策略'
+        title: '🚀 MVP 原型',
+        desc: '以模型為核心打造最小可展示產品：選型、API 封裝、輕量介面'
       },
       {
-        title: '🧠 AI MVP 專案顧問',
-        desc: '協助你打造可展示、可驗證的 AI PoC，整合模型、API 與前端'
+        title: '⚡ 推論最佳化與部署',
+        desc: 'ONNX/TensorRT、量化、延遲預算；SDK/REST、批次/串流、私有環境部署'
       }
     ],
     ja: [
       {
-        title: '🔧 モデル導入と統合',
-        desc: '既存のモデルをAPI化し、FastAPI + Dockerでデプロイを支援'
+        title: '🧩 モジュール開発と保守',
+        desc: '1つのモデルモジュールを製品化し、データ版管理とベンチマークで長期保守'
       },
       {
-        title: '🌐 ドキュメントサイト構築',
-        desc: 'Docusaurusを使って技術ブログや簡易コースプラットフォームを素早く構築'
+        title: '🗓️ コンサル',
+        desc: '週1〜2日で協働：実験設計、データガバナンス助言、評価とレポート'
       },
       {
-        title: '📘 技術リサーチと計画立案',
-        desc: '論文を読むだけでは実装はできません。要点を抽出し、実装に向けた戦略を提案します'
+        title: '🚀 MVP',
+        desc: 'モデル中心の最小デモ製品：選定、API化、軽量UIで価値を可視化'
       },
       {
-        title: '🧠 AI MVP プロジェクト支援',
-        desc: 'モデル・API・簡易なUIを統合し、実用的なAI PoCを構築します'
+        title: '⚡ 推論最適化とデプロイ',
+        desc: 'ONNX/TensorRT、量子化、レイテンシ管理；SDK/REST、バッチ/ストリーム、プライベート環境'
       }
     ]
   },
+
   'homepage.consultingNoticeTitle': {
-    en: '⚠️ Important Notes:',
-    'zh-hant': '⚠️ 注意事項：',
-    ja: '⚠️ 注意事項：'
+    en: '⚠️ Important Notes',
+    'zh-hant': '⚠️ 注意事項',
+    ja: '⚠️ 注意事項'
   },
+  // Replace coffee/USD with TWD + retainer info, model-first scope, international scheduling
   'homepage.consultingNoticeList': {
     en: [
-      '❌ LLM self-training not available (consultation OK)',
-      '🌍 Cross-timezone or international collaboration is welcome, but please schedule in advance for smooth coordination.',
-      '💵 All services are billed via Buy Me a Coffee (USD)',
-      '📜 NDA supported, with optional warranty and post-delivery support'
+      '🧠 Model-first scope: FE/BE are lightweight for evaluation/showcase/integration only',
+      '🗓️ Ongoing work often uses a monthly retainer; final quotes follow scoping',
+      '💵 Billing in TWD (Taiwan).',
+      '🌍 Cross-timezone/international work is welcome—please schedule in advance',
+      '❌ We don’t offer LLM self-training (consultation and system evaluation are OK)',
+      '📜 NDA supported; change logs and rollback strategy provided'
     ],
     'zh-hant': [
-      '❌ 目前不提供 LLM 模型自行訓練（可協助初步技術選型）',
-      '🌍 跨時區 / 海外合作請先預約，時程與溝通方式將另行評估',
-      '💵 所有服務透過 Buy Me a Coffee（以美元計價）',
-      '📜 可簽 NDA，並提供短期保固與後續擴充建議'
+      '🧠 以模型為核心：前/後端為評測、展示與接入的輕量配套',
+      '🗓️ 長期合作多採月保（Retainer）；實際報價以需求釐清為準',
+      '💵 以新台幣（TWD）計價',
+      '🌍 歡迎跨時區/海外合作，請先預約以便排程',
+      '❌ 不提供 LLM 自訓（可提供諮詢與系統評估）',
+      '📜 可簽 NDA，提供變更日誌與回滾策略'
     ],
     ja: [
-      '❌ 現在、大規模言語モデル（LLM）の独自トレーニングは対応不可（基本的な相談は可能）',
-      '🌍 時差のある海外クライアントの場合、打ち合わせや日程調整が必要です',
-      '💵 決済はすべて Buy Me a Coffee（USD建て）で行っています',
-      '📜 NDA締結可能、短期保証と将来的な拡張についての提案も可能'
+      '🧠 モデル中心：FE/BEは評価・デモ・接続の軽量補助',
+      '🗓️ 継続案件は月額リテイナーが一般的。見積は要件整理後に提示',
+      '💵 請求は台湾元（TWD）。',
+      '🌍 時差のある海外協業歓迎。事前にスケジュール調整をお願いします',
+      '❌ LLMの独自学習は非対応（相談・評価は可）',
+      '📜 NDA対応。変更履歴とロールバック戦略を提供'
     ]
   },
+
   'homepage.cooperationFormTitle': {
     en: 'Cooperation Form',
     'zh-hant': '合作需求表單',
     ja: '協力依頼フォーム'
   },
   'homepage.consultingMoreInfo': {
-    en: 'For full service details, pricing, and deliverables, please visit:',
-    'zh-hant': '詳細項目、價格與交付方式，歡迎參考完整頁面：👉',
-    ja: '詳細な項目、料金、納品内容については、以下のページをご参照ください：'
+    en: 'For full service details, deliverables, and budget ranges, please visit:',
+    'zh-hant': '完整服務內容、交付項目與預算區間，請參考：👉',
+    ja: 'サービス内容、納品物、予算レンジの詳細は以下をご覧ください：'
   },
   'homepage.consultingMoreInfoLinkText': {
     en: 'Full Service Overview',
