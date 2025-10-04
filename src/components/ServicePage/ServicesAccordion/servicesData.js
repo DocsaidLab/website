@@ -72,7 +72,7 @@ export const servicesData = {
             title: '服務構成（核心模組）',
             items: [
               '訓練模組：資料規劃/版本、標註流程、增強策略、訓練與微調、實驗追蹤（mAP/F1/Latency/TPR@FPR）',
-              '推論模組：SDK/REST、批次與串流、效能最佳化（ONNX/TensorRT/量化）、資源監控與延遲預算管理',
+              '推論模組：SDK/REST、批次與串流、效能最佳化（ONNX/TensorRT/量化）、資源監控',
               'Benchmark 模組：Kaggle 式排行榜頁，PR 曲線/混淆矩陣/速度–精度曲面；多模型與多資料版本比較、報表匯出',
             ],
           },
