@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocsaid_website=self.webpackChunkdocsaid_website||[]).push([["27627"],{47548:function(e){e.exports=JSON.parse('{"blogBasePath":"/en/blog","blogTitle":"Blog","authorsListPath":"/en/blog/authors"}')}}]);
