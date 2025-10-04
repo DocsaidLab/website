@@ -19,7 +19,7 @@ const path = require('path');
 const git = simpleGit();
 
 // 可根據需求調整：抓取最近 N 天的新增檔案
-const RECENT_DAYS = 30;
+const RECENT_DAYS = 60;
 
 // 若主要分支不是 "main"，請自行修改
 const MAIN_BRANCH = 'main';
