@@ -3,672 +3,485 @@
 export const servicesData = {
   'zh-hant': [
     // =============================
-    // 1. 顧問合作
+    // 1) 顧問合作（週工時切分, 協力不取代）
     // =============================
     {
       brief: {
-        title: '顧問合作',
-        scenario: '想長期顧問支援，但暫無大型專案需求；以每週固定天數獲取穩定支援',
-        deliverables: '每週固定天數顧問 / 技術支援、階段性成果與進度紀錄',
+        title: '顧問合作（週工時切分）',
+        scenario: '需要穩定的模型研發/評估建議，但暫無大型專案；以每週固定天數取得支持，與你方團隊協作而非取代',
+        deliverables: '每週顧問/技術支援、模型與資料決策建議、階段性成果與進度紀錄',
         timeline: '按週期彈性協作',
-        note: '可遠端或定期會議，適合持續優化與多次小幅開發',
+        note: '遠端或定期會議皆可；適合持續優化與多次小幅迭代',
       },
       detail: {
         description: [
-          '若你需要長期技術顧問支援，但尚未達到全職或大型專案規模，可採用「週工時切分」模式：',
+          '當你希望持續累積模型能力、但節奏尚未到專案制時，建議採用「週工時切分」模式：我們以小型團隊內嵌協作，聚焦模型品質與可靠性，沿用你的工具與流程。',
         ],
         bullets: [
           {
             title: '適合情境',
             items: [
               '需要固定技術顧問，但專案規模暫不大',
-              '每週想保留固定天數，用於規劃或功能迭代',
-              '希望能彈性分配預算與開發量',
+              '每週保留固定天數，處理資料/模型/評測的排程',
+              '希望彈性配置預算與開發量，逐步拉升模型表現',
             ],
           },
           {
             title: '服務模式',
             items: [
-              '每週 1～2 天（或協商天數）進行專案投入',
-              '可遠端或定期會議協作，時程可彈性安排',
-              '內容包含程式開發、架構諮詢、文件撰寫等',
+              '每週 1～2 天（或協商）投入；與你方工程/資料/產品團隊協作',
+              '可遠端或定期會議；沿用你方既有 repo、CI、看板與溝通工具',
+              '內容包含：模型調研/實驗設計、資料治理建議、評測體系與報表',
             ],
           },
           {
             title: '交付與時程',
             items: [
-              '以週為單位進行，持續累積成果',
-              '每週提供進度紀錄或完成項目',
-              '如有大型功能，可轉為其他專案模式',
+              '以週為單位滾動累積，維持穩定節奏',
+              '提供每週進度紀錄與決策備忘、下週優先級',
+              '若需求擴大，可平滑切換至專案模式',
             ],
           },
         ],
         extraNotes: [
-          '此模式適合開發步調尚不明確、需求會持續變動，或想穩定累積技術深度的人。',
-          '你能在每週獲得專業建議並靈活調整開發方向。',
+          '重點在「協力補位」，不取代你方團隊的主導權。',
+          '如需小型前/後端介面，僅作為模型展示與評測之配套。',
         ],
       },
     },
 
     // =============================
-    // 2. 技術論文導讀與應用策略建議
+    // 2) 單一模型模組：開發與長期維護（模組制）
     // =============================
     {
       brief: {
-        title: '技術論文導讀與應用策略建議',
-        scenario: '有想研究的論文，需判斷應用價值並快速選型，或擬定技術路線',
-        deliverables: '策略建議書 (PDF) + 線上討論',
-        timeline: '約 1 ～ 3 天',
-        note: '可簽 NDA；預留 1～2 天溝通時間',
+        title: '單一模型模組：開發與長期維護（模組制）',
+        scenario:
+          '聚焦一個 AI 模型模組，長期迭代與維護（典型如 DocAligner：文件對齊/版面理解），我們負責把模型做穩、做準、可持續演進',
+        deliverables:
+          '訓練模組 + 推論模組 + Benchmark 前端（多模型/多資料比較），版本化與維運紀錄',
+        timeline: '長期維運；以迭代週期交付',
+        note: '新增能力（如在 DocAligner 基礎上擴充版面語義/鍵值抽取/ReID）視為新模組，另行估價',
       },
       detail: {
         description: [
-          '若你發現了一篇值得關注的技術論文，不確定它是否適合投入開發或能否與你的應用場景契合，此服務能協助快速分析並提出應用策略：',
+          '我們將「單一模型模組」產品化與長期維護。以 DocAligner（文件對齊/版面理解）為例：從資料治理→訓練與評估→推論與部署→持續版本化，確保每次改版皆可量化、可回溯、可解釋。',
         ],
         bullets: [
           {
-            title: '重點',
+            title: '服務構成（核心模組）',
             items: [
-              '萃取論文的核心技術與應用特色',
-              '評估其與你需求的相容性與落地風險',
-              '提供後續行動建議（測試、小型實驗等）',
+              '訓練模組：資料規劃/版本、標註流程、增強策略、訓練與微調、實驗追蹤（mAP/F1/Latency/TPR@FPR）',
+              '推論模組：SDK/REST、批次與串流、效能最佳化（ONNX/TensorRT/量化）、資源監控與延遲預算管理',
+              'Benchmark 模組：Kaggle 式排行榜頁，PR 曲線/混淆矩陣/速度–精度曲面；多模型與多資料版本比較、報表匯出',
             ],
           },
           {
-            title: '適合需求',
+            title: '展示範例（以 DocAligner 為例）',
             items: [
-              '想判斷論文方法的開發價值，並選擇投入時機',
-              '對比多篇模型並做更精準的選型',
-              '用報告說服團隊、主管或投資人',
+              '多輪訓練/多資料版本的模型比較，對齊精度、關鍵點誤差與延遲統一呈現',
+              '前端可切換模型版本，檢視在多份公版/匿名化文件的對齊品質與熱區可視化',
+              '一鍵匯出審查報表，支援里程碑回顧',
+            ],
+          },
+          {
+            title: '協作與交付方式',
+            items: [
+              '以迭代週期協作：每一週期鎖定明確目標（資料更新/指標提升/效能優化）與交付物',
+              '提供技術紀錄與變更日誌；維持可復現的環境/腳本',
+              '可與既有標註/MLOps/CI-CD 流程整合；你方保有系統主導權',
+            ],
+          },
+          {
+            title: '模組邊界與擴充',
+            items: [
+              '新能力（版面語義分割、鍵值抽取、表格結構化、跨文件匹配）視為「新模組」',
+              '硬體/平台切換（Jetson/Edge TPU/雲 GPU）如需顯著調整，將另估',
+              '可簽 NDA；依你方規範執行資料治理與權限管控',
             ],
           },
         ],
         references: [
           {
-            label: '範例參考',
-            linkText: 'Face Anti-Spoofing 技術地圖',
-            linkHref: 'https://docsaid.org/blog/fas-paper-roadmap',
+            label: '經典專案：DocAligner（GitHub）',
+            linkText: 'DocAligner 專案連結',
+            linkHref: 'https://github.com/DocsaidLab/DocAligner',
           },
         ],
-        extraNotes: [
-          '我更注重「轉譯」成適用於你專案的決策與實作方針。',
-        ],
         warnings: [
-          '建議先提供論文與背景資訊；若論文屬未公開或機密資料，請事先說明。',
+          '本服務專注單一模型模組；大型平台建設或跨多系統整合不在本套餐範圍。',
+          '第三方/商用模型授權費用不含在內。',
+        ],
+        extraNotes: [
+          '可採 PoC → Pilot → Production 分階段路線；也可接手既有模型維護。',
+          '交付包含基準資料集與固定頻率之 Benchmark 報告（週/雙週/月，依協議）。',
         ],
       },
     },
 
     // =============================
-    // 3. AI 模型 API 化與部署服務
+    // 3) MVP 原型：從 0 打造可展示的模型產品（進階專案）
     // =============================
     {
       brief: {
-        title: 'AI 模型 API 化與部署服務',
-        scenario: '已有模型，需要封裝成 API，並穩定部署到本地或私有環境',
-        deliverables: 'FastAPI + Docker Demo、部署文件，基本保固',
-        timeline: '約 3 ～ 14 天',
-        note: '部署完成後提供短期保固',
+        title: 'MVP 原型：從 0 打造可展示的模型產品（進階專案）',
+        scenario: '需要從 0 開發 MVP：模型選型/訓練、推論部署與輕量前後端整合，用於驗證價值與內部展示',
+        deliverables: 'MVP（模型 + API + 輕量介面），專案說明與操作指南',
+        timeline: '約 1 ～ 2 個月起（依範疇）',
+        note: '分階段里程碑交付，可簽 NDA / 合約；前後端以「模型展示/評測」為主，不承諾大型平台開發',
       },
       detail: {
         description: [
-          '若你已擁有一個模型，但不知道如何封裝成 API，或需要在本地或私有環境中穩定運行，我能透過 FastAPI 與 Docker 技術為你的模型打造服務端點。',
-        ],
-        bullets: [
-          {
-            title: '內容範圍',
-            items: [
-              '使用 FastAPI + Uvicorn 進行 API 封裝',
-              '提供部署腳本（支援 Docker / 本地 / Nginx）',
-              '包含 Swagger 文件、錯誤處理與基本安全設定',
-            ],
-          },
-          {
-            title: '延伸項目',
-            items: [
-              'API 測試頁設計',
-              '部署錄影教學',
-              'HTTPS 配置',
-            ],
-          },
-        ],
-        warnings: [
-          '僅針對「已有模型」的部署，不含模型訓練或微調。',
-          '若涉多容器協同或特定平台，請事先溝通。',
-        ],
-        extraNotes: [
-          '完成後提供簡易保固，若需功能擴充或長期維運可再討論。',
-        ],
-      },
-    },
-
-    // =============================
-    // 4. 教學型網站建置服務
-    // =============================
-    {
-      brief: {
-        title: '教學型網站建置服務',
-        scenario: '以 Docusaurus 建置技術教學網站、團隊文件或部落格',
-        deliverables: '基礎網站框架 (首頁、Blog、文件模組)、部署說明',
-        timeline: '約 3 ～ 5 天',
-        note: '上線後提供基本保固；可再討論延伸功能',
-      },
-      detail: {
-        description: [
-          '若你想將技術筆記或開源文件整理成一個易於擴充、結構分明且有設計感的網站，我能使用 Docusaurus 帶給你一個輕量且功能豐富的站點。',
-        ],
-        bullets: [
-          {
-            title: '可用範圍',
-            items: [
-              '個人技術筆記或部落格',
-              '開源專案文件 / README 展示頁',
-              '團隊內部教學平台或知識庫',
-            ],
-          },
-          {
-            title: '服務內容',
-            items: [
-              '網站框架設定與模組安裝（Blog、多語系、Navbar、Sidebar 等）',
-              '客製化首頁與主視覺設計',
-              '自訂網域、SEO 設定與部署教學',
-            ],
-          },
-        ],
-        warnings: [
-          '若需更多功能（線上課程付費、會員系統、客製化後台）或大量排版調整，需另行討論。',
-        ],
-        extraNotes: [
-          '網站上線後提供基本保固；若有進一步維運或功能擴充需求，可再談合作。',
-        ],
-      },
-    },
-
-    // =============================
-    // 5. 從零打造 AI 模型產品（進階專案）
-    // =============================
-    {
-      brief: {
-        title: '從零打造 AI 模型產品（進階專案）',
-        scenario: '需從 0 開發 MVP，整合 AI 應用、模型訓練、部署、前後端串接',
-        deliverables: 'MVP 系統 (模型、API、介面整合)、專案說明與操作指南',
-        timeline: '約 1 ～ 2 個月起',
-        note: '分階段里程碑交付，可簽 NDA / 合約',
-      },
-      detail: {
-        description: [
-          '若你已有明確 AI 應用構想，但缺乏技術團隊或原型，我可協助「從 0 到 1」打造 MVP 系統，提供模型選型與評估，並進行 API 封裝、前後端整合。',
+          '當你已有明確應用構想但缺少技術原型時，我們能自模型核心出發，建立最小可行產品：包含模型選型與評估、API 封裝與部署、以及可展示的輕量介面以便溝通價值。',
         ],
         bullets: [
           {
             title: '適用場景',
             items: [
-              '新創或團隊需要快速驗證 PoC 可行性',
-              '已有場景與資料，想開發專屬 AI 功能（如 OCR、人臉辨識）',
-              '需要可展示的 demo，向決策者證明價值',
+              '新創/團隊需要快速驗證 PoC 可行性',
+              '以 DocAligner 概念為靈感的文件理解原型（對齊/版面/鍵值抽取等）',
+              '需要「可操作的 demo」來說服決策者',
             ],
           },
           {
             title: '服務範圍',
             items: [
-              '需求釐清與資料設計規劃',
+              '需求釐清與資料設計',
               '模型訓練流程與評估策略',
               'API 打包與部署（FastAPI / Docker / 私有環境）',
-              '前後端串接（或提供可視化 demo）',
+              '輕量前端/後端整合（以評測與展示為目的）',
             ],
           },
         ],
         warnings: [
-          '此服務屬進階定製專案，需明確應用方向與決策者參與，並階段性討論功能範疇。',
+          '屬進階客製專案；需與決策者就目標與範疇進行階段性對齊，避免變更失控。',
         ],
         extraNotes: [
-          '可依需求分階段交付（Prototype、Beta、正式 MVP 等），保障交付與保密。',
+          '可依需求分階段交付（Prototype → Beta → MVP），並確保保密與權限控管。',
         ],
       },
     },
-  ], // end zh-hant
+  ],
 
   // -----------------------------------------
   //                 EN
   // -----------------------------------------
   en: [
-    // 1. Consulting Partnership
+    // 1) Consulting (time-sliced, embedded collaboration)
     {
       brief: {
-        title: 'Consulting Partnership',
+        title: 'Consulting (Time-Sliced, Embedded)',
         scenario:
-          'Seeking ongoing technical consulting without a full-scale project; allocate fixed days each week for stable support',
-        deliverables: 'Weekly consulting / technical support, staged deliverables & progress logs',
-        timeline: 'Flexible weekly collaboration',
-        note: 'Remote or scheduled meetings, suitable for continuous improvements with small increments',
+          'Need steady model R&D/evaluation guidance without a large project; fixed weekly days with embedded collaboration (we augment, not replace)',
+        deliverables: 'Weekly consulting/tech support, model/data decisions, staged notes & progress logs',
+        timeline: 'Flexible, week-based cadence',
+        note: 'Remote or scheduled sessions; great for continuous improvements and small iterations',
       },
       detail: {
         description: [
-          'If you need long-term technical consulting but are not ready for a full-time or large project, consider a “weekly time-slice” model:',
+          'When you want to compound model capability but are not ready for project mode, use a “weekly time-slice” model: we embed into your process, focus on model quality/reliability, and use your toolchain.',
         ],
         bullets: [
           {
             title: 'Suitable Scenarios',
             items: [
-              'Need stable consulting support but project scale is still small',
-              'Want to reserve fixed days each week for planning or feature iteration',
-              'Prefer flexible ways to allocate development resources',
+              'Stable consulting needed but current scope is small',
+              'Reserve fixed weekly days for data/model/evaluation work',
+              'Prefer flexible budget/bandwidth allocation while lifting metrics',
             ],
           },
           {
             title: 'Service Model',
             items: [
-              'Dedicate 1–2 days per week (or agreed upon) for project involvement',
-              'Remote or scheduled collaboration, flexible scheduling',
-              'Includes coding, architecture consulting, documentation, etc.',
+              '1–2 days/week (or agreed) with your eng/data/product teams',
+              'Remote or scheduled; we adopt your repos, CI, boards, comms',
+              'Model research/experiment design, data governance advice, evaluation & reports',
             ],
           },
           {
             title: 'Deliverables & Timeline',
             items: [
-              'Operate on a weekly cycle, continuously accumulating progress',
-              'Provide progress updates or completed items each week',
-              'For larger features, we can switch to other project modes',
+              'Weekly rhythm with compounding progress',
+              'Weekly update notes: decisions, diffs, next priorities',
+              'Seamless upgrade to project mode when scope grows',
             ],
           },
         ],
         extraNotes: [
-          'Ideal for teams with uncertain development pace or evolving requirements, aiming to steadily grow technical depth.',
-          'You will receive professional advice weekly and can adjust direction dynamically.',
+          'We augment your team; you retain ownership.',
+          'Any frontend/backend is lightweight for showcasing/evaluation only.',
         ],
       },
     },
 
-    // 2. Technical Paper Reading & Strategy
+    // 2) Single Model Module: Development & Long-Term Maintenance (Modular)
     {
       brief: {
-        title: 'Technical Paper Insight & Strategy',
+        title: 'Single Model Module: Development & Long-Term Maintenance',
         scenario:
-          'Have a paper to study? Need to assess its practical value, choose implementation paths, or plan a technical route',
-        deliverables: 'Strategy report (PDF) + online discussion',
-        timeline: 'Around 1–3 days',
-        note: 'NDA possible; reserve at least 1–2 days for communication',
+          'Focus on one AI model module for iterative development and maintenance (e.g., DocAligner for alignment/layout). We make the model accurate, stable, and evolvable.',
+        deliverables:
+          'Training module + Inference module + Benchmark web (multi-model/dataset comparisons), versioned ops logs',
+        timeline: 'Long-term; delivered in iterative cycles',
+        note: 'New capabilities (e.g., extending DocAligner with semantic layout/key-value/ReID) are separate modules and quoted separately',
       },
       detail: {
         description: [
-          'If you find a noteworthy technical paper but are unsure whether it suits your use case, this service provides a quick analysis and strategic suggestions:',
+          'We productize and maintain a single model module end-to-end. Using DocAligner as the example: data governance → training & evaluation → inference & deployment → ongoing versioning, making every release measurable, traceable, and explainable.',
         ],
         bullets: [
           {
-            title: 'Key Points',
+            title: 'Included (Core)',
             items: [
-              'Extract the core techniques and application highlights from the paper',
-              'Evaluate compatibility with your requirements and potential risks',
-              'Offer next-step suggestions (testing, small-scale experiments, etc.)',
+              'Training: data planning/versioning, labeling workflow, augmentation, training & finetune, experiment tracking (mAP/F1/Latency/TPR@FPR)',
+              'Inference: SDK/REST, batch & streaming, perf optimization (ONNX/TensorRT/quantization), resource monitoring, latency budgeting',
+              'Benchmark web: Kaggle-like leaderboard with PR/CM/speed–accuracy surfaces; compare across models & dataset versions; export reports',
             ],
           },
           {
-            title: 'Ideal For',
+            title: 'Showcase (DocAligner)',
             items: [
-              'Deciding whether a paper’s method is worth developing and when to invest',
-              'Comparing multiple models for more precise selection',
-              'Using a concise report to convince your team, executives, or investors',
+              'Compare models over rounds/dataset versions: alignment accuracy, keypoint error, latency',
+              'Switch model versions on a web page and visualize hot zones on public/anon docs',
+              'One-click report export for internal reviews & milestones',
+            ],
+          },
+          {
+            title: 'Collaboration & Delivery',
+            items: [
+              'Iteration-based: each cycle pins targets (data refresh/metric lift/perf tuning) and deliverables',
+              'Technical notes/changelogs; reproducible env/scripts',
+              'Integrates with your labeling/MLOps/CI-CD; you keep ownership/control',
+            ],
+          },
+          {
+            title: 'Boundaries & Extensions',
+            items: [
+              'New capabilities (layout semantics, key-value extraction, table structuring, cross-doc linking) are new modules',
+              'Platform shifts (Jetson/Edge TPU/cloud GPU) may require re-estimation',
+              'NDA and data governance aligned to your policies',
             ],
           },
         ],
         references: [
           {
-            label: 'Sample Reference',
-            linkText: 'Face Anti-Spoofing Tech Roadmap',
-            linkHref: 'https://docsaid.org/blog/fas-paper-roadmap',
+            label: 'Classic Project: DocAligner (GitHub)',
+            linkText: 'DocAligner Repository',
+            linkHref: 'https://github.com/DocsaidLab/DocAligner',
           },
         ],
-        extraNotes: [
-          'Beyond simple “translation,” the focus is on turning the paper into actionable strategies for your project.',
-        ],
         warnings: [
-          'Recommended to provide the paper and background info in advance; if the paper is confidential, please mention beforehand.',
+          'Scope is a single model module; large platform build-outs/cross-system integration are out of scope.',
+          'Third-party/commercial model licensing is excluded.',
+        ],
+        extraNotes: [
+          'Supports PoC → Pilot → Production; we can also take over existing models.',
+          'Baseline datasets and periodic benchmark reports (weekly/biweekly/monthly) included by agreement.',
         ],
       },
     },
 
-    // 3. AI Model API & Deployment
+    // 3) MVP from Zero: Demonstrable Model Product (Advanced)
     {
       brief: {
-        title: 'AI Model API & Deployment',
-        scenario: 'Have a trained model, need to expose it as an API, deploy locally or in a private environment',
-        deliverables: 'FastAPI + Docker demo, documentation, basic support',
-        timeline: 'Approx. 3–14 days',
-        note: 'Short-term support after deployment',
+        title: 'MVP from Zero: Demonstrable Model Product (Advanced)',
+        scenario:
+          'Build an MVP from scratch: model selection/training, inference deployment, and lightweight FE/BE for showcasing value',
+        deliverables: 'MVP (model + API + lightweight UI), docs & user guide',
+        timeline: 'Approx. 1–2 months+ depending on scope',
+        note: 'Milestone-based; NDA/contract ready. FE/BE is for model demo/evaluation, not for large platform dev.',
       },
       detail: {
         description: [
-          'If you already have a trained model but are unsure how to wrap it as an API or run it stably on your own infrastructure, I use FastAPI & Docker to build a service endpoint.',
-        ],
-        bullets: [
-          {
-            title: 'Scope',
-            items: [
-              'Wrap the model with FastAPI + Uvicorn',
-              'Provide deployment scripts (Docker / local / Nginx)',
-              'Include Swagger docs, error handling, basic security settings',
-            ],
-          },
-          {
-            title: 'Extended Options',
-            items: [
-              'API test page design',
-              'Deployment video tutorial',
-              'HTTPS setup',
-            ],
-          },
-        ],
-        warnings: [
-          'For existing models only—no training or fine-tuning included.',
-          'If you require multi-container orchestration or specialized platforms, please discuss first.',
-        ],
-        extraNotes: [
-          'Short-term support post-deployment. Further expansions or long-term maintenance can be discussed.',
-        ],
-      },
-    },
-
-    // 4. Educational Website with Docusaurus
-    {
-      brief: {
-        title: 'Educational Website Setup',
-        scenario: 'Use Docusaurus to build a documentation or blogging platform for technical content',
-        deliverables: 'Basic website structure (home, blog, doc modules), deployment guides',
-        timeline: 'Approx. 3–5 days',
-        note: 'Basic support after launch; additional features can be discussed',
-      },
-      detail: {
-        description: [
-          'If you want to organize your technical notes or open-source docs into a well-structured, design-oriented site, I can help you build a lightweight yet feature-rich website using Docusaurus.',
-        ],
-        bullets: [
-          {
-            title: 'Use Cases',
-            items: [
-              'Personal tech blogs or note collections',
-              'Open-source project documentation / README showcase',
-              'Team internal knowledge base or learning portal',
-            ],
-          },
-          {
-            title: 'Service Outline',
-            items: [
-              'Framework setup and modules (Blog, i18n, Navbar, Sidebar, etc.)',
-              'Customized homepage and visual design',
-              'Custom domain, SEO setup, and deployment instructions',
-            ],
-          },
-        ],
-        warnings: [
-          'For advanced features (paid courses, membership systems, custom backends), further discussion is required.',
-        ],
-        extraNotes: [
-          'After launch, basic support is provided. For extended maintenance or feature expansions, let’s talk further.',
-        ],
-      },
-    },
-
-    // 5. Full AI Product Development (Advanced)
-    {
-      brief: {
-        title: 'Full AI Product Development (Advanced)',
-        scenario: 'Need to build an MVP from scratch, integrating AI, model training, deployment, frontend & backend',
-        deliverables: 'MVP system (model, API, interface integration), project docs & user guide',
-        timeline: 'Approx. 1–2 months+',
-        note: 'Milestone-based delivery, NDA or contract possible',
-      },
-      detail: {
-        description: [
-          'If you have a clear AI application idea but lack a dedicated tech team or prototype, I can assist in building an MVP from the ground up, including model selection & evaluation, API packaging, and front/backend integration.',
+          'When you have a clear application idea but lack a prototype, we build the minimal viable product around the model: selection/evaluation, API packaging/deploy, and a small UI to communicate value to stakeholders.',
         ],
         bullets: [
           {
             title: 'Ideal Scenarios',
             items: [
-              'Startups or teams needing a quick PoC feasibility check',
-              'Have data & use cases, want custom AI features (OCR, face recognition, etc.)',
-              'Need a functional demo to convince decision-makers or investors',
+              'Startups/teams needing fast PoC validation',
+              'DocAligner-inspired document understanding prototype (alignment/layout/key-value, etc.)',
+              'A working demo to persuade decision-makers',
             ],
           },
           {
             title: 'Service Scope',
             items: [
-              'Requirement analysis and data design',
-              'Model training process & evaluation strategy',
-              'API packaging & deployment (FastAPI / Docker / private environment)',
-              'Frontend-backend integration (or a visual demo interface)',
+              'Requirements analysis & data design',
+              'Training pipeline & evaluation strategy',
+              'API packaging & deployment (FastAPI / Docker / private env)',
+              'Lightweight FE/BE integration for evaluation/showcase',
             ],
           },
         ],
         warnings: [
-          'This is a tailored, advanced project; it requires clear objectives and iterative discussions about feature scope.',
+          'Tailored and advanced; needs iterative scope alignment with decision-makers.',
         ],
         extraNotes: [
-          'We can deliver in phases (Prototype, Beta, final MVP) with confidentiality and IP protection.',
+          'Phased delivery (Prototype → Beta → MVP) with confidentiality and access control.',
         ],
       },
     },
-  ], // end en
+  ],
 
   // -----------------------------------------
   //                 JA
   // -----------------------------------------
   ja: [
-    // 1. コンサルティングパートナーシップ
+    // 1) コンサル（週単位タイムスライス、内製チームと協働）
     {
       brief: {
-        title: 'コンサルティングパートナーシップ',
+        title: 'コンサルティング（週タイムスライス・内製協働）',
         scenario:
-          '大規模なプロジェクトではなく、定期的な技術支援を求めている。週単位で固定日を確保して安定したサポートを受けたい',
-        deliverables: '毎週固定のコンサル / 技術支援、進捗ログや成果物',
+          '大規模案件ではないが、モデルR&D/評価の継続支援が必要。週の固定日を確保し、あなたのチームを増強（置き換えではなく協働）',
+        deliverables: '毎週のコンサル/技術支援、モデル/データの意思決定メモ、進捗ログ',
         timeline: '週単位で柔軟に対応',
-        note: 'リモートまたは定期ミーティング可能。小規模開発を継続的に改善するのに最適',
+        note: 'リモート/定期ミーティング可。小さな反復で着実に前進',
       },
       detail: {
         description: [
-          'フルタイムや大規模プロジェクトまでは必要ないが、長期的な技術コンサルを望む場合、「週単位の時間切り分け」モデルを検討できます：',
+          'プロジェクト化する前段階でもモデル力を積み上げたい場合、「週タイムスライス」がおすすめです。あなたのツールチェーンに合わせ、品質/信頼性を重視して内製チームと協働します。',
         ],
         bullets: [
           {
             title: '想定シチュエーション',
             items: [
-              '専任の技術アドバイザーが必要だが、まだ大規模ではない',
-              '週ごとに固定日を設け、計画・機能追加を継続したい',
-              '予算と開発リソースを柔軟に配分したい',
+              '安定した助言が必要だが現状スコープは小さい',
+              'データ/モデル/評価作業のため週の固定日を確保したい',
+              '予算/開発リソースを柔軟に配分しつつ指標を伸ばしたい',
             ],
           },
           {
             title: 'サービスモデル',
             items: [
-              '週1～2日（または相談）でプロジェクト支援',
-              'リモートや定期ミーティングでの協力、スケジュールは柔軟',
-              'プログラミング、アーキテクチャ相談、ドキュメント作成など含む',
+              '週1〜2日（応相談）で参画、あなたの Eng/データ/PM と協働',
+              'リモート/定期ミーティング。既存のRepo/CI/ボード/コミュニケーションを使用',
+              'モデル調査/実験設計、データガバナンス助言、評価とレポート',
             ],
           },
           {
             title: '納品と期間',
             items: [
-              '週単位で進行し、継続的に成果を蓄積',
-              '毎週、進捗レポートや完了項目を提示',
-              '大きな機能要件がある場合は別のプロジェクト形態に移行可能',
+              '週次リズムで積み上げ',
+              '意思決定メモ/差分/次の優先度を毎週共有',
+              'スコープ拡大時はプロジェクトモードへシームレス移行',
             ],
           },
         ],
         extraNotes: [
-          '開発ペースが不確定、要件が頻繁に変動するチームや、技術力を徐々に蓄えたい方に適しています。',
-          '週ごとに専門的なアドバイスを得ながら柔軟に方向修正が可能です。',
+          '増強（augmentation）が目的で、置き換えではありません。',
+          'FE/BE は評価/デモのための軽量実装に留めます。',
         ],
       },
     },
 
-    // 2. 技術論文リーディング＆戦略提案
+    // 2) 単一モデルモジュール：開発と長期保守（モジュール制）
     {
       brief: {
-        title: '技術論文リーディング＆戦略提案',
+        title: '単一モデルモジュール：開発と長期保守（モジュール制）',
         scenario:
-          '気になる論文があるが、実用価値や導入可能性を判断したい、または最適なモデル選定や手法を知りたい',
-        deliverables: '戦略レポート（PDF）+ オンラインディスカッション',
-        timeline: '約1～3日',
-        note: 'NDA対応可。1～2日ほどのコミュニケーション期間を確保してください',
+          '1つのAIモデルモジュールに集中してイテレーション/保守（例：DocAlignerのアライメント/レイアウト）。正確・安定・進化可能な状態に保ちます。',
+        deliverables:
+          '学習モジュール + 推論モジュール + ベンチマークWeb（複数モデル/データ比較）、バージョン化された運用ログ',
+        timeline: '長期運用。イテレーション単位で納品',
+        note: 'DocAligner拡張（レイアウト意味/キー値/ReID など）は新モジュールとして別見積もり',
       },
       detail: {
         description: [
-          '注目している技術論文があり、それが本当に利用シーンに合うか不明な場合に、このサービスで短期間に分析し、実装戦略を提案します：',
+          '単一モデルモジュールを製品化し、データ設計→学習/評価→推論/デプロイ→継続バージョニングまで一貫対応。各リリースを測定可能・追跡可能・説明可能に保ちます。',
         ],
         bullets: [
           {
-            title: '主なポイント',
+            title: '含まれる範囲（コア）',
             items: [
-              '論文のコア技術・応用要点を抽出',
-              'ニーズとの適合度とリスクを評価',
-              '次のアクション（小規模テスト、実験など）を提案',
+              '学習：データ設計/バージョン、アノテーション、拡張、学習/微調整、実験トラッキング（mAP/F1/Latency/TPR@FPR）',
+              '推論：SDK/REST、バッチ/ストリーム、性能最適化（ONNX/TensorRT/量子化）、リソース監視・レイテンシ予算管理',
+              'ベンチマークWeb：Kaggle風ダッシュボード（PR/CM/速度–精度）、モデル/データ版比較、レポート出力',
             ],
           },
           {
-            title: '対象となる方',
+            title: 'DocAligner での例',
             items: [
-              '論文手法が投資する価値があるかどうかを判断したい',
-              '複数のモデルを比較検討したい',
-              '要約レポートでチーム・上司・投資家を説得したい',
+              'ラウンド/データ版を跨いだ比較：アライメント精度、キーポイント誤差、レイテンシ',
+              'Webでモデル版を切替、公開/匿名文書の品質とホットゾーン可視化',
+              'ワンクリックでレビュー/マイルストーン向けレポート出力',
+            ],
+          },
+          {
+            title: '協業と納品',
+            items: [
+              'イテレーションごとに目標（データ更新/指標向上/性能調整）と成果物を定義',
+              '技術ノート/変更履歴、再現可能な環境スクリプト',
+              '既存のラベリング/MLOps/CI-CD と統合。所有権はあなた側に保持',
+            ],
+          },
+          {
+            title: '境界と拡張',
+            items: [
+              'レイアウト意味分割/キー値抽出/表構造化/文書間リンクなどは新モジュール扱い',
+              'Jetson/EdgeTPU/クラウドGPUなどプラットフォーム変更は再見積もりの可能性',
+              'NDAとデータガバナンスは貴社ポリシーに準拠',
             ],
           },
         ],
         references: [
           {
-            label: '参考例',
-            linkText: 'Face Anti-Spoofing 技術マップ',
-            linkHref: 'https://docsaid.org/blog/fas-paper-roadmap',
+            label: 'クラシック：DocAligner（GitHub）',
+            linkText: 'DocAligner リポジトリ',
+            linkHref: 'https://github.com/DocsaidLab/DocAligner',
           },
         ],
-        extraNotes: [
-          '単なる論文「翻訳」ではなく、あなたのプロジェクトに活かせる「方針策定」を重視します。',
-        ],
         warnings: [
-          '論文と背景情報を事前に共有いただくとスムーズです。未公開や機密論文の場合はご相談ください。',
+          '対象は単一モデル。大規模プラットフォーム構築や複雑なシステム連携はスコープ外です。',
+          'サードパーティ/商用モデルのライセンス費用は含みません。',
+        ],
+        extraNotes: [
+          'PoC → Pilot → 本番の段階導入に対応。既存モデルの引継ぎも可能。',
+          'ベースラインデータセットと定期ベンチマークレポート（週/隔週/月）は合意の上で提供。',
         ],
       },
     },
 
-    // 3. AIモデルのAPI化とデプロイ
+    // 3) MVPをゼロから：デモ可能なモデル製品（上級）
     {
       brief: {
-        title: 'AIモデルのAPI化とデプロイ',
-        scenario: '既にモデルはあるが、APIとして公開またはローカル・社内環境で安定稼働させたい',
-        deliverables: 'FastAPI + Docker デモ、ドキュメント、基本的なサポート',
-        timeline: '3～14日ほど',
-        note: 'デプロイ後、短期的なサポートあり',
+        title: 'MVPをゼロから：デモ可能なモデル製品（上級）',
+        scenario:
+          'モデル選定/学習、推論デプロイに加え、価値を伝えるための軽量FE/BEを統合したMVPを0→1で構築',
+        deliverables: 'MVP（モデル + API + 軽量UI）、ドキュメント/ユーザーガイド',
+        timeline: '目安 1〜2ヶ月以上（スコープ依存）',
+        note: 'マイルストーンベース。NDA/契約可。FE/BEは評価/デモ目的であり、大規模プラットフォーム開発は対象外',
       },
       detail: {
         description: [
-          '学習済みモデルはあるが、APIとしてどのように構築・運用すればいいかわからない場合、FastAPIとDockerを用いてサービスエンドポイントを作成します。',
-        ],
-        bullets: [
-          {
-            title: '対応範囲',
-            items: [
-              'FastAPI + Uvicorn を用いたモデルのAPI化',
-              'Docker / ローカル / Nginx などのデプロイスクリプト提供',
-              'Swaggerドキュメント、エラーハンドリング、基本的なセキュリティ設定',
-            ],
-          },
-          {
-            title: '拡張オプション',
-            items: [
-              'APIテストページ設計',
-              'デプロイ方法の録画チュートリアル',
-              'HTTPS設定',
-            ],
-          },
-        ],
-        warnings: [
-          '既存モデルのデプロイのみを対象（学習やファインチューニングは含まず）',
-          'マルチコンテナ構成や特定クラウド環境などは事前にご相談ください',
-        ],
-        extraNotes: [
-          'デプロイ後は短期間のサポートを提供。長期の運用や機能拡張は別途ご相談ください。',
-        ],
-      },
-    },
-
-    // 4. 教学向けサイト構築（Docusaurus）
-    {
-      brief: {
-        title: 'ドキュメント系サイト構築サービス',
-        scenario: 'Docusaurusを使った技術ドキュメント、ブログやチーム内向け資料サイトの構築',
-        deliverables: '基本的なサイトフレーム（ホーム、ブログ、ドキュメントモジュール）とデプロイ手順',
-        timeline: '3～5日程度',
-        note: 'リリース後の基本サポートあり。追加機能は別途要相談',
-      },
-      detail: {
-        description: [
-          '技術メモやオープンソース資料を整理し、拡張性とデザイン性を備えたサイトを作成したい場合、Docusaurusを用いて軽量かつ機能豊富なドキュメントサイトを構築します。',
-        ],
-        bullets: [
-          {
-            title: '想定ユースケース',
-            items: [
-              '個人の技術ブログやノート整理',
-              'オープンソースプロジェクトのドキュメント/README',
-              'チーム内ナレッジベースや教育用ポータル',
-            ],
-          },
-          {
-            title: 'サービス内容',
-            items: [
-              'サイトフレームの設定、ブログ、多言語対応、Navbar、Sidebarなど',
-              'ホームページや主要ビジュアルのカスタマイズ',
-              '独自ドメイン、SEO対応、デプロイ手順の提供',
-            ],
-          },
-        ],
-        warnings: [
-          'オンラインコース課金、会員システム、独自バックエンドなど高度機能が必要な場合は追加検討が必要。',
-        ],
-        extraNotes: [
-          'サイト公開後は基本的なサポートを行います。追加機能や長期メンテは別途ご相談ください。',
-        ],
-      },
-    },
-
-    // 5. ゼロからAIモデル製品を構築（上級案件）
-    {
-      brief: {
-        title: 'ゼロからAIモデル製品開発（上級プロジェクト）',
-        scenario: 'MVPを0から作り、AIモデルの学習、デプロイ、フロント・バックエンド統合まで行いたい',
-        deliverables: 'MVPシステム（モデル、API、UI統合）、プロジェクトドキュメントと操作ガイド',
-        timeline: '1～2ヶ月以上',
-        note: 'マイルストーン単位で納品。NDAや契約にも対応可',
-      },
-      detail: {
-        description: [
-          '明確なAI活用アイデアがあるが、専任チームやプロトタイプがない場合、モデル選定・評価からAPI化、フロント／バックエンドの接続まで「0→1」でMVPを構築します。',
+          '明確なユースケースがありつつプロトタイプが無い場合、モデルを中心に最小製品を構築。選定/評価、API化・デプロイ、小さなUIでステークホルダーに価値を伝えます。',
         ],
         bullets: [
           {
             title: '適した状況',
             items: [
-              'スタートアップやチームでPoC実験を急ぎたい',
-              'データやシーンはあるがOCRや顔認証など独自AI機能を実装したい',
-              '投資家や上層部へのデモが必要',
+              'PoCの迅速検証が必要',
+              'DocAligner発想の文書理解プロトタイプ（アライメント/レイアウト/キー値など）',
+              '意思決定者に見せる「動くデモ」が要る',
             ],
           },
           {
             title: 'サービス範囲',
             items: [
-              '要件定義とデータ設計支援',
-              'モデル学習・評価戦略',
+              '要件分析とデータ設計',
+              '学習パイプラインと評価戦略',
               'API化とデプロイ（FastAPI / Docker / プライベート環境）',
-              'フロントエンドとの連携（またはデモUI）',
+              '軽量なFE/BE統合（評価・デモ用途）',
             ],
           },
         ],
         warnings: [
-          '本サービスは上級のカスタムプロジェクトです。明確なゴール設定と機能範囲のすり合わせが必要です。',
+          'カスタム性が高いため、意思決定者と段階的にスコープをすり合わせる必要があります。',
         ],
         extraNotes: [
-          'プロトタイプ、ベータ、正式MVPなど段階的に納品し、知的財産や機密を保護します。',
+          'Prototype → Beta → MVP の段階納品。機密/アクセス管理に対応。',
         ],
       },
     },
-  ], // end ja
+  ],
 };
