@@ -30,6 +30,7 @@
     "@emotion/styled": "^11.11.5",
     "@giscus/react": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
+    "@mermaid-js/layout-elk": "^0.2.0",
     "@mui/material": "^5.15.15",
     "@types/react": "18",
     "@types/react-dom": "18",
