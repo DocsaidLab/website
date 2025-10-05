@@ -85,22 +85,31 @@ export default function CooperationForm() {
         validation: { 'zh-hant': '請選擇服務類型', 'en': 'Please select a service type', 'ja': 'サービスの種類を選択してください' },
         placeholder: { 'zh-hant': '-- 請選擇 --', 'en': '-- Please choose --', 'ja': '-- 選択してください --' },
       },
+      modulesCount: {
+        label: { 'zh-hant': '並行專案／模組數', 'en': 'Concurrent projects/modules', 'ja': '並行プロジェクト／モジュール数' },
+        placeholder: { 'zh-hant': '-- 請選擇 --', 'en': '-- Please choose --', 'ja': '-- 選択してください --' },
+        hint: {
+          'zh-hant': '我們可同時維護多個專案；計價為「每專案每月」。',
+          'en': 'We can maintain multiple projects concurrently; pricing is per project per month.',
+          'ja': '複数プロジェクトの同時保守が可能です。料金は「プロジェクト毎・月額」です。'
+        }
+      },
       budget: {
-        label: { 'zh-hant': '預期預算範圍（TWD）', 'en': 'Expected budget range (TWD)', 'ja': '予算範囲（TWD）' },
+        label: { 'zh-hant': '預算範圍（每專案每月，TWD）', 'en': 'Budget range (per project per month, TWD)', 'ja': '予算範囲（プロジェクト毎・月額、TWD）' },
         validation: { 'zh-hant': '請選擇預算範圍', 'en': 'Please select a budget range', 'ja': '予算範囲を選択してください' },
         placeholder: { 'zh-hant': '-- 請選擇 --', 'en': '-- Please choose --', 'ja': '-- 選択してください --' },
         hint: {
-          'zh-hant': '區間僅供初步規劃，實際報價將於需求釐清後提供（維運型專案常採月費 Retainer）。',
-          'en': 'Ranges are for initial planning; final quote will be provided after scoping (retainer is common for ongoing work).',
-          'ja': '範囲は初期検討用です。最終見積は要件整理後に提示します（継続案件はリテイナーが一般的）。'
+          'zh-hant': '起點為 TWD 100,000／專案／月；實際報價將於需求釐清後提供（長期維運多採月保 Retainer）。',
+          'en': 'Starts at TWD 100,000 per project per month; final quote after scoping (retainer is common for ongoing work).',
+          'ja': '開始価格は TWD 100,000／プロジェクト／月。最終見積は要件整理後（継続案件はリテイナーが一般的）。'
         }
       },
       message: {
         label: { 'zh-hant': '需求說明 / 其他備註', 'en': 'Request details / Remarks', 'ja': '依頼内容 / その他の注意点' },
         placeholder: {
-          'zh-hant': '請盡量描述您的需求、專案背景、預期時程等資訊。',
-          'en': 'Please describe your needs, project background, and expected timeline.',
-          'ja': 'ご依頼内容、プロジェクトの背景、予定のタイムラインなど、できるだけ詳しくご記入ください。'
+          'zh-hant': '請描述目標、資料情況、目前瓶頸與預計時程。若有多個專案，請簡述各模組與優先順序。',
+          'en': 'Describe goals, data status, current bottlenecks, and timeline. If multiple projects, list modules and priorities.',
+          'ja': '目標、データ状況、課題、希望タイムラインをご記入ください。複数案件の場合は各モジュールと優先度も。'
         },
       },
       submit: {
@@ -126,32 +135,32 @@ export default function CooperationForm() {
     },
   };
 
-  // ---------- Options aligned with your updated services ----------
+  // --------- Options aligned to per-project monthly retainer model ---------
   const projectTypeOptions = [
     { label: currentLocale === 'en' ? 'Not sure yet' : currentLocale === 'ja' ? '未定' : '尚不確定', value: 'Not sure' },
     {
       label: currentLocale === 'en'
+        ? 'Single model module: development & long-term maintenance (per-project monthly retainer)'
+        : currentLocale === 'ja'
+          ? '単一モデルモジュール：開発と長期保守（月額リテイナー／プロジェクト毎）'
+          : '單一模型模組：開發與長期維護（每專案月保）',
+      value: 'Single model module (retainer)',
+    },
+    {
+      label: currentLocale === 'en'
         ? 'Consulting (time-sliced, embedded collaboration)'
         : currentLocale === 'ja'
-          ? 'コンサル（週タイムスライス）'
-          : '顧問合作（週工時切分）',
+          ? 'コンサル（週タイムスライス・内製協働）'
+          : '顧問合作（週工時切分・內嵌協作）',
       value: 'Consulting (time-sliced)',
     },
     {
       label: currentLocale === 'en'
-        ? 'Single model module: development & long-term maintenance'
+        ? 'MVP: demonstrable model product from 0 (one-off scope)'
         : currentLocale === 'ja'
-          ? '単一モデルモジュール：開発と長期保守'
-          : '單一模型模組：開發與長期維護（模組制）',
-      value: 'Single model module (dev & maintenance)',
-    },
-    {
-      label: currentLocale === 'en'
-        ? 'MVP: demonstrable model product from 0'
-        : currentLocale === 'ja'
-          ? 'MVP：ゼロからのデモ可能なモデル製品'
-          : 'MVP 原型：從 0 打造可展示的模型產品',
-      value: 'MVP from zero',
+          ? 'MVP：ゼロからのモデル製品（単発スコープ）'
+          : 'MVP 原型：從 0 打造（一次性範疇）',
+      value: 'MVP from zero (one-off)',
     },
     {
       label: currentLocale === 'en'
@@ -163,28 +172,40 @@ export default function CooperationForm() {
     },
   ];
 
-  // TWD-only ranges (no “coffee cups”); bands cover your 100k/month retainer naturally.
+  const modulesCountOptions = [
+    { label: currentLocale === 'en' ? 'Not sure yet' : currentLocale === 'ja' ? '未定' : '尚不確定', value: 'Not sure' },
+    { label: '1', value: '1' },
+    { label: '2', value: '2' },
+    { label: '3', value: '3' },
+    { label: currentLocale === 'en' ? '4 or more' : currentLocale === 'ja' ? '4以上' : '4 以上', value: '4+' },
+  ];
+
+  // TWD ranges start at 100k per project per month
   const budgetOptions = [
     { label: currentLocale === 'en' ? 'Not sure yet' : currentLocale === 'ja' ? '未定' : '尚不確定', value: 'Not sure' },
     {
-      label: currentLocale === 'en' ? 'Under TWD 50,000' : currentLocale === 'ja' ? 'TWD 50,000 未満' : 'TWD 50,000 以下',
-      value: 'Under TWD 50,000',
+      label: currentLocale === 'en' ? 'TWD 100,000 – 150,000 / month / project'
+        : currentLocale === 'ja' ? 'TWD 100,000 – 150,000／月／プロジェクト'
+        : 'TWD 100,000 – 150,000／月／專案',
+      value: 'TWD 100,000 – 150,000 / month / project',
     },
     {
-      label: currentLocale === 'en' ? 'TWD 50,000 – 100,000' : currentLocale === 'ja' ? 'TWD 50,000 – 100,000' : 'TWD 50,000 – 100,000',
-      value: 'TWD 50,000 – 100,000',
+      label: currentLocale === 'en' ? 'TWD 150,000 – 250,000 / month / project'
+        : currentLocale === 'ja' ? 'TWD 150,000 – 250,000／月／プロジェクト'
+        : 'TWD 150,000 – 250,000／月／專案',
+      value: 'TWD 150,000 – 250,000 / month / project',
     },
     {
-      label: currentLocale === 'en' ? 'TWD 100,000 – 200,000' : currentLocale === 'ja' ? 'TWD 100,000 – 200,000' : 'TWD 100,000 – 200,000',
-      value: 'TWD 100,000 – 200,000',
+      label: currentLocale === 'en' ? 'TWD 250,000 – 400,000 / month / project'
+        : currentLocale === 'ja' ? 'TWD 250,000 – 400,000／月／プロジェクト'
+        : 'TWD 250,000 – 400,000／月／專案',
+      value: 'TWD 250,000 – 400,000 / month / project',
     },
     {
-      label: currentLocale === 'en' ? 'TWD 200,000 – 400,000' : currentLocale === 'ja' ? 'TWD 200,000 – 400,000' : 'TWD 200,000 – 400,000',
-      value: 'TWD 200,000 – 400,000',
-    },
-    {
-      label: currentLocale === 'en' ? 'Above TWD 400,000' : currentLocale === 'ja' ? 'TWD 400,000 以上' : 'TWD 400,000 以上',
-      value: 'Above TWD 400,000',
+      label: currentLocale === 'en' ? 'Above TWD 400,000 / month / project'
+        : currentLocale === 'ja' ? 'TWD 400,000 以上／月／プロジェクト'
+        : 'TWD 400,000 以上／月／專案',
+      value: 'Above TWD 400,000 / month / project',
     },
   ];
 
@@ -212,6 +233,14 @@ export default function CooperationForm() {
   const onFinish = async (values) => {
     setLoading(true);
     try {
+      // Keep backend payload compatible.
+      // Append new fields (modulesCount + billing model) into message to avoid API breakage.
+      const metaLines = [
+        `modules_count: ${values.modulesCount || 'Not specified'}`,
+        `billing_model: per-project monthly retainer (TWD)`,
+      ];
+      const mergedMessage = (values.message ? values.message + '\n\n' : '') + '---\n' + metaLines.join('\n');
+
       const response = await fetch('https://api.docsaid.org/cooperation/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -220,7 +249,7 @@ export default function CooperationForm() {
           email: values.email,
           project_type: values.projectType,
           budget: values.budget,
-          message: values.message || '',
+          message: mergedMessage,
         }),
       });
 
@@ -318,6 +347,15 @@ export default function CooperationForm() {
           initialValue={projectTypeOptions[0].value}
         >
           <Select placeholder={getText(translations.formLabels.projectType.placeholder)} options={projectTypeOptions} />
+        </Form.Item>
+
+        <Form.Item
+          label={getText(translations.formLabels.modulesCount.label)}
+          name="modulesCount"
+          initialValue={'1'}
+          extra={<Text type="secondary" style={{ fontSize: 12 }}>{getText(translations.formLabels.modulesCount.hint)}</Text>}
+        >
+          <Select placeholder={getText(translations.formLabels.modulesCount.placeholder)} options={modulesCountOptions} />
         </Form.Item>
 
         <Form.Item
