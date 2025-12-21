@@ -2,14 +2,11 @@
  * recent-updates.js
  *
  * 功能：
- *  1. 偵測「最近 N 天內，最終合併/出現在 main 分支」的 .md 或 .mdx 檔案（包含從其他分支 PR merge 進來）。
- *  2. 追溯每個檔案「在整個 repo 第一次被加入」的 commit 日期（作為 publishTime）。
- *  3. 幫各語系的 docs 目錄產生 `recent_updates_data.json`（依照檔案所在資料夾）。
+ *  1. 取得各語系 docs 目錄下的所有 .md/.mdx 檔案。
+ *  2. 透過 git 歷史查詢每個檔案「第一次被加入 repo」的 commit 時間（作為 publishTime）。
+ *  3. 依 publishTime 由新到舊排序，取最新 N 篇，寫入 `recent_updates_data.json`。
  *
- *  - 使用 `git log main -m --name-status --since=... --pretty=format:%H|%cI` 去擴展 merge commit，
- *    以偵測合併帶進來的新檔案。
- *  - 另做第二階段的最早 `Add` commit 查詢：`git log --diff-filter=A --reverse --max-count=1 filePath`
- *    取得檔案在 repo 第一次加入的 ISO 時間，再格式化成 YYYY-MM-DD。
+ * 註：這裡以「首次加入 repo 的時間」作為文章日期來源，避免依賴 front matter 的 date 欄位。
  */
 
 const simpleGit = require('simple-git');
@@ -18,112 +15,102 @@ const path = require('path');
 
 const git = simpleGit();
 
-// 可根據需求調整：抓取最近 N 天的新增檔案
-const RECENT_DAYS = 60;
+// 可根據需求調整：顯示最新 N 篇文章
+const MAX_ARTICLES = 10;
 
-// 若主要分支不是 "main"，請自行修改
-const MAIN_BRANCH = 'main';
+const REPO_ROOT = path.join(__dirname, '..', '..');
 
 // 對應到各語系 (或其他) intro.md 檔案所在資料夾
 const TARGET_FILES = [
-  path.join(__dirname, '..', '..', 'papers', 'intro.md'),
-  path.join(__dirname, '..', '..', 'i18n', 'en', 'docusaurus-plugin-content-docs-papers', 'current', 'intro.md'),
-  path.join(__dirname, '..', '..', 'i18n', 'ja', 'docusaurus-plugin-content-docs-papers', 'current', 'intro.md'),
+  path.join(REPO_ROOT, 'papers', 'intro.md'),
+  path.join(REPO_ROOT, 'i18n', 'en', 'docusaurus-plugin-content-docs-papers', 'current', 'intro.md'),
+  path.join(REPO_ROOT, 'i18n', 'ja', 'docusaurus-plugin-content-docs-papers', 'current', 'intro.md'),
 ];
 
 /* -------------------------------------------------------------------------- */
-/*                     1. 抓「main 分支最近 N 天內的新增檔案」                    */
+/*                              1. 取得文章清單                                 */
 /* -------------------------------------------------------------------------- */
 
-async function getAddedArticles(sinceOption) {
+function isMarkdownFile(filePath) {
+  return filePath.endsWith('.md') || filePath.endsWith('.mdx');
+}
+
+/* -------------------------------------------------------------------------- */
+/*                 2. 查詢檔案「第一次被加入 repo」的 commit 時間 (ISO)          */
+/* -------------------------------------------------------------------------- */
+
+async function resolveLogBaseRef() {
+  const preferredRef = process.env.RECENT_UPDATES_BASE_REF || 'HEAD';
+  try {
+    await git.raw(['rev-parse', '--verify', preferredRef]);
+    return preferredRef;
+  } catch {
+    return 'HEAD';
+  }
+}
+
+async function getEarliestAddDatesByDir(dirRelativeToRepo, baseRef) {
   /**
-   * 這裡的關鍵：
-   *  1. `main`：只看 main 分支的歷史 (包含合併 commit)。
-   *  2. `-m`：對 merge commit 也會列出來自各個 parent 的差異。
-   *  3. `--name-status`：用 "A\t" / "M\t" 等標識檔案操作類型。
-   *  4. `--pretty=format:%H|%cI`：顯示 commit SHA | ISO 時間，方便分行解析。
+   * 使用一次 git log 掃描整個資料夾，避免逐檔案呼叫 git。
+   * 以 --reverse 由舊到新，第一次看到檔案即為最早 add 時間。
    */
-  const rawLog = await git.raw([
-    'log',
-    MAIN_BRANCH,
-    `--since=${sinceOption}`,
-    '--name-status',
-    '-m',
-    '--pretty=format:%H|%cI',
-  ]);
+  const rawLog = await git
+    .raw([
+      'log',
+      baseRef,
+      '--diff-filter=A',
+      '--name-only',
+      '--pretty=format:%cI',
+      '--reverse',
+      '--',
+      dirRelativeToRepo,
+    ])
+    .catch(() => '');
 
   const lines = rawLog.split('\n');
-
-  // 用 Map 來避免重複記錄同一個檔案
-  // key = 檔案路徑, value = commit的ISO時間 (最後一次在 log 裡看到它以"A"出現的那個commit)
-  const addedMap = new Map();
-
-  let currentCommitIso = ''; // 目前解析到的 commit 時間 (ISO)
+  const earliestMap = new Map();
+  let currentIso = null;
 
   for (const line of lines) {
-    // 如果是一行 commit 資訊 (格式: "40位SHA|YYYY-MM-DDTHH:mm:ssZ")
-    if (/^[0-9a-f]{40}\|/.test(line)) {
-      const [sha, isoDate] = line.split('|');
-      currentCommitIso = isoDate.trim();
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+
+    // --pretty=format:%cI 會輸出 ISO 8601
+    if (/^\d{4}-\d{2}-\d{2}T/.test(trimmed)) {
+      currentIso = trimmed;
       continue;
     }
 
-    // 若是檔案變動行 (如 "A\tpath/to/file.md")
-    if (line.startsWith('A\t')) {
-      const filePath = line.substring(2).trim();
-      if (filePath.endsWith('.md') || filePath.endsWith('.mdx')) {
-        // 記下 (或覆蓋) → 表示在這個 commit 看到它被新增
-        addedMap.set(filePath, currentCommitIso);
-      }
+    if (!currentIso) continue;
+    if (!isMarkdownFile(trimmed)) continue;
+    if (!earliestMap.has(trimmed)) {
+      earliestMap.set(trimmed, currentIso);
     }
   }
 
-  // 整理回陣列
-  const addedArticles = [];
-  for (const [filePath, isoDate] of addedMap.entries()) {
-    const fullPath = path.resolve(__dirname, '..', '..', filePath);
-    addedArticles.push({
-      filePath,
-      fullPath,
-      // 先存「在 main 偵測到的 commit」的時間（如需即可使用）
-      foundTime: isoDate.split('T')[0],
-      // 真正的第一次加入時間（待第二階段查詢）
-      publishTime: null,
-    });
-  }
-
-  console.log(`\n🔍 Detected ${addedArticles.length} newly added MD/MDX under [${MAIN_BRANCH}] since ${sinceOption}.`);
-  return addedArticles;
+  return earliestMap;
 }
 
-/* -------------------------------------------------------------------------- */
-/*       2. 查詢檔案「在整個 repo 第一次被加入」的 commit 時間 (ISO) + 去除時區   */
-/* -------------------------------------------------------------------------- */
+async function getEarliestCommitDateISO(filePathRelativeToRepo, baseRef) {
+  const rawLog = await git
+    .raw([
+      'log',
+      baseRef,
+      '--follow',
+      '--format=%cI',
+      '--reverse',
+      '--max-count=1',
+      '--',
+      filePathRelativeToRepo,
+    ])
+    .catch(() => '');
 
-async function getEarliestAddDate(filePath) {
-  /**
-   * 透過 --diff-filter=A + --reverse + --max-count=1 找到該檔案最早 (earliest) 的 Add commit
-   * - %cI：取得 ISO 8601 的提交時間。
-   */
-  const rawLog = await git.raw([
-    'log',
-    '--diff-filter=A',
-    '--format=%cI',
-    '--reverse',
-    '--max-count=1',
-    filePath
-  ]).catch(() => null);
-
-  if (!rawLog) return null;
   const isoDate = rawLog.trim();
-  if (!isoDate) return null;
-
-  // 回傳完整ISO字串 (e.g. "2025-05-18T11:22:33+08:00")
-  return isoDate.split('T')[0];
+  return isoDate || null;
 }
 
 /* -------------------------------------------------------------------------- */
-/*                              3. 解析文章標題                                */
+/*                              3. 解析文章標題                                 */
 /* -------------------------------------------------------------------------- */
 
 async function extractTitleInfo(fullPath, filePath) {
@@ -166,21 +153,20 @@ async function extractTitleInfo(fullPath, filePath) {
 /* -------------------------------------------------------------------------- */
 
 async function writeRecentUpdatesData(targetDir, articles) {
-  if (articles.length === 0) {
-    console.log(`ℹ️  No new articles under ${targetDir}. Skipped.`);
-    return;
+  await fs.ensureDir(targetDir);
+
+  if (articles.length > 0) {
+    console.log(`\n📄 Articles under ${targetDir}:`);
+    for (const a of articles) {
+      console.log(`   • ${a.publishTime}  →  ${a.combinedTitle}`);
+    }
+  } else {
+    console.log(`ℹ️  No new articles under ${targetDir}. Writing empty recent_updates_data.json.`);
   }
 
-  console.log(`\n📄 Articles under ${targetDir}:`);
-  for (const a of articles) {
-    // date = YYYY-MM-DD, publishTime = 全部(ISO)
-    console.log(`   • ${a.publishTime}  →  ${a.combinedTitle}`);
-  }
-
-  // 寫入 JSON
-  const data = articles.map(a => ({
-    date: a.publishTime.split('T')[0], // 純日期 (YYYY-MM-DD)
-    publishTime: a.publishTime,        // 完整 ISO timestamp
+  const data = articles.map((a) => ({
+    date: a.publishTime.split('T')[0],
+    publishTime: a.publishTime,
     link: a.link,
     combinedTitle: a.combinedTitle,
   }));
@@ -190,56 +176,81 @@ async function writeRecentUpdatesData(targetDir, articles) {
   console.log(`✅  JSON generated: ${outputFile}`);
 }
 
+async function listMarkdownFilesRecursively(dirAbs) {
+  const results = [];
+  const stack = [dirAbs];
+
+  while (stack.length > 0) {
+    const current = stack.pop();
+    const entries = await fs.readdir(current, { withFileTypes: true }).catch(() => []);
+
+    for (const entry of entries) {
+      const fullPath = path.join(current, entry.name);
+      if (entry.isDirectory()) {
+        stack.push(fullPath);
+        continue;
+      }
+      if (!entry.isFile()) continue;
+      if (!isMarkdownFile(entry.name)) continue;
+      results.push(fullPath);
+    }
+  }
+
+  return results;
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                   主流程                                    */
 /* -------------------------------------------------------------------------- */
 
 (async () => {
   try {
-    const sinceOption = `${RECENT_DAYS} days ago`;
-    console.log(`\n=== Scanning commits on [${MAIN_BRANCH}] since: ${sinceOption} ===`);
+    const baseRef = await resolveLogBaseRef();
+    console.log(`\n=== Generating recent updates from [${baseRef}] (latest ${MAX_ARTICLES}) ===`);
 
-    // 第1步：先從 main 分支 (含 merge commit) 找「最近 N 天的新增(A)」檔案
-    const addedArticles = await getAddedArticles(sinceOption);
-    if (!addedArticles || addedArticles.length === 0) {
-      console.log('No newly added articles found—done.\n');
-      return;
-    }
-
-    // 第2步：對於每個檔案，找它在整個 repo "第一次被加入" 的 commit 時間
-    for (const art of addedArticles) {
-      const earliestISO = await getEarliestAddDate(art.filePath);
-      // 若找不到就用 foundTime 退而求其次
-      art.publishTime = earliestISO || art.foundTime;
-    }
-
-    // 第3步：針對每個語系資料夾，歸納出屬於該資料夾的新檔案
+    // 針對每個語系資料夾：找出最新 N 篇文章並輸出 JSON
     for (const introFile of TARGET_FILES) {
       const targetDir = path.dirname(introFile);
-      const articlesForDir = [];
+      const dirRelativeToRepo = path.relative(REPO_ROOT, targetDir).replace(/\\/g, '/');
+      const introFileRel = path.relative(REPO_ROOT, introFile).replace(/\\/g, '/');
 
-      for (const art of addedArticles) {
-        if (!art.publishTime) continue;
-        if (!art.fullPath.startsWith(targetDir)) continue;
+      const existingFilesAbs = await listMarkdownFilesRecursively(targetDir);
+      const existingFilesRel = existingFilesAbs
+        .map((p) => path.relative(REPO_ROOT, p).replace(/\\/g, '/'))
+        .filter((p) => p.startsWith(dirRelativeToRepo + '/'))
+        .filter((p) => p !== introFileRel);
 
-        const combinedTitle = await extractTitleInfo(art.fullPath, art.filePath);
+      const earliestMap = await getEarliestAddDatesByDir(dirRelativeToRepo, baseRef);
+
+      const candidates = [];
+      for (const fileRel of existingFilesRel) {
+        let publishTime = earliestMap.get(fileRel) || null;
+        if (!publishTime) {
+          publishTime = await getEarliestCommitDateISO(fileRel, baseRef);
+        }
+        if (!publishTime) continue;
+        candidates.push({ fileRel, publishTime });
+      }
+
+      candidates.sort((a, b) => new Date(b.publishTime) - new Date(a.publishTime));
+
+      const latest = [];
+      for (const { fileRel, publishTime } of candidates) {
+        if (latest.length >= MAX_ARTICLES) break;
+
+        const fullPath = path.join(REPO_ROOT, fileRel);
+        const combinedTitle = await extractTitleInfo(fullPath, fileRel);
         if (!combinedTitle) continue;
 
-        // 相對連結
-        const relLink = './' + path.relative(targetDir, art.fullPath).replace(/\\/g, '/');
-
-        articlesForDir.push({
+        const relLink = './' + path.relative(targetDir, fullPath).replace(/\\/g, '/');
+        latest.push({
           combinedTitle,
           link: relLink,
-          publishTime: art.publishTime,
+          publishTime,
         });
       }
 
-      // 依發佈時間 新→舊 排序
-      articlesForDir.sort((a, b) => new Date(b.publishTime) - new Date(a.publishTime));
-
-      // 第4步：輸出到 recent_updates_data.json
-      await writeRecentUpdatesData(targetDir, articlesForDir);
+      await writeRecentUpdatesData(targetDir, latest);
     }
 
     console.log('\n🎉  All done.\n');
