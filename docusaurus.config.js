@@ -20,7 +20,6 @@ const config = {
   projectName: 'website',
   deploymentBranch: 'gh-pages',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
   i18n: {
     defaultLocale: 'zh-hant',
     locales: ['zh-hant', 'en', 'ja']
@@ -98,6 +97,9 @@ const config = {
   ],
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
   },
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */

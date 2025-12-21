@@ -55,12 +55,6 @@ const i18nMessages = {
     'zh-hant': '上傳含 MRZ（機器可判讀區）的圖片，偵測並解析其中的文字內容。',
     ja: 'MRZ（機械可読ゾーン）を含む画像をアップロードし、テキストを検出・解析します。'
   },
-  'homepage.followUs': {
-    en: '👍 Follow our Facebook Page',
-    'zh-hant': '👍 追蹤我們的粉絲專頁',
-    ja: '👍 フェイスブックページをフォロー'
-  },
-
   // ===== Consulting & Services (re-aligned to model-centric, small studio, collaboration) =====
   'homepage.consultingTitle': {
     en: '🤝 Model-Centric Consulting & Services',

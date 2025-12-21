@@ -224,27 +224,7 @@ img {
   right: 0.5rem;
 }
 
-/* ========== 新增區塊：Facebook、Demo、Consulting ========== */
-
-/* --- Facebook --- */
-.facebookContainer {
-  width: 100%;
-}
-.facebookTitle {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-align: left;
-}
-.facebookFrameWrapper {
-  max-width: 320px;
-  margin: 0 auto;
-}
-.facebookIframe {
-  border: none;
-  overflow: hidden;
-  display: block;
-}
+/* ========== 新增區塊：Demo、Consulting ========== */
 
 /* --- DocAligner Demo 區段 --- */
 .demoSectionRow {

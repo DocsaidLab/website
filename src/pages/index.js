@@ -281,7 +281,7 @@ export default function Home() {
   const { siteConfig, i18n } = useDocusaurusContext();
   const currentLocale = i18n.currentLocale;
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(5);
+  const [visibleCount, setVisibleCount] = useState(10);
 
   // 依照語系載入 featuredProjects
   const currentProjects = featuredProjectsData[currentLocale] || featuredProjectsData['en'];
@@ -333,37 +333,17 @@ export default function Home() {
         {/* 精選作品：自動橫向捲動 */}
         <AutoScrollingProjects projects={currentProjects} />
 
-        {/* Timeline + Facebook 粉專 雙欄併排 */}
+        {/* Timeline */}
         <section className={styles.sectionBox}>
           <Row gutter={[32, 32]}>
             {/* 左欄：StaggeredTimeline */}
-            <Col xs={24} md={16}>
+            <Col xs={24} md={24}>
               <StaggeredTimeline
                 recentUpdates={recentUpdates}
                 visibleCount={visibleCount}
                 setVisibleCount={setVisibleCount}
                 convertMdLinkToRoute={convertMdLinkToRoute}
               />
-            </Col>
-
-            {/* 右欄：Facebook 粉專 */}
-            <Col xs={24} md={8}>
-              <div className="facebookContainer">
-                <h2 className="facebookTitle">
-                  {getTranslation('homepage.followUs', currentLocale)}
-                </h2>
-                <div className="facebookFrameWrapper">
-                  <iframe
-                    title="Facebook Page"
-                    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F61574315987805&tabs=timeline&width=300&height=400&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-                    width="100%"
-                    height="400"
-                    className="facebookIframe"
-                    allowFullScreen={true}
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  ></iframe>
-                </div>
-              </div>
             </Col>
           </Row>
         </section>

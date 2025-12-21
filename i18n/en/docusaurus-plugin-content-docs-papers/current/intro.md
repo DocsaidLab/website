@@ -34,9 +34,7 @@ import recentUpdates from './recent_updates_data.json';
 </Timeline>
 
 :::info
-This section automatically reads the most recent 30 days' worth of paper notes from our commit history.
-
-Therefore, it's normal to see different content each day, which also encourages us to write more notes ourselves.
+This section automatically lists the latest 10 paper notes from our commit history (sorted by when each note was first added to the repo). So the list updates when new notes are added.
 :::
 
 ## Daily Routine
