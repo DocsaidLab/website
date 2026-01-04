@@ -2,7 +2,7 @@
 slug: sqlite-job-queue-atomic-claim
 title: SQLite 實作（二）：原子宣告
 authors: Z. Yuan
-tags: [sqlite, job-queue, transactions, concurrency, state-machine]
+tags: [sqlite, job-queue, transactions, concurrency]
 image: /img/2025/0912.jpg
 description: 兩個 worker 不能拿到同一個 job，這件事比你想得難。
 ---

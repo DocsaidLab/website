@@ -2,7 +2,7 @@
 slug: sqlite-job-queue-atomic-claim
 title: "SQLite in Practice (2): Atomic Claims"
 authors: Z. Yuan
-tags: [sqlite, job-queue, transactions, concurrency, state-machine]
+tags: [sqlite, job-queue, transactions, concurrency]
 image: /en/img/2025/0912.jpg
 description: Making sure two workers can’t claim the same job is harder than you think.
 ---

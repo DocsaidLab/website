@@ -2,7 +2,7 @@
 slug: sqlite-job-queue-atomic-claim
 title: SQLite 実装（2）：アトミックな claim
 authors: Z. Yuan
-tags: [sqlite, job-queue, transactions, concurrency, state-machine]
+tags: [sqlite, job-queue, transactions, concurrency]
 image: /ja/img/2025/0912.jpg
 description: 2 つの worker が同じ job を取れないようにするのは、思っているより難しい。
 ---
