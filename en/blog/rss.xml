@@ -356,7 +356,6 @@ don’t let them interfere with each other.</p>
             <category>job-queue</category>
             <category>transactions</category>
             <category>concurrency</category>
-            <category>state-machine</category>
         </item>
         <item>
             <title><![CDATA[SQLite in Practice (1): The Database Is Locked Again!]]></title>

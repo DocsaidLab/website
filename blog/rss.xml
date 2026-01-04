@@ -357,7 +357,6 @@ claim 一個短 transaction；
             <category>job-queue</category>
             <category>transactions</category>
             <category>concurrency</category>
-            <category>state-machine</category>
         </item>
         <item>
             <title><![CDATA[SQLite 實作（一）：資料庫又鎖死啦！]]></title>
