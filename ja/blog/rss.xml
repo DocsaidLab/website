@@ -4,10 +4,472 @@
         <title>DOCSAID Blog</title>
         <link>https://docsaid.org/ja/blog</link>
         <description>DOCSAID Blog</description>
-        <lastBuildDate>Wed, 08 Oct 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 23 Dec 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>ja</language>
+        <item>
+            <title><![CDATA[SQLite 実戦（5）：私は誰？ここはどこ？]]></title>
+            <link>https://docsaid.org/ja/blog/sqlite-queue-observability-governance</link>
+            <guid>https://docsaid.org/ja/blog/sqlite-queue-observability-governance</guid>
+            <pubDate>Tue, 23 Dec 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[エラーコード、保持戦略、監査ログまで。キューを運用できる形にする。]]></description>
+            <content:encoded><![CDATA[<p>きっとこんな会話をしたことがある：</p>
+<ul>
+<li class="">あなた：システム、いまどう？</li>
+<li class="">システム：動いてる。</li>
+<li class="">あなた：どこで？</li>
+<li class="">システム：動いてる。</li>
+</ul>
+<p>なるほど。ありがとう。まったく役に立たない。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="queue">Queue<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#queue" class="hash-link" aria-label="Queue への直接リンク" title="Queue への直接リンク" translate="no">​</a></h2>
+<p>SQLite で queue を作るのはもちろんできる。でも最低限、次の 5 つのエンジニアリングな問いに答えられないといけない：</p>
+<ol>
+<li class=""><strong>いまキューの中に job は何件ある？状態ごとに何件？</strong></li>
+<li class=""><strong>いちばん古い job はどれだけ詰まってる？誰（どの worker）に詰まってる？</strong></li>
+<li class=""><strong>リトライ回数の分布は？特定のタイプだけ延々と失敗してない？</strong></li>
+<li class=""><strong>失敗理由は何？集計（Top-N）できる？</strong></li>
+<li class=""><strong>データはどれくらい保持する？孤児データを作らず、DB を壊さずにどう消す？</strong></li>
+</ol>
+<p>この 5 つの問いの裏にあるのは、実は 2 つのキーワードだ：</p>
+<ul>
+<li class=""><strong>Observability（可観測性）</strong>：祈るのではなく、「データで」いまの状態を理解できるか？</li>
+<li class=""><strong>Governance（データガバナンス）</strong>：データの保持と削除を「コントロール可能に」行い、削除後も整合性と追跡可能性を保てるか？</li>
+</ul>
+<p>ここでは、実務寄りの設計でこの 2 つを地に足のついた形にする。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="queue-を-1-枚のテーブルで済ませない">Queue を 1 枚のテーブルで済ませない<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#queue-%E3%82%92-1-%E6%9E%9A%E3%81%AE%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%81%A7%E6%B8%88%E3%81%BE%E3%81%9B%E3%81%AA%E3%81%84" class="hash-link" aria-label="Queue を 1 枚のテーブルで済ませない への直接リンク" title="Queue を 1 枚のテーブルで済ませない への直接リンク" translate="no">​</a></h2>
+<p>queue の直感的な作り方はこうなりがち：</p>
+<ul>
+<li class=""><code>jobs</code> テーブル 1 枚</li>
+<li class=""><code>status</code> カラム</li>
+<li class="">必要になったらカラムを足す</li>
+</ul>
+<p>動きはする。でもすぐに「聞きたい質問に schema が答えられない」状態になる。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="本当に必要なのは-3-つのデータ階層">本当に必要なのは 3 つのデータ階層<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E6%9C%AC%E5%BD%93%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%AE%E3%81%AF-3-%E3%81%A4%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E9%9A%8E%E5%B1%A4" class="hash-link" aria-label="本当に必要なのは 3 つのデータ階層 への直接リンク" title="本当に必要なのは 3 つのデータ階層 への直接リンク" translate="no">​</a></h3>
+<p>queue を 3 つの層に分けると、運用が急に楽になる：</p>
+<ol>
+<li class="">
+<p><strong>Job 本体（Current State）</strong>
+いまこの job が「どの状態か」を素早く知れること。</p>
+</li>
+<li class="">
+<p><strong>試行記録（Attempts / Retries）</strong>
+同じ job が何度も走ることがある。「何回目が失敗した？毎回同じ理由？所要時間は？」に答えたい。</p>
+</li>
+<li class="">
+<p><strong>イベント記録（Audit Log / Event Log）</strong>
+状態は「結果」、イベントは「過程」。デバッグしやすいシステムは「1 行を見張る」より、イベントの流れで追う。</p>
+</li>
+</ol>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="どんな可観測カラムが要る">どんな「可観測」カラムが要る？<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E3%81%A9%E3%82%93%E3%81%AA%E5%8F%AF%E8%A6%B3%E6%B8%AC%E3%82%AB%E3%83%A9%E3%83%A0%E3%81%8C%E8%A6%81%E3%82%8B" class="hash-link" aria-label="どんな「可観測」カラムが要る？ への直接リンク" title="どんな「可観測」カラムが要る？ への直接リンク" translate="no">​</a></h2>
+<p>「可観測」とは schema を百科事典にすることではない。さっきの 5 つの問いに答えるための設計だ。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="jobs-にあるとよいカラム"><code>jobs</code> にあるとよいカラム<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#jobs-%E3%81%AB%E3%81%82%E3%82%8B%E3%81%A8%E3%82%88%E3%81%84%E3%82%AB%E3%83%A9%E3%83%A0" class="hash-link" aria-label="jobs-にあるとよいカラム への直接リンク" title="jobs-にあるとよいカラム への直接リンク" translate="no">​</a></h3>
+<ul>
+<li class=""><code>status</code>：状態機械（Queued / Claimed / Running / Succeeded / Failed / Cancelled …）</li>
+<li class=""><code>created_at / started_at / finished_at</code>：時間軸（待ち時間・処理時間を計算できる）</li>
+<li class=""><code>priority</code>（任意）：侮るな。あとでスケジューリングと運用が感謝する</li>
+<li class=""><code>worker_id</code>（または <code>claimed_by</code>）：誰が取ったか（問題 worker の特定）</li>
+<li class=""><code>heartbeat_at</code>：ハートビート時刻（worker が生きているか判断）</li>
+<li class=""><code>retry_count</code>：これまでのリトライ回数（集計を速くする）</li>
+<li class=""><code>error_code</code>：集計可能なエラー分類（Top-N の要）</li>
+<li class=""><code>error_detail</code>：短い要約（全ログを入れる場所ではない）</li>
+</ul>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="提案スキーマ">提案スキーマ<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E6%8F%90%E6%A1%88%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9E" class="hash-link" aria-label="提案スキーマ への直接リンク" title="提案スキーマ への直接リンク" translate="no">​</a></h3>
+<p>あくまで提案だが、運用上の問いをきれいに分離することを狙っている。</p>
+<ol>
+<li class="">
+<p><strong>jobs：現在状態（提供側は速く）</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">TABLE</span><span class="token plain"> jobs </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  id            </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">PRIMARY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">type</span><span class="token plain">          </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                 </span><span class="token comment" style="color:#999988;font-style:italic">-- job 種別（集計のグルーピング用）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain">        </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                 </span><span class="token comment" style="color:#999988;font-style:italic">-- 状態機械</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  priority      </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DEFAULT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  created_at    </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">              </span><span class="token comment" style="color:#999988;font-style:italic">-- Unix epoch seconds</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  started_at    </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  finished_at   </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  claimed_by    </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- worker_id</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  claim_token   </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- 誤更新防止（任意）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  heartbeat_at  </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  retry_count   </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DEFAULT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  max_retries   </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DEFAULT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">3</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  error_code    </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- 集計可能な分類</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  error_detail  </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- 短い要約（長さ制限推奨）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  payload_ref   </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- 大きい payload は別に保存（ファイル/オブジェクトストレージ）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  result_ref    </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain">                           </span><span class="token comment" style="color:#999988;font-style:italic">-- 大きい結果は別に保存</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+</li>
+<li class="">
+<p><strong>job_attempts：各試行（「何回目？」が必要）</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">TABLE</span><span class="token plain"> job_attempts </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  id           </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">PRIMARY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  job_id       </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  attempt      </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">               </span><span class="token comment" style="color:#999988;font-style:italic">-- 1,2,3...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  started_at   </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  finished_at  </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain">       </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                  </span><span class="token comment" style="color:#999988;font-style:italic">-- RUNNING/SUCCEEDED/FAILED</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  error_code   </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  error_detail </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  worker_id    </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">FOREIGN</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">REFERENCES</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DELETE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">CASCADE</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">UNIQUE</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> attempt</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+</li>
+<li class="">
+<p><strong>job_events：イベント流（デバッグはこれ）</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">TABLE</span><span class="token plain"> job_events </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  id          </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">PRIMARY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  job_id      </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ts          </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  event       </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                   </span><span class="token comment" style="color:#999988;font-style:italic">-- CLAIMED/STARTED/HEARTBEAT/FAILED/RETRY_SCHEDULED...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  actor       </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                            </span><span class="token comment" style="color:#999988;font-style:italic">-- worker_id / system</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  detail      </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                            </span><span class="token comment" style="color:#999988;font-style:italic">-- 短い JSON（詰め込みすぎない）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">FOREIGN</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">REFERENCES</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DELETE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">CASCADE</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<blockquote>
+<p>なぜ event テーブルが必要？
+「状態」はいま FAILED だとしか言わない。でも「イベント」ならこう教えてくれる：</p>
+<ul>
+<li class="">いつ、誰に claim されたか</li>
+<li class="">どれくらい走ったか</li>
+<li class="">最後のハートビートはいつか</li>
+<li class="">どの retry から失敗し始めたか</li>
+</ul>
+<p>デバッグは当てずっぽうじゃない。履歴を見る。</p>
+</blockquote>
+</li>
+</ol>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="インデックス">インデックス<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E3%82%A4%E3%83%B3%E3%83%87%E3%83%83%E3%82%AF%E3%82%B9" class="hash-link" aria-label="インデックス への直接リンク" title="インデックス への直接リンク" translate="no">​</a></h2>
+<p>可観測性は、SQL を何本か書いて終わりじゃない：</p>
+<ul>
+<li class=""><strong>最低でも、ちゃんと速く走るようにしないとね？</strong></li>
+</ul>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="よく使うインデックス提案">よく使うインデックス（提案）<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E3%82%88%E3%81%8F%E4%BD%BF%E3%81%86%E3%82%A4%E3%83%B3%E3%83%87%E3%83%83%E3%82%AF%E3%82%B9%E6%8F%90%E6%A1%88" class="hash-link" aria-label="よく使うインデックス（提案） への直接リンク" title="よく使うインデックス（提案） への直接リンク" translate="no">​</a></h3>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_jobs_status </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_jobs_type_status </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">type</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">-- stuck を探す／最古の running を探すのに一番使う</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_jobs_running_age</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> heartbeat_at</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> created_at</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">-- 失敗 Top-N 集計</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_jobs_failed_code</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> error_code</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">-- attempts / events の検索キー</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_attempts_job </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> job_attempts</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> attempt</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_events_job_ts </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> job_events</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> ts</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>設計原則はシンプルだ：<strong>ダッシュボードでよく投げるクエリから逆算してインデックスを貼る。</strong></p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="よく使う観測クエリ">よく使う観測クエリ<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E3%82%88%E3%81%8F%E4%BD%BF%E3%81%86%E8%A6%B3%E6%B8%AC%E3%82%AF%E3%82%A8%E3%83%AA" class="hash-link" aria-label="よく使う観測クエリ への直接リンク" title="よく使う観測クエリ への直接リンク" translate="no">​</a></h2>
+<ol>
+<li class="">
+<p><strong>状態ごとの件数：いまどれくらい忙しい？</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">COUNT</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">*</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">AS</span><span class="token plain"> cnt</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">GROUP</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> cnt </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>すぐにこういうサインが見えてくる：</p>
+<ul>
+<li class=""><code>QUEUED</code> が爆増 → 上流が送りすぎ、下流が捌けてない</li>
+<li class=""><code>RUNNING</code> は多いのにスループットが上がらない → worker が詰まってる or リソース不足</li>
+<li class=""><code>FAILED</code> がじわじわ増える → 特定 job のバグ or 外部依存が壊れてる</li>
+</ul>
+</li>
+<li class="">
+<p><strong>いちばん長く詰まっている進行中 job を探す</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">type</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> claimed_by</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> created_at</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> heartbeat_at</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">IN</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'CLAIMED'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'RUNNING'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">COALESCE</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">heartbeat_at</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> created_at</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">ASC</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">20</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>ここでのポイントは <code>COALESCE</code>：</p>
+<ul>
+<li class="">ハートビートがあれば、それを「直近の生存証拠」として使う</li>
+<li class="">無ければ <code>created_at</code> にフォールバック（そもそも動いていないか、設計の抜けがある）</li>
+</ul>
+</li>
+<li class="">
+<p><strong>リトライ分布：特定の種類だけ延々と回ってない？</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> retry_count</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">COUNT</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">*</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">AS</span><span class="token plain"> cnt</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">IN</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'QUEUED'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'CLAIMED'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'RUNNING'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'FAILED'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">GROUP</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> retry_count</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> retry_count </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p><code>retry_count = 3</code> に塊ができていたら、だいたいこういう原因だ：</p>
+<ul>
+<li class="">外部サービスが落ちてる（timeout）</li>
+<li class="">入力が不正（invalid input）</li>
+<li class="">仕組みレベルのバグ（internal）</li>
+</ul>
+<p>次はエラーコードの集計に進む。</p>
+</li>
+<li class="">
+<p><strong>失敗理由 Top-N：集計できないと話にならない</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> error_code</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">COUNT</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">*</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">AS</span><span class="token plain"> cnt</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'FAILED'</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">GROUP</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> error_code</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> cnt </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">20</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>これが回る前提は「まともな <code>error_code</code> があること」だ。</p>
+</li>
+</ol>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="エラーコード設計">エラーコード設計<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E3%82%A8%E3%83%A9%E3%83%BC%E3%82%B3%E3%83%BC%E3%83%89%E8%A8%AD%E8%A8%88" class="hash-link" aria-label="エラーコード設計 への直接リンク" title="エラーコード設計 への直接リンク" translate="no">​</a></h2>
+<p><code>error_code</code> は「統計」のために存在する。よくあるアンチパターンはこれ：</p>
+<ul>
+<li class=""><code>error_detail</code> に stack trace 全部を突っ込む</li>
+<li class=""><code>error_code</code> を入れない（または適当に入れる）</li>
+</ul>
+<p>最後は「1 件ずつログを見る」しかなくなり、集計できない。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="推奨するエラーコード階層">推奨するエラーコード階層<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E6%8E%A8%E5%A5%A8%E3%81%99%E3%82%8B%E3%82%A8%E3%83%A9%E3%83%BC%E3%82%B3%E3%83%BC%E3%83%89%E9%9A%8E%E5%B1%A4" class="hash-link" aria-label="推奨するエラーコード階層 への直接リンク" title="推奨するエラーコード階層 への直接リンク" translate="no">​</a></h3>
+<p><code>CATEGORY:SUBCATEGORY</code>（または <code>CATEGORY/SUBCATEGORY</code>）にする：</p>
+<ul>
+<li class=""><code>TIMEOUT:UPSTREAM_API</code></li>
+<li class=""><code>INVALID_INPUT:SCHEMA_MISMATCH</code></li>
+<li class=""><code>RESOURCE:OUT_OF_MEMORY</code></li>
+<li class=""><code>INTERNAL:ASSERTION_FAILED</code></li>
+<li class=""><code>DEPENDENCY:DB_LOCKED</code></li>
+</ul>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="error_detail-の原則"><code>error_detail</code> の原則<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#error_detail-%E3%81%AE%E5%8E%9F%E5%89%87" class="hash-link" aria-label="error_detail-の原則 への直接リンク" title="error_detail-の原則 への直接リンク" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>短い要約</strong>で十分（例：200〜500 文字）</li>
+<li class="">stack trace 全文／JSON 全文／レポート全文はファイルシステムや object storage に置く。DB は <code>path/URL</code> だけを持つ</li>
+</ul>
+<p>「ゴミ箱型 log storage」は何度も見てきた。本当におすすめしない。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="外部キーと孤児データ">外部キーと孤児データ<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E5%A4%96%E9%83%A8%E3%82%AD%E3%83%BC%E3%81%A8%E5%AD%A4%E5%85%90%E3%83%87%E3%83%BC%E3%82%BF" class="hash-link" aria-label="外部キーと孤児データ への直接リンク" title="外部キーと孤児データ への直接リンク" translate="no">​</a></h2>
+<blockquote>
+<p>放っておくと、あとであなたを殺しに来る。</p>
+</blockquote>
+<p>SQLite の外部キーは「ある」。でも <strong>デフォルトで有効ではない</strong>。</p>
+<p>有効にしなければ、無かったことになる。</p>
+<p>ここでやるべきことは 2 つ：</p>
+<ol>
+<li class=""><strong>接続ごとに外部キーを有効化する</strong></li>
+</ol>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">PRAGMA foreign_keys </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">ON</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>これは 1 回の設定ではない。接続プールを使う、接続を張り直す——そのたびに必要だ。</p>
+<ol start="2">
+<li class=""><strong><code>ON DELETE CASCADE</code> で整合性を保つ</strong></li>
+</ol>
+<p><code>jobs</code> を消すなら <code>attempts/events</code> も自動で消えるようにする。そうしないと必ず孤児データが残る。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="upsert">Upsert<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#upsert" class="hash-link" aria-label="Upsert への直接リンク" title="Upsert への直接リンク" translate="no">​</a></h2>
+<p>「更新」として <code>INSERT OR REPLACE</code> を使うのはやめよう！</p>
+<p>これは太字で 3 回書く価値がある：</p>
+<ul>
+<li class=""><strong><code>REPLACE</code> は update ではない</strong></li>
+<li class=""><strong><code>REPLACE</code> は update ではない</strong></li>
+<li class=""><strong><code>REPLACE</code> は update ではない</strong></li>
+</ul>
+<p>挙動としては、むしろこうだ：</p>
+<blockquote>
+<p>先に DELETE してから INSERT</p>
+</blockquote>
+<p>外部キーがある、audit log がある、attempt/event がある……そんな状態で <code>REPLACE</code> を使うと即死する。</p>
+<p>しかも死んだあとで、原因が分からない。</p>
+<p>正しいやり方は <code>ON CONFLICT DO UPDATE</code>。状態更新は予測可能で追跡可能であるべきで、こっそり削除してはいけない：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">INSERT</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INTO</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> heartbeat_at</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">VALUES</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">?</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> ?</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> ?</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> CONFLICT</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DO</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">UPDATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">SET</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> excluded</span><span class="token punctuation" style="color:#393A34">.</span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  heartbeat_at </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> excluded</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">heartbeat_at</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="audit-logイベントテーブル">Audit log（イベントテーブル）<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#audit-log%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB" class="hash-link" aria-label="Audit log（イベントテーブル） への直接リンク" title="Audit log（イベントテーブル） への直接リンク" translate="no">​</a></h2>
+<p><code>jobs</code> の 1 行だけを見ていると、見えるのは「いま」だけで「なぜそうなったか」が見えない。</p>
+<p>イベントテーブルの哲学はこうだ：<strong>状態はスナップショット、イベントはタイムライン。</strong></p>
+<p>最低でも、次は記録したい：</p>
+<ul>
+<li class=""><code>ENQUEUED</code>：入列</li>
+<li class=""><code>CLAIMED</code>：worker に取られた</li>
+<li class=""><code>STARTED</code>：処理開始（claimed と分けてもよい）</li>
+<li class=""><code>HEARTBEAT</code>：ハートビート（頻度を下げる／「最後だけ」でもよい）</li>
+<li class=""><code>FAILED</code>：失敗（<code>error_code</code> を付ける）</li>
+<li class=""><code>RETRY_SCHEDULED</code>：リトライ予定（delay、attempt を付ける）</li>
+<li class=""><code>SUCCEEDED</code>：成功</li>
+<li class=""><code>CANCELLED</code>：手動キャンセル</li>
+<li class=""><code>RECOVERED</code>：回収／再割り当て（lease があるなら）</li>
+</ul>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="保持戦略">保持戦略<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E4%BF%9D%E6%8C%81%E6%88%A6%E7%95%A5" class="hash-link" aria-label="保持戦略 への直接リンク" title="保持戦略 への直接リンク" translate="no">​</a></h2>
+<p>データは消す。でも「ルールに従って」消す。</p>
+<p>queue システムが最後に必ずぶつかる問いがある：</p>
+<blockquote>
+<p><strong>どれくらい残す？</strong></p>
+</blockquote>
+<p>「全部残す」なら、SQLite は容量で人生相談を始める。
+「全部消す」なら、次の事故で証拠が残らない。</p>
+<p>現実的には、こんな戦略になる：</p>
+<ul>
+<li class=""><code>SUCCEEDED</code>：30 日（だいたい追跡には十分）</li>
+<li class=""><code>FAILED</code>：90 日（失敗は長めに。何度も戻ってくる）</li>
+<li class=""><code>CANCELLED</code>：要件次第（よくあるのは 30 日）</li>
+</ul>
+<p>削除は、分割して、中断できて、再実行できるようにするのがおすすめだ。</p>
+<p>100 万件を一気に消すな。サービス提供中ならなおさらだ。1 分ごとに掃除ジョブを走らせて、少しずつ消す：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">-- 成功 job を削除（30 日より前）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">DELETE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'SUCCEEDED'</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token operator" style="color:#393A34">AND</span><span class="token plain"> finished_at </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain"> strftime</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'%s'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'now'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">-</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">30</span><span class="token operator" style="color:#393A34">*</span><span class="token number" style="color:#36acaa">86400</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">5000</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="vacuum-は必要"><code>VACUUM</code> は必要？<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#vacuum-%E3%81%AF%E5%BF%85%E8%A6%81" class="hash-link" aria-label="vacuum-は必要 への直接リンク" title="vacuum-は必要 への直接リンク" translate="no">​</a></h3>
+<ul>
+<li class="">SQLite は削除してもすぐにファイルサイズが縮まらない（内部で再利用可能とマークするだけ）</li>
+<li class=""><code>VACUUM</code> は DB 全体を書き直す。I/O が重く、時間もかかる</li>
+</ul>
+<p>おすすめは：</p>
+<ul>
+<li class=""><strong>普段は分割削除で回す</strong></li>
+<li class=""><strong>本当に縮めたい（容量が逼迫）ときだけ、低負荷時間に <code>VACUUM</code></strong></li>
+</ul>
+<p>WAL モードなら、WAL ファイルと checkpoint の挙動も理解しておく。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="よくある問題">よくある問題<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E5%95%8F%E9%A1%8C" class="hash-link" aria-label="よくある問題 への直接リンク" title="よくある問題 への直接リンク" translate="no">​</a></h2>
+<ol>
+<li class="">
+<p><strong><code>error_detail</code> 無制限で、DB がゴミ箱になる</strong></p>
+<p><strong>対策</strong>：</p>
+<ul>
+<li class=""><code>error_code</code> で分類する</li>
+<li class=""><code>error_detail</code> は短い要約だけ</li>
+<li class="">全文レポートは外に置く（DB は参照だけ）</li>
+</ul>
+</li>
+<li class="">
+<p><code>foreign key</code> を有効にし忘れて、親を消したあとに孤児データが残る</p>
+<p><strong>対策</strong>：接続ごとに <code>PRAGMA foreign_keys = ON</code>、そして <code>ON DELETE CASCADE</code></p>
+</li>
+<li class="">
+<p><code>INSERT OR REPLACE</code> を upsert として使う</p>
+<p><strong>対策</strong>：<code>ON CONFLICT DO UPDATE</code> を使い、<code>REPLACE</code> に DELETE をさせない</p>
+</li>
+<li class="">
+<p>観測クエリを書いたのに、インデックスを貼っていない</p>
+<p><strong>対策</strong>：ダッシュボード／運用でよく使うクエリから逆算してインデックスを貼る（全表走査で SQLite と殴り合わない）</p>
+</li>
+</ol>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="まとめ">まとめ<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E3%81%BE%E3%81%A8%E3%82%81" class="hash-link" aria-label="まとめ への直接リンク" title="まとめ への直接リンク" translate="no">​</a></h2>
+<p>キューがあの 5 つの問いに答えられるようになると、システムは急に「システムらしく」なる：</p>
+<ul>
+<li class="">現況を説明できる（可観測）</li>
+<li class="">過程を追跡できる（audit）</li>
+<li class="">データのライフサイクルを制御できる（ガバナンス）</li>
+<li class="">事故対応を「勘」から「クエリ」に変えられる</li>
+</ul>
+<p>ここまでやれば、SQLite を queue に使うのも水到渠成だ。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="参考資料">参考資料<a href="https://docsaid.org/ja/blog/sqlite-queue-observability-governance#%E5%8F%82%E8%80%83%E8%B3%87%E6%96%99" class="hash-link" aria-label="参考資料 への直接リンク" title="参考資料 への直接リンク" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://www.sqlite.org/foreignkeys.html" target="_blank" rel="noopener noreferrer" class=""><strong>SQLite: Foreign Key Support</strong></a></li>
+<li class=""><a href="https://www.sqlite.org/lang_UPSERT.html" target="_blank" rel="noopener noreferrer" class=""><strong>SQLite: UPSERT</strong></a></li>
+<li class=""><a href="https://www.sqlite.org/lang_vacuum.html" target="_blank" rel="noopener noreferrer" class=""><strong>SQLite: VACUUM</strong></a></li>
+</ul><section class="ctaSection_iCjC"><div class="
+        simpleCta_ji_Y
+        simple-cta__coffee_YwC8
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ 1杯のコーヒーが支えになります</h3><p class="simple-cta__subtitle_ol86">AIやフルスタックの情報発信を続けるため、ご支援お願いします。</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/ja/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/ja/img/icons/all_in.svg" alt="AI・開発・運用まで一括対応 icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">ALL</span><h4 class="card__title_SQBY">AI・開発・運用まで一括対応</h4><p class="card__concept_Ak8F">アイデアからリリースまで、技術面はまるごとお任せください。</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">対応内容</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">技術相談 + 開発 + デプロイ</li><li class="card__bulletItem_wCRd">継続サポート &amp; 拡張</li></ul></div></div></div></div><div class="
+        simpleCta_ji_Y
+        simple-cta__outro_AXbn
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 次のプロジェクト、始めましょう！</h3><p class="simple-cta__subtitle_ol86">カスタム開発や長期支援をご希望の方は、ぜひご相談ください。</p></div></section><div style="margin-top:3rem"> </div>]]></content:encoded>
+            <category>sqlite</category>
+            <category>observability</category>
+            <category>data-governance</category>
+            <category>job-queue</category>
+        </item>
+        <item>
+            <title><![CDATA[SQLite 実戦（4）：クエリが遅い？]]></title>
+            <link>https://docsaid.org/ja/blog/sqlite-indexing-for-leaderboards</link>
+            <guid>https://docsaid.org/ja/blog/sqlite-indexing-for-leaderboards</guid>
+            <pubDate>Mon, 10 Nov 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[正しいインデックスで、`ORDER BY ... LIMIT` が本当に上位 100 件で止まるようにする。]]></description>
+            <content:encoded><![CDATA[<p>あなたは評価プラットフォームを作った。</p>
+<p>ユーザーに少し達成感を与えるために、慈悲深く leaderboard まで用意した。</p>
+<p>そして DevTools を開き、API の応答時間を見た。3 秒、5 秒、10 秒。</p>
+<p>ん？</p>
+<p>信じられなくて、SQL ももう一度見直す。</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">100</span><br></span></code></pre></div></div>
+<p>上位 100 件だけのはずなのに、なぜここまで遅い？</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="問題は-limit-ではない">問題は <code>LIMIT</code> ではない<a href="https://docsaid.org/ja/blog/sqlite-indexing-for-leaderboards#%E5%95%8F%E9%A1%8C%E3%81%AF-limit-%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84" class="hash-link" aria-label="問題は-limit-ではない への直接リンク" title="問題は-limit-ではない への直接リンク" translate="no">​</a></h2>
+<p>これはよくある誤解です。</p>
+<p><code>LIMIT 100</code> は、<strong>SQLite が 100 件しか処理しない</strong>という意味ではありません。</p>
+<p>もし「上位 100」を探す前に、「条件に合う行」を全部集めてソートしないといけないなら……</p>
+<p>あなたが言っているのは結局こうです：</p>
+<blockquote>
+<p>「最後に 100 件だけ返してくれればいい。でもその前に必要なことは、全部やってね。」</p>
+</blockquote>
+<p>クエリが遅いのはたいてい、SQLite に「いちばん愚直なやり方」しか残していないからです。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="典型的なクエリ">典型的なクエリ<a href="https://docsaid.org/ja/blog/sqlite-indexing-for-leaderboards#%E5%85%B8%E5%9E%8B%E7%9A%84%E3%81%AA%E3%82%AF%E3%82%A8%E3%83%AA" class="hash-link" aria-label="典型的なクエリ への直接リンク" title="典型的なクエリ への直接リンク" translate="no">​</a></h2>
+<p>多くの評価プラットフォームの schema は、だいたいこんな感じになります：</p>
+<ul>
+<li class=""><code>jobs</code>：1 回の submit / 1 回の run の基本情報
+（status、version、timestamp、queue）</li>
+<li class=""><code>job_scores</code>：実際の評価指標
+（train / public / private split に分かれることもある）</li>
+</ul>
+<p>SQL の例：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_OeMC">leaderboard（例）</div><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">model_name</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">split</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score1</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs j</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">JOIN</span><span class="token plain"> job_scores s </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">job_id </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">id</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'SUCCEEDED'</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token operator" style="color:#393A34">AND</span><span class="token plain"> j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">queue </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> :queue</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token operator" style="color:#393A34">AND</span><span class="token plain"> s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">split </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> :split</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score1 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score2 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">created_at </span><span class="token keyword" style="color:#00009f">ASC</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> :</span><span class="token keyword" style="color:#00009f">limit</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>最後の <code>j.created_at ASC</code> が重要です。</p>
+<p>これは <strong>とても筋の良い設計</strong>です：
+同点なら時間を tie-breaker にして、ランキングが安定して跳ねないようにする。</p>
+<p>でも SQLite から見ると、こういう要求になります：</p>
+<blockquote>
+<p><strong>いま欲しいのは「join あり・条件複数・複合ソート」の Top-N クエリです。</strong></p>
+</blockquote>
+<p>インデックスがズレていると、力技でやるしかありません。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="インデックスが無いときsqlite-はどう動く">インデックスが無いとき、SQLite はどう動く？<a href="https://docsaid.org/ja/blog/sqlite-indexing-for-leaderboards#%E3%82%A4%E3%83%B3%E3%83%87%E3%83%83%E3%82%AF%E3%82%B9%E3%81%8C%E7%84%A1%E3%81%84%E3%81%A8%E3%81%8Dsqlite-%E3%81%AF%E3%81%A9%E3%81%86%E5%8B%95%E3%81%8F" class="hash-link" aria-label="インデックスが無いとき、SQLite はどう動く？ への直接リンク" title="インデックスが無いとき、SQLite はどう動く？ への直接リンク" translate="no">​</a></h2>
+<p>単純化すると、流れはだいたいこうです：</p>
+<ol>
+<li class=""><code>status = 'SUCCEEDED'</code> かつ <code>queue = ?</code> の job を全部探す</li>
+<li class=""><code>split = ?</code> の score を join する</li>
+<li class="">結果を全部引っ張り出す</li>
+<li class=""><code>score1 → score2 → created_at</code> でソートする</li>
+<li class="">ソートしたあと 99% を捨てて、上位 100 件だけ残す</li>
+</ol>
+<p>遅いのは気のせいではありません。</p>
+<p>SQLite は本当に「全部読み、ひと息ついて、並べ替える」ことをやっています。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="本当に効くインデックスの貼り方">本当に効くインデックスの貼り方<a href="https://docsaid.org/ja/blog/sqlite-indexing-for-leaderboards#%E6%9C%AC%E5%BD%93%E3%81%AB%E5%8A%B9%E3%81%8F%E3%82%A4%E3%83%B3%E3%83%87%E3%83%83%E3%82%AF%E3%82%B9%E3%81%AE%E8%B2%BC%E3%82%8A%E6%96%B9" class="hash-link" aria-label="本当に効くインデックスの貼り方 への直接リンク" title="本当に効くインデックスの貼り方 への直接リンク" translate="no">​</a></h2>
+<p>インデックスは「貼れば速い」わけではありません。</p>
+<p>leaderboard のような Top-N クエリを速くするには、正しい順序が 1 つだけあります。逆にすると壊れます：</p>
+<ol>
+<li class=""><strong>まず <code>WHERE</code> で候補集合を一気に絞る</strong></li>
+<li class=""><strong>次に <code>ORDER BY ... LIMIT</code> がインデックス順に先頭 N 件を吐けるようにする</strong></li>
+</ol>
+<p>ソートの段階で SQLite が「もう一回ソート」しているなら、<code>LIMIT 100</code> はほとんど救ってくれません。必要なものはもう全部ソートし終わっているからです。</p>
+<p>例として <code>job_scores</code>（指標テーブル）から見ます。</p>
+<p>クエリの並び順がこうなら：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score1 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score2 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><br></span></code></pre></div></div>
+<p>インデックスも同じ並びを先に敷きます：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_OeMC">index（例）</div><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">IF</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">EXISTS</span><span class="token plain"> idx_scores_rank</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> job_scores </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  split</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  score1 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  score2 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>このインデックスが狙う効果：</p>
+<ul>
+<li class=""><strong><code>split = ?</code> で欲しいグループに絞る</strong></li>
+<li class="">絞ったあと、行はインデックス内ですでに <code>score1 → score2</code> の順になっている</li>
+<li class="">SQLite はインデックスを順に辿るだけで、上位 100 の候補をすぐ取れる</li>
+</ul>
+<p>これは SQLite に「全員集合して整列して」と言うのではなく、「最初から並んでいる廊下」に連れて行く感じです。</p>
+<p>次は <code>jobs</code>（run のメタ情報）。ここに条件と tie-breaker があります：</p>
+<ul>
+<li class="">絞り込み：<code>queue</code>、<code>status</code></li>
+<li class="">最後の tie-breaker：<code>created_at ASC</code>（同点のとき順位を安定させる）</li>
+</ul>
+<p>なので、この 3 つに対応するインデックスを貼ります：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_OeMC">index（例）</div><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">IF</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">EXISTS</span><span class="token plain"> idx_jobs_filter</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  queue</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  created_at</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>ここでの <code>created_at</code> は、<strong>絞り込みのためではなく</strong>「最後のひと押し」のためです。</p>
+<p>というのも、<code>ORDER BY</code> の最後はこうだから：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">created_at </span><span class="token keyword" style="color:#00009f">ASC</span><br></span></code></pre></div></div>
+<p>もし <code>score1/score2</code> が同じ行が大量にあるなら（同点はよくある）、SQLite は：</p>
+<ol>
+<li class="">まず同点の巨大な候補の塊を集める</li>
+<li class=""><code>jobs</code> に join して <code>created_at</code> を読む</li>
+<li class=""><strong>その塊を <code>created_at</code> で並べ替える</strong></li>
+<li class="">そこで初めて、安定して上位 100 件を選べる</li>
+</ol>
+<p><code>created_at</code> を支えるインデックスが無いと、SQLite はだいたいこうします：</p>
+<ul>
+<li class="">一時的なソート構造（temp B-tree）を作る</li>
+<li class="">同点候補を突っ込む</li>
+<li class="">ソートしてから結果を返す</li>
+</ul>
+<p>query plan で見えるのがこれ：<code>USE TEMP B-TREE FOR ORDER BY</code></p>
+<p>自分のクエリが追加ソートしているか知りたいなら、<code>EXPLAIN QUERY PLAN</code> で SQLite に聞けます：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">EXPLAIN</span><span class="token plain"> QUERY </span><span class="token keyword" style="color:#00009f">PLAN</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>見たい計画はだいたいこうです：</p>
+<ul>
+<li class=""><code>USING INDEX ...</code>（貼ったインデックスを使っている）</li>
+<li class=""><code>SCAN TABLE</code> が無い（全表スキャンしていない）</li>
+<li class=""><code>USE TEMP B-TREE FOR ORDER BY</code> が無い（追加ソートしていない）</li>
+</ul>
+<p>もし <code>TEMP B-TREE</code> が見えたら、ほぼこう断定できます：</p>
+<ul>
+<li class="">まだ追加ソートしている。Top-N の LIMIT は最後にしか効いていない。直そう。</li>
+</ul>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="よくある落とし穴">よくある落とし穴<a href="https://docsaid.org/ja/blog/sqlite-indexing-for-leaderboards#%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E8%90%BD%E3%81%A8%E3%81%97%E7%A9%B4" class="hash-link" aria-label="よくある落とし穴 への直接リンク" title="よくある落とし穴 への直接リンク" translate="no">​</a></h2>
+<ol>
+<li class="">
+<p><strong>数字を TEXT で持って、CAST でソートする</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> CAST</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">score1 </span><span class="token keyword" style="color:#00009f">AS</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">REAL</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DESC</span><br></span></code></pre></div></div>
+<p>この 1 行でインデックスが死にます。</p>
+<p>SQLite は「変換後の結果」を使ってインデックスを辿れません。</p>
+<p><strong>対策は単純</strong>：
+数値は最初から <code>INTEGER / REAL</code> で持ちましょう。ソート時の CAST に頼らない。</p>
+</li>
+<li class="">
+<p><strong>ソート列を足し続けると、インデックスが太り続ける</strong></p>
+<p><code>score1 → score2 → score3 → score4 → …</code></p>
+<p>最後に残るのは、書き込みが遅くて容量を食うのに、クエリが必ずしも速くならない“インデックス怪獣”です。</p>
+<p><strong>対策</strong>：どの指標が本当に順位を変えるか確認し、ソートキーは最小限に。</p>
+</li>
+</ol>
+<p>leaderboard が頻繁にクリックされるようになったら、こんな選択肢もあります：</p>
+<ul>
+<li class=""><strong>Top-N 結果をキャッシュする</strong>（leaderboard は典型的に read-heavy / write-light）</li>
+<li class=""><strong>人気 split だけ partial index を作る</strong></li>
+<li class=""><strong>オフラインでランキングを計算し、結果テーブルを引く</strong></li>
+</ul>
+<p>SQLite は「クエリエンジン」として非常に向いています。でも毎回リアルタイムに計算する必要はありません。ちょっとした工夫で、プロダクトはかなり安定します。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="まとめ">まとめ<a href="https://docsaid.org/ja/blog/sqlite-indexing-for-leaderboards#%E3%81%BE%E3%81%A8%E3%82%81" class="hash-link" aria-label="まとめ への直接リンク" title="まとめ への直接リンク" translate="no">​</a></h2>
+<p>クエリが遅いとき、よくある理由は SQLite がダメだからではありません。</p>
+<p>あなたが SQLite に要求しているのは：</p>
+<ul>
+<li class="">join（テーブル結合）</li>
+<li class="">条件が複数</li>
+<li class="">複合ソート</li>
+<li class="">しかも順位が安定した Top-N クエリ</li>
+</ul>
+<p>なのに、それに対応したインデックスを与えていないからです。</p>
+<p>だから SQLite は一番保守的で一般的なやり方を選びます：全部読む、全部並べ替える、そのあと大半を捨てる。</p>
+<p>本当に調整すべきなのは、SQL の書き方そのものよりも、事前に考えたかどうかです：</p>
+<ul>
+<li class="">どの条件が「範囲を絞る」のか</li>
+<li class="">どの列が本当に「順位を変える」のか</li>
+<li class="">どのソートが SQLite に「追加の並べ替え」をさせてはいけないのか</li>
+</ul>
+<p>SQLite はずっと堅実です。</p>
+<p>必要なのは、あなたが「本当に欲しいもの」をもう少し精密に伝えることだけ。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="参考資料">参考資料<a href="https://docsaid.org/ja/blog/sqlite-indexing-for-leaderboards#%E5%8F%82%E8%80%83%E8%B3%87%E6%96%99" class="hash-link" aria-label="参考資料 への直接リンク" title="参考資料 への直接リンク" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://www.sqlite.org/lang_createindex.html" target="_blank" rel="noopener noreferrer" class="">SQLite: Indexes</a></li>
+<li class=""><a href="https://www.sqlite.org/queryplanner.html" target="_blank" rel="noopener noreferrer" class="">SQLite: Query Planner</a></li>
+<li class=""><a href="https://www.sqlite.org/eqp.html" target="_blank" rel="noopener noreferrer" class="">SQLite: EXPLAIN QUERY PLAN</a></li>
+</ul><section class="ctaSection_iCjC"><div class="
+        simpleCta_ji_Y
+        simple-cta__coffee_YwC8
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ 1杯のコーヒーが支えになります</h3><p class="simple-cta__subtitle_ol86">AIやフルスタックの情報発信を続けるため、ご支援お願いします。</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/ja/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/ja/img/icons/all_in.svg" alt="AI・開発・運用まで一括対応 icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">ALL</span><h4 class="card__title_SQBY">AI・開発・運用まで一括対応</h4><p class="card__concept_Ak8F">アイデアからリリースまで、技術面はまるごとお任せください。</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">対応内容</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">技術相談 + 開発 + デプロイ</li><li class="card__bulletItem_wCRd">継続サポート &amp; 拡張</li></ul></div></div></div></div><div class="
+        simpleCta_ji_Y
+        simple-cta__outro_AXbn
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 次のプロジェクト、始めましょう！</h3><p class="simple-cta__subtitle_ol86">カスタム開発や長期支援をご希望の方は、ぜひご相談ください。</p></div></section><div style="margin-top:3rem"> </div>]]></content:encoded>
+            <category>sqlite</category>
+            <category>index</category>
+            <category>performance</category>
+            <category>leaderboard</category>
+            <category>query-plan</category>
+        </item>
         <item>
             <title><![CDATA[SQLite 実戦（3）：worker を救え]]></title>
             <link>https://docsaid.org/ja/blog/sqlite-lease-heartbeat-recovery</link>
@@ -2396,252 +2858,6 @@ CLIP と Mixture of Experts アーキテクチャを組み合わせ、soft-adapt
             <category>Python</category>
             <category>Pydantic</category>
             <category>Data Validation</category>
-        </item>
-        <item>
-            <title><![CDATA[AIをやっている私が、なぜバックエンドシステムを作ったのか？]]></title>
-            <link>https://docsaid.org/ja/blog/builds-dashboard-system</link>
-            <guid>https://docsaid.org/ja/blog/builds-dashboard-system</guid>
-            <pubDate>Sun, 16 Mar 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[ゼロから始めてバックエンドシステムを構築した経験の共有。]]></description>
-            <content:encoded><![CDATA[<p>こんにちは、もしくはこんばんは。</p>
-<p>最近、記事の更新が少し滞ってしまいました。まず最初に、皆さんにお詫びを申し上げます。</p>
-<p>なぜかというと、私は本業から外れて、フロントエンドとバックエンドを作っていたからです。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="まさかの暇つぶし">まさかの暇つぶし？<a href="https://docsaid.org/ja/blog/builds-dashboard-system#%E3%81%BE%E3%81%95%E3%81%8B%E3%81%AE%E6%9A%87%E3%81%A4%E3%81%B6%E3%81%97" class="hash-link" aria-label="まさかの暇つぶし？ への直接リンク" title="まさかの暇つぶし？ への直接リンク" translate="no">​</a></h2>
-<p>確かに。</p>
-<hr>
-<p>最近、ちょうど長期休暇を取ることができ、やっと手が空いて、以前時間がなくて解決できなかった問題を整理することができました：</p>
-<ul>
-<li class=""><strong>このサイトにはバックエンドがない！</strong></li>
-</ul>
-<p>おそらく少しは知っているかもしれませんが、このサイトは Docusaurus フレームワークを使って作成された静的サイトです。サイトを作成した当初、私はただ気まぐれにブログを書いたり、論文のメモをシェアしたりしようと思っていただけで、特別な計画や大きな目標はありませんでした。</p>
-<p>静的サイトと動的サイトにはそれぞれの長所と短所があることは、私がもう一度説明するまでもないでしょう。以前は WordPress を使ってサイトを作ろうとしましたが、数歩進んだところで何か人物が現れてお金を要求してきて、本当にイライラさせられました：</p>
-<blockquote>
-<p><strong>サイトを作るだけでこんなに利益が少ないのに、どうして誰かが私のお財布を狙っているんだろう？</strong></p>
-</blockquote>
-<p>その後、WordPress をしばらく運用しましたが、結局諦めました。</p>
-<p>全てが高額な有料サービスが原因ではなく、そのコードがカスタマイズしづらかったからです……まあ、言い訳をしても仕方ないですが、PHP を書くのが苦手だというのが本音です。</p>
-<p>それに比べて、やはりフロントエンドとバックエンドが分離された構造の方が、私にはずっと快適に感じました。</p>
-<p>その後の話はご存知の通り、最終的には Docusaurus を選び、今に至っています。ぐるっと回って、また静的サイトの構造に戻ってきました。</p>
-<p>＊</p>
-<p>サイトの内容が徐々に増えていくと、読者からのメールが届き始めました。たいていはモデルの使い方に関する質問です：環境の設定方法、依存関係のインストール方法、さらには運用中に遭遇した奇妙なエラーの解決方法など。</p>
-<p>これらは簡単に解決できます。彼らには ChatGPT に聞くように伝えれば、問題は解決です。（<del>あまりにも手軽すぎる？</del>）</p>
-<p>手軽ではありません。今の AI ツールは非常に強力で、大半の問題はすぐに答えが得られます。無駄に私とメールのやり取りをする必要はありません。</p>
-<p>もちろん、AI では解決できない問題もあります。例えば、読者が私のバックエンド API を直接呼び出せるようにしてほしい、というリクエストがありました！</p>
-<p>おっと！一見簡単な要求に見えますが、実際に実行するとなるといくつか問題が発生します。その話は後ほど。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="初代バックエンド">初代バックエンド<a href="https://docsaid.org/ja/blog/builds-dashboard-system#%E5%88%9D%E4%BB%A3%E3%83%90%E3%83%83%E3%82%AF%E3%82%A8%E3%83%B3%E3%83%89" class="hash-link" aria-label="初代バックエンド への直接リンク" title="初代バックエンド への直接リンク" translate="no">​</a></h2>
-<p>少し時間を戻してみましょう。</p>
-<p>いくつかのモデルを作った後、私はそのモデルをみんなに使ってもらいたいと思うようになりました。それは、まるで海辺で砂で城壁を作り、波が来てその城壁がどれだけ丈夫かを試すのを待っているようなものです。波に崩されても問題ありません、少なくともやってみたという努力があったのです。</p>
-<p>モデルを作るのも同じです。おそらくどのエンジニアも、モデルを作り終わった後、それを隠して誰にも知られないようにすることはないでしょう……それなら作る意味がないですから。</p>
-<p>そこで、私はいくつかのモデルのデモを作り、初代バックエンドを作成しました：そう、これがこのサイトのナビゲーションバーにある「遊び場」です。もしまだ試したことがなければ、ぜひ遊んでみてください。</p>
-<p>「デモを作るだけなら、バックエンドなんて必要ないだろう」と思うかもしれません。</p>
-<p>その通りです。一般的に、モデルをウェブ上で使う方法は 2 つの解決策があります：</p>
-<ol>
-<li class="">
-<p><strong>ウェブから直接モデルをロードして、ブラウザで推論を実行する。</strong></p>
-<p>この案は最初に出た時点で自分で却下しました。</p>
-<p>ブラウザでモデルを動かすことは不可能ではありませんが、面倒です。少なくとも 3 つ以上のブラウザに対応し、それぞれの動作環境設定が異なります。これを聞いた WebAssembly で大変だったフロントエンドの仲間たちは、きっと私を止めていたでしょう。</p>
-</li>
-<li class="">
-<p><strong>バックエンドサービスを提供して、推論結果を返す。</strong></p>
-<p>これは後に私が採用した案です。</p>
-<p>フロントエンドはデータの送受信だけを行い、面倒な処理はすべてバックエンドに任せます。しかし、これには必ずバックエンドシステムを自分で作成して、対応するサービスを提供しなければならないという意味でもあります。</p>
-</li>
-</ol>
-<hr>
-<p>フロントエンドにはすでに Docusaurus を使用しているので、ここでは必然的にフロントエンドとバックエンドが分離された構造を採用しなければなりません。</p>
-<p>プログラムを書き始める前に、まずは図を描きました。この構成は、次のような形になります：</p>
-<!-- -->
-<p>実際、この構成図の他にも多くの仕様やシステムの操作フロー、入力・出力の詳細設計などを書きましたが、非常に煩雑なのでここでは構成図だけにとどめておきます。</p>
-<p>仕様を決めた後は、図に従って作業を進め、現在の「遊び場」の背後にある運用ロジックが完成しました。</p>
-<p>ここまで見ると、シンプルに見えるかもしれませんが、私が選んだ技術スタックについて少し話してみましょう。</p>
-<ol>
-<li class="">
-<p><strong>Nginx</strong></p>
-<p>ここでよく聞くもう一つの選択肢は Apache です。かつて Apache はウェブサーバーの王者であり、豊富な機能と多様なモジュール、大きなコミュニティを誇り、広範なユーザーを持っています。しかし、Apache の設定は少し複雑であり、高い同時接続数の処理能力において Nginx に劣ります。</p>
-<p>正直言うと、Apache が悪いとは思いませんが、私は Nginx のシンプルで直感的な設定スタイルが好きです。静的リソースの代理やリバースプロキシ、負荷分散など、Nginx の設定方法は理解しやすいです。ただし、これは好みの問題であり、この設定スタイルを好まない人もいます。</p>
-<p>最後に、Nginx はもともと大量の同時接続を処理するために設計されており、安定性とパフォーマンスは市場と時間によって証明されています。これも一つの良い選択肢だと思います。</p>
-<hr>
-</li>
-<li class="">
-<p><strong>FastAPI</strong></p>
-<p>バックエンドフレームワークでよく聞くのは C#や Node.js ですが、残念ながら私はそれらにはあまり詳しくありません。</p>
-<p>AI エンジニアとして、最も馴染みがあるのは Python 環境です。今、急に Node.js や他の言語のバックエンドフレームワークを学び始めるのは、私にとって学習コストが高すぎます。その場合、開発が数ヶ月遅れる可能性も十分にあります。</p>
-<p>それで、私は FastAPI を選びました。</p>
-<p>FastAPI は非同期操作を天然にサポートしており、後端のモデル推論のような時間がかかるが効率的に並行リクエストを処理する必要があるシーンに非常に適しています。さらに、FastAPI には Pydantic による検証機能が組み込まれており、API のドキュメントを自動生成でき、テストインターフェースも準備されているため、API の開発とメンテナンスの際の苦痛が大幅に減少します。</p>
-<p>重要なのは、FastAPI の設計がシンプルで理解しやすい点です。Django のように重くて煩雑ではなく、Flask のように自由すぎてアーキテクチャが混乱することもなく、開発体験はまさに理想的です。</p>
-<hr>
-</li>
-<li class="">
-<p><strong>PostgreSQL</strong></p>
-<p>データベースについて話すと、私は実は MySQL の方が詳しいです。</p>
-<p>MySQL は開発コミュニティ内でも評判が良く、多くの初心者にとって最初のデータベースとして選ばれますが、Oracle に買収されて以来、MySQL のオープンソースライセンスが商業化の方向にシフトしており、そのエコシステムに不確定性を感じるようになっています。</p>
-<p>それに対して、PostgreSQL はオープンソースコミュニティで安定的に成長し続けています。継続的なコミュニティサポートに加え、PostgreSQL は JSON データ型や GIS 地理情報処理など、複雑なデータ要求に対して強力な機能を提供しています。</p>
-<p>さらに、PostgreSQL は FastAPI やさまざまな ORM ツール（例えば SQLAlchemy）との統合が非常にスムーズで、使いやすい体験を提供します。さらに、PostgreSQL は大量の同時接続や高負荷リクエストの処理能力にも優れており、将来的にサイトのトラフィックが増えたり、バックエンドの要求が複雑になったりしても、データベースがボトルネックになる心配は少ないでしょう。</p>
-<hr>
-</li>
-</ol>
-<p>これまで話したことは、必ずしも最適な組み合わせではありませんが、現時点でのニーズには十分に対応できるものです。</p>
-<p>私のシンプルな構成には、これで十分です。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="第二代バックエンド">第二代バックエンド<a href="https://docsaid.org/ja/blog/builds-dashboard-system#%E7%AC%AC%E4%BA%8C%E4%BB%A3%E3%83%90%E3%83%83%E3%82%AF%E3%82%A8%E3%83%B3%E3%83%89" class="hash-link" aria-label="第二代バックエンド への直接リンク" title="第二代バックエンド への直接リンク" translate="no">​</a></h2>
-<p>最初に触れた問題に戻ります。読者からのメールで、私のバックエンド API をウェブインターフェースを介さずに直接プログラムで呼び出したいという要望がありました。これは面白いリクエストで、ユーザーがシステムとより自動化され、高効率な方法でインタラクトしたいと考えていることを示唆しています。</p>
-<p>では、API を直接開放してユーザーが自由に呼び出せるようにすると、どんな問題が発生するのでしょうか？</p>
-<ol>
-<li class="">
-<p><strong>トラフィックが爆発する</strong></p>
-<p>API が直接外部に開放されると、ユーザーはプログラムを使って高頻度でリクエストを送ることができ、それがサーバーのトラフィック急増を引き起こし、負荷能力を超えてしまう可能性があります。</p>
-<p>例えば、一部のユーザーは適切なリクエスト頻度を設定せず、API が短期間で大量のリクエストを受けることになります。これが他のユーザーの正常なアクセスに影響を与えることになります。また、クローラーや悪意のあるスクリプトを使って API をテストする人もおり、サーバーの帯域幅や計算資源が大量に消費され、サービスの安定性に悪影響を与える可能性があります。</p>
-<hr>
-</li>
-<li class="">
-<p><strong>セキュリティリスクがある</strong></p>
-<p>API を開放した後、適切な認証やアクセス制御がなければ、誰でも本来アクセスすべきでないデータを取得したり、危険な操作を実行したりする可能性があります。例えば、API に適切な認証機能（OAuth や JWT など）がなければ、悪意のある者が簡単なリクエストを使って合法的なユーザーを模倣し、セキュリティリスクを引き起こす可能性があります。</p>
-<hr>
-</li>
-</ol>
-<p>その他にも延長的な問題はまだまだありますが、ここでは省略します。</p>
-<p>とにかく、直接開放することはできません。私自身と私のサーバーがそのために危機的な状況に陥るかもしれません。</p>
-<p>そのため、API を開放するというニーズを満たすためには、ユーザー認証と API 認証の認可システムを自分で作成しなければならないということです。</p>
-<p>さて、いつものように言いますが：エンジニアは未経験を恐れず、手を動かさなければならない、私は今すぐプログラムを書きます！</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="ユーザーログインシステム">ユーザーログインシステム<a href="https://docsaid.org/ja/blog/builds-dashboard-system#%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0" class="hash-link" aria-label="ユーザーログインシステム への直接リンク" title="ユーザーログインシステム への直接リンク" translate="no">​</a></h3>
-<p>完全なユーザーシステムには、ユーザー登録、ログイン、権限管理、メール認証などの機能が含まれます。</p>
-<p>元々使用している FastAPI と PostgreSQL データベースに加えて、Redis を導入してセッションキャッシュとトークン管理を行いました。ユーザー体験を向上させるために、メール認証やパスワード忘れ機能も設計し、SMTP サービスを利用して認証メールを送信しました。</p>
-<p>さて、ここでまた構成図を描くことができます。簡単に描いてみました：</p>
-<!-- -->
-<p>このユーザーシステムには、ユーザーデータベース、パスワード暗号化、登録メール認証、パスワード忘れリセットプロセスなど、さまざまな詳細が含まれています。ここでは、Google や Facebook のアカウントを使ったサードパーティログイン機能の統合については考慮していません。もしサードパーティログイン認証を追加するなら、それにはさらに多くの作業が必要になりますので、それは未来の自分に任せておきます。</p>
-<p>登録メール認証の部分について言うと、これが思っていたよりも手間がかかりました。</p>
-<p>最初に Amazon SES を申請したところ、1 日後に拒否されました。彼らは私を怪しいと感じたようです。（何故？）</p>
-<div align="center"><figure style="width:60%"><p><img decoding="async" loading="lazy" alt="amazon" src="https://docsaid.org/ja/assets/images/img1-17d661c856bca0be72bad9dcd0ad15de.jpg" width="2291" height="1617" class="img_ev3q"></p></figure></div>
-<p>それなら、自分でメールサーバーを立てればいいかと思って、また手動で色々と操作をして、1 日かかってようやくサーバーを立てました。</p>
-<p>しかし、送信したメールは再び Gmail に拒否されました。なぜなら、彼らも私を怪しいと感じたからです。（😭 😭 😭）</p>
-<p>最終的に、別のプロバイダーを見つけてこの問題を解決したので、それについてはもう言及しません。</p>
-<p>そんなこんなで、1 週間以上かかってようやく規格を完成させ、簡単なページの構築を終えましたが、数千行のコードを書きました。その結果、CP（コストパフォーマンス）値がとても低いように感じます。</p>
-<p>ここまでプログラムを書いて、私はなぜどの企業でもフロントエンドとバックエンドが常にお互いに不満を持ち、喧嘩しているのかが理解できました。結局、仕様を決めることがどれだけ重要かということです。たとえ一人で書いていても、仕様をしっかりと定めておかないと、自分で苦しむことになります。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="api-token-発行システム">API Token 発行システム<a href="https://docsaid.org/ja/blog/builds-dashboard-system#api-token-%E7%99%BA%E8%A1%8C%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0" class="hash-link" aria-label="API Token 発行システム への直接リンク" title="API Token 発行システム への直接リンク" translate="no">​</a></h3>
-<p>ユーザーシステムを完成させた後、ついに API トークンの機能を作成することができました。</p>
-<p>現在、最も一般的なトークン形式は JWT（JSON Web Token）で、その特徴の一つは JWT が自己完結型（self-contained）であることです。トークンが有効であるかどうかを確認するだけで、ユーザーの身分と権限を知ることができ、データベースの頻繁なクエリを減らし、パフォーマンスを向上させます。さらに、JWT 内部にユーザー ID、権限、有効期限などの情報を保存でき、追加の API クエリを避けることができます。</p>
-<p>そのため、私は JWT をそのまま使用しました。ユーザーはログインして身分を認証した後、システムが JWT を生成し、Redis に保存します。ユーザーが API リクエストを送信する際に、JWT が Bearer トークンとしてバックエンドに送られ、身分認証を行います。トークンが認証されると、バックエンドのモデル推論サービスにアクセスできるようになります。</p>
-<p>この部分は比較的シンプルで、トークンを申請するための構成図は次のようになります：</p>
-<!-- -->
-<p>ユーザーがトークンを取得した後、このトークンを使って API を呼び出すことができます。この部分で、Redis はトラフィック制限と呼び出し回数の計算に使用されます。全体的な呼び出しフローは次のようになります：</p>
-<!-- -->
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="api-トークン管理機構">API トークン管理機構<a href="https://docsaid.org/ja/blog/builds-dashboard-system#api-%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E7%AE%A1%E7%90%86%E6%A9%9F%E6%A7%8B" class="hash-link" aria-label="API トークン管理機構 への直接リンク" title="API トークン管理機構 への直接リンク" translate="no">​</a></h3>
-<p>トークン設計時に、私はトークンの有効期限をユーザー自身で設定できるようにし、再発行メカニズムは設けませんでした。代わりに、手動でトークンの取り消しと削除を行うことができ、API のアクセス権限の柔軟性とセキュリティを確保しています。</p>
-<p>ユーザーがトークンを申請する際に、有効期限（例えば 1 時間、1 日、7 日、または 1 年など）を指定できます。一度トークンが期限切れになると、システムは自動的に無効にし、ユーザーは新しいトークンを再度申請する必要があります。</p>
-<p>この設計により、開発者は自分のニーズに合わせた適切なトークン期限を選択でき、頻繁な再認証を避けることができます。</p>
-<p>ユーザーはいつでもトークンを取り消したり削除したりすることができ、トークンが漏洩したり、もはや必要でなくなった場合、即座に削除して無効にすることができます。</p>
-<p>トークンの状態は Redis に保存されており、ユーザーが手動でトークンを取り消すと、システムは即座にそれを無効としてマークします。その後の API リクエストは拒否されます。これにより、不要な長期間の認証リスクを避け、システムの可制御性を確保することができます。</p>
-<p>このフローの構成図は次のようになります：</p>
-<!-- -->
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p><strong>なぜ再発行メカニズムを使わないのか？</strong></p><ul>
-<li class="">ユーザーが自分で有効期限を設定できることで、API の柔軟性が向上し、システムが過度にユーザーのトークン管理に干渉しないようにできます。</li>
-<li class="">再発行メカニズムがないことで、トークンは設定された期限内で固定的に有効となり、頻繁な再認証による余分な検証負担を回避できます。</li>
-<li class="">トークンを手動で取り消すことができるため、トークンが漏洩した場合やもはや不要になった場合、即座に無効にすることができ、セキュリティが向上します。</li>
-</ul><p>この設計は、長期的にアクセスが必要だが、セキュリティも保ちたいユーザーにとって、シンプルでありながら制御可能なトークン管理方法を提供します。</p></div></div>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="api-トラフィック制限">API トラフィック制限<a href="https://docsaid.org/ja/blog/builds-dashboard-system#api-%E3%83%88%E3%83%A9%E3%83%95%E3%82%A3%E3%83%83%E3%82%AF%E5%88%B6%E9%99%90" class="hash-link" aria-label="API トラフィック制限 への直接リンク" title="API トラフィック制限 への直接リンク" translate="no">​</a></h3>
-<p>トークンを取得した後、次の問題は「悪意のあるユーザーが API を濫用するのをどう防ぐか？」です。</p>
-<p>API は大量の推論リクエスト（AI モデルの推論やバッチクエリなど）を含む可能性があるため、制限をかけないと、悪意のある攻撃によって正常なユーザーの使用に影響を及ぼすことがあります。そこで、私は「レート制限（Rate Limiting）」メカニズムを導入し、Redis を使用してリクエスト回数を記録し、短時間で制限に達した場合にリクエストを一時的にブロックするようにしました。</p>
-<p>このプロセスの構成図は次のようになります：</p>
-<!-- -->
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="技術スタック小結">技術スタック小結<a href="https://docsaid.org/ja/blog/builds-dashboard-system#%E6%8A%80%E8%A1%93%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E5%B0%8F%E7%B5%90" class="hash-link" aria-label="技術スタック小結 への直接リンク" title="技術スタック小結 への直接リンク" translate="no">​</a></h2>
-<p>このウェブサイトのバックエンドは、今回のアップグレード後に次のような技術スタックに更新されました：</p>
-<ul>
-<li class=""><strong>フロントエンドフレームワーク</strong>：React（Docusaurus）</li>
-<li class=""><strong>バックエンドフレームワーク</strong>：FastAPI（Python）</li>
-<li class=""><strong>データベース</strong>：PostgreSQL</li>
-<li class=""><strong>キャッシュサービス</strong>：Redis</li>
-<li class=""><strong>リバースプロキシと負荷分散</strong>：Nginx</li>
-</ul>
-<p>新たに追加された Redis 以外は、実際に上記の技術はすべて初代バックエンドにもすでに存在していましたが、その当時はこれらの関連情報を明確に表示する専用のフロントエンドページがありませんでした。このアップデートを通じて、ユーザーが直接操作できるフロントエンドバックエンドページを追加し、より多くのサービスと機能を提供できるようになりました。</p>
-<p>私にとって、Python と FastAPI はすでに日常的な必需ツールであり、この技術スタックは特に革新的ではありませんが、確実に開発効率と使用感を大幅に向上させました。デプロイに関しては、私が慣れている Docker Compose と Nginx を使い、自宅のサーバーで構築しています。クラウドサーバーに移行したいとも思いましたが、コストが高いため（安価なものは性能が低い）、実際にはまだ自宅サーバーでやりくりしています。</p>
-<p>ともあれ、このシステムは現在順調に運用されており、まずは動作を確認し、引き続き改善を加えていく予定です。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="最後に">最後に<a href="https://docsaid.org/ja/blog/builds-dashboard-system#%E6%9C%80%E5%BE%8C%E3%81%AB" class="hash-link" aria-label="最後に への直接リンク" title="最後に への直接リンク" translate="no">​</a></h2>
-<p>論文を読むとき、論理が抽象的に感じることが多いですが、何度も読み返すことで、大抵は再現できるようになります。（計算リソース不足の問題を除けば）</p>
-<p>フロントエンドのドキュメントは一見明快ですが、実際に作業をすると、どのステップにも罠が隠れていて、非常に狡猾です。（<del>不慣れなら素直に言えばよかったのに！</del>）過去の深夜のデバッグ作業は、「ロスが収束しない」、「GPU メモリ不足」といった AI エンジニアの日常的な問題に対処していましたが、現在はむしろ React のエラーやフォームボタンの無効化、バックエンド API の仕様不一致など、面倒な問題に直面しています。</p>
-<p>それでも、今回の作業は ChatGPT を使ってリアルタイムで助けを求めながら進めることができました。もし ChatGPT がなかった時代に戻っていたら、このバックエンドを作成できたかどうかは本当に分かりません。</p>
-<p>今後、時間があればさらに機能を追加していく予定です。もしこのシステムについて他にアドバイスや意見があれば、コメント欄で気軽に交流・シェアしてください。</p>
-<p>もし使用中にバグを見つけたり問題に直面した場合、システムの安全のために、ぜひ私に直接メールで連絡してください。詳細なエラーメッセージやスクリーンショットを提供していただけると、問題を迅速に特定し修正する手助けになります。</p>
-<p>このシステムで楽しいひとときをお過ごしください！</p><section class="ctaSection_iCjC"><div class="
-        simpleCta_ji_Y
-        simple-cta__coffee_YwC8
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ 1杯のコーヒーが支えになります</h3><p class="simple-cta__subtitle_ol86">AIやフルスタックの情報発信を続けるため、ご支援お願いします。</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/ja/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/ja/img/icons/all_in.svg" alt="AI・開発・運用まで一括対応 icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">ALL</span><h4 class="card__title_SQBY">AI・開発・運用まで一括対応</h4><p class="card__concept_Ak8F">アイデアからリリースまで、技術面はまるごとお任せください。</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">対応内容</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">技術相談 + 開発 + デプロイ</li><li class="card__bulletItem_wCRd">継続サポート &amp; 拡張</li></ul></div></div></div></div><div class="
-        simpleCta_ji_Y
-        simple-cta__outro_AXbn
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 次のプロジェクト、始めましょう！</h3><p class="simple-cta__subtitle_ol86">カスタム開発や長期支援をご希望の方は、ぜひご相談ください。</p></div></section><div style="margin-top:3rem"> </div>]]></content:encoded>
-            <category>React</category>
-            <category>FastAPI</category>
-            <category>ユーザー認証</category>
-        </item>
-        <item>
-            <title><![CDATA[Amazon SES における Namecheap の DNS 設定]]></title>
-            <link>https://docsaid.org/ja/blog/amazon-ses-setting-dns-on-namecheap</link>
-            <guid>https://docsaid.org/ja/blog/amazon-ses-setting-dns-on-namecheap</guid>
-            <pubDate>Wed, 05 Mar 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Amazon SES の DNS 設定プロセスを記録する。]]></description>
-            <content:encoded><![CDATA[<p>Amazon SES サービスを有効にしようとした際、検証プロセスの中で Amazon から DNS レコードの設定を求められました。</p>
-<p>この設定方法を見つけるのに、結構な時間を費やしました。（約 30 分）</p>
-<p>ここに記録しておくので、今後の参考にしてください。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="amazon-ses-設定">Amazon SES 設定<a href="https://docsaid.org/ja/blog/amazon-ses-setting-dns-on-namecheap#amazon-ses-%E8%A8%AD%E5%AE%9A" class="hash-link" aria-label="Amazon SES 設定 への直接リンク" title="Amazon SES 設定 への直接リンク" translate="no">​</a></h2>
-<p>Amazon SES の設定については、すでに詳しい解説記事が存在します。以下のリンクを参考にしてください。</p>
-<ul>
-<li class=""><a href="https://www.quantsnote.com/amazon-ses-how-to-apply/" target="_blank" rel="noopener noreferrer" class=""><strong>Amazon SES メールサービス、2024 年最新の申請手順完全ガイド</strong></a></li>
-</ul>
-<p>私たちは順調に設定を進め、「<strong>送信ドメインの検証</strong>」のステップまで到達しましたが、ここでつまずきました。</p>
-<p>私たちのドメインは Namecheap で取得しているため、Namecheap 上で DNS レコードを設定する必要があります。</p>
-<p>では、具体的にどのように設定すればよいのでしょうか？</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="dns-レコード">DNS レコード<a href="https://docsaid.org/ja/blog/amazon-ses-setting-dns-on-namecheap#dns-%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89" class="hash-link" aria-label="DNS レコード への直接リンク" title="DNS レコード への直接リンク" translate="no">​</a></h2>
-<p>Amazon SES の「<strong>送信ドメインの検証</strong>」カード内にある「<strong>DNS レコードを取得</strong>」をクリックすると、詳細な DNS レコード情報が記載されたポップアップが表示されます。以下のような画面になります。</p>
-<p><img decoding="async" loading="lazy" alt="Amazon SES DNS 記録" src="https://docsaid.org/ja/assets/images/img1-ca3991c5ffc59073150b27f2850f86f2.jpg" width="6150" height="3226" class="img_ev3q"></p>
-<p>ここで、例として <code>docsaid.org</code> が検証対象のドメインとなっています。</p>
-<p>この DNS レコードを取得したら、Namecheap に設定していきます。</p>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>ヒント</div><div class="admonitionContent_BuS1"><p>各フィールドのデータは一部変更しており、当サイトのセキュリティを保護しています。</p></div></div>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="dkim-レコード">DKIM レコード<a href="https://docsaid.org/ja/blog/amazon-ses-setting-dns-on-namecheap#dkim-%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89" class="hash-link" aria-label="DKIM レコード への直接リンク" title="DKIM レコード への直接リンク" translate="no">​</a></h2>
-<p>まず、Namecheap のサイトを開き、ログイン後、「<strong>ドメインリスト</strong>」をクリックし、設定したいドメインの「<strong>管理</strong>」を選択します。</p>
-<p>ドメイン管理ページで「<strong>Advanced DNS</strong>」セクションを探してクリックします。</p>
-<p><img decoding="async" loading="lazy" alt="setting dkim records" src="https://docsaid.org/ja/assets/images/img2-560f5004a8bd2c4b43ee07d6e4537add.jpg" width="6595" height="5701" class="img_ev3q"></p>
-<p>上の画像のように、「<strong>Add New Record</strong>」ボタンがあるので、これをクリックし、「<strong>CNAME Record</strong>」を選択します。</p>
-<p>次に、先ほどの DKIM レコード情報を入力します。入力時の注意点は以下の通りです。</p>
-<ol>
-<li class="">DKIM の <code>Name</code> フィールドの値は、<code>Host</code> フィールドに入力しますが、ドメイン部分を除いたプレフィックスのみを入力します。</li>
-<li class=""><code>Value</code> フィールドには、提供された値をそのままコピー＆ペーストします。</li>
-</ol>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="mail-from-レコード">MAIL FROM レコード<a href="https://docsaid.org/ja/blog/amazon-ses-setting-dns-on-namecheap#mail-from-%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89" class="hash-link" aria-label="MAIL FROM レコード への直接リンク" title="MAIL FROM レコード への直接リンク" translate="no">​</a></h2>
-<p>この部分で最も時間がかかりました。というのも、必要なのは MX レコードの設定だけで、それ以外は無視しても問題ないからです。</p>
-<p><img decoding="async" loading="lazy" alt="setting mail from records" src="https://docsaid.org/ja/assets/images/img3-c1e3964deb60ba184f785e61f62f3cee.jpg" width="6572" height="3762" class="img_ev3q"></p>
-<p>Namecheap の「<strong>Advanced DNS</strong>」ページで、「<strong>MAIL SETTINGS</strong>」セクションを探します。横にあるドロップダウンメニューから「<strong>Custom MX</strong>」を選択します。</p>
-<p>次に、Amazon SES から提供された MX レコードを入力します。以下の点に注意してください。</p>
-<ol>
-<li class="">Amazon SES で設定したサブドメインに応じて、対応する <code>Host</code> フィールドを入力します。例では <code>mail</code> を使用していますが、別のサブドメインを使う場合は、それに対応する値を入力してください。</li>
-<li class=""><code>Value</code> フィールドには、優先度を示す <code>10</code> を <code>Priority</code> フィールドに入力し、それ以降の値を <code>Value</code> フィールドに入力します。</li>
-</ol>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p>Namecheap の Mail Settings は <code>Email Forwarding</code> と <code>Custom MX</code> のいずれか一方しか選択できません。</p><ul>
-<li class=""><code>Email Forwarding</code> を有効にすると、Namecheap 側で MX レコードが固定され、メール転送サーバーにしか設定できなくなります。</li>
-<li class=""><code>Custom MX</code> を有効にすると、Amazon SES が提供する MX レコードを手動で設定でき、SES 側でバウンス処理が可能になります。</li>
-</ul></div></div>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="dmarc-レコード">DMARC レコード<a href="https://docsaid.org/ja/blog/amazon-ses-setting-dns-on-namecheap#dmarc-%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89" class="hash-link" aria-label="DMARC レコード への直接リンク" title="DMARC レコード への直接リンク" translate="no">​</a></h2>
-<p>この設定は最も簡単です。Namecheap の「<strong>Advanced DNS</strong>」ページで、「<strong>Add New Record</strong>」をクリックし、「<strong>TXT Record</strong>」を選択します。</p>
-<p>その後、Amazon SES から提供された DMARC レコードを入力します。唯一の注意点は、<code>"</code> を入力しないことです。</p>
-<p><img decoding="async" loading="lazy" alt="setting dmarc records" src="https://docsaid.org/ja/assets/images/img4-8de32e2d990112435f043a009f901759.jpg" width="6595" height="5619" class="img_ev3q"></p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="まとめ">まとめ<a href="https://docsaid.org/ja/blog/amazon-ses-setting-dns-on-namecheap#%E3%81%BE%E3%81%A8%E3%82%81" class="hash-link" aria-label="まとめ への直接リンク" title="まとめ への直接リンク" translate="no">​</a></h2>
-<p>以上で、Amazon SES の DNS 設定を Namecheap 上で完了しました。</p>
-<p>設定が完了したら、しばらく待ちます。通常 30 分ほどで Amazon SES が DNS レコードを自動検証し、正常に完了すると Amazon SES から成功の通知メールが届きます。</p>
-<p>成功を祈ります！</p><section class="ctaSection_iCjC"><div class="
-        simpleCta_ji_Y
-        simple-cta__coffee_YwC8
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ 1杯のコーヒーが支えになります</h3><p class="simple-cta__subtitle_ol86">AIやフルスタックの情報発信を続けるため、ご支援お願いします。</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/ja/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/ja/img/icons/all_in.svg" alt="AI・開発・運用まで一括対応 icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">ALL</span><h4 class="card__title_SQBY">AI・開発・運用まで一括対応</h4><p class="card__concept_Ak8F">アイデアからリリースまで、技術面はまるごとお任せください。</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">対応内容</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">技術相談 + 開発 + デプロイ</li><li class="card__bulletItem_wCRd">継続サポート &amp; 拡張</li></ul></div></div></div></div><div class="
-        simpleCta_ji_Y
-        simple-cta__outro_AXbn
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 次のプロジェクト、始めましょう！</h3><p class="simple-cta__subtitle_ol86">カスタム開発や長期支援をご希望の方は、ぜひご相談ください。</p></div></section><div style="margin-top:3rem"> </div>]]></content:encoded>
-            <category>Amazon SES</category>
-            <category>Namecheap</category>
-            <category>DNS</category>
         </item>
     </channel>
 </rss>

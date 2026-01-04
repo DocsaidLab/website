@@ -2,11 +2,481 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://docsaid.org/blog</id>
     <title>DOCSAID Blog</title>
-    <updated>2025-10-08T00:00:00.000Z</updated>
+    <updated>2025-12-23T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://docsaid.org/blog"/>
     <subtitle>DOCSAID Blog</subtitle>
     <icon>https://docsaid.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[SQLite 實戰（五）：我是誰？我在哪？]]></title>
+        <id>https://docsaid.org/blog/sqlite-queue-observability-governance</id>
+        <link href="https://docsaid.org/blog/sqlite-queue-observability-governance"/>
+        <updated>2025-12-23T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[從錯誤碼、留存策略到 audit log，讓佇列系統可維運。]]></summary>
+        <content type="html"><![CDATA[<p>你一定有過這種對話：</p>
+<ul>
+<li class="">你：系統現在跑得怎樣？</li>
+<li class="">系統：我在跑。</li>
+<li class="">你：跑哪裡？</li>
+<li class="">系統：我在跑。</li>
+</ul>
+<p>好的，謝謝，完全沒有幫助。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="queue">Queue<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#queue" class="hash-link" aria-label="Queue的直接連結" title="Queue的直接連結" translate="no">​</a></h2>
+<p>用 SQLite 做 queue 當然可以，但你至少要能回答五個工程問題：</p>
+<ol>
+<li class=""><strong>現在佇列裡有多少 job？各狀態多少？</strong></li>
+<li class=""><strong>最老的 job 卡了多久？卡在誰身上（哪個 worker）？</strong></li>
+<li class=""><strong>重試次數分佈如何？是不是某一類一直失敗？</strong></li>
+<li class=""><strong>失敗的原因是什麼？能不能聚合（Top-N）？</strong></li>
+<li class=""><strong>資料要留多久？怎麼刪才不會刪出孤兒資料、也不會把 DB 刪爆？</strong></li>
+</ol>
+<p>這五個問題背後，其實就是兩個關鍵字：</p>
+<ul>
+<li class=""><strong>Observability（可觀測性）</strong>：你能不能「用資料」看懂系統目前狀態，而不是靠祈禱。</li>
+<li class=""><strong>Governance（資料治理）</strong>：你能不能「可控地」保留與清理資料，且清理後仍然一致、可追溯。</li>
+</ul>
+<p>下面我們用一套偏實務的設計，把這兩件事落地。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="不要把-queue-當成一張表">不要把 Queue 當成一張表<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E4%B8%8D%E8%A6%81%E6%8A%8A-queue-%E7%95%B6%E6%88%90%E4%B8%80%E5%BC%B5%E8%A1%A8" class="hash-link" aria-label="不要把 Queue 當成一張表的直接連結" title="不要把 Queue 當成一張表的直接連結" translate="no">​</a></h2>
+<p>很多人做 queue 的直覺是：</p>
+<ul>
+<li class="">一張 <code>jobs</code> 表</li>
+<li class="">狀態欄位 <code>status</code></li>
+<li class="">反正需要什麼就塞欄位</li>
+</ul>
+<p>跑起來當然可以，但它會很快變成「你想問的問題，schema 回答不了」。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="你真正需要的是三種資料層次">你真正需要的，是三種資料層次<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E4%BD%A0%E7%9C%9F%E6%AD%A3%E9%9C%80%E8%A6%81%E7%9A%84%E6%98%AF%E4%B8%89%E7%A8%AE%E8%B3%87%E6%96%99%E5%B1%A4%E6%AC%A1" class="hash-link" aria-label="你真正需要的，是三種資料層次的直接連結" title="你真正需要的，是三種資料層次的直接連結" translate="no">​</a></h3>
+<p>把 queue 拆成三個層次，你會突然變得很好維運：</p>
+<ol>
+<li class="">
+<p><strong>Job 本體（Current State）</strong>
+你要能快速知道「現在這個 job 目前是什麼狀態」。</p>
+</li>
+<li class="">
+<p><strong>嘗試紀錄（Attempts / Retries）</strong>
+同一個 job 可能跑很多次。你需要回答：「第幾次失敗？每次失敗原因一樣嗎？耗時如何？」</p>
+</li>
+<li class="">
+<p><strong>事件紀錄（Audit Log / Event Log）</strong>
+狀態是結果，事件是過程。真正好 debug 的系統，靠的是事件流而不是「盯著某一列」。</p>
+</li>
+</ol>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="你需要哪些可觀測欄位">你需要哪些「可觀測」欄位？<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E4%BD%A0%E9%9C%80%E8%A6%81%E5%93%AA%E4%BA%9B%E5%8F%AF%E8%A7%80%E6%B8%AC%E6%AC%84%E4%BD%8D" class="hash-link" aria-label="你需要哪些「可觀測」欄位？的直接連結" title="你需要哪些「可觀測」欄位？的直接連結" translate="no">​</a></h2>
+<p>「可觀測」不是叫你把 schema 寫成百科全書，而是要能回答剛才那五個問題。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="建議的-jobs-表">建議的 jobs 表<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E5%BB%BA%E8%AD%B0%E7%9A%84-jobs-%E8%A1%A8" class="hash-link" aria-label="建議的 jobs 表的直接連結" title="建議的 jobs 表的直接連結" translate="no">​</a></h3>
+<ul>
+<li class=""><code>status</code>：狀態機（Queued / Claimed / Running / Succeeded / Failed / Cancelled …）</li>
+<li class=""><code>created_at / started_at / finished_at</code>：時間軸（讓你能算等待時間、處理時間）</li>
+<li class=""><code>priority</code>（可選）：不要小看它，後面排程與維運會謝謝你</li>
+<li class=""><code>worker_id</code>（或 <code>claimed_by</code>）：誰拿走的（用於定位問題 worker）</li>
+<li class=""><code>heartbeat_at</code>：心跳時間（判斷 worker 是否還活著）</li>
+<li class=""><code>retry_count</code>：目前已重試幾次（快速統計用）</li>
+<li class=""><code>error_code</code>：可聚合的錯誤分類（Top-N 靠它）</li>
+<li class=""><code>error_detail</code>：短摘要（用來快速定位，不是用來存整份日誌）</li>
+</ul>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="建議的-schema">建議的 schema<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E5%BB%BA%E8%AD%B0%E7%9A%84-schema" class="hash-link" aria-label="建議的 schema的直接連結" title="建議的 schema的直接連結" translate="no">​</a></h3>
+<p>這裡只是一個建議，我們試著把維運問題切乾淨。</p>
+<ol>
+<li class="">
+<p><strong>jobs：當前狀態（跑系統要快）</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">TABLE</span><span class="token plain"> jobs </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  id            </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">PRIMARY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">type</span><span class="token plain">          </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                 </span><span class="token comment" style="color:#999988;font-style:italic">-- job 類型（用於分群統計）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain">        </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                 </span><span class="token comment" style="color:#999988;font-style:italic">-- 狀態機</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  priority      </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DEFAULT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  created_at    </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">              </span><span class="token comment" style="color:#999988;font-style:italic">-- Unix epoch seconds</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  started_at    </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  finished_at   </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  claimed_by    </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- worker_id</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  claim_token   </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- 防止誤更新（可選）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  heartbeat_at  </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  retry_count   </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DEFAULT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  max_retries   </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DEFAULT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">3</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  error_code    </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- 可聚合分類</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  error_detail  </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- 短摘要（建議限制長度）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  payload_ref   </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- 大 payload 另外存（檔案/物件儲存）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  result_ref    </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain">                           </span><span class="token comment" style="color:#999988;font-style:italic">-- 大結果另外存</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+</li>
+<li class="">
+<p><strong>job_attempts：每次嘗試（你要知道「第幾次」）</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">TABLE</span><span class="token plain"> job_attempts </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  id           </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">PRIMARY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  job_id       </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  attempt      </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">               </span><span class="token comment" style="color:#999988;font-style:italic">-- 1,2,3...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  started_at   </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  finished_at  </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain">       </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                  </span><span class="token comment" style="color:#999988;font-style:italic">-- RUNNING/SUCCEEDED/FAILED</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  error_code   </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  error_detail </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  worker_id    </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">FOREIGN</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">REFERENCES</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DELETE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">CASCADE</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">UNIQUE</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> attempt</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+</li>
+<li class="">
+<p><strong>job_events：事件流（debug 靠它）</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">TABLE</span><span class="token plain"> job_events </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  id          </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">PRIMARY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  job_id      </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ts          </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  event       </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                   </span><span class="token comment" style="color:#999988;font-style:italic">-- CLAIMED/STARTED/HEARTBEAT/FAILED/RETRY_SCHEDULED...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  actor       </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                            </span><span class="token comment" style="color:#999988;font-style:italic">-- worker_id / system</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  detail      </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                            </span><span class="token comment" style="color:#999988;font-style:italic">-- 短 JSON（別塞爆）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">FOREIGN</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">REFERENCES</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DELETE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">CASCADE</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<blockquote>
+<p>為什麼要 event 表？
+因為「狀態」只告訴你現在是 FAILED，但「事件」會告訴你：</p>
+<ul>
+<li class="">何時被誰 claim</li>
+<li class="">跑了多久</li>
+<li class="">心跳最後一次在哪</li>
+<li class="">哪次 retry 開始失敗</li>
+</ul>
+<p>我們 debug 不靠猜，而是靠歷史。</p>
+</blockquote>
+</li>
+</ol>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="索引">索引<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E7%B4%A2%E5%BC%95" class="hash-link" aria-label="索引的直接連結" title="索引的直接連結" translate="no">​</a></h2>
+<p>可觀測性不是寫幾條 SQL 就完成了：</p>
+<ul>
+<li class=""><strong>至少，你要確保它們跑得動，對吧？</strong>。</li>
+</ul>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="常用索引建議">常用索引（建議）<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E5%B8%B8%E7%94%A8%E7%B4%A2%E5%BC%95%E5%BB%BA%E8%AD%B0" class="hash-link" aria-label="常用索引（建議）的直接連結" title="常用索引（建議）的直接連結" translate="no">​</a></h3>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_jobs_status </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_jobs_type_status </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">type</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">-- 你最常用來找卡死、找最老的 running</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_jobs_running_age</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> heartbeat_at</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> created_at</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">-- 失敗聚合 Top-N</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_jobs_failed_code</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> error_code</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">-- attempts / events 的查詢主鍵</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_attempts_job </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> job_attempts</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> attempt</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_events_job_ts </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> job_events</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> ts</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>設計原則很簡單：<strong>我們想在 Dashboard 查什麼，你就替它做索引。</strong></p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="最常用的觀測查詢">最常用的觀測查詢<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E8%A7%80%E6%B8%AC%E6%9F%A5%E8%A9%A2" class="hash-link" aria-label="最常用的觀測查詢的直接連結" title="最常用的觀測查詢的直接連結" translate="no">​</a></h2>
+<ol>
+<li class="">
+<p><strong>各狀態計數：我現在到底多忙？</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">COUNT</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">*</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">AS</span><span class="token plain"> cnt</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">GROUP</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> cnt </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>你會很快發現：</p>
+<ul>
+<li class=""><code>QUEUED</code> 爆量 → 上游送太快、下游處理太慢</li>
+<li class=""><code>RUNNING</code> 很多但吞吐沒上升 → worker 卡住或資源不足</li>
+<li class=""><code>FAILED</code> 緩慢爬升 → 某類 job 出 bug 或外部依賴壞了</li>
+</ul>
+</li>
+<li class="">
+<p><strong>找出卡最久的進行中 job？</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">type</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> claimed_by</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> created_at</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> heartbeat_at</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">IN</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'CLAIMED'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'RUNNING'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">COALESCE</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">heartbeat_at</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> created_at</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">ASC</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">20</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>這條的重點在 <code>COALESCE</code>：</p>
+<ul>
+<li class="">有心跳就用心跳當「最近活著的證據」</li>
+<li class="">沒心跳就退回用 created_at（通常表示還沒真的跑起來或設計漏了）</li>
+</ul>
+</li>
+<li class="">
+<p><strong>重試分佈：是不是某一類一直在重跑？</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> retry_count</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">COUNT</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">*</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">AS</span><span class="token plain"> cnt</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">IN</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'QUEUED'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'CLAIMED'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'RUNNING'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'FAILED'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">GROUP</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> retry_count</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> retry_count </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>如果你看到 <code>retry_count = 3</code> 一坨，通常意味著：</p>
+<ul>
+<li class="">外部服務掛掉（timeout）</li>
+<li class="">資料格式不合（invalid input）</li>
+<li class="">系統性 bug（internal）</li>
+</ul>
+<p>下一步就該接錯誤碼聚合。</p>
+</li>
+<li class="">
+<p><strong>失敗原因 Top-N：必須要能「聚合」</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> error_code</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">COUNT</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">*</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">AS</span><span class="token plain"> cnt</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'FAILED'</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">GROUP</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> error_code</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> cnt </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">20</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>這條能跑起來的前提，是你有「像樣的 error_code」。</p>
+</li>
+</ol>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="錯誤碼設計">錯誤碼設計<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E9%8C%AF%E8%AA%A4%E7%A2%BC%E8%A8%AD%E8%A8%88" class="hash-link" aria-label="錯誤碼設計的直接連結" title="錯誤碼設計的直接連結" translate="no">​</a></h2>
+<p>error_code 要為「統計」而生，最常見的反模式是：</p>
+<ul>
+<li class=""><code>error_detail</code> 存整段 stack trace</li>
+<li class=""><code>error_code</code> 不存或亂存</li>
+</ul>
+<p>最後你只能「逐筆看日誌」，完全無法聚合</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="建議的錯誤碼層級">建議的錯誤碼層級<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E5%BB%BA%E8%AD%B0%E7%9A%84%E9%8C%AF%E8%AA%A4%E7%A2%BC%E5%B1%A4%E7%B4%9A" class="hash-link" aria-label="建議的錯誤碼層級的直接連結" title="建議的錯誤碼層級的直接連結" translate="no">​</a></h3>
+<p>你可以用 <code>CATEGORY:SUBCATEGORY</code> 或 <code>CATEGORY/SUBCATEGORY</code>：</p>
+<ul>
+<li class=""><code>TIMEOUT:UPSTREAM_API</code></li>
+<li class=""><code>INVALID_INPUT:SCHEMA_MISMATCH</code></li>
+<li class=""><code>RESOURCE:OUT_OF_MEMORY</code></li>
+<li class=""><code>INTERNAL:ASSERTION_FAILED</code></li>
+<li class=""><code>DEPENDENCY:DB_LOCKED</code></li>
+</ul>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="error_detail-的原則">error_detail 的原則<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#error_detail-%E7%9A%84%E5%8E%9F%E5%89%87" class="hash-link" aria-label="error_detail 的原則的直接連結" title="error_detail 的原則的直接連結" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>短摘要</strong>即可（例如 200~500 字）</li>
+<li class="">完整 stack trace、完整 JSON、完整 report 放到檔案系統或 object storage，DB 只存 <code>path/URL</code></li>
+</ul>
+<p>我們看過太多「垃圾場型 log storage」，真心建議你不要步上這個後塵。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="foreign-key-與孤兒資料">Foreign key 與孤兒資料<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#foreign-key-%E8%88%87%E5%AD%A4%E5%85%92%E8%B3%87%E6%96%99" class="hash-link" aria-label="Foreign key 與孤兒資料的直接連結" title="Foreign key 與孤兒資料的直接連結" translate="no">​</a></h2>
+<blockquote>
+<p>你不解決它？之後它就會解決你。</p>
+</blockquote>
+<p>SQLite 的外鍵支援是「有，但不預設啟用」。</p>
+<p>也就是你不開，它就當沒看到。</p>
+<p>這裡你必須做到兩件事：</p>
+<ol>
+<li class=""><strong>每條連線都開外鍵</strong></li>
+</ol>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">PRAGMA foreign_keys </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">ON</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>這不是一次性設定。你用連線池或每次開新連線，都要做。</p>
+<ol start="2">
+<li class=""><strong>用 ON DELETE CASCADE 保一致性</strong></li>
+</ol>
+<p>你刪 <code>jobs</code>，就要讓 <code>attempts/events</code> 自動跟著刪，不然你一定會留下孤兒資料。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="upsert">Upsert<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#upsert" class="hash-link" aria-label="Upsert的直接連結" title="Upsert的直接連結" translate="no">​</a></h2>
+<p>別再用 INSERT OR REPLACE 當「更新」！</p>
+<p>這個坑值得用粗體寫三遍：</p>
+<ul>
+<li class=""><strong><code>REPLACE</code> 不是 update</strong></li>
+<li class=""><strong><code>REPLACE</code> 不是 update</strong></li>
+<li class=""><strong><code>REPLACE</code> 不是 update</strong></li>
+</ul>
+<p>它比較像：</p>
+<blockquote>
+<p>先 DELETE 再 INSERT</p>
+</blockquote>
+<p>如果你有外鍵、有 audit log、有 attempt/event，<code>REPLACE</code> 會直接讓你往生。</p>
+<p>然後你在往生之後，還找不到問題在哪裡。</p>
+<p>正確姿勢是使用 <code>ON CONFLICT DO UPDATE</code>，狀態更新要可預期、可追溯、不要偷做刪除，像是這樣：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">INSERT</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INTO</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> heartbeat_at</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">VALUES</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">?</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> ?</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> ?</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> CONFLICT</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DO</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">UPDATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">SET</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> excluded</span><span class="token punctuation" style="color:#393A34">.</span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  heartbeat_at </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> excluded</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">heartbeat_at</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="audit-log事件表">Audit log（事件表）<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#audit-log%E4%BA%8B%E4%BB%B6%E8%A1%A8" class="hash-link" aria-label="Audit log（事件表）的直接連結" title="Audit log（事件表）的直接連結" translate="no">​</a></h2>
+<p>如果你只靠 <code>jobs</code> 那一列資料，debug 就像你只看到了「現在」，但是看不到「為什麼變成現在」。</p>
+<p>事件表的設計哲學是：<strong>狀態是快照；事件是時間線。</strong></p>
+<p>你至少應該記這些資訊：</p>
+<ul>
+<li class=""><code>ENQUEUED</code>：入列</li>
+<li class=""><code>CLAIMED</code>：被 worker 拿走</li>
+<li class=""><code>STARTED</code>：正式開始（可與 claimed 分開）</li>
+<li class=""><code>HEARTBEAT</code>：心跳（可降低頻率或只記「最後一次」）</li>
+<li class=""><code>FAILED</code>：失敗（附 error_code）</li>
+<li class=""><code>RETRY_SCHEDULED</code>：安排重試（附 delay、attempt）</li>
+<li class=""><code>SUCCEEDED</code>：成功</li>
+<li class=""><code>CANCELLED</code>：人工取消</li>
+<li class=""><code>RECOVERED</code>：回收/重派（如果你有 lease 機制）</li>
+</ul>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="留存策略">留存策略<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E7%95%99%E5%AD%98%E7%AD%96%E7%95%A5" class="hash-link" aria-label="留存策略的直接連結" title="留存策略的直接連結" translate="no">​</a></h2>
+<p>資料要刪，但要「有規則地刪」</p>
+<p>Queue 系統最終都會面對一個問題：</p>
+<blockquote>
+<p><strong>你要留多久？</strong></p>
+</blockquote>
+<p>如果你說「都留」，SQLite 會用容量跟你討論人生。
+如果你說「都刪」，你下一次事故就沒有證據。</p>
+<p>比較務實的策略是：</p>
+<ul>
+<li class=""><code>SUCCEEDED</code>：留 30 天（通常夠追問題）</li>
+<li class=""><code>FAILED</code>：留 90 天（失敗要多留，因為會反覆回來）</li>
+<li class=""><code>CANCELLED</code>：看需求（常見 30 天）</li>
+</ul>
+<p>刪除流程則是建議：分批、可中斷、可重跑。</p>
+<p>不要一次刪 100 萬筆，尤其你還要提供服務的情況下，可以用排程每分鐘跑一次，慢慢清，像是這樣：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">-- 刪成功 job（30 天前）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">DELETE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'SUCCEEDED'</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token operator" style="color:#393A34">AND</span><span class="token plain"> finished_at </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain"> strftime</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'%s'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'now'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">-</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">30</span><span class="token operator" style="color:#393A34">*</span><span class="token number" style="color:#36acaa">86400</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">5000</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="需要-vacuum-嗎">需要 VACUUM 嗎？<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E9%9C%80%E8%A6%81-vacuum-%E5%97%8E" class="hash-link" aria-label="需要 VACUUM 嗎？的直接連結" title="需要 VACUUM 嗎？的直接連結" translate="no">​</a></h3>
+<ul>
+<li class="">SQLite 的檔案空間不一定會立刻縮回去（刪除只是在內部標記可重用）</li>
+<li class=""><code>VACUUM</code> 會重寫整個 DB，I/O 大、時間長</li>
+</ul>
+<p>建議做法：</p>
+<ul>
+<li class=""><strong>日常靠分批刪除</strong></li>
+<li class=""><strong>真的需要縮檔（例如容量壓力）才在低峰期 VACUUM</strong></li>
+</ul>
+<p>如果你是 WAL 模式，也記得理解 WAL 檔案與 checkpoint 的行為。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="常見問題">常見問題<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C" class="hash-link" aria-label="常見問題的直接連結" title="常見問題的直接連結" translate="no">​</a></h2>
+<ol>
+<li class="">
+<p><strong><code>error_detail</code> 無上限，最後 DB 變垃圾場</strong></p>
+<p><strong>對策</strong>：</p>
+<ul>
+<li class=""><code>error_code</code> 做分類</li>
+<li class=""><code>error_detail</code> 只存短摘要</li>
+<li class="">完整報告放外部（DB 只存引用）</li>
+</ul>
+</li>
+<li class="">
+<p>忘了開 <code>foreign key</code>，刪主表留下孤兒資料</p>
+<p><strong>對策</strong>：每條連線都 <code>PRAGMA foreign_keys = ON</code>，並用 <code>ON DELETE CASCADE</code></p>
+</li>
+<li class="">
+<p>用 <code>INSERT OR REPLACE</code> 當 upsert</p>
+<p><strong>對策</strong>：用 <code>ON CONFLICT DO UPDATE</code>，不要用 REPLACE 偷偷做 DELETE</p>
+</li>
+<li class="">
+<p>你寫了觀測查詢，但沒索引</p>
+<p><strong>對策</strong>：把 dashboard/維運最常用的查詢，反推索引（不要跟 SQLite 硬拼全表掃描）</p>
+</li>
+</ol>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="小結">小結<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E5%B0%8F%E7%B5%90" class="hash-link" aria-label="小結的直接連結" title="小結的直接連結" translate="no">​</a></h2>
+<p>當你把 queue 做到能回答那五個問題，你會發現系統突然變得「像個系統」：</p>
+<ul>
+<li class="">你能描述現況（可觀測）</li>
+<li class="">你能追溯過程（audit）</li>
+<li class="">你能控制資料生命週期（治理）</li>
+<li class="">你能把事故從「猜」變成「查」</li>
+</ul>
+<p>做完這些，SQLite 被我們拿來做 queue 也是水到渠成的事。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="參考資料">參考資料<a href="https://docsaid.org/blog/sqlite-queue-observability-governance#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99" class="hash-link" aria-label="參考資料的直接連結" title="參考資料的直接連結" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://www.sqlite.org/foreignkeys.html" target="_blank" rel="noopener noreferrer" class=""><strong>SQLite: Foreign Key Support</strong></a></li>
+<li class=""><a href="https://www.sqlite.org/lang_UPSERT.html" target="_blank" rel="noopener noreferrer" class=""><strong>SQLite: UPSERT</strong></a></li>
+<li class=""><a href="https://www.sqlite.org/lang_vacuum.html" target="_blank" rel="noopener noreferrer" class=""><strong>SQLite: VACUUM</strong></a></li>
+</ul><section class="ctaSection_iCjC"><div class="
+        simpleCta_ji_Y
+        simple-cta__coffee_YwC8
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ 一杯咖啡，就是我創作的燃料！</h3><p class="simple-cta__subtitle_ol86">贊助我持續分享 AI 實作、全端架構與開源經驗，讓好文章不斷更新。</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/img/icons/all_in.svg" alt="AI / 全端 / 客製 一次搞定 icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">ALL</span><h4 class="card__title_SQBY">AI / 全端 / 客製 一次搞定</h4><p class="card__concept_Ak8F">從構想到上線，涵蓋顧問、開發與部署，全方位支援你的技術實作。</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">包含內容</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">顧問服務 + 系統建置 + 客製開發</li><li class="card__bulletItem_wCRd">長期維運與擴充規劃</li></ul></div></div></div></div><div class="
+        simpleCta_ji_Y
+        simple-cta__outro_AXbn
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 你的專案準備好了嗎？</h3><p class="simple-cta__subtitle_ol86">如果你需要客製服務或長期顧問，歡迎與我聯繫！</p></div></section><div style="margin-top:3rem"> </div>]]></content>
+        <author>
+            <name>Z. Yuan</name>
+            <uri>https://github.com/zephyr-sh</uri>
+        </author>
+        <category label="sqlite" term="sqlite"/>
+        <category label="observability" term="observability"/>
+        <category label="data-governance" term="data-governance"/>
+        <category label="job-queue" term="job-queue"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[SQLite 實戰（四）：查詢好慢？]]></title>
+        <id>https://docsaid.org/blog/sqlite-indexing-for-leaderboards</id>
+        <link href="https://docsaid.org/blog/sqlite-indexing-for-leaderboards"/>
+        <updated>2025-11-10T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[用正確的索引，讓 `ORDER BY ... LIMIT` 真的只跑前 100 名。]]></summary>
+        <content type="html"><![CDATA[<p>你做了一個評測平台。</p>
+<p>為了讓使用者有點成就感，還大發慈悲地做了個排行榜。</p>
+<p>然後你打開 DevTools，看了一眼 API 回傳時間：三秒、五秒、十秒。</p>
+<p>恩？</p>
+<p>你不信邪，又看了一眼 SQL。</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">100</span><br></span></code></pre></div></div>
+<p>明明就只要前 100 名，為什麼能慢成這樣？</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="問題其實不在-limit">問題其實不在 <code>LIMIT</code><a href="https://docsaid.org/blog/sqlite-indexing-for-leaderboards#%E5%95%8F%E9%A1%8C%E5%85%B6%E5%AF%A6%E4%B8%8D%E5%9C%A8-limit" class="hash-link" aria-label="問題其實不在-limit的直接連結" title="問題其實不在-limit的直接連結" translate="no">​</a></h2>
+<p>這可能是個常見錯誤。</p>
+<p><code>LIMIT 100</code> <strong>並不代表 SQLite 只處理 100 筆資料</strong>。</p>
+<p>如果它在找「前 100 名」之前，必須先把「全部符合條件的資料」都掃出來、排序完......</p>
+<p>那你只是告訴它：</p>
+<blockquote>
+<p>「最後只給我 100 筆就好，但前面你該做的事情，一樣都不能少。」</p>
+</blockquote>
+<p>查詢慢，通常是因為你限制了 SQLite 只能用最笨的方式幫你找答案。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="一個典型的查詢">一個典型的查詢<a href="https://docsaid.org/blog/sqlite-indexing-for-leaderboards#%E4%B8%80%E5%80%8B%E5%85%B8%E5%9E%8B%E7%9A%84%E6%9F%A5%E8%A9%A2" class="hash-link" aria-label="一個典型的查詢的直接連結" title="一個典型的查詢的直接連結" translate="no">​</a></h2>
+<p>多數評測平台的 schema，大致會長這樣：</p>
+<ul>
+<li class=""><code>jobs</code>：一次提交 / 一次 run 的基本資訊
+（狀態、版本、時間、queue）</li>
+<li class=""><code>job_scores</code>：實際的評測指標
+（可能還分 train / public / private split）</li>
+</ul>
+<p>示意 SQL：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_OeMC">leaderboard（示意）</div><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">model_name</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">split</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score1</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs j</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">JOIN</span><span class="token plain"> job_scores s </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">job_id </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">id</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'SUCCEEDED'</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token operator" style="color:#393A34">AND</span><span class="token plain"> j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">queue </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> :queue</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token operator" style="color:#393A34">AND</span><span class="token plain"> s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">split </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> :split</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score1 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score2 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">created_at </span><span class="token keyword" style="color:#00009f">ASC</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> :</span><span class="token keyword" style="color:#00009f">limit</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>最後那個 <code>j.created_at ASC</code> 很關鍵。</p>
+<p>這是一個<strong>非常合理的設計</strong>：
+當分數相同時，用時間當 tie-breaker，讓排名穩定、不亂跳。</p>
+<p>但對 SQLite 來說，這代表一件事：</p>
+<blockquote>
+<p><strong>你現在要求的是「跨表、多條件、複合排序」的 Top-N 查詢。</strong></p>
+</blockquote>
+<p>如果索引下錯，它就只能硬幹。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="sqlite-在沒有索引時會怎麼做">SQLite 在沒有索引時，會怎麼做？<a href="https://docsaid.org/blog/sqlite-indexing-for-leaderboards#sqlite-%E5%9C%A8%E6%B2%92%E6%9C%89%E7%B4%A2%E5%BC%95%E6%99%82%E6%9C%83%E6%80%8E%E9%BA%BC%E5%81%9A" class="hash-link" aria-label="SQLite 在沒有索引時，會怎麼做？的直接連結" title="SQLite 在沒有索引時，會怎麼做？的直接連結" translate="no">​</a></h2>
+<p>簡化來看，流程通常是：</p>
+<ol>
+<li class="">找出所有 <code>status = 'SUCCEEDED'</code> 且 <code>queue = ?</code> 的 job</li>
+<li class="">join 上所有符合 <code>split = ?</code> 的 score</li>
+<li class="">把結果全部拉出來</li>
+<li class="">依照 <code>score1 → score2 → created_at</code> 排序</li>
+<li class="">排完之後，丟掉 99% 的資料，只留下前 100 筆</li>
+</ol>
+<p>你看到的慢，不是錯覺。</p>
+<p>SQLite 真的有把資料「全掃一遍、喘一口氣、再幫你排好」。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="索引怎麼下才真的有用">索引怎麼下，才真的有用？<a href="https://docsaid.org/blog/sqlite-indexing-for-leaderboards#%E7%B4%A2%E5%BC%95%E6%80%8E%E9%BA%BC%E4%B8%8B%E6%89%8D%E7%9C%9F%E7%9A%84%E6%9C%89%E7%94%A8" class="hash-link" aria-label="索引怎麼下，才真的有用？的直接連結" title="索引怎麼下，才真的有用？的直接連結" translate="no">​</a></h2>
+<p>索引不是「有下就會快」。</p>
+<p>排行榜這種 Top-N 查詢，要快，只有一個正確順序，而且不能顛倒：</p>
+<ol>
+<li class=""><strong>先讓 <code>WHERE</code> 快速縮小候選集合</strong></li>
+<li class=""><strong>再讓 <code>ORDER BY ... LIMIT</code> 能沿著索引順序吐出前 N 筆</strong></li>
+</ol>
+<p>只要 SQLite 在排序階段還得「另外做一次排序」，那麼 <code>LIMIT 100</code> 幾乎救不了你，因為它已經先把該排的都排完了。</p>
+<p>舉個例子，先看 <code>job_scores</code>（評測指標表）。</p>
+<p>假設我們在查詢裡的排序是：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score1 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score2 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><br></span></code></pre></div></div>
+<p>所以索引也要用同樣的排序邏輯鋪路：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_OeMC">index（示意）</div><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">IF</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">EXISTS</span><span class="token plain"> idx_scores_rank</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> job_scores </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  split</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  score1 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  score2 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>這個索引要達成的效果是：</p>
+<ul>
+<li class=""><strong>先用 <code>split = ?</code> 篩出我們要的那一群資料</strong></li>
+<li class="">篩完後，資料在索引裡已經是照 <code>score1 → score2</code> 排好的</li>
+<li class="">SQLite 可以「沿著索引往下讀」，很快就拿到前 100 名的候選</li>
+</ul>
+<p>這裡比較像是：你不是叫 SQLite「把所有人叫來排隊」，而是直接帶它去「本來就排好隊的那條走廊」。</p>
+<p>接著是 <code>jobs</code>（run 的基本資訊表），我們的查詢條件與 tie-breaker 在這裡：</p>
+<ul>
+<li class="">篩選：<code>queue</code>、<code>status</code></li>
+<li class="">最後排序用：<code>created_at ASC</code>（分數相同時穩定排名）</li>
+</ul>
+<p>所以索引要對應這三件事：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_OeMC">index（示意）</div><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">IF</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">EXISTS</span><span class="token plain"> idx_jobs_filter</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  queue</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  created_at</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>這裡的 <code>created_at</code> <strong>不是為了加速篩選</strong>，而是為了加速「最後那一段」。</p>
+<p>因為 <code>ORDER BY</code> 最後一段是：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">created_at </span><span class="token keyword" style="color:#00009f">ASC</span><br></span></code></pre></div></div>
+<p>如果很多筆資料 <code>score1/score2</code> 都一樣（同分很多很常見），SQLite 必須：</p>
+<ol>
+<li class="">先把同分那一大坨候選人找出來</li>
+<li class="">join 到 <code>jobs</code> 拿到每筆的 <code>created_at</code></li>
+<li class=""><strong>再用 <code>created_at</code> 把這坨人重新排順</strong></li>
+<li class="">才能穩定選出前 100</li>
+</ol>
+<p>如果 <code>created_at</code> 沒有對應的索引支援，SQLite 通常就會選擇：</p>
+<ul>
+<li class="">建一個臨時排序結構（temp B-tree）</li>
+<li class="">把同分候選塞進去</li>
+<li class="">排完再吐結果</li>
+</ul>
+<p>這就是我們在 query plan 裡看到的： <code>USE TEMP B-TREE FOR ORDER BY</code></p>
+<p>如果你想知道自己的指令是否有額外的排序，可以直接用 <code>EXPLAIN QUERY PLAN</code> 問 SQLite：</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">EXPLAIN</span><span class="token plain"> QUERY </span><span class="token keyword" style="color:#00009f">PLAN</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>一個你會想看到的計畫通常長這樣：</p>
+<ul>
+<li class=""><code>USING INDEX ...</code>（有用到你下的索引）</li>
+<li class="">沒有 <code>SCAN TABLE</code>（不是全表掃描）</li>
+<li class="">沒有 <code>USE TEMP B-TREE FOR ORDER BY</code>（沒有額外排序）</li>
+</ul>
+<p>只要看到 <code>TEMP B-TREE</code>，你就可以幾乎直接判定：</p>
+<ul>
+<li class="">這個查詢還在做額外排序；Top-N 的 LIMIT 只是最後才生效，要改！</li>
+</ul>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="常見問題">常見問題<a href="https://docsaid.org/blog/sqlite-indexing-for-leaderboards#%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C" class="hash-link" aria-label="常見問題的直接連結" title="常見問題的直接連結" translate="no">​</a></h2>
+<ol>
+<li class="">
+<p><strong>把數字存成 TEXT，再用 CAST 排序</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> CAST</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">score1 </span><span class="token keyword" style="color:#00009f">AS</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">REAL</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DESC</span><br></span></code></pre></div></div>
+<p>這一行，會直接讓索引失效。</p>
+<p>SQLite 沒辦法用「轉型後的結果」來走索引。</p>
+<p><strong>對策很單純</strong>：
+數值就用 <code>INTEGER / REAL</code> 存，不要留給排序時補救。</p>
+</li>
+<li class="">
+<p><strong>排序欄位一路加，索引一路肥</strong></p>
+<p><code>score1 → score2 → score3 → score4 → …</code></p>
+<p>你最後會得到一個寫入慢、佔空間但查詢卻不一定真的變快的索引怪獸。</p>
+<p><strong>對策</strong>：確認哪些指標，真的影響排名？盡量減少排序數量。</p>
+</li>
+</ol>
+<p>如果你的排行榜真的開始被頻繁點擊，那可以考慮幾個方式：</p>
+<ul>
+<li class=""><strong>快取 Top-N 結果</strong>（排行榜是標準讀多寫少）</li>
+<li class=""><strong>針對熱門 split 建 partial index</strong></li>
+<li class=""><strong>離線算排名，查詢結果表</strong></li>
+</ul>
+<p>SQLite 很適合做「查詢引擎」，但也不代表你一定要每次都即時計算，透過一些小技巧，可以讓產品更穩定。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="小結">小結<a href="https://docsaid.org/blog/sqlite-indexing-for-leaderboards#%E5%B0%8F%E7%B5%90" class="hash-link" aria-label="小結的直接連結" title="小結的直接連結" translate="no">​</a></h2>
+<p>查詢慢，最常見的原因不是 SQLite 不行。</p>
+<p>而是你要求它處理的是：</p>
+<ul>
+<li class="">跨表</li>
+<li class="">多條件</li>
+<li class="">複合排序</li>
+<li class="">還要穩定排名的 Top-N 查詢</li>
+</ul>
+<p>卻沒有給它能對應這些需求的索引。</p>
+<p>於是它只能照最保守、最通用的方式做事：把資料全掃出來、排完，再丟掉大部分結果。</p>
+<p>真正該調整的，往往不是查詢語法本身，而是你有沒有先想清楚：</p>
+<ul>
+<li class="">哪些條件用來「縮小範圍」</li>
+<li class="">哪些欄位真的「影響名次」</li>
+<li class="">哪一段排序，不能讓 SQLite 再補一次</li>
+</ul>
+<p>SQLite 一直都很穩定。</p>
+<p>只是它需要你用更精確的方式，告訴它你真正想要的是什麼。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="參考資料">參考資料<a href="https://docsaid.org/blog/sqlite-indexing-for-leaderboards#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99" class="hash-link" aria-label="參考資料的直接連結" title="參考資料的直接連結" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://www.sqlite.org/lang_createindex.html" target="_blank" rel="noopener noreferrer" class="">SQLite 官方文件：Indexes</a></li>
+<li class=""><a href="https://www.sqlite.org/queryplanner.html" target="_blank" rel="noopener noreferrer" class="">SQLite 官方文件：Query Planner</a></li>
+<li class=""><a href="https://www.sqlite.org/eqp.html" target="_blank" rel="noopener noreferrer" class="">SQLite 官方文件：EXPLAIN QUERY PLAN</a></li>
+</ul><section class="ctaSection_iCjC"><div class="
+        simpleCta_ji_Y
+        simple-cta__coffee_YwC8
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ 一杯咖啡，就是我創作的燃料！</h3><p class="simple-cta__subtitle_ol86">贊助我持續分享 AI 實作、全端架構與開源經驗，讓好文章不斷更新。</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/img/icons/all_in.svg" alt="AI / 全端 / 客製 一次搞定 icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">ALL</span><h4 class="card__title_SQBY">AI / 全端 / 客製 一次搞定</h4><p class="card__concept_Ak8F">從構想到上線，涵蓋顧問、開發與部署，全方位支援你的技術實作。</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">包含內容</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">顧問服務 + 系統建置 + 客製開發</li><li class="card__bulletItem_wCRd">長期維運與擴充規劃</li></ul></div></div></div></div><div class="
+        simpleCta_ji_Y
+        simple-cta__outro_AXbn
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 你的專案準備好了嗎？</h3><p class="simple-cta__subtitle_ol86">如果你需要客製服務或長期顧問，歡迎與我聯繫！</p></div></section><div style="margin-top:3rem"> </div>]]></content>
+        <author>
+            <name>Z. Yuan</name>
+            <uri>https://github.com/zephyr-sh</uri>
+        </author>
+        <category label="sqlite" term="sqlite"/>
+        <category label="index" term="index"/>
+        <category label="performance" term="performance"/>
+        <category label="leaderboard" term="leaderboard"/>
+        <category label="query-plan" term="query-plan"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[SQLite 實戰（三）：救救你的 worker]]></title>
         <id>https://docsaid.org/blog/sqlite-lease-heartbeat-recovery</id>
@@ -2475,260 +2945,5 @@ FortiClient 支援 Windows、macOS、Linux、iOS、Android 等多平台，方便
         <category label="Python" term="Python"/>
         <category label="Pydantic" term="Pydantic"/>
         <category label="Data Validation" term="Data Validation"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[我一個做 AI 的，居然寫了後台系統？]]></title>
-        <id>https://docsaid.org/blog/builds-dashboard-system</id>
-        <link href="https://docsaid.org/blog/builds-dashboard-system"/>
-        <updated>2025-03-16T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[從零到一打造後台系統的經驗分享。]]></summary>
-        <content type="html"><![CDATA[<p>午安，或是晚安。</p>
-<p>最近我在文章的更新上有點懈怠，先跟大家說聲抱歉。</p>
-<p>因為我不務正業地跑去寫前後端了。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="是不是吃飽撐著">是不是吃飽撐著？<a href="https://docsaid.org/blog/builds-dashboard-system#%E6%98%AF%E4%B8%8D%E6%98%AF%E5%90%83%E9%A3%BD%E6%92%90%E8%91%97" class="hash-link" aria-label="是不是吃飽撐著？的直接連結" title="是不是吃飽撐著？的直接連結" translate="no">​</a></h2>
-<p>確實。</p>
-<hr>
-<p>最近剛好放了個長假，終於可以騰出手來，整理以前沒時間解決的問題：</p>
-<ul>
-<li class=""><strong>這個網站沒後台呀！</strong></li>
-</ul>
-<p>你可能多少也知道一點，這個網站本身是基於 Docusaurus 框架所建立的靜態網站。當初我在架設這個網站時，只是抱持著偶爾寫點部落格、順手分享一些論文筆記的想法，並沒有特別的規劃或遠大的目標。</p>
-<p>靜態網站和動態網站各自的優缺點應該不用我再多提，我之前也試著用 Wordpress 來架站，但走沒幾步就會跳出某個傢伙來跟你討錢，真的讓人倍感煩躁：</p>
-<blockquote>
-<p><strong>明明自己架站已經是件這麼收益微薄的事情了，怎麼還是有些人老是盯著我的荷包？</strong></p>
-</blockquote>
-<p>而後又用 Wordpress 運行了一陣子，終究還是放棄了。</p>
-<p>到也不全然是因為昂貴的付費服務，而是它的程式碼難以客製化......好吧，不推諉，我就承認我不會寫 PHP。</p>
-<p>相比之下，還是前後端分離的架構要讓我覺得舒服多了。</p>
-<p>後來的事情你也知道了，最後選了 Docusaurus 直到現在。繞了一圈，又回到靜態網站的架構上。</p>
-<p>＊</p>
-<p>隨著網站內容逐漸累積，我開始收到讀者的來信，通常是詢問的是模型使用上的問題：像是如何配置環境、安裝依賴套件，甚至是怎麼解決運行過程中碰到的奇怪錯誤。</p>
-<p>這些都好解決，請他們移駕去問 ChatGPT 就沒事了。（<del>也太隨便了吧？</del>）</p>
-<p>不隨便，現在的各種 AI 工具非常強，大多數的問題都可以直接問出答案，完全不需要浪費時間來跟我往來郵件。</p>
-<p>當然，還是有 AI 無法解決的問題，例如：有讀者希望可以直接呼叫我的後台 API ！</p>
-<p>嘿！看似很簡單的要求，實際執行起來的問題還不少，我們等等再聊。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="初代後台簡陋風">初代後台：簡陋風<a href="https://docsaid.org/blog/builds-dashboard-system#%E5%88%9D%E4%BB%A3%E5%BE%8C%E5%8F%B0%E7%B0%A1%E9%99%8B%E9%A2%A8" class="hash-link" aria-label="初代後台：簡陋風的直接連結" title="初代後台：簡陋風的直接連結" translate="no">​</a></h2>
-<p>時間再往回推一點。</p>
-<p>做了幾個模型之後，我又總想要把模型開給大家玩，那就像是你在海邊用沙子蓋了一座城牆，迫不急待地等待一個大浪來檢視你蓋的城牆是否堅固耐用？就算被浪花衝散了也無妨，至少有努力過了。</p>
-<p>做模型也是一樣，我想應該沒有哪個工程師做完模型之後，會把它藏起來不讓大家知道......那還做它幹嘛？</p>
-<p>於是我自己動手做了幾個模型的 Demo，打造了第一代的後台：沒錯！就是這個網站的導航欄上面的「遊樂場」，如果你沒玩過的可以去玩玩看。</p>
-<p>你說做個 Demo 而已，哪需要什麼後台？</p>
-<p>說得沒錯，一般來說，想要讓模型在網頁上使用，有兩個解決方案：</p>
-<ol>
-<li class="">
-<p><strong>直接從網頁載入模型，然後用瀏覽器進行推論。</strong></p>
-<p>這個方案剛提出就被我自己否決了。</p>
-<p>在瀏覽器上面跑模型也不是不行，但是很麻煩，至少要支援三種以上瀏覽器，每一種的工作環境配置各有不同。這讓我想起了那些曾經被 WebAssembly 搞得半死的前端夥伴，如果他們知道我想這樣做，一定也會阻止我的。</p>
-</li>
-<li class="">
-<p><strong>提供後端服務，回傳推論結果。</strong></p>
-<p>這是我後來採用的方案。</p>
-<p>前端用來單純的收發資料，所有麻煩事都交給後端解決。但也就意味著，不論如何我一定得手搓一個後端系統出來提供對應的服務。</p>
-</li>
-</ol>
-<hr>
-<p>由於前端已經用了 Docusaurus，這裡勢必得採用前後端分離的架構。</p>
-<p>在開始施工寫程式之前，先畫個圖。這個架構做起來，應該要像這樣：</p>
-<!-- -->
-<p>其實除了架構圖之外，我開了一堆規格和系統操作流程，輸入輸出的細部設計等。不過太繁瑣了，我就不全部放在這裡，姑且只畫架構圖就好。</p>
-<p>訂完規格後就是按圖施工，於是就成為現在網站上的「遊樂場」的背後運作邏輯。</p>
-<p>到這邊，雖然看起來還算簡單，但還是可以聊一下我選用的技術線：</p>
-<ol>
-<li class="">
-<p><strong>Nginx</strong></p>
-<p>這邊常見的另外一個選擇是 Apache，它曾經是網頁伺服器界的王者，功能豐富、模組多樣、社群也龐大，用戶群非常廣泛。但 Apache 的設定稍顯複雜，而且對高併發連線的處理能力略遜於 Nginx。</p>
-<p>說實話，我並不覺得 Apache 不好，只是我比較喜歡 Nginx 那種乾淨直觀的設定風格。不論是靜態資源代理、反向代理還是負載均衡，Nginx 的設定方式比較容易理解。不過這個部分見仁見智，也是有人不喜歡這種設定風格。</p>
-<p>最後就是 Nginx 本身就是為了處理大量併發連線而設計的，穩定性與效能上也都經過了市場和時間的考驗，想來也是個不錯的選擇。</p>
-<hr>
-</li>
-<li class="">
-<p><strong>FastAPI</strong></p>
-<p>後端框架常聽到的應該是 C# 或 NodeJS，但很遺憾地，我和他們都不熟。</p>
-<p>身為 AI 工程師，最熟悉的還是 Python 環境了。如果現在突然轉去學 NodeJS 或其他語言的後端框架，對我來說會多出不少學習成本，到時候開發進度再往後拖個幾個月也是很有可能。</p>
-<p>所以就選了 FastAPI 了。</p>
-<p>FastAPI 天然支援非同步操作，非常適合用在後端模型推論這種耗時但又必須高效率處理併發請求的場景。再加上它內建了 Pydantic 驗證機制，可以直接自動生成 API 文件，甚至連測試介面都幫你準備好了，大幅減少了我在開發和維護 API 時的痛苦指數。</p>
-<p>更重要的是，FastAPI 的設計結構清晰易懂，既不會像 Django 那樣笨重繁瑣，又不像 Flask 那樣自由得可能導致架構混亂，開發體驗可以說是剛剛好。</p>
-<hr>
-</li>
-<li class="">
-<p><strong>PostgreSQL</strong></p>
-<p>說到資料庫，我其實更熟悉的是 MySQL。</p>
-<p>MySQL 在開發圈內的名聲當然不差，甚至是許多新手入門資料庫的首選，但自從 Oracle 收購之後，MySQL 的開源授權逐漸往商業化方向靠攏，讓整個生態系統的不確定性逐步提高，讓人有些擔心。</p>
-<p>相較之下，PostgreSQL 在開源社群裡卻呈現出一種穩定且逐步成長的良性狀態。除了持續的社群支持外，PostgreSQL 本身還支援許多強大的進階功能，比如原生的 JSON 資料類型、GIS 地理資訊處理等，讓它在複雜資料需求的情境下顯得更加實用。</p>
-<p>再加上 PostgreSQL 和 FastAPI 以及各種 ORM 工具（例如 SQLAlchemy）的整合非常順暢，使用起來的體驗相當愉快。不僅如此，PostgreSQL 在處理大量併發與高負載請求的能力也相當優秀，未來如果網站流量增加了，或後端需求變得更複雜了，至少不用擔心資料庫會成為瓶頸。</p>
-<hr>
-</li>
-</ol>
-<p>說這麼多，但這也不一定是最好的搭配，主要是可以足夠應付現階段的需求。</p>
-<p>對我這個簡單的架構來說，足夠了。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="第二代後台簡約風">第二代後台：簡約風<a href="https://docsaid.org/blog/builds-dashboard-system#%E7%AC%AC%E4%BA%8C%E4%BB%A3%E5%BE%8C%E5%8F%B0%E7%B0%A1%E7%B4%84%E9%A2%A8" class="hash-link" aria-label="第二代後台：簡約風的直接連結" title="第二代後台：簡約風的直接連結" translate="no">​</a></h2>
-<p>回到開頭提到的問題，有讀者來信說想要直接透過程式呼叫我的後台 API，而不需要透過網頁介面操作。這是一個有趣的需求，代表使用者可能希望以更自動化、更高效的方式與系統互動。</p>
-<p>所以，直接開放 API 讓使用者自由呼叫，會衍生出什麼問題呢？</p>
-<ol>
-<li class="">
-<p><strong>會爆流量</strong></p>
-<p>當 API 直接對外開放，使用者可以透過程式高頻率地發送請求，這可能會導致伺服器流量激增，甚至超出負載能力。</p>
-<p>例如某些使用者可能不會設置適當的請求頻率，導致 API 在短時間內收到大量請求，影響其他使用者的正常存取。或是有人用爬蟲或惡意腳本來測試 API，伺服器的頻寬與運算資源可能會被大量佔用，影響服務穩定性。</p>
-<hr>
-</li>
-<li class="">
-<p><strong>會有資安風險</strong></p>
-<p>開放 API 之後，如果沒有嚴格的身份驗證與存取控制，任何人都可能獲取不應該取得的資料，甚至執行危險操作。像是 API 沒有適當的身份驗證機制（如 OAuth、JWT），惡意人士可能透過簡單的請求模擬合法用戶，進而造成資安風險。</p>
-<hr>
-</li>
-</ol>
-<p>各種延伸的問題還可以再寫個兩千字，在此先略過不提。</p>
-<p>總之就是不能直接開，因為我本人和我的主機可能會因此而往生。</p>
-<p>所以為了要滿足開放 API 的需求，意味著我必須自己動手建立一套完整的使用者認證和 API 認證的授權系統。</p>
-<p>好吧，那還是老話一句：工程師不怕菜，就怕不動手，我這就來寫程式吧！</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="使用者登入系統">使用者登入系統<a href="https://docsaid.org/blog/builds-dashboard-system#%E4%BD%BF%E7%94%A8%E8%80%85%E7%99%BB%E5%85%A5%E7%B3%BB%E7%B5%B1" class="hash-link" aria-label="使用者登入系統的直接連結" title="使用者登入系統的直接連結" translate="no">​</a></h3>
-<p>一個完整的使用者系統，包括使用者註冊、登入、權限管理、郵件驗證等功能。</p>
-<p>除了原本就有的 FastAPI 和 PostgreSQL 資料庫之外，我又引入了 Redis 來處理 Session 快取和 Token 管理；為了使用者體驗更順暢，我也設計了郵件驗證及忘記密碼功能，使用 SMTP 服務寄送驗證郵件。</p>
-<p>好的，到這裡又可以生出一張架構圖，我簡單畫一下：</p>
-<!-- -->
-<p>這套使用者系統需要包含使用者資料庫、密碼加密、註冊郵件驗證、忘記密碼重設流程等各種細節。這裡還沒有考慮到串接第三方登入的服務，像是許多網站可以透過 Google 或是 Facebook 的帳號登入的功能。如果要串接第三方登入驗證的話，那又是一堆事情要做，暫時先留給未來的自己。</p>
-<p>說到註冊郵件驗證的部分，這件事比想像中還要麻煩。</p>
-<p>一開始我去申請 Amazon SES，結果等了一天之後，被對方拒絕，他們說覺得我看起來很可疑。（到底？）</p>
-<div align="center"><figure style="width:60%"><p><img decoding="async" loading="lazy" alt="amazon" src="https://docsaid.org/assets/images/img1-17d661c856bca0be72bad9dcd0ad15de.jpg" width="2291" height="1617" class="img_ev3q"></p></figure></div>
-<p>既然這樣，我自己架一台郵件伺服器總行了吧？</p>
-<p>接著又是砰砰砰的一頓操作，耗時一天，終於架好了！</p>
-<p>然後送出去的郵件卻還是被 Gmail 殘忍拒絕，因為他們也覺得我很可疑。（😭 😭 😭）</p>
-<p>總之，經過一番波折，最後還是找了另外一個供應商搞定了這件事，就不再多提了。</p>
-<p>就這樣花了一個多禮拜，終於把之前開出來的規格依序完成，儘管成果只是一個簡單的頁面，但還寫了上千行程式碼。感覺起來有種 CP 值很低的感覺。</p>
-<p>程式寫到這裡，我已經可以理解為什麼不管在哪間公司內，前端跟後端總是會看對方不順眼，三天兩頭都在吵架和推卸責任了。只能說開規格真的很重要，哪怕都是我自己一個人寫，規格沒定好還是搞得自己灰頭土臉的。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="api-token-簽發系統">API Token 簽發系統<a href="https://docsaid.org/blog/builds-dashboard-system#api-token-%E7%B0%BD%E7%99%BC%E7%B3%BB%E7%B5%B1" class="hash-link" aria-label="API Token 簽發系統的直接連結" title="API Token 簽發系統的直接連結" translate="no">​</a></h3>
-<p>搞定了使用者系統之後，終於可以來做 API Token 的功能了。</p>
-<p>目前較為常見的 Token 格式是 JWT（JSON Web Token），其中一個特性是 JWT 是自包含的（self-contained），只要驗證 Token 是否有效，就可以知道用戶的身份與權限，減少頻繁查詢資料庫的需求，提高效能。而且 JWT 內部可以存放用戶 ID、權限、有效期限等資訊，避免額外的 API 查詢。</p>
-<p>所以我就直接拿來用了，使用者透過登入驗證身份，而後系統產生 JWT 並儲存在 Redis。使用者發送 API 請求時，JWT 作為 Bearer Token 傳送至後端驗證身份。Token 驗證成功後，才能進一步存取後端的模型推論服務。</p>
-<p>這裡就比較簡單，申請 Token 的架構圖畫起來長這樣：</p>
-<!-- -->
-<p>當使用者拿到 Token 之後，就可以拿著這個 Token 來呼叫 API，這個部分的 Redis 用來作為限制流量和計算呼叫次數的元件。整體呼叫流程大致上是這樣：</p>
-<!-- -->
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="api-token-管理機制">API Token 管理機制<a href="https://docsaid.org/blog/builds-dashboard-system#api-token-%E7%AE%A1%E7%90%86%E6%A9%9F%E5%88%B6" class="hash-link" aria-label="API Token 管理機制的直接連結" title="API Token 管理機制的直接連結" translate="no">​</a></h3>
-<p>在設計 Token 時，我沒有做續期機制，而是讓使用者可以自行設定 Token 的有效期限，並提供手動撤銷與刪除機制，確保 API 存取權限的靈活性與安全性。</p>
-<p>當使用者申請 Token 時，可以指定有效期限（例如 1 小時、1 天、7 天，甚至 1 年）。一旦 Token 到期，系統將自動失效，使用者需要重新申請新的 Token。</p>
-<p>這樣的設計讓開發者可以根據自身需求選擇合適的 Token 期限，避免過於頻繁的重新授權。</p>
-<p>使用者可以隨時撤銷或刪除 Token，如果發現 Token 洩漏或不再需要該 Token，可以直接刪除，立即失效。</p>
-<p>Token 狀態儲存在 Redis，當使用者手動撤銷 Token，系統會立即將其標記為無效，後續 API 請求將被拒絕。這樣可以避免不必要的長期授權風險，並且確保系統的可控性。</p>
-<p>這個流程的架構圖如下：</p>
-<!-- -->
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p><strong>為什麼不使用續期機制？</strong></p><ul>
-<li class="">讓使用者自行設定有效期限，可以提高 API 的彈性，避免系統過度干涉使用者的 Token 管理。</li>
-<li class="">沒有續期機制，就能確保 Token 在設定的期限內是固定有效的，避免頻繁續期造成的額外驗證負擔。</li>
-<li class="">手動撤銷 Token，確保當發現 Token 洩露或不再需要時，可以立即失效，提升安全性。</li>
-</ul><p>這樣的設計提供了一種簡單但可控的 Token 管理方式，適合需要長期存取但又希望保持安全性的使用者。</p></div></div>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="api-流量限制">API 流量限制<a href="https://docsaid.org/blog/builds-dashboard-system#api-%E6%B5%81%E9%87%8F%E9%99%90%E5%88%B6" class="hash-link" aria-label="API 流量限制的直接連結" title="API 流量限制的直接連結" translate="no">​</a></h3>
-<p>有了 Token 之後，接下來的問題是：「如何防止惡意用戶濫用 API？」</p>
-<p>由於 API 可能會涉及大量的推論請求（例如 AI 模型推論、批量查詢等），如果不做限制，很容易被惡意攻擊，甚至影響正常用戶的使用。因此，我在這裡引入 「Rate Limiting（速率限制）」 機制，透過 Redis 記錄請求次數，並在短時間內達到上限時，暫時阻擋請求。</p>
-<p>這個流程的架構圖如下：</p>
-<!-- -->
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="技術堆疊小結">技術堆疊小結<a href="https://docsaid.org/blog/builds-dashboard-system#%E6%8A%80%E8%A1%93%E5%A0%86%E7%96%8A%E5%B0%8F%E7%B5%90" class="hash-link" aria-label="技術堆疊小結的直接連結" title="技術堆疊小結的直接連結" translate="no">​</a></h2>
-<p>這個網站的後台經過這次升級後，整體的技術堆疊更新如下：</p>
-<ul>
-<li class=""><strong>前端框架</strong>：React（Docusaurus）</li>
-<li class=""><strong>後端框架</strong>：FastAPI（Python）</li>
-<li class=""><strong>資料庫</strong>：PostgreSQL</li>
-<li class=""><strong>快取服務</strong>：Redis</li>
-<li class=""><strong>反向代理與負載均衡</strong>：Nginx</li>
-</ul>
-<p>除了新加入的 Redis 之外，其實上述技術大多在第一代後台就已經存在，只是當時尚未有專門的前端頁面能夠清晰地呈現這些相關資訊。透過這次的改版，加入可以讓使用者動手操作的前端後台頁面，提供更多的服務和功能。</p>
-<p>對我來說 Python 搭配 FastAPI 已是日常必備工具，雖然這套技術堆疊談不上特別創新，但確實大幅提升了開發效率與使用的順暢度。部署的部分，我還是使用自己熟悉的 Docker Compose 配合 Nginx，架設在家裡的主機上。雖然我也想放到雲端主機，但無奈成本太高（費用低的效能差），實在消費不起，只好先這樣將就一下。</p>
-<p>總之，這個系統目前已經順利運轉，先跑跑看再持續觀察與改善吧。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="最後">最後<a href="https://docsaid.org/blog/builds-dashboard-system#%E6%9C%80%E5%BE%8C" class="hash-link" aria-label="最後的直接連結" title="最後的直接連結" translate="no">​</a></h2>
-<p>看論文時，雖然常常會覺得邏輯抽象，但只要反覆閱讀幾次，通常都還是能夠順利複現。（撇開算力不足的部分）</p>
-<p>前端文件看似一目瞭然，但動手時每一步都可能暗藏陷阱，實在是奸詐無比。（<del>不熟就說！</del>）過去半夜 Debug 常常是在處理「Loss 無法收斂」、「GPU 記憶體不足」這些身為 AI 工程師的日常；現在反而變成了 React 頻繁報錯、表單按鈕失效，以及後端 API 規格對不上等等繁瑣問題。</p>
-<p>更何況，這還是在有 ChatGPT 可以即時求救的狀態下完成的，要是回到上古時代（ChatGPT 發表前？），那這個後台能不能成功讓我做出來還真不好說。</p>
-<p>之後我有空的話會再陸續增加更多功能，若你對此系統有其他建議或心得，歡迎隨時在留言區和我交流分享。</p>
-<p>如果你在使用過程中發現了任何 Bug 或遭遇到問題，為了保護系統安全，請私下透過 Email 聯絡我，我會非常感激。如果還能提供詳細的錯誤訊息或畫面截圖，能讓我更快地定位並修復問題。</p>
-<p>祝你在這裡玩得愉快！</p><section class="ctaSection_iCjC"><div class="
-        simpleCta_ji_Y
-        simple-cta__coffee_YwC8
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ 一杯咖啡，就是我創作的燃料！</h3><p class="simple-cta__subtitle_ol86">贊助我持續分享 AI 實作、全端架構與開源經驗，讓好文章不斷更新。</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/img/icons/all_in.svg" alt="AI / 全端 / 客製 一次搞定 icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">ALL</span><h4 class="card__title_SQBY">AI / 全端 / 客製 一次搞定</h4><p class="card__concept_Ak8F">從構想到上線，涵蓋顧問、開發與部署，全方位支援你的技術實作。</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">包含內容</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">顧問服務 + 系統建置 + 客製開發</li><li class="card__bulletItem_wCRd">長期維運與擴充規劃</li></ul></div></div></div></div><div class="
-        simpleCta_ji_Y
-        simple-cta__outro_AXbn
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 你的專案準備好了嗎？</h3><p class="simple-cta__subtitle_ol86">如果你需要客製服務或長期顧問，歡迎與我聯繫！</p></div></section><div style="margin-top:3rem"> </div>]]></content>
-        <author>
-            <name>Z. Yuan</name>
-            <uri>https://github.com/zephyr-sh</uri>
-        </author>
-        <category label="React" term="React"/>
-        <category label="FastAPI" term="FastAPI"/>
-        <category label="User Authentication" term="User Authentication"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Amazon SES 在 Namecheap 設定 DNS]]></title>
-        <id>https://docsaid.org/blog/amazon-ses-setting-dns-on-namecheap</id>
-        <link href="https://docsaid.org/blog/amazon-ses-setting-dns-on-namecheap"/>
-        <updated>2025-03-05T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[紀錄 Amazon SES 的 DNS 設定過程。]]></summary>
-        <content type="html"><![CDATA[<p>我試著啟用 Amazon SES 服務，然後在驗證過程中，Amazon 要求設定 DNS 記錄。</p>
-<p>這個過程花了我好一陣子才找到正確的設定方法。(<del>半個小時</del>)</p>
-<p>這裡紀錄一下，以便日後查詢。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="amazon-ses-設定">Amazon SES 設定<a href="https://docsaid.org/blog/amazon-ses-setting-dns-on-namecheap#amazon-ses-%E8%A8%AD%E5%AE%9A" class="hash-link" aria-label="Amazon SES 設定的直接連結" title="Amazon SES 設定的直接連結" translate="no">​</a></h2>
-<p>Amazon SES 設定已經有別人寫好的教學文章，內容完整，請參考這裡：</p>
-<ul>
-<li class=""><a href="https://www.quantsnote.com/amazon-ses-how-to-apply/" target="_blank" rel="noopener noreferrer" class=""><strong>Amazon SES 電子郵件服務，2024 最完整申請步驟教學</strong></a></li>
-</ul>
-<p>我一路順暢的走到「<strong>驗證傳送網域</strong>」這一步，然後卡住了。</p>
-<p>因為我使用的域名是在 Namecheap 購買的，所以需要在 Namecheap 上設定 DNS 記錄。</p>
-<p>那麼，該怎麼設定呢？</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="dns-records">DNS Records<a href="https://docsaid.org/blog/amazon-ses-setting-dns-on-namecheap#dns-records" class="hash-link" aria-label="DNS Records的直接連結" title="DNS Records的直接連結" translate="no">​</a></h2>
-<p>在 Amazon SES 的「<strong>驗證傳送網域</strong>」的卡片上，點選「<strong>取得 DNS 紀錄</strong>」，然後會出現一個提示框，裡面有一份詳細的 DNS 記錄，大概是長這樣：</p>
-<p><img decoding="async" loading="lazy" alt="Amazon SES DNS 記錄" src="https://docsaid.org/assets/images/img1-ca3991c5ffc59073150b27f2850f86f2.jpg" width="6150" height="3226" class="img_ev3q"></p>
-<p>這裡以我自己的域名為例，上圖中的 <code>docsaid.org</code> 就是我送去驗證的域名。</p>
-<p>拿到這份 DNS 記錄後，我就可以在 Namecheap 上設定了。</p>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>每個欄位的原始資料我有稍作修改，保護一下網站安全。</p></div></div>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="dkim-records">DKIM Records<a href="https://docsaid.org/blog/amazon-ses-setting-dns-on-namecheap#dkim-records" class="hash-link" aria-label="DKIM Records的直接連結" title="DKIM Records的直接連結" translate="no">​</a></h2>
-<p>打開 Namecheap 的網站，登入後，點選「<strong>域名列表</strong>」，然後找到要設定的域名，點選「<strong>管理</strong>」。</p>
-<p>在域名管理頁面，找到「<strong>Advanced DNS</strong>」，點選進入。</p>
-<p><img decoding="async" loading="lazy" alt="setting dkim records" src="https://docsaid.org/assets/images/img2-560f5004a8bd2c4b43ee07d6e4537add.jpg" width="6595" height="5701" class="img_ev3q"></p>
-<p>如上圖，你可以看到一個「<strong>Add New Record</strong>」的按鈕，點選，選擇「<strong>CNAME Record</strong>」。</p>
-<p>把剛才看到的 DKIM 記錄輸入進去，輸入的時候有幾個注意事項：</p>
-<ol>
-<li class="">DKIM 上的名稱要輸入到 <code>Host</code> 欄位，只要輸入域名前面的部分即可，不用包含域名。</li>
-<li class="">值要輸入到 <code>Value</code> 欄位，直接複製貼上即可。</li>
-</ol>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="mail-from-records">MAIL FROM Records<a href="https://docsaid.org/blog/amazon-ses-setting-dns-on-namecheap#mail-from-records" class="hash-link" aria-label="MAIL FROM Records的直接連結" title="MAIL FROM Records的直接連結" translate="no">​</a></h2>
-<p>這個部分卡了我最久，因為這個部分只需要輸入 MX 紀錄，另外一個可以不用管他。</p>
-<p><img decoding="async" loading="lazy" alt="setting mail from records" src="https://docsaid.org/assets/images/img3-c1e3964deb60ba184f785e61f62f3cee.jpg" width="6572" height="3762" class="img_ev3q"></p>
-<p>在 Namecheap 的「<strong>Advanced DNS</strong>」頁面中，找到「<strong>MAIL SETTINGS</strong>」。然後在一旁的下拉選單中選擇「<strong>Custom MX</strong>」。</p>
-<p>然後把 Amazon SES 提供的 MX 記錄輸入進去，有幾個注意事項：</p>
-<ol>
-<li class="">根據你在 Amazon SES 上所設定的子網域，輸入對應的 MX 記錄的 <code>Host</code> 欄位。在我的範例中使用的是 <code>mail</code>，如果你使用的是其他的子網域，請輸入對應的子網域。</li>
-<li class="">值要輸入到 <code>Value</code> 欄位，這裡分為兩個部分：把 <code>10</code> 輸入到 <code>Priority</code> 欄位，後面剩下的部分輸入到 <code>Value</code> 欄位。</li>
-</ol>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>資訊</div><div class="admonitionContent_BuS1"><p>Namecheap 的 Mail Settings 只允許在 <code>Email Forwarding</code> 和 <code>Custom MX</code> 之間二選一：</p><ul>
-<li class="">如果啟用 <code>Email Forwarding</code>，Namecheap 會鎖住 MX 記錄，讓它只能指向自己的郵件轉發伺服器。</li>
-<li class="">如果你啟用 <code>Custom MX</code>，就可以手動設定 Amazon SES 提供的 MX 記錄，這樣 Amazon SES 就可以處理退信。</li>
-</ul></div></div>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="dmarc-records">DMARC Records<a href="https://docsaid.org/blog/amazon-ses-setting-dns-on-namecheap#dmarc-records" class="hash-link" aria-label="DMARC Records的直接連結" title="DMARC Records的直接連結" translate="no">​</a></h2>
-<p>這個部分設定最簡單，在 Namecheap 的「<strong>Advanced DNS</strong>」頁面中，找到「<strong>Add New Record</strong>」，選擇「<strong>TXT Record</strong>」。</p>
-<p>然後把 Amazon SES 提供的 DMARC 記錄輸入進去，輸入的時候唯一的注意事項就是不要把 <code>"</code> 輸入進去。</p>
-<p><img decoding="async" loading="lazy" alt="setting dmarc records" src="https://docsaid.org/assets/images/img4-8de32e2d990112435f043a009f901759.jpg" width="6595" height="5619" class="img_ev3q"></p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="小結">小結<a href="https://docsaid.org/blog/amazon-ses-setting-dns-on-namecheap#%E5%B0%8F%E7%B5%90" class="hash-link" aria-label="小結的直接連結" title="小結的直接連結" translate="no">​</a></h2>
-<p>到這裡，就完成了 Amazon SES 在 Namecheap 上的 DNS 設定。</p>
-<p>完成之後要稍待片刻，大約 30 分鐘左右，Amazon SES 就會自動驗證新增的 DNS 記錄。若一切正常，會收到來自 Amazon SES 的郵件通知驗證成功。</p>
-<p>祝你好運！</p><section class="ctaSection_iCjC"><div class="
-        simpleCta_ji_Y
-        simple-cta__coffee_YwC8
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ 一杯咖啡，就是我創作的燃料！</h3><p class="simple-cta__subtitle_ol86">贊助我持續分享 AI 實作、全端架構與開源經驗，讓好文章不斷更新。</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/img/icons/all_in.svg" alt="AI / 全端 / 客製 一次搞定 icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">ALL</span><h4 class="card__title_SQBY">AI / 全端 / 客製 一次搞定</h4><p class="card__concept_Ak8F">從構想到上線，涵蓋顧問、開發與部署，全方位支援你的技術實作。</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">包含內容</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">顧問服務 + 系統建置 + 客製開發</li><li class="card__bulletItem_wCRd">長期維運與擴充規劃</li></ul></div></div></div></div><div class="
-        simpleCta_ji_Y
-        simple-cta__outro_AXbn
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 你的專案準備好了嗎？</h3><p class="simple-cta__subtitle_ol86">如果你需要客製服務或長期顧問，歡迎與我聯繫！</p></div></section><div style="margin-top:3rem"> </div>]]></content>
-        <author>
-            <name>Z. Yuan</name>
-            <uri>https://github.com/zephyr-sh</uri>
-        </author>
-        <category label="Amazon SES" term="Amazon SES"/>
-        <category label="Namecheap" term="Namecheap"/>
-        <category label="DNS" term="DNS"/>
     </entry>
 </feed>

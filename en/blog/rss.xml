@@ -4,10 +4,472 @@
         <title>DOCSAID Blog</title>
         <link>https://docsaid.org/en/blog</link>
         <description>DOCSAID Blog</description>
-        <lastBuildDate>Wed, 08 Oct 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 23 Dec 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[SQLite in Practice (5): Who Am I? Where Am I?]]></title>
+            <link>https://docsaid.org/en/blog/sqlite-queue-observability-governance</link>
+            <guid>https://docsaid.org/en/blog/sqlite-queue-observability-governance</guid>
+            <pubDate>Tue, 23 Dec 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[From error codes and retention policies to audit logs—make your queue operable.]]></description>
+            <content:encoded><![CDATA[<p>You’ve probably had a conversation like this:</p>
+<ul>
+<li class="">You: How’s the system doing right now?</li>
+<li class="">System: I’m running.</li>
+<li class="">You: Running where?</li>
+<li class="">System: I’m running.</li>
+</ul>
+<p>Cool. Thanks. That helps exactly zero.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="queue">Queue<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#queue" class="hash-link" aria-label="Direct link to Queue" title="Direct link to Queue" translate="no">​</a></h2>
+<p>Sure, you can build a queue with SQLite—but at minimum you should be able to answer five engineering questions:</p>
+<ol>
+<li class=""><strong>How many jobs are in the queue right now? How many in each state?</strong></li>
+<li class=""><strong>How long has the oldest job been stuck? And who is it stuck on (which worker)?</strong></li>
+<li class=""><strong>What does the retry distribution look like? Is one type failing over and over?</strong></li>
+<li class=""><strong>What are the failure reasons? Can you aggregate them (Top-N)?</strong></li>
+<li class=""><strong>How long should you retain data? How do you delete it without creating orphaned rows or blowing up the DB?</strong></li>
+</ol>
+<p>Behind these five questions are really just two keywords:</p>
+<ul>
+<li class=""><strong>Observability</strong>: can you understand the system’s current state <strong>with data</strong>, not with prayer?</li>
+<li class=""><strong>Governance</strong>: can you retain and clean up data <strong>in a controlled way</strong>, and still stay consistent and auditable afterward?</li>
+</ul>
+<p>Below is a practical design that makes both of these real.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="dont-treat-a-queue-as-one-table">Don’t Treat a Queue as One Table<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#dont-treat-a-queue-as-one-table" class="hash-link" aria-label="Direct link to Don’t Treat a Queue as One Table" title="Direct link to Don’t Treat a Queue as One Table" translate="no">​</a></h2>
+<p>Most people’s first instinct for a queue is:</p>
+<ul>
+<li class="">one <code>jobs</code> table</li>
+<li class="">a <code>status</code> column</li>
+<li class="">add whatever columns you need later</li>
+</ul>
+<p>Sure, it runs—but it quickly turns into “the schema can’t answer the questions you want to ask.”</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="what-you-actually-need-three-layers-of-data">What You Actually Need: Three Layers of Data<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#what-you-actually-need-three-layers-of-data" class="hash-link" aria-label="Direct link to What You Actually Need: Three Layers of Data" title="Direct link to What You Actually Need: Three Layers of Data" translate="no">​</a></h3>
+<p>Split the queue into three layers and operations suddenly get much easier:</p>
+<ol>
+<li class="">
+<p><strong>Job entity (Current State)</strong>
+You need to quickly answer: “What state is this job in right now?”</p>
+</li>
+<li class="">
+<p><strong>Attempt records (Attempts / Retries)</strong>
+A job may run many times. You need to answer: “Which attempt failed? Did it fail for the same reason each time? How long did each attempt take?”</p>
+</li>
+<li class="">
+<p><strong>Event records (Audit Log / Event Log)</strong>
+State is an outcome; events are the process. Systems that are actually debuggable rely on event streams, not on “staring at one row.”</p>
+</li>
+</ol>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="which-observable-fields-do-you-need">Which “Observable” Fields Do You Need?<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#which-observable-fields-do-you-need" class="hash-link" aria-label="Direct link to Which “Observable” Fields Do You Need?" title="Direct link to Which “Observable” Fields Do You Need?" translate="no">​</a></h2>
+<p>“Observable” doesn’t mean turning your schema into an encyclopedia—it means being able to answer those five questions.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="recommended-fields-for-jobs">Recommended fields for <code>jobs</code><a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#recommended-fields-for-jobs" class="hash-link" aria-label="Direct link to recommended-fields-for-jobs" title="Direct link to recommended-fields-for-jobs" translate="no">​</a></h3>
+<ul>
+<li class=""><code>status</code>: the state machine (Queued / Claimed / Running / Succeeded / Failed / Cancelled …)</li>
+<li class=""><code>created_at / started_at / finished_at</code>: timeline (so you can compute wait time and processing time)</li>
+<li class=""><code>priority</code> (optional): don’t underestimate it—your scheduler and on-call self will thank you</li>
+<li class=""><code>worker_id</code> (or <code>claimed_by</code>): who took it (for finding the problematic worker)</li>
+<li class=""><code>heartbeat_at</code>: heartbeat timestamp (to tell whether the worker is still alive)</li>
+<li class=""><code>retry_count</code>: retries so far (for fast aggregation)</li>
+<li class=""><code>error_code</code>: an aggregatable error category (Top-N depends on it)</li>
+<li class=""><code>error_detail</code>: a short summary (for quick diagnosis—not for storing the whole log)</li>
+</ul>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="suggested-schema">Suggested schema<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#suggested-schema" class="hash-link" aria-label="Direct link to Suggested schema" title="Direct link to Suggested schema" translate="no">​</a></h3>
+<p>This is just a suggestion—we’re trying to separate operational concerns cleanly.</p>
+<ol>
+<li class="">
+<p><strong>jobs: current state (fast for serving)</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">TABLE</span><span class="token plain"> jobs </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  id            </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">PRIMARY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">type</span><span class="token plain">          </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                 </span><span class="token comment" style="color:#999988;font-style:italic">-- job type (for grouped stats)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain">        </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                 </span><span class="token comment" style="color:#999988;font-style:italic">-- state machine</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  priority      </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DEFAULT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  created_at    </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">              </span><span class="token comment" style="color:#999988;font-style:italic">-- Unix epoch seconds</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  started_at    </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  finished_at   </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  claimed_by    </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- worker_id</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  claim_token   </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- prevent accidental updates (optional)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  heartbeat_at  </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  retry_count   </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DEFAULT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  max_retries   </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DEFAULT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">3</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  error_code    </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- aggregatable category</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  error_detail  </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- short summary (consider a length limit)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  payload_ref   </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                          </span><span class="token comment" style="color:#999988;font-style:italic">-- store large payload elsewhere (file/object storage)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  result_ref    </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain">                           </span><span class="token comment" style="color:#999988;font-style:italic">-- store large results elsewhere</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+</li>
+<li class="">
+<p><strong>job_attempts: each attempt (“which try was it?”)</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">TABLE</span><span class="token plain"> job_attempts </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  id           </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">PRIMARY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  job_id       </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  attempt      </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">               </span><span class="token comment" style="color:#999988;font-style:italic">-- 1,2,3...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  started_at   </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  finished_at  </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain">       </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                  </span><span class="token comment" style="color:#999988;font-style:italic">-- RUNNING/SUCCEEDED/FAILED</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  error_code   </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  error_detail </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  worker_id    </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">FOREIGN</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">REFERENCES</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DELETE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">CASCADE</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">UNIQUE</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> attempt</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+</li>
+<li class="">
+<p><strong>job_events: event stream (debugging depends on it)</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">TABLE</span><span class="token plain"> job_events </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  id          </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">PRIMARY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  job_id      </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ts          </span><span class="token keyword" style="color:#00009f">INTEGER</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  event       </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">NULL</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                   </span><span class="token comment" style="color:#999988;font-style:italic">-- CLAIMED/STARTED/HEARTBEAT/FAILED/RETRY_SCHEDULED...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  actor       </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                            </span><span class="token comment" style="color:#999988;font-style:italic">-- worker_id / system</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  detail      </span><span class="token keyword" style="color:#00009f">TEXT</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">                            </span><span class="token comment" style="color:#999988;font-style:italic">-- short JSON (don’t bloat it)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">FOREIGN</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">KEY</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">REFERENCES</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DELETE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">CASCADE</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<blockquote>
+<p>Why have an event table?
+Because “state” only tells you it’s FAILED, but “events” tell you:</p>
+<ul>
+<li class="">when and by whom it was claimed</li>
+<li class="">how long it ran</li>
+<li class="">when the last heartbeat was</li>
+<li class="">which retry started failing</li>
+</ul>
+<p>Debugging shouldn’t be guessing. It should be reading history.</p>
+</blockquote>
+</li>
+</ol>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="indexes">Indexes<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#indexes" class="hash-link" aria-label="Direct link to Indexes" title="Direct link to Indexes" translate="no">​</a></h2>
+<p>Observability isn’t finished just because you wrote a few queries:</p>
+<ul>
+<li class=""><strong>At the very least, you need to make sure they can run fast, right?</strong></li>
+</ul>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="common-indexes-recommended">Common indexes (recommended)<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#common-indexes-recommended" class="hash-link" aria-label="Direct link to Common indexes (recommended)" title="Direct link to Common indexes (recommended)" translate="no">​</a></h3>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_jobs_status </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_jobs_type_status </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">type</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">-- commonly used to find stuck jobs and the oldest running ones</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_jobs_running_age</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> heartbeat_at</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> created_at</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">-- failure Top-N aggregation</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_jobs_failed_code</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> error_code</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">-- primary query keys for attempts / events</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_attempts_job </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> job_attempts</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> attempt</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> idx_events_job_ts </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> job_events</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">job_id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> ts</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>The design principle is simple: <strong>index whatever your dashboard and ops queries ask for most often.</strong></p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="most-common-observability-queries">Most Common Observability Queries<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#most-common-observability-queries" class="hash-link" aria-label="Direct link to Most Common Observability Queries" title="Direct link to Most Common Observability Queries" translate="no">​</a></h2>
+<ol>
+<li class="">
+<p><strong>Count by state: how busy are we right now?</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">COUNT</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">*</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">AS</span><span class="token plain"> cnt</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">GROUP</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> cnt </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>You’ll quickly find patterns like:</p>
+<ul>
+<li class=""><code>QUEUED</code> exploding → upstream sends too fast, downstream processes too slowly</li>
+<li class="">lots of <code>RUNNING</code> but throughput doesn’t rise → workers are stuck or resources are constrained</li>
+<li class=""><code>FAILED</code> slowly creeping up → a job type has a bug, or an external dependency is unhealthy</li>
+</ul>
+</li>
+<li class="">
+<p><strong>Find the oldest in-progress jobs (who’s stuck the longest?)</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">type</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> claimed_by</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> created_at</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> heartbeat_at</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">IN</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'CLAIMED'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'RUNNING'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">COALESCE</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">heartbeat_at</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> created_at</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">ASC</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">20</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>The key is <code>COALESCE</code>:</p>
+<ul>
+<li class="">if there’s a heartbeat, use it as the “latest proof of life”</li>
+<li class="">if there isn’t, fall back to <code>created_at</code> (usually means it never truly started, or your design missed something)</li>
+</ul>
+</li>
+<li class="">
+<p><strong>Retry distribution: is one class of jobs rerunning forever?</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> retry_count</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">COUNT</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">*</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">AS</span><span class="token plain"> cnt</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">IN</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'QUEUED'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'CLAIMED'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'RUNNING'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'FAILED'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">GROUP</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> retry_count</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> retry_count </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>If you see a big pile at <code>retry_count = 3</code>, it usually means:</p>
+<ul>
+<li class="">an external service is down (timeouts)</li>
+<li class="">input format is wrong (invalid input)</li>
+<li class="">a systemic bug (internal)</li>
+</ul>
+<p>The next step is error-code aggregation.</p>
+</li>
+<li class="">
+<p><strong>Failure reasons Top-N: you must be able to aggregate</strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> error_code</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">COUNT</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">*</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">AS</span><span class="token plain"> cnt</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'FAILED'</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">GROUP</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> error_code</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> cnt </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">20</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>This only works if you have a decent <code>error_code</code>.</p>
+</li>
+</ol>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="designing-error-codes">Designing Error Codes<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#designing-error-codes" class="hash-link" aria-label="Direct link to Designing Error Codes" title="Direct link to Designing Error Codes" translate="no">​</a></h2>
+<p><code>error_code</code> should exist for <strong>statistics</strong>. The most common anti-pattern is:</p>
+<ul>
+<li class="">dumping an entire stack trace into <code>error_detail</code></li>
+<li class="">not storing <code>error_code</code> at all (or storing it randomly)</li>
+</ul>
+<p>In the end, you can’t aggregate anything—you can only read logs row by row.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="suggested-error-code-structure">Suggested error-code structure<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#suggested-error-code-structure" class="hash-link" aria-label="Direct link to Suggested error-code structure" title="Direct link to Suggested error-code structure" translate="no">​</a></h3>
+<p>Use <code>CATEGORY:SUBCATEGORY</code> (or <code>CATEGORY/SUBCATEGORY</code>), for example:</p>
+<ul>
+<li class=""><code>TIMEOUT:UPSTREAM_API</code></li>
+<li class=""><code>INVALID_INPUT:SCHEMA_MISMATCH</code></li>
+<li class=""><code>RESOURCE:OUT_OF_MEMORY</code></li>
+<li class=""><code>INTERNAL:ASSERTION_FAILED</code></li>
+<li class=""><code>DEPENDENCY:DB_LOCKED</code></li>
+</ul>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="guidelines-for-error_detail">Guidelines for <code>error_detail</code><a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#guidelines-for-error_detail" class="hash-link" aria-label="Direct link to guidelines-for-error_detail" title="Direct link to guidelines-for-error_detail" translate="no">​</a></h3>
+<ul>
+<li class="">keep it a <strong>short summary</strong> (e.g. 200–500 characters)</li>
+<li class="">store full stack traces / full JSON / full reports in the filesystem or object storage; the DB should only keep a <code>path/URL</code></li>
+</ul>
+<p>We’ve seen too many “dumpster-fire log storages.” Don’t follow that path.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="foreign-keys-and-orphaned-rows">Foreign Keys and Orphaned Rows<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#foreign-keys-and-orphaned-rows" class="hash-link" aria-label="Direct link to Foreign Keys and Orphaned Rows" title="Direct link to Foreign Keys and Orphaned Rows" translate="no">​</a></h2>
+<blockquote>
+<p>If you don’t deal with it, it will deal with you later.</p>
+</blockquote>
+<p>SQLite supports foreign keys—but they’re <strong>not enabled by default</strong>.</p>
+<p>If you don’t turn them on, SQLite will pretend they don’t exist.</p>
+<p>You need to do two things:</p>
+<ol>
+<li class=""><strong>Enable foreign keys on every connection</strong></li>
+</ol>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">PRAGMA foreign_keys </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">ON</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>This is not a one-time setting. If you use a connection pool or open new connections, you must do this each time.</p>
+<ol start="2">
+<li class=""><strong>Use <code>ON DELETE CASCADE</code> to keep consistency</strong></li>
+</ol>
+<p>If you delete from <code>jobs</code>, <code>attempts/events</code> should be deleted automatically—otherwise you will create orphaned rows.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="upsert">Upsert<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#upsert" class="hash-link" aria-label="Direct link to Upsert" title="Direct link to Upsert" translate="no">​</a></h2>
+<p>Stop using <code>INSERT OR REPLACE</code> as “update”!</p>
+<p>This is worth writing in bold three times:</p>
+<ul>
+<li class=""><strong><code>REPLACE</code> is not update</strong></li>
+<li class=""><strong><code>REPLACE</code> is not update</strong></li>
+<li class=""><strong><code>REPLACE</code> is not update</strong></li>
+</ul>
+<p>It’s closer to:</p>
+<blockquote>
+<p>delete first, then insert</p>
+</blockquote>
+<p>If you have foreign keys, audit logs, attempts/events… <code>REPLACE</code> will kill you.</p>
+<p>And after it kills you, you still won’t know where the bug is.</p>
+<p>The right way is <code>ON CONFLICT DO UPDATE</code>. State updates should be predictable and traceable, and should never secretly delete rows:</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">INSERT</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INTO</span><span class="token plain"> jobs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> heartbeat_at</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">VALUES</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">?</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> ?</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> ?</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> CONFLICT</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DO</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">UPDATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">SET</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> excluded</span><span class="token punctuation" style="color:#393A34">.</span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  heartbeat_at </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> excluded</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">heartbeat_at</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="audit-log-event-table">Audit Log (Event Table)<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#audit-log-event-table" class="hash-link" aria-label="Direct link to Audit Log (Event Table)" title="Direct link to Audit Log (Event Table)" translate="no">​</a></h2>
+<p>If you only look at the <code>jobs</code> row, debugging is like seeing “now” but not “how it became now.”</p>
+<p>The event table philosophy is: <strong>state is a snapshot; events are a timeline.</strong></p>
+<p>At minimum, you should record:</p>
+<ul>
+<li class=""><code>ENQUEUED</code>: enqueued</li>
+<li class=""><code>CLAIMED</code>: claimed by a worker</li>
+<li class=""><code>STARTED</code>: actually started (can be separate from claimed)</li>
+<li class=""><code>HEARTBEAT</code>: heartbeat (lower frequency, or only keep “the latest”)</li>
+<li class=""><code>FAILED</code>: failed (with <code>error_code</code>)</li>
+<li class=""><code>RETRY_SCHEDULED</code>: retry scheduled (with delay, attempt)</li>
+<li class=""><code>SUCCEEDED</code>: succeeded</li>
+<li class=""><code>CANCELLED</code>: manually cancelled</li>
+<li class=""><code>RECOVERED</code>: reclaimed / reassigned (if you have a lease mechanism)</li>
+</ul>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="retention-policy">Retention Policy<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#retention-policy" class="hash-link" aria-label="Direct link to Retention Policy" title="Direct link to Retention Policy" translate="no">​</a></h2>
+<p>You need to delete data—but you need to delete it <strong>with rules</strong>.</p>
+<p>Every queue system eventually faces this question:</p>
+<blockquote>
+<p><strong>How long do you keep it?</strong></p>
+</blockquote>
+<p>If your answer is “keep everything,” SQLite will use disk space to have a philosophical conversation with you.
+If your answer is “delete everything,” your next incident will leave you with no evidence.</p>
+<p>A practical policy looks like:</p>
+<ul>
+<li class=""><code>SUCCEEDED</code>: keep 30 days (usually enough for investigations)</li>
+<li class=""><code>FAILED</code>: keep 90 days (failures deserve longer retention—they tend to come back)</li>
+<li class=""><code>CANCELLED</code>: depends (commonly 30 days)</li>
+</ul>
+<p>For deletion, make it batched, interruptible, and rerunnable.</p>
+<p>Don’t delete a million rows at once—especially while serving traffic. Run a scheduled cleanup every minute and delete slowly, like this:</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">-- delete succeeded jobs (older than 30 days)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">DELETE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'SUCCEEDED'</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token operator" style="color:#393A34">AND</span><span class="token plain"> finished_at </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain"> strftime</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'%s'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'now'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">-</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">30</span><span class="token operator" style="color:#393A34">*</span><span class="token number" style="color:#36acaa">86400</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">5000</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="do-you-need-vacuum">Do you need <code>VACUUM</code>?<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#do-you-need-vacuum" class="hash-link" aria-label="Direct link to do-you-need-vacuum" title="Direct link to do-you-need-vacuum" translate="no">​</a></h3>
+<ul>
+<li class="">SQLite file size doesn’t necessarily shrink immediately (deletes just mark pages as reusable)</li>
+<li class=""><code>VACUUM</code> rewrites the entire DB: heavy I/O and long runtime</li>
+</ul>
+<p>Suggested approach:</p>
+<ul>
+<li class=""><strong>use batched deletes for day-to-day cleanup</strong></li>
+<li class=""><strong>only <code>VACUUM</code> during off-peak when you truly need to shrink the file</strong></li>
+</ul>
+<p>If you use WAL mode, make sure you understand WAL files and checkpoint behavior too.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="common-issues">Common Issues<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#common-issues" class="hash-link" aria-label="Direct link to Common Issues" title="Direct link to Common Issues" translate="no">​</a></h2>
+<ol>
+<li class="">
+<p><strong>Unlimited <code>error_detail</code> turns the DB into a dumpster</strong></p>
+<p><strong>Fix</strong>:</p>
+<ul>
+<li class="">categorize with <code>error_code</code></li>
+<li class="">keep <code>error_detail</code> as a short summary</li>
+<li class="">store full reports externally (DB keeps references)</li>
+</ul>
+</li>
+<li class="">
+<p>Forgot to enable <code>foreign key</code>, leaving orphans after deleting the parent table</p>
+<p><strong>Fix</strong>: <code>PRAGMA foreign_keys = ON</code> on every connection, and use <code>ON DELETE CASCADE</code></p>
+</li>
+<li class="">
+<p>Using <code>INSERT OR REPLACE</code> as upsert</p>
+<p><strong>Fix</strong>: use <code>ON CONFLICT DO UPDATE</code>; don’t let <code>REPLACE</code> secretly do a DELETE</p>
+</li>
+<li class="">
+<p>You wrote observability queries, but added no indexes</p>
+<p><strong>Fix</strong>: derive indexes from the dashboard/ops queries you run most often (don’t force SQLite into full table scans)</p>
+</li>
+</ol>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="summary">Summary<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary" translate="no">​</a></h2>
+<p>Once your queue can answer those five questions, it suddenly starts to feel like a “real system”:</p>
+<ul>
+<li class="">you can describe the current state (observability)</li>
+<li class="">you can trace the process (audit)</li>
+<li class="">you can control the data lifecycle (governance)</li>
+<li class="">you can turn incidents from “guess” into “query”</li>
+</ul>
+<p>After that, using SQLite as a queue is the natural next step.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="references">References<a href="https://docsaid.org/en/blog/sqlite-queue-observability-governance#references" class="hash-link" aria-label="Direct link to References" title="Direct link to References" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://www.sqlite.org/foreignkeys.html" target="_blank" rel="noopener noreferrer" class=""><strong>SQLite: Foreign Key Support</strong></a></li>
+<li class=""><a href="https://www.sqlite.org/lang_UPSERT.html" target="_blank" rel="noopener noreferrer" class=""><strong>SQLite: UPSERT</strong></a></li>
+<li class=""><a href="https://www.sqlite.org/lang_vacuum.html" target="_blank" rel="noopener noreferrer" class=""><strong>SQLite: VACUUM</strong></a></li>
+</ul><section class="ctaSection_iCjC"><div class="
+        simpleCta_ji_Y
+        simple-cta__coffee_YwC8
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ Fuel my writing with a coffee</h3><p class="simple-cta__subtitle_ol86">Your support keeps my AI &amp; full-stack guides coming.</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/en/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/en/img/icons/all_in.svg" alt="AI / Full-Stack / Custom — All In icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">All-in</span><h4 class="card__title_SQBY">AI / Full-Stack / Custom — All In</h4><p class="card__concept_Ak8F">From idea to launch—efficient systems that are future-ready.</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">All-In Bundle</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">Consulting + Dev + Deploy</li><li class="card__bulletItem_wCRd">Maintenance &amp; upgrades</li></ul></div></div></div></div><div class="
+        simpleCta_ji_Y
+        simple-cta__outro_AXbn
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 Ready for your next project?</h3><p class="simple-cta__subtitle_ol86">Need a tech partner or custom solution? Let's connect.</p></div></section><div style="margin-top:3rem"> </div>]]></content:encoded>
+            <category>sqlite</category>
+            <category>observability</category>
+            <category>data-governance</category>
+            <category>job-queue</category>
+        </item>
+        <item>
+            <title><![CDATA[SQLite in Practice (4): Why Is My Query So Slow?]]></title>
+            <link>https://docsaid.org/en/blog/sqlite-indexing-for-leaderboards</link>
+            <guid>https://docsaid.org/en/blog/sqlite-indexing-for-leaderboards</guid>
+            <pubDate>Mon, 10 Nov 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Use the right indexes so `ORDER BY ... LIMIT` can stop after the top 100.]]></description>
+            <content:encoded><![CDATA[<p>You built a benchmarking platform.</p>
+<p>To give users a bit of a sense of achievement, you even (in a rare act of mercy) added a leaderboard.</p>
+<p>Then you open DevTools and check the API latency: three seconds, five seconds, ten seconds.</p>
+<p>Huh?</p>
+<p>You don’t buy it, so you look at the SQL again.</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">100</span><br></span></code></pre></div></div>
+<p>We only need the top 100. How can it be this slow?</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-problem-isnt-limit">The Problem Isn’t <code>LIMIT</code><a href="https://docsaid.org/en/blog/sqlite-indexing-for-leaderboards#the-problem-isnt-limit" class="hash-link" aria-label="Direct link to the-problem-isnt-limit" title="Direct link to the-problem-isnt-limit" translate="no">​</a></h2>
+<p>This is a common misunderstanding.</p>
+<p><code>LIMIT 100</code> <strong>does not mean SQLite only processes 100 rows</strong>.</p>
+<p>If, before it can find the “top 100”, it has to scan all matching rows and sort them first...</p>
+<p>Then all you’ve told it is:</p>
+<blockquote>
+<p>“Just give me 100 rows at the end — but everything you need to do before that still has to happen.”</p>
+</blockquote>
+<p>Queries get slow when you leave SQLite no choice but to do it the dumbest, most brute-force way.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="a-typical-query">A Typical Query<a href="https://docsaid.org/en/blog/sqlite-indexing-for-leaderboards#a-typical-query" class="hash-link" aria-label="Direct link to A Typical Query" title="Direct link to A Typical Query" translate="no">​</a></h2>
+<p>Most benchmarking platforms have a schema that looks roughly like this:</p>
+<ul>
+<li class=""><code>jobs</code>: basic info for a submission / a run
+(status, version, timestamp, queue)</li>
+<li class=""><code>job_scores</code>: the actual evaluation metrics
+(often split into train / public / private)</li>
+</ul>
+<p>Illustrative SQL:</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_OeMC">leaderboard (illustration)</div><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">id</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">model_name</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">split</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score1</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">FROM</span><span class="token plain"> jobs j</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">JOIN</span><span class="token plain"> job_scores s </span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">job_id </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">id</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">WHERE</span><span class="token plain"> j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token keyword" style="color:#00009f">status</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'SUCCEEDED'</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token operator" style="color:#393A34">AND</span><span class="token plain"> j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">queue </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> :queue</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token operator" style="color:#393A34">AND</span><span class="token plain"> s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">split </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> :split</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score1 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score2 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">created_at </span><span class="token keyword" style="color:#00009f">ASC</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">LIMIT</span><span class="token plain"> :</span><span class="token keyword" style="color:#00009f">limit</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>That last <code>j.created_at ASC</code> is key.</p>
+<p>It’s a <strong>very reasonable design</strong>:
+when scores tie, use time as a tie-breaker so the ranking stays stable and doesn’t jump around.</p>
+<p>But to SQLite, it means one thing:</p>
+<blockquote>
+<p><strong>You’re asking for a Top-N query with joins, filters, and a composite sort.</strong></p>
+</blockquote>
+<p>If the indexes are wrong, it has to brute-force it.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="what-sqlite-does-without-indexes">What SQLite Does Without Indexes<a href="https://docsaid.org/en/blog/sqlite-indexing-for-leaderboards#what-sqlite-does-without-indexes" class="hash-link" aria-label="Direct link to What SQLite Does Without Indexes" title="Direct link to What SQLite Does Without Indexes" translate="no">​</a></h2>
+<p>Simplified, the flow is usually:</p>
+<ol>
+<li class="">Find all jobs with <code>status = 'SUCCEEDED'</code> and <code>queue = ?</code></li>
+<li class="">Join all scores that match <code>split = ?</code></li>
+<li class="">Pull the entire result set</li>
+<li class="">Sort by <code>score1 → score2 → created_at</code></li>
+<li class="">After sorting, throw away 99% and keep only the top 100</li>
+</ol>
+<p>The slowness isn’t your imagination.</p>
+<p>SQLite really does “scan everything, catch its breath, and then sort it for you.”</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="indexes-that-actually-help">Indexes That Actually Help<a href="https://docsaid.org/en/blog/sqlite-indexing-for-leaderboards#indexes-that-actually-help" class="hash-link" aria-label="Direct link to Indexes That Actually Help" title="Direct link to Indexes That Actually Help" translate="no">​</a></h2>
+<p>Indexes aren’t “fast just because they exist.”</p>
+<p>For Top-N leaderboard queries, there’s only one correct order — and you can’t swap it:</p>
+<ol>
+<li class=""><strong>Make <code>WHERE</code> quickly shrink the candidate set</strong></li>
+<li class=""><strong>Make <code>ORDER BY ... LIMIT</code> able to stream the first N rows along index order</strong></li>
+</ol>
+<p>If SQLite still needs to do an extra sort, <code>LIMIT 100</code> won’t save you — because it already sorted everything it needed to.</p>
+<p>Let’s start with <code>job_scores</code> (the metrics table).</p>
+<p>Suppose the query orders by:</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score1 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> s</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">score2 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><br></span></code></pre></div></div>
+<p>Then your index needs to “pave the road” with the same ordering:</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_OeMC">index (illustration)</div><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">IF</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">EXISTS</span><span class="token plain"> idx_scores_rank</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> job_scores </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  split</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  score1 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  score2 </span><span class="token keyword" style="color:#00009f">DESC</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>What this index gives you:</p>
+<ul>
+<li class=""><strong>Use <code>split = ?</code> to filter down to the group you actually want</strong></li>
+<li class="">After filtering, the rows are already ordered by <code>score1 → score2</code> inside the index</li>
+<li class="">SQLite can “walk the index” and quickly grab candidates for the top 100</li>
+</ul>
+<p>It’s less like asking SQLite to “gather everyone and make them line up,” and more like taking it straight to the hallway where they’re already lined up.</p>
+<p>Next is <code>jobs</code> (the run metadata table). This is where your filters and tie-breaker live:</p>
+<ul>
+<li class="">Filters: <code>queue</code>, <code>status</code></li>
+<li class="">Final tie-breaker: <code>created_at ASC</code> (stable ordering for equal scores)</li>
+</ul>
+<p>So your index needs to match those three things:</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockTitle_OeMC">index (illustration)</div><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">CREATE</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">INDEX</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">IF</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">NOT</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">EXISTS</span><span class="token plain"> idx_jobs_filter</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ON</span><span class="token plain"> jobs </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  queue</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">status</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  created_at</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>Here, <code>created_at</code> <strong>isn’t for filtering</strong> — it’s for speeding up “the last mile.”</p>
+<p>Because the last part of <code>ORDER BY</code> is:</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> j</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">created_at </span><span class="token keyword" style="color:#00009f">ASC</span><br></span></code></pre></div></div>
+<p>If many rows share the same <code>score1/score2</code> (ties are common), SQLite has to:</p>
+<ol>
+<li class="">First gather that big blob of tied candidates</li>
+<li class="">Join into <code>jobs</code> to read each row’s <code>created_at</code></li>
+<li class=""><strong>Re-order that blob by <code>created_at</code></strong></li>
+<li class="">Only then can it stably pick the top 100</li>
+</ol>
+<p>If there’s no supporting index for <code>created_at</code>, SQLite will often choose to:</p>
+<ul>
+<li class="">build a temporary sort structure (a temp B-tree)</li>
+<li class="">push those tied candidates into it</li>
+<li class="">sort and then emit results</li>
+</ul>
+<p>That’s what you see in the query plan: <code>USE TEMP B-TREE FOR ORDER BY</code>.</p>
+<p>If you want to know whether your query is doing an extra sort, ask SQLite directly with <code>EXPLAIN QUERY PLAN</code>:</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">EXPLAIN</span><span class="token plain"> QUERY </span><span class="token keyword" style="color:#00009f">PLAN</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">SELECT</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">.</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>A plan you want to see usually looks like:</p>
+<ul>
+<li class=""><code>USING INDEX ...</code> (it’s using your indexes)</li>
+<li class="">no <code>SCAN TABLE</code> (it’s not doing a full table scan)</li>
+<li class="">no <code>USE TEMP B-TREE FOR ORDER BY</code> (no extra sort)</li>
+</ul>
+<p>If you see <code>TEMP B-TREE</code>, you can almost immediately conclude:</p>
+<ul>
+<li class="">the query is still doing an extra sort; the Top-N LIMIT only kicks in at the very end — fix it.</li>
+</ul>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="common-pitfalls">Common Pitfalls<a href="https://docsaid.org/en/blog/sqlite-indexing-for-leaderboards#common-pitfalls" class="hash-link" aria-label="Direct link to Common Pitfalls" title="Direct link to Common Pitfalls" translate="no">​</a></h2>
+<ol>
+<li class="">
+<p><strong>Storing numbers as TEXT, then sorting with <code>CAST</code></strong></p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">ORDER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">BY</span><span class="token plain"> CAST</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">score1 </span><span class="token keyword" style="color:#00009f">AS</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">REAL</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">DESC</span><br></span></code></pre></div></div>
+<p>This line makes your index unusable.</p>
+<p>SQLite can’t use an index on “the casted result.”</p>
+<p><strong>Fix</strong>:
+store numbers as <code>INTEGER / REAL</code> — don’t rely on <code>CAST</code> at sort time to save you.</p>
+</li>
+<li class="">
+<p><strong>Keep adding sort columns, and the index keeps getting fatter</strong></p>
+<p><code>score1 → score2 → score3 → score4 → …</code></p>
+<p>Eventually you end up with an index monster that slows writes, eats space, and still doesn’t necessarily make the query faster.</p>
+<p><strong>Fix</strong>: confirm which metrics actually affect ranking, and keep the sort key as small as you can.</p>
+</li>
+</ol>
+<p>If your leaderboard starts getting clicked a lot, consider:</p>
+<ul>
+<li class=""><strong>Caching Top-N results</strong> (leaderboards are read-heavy, write-light)</li>
+<li class=""><strong>Partial indexes for popular splits</strong></li>
+<li class=""><strong>Offline ranking + a result table</strong></li>
+</ul>
+<p>SQLite is great as a “query engine,” but that doesn’t mean you must compute rankings live every time. A few small tricks can make the product much more stable.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="wrap-up">Wrap-up<a href="https://docsaid.org/en/blog/sqlite-indexing-for-leaderboards#wrap-up" class="hash-link" aria-label="Direct link to Wrap-up" title="Direct link to Wrap-up" translate="no">​</a></h2>
+<p>When a query is slow, the most common reason isn’t that SQLite is bad.</p>
+<p>It’s that you’re asking it to handle:</p>
+<ul>
+<li class="">joins</li>
+<li class="">multiple filters</li>
+<li class="">a composite sort</li>
+<li class="">a stable Top-N ranking</li>
+</ul>
+<p>...without giving it indexes that actually match those requirements.</p>
+<p>So it falls back to the most conservative, general approach: scan everything, sort everything, then throw most of it away.</p>
+<p>What you usually need to adjust isn’t the query syntax itself, but whether you’ve thought through:</p>
+<ul>
+<li class="">which conditions actually “shrink the search space”</li>
+<li class="">which columns truly “change the ranking”</li>
+<li class="">which part of the ordering must not force SQLite to do another sort pass</li>
+</ul>
+<p>SQLite has always been stable.</p>
+<p>It just needs you to tell it — more precisely — what you really want.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="references">References<a href="https://docsaid.org/en/blog/sqlite-indexing-for-leaderboards#references" class="hash-link" aria-label="Direct link to References" title="Direct link to References" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://www.sqlite.org/lang_createindex.html" target="_blank" rel="noopener noreferrer" class="">SQLite Docs: Indexes</a></li>
+<li class=""><a href="https://www.sqlite.org/queryplanner.html" target="_blank" rel="noopener noreferrer" class="">SQLite Docs: Query Planner</a></li>
+<li class=""><a href="https://www.sqlite.org/eqp.html" target="_blank" rel="noopener noreferrer" class="">SQLite Docs: EXPLAIN QUERY PLAN</a></li>
+</ul><section class="ctaSection_iCjC"><div class="
+        simpleCta_ji_Y
+        simple-cta__coffee_YwC8
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ Fuel my writing with a coffee</h3><p class="simple-cta__subtitle_ol86">Your support keeps my AI &amp; full-stack guides coming.</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/en/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/en/img/icons/all_in.svg" alt="AI / Full-Stack / Custom — All In icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">All-in</span><h4 class="card__title_SQBY">AI / Full-Stack / Custom — All In</h4><p class="card__concept_Ak8F">From idea to launch—efficient systems that are future-ready.</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">All-In Bundle</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">Consulting + Dev + Deploy</li><li class="card__bulletItem_wCRd">Maintenance &amp; upgrades</li></ul></div></div></div></div><div class="
+        simpleCta_ji_Y
+        simple-cta__outro_AXbn
+        fadeInUp_n33J
+        hoverTransform_Mozy
+      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 Ready for your next project?</h3><p class="simple-cta__subtitle_ol86">Need a tech partner or custom solution? Let's connect.</p></div></section><div style="margin-top:3rem"> </div>]]></content:encoded>
+            <category>sqlite</category>
+            <category>index</category>
+            <category>performance</category>
+            <category>leaderboard</category>
+            <category>query-plan</category>
+        </item>
         <item>
             <title><![CDATA[SQLite in Practice (3): Save Your Workers]]></title>
             <link>https://docsaid.org/en/blog/sqlite-lease-heartbeat-recovery</link>
@@ -2394,258 +2856,6 @@ Based on your past knowledge and understanding of the world, what would each of 
             <category>Python</category>
             <category>Pydantic</category>
             <category>Data Validation</category>
-        </item>
-        <item>
-            <title><![CDATA[I, an AI Engineer, Actually Built a Backend System?]]></title>
-            <link>https://docsaid.org/en/blog/builds-dashboard-system</link>
-            <guid>https://docsaid.org/en/blog/builds-dashboard-system</guid>
-            <pubDate>Sun, 16 Mar 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[A sharing of the experience building a backend system from scratch.]]></description>
-            <content:encoded><![CDATA[<p>Good afternoon, or good evening.</p>
-<p>I've been a bit slack on updating articles lately, so I want to apologize to everyone.</p>
-<p>Because I’ve been busy doing something unrelated to my main work: I’ve been working on both the frontend and backend.</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="are-you-just-bored">Are You Just Bored?<a href="https://docsaid.org/en/blog/builds-dashboard-system#are-you-just-bored" class="hash-link" aria-label="Direct link to Are You Just Bored?" title="Direct link to Are You Just Bored?" translate="no">​</a></h2>
-<p>Well, yes.</p>
-<hr>
-<p>Recently, I had a long holiday, and finally had time to deal with some unresolved issues:</p>
-<ul>
-<li class=""><strong>This website doesn’t have a backend!</strong></li>
-</ul>
-<p>You might know a bit about it, but this website is built on the Docusaurus framework, which is a static site. When I first set up this website, my idea was just to occasionally write some blogs and share paper notes; there wasn’t any special planning or grand goal behind it.</p>
-<p>The pros and cons of static vs. dynamic websites are probably not new to you. I even tried using WordPress to set up a site, but after a short while, I was greeted by someone asking for money, which was really frustrating:</p>
-<blockquote>
-<p><strong>Building a site myself already brings minimal returns, so why do some people always target my wallet?</strong></p>
-</blockquote>
-<p>I ended up using WordPress for a while but eventually gave it up.</p>
-<p>It wasn’t just because of expensive paid services, but because its code was hard to customize... okay, I admit it: I just can’t write PHP.</p>
-<p>In contrast, I prefer the frontend-backend separation architecture, which is much more comfortable.</p>
-<p>You know what happened after that—I chose Docusaurus and stuck with it. After all that, I ended up back with a static site architecture.</p>
-<p>＊</p>
-<p>As the content of the website accumulated, I started receiving emails from readers, mostly asking about model usage: such as how to configure environments, install dependencies, or even how to resolve strange errors that appeared during execution.</p>
-<p>These were easy to handle; I just told them to ask ChatGPT, and that was it. (<del>Too casual, huh?</del>)</p>
-<p>Not casual at all! With the power of AI tools these days, most problems can be resolved directly by asking, saving a lot of time compared to emailing back and forth.</p>
-<p>Of course, there are still problems AI can't solve, like when readers asked if they could directly call my backend API!</p>
-<p>Hey! At first glance, it sounds like a simple request, but when you try to implement it, the issues pile up. Let’s talk about it in a moment.</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-first-version-of-the-backend">The First Version of the Backend<a href="https://docsaid.org/en/blog/builds-dashboard-system#the-first-version-of-the-backend" class="hash-link" aria-label="Direct link to The First Version of the Backend" title="Direct link to The First Version of the Backend" translate="no">​</a></h2>
-<p>Let’s rewind a bit.</p>
-<p>After working on a few models, I wanted to make them available for everyone to try. It's like building a sandcastle by the sea and eagerly waiting for a big wave to test how sturdy your wall is. Even if the wave washes it away, at least you tried.</p>
-<p>It’s the same with models. I don’t think any engineer would build a model and then hide it away... what would be the point of that?</p>
-<p>So, I made a few model demos myself and built the first generation of the backend: that’s right! The "Playground" section in the navigation bar of this site. If you haven’t tried it yet, feel free to explore.</p>
-<p>You might ask, why would you need a backend just for a demo?</p>
-<p>That’s a fair point. Generally, there are two solutions if you want to use a model on a website:</p>
-<ol>
-<li class="">
-<p><strong>Load the model directly in the browser and run inference in the browser.</strong></p>
-<p>I rejected this solution immediately.</p>
-<p>Running models in the browser is technically possible but very cumbersome. At the very least, it needs to support three or more browsers, each with different configuration environments. This reminded me of the frontend colleagues who struggled with WebAssembly. If they knew I was considering this, they would definitely stop me.</p>
-</li>
-<li class="">
-<p><strong>Provide a backend service to return inference results.</strong></p>
-<p>This is the solution I chose.</p>
-<p>The frontend simply handles data input and output, leaving all the troublesome work to the backend. But that means I have to build a backend system to provide the necessary services.</p>
-</li>
-</ol>
-<hr>
-<p>Since I was already using Docusaurus for the frontend, I had to adopt a frontend-backend separation architecture.</p>
-<p>Before starting the coding, I drew a diagram. This is what the architecture should look like:</p>
-<!-- -->
-<p>Apart from the architecture diagram, I also created lots of specifications and system operation processes, as well as detailed input and output designs. But it’s too tedious to include everything here, so I’ll just share the architecture diagram.</p>
-<p>Once the specifications were ready, I started working based on the diagram, and that’s how the backend logic for the current "Playground" on the site was built.</p>
-<p>At this point, although it seems relatively simple, let’s talk about the technologies I chose:</p>
-<ol>
-<li class="">
-<p><strong>Nginx</strong></p>
-<p>Another common choice here is Apache, which was once the king of web servers, with rich features, many modules, and a large community. But Apache’s configuration can be complex, and it’s not as good at handling high-concurrency connections as Nginx.</p>
-<p>Honestly, I don’t think Apache is bad, but I prefer Nginx’s clean and intuitive configuration style. Whether it’s for static resource proxying, reverse proxying, or load balancing, Nginx’s setup is easier to understand. But of course, this is subjective—some people may not like this style.</p>
-<p>Ultimately, Nginx was designed to handle a large number of concurrent connections, and its stability and performance have been tested over time. It seems like a solid choice.</p>
-<hr>
-</li>
-<li class="">
-<p><strong>FastAPI</strong></p>
-<p>The backend frameworks I hear most about are C# and NodeJS, but unfortunately, I’m not familiar with them.</p>
-<p>As an AI engineer, I’m most comfortable in the Python environment. If I suddenly switched to learning NodeJS or other backend frameworks, I’d incur a lot of additional learning costs, which could delay development for several months.</p>
-<p>So, I chose FastAPI.</p>
-<p>FastAPI natively supports asynchronous operations, making it perfect for backend model inference, where requests need to be processed efficiently even if they are time-consuming. Plus, it has Pydantic built-in for validation and can automatically generate API documentation and testing interfaces, which greatly reduces the pain of developing and maintaining the API.</p>
-<p>More importantly, FastAPI’s design is clean and easy to understand. It’s not as bulky and complex as Django, nor as free-form as Flask, which could lead to architectural chaos. The development experience is just right.</p>
-<hr>
-</li>
-<li class="">
-<p><strong>PostgreSQL</strong></p>
-<p>When it comes to databases, I’m actually more familiar with MySQL.</p>
-<p>MySQL has a great reputation in the developer community and is the go-to choice for many beginners. But since Oracle acquired MySQL, its open-source license has gradually become more commercial, which raises some concerns about the ecosystem’s uncertainty.</p>
-<p>In contrast, PostgreSQL has maintained a stable and steadily growing presence in the open-source community. In addition to continuous community support, PostgreSQL also supports powerful advanced features, such as native JSON data types and GIS for geographical information processing, making it more useful in complex data scenarios.</p>
-<p>Furthermore, PostgreSQL integrates smoothly with FastAPI and various ORM tools (like SQLAlchemy), making for a pleasant user experience. It also handles high-concurrency and high-load requests very well, so if traffic increases or backend requirements get more complex in the future, I won’t have to worry about the database becoming a bottleneck.</p>
-<hr>
-</li>
-</ol>
-<p>I’ve mentioned a lot, but this might not necessarily be the best combination—it’s just enough to handle the current needs.</p>
-<p>For this simple architecture, it works well enough.</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="second-generation-backend">Second Generation Backend<a href="https://docsaid.org/en/blog/builds-dashboard-system#second-generation-backend" class="hash-link" aria-label="Direct link to Second Generation Backend" title="Direct link to Second Generation Backend" translate="no">​</a></h2>
-<p>Returning to the issue mentioned at the beginning, a reader emailed me asking if they could directly call my backend API via code, instead of interacting through the web interface. This is an interesting request, indicating that the user may want a more automated and efficient way to interact with the system.</p>
-<p>So, what issues arise when we open the API directly for users to call?</p>
-<ol>
-<li class="">
-<p><strong>It Could Overload the Traffic</strong></p>
-<p>When an API is exposed externally, users can send high-frequency requests via code, which could lead to a sudden surge in server traffic and potentially exceed its load capacity.</p>
-<p>For example, some users may fail to set appropriate request frequencies, causing the API to receive a large number of requests in a short period of time, which can affect other users’ ability to access the system normally. Or someone might use a crawler or malicious script to test the API, occupying the server’s bandwidth and computational resources, which could affect service stability.</p>
-<hr>
-</li>
-<li class="">
-<p><strong>Security Risks</strong></p>
-<p>Once the API is open, if there is no strict authentication and access control, anyone could obtain data they shouldn't have access to or even execute dangerous operations. If the API lacks proper authentication mechanisms (such as OAuth or JWT), malicious individuals might simulate legitimate users through simple requests, leading to potential security risks.</p>
-<hr>
-</li>
-</ol>
-<p>There are many other extended problems that could be discussed in detail, but I’ll skip over those for now.</p>
-<p>In conclusion, I can’t open the API directly, because both I and my server could face significant risks.</p>
-<p>So, to meet the demand for open APIs, I had to build a complete user authentication and API authorization system myself.</p>
-<p>Alright, here we go again: engineers aren’t afraid of being inexperienced, they’re just afraid of not taking action. Time to write some code!</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="user-login-system">User Login System<a href="https://docsaid.org/en/blog/builds-dashboard-system#user-login-system" class="hash-link" aria-label="Direct link to User Login System" title="Direct link to User Login System" translate="no">​</a></h3>
-<p>A complete user system includes features like user registration, login, permission management, and email verification.</p>
-<p>In addition to FastAPI and the PostgreSQL database that I was already using, I also integrated Redis for session caching and token management. To enhance the user experience, I designed email verification and password recovery features, using SMTP services to send verification emails.</p>
-<p>Now, I can create a new architecture diagram for this part—let me sketch it out simply:</p>
-<!-- -->
-<p>This user system needs to include a user database, password encryption, registration email verification, forgotten password reset processes, and other details. I haven’t considered integrating third-party login services yet, such as logging in via Google or Facebook accounts. If I were to add third-party login verification, that would involve a lot more work, which I’ll leave for my future self.</p>
-<p>Speaking of registration email verification, this turned out to be more troublesome than expected.</p>
-<p>I first applied for Amazon SES, but after waiting for a day, they rejected me, saying I looked suspicious. (What?)</p>
-<div align="center"><figure style="width:60%"><p><img decoding="async" loading="lazy" alt="amazon" src="https://docsaid.org/en/assets/images/img1-17d661c856bca0be72bad9dcd0ad15de.jpg" width="2291" height="1617" class="img_ev3q"></p></figure></div>
-<p>Since that didn’t work, I thought maybe I could set up my own mail server.</p>
-<p>After a day of setup and troubleshooting, I finally got it working!</p>
-<p>But then, the emails I sent were still rejected by Gmail because they also thought I looked suspicious. (😭 😭 😭)</p>
-<p>In the end, after some twists and turns, I found another provider who helped me get it sorted out, but I’ll spare you the details.</p>
-<p>After more than a week of work, I finally completed the specifications I set out to do. Although the result is just a simple page, I still wrote over a thousand lines of code. It feels like a very low-effort payoff.</p>
-<p>By the time I reached this point in the coding process, I finally understood why frontend and backend developers often don’t see eye to eye and end up arguing and shifting blame all the time. I can only say that setting clear specifications is really important—though it was just me doing everything, without clear specifications, I’d still end up in a messy situation.</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="api-token-issuance-system">API Token Issuance System<a href="https://docsaid.org/en/blog/builds-dashboard-system#api-token-issuance-system" class="hash-link" aria-label="Direct link to API Token Issuance System" title="Direct link to API Token Issuance System" translate="no">​</a></h3>
-<p>After finishing the user system, I finally got around to implementing the API Token functionality.</p>
-<p>The most common token format these days is JWT (JSON Web Token), and one of its key features is that JWT is self-contained. As long as we verify that the token is valid, we can know the user's identity and permissions, reducing the need for frequent database queries and improving performance. JWT can store information like the user ID, permissions, and expiration date, thus avoiding additional API queries.</p>
-<p>So I decided to use JWT directly. Users verify their identity through login, after which the system generates a JWT and stores it in Redis. When the user sends an API request, the JWT is sent to the backend as a Bearer Token for authentication. Once the token is verified successfully, the user can proceed to access the backend model inference services.</p>
-<p>The architecture for applying for a token is quite simple, and here’s the diagram for it:</p>
-<!-- -->
-<p>Once the user receives the token, they can use this token to call the API. For this part, Redis is used to limit traffic and calculate the number of calls. The overall calling process is as follows:</p>
-<!-- -->
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="api-token-management-mechanism">API Token Management Mechanism<a href="https://docsaid.org/en/blog/builds-dashboard-system#api-token-management-mechanism" class="hash-link" aria-label="Direct link to API Token Management Mechanism" title="Direct link to API Token Management Mechanism" translate="no">​</a></h3>
-<p>After designing the Token, I didn’t implement a renewal mechanism. Instead, I allowed users to set the token's expiration time and provided manual revocation and deletion mechanisms to ensure flexibility and security in API access permissions.</p>
-<p>When users request a token, they can specify its expiration time (e.g., 1 hour, 1 day, 7 days, or even 1 year). Once the token expires, the system will automatically invalidate it, and users will need to request a new token.</p>
-<p>This design allows developers to choose an appropriate token validity period based on their needs, avoiding frequent reauthorization.</p>
-<p>Users can revoke or delete their tokens at any time. If a token is compromised or is no longer needed, it can be deleted immediately, rendering it inactive.</p>
-<p>Token status is stored in Redis. When a user manually revokes a token, the system will immediately mark it as invalid, and subsequent API requests will be rejected. This avoids unnecessary long-term authorization risks and ensures control over the system.</p>
-<p>Here is the architecture diagram for this process:</p>
-<!-- -->
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p><strong>Why Not Use a Renewal Mechanism?</strong></p><ul>
-<li class="">Allowing users to set expiration times increases API flexibility, avoiding the system from overly interfering with user token management.</li>
-<li class="">Without a renewal mechanism, we can ensure that the token remains valid within the set period, preventing the additional verification burden caused by frequent renewals.</li>
-<li class="">Manual token revocation ensures that if a token is compromised or no longer needed, it can be invalidated immediately, enhancing security.</li>
-</ul><p>This design provides a simple yet controlled token management approach, ideal for users who need long-term access but still want to maintain security.</p></div></div>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="api-rate-limiting">API Rate Limiting<a href="https://docsaid.org/en/blog/builds-dashboard-system#api-rate-limiting" class="hash-link" aria-label="Direct link to API Rate Limiting" title="Direct link to API Rate Limiting" translate="no">​</a></h3>
-<p>With tokens in place, the next challenge is: "How to prevent malicious users from abusing the API?"</p>
-<p>Since the API could involve a large number of inference requests (e.g., AI model inference, batch queries), if not limited, it could easily be attacked or affect regular users' experience. Therefore, I introduced a "Rate Limiting" mechanism, which uses Redis to track the number of requests and temporarily blocks requests when the limit is reached within a short time.</p>
-<p>Here’s the architecture diagram for this process:</p>
-<!-- -->
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="technology-stack-summary">Technology Stack Summary<a href="https://docsaid.org/en/blog/builds-dashboard-system#technology-stack-summary" class="hash-link" aria-label="Direct link to Technology Stack Summary" title="Direct link to Technology Stack Summary" translate="no">​</a></h2>
-<p>After upgrading the backend of this website, the overall technology stack is now updated as follows:</p>
-<ul>
-<li class=""><strong>Frontend Framework</strong>: React (Docusaurus)</li>
-<li class=""><strong>Backend Framework</strong>: FastAPI (Python)</li>
-<li class=""><strong>Database</strong>: PostgreSQL</li>
-<li class=""><strong>Cache Service</strong>: Redis</li>
-<li class=""><strong>Reverse Proxy and Load Balancer</strong>: Nginx</li>
-</ul>
-<p>Apart from the newly added Redis, most of the technologies above were already present in the first-generation backend. It’s just that, at the time, there wasn’t a dedicated frontend page to clearly present this related information. With this upgrade, I’ve added a frontend backend page where users can interact with it and access more services and features.</p>
-<p>For me, Python with FastAPI is an everyday essential tool. While this technology stack isn’t necessarily groundbreaking, it has significantly increased development efficiency and the smoothness of usage. As for deployment, I’m still using Docker Compose combined with Nginx and hosting it on my own machine. While I would have liked to move it to the cloud, the cost is too high (low-cost options have poor performance), so I have to make do with what I have.</p>
-<p>In summary, the system is now running smoothly. I’ll continue observing and improving it as I go.</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="final-thoughts">Final Thoughts<a href="https://docsaid.org/en/blog/builds-dashboard-system#final-thoughts" class="hash-link" aria-label="Direct link to Final Thoughts" title="Direct link to Final Thoughts" translate="no">​</a></h2>
-<p>When reading papers, I often find the logic abstract, but after reading several times, I can usually reproduce it successfully (ignoring issues with insufficient computing power).</p>
-<p>Frontend documentation seems straightforward, but every step when implementing it can hide traps—it’s incredibly tricky. (<del>Just admit it, you’re not familiar with it!</del>) In the past, late-night debugging often involved dealing with issues like “Loss not converging” or “GPU memory insufficient,” which are daily struggles for an AI engineer. Now, I’m facing frequent React errors, form button malfunctions, and backend API mismatches—such tedious problems.</p>
-<p>Moreover, all of this was done with ChatGPT available for instant help. If this were before ChatGPT’s release, I’m not so sure if I would have been able to make this backend system work.</p>
-<p>If I have time in the future, I will add more features. If you have any suggestions or feedback on this system, feel free to share them with me in the comment section.</p>
-<p>If you encounter any bugs or issues while using it, please contact me privately via email to protect the system’s security. I would really appreciate it. If you can provide detailed error messages or screenshots, it would help me quickly locate and fix the issue.</p>
-<p>I hope you enjoy using this system!</p><section class="ctaSection_iCjC"><div class="
-        simpleCta_ji_Y
-        simple-cta__coffee_YwC8
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ Fuel my writing with a coffee</h3><p class="simple-cta__subtitle_ol86">Your support keeps my AI &amp; full-stack guides coming.</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/en/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/en/img/icons/all_in.svg" alt="AI / Full-Stack / Custom — All In icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">All-in</span><h4 class="card__title_SQBY">AI / Full-Stack / Custom — All In</h4><p class="card__concept_Ak8F">From idea to launch—efficient systems that are future-ready.</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">All-In Bundle</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">Consulting + Dev + Deploy</li><li class="card__bulletItem_wCRd">Maintenance &amp; upgrades</li></ul></div></div></div></div><div class="
-        simpleCta_ji_Y
-        simple-cta__outro_AXbn
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 Ready for your next project?</h3><p class="simple-cta__subtitle_ol86">Need a tech partner or custom solution? Let's connect.</p></div></section><div style="margin-top:3rem"> </div>]]></content:encoded>
-            <category>React</category>
-            <category>FastAPI</category>
-            <category>User Authentication</category>
-        </item>
-        <item>
-            <title><![CDATA[Setting Up Amazon SES DNS on Namecheap]]></title>
-            <link>https://docsaid.org/en/blog/amazon-ses-setting-dns-on-namecheap</link>
-            <guid>https://docsaid.org/en/blog/amazon-ses-setting-dns-on-namecheap</guid>
-            <pubDate>Wed, 05 Mar 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Documenting the process of configuring Amazon SES DNS settings.]]></description>
-            <content:encoded><![CDATA[<p>We attempted to enable Amazon SES, and during the verification process, Amazon required us to set up DNS records.</p>
-<p>It took us quite some time to find the correct configuration (<del>about half an hour</del>).</p>
-<p>Here, we document the process for future reference.</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="amazon-ses-setup">Amazon SES Setup<a href="https://docsaid.org/en/blog/amazon-ses-setting-dns-on-namecheap#amazon-ses-setup" class="hash-link" aria-label="Direct link to Amazon SES Setup" title="Direct link to Amazon SES Setup" translate="no">​</a></h2>
-<p>There are already comprehensive tutorials available on setting up Amazon SES. Please refer to this guide:</p>
-<ul>
-<li class=""><a href="https://www.quantsnote.com/amazon-ses-how-to-apply/" target="_blank" rel="noopener noreferrer" class=""><strong>Amazon SES Email Service: The Most Complete Application Guide for 2024</strong></a></li>
-</ul>
-<p>We followed the steps smoothly until we reached the <strong>"Verify a Sending Domain"</strong> stage—then we got stuck.</p>
-<p>Since our domain was purchased from Namecheap, we needed to configure DNS records there.</p>
-<p>So, how should we set it up?</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="dns-records">DNS Records<a href="https://docsaid.org/en/blog/amazon-ses-setting-dns-on-namecheap#dns-records" class="hash-link" aria-label="Direct link to DNS Records" title="Direct link to DNS Records" translate="no">​</a></h2>
-<p>In the Amazon SES <strong>"Verify a Sending Domain"</strong> card, click <strong>"Get DNS Records"</strong>, and a pop-up window will appear containing a detailed list of DNS records, which looks something like this:</p>
-<p><img decoding="async" loading="lazy" alt="Amazon SES DNS Records" src="https://docsaid.org/en/assets/images/img1-ca3991c5ffc59073150b27f2850f86f2.jpg" width="6150" height="3226" class="img_ev3q"></p>
-<p>Using our domain as an example, <code>docsaid.org</code> in the image represents the domain we are verifying.</p>
-<p>Once we obtain these DNS records, we can proceed with the setup in Namecheap.</p>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>The original values in each field have been slightly modified to protect our website security.</p></div></div>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="dkim-records">DKIM Records<a href="https://docsaid.org/en/blog/amazon-ses-setting-dns-on-namecheap#dkim-records" class="hash-link" aria-label="Direct link to DKIM Records" title="Direct link to DKIM Records" translate="no">​</a></h2>
-<p>Go to the Namecheap website, log in, and navigate to <strong>"Domain List"</strong>. Locate the domain you need to configure and click <strong>"Manage"</strong>.</p>
-<p>In the domain management page, find <strong>"Advanced DNS"</strong> and enter the section.</p>
-<p><img decoding="async" loading="lazy" alt="Setting DKIM Records" src="https://docsaid.org/en/assets/images/img2-560f5004a8bd2c4b43ee07d6e4537add.jpg" width="6595" height="5701" class="img_ev3q"></p>
-<p>As shown in the image, there is an <strong>"Add New Record"</strong> button. Click it and select <strong>"CNAME Record"</strong>.</p>
-<p>Now, enter the DKIM records obtained earlier. Pay attention to the following details:</p>
-<ol>
-<li class="">The <strong>DKIM name</strong> should be entered in the <code>Host</code> field. Only enter the part before the domain name; do not include the domain itself.</li>
-<li class="">The <strong>value</strong> should be entered in the <code>Value</code> field—simply copy and paste it.</li>
-</ol>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="mail-from-records">MAIL FROM Records<a href="https://docsaid.org/en/blog/amazon-ses-setting-dns-on-namecheap#mail-from-records" class="hash-link" aria-label="Direct link to MAIL FROM Records" title="Direct link to MAIL FROM Records" translate="no">​</a></h2>
-<p>This part took us the longest time because only the MX record needs to be added—the other one can be ignored.</p>
-<p><img decoding="async" loading="lazy" alt="Setting MAIL FROM Records" src="https://docsaid.org/en/assets/images/img3-c1e3964deb60ba184f785e61f62f3cee.jpg" width="6572" height="3762" class="img_ev3q"></p>
-<p>In the <strong>"Advanced DNS"</strong> section of Namecheap, locate <strong>"MAIL SETTINGS"</strong>. In the dropdown menu, select <strong>"Custom MX"</strong>.</p>
-<p>Then, enter the MX record provided by Amazon SES, keeping in mind the following:</p>
-<ol>
-<li class="">Depending on the subdomain you configured in Amazon SES, enter the corresponding MX record in the <code>Host</code> field. In our example, we used <code>mail</code>, but if you chose a different subdomain, enter the corresponding value.</li>
-<li class="">Enter the <strong>value</strong> in the <code>Value</code> field. There are two parts:<!-- -->
-<ul>
-<li class="">Enter <code>10</code> in the <strong>"Priority"</strong> field.</li>
-<li class="">Enter the remaining part of the value in the <strong>"Value"</strong> field.</li>
-</ul>
-</li>
-</ol>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Namecheap's Mail Settings allow only one of the following options:</p><ul>
-<li class="">If <strong>"Email Forwarding"</strong> is enabled, Namecheap locks the MX records, restricting them to its own forwarding servers.</li>
-<li class="">If <strong>"Custom MX"</strong> is enabled, you can manually configure the MX records provided by Amazon SES, allowing it to handle bounced emails.</li>
-</ul></div></div>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="dmarc-records">DMARC Records<a href="https://docsaid.org/en/blog/amazon-ses-setting-dns-on-namecheap#dmarc-records" class="hash-link" aria-label="Direct link to DMARC Records" title="Direct link to DMARC Records" translate="no">​</a></h2>
-<p>This is the easiest part to configure. In Namecheap's <strong>"Advanced DNS"</strong> section, click <strong>"Add New Record"</strong> and select <strong>"TXT Record"</strong>.</p>
-<p>Enter the DMARC record provided by Amazon SES. The only thing to keep in mind is <strong>not to include quotation marks (<code>"</code>)</strong> in the value.</p>
-<p><img decoding="async" loading="lazy" alt="Setting DMARC Records" src="https://docsaid.org/en/assets/images/img4-8de32e2d990112435f043a009f901759.jpg" width="6595" height="5619" class="img_ev3q"></p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="summary">Summary<a href="https://docsaid.org/en/blog/amazon-ses-setting-dns-on-namecheap#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary" translate="no">​</a></h2>
-<p>At this point, we have completed the Amazon SES DNS setup on Namecheap.</p>
-<p>After completing the setup, wait for about <strong>30 minutes</strong>. Amazon SES will automatically verify your DNS records. If everything is set up correctly, you will receive an email notification from Amazon SES confirming a successful verification.</p>
-<p>Good luck!</p><section class="ctaSection_iCjC"><div class="
-        simpleCta_ji_Y
-        simple-cta__coffee_YwC8
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">☕ Fuel my writing with a coffee</h3><p class="simple-cta__subtitle_ol86">Your support keeps my AI &amp; full-stack guides coming.</p><div class="simple-cta__buttonWrapper_jk1Y"><img src="https://docsaid.org/en/img/bmc-logo.svg" alt="cta-button" class="simple-cta__buttonImg_Q9VV"></div></div><div class="ant-row ant-row-stretch cardsSection_wRaP css-mc1tut" style="margin-left:-8px;margin-right:-8px;row-gap:16px"><div style="padding-left:8px;padding-right:8px;display:flex" class="ant-col ant-col-xs-24 css-mc1tut"><div class="ant-card ant-card-bordered card_gKx9 fadeInUp_n33J hoverTransform_Mozy css-mc1tut" style="flex:1;display:flex;flex-direction:column"><div class="ant-card-body"><div style="text-align:center;margin-top:1rem"><img src="https://docsaid.org/en/img/icons/all_in.svg" alt="AI / Full-Stack / Custom — All In icon" style="width:48px;height:48px"></div><span class="ant-tag ant-tag-orange card__tag_PLj3 css-mc1tut">All-in</span><h4 class="card__title_SQBY">AI / Full-Stack / Custom — All In</h4><p class="card__concept_Ak8F">From idea to launch—efficient systems that are future-ready.</p><div class="card__bulletHeader_b6cf"><h5 class="card__bulletTitle_R_wg">All-In Bundle</h5></div><ul class="card__bulletList_SrNN"><li class="card__bulletItem_wCRd">Consulting + Dev + Deploy</li><li class="card__bulletItem_wCRd">Maintenance &amp; upgrades</li></ul></div></div></div></div><div class="
-        simpleCta_ji_Y
-        simple-cta__outro_AXbn
-        fadeInUp_n33J
-        hoverTransform_Mozy
-      " style="cursor:pointer"><h3 class="simple-cta__title_i7hn">🚀 Ready for your next project?</h3><p class="simple-cta__subtitle_ol86">Need a tech partner or custom solution? Let's connect.</p></div></section><div style="margin-top:3rem"> </div>]]></content:encoded>
-            <category>Amazon SES</category>
-            <category>Namecheap</category>
-            <category>DNS</category>
         </item>
     </channel>
 </rss>
