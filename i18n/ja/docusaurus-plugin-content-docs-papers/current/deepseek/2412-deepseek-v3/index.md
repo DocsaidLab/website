@@ -69,7 +69,7 @@ $$
 g'_{i,t} =
 \begin{cases}
 s_{i,t}, & s_{i,t} + b_i \in \text{Topk}(\{ s_{j,t} + b_j \,|\, 1 \le j \le N_r \}, K_r), \\
-0, & \text{それ以外}。
+0, & \text{それ以外。}
 \end{cases}
 $$
 
