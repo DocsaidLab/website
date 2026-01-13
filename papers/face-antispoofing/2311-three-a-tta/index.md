@@ -141,7 +141,7 @@ $$
 \end{cases}
 $$
 
-其中，$\alpha = 0.8,;\beta = 0.2，m_{\text{sim}} = \text{sim}(\mathbf{f}, \mathbf{A}_l) - \text{sim}(\mathbf{f}, \mathbf{A}_s)$
+其中，$\alpha = 0.8,\; \beta = 0.2,\; m_{\text{sim}} = \text{sim}(\mathbf{f}, \mathbf{A}_l) - \text{sim}(\mathbf{f}, \mathbf{A}_s)$
 
 若 $\gamma=1$，則將此特徵寫入 $MB$（以 FIFO 更新）。
 

@@ -29,18 +29,18 @@ description: 記錄組裝電腦的過程。
 
 | 品名       | 品項                                                                        | 數量 | 總價 (NTD) |
 | ---------- | --------------------------------------------------------------------------- | ---- | ---------- |
-| CPU        | Intel i9-13900K 【24 核/32 緒】3.0GHz-5.8GHz 36MB LGA1700 125W              | 1    | $ 19,500   |
-| 主機板     | 技嘉 Z790 AORUS ELITE (ATX/Realtek 2.5Gb) 16+1+2 相電源                     | 1    | $ 7,990    |
-| 顯示卡     | 技嘉 RTX 4090 AERO OC 24G 白色風之力 散熱 金屬背板                          | 1    | $ 60,990   |
-| 記憶體     | 金士頓 64 GB (雙通道 32GBx2) DDR5 6000 CL36 FURY Beast 白色                 | 2    | $ 12,258   |
-| 硬碟       | 美光 Crucial P5 Plus 2TB (Gen4 M.2 PCIe 4.0) NVMe SSD (讀 6600M / 寫 5500M) | 2    | $ 7,800    |
-| 水冷系統   | NZXT Kraken 360 RGB 白色                                                    | 1    | $ 7,990    |
-| 機殼       | 華碩 TUF Gaming GT502 白色 ATX                                              | 1    | $ 5,490    |
+| CPU        | Intel i9-13900K 【24 核/32 緒】3.0GHz-5.8GHz 36MB LGA1700 125W              | 1    | \$ 19,500   |
+| 主機板     | 技嘉 Z790 AORUS ELITE (ATX/Realtek 2.5Gb) 16+1+2 相電源                     | 1    | \$ 7,990    |
+| 顯示卡     | 技嘉 RTX 4090 AERO OC 24G 白色風之力 散熱 金屬背板                          | 1    | \$ 60,990   |
+| 記憶體     | 金士頓 64 GB (雙通道 32GBx2) DDR5 6000 CL36 FURY Beast 白色                 | 2    | \$ 12,258   |
+| 硬碟       | 美光 Crucial P5 Plus 2TB (Gen4 M.2 PCIe 4.0) NVMe SSD (讀 6600M / 寫 5500M) | 2    | \$ 7,800    |
+| 水冷系統   | NZXT Kraken 360 RGB 白色                                                    | 1    | \$ 7,990    |
+| 機殼       | 華碩 TUF Gaming GT502 白色 ATX                                              | 1    | \$ 5,490    |
 | 機殼風扇   | 華碩 TUF Gaming TF120 ARGB 白色 三風扇組 (機殼贈品)                         | 1    | -          |
-| 機殼風扇   | 華碩 TUF Gaming TF120 ARGB 白色 三風扇組 (加購)                             | 1    | $ 1,690    |
-| 機殼風扇   | 華碩 TUF Gaming TF120 ARGB 白色 單風扇 (加購)                               | 4    | $ 2,196    |
-| 電源供應器 | 全漢 HYDRO PTM PRO 1200W ATX3.0 白金 全模                                   | 1    | $ 5,790    |
-| 連接線     | 銀欣 1 分 4 A.RGB 連接線（SST-CPL03）                                       | 2    | $ 250      |
+| 機殼風扇   | 華碩 TUF Gaming TF120 ARGB 白色 三風扇組 (加購)                             | 1    | \$ 1,690    |
+| 機殼風扇   | 華碩 TUF Gaming TF120 ARGB 白色 單風扇 (加購)                               | 4    | \$ 2,196    |
+| 電源供應器 | 全漢 HYDRO PTM PRO 1200W ATX3.0 白金 全模                                   | 1    | \$ 5,790    |
+| 連接線     | 銀欣 1 分 4 A.RGB 連接線（SST-CPL03）                                       | 2    | \$ 250      |
 
 - **總價（含稅）**：新台幣 131,944 元，折合美金約 4,100 元
 - **日期**：2023 年 9 月
@@ -72,7 +72,7 @@ description: 記錄組裝電腦的過程。
 詳細參數：
 
 - 品項：GIGABYTE RTX 4090 AERO OC 24G 白色風之力 散熱 金屬背板
-- 價格：原價屋 $ 60,900 NTD
+- 價格：原價屋 \$ 60,900 NTD
 - 長度：34.2 cm
 
   ![gigabyte](./img/img2.jpg)
@@ -137,7 +137,7 @@ LGA 1700，是英特爾用於 2021 年推出 Alder Lake 微架構（第 12 代 I
 詳細參數：
 
 - 品項：GIGABYTE Z790 AORUS ELITE (ATX/Realtek 2.5Gb) 16+1+2 相電源
-- 價格：原價屋 $ 7,990 NTD
+- 價格：原價屋 \$ 7,990 NTD
 
   ![gigabyte](./img/img3.jpg)
 
@@ -150,7 +150,7 @@ LGA 1700，是英特爾用於 2021 年推出 Alder Lake 微架構（第 12 代 I
 詳細參數：
 
 - 品項：Intel i9-13900K 【24 核/32 緒】3.0GHz-5.8GHz 36MB 1700 腳位 125W
-- 價格：原價屋 $ 19,500 NTD
+- 價格：原價屋 \$ 19,500 NTD
 
 :::tip
 我運行的是 Ubuntu 系統，在後續使用中確實有當機的問題。
@@ -167,7 +167,7 @@ LGA 1700，是英特爾用於 2021 年推出 Alder Lake 微架構（第 12 代 I
 詳細參數：
 
 - 品項：金士頓 64 GB (雙通道 32GBx2) DDR5 6000 CL36 FURY Beast 白色
-- 價格：原價屋 $ 6,129 NTD / 1 組
+- 價格：原價屋 \$ 6,129 NTD / 1 組
 - 數量：2 組
 
   ![kingston](./img/img4.jpg)
@@ -199,7 +199,7 @@ LGA 1700，是英特爾用於 2021 年推出 Alder Lake 微架構（第 12 代 I
 詳細參數：
 
 - 品項：美光 Crucial P5 Plus 2TB PCIe 4.0 NVMe SSD (讀 6600M / 寫 5500M) TLC
-- 價格：原價屋 $ 3,900 NTD / 1 顆
+- 價格：原價屋 \$ 3,900 NTD / 1 顆
 - 數量：2 顆
 
   ![micron](./img/img5.jpg)
@@ -213,7 +213,7 @@ LGA 1700，是英特爾用於 2021 年推出 Alder Lake 微架構（第 12 代 I
 詳細參數：
 
 - 品項：NZXT Kraken 360 RGB 白色
-- 價格：原價屋 $ 7,990 NTD
+- 價格：原價屋 \$ 7,990 NTD
 - 厚度：5.6 cm
 
   ![nzxt](./img/img6.jpg)
@@ -235,9 +235,9 @@ LGA 1700，是英特爾用於 2021 年推出 Alder Lake 微架構（第 12 代 I
   - TUF Gaming TF120 ARGB 白 單風扇 (加購) x4
 - 價格：
 
-  - 機殼加贈品，原價屋 $ 5,490 NTD
-  - 三風扇組加購，原價屋 $ 1,690 NTD / 1 組
-  - 單風扇加購，原價屋 $ 549 NTD / 1 組
+  - 機殼加贈品，原價屋 \$ 5,490 NTD
+  - 三風扇組加購，原價屋 \$ 1,690 NTD / 1 組
+  - 單風扇加購，原價屋 \$ 549 NTD / 1 組
 
     ![asus case](./img/img7.jpg)
 
@@ -250,7 +250,7 @@ LGA 1700，是英特爾用於 2021 年推出 Alder Lake 微架構（第 12 代 I
 詳細參數：
 
 - 品項：全漢 HYDRO PTM PRO 1200W ATX3.0 白金 全模
-- 價格：原價屋 $ 5,790 NTD
+- 價格：原價屋 \$ 5,790 NTD
 
   ![fsp](./img/img8.jpg)
 

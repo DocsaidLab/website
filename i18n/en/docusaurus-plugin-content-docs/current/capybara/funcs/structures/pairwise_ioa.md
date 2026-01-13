@@ -26,7 +26,7 @@ sidebar_position: 8
 - **Exceptions**
 
   - **TypeError**: `boxes1` or `boxes2` is not `Boxes`.
-  - **ValueError**: Empty boxes exist (width/height <= 0).
+  - **ValueError**: Empty boxes exist (width/height `<= 0`).
 
 - **Example**
 

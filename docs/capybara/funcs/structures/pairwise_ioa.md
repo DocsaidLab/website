@@ -26,7 +26,7 @@ sidebar_position: 8
 - **例外**
 
   - **TypeError**：`boxes1` 或 `boxes2` 不是 `Boxes`。
-  - **ValueError**：存在空框（寬或高 <= 0）時。
+  - **ValueError**：存在空框（寬或高 `<= 0`）時。
 
 - **範例**
 
