@@ -1,6 +1,6 @@
 # EnumCheckMixin
 
-> [EnumCheckMixin](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/mixins.py#L57)
+> [EnumCheckMixin](https://github.com/DocsaidLab/Capybara/blob/main/capybara/mixins.py)
 
 - **說明**：提供 Enum 物件 `obj_to_enum` 方法，可以用來承接不同型態的列舉查詢。
 

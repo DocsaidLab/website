@@ -1,6 +1,6 @@
 # centercrop
 
-> [centercrop(img: np.ndarray) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L374)
+> [centercrop(img: np.ndarray) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **Description**: Performs a center crop on the input image.
 
@@ -15,13 +15,14 @@
 - **Example**
 
   ```python
-  import capybara as cb
+  from capybara import imread, imresize
+  from capybara.vision.functionals import centercrop
 
-  img = cb.imread('lena.png')
-  img = cb.imresize(img, [128, 256])
-  crop_img = cb.centercrop(img)
+  img = imread('lena.png')
+  img = imresize(img, [128, 256])
+  crop_img = centercrop(img)
   ```
 
-  The green box represents the area of the center crop.
+  The green box represents the center-crop region.
 
   ![centercrop](./resource/test_centercrop.jpg)

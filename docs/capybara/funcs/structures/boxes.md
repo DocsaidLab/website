@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Boxes
 
-> [Boxes(array: \_Boxes, box_mode: \_BoxMode = BoxMode.XYXY, normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/boxes.py#L362)
+> [Boxes(array: _Boxes, box_mode: _BoxMode = BoxMode.XYXY, is_normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/boxes.py)
 
 - **說明**：
 
@@ -14,12 +14,12 @@ sidebar_position: 3
 
   - **array** (`_Boxes`)：多個邊界框。
   - **box_mode** (`_BoxMode`)：表示邊界框的不同方式的列舉類別，預設格式為 `XYXY`。
-  - **normalized** (`bool`)：是否為正規化邊界框的座標，是一個屬性標記。預設為 `False`。
+  - **is_normalized** (`bool`)：是否為正規化座標（屬性標記）。預設為 `False`。
 
 - **屬性**
 
   - **box_mode**：取得邊界框的表示方式。
-  - **normalized**：取得邊界框的正規化狀態。
+  - **is_normalized**：取得邊界框的正規化狀態。
   - **width**：取得邊界框的寬度。
   - **height**：取得邊界框的高度。
   - **left_top**：取得邊界框的左上角點。

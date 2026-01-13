@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Boxes
 
-> [Boxes(array: \_Boxes, box_mode: \_BoxMode = BoxMode.XYXY, normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/boxes.py#L362)
+> [Boxes(array: _Boxes, box_mode: _BoxMode = BoxMode.XYXY, is_normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/boxes.py)
 
 - **説明**：
 

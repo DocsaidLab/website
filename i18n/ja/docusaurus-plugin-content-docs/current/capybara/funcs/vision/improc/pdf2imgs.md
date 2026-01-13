@@ -1,8 +1,12 @@
 # pdf2imgs
 
-> [pdf2imgs(stream: Union[str, Path, bytes]) -> Union[List[np.ndarray], None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L275)
+> [pdf2imgs(stream: str | Path | bytes) -> list[np.ndarray] | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **説明**：PDF ファイルを NumPy 形式の画像リストに変換します。
+
+- **依存関係**
+
+  - `poppler`（例：Ubuntu の `poppler-utils`）が必要です。未インストールの場合、`pdf2image` が正しく変換できないことがあります。
 
 - **パラメータ**
 
@@ -15,7 +19,7 @@
 - **使用例**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import pdf2imgs
 
-  imgs = cb.pdf2imgs('sample.pdf')
+  imgs = pdf2imgs('sample.pdf')
   ```

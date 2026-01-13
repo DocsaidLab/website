@@ -1,6 +1,6 @@
 # imbinarize
 
-> [imbinarize(img: np.ndarray, threth: int = cv2.THRESH_BINARY, color_base: str = 'BGR') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L336)
+> [imbinarize(img: np.ndarray, threth: int = cv2.THRESH_BINARY, color_base: str = "BGR") -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **説明**：入力画像に対して二値化処理を行います。
 

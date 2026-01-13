@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # BoxMode
 
-> [BoxMode](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/boxes.py#L26)
+> [BoxMode](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/boxes.py)
 
 - **Description**:
 

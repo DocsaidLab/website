@@ -1,6 +1,6 @@
 # dump_json
 
-> [dump_json(obj: Any, path: Union[str, Path] = None, \*\*kwargs) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L65)
+> [dump_json(obj: Any, path: str | Path | None = None, **kwargs) -> None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/files_utils.py)
 
 - **說明**：將物件寫入 json。這裡是透過 `ujson` 來寫入，原因是 `ujson` 比 `json` 快很多。
 
@@ -13,8 +13,8 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.utils.files_utils import dump_json
 
   data = {'key': 'value'}
-  cb.dump_json(data)
+  dump_json(data)
   ```

@@ -1,6 +1,6 @@
 # imwarp_quadrangle
 
-> [imwarp_quadrangle(img: np.ndarray, polygon: Union[Polygon, np.ndarray]) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/geometric.py#L155)
+> [imwarp_quadrangle(img: np.ndarray, polygon: Polygon | np.ndarray, dst_size: tuple[int, int] | None = None, do_order_points: bool = True) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/geometric.py)
 
 - **説明**：入力画像に、与えられた多角形で定義された 4 点透視変換を適用します。この関数は自動的に 4 点の順番をソートします。順番は、最初の点が左上、2 番目が右上、3 番目が右下、4 番目が左下となります。画像変換のターゲットサイズは、多角形の最小回転外接矩形の幅と高さによって決まります。
 

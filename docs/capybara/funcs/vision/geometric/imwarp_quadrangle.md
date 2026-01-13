@@ -1,13 +1,15 @@
 # imwarp_quadrangle
 
-> [imwarp_quadrangle(img: np.ndarray, polygon: Union[Polygon, np.ndarray]) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/geometric.py#L155)
+> [imwarp_quadrangle(img: np.ndarray, polygon: Polygon | np.ndarray, dst_size: tuple[int, int] | None = None, do_order_points: bool = True) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/geometric.py)
 
-- **說明**：對輸入影像應用給定多邊形定義的 4 點透視變換。函數為會自動對四個點進行排序，其順序：第一個點為左上角，第二個點為右上角，第三個點為右下角，第四個點為左下角。影像變換的目標大小的長寬由多邊形的最小旋轉外接矩形的長寬決定。
+- **說明**：對輸入影像應用 4 點透視變換。
 
 - **參數**
 
   - **img** (`np.ndarray`)：要進行變換的輸入影像。
-  - **polygon** (`Union[Polygon, np.ndarray]`)：包含定義變換的四個點的多邊形對象。
+  - **polygon** (`Polygon | np.ndarray`)：包含四個點的多邊形。若為 `np.ndarray`，會先轉成 `Polygon`。
+  - **dst_size** (`tuple[int, int] | None`)：輸出影像尺寸（格式為 `(width, height)`）。若為 `None`，則由 `polygon.min_box_wh` 推算。
+  - **do_order_points** (`bool`)：是否將四點排序為順時針順序（左上、右上、右下、左下）。預設為 `True`。
 
 - **傳回值**
 

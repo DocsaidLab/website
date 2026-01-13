@@ -1,6 +1,6 @@
 # imdecode
 
-> [imdecode(byte\_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L107)
+> [imdecode(byte\_: bytes) -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：將圖像字節串解碼為 NumPy 圖像數組。
 
@@ -10,14 +10,14 @@
 
 - **傳回值**
 
-  - **np.ndarray**：解碼後的圖像數組。
+  - **np.ndarray | None**：解碼後的圖像數組；解碼失敗時回傳 `None`。
 
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import IMGTYP, imdecode, imencode, imread
 
-  img = cb.imread('lena.png')
-  encoded_bytes = cb.imencode(img, IMGTYP=cb.IMGTYP.PNG)
-  decoded_img = cb.imdecode(encoded_bytes)
+  img = imread('lena.png')
+  encoded_bytes = imencode(img, imgtyp=IMGTYP.PNG)
+  decoded_img = imdecode(encoded_bytes)
   ```

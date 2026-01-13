@@ -1,20 +1,24 @@
 # copy_path
 
-> [copy_path(path_src: Union[str, Path], path_dst: Union[str, Path]) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/custom_path.py#L34)
+> [copy_path(path_src: str | Path, path_dst: str | Path) -> None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/custom_path.py)
 
-- **Description**: Copies a file or directory.
+- **Description**: Copies a file.
 
 - **Parameters**
 
-  - **path_src** (`Union[str, Path]`): The source file or directory to be copied.
-  - **path_dst** (`Union[str, Path]`): The destination where the file or directory will be copied.
+  - **path_src** (`str | Path`): Source file path (must be a file).
+  - **path_dst** (`str | Path`): Destination path.
+
+- **Exceptions**
+
+  - **ValueError**: Raised when `path_src` is not a file.
 
 - **Example**
 
   ```python
-  import capybara as cb
+  from capybara.utils import copy_path
 
   path_src = '/path/to/your/source'
   path_dst = '/path/to/your/destination'
-  cb.copy_path(path_src, path_dst)
+  copy_path(path_src, path_dst)
   ```

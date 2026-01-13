@@ -1,6 +1,6 @@
 # dump_json
 
-> [dump_json(obj: Any, path: Union[str, Path] = None, \*\*kwargs) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L65)
+> [dump_json(obj: Any, path: str | Path | None = None, **kwargs) -> None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/files_utils.py)
 
 - **Description**: Writes an object to a JSON file. It uses `ujson` for faster writing compared to the standard `json` module.
 
@@ -13,8 +13,8 @@
 - **Example**:
 
   ```python
-  import capybara as cb
+  from capybara.utils.files_utils import dump_json
 
   data = {'key': 'value'}
-  cb.dump_json(data)
+  dump_json(data)
   ```

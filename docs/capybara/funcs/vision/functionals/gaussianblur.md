@@ -1,6 +1,6 @@
 # gaussianblur
 
-> [gaussianblur(img: np.ndarray, ksize: \_Ksize = 3, sigmaX: int = 0, \*\*kwargs) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L54)
+> [gaussianblur(img: np.ndarray, ksize: int | tuple[int, int] | np.ndarray = 3, sigma_x: int = 0, **kwargs) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **說明**：對輸入影像套用高斯模糊處理。
 
@@ -8,7 +8,11 @@
 
   - **img** (`np.ndarray`)：要進行模糊處理的輸入影像。
   - **ksize** (`Union[int, Tuple[int, int]]`)：用於模糊處理的核心大小。如果提供了整數值，則使用指定大小的正方形核。如果提供了元組`(k_height, k_width)`，則使用指定大小的矩形核。預設為 3。
-  - **sigmaX** (`int`)：高斯核心的 X 方向標準差。預設為 0。
+  - **sigma_x** (`int`)：高斯核心的 X 方向標準差。預設為 0。
+
+- **備註**
+
+  - 為了兼容舊版呼叫方式，亦接受 `sigmaX=...`。
 
 - **傳回值**
 

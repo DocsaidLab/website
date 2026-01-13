@@ -1,6 +1,6 @@
 # colorstr
 
-> [colorstr(obj: Any, color: Union[COLORSTR, int, str] = COLORSTR.BLUE, fmt: Union[FORMATSTR, int, str] = FORMATSTR.BOLD) -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/utils.py#L37)
+> [colorstr(obj: Any, color: COLORSTR | int | str = COLORSTR.BLUE, fmt: FORMATSTR | int | str = FORMATSTR.BOLD) -> str](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/utils.py)
 
 - **説明**：この関数は、Python オブジェクトを色付きの文字列に変換するために使用されます。
 

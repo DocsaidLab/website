@@ -1,6 +1,6 @@
 # gaussianblur
 
-> [gaussianblur(img: np.ndarray, ksize: \_Ksize = 3, sigmaX: int = 0, \*\*kwargs) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L54)
+> [gaussianblur(img: np.ndarray, ksize: int | tuple[int, int] | np.ndarray = 3, sigma_x: int = 0, **kwargs) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **説明**：入力画像に対してガウスぼかし処理を適用します。
 

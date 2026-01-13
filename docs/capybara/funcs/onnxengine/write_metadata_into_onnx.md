@@ -1,6 +1,11 @@
 # write_metadata_into_onnx
 
-> [write_metadata_into_onnx(onnx_path: Union[str, Path], out_path: Union[str, Path], drop_old_meta: bool = False, \*\*kwargs)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/onnxengine/metadata.py#L20)
+> [write_metadata_into_onnx(onnx_path: str | Path, out_path: str | Path, drop_old_meta: bool = False, **kwargs: Any) -> None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/onnxengine/metadata.py)
+
+- **依賴**
+
+  - 需要 `onnx`（讀寫模型檔）。
+  - 當 `drop_old_meta=False` 時，會讀取舊 metadata，額外需要 `onnxruntime`。
 
 - **說明**：將自定義元數據寫入 ONNX 模型中。
 
@@ -11,14 +16,19 @@
   - **drop_old_meta** (`bool`)：是否刪除舊的元數據。預設為 `False`。
   - `**kwargs`：自定義元數據。
 
+- **行為**
+
+  - 會自動加入 `Date` 欄位（使用 `capybara.utils.time.now(fmt=...)`）。
+  - 會把每個 metadata value 以 `json.dumps()` 轉成字串寫入 ONNX props。
+
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.onnxengine import write_metadata_into_onnx
 
   onnx_path = 'model.onnx'
   out_path = 'model_with_metadata.onnx'
-  cb.write_metadata_into_onnx(
+  write_metadata_into_onnx(
       onnx_path,
       out_path,
       drop_old_meta=False,

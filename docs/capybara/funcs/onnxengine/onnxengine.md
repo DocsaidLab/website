@@ -1,42 +1,63 @@
 # ONNXEngine
 
-> [ONNXEngine(model_path: Union[str, Path], gpu_id: int = 0, backend: Union[str, int, Backend] = Backend.cpu, session_option: Dict[str, Any] = {}, provider_option: Dict[str, Any] = {})](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/onnxengine/engine.py#L18)
+> [ONNXEngine(model_path: str | Path, gpu_id: int = 0, backend: str | Backend = Backend.cpu, session_option: Mapping[str, Any] | None = None, provider_option: Mapping[str, Any] | None = None, config: EngineConfig | None = None)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/onnxengine/engine.py)
 
 - **說明**：初始化 ONNX 模型推論引擎。
 
+- **依賴**
+
+  - 此模組依賴 `onnxruntime`（CPU 或 GPU 版），請先安裝：
+
+    ```bash
+    pip install "capybara-docsaid[onnxruntime]"      # CPU
+    # or
+    pip install "capybara-docsaid[onnxruntime-gpu]"  # GPU
+    ```
+
 - **參數**
 
-  - **model_path** (`Union[str, Path]`)：檔案名稱或序列化的 ONNX 或 ORT 格式模型的位元組字串。
+  - **model_path** (`str | Path`)：ONNX 模型檔案路徑。
   - **gpu_id** (`int`)：GPU ID。預設為 0。
-  - **backend** (`Union[str, int, Backend]`)：推論後端，可以選 `Backend.cpu` 或 `Backend.cuda`。預設為 `Backend.cpu`。
-  - **session_option** (`Dict[str, Any]`)：這是 onnxruntime.SessionOptions 的參數，用來設定會話選項。預設為 `{}`。詳細設定方式請參考：[SessionOptions](https://onnxruntime.ai/docs/api/python/api_summary.html#onnxruntime.SessionOptions)。
-  - **provider_option** (`Dict[str, Any]`)：這是 onnxruntime.provider_options 的參數。預設為 `{}`。詳細設定方式請參考：[CUDAExecutionProvider](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#configuration-options)。
+  - **backend** (`str | Backend`)：推論後端（runtime=`onnx`）。常用值：
+    - `Backend.cpu`
+    - `Backend.cuda`
+    - `Backend.tensorrt`
+    - `Backend.tensorrt_rtx`
+  - **session_option** (`Mapping[str, Any] | None`)：SessionOptions 的覆寫參數（會以 `setattr` 或 `add_session_config_entry` 方式套用）。
+  - **provider_option** (`Mapping[str, Any] | None`)：Execution Provider 的覆寫參數（例如 `device_id`、cache 等）。
+  - **config** (`EngineConfig | None`)：較高階的推論設定（graph optimization、threading、IOBinding、profiling 等）。
 
 - **推論**
 
-  在載入模型時，該函數會載入 ONNX 檔案內的資訊，並為輸入和輸出值給定一個字典，其中包含輸入和輸出的形狀和數據類型。
+  - `engine.run(feed)`：以 `Mapping[str, np.ndarray]` 推論。
+  - `engine(**inputs)`：以 keyword arguments 推論（若只傳一個 `dict` 也會被視為 feed）。
+  - 回傳值為 `dict[str, np.ndarray]`，key 為模型 output name。
 
-  因此，當你呼叫 `ONNXEngine` 實例時，你可以直接使用該字典來得到輸出結果。
+- **常用方法**
+
+  - `summary()`：回傳 inputs/outputs/providers 等摘要資訊。
+  - `benchmark(inputs, repeat=100, warmup=10)`：回傳 throughput 與 latency 統計。
 
 - **範例**
 
   ```python
-  import capybara as cb
+  import numpy as np
+  from capybara.onnxengine import EngineConfig, ONNXEngine
+  from capybara.runtime import Runtime
 
   model_path = 'model.onnx'
-  engine = cb.ONNXEngine(model_path)
-  print(engine)
+  runtime = Runtime.onnx
 
-  # Inferencing
-  # Assuming the model has two inputs and two outputs and named:
-  #   'input1', 'input2', 'output1', 'output2'.
-  input_data = {
-      'input1': np.random.randn(1, 3, 224, 224).astype(np.float32),
-      'input2': np.random.randn(1, 3, 224, 224).astype(np.float32),
+  engine = ONNXEngine(
+      model_path,
+      backend=runtime.auto_backend_name(),
+      config=EngineConfig(enable_io_binding=False),
+  )
+
+  inputs = {
+      'input': np.random.randn(1, 3, 224, 224).astype(np.float32),
   }
-
-  outputs = engine(**input_data)
-
-  output_data1 = outputs['output1']
-  output_data2 = outputs['output2']
+  outputs = engine.run(inputs)
+  print(outputs.keys())
+  print(engine.summary())
   ```

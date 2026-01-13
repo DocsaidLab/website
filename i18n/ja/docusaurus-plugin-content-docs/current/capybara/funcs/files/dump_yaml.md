@@ -1,6 +1,6 @@
 # dump_yaml
 
-> [dump_yaml(obj, path: Union[str, Path] = None, \*\*kwargs) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L200)
+> [dump_yaml(obj: Any, path: str | Path | None = None, **kwargs) -> None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/files_utils.py)
 
 - **説明**：オブジェクトを yaml ファイルに書き込む。
 
@@ -13,8 +13,8 @@
 - **例**
 
   ```python
-  import capybara as cb
+  from capybara.utils.files_utils import dump_yaml
 
   data = {'key': 'value'}
-  cb.dump_yaml(data)
+  dump_yaml(data)
   ```

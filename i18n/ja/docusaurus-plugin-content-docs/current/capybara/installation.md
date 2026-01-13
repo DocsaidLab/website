@@ -4,122 +4,85 @@ sidebar_position: 2
 
 # 基本インストール
 
-Capybara をインストールする前に、システムが以下の要件を満たしていることを確認してください：
+Capybara の PyPI パッケージ名は `capybara-docsaid` です。Python 3.10+ が必要です。
 
-## 依存パッケージ
-
-オペレーティングシステムに応じて、以下の必須システムパッケージをインストールしてください：
-
-- **Ubuntu**
-
-  ```bash
-  sudo apt install libturbojpeg exiftool ffmpeg libheif-dev
-  ```
-
-- **MacOS**
-
-  ```bash
-  brew install jpeg-turbo exiftool ffmpeg
-  ```
-
-  - **特記事項**：テスト結果として、macOS で libheif を使用する際にいくつかの既知の問題があります。主な問題は以下の通りです：
-
-    1. **生成された HEIC ファイルが開けない**：macOS 上で libheif で生成された HEIC ファイルが一部のアプリケーションで開けないことがあります。これは画像サイズに関連しており、特に画像の幅や高さが奇数の場合に互換性の問題が発生することがあります。
-
-    2. **コンパイルエラー**：macOS で libheif をコンパイルする際に、ffmpeg デコーダーに関連する未定義シンボルエラーが発生することがあります。これはコンパイルオプションや依存関係の設定ミスによるものです。
-
-    3. **サンプルプログラムが実行できない**：macOS Sonoma では、libheif のサンプルプログラムが正常に動作せず、`libheif.1.dylib`が見つからないというダイナミックリンクエラーが発生することがあります。これは動的ライブラリのパス設定に関する問題です。
-
-    これらの問題が多いため、現在は Ubuntu でのみ libheif を使用しています。macOS に関しては、将来のバージョンで解決される予定です。
-
-### pdf2image
-
-pdf2image は PDF ファイルを画像に変換する Python モジュールで、システムに以下のツールがインストールされていることを確認してください：
-
-- MacOS：poppler をインストールする必要があります
-
-  ```bash
-  brew install poppler
-  ```
-
-- Linux：ほとんどのディストリビューションには`pdftoppm`と`pdftocairo`がデフォルトでインストールされています。もしインストールされていない場合、以下を実行してください：
-
-  ```bash
-  sudo apt install poppler-utils
-  ```
-
-### ONNXRuntime
-
-ONNXRuntime を使用して GPU 加速推論を行う場合、適切な CUDA バージョンがインストールされていることを確認してください。以下の手順でインストールできます：
+## PyPI からインストール（core）
 
 ```bash
-sudo apt install cuda-12-4
-# .bashrcに追加する場合
-echo 'export PATH=/usr/local/cuda-12.4/bin${PATH:+:${PATH}}' >> ~/.bashrc
-echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.4/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.bashrc
+pip install capybara-docsaid
+python -c "import capybara; print(capybara.__version__)"
 ```
 
-## PyPI を通じてインストール
+## optional 機能（extras）
 
-1. PyPI を使ってパッケージをインストール：
+推論 backend と一部機能は extras として分離されています。必要に応じて追加インストールしてください：
 
-   ```bash
-   pip install capybara-docsaid
-   ```
+```bash
+# ONNXRuntime（CPU）
+pip install "capybara-docsaid[onnxruntime]"
 
-2. インストール確認：
+# ONNXRuntime（GPU）
+pip install "capybara-docsaid[onnxruntime-gpu]"
 
-   ```bash
-   python -c "import capybara; print(capybara.__version__)"
-   ```
+# OpenVINO
+pip install "capybara-docsaid[openvino]"
 
-3. バージョン番号が表示された場合、インストールは成功です。
+# TorchScript
+pip install "capybara-docsaid[torchscript]"
 
-## git clone を通じてインストール
+# 可視化描画（matplotlib/pillow）
+pip install "capybara-docsaid[visualization]"
 
-1. プロジェクトをダウンロード：
+# IPCam demo（flask）
+pip install "capybara-docsaid[ipcam]"
 
-   ```bash
-   git clone https://github.com/DocsaidLab/Capybara.git
-   ```
+# システム情報（psutil）
+pip install "capybara-docsaid[system]"
 
-2. wheel パッケージをインストール：
+# 全部
+pip install "capybara-docsaid[all]"
+```
 
-   ```bash
-   pip install wheel
-   ```
+## システム依存パッケージ（機能に応じて）
 
-3. wheel ファイルをビルド：
+一部機能は OS 依存の codec / 変換ツールに依存します：
 
-   ```bash
-   cd Capybara
-   python setup.py bdist_wheel
-   ```
+- JPEG の高速 I/O（`PyTurboJPEG`）：TurboJPEG library
+- HEIC/HEIF（`pillow-heif`）：libheif
+- PDF → 画像（`pdf2image`）：Poppler（`pdftoppm` / `pdftocairo`）
+- 動画抽出：`ffmpeg`（OpenCV の動画読み取りが安定しやすい）
 
-4. ビルドされた wheel ファイルをインストール：
+### Ubuntu
 
-   ```bash
-   pip install dist/capybara_docsaid-*-py3-none-any.whl
-   ```
+```bash
+sudo apt install ffmpeg libturbojpeg libheif-dev poppler-utils
+```
 
-## よくある質問
+### macOS
 
-1. **なぜ Windows のインストールはサポートされていないのですか？**
+```bash
+brew install ffmpeg jpeg-turbo libheif poppler
+```
 
-   命を大事に、Windows からは離れましょう。
+## Git からインストール
 
----
+```bash
+pip install git+https://github.com/DocsaidLab/Capybara.git
+```
 
-2. **Windows を使いたいんですが、余計なことは言わないで！**
+ローカル開発の場合：
 
-   わかりました、Docker をインストールし、上記の手順で Docker を使ってプログラムを実行することをお勧めします。
+```bash
+pip install -e .
+```
 
-   詳しくは次のページを参照：[**詳細インストール**](./advance.md)。
+## Windows
 
----
+Windows での動作は十分にテストしていません。WSL2 または Docker を推奨します： [**進階インストール**](./advance.md)。
 
-3. **Docker はどうやってインストールするのですか？**
+## GPU 注意事項（ONNXRuntime CUDA）
 
-   難しくはありませんが、手順がいくつかあります。
+`onnxruntime-gpu` を使用する場合、ORT のバージョンに対応する CUDA/cuDNN をインストールしてください：
 
-   インストール方法については[**Docker 公式ドキュメント**](https://docs.docker.com/get-docker/)を参照してください。
+- https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements
+

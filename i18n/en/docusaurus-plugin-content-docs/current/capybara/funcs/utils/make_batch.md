@@ -1,6 +1,6 @@
 # make_batch
 
-> [make_batch(data: Union[Iterable, Generator], batch_size: int) -> Generator[List, None, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/utils.py#L13)
+> [make_batch(data: Iterable | Generator, batch_size: int) -> Generator[list, None, None]](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/utils.py)
 
 - **Description**: This function is used to convert data into batches.
 

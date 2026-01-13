@@ -4,7 +4,7 @@ sidebar_position: 9
 
 # polygon_iou
 
-> [polygon_iou(poly1: Polygon, poly2: Polygon) -> float](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/functionals.py#L169)
+> [polygon_iou(poly1: Polygon, poly2: Polygon) -> float](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/functionals.py)
 
 - **説明**：
 

@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # pairwise_intersection
 
-> [pairwise_intersection(boxes1: Boxes, boxes2: Boxes) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/functionals.py#L18)
+> [pairwise_intersection(boxes1: Boxes, boxes2: Boxes) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/functionals.py)
 
 - **說明**：
 
@@ -18,11 +18,11 @@ sidebar_position: 6
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.structures import Boxes, pairwise_intersection
 
-  boxes1 = cb.Boxes([[10, 20, 50, 80], [20, 30, 60, 90]])
-  boxes2 = cb.Boxes([[20, 30, 60, 90], [30, 40, 70, 100]])
-  intersection = cb.pairwise_intersection(boxes1, boxes2)
+  boxes1 = Boxes([[10, 20, 50, 80], [20, 30, 60, 90]])
+  boxes2 = Boxes([[20, 30, 60, 90], [30, 40, 70, 100]])
+  intersection = pairwise_intersection(boxes1, boxes2)
   print(intersection)
   # >>> [[1500. 800.]
   #      [2400. 1500.]]

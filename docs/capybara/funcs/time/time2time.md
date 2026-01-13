@@ -38,7 +38,7 @@ graph TD
 
 ## timestamp2datetime
 
-> [timestamp2datetime(ts: Union[int, float]) -> datetime](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L189)
+> [timestamp2datetime(ts: int | float) -> datetime](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **說明**：將時間戳轉換為 `datetime`。
 
@@ -53,17 +53,17 @@ graph TD
 - **範例**
 
   ```python
-  import capybara as cb
+  import capybara.utils.time as ct
 
   ts = 1634025600
-  dt = cb.timestamp2datetime(ts)
+  dt = ct.timestamp2datetime(ts)
   print(dt)
   # >>> 2021-10-12 16:00:00
   ```
 
 ## timestamp2time
 
-> [timestamp2time(ts: Union[int, float]) -> struct_time](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L193)
+> [timestamp2time(ts: int | float) -> struct_time](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **說明**：將時間戳轉換為 `struct_time`。
 
@@ -78,17 +78,17 @@ graph TD
 - **範例**
 
   ```python
-  import capybara as cb
+  import capybara.utils.time as ct
 
   ts = 1634025600
-  t = cb.timestamp2time(ts)
+  t = ct.timestamp2time(ts)
   print(t)
   # >>> time.struct_time(tm_year=2021, tm_mon=10, tm_mday=12, tm_hour=16, tm_min=0, tm_sec=0, tm_wday=1, tm_yday=285, tm_isdst=0)
   ```
 
 ## timestamp2str
 
-> [timestamp2str(ts: Union[int, float], fmt: str) -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L197)
+> [timestamp2str(ts: int | float, fmt: str) -> str](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **說明**：將時間戳轉換為時間字串。
 
@@ -104,17 +104,17 @@ graph TD
 - **範例**
 
   ```python
-  import capybara as cb
+  import capybara.utils.time as ct
 
   ts = 1634025600
-  s = cb.timestamp2str(ts, fmt='%Y-%m-%d %H:%M:%S')
+  s = ct.timestamp2str(ts, fmt='%Y-%m-%d %H:%M:%S')
   print(s)
   # >>> '2021-10-12 16:00:00'
   ```
 
 ## time2datetime
 
-> [time2datetime(t: struct_time) -> datetime](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L201)
+> [time2datetime(t: struct_time) -> datetime](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **說明**：將 `struct_time` 轉換為 `datetime`。
 
@@ -129,18 +129,18 @@ graph TD
 - **範例**
 
   ```python
-  import capybara as cb
+  import capybara.utils.time as ct
 
   ts = 1634025600
-  t = cb.timestamp2time(ts)
-  dt = cb.time2datetime(t)
+  t = ct.timestamp2time(ts)
+  dt = ct.time2datetime(t)
   print(dt)
   # >>> datetime.datetime(2021, 10, 12, 16, 0)
   ```
 
 ## time2timestamp
 
-> [time2timestamp(t: struct_time) -> float](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L207)
+> [time2timestamp(t: struct_time) -> float](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **說明**：將 `struct_time` 轉換為時間戳。
 
@@ -155,18 +155,18 @@ graph TD
 - **範例**
 
   ```python
-  import capybara as cb
+  import capybara.utils.time as ct
 
   ts = 1634025600
-  t = cb.timestamp2time(ts)
-  ts = cb.time2timestamp(t)
+  t = ct.timestamp2time(ts)
+  ts = ct.time2timestamp(t)
   print(ts)
   # >>> 1634025600.0
   ```
 
 ## time2str
 
-> [time2str(t: struct_time, fmt: str) -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L213)
+> [time2str(t: struct_time, fmt: str) -> str](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **說明**：將 `struct_time` 轉換為時間字串。
 
@@ -182,18 +182,18 @@ graph TD
 - **範例**
 
   ```python
-  import capybara as cb
+  import capybara.utils.time as ct
 
   ts = 1634025600
-  t = cb.timestamp2time(ts)
-  s = cb.time2str(t, fmt='%Y-%m-%d %H:%M:%S')
+  t = ct.timestamp2time(ts)
+  s = ct.time2str(t, fmt='%Y-%m-%d %H:%M:%S')
   print(s)
   # >>> '2021-10-12 16:00:00'
   ```
 
 ## datetime2time
 
-> [datetime2time(dt: datetime) -> struct_time](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L219)
+> [datetime2time(dt: datetime) -> struct_time](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **說明**：將 `datetime` 轉換為 `struct_time`。
 
@@ -208,18 +208,18 @@ graph TD
 - **範例**
 
   ```python
-  import capybara as cb
+  import capybara.utils.time as ct
 
   ts = 1634025600
-  dt = cb.timestamp2datetime(ts)
-  t = cb.datetime2time(dt)
+  dt = ct.timestamp2datetime(ts)
+  t = ct.datetime2time(dt)
   print(t)
   # >>> time.struct_time(tm_year=2021, tm_mon=10, tm_mday=12, tm_hour=16, tm_min=0, tm_sec=0, tm_wday=1, tm_yday=285, tm_isdst=-1)
   ```
 
 ## datetime2timestamp
 
-> [datetime2timestamp(dt: datetime) -> float](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L225)
+> [datetime2timestamp(dt: datetime) -> float](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **說明**：將 `datetime` 轉換為時間戳。
 
@@ -234,18 +234,18 @@ graph TD
 - **範例**
 
   ```python
-  import capybara as cb
+  import capybara.utils.time as ct
 
   ts = 1634025600
-  dt = cb.timestamp2datetime(ts)
-  ts = cb.datetime2timestamp(dt)
+  dt = ct.timestamp2datetime(ts)
+  ts = ct.datetime2timestamp(dt)
   print(ts)
   # >>> 1634025600.0
   ```
 
 ## datetime2str
 
-> [datetime2str(dt: datetime, fmt: str) -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L231)
+> [datetime2str(dt: datetime, fmt: str) -> str](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **說明**：將 `datetime` 轉換為時間字串。
 
@@ -261,18 +261,18 @@ graph TD
 - **範例**
 
   ```python
-  import capybara as cb
+  import capybara.utils.time as ct
 
   ts = 1634025600
-  dt = cb.timestamp2datetime(ts)
-  s = cb.datetime2str(dt, fmt='%Y-%m-%d %H:%M:%S')
+  dt = ct.timestamp2datetime(ts)
+  s = ct.datetime2str(dt, fmt='%Y-%m-%d %H:%M:%S')
   print(s)
   # >>> '2021-10-12 16:00:00'
   ```
 
 ## str2time
 
-> [str2time(s: str, fmt: str) -> struct_time](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L237)
+> [str2time(s: str, fmt: str) -> struct_time](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **說明**：將時間字串轉換為 `struct_time`。
 
@@ -288,17 +288,17 @@ graph TD
 - **範例**
 
   ```python
-  import capybara as cb
+  import capybara.utils.time as ct
 
   s = '2021-10-12 16:00:00'
-  t = cb.str2time(s, fmt='%Y-%m-%d %H:%M:%S')
+  t = ct.str2time(s, fmt='%Y-%m-%d %H:%M:%S')
   print(t)
   # >>> time.struct_time(tm_year=2021, tm_mon=10, tm_mday=12, tm_hour=16, tm_min=0, tm_sec=0, tm_wday=1, tm_yday=285, tm_isdst=-1)
   ```
 
 ## str2datetime
 
-> [str2datetime(s: str, fmt: str) -> datetime](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L243)
+> [str2datetime(s: str, fmt: str) -> datetime](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **說明**：將時間字串轉換為 `datetime`。
 
@@ -314,17 +314,17 @@ graph TD
 - **範例**
 
   ```python
-  import capybara as cb
+  import capybara.utils.time as ct
 
   s = '2021-10-12 16:00:00'
-  dt = cb.str2datetime(s, fmt='%Y-%m-%d %H:%M:%S')
+  dt = ct.str2datetime(s, fmt='%Y-%m-%d %H:%M:%S')
   print(dt)
   # >>> datetime.datetime(2021, 10, 12, 16, 0)
   ```
 
 ## str2timestamp
 
-> [str2timestamp(s: str, fmt: str) -> float](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L249)
+> [str2timestamp(s: str, fmt: str) -> float](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **說明**：將時間字串轉換為時間戳。
 
@@ -340,10 +340,10 @@ graph TD
 - **範例**
 
   ```python
-  import capybara as cb
+  import capybara.utils.time as ct
 
   s = '2021-10-12 16:00:00'
-  ts = cb.str2timestamp(s, fmt='%Y-%m-%d %H:%M:%S')
+  ts = ct.str2timestamp(s, fmt='%Y-%m-%d %H:%M:%S')
   print(ts)
   # >>> 1634025600.0
   ```

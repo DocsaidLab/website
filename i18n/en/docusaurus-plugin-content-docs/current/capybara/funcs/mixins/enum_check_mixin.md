@@ -1,6 +1,6 @@
 # EnumCheckMixin
 
-> [EnumCheckMixin](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/mixins.py#L57)
+> [EnumCheckMixin](https://github.com/DocsaidLab/Capybara/blob/main/capybara/mixins.py)
 
 - **Description**: Provides the `obj_to_enum` method for Enum objects, allowing for the conversion of various types into the corresponding enum values.
 

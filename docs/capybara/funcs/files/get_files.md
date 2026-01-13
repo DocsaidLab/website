@@ -1,6 +1,6 @@
 # get_files
 
-> [get_files(folder: Union[str, Path], suffix: Union[str, List[str], Tuple[str]] = None, recursive: bool = True, return_pathlib: bool = True, sort_path: bool = True, ignore_letter_case: bool = True) -> List[Path]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L88)
+> [get_files(folder: str | Path, suffix: str | list[str] | tuple[str, ...] | None = None, recursive: bool = True, return_pathlib: bool = True, sort_path: bool = True, ignore_letter_case: bool = True)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/files_utils.py)
 
 - **說明**：取得指定資料夾中的所有檔案。注意這裡的 `suffix` 對於大小寫不敏感，但是必須要記得加上 `.`，很多時候沒有找到檔案，就是因為這個問題。
 
@@ -20,10 +20,10 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.utils.files_utils import get_files
 
   folder = '/path/to/your/folder'
-  files = cb.get_files(folder, suffix=['.jpg', '.png'])
+  files = get_files(folder, suffix=['.jpg', '.png'])
   print(files)
   # >>> ['/path/to/your/folder/1.jpg', '/path/to/your/folder/2.png']
   ```

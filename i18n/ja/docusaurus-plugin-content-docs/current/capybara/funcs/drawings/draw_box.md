@@ -1,6 +1,14 @@
 # draw_box
 
-> [draw_box(img: np.ndarray, box: Union[Box, np.ndarray], color: \_Color = (0, 255, 0), thickness: \_Thickness = 2) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/visualization/draw.py#L36)
+> [draw_box(img: np.ndarray, box: _Box, color: _Color = (0, 255, 0), thickness: _Thickness = 2) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/visualization/draw.py)
+
+- **依存関係**
+
+  - 描画機能は optional extra です。先にインストールしてください：
+
+    ```bash
+    pip install "capybara-docsaid[visualization]"
+    ```
 
 - **説明**：画像にバウンディングボックスを描画します。
 
@@ -18,11 +26,12 @@
 - **例**
 
   ```python
-  import capybara as cb
+  from capybara import Box, imread
+  from capybara.vision.visualization.draw import draw_box
 
-  img = cb.imread('lena.png')
-  box = cb.Box([20, 20, 100, 100])
-  box_img = cb.draw_box(img, box, color=(0, 255, 0), thickness=2)
+  img = imread('lena.png')
+  box = Box([20, 20, 100, 100])
+  box_img = draw_box(img, box, color=(0, 255, 0), thickness=2)
   ```
 
   ![draw_box](./resource/test_draw_box.jpg)

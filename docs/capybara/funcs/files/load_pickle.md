@@ -1,6 +1,6 @@
 # load_pickle
 
-> [load_pickle(path: Union[str, Path]) -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L159)
+> [load_pickle(path: str | Path)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/files_utils.py)
 
 - **說明**：讀取 pickle 檔案。
 
@@ -10,15 +10,15 @@
 
 - **傳回值**
 
-  - **dict**：pickle 檔案的內容。
+  - **Any**：pickle 檔案反序列化後的內容。
 
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.utils.files_utils import load_pickle
 
   path = '/path/to/your/pickle'
-  data = cb.load_pickle(path)
+  data = load_pickle(path)
   print(data)
   # >>> {'key': 'value'}
   ```

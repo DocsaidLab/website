@@ -1,14 +1,14 @@
 # imresize
 
-> [imresize(img: np.ndarray, size: Tuple[int, int], interpolation: Union[str, int, INTER] = INTER.BILINEAR, return_scale: bool = False) -> Union[np.ndarray, Tuple[np.ndarray, float, float]]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/geometric.py#L15)
+> [imresize(img: np.ndarray, size: tuple[int | None, int | None], interpolation: str | int | INTER = INTER.BILINEAR, return_scale: bool = False)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/geometric.py)
 
 - **説明**：入力画像をリサイズします。
 
 - **パラメータ**
 
   - **img** (`np.ndarray`)：リサイズする入力画像。
-  - **size** (`Tuple[int, int]`)：リサイズ後の画像のサイズ。1 つの次元のみ指定された場合、元の画像のアスペクト比を保持してもう一方の次元が計算されます。
-  - **interpolation** (`Union[str, int, INTER]`)：補間方法。選べるオプションは、INTER.NEAREST、INTER.LINEAR、INTER.CUBIC、INTER.LANCZOS4 です。デフォルトは INTER.LINEAR です。
+  - **size** (`tuple[int | None, int | None]`)：リサイズ後のサイズ（`(height, width)`）。片方が `None` の場合、アスペクト比を維持するようにもう一方が推定されます。
+  - **interpolation** (`str | int | INTER`)：補間方法。`INTER.NEAREST` / `INTER.BILINEAR` / `INTER.CUBIC` / `INTER.AREA` / `INTER.LANCZOS4`。デフォルトは `INTER.BILINEAR`。
   - **return_scale** (`bool`)：スケールを返すかどうか。デフォルトは False です。
 
 - **戻り値**

@@ -4,7 +4,7 @@ sidebar_position: 7
 
 # pairwise_iou
 
-> [paiwise_iou(boxes1: Boxes, boxes2: Boxes) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/functionals.py#L42)
+> [pairwise_iou(boxes1: Boxes, boxes2: Boxes) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/functionals.py)
 
 - **說明**：
 

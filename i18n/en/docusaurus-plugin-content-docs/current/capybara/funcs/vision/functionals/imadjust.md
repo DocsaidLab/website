@@ -1,6 +1,6 @@
 # imadjust
 
-> [imadjust(img: np.ndarray, rng_out: Tuple[int, int] = (0, 255), gamma: float = 1.0, color_base: str = 'BGR') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L122)
+> [imadjust(img: np.ndarray, rng_out: tuple[int, int] = (0, 255), gamma: float = 1.0, color_base: str = "BGR") -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **Description**: Adjusts the intensity of an image.
 
@@ -18,10 +18,11 @@
 - **Example**
 
   ```python
-  import capybara as cb
+  from capybara import imread
+  from capybara.vision.functionals import imadjust
 
-  img = cb.imread('lena.png')
-  adj_img = cb.imadjust(img, gamma=2)
+  img = imread('lena.png')
+  adj_img = imadjust(img, gamma=2)
   ```
 
   ![imadjust](./resource/test_imadjust.jpg)

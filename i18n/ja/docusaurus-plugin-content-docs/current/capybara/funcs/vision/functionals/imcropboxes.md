@@ -1,6 +1,6 @@
 # imcropboxes
 
-> [imcropboxes(img: np.ndarray, boxes: Union[Box, np.ndarray], use_pad: bool = False) -> List[np.ndarray]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L325)
+> [imcropboxes(img: np.ndarray, boxes: Boxes | np.ndarray, use_pad: bool = False) -> list[np.ndarray]](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **説明**：提供された複数のボックスを使用して入力画像をクロップします。
 

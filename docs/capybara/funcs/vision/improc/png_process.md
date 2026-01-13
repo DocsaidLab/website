@@ -2,7 +2,7 @@
 
 ## pngencode
 
-> [pngencode(img: np.ndarray, compression: int = 1) -> Union[bytes, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L80)
+> [pngencode(img: np.ndarray, compression: int = 1) -> bytes | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：將 NumPy 圖像數組編碼為 PNG 格式的字節串。
 
@@ -13,21 +13,20 @@
 
 - **傳回值**
 
-  - **bytes**：編碼後的 PNG 格式字節串。
+  - **bytes | None**：編碼後的 PNG 格式字節串；編碼失敗時回傳 `None`。
 
 - **範例**
 
   ```python
-  import numpy as np
-  import capybara as cb
+  from capybara.vision.improc import imread, pngencode
 
-  img_array = np.random.rand(100, 100, 3) * 255
-  encoded_bytes = cb.pngencode(img_array, compression=9)
+  img = imread('lena.png')
+  encoded_bytes = pngencode(img, compression=9)
   ```
 
 ## pngdecode
 
-> [pngdecode(byte\_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L91)
+> [pngdecode(byte\_: bytes) -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：將 PNG 格式的字節串解碼為 NumPy 圖像數組。
 
@@ -37,10 +36,12 @@
 
 - **傳回值**
 
-  - **np.ndarray**：解碼後的圖像數組。
+  - **np.ndarray | None**：解碼後的圖像數組；解碼失敗時回傳 `None`。
 
 - **範例**
 
   ```python
-  decoded_img = cb.pngdecode(encoded_bytes)
+  from capybara.vision.improc import pngdecode
+
+  decoded_img = pngdecode(encoded_bytes)
   ```

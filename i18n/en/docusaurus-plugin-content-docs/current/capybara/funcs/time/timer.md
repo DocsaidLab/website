@@ -1,6 +1,6 @@
 # Timer
 
-> [Timer(precision: int = 5, desc: str = None, verbose: bool = False)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L76)
+> [Timer(precision: int = 5, desc: str | None = None, verbose: bool = False)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **Description**: This is a timer used to measure the execution time of a program. There are three ways to use this timer: 1. Using `tic` and `toc` methods; 2. Using a decorator; 3. Using a `with` statement. By the way, when designing this, I was torn between naming it `start/stop` or `tic/toc`, and ultimately chose `tic/toc` because it feels more fitting for a timer.
 
@@ -26,20 +26,21 @@
 - **Example**
 
   ```python
-  import capybara as cb
+  import time
+  from capybara.utils import Timer
 
   # Using 'tic' and 'toc' method
-  t = cb.Timer()
+  t = Timer()
   t.tic()
   time.sleep(1)
   t.toc()
 
   # Using decorator
-  @cb.Timer()
+  @Timer()
   def testing_function():
       time.sleep(1)
 
   # Using 'with' statement
-  with cb.Timer():
+  with Timer():
       time.sleep(1)
   ```

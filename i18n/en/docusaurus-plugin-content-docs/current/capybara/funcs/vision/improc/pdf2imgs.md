@@ -1,21 +1,25 @@
 # pdf2imgs
 
-> [pdf2imgs(stream: Union[str, Path, bytes]) -> Union[List[np.ndarray], None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L275)
+> [pdf2imgs(stream: str | Path | bytes) -> list[np.ndarray] | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Converts a PDF file into a list of images in numpy format.
+- **Description**: Converts a PDF to a list of BGR numpy images (one per page).
 
-- **Parameters**:
+- **Dependencies**
 
-  - **stream** (`Union[str, Path, bytes]`): The path or binary data of the PDF file.
+  - Requires system `poppler` (e.g. Ubuntu `poppler-utils`), otherwise `pdf2image` may not work properly.
 
-- **Return value**:
+- **Parameters**
 
-  - **List[np.ndarray]**: Returns a list of numpy images for each page of the PDF if successful; otherwise, returns None.
+  - **stream** (`str | Path | bytes`): PDF path or PDF bytes.
 
-- **Example**:
+- **Returns**
+
+  - **list[np.ndarray] | None**: Images per page; returns `None` on failure.
+
+- **Example**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import pdf2imgs
 
-  imgs = cb.pdf2imgs('sample.pdf')
+  imgs = pdf2imgs('sample.pdf')
   ```

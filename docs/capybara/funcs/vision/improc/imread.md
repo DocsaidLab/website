@@ -1,13 +1,11 @@
 # imread
 
-> [imread(path: Union[str, Path], color_base: str = 'BGR', verbose: bool = False) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L197)
+> [imread(path: str | Path, color_base: str = 'BGR', verbose: bool = False) -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **說明**：讀取圖片，基於不同的影像格式，使用不同的讀取方式，其支援的格式說明如下：
+- **說明**：讀取圖片並回傳 BGR numpy 影像（必要時進行色彩空間轉換）。
 
-  - `.heic`：使用 `read_heic_to_numpy` 讀取，並轉換成 `BGR` 格式。
-  - `.jpg`：使用 `jpgread` 讀取，並轉換成 `BGR` 格式。
-  - 其他格式：使用 `cv2.imread` 讀取，並轉換成 `BGR` 格式。
-  - 若使用 `jpgread` 讀取為 `None`，則會使用 `cv2.imread` 進行讀取。
+  - 若副檔名為 `.heic`：使用 `pillow-heif` 讀取（直接輸出 BGR）。
+  - 其他格式：先嘗試 `jpgread`（可處理 JPEG 與 EXIF 方向），失敗則退回 `cv2.imread`。
 
 - **參數**
 
@@ -18,6 +16,10 @@
 - **傳回值**
 
   - **np.ndarray**：成功時返回圖片的 numpy ndarray，否則返回 None。
+
+- **例外**
+
+  - **FileExistsError**：`path` 不存在時。
 
 - **範例**
 

@@ -1,21 +1,21 @@
 # imwrite
 
-> [imwrite(img: np.ndarray, path: Union[str, Path] = None, color_base: str = 'BGR', suffix: str = '.jpg') -> bool](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L245)
+> [imwrite(img: np.ndarray, path: str | Path | None = None, color_base: str = 'BGR', suffix: str = '.jpg') -> bool](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Writes an image to a file, with an optional color space conversion. If no path is provided, the image is written to a temporary file.
+- **Description**: Writes an image to a file, with optional color base conversion. If `path` is `None`, it writes to a temporary file.
 
-- **Parameters**:
+- **Parameters**
 
-  - **img** (`np.ndarray`): The image to write, represented as a NumPy ndarray.
-  - **path** (`Union[str, Path]`): The path where the image file will be saved. If `None`, a temporary file will be created. Default is `None`.
-  - **color_base** (`str`): The current color space of the image. If it is not `BGR`, the function will attempt to convert it to `BGR`. Default is `BGR`.
-  - **suffix** (`str`): The suffix for the temporary file if `path` is `None`. Default is `.jpg`.
+  - **img** (`np.ndarray`): Image array.
+  - **path** (`str | Path | None`): Output path. If `None`, writes to a temporary file. Default is `None`.
+  - **color_base** (`str`): Current color base of `img`. If not `BGR`, it converts to `BGR` before writing. Default is `BGR`.
+  - **suffix** (`str`): Temp file suffix when `path` is `None`. Default is `.jpg`.
 
-- **Return value**:
+- **Returns**
 
-  - **bool**: Returns `True` if the write operation is successful, otherwise returns `False`.
+  - **bool**: Whether the write succeeded.
 
-- **Example**:
+- **Example**
 
   ```python
   import capybara as cb

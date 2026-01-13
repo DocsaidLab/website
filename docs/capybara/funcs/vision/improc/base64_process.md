@@ -1,8 +1,6 @@
 # Base64 Process
 
-`pybase64` 是一個 Python 函式庫，提供了 Base64 編碼和解碼的功能。 它支援多種編碼格式，包括標準 Base64、Base64 URL 和 Base64 URL 檔案名稱安全編碼。 `pybase64` 是基於 `base64` 模組的增強版本，提供了更多的功能和選項。
-
-在影像處理中，我們經常需要將影像資料轉換為 Base64 編碼的字串，以便在網路傳輸中使用。 `pybase64` 提供了方便的介面，可以快速地進行 Base64 編碼和解碼操作，同時支援多種編碼格式，滿足不同的需求。
+此模組內部使用 `pybase64` 進行 Base64 編碼／解碼，並提供 `bytes` 與 `str` 兩種介面（例如 `img_to_b64` 與 `img_to_b64str`）。
 
 - **常見問題：字串 vs 位元組字串？**
 
@@ -10,31 +8,35 @@
 
 ## img_to_b64
 
-> [img_to_b64(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG) -> Union[bytes, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L116)
+> [img_to_b64(img: np.ndarray, imgtyp: str | int | IMGTYP = IMGTYP.JPEG, **kwargs: object) -> bytes | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：將 NumPy 圖像數組轉換為 Base64 字節串。
 
 - **參數**
 
   - **img** (`np.ndarray`)：要轉換的圖像數組。
-  - **IMGTYP** (`Union[str, int, IMGTYP]`)：圖像類型。支持的類型有 `IMGTYP.JPEG` 和 `IMGTYP.PNG`。預設為 `IMGTYP.JPEG`。
+  - **imgtyp** (`str | int | IMGTYP`)：圖像類型。支援 `IMGTYP.JPEG` / `IMGTYP.PNG`。預設為 `IMGTYP.JPEG`。
 
 - **傳回值**
 
-  - **bytes**：轉換後的 Base64 字節串。
+  - **bytes | None**：轉換後的 Base64 字節串；編碼失敗時回傳 `None`。
+
+- **備註**
+
+  - 為了兼容舊版呼叫方式，亦接受 `IMGTYP=...`（與 `imgtyp` 同時提供會拋出 `TypeError`）。
 
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import IMGTYP, img_to_b64, imread
 
-  img = cb.imread('lena.png')
-  b64 = cb.img_to_b64(img, IMGTYP=cb.IMGTYP.PNG)
+  img = imread('lena.png')
+  b64 = img_to_b64(img, imgtyp=IMGTYP.PNG)
   ```
 
 ## npy_to_b64
 
-> [npy_to_b64(x: np.ndarray, dtype='float32') -> bytes](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L126)
+> [npy_to_b64(x: np.ndarray, dtype='float32') -> bytes](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：將 NumPy 數組轉換為 Base64 字節串。
 
@@ -50,16 +52,16 @@
 - **範例**
 
   ```python
-  import capybara as cb
   import numpy as np
+  from capybara.vision.improc import npy_to_b64
 
   x = np.random.rand(100, 100, 3)
-  b64 = cb.npy_to_b64(x)
+  b64 = npy_to_b64(x)
   ```
 
 ## npy_to_b64str
 
-> [npy_to_b64str(x: np.ndarray, dtype='float32', string_encode: str = 'utf-8') -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L130)
+> [npy_to_b64str(x: np.ndarray, dtype='float32', string_encode: str = 'utf-8') -> str](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：將 NumPy 數組轉換為 Base64 字串。
 
@@ -76,29 +78,33 @@
 - **範例**
 
   ```python
-  import capybara as cb
   import numpy as np
+  from capybara.vision.improc import npy_to_b64str
 
   x = np.random.rand(100, 100, 3)
 
-  b64str = cb.npy_to_b64str(x)
+  b64str = npy_to_b64str(x)
   ```
 
 ## img_to_b64str
 
-> [img_to_b64str(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG, string_encode: str = 'utf-8') -> Union[str, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L134)
+> [img_to_b64str(img: np.ndarray, imgtyp: str | int | IMGTYP = IMGTYP.JPEG, string_encode: str = 'utf-8', **kwargs: object) -> str | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：將 NumPy 圖像數組轉換為 Base64 字串。
 
 - **參數**
 
   - **img** (`np.ndarray`)：要轉換的圖像數組。
-  - **IMGTYP** (`Union[str, int, IMGTYP]`)：圖像類型。支持的類型有 `IMGTYP.JPEG` 和 `IMGTYP.PNG`。預設為 `IMGTYP.JPEG`。
+  - **imgtyp** (`str | int | IMGTYP`)：圖像類型。支援 `IMGTYP.JPEG` / `IMGTYP.PNG`。預設為 `IMGTYP.JPEG`。
   - **string_encode** (`str`)：字串編碼。預設為 `'utf-8'`。
 
 - **傳回值**
 
-  - **str**：轉換後的 Base64 字串。
+  - **str | None**：轉換後的 Base64 字串；編碼失敗時回傳 `None`。
+
+- **備註**
+
+  - 為了兼容舊版呼叫方式，亦接受 `IMGTYP=...`（與 `imgtyp` 同時提供會拋出 `TypeError`）。
 
 - **範例**
 
@@ -106,12 +112,12 @@
   import capybara as cb
 
   img = cb.imread('lena.png')
-  b64str = cb.img_to_b64str(img, IMGTYP=cb.IMGTYP.PNG)
+  b64str = cb.img_to_b64str(img, imgtyp=cb.IMGTYP.PNG)
   ```
 
 ## b64_to_img
 
-> [b64_to_img(b64: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L143)
+> [b64_to_img(b64: bytes) -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：將 Base64 字節串轉換為 NumPy 圖像數組。
 
@@ -126,15 +132,15 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import b64_to_img, img_to_b64, imread
 
-  b64 = cb.img_to_b64(cb.imread('lena.png'))
-  img = cb.b64_to_img(b64)
+  b64 = img_to_b64(imread('lena.png'))
+  img = b64_to_img(b64)
   ```
 
 ## b64str_to_img
 
-> [b64str_to_img(b64str: Union[str, None], string_encode: str = 'utf-8') -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L151)
+> [b64str_to_img(b64str: str | None, string_encode: str = 'utf-8') -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：將 Base64 字串轉換為 NumPy 圖像數組。
 
@@ -150,16 +156,16 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import b64str_to_img, img_to_b64, imread
 
-  b64 = cb.img_to_b64(cb.imread('lena.png'))
+  b64 = img_to_b64(imread('lena.png'))
   b64str = b64.decode('utf-8')
-  img = cb.b64str_to_img(b64str)
+  img = b64str_to_img(b64str)
   ```
 
 ## b64_to_npy
 
-> [b64_to_npy(x: bytes, dtype='float32') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L166)
+> [b64_to_npy(x: bytes, dtype='float32') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：將 Base64 字節串轉換為 NumPy 數組。
 
@@ -175,21 +181,22 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  import numpy as np
+  from capybara.vision.improc import b64_to_npy, npy_to_b64
 
-  b64 = cb.npy_to_b64(np.random.rand(100, 100, 3))
-  x = cb.b64_to_npy(b64)
+  b64 = npy_to_b64(np.random.rand(100, 100, 3))
+  x = b64_to_npy(b64)
   ```
 
 ## b64str_to_npy
 
-> [b64str_to_npy(x: bytes, dtype='float32', string_encode: str = 'utf-8') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L170)
+> [b64str_to_npy(x: str, dtype='float32', string_encode: str = 'utf-8') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：將 Base64 字串轉換為 NumPy 數組。
 
 - **參數**
 
-  - **x** (`bytes`)：要轉換的 Base64 字串。
+  - **x** (`str`)：要轉換的 Base64 字串。
   - **dtype** (`str`)：數據類型。預設為 `'float32'`。
   - **string_encode** (`str`)：字串編碼。預設為 `'utf-8'`。
 
@@ -200,8 +207,9 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  import numpy as np
+  from capybara.vision.improc import b64str_to_npy, npy_to_b64
 
-  b64 = cb.npy_to_b64(np.random.rand(100, 100, 3))
-  x = cb.b64str_to_npy(b64.decode('utf-8'))
+  b64 = npy_to_b64(np.random.rand(100, 100, 3))
+  x = b64str_to_npy(b64.decode('utf-8'))
   ```

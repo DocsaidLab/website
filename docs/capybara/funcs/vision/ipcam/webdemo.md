@@ -1,6 +1,10 @@
 # WebDemo
 
-> [WebDemo(camera_ip: str, color_base: str = 'BGR', route: str = '/', pipelines: list = []) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/ipcam/app.py#L23)
+> [WebDemo(camera_ip: str, color_base: str = "BGR", route: str = "/", pipelines: list | None = None) -> None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/ipcam/app.py)
+
+- **依賴**
+
+  - 需要 `flask`（請先安裝 `capybara-docsaid[ipcam]`）。
 
 - **說明**：在網頁上展示 IP 攝影機的影像。
 
@@ -14,7 +18,7 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.vision.ipcam.app import WebDemo
 
-  cb.WebDemo(camera_ip='http://your_ip:your_port/video').run()
+  WebDemo(camera_ip='http://your_ip:your_port/video').run()
   ```

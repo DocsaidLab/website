@@ -2,45 +2,46 @@
 
 ## pngencode
 
-> [pngencode(img: np.ndarray, compression: int = 1) -> Union[bytes, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L80)
+> [pngencode(img: np.ndarray, compression: int = 1) -> bytes | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Encodes a NumPy image array into a PNG format byte string.
+- **Description**: Encodes a numpy image into PNG bytes.
 
-- **Parameters**:
+- **Parameters**
 
-  - **img** (`np.ndarray`): The image array to encode.
-  - **compression** (`int`): The compression level, ranging from 0 to 9. 0 means no compression, and 9 represents maximum compression. Default is 1.
+  - **img** (`np.ndarray`): Image array.
+  - **compression** (`int`): Compression level (0 to 9). Default is 1.
 
-- **Return value**:
+- **Returns**
 
-  - **bytes**: The PNG format byte string after encoding.
+  - **bytes | None**: PNG bytes; returns `None` on failure.
 
-- **Example**:
+- **Example**
 
   ```python
-  import numpy as np
-  import capybara as cb
+  from capybara.vision.improc import imread, pngencode
 
-  img_array = np.random.rand(100, 100, 3) * 255
-  encoded_bytes = cb.pngencode(img_array, compression=9)
+  img = imread('lena.png')
+  encoded_bytes = pngencode(img, compression=9)
   ```
 
 ## pngdecode
 
-> [pngdecode(byte\_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L91)
+> [pngdecode(byte\_: bytes) -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Decodes a PNG format byte string into a NumPy image array.
+- **Description**: Decodes PNG bytes into a numpy image.
 
-- **Parameters**:
+- **Parameters**
 
-  - **byte\_** (`bytes`): The PNG format byte string to decode.
+  - **byte_** (`bytes`): PNG bytes.
 
-- **Return value**:
+- **Returns**
 
-  - **np.ndarray**: The image array after decoding.
+  - **np.ndarray | None**: Decoded image; returns `None` on failure.
 
-- **Example**:
+- **Example**
 
   ```python
-  decoded_img = cb.pngdecode(encoded_bytes)
+  from capybara.vision.improc import pngdecode
+
+  decoded_img = pngdecode(encoded_bytes)
   ```

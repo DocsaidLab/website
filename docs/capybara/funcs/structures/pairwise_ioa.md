@@ -4,7 +4,7 @@ sidebar_position: 8
 
 # pairwise_ioa
 
-> [pairwise_ioa(boxes1: Boxes, boxes2: Boxes) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/functionals.py#L70)
+> [pairwise_ioa(boxes1: Boxes, boxes2: Boxes) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/functionals.py)
 
 - **說明**：
 
@@ -14,6 +14,19 @@ sidebar_position: 8
 
   - **boxes1** (`Boxes`)：第一個邊界框列表。包含 N 個邊界框。
   - **boxes2** (`Boxes`)：第二個邊界框列表。包含 M 個邊界框。
+
+- **傳回值**
+
+  - **np.ndarray**：IoA 矩陣，shape 為 `[N, M]`。
+
+- **備註**
+
+  - IoA 定義為 `intersection(boxes1, boxes2) / area(boxes2)`。
+
+- **例外**
+
+  - **TypeError**：`boxes1` 或 `boxes2` 不是 `Boxes`。
+  - **ValueError**：存在空框（寬或高 <= 0）時。
 
 - **範例**
 
@@ -27,35 +40,3 @@ sidebar_position: 8
   # >>> [[0.625 0.33333334]
   #      [1.0 0.625]]
   ```
-
-## 補充說明
-
-### IoA 簡介
-
-IoA（Intersection over Area）是一種用來評估邊界框重疊程度的指標，它衡量的是預測邊界框和真實邊界框之間的交集面積與真實邊界框的面積之比。
-
-### 定義
-
-IoA 計算公式為預測邊界框和真實邊界框交集的面積除以真實邊界框的面積。 IoA 的值範圍從 0 到 1，數值越大表示預測邊界框覆蓋真實邊界框的程度越高。
-
-### 計算步驟
-
-1. **確定邊界框座標**：首先，需要確定預測邊界框和真實邊界框在影像中的位置，通常使用四個座標來表示一個邊界框：(x0, y0, x1, y1)，其中 (x0, y0) 是邊界框左上角的座標，(x1, y1) 是右下角的座標。
-
-2. **計算交集面積**：計算預測邊界框和真實邊界框的交集面積。
-
-3. **計算 IoA**：交集面積除以真實邊界框的面積，得到 IoA 值。
-
-### 應用場景
-
-- **目標偵測**：在目標偵測任務中，IoA 用於評估預測邊界框和真實邊界框之間的重疊程度，進而評估偵測模型的準確性。
-
-- **模型評估**：IoA 常用於評估和比較不同物件偵測模型的效能，較高的 IoA 值表示模型具有較好的偵測精度。
-
-- **非極大值抑制（NMS）**：在目標檢測後處理中，IoA 用於非極大值抑制，以消除重疊的檢測框，保留最佳的檢測結果。
-
-### 優點與限制
-
-- **優點**：IoA 能夠量化預測邊界框和真實邊界框之間的重疊程度，幫助評估模型的準確性。
-
-- **局限**：IoA 只考慮了預測邊界框和真實邊界框之間的重疊程度，並未考慮其他因素，如邊界框的形狀和方向，因此在某些情況下可能不夠準確。

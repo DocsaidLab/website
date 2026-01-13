@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Boxes
 
-> [Boxes(array: \_Boxes, box_mode: \_BoxMode = BoxMode.XYXY, normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/boxes.py#L362)
+> [Boxes(array: _Boxes, box_mode: _BoxMode = BoxMode.XYXY, is_normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/boxes.py)
 
 - **Description**:
 
@@ -14,12 +14,12 @@ sidebar_position: 3
 
   - **array** (`_Boxes`): Multiple bounding boxes.
   - **box_mode** (`_BoxMode`): An enumeration class representing different bounding box formats. The default format is `XYXY`.
-  - **normalized** (`bool`): A flag indicating whether the bounding box coordinates are normalized. Default is `False`.
+  - **is_normalized** (`bool`): Whether the boxes are normalized (flag). Default is `False`.
 
 - **Attributes**
 
   - **box_mode**: Gets the representation of the bounding box format.
-  - **normalized**: Gets the normalized status of the bounding box.
+  - **is_normalized**: Gets the normalized status of the bounding box.
   - **width**: Gets the width of the bounding box.
   - **height**: Gets the height of the bounding box.
   - **left_top**: Gets the top-left corner of the bounding box.

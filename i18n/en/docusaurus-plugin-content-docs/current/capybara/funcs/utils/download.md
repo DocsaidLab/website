@@ -1,39 +1,41 @@
-# download
+# download_from_google
 
-## download_from_google
+> [download_from_google(file_id: str, file_name: str, target: str | Path = ".") -> Path](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/utils.py)
 
-> [download_from_google(file_id: str, file_name: str, target: str = ".") -> None](https://github.com/DocsaidLab/Capybara/blob/c83d96363a3de3686a98dd7b558a168f08b9bc97/capybara/utils/utils.py#L70)
-
-- **Description**: Download files from Google Drive and handle confirmation issues for large files.
+- **Description**: Downloads a file from Google Drive and handles confirmation tokens for large files.
 
 - **Parameters**
 
-  - **file_id** (`str`): The ID of the file to be downloaded from Google Drive.
-  - **file_name** (`str`): The name to save the file as after downloading.
-  - **target** (`str`, optional): The target directory to save the file. The default is the current directory `"."`.
+  - **file_id** (`str`): Google Drive file id.
+  - **file_name** (`str`): File name to save as.
+  - **target** (`str | Path`, optional): Target directory. Default is `"."`.
+
+- **Returns**
+
+  - **Path**: Path to the downloaded file.
 
 - **Exceptions**
 
-  - **Exception**: An exception is raised if the download fails or the file cannot be created.
+  - **Exception**: Failed to parse download link / confirmation parameters from the response.
+  - **RuntimeError**: Failed during the file writing process.
 
 - **Notes**
 
-  - This function handles both small and large files. For large files, it automatically handles Google's confirmation checks, bypassing warnings about virus scans or file size limits.
-  - Ensure the target directory exists; if not, it will be created automatically.
+  - This function supports both small and large files. For large files, it handles Google's confirmation token automatically.
 
 - **Example**
 
   ```python
-  # Example 1: Download a file to the current directory
-  download_from_google(
-      file_id="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-      file_name="example_file.txt"
-  )
+  from capybara.utils import download_from_google
 
-  # Example 2: Download a file to a specified directory
-  download_from_google(
+  path = download_from_google(
       file_id="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
       file_name="example_file.txt",
-      target="./downloads"
+  )
+
+  path = download_from_google(
+      file_id="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      file_name="example_file.txt",
+      target="./downloads",
   )
   ```

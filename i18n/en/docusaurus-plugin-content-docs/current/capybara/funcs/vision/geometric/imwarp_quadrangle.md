@@ -1,13 +1,15 @@
 # imwarp_quadrangle
 
-> [imwarp_quadrangle(img: np.ndarray, polygon: Union[Polygon, np.ndarray]) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/geometric.py#L155)
+> [imwarp_quadrangle(img: np.ndarray, polygon: Polygon | np.ndarray, dst_size: tuple[int, int] | None = None, do_order_points: bool = True) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/geometric.py)
 
-- **Description**: Applies a perspective transformation to the input image based on a quadrilateral defined by four points. The function automatically sorts the points in the following order: the first point is the top-left, the second is the top-right, the third is the bottom-right, and the fourth is the bottom-left. The target size of the transformed image is determined by the width and height of the minimum rotated bounding box of the polygon.
+- **Description**: Applies a 4-point perspective transform to the input image.
 
 - **Parameters**
 
   - **img** (`np.ndarray`): The input image to be transformed.
-  - **polygon** (`Union[Polygon, np.ndarray]`): A polygon object containing the four points that define the transformation.
+  - **polygon** (`Polygon | np.ndarray`): A polygon with four points. If `np.ndarray` is provided, it is converted to `Polygon` first.
+  - **dst_size** (`tuple[int, int] | None`): Output image size `(width, height)`. If `None`, it is inferred from `polygon.min_box_wh`.
+  - **do_order_points** (`bool`): Whether to order the 4 points clockwise (TL, TR, BR, BL). Default is `True`.
 
 - **Returns**
 

@@ -1,6 +1,6 @@
 # load_json
 
-> [load_json(path: Union[Path, str], \*\*kwargs) -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L50)
+> [load_json(path: Path | str, **kwargs) -> dict](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/files_utils.py)
 
 - **說明**：讀取 json 檔案。這裡是透過 `ujson` 來讀取，原因是 `ujson` 比 `json` 快很多。
 
@@ -16,10 +16,10 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.utils.files_utils import load_json
 
   path = '/path/to/your/json'
-  data = cb.load_json(path)
+  data = load_json(path)
   print(data)
   # >>> {'key': 'value'}
   ```

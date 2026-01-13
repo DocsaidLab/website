@@ -1,6 +1,6 @@
 # imcropboxes
 
-> [imcropboxes(img: np.ndarray, boxes: Union[Box, np.ndarray], use_pad: bool = False) -> List[np.ndarray]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L325)
+> [imcropboxes(img: np.ndarray, boxes: Boxes | np.ndarray, use_pad: bool = False) -> list[np.ndarray]](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **說明**：使用提供多個框裁剪輸入影像。
 
@@ -19,15 +19,12 @@
   ```python
   import capybara as cb
 
-  # 使用自定義 Box 物件
+  # 使用自定義 Boxes 物件
   img = cb.imread('lena.png')
   box1 = cb.Box([50, 50, 200, 200], box_mode='xyxy')
   box2 = cb.Box([50, 50, 100, 100], box_mode='xyxy')
   boxes = cb.Boxes([box1, box2])
   cropped_imgs = cb.imcropboxes(img, boxes, use_pad=True)
-
-  # Resize the cropped image to the original size for visualization
-  cropped_img = cb.imresize(cropped_img, [img.shape[0], img.shape[1]])
   ```
 
   ![imcropbox_boxes](./resource/test_imcropboxes.jpg)

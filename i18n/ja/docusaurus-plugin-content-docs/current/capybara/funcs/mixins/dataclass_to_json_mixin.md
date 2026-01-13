@@ -1,8 +1,8 @@
-# DataClassToJsonMixin
+# DataclassToJsonMixin
 
-> [DataClassToJsonMixin](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/mixins.py#L90)
+> [DataclassToJsonMixin](https://github.com/DocsaidLab/Capybara/blob/main/capybara/mixins.py)
 
-- **説明**：DataClass オブジェクトの JSON シリアライズ方法を提供し、DataClass オブジェクトを JSON 形式に変換する際に使用できます。
+- **説明**：dataclass オブジェクトを JSON 化可能な dict に変換するための mixin を提供します。
 
 - **dict_to_jsonable** のサポート形式：
 

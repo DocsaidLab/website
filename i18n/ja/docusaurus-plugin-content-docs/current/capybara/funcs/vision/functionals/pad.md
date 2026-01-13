@@ -1,6 +1,6 @@
 # pad
 
-> [pad(img: np.ndarray, pad_size: Union[int, Tuple[int, int], Tuple[int, int, int, int]], fill_value: Optional[Union[int, Tuple[int, int, int]]] = 0, pad_mode: Union[str, int, BORDER] = BORDER.CONSTANT) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L194)
+> [pad(img: np.ndarray, pad_size: int | tuple[int, int] | tuple[int, int, int, int], pad_value: int | tuple[int, ...] | None = 0, pad_mode: str | int | BORDER = BORDER.CONSTANT) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **説明**：入力画像に対してパディング処理を行います。
 
@@ -13,7 +13,7 @@
     - `BORDER.CONSTANT`：定数値（`fill_value`）を使用してパディング。
     - `BORDER.REPLICATE`：端のピクセルをコピーしてパディング。
     - `BORDER.REFLECT`：端を反射させてパディング。
-    - `BORDER.REFLECT101`：端を反射させ、人工的な痕跡を避けるために微調整してパディング。
+    - `BORDER.REFLECT_101`：端を反射させ、人工的な痕跡を避けるために微調整してパディング。
       デフォルトは `BORDER.CONSTANT`。
 
 - **戻り値**

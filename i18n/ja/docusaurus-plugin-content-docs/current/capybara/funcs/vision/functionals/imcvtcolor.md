@@ -1,6 +1,6 @@
 # imcvtcolor
 
-> [imcvtcolor(img: np.ndarray, cvt_mode: Union[int, str]) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L96)
+> [imcvtcolor(img: np.ndarray, cvt_mode: int | str) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **説明**：入力画像に対して色空間変換を行います。
 

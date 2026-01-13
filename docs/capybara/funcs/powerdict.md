@@ -1,6 +1,6 @@
 # PowerDict
 
-> [PowerDict(d=None, \*\*kwargs)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/powerdict.py#L10)
+> [PowerDict(d=None, **kwargs)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/powerdict.py)
 
 - **說明**：這個類別用來建立一個具有凍結和解凍功能的字典，並且可以透過 `.` 的方式來取得內部屬性。
 
@@ -18,7 +18,7 @@
   - **to_txt(path: Union[str, Path]) -> None**：將字典寫入 txt 檔案。
   - **to_pickle(path: Union[str, Path]) -> None**：將字典寫入 pickle 檔案。
 
-－ **類別方法**
+- **類別方法**
 
     - **load_json(path: Union[str, Path]) -> PowerDict**：從 json 檔案讀取字典。
     - **load_pickle(path: Union[str, Path]) -> PowerDict**：從 pickle 檔案讀取字典。

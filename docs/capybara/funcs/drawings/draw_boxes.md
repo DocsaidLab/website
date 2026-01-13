@@ -1,6 +1,10 @@
 # draw_boxes
 
-> [draw_boxes(img: np.ndarray, boxes: Union[Boxes, np.ndarray], color: \_Colors = (0, 255, 0), thickness: \_Thicknesses = 2) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/visualization/draw.py#L70)
+> [draw_boxes(img: np.ndarray, boxes: _Boxes, colors: _Colors = (0, 255, 0), thicknesses: _Thicknesses = 2) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/visualization/draw.py)
+
+- **依賴**
+
+  - 請先安裝 `capybara-docsaid[visualization]`。
 
 - **說明**：在影像上繪製多個 Bounding Box。
 
@@ -8,8 +12,8 @@
 
   - **img** (`np.ndarray`)：要繪製的影像，為 NumPy 陣列。
   - **boxes** (`Union[Boxes, np.ndarray]`)：要繪製的 Bounding Box，可以是 Box 物件的列表或 NumPy 陣列形式的 [[x1, y1, x2, y2], ...]。
-  - **color** (`_Colors`)：要繪製的框的顏色。可以是單一顏色或顏色列表。預設為 (0, 255, 0)。
-  - **thickness** (`_Thicknesses`)：要繪製的框線的粗細。可以是單一粗細或粗細列表。預設為 2。
+  - **colors** (`_Colors`)：要繪製的框的顏色（BGR）。可為單一顏色或顏色列表。預設為 (0, 255, 0)。
+  - **thicknesses** (`_Thicknesses`)：要繪製的框線粗細。可為單一值或列表。預設為 2。
 
 - **傳回值**
 
@@ -18,11 +22,17 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara import Box, imread
+  from capybara.vision.visualization.draw import draw_boxes
 
-  img = cb.imread('lena.png')
-  boxes = [cb.Box([20, 20, 100, 100]), cb.Box([150, 150, 200, 200])]
-  boxes_img = cb.draw_boxes(img, boxes, color=[(0, 255, 0), (255, 0, 0)], thickness=2)
+  img = imread('lena.png')
+  boxes = [Box([20, 20, 100, 100]), Box([150, 150, 200, 200])]
+  boxes_img = draw_boxes(
+      img,
+      boxes,
+      colors=[(0, 255, 0), (255, 0, 0)],
+      thicknesses=2,
+  )
   ```
 
   ![draw_boxes](./resource/test_draw_boxes.jpg)

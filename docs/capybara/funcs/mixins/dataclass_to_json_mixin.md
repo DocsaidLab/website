@@ -1,6 +1,6 @@
-# DataClassToJsonMixin
+# DataclassToJsonMixin
 
-> [DataClassToJsonMixin](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/mixins.py#L90)
+> [DataclassToJsonMixin](https://github.com/DocsaidLab/Capybara/blob/main/capybara/mixins.py)
 
 - **說明**：提供 DataClass 物件的 JSON 序列化方法，可以用來將 DataClass 物件轉換成 JSON 格式。
 

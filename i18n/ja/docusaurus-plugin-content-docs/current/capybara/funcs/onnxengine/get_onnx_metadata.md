@@ -1,24 +1,28 @@
 # get_onnx_metadata
 
-> [get_onnx_metadata(onnx_path: Union[str, Path]) -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/onnxengine/metadata.py#L10)
+> [get_onnx_metadata(onnx_path: str | Path) -> dict[str, Any]](https://github.com/DocsaidLab/Capybara/blob/main/capybara/onnxengine/metadata.py)
 
-- **説明**：ONNX モデルからカスタムメタデータを取得します。
+- **依存関係**
+
+  - `onnxruntime` が必要です（InferenceSession 経由で metadata を読み取ります）。
+
+- **説明**：ONNX モデルから custom metadata を取得します。
 
 - **パラメータ**
 
-  - **onnx_path** (`Union[str, Path]`)：ONNX モデルのパス。
+  - **onnx_path** (`str | Path`)：ONNX モデルのパス。
 
-- **返り値**
+- **戻り値**
 
-  - **dict**：カスタムメタデータ。
+  - **dict[str, Any]**：custom metadata（`custom_metadata_map` の内容。通常は文字列）。
 
 - **例**
 
   ```python
-  import capybara as cb
+  from capybara.onnxengine import get_onnx_metadata
 
   onnx_path = 'model.onnx'
-  metadata = cb.get_onnx_metadata(onnx_path)
+  metadata = get_onnx_metadata(onnx_path)
   print(metadata)
   # >>> metadata = {
   #     'key1': 'value1',
@@ -26,3 +30,4 @@
   #     'key3': 'value3',
   # }
   ```
+

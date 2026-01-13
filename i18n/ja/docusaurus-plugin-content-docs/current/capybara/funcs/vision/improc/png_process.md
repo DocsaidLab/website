@@ -2,45 +2,47 @@
 
 ## pngencode
 
-> [pngencode(img: np.ndarray, compression: int = 1) -> Union[bytes, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L80)
+> [pngencode(img: np.ndarray, compression: int = 1) -> bytes | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **説明**：NumPy の画像配列を PNG 形式のバイト列にエンコードします。
+- **説明**：NumPy の画像配列を PNG bytes にエンコードします。
 
-- **パラメータ**：
+- **パラメータ**
 
   - **img** (`np.ndarray`)：エンコードする画像配列。
-  - **compression** (`int`)：圧縮レベル、範囲は 0 から 9。0 は圧縮なし、9 は最大圧縮。デフォルトは 1。
+  - **compression** (`int`)：圧縮レベル（0〜9）。0 は無圧縮、9 は最大圧縮。デフォルトは 1。
 
 - **戻り値**
 
-  - **bytes**：エンコードされた PNG 形式のバイト列。
+  - **bytes | None**：PNG bytes。失敗時は `None`。
 
-- **使用例**
+- **例**
 
   ```python
-  import numpy as np
-  import capybara as cb
+  from capybara.vision.improc import imread, pngencode
 
-  img_array = np.random.rand(100, 100, 3) * 255
-  encoded_bytes = cb.pngencode(img_array, compression=9)
+  img = imread('lena.png')
+  encoded_bytes = pngencode(img, compression=9)
   ```
 
 ## pngdecode
 
-> [pngdecode(byte\_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L91)
+> [pngdecode(byte\_: bytes) -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **説明**：PNG 形式のバイト列を NumPy の画像配列にデコードします。
+- **説明**：PNG bytes を NumPy 画像配列にデコードします。
 
-- **パラメータ**：
+- **パラメータ**
 
-  - **byte\_** (`bytes`)：デコードする PNG 形式のバイト列。
+  - **byte\_** (`bytes`)：デコードする PNG bytes。
 
 - **戻り値**
 
-  - **np.ndarray**：デコードされた画像配列。
+  - **np.ndarray | None**：NumPy 画像配列。失敗時は `None`。
 
-- **使用例**
+- **例**
 
   ```python
-  decoded_img = cb.pngdecode(encoded_bytes)
+  from capybara.vision.improc import pngdecode
+
+  decoded_img = pngdecode(encoded_bytes)
   ```
+

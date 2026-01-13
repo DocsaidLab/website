@@ -1,6 +1,6 @@
 # colorstr
 
-> [colorstr(obj: Any, color: Union[COLORSTR, int, str] = COLORSTR.BLUE, fmt: Union[FORMATSTR, int, str] = FORMATSTR.BOLD) -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/utils.py#L37)
+> [colorstr(obj: Any, color: COLORSTR | int | str = COLORSTR.BLUE, fmt: FORMATSTR | int | str = FORMATSTR.BOLD) -> str](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/utils.py)
 
 - **Description**: This function is used to convert a Python object into a string with color.
 
@@ -9,6 +9,7 @@
   - **obj** (`Any`): The Python object to be converted into a colored string.
   - **color** (`Union[COLORSTR, int, str]`): The color of the object. Default is `COLORSTR.BLUE`.
   - **fmt** (`Union[FORMATSTR, int, str]`): The format of the object. Default is `FORMATSTR.BOLD`.
+    Supported: `BOLD` / `ITALIC` / `UNDERLINE`.
 
 - **Returns**
 

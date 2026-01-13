@@ -1,6 +1,6 @@
 # PowerDict
 
-> [PowerDict(d=None, \*\*kwargs)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/powerdict.py#L10)
+> [PowerDict(d=None, **kwargs)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/powerdict.py)
 
 - **説明**：このクラスは、凍結および解凍機能を持つ辞書を作成するために使用され、` .` を使って内部の属性にアクセスできます。
 

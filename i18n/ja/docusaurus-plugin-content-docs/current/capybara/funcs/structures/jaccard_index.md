@@ -4,7 +4,7 @@ sidebar_position: 10
 
 # jaccard_index
 
-> [jaccard_index(pred_poly: np.ndarray, gt_poly: np.ndarray, image_size: Tuple[int, int]) -> float](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/functionals.py#L95)
+> [jaccard_index(pred_poly: np.ndarray, gt_poly: np.ndarray, image_size: tuple[int, int]) -> float](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/functionals.py)
 
 - **説明**：
 

@@ -1,17 +1,22 @@
 # video2frames
 
-> [video2frames(video_path: str, frame_per_sec: int = None) -> List[np.ndarray]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/videotools/video2frames.py#L19)
+> [video2frames(video_path: str | Path, frame_per_sec: int | None = None) -> list[np.ndarray]](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/videotools/video2frames.py)
 
 - **Description**: Extracts frames from a video. Supported video formats include `.MOV`, `.MP4`, `.AVI`, `.WEBM`, `.3GP`, and `.MKV`.
 
 - **Parameters**
 
-  - **video_path** (`str`): The path to the video file.
-  - **frame_per_sec** (`int`): The number of frames to extract per second. If `None`, all frames are extracted.
+  - **video_path** (`str | Path`): The path to the video file.
+  - **frame_per_sec** (`int | None`): The number of frames to extract per second. If `None`, all frames are extracted.
 
 - **Returns**
 
-  - **List[np.ndarray]**: A list of frames.
+  - **list[np.ndarray]**: A list of frames. Returns an empty list if the video cannot be opened.
+
+- **Exceptions**
+
+  - **TypeError**: `video_path` does not exist or has an unsupported file extension.
+  - **ValueError**: `frame_per_sec <= 0`.
 
 - **Example**
 

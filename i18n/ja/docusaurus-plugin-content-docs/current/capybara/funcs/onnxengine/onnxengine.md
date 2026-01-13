@@ -1,42 +1,64 @@
 # ONNXEngine
 
-> [ONNXEngine(model_path: Union[str, Path], gpu_id: int = 0, backend: Union[str, int, Backend] = Backend.cpu, session_option: Dict[str, Any] = {}, provider_option: Dict[str, Any] = {})](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/onnxengine/engine.py#L18)
+> [ONNXEngine(model_path: str | Path, gpu_id: int = 0, backend: str | Backend = Backend.cpu, session_option: Mapping[str, Any] | None = None, provider_option: Mapping[str, Any] | None = None, config: EngineConfig | None = None)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/onnxengine/engine.py)
 
 - **説明**：ONNX モデル推論エンジンを初期化します。
 
+- **依存関係**
+
+  - 本モジュールは `onnxruntime`（CPU または GPU 版）に依存します。先にインストールしてください：
+
+    ```bash
+    pip install "capybara-docsaid[onnxruntime]"      # CPU
+    # or
+    pip install "capybara-docsaid[onnxruntime-gpu]"  # GPU
+    ```
+
 - **パラメータ**
 
-  - **model_path** (`Union[str, Path]`)：ファイル名またはシリアライズされた ONNX または ORT 形式のモデルのバイト文字列。
+  - **model_path** (`str | Path`)：ONNX モデルファイルのパス。
   - **gpu_id** (`int`)：GPU ID。デフォルトは 0。
-  - **backend** (`Union[str, int, Backend]`)：推論バックエンド。`Backend.cpu` または `Backend.cuda` を選択可能。デフォルトは `Backend.cpu`。
-  - **session_option** (`Dict[str, Any]`)：onnxruntime.SessionOptions のパラメータで、セッションオプションを設定します。デフォルトは `{}`。詳細設定については：[SessionOptions](https://onnxruntime.ai/docs/api/python/api_summary.html#onnxruntime.SessionOptions) を参照してください。
-  - **provider_option** (`Dict[str, Any]`)：onnxruntime.provider_options のパラメータ。デフォルトは `{}`。詳細設定については：[CUDAExecutionProvider](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#configuration-options) を参照してください。
+  - **backend** (`str | Backend`)：推論 backend（runtime=`onnx`）。代表的な値：
+    - `Backend.cpu`
+    - `Backend.cuda`
+    - `Backend.tensorrt`
+    - `Backend.tensorrt_rtx`
+  - **session_option** (`Mapping[str, Any] | None`)：SessionOptions の上書きパラメータ（`setattr` / `add_session_config_entry` で適用）。
+  - **provider_option** (`Mapping[str, Any] | None`)：Execution Provider の上書きパラメータ（例：`device_id` や cache 等）。
+  - **config** (`EngineConfig | None`)：高レベル推論設定（graph optimization、threading、IOBinding、profiling 等）。
 
 - **推論**
 
-  モデルをロードする際に、関数は ONNX ファイル内の情報を読み込み、入力と出力値に対して、形状とデータ型を含む辞書を設定します。
+  - `engine.run(feed)`：`Mapping[str, np.ndarray]` で推論します。
+  - `engine(**inputs)`：keyword arguments で推論します（`dict` を 1 つ渡した場合も feed として扱われます）。
+  - 返り値は `dict[str, np.ndarray]` で、key はモデルの output name です。
 
-  したがって、`ONNXEngine` インスタンスを呼び出すと、その辞書を使って出力結果を直接取得できます。
+- **主なメソッド**
+
+  - `summary()`：inputs/outputs/providers などの概要を返します。
+  - `benchmark(inputs, repeat=100, warmup=10)`：throughput と latency の統計を返します。
 
 - **例**
 
   ```python
-  import capybara as cb
+  import numpy as np
+  from capybara.onnxengine import EngineConfig, ONNXEngine
+  from capybara.runtime import Runtime
 
   model_path = 'model.onnx'
-  engine = cb.ONNXEngine(model_path)
-  print(engine)
+  runtime = Runtime.onnx
 
-  # 推論
-  # モデルには2つの入力と2つの出力があり、それぞれ名前が付けられていると仮定：
-  #   'input1', 'input2', 'output1', 'output2'。
-  input_data = {
-      'input1': np.random.randn(1, 3, 224, 224).astype(np.float32),
-      'input2': np.random.randn(1, 3, 224, 224).astype(np.float32),
+  engine = ONNXEngine(
+      model_path,
+      backend=runtime.auto_backend_name(),
+      config=EngineConfig(enable_io_binding=False),
+  )
+
+  inputs = {
+      'input': np.random.randn(1, 3, 224, 224).astype(np.float32),
   }
-
-  outputs = engine(**input_data)
-
-  output_data1 = outputs['output1']
-  output_data2 = outputs['output2']
+  outputs = engine.run(inputs)
+  print(outputs.keys())
+  print(engine.summary())
   ```
+

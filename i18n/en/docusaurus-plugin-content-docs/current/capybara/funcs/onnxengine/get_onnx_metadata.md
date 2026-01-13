@@ -1,24 +1,28 @@
 # get_onnx_metadata
 
-> [get_onnx_metadata(onnx_path: Union[str, Path]) -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/onnxengine/metadata.py#L10)
+> [get_onnx_metadata(onnx_path: str | Path) -> dict[str, Any]](https://github.com/DocsaidLab/Capybara/blob/main/capybara/onnxengine/metadata.py)
+
+- **Dependencies**
+
+  - Requires `onnxruntime` (reads metadata via `InferenceSession`).
 
 - **Description**: Retrieves custom metadata from an ONNX model.
 
 - **Parameters**
 
-  - **onnx_path** (`Union[str, Path]`): The path to the ONNX model.
+  - **onnx_path** (`str | Path`): Path to the ONNX model.
 
 - **Returns**
 
-  - **dict**: Custom metadata.
+  - **dict[str, Any]**: Raw `custom_metadata_map` content (typically strings).
 
 - **Example**
 
   ```python
-  import capybara as cb
+  from capybara.onnxengine import get_onnx_metadata
 
   onnx_path = 'model.onnx'
-  metadata = cb.get_onnx_metadata(onnx_path)
+  metadata = get_onnx_metadata(onnx_path)
   print(metadata)
   # >>> metadata = {
   #     'key1': 'value1',

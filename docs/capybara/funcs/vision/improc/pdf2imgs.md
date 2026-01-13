@@ -1,8 +1,12 @@
 # pdf2imgs
 
-> [pdf2imgs(stream: Union[str, Path, bytes]) -> Union[List[np.ndarray], None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L275)
+> [pdf2imgs(stream: str | Path | bytes) -> list[np.ndarray] | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：將 PDF 文件轉換為 numpy 格式的圖片列表。
+
+- **依賴**
+
+  - 需要系統安裝 `poppler`（例如 Ubuntu 的 `poppler-utils`），否則 `pdf2image` 可能無法正確轉換。
 
 - **參數**
 
@@ -10,12 +14,12 @@
 
 - **傳回值**
 
-  - **List[np.ndarray]**：成功時返回 PDF 文件的每一頁的 numpy 圖片列表，否則返回 None。
+  - **list[np.ndarray] | None**：成功時回傳 PDF 每一頁的 BGR numpy 影像；失敗時回傳 `None`。
 
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import pdf2imgs
 
-  imgs = cb.pdf2imgs('sample.pdf')
+  imgs = pdf2imgs('sample.pdf')
   ```

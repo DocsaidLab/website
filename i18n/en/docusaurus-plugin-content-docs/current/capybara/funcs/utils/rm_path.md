@@ -1,6 +1,6 @@
 # rm_path
 
-> [rm_path(path: Union[str, Path]) -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/custom_path.py#L26)
+> [rm_path(path: str | Path) -> None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/custom_path.py)
 
 - **Description**: Removes a path/file.
 
@@ -8,11 +8,16 @@
 
   - **path** (`Union[str, Path]`): The path/file to be removed.
 
+- **Behavior**
+
+  - If `path` is a directory and not a symlink: removed recursively via `shutil.rmtree`.
+  - Otherwise (regular file/symlink): removed via `Path.unlink()`.
+
 - **Example**
 
   ```python
-  import capybara as cb
+  from capybara.utils import rm_path
 
   path = '/path/to/your/directory'
-  new_path = cb.rm_path(path)
+  rm_path(path)
   ```

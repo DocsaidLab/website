@@ -1,6 +1,14 @@
 # IpcamCapture
 
-> [IpcamCapture(url: int, str, color_base: str) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/ipcam/camera.py#L11)
+> [IpcamCapture(url: int | str = 0, color_base: str = "BGR") -> None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/ipcam/camera.py)
+
+- **依賴**
+
+  - `ipcam` 功能為可選依賴；若要使用 `WebDemo`，請先安裝：
+
+    ```bash
+    pip install "capybara-docsaid[ipcam]"
+    ```
 
 - **說明**：從 IP 攝影機中捕獲影像。
 
@@ -20,9 +28,10 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.vision.ipcam.camera import IpcamCapture
+  from capybara import imwrite
 
-  cam = cb.IpcamCapture(url='http://your_ip:your_port/video')
+  cam = IpcamCapture(url='http://your_ip:your_port/video')
   for frame in cam:
-      cb.imwrite(frame, 'frame.jpg')
+      imwrite(frame, 'frame.jpg')
   ```

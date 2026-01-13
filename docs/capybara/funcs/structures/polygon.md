@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Polygon
 
-> [Polygon(array: \_Polygon, normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/polygons.py#L64)
+> [Polygon(array: _Polygon, is_normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/polygons.py)
 
 - **說明**：
 
@@ -13,11 +13,11 @@ sidebar_position: 4
 - **參數**
 
   - **array** (`_Polygon`)：多邊形的座標。
-  - **normalized** (`bool`)：是否為正規化多邊形的座標，是一個屬性標記。預設為 `False`。
+  - **is_normalized** (`bool`)：是否為正規化座標（屬性標記）。預設為 `False`。
 
 - **屬性**
 
-  - **normalized**：取得多邊形的正規化狀態。
+  - **is_normalized**：取得多邊形的正規化狀態。
   - **moments**：取得多邊形的矩。
   - **area**：取得多邊形的面積。
   - **arclength**：取得多邊形的周長。

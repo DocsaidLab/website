@@ -1,19 +1,28 @@
 # get_curdir
 
-> [get_curdir() -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/custom_path.py#L8)
+> [get_curdir(path: str | Path, absolute: bool = True) -> Path](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/custom_path.py)
 
-- **說明**：取得當前工作目錄的路徑。這裡的工作目錄是指「調用本函數」的當下，那個 Python 檔案所在的目錄。一般來說，我們會透過這種方式來作為相對路徑的基準。
+- **說明**：取得指定 `path` 所在的資料夾路徑（也就是 `path.parent`）。
+
+  典型用法是用 `__file__` 當作輸入，取得當前 Python 檔案所在目錄，做為相對路徑的基準。
+
+  注意：這個函式**不會**回傳 `Path.cwd()`（也就是 shell 的當前工作目錄）。
+
+- **參數**
+
+  - **path** (`str | Path`)：任意檔案路徑（通常是 `__file__`）。
+  - **absolute** (`bool`)：是否先將輸入轉為絕對路徑再取 parent。預設為 `True`。
 
 - **傳回值**
 
-  - **str**：當前工作目錄的路徑。
+  - **Path**：`path` 的 parent 目錄。
 
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara import get_curdir
 
-  DIR = cb.get_curdir()
+  DIR = get_curdir(__file__)
   print(DIR)
   # >>> '/path/to/your/current/directory'
   ```

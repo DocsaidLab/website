@@ -1,6 +1,6 @@
 # EnumCheckMixin
 
-> [EnumCheckMixin](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/mixins.py#L57)
+> [EnumCheckMixin](https://github.com/DocsaidLab/Capybara/blob/main/capybara/mixins.py)
 
 - **説明**：Enum オブジェクトの `obj_to_enum` メソッドを提供し、異なる型の列挙値を取得する際に使用できます。
 

@@ -1,6 +1,6 @@
-# DataClassToJsonMixin
+# DataclassToJsonMixin
 
-> [DataClassToJsonMixin](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/mixins.py#L90)
+> [DataclassToJsonMixin](https://github.com/DocsaidLab/Capybara/blob/main/capybara/mixins.py)
 
 - **Description**: Provides JSON serialization methods for DataClass objects, enabling conversion of DataClass instances to JSON format.
 

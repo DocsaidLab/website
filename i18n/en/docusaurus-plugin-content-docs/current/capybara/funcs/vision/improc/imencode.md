@@ -1,23 +1,27 @@
 # imencode
 
-> [imencode(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG) -> Union[bytes, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L100)
+> [imencode(img: np.ndarray, imgtyp: str | int | IMGTYP = IMGTYP.JPEG, **kwargs: object) -> bytes | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Encodes a NumPy image array into a byte string in a specified format.
+- **Description**: Encodes a numpy image into bytes with the requested format.
 
-- **Parameters**:
+- **Parameters**
 
-  - **img** (`np.ndarray`): The image array to encode.
-  - **IMGTYP** (`Union[str, int, IMGTYP]`): The image type. Supported types are `IMGTYP.JPEG` and `IMGTYP.PNG`. Default is `IMGTYP.JPEG`.
+  - **img** (`np.ndarray`): Image array.
+  - **imgtyp** (`str | int | IMGTYP`): Image type. Supports `IMGTYP.JPEG` / `IMGTYP.PNG`. Default is `IMGTYP.JPEG`.
 
-- **Return value**:
+- **Returns**
 
-  - **bytes**: The encoded image byte string.
+  - **bytes | None**: Encoded bytes; returns `None` on failure.
 
-- **Example**:
+- **Notes**
+
+  - For backward compatibility, `IMGTYP=...` is also accepted (providing both `imgtyp` and `IMGTYP` raises `TypeError`).
+
+- **Example**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import IMGTYP, imencode, imread
 
-  img = cb.imread('lena.png')
-  encoded_bytes = cb.imencode(img, IMGTYP=cb.IMGTYP.PNG)
+  img = imread('lena.png')
+  encoded_bytes = imencode(img, imgtyp=IMGTYP.PNG)
   ```

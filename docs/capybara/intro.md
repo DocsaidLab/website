@@ -4,13 +4,20 @@ sidebar_position: 1
 
 # 介紹
 
-Capybara 主要包括以下幾個部分：
+Capybara 主要包括以下幾個部分（以程式碼結構為準）：
 
-- **Vision**：包括與電腦視覺相關的功能，如圖像和影片處理。
-- **Structures**：用於處理結構化數據的模塊，例如 BoundingBox 和 Polygon。
-- **ONNXEngine**：提供 ONNX 推理的功能，支持 ONNX 格式模型。
-- **Utils**：包含各種工具函數，提供系統資訊、文件處理等輔助功能。
-- **Tests**：測試文件，用於驗證各類函數的功能。
+- **Vision**（`capybara.vision`）：影像／影片處理與 I/O。
+- **Structures**（`capybara.structures`）：`Box/Boxes`、`Polygon/Polygons`、`Keypoints` 等幾何結構。
+- **Runtime**（`capybara.runtime`）：推論 runtime / backend 的註冊表與選擇邏輯。
+- **Inference engines（可選）**：
+  - `capybara.onnxengine`（ONNXRuntime）
+  - `capybara.openvinoengine`（OpenVINO）
+  - `capybara.torchengine`（TorchScript）
+- **Utils**（`capybara.utils`）：輔助工具（路徑、下載、時間、設定容器等）。
+- **Extras（可選）**：
+  - `visualization`：繪圖工具（`capybara.vision.visualization`）
+  - `ipcam`：簡易 Web demo（`capybara.vision.ipcam`）
+  - `system`：系統資訊工具（`capybara.utils.system_info`）
 
 ## Vision
 
@@ -23,16 +30,16 @@ vision
 ├── functionals.py       # 提供基本的影像處理函數，例如濾波、變換等
 ├── geometric.py         # 幾何處理相關函數，例如旋轉、縮放
 ├── improc.py            # 圖像處理核心邏輯
-├── ipcam                # 用於處理網路攝影機流的模塊
 ├── morphology.py        # 提供形態學處理，例如膨脹、腐蝕
 ├── videotools           # 影片工具相關模塊
-└── visualization        # 提供視覺化工具，例如畫框、標註
+├── ipcam                # （需 extra: ipcam）網路攝影機 demo
+└── visualization        # （需 extra: visualization）繪圖與可視化
 ```
 
 主要功能：
 
 - 圖像與影片的讀取、處理及視覺化。
-- 支持多種格式及來源（如本地文件、網絡攝影機）。
+- 支持多種格式與來源（本地檔案、影片抽幀、IPCam demo 等）。
 
 ## Structures
 
@@ -53,9 +60,17 @@ structures
 - 提供 Box、Keypoints、Polygon 等結構化數據處理。
 - 支持多種操作如交集、並集、縮放等。
 
-## ONNXEngine
+## Runtime / Inference engines（可選）
 
-ONNXEngine 模塊提供與 ONNX 格式模型推理相關的功能。
+推論相關功能位於獨立模組中，並透過 `capybara.runtime` 提供 runtime/backend 的統一描述。
+
+注意：推論後端為可選依賴，請先依需求安裝 extras（例如 `capybara-docsaid[onnxruntime]`）。
+
+### capybara.runtime
+
+- 定義 `Runtime` / `Backend`，並提供 `auto_backend_name()` 等選擇邏輯。
+
+### capybara.onnxengine
 
 目錄結構：
 
@@ -63,12 +78,21 @@ ONNXEngine 模塊提供與 ONNX 格式模型推理相關的功能。
 onnxengine
 ├── engine.py            # 核心推理邏輯
 ├── __init__.py          # 初始化文件
-└── metadata.py          # 模型元數據管理
+├── metadata.py          # 模型元數據管理
+└── utils.py             # ONNX 解析與輔助工具
 ```
 
 主要功能：
 
 - 支持 ONNX 模型的載入與推理。
+
+### capybara.openvinoengine
+
+- OpenVINO 推論封裝（同步推論 + 可選 async queue）。
+
+### capybara.torchengine
+
+- TorchScript 推論封裝（支援簡單的 dtype / device 正規化）。
 
 ## Utils
 
@@ -82,7 +106,7 @@ utils
 ├── custom_tqdm.py       # 進度條工具
 ├── files_utils.py       # 文件處理函數
 ├── powerdict.py         # 強化版字典操作
-├── system_info.py       # 系統資訊檢測
+├── system_info.py       # （需 extra: system）系統資訊檢測
 ├── time.py              # 時間處理工具
 └── utils.py             # 通用工具函數
 ```
@@ -105,4 +129,4 @@ Tests 模塊用於驗證系統的功能是否正確。
 
 以上是 Capybara 各模塊的初步介紹。
 
-具體使用方式可以繼續往後閱讀相應的 API 文件及範例程式碼。
+具體使用方式請參考後續 API 文件與範例；若遇到「無法 import」的情況，優先確認是否需要安裝對應的 extras。

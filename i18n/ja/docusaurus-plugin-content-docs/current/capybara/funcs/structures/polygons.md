@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Polygons
 
-> [Polygons(array: \_Polygons, normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/polygons.py#L336)
+> [Polygons(polygons: _Polygons, is_normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/polygons.py)
 
 - **説明**：
 

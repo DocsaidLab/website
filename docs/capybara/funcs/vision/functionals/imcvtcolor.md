@@ -1,6 +1,6 @@
 # imcvtcolor
 
-> [imcvtcolor(img: np.ndarray, cvt_mode: Union[int, str]) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L96)
+> [imcvtcolor(img: np.ndarray, cvt_mode: int | str) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **說明**：對輸入影像進行顏色空間轉換。
 
@@ -28,7 +28,7 @@
   import capybara as cb
 
   img = cb.imread('lena.png')
-  ycrcb_img = cb.imcvtcolor(img, 'BGR2YCrCb')
+  gray_img = cb.imcvtcolor(img, 'BGR2GRAY')
   ```
 
   ![imcvtcolor_gray](./resource/test_imcvtcolor_gray.jpg)

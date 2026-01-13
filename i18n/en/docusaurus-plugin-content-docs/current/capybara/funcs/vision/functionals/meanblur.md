@@ -1,6 +1,6 @@
 # meanblur
 
-> [meanblur(img: np.ndarray, ksize: \_Ksize = 3, \*\*kwargs) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L33)
+> [meanblur(img: np.ndarray, ksize: int | tuple[int, int] | np.ndarray = 3, **kwargs) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **Description**: Applies mean blur to the input image.
 

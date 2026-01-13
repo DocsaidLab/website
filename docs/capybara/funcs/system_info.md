@@ -1,10 +1,16 @@
 # SystemInfo
 
-這是一個用來獲取系統資訊的工具。它可以幫助你獲取 CPU、記憶體、磁盤、網路等系統資訊。
+這是一個用來獲取系統資訊的工具，包含 CPU、記憶體、磁碟、GPU/CUDA、網路等資訊。
+
+注意：此模組依賴 `psutil`，需要先安裝 `capybara-docsaid[system]` 才能 import：
+
+```bash
+pip install "capybara-docsaid[system]"
+```
 
 ## get_package_versions
 
-> [get_package_versions() -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/system_info.py#L14)
+> [get_package_versions() -> dict](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
 
 - **說明**：獲取常用深度學習和數據分析相關套件的版本。包含 PyTorch、PyTorch Lightning、TensorFlow、Keras、NumPy、Pandas、Scikit-learn、OpenCV 等套件的版本資訊。
 
@@ -15,9 +21,9 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.utils.system_info import get_package_versions
 
-  versions_info = cb.get_package_versions()
+  versions_info = get_package_versions()
   print(versions_info)
   # versions_info = {
   #     'PyTorch Version': '1.9.0',
@@ -33,7 +39,7 @@
 
 ## get_gpu_cuda_versions
 
-> [get_gpu_cuda_versions() -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/system_info.py#L84)
+> [get_gpu_cuda_versions() -> dict](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
 
 - **說明**：獲取 GPU 和 CUDA 版本資訊。嘗試使用 PyTorch、TensorFlow 和 CuPy 等套件來獲取 CUDA 版本，並使用 `nvidia-smi` 命令來獲取 Nvidia 驅動程式版本。
 
@@ -44,9 +50,9 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.utils.system_info import get_gpu_cuda_versions
 
-  gpu_cuda_info = cb.get_gpu_cuda_versions()
+  gpu_cuda_info = get_gpu_cuda_versions()
   print(gpu_cuda_info)
   # gpu_cuda_info = {
   #     'CUDA Version': '11.1',
@@ -56,7 +62,7 @@
 
 ## get_cpu_info
 
-> [get_cpu_info() -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/system_info.py#L134)
+> [get_cpu_info() -> str](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
 
 - **說明**：根據不同平台獲取 CPU 型號名稱。
 
@@ -67,18 +73,38 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.utils.system_info import get_cpu_info
 
-  cpu_info = cb.get_cpu_info()
+  cpu_info = get_cpu_info()
   print(cpu_info)
   # cpu_info = 'Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz'
   ```
 
+## get_external_ip
+
+> [get_external_ip() -> str](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
+
+- **說明**：透過 `https://httpbin.org/ip` 取得外網 IP。若請求失敗，回傳 `"Error obtaining IP: ..."` 字串。
+
+- **範例**
+
+  ```python
+  from capybara.utils.system_info import get_external_ip
+
+  ip = get_external_ip()
+  print(ip)
+  ```
+
 ## get_system_info
 
-> [get_system_info() -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/system_info.py#L155)
+> [get_system_info() -> dict](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
 
 - **說明**：獲取系統資訊，包括作業系統版本、CPU 資訊、記憶體、磁盤使用量等。
+
+- **注意**
+
+  - 內部固定使用網卡名稱 `enp5s0` 取得 `IPV4 Address` / `MAC Address`；若你的環境網卡名稱不同，這兩項可能會是空列表。
+  - GPU 資訊透過 `nvidia-smi` 取得；未安裝或不可用時會回傳 `"N/A or Error"`。
 
 - **傳回值**
 
@@ -87,9 +113,9 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.utils.system_info import get_system_info
 
-  system_info = cb.get_system_info()
+  system_info = get_system_info()
   print(system_info)
   # system_info = {
   #     'OS Version': 'Linux-5.4.0-80-generic-x86_64-with-glibc2.29',

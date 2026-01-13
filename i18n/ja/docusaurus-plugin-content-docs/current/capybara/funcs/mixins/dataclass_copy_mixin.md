@@ -1,12 +1,13 @@
-# DataClassCopyMixin
+# DataclassCopyMixin
 
-> [DataClassCopyMixin](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/mixins.py#L77)
+> [DataclassCopyMixin](https://github.com/DocsaidLab/Capybara/blob/main/capybara/mixins.py)
 
-- **説明**：DataClass オブジェクトのコピー方法を提供し、DataClass オブジェクトをコピーする際に使用できます。
+- **説明**：dataclass オブジェクトのコピー（`copy.copy` / `copy.deepcopy`）を提供します。
 
 - **例**
 
   ```python
+  import copy
   from dataclasses import dataclass
   from capybara import DataclassCopyMixin
 
@@ -16,6 +17,6 @@
       age: int
 
   person = Person('Alice', 20)
-  person_copy = person.__copy__()
-  person_deepcopy = person.__deepcopy__()
+  person_copy = copy.copy(person)
+  person_deepcopy = copy.deepcopy(person)
   ```

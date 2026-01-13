@@ -4,17 +4,24 @@ sidebar_position: 1
 
 # Introduction
 
-Capybara primarily consists of the following components:
+Capybara consists of the following parts (based on the current code structure):
 
-- **Vision**: Includes computer vision-related functionalities, such as image and video processing.
-- **Structures**: Modules for handling structured data, such as BoundingBox and Polygon.
-- **ONNXEngine**: Provides ONNX inference functionality, supporting ONNX format models.
-- **Utils**: Contains various utility functions for system information, file handling, and other auxiliary tasks.
-- **Tests**: Test files used for verifying the functionality of various functions.
+- **Vision** (`capybara.vision`): Image/video I/O and processing.
+- **Structures** (`capybara.structures`): Geometric structures such as `Box/Boxes`, `Polygon/Polygons`, and `Keypoints`.
+- **Runtime** (`capybara.runtime`): Registry and selection logic for runtime/backend.
+- **Inference engines (optional)**:
+  - `capybara.onnxengine` (ONNXRuntime)
+  - `capybara.openvinoengine` (OpenVINO)
+  - `capybara.torchengine` (TorchScript)
+- **Utils** (`capybara.utils`): Utilities (paths, downloads, time, etc.).
+- **Extras (optional)**:
+  - `visualization`: drawing utilities (`capybara.vision.visualization`)
+  - `ipcam`: simple Web demo (`capybara.vision.ipcam`)
+  - `system`: system info utilities (`capybara.utils.system_info`)
 
 ## Vision
 
-The Vision module focuses on processing image and video data, offering a rich set of computer vision tools.
+The Vision module focuses on image/video processing and I/O.
 
 Directory structure:
 
@@ -23,16 +30,16 @@ vision
 ├── functionals.py       # Basic image processing functions, such as filtering and transformations
 ├── geometric.py         # Geometric processing functions, such as rotation and scaling
 ├── improc.py            # Core image processing logic
-├── ipcam                # Module for handling network camera streams
 ├── morphology.py        # Morphological processing functions, such as dilation and erosion
 ├── videotools           # Video-related tools
-└── visualization        # Visualization tools, such as drawing frames and annotations
+├── ipcam                # (extra: ipcam) IPCam demo
+└── visualization        # (extra: visualization) drawing/visualization
 ```
 
 Main features:
 
-- Image and video reading, processing, and visualization.
-- Supports various formats and sources (e.g., local files, network cameras).
+- Image/video reading, processing, and visualization.
+- Supports multiple sources (local files, video frame extraction, IPCam demo, etc.).
 
 ## Structures
 
@@ -51,11 +58,19 @@ structures
 Main features:
 
 - Provides structured data processing for Boxes, Keypoints, and Polygons.
-- Supports various operations like intersection, union, scaling, etc.
+- Supports operations such as intersection, IoU, scaling, etc.
 
-## ONNXEngine
+## Runtime / Inference engines (optional)
 
-The ONNXEngine module provides functionalities related to ONNX model inference.
+Inference-related features live in separate modules, and `capybara.runtime` provides a unified way to describe/choose runtime/backend.
+
+Note: inference backends are optional dependencies. Install the required extras first (e.g. `capybara-docsaid[onnxruntime]`).
+
+### capybara.runtime
+
+- Defines `Runtime` / `Backend`, and provides selection helpers such as `auto_backend_name()`.
+
+### capybara.onnxengine
 
 Directory structure:
 
@@ -63,12 +78,21 @@ Directory structure:
 onnxengine
 ├── engine.py            # Core inference logic
 ├── __init__.py          # Initialization file
-└── metadata.py          # Model metadata management
+├── metadata.py          # Model metadata management
+└── utils.py             # ONNX helpers
 ```
 
 Main features:
 
-- Supports loading and inference of ONNX models.
+- Load and run inference on ONNX models.
+
+### capybara.openvinoengine
+
+- OpenVINO inference wrapper (sync inference + optional async queue).
+
+### capybara.torchengine
+
+- TorchScript inference wrapper (simple dtype/device normalization).
 
 ## Utils
 
@@ -103,6 +127,6 @@ Main features:
 
 ---
 
-This is a preliminary introduction to the modules of Capybara.
+This is a high-level introduction to the modules of Capybara.
 
-For specific usage, you can continue reading the corresponding API documentation and sample code.
+For API usage and examples, continue reading the docs. If you see an import error, check whether the corresponding extra is installed.

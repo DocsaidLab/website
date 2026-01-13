@@ -1,6 +1,6 @@
 # imread
 
-> [imread(path: Union[str, Path], color_base: str = 'BGR', verbose: bool = False) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L197)
+> [imread(path: str | Path, color_base: str = 'BGR', verbose: bool = False) -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **説明**：画像を読み込み、異なる画像形式に基づいて異なる読み込み方法を使用します。サポートされている形式は以下の通りです：
 

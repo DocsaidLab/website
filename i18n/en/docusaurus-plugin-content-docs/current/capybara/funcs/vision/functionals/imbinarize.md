@@ -1,12 +1,12 @@
 # imbinarize
 
-> [imbinarize(img: np.ndarray, threth: int = cv2.THRESH_BINARY, color_base: str = 'BGR') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L336)
+> [imbinarize(img: np.ndarray, threth: int = cv2.THRESH_BINARY, color_base: str = "BGR") -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **Description**: Performs binarization on the input image.
 
 - **Parameters**
 
-  - **img** (`np.ndarray`): The input image to binarize. If the input image has 3 channels, the function will automatically apply the `bgr2gray` function.
+  - **img** (`np.ndarray`): The input image to binarize. If it has 3 channels, it is converted to grayscale via `imcvtcolor(..., f\"{color_base}2GRAY\")` first.
   - **threth** (`int`): The threshold type. There are two threshold types:
     1. `cv2.THRESH_BINARY`: `cv2.THRESH_OTSU + cv2.THRESH_BINARY`
     2. `cv2.THRESH_BINARY_INV`: `cv2.THRESH_OTSU + cv2.THRESH_BINARY_INV`

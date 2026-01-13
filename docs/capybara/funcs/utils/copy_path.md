@@ -1,20 +1,24 @@
 # copy_path
 
-> [copy_path(path_src: Union[str, Path], path_dst: Union[str, Path]) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/custom_path.py#L34)
+> [copy_path(path_src: str | Path, path_dst: str | Path) -> None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/custom_path.py)
 
-- **說明**：複製檔案／目錄。
+- **說明**：複製檔案。
 
 - **參數**
 
-  - **path_src** (`path_src: Union[str, Path]`)：要複製的檔案／目錄。
-  - **path_dst** (`path_dst: Union[str, Path]`)：複製後的檔案／目錄。
+  - **path_src** (`str | Path`)：來源檔案路徑（必須是檔案）。
+  - **path_dst** (`str | Path`)：目標路徑。
+
+- **例外**
+
+  - **ValueError**：`path_src` 不是檔案時會拋出。
 
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.utils import copy_path
 
   path_src = '/path/to/your/source'
   path_dst = '/path/to/your/destination'
-  cb.copy_path(path_src, path_dst)
+  copy_path(path_src, path_dst)
   ```

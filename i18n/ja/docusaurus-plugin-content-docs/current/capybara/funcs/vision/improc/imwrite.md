@@ -1,6 +1,6 @@
 # imwrite
 
-> [imwrite(img: np.ndarray, path: Union[str, Path] = None, color_base: str = 'BGR', suffix: str = '.jpg') -> bool](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L245)
+> [imwrite(img: np.ndarray, path: str | Path | None = None, color_base: str = 'BGR', suffix: str = '.jpg') -> bool](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **説明**：画像をファイルに書き込むとともに、必要に応じて色空間の変換を行います。パスを指定しない場合は、一時ファイルに書き込まれます。
 

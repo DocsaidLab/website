@@ -1,21 +1,21 @@
 # npyread
 
-> [npyread(path: Union[str, Path]) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L174)
+> [npyread(path: str | Path) -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Reads an image array from a NumPy `.npy` file.
+- **Description**: Reads a numpy `.npy` file.
 
-- **Parameters**:
+- **Parameters**
 
-  - **path** (`Union[str, Path]`): The path to the `.npy` file.
+  - **path** (`str | Path`): Path to the `.npy` file.
 
-- **Return value**:
+- **Returns**
 
-  - **np.ndarray**: The image array read from the file. Returns `None` if reading fails.
+  - **np.ndarray | None**: Loaded array; returns `None` on failure.
 
-- **Example**:
+- **Example**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import npyread
 
-  img = cb.npyread('lena.npy')
+  img = npyread('lena.npy')
   ```

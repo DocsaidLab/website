@@ -1,6 +1,6 @@
 # Timer
 
-> [Timer(precision: int = 5, desc: str = None, verbose: bool = False)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/time.py#L76)
+> [Timer(precision: int = 5, desc: str | None = None, verbose: bool = False)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/time.py)
 
 - **説明**：これは、プログラムの実行時間を計測するためのタイマーです。このタイマーには 3 つの使い方があります：1. `tic` と `toc` メソッドを使用；2. デコレータを使用；3. `with` ステートメントを使用。設計時に `start/stop` と `tic/toc` どちらにするか迷いましたが、計測を意識して `tic/toc` を選びました。
 
@@ -26,20 +26,21 @@
 - **例**
 
   ```python
-  import capybara as cb
+  import time
+  from capybara.utils import Timer
 
   # 'tic' と 'toc' メソッドを使用
-  t = cb.Timer()
+  t = Timer()
   t.tic()
   time.sleep(1)
   t.toc()
 
   # デコレータを使用
-  @cb.Timer()
+  @Timer()
   def testing_function():
       time.sleep(1)
 
   # 'with' ステートメントを使用
-  with cb.Timer():
+  with Timer():
       time.sleep(1)
   ```

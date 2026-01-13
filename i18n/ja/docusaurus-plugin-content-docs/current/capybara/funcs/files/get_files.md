@@ -1,6 +1,6 @@
 # get_files
 
-> [get_files(folder: Union[str, Path], suffix: Union[str, List[str], Tuple[str]] = None, recursive: bool = True, return_pathlib: bool = True, sort_path: bool = True, ignore_letter_case: bool = True) -> List[Path]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L88)
+> [get_files(folder: str | Path, suffix: str | list[str] | tuple[str, ...] | None = None, recursive: bool = True, return_pathlib: bool = True, sort_path: bool = True, ignore_letter_case: bool = True)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/files_utils.py)
 
 - **説明**：指定したフォルダ内のすべてのファイルを取得します。ここでの `suffix` は大文字と小文字を区別しませんが、`suffix` に `.` を含める必要があることに注意してください。多くの場合、この問題でファイルが見つからないことがあります。
 
@@ -20,10 +20,10 @@
 - **例**
 
   ```python
-  import capybara as cb
+  from capybara.utils.files_utils import get_files
 
   folder = '/path/to/your/folder'
-  files = cb.get_files(folder, suffix=['.jpg', '.png'])
+  files = get_files(folder, suffix=['.jpg', '.png'])
   print(files)
   # >>> ['/path/to/your/folder/1.jpg', '/path/to/your/folder/2.png']
   ```

@@ -1,6 +1,6 @@
 # load_pickle
 
-> [load_pickle(path: Union[str, Path]) -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L159)
+> [load_pickle(path: str | Path)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/files_utils.py)
 
 - **Description**: Reads a pickle file.
 
@@ -10,15 +10,15 @@
 
 - **Return Value**:
 
-  - **dict**: The content of the pickle file.
+  - **Any**: The deserialized content.
 
 - **Example**:
 
   ```python
-  import capybara as cb
+  from capybara.utils.files_utils import load_pickle
 
   path = '/path/to/your/pickle'
-  data = cb.load_pickle(path)
+  data = load_pickle(path)
   print(data)
   # >>> {'key': 'value'}
   ```

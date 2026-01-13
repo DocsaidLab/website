@@ -1,6 +1,6 @@
 # imcropbox
 
-> [imcropbox(img: np.ndarray, box: Union[Box, np.ndarray], use_pad: bool = False) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L257)
+> [imcropbox(img: np.ndarray, box: Box | np.ndarray, use_pad: bool = False) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **Description**: Crops the input image using the provided bounding box.
 

@@ -1,6 +1,10 @@
 # draw_polygon
 
-> [draw_polygon(img: np.ndarray, polygon: Union[Polygon, np.ndarray], color: \_Color = (0, 255, 0), thickness: \_Thickness = 2, fillup=False, \*\*kwargs) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/visualization/draw.py#L103)
+> [draw_polygon(img: np.ndarray, polygon: _Polygon, color: _Color = (0, 255, 0), thickness: _Thickness = 2, fillup: bool = False, **kwargs) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/visualization/draw.py)
+
+- **依存関係**
+
+  - `capybara-docsaid[visualization]` を先にインストールしてください。
 
 - **説明**：画像に多角形を描画します。
 
@@ -20,11 +24,12 @@
 - **例**
 
   ```python
-  import capybara as cb
+  from capybara import Polygon, imread
+  from capybara.vision.visualization.draw import draw_polygon
 
-  img = cb.imread('lena.png')
-  polygon = cb.Polygon([(20, 20), (100, 20), (80, 80), (20, 40)])
-  polygon_img = cb.draw_polygon(img, polygon, color=(0, 255, 0), thickness=2)
+  img = imread('lena.png')
+  polygon = Polygon([(20, 20), (100, 20), (80, 80), (20, 40)])
+  polygon_img = draw_polygon(img, polygon, color=(0, 255, 0), thickness=2)
   ```
 
   ![draw_polygon](./resource/test_draw_polygon.jpg)

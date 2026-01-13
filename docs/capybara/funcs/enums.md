@@ -6,13 +6,13 @@
 
 ## 列舉類別概述
 
-- [**INTER**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L12)：定義了不同的影像內插法。
-- [**ROTATE**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L20)：定義了影像的旋轉角度。
-- [**BORDER**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L26)：定義了邊界處理的方式。
-- [**MORPH**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L35)：定義了形態學操作的核形狀。
-- [**COLORSTR**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L41)：定義了終端顯示的顏色字串。
-- [**FORMATSTR**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L60)：定義了文字格式化的字串。
-- [**IMGTYP**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L66)：定義了支援的映像檔類型。
+- [**INTER**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py)：定義了不同的影像內插法。
+- [**ROTATE**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py)：定義了影像的旋轉角度。
+- [**BORDER**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py)：定義了邊界處理的方式。
+- [**MORPH**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py)：定義了形態學操作的核形狀。
+- [**COLORSTR**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py)：定義了終端顯示的顏色字串。
+- [**FORMATSTR**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py)：定義了文字格式化的字串。
+- [**IMGTYP**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py)：定義了支援的映像檔類型。
 
 ## capybara.INTER
 

@@ -1,6 +1,6 @@
 # centercrop
 
-> [centercrop(img: np.ndarray) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L374)
+> [centercrop(img: np.ndarray) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **說明**：對輸入影像進行中心裁剪處理。
 
@@ -15,11 +15,12 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara import imread, imresize
+  from capybara.vision.functionals import centercrop
 
-  img = cb.imread('lena.png')
-  img = cb.imresize(img, [128, 256])
-  crop_img = cb.centercrop(img)
+  img = imread('lena.png')
+  img = imresize(img, [128, 256])
+  crop_img = centercrop(img)
   ```
 
   綠色框表示中心裁剪的區域。

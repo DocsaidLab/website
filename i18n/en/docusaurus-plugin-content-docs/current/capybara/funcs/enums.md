@@ -6,13 +6,13 @@ Most of the enumeration values directly reference OpenCV’s enumeration values,
 
 ## Overview of Enumeration Classes
 
-- [**INTER**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L12): Defines different image interpolation methods.
-- [**ROTATE**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L20): Defines the rotation angles of an image.
-- [**BORDER**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L26): Defines border handling methods.
-- [**MORPH**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L35): Defines the kernel shapes for morphological operations.
-- [**COLORSTR**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L41): Defines color strings for terminal display.
-- [**FORMATSTR**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L60): Defines formatting strings for text.
-- [**IMGTYP**](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/enums.py#L66): Defines supported image file types.
+- [**INTER**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py): Defines different image interpolation methods.
+- [**ROTATE**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py): Defines the rotation angles of an image.
+- [**BORDER**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py): Defines border handling methods.
+- [**MORPH**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py): Defines the kernel shapes for morphological operations.
+- [**COLORSTR**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py): Defines color strings for terminal display.
+- [**FORMATSTR**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py): Defines formatting strings for text.
+- [**IMGTYP**](https://github.com/DocsaidLab/Capybara/blob/main/capybara/enums.py): Defines supported image file types.
 
 ## capybara.INTER
 

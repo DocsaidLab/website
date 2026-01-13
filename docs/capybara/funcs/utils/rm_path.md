@@ -1,18 +1,23 @@
 # rm_path
 
-> [rm_path(path: Union[str, Path]) -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/custom_path.py#L26)
+> [rm_path(path: str | Path) -> None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/custom_path.py)
 
 - **說明**：移除路徑／檔案。
 
 - **參數**
 
-  - **path** (`path: Union[str, Path]`)：要移除的路徑／檔案。
+  - **path** (`str | Path`)：要移除的路徑／檔案。
+
+- **行為**
+
+  - 若 `path` 是資料夾且不是 symlink：使用 `shutil.rmtree` 遞迴刪除。
+  - 其他情況（一般檔案／symlink）：使用 `Path.unlink()` 刪除。
 
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.utils import rm_path
 
   path = '/path/to/your/directory'
-  new_path = cb.rm_path(path)
+  rm_path(path)
   ```

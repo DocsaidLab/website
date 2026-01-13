@@ -1,23 +1,27 @@
 # imencode
 
-> [imencode(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG) -> Union[bytes, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L100)
+> [imencode(img: np.ndarray, imgtyp: str | int | IMGTYP = IMGTYP.JPEG, **kwargs: object) -> bytes | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **説明**：NumPy 画像配列を指定された形式のバイト列にエンコードします。
 
 - **パラメータ**
 
   - **img** (`np.ndarray`)：エンコードする画像配列。
-  - **IMGTYP** (`Union[str, int, IMGTYP]`)：画像タイプ。サポートされているタイプは`IMGTYP.JPEG`と`IMGTYP.PNG`です。デフォルトは`IMGTYP.JPEG`。
+  - **imgtyp** (`str | int | IMGTYP`)：画像タイプ。`IMGTYP.JPEG` / `IMGTYP.PNG` を指定できます。デフォルトは `IMGTYP.JPEG`。
 
 - **戻り値**
 
-  - **bytes**：エンコードされた画像のバイト列。
+  - **bytes | None**：エンコードされた画像のバイト列。失敗時は `None`。
+
+- **備考**
+
+  - 互換性のため `IMGTYP=...` も受け付けます（`imgtyp` と同時に渡すと `TypeError`）。
 
 - **使用例**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import IMGTYP, imencode, imread
 
-  img = cb.imread('lena.png')
-  encoded_bytes = cb.imencode(img, IMGTYP=cb.IMGTYP.PNG)
+  img = imread('lena.png')
+  encoded_bytes = imencode(img, imgtyp=IMGTYP.PNG)
   ```

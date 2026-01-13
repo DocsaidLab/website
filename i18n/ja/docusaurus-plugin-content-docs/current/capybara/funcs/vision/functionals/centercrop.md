@@ -1,6 +1,6 @@
 # centercrop
 
-> [centercrop(img: np.ndarray) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/functionals.py#L374)
+> [centercrop(img: np.ndarray) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/functionals.py)
 
 - **説明**：入力画像に対してセンタークロップ処理を行います。
 
@@ -16,10 +16,11 @@
 
   ```python
   import capybara as cb
+  from capybara.vision.functionals import centercrop
 
   img = cb.imread('lena.png')
   img = cb.imresize(img, [128, 256])
-  crop_img = cb.centercrop(img)
+  crop_img = centercrop(img)
   ```
 
   緑色の枠はセンタークロップされた領域を示します。

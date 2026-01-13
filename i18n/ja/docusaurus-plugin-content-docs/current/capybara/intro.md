@@ -4,105 +4,123 @@ sidebar_position: 1
 
 # イントロダクション
 
-Capybara は主に以下の部分で構成されています：
+Capybara は以下の要素で構成されています（現行のコード構造に基づく）：
 
-- **Vision**：画像や動画処理など、コンピュータビジョンに関連する機能。
-- **Structures**：BoundingBox や Polygon など、構造化データを処理するモジュール。
-- **ONNXEngine**：ONNX 形式のモデルをサポートし、ONNX 推論機能を提供。
-- **Utils**：システム情報やファイル処理などの補助的なツール関数を含む。
-- **Tests**：各種関数の機能を検証するテストファイル。
+- **Vision**（`capybara.vision`）：画像／動画の I/O と処理。
+- **Structures**（`capybara.structures`）：`Box/Boxes`、`Polygon/Polygons`、`Keypoints` などの幾何構造。
+- **Runtime**（`capybara.runtime`）：runtime/backend のレジストリと選択ロジック。
+- **推論エンジン（optional）**：
+  - `capybara.onnxengine`（ONNXRuntime）
+  - `capybara.openvinoengine`（OpenVINO）
+  - `capybara.torchengine`（TorchScript）
+- **Utils**（`capybara.utils`）：ユーティリティ（パス、ダウンロード、時間など）。
+- **Extras（optional）**：
+  - `visualization`：描画ユーティリティ（`capybara.vision.visualization`）
+  - `ipcam`：簡易 Web demo（`capybara.vision.ipcam`）
+  - `system`：システム情報ユーティリティ（`capybara.utils.system_info`）
 
 ## Vision
 
-Vision モジュールは、画像や動画データの処理に特化しており、豊富なコンピュータビジョンツールを提供します。
+Vision モジュールは画像／動画の処理と I/O を扱います。
 
 ディレクトリ構成：
 
 ```
 vision
-├── functionals.py       # 基本的な画像処理関数（フィルタリング、変換など）
-├── geometric.py         # 幾何学的な処理（回転、スケーリングなど）
-├── improc.py            # 画像処理のコアロジック
-├── ipcam                # ネットワークカメラストリーム処理モジュール
-├── morphology.py        # 形態学的な処理（膨張、収縮など）
-├── videotools           # 動画ツール関連モジュール
-└── visualization        # 可視化ツール（枠線描画、アノテーションなど）
+├── functionals.py       # 基本的な画像処理（フィルタ、変換など）
+├── geometric.py         # 幾何処理（回転、リサイズなど）
+├── improc.py            # 画像 I/O と補助処理
+├── morphology.py        # 形態学処理（膨張、収縮など）
+├── videotools           # 動画ツール
+├── ipcam                # （extra: ipcam）IPCam demo
+└── visualization        # （extra: visualization）描画／可視化
 ```
 
 主な機能：
 
-- 画像と動画の読み込み、処理、可視化。
-- 複数のフォーマットやソース（ローカルファイル、ネットワークカメラなど）をサポート。
+- 画像／動画の読み取り、処理、可視化。
+- 複数の入力ソース（ローカルファイル、動画抽出、IPCam demo など）に対応。
 
 ## Structures
 
-Structures モジュールは、構造化データを処理するためのもので、主にコンピュータビジョンやデータ分析のシーンで使用されます。
+Structures モジュールは構造化データ（幾何情報）を扱います。
 
 ディレクトリ構成：
 
 ```
 structures
-├── functionals.py       # 関連する機能関数
-├── boxes.py             # Box、Boxesデータ構造
-├── keypoints.py         # Keypointsデータ構造
-└── polygons.py          # Polygon、Polygonsデータ構造
+├── functionals.py       # 関連機能
+├── boxes.py             # Box / Boxes
+├── keypoints.py         # Keypoints
+└── polygons.py          # Polygon / Polygons
 ```
 
 主な機能：
 
-- Box、Keypoints、Polygon などの構造化データの処理。
-- インターセクション、ユニオン、スケーリングなどの操作をサポート。
+- Boxes/Keypoints/Polygons などの構造化データ処理。
+- intersection、IoU、scale などの操作。
 
-## ONNXEngine
+## Runtime / 推論エンジン（optional）
 
-ONNXEngine モジュールは、ONNX 形式のモデル推論に関連する機能を提供します。
+推論関連機能は独立モジュールとして提供され、`capybara.runtime` は runtime/backend の統一的な表現と選択ロジックを提供します。
+
+注意：推論 backend は optional dependency です。必要な extras を先にインストールしてください（例：`capybara-docsaid[onnxruntime]`）。
+
+### capybara.runtime
+
+- `Runtime` / `Backend` を定義し、`auto_backend_name()` などの選択ヘルパーを提供します。
+
+### capybara.onnxengine
 
 ディレクトリ構成：
 
 ```
 onnxengine
 ├── engine.py            # コア推論ロジック
-├── __init__.py          # 初期化ファイル
-└── metadata.py          # モデルメタデータ管理
+├── __init__.py          # 初期化
+├── metadata.py          # モデル metadata
+└── utils.py             # ONNX helper
 ```
 
 主な機能：
 
-- ONNX モデルの読み込みと推論をサポート。
+- ONNX モデルのロードと推論。
+
+### capybara.openvinoengine
+
+- OpenVINO 推論 wrapper（同期推論 + optional async queue）。
+
+### capybara.torchengine
+
+- TorchScript 推論 wrapper（簡易 dtype/device 正規化）。
 
 ## Utils
 
-Utils モジュールは、さまざまな補助的なツール関数を含んでおり、広範囲にわたる機能を提供します。
+Utils モジュールは補助ユーティリティを提供します。
 
 ディレクトリ構成：
 
 ```
 utils
-├── custom_path.py       # カスタムパス操作
-├── custom_tqdm.py       # プログレスバーのツール
-├── files_utils.py       # ファイル処理関数
-├── powerdict.py         # 強化版辞書操作
-├── system_info.py       # システム情報のチェック
-├── time.py              # 時間処理ツール
-└── utils.py             # 汎用的なツール関数
+├── custom_path.py       # パス操作
+├── custom_tqdm.py       # 進捗バー
+├── files_utils.py       # ファイルユーティリティ
+├── powerdict.py         # 拡張 dict
+├── system_info.py       # システム情報（extra: system）
+├── time.py              # 時間ユーティリティ
+└── utils.py             # 汎用ユーティリティ
 ```
 
 主な機能：
 
-- ファイル処理とシステム情報のチェック。
-- プログレスバーや強化版辞書などのカスタムツールを提供。
+- ファイル操作／システム情報取得。
+- 進捗バーや拡張 dict などの補助ツール。
 
 ## Tests
 
-Tests モジュールは、システムの機能が正しいかどうかを検証するために使用されます。
-
-主な機能：
-
-- 各モジュールのユニットテストを含む。
-- クイック回帰と機能検証を提供。
+Tests は機能検証のためのテスト群です。
 
 ---
 
-以上が Capybara 各モジュールの概要です。
+API の使用方法は各ドキュメントを参照してください。import エラーが出る場合は、対応する extra がインストールされているかを確認してください。
 
-詳細な使用方法については、対応する API ドキュメントやサンプルコードをご覧ください。

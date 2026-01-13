@@ -1,207 +1,214 @@
 # Base64 Process
 
-`pybase64` is a Python library that provides Base64 encoding and decoding functionalities. It supports various encoding formats, including standard Base64, Base64 URL, and Base64 URL file name safe encoding. `pybase64` is an enhanced version of the `base64` module, offering more features and options.
+This module uses `pybase64` internally and provides both `bytes` and `str` interfaces (e.g. `img_to_b64` vs `img_to_b64str`).
 
-In image processing, we often need to convert image data into Base64 encoded strings for use in web transmission. `pybase64` provides a convenient interface for fast Base64 encoding and decoding operations, supporting various encoding formats to meet different needs.
+- **Common issue: string vs bytes?**
 
-- **Common Issue: String vs Byte String?**
-
-  In Python, a string is a sequence of Unicode characters, while a byte string is a sequence of "bytes." In Base64 encoding, we typically use byte strings for encoding and decoding, as Base64 encoding operates on byte data.
+  In Python, `str` is a sequence of Unicode characters, while `bytes` is a sequence of raw bytes. Base64 operates on bytes, so encoding/decoding typically happens on `bytes`. String variants are provided for convenience.
 
 ## img_to_b64
 
-> [img_to_b64(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG) -> Union[bytes, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L116)
+> [img_to_b64(img: np.ndarray, imgtyp: str | int | IMGTYP = IMGTYP.JPEG, **kwargs: object) -> bytes | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Converts a NumPy image array into a Base64 byte string.
+- **Description**: Encodes a numpy image into Base64 `bytes`.
 
-- **Parameters**:
+- **Parameters**
 
-  - **img** (`np.ndarray`): The image array to convert.
-  - **IMGTYP** (`Union[str, int, IMGTYP]`): The image type. Supported types are `IMGTYP.JPEG` and `IMGTYP.PNG`. Default is `IMGTYP.JPEG`.
+  - **img** (`np.ndarray`): Image array.
+  - **imgtyp** (`str | int | IMGTYP`): Image type. Supports `IMGTYP.JPEG` / `IMGTYP.PNG`. Default is `IMGTYP.JPEG`.
 
-- **Return value**:
+- **Returns**
 
-  - **bytes**: The Base64 encoded byte string.
+  - **bytes | None**: Base64 bytes; returns `None` when encoding fails.
 
-- **Example**:
+- **Notes**
+
+  - For backward compatibility, `IMGTYP=...` is also accepted (providing both `imgtyp` and `IMGTYP` raises `TypeError`).
+
+- **Example**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import IMGTYP, img_to_b64, imread
 
-  img = cb.imread('lena.png')
-  b64 = cb.img_to_b64(img, IMGTYP=cb.IMGTYP.PNG)
+  img = imread('lena.png')
+  b64 = img_to_b64(img, imgtyp=IMGTYP.PNG)
   ```
 
 ## npy_to_b64
 
-> [npy_to_b64(x: np.ndarray, dtype='float32') -> bytes](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L126)
+> [npy_to_b64(x: np.ndarray, dtype='float32') -> bytes](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Converts a NumPy array into a Base64 byte string.
+- **Description**: Encodes a numpy array into Base64 `bytes`.
 
-- **Parameters**:
+- **Parameters**
 
-  - **x** (`np.ndarray`): The NumPy array to convert.
-  - **dtype** (`str`): The data type. Default is `'float32'`.
+  - **x** (`np.ndarray`): Numpy array.
+  - **dtype** (`str`): Cast dtype before encoding. Default is `'float32'`.
 
-- **Return value**:
+- **Returns**
 
-  - **bytes**: The Base64 encoded byte string.
+  - **bytes**: Base64 bytes.
 
-- **Example**:
+- **Example**
 
   ```python
-  import capybara as cb
   import numpy as np
+  from capybara.vision.improc import npy_to_b64
 
   x = np.random.rand(100, 100, 3)
-  b64 = cb.npy_to_b64(x)
+  b64 = npy_to_b64(x)
   ```
 
 ## npy_to_b64str
 
-> [npy_to_b64str(x: np.ndarray, dtype='float32', string_encode: str = 'utf-8') -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L130)
+> [npy_to_b64str(x: np.ndarray, dtype='float32', string_encode: str = 'utf-8') -> str](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Converts a NumPy array into a Base64 string.
+- **Description**: Encodes a numpy array into a Base64 string.
 
-- **Parameters**:
+- **Parameters**
 
-  - **x** (`np.ndarray`): The NumPy array to convert.
-  - **dtype** (`str`): The data type. Default is `'float32'`.
-  - **string_encode** (`str`): The string encoding. Default is `'utf-8'`.
+  - **x** (`np.ndarray`): Numpy array.
+  - **dtype** (`str`): Cast dtype before encoding. Default is `'float32'`.
+  - **string_encode** (`str`): String encoding. Default is `'utf-8'`.
 
-- **Return value**:
+- **Returns**
 
-  - **str**: The Base64 encoded string.
+  - **str**: Base64 string.
 
-- **Example**:
+- **Example**
 
   ```python
-  import capybara as cb
   import numpy as np
+  from capybara.vision.improc import npy_to_b64str
 
   x = np.random.rand(100, 100, 3)
-
-  b64str = cb.npy_to_b64str(x)
+  b64str = npy_to_b64str(x)
   ```
 
 ## img_to_b64str
 
-> [img_to_b64str(img: np.ndarray, IMGTYP: Union[str, int, IMGTYP] = IMGTYP.JPEG, string_encode: str = 'utf-8') -> Union[str, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L134)
+> [img_to_b64str(img: np.ndarray, imgtyp: str | int | IMGTYP = IMGTYP.JPEG, string_encode: str = 'utf-8', **kwargs: object) -> str | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Converts a NumPy image array into a Base64 string.
+- **Description**: Encodes a numpy image into a Base64 string.
 
-- **Parameters**:
+- **Parameters**
 
-  - **img** (`np.ndarray`): The image array to convert.
-  - **IMGTYP** (`Union[str, int, IMGTYP]`): The image type. Supported types are `IMGTYP.JPEG` and `IMGTYP.PNG`. Default is `IMGTYP.JPEG`.
-  - **string_encode** (`str`): The string encoding. Default is `'utf-8'`.
+  - **img** (`np.ndarray`): Image array.
+  - **imgtyp** (`str | int | IMGTYP`): Image type. Supports `IMGTYP.JPEG` / `IMGTYP.PNG`. Default is `IMGTYP.JPEG`.
+  - **string_encode** (`str`): String encoding. Default is `'utf-8'`.
 
-- **Return value**:
+- **Returns**
 
-  - **str**: The Base64 encoded string.
+  - **str | None**: Base64 string; returns `None` when encoding fails.
 
-- **Example**:
+- **Notes**
+
+  - For backward compatibility, `IMGTYP=...` is also accepted (providing both `imgtyp` and `IMGTYP` raises `TypeError`).
+
+- **Example**
 
   ```python
   import capybara as cb
 
   img = cb.imread('lena.png')
-  b64str = cb.img_to_b64str(img, IMGTYP=cb.IMGTYP.PNG)
+  b64str = cb.img_to_b64str(img, imgtyp=cb.IMGTYP.PNG)
   ```
 
 ## b64_to_img
 
-> [b64_to_img(b64: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L143)
+> [b64_to_img(b64: bytes) -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Converts a Base64 byte string into a NumPy image array.
+- **Description**: Decodes Base64 bytes into a numpy image.
 
-- **Parameters**:
+- **Parameters**
 
-  - **b64** (`bytes`): The Base64 byte string to convert.
+  - **b64** (`bytes`): Base64 bytes.
 
-- **Return value**:
+- **Returns**
 
-  - **np.ndarray**: The converted NumPy image array.
+  - **np.ndarray | None**: Decoded image; returns `None` on failure.
 
-- **Example**:
+- **Example**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import b64_to_img, img_to_b64, imread
 
-  b64 = cb.img_to_b64(cb.imread('lena.png'))
-  img = cb.b64_to_img(b64)
+  b64 = img_to_b64(imread('lena.png'))
+  img = b64_to_img(b64)
   ```
 
 ## b64str_to_img
 
-> [b64str_to_img(b64str: Union[str, None], string_encode: str = 'utf-8') -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L151)
+> [b64str_to_img(b64str: str | None, string_encode: str = 'utf-8') -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Converts a Base64 string into a NumPy image array.
+- **Description**: Decodes a Base64 string into a numpy image.
 
-- **Parameters**:
+- **Parameters**
 
-  - **b64str** (`Union[str, None]`): The Base64 string to convert.
-  - **string_encode** (`str`): The string encoding. Default is `'utf-8'`.
+  - **b64str** (`str | None`): Base64 string.
+  - **string_encode** (`str`): String encoding. Default is `'utf-8'`.
 
-- **Return value**:
+- **Returns**
 
-  - **np.ndarray**: The converted NumPy image array.
+  - **np.ndarray | None**: Decoded image; returns `None` on failure.
 
-- **Example**:
+- **Example**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import b64str_to_img, img_to_b64, imread
 
-  b64 = cb.img_to_b64(cb.imread('lena.png'))
+  b64 = img_to_b64(imread('lena.png'))
   b64str = b64.decode('utf-8')
-  img = cb.b64str_to_img(b64str)
+  img = b64str_to_img(b64str)
   ```
 
 ## b64_to_npy
 
-> [b64_to_npy(x: bytes, dtype='float32') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L166)
+> [b64_to_npy(x: bytes, dtype='float32') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Converts a Base64 byte string into a NumPy array.
+- **Description**: Decodes Base64 bytes into a numpy array.
 
-- **Parameters**:
+- **Parameters**
 
-  - **x** (`bytes`): The Base64 byte string to convert.
-  - **dtype** (`str`): The data type. Default is `'float32'`.
+  - **x** (`bytes`): Base64 bytes.
+  - **dtype** (`str`): Output dtype. Default is `'float32'`.
 
-- **Return value**:
+- **Returns**
 
-  - **np.ndarray**: The converted NumPy array.
+  - **np.ndarray**: Decoded numpy array.
 
-- **Example**:
+- **Example**
 
   ```python
-  import capybara as cb
+  import numpy as np
+  from capybara.vision.improc import b64_to_npy, npy_to_b64
 
-  b64 = cb.npy_to_b64(np.random.rand(100, 100, 3))
-  x = cb.b64_to_npy(b64)
+  b64 = npy_to_b64(np.random.rand(100, 100, 3))
+  x = b64_to_npy(b64)
   ```
 
 ## b64str_to_npy
 
-> [b64str_to_npy(x: bytes, dtype='float32', string_encode: str = 'utf-8') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L170)
+> [b64str_to_npy(x: str, dtype='float32', string_encode: str = 'utf-8') -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Converts a Base64 string into a NumPy array.
+- **Description**: Decodes a Base64 string into a numpy array.
 
-- **Parameters**:
+- **Parameters**
 
-  - **x** (`bytes`): The Base64 string to convert.
-  - **dtype** (`str`): The data type. Default is `'float32'`.
-  - **string_encode** (`str`): The string encoding. Default is `'utf-8'`.
+  - **x** (`str`): Base64 string.
+  - **dtype** (`str`): Output dtype. Default is `'float32'`.
+  - **string_encode** (`str`): String encoding. Default is `'utf-8'`.
 
-- **Return value**:
+- **Returns**
 
-  - **np.ndarray**: The converted NumPy array.
+  - **np.ndarray**: Decoded numpy array.
 
-- **Example**:
+- **Example**
 
   ```python
-  import capybara as cb
+  import numpy as np
+  from capybara.vision.improc import b64str_to_npy, npy_to_b64
 
-  b64 = cb.npy_to_b64(np.random.rand(100, 100, 3))
-  x = cb.b64str_to_npy(b64.decode('utf-8'))
+  b64 = npy_to_b64(np.random.rand(100, 100, 3))
+  x = b64str_to_npy(b64.decode('utf-8'))
   ```

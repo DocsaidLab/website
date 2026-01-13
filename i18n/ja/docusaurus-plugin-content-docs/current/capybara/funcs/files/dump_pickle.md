@@ -1,6 +1,6 @@
 # dump_pickle
 
-> [dump_pickle(obj, path: Union[str, Path]) -> None](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/files_utils.py#L173)
+> [dump_pickle(obj: Any, path: str | Path) -> None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/files_utils.py)
 
 - **説明**：オブジェクトを pickle ファイルに書き込みます。
 
@@ -12,8 +12,8 @@
 - **使用例**
 
   ```python
-  import capybara as cb
+  from capybara.utils.files_utils import dump_pickle
 
   data = {'key': 'value'}
-  cb.dump_pickle(data, '/path/to/your/pickle')
+  dump_pickle(data, '/path/to/your/pickle')
   ```

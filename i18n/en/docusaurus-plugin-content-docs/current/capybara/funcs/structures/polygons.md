@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Polygons
 
-> [Polygons(array: \_Polygons, normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/polygons.py#L336)
+> [Polygons(polygons: _Polygons, is_normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/polygons.py)
 
 - **Description**:
 
@@ -12,12 +12,12 @@ sidebar_position: 5
 
 - **Parameters**
 
-  - **array** (`_Polygons`): The coordinates of multiple polygons.
-  - **normalized** (`bool`): A flag indicating whether the polygon coordinates are normalized. Default is `False`.
+  - **polygons** (`_Polygons`): The coordinates of multiple polygons.
+  - **is_normalized** (`bool`): Whether the polygon coordinates are normalized (flag). Default is `False`.
 
 - **Attributes**
 
-  - **normalized**: Gets the normalized status of the polygons.
+  - **is_normalized**: Gets the normalized status of the polygons.
   - **moments**: Gets the moments of the polygons.
   - **area**: Gets the area of the polygons.
   - **arclength**: Gets the perimeter (arc length) of the polygons.
@@ -38,10 +38,10 @@ sidebar_position: 5
   - **denormalize**(`w: float, h: float`): Denormalizes the polygon coordinates.
   - **clip**(`xmin: int, ymin: int, xmax: int, ymax: int`): Clips the polygons.
   - **shift**(`shift_x: float, shift_y: float`): Shifts the polygons.
-  - **scale**(`distance: int, join_style: JOIN_STYLE = JOIN_STYLE.mitre`): Scales the polygons.
+  - **scale**(`distance: int`): Scales the polygons (currently does not expose `join_style`).
   - **to_convexhull**(): Converts the polygons to convex hulls.
   - **to_min_boxpoints**(): Converts the polygons to the coordinates of the minimum bounding rectangle.
-  - **to_box**(`box_mode: str = 'xyxy'`): Converts the polygons to bounding boxes.
+  - **to_boxes**(`box_mode: str = 'xyxy'`): Converts the polygons to bounding boxes.
   - **to_list**(`flatten: bool = False`): Converts the polygons to a list.
   - **is_empty**(`threshold: int = 3`): Determines if the polygons are empty.
 

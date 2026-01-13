@@ -1,84 +1,95 @@
 # SystemInfo
 
-This is a tool to retrieve system information, including CPU, memory, disk, network, and more.
+This module provides utilities to retrieve system information, including CPU, memory, disk, GPU/CUDA, and network.
+
+Note: this module depends on `psutil`. Install `capybara-docsaid[system]` first:
+
+```bash
+pip install "capybara-docsaid[system]"
+```
 
 ## get_package_versions
 
-> [get_package_versions() -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/system_info.py#L14)
+> [get_package_versions() -> dict](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
 
-- **Description**: Retrieves the versions of common deep learning and data analysis packages, including PyTorch, PyTorch Lightning, TensorFlow, Keras, NumPy, Pandas, Scikit-learn, OpenCV, and more.
+- **Description**: Retrieves versions of common deep learning / data analysis packages, including PyTorch, PyTorch Lightning, TensorFlow, Keras, NumPy, Pandas, Scikit-learn, OpenCV, etc.
 
 - **Returns**
 
-  - **dict**: A dictionary containing version information of installed packages.
+  - **dict**: A dictionary of installed package versions.
 
 - **Example**
 
   ```python
-  import capybara as cb
+  from capybara.utils.system_info import get_package_versions
 
-  versions_info = cb.get_package_versions()
+  versions_info = get_package_versions()
   print(versions_info)
-  # versions_info = {
-  #     'PyTorch Version': '1.9.0',
-  #     'PyTorch Lightning Version': '1.3.8',
-  #     'TensorFlow Version': '2.5.0',
-  #     'Keras Version': '2.4.3',
-  #     'NumPy Version': '1.19.5',
-  #     'Pandas Version': '1.1.5',
-  #     'Scikit-learn Version': '0.24.2',
-  #     'OpenCV Version': '4.5.2'
-  # }
   ```
 
 ## get_gpu_cuda_versions
 
-> [get_gpu_cuda_versions() -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/system_info.py#L84)
+> [get_gpu_cuda_versions() -> dict](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
 
-- **Description**: Retrieves GPU and CUDA version information. It attempts to get the CUDA version using packages such as PyTorch, TensorFlow, and CuPy, and uses the `nvidia-smi` command to fetch the Nvidia driver version.
+- **Description**: Retrieves GPU and CUDA version information. It tries to infer CUDA version via PyTorch/TensorFlow/CuPy and uses `nvidia-smi` to read NVIDIA driver version.
 
 - **Returns**
 
-  - **dict**: A dictionary containing CUDA and GPU driver version information.
+  - **dict**: A dictionary containing CUDA and driver version information.
 
 - **Example**
 
   ```python
-  import capybara as cb
+  from capybara.utils.system_info import get_gpu_cuda_versions
 
-  gpu_cuda_info = cb.get_gpu_cuda_versions()
+  gpu_cuda_info = get_gpu_cuda_versions()
   print(gpu_cuda_info)
-  # gpu_cuda_info = {
-  #     'CUDA Version': '11.1',
-  #     'NVIDIA Driver Version': '460.32.03'
-  # }
   ```
 
 ## get_cpu_info
 
-> [get_cpu_info() -> str](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/system_info.py#L134)
+> [get_cpu_info() -> str](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
 
-- **Description**: Retrieves the CPU model name based on the platform.
+- **Description**: Returns CPU model name based on the current platform.
 
 - **Returns**
 
-  - **str**: The CPU model name. Returns "N/A" if not found.
+  - **str**: CPU model name; returns `"N/A"` when not found.
 
 - **Example**
 
   ```python
-  import capybara as cb
+  from capybara.utils.system_info import get_cpu_info
 
-  cpu_info = cb.get_cpu_info()
+  cpu_info = get_cpu_info()
   print(cpu_info)
-  # cpu_info = 'Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz'
+  ```
+
+## get_external_ip
+
+> [get_external_ip() -> str](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
+
+- **Description**: Retrieves external IP via `https://httpbin.org/ip`. On request failure, returns a string like `"Error obtaining IP: ..."`.
+
+- **Example**
+
+  ```python
+  from capybara.utils.system_info import get_external_ip
+
+  ip = get_external_ip()
+  print(ip)
   ```
 
 ## get_system_info
 
-> [get_system_info() -> dict](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/utils/system_info.py#L155)
+> [get_system_info() -> dict](https://github.com/DocsaidLab/Capybara/blob/main/capybara/utils/system_info.py)
 
-- **Description**: Retrieves system information, including operating system version, CPU info, memory, disk usage, etc.
+- **Description**: Retrieves system information, including OS version, CPU info, memory, disk usage, etc.
+
+- **Notes**
+
+  - NIC name is hard-coded to `enp5s0` to fetch `IPV4 Address` / `MAC Address`. If your environment uses a different NIC name, these fields may be empty lists.
+  - GPU info is fetched via `nvidia-smi`; if unavailable, it returns `"N/A or Error"`.
 
 - **Returns**
 
@@ -87,25 +98,8 @@ This is a tool to retrieve system information, including CPU, memory, disk, netw
 - **Example**
 
   ```python
-  import capybara as cb
+  from capybara.utils.system_info import get_system_info
 
-  system_info = cb.get_system_info()
+  system_info = get_system_info()
   print(system_info)
-  # system_info = {
-  #     'OS Version': 'Linux-5.4.0-80-generic-x86_64-with-glibc2.29',
-  #     'CPU Model': 'Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz',
-  #     'Physical CPU Cores': 6,
-  #     'Logical CPU Cores (incl. hyper-threading)': 12,
-  #     'Total RAM (GB)': 15.52,
-  #     'Available RAM (GB)': 7.52,
-  #     'Disk Total (GB)': 476.94,
-  #     'Disk Used (GB)': 18.94,
-  #     'Disk Free (GB)': 458.0,
-  #     'GPU Info': 'NVIDIA GeForce GTX 1660 Ti',
-  #     'IPV4 Address': ['xxx.xxx.xxx.xxx'],
-  #     'IPV4 Address (External)': 'xxx.xxx.xxx.xxx',
-  #     'MAC Address': [
-  #         'xx:xx:xx:xx:xx:xx'
-  #     ]
-  # }
   ```

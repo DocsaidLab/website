@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Polygon
 
-> [Polygon(array: \_Polygon, normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/polygons.py#L64)
+> [Polygon(array: _Polygon, is_normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/polygons.py)
 
 - **Description**:
 
@@ -13,11 +13,11 @@ sidebar_position: 4
 - **Parameters**
 
   - **array** (`_Polygon`): The coordinates of the polygon.
-  - **normalized** (`bool`): A flag indicating whether the polygon coordinates are normalized. Default is `False`.
+  - **is_normalized** (`bool`): Whether the polygon coordinates are normalized (flag). Default is `False`.
 
 - **Attributes**
 
-  - **normalized**: Gets the normalized status of the polygon.
+  - **is_normalized**: Gets the normalized status of the polygon.
   - **moments**: Gets the moments of the polygon.
   - **area**: Gets the area of the polygon.
   - **arclength**: Gets the perimeter (arc length) of the polygon.

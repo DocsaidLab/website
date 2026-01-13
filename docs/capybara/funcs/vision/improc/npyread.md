@@ -1,6 +1,6 @@
 # npyread
 
-> [npyread(path: Union[str, Path]) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L174)
+> [npyread(path: str | Path) -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
 - **說明**：從 NumPy `.npy` 文件中讀取圖像數組。
 
@@ -15,7 +15,7 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import npyread
 
-  img = cb.npyread('lena.npy')
+  img = npyread('lena.npy')
   ```

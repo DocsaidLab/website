@@ -1,24 +1,34 @@
 # write_metadata_into_onnx
 
-> [write_metadata_into_onnx(onnx_path: Union[str, Path], out_path: Union[str, Path], drop_old_meta: bool = False, \*\*kwargs)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/onnxengine/metadata.py#L20)
+> [write_metadata_into_onnx(onnx_path: str | Path, out_path: str | Path, drop_old_meta: bool = False, **kwargs: Any) -> None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/onnxengine/metadata.py)
 
-- **説明**：カスタムメタデータを ONNX モデルに書き込みます。
+- **依存関係**
+
+  - `onnx` が必要です（モデルファイルの read/write）。
+  - `drop_old_meta=False` の場合、旧 metadata を読み取るために `onnxruntime` も必要です。
+
+- **説明**：custom metadata を ONNX モデルへ書き込みます。
 
 - **パラメータ**
 
-  - **onnx_path** (`Union[str, Path]`)：ONNX モデルのパス。
-  - **out_path** (`Union[str, Path]`)：出力先 ONNX モデルのパス。
-  - **drop_old_meta** (`bool`)：古いメタデータを削除するかどうか。デフォルトは `False`。
-  - `**kwargs`：カスタムメタデータ。
+  - **onnx_path** (`str | Path`)：ONNX モデルのパス。
+  - **out_path** (`str | Path`)：出力 ONNX モデルのパス。
+  - **drop_old_meta** (`bool`)：旧 metadata を削除するかどうか。デフォルトは `False`。
+  - `**kwargs`：書き込む custom metadata。
+
+- **挙動**
+
+  - `Date` フィールドを自動追加します（`capybara.utils.time.now(fmt=...)` を使用）。
+  - 各 metadata value は `json.dumps()` で文字列化して ONNX props に書き込みます。
 
 - **例**
 
   ```python
-  import capybara as cb
+  from capybara.onnxengine import write_metadata_into_onnx
 
   onnx_path = 'model.onnx'
   out_path = 'model_with_metadata.onnx'
-  cb.write_metadata_into_onnx(
+  write_metadata_into_onnx(
       onnx_path,
       out_path,
       drop_old_meta=False,
@@ -27,3 +37,4 @@
       key3='value3',
   )
   ```
+

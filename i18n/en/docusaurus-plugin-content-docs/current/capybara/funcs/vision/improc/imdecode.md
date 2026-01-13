@@ -1,23 +1,23 @@
 # imdecode
 
-> [imdecode(byte\_: bytes) -> Union[np.ndarray, None]](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/improc.py#L107)
+> [imdecode(byte\_: bytes) -> np.ndarray | None](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/improc.py)
 
-- **Description**: Decodes an image byte string into a NumPy image array.
+- **Description**: Decodes image bytes into a numpy image.
 
-- **Parameters**:
+- **Parameters**
 
-  - **byte\_** (`bytes`): The image byte string to decode.
+  - **byte_** (`bytes`): Image bytes.
 
-- **Return value**:
+- **Returns**
 
-  - **np.ndarray**: The decoded image array.
+  - **np.ndarray | None**: Decoded image; returns `None` on failure.
 
-- **Example**:
+- **Example**
 
   ```python
-  import capybara as cb
+  from capybara.vision.improc import IMGTYP, imdecode, imencode, imread
 
-  img = cb.imread('lena.png')
-  encoded_bytes = cb.imencode(img, IMGTYP=cb.IMGTYP.PNG)
-  decoded_img = cb.imdecode(encoded_bytes)
+  img = imread('lena.png')
+  encoded_bytes = imencode(img, imgtyp=IMGTYP.PNG)
+  decoded_img = imdecode(encoded_bytes)
   ```

@@ -1,6 +1,14 @@
 # draw_box
 
-> [draw_box(img: np.ndarray, box: Union[Box, np.ndarray], color: \_Color = (0, 255, 0), thickness: \_Thickness = 2) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/vision/visualization/draw.py#L36)
+> [draw_box(img: np.ndarray, box: _Box, color: _Color = (0, 255, 0), thickness: _Thickness = 2) -> np.ndarray](https://github.com/DocsaidLab/Capybara/blob/main/capybara/vision/visualization/draw.py)
+
+- **依賴**
+
+  - 繪圖功能為可選依賴；請先安裝：
+
+    ```bash
+    pip install "capybara-docsaid[visualization]"
+    ```
 
 - **說明**：在影像上繪製 Bounding Box。
 
@@ -8,7 +16,7 @@
 
   - **img** (`np.ndarray`)：要繪製的影像，為 NumPy 陣列。
   - **box** (`Union[Box, np.ndarray]`)：要繪製的 Bounding Box，可以是 Box 物件或 NumPy 陣列形式的 [x1, y1, x2, y2]。
-  - **color** (`_Color`)：要繪製的框的顏色。預設為 (0, 255, 0)。
+  - **color** (`_Color`)：要繪製的框的顏色（OpenCV 慣例：BGR）。預設為 (0, 255, 0)。
   - **thickness** (`_Thickness`)：要繪製的框線的粗細。預設為 2。
 
 - **傳回值**
@@ -18,11 +26,12 @@
 - **範例**
 
   ```python
-  import capybara as cb
+  from capybara import Box, imread
+  from capybara.vision.visualization.draw import draw_box
 
-  img = cb.imread('lena.png')
-  box = cb.Box([20, 20, 100, 100])
-  box_img = cb.draw_box(img, box, color=(0, 255, 0), thickness=2)
+  img = imread('lena.png')
+  box = Box([20, 20, 100, 100])
+  box_img = draw_box(img, box, color=(0, 255, 0), thickness=2)
   ```
 
   ![draw_box](./resource/test_draw_box.jpg)

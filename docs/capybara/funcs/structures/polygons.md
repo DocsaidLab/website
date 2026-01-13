@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Polygons
 
-> [Polygons(array: \_Polygons, normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/structures/polygons.py#L336)
+> [Polygons(polygons: _Polygons, is_normalized: bool = False)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/structures/polygons.py)
 
 - **說明**：
 
@@ -12,12 +12,12 @@ sidebar_position: 5
 
 - **參數**
 
-  - **array** (`_Polygons`)：多個多邊形的座標。
-  - **normalized** (`bool`)：是否為正規化多邊形的座標，是一個屬性標記。預設為 `False`。
+  - **polygons** (`_Polygons`)：多個多邊形的座標。
+  - **is_normalized** (`bool`)：是否為正規化座標（屬性標記）。預設為 `False`。
 
 - **屬性**
 
-  - **normalized**：取得多邊形的正規化狀態。
+  - **is_normalized**：取得多邊形的正規化狀態。
   - **moments**：取得多邊形的矩。
   - **area**：取得多邊形的面積。
   - **arclength**：取得多邊形的周長。
@@ -38,10 +38,10 @@ sidebar_position: 5
   - **denormalize**(`w: float, h: float`)：反正規化多邊形的座標。
   - **clip**(`xmin: int, ymin: int, xmax: int, ymax: int`)：裁剪多邊形。
   - **shift**(`shift_x: float, shift_y: float`)：移動多邊形。
-  - **scale**(`distance: int, join_style: JOIN_STYLE = JOIN_STYLE.mitre`)：縮放多邊形。
+  - **scale**(`distance: int`)：縮放多邊形（目前不提供 `join_style` 參數）。
   - **to_convexhull**()：將多邊形轉換為凸多邊形。
   - **to_min_boxpoints**()：將多邊形轉換為最小外接矩形的座標。
-  - **to_box**(`box_mode: str = 'xyxy'`)：將多邊形轉換為邊界框。
+  - **to_boxes**(`box_mode: str = 'xyxy'`)：將多邊形轉換為邊界框。
   - **to_list**(`flatten: bool = False`)：將多邊形轉換為列表。
   - **is_empty**(`threshold: int = 3`)：判斷多邊形是否為空。
 

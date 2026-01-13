@@ -1,42 +1,63 @@
 # ONNXEngine
 
-> [ONNXEngine(model_path: Union[str, Path], gpu_id: int = 0, backend: Union[str, int, Backend] = Backend.cpu, session_option: Dict[str, Any] = {}, provider_option: Dict[str, Any] = {})](https://github.com/DocsaidLab/Capybara/blob/975d62fba4f76db59e715c220f7a2af5ad8d050e/capybara/onnxengine/engine.py#L18)
+> [ONNXEngine(model_path: str | Path, gpu_id: int = 0, backend: str | Backend = Backend.cpu, session_option: Mapping[str, Any] | None = None, provider_option: Mapping[str, Any] | None = None, config: EngineConfig | None = None)](https://github.com/DocsaidLab/Capybara/blob/main/capybara/onnxengine/engine.py)
 
-- **Description**: Initializes the ONNX model inference engine.
+- **Description**: Initializes an ONNX model inference engine.
+
+- **Dependencies**
+
+  - This module depends on `onnxruntime` (CPU or GPU). Install one of:
+
+    ```bash
+    pip install "capybara-docsaid[onnxruntime]"      # CPU
+    # or
+    pip install "capybara-docsaid[onnxruntime-gpu]"  # GPU
+    ```
 
 - **Parameters**
 
-  - **model_path** (`Union[str, Path]`): The file name or serialized ONNX or ORT format model byte string.
-  - **gpu_id** (`int`): The GPU ID. Default is 0.
-  - **backend** (`Union[str, int, Backend]`): The inference backend, which can be `Backend.cpu` or `Backend.cuda`. Default is `Backend.cpu`.
-  - **session_option** (`Dict[str, Any]`): Parameters for `onnxruntime.SessionOptions` to set session options. Default is `{}`. For detailed configuration, refer to: [SessionOptions](https://onnxruntime.ai/docs/api/python/api_summary.html#onnxruntime.SessionOptions).
-  - **provider_option** (`Dict[str, Any]`): Parameters for `onnxruntime.provider_options`. Default is `{}`. For detailed configuration, refer to: [CUDAExecutionProvider](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#configuration-options).
+  - **model_path** (`str | Path`): Path to the ONNX model file.
+  - **gpu_id** (`int`): GPU id. Default is 0.
+  - **backend** (`str | Backend`): Inference backend (runtime=`onnx`). Common values:
+    - `Backend.cpu`
+    - `Backend.cuda`
+    - `Backend.tensorrt`
+    - `Backend.tensorrt_rtx`
+  - **session_option** (`Mapping[str, Any] | None`): Overrides for `SessionOptions` (applied via `setattr` or `add_session_config_entry`).
+  - **provider_option** (`Mapping[str, Any] | None`): Overrides for Execution Provider options (e.g. `device_id`, cache, etc.).
+  - **config** (`EngineConfig | None`): Higher-level inference settings (graph optimization, threading, IO binding, profiling, etc.).
 
 - **Inference**
 
-  When loading the model, this function loads the information inside the ONNX file and provides a dictionary with input and output shapes and data types.
+  - `engine.run(feed)`: Runs with `Mapping[str, np.ndarray]`.
+  - `engine(**inputs)`: Runs with keyword arguments (passing a single `dict` is treated as feed).
+  - Returns `dict[str, np.ndarray]`, keyed by output names.
 
-  Therefore, when calling the `ONNXEngine` instance, you can directly use this dictionary to obtain the output results.
+- **Common methods**
+
+  - `summary()`: Returns a summary of inputs/outputs/providers, etc.
+  - `benchmark(inputs, repeat=100, warmup=10)`: Returns throughput/latency stats.
 
 - **Example**
 
   ```python
-  import capybara as cb
+  import numpy as np
+  from capybara.onnxengine import EngineConfig, ONNXEngine
+  from capybara.runtime import Runtime
 
   model_path = 'model.onnx'
-  engine = cb.ONNXEngine(model_path)
-  print(engine)
+  runtime = Runtime.onnx
 
-  # Inferencing
-  # Assuming the model has two inputs and two outputs and named:
-  #   'input1', 'input2', 'output1', 'output2'.
-  input_data = {
-      'input1': np.random.randn(1, 3, 224, 224).astype(np.float32),
-      'input2': np.random.randn(1, 3, 224, 224).astype(np.float32),
+  engine = ONNXEngine(
+      model_path,
+      backend=runtime.auto_backend_name(),
+      config=EngineConfig(enable_io_binding=False),
+  )
+
+  inputs = {
+      'input': np.random.randn(1, 3, 224, 224).astype(np.float32),
   }
-
-  outputs = engine(**input_data)
-
-  output_data1 = outputs['output1']
-  output_data2 = outputs['output2']
+  outputs = engine.run(inputs)
+  print(outputs.keys())
+  print(engine.summary())
   ```
