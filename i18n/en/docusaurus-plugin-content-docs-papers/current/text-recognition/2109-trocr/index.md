@@ -20,7 +20,7 @@ Although these methods have seen some success, most models are still trained fro
 In this paper, the authors lead by example, showing how pre-trained models can be applied effectively to OCR tasks.
 
 :::tip
-While some studies suggest that models trained from scratch perform better, and thus argue against the use of pre-trained models in OCR.
+Many experiments show that models trained from scratch can perform better, so some researchers argue that using pre-trained models in OCR does not bring significant gains.
 :::
 
 ## Solution
@@ -124,7 +124,7 @@ The authors conducted experiments to evaluate different encoder-decoder pairings
 
 For encoders, the authors tested DeiT, BEiT, and ResNet-50; for decoders, they used RoBERTa.
 
-The results show that the BEiT encoder outperformed the other two, while the RoBERTa$_{\text{LARGE}}$ decoder also demonstrated the best performance. This suggests that pre-trained models on visual tasks can significantly enhance text recognition accuracy.
+The results show that the BEiT encoder outperformed the other two, while the RoBERTa$_{\text{LARGE}}$ decoder also demonstrated the best performance. This suggests that models pre-trained on vision tasks can improve text recognition performance.
 
 Based on these findings, the authors selected three primary configurations for further experiments:
 

@@ -1,6 +1,6 @@
 ---
 slug: builds-dashboard-system
-title: I, an AI Engineer, Actually Built a Backend System?
+title: I Work in AI, and Somehow Ended Up Building a Backend System?
 authors: Z. Yuan
 image: /en/img/2025/0316.webp
 tags: [React, FastAPI, User Authentication]
@@ -43,7 +43,7 @@ You know what happened after that—I chose Docusaurus and stuck with it. After 
 
 As the content of the website accumulated, I started receiving emails from readers, mostly asking about model usage: such as how to configure environments, install dependencies, or even how to resolve strange errors that appeared during execution.
 
-These were easy to handle; I just told them to ask ChatGPT, and that was it. (~Too casual, huh?~)
+Those were easy to handle — I just told them to ask ChatGPT. Problem solved. (~Too casual, huh?~)
 
 Not casual at all! With the power of AI tools these days, most problems can be resolved directly by asking, saving a lot of time compared to emailing back and forth.
 

@@ -61,7 +61,7 @@ So, was it really worth it?
 Personally, I think it wasn’t.
 :::
 
-## What other options are there?
+## What other options do I have?
 
 After carefully considering my needs, my most basic requirement is: writing articles.
 
@@ -99,7 +99,7 @@ We gathered some information online and here’s a quick comparison:
 | Markdown Support       | ✅ Strong        | ✅ Strong    | ⚠️ Acceptable     | ⚠️ Acceptable | ✅ Strong        |
 | Git/Version Control    | ✅ Strong        | ✅ Strong    | ⚠️ Acceptable     | ⚠️ Acceptable | ✅ Strong        |
 | Themes & Community     | ⚠️ Weak          | ✅ Strong    | ⚠️ Acceptable     | ✅ Strong     | ⚠️ Weak          |
-| Arch Flexibility       | ⚠️ Acceptable    | ✅ Strong    | ⚠️ Acceptable     | ⚠️ Acceptable | ✅ Strong        |
+| Architectural Flexibility | ⚠️ Acceptable | ✅ Strong | ⚠️ Acceptable | ⚠️ Acceptable | ✅ Strong |
 | Learning Curve         | ❌ Difficult     | ⚠️ Moderate  | ✅ Easy           | ✅ Easy       | ⚠️ Moderate      |
 | Build Speed            | ⚠️ Acceptable    | ✅ Very Fast | ⚠️ Average        | ⚠️ Average    | ✅ Fast          |
 | SEO Friendliness       | ✅ Strong        | ✅ Strong    | ⚠️ Acceptable     | ⚠️ Acceptable | ✅ Strong        |
