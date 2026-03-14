@@ -1,0 +1,44 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" rx="32" fill="#F8FAFC"/>
+  <rect x="60" y="60" width="1480" height="780" rx="30" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="4"/>
+
+  <text x="800" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="#0F172A">Expose only one path</text>
+  <text x="800" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#475569">Public traffic should hit the LINE webhook and nothing else.</text>
+
+  <rect x="150" y="280" width="300" height="320" rx="28" fill="#ECFEFF" stroke="#67E8F9" stroke-width="3"/>
+  <text x="300" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#164E63">Internet</text>
+  <text x="300" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#475569">LINE Platform</text>
+  <text x="300" y="448" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#475569">sends webhook event</text>
+  <rect x="192" y="500" width="216" height="56" rx="16" fill="#FFFFFF"/>
+  <text x="300" y="536" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#0891B2">HTTPS request</text>
+
+  <rect x="560" y="220" width="500" height="440" rx="32" fill="#FFF7ED" stroke="#FDBA74" stroke-width="3"/>
+  <text x="810" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#9A3412">Caddy / Reverse Proxy</text>
+  <rect x="620" y="350" width="380" height="78" rx="18" fill="#FFFFFF"/>
+  <text x="810" y="398" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#0F172A">line.example.com/line/webhook</text>
+  <rect x="620" y="460" width="380" height="72" rx="18" fill="#DCFCE7"/>
+  <text x="810" y="506" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#166534">reverse_proxy 127.0.0.1:18789</text>
+  <rect x="620" y="560" width="380" height="56" rx="18" fill="#FEE2E2"/>
+  <text x="810" y="596" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#B91C1C">all other paths -> 404</text>
+
+  <rect x="1170" y="220" width="280" height="220" rx="28" fill="#EEF2FF" stroke="#A5B4FC" stroke-width="3"/>
+  <text x="1310" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#3730A3">OpenClaw</text>
+  <text x="1310" y="338" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" fill="#475569">Gateway</text>
+  <text x="1310" y="376" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#475569">127.0.0.1:18789</text>
+
+  <rect x="1170" y="500" width="280" height="160" rx="28" fill="#FFF1F2" stroke="#FDA4AF" stroke-width="3"/>
+  <text x="1310" y="564" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#9F1239">Dashboard</text>
+  <text x="1310" y="610" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#881337">keep local only</text>
+
+  <path d="M450 440H540" stroke="#0F172A" stroke-width="10" stroke-linecap="round"/>
+  <path d="M530 415L560 440L530 465" stroke="#0F172A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M1060 495H1150" stroke="#16A34A" stroke-width="10" stroke-linecap="round"/>
+  <path d="M1140 470L1170 495L1140 520" stroke="#16A34A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M1060 365H1150" stroke="#F59E0B" stroke-width="10" stroke-linecap="round"/>
+  <path d="M1140 340L1170 365L1140 390" stroke="#F59E0B" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="1110" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#B45309">forward webhook</text>
+  <text x="1110" y="538" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#166534">safe path</text>
+</svg>

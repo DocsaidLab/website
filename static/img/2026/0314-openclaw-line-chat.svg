@@ -1,0 +1,46 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" rx="36" fill="url(#bg)"/>
+  <circle cx="272" cy="188" r="102" fill="#FFFFFF" fill-opacity="0.35"/>
+  <circle cx="1360" cy="734" r="138" fill="#FFFFFF" fill-opacity="0.24"/>
+  <circle cx="1248" cy="182" r="62" fill="#F97316" fill-opacity="0.18"/>
+
+  <rect x="108" y="172" width="350" height="556" rx="42" fill="#0F172A"/>
+  <rect x="134" y="204" width="298" height="498" rx="30" fill="#E5F7EF"/>
+  <rect x="182" y="264" width="204" height="64" rx="20" fill="#06C755"/>
+  <text x="284" y="306" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#FFFFFF">LINE</text>
+  <rect x="170" y="388" width="158" height="72" rx="22" fill="#FFFFFF"/>
+  <text x="249" y="432" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#0F172A">status?</text>
+  <rect x="226" y="492" width="156" height="84" rx="24" fill="#DCFCE7"/>
+  <text x="304" y="544" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#166534">done</text>
+  <rect x="228" y="764" width="110" height="10" rx="5" fill="#334155"/>
+
+  <rect x="632" y="208" width="420" height="492" rx="36" fill="#FFFFFF" fill-opacity="0.9"/>
+  <text x="842" y="306" text-anchor="middle" font-family="Arial, sans-serif" font-size="52" font-weight="700" fill="#0F172A">OpenClaw</text>
+  <text x="842" y="368" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" fill="#334155">to LINE</text>
+  <rect x="724" y="432" width="236" height="72" rx="22" fill="#FFF7ED"/>
+  <text x="842" y="476" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#9A3412">Webhook + Pairing</text>
+  <rect x="724" y="534" width="236" height="58" rx="18" fill="#EEF2FF"/>
+  <text x="842" y="570" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#3730A3">safe setup</text>
+
+  <rect x="1168" y="198" width="294" height="384" rx="36" fill="#FFF1F2" fill-opacity="0.9"/>
+  <text x="1315" y="288" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#9F1239">Gateway</text>
+  <rect x="1218" y="346" width="194" height="64" rx="20" fill="#FFFFFF"/>
+  <text x="1315" y="388" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#0F172A">/line/webhook</text>
+  <rect x="1218" y="446" width="194" height="64" rx="20" fill="#ECFCCB"/>
+  <text x="1315" y="488" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#3F6212">agent reply</text>
+
+  <path d="M458 448H594" stroke="#0F172A" stroke-width="12" stroke-linecap="round"/>
+  <path d="M580 416L632 448L580 480" stroke="#0F172A" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1052 448H1128" stroke="#0F172A" stroke-width="12" stroke-linecap="round"/>
+  <path d="M1114 416L1168 448L1114 480" stroke="#0F172A" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="800" y="806" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#FFFFFF">Build a private LINE bot on top of your own OpenClaw agent</text>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5E9"/>
+      <stop offset="0.52" stop-color="#06C755"/>
+      <stop offset="1" stop-color="#FB923C"/>
+    </linearGradient>
+  </defs>
+</svg>
