@@ -332,7 +332,17 @@ curl -i https://line.example.com/line/webhook
 
 ### 3-2 打開 Messaging API 設定
 
-進到這個流程後，頁面會一路帶你從官方帳號走到 Messaging API channel。
+如果你現在看到的頁面網址長這樣：
+
+```text
+https://developers.line.biz/console/channel/.../messaging-api
+```
+
+那代表你**已經在對的地方了**。
+
+先別急著切頁。
+
+你現在這個頁面裡，真正有用的欄位其實只有幾個。
 
 <div align="center">
 <figure style={{"width": "92%"}}>
@@ -342,35 +352,108 @@ curl -i https://line.example.com/line/webhook
 
 *官方文件頁面截圖，擷取自 LINE Messaging API getting started（2026-03-14）。實際 console 畫面會依你的帳號狀態略有差異。*
 
-你真正需要抄下來的，只有這三個值：
+### 3-2-1 先講結論：哪些欄位要理，哪些不用理？
 
-- `Channel secret`
-- `Channel access token`
-- `Webhook URL`
+如果你現在頁面上看到的是這些欄位：
 
-你要做的事如下：
+- `Bot basic ID`
+- `QR code`
+- `Webhook settings`
+- `Allow bot to join group chats`
+- `Auto-reply messages`
+- `Greeting messages`
+- `Channel access token (long-lived)`
 
-1. 找到 `Channel secret`，先複製起來。
-2. 產生或複製 `Channel access token`。
-3. 把 `Use webhook` 打開。
-4. 在 `Webhook URL` 填上：
+那你可以直接這樣理解：
+
+- `Bot basic ID`：先不用管
+- `QR code`：先不用管
+- `Webhook URL`：要填
+- `Allow bot to join group chats`：先維持 `Disabled`
+- `Auto-reply messages`：要關掉
+- `Greeting messages`：要關掉
+- `Channel access token (long-lived)`：要產生並複製
+
+真正會讓人卡住的是這一點：
+
+> **`Channel secret` 不在這個頁面。**
+
+它通常在同一個 channel 左側的：
+
+- `Basic settings`
+
+也就是說，OpenClaw 需要的兩個值，LINE 是拆在兩個地方給你的：
+
+- `Channel access token`：在你目前這個 `Messaging API` 頁
+- `Channel secret`：在 `Basic settings` 頁
+
+### 3-2-2 你現在這個 `Messaging API` 頁面，照這個順序做
+
+先只做這四件事。
+
+1. 在 `Webhook settings` 區塊找到 `Webhook URL`
+2. 填上：
 
 ```text
 https://line.example.com/line/webhook
 ```
 
-5. 按 `Verify` 驗證。
+如果你是用 nginx 那種前置代理，這裡就填你真正對外的網址，例如：
 
-如果驗證成功，代表 LINE 已經打得到你的 OpenClaw Webhook 入口。
+```text
+https://api.docsaid.org/line/webhook
+```
 
-### 3-3 把自動回應先關掉
+3. 儲存後按 `Verify`
+4. 往下找到 `Channel access token (long-lived)`，按 `Issue` 或 `Reissue`，把 token 複製起來
 
-LINE 官方也建議：如果訊息要交給 Messaging API 處理，最好把 LINE Official Account Manager 裡的：
+如果 `Verify` 成功，代表 LINE 已經打得到你的 OpenClaw Webhook 入口。
+
+如果 `Verify` 失敗，不要先懷疑 LINE。
+
+先檢查：
+
+- `https://.../line/webhook` 是否真的可從外網連到
+- nginx / caddy 是否真的把 `/line/webhook` 轉到 OpenClaw
+- OpenClaw 是否真的在目標主機上 listening
+
+### 3-2-3 然後切到 `Basic settings`，把 `Channel secret` 複製下來
+
+這一步是舊文章最容易讓人看不懂的地方。
+
+很多人會一直在 `Messaging API` 頁面找 `Channel secret`，然後完全找不到。
+
+那不是你眼殘。
+
+是因為它本來就不在這頁。
+
+你要做的是：
+
+1. 在左側切到 `Basic settings`
+2. 往下找 `Channel secret`
+3. 按 `Issue`、`Show`、或複製按鈕
+4. 把這個值存起來
+
+到這裡為止，你才算真的拿齊 OpenClaw 需要的兩個憑證：
+
+- `channelAccessToken`
+- `channelSecret`
+
+### 3-2-4 最後再回到 `Messaging API` 頁，處理官方帳號預設功能
+
+你在目前這個頁面上，還會看到：
 
 - Greeting messages
 - Auto-reply messages
 
-先關掉。
+這兩個欄位旁邊通常會有 `Edit`。
+
+按下去之後，LINE 會把你帶到 `LINE Official Account Manager`。
+
+你要做的事情很單純：
+
+- 把 `Greeting messages` 關掉
+- 把 `Auto-reply messages` 關掉
 
 不然你很容易看到這種情況：
 
@@ -378,6 +461,19 @@ LINE 官方也建議：如果訊息要交給 Messaging API 處理，最好把 LI
 - OpenClaw 再回一段 agent 回覆
 
 最後聊天室看起來像兩個 bot 在搶話。
+
+### 3-3 如果你現在就卡在這個畫面，只要完成這份清單就夠了
+
+你目前這個 `Messaging API` 畫面，請直接照這份 checklist：
+
+1. `Webhook URL` 填 `https://你的網域/line/webhook`
+2. 按 `Verify`
+3. 在 `Channel access token (long-lived)` 產生 token 並複製
+4. 點 `Edit` 去把 `Auto-reply messages` 關掉
+5. 點 `Edit` 去把 `Greeting messages` 關掉
+6. 再切去 `Basic settings` 複製 `Channel secret`
+
+做完這六步，你就可以回到 OpenClaw 設定檔了。
 
 ## 步驟 4：把 LINE 憑證填進 OpenClaw
 
