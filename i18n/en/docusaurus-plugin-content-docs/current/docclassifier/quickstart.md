@@ -46,10 +46,10 @@ This issue is divided into two situations:
 
   Suppose the user registers three identical images with different labels. During inference, the scores will be the same in the similarity ranking process, but one will always appear first. In this case, the model cannot guarantee that the same label will be returned each time.
 
-  This issue is also not severe, but it introduces uncertainty, and you may not understand why this happens. (~Hey!~)
+  This issue is also not severe, but it does introduce uncertainty, and you may end up with no idea why it is happening. (~Hey!~)
 
 :::tip
-In summary, please take registering data seriously.
+In short, please take your registration data seriously.
 :::
 
 ## Model Inference
@@ -90,7 +90,7 @@ For the above example, refer to the image download link: [**test_driver.jpg**](h
 By default, this example returns `None` and `0.0000` because the difference between our default registration data and the input image is significant. Therefore, the model finds the similarity between the image and the registration data to be very low.
 
 :::tip
-The pre-registered driver's license data is of a deer; the input recognition image is a blank driver's license. (Quite a difference!)
+The default registered driver's license sample is a moose; the input image is a blank driver's license. (That's quite a mismatch!)
 :::
 
 In this case, you may consider lowering the `threshold` parameter:
