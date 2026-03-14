@@ -1,0 +1,38 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#0B1020"/>
+  <rect x="72" y="72" width="1456" height="756" rx="28" fill="#11172A" stroke="#2A3558" stroke-width="2"/>
+  <text x="110" y="150" fill="#E8ECF8" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700">Same command, different context.</text>
+  <text x="110" y="205" fill="#A8B3CF" font-family="Inter, Arial, sans-serif" font-size="28">Why a terminal success becomes a cron/systemd failure.</text>
+
+  <rect x="110" y="270" width="520" height="420" rx="24" fill="#151E36" stroke="#3C4B79" stroke-width="2"/>
+  <text x="150" y="330" fill="#7EE787" font-family="Menlo, Consolas, monospace" font-size="28">$ python app.py</text>
+  <text x="150" y="378" fill="#E8ECF8" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">Interactive shell</text>
+  <text x="150" y="428" fill="#B8C3E0" font-family="Inter, Arial, sans-serif" font-size="24">PATH: long enough to hide your mistakes</text>
+  <text x="150" y="468" fill="#B8C3E0" font-family="Inter, Arial, sans-serif" font-size="24">PWD: probably the project root</text>
+  <text x="150" y="508" fill="#B8C3E0" font-family="Inter, Arial, sans-serif" font-size="24">Shell: your customized comfort animal</text>
+  <text x="150" y="548" fill="#B8C3E0" font-family="Inter, Arial, sans-serif" font-size="24">Env: full of exports, aliases, and bad habits</text>
+  <rect x="150" y="590" width="168" height="56" rx="14" fill="#173E2A"/>
+  <text x="184" y="627" fill="#7EE787" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">Works</text>
+
+  <rect x="970" y="270" width="520" height="420" rx="24" fill="#21152B" stroke="#6D426E" stroke-width="2"/>
+  <text x="1010" y="330" fill="#FF7B72" font-family="Menlo, Consolas, monospace" font-size="28">* * * * * python app.py</text>
+  <text x="1010" y="378" fill="#E8ECF8" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">cron / systemd</text>
+  <text x="1010" y="428" fill="#D4B6D9" font-family="Inter, Arial, sans-serif" font-size="24">PATH: suspiciously short</text>
+  <text x="1010" y="468" fill="#D4B6D9" font-family="Inter, Arial, sans-serif" font-size="24">PWD: not your project, not your friend</text>
+  <text x="1010" y="508" fill="#D4B6D9" font-family="Inter, Arial, sans-serif" font-size="24">Shell: maybe /bin/sh, enjoy</text>
+  <text x="1010" y="548" fill="#D4B6D9" font-family="Inter, Arial, sans-serif" font-size="24">Env: minimal, literal, unsentimental</text>
+  <rect x="1010" y="590" width="148" height="56" rx="14" fill="#47202A"/>
+  <text x="1047" y="627" fill="#FF7B72" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">Fails</text>
+
+  <path d="M670 470H930" stroke="#8EA4FF" stroke-width="10" stroke-linecap="round" stroke-dasharray="18 18"/>
+  <polygon points="930,470 892,448 892,492" fill="#8EA4FF"/>
+
+  <rect x="560" y="340" width="480" height="260" rx="22" fill="#0E1424" stroke="#314065" stroke-width="2"/>
+  <text x="600" y="392" fill="#E8ECF8" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">What changed?</text>
+  <text x="600" y="442" fill="#9DB0D8" font-family="Inter, Arial, sans-serif" font-size="24">1. PATH</text>
+  <text x="600" y="478" fill="#9DB0D8" font-family="Inter, Arial, sans-serif" font-size="24">2. Working directory</text>
+  <text x="600" y="514" fill="#9DB0D8" font-family="Inter, Arial, sans-serif" font-size="24">3. Shell type</text>
+  <text x="600" y="550" fill="#9DB0D8" font-family="Inter, Arial, sans-serif" font-size="24">4. User, HOME, and permissions</text>
+
+  <text x="110" y="780" fill="#7C8DB8" font-family="Inter, Arial, sans-serif" font-size="24">DOCSAID · debugging the parts your shell politely hid from you</text>
+</svg>
