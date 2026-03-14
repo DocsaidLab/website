@@ -2,17 +2,17 @@
 sidebar_position: 4
 ---
 
-# Gmail API の呼び出し
+# Gmail API の利用
 
-設定が完了したら、Gmail API を使用し始めることができます。
+設定が完了したら、Gmail API を使い始められます。
 
-まず、先ほどダウンロードした`credentials.json`ファイルを見つけ、それをプロジェクトのルートディレクトリに配置します。
+まず、先ほどダウンロードした `credentials.json` を見つけて、プロジェクトのルートディレクトリに配置してください。
 
 次に、Google が提供しているチュートリアルを開きます：[**Python quickstart**](https://developers.google.com/gmail/api/quickstart/python)
 
 ## パッケージのインストール
 
-Python 用の Google クライアントライブラリをインストールする必要があります：
+Python 用の Google クライアントライブラリをインストールします：
 
 ```bash
 pip install -U google-api-python-client google-auth-httplib2 google-auth-oauthlib
@@ -20,11 +20,11 @@ pip install -U google-api-python-client google-auth-httplib2 google-auth-oauthli
 
 ## 設定例
 
-1. 作業ディレクトリに`quickstart.py`という名前のファイルを作成します。
+1. 作業ディレクトリに `quickstart.py` という名前のファイルを作成します。
 
-   - Google が提供するソースコードをそのまま使うこともできます：[**source code**](https://github.com/googleworkspace/python-samples/blob/main/gmail/quickstart/quickstart.py)
+   - Google が提供するサンプルコードをそのまま使っても構いません：[**source code**](https://github.com/googleworkspace/python-samples/blob/main/gmail/quickstart/quickstart.py)
 
-2. 以下のコードを`quickstart.py`に追加します：
+2. 以下のコードを `quickstart.py` に追加します：
 
    ```python title="quickstart.py"
    import os.path
@@ -83,17 +83,17 @@ pip install -U google-api-python-client google-auth-httplib2 google-auth-oauthli
 
 ## 実行例
 
-`quickstart.py`を実行します：
+`quickstart.py` を実行します：
 
 ```bash
 python quickstart.py
 ```
 
-`quickstart.py`を初めて実行すると、認証を求められます。「Allow」をクリックしてください。
+初回実行時には認証画面が表示されるので、「Allow」をクリックしてください。
 
 ![gmail_19](./resources/gmail19.jpg)
 
-次のような出力が表示されます：
+すると、次のような出力が表示されます：
 
 ```bash
 Labels:
@@ -113,15 +113,15 @@ STARRED
 UNREAD
 ```
 
-また、`token.json`というファイルが取得され、次回`quickstart.py`を実行する際に再度認証を求められることはなくなります。
+また、`token.json` というファイルも生成されます。次回以降は、このファイルにより再認証が不要になります。
 
-## 使用開始
+## 使い始める
 
-次に、Gmail API を使用してメール内容を解析する準備を始めます。
+ここからは、Gmail API を使ってメール内容を解析していきます。
 
-以下の三つの部分を実装します：クライアントの作成、メールの取得、メールの解析。
+実装するのは、次の 3 つです：クライアントの作成、メールの取得、メール本文の解析。
 
-まず必要なパッケージをインポートします：
+まず、必要なパッケージをインポートします：
 
 ```python
 from base64 import urlsafe_b64decode
@@ -135,7 +135,7 @@ from googleapiclient.discovery import build
 
 ### クライアントの作成
 
-Gmail API クライアントを作成するとき、`token.json`に保存されたユーザーのアクセスおよびリフレッシュトークンをロードし、アクセス令牌が期限切れの場合は自動的にリフレッシュされます。
+Gmail API クライアントを作成する際は、`token.json` に保存されたアクセストークンとリフレッシュトークンを読み込みます。アクセストークンの有効期限が切れている場合は、自動的に更新されます。
 
 ```python
 def build_service():
@@ -149,7 +149,7 @@ def build_service():
 
 ### メールの取得
 
-次に、ユーザーからメール内容を取得する関数を定義します：
+次に、メール内容を取得する関数を定義します：
 
 ```python
 def get_messages(
@@ -196,7 +196,7 @@ def get_messages(
 
 ### メールの解析
 
-データを取得した後、その内容は大量のメタデータを含んでいるため、読みやすい形式に解析する必要があります。
+取得したデータには大量のメタデータが含まれているため、読みやすい形式に整形します。
 
 ```python
 def parse_message(service, msg_id, user_id='me'):
@@ -212,14 +212,14 @@ def parse_message(service, msg_id, user_id='me'):
             'Text': None
         }
 
-        # 解析ヘッダー情報（送信日時、件名、送信者、受信者）
+        # ヘッダーを解析して送信日時と件名を取得
         for header in headers:
             if header['name'] == 'Date':
                 email_data['Date'] = header['value']
             elif header['name'] == 'Subject':
                 email_data['Subject'] = header['value']
 
-        # メール本文の解析
+        # メール本文を解析
         for part in parts:
             if part['mimeType'] == 'text/plain' or part['mimeType'] == 'text/html':
                 data = part['body']['data']
@@ -236,8 +236,8 @@ def parse_message(service, msg_id, user_id='me'):
 
 ## まとめ
 
-ここまでで、Gmail API の基本的な使用方法について説明しました。
+ここまでで、Gmail API の基本的な使い方は一通り説明できました。
 
-次に進む前に、いくつか準備が必要です。
+ただし、まだ実行するのは少し待ってください。先にいくつか準備が必要です。
 
-OpenAI の API と接続し、メール内容を ChatGPT に送信して解析を行えるようにします。
+次は OpenAI API と接続し、メール内容を ChatGPT に渡して解析できるようにします。
