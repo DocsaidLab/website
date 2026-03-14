@@ -4,13 +4,13 @@ sidebar_position: 1
 
 # イントロダクション
 
-日常生活の中で、私たちはよく GitHub のあるプロジェクトで「Watch」オプションをクリックすることによって、そのプロジェクトの活動更新メールを受け取るようになります。これらの更新には、新機能の議論、issue の報告、pull request (PR)、バグ報告などが含まれます。
+日常の中で、GitHub のプロジェクトを Watch したのをきっかけに、そのプロジェクトの更新メールを受け取るようになることはよくあります。更新内容には、新機能の議論、issue 報告、pull request (PR)、バグ報告などが含まれます。
 
 例えば、いくつかの GitHub プロジェクトをフォローして「すべてのアクティビティ」の設定を採用した場合：
 
-- [**albumentations**](https://github.com/albumentations-team/albumentations): 約毎日 10 通のメール。
-- [**onnxruntime**](https://github.com/microsoft/onnxruntime): 約毎日 200 通のメール。
-- [**PyTorch**](https://github.com/pytorch/pytorch): 約毎日 1,500 通のメール。
+- [**albumentations**](https://github.com/albumentations-team/albumentations): 1 日あたり約 10 通。
+- [**onnxruntime**](https://github.com/microsoft/onnxruntime): 1 日あたり約 200 通。
+- [**PyTorch**](https://github.com/pytorch/pytorch): 1 日あたり約 1,500 通。
 
 もしさらに多くのプロジェクトをフォローしていたら、毎日 5,000 通以上のメールを受け取ることになるでしょう。
 
@@ -22,7 +22,7 @@ sidebar_position: 1
 
 私は絶対に読まないですね、通常は開かずに削除してしまいます。
 
-したがって、効率（手抜き）を追求するエンジニアとして、この問題をどう解決するかを考えなければなりません。
+なので、効率（つまり手抜き）を重んじるエンジニアとして、この問題をどう片づけるか考えないといけません。
 
 ## 問題の分解
 
