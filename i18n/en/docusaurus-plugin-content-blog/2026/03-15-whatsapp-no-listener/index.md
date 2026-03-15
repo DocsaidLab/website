@@ -1,6 +1,6 @@
 ---
 slug: whatsapp-online-but-no-listener
-title: OpenClaw × WhatsApp: A Runtime State Split Triggered by the Bundler
+title: "OpenClaw × WhatsApp: A Runtime State Split Triggered by the Bundler"
 authors: Z. Yuan
 tags: [openclaw, whatsapp, debugging, javascript, bundling]
 image: /img/2026/0315-whatsapp-no-listener.svg

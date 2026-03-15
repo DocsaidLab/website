@@ -1,6 +1,6 @@
 ---
 slug: whatsapp-online-but-no-listener
-title: OpenClaw × WhatsApp：一次由 bundler 引發的 runtime state 分裂
+title: "OpenClaw × WhatsApp：一次由 bundler 引發的 runtime state 分裂"
 authors: Z. Yuan
 tags: [openclaw, whatsapp, debugging, javascript, bundling]
 image: /img/2026/0315-whatsapp-no-listener.svg
