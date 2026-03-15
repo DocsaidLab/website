@@ -3,13 +3,13 @@ title: "[21.01] Prefix-Tuning"
 authors: Z. Yuan
 ---
 
-## それは彼？それとも彼ではない？
+## その人？ 別人？
 
 [**Prefix-Tuning: Optimizing Continuous Prompts for Generation**](https://arxiv.org/abs/2101.00190)
 
 ---
 
-他の人が訓練した言語モデルを使用するための一般的な方法は次の通りです：
+他人が学習済みの言語モデルを使うとき、よくある方法は次のとおりです：
 
 1. **Fine-tuning**：モデルのパラメータを新しいタスクに合わせて調整する。
 
@@ -24,7 +24,7 @@ authors: Z. Yuan
    3. BART：`Document summarization:`
    4. ...
 
-   ただし、モデルを変更すると脳も変わるため、テストを繰り返す必要があります。
+   ただし、モデルが変われば癖も変わるので、毎回テストをやり直す必要があります。
 
 ---
 
