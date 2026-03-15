@@ -99,27 +99,7 @@ That is also why:
 - the error message looked correct too
 - but the overall behavior was still inconsistent
 
-## Why the First Patch Was Not Enough
-
-The first patch was applied inside the Homebrew-installed copy of OpenClaw.
-
-That was useful for validating the diagnosis, but it was not a maintainable fix.
-
-The reason was simple:
-
-- you are modifying installed artifacts
-- package updates can overwrite the patch
-- the next failure sends you back to patching it again
-
-So the final fix had to move back into:
-
-```
-~/openclaw
-```
-
-The change needed to be made in the source tree and rebuilt there, so runtime behavior, source, and tests would stay aligned.
-
-## Final Remediation Strategy
+## Remediation Strategy
 
 The remediation goal was straightforward:
 
@@ -196,7 +176,7 @@ gateway send RPC
 
 That was the path used for the final smoke test in this case.
 
-## A Broader Engineering Lesson
+## Takeaway
 
 When a system shows all of the following at the same time:
 
