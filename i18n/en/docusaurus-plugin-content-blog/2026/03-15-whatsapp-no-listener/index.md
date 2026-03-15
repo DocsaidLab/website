@@ -1,105 +1,219 @@
 ---
 slug: whatsapp-online-but-no-listener
-title: Why OpenClaw Reported `No active WhatsApp Web listener` Despite an Active Monitor
+title: OpenClaw × WhatsApp: A Runtime State Split Triggered by the Bundler
 authors: Z. Yuan
 tags: [openclaw, whatsapp, debugging, javascript, bundling]
 image: /img/2026/0315-whatsapp-no-listener.svg
-description: An analysis of a state-consistency failure in OpenClaw's WhatsApp path, where monitor successfully registered a listener but send still returned `No active WhatsApp Web listener` because bundling split module-scoped runtime state.
+description: An analysis of the state-consistency problem in OpenClaw's WhatsApp path.
 ---
 
-## Summary
+I finally had a bit of free time, so I decided to try wiring OpenClaw into WhatsApp.
 
-This article analyzes a state-consistency failure in OpenClaw's WhatsApp path: the monitor side successfully registered a listener, yet outbound send still returned `No active WhatsApp Web listener`. The root cause was neither session invalidation nor a missing gateway process. It was a bundling-induced split in module-scoped runtime state, which meant the monitor path and send path were not reading and writing the same listener registry.
+The basic flow went smoothly:
+when a user sent a message from WhatsApp, the AI agent replied normally.
 
-The final remediation had two parts: move the shared registry onto `globalThis` with a stable `Symbol.for(...)` key, and add regression coverage for module reload boundaries so later bundling or lazy-load changes would not silently reintroduce the same failure mode.
+But when I tried to proactively push a message from OpenClaw to WhatsApp, the system kept responding with:
 
-- the monitor path had already registered a listener
-- the outbound send path still reported that no listener existed
-- the failure was about runtime-state boundaries, not the transport layer
-- the durable maintenance point had to move back into the repo source tree
+```
+No active WhatsApp Web listener
+```
+
+What made it strange was that every other signal still looked healthy.
 
 <!-- truncate -->
 
-## Observed Symptoms
+## The Problem
 
-The observed behavior was internally inconsistent:
+The overall symptom looked inconsistent:
 
-- the gateway log said WhatsApp inbound monitoring was active
-- the dashboard still opened normally
-- outbound send still returned `No active WhatsApp Web listener`
+- the gateway log showed that the WhatsApp inbound listener had started
+- the dashboard opened normally
+- inbound messages could still trigger agent replies
+- but the active send path always returned:
 
-Taken together, these signals showed that the monitor path and send path were not observing the same listener state. The system looked partially healthy, but failed at the exact point where shared listener ownership was required.
+```
+No active WhatsApp Web listener
+```
 
-## Initial Misleading Hypotheses
+In other words:
 
-During initial triage, the most plausible explanations were:
+- the monitor path could see the listener
+- the send path believed the listener did not exist
+
+That suggested the issue was not the WhatsApp connection, and not the gateway service itself. The problem was that listener state was being observed inconsistently inside the system.
+
+## Initial Triage, But Not the Cause
+
+At first, the most reasonable suspects were these:
 
 - WhatsApp session invalidation
-- QR pairing failure
-- gateway service startup failure
-- lifecycle timing issues between listener initialization and the send path
+- a broken QR pairing flow
+- the gateway service not starting correctly
+- a lifecycle timing race condition around listener initialization
 
-Those hypotheses were reasonable, but they did not explain why the monitor could confirm listener registration while the send path still reported listener absence.
+All of those were plausible, but they could not explain one key signal:
 
-## Root Cause
+> the monitor explicitly recorded that a listener existed, yet the send path still reported that none existed.
 
-The WhatsApp path in OpenClaw maintains a shared piece of state: the currently active web listener. Under normal conditions, the monitor path registers the listener, and the send path reads the same registry for outbound delivery.
+That meant the listener state had not disappeared. It was being seen as different versions by different modules.
 
-The failure emerged after bundling. The monitor and send paths both imported `active-listener`, but after build they landed in different chunks and no longer shared the same module-scoped runtime store.
+## Root Cause: Bundling Split the Runtime State
 
-This means the problem was not an overwritten registry. It was a split state model:
+Inside OpenClaw's WhatsApp integration, there is a piece of shared state:
 
-- chunk A had the real listener
-- chunk B had an empty registry
-- each side emitted locally consistent signals
-- the combined outcome was a state-consistency failure
+```
+active web listener registry
+```
 
-That is why the logs and the send error were not individually false, yet still failed to describe a coherent global runtime state.
+By design:
 
-## Why the Existing Patch Was Not Sufficient
+- the monitor path registers the listener
+- the send path reads the listener
 
-The first round of mitigation happened inside the Homebrew-installed copy.
+In theory, both sides should share the same module state.
 
-That was useful for confirming the diagnosis, but it was not a stable maintenance point:
+But after bundling, that assumption stopped being true.
 
-- you are patching installed output
-- package updates can wipe the fix
-- the next regression sends you back to the same chase
+In the build output:
 
-The long-term fix therefore had to move back into the `~/openclaw` source tree, where source, tests, and runtime behavior remain aligned.
+- the monitor code and the send code landed in different bundle chunks
+- the module-scoped store was initialized separately in each chunk
 
-## Final Remediation
+The result looked like this:
 
-The remediation prioritized runtime consistency over abstraction. The active-listener registry was moved from module-local singleton state to a shared store on `globalThis`, keyed by `Symbol.for(...)`.
+```
+monitor chunk -> store A
+send chunk    -> store B
+```
 
-The core identifier looked like this:
+Each side was locally reasonable:
 
-```ts
+- the monitor really did write the listener
+- the send path really could not find the listener
+
+But they were operating on two completely different copies of runtime state.
+
+That is also why:
+
+- the logs looked correct
+- the error message looked correct too
+- but the overall behavior was still inconsistent
+
+## Why the First Patch Was Not Enough
+
+The first patch was applied inside the Homebrew-installed copy of OpenClaw.
+
+That was useful for validating the diagnosis, but it was not a maintainable fix.
+
+The reason was simple:
+
+- you are modifying installed artifacts
+- package updates can overwrite the patch
+- the next failure sends you back to patching it again
+
+So the final fix had to move back into:
+
+```
+~/openclaw
+```
+
+The change needed to be made in the source tree and rebuilt there, so runtime behavior, source, and tests would stay aligned.
+
+## Final Remediation Strategy
+
+The remediation goal was straightforward:
+
+> ensure that the monitor path and the send path always share the same listener store.
+
+The fix was to move the module-scoped state into a global runtime store:
+
+```javascript
 const STORE_KEY = Symbol.for("openclaw.whatsapp.active-web-listener-store");
 ```
 
-The goal was direct: if the monitor path and send path are still inside the same JavaScript runtime, they must resolve the same listener store rather than separate chunk-local state.
+Then mount the listener registry on:
 
-## Regression Test Strategy
+```
+globalThis[STORE_KEY]
+```
 
-The code change alone was not enough. This type of failure can reappear when bundling changes or lazy-load boundaries move, so regression coverage was added for the exact state-sharing behavior that failed here.
+The benefits are:
 
-The test specifically verifies that:
+- different bundle chunks still resolve the same Symbol key
+- module reload does not reinitialize the state
+- as long as execution stays inside the same JavaScript runtime, it shares the same store
 
-- the store survives module reload boundaries
-- the shared listener still points at the same backing state
-- the send path does not silently acquire a different registry after reloads
+In other words:
 
-## Verification Caveats
+```
+module state   -> unreliable
+global runtime -> stable
+```
 
-Verification strategy also had an important caveat. `openclaw message send` is not the best proof that the main-system WhatsApp push path has recovered.
+## Regression Test
 
-The reason is not that the command never works. The reason is that it exercises the CLI process and its own lazy-loaded outbound path.
+When a runtime-state bug is fixed without tests, it is easy for it to come back during a later build change.
 
-That can prove that the CLI process can send while leaving the long-running gateway service unverified. If the question is whether the repo-based main system is fixed, the more accurate check is the gateway `send` RPC. That is the path used for the final smoke test.
+So this change also added regression coverage for:
 
-## Generalized Engineering Lessons
+- module reload
+- lazy-load boundaries
+- bundle chunk boundaries
 
-The main lesson from this incident is operational: when a system simultaneously shows "monitor visible, service alive, active operation failing, shared object missing," the first check should be whether runtime state still remains consistent across process, bundle, or lazy-load boundaries.
+The tests ensure that:
 
-On the surface, these failures are easy to misclassify as transport problems. In practice, what often fails first is the state-sharing model itself. Prioritizing state ownership and runtime-boundary analysis shortens diagnosis substantially.
+- the listener registry always resolves to the same store
+- the send path does not silently obtain a fresh registry
+
+## A Verification Trap
+
+There is an easy source of false confidence when verifying this kind of bug.
+
+`openclaw message send` is not the best smoke test.
+
+The reason is:
+
+- the CLI command starts its own process
+- the send path is lazy-loaded
+
+So it can only prove:
+
+```
+the CLI process can find a listener
+```
+
+It does not necessarily prove:
+
+```
+the long-running gateway service has recovered its listener sharing
+```
+
+A more accurate verification path is to call:
+
+```
+gateway send RPC
+```
+
+That was the path used for the final smoke test in this case.
+
+## A Broader Engineering Lesson
+
+When a system shows all of the following at the same time:
+
+- the monitor is visible
+- the service is alive
+- the active operation fails
+- the shared object is missing
+
+the problem is often not in the transport layer, but in runtime state ownership.
+
+The boundaries worth checking first are:
+
+- process boundaries
+- lazy-loading boundaries
+- bundle chunk boundaries
+- global state boundaries
+
+On the surface, this kind of failure looks like a network problem or a session problem. In practice, it is often a case where state got duplicated or reinitialized across different runtime contexts.
+
+If runtime state and module boundaries move earlier in the debugging order, diagnosis usually gets much faster.
