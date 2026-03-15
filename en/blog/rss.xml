@@ -77,19 +77,7 @@ when a user sent a message from WhatsApp, the AI agent replied normally.</p>
 <li class="">the error message looked correct too</li>
 <li class="">but the overall behavior was still inconsistent</li>
 </ul>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="why-the-first-patch-was-not-enough">Why the First Patch Was Not Enough<a href="https://docsaid.org/en/blog/whatsapp-online-but-no-listener#why-the-first-patch-was-not-enough" class="hash-link" aria-label="Direct link to Why the First Patch Was Not Enough" title="Direct link to Why the First Patch Was Not Enough" translate="no">​</a></h2>
-<p>The first patch was applied inside the Homebrew-installed copy of OpenClaw.</p>
-<p>That was useful for validating the diagnosis, but it was not a maintainable fix.</p>
-<p>The reason was simple:</p>
-<ul>
-<li class="">you are modifying installed artifacts</li>
-<li class="">package updates can overwrite the patch</li>
-<li class="">the next failure sends you back to patching it again</li>
-</ul>
-<p>So the final fix had to move back into:</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">~/openclaw</span><br></span></code></pre></div></div>
-<p>The change needed to be made in the source tree and rebuilt there, so runtime behavior, source, and tests would stay aligned.</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="final-remediation-strategy">Final Remediation Strategy<a href="https://docsaid.org/en/blog/whatsapp-online-but-no-listener#final-remediation-strategy" class="hash-link" aria-label="Direct link to Final Remediation Strategy" title="Direct link to Final Remediation Strategy" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="remediation-strategy">Remediation Strategy<a href="https://docsaid.org/en/blog/whatsapp-online-but-no-listener#remediation-strategy" class="hash-link" aria-label="Direct link to Remediation Strategy" title="Direct link to Remediation Strategy" translate="no">​</a></h2>
 <p>The remediation goal was straightforward:</p>
 <blockquote>
 <p>ensure that the monitor path and the send path always share the same listener store.</p>
@@ -134,7 +122,7 @@ when a user sent a message from WhatsApp, the AI agent replied normally.</p>
 <p>A more accurate verification path is to call:</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">gateway send RPC</span><br></span></code></pre></div></div>
 <p>That was the path used for the final smoke test in this case.</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="a-broader-engineering-lesson">A Broader Engineering Lesson<a href="https://docsaid.org/en/blog/whatsapp-online-but-no-listener#a-broader-engineering-lesson" class="hash-link" aria-label="Direct link to A Broader Engineering Lesson" title="Direct link to A Broader Engineering Lesson" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="takeaway">Takeaway<a href="https://docsaid.org/en/blog/whatsapp-online-but-no-listener#takeaway" class="hash-link" aria-label="Direct link to Takeaway" title="Direct link to Takeaway" translate="no">​</a></h2>
 <p>When a system shows all of the following at the same time:</p>
 <ul>
 <li class="">the monitor is visible</li>
