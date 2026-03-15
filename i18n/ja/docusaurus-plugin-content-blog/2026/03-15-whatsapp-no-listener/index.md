@@ -1,203 +1,107 @@
 ---
 slug: whatsapp-online-but-no-listener
-title: WhatsApp はオンラインに見えるのに、なぜ OpenClaw は listener がないと言うのか
+title: Active Monitor 存在下で OpenClaw が `No active WhatsApp Web listener` を返した理由
 authors: Z. Yuan
 tags: [openclaw, whatsapp, debugging, javascript, bundling]
 image: /img/2026/0315-whatsapp-no-listener.svg
-description: Gateway は WhatsApp を監視中だと言っているのに、送信すると No active WhatsApp Web listener が返る。接続が死んでいたのではなく、共有状態が bundle chunk の境界で分裂していました。
+description: monitor が listener を正常に登録しているにもかかわらず send が `No active WhatsApp Web listener` を返した OpenClaw WhatsApp 経路の状態整合性問題を分析する。根因は bundling 後に発生した module-scoped runtime state の分裂でした。
 ---
 
-オンラインには見えていました。
+## Summary
 
-log も監視中だと言っていました。
+本稿では、OpenClaw の WhatsApp 経路で発生した状態整合性問題を扱います。monitor 側は listener の登録に成功しているのに、主動送信経路では `No active WhatsApp Web listener` が返るという現象です。根因は session 失効でも gateway 未起動でもなく、bundling 後に module-scoped runtime state が分裂し、monitor と send が同一の listener registry を共有していなかったことにあります。
 
-送信すると、
+最終的な remediation は二段構えでした。共有 registry を `globalThis` に移し、`Symbol.for(...)` で安定した key を与えること。さらに、module reload 境界で同じ失敗が再発しないよう regression coverage を追加することです。
 
-こう返ってきます。
-
-```text
-No active WhatsApp Web listener
-```
-
-この手のバグが腹立たしいのは、どちらも真実を話しているように見えるからです。
-
-monitor 側は listener を登録したと言う。
-
-send 側はここには listener がないと言う。
-
-どちらも嘘ではありません。
-
-ただ、別の宇宙に住んでいました。
-
-> **問題は WhatsApp の接続断ではなく、同じ runtime state が bundler によって二重化されていたことでした。**
-
-今回はその症状、修正、そして最終的に `~/openclaw` 側へ戻した理由をまとめておきます。
+- monitor 経路では listener 登録が完了していた
+- send 経路では listener 不在が報告された
+- 問題の中心は transport layer ではなく runtime state の共有境界にあった
+- 恒久対応には repo source tree への回帰が必要だった
 
 <!-- truncate -->
 
-## まず症状：生きているように見えるのに送れない
+## Observed Symptoms
 
-見えていた現象はかなり矛盾していました。
+観測された症状は内部的に整合していませんでした。
 
 - gateway log には WhatsApp inbound を監視中と出る
 - dashboard も普通に開く
 - それでも送信すると `No active WhatsApp Web listener` が返る
 
-表面だけ見ると、疑う先はいくつもあります。
+これらの信号から分かるのは、monitor path と send path が同じ listener state を見ていないということです。表面的には部分的に正常に見えますが、共有 listener が必要な主動送信で失敗しています。
 
-- WhatsApp session が切れたのかもしれない
-- QR pairing が壊れたのかもしれない
-- gateway service が半分だけ死んでいるのかもしれない
-- 再起動のタイミングが悪かったのかもしれない
+## Initial Misleading Hypotheses
 
-どれも自然な推測です。
+初期切り分けで優先候補になりやすいのは次の方向です。
 
-ただし今回は全部違いました。
+- WhatsApp session の失効
+- QR pairing の異常
+- gateway service の起動不全
+- listener 初期化と send path の間にある lifecycle timing 問題
 
-## 本当の原因：listener が二つに割れた
+これらは妥当な仮説ですが、「monitor では listener 存在が確認できるのに send では欠落している」という症状全体は説明しきれません。
 
-OpenClaw の WhatsApp 経路には、「今生きている web listener」を持つ共有状態があります。
+## Root Cause
 
-本来は、
+OpenClaw の WhatsApp 経路には、現在有効な web listener を保持する共有状態があります。通常は monitor path が listener を登録し、send path が同じ registry を参照して主動送信を行います。
 
-- monitor 側が listener を登録し
-- send 側がそれを読んで送信に使う
+実際の失敗点は bundling 後にありました。monitor と send はどちらも `active-listener` を import していましたが、build 産物では別 chunk に入り、同じ module-scoped runtime store を共有しなくなっていました。
 
-という流れです。
-
-問題は bundle 後に起きました。
-
-monitor と send が別の chunk に入りました。
-
-どちらも `active-listener` を import しているのに、build 後は同じ module state を共有していませんでした。
-
-結果はこうです。
+つまり本質は registry の上書きではありません。状態が二つに分裂していました。
 
 - chunk A には本物の listener がいる
 - chunk B の registry は空のまま
-- log はその世界では正しい
-- send のエラーもその世界では正しい
+- それぞれの側は局所的には正しい信号を出す
+- 合成すると state consistency failure として現れる
 
-普通の「どこかで上書きされた」系のバグではありません。
+このため、log と send error は individually には成立していても、全体として一つの整合した runtime state を表していませんでした。
 
-同じオフィスに白板を二枚置いて、それぞれが真面目に更新しているのに、なぜか話が噛み合わない感じです。
-
-## 以前 Homebrew 側で直しただけでは足りなかった理由
+## Why the Existing Patch Was Not Sufficient
 
 最初の応急処置は Homebrew で入れたシステム側に当てました。
 
-診断を確かめるには役立ちました。
-
-ただ、そこに留まるのは危ない。
-
-理由は単純です。
+診断の妥当性を確認するには十分でしたが、恒久的な保守点としては不十分です。
 
 - 直しているのはインストール済みの成果物
 - 更新が入れば修正が消えるかもしれない
 - 次に再発したとき、また同じ追跡をやり直す
 
-なので本当にやるべきことは、「とりあえず送れるようにする」だけではありませんでした。
+そのため、最終的な修復は `~/openclaw` の source tree に戻し、source・test・runtime を同じ保守面に揃える必要がありました。
 
-主系統を `~/openclaw` の repo に戻し、source から build し、そのコードで service を動かすことです。
+## Final Remediation
 
-そうすれば：
+修復方針は抽象性より runtime 一貫性を優先しました。active listener registry を module-local singleton から `globalThis` 上の共有 store に移し、`Symbol.for(...)` で安定した key を与えています。
 
-- 修正がパッケージ更新で消えない
-- regression test を source と一緒に残せる
-- gateway が本当に今見ているコードを動かす
-
-## 修正は素直です：共有状態を `globalThis` に出す
-
-問題が「chunk 境界では module state が共有されない」なら、bundler の気分に期待しない方が早いです。
-
-active listener registry を `globalThis` に載せ、`Symbol.for(...)` で安定した key を使う形に変えました。
-
-考え方は単純です。
-
-- monitor がどの chunk から来ても
-- send がどの chunk から来ても
-- 同じ JavaScript runtime にいる限り
-- 同じ store に着地する
-
-核になる方向はこうです。
+識別子の中心は次の形です。
 
 ```ts
 const STORE_KEY = Symbol.for("openclaw.whatsapp.active-web-listener-store");
 ```
 
-もともと module 内に閉じていた singleton を、`globalThis` 上の共有 store に置き換えたわけです。
+意図は明確です。monitor と send が同じ JavaScript runtime に存在する限り、参照先は常に同じ listener store でなければなりません。
 
-派手ではありません。
+## Regression Test Strategy
 
-でも効きます。
+コード修正だけでは bundling 変更に対して脆弱です。そのため、今回の failure mode を直接再現・監視する regression coverage も追加しました。
 
-## コードだけでなく、ちゃんと再発防止のテストも置く
-
-この種のバグは厄介です。
-
-今は直って見えても、次の bundling 変更や lazy load の調整で静かに戻ってきます。
-
-だから今回は `active-listener.ts` の修正だけでは終わらせませんでした。
-
-regression test も追加しました。
-
-見るポイントは単なる set/get ではなく、
+確認しているのは単純な set/get ではありません。
 
 - module reload 境界をまたいでも store が残るか
 - 共有 listener が同じ backing state を見続けるか
-- send 側が後から別宇宙を増やさないか
+- send path が別の registry を取得しないか
 
-要するに、今回落ちた穴にベルを付けました。
+## Verification Caveats
 
-## 検証にも罠がある：`message send` を主系統の証拠にしない
+検証手順にも注意点があります。`openclaw message send` は主系統の WhatsApp push が回復したことを証明する最適な方法ではありません。
 
-もう一つ、見落としやすい点がありました。
+理由は、そのコマンドが CLI process 自身の lazy-loaded send path を通るためです。
 
-`openclaw message send` は、主系統の WhatsApp push が直った証明としては最適ではありません。
+つまり確認できるのは「CLI process は送れる」ことであり、「常駐 gateway service が listener を共有できている」ことではありません。
 
-使えないからではありません。
+repo-based main system の修復を検証するには、gateway の `send` RPC を直接叩く方が適切です。最終 smoke test もこの経路で実施しました。
 
-CLI process 側の lazy-loaded send path を通るからです。
+## Generalized Engineering Lessons
 
-つまり、うっかり次のことだけを証明してしまいます。
+この事例の教訓は再利用可能です。システムが同時に「monitor は見えている」「service は生きている」「能動操作だけ失敗する」「共有オブジェクトだけ欠落する」という症状を示した場合、最初に確認すべきなのは runtime state が process・bundle・lazy-load 境界をまたいで一貫しているかどうかです。
 
-- CLI process 単体では送れる
-- でも常駐している gateway service はまだ壊れている
-
-本当に確認したいのが「主系統 service が直ったか」なら、見るべきは gateway の `send` RPC です。
-
-最終 smoke test はその経路で行い、repo ベースの主系統が本当に回復したことを確認しました。
-
-## この教訓は、実は WhatsApp に限らない
-
-見た目は transport の障害に見えました。
-
-でも違いました。
-
-runtime 境界の問題です。
-
-- process boundary
-- lazy-loading boundary
-- bundle chunk boundary
-- global-state boundary
-
-この手のバグには特徴があります。
-
-- log は別に嘘ではない
-- ただし各 log は自分の世界しか見ていない
-- 並べて初めて、状態が共有されていなかったと分かる
-
-なので今後、こんな症状を見たら：
-
-- 「オンラインに見える」
-- 「monitor は動いている」
-- 「service も生きている」
-- 「でも能動操作だけ共有物がないと言う」
-
-最初から transport を疑わない方がいいです。
-
-まず、本当にその境界を越えて状態が共有されているかを見る。
-
-たいてい、幽霊はネットワークの中ではありません。
-
-自分の runtime の中にいます。
+表面的には transport failure に見えやすい問題でも、実際に先に壊れているのは state-sharing model であることがあります。state ownership と runtime boundary を優先して点検する方が、診断は速く安定します。
