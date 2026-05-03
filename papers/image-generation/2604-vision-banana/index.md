@@ -232,11 +232,11 @@ Surface normal 是個 unit vector $(x, y, z) \in [-1, 1]^3$，跟 RGB 的對應�
 
 過去做 vision task 大家都各自設計專屬的架構：segmentation 要 mask decoder、depth 要 regression head、normal 要特殊的 loss function，每個任務都長得不一樣，模型之間沒辦法共享。但 Vision Banana 直接把所有 vision output 統一塑造成 RGB image，讓「圖片生成模型」本身就成了所有視覺任務的 universal interface，這個想法跟當年 GPT 把所有 NLP 任務統一成 text generation 是同一個味道，真的很有潛力。
 
-特別是 metric depth 那個 bijective encoding 的設計（power transform + RGB cube 邊上的 piecewise-linear interpolation）我覺得是整篇最巧妙的地方，它解決了過去用 generation model 做 vision task 最大的痛點：生成出來的東西沒辦法被精確 decode 回 metric value 來做 benchmark。沒有這個 invertible mapping，再好看的 depth visualization 也只能停留在 qualitative 階段。
+特別是 metric depth 的設計（power transform + RGB cube 邊上的 piecewise-linear interpolation）我覺得是整篇最巧妙的地方，它解決了過去用 generation model 做 vision task 最大的痛點：生成出來的東西沒辦法被精確 decode 回 metric value 來做 benchmark。沒有這個 invertible mapping，再好看的 depth visualization 也只能停留在 qualitative 階段。
 
 另外 generative model 天然處理 ambiguity 這點也很值得想：discriminative model 為了不 collapse 到 blurry mean，要設計各種 hacky 的 loss（SAM 系列 output 多個 mask 但是只對其中一個算 loss 就是個典型例子），但 generative model 本來就是在 model 整個 distribution 的，這個問題會被自然地解掉。
 
-## 心得結語
+## 心得
 
 看完這篇論文，我覺得 Vision Banana 的貢獻更多是體現在**問題的 reframing**，而不是新的演算法或架構創新。
 
