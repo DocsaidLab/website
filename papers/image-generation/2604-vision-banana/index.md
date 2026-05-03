@@ -221,7 +221,7 @@ Surface normal 是個 unit vector $(x, y, z) \in [-1, 1]^3$，跟 RGB 的對應�
 
 1. **Image generators 本身就是 generalist vision learners**：強大的 visual understanding 能力是在 generative pretraining 過程中**自然 emergent** 出來的，instruction tuning 只是把這些能力 "unlock" 出來，這跟當年 LLM 顛覆 NLP 領域的故事一致
 2. **Image generation 可以作為 vision 的 universal interface**：就像 text generation 是 NLP 任務的 universal interface 一樣。所有 vision output（mask, depth, normal）都可以表達成 RGB image，prompt 中指定 visualization scheme 就可以做不同的任務
-3. **生成模型擁有處理 ambiguity 的能力**：同一個 input 可能對應到多個合理的 output（例如 segmentation 中「哪一塊算是同一個 instance」是有多種合理答案的）。Discriminative model 為了避免 collapse 到 blurry mean 必須設計很 hacky 的 loss（例如 SAM 系列 output 多個 mask 但是只對其中一個算 loss），但是 generative model 本來就是在 model 整個 distribution 的，這個 ambiguity 會被自然處理
+3. **生成模型天生擁有處理 ambiguity 的能力**：同一個 input 可能對應到多個合理的 output（例如 segmentation 中「哪一塊算是同一個 instance」是有多種合理答案的）。Discriminative model 為了避免 collapse 到 blurry mean 必須設計很 hacky 的 loss（例如 SAM 系列 output 多個 mask 但是只對其中一個算 loss），但是 generative model 本來就是在 model 整個 distribution 的，這個 ambiguity 會被自然處理
 4. **Future work**：
     - 擴大 instruction-tuned 任務的多樣性，可能會 unlock 更多 cross-task generalization
     - 從 monocular 擴展到 multi-view、video input
