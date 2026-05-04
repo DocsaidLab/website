@@ -9,10 +9,6 @@ authors: nbswords
 
 ---
 
-:::info
-Project page: [**vision-banana.github.io**](https://vision-banana.github.io)
-:::
-
 在 LLM 領域，我們已經習慣了使用 generative pretraining 出來的模型，會自然而然地獲得語言理解、推理、coding 等下游能力，這些能力並沒有特別被訓練，而是從預測下一個 token 的目標中 emergent 出來的。
 
 那麼同樣的故事是否能套用在視覺領域? 也就是說，當一個 model 被訓練去**生成**高品質的圖片時，它是否也順便學會了如何**理解**圖片?
