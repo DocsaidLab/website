@@ -28,13 +28,13 @@ Project page: [**vision-banana.github.io**](https://vision-banana.github.io)
 
 <div align="center">
 <figure style={{"width": "80%"}}>
-![Benchmark overview 1](./img/img1.jpg)
+![benchmark overview 1](./img/img1.jpg)
 </figure>
 </div>
 
 <div align="center">
 <figure style={{"width": "80%"}}>
-![Benchmark overview 2](./img/img2.jpg)
+![benchmark overview 2](./img/img2.jpg)
 </figure>
 </div>
 
@@ -75,15 +75,15 @@ prompt 的寫法非常彈性，可以用 hex code (`#80C000`)、RGB tuple (`<255
 
 <div align="center">
 <figure style={{"width": "80%"}}>
-![Cityscapes mIoU 比較](./img/img3.jpg)
+![cityscapes mIoU](./img/img3.jpg)
 </figure>
 </div>
 
 下圖是 Vision Banana 做 semantic segmentation 的範例圖。
 
 <div align="center">
-<figure style={{"width": "80%"}}>
-![Semantic segmentation 範例](./img/img4.jpg)
+<figure style={{"width": "60%"}}>
+![semantic segmentation](./img/img4.jpg)
 </figure>
 </div>
 
@@ -105,8 +105,8 @@ Each piece of garlic is colored differently."
 下圖是 Vision Banana 做 instance segmentation 的範例圖。
 
 <div align="center">
-<figure style={{"width": "80%"}}>
-![Instance segmentation 範例](./img/img5.jpg)
+<figure style={{"width": "60%"}}>
+![instance segmentation](./img/img5.jpg)
 </figure>
 </div>
 
@@ -128,8 +128,8 @@ Each piece of garlic is colored differently."
 4. 理解多語言的文字內容（text on the menu in Chinese and English）
 
 <div align="center">
-<figure style={{"width": "80%"}}>
-![Referring expression segmentation 範例](./img/img6.jpg)
+<figure style={{"width": "60%"}}>
+![referring segmentation](./img/img6.jpg)
 </figure>
 </div>
 
@@ -151,7 +151,7 @@ $$f(d, \lambda, c) = 1 - (1 - d/\lambda c)^{\lambda+1}$$
 
 <div align="center">
 <figure style={{"width": "60%"}}>
-![RGB cube 上的 piecewise-linear interpolation 路徑](./img/img7.jpg)
+![RGB cube path](./img/img7.jpg)
 </figure>
 </div>
 
@@ -164,23 +164,23 @@ $$f(d, \lambda, c) = 1 - (1 - d/\lambda c)^{\lambda+1}$$
 
 <div align="center">
 <figure style={{"width": "80%"}}>
-![Depth benchmark 結果](./img/img8.jpg)
+![depth benchmark](./img/img8.jpg)
 </figure>
 </div>
 
 下圖是 Vision Banana 在 metric depth estimation 的範例。
 
 <div align="center">
-<figure style={{"width": "80%"}}>
-![Metric depth estimation 範例](./img/img9.jpg)
+<figure style={{"width": "60%"}}>
+![metric depth example](./img/img9.jpg)
 </figure>
 </div>
 
 論文裡還有個有趣的 "vibe test": 作者去金閣寺拍了張照片，Vision Banana 估出綠色標記點的距離是 13.71 公尺，用 Google Maps 量出來實際是 12.87 公尺，AbsRel error 約 0.065。
 
 <div align="center">
-<figure style={{"width": "80%"}}>
-![金閣寺 vibe test](./img/img10.jpg)
+<figure style={{"width": "60%"}}>
+![vibe test](./img/img10.jpg)
 </figure>
 </div>
 
@@ -196,15 +196,15 @@ Surface normal 是個 unit vector $(x, y, z) \in [-1, 1]^3$，跟 RGB 的對應�
 
 <div align="center">
 <figure style={{"width": "80%"}}>
-![Surface normal benchmark 結果](./img/img11.jpg)
+![normal benchmark](./img/img11.jpg)
 </figure>
 </div>
 
 下圖是 Vision Banana 在 Surface Normal Estimation 的範例。
 
 <div align="center">
-<figure style={{"width": "80%"}}>
-![Surface normal estimation 範例](./img/img12.jpg)
+<figure style={{"width": "60%"}}>
+![normal example](./img/img12.jpg)
 </figure>
 </div>
 
